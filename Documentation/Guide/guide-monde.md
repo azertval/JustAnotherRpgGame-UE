@@ -119,6 +119,16 @@ et l'on tire de nouveau les conséquences des drapeaux, qu'un coffre ouvert a pu
 compte : marcher *après* avoir franchi ferait faire au héros un pas sur la carte d'arrivée avec
 l'intention qui l'a fait entrer.
 
+**Être mené (`carried`, `LOT-1016`).** Dans le nouveau moteur, ce n'est pas la session qui fait
+marcher le héros : il suit le maillage de navigation d'Unreal
+([L'exploration dans le moteur](guide-exploration-moteur.md)). L'intention porte alors la position
+où il **a été mené** (`ExplorationIntent::carried`, en cases) ; la session ne la confronte pas à la
+grille, prend son orientation du déplacement (en deçà de `FollowTrail::MIN_STEP_CELLS` il piétine
+et la garde), puis enchaîne comme après un pas marché — trace, portail, zones, interaction. `move`
+est ignoré. Ce n'est pas `placeHero`, qui pose le héros sans qu'il soit arrivé nulle part.
+`interactionTarget()` rend ce que le héros solliciterait maintenant, sans le solliciter : l'écran
+le désigne avant qu'on appuie.
+
 **Marcher (`walk`).** Si l'intention est nulle, rien ; sinon l'orientation prend la direction
 demandée (`EX-EXP-004` : elle est **conservée à l'arrêt**) et le héros avance de
 `WALK_SPEED_CELLS_PER_SECOND × seconds` (2 cases par seconde, soit 3 m/s aux 1,5 m de la case —

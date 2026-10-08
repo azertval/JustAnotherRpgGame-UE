@@ -1,0 +1,11 @@
+{
+  "map": "parvis",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 13.81,
+  "captures": ["parvis-1200.png", "parvis-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.5, "frames": 1233, "fps": 107.6, "frameMs": 9.30, "p99FrameMs": 13.09, "worstFrameMs": 25.06, "gameMs": 2.06, "renderMs": 9.29, "gpuMs": 8.65},
+    {"hour": "22:00", "seconds": 11.4, "frames": 1222, "fps": 106.9, "frameMs": 9.36, "p99FrameMs": 11.24, "worstFrameMs": 20.86, "gameMs": 2.03, "renderMs": 9.36, "gpuMs": 8.80}
+  ]
+}

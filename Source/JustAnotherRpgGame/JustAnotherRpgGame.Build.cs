@@ -49,6 +49,7 @@ public class JustAnotherRpgGame : ModuleRules
 		PublicDefinitions.Add("JADG_VERSION=\"" + File.ReadAllText(VersionFile).Trim() + "\"");
 
 		// AIModule et NavigationSystem : la marche au clic sur le maillage de navigation (LOT-1012) ;
+		// EnhancedInput : les commandes du jeu, créées en C++ depuis leur fichier texte (LOT-1016) ;
 		// RenderCore et RHI : les temps de trame que la mesure de cadence relève.
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "AIModule", "NavigationSystem", "RenderCore", "RHI" });
 

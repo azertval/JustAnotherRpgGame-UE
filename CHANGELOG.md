@@ -6,6 +6,38 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **On explore une carte sur le nouveau moteur : la quête des pommes s'y joue hors combat**
+  (LOT-1016, 8 octobre 2026). Le partage est écrit : **le moteur déplace, Core décide**. Le meneur
+  marche sur le maillage de navigation d'Unreal, et Core **constate** sa case à chaque trame
+  (`core::ExplorationIntent::carried`) pour en tirer ce qu'il tire d'un pas marché — le portail de
+  la case atteinte, les zones, l'interaction, les étapes de quête ; `interactionTarget()` dit ce
+  que le meneur solliciterait, sans le solliciter. Un sous-système de l'instance du jeu
+  (`UJadgExploration`) garde la session de Core d'une carte à l'autre : un portail franchi ouvre la
+  carte du moteur de la carte cible (`/Game/Maps/Levels/<id>`), drapeaux, quêtes, heure et groupe
+  passent la porte. Une description de scène nomme la carte de Core qu'elle joue (`level`) ; ses PNJ
+  paraissent et disparaissent avec les drapeaux, ses lumières `light` deviennent des lumières du
+  moteur, **avec ombre** pour celles de nuit. Le **groupe de quatre** suit le meneur en file par la
+  trace de Core (`core::FollowTrail`), chacun par le maillage de navigation ; `Tab` passe la main.
+  La **caméra** de D-49 est à ressort : elle ne traverse ni le sol ni les murs, et ses bornes sont
+  dans `Config/DefaultGame.ini` (inclinaison de 25° à 70°). Les **commandes** sont nommées et lues
+  dans le même fichier, puis créées en actions d'Enhanced Input, sans asset ni Blueprint. Ce que le
+  meneur peut solliciter porte un **contour** (tampon de gabarit, matière de post-traitement écrite
+  par script). L'**heure du monde** de Core (une heure par minute réelle) règle le soleil, le ciel
+  et les lumières de nuit, et se fige pendant un dialogue. Un **HUD minimal** écrit le groupe,
+  l'heure, l'invite et le dialogue, avec le jet annoncé puis joué. Deux **cartes d'essai** sans kit
+  (`scripts/maps/build_essai_maps.py` : la carte de Core et la scène du même plan) rejouent le
+  début de la quête avec ses dialogues livrés, et `scripts/build.ps1 -Unreal -Parcours` la joue
+  dans le jeu lancé, **par les ordres d'un joueur** : la mère, le portail, le garde, Persuasion 16
+  contre DD 15, le retour — quête rendue 40 s après le lancement, code 0. Mesuré : 637 tests de
+  Core (deux nouveaux, et le balayage des familles d'entités revenu), 9 tests du moteur (six
+  nouveaux, `Jadg.Exploration.*`, dont le test d'intégration de la quête porté de l'ancien dépôt,
+  une graine par issue), 108 images par seconde sur les cartes d'essai à midi comme à 22 h. La
+  porte du LOT-1012 reçoit le groupe de quatre ; elle se rend à 88 images par seconde, 89 avec le code
+  d'avant ce lot — plus les 119 de sa clôture, et la cause n'est pas dans ce
+  lot. **Ce qui n'est pas fait** est dans la fiche : personne n'a joué dans une fenêtre (les tests
+  ne passent pas par le clavier ni la souris), le portrait du PNJ, les étages, un coffre à l'essai ;
+  la touche d'interaction est Espace, pas E, qui tourne la caméra. La fiche reste `a-faire` tant
+  que le LOT-1014, son prérequis, n'est pas clos.
 - **Le socle du nouveau moteur se construit, se teste et se capture en une commande** (LOT-1014,
   8 octobre 2026). `scripts/build.ps1 -Unreal` enchaîne désormais cinq temps, sans fenêtre : la
   cible d'éditeur, le commandlet `JadgContentCheck`, les **premiers tests d'automatisation du

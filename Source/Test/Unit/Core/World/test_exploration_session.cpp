@@ -385,3 +385,101 @@ TEST(FollowTrailTest, LaTraceSeMesureLeLongDuChemin) {
     trace.record(trace.points().front());
     EXPECT_EQ(trace.points().size(), avant);
 }
+
+/**
+ * @brief Un heros mene par le moteur franchit le portail ou il arrive, sans que la grille juge son
+ *        pas.
+ * \castest{<b>Mene de l'exterieur, le heros franchit le portail ou il arrive et tire sa
+ * trace.</b><br/>
+ * \tcat Unitaire · Exploration<br/>
+ * \tcrit Critique<br/>
+ * \tetapes 1. Entrer sur une carte muree avec deux suiveurs.<br/>
+ * 2. Mener le heros (`carried`) de case en case vers un portail, une direction de marche
+ * contraire donnee en meme temps.<br/>
+ * 3. Le mener sur la case du portail, puis l'y laisser.<br/>
+ * \tattendu Le heros est ou on l'a mene, tourne vers son deplacement, la direction de marche
+ * ignoree ; le premier suiveur est a une case derriere lui sur son chemin ; l'arrivee sur le
+ * portail donne un seul `MapEntered` et le depose au point d'arrivee (`LOT-1016`).
+ * }
+ */
+TEST(ExplorationSessionTest, UnHerosMeneFranchitLePortailOuIlArrive) {
+    DossierEnMemoire dossier;
+    dossier.poser("place", carteMuree("place", {portail("cave", "seuil", {6, 1})}));
+    dossier.poser("cave", carteMuree("cave", {pointDArrivee("seuil", {6, 7})}));
+    core::ExplorationSession session{dossier.chargeur()};
+    ASSERT_TRUE(session.start("place", ""));
+    session.setFollowers(2);
+
+    // Par dixiemes de case, de (1,5 ; 1,5) a (5,5 ; 1,5) : aucun portail sur le chemin.
+    for (int pas = 1; pas <= 40; ++pas) {
+        const core::CellPoint ou{1.5F + (static_cast<float>(pas) * 0.1F), 1.5F};
+        EXPECT_TRUE(session
+                        .update(
+                            core::ExplorationIntent{
+                                .move = {-1.0F, 0.0F}, .interact = false, .carried = ou},
+                            1.0F / 60.0F)
+                        .empty());
+    }
+    EXPECT_NEAR(session.heroPoint().column, 5.5F, 0.001F);
+    EXPECT_GT(session.facing().x, 0.0F) << "l'orientation suit le deplacement, pas `move`";
+    EXPECT_NEAR(session.followerPoint(0).column, 4.5F, 0.02F);
+    EXPECT_NEAR(session.followerPoint(1).column, 3.5F, 0.02F);
+
+    // Un point confondu avec le precedent ne retourne pas le heros.
+    static_cast<void>(session.update(
+        core::ExplorationIntent{.move = {}, .interact = false, .carried = session.heroPoint()},
+        1.0F / 60.0F));
+    EXPECT_GT(session.facing().x, 0.0F);
+
+    const std::vector<core::ExplorationEvent> vus = session.update(
+        core::ExplorationIntent{
+            .move = {}, .interact = false, .carried = core::CellPoint{6.4F, 1.5F}},
+        1.0F / 60.0F);
+    ASSERT_EQ(vus.size(), 1U);
+    EXPECT_EQ(vus.front().kind, ExplorationEventKind::MapEntered);
+    EXPECT_EQ(session.mapId(), "cave");
+    EXPECT_EQ(session.heroPoint(), (core::CellPoint{6.5F, 7.5F}));
+    EXPECT_TRUE(session
+                    .update(
+                        core::ExplorationIntent{
+                            .move = {}, .interact = false, .carried = session.heroPoint()},
+                        1.0F / 60.0F)
+                    .empty());
+}
+
+/**
+ * @brief La cible d'interaction se lit avant d'interagir, et ne sollicite rien.
+ * \castest{<b>La session dit ce que le heros solliciterait, sans le solliciter.</b><br/>
+ * \tcat Unitaire · Exploration<br/>
+ * \tcrit Majeur<br/>
+ * \tetapes 1. Poser un PNJ a deux cases du heros : lire la cible.<br/>
+ * 2. Mener le heros a une case du PNJ : lire la cible, deux fois.<br/>
+ * 3. Geler la session : lire la cible.<br/>
+ * \tattendu Aucune cible hors de portee ; le PNJ a portee, autant de fois qu'on le demande et
+ * sans evenement ; aucune cible sous le gel (`LOT-1016`).
+ * }
+ */
+TEST(ExplorationSessionTest, LaCibleDInteractionSeLitSansInteragir) {
+    DossierEnMemoire dossier;
+    dossier.poser("place", carteMuree("place", {pnj("garde", {6, 4})}));
+    core::ExplorationSession session{dossier.chargeur()};
+    ASSERT_TRUE(session.start("place", ""));
+    session.placeHero(core::cellCenter({3, 4}));
+    EXPECT_FALSE(session.interactionTarget().has_value());
+
+    EXPECT_TRUE(session
+                    .update(
+                        core::ExplorationIntent{
+                            .move = {}, .interact = false, .carried = core::cellCenter({5, 4})},
+                        1.0F / 60.0F)
+                    .empty());
+    for (int fois = 0; fois < 2; ++fois) {
+        const std::optional<core::Interactable> cible = session.interactionTarget();
+        ASSERT_TRUE(cible.has_value());
+        EXPECT_EQ(cible->type, core::NPC_ENTITY_TYPE);
+        EXPECT_EQ(cible->position, (core::GridPosition{6, 4}));
+    }
+
+    session.freeze(true);
+    EXPECT_FALSE(session.interactionTarget().has_value());
+}

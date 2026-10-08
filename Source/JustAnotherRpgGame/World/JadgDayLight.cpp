@@ -9,11 +9,15 @@
 #include "Bridge/JadgPaths.h"
 #include "Components/DirectionalLightComponent.h"
 #include "Components/LocalLightComponent.h"
+#include "Components/PointLightComponent.h"
 #include "Components/SkyLightComponent.h"
 #include "Engine/DirectionalLight.h"
+#include "Engine/GameInstance.h"
+#include "Engine/PointLight.h"
 #include "Engine/SkyLight.h"
 #include "Engine/World.h"
 #include "EngineUtils.h"
+#include "Game/JadgExploration.h"
 #include "HAL/IConsoleManager.h"
 #include "JustAnotherRpgGame.h"
 
@@ -38,7 +42,7 @@ namespace
 
 	FAutoConsoleCommandWithWorldAndArgs GTimeCommand(
 		TEXT("Jadg.Time"),
-		TEXT("Jadg.Time HH:MM règle l'heure du monde ; sans argument, l'écrit."),
+		TEXT("Jadg.Time HH:MM règle l'heure du monde et la fige ; run la relance ; sans argument, l'écrit."),
 		FConsoleCommandWithWorldAndArgsDelegate::CreateLambda([](const TArray<FString>& Args, UWorld* World)
 		{
 			AJadgDayLight* DayLight = FindDayLight(World);
@@ -48,7 +52,11 @@ namespace
 				return;
 			}
 			float Minutes = 0.0f;
-			if (Args.Num() > 0 && AJadgDayLight::ParseTime(Args[0], Minutes))
+			if (Args.Num() > 0 && Args[0] == TEXT("run"))
+			{
+				DayLight->SetRunning(true);
+			}
+			else if (Args.Num() > 0 && AJadgDayLight::ParseTime(Args[0], Minutes))
 			{
 				DayLight->SetMinutes(Minutes);
 			}
@@ -112,21 +120,36 @@ void AJadgDayLight::BeginPlay()
 		}
 	}
 
-	float Minutes0 = StartMinutes;
-	FString Asked;
-	if (FParse::Value(FCommandLine::Get(), TEXT("JadgTime="), Asked))
+	float Asked = 0.0f;
+	FString AskedText;
+	if (FParse::Value(FCommandLine::Get(), TEXT("JadgTime="), AskedText) && ParseTime(AskedText, Asked))
 	{
-		ParseTime(Asked, Minutes0);
+		SetMinutes(Asked);
 	}
-	SetMinutes(Minutes0);
+	else
+	{
+		Minutes = WorldMinutes();
+		Apply();
+	}
+}
+
+float AJadgDayLight::WorldMinutes() const
+{
+	const UGameInstance* Instance = GetGameInstance();
+	const UJadgExploration* Exploration = Instance != nullptr ? Instance->GetSubsystem<UJadgExploration>() : nullptr;
+	return Exploration != nullptr ? Exploration->Minutes() : Minutes;
 }
 
 void AJadgDayLight::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-	if (MinutesPerSecond != 0.0f)
+	// L'heure du monde passe ailleurs (`UJadgExploration`) : ici elle se lit, et ne s'applique que
+	// si elle a bougé d'un centième de minute.
+	const float Now = WorldMinutes();
+	if (FMath::Abs(Now - Minutes) > 0.01f)
 	{
-		SetMinutes(Minutes + MinutesPerSecond * DeltaSeconds);
+		Minutes = Now;
+		Apply();
 	}
 }
 
@@ -137,7 +160,56 @@ void AJadgDayLight::SetMinutes(float InMinutes)
 	{
 		Minutes += 1440.0f;
 	}
+	if (const UGameInstance* Instance = GetGameInstance())
+	{
+		if (UJadgExploration* Exploration = Instance->GetSubsystem<UJadgExploration>())
+		{
+			Exploration->SetMinutes(Minutes);
+			// Une carte à heure fixe se montre à son heure, quelle que soit celle qu'on règle.
+			Minutes = Exploration->Minutes();
+		}
+	}
 	Apply();
+}
+
+void AJadgDayLight::SetRunning(bool bRunning)
+{
+	if (const UGameInstance* Instance = GetGameInstance())
+	{
+		if (UJadgExploration* Exploration = Instance->GetSubsystem<UJadgExploration>())
+		{
+			Exploration->SetClockRunning(bRunning);
+		}
+	}
+}
+
+ULocalLightComponent* AJadgDayLight::AddLamp(const FVector& Location, const FLinearColor& Colour, float Radius, float Scale, bool bAlways)
+{
+	APointLight* Lamp = GetWorld()->SpawnActorDeferred<APointLight>(APointLight::StaticClass(), FTransform(Location));
+	if (Lamp == nullptr)
+	{
+		return nullptr;
+	}
+	UPointLightComponent* Component = Lamp->PointLightComponent;
+	Component->SetMobility(EComponentMobility::Movable);
+	Component->IntensityUnits = ELightUnits::Candelas;
+	Component->Intensity = (bAlways ? FireCandelas : LampCandelas) * Scale;
+	Component->LightColor = Colour.ToFColor(false);
+	Component->AttenuationRadius = Radius;
+	Component->CastShadows = !bAlways;
+	Lamp->FinishSpawning(FTransform(Location));
+	if (!bAlways && State.IsValid())
+	{
+		Lamp->Tags.Add(LampTag);
+		State->Lamps.Add(Component, Component->Intensity);
+		Apply();
+	}
+	return Component;
+}
+
+int32 AJadgDayLight::LampCount() const
+{
+	return State.IsValid() ? State->Lamps.Num() : 0;
 }
 
 void AJadgDayLight::Apply()

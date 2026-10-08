@@ -55,8 +55,10 @@ affiche. Cette frontière est ce qui rend le moteur analysable domaine par domai
 ### La présentation
 
 Les pages qui décrivaient la présentation et l'éditeur de cartes du moteur maison ne sont pas venues
-dans ce dépôt (D-58). Celles du nouveau moteur s'écrivent avec leur lot : la caméra et les entrées
-au LOT-1016, le format de carte au LOT-1018, l'interface au LOT-1020.
+dans ce dépôt (D-58). Celles du nouveau moteur s'écrivent avec leur lot : le format de carte au
+LOT-1018, l'interface au LOT-1020.
+
+- [L'exploration dans le moteur](guide-exploration-moteur.md) — la caméra libre, la marche du groupe sur le maillage de navigation, les commandes, les portails entre cartes, l'heure du monde (LOT-1016).
 
 ### Construire, vérifier, documenter
 

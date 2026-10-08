@@ -41,6 +41,18 @@
 .PARAMETER NoCapture
     Avec -Unreal, sans -Scene : ne pas construire la scène du socle ni prendre ses captures.
 
+.PARAMETER Parcours
+    Avec -Unreal, à la place de -Scene : construire les deux cartes d'essai de l'exploration
+    (essai-1016-etals, essai-1016-parvis, LOT-1016), puis lancer le jeu hors écran sur la première
+    et y jouer la quête « Des pommes pour l'arène » sans personne : le meneur va parler à la mère,
+    passe le portail, plaide devant le garde (jet de Persuasion, graine -Seed), revient. Chaque
+    réplique est capturée, HUD compris. Sorties dans Saved/Captures/parcours-1016/. Demande un
+    processeur graphique.
+
+.PARAMETER Seed
+    Avec -Parcours : la graine du jet de Persuasion (défaut : 1, qui le réussit — relevé par le
+    test Jadg.Exploration.QueteDesPommes).
+
 .PARAMETER UpdateReference
     Avec des captures : réécrire leur référence (les images de blocs de
     Source/Test/Fixtures/Captures/<Scene>/) au lieu de les y comparer. Pour une image qui a changé
@@ -74,6 +86,11 @@
 .EXAMPLE
     pwsh scripts/build.ps1 -Unreal -Scene porte-1012 -Capture
     Construit, vérifie, reconstruit la carte de la porte, puis en prend les captures et la mesure.
+
+.EXAMPLE
+    pwsh scripts/build.ps1 -Unreal -Parcours
+    Construit, vérifie, reconstruit les deux cartes d'essai de l'exploration, puis y joue la quête
+    des pommes dans le jeu lancé hors écran.
 #>
 [CmdletBinding()]
 param(
@@ -81,6 +98,8 @@ param(
     [string]$Scene,
     [switch]$Capture,
     [switch]$NoCapture,
+    [switch]$Parcours,
+    [int]$Seed = 1,
     [switch]$UpdateReference,
     [int]$MeasureSeconds = 10,
     [string]$EnginePath,
@@ -168,7 +187,8 @@ if ($Unreal) {
     }
     Write-Host "Unreal Engine $found.$($installed.PatchVersion) : $EnginePath" -ForegroundColor DarkGray
 
-    if (-not $Scene -and -not $NoCapture) {
+    if ($Parcours -and $Scene) { Fail '-Parcours construit ses deux cartes : il ne se combine pas avec -Scene.' }
+    if (-not $Scene -and -not $NoCapture -and -not $Parcours) {
         $Scene = $SocleScene
         $Capture = $true
     }
@@ -203,6 +223,32 @@ if ($Unreal) {
     }
     Write-Host "Tests d'automatisation : $passed passé(s), dont $($results.succeededWithWarnings) avec avertissement." -ForegroundColor Green
 
+    if ($Parcours) {
+        # Les cartes d'essai de l'exploration sont écrites par script, carte de Core et scène du même plan.
+        & (Get-Python) (Join-Path $root 'scripts\maps\build_essai_maps.py') --check
+        if ($LASTEXITCODE -ne 0) { Fail "Les cartes d'essai de l'exploration sont périmées : python scripts/maps/build_essai_maps.py" }
+        $builder = (Join-Path $root 'scripts\maps\build_scene_unreal.py') -replace '\\', '/'
+        foreach ($trial in @('essai-1016-etals', 'essai-1016-parvis')) {
+            Write-Host "== Scène « $trial » : construction de la carte par script (sans fenêtre) ==" -ForegroundColor Cyan
+            & $editorCmd "$uproject" -run=pythonscript "-script=$builder" "-JadgScene=$trial" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
+            if ($LASTEXITCODE -ne 0) { Fail "La construction de la scène $trial a échoué (code $LASTEXITCODE)." }
+        }
+
+        $start = (Get-Content (Join-Path $root 'Source\Elements\Scenes\essai-1016-etals.json') -Raw -Encoding UTF8 | ConvertFrom-Json).map
+        $output = Join-Path $root 'Saved\Captures\parcours-1016'
+        $journal = Join-Path $output 'parcours.json'
+        if (Test-Path $journal) { Remove-Item $journal }
+        Write-Host "== Parcours : la quête des pommes sur les cartes d'essai (rendu hors écran, graine $Seed) ==" -ForegroundColor Cyan
+        & $editorCmd "$uproject" $start -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
+            "-JadgParcours=$output" "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
+        $walked = $LASTEXITCODE
+        if (Test-Path $journal) { Get-Content $journal -Encoding UTF8 }
+        if ($walked -ne 0) { Fail "Le parcours ne s'est pas terminé (code $walked) : $journal" }
+        if (-not (Test-Path $journal)) { Fail "Le parcours n'a pas écrit $journal." }
+        Write-Host "Parcours terminé : $output" -ForegroundColor Green
+        exit 0
+    }
+
     if ($Scene) {
         $description = Join-Path $root "Source\Elements\Scenes\$Scene.json"
         if (-not (Test-Path $description)) { Fail "Description de scène absente : $description" }
@@ -211,6 +257,11 @@ if ($Unreal) {
             # Le groupe du Colisée est une sortie de script : la carte ne se construit pas sur un fichier périmé.
             & (Get-Python) (Join-Path $root 'scripts\maps\build_gate_scene.py') --check
             if ($LASTEXITCODE -ne 0) { Fail 'Le groupe du Colisée (colisee.json) est périmé : python scripts/maps/build_gate_scene.py' }
+        }
+        if ($Scene -like 'essai-1016-*') {
+            # Les cartes d'essai de l'exploration sont écrites par script, carte de Core et scène du même plan.
+            & (Get-Python) (Join-Path $root 'scripts\maps\build_essai_maps.py') --check
+            if ($LASTEXITCODE -ne 0) { Fail "Les cartes d'essai de l'exploration sont périmées : python scripts/maps/build_essai_maps.py" }
         }
         if ($Scene -eq $SocleScene) {
             # Le repère du socle est une donnée d'essai écrite par script : pas de carte sur un fichier périmé.

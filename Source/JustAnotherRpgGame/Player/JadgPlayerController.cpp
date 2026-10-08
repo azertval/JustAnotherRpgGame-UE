@@ -3,20 +3,50 @@
 
 #include "Player/JadgPlayerController.h"
 
+#include "Characters/JadgParty.h"
 #include "Characters/JadgWalker.h"
-#include "EngineUtils.h"
-#include "InputCoreTypes.h"
-#include "NavigationSystem.h"
+#include "Engine/GameInstance.h"
+#include "Engine/LocalPlayer.h"
+#include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
+#include "Game/JadgExploration.h"
+#include "InputAction.h"
+#include "InputMappingContext.h"
+#include "InputModifiers.h"
+#include "JustAnotherRpgGame.h"
 #include "Player/JadgCameraPawn.h"
+#include "Player/JadgControls.h"
 
 namespace
 {
-	// Réglages de la porte ; les commandes du jeu sont le LOT-1016.
-	constexpr float TurnDegreesPerSecond = 90.0f;
-	constexpr float TiltDegreesPerSecond = 45.0f;
-	constexpr float MouseDegreesPerUnit = 0.25f;
-	constexpr float PanCentimetresPerSecond = 1500.0f;
-	constexpr float ZoomStep = 0.88f;
+	const FName WalkCommand(TEXT("Walk"));
+	const FName InteractCommand(TEXT("Interact"));
+	const FName NextLeaderCommand(TEXT("NextLeader"));
+	const FName RecenterCommand(TEXT("Recenter"));
+	const FName LookCommand(TEXT("Look"));
+	const FName LookTurnCommand(TEXT("LookTurn"));
+	const FName LookTiltCommand(TEXT("LookTilt"));
+	const FName TurnCommand(TEXT("Turn"));
+	const FName TiltCommand(TEXT("Tilt"));
+	const FName ZoomCommand(TEXT("Zoom"));
+	const FName PanForwardCommand(TEXT("PanForward"));
+	const FName PanRightCommand(TEXT("PanRight"));
+	const FString ChoicePrefix(TEXT("Choice"));
+}
+
+bool UJadgControls::IsAxis(FName Command)
+{
+	return Command == LookCommand || Command == LookTurnCommand || Command == LookTiltCommand || Command == TurnCommand
+		|| Command == TiltCommand || Command == ZoomCommand || Command == PanForwardCommand || Command == PanRightCommand;
+}
+
+bool UJadgControls::IsKnown(FName Command)
+{
+	const FString Name = Command.ToString();
+	const bool bChoice = Name.StartsWith(ChoicePrefix) && Name.Len() == ChoicePrefix.Len() + 1 && Name[ChoicePrefix.Len()] >= TEXT('1')
+		&& Name[ChoicePrefix.Len()] <= TEXT('9');
+	return bChoice || IsAxis(Command) || Command == WalkCommand || Command == InteractCommand || Command == NextLeaderCommand
+		|| Command == RecenterCommand;
 }
 
 AJadgPlayerController::AJadgPlayerController()
@@ -26,24 +56,62 @@ AJadgPlayerController::AJadgPlayerController()
 	bEnableMouseOverEvents = false;
 }
 
+void AJadgPlayerController::SetupInputComponent()
+{
+	Super::SetupInputComponent();
+
+	UEnhancedInputComponent* Input = Cast<UEnhancedInputComponent>(InputComponent);
+	if (Input == nullptr)
+	{
+		UE_LOG(LogJadg, Error, TEXT("[Commandes] le composant d'entrée n'est pas celui d'Enhanced Input (Config/DefaultInput.ini)"));
+		return;
+	}
+	Context = NewObject<UInputMappingContext>(this, TEXT("JadgControls"));
+	for (const FJadgBinding& Binding : GetDefault<UJadgControls>()->Bindings)
+	{
+		if (Binding.Command.IsNone() || !Binding.Key.IsValid())
+		{
+			UE_LOG(LogJadg, Error, TEXT("[Commandes] touche refusée : commande « %s », touche « %s »"), *Binding.Command.ToString(),
+				*Binding.Key.ToString());
+			continue;
+		}
+		const bool bAxis = UJadgControls::IsAxis(Binding.Command);
+		TObjectPtr<UInputAction>& Action = Actions.FindOrAdd(Binding.Command);
+		if (Action == nullptr)
+		{
+			Action = NewObject<UInputAction>(this, Binding.Command);
+			Action->ValueType = bAxis ? EInputActionValueType::Axis1D : EInputActionValueType::Boolean;
+			if (bAxis)
+			{
+				Input->BindAction(Action, ETriggerEvent::Triggered, this, &AJadgPlayerController::OnAxis);
+			}
+			else
+			{
+				Input->BindAction(Action, ETriggerEvent::Started, this, &AJadgPlayerController::OnPressed);
+			}
+		}
+		FEnhancedActionKeyMapping& Mapping = Context->MapKey(Action, Binding.Key);
+		if (bAxis && Binding.Scale != 1.0f)
+		{
+			UInputModifierScalar* Scalar = NewObject<UInputModifierScalar>(Context);
+			Scalar->Scalar = FVector(Binding.Scale);
+			Mapping.Modifiers.Add(Scalar);
+		}
+	}
+}
+
 void AJadgPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	for (TActorIterator<AJadgWalker> It(GetWorld()); It; ++It)
+	if (const ULocalPlayer* Local = GetLocalPlayer())
 	{
-		if (It->bPlayable)
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = Local->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
 		{
-			Hero = *It;
-			break;
-		}
-	}
-	if (AJadgCameraPawn* View = Cast<AJadgCameraPawn>(GetPawn()))
-	{
-		if (Hero != nullptr)
-		{
-			View->SetActorLocation(Hero->GetActorLocation());
-			View->Follow(Hero);
+			if (Context != nullptr)
+			{
+				Subsystem->AddMappingContext(Context, 0);
+			}
 		}
 	}
 
@@ -52,8 +120,32 @@ void AJadgPlayerController::BeginPlay()
 	SetInputMode(Mode);
 }
 
+void AJadgPlayerController::OnAxis(const FInputActionInstance& Instance)
+{
+	if (const UInputAction* Action = Instance.GetSourceAction())
+	{
+		Axes.FindOrAdd(Action->GetFName()) = Instance.GetValue().Get<float>();
+	}
+}
+
+void AJadgPlayerController::OnPressed(const FInputActionInstance& Instance)
+{
+	if (const UInputAction* Action = Instance.GetSourceAction())
+	{
+		Press(Action->GetFName());
+	}
+}
+
+float AJadgPlayerController::Axis(FName Command) const
+{
+	const float* Value = Axes.Find(Command);
+	return Value != nullptr ? *Value : 0.0f;
+}
+
 void AJadgPlayerController::PlayerTick(float DeltaSeconds)
 {
+	// Les entrées de la trame se lisent dans l'appel hérité : les axes sont à jour ensuite.
+	Axes.Reset();
 	Super::PlayerTick(DeltaSeconds);
 
 	AJadgCameraPawn* View = Cast<AJadgCameraPawn>(GetPawn());
@@ -62,59 +154,92 @@ void AJadgPlayerController::PlayerTick(float DeltaSeconds)
 		return;
 	}
 
-	float Turn = 0.0f;
-	float Tilt = 0.0f;
-	if (IsInputKeyDown(EKeys::A)) { Turn -= TurnDegreesPerSecond * DeltaSeconds; }
-	if (IsInputKeyDown(EKeys::E)) { Turn += TurnDegreesPerSecond * DeltaSeconds; }
-	if (IsInputKeyDown(EKeys::R)) { Tilt += TiltDegreesPerSecond * DeltaSeconds; }
-	if (IsInputKeyDown(EKeys::F)) { Tilt -= TiltDegreesPerSecond * DeltaSeconds; }
-	if (IsInputKeyDown(EKeys::RightMouseButton))
+	float Turn = Axis(TurnCommand) * DeltaSeconds;
+	float Tilt = Axis(TiltCommand) * DeltaSeconds;
+	if (Axis(LookCommand) > 0.0f)
 	{
-		float DeltaX = 0.0f;
-		float DeltaY = 0.0f;
-		GetInputMouseDelta(DeltaX, DeltaY);
-		Turn += DeltaX * MouseDegreesPerUnit;
-		Tilt -= DeltaY * MouseDegreesPerUnit;
+		// La souris donne un déplacement, pas une vitesse : il ne se multiplie pas par la durée.
+		Turn += Axis(LookTurnCommand);
+		Tilt += Axis(LookTiltCommand);
 	}
 	if (Turn != 0.0f) { View->AddYaw(Turn); }
 	if (Tilt != 0.0f) { View->AddPitch(Tilt); }
 
-	if (WasInputKeyJustPressed(EKeys::MouseScrollUp)) { View->Zoom(ZoomStep); }
-	if (WasInputKeyJustPressed(EKeys::MouseScrollDown)) { View->Zoom(1.0f / ZoomStep); }
-
-	FVector2D Move = FVector2D::ZeroVector;
-	if (IsInputKeyDown(EKeys::Z) || IsInputKeyDown(EKeys::Up)) { Move.X += 1.0; }
-	if (IsInputKeyDown(EKeys::S) || IsInputKeyDown(EKeys::Down)) { Move.X -= 1.0; }
-	if (IsInputKeyDown(EKeys::D) || IsInputKeyDown(EKeys::Right)) { Move.Y += 1.0; }
-	if (IsInputKeyDown(EKeys::Q) || IsInputKeyDown(EKeys::Left)) { Move.Y -= 1.0; }
-	View->Pan(Move.GetSafeNormal() * PanCentimetresPerSecond * DeltaSeconds);
-
-	if (WasInputKeyJustPressed(EKeys::SpaceBar) && Hero != nullptr)
+	const float Notches = Axis(ZoomCommand);
+	if (Notches != 0.0f)
 	{
-		View->Follow(Hero);
+		View->Zoom(FMath::Pow(GetDefault<UJadgControls>()->ZoomStep, Notches));
 	}
-	if (WasInputKeyJustPressed(EKeys::LeftMouseButton))
+	View->Pan(FVector2D(Axis(PanForwardCommand), Axis(PanRightCommand)) * DeltaSeconds);
+}
+
+void AJadgPlayerController::Press(FName Command)
+{
+	AJadgParty* Party = AJadgParty::Find(GetWorld());
+	UJadgExploration* Exploration = GetGameInstance() != nullptr ? GetGameInstance()->GetSubsystem<UJadgExploration>() : nullptr;
+	const bool bTalking = Exploration != nullptr && Exploration->InDialogue();
+
+	const FString Name = Command.ToString();
+	if (Name.StartsWith(ChoicePrefix))
 	{
-		OrderWalk();
+		if (bTalking)
+		{
+			Exploration->Choose(FCString::Atoi(*Name.RightChop(ChoicePrefix.Len())) - 1);
+		}
+	}
+	else if (Command == InteractCommand)
+	{
+		if (bTalking)
+		{
+			// Une réplique à une seule suite se passe de la touche d'interaction : « continuer ».
+			if (Exploration->Choices().Num() == 1)
+			{
+				Exploration->Choose(0);
+			}
+		}
+		else if (Party != nullptr)
+		{
+			Party->Interact();
+		}
+	}
+	else if (Command == WalkCommand)
+	{
+		if (!bTalking)
+		{
+			OrderUnderCursor();
+		}
+	}
+	else if (Command == NextLeaderCommand)
+	{
+		if (Party != nullptr)
+		{
+			Party->RotateLeader();
+		}
+	}
+	else if (Command == RecenterCommand)
+	{
+		AJadgCameraPawn* View = Cast<AJadgCameraPawn>(GetPawn());
+		if (View != nullptr && Party != nullptr && Party->Leader() != nullptr)
+		{
+			View->Follow(Party->Leader());
+		}
 	}
 }
 
-void AJadgPlayerController::OrderWalk()
+void AJadgPlayerController::OrderUnderCursor()
 {
-	if (Hero == nullptr)
-	{
-		return;
-	}
+	AJadgParty* Party = AJadgParty::Find(GetWorld());
 	FHitResult Hit;
-	if (!GetHitResultUnderCursor(ECC_Visibility, true, Hit))
+	if (Party == nullptr || !GetHitResultUnderCursor(ECC_Visibility, true, Hit))
 	{
 		return;
 	}
-	// Le point cliqué peut être un mur ou un toit : il est ramené sur le maillage de navigation.
-	UNavigationSystemV1* Navigation = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
-	FNavLocation OnMesh;
-	if (Navigation != nullptr && Navigation->ProjectPointToNavigation(Hit.ImpactPoint, OnMesh, FVector(200.0, 200.0, 400.0)))
+	if (Party->IsEntity(Hit.GetActor()))
 	{
-		Hero->WalkTo(OnMesh.Location);
+		Party->OrderInteract(Hit.GetActor());
+	}
+	else
+	{
+		Party->OrderWalk(Hit.ImpactPoint);
 	}
 }
