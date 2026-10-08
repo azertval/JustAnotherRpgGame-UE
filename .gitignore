@@ -70,12 +70,10 @@ Documentation/SourceBook/
 /Documentation/Metiers/Sources/lecture-corpus.html
 # Copie de l'atelier local (Tools/, hors Git) : extractions des livres, fichiers de travail de 25 Mio.
 /Documentation/Metiers/Reproduction/Etude/
-# Site rendu de l'étude : une sortie, comme Documentation/generated/.
-/Documentation/Metiers/generated/
-# Au-delà du plafond de 5 Mio de check_binary_files.py ; régénérés par Reproduction/.
-/Documentation/Metiers/explorateur.html
-/Documentation/Metiers/Donnees/metiers-tanares-modele.json
-/Documentation/Metiers/Donnees/metiers-tanares-alimentation-v3.json
+# Le site rendu de l'étude est suivi, sauf ses copies des mêmes textes et de l'atelier.
+/Documentation/Metiers/generated/site/Metiers/Sources/Corpus/
+/Documentation/Metiers/generated/site/Metiers/Sources/lecture-corpus.html
+/Documentation/Metiers/generated/site/Metiers/Reproduction/Etude/
 
 # --- Outillage d'agent ---
 /.claude/worktrees/

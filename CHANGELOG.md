@@ -6,6 +6,11 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **L'étude des métiers entre entière dans le dépôt** (8 octobre 2026) : son site rendu
+  (`Documentation/Metiers/generated/`), l'explorateur interactif et les deux fichiers de données
+  qui dépassaient le plafond de 5 Mio. Ces trois fichiers, et leur copie dans le site, vont en
+  Git LFS ; `check_binary_files.py` exempte du plafond ce que `.gitattributes` range en LFS — ce
+  qui vaudra aussi pour les `.uasset` régénérés (D-52). Le texte des livres reste dehors.
 - **Le dépôt du nouveau moteur est public, avec sa CI refaite à neuf** (LOT-1014, 8 octobre 2026).
   À chaque PR, sur les runners hébergés : les tests de Core hors moteur (Debug et Release),
   clang-format sur Core et ses tests — pas sur le code du pont, dont il déferait l'ordre « Core

@@ -39,3 +39,13 @@ CMakeLists.txt text
 *.otf binary
 # Maillages : glTF binaire.
 *.glb binary
+
+# Étude des métiers : trois fichiers de texte au-delà du plafond de 5 Mio (le modèle fait 40 Mio),
+# et leur copie dans le site rendu. En Git LFS pour ne pas peser dans le pack ; les nommer ici est
+# la décision de les admettre (check_binary_files.py n'exempte du plafond que ce qui est en LFS).
+/Documentation/Metiers/explorateur.html                                             filter=lfs diff=lfs merge=lfs -text
+/Documentation/Metiers/Donnees/metiers-tanares-modele.json                          filter=lfs diff=lfs merge=lfs -text
+/Documentation/Metiers/Donnees/metiers-tanares-alimentation-v3.json                 filter=lfs diff=lfs merge=lfs -text
+/Documentation/Metiers/generated/site/Metiers/explorateur.html                      filter=lfs diff=lfs merge=lfs -text
+/Documentation/Metiers/generated/site/Metiers/Donnees/metiers-tanares-modele.json   filter=lfs diff=lfs merge=lfs -text
+/Documentation/Metiers/generated/site/Metiers/Donnees/metiers-tanares-alimentation-v3.json filter=lfs diff=lfs merge=lfs -text

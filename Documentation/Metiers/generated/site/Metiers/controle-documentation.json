@@ -1,0 +1,31 @@
+{
+  "markdown_pages_site": 504,
+  "new_documentation_pages": 503,
+  "base_pages": 66,
+  "branch_pages": 267,
+  "specialisation_pages": 234,
+  "generalist_pages": 33,
+  "locality_pages": 118,
+  "csv_profiles": 118,
+  "csv_rows_per_profile": 269,
+  "csv_denominators_and_social_rows_conserved": true,
+  "sources_and_anchors_and_orphans_errors": [],
+  "frozen_json_sha256_unchanged": true,
+  "svg_textual_figures": 87,
+  "svg_no_corpus_image": true,
+  "representative_figures_rendered": [
+    "coverage",
+    "activity",
+    "stocks_taiimaku",
+    "tree_arcane",
+    "tree_forge"
+  ],
+  "representative_figures_visually_inspected": [
+    "coverage",
+    "activity",
+    "tree_arcane"
+  ],
+  "all_figure_layouts_visually_inspected": false,
+  "skills_functions_training_proposed": true,
+  "old_documentation_errors_outside_scope": 5
+}

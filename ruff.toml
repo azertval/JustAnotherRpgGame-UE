@@ -14,6 +14,8 @@
 # à part, dans un commit qui ne contient que cela.
 target-version = "py312"
 line-length = 100
+# Le site rendu de l'étude des métiers recopie ses scripts : une sortie, lue à sa source.
+extend-exclude = ["Documentation/Metiers/generated"]
 
 [lint]
 select = ["E4", "E7", "E9", "F", "B"]
