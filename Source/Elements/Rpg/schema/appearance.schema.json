@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/appearance.schema.json",
+  "title": "Apparence",
+  "description": "L'apparence d'un personnage (LOT-1015, D-63) : les valeurs que le createur de personnage du moteur (objet personnalisable Mutable) recoit pour l'assembler. Une fiche par personnage, liee a sa fiche de regles par le meme identifiant ; Core la lit (core::readAppearance), le moteur traduit chaque champ en parametre du createur.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "creator": {
+      "description": "L'objet personnalisable qui assemble ce personnage (Source/Elements/Assets/Characters/<creator>.json).",
+      "type": "string",
+      "minLength": 1
+    },
+    "body": {
+      "description": "Le corps : une option du parametre `Body` du createur.",
+      "type": "string",
+      "minLength": 1
+    },
+    "head": {
+      "description": "La tete : une option du parametre `Head` du createur.",
+      "type": "string",
+      "minLength": 1
+    },
+    "height": {
+      "description": "La taille du sol au sommet du crane, en metres.",
+      "type": "number",
+      "exclusiveMinimum": 0,
+      "maximum": 4
+    },
+    "colors": {
+      "description": "Les couleurs, en lineaire de 0 a 1 : skin, hair, eyes, ou tout parametre de couleur du createur.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "minItems": 3,
+        "maxItems": 4
+      }
+    },
+    "pieces": {
+      "description": "Les pieces portees, par emplacement : l'option choisie d'un parametre de choix du createur (torso, legs, feet, hair, beard, horns...). Vide : rien a cet emplacement.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "weapons": {
+      "description": "L'arme de chaque main : une piece de Source/Elements/Assets/Master/Weapons, accrochee par socket (D-63).",
+      "type": "object",
+      "properties": {
+        "main-hand": { "type": "string", "minLength": 1 },
+        "off-hand": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "clips": {
+      "description": "Les clips et leur instant d'impact `key` en secondes (attack, cast) ; les autres clips n'en ont pas.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "key": { "type": "number", "minimum": 0 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "metahuman": {
+      "description": "Ce que le constructeur du createur donne a MetaHuman Creator pour produire le corps et la tete de ce personnage ; Core ne le lit pas.",
+      "type": "object",
+      "properties": {
+        "bodyConstraints": {
+          "description": "Contraintes du corps parametrique, en centimetres, par nom de contrainte (height, upper_arm_length...).",
+          "type": "object",
+          "additionalProperties": { "type": "number" }
+        },
+        "skin": {
+          "type": "object",
+          "properties": {
+            "u": { "type": "number", "minimum": 0, "maximum": 1 },
+            "v": { "type": "number", "minimum": 0, "maximum": 1 },
+            "roughness": { "type": "number", "minimum": 0, "maximum": 1 },
+            "bodyTextureIndex": { "type": "integer", "minimum": 0 },
+            "faceTextureIndex": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "eyes": {
+          "type": "object",
+          "additionalProperties": { "type": "number" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["id", "name", "source", "creator", "body", "head", "height"],
+  "additionalProperties": false
+}

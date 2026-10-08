@@ -40,8 +40,39 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from reduce_model import read_glb, write_glb  # noqa: E402
+import struct
+
+GLB_MAGIC = b"glTF"
+CHUNK_JSON = b"JSON"
+CHUNK_BIN = b"BIN\x00"
+
+
+def read_glb(data: bytes) -> tuple[dict, bytes]:
+    """Le document JSON et le bloc binaire d'un `.glb` 2.0 (venu de `reduce_model.py`, retiré au LOT-1015)."""
+    magic, version, length = struct.unpack_from("<4sII", data, 0)
+    if magic != GLB_MAGIC or version != 2 or length > len(data):
+        raise ValueError("pas un fichier .glb 2.0")
+    json_length, json_kind = struct.unpack_from("<I4s", data, 12)
+    if json_kind != CHUNK_JSON:
+        raise ValueError("bloc JSON absent")
+    document = json.loads(data[20:20 + json_length])
+    binary = b""
+    offset = 20 + json_length
+    if offset + 8 <= length:
+        binary_length, binary_kind = struct.unpack_from("<I4s", data, offset)
+        if binary_kind == CHUNK_BIN:
+            binary = data[offset + 8:offset + 8 + binary_length]
+    return document, binary
+
+
+def write_glb(document: dict, binary: bytes) -> bytes:
+    """Un `.glb` de `document` et de `binary`, chaque bloc complété à quatre octets."""
+    text = json.dumps(document, separators=(",", ":")).encode("utf-8")
+    text += b" " * ((4 - len(text) % 4) % 4)
+    binary += b"\x00" * ((4 - len(binary) % 4) % 4)
+    body = (struct.pack("<I4s", len(text), CHUNK_JSON) + text
+            + struct.pack("<I4s", len(binary), CHUNK_BIN) + binary)
+    return struct.pack("<4sII", GLB_MAGIC, 2, 12 + len(body)) + body
 
 MATTERS_DEFAUT = Path(__file__).resolve().parent / "arena_fate_matters.json"
 JPEG_QUALITY = 90

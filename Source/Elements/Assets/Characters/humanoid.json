@@ -1,0 +1,31 @@
+{
+  "id": "humanoid",
+  "description": "Le createur des humanoides (LOT-1015, D-63) : ce que le commandlet JadgBuildCharacterCreator construit en objet personnalisable Mutable, et ce que l'acteur du jeu lit pour poser un personnage depuis sa fiche d'apparence. Les corps viennent du mannequin du moteur (import_mannequin_unreal.py) ; MetaHuman s'y ajoute quand son contenu optionnel est installe sur le poste.",
+  "asset": "/Game/Characters/Creator/CO_Humanoid",
+  "component": "Body",
+  "skeleton": "/Game/Characters/Mannequins/Meshes/SK_Mannequin",
+  "referenceHeight": 1.8,
+  "bodies": {
+    "manny": "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple",
+    "quinn": "/Game/Characters/Mannequins/Meshes/SKM_Quinn_Simple",
+    "mannequin": "/Game/Characters/Mannequins/Meshes/SKM_Manny_Simple"
+  },
+  "heads": {
+    "manny": "",
+    "quinn": "",
+    "mannequin": ""
+  },
+  "clips": {
+    "idle": "/Game/Characters/Mannequins/Anims/Unarmed/MM_Idle",
+    "walk": "/Game/Characters/Mannequins/Anims/Unarmed/Walk/MF_Unarmed_Walk_Fwd",
+    "attack": "/Game/Characters/Mannequins/Anims/Unarmed/Attack/MM_Attack_01",
+    "cast": "/Game/Characters/Mannequins/Anims/Unarmed/Attack/MM_ChargedAttack",
+    "hit": "/Game/Characters/Mannequins/Anims/Rifle/HitReact/MM_HitReact_Front_Med_01",
+    "death": "/Game/Characters/Mannequins/Anims/Death/MM_Death_Front_01"
+  },
+  "sockets": {
+    "main-hand": "hand_r",
+    "off-hand": "hand_l"
+  },
+  "weapons": "/Game/Master/Weapons"
+}

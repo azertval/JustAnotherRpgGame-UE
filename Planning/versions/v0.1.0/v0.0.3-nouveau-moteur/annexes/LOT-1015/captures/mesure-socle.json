@@ -1,0 +1,11 @@
+{
+  "map": "Socle1014",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 15.72,
+  "captures": ["socle-1200.png", "socle-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.6, "frames": 1352, "fps": 116.5, "frameMs": 8.58, "p99FrameMs": 101.86, "worstFrameMs": 133.70, "gameMs": 1.48, "renderMs": 8.52, "gpuMs": 7.67},
+    {"hour": "22:00", "seconds": 11.6, "frames": 1343, "fps": 115.5, "frameMs": 8.66, "p99FrameMs": 105.84, "worstFrameMs": 155.64, "gameMs": 1.46, "renderMs": 8.61, "gpuMs": 7.60}
+  ]
+}

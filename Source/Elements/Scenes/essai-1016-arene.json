@@ -96,10 +96,10 @@
     {"id": "mur/11,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.0, 9.75], "yaw": 0.0, "scale": 1.0}
   ],
   "characters": [
-    {"id": "groupe-1", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 0},
-    {"id": "groupe-2", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 1},
-    {"id": "groupe-3", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 2},
-    {"id": "groupe-4", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 3}
+    {"id": "groupe-1", "appearance": "heros-brawler", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 0},
+    {"id": "groupe-2", "appearance": "heros-mage", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 1},
+    {"id": "groupe-3", "appearance": "heros-priest", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 2},
+    {"id": "groupe-4", "appearance": "heros-scoundrel", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 3}
   ],
   "shots": [
     {"id": "arene", "target": [9.0, 1.0, 5.25], "heading": 0.0, "pitch": 42.0, "distance": 18.0, "comment": "L'arène vide, depuis le sud : le groupe y attend le combat du LOT-1017."}

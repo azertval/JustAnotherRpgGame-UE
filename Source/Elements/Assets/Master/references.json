@@ -1,10 +1,9 @@
 {
   "version": 1,
-  "note": "Chaque retour Meshy (famille/nom, ou famille/nom_idMeshy quand deux retours portent le même nom) reçoit l'identifiant de sa référence : le dieu de Tanares, la fiche de personnage, la pièce d'équipement. build_master_manifest.py nomme les fichiers et les assets d'après cette table ; un retour absent de la table arrête le script. La colonne basis dit d'où vient l'attribution ; rien n'est deviné. Les entrées « à confirmer » attendent l'auteur.",
+  "note": "Chaque retour Meshy (famille/nom, ou famille/nom_idMeshy quand deux retours portent le même nom) reçoit l'identifiant de sa référence : le dieu de Tanares, la fiche de personnage, la pièce d'équipement. build_master_manifest.py nomme les fichiers et les assets d'après cette table ; un retour absent de la table arrête le script. La colonne basis dit d'où vient l'attribution ; rien n'est deviné. Les entrées « à confirmer » attendent l'auteur. Les références des 21 PNJ sont retirées au LOT-1015 (D-63, D-64).",
   "sources": [
     "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/V2/MeshyReferences/meshy-identification.json (3 octobre 2026, 15 statues, confiance haute, attribution visuelle sur deux rendus)",
     "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/V3/Sculptures/identification.json (8 sculptures des sous-sols, confiance haute)",
-    "Tools/Assets3D/Personnages/<fiche>/Meshy_AI_<nom>_<id>_texture.glb (le retour Meshy rangé par fiche de personnage, 2 octobre 2026)",
     "Tools/Assets3D/Equipements/meshy-inputs/generation.json et apercu.jpg (les 28 références d'équipement du 2 octobre 2026), comparées aux vignettes Blender des retours du 7 octobre"
   ],
   "references": {
@@ -117,111 +116,6 @@
       "id": "Statues/neutral-athlete",
       "name": "Athlète neutre",
       "basis": "V3 Sculptures/identification"
-    },
-    "NPC/Aurelian_Emberleaf": {
-      "id": "Npc/mage",
-      "name": "Faelar, le mage (héros)",
-      "basis": "Personnages/mage"
-    },
-    "NPC/Ironbraid_Matriarch": {
-      "id": "Npc/priest",
-      "name": "Helga, la prêtresse (héros)",
-      "basis": "Personnages/priest"
-    },
-    "NPC/LOT_1009_Brawler_T_": {
-      "id": "Npc/brawler",
-      "name": "Grom, le brawler (héros)",
-      "basis": "Personnages/brawler"
-    },
-    "NPC/Scarlet_Ranger": {
-      "id": "Npc/scoundrel",
-      "name": "Nessa, la scoundrel (héros)",
-      "basis": "Personnages/scoundrel portait « Auburn Ranger » le 2 octobre ; même fiche ; confirmé sur vignette Blender du 8 octobre (femme rousse, cuir, sacoche)"
-    },
-    "NPC/Ironclad_Sentinel_1007175750": {
-      "id": "Npc/arena-fighter",
-      "name": "Combattant de l'arène",
-      "basis": "Personnages/arena-fighter porte le même nom Meshy ; confirmé sur vignette Blender du 8 octobre : femme, cheveux courts, cuir clouté, comme reference/face.png"
-    },
-    "NPC/Ironclad_Sentinel_1007180054": {
-      "id": "Npc/veteran",
-      "name": "Vétéran",
-      "basis": "Personnages/veteran porte le même nom Meshy ; confirmé sur vignette Blender du 8 octobre : homme à barbe grise, armure de plates, comme reference/face.png"
-    },
-    "NPC/The_Crimson_Baron": {
-      "id": "Npc/arena-master",
-      "name": "Maître d'arène",
-      "basis": "Personnages/arena-master"
-    },
-    "NPC/The_Dustbound_Corsair": {
-      "id": "Npc/bandit",
-      "name": "Bandit",
-      "basis": "Personnages/bandit"
-    },
-    "NPC/Rugged_Outrider": {
-      "id": "Npc/bandit-archer",
-      "name": "Bandit archer",
-      "basis": "Personnages/bandit-archer"
-    },
-    "NPC/Crimson_Corsair": {
-      "id": "Npc/bandit-captain",
-      "name": "Capitaine des bandits",
-      "basis": "Personnages/bandit-captain"
-    },
-    "NPC/Stormhide_Warlord": {
-      "id": "Npc/berserker",
-      "name": "Berserker",
-      "basis": "Personnages/berserker"
-    },
-    "NPC/Little_Wanderer": {
-      "id": "Npc/child",
-      "name": "L'enfant",
-      "basis": "Personnages/child"
-    },
-    "NPC/Gladiator_Champion": {
-      "id": "Npc/gladiator",
-      "name": "Gladiateur",
-      "basis": "Personnages/gladiator"
-    },
-    "NPC/Crimson_Paladin": {
-      "id": "Npc/ironhand-soldier",
-      "name": "Soldat Ironhand",
-      "basis": "Personnages/ironhand-soldier"
-    },
-    "NPC/Scarred_Lion_King": {
-      "id": "Npc/lion",
-      "name": "Le lion",
-      "basis": "Personnages/lion"
-    },
-    "NPC/The_Village_Seamstres": {
-      "id": "Npc/mother",
-      "name": "La mère",
-      "basis": "Personnages/mother"
-    },
-    "NPC/Rustbone_Sentinel": {
-      "id": "Npc/skeleton",
-      "name": "Squelette",
-      "basis": "Personnages/skeleton"
-    },
-    "NPC/Ironbound_Brawler": {
-      "id": "Npc/thug",
-      "name": "Brute",
-      "basis": "Personnages/thug"
-    },
-    "NPC/Silverfang": {
-      "id": "Npc/wolf",
-      "name": "Le loup",
-      "basis": "Personnages/wolf"
-    },
-    "NPC/The_Tattered_Undead": {
-      "id": "Npc/zombie",
-      "name": "Zombie",
-      "basis": "Personnages/zombie"
-    },
-    "NPC/Chromatic_Sentinel": {
-      "id": "Npc/mannequin",
-      "name": "Mannequin humanoïde",
-      "basis": "Personnages/mannequin"
     },
     "Weapon/Bronze_Guardian_Shiel": {
       "id": "Weapons/gladiator-shield",

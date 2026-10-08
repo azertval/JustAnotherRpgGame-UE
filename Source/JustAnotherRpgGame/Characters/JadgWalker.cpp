@@ -4,6 +4,8 @@
 #include "Characters/JadgWalker.h"
 
 #include "AIController.h"
+#include "Characters/JadgAppearance.h"
+#include "JustAnotherRpgGame.h"
 #include "Animation/AnimSequence.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
@@ -43,7 +45,28 @@ void AJadgWalker::BeginPlay()
 	{
 		GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
 	}
+	if (!Appearance.IsEmpty())
+	{
+		FString Erreur;
+		if (!JadgAppearance::Apply(*this, Appearance, Erreur))
+		{
+			UE_LOG(LogJadg, Error, TEXT("[Personnage] %s : %s"), *GetName(), *Erreur);
+		}
+	}
 	Play(IdleClip);
+}
+
+bool AJadgWalker::PlayOnce(FName Clip)
+{
+	UAnimSequence* Once = Clips.FindRef(Clip);
+	if (Once == nullptr)
+	{
+		return false;
+	}
+	GetMesh()->PlayAnimation(Once, false);
+	GetMesh()->SetPlayRate(1.0f);
+	bWalking = false;
+	return true;
 }
 
 void AJadgWalker::Tick(float DeltaSeconds)

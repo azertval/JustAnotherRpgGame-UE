@@ -51,7 +51,9 @@ public class JustAnotherRpgGame : ModuleRules
 		// AIModule et NavigationSystem : la marche au clic sur le maillage de navigation (LOT-1012) ;
 		// EnhancedInput : les commandes du jeu, créées en C++ depuis leur fichier texte (LOT-1016) ;
 		// RenderCore et RHI : les temps de trame que la mesure de cadence relève.
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "AIModule", "NavigationSystem", "RenderCore", "RHI" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "AIModule", "NavigationSystem", "RenderCore", "RHI",
+			// Mutable : le créateur de personnage, un objet personnalisable que l'acteur instancie (LOT-1015).
+			"CustomizableObject" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
 
@@ -59,6 +61,8 @@ public class JustAnotherRpgGame : ModuleRules
 		if (Target.bBuildEditor)
 		{
 			PrivateDependencyModuleNames.Add("UnrealEd");
+			// Le graphe du créateur se construit par réflexion sur les nœuds du plugin (JadgCreatorGraph).
+			PrivateDependencyModuleNames.Add("CustomizableObjectEditor");
 		}
 	}
 }

@@ -1,12 +1,14 @@
 # Core · Rpg
 
-Tests unitaires — **106 cas** (3 bloquants, 62 critiques, 39 majeurs, 2 mineurs). [Retour à la synthèse](README.md).
+Tests unitaires — **113 cas** (3 bloquants, 62 critiques, 46 majeurs, 2 mineurs). [Retour à la synthèse](README.md).
 
 ## Ce que cette page couvre
 
 | Fichier de test | Cas | Bloquant | Critique | Majeur | Mineur |
 |---|---|---|---|---|---|
+| [`test_appearance.cpp`](#test-appearancecpp) | 4 | - | - | 4 | - |
 | [`test_bestiary.cpp`](#test-bestiarycpp) | 6 | - | 3 | 3 | - |
+| [`test_character_creator.cpp`](#test-character-creatorcpp) | 3 | - | - | 3 | - |
 | [`test_character_options.cpp`](#test-character-optionscpp) | 9 | - | 5 | 4 | - |
 | [`test_character_sheet.cpp`](#test-character-sheetcpp) | 10 | - | 6 | 4 | - |
 | [`test_check.cpp`](#test-checkcpp) | 5 | - | 4 | 1 | - |
@@ -36,6 +38,84 @@ Chaque exigence citée par un cas de cette page, avec les cas qui la citent ; la
 | `EX-NFR-002` | [`DiceTest.RejouabiliteStricte`](#dicetestrejouabilitestricte) |
 | `EX-REG-003` | [`CheckTest.ModificateursEtRestitution`](#checktestmodificateursetrestitution) |
 | `EX-RPG-042` | [`DialogueTest.UnDialogueEstRefuseFauteDeLangueCommune`](#dialoguetestundialogueestrefusefautedelanguecommune) |
+
+## test_appearance.cpp
+
+### ApparenceTest.UneFicheSeLitChampParChamp
+
+*Majeur · Unitaire · Personnages (LOT-1015)* — `Source/Test/Unit/Core/Rpg/test_appearance.cpp:33`
+
+Une fiche d'apparence se lit champ par champ.
+
+**Étapes**
+
+1. Lire une fiche en texte : createur, corps, tete, taille, couleurs, pieces, armes, clips.
+
+**Résultat attendu**
+
+- Vérifie que `lue.ok()` est vrai.
+- Vérifie que `fiche.id` vaut `"essai"`.
+- Vérifie que `fiche.creator` vaut `"humanoid"`.
+- Vérifie que `fiche.body` vaut `"metahuman"`.
+- Vérifie que `fiche.height` vaut `1.8F` (comparaison flottante).
+- Vérifie que `fiche.colors.size()` vaut `2U`.
+- Vérifie que `fiche.colors.at("skin").r` vaut `0.5F` (comparaison flottante).
+- Vérifie que `fiche.colors.at("skin").a` vaut `1.0F` (comparaison flottante).
+- Vérifie que `fiche.colors.at("eyes").b` vaut `0.3F` (comparaison flottante).
+- Vérifie que `fiche.pieces.at("torso")` vaut `"tunic"`.
+- Vérifie que `fiche.weapons.at("main-hand")` vaut `"Weapons/brawler-axe"`.
+- Vérifie que `fiche.clipKeys.size()` vaut `1U`.
+- Vérifie que `fiche.clipKeys.at("attack")` vaut `0.4F` (comparaison flottante).
+
+### ApparenceTest.CeQuEllRefuseEstNommeAvecSonChamp
+
+*Majeur · Unitaire · Personnages (LOT-1015)* — `Source/Test/Unit/Core/Rpg/test_appearance.cpp:60`
+
+Une fiche fautive est refusee en nommant son champ.
+
+**Étapes**
+
+1. Lire une fiche sans createur, de taille nulle, a couleur hors de 0..1, a main inconnue, a key negatif ; puis un texte malforme.
+
+**Résultat attendu**
+
+- Vérifie que `lue.error` vaut `core::JsonReadError::MalformedStructure`.
+- Vérifie que `lue.message.find(c.champ)` diffère de `std::string::npos`.
+- Vérifie que `malforme.error` vaut `core::JsonReadError::ParseError`.
+
+### ApparenceTest.LesFichesLivreesSeLisentEtPortentLeurNomDeFichier
+
+*Majeur · Unitaire · Personnages (LOT-1015)* — `Source/Test/Unit/Core/Rpg/test_appearance.cpp:98`
+
+Les fiches livrees se lisent et portent le nom de leur fichier.
+
+**Étapes**
+
+1. Charger Rpg/appearances/.
+2. Verifier les quatre heros et le pantin, l'arme de main principale et le key d'attaque des heros, et qu'une fiche de regles de heros a sa fiche d'apparence.
+
+**Résultat attendu**
+
+- Vérifie que `erreurs.empty()` est vrai.
+- Vérifie que `fiches.count(id)` est vrai.
+- Vérifie que `fiches.at(id).height` est strictement supérieur à `0.0F`.
+- Vérifie que `fiches.at(id).weapons.count("main-hand")` est vrai.
+- Vérifie que `fiches.at(id).clipKeys.at("attack")` vaut `0.4F` (comparaison flottante).
+- Vérifie que `fiches.count(entree.path().stem().string())` est vrai.
+
+### ApparenceTest.UnFichierAbsentEstUnEchecNomme
+
+*Majeur · Unitaire · Personnages (LOT-1015)* — `Source/Test/Unit/Core/Rpg/test_appearance.cpp:129`
+
+Une fiche absente est un echec nomme.
+
+**Étapes**
+
+1. Lire un fichier qui n'existe pas.
+
+**Résultat attendu**
+
+- Vérifie que `lue.error` vaut `core::JsonReadError::FileNotFound`.
 
 ## test_bestiary.cpp
 
@@ -147,6 +227,64 @@ Charger un dossier de creatures inexistant produit une erreur nommee.
 - Vérifie que `vide.creatures.empty()` est vrai.
 - Vérifie que `vide.errors.size()` vaut `1U`.
 - Vérifie que `vide.errors.front().find("dossier-inexistant")` diffère de `std::string::npos`.
+
+## test_character_creator.cpp
+
+### CreateurDePersonnageTest.LaDescriptionLivreeSeLit
+
+*Majeur · Unitaire · Personnages (LOT-1015)* — `Source/Test/Unit/Core/Rpg/test_character_creator.cpp:25`
+
+La description du createur humanoide se lit.
+
+**Étapes**
+
+1. Lire Assets/Characters/humanoid.json.
+
+**Résultat attendu**
+
+- Vérifie que `lue.ok()` est vrai.
+- Vérifie que `creator.id` vaut `"humanoid"`.
+- Vérifie que `creator.component` vaut `"Body"`.
+- Vérifie que `creator.referenceHeight` est strictement supérieur à `0.0F`.
+- Vérifie que `creator.bodies.size()` est supérieur ou égal à `2U`.
+- Vérifie que `creator.clips.count(clip)` est vrai.
+- Vérifie que `creator.sockets.count("main-hand")` est vrai.
+- Vérifie que `creator.sockets.count("off-hand")` est vrai.
+
+### CreateurDePersonnageTest.ChaqueFicheLivreeNommeUnCorpsDuCreateur
+
+*Majeur · Unitaire · Personnages (LOT-1015)* — `Source/Test/Unit/Core/Rpg/test_character_creator.cpp:50`
+
+Chaque fiche livree nomme un corps du createur.
+
+**Étapes**
+
+1. Charger la description et les fiches d'apparence.
+2. Croiser createur, corps, mains et pieces d'armes.
+
+**Résultat attendu**
+
+- Vérifie que `erreurs.empty()` est vrai.
+- Vérifie que `fiche.creator` vaut `creator.id`.
+- Vérifie que `creator.bodies.count(fiche.body)` est vrai.
+- Vérifie que `creator.sockets.count(main)` est vrai.
+- Vérifie que `piece.rfind("Weapons/", 0)` vaut `0U`.
+
+### CreateurDePersonnageTest.CeQuIlRefuse
+
+*Majeur · Unitaire · Personnages (LOT-1015)* — `Source/Test/Unit/Core/Rpg/test_character_creator.cpp:75`
+
+Une description fautive est refusee en nommant son champ.
+
+**Étapes**
+
+1. Lire une description a chemin d'asset hors /Game, a taille nulle, a corps sans chemin de contenu, sans clip walk.
+
+**Résultat attendu**
+
+- Vérifie que `core::parseCharacterCreator(ok, "ok").ok()` est vrai.
+- Vérifie que `lue.error` vaut `core::JsonReadError::MalformedStructure`.
+- Vérifie que `lue.message.find(c.champ)` diffère de `std::string::npos`.
 
 ## test_character_options.cpp
 

@@ -548,22 +548,15 @@ scripts, hors CI, tiennent la chaîne, et chacun dit dans son en-tête ce qu'il 
   sert plus qu'aux **images tolérées** du standard 3D ; son pendant pour les figurines
   (`LOT-112`) et l'aperçu de marche ont été retirés au `LOT-1001` : un personnage ne se commande
   plus en bandes peintes.
-- [`rig_character.py`](../../scripts/assetsGeneration/rig_character.py) (`LOT-1005`) lie un
-  maillage reçu de Meshy au squelette humanoïde commun, d'après sa fiche de liaison, pose les six
-  clips et écrit le `.glb` autonome et `skeleton.json` ;
-  [`check_character_model.py`](../../scripts/checks/check_character_model.py) contrôle l'export
-  (structure, poids, contact au sol, glissement du pied) et
-  [`render_character_review.py`](../../scripts/assetsGeneration/render_character_review.py) rend
-  les planches que l'auteur juge. L'atelier des assets de l'éditeur pose ensuite le modèle, sa
-  fiche `character.json`, son portrait, son jeton et le squelette (`LOT-1008`).
-- [`retouch_character.py`](../../scripts/assetsGeneration/retouch_character.py) (`LOT-1008`,
-  décision D-44) fait l'**aller-retour par Blender** d'un personnage lié : `open` ouvre le modèle
-  dans Blender — maillage, 53 os, une action par clip, à 60 images par seconde — et prend un
-  **repère** de ce que Blender a lu ; `import` relit le `.blend` enregistré, ne retient que ce
-  qui diffère du repère — une articulation déplacée dans la fiche de liaison, un clip modifié
-  dans la fiche de retouche `retouche.json` — puis, avec `--source` et `--output`, relie le modèle
-  par `rig_character.py --retouch` et le contrôle. Blender n'est que l'instrument de saisie : rien
-  n'en revient qu'en données, ni maillage, ni poids, ni `.glb` exporté par lui.
+- Les **personnages** ne passent plus par une chaîne de liaison du dépôt (`LOT-1015`, décisions
+  D-63 et D-64) : un personnage est une **fiche d'apparence** (`Source/Elements/Rpg/appearances/`,
+  lue par `core::readAppearance`) que le **créateur** du moteur assemble. Le créateur est un objet
+  personnalisable Mutable, construit sans fenêtre par le commandlet `JadgBuildCharacterCreator`
+  depuis sa description texte (`Source/Elements/Assets/Characters/humanoid.json`) ;
+  [`import_mannequin_unreal.py`](../../scripts/assetsGeneration/import_mannequin_unreal.py) pose
+  dans le projet le mannequin du moteur et ses six clips, première source de corps et
+  d'animations. `rig_character.py`, `rig_quadruped.py`, `retouch_character.py`,
+  `reduce_model.py`, `render_character_review.py` et `check_character_model.py` sont retirés.
 - [`build_hd_mockup.py`](../../scripts/assetsGeneration/build_hd_mockup.py) (`LOT-101`) monte la
   maquette de validation du standard 2D HD, huit cases sur huit à 1080p et 2160p, et écrit sous
   `Source/Test/Fixtures/HdMockup/` la même scène en données d'essai du moteur ; `--check` vérifie

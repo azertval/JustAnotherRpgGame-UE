@@ -14,8 +14,7 @@ rend impossible l'écart SILENCIEUX entre les deux :
   losange du lieu, une ancre dans l'image, un losange de lieu égal à celui de sa région ;
 - un **personnage** qui n'est pas ce que le standard en dit (`Planning/standards/personnages-3d.md`,
   LOT-1006) : un modèle sans fiche (`character.json`), une fiche qui cite un `.glb` ou un squelette
-  que rien ne déclare, une description de squelette (`skeleton.json`) mal formée, un `.glb` installé
-  qui ne passe pas les contrôles de l'export (`check_character_model.py`) — et **toute bande de
+  que rien ne déclare, une description de squelette (`skeleton.json`) mal formée — et **toute bande de
   figurine** restée sous un dossier `Characters/` : un personnage est un modèle, plus une suite
   d'images. Un visage sans modèle n'existe plus : la liste `portraits` du manifeste (le portrait
   d'attente du LOT-145) est refusée depuis le LOT-1011.
@@ -240,26 +239,6 @@ def check_skeleton(path: Path, root: Path, report: Report) -> dict | None:
     return data if len(report.errors) == before else None
 
 
-def check_model_file(path: Path, skeleton: dict | None, root: Path, report: Report) -> None:
-    """Un `.glb` de personnage installé passe les contrôles de l'export (standard, §9).
-
-    Par `check_character_model.inspect`, qui les tient : structure, poids, contact au sol, glissement
-    du pied. Demande numpy ; sans lui, le fichier n'est pas ouvert — le contrôle des fiches a lieu
-    quand même.
-    """
-    try:
-        import check_character_model
-    except ImportError:
-        return
-    try:
-        measures = check_character_model.inspect(path.read_bytes(), skeleton)
-    except Exception as error:  # noqa: BLE001 : un fichier illisible est un écart, pas une panne
-        report.fail(f"{relative(path, root)} : modèle illisible ({error})")
-        return
-    for fault in measures.get("faults", []):
-        report.fail(f"{relative(path, root)} : {fault}")
-
-
 def check_sheet(folder: Path, models: dict, name: str, root: Path, report: Report,
                 skeletons: dict[str, dict | None]) -> None:
     """La fiche d'un personnage en modèle : elle cite un `.glb` et un squelette déclarés."""
@@ -292,9 +271,9 @@ def check_sheet(folder: Path, models: dict, name: str, root: Path, report: Repor
         else:
             skeletons[skeleton] = None
             report.fail(f"{where} : squelette `{skeleton}` sans {relative(path, root)}")
-    # Le fichier n'est là que si le kit est installé : il est hors de Git, comme une image.
-    if (folder / model).is_file():
-        check_model_file(folder / model, skeletons[skeleton], root, report)
+    # Le fichier n'est là que si le kit est installé : il est hors de Git, comme une image. Le
+    # contrôle du .glb lié (check_character_model.py) est parti avec la chaîne maison (LOT-1015,
+    # D-64) : un personnage est une fiche d'apparence, le fichier n'est plus ouvert ici.
 
 
 def check_no_strip(directory: Path, root: Path, report: Report) -> None:

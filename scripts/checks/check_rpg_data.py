@@ -91,6 +91,9 @@ FAMILLES = {
     # personnage. Elle passe par le meme controle que les autres -- une fiche de demonstration mal
     # formee est un ecran vide qu'on met une heure a expliquer.
     'characters': 'character',
+    # Apparences (LOT-1015, D-63) : ce que le createur de personnage du moteur assemble, par le meme
+    # identifiant que la fiche de regles. Core la lit (core::readAppearance).
+    'appearances': 'appearance',
     'encounters': 'encounter',
     # Dialogues (LOT-15), sous World/ : une conversation est un contenu de lieu. Le schema dit la
     # forme ; les cibles, les cycles et les impasses se refusent au chargement (core::readDialogue).

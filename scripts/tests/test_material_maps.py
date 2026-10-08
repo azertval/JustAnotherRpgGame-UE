@@ -14,7 +14,7 @@ import pytest
 
 import build_mesh_fixture as F
 import material_maps as M
-from reduce_model import read_glb
+from material_maps import read_glb
 
 pytest.importorskip('numpy')
 Image = pytest.importorskip('PIL.Image')

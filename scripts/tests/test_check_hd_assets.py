@@ -148,23 +148,11 @@ def test_un_personnage_en_modele_passe_sans_son_glb(assets):
     assert errors(root) == []
 
 
-def test_le_glb_installe_passe_les_controles_de_l_export(assets):
-    """Le kit installé : le modèle d'essai du moteur, lié aux 53 os, contre son squelette."""
+def test_un_glb_que_rien_ne_declare_echoue(assets):
+    """Le contrôle de l'export du .glb (check_character_model.py) est parti au LOT-1015 (D-64) ;
+    un fichier .glb qu'aucune fiche ne déclare reste un écart."""
     root, _, _ = assets
-    skeleton = json.loads((FIXTURE / 'Skeletons' / 'humanoid' / 'skeleton.json').read_text(encoding='utf-8'))
-    model = (FIXTURE / 'Mannequins' / 'humanoid' / 'humanoid.glb').read_bytes()
-    folder = heros(root, skeleton=skeleton, model=model)
-    assert errors(root) == []
-    # Contre un squelette qui n'est pas le sien, le modèle est refusé, et c'est dit.
-    write(folder.parent.parent / 'Skeletons' / 'humanoid' / 'skeleton.json', SKELETON)
-    assert any('brawler.glb' in e for e in errors(root))
-
-
-def test_un_glb_illisible_ou_non_declare_echoue(assets):
-    root, _, _ = assets
-    folder = heros(root, model=b'pas un glb')
-    assert any('brawler.glb' in e and 'illisible' in e for e in errors(root))
-    (folder / 'brawler.glb').unlink()
+    folder = heros(root)
     (folder / 'autre.glb').write_bytes(b'x')
     assert any('autre.glb' in e and 'ne déclare pas' in e for e in errors(root))
 
