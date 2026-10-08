@@ -1,0 +1,922 @@
+{
+  "version": "research_capacity_rules_v3_2026-10-07",
+  "status": "A rule values; D calculations; P service and population assumptions",
+  "calendar": {
+    "status": "A",
+    "days_per_year": 360,
+    "months": 12,
+    "days_per_month": 30,
+    "source": "SB255"
+  },
+  "energy": {
+    "status": "P",
+    "kcal_per_M_person_day": 2500,
+    "kcal_range": [
+      2200,
+      3000
+    ],
+    "grain_kcal_per_kg": 3500,
+    "grain_kcal_range": [
+      3200,
+      3800
+    ],
+    "grain_kg_M_person_day": 0.7142857142857143,
+    "grain_kg_M_person_year": 257.14285714285717,
+    "rules_ration_kg_day_M": 0.5,
+    "note": "Rule ration is abstract mixed food; calories and grain density absent books. Do not equate 0.5kg rule ration to 0.5kg cereal."
+  },
+  "size_requirements": {
+    "source": "DMG111",
+    "status": "A",
+    "rows": [
+      {
+        "size": "tiny",
+        "food_kg_day": 0.125,
+        "water_liters_day": 1,
+        "medium_food_equivalent": 0.25
+      },
+      {
+        "size": "small",
+        "food_kg_day": 0.5,
+        "water_liters_day": 3.5,
+        "medium_food_equivalent": 1
+      },
+      {
+        "size": "medium",
+        "food_kg_day": 0.5,
+        "water_liters_day": 3.5,
+        "medium_food_equivalent": 1
+      },
+      {
+        "size": "large",
+        "food_kg_day": 2,
+        "water_liters_day": 14,
+        "medium_food_equivalent": 4
+      },
+      {
+        "size": "huge",
+        "food_kg_day": 8,
+        "water_liters_day": 56,
+        "medium_food_equivalent": 16
+      },
+      {
+        "size": "gargantuan",
+        "food_kg_day": 32,
+        "water_liters_day": 224,
+        "medium_food_equivalent": 64
+      }
+    ],
+    "hot_water_factor": 2,
+    "basic_rules_character_water_liters": 4,
+    "basic_source": "BR73",
+    "note": "Pick water convention explicitly; giant adult Huge normally16 M food units, not1. Powerful Build alone does not change body size."
+  },
+  "spells": {
+    "goodberry": {
+      "status": "A",
+      "source": "MJ217",
+      "spell_level": 1,
+      "casting": "one_action",
+      "max_creature_days_per_cast": 10,
+      "expiry_hours": 24,
+      "water_provision": false,
+      "size_limit": null,
+      "eligible_class_minima": {
+        "druid": 1,
+        "ranger": 2,
+        "redeemer_shepherd": 3
+      },
+      "redeemer_source": "PG186",
+      "note": "Literal creature nourishment no size limit; assigning berry to Huge giant nourishes one giant-day. Calories realized depend beneficiary. No blanket innate halfling/elf Goodberry found."
+    },
+    "create_food_water": {
+      "status": "A",
+      "source": "MJ230",
+      "spell_level": 3,
+      "casting": "one_action",
+      "food_kg": 22.5,
+      "water_liters": 120,
+      "max_humanoid_days_per_cast": 15,
+      "alternative_mount_days_per_cast": 5,
+      "food_expiry_hours": 24,
+      "water_spoils": false,
+      "upcast_increases_yield": false,
+      "eligible_class_minima": {
+        "cleric": 5,
+        "paladin": 9,
+        "druid_land_desert": 5
+      },
+      "note": "Explicit15humanoid/5mount cap; giant creature type is not humanoid. Material created food can be allocated physically as P but do not promise15giants by rule cap."
+    },
+    "plant_growth": {
+      "status": "A",
+      "source": "MJ231",
+      "spell_level": 3,
+      "long_cast_hours": 8,
+      "radius_m": 800,
+      "area_ha": 201.06192982974676,
+      "harvest_food_multiplier": 2,
+      "effect_years": 1,
+      "short_cast_yield_bonus": false,
+      "eligible_class_minima": {
+        "druid": 5,
+        "bard": 5,
+        "cleric_nature_domain": 5,
+        "warlock_archfey_if_known": 5,
+        "ranger": 9,
+        "paladin_ancients": 9
+      },
+      "nonstack_source": "MJ205",
+      "note": "Overlap accounted as union. Same spell repeated not exponentiated. Existing vegetation/cultivation necessary."
+    },
+    "create_water": {
+      "status": "A",
+      "source": "MJ230-231",
+      "spell_level": 1,
+      "liters": 40,
+      "additional_liters_per_upcast_level": 40,
+      "casting": "one_action",
+      "mm_on_one_ha_per_level1_cast": 0.004
+    },
+    "pakaitos_recovery": {
+      "status": "A",
+      "source": "SB186",
+      "slots_recovered_per_short_rest": 1,
+      "slot_level": "highest available",
+      "published_daily_limit": null,
+      "scenario_extra_recovery_rests_per_day": 2,
+      "scenario_status": "P",
+      "rest_hours_minimum": 1,
+      "note": "Highest-level slot, not arbitrary lowest slot. Recovery requires actual available short rest; no unlimited productivity assumption."
+    }
+  },
+  "npc_limits": {
+    "sources": [
+      "MM342",
+      "MM345",
+      "BR24-25"
+    ],
+    "acolyte": {
+      "caster_level": 1,
+      "level1_slots": 3,
+      "prepared_food_spells": [],
+      "note": "Statblock spells prepared do not include food production."
+    },
+    "druid": {
+      "caster_level": 4,
+      "level1_slots": 4,
+      "level2_slots": 3,
+      "level3_slots": 0,
+      "prepared_goodberry": false,
+      "note": "Cannot Plant Growth. Changing prepared spell Goodberry is explicit D/P variant."
+    },
+    "full_caster5": {
+      "slot_levels": [
+        4,
+        3,
+        2
+      ],
+      "note": "Reserve P1 level1slot forGoodberry, P1 level3slot forCFW orGrowth; spare slots remain care/security."
+    }
+  },
+  "service_budget": {
+    "status": "P",
+    "days_per_year": 240,
+    "day_range": [
+      180,
+      300
+    ],
+    "annual_unserved_days": 120,
+    "goodberry_casts_per_service_day": 1,
+    "create_food_casts_per_service_day": 1,
+    "create_food_high_casts_per_day": 2,
+    "plant_growth_service_days": 20,
+    "plant_growth_day_range": [
+      10,
+      40
+    ],
+    "plant_growth_casts_per_day": 1,
+    "plant_growth_crop_fraction_of_disk": 0.5,
+    "plant_growth_new_area_fraction": 0.75,
+    "plant_growth_potential_ha_per_caster": 1507.9644737231006,
+    "plant_growth_final_formula": "min(geographic_union_of_covered_cultivated_plots, accessible_cultivated_ha, calculated_potential_ha)",
+    "note": "120unserved days need ordinary foods or rotated caster contracts. PlantGrowth days use8h plus slot. For person-qualified multiple spells, one slot/time ledger prevents duplication."
+  },
+  "regional_rate_caps": [
+    {
+      "region": "empire",
+      "name": "Central Empire",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.1,
+      "create_food_rate_cap_percent": 0.04,
+      "plant_growth_rate_cap_percent": 0.002,
+      "context_driver": "Réseau clérical et rural, contrôle institutionnel de la magie.",
+      "context_sources": [
+        "SB90",
+        "SB91",
+        "SB98"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 1.0666666666666669,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 3015.928947446201
+    },
+    {
+      "region": "freelands",
+      "name": "Republic of Freelands",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.15,
+      "create_food_rate_cap_percent": 0.05,
+      "plant_growth_rate_cap_percent": 0.003,
+      "context_driver": "Institutions, aventuriers et régions boisées ; service civil proposé.",
+      "context_sources": [
+        "SB104",
+        "SB105",
+        "SB107",
+        "SB108"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 1.5,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 4523.893421169301
+    },
+    {
+      "region": "bennet",
+      "name": "Imperial Ben’net",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.12,
+      "create_food_rate_cap_percent": 0.02,
+      "plant_growth_rate_cap_percent": 0.002,
+      "context_driver": "Pastoralisme et communautés cirrus ; magie alimentaire distincte de magie céleste.",
+      "context_sources": [
+        "SB120",
+        "SB121",
+        "SB124"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 1,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 3015.928947446201
+    },
+    {
+      "region": "kolbjorn",
+      "name": "Kingdom of Kolbjörn",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.05,
+      "create_food_rate_cap_percent": 0.01,
+      "plant_growth_rate_cap_percent": 0.001,
+      "context_driver": "Shamans, agriculture limitée, navigation et climat froid.",
+      "context_sources": [
+        "SB128",
+        "SB129",
+        "SB130",
+        "SB134"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 0.43333333333333335,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 1507.9644737231006
+    },
+    {
+      "region": "magocracy",
+      "name": "Magocracy of Mage Tower",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.12,
+      "create_food_rate_cap_percent": 0.1,
+      "plant_growth_rate_cap_percent": 0.003,
+      "context_driver": "Formation magique forte ; magicien ordinaire inéligible aux trois sorts.",
+      "context_sources": [
+        "SB138",
+        "SB139",
+        "SB140",
+        "SB141"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 1.8,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 4523.893421169301
+    },
+    {
+      "region": "seashores",
+      "name": "Seashores",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.08,
+      "create_food_rate_cap_percent": 0.03,
+      "plant_growth_rate_cap_percent": 0.001,
+      "context_driver": "Services maritimes ; petite surface terrestre cultivable.",
+      "context_sources": [
+        "SB148",
+        "SB149"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 0.8333333333333333,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 1507.9644737231006
+    },
+    {
+      "region": "sindile",
+      "name": "Sindile Forest",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.6,
+      "create_food_rate_cap_percent": 0.1,
+      "plant_growth_rate_cap_percent": 0.02,
+      "context_driver": "Tradition druidique explicite ; tous les elfes ne sont pas lanceurs.",
+      "context_sources": [
+        "SB152",
+        "SB153",
+        "SB154",
+        "SB155",
+        "SB157"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 5,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 30159.28947446202
+    },
+    {
+      "region": "stravian",
+      "name": "Stravian Domains",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.3,
+      "create_food_rate_cap_percent": 0.08,
+      "plant_growth_rate_cap_percent": 0.01,
+      "context_driver": "Communautés halflings/Fey et prêtres nains ; domaines et classes à qualifier.",
+      "context_sources": [
+        "SB160",
+        "SB161",
+        "SB163"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 2.8,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 15079.64473723101
+    },
+    {
+      "region": "storm",
+      "name": "Storm Islands",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.01,
+      "create_food_rate_cap_percent": 0.1,
+      "plant_growth_rate_cap_percent": 0,
+      "context_driver": "Clercs de Bás proposés niveau5 ; aucun shaman Nature Spirits ajouté.",
+      "context_sources": [
+        "SB168",
+        "SB169",
+        "SB170",
+        "SB171"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 1.0666666666666667,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 0
+    },
+    {
+      "region": "taiimaku",
+      "name": "Taii’Maku City States",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.08,
+      "create_food_rate_cap_percent": 0.12,
+      "plant_growth_rate_cap_percent": 0.005,
+      "context_driver": "Clercs par étude attestés ; ingénieur ou érudit n'est pas automatiquement lanceur.",
+      "context_sources": [
+        "SB174",
+        "SB175",
+        "SB178",
+        "SB179"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 1.7333333333333334,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 7539.822368615505
+    },
+    {
+      "region": "kepesh",
+      "name": "Theocracy of Kepesh",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.05,
+      "create_food_rate_cap_percent": 0.15,
+      "plant_growth_rate_cap_percent": 0.003,
+      "context_driver": "Clergé et services d'eau ; tribus non converties ne reçoivent pas automatiquement Ba-Ka.",
+      "context_sources": [
+        "SB182",
+        "SB183",
+        "SB185",
+        "SB186",
+        "SB187"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 1.8333333333333335,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 4523.893421169301
+    },
+    {
+      "region": "tsvetan",
+      "name": "Tsvetan",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.2,
+      "create_food_rate_cap_percent": 0.01,
+      "plant_growth_rate_cap_percent": 0.004,
+      "context_driver": "Shamans et cultures arides ; seuls personnages au niveau adéquat.",
+      "context_sources": [
+        "SB190",
+        "SB191",
+        "SB193",
+        "SB194",
+        "SB195"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 1.4333333333333336,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 6031.857894892402
+    },
+    {
+      "region": "yama",
+      "name": "Yama",
+      "status": "P",
+      "denominator": "living_reference_residents",
+      "goodberry_rate_cap_percent": 0.1,
+      "create_food_rate_cap_percent": 0.08,
+      "plant_growth_rate_cap_percent": 0.005,
+      "context_driver": "Clergé et savoir magique ; Ki et statut samurai ne donnent pas slots.",
+      "context_sources": [
+        "SB198",
+        "SB199",
+        "SB200",
+        "SB201"
+      ],
+      "rate_low_factor": 0.5,
+      "rate_high_factor": 2,
+      "cohort_assignment": "disjoint_service_cohorts_default; no person counted in two cohorts",
+      "eligibility_cap_formula": "assigned <= min(N_residents*rate_cap/100, verified_qualified_people_available_in_compatible_occupation_and_class_pool)",
+      "note": "Métier ne suffit pas : qualifier classe/vocation/niveau, sort connu/préparé, slots et engagement. Taux = plafond P, non capacité canonique.",
+      "food_people_equivalent_percent_M_using_one_slot_240_days": 1.4666666666666668,
+      "plant_growth_potential_ha_per_100000_residents_before_land_cap": 7539.822368615505
+    }
+  ],
+  "unknown_regions": {
+    "undertanares": {
+      "population": null,
+      "goodberry_caps_percent": {
+        "gloomfolk_hive": 0.2,
+        "dwarf_enclave": 0.1
+      },
+      "create_food_cap_percent_dwarves": 0.04,
+      "plant_growth_default": 0,
+      "note": "Relative settlement profiles only. Gloomfolk children specific penumbral nutrition not automatically replaced by generic spell nourishment."
+    },
+    "darkall": {
+      "population": null,
+      "goodberry_cap_percent": 0.01,
+      "create_food_caps_percent": {
+        "north": 0.1,
+        "central": 0.05
+      },
+      "plant_growth_default": 0
+    },
+    "mystical": {
+      "population": null,
+      "civilian_region_caster_quota": null,
+      "note": "Expedition/protected base cohorts only; no ordinary living resident total."
+    },
+    "penumbral": {
+      "population": null,
+      "quota": null
+    }
+  },
+  "innate_and_facility_modules": [
+    {
+      "module": "guardian_tree_or_ancient_guardian",
+      "status": "A",
+      "source": "PG224-225",
+      "goodberry_casts_per_day": 3,
+      "max_creature_days_day": 30,
+      "count": null,
+      "note": "Only specific statblock or qualified summoned form, not every tree."
+    },
+    {
+      "module": "bloom",
+      "status": "A",
+      "source": "PG222-223",
+      "druid_circle_level_min": 10,
+      "sunlight_hours_last24": 1,
+      "fruit_count": "proficiency_bonus",
+      "level10_fruit_count": 4,
+      "casting_minutes": 10,
+      "regains_after_long_rest": true,
+      "food_and_water_day": true,
+      "count": null
+    },
+    {
+      "module": "garden_HQ",
+      "status": "A",
+      "source": "PG314-315",
+      "facility_levels_yields": [
+        {
+          "level": 2,
+          "die": "1d4",
+          "mean_creature_days_day": 2.5
+        },
+        {
+          "level": 3,
+          "die": "1d8",
+          "mean_creature_days_day": 4.5
+        },
+        {
+          "level": 5,
+          "die": "1d12",
+          "mean_creature_days_day": 6.5
+        }
+      ],
+      "count": null,
+      "note": "Onefruit=oneGoodberryeffect, not10creatures. Adventuringteamfacilitynotordinarygarden."
+    },
+    {
+      "module": "redeemer_green",
+      "status": "optional_A",
+      "source": "PG188-191",
+      "level_min": 5,
+      "cost_gp": 10,
+      "ritual_hours": 1,
+      "attunement": true,
+      "yield_food_factor": 1.3,
+      "plot_scope": "planted and tended by blessed person",
+      "count": null
+    },
+    {
+      "module": "redeemer_nourishment",
+      "status": "optional_A",
+      "source": "PG188-191",
+      "level_min": 11,
+      "cost_gp": 4000,
+      "ritual_hours": 1,
+      "attunement": true,
+      "need_food": false,
+      "need_water": false,
+      "count": null
+    },
+    {
+      "module": "djinn",
+      "status": "A generic statblock; Tanares presence module D",
+      "source": "MM145",
+      "food_casts_per_day": 3,
+      "max_humanoid_days_day": 45,
+      "count": null,
+      "note": "Hajal guards attested SB212; no count or food-service contract published."
+    },
+    {
+      "module": "marid",
+      "status": "A generic statblock; presence P unknown",
+      "source": "MM147",
+      "create_water_at_will": true,
+      "count": null,
+      "scenario_hours_service_day": 6,
+      "scenario_casts_per_minute": 1,
+      "scenario_liters_day": 14400,
+      "scenario_days": 240,
+      "scenario_m3_year": 3456,
+      "scenario_food_irrigation_need_mm_year_range": [
+        300,
+        800
+      ],
+      "scenario_irrigable_ha_range": [
+        0.432,
+        1.152
+      ],
+      "note": "Not assume marid atPakaitos/Hajal; need contracted individual and cistern/distribution capacity."
+    }
+  ],
+  "labor_nonfood": {
+    "status": "P bounded scenario; no published counts",
+    "agents": [
+      {
+        "type": "agricultural_golem",
+        "normal_food_need": 0,
+        "source": "MM166",
+        "labor_FTE_range": [
+          1,
+          2
+        ],
+        "annual_uptime_range": [
+          0.7,
+          0.9
+        ],
+        "count": null,
+        "maintenance_FTE_per100_range": [
+          1,
+          3
+        ],
+        "supervision_FTE_per100_range": [
+          0.5,
+          2
+        ],
+        "energy": "Bauronite core/reactor SB174-177, cost quantities unknown"
+      },
+      {
+        "type": "skeleton",
+        "normal_food_need": 0,
+        "source": "MM274",
+        "labor_FTE_range": [
+          0.5,
+          1.5
+        ],
+        "count": null
+      },
+      {
+        "type": "zombie",
+        "normal_food_need": 0,
+        "source": "MM315",
+        "labor_FTE_range": [
+          0.5,
+          1
+        ],
+        "count": null
+      }
+    ],
+    "necromantic_controller_FTE_per100_range": [
+      1,
+      5
+    ],
+    "note": "These give work capacity, not free nutrients/water/land. Continuous24h cannot be multiplied mechanically without task capacity and supply ledger. No citizen count inferred from labor agent stock."
+  },
+  "personhood_and_diet": {
+    "vampires": {
+      "source": "MM292",
+      "no_breathing": true,
+      "no_food_claim_from_trait": false,
+      "blood_consumption": "separate_unknown"
+    },
+    "gloomfolk_children": {
+      "source": "PG40-41",
+      "special_penumbral_meat_need": true,
+      "quantity": null
+    },
+    "citizenship": "source species margins kept; undead conscious person citizenship not erased; food demand separate",
+    "ordinary_fae_halfling_elf": {
+      "innate_food_spell_proven": false,
+      "source": "PG20-21",
+      "fertile_lands_weather_pest_protection": "qualitative blessing; no published productivity factor"
+    }
+  },
+  "crop_factor": {
+    "plant_growth_field_formula": "Y0*((A-E)+2*E)",
+    "scope": "plant food harvest only; not livestock fish minerals",
+    "fey_lushlands_bonus_range": [
+      1.1,
+      1.5
+    ],
+    "fey_status": "P; PG21 qualitative only, pact weekly banquets required",
+    "multi_effect_cap_proposed": 2.5,
+    "multi_effect_cap_status": "P not canonical ban",
+    "plant_growth_plus_redeemer_green_compatible_factor": 2.6,
+    "note": "Distinct effects may combine MJ205. Decide compatibility explicitly; same effect no exponentiation."
+  },
+  "transport": {
+    "basic": {
+      "source": "BR56,71",
+      "road_normal_km_day": 36,
+      "difficult_factor": 0.5,
+      "sea_hours_day_max": 24,
+      "draft_load_factor": 5,
+      "note": "Draft rule includes cart mass. SB253 localcarriagecapacitytakesprioritywithoutfurther×5."
+    },
+    "ships": {
+      "source": "DMG118-119",
+      "status": "A",
+      "rows": [
+        {
+          "type": "sailing_ship",
+          "km_hour": 3,
+          "crew": 20,
+          "tonnes_max": 100
+        },
+        {
+          "type": "warship",
+          "km_hour": 4,
+          "crew": 60,
+          "tonnes_max": 200
+        },
+        {
+          "type": "longship",
+          "km_hour": 4.5,
+          "crew": 40,
+          "tonnes_max": 10
+        },
+        {
+          "type": "galley",
+          "km_hour": 6,
+          "crew": 80,
+          "tonnes_max": 150
+        },
+        {
+          "type": "keelboat",
+          "km_hour": 1.5,
+          "crew": 1,
+          "tonnes_max": 0.5
+        },
+        {
+          "type": "airship",
+          "km_hour": 12,
+          "crew": 10,
+          "tonnes_max": 1
+        }
+      ],
+      "no_wind_sail_factor": 0,
+      "strong_headwind_factor": 0.5
+    },
+    "tanares": {
+      "source": "SB253-254",
+      "two_horse_carriage_lb": 1000,
+      "four_horse_carriage_lb": 2000,
+      "magic_train_lb_min": 10000,
+      "magic_train_fast_mph": 13,
+      "stone_disks_people_max": 50,
+      "stone_disks_freight_tonnes": null,
+      "portal_large_tameranium_pieces_min": 3,
+      "portal_consumes_bauronite_each_use": true,
+      "portal_cargo_kg_per_use": null,
+      "penumbral_yama_freelands_hours": 6,
+      "penumbral_large_caravan_normal_grain_corridor": false
+    },
+    "spell_limits": {
+      "teleportation_circle": {
+        "source": "MJ221",
+        "level": 5,
+        "cast_minutes": 1,
+        "consumed_gp_cast": 50,
+        "portal_rounds": 1,
+        "same_plane": true,
+        "destination_sequence_known": true,
+        "cargo_per_round": null
+      },
+      "transport_via_plants": {
+        "source": "MJ285",
+        "level": 6,
+        "portal_rounds": 1,
+        "plant_size_min": "large",
+        "destination_seen_or_touched": true,
+        "cargo_per_round": null
+      },
+      "tensers_disk": {
+        "source": "MJ233",
+        "level": 1,
+        "ritual": true,
+        "load_kg": 250,
+        "hours": 1,
+        "follows_caster": true,
+        "not_dwarven_disk": true
+      }
+    },
+    "scenario": {
+      "status": "P",
+      "service_days": 240,
+      "availability_range": [
+        0.7,
+        0.9
+      ],
+      "grain_fraction_load_range": [
+        0.6,
+        0.85
+      ],
+      "port_service_days_each_call_range": [
+        1,
+        3
+      ],
+      "requires_return_leg": true,
+      "losses": "parameterunknown",
+      "example": {
+        "ship": "100tonnes sailing",
+        "grain_tonnes_voyage": 60,
+        "km_oneway": 1000,
+        "km_day": 72,
+        "port_total_cycle_days": 4,
+        "availability": 0.8,
+        "cycles_year": 6.041958041958042,
+        "grain_tonnes_year": 362.5174825174825,
+        "medium_person_years_grain": 1409.7902097902095,
+        "crew": 20
+      }
+    }
+  },
+  "outstanding": [
+    "Check exact NPC priest statblock prep/slots before using priest cohort; reference class table sufficient for proposed caster5.",
+    "Caster caps must be bound to individually-qualified occupation/class pools from final model; no person double counted.",
+    "No canonical irrigation demand or calorie densities found; P agronomy values require author choice.",
+    "Spatial caster coverage and freight corridors supplied by cartographer; do not infer regionfieldarea fromdisk only."
+  ],
+  "occupation_candidate_pools": {
+    "goodberry": {
+      "candidate_leaves": [
+        "druide",
+        "shaman",
+        "gardien-Mother-Tree",
+        "gardien-arbres-funeraires",
+        "herboriste",
+        "jardinier",
+        "professeur",
+        "guerisseur",
+        "pretre",
+        "acolyte",
+        "sugenja"
+      ],
+      "qualification_required": "Explicit druid>=1, ranger>=2, redeemer Shepherd>=3, or recorded innate statblock. Candidate occupation alone gives NO capacity.",
+      "excluded_without_other_qualification": [
+        "magicien",
+        "ingenieur",
+        "savant",
+        "samurai",
+        "moine",
+        "noble",
+        "elfe",
+        "halfling"
+      ],
+      "institution_filters": "Storm not generic nature cult; nonconverted Brightlight not Ba-Ka; Gbagede caster activity only secondary capacity of teacher/researcher; divine class can be qualified without changing principal occupation."
+    },
+    "create_food": {
+      "candidate_leaves": [
+        "pretre",
+        "sugenja",
+        "acolyte",
+        "guerisseur",
+        "professeur",
+        "chercheur-magie"
+      ],
+      "qualification_required": "Explicit cleric>=5, paladin>=9, Desert Land Druid>=5, or contracted Djinn innate3/day; generic wizard ineligible.",
+      "npc_acolyte_default_eligible": false,
+      "institution_filters": "Cleric qualification respects local cult. Cleric method of study taiimaku possible, faithless philosophy not automatic spell list."
+    },
+    "plant_growth": {
+      "candidate_leaves": [
+        "druide",
+        "shaman",
+        "gardien-Mother-Tree",
+        "professeur",
+        "chercheur-magie",
+        "guerisseur",
+        "pretre",
+        "jardinier"
+      ],
+      "qualification_required": "Explicit fullcaster5+with approved spell list, ranger9+,AncientsPaladin9+. Generic NPCDruid4 ineligible.",
+      "npc_druid_default_eligible": false,
+      "spatial_filter": "Actual accessible cultivated vegetation. Void/cursedcentralMystical no ordinary cropbenefit assumed."
+    },
+    "allocation": {
+      "status": "P",
+      "method": "Assign individual people to disjoint service pools, max cohort=min(rateCap*N, candidate occupation count times chosen qualified fraction). Show qualified fraction and level distribution separately. If pool sums exceed physical candidates, shrink until feasible.",
+      "qualified_fraction_bounds": [
+        0,
+        1
+      ],
+      "default_fraction_when_not_decided": null,
+      "unserved_days_per_year": 120,
+      "note": "No numeric regional rate is proof every candidate has a character class. Final writer must record the qualified fraction it chooses and cap rates by actual profiles."
+    }
+  }
+}

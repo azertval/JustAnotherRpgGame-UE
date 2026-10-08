@@ -112,8 +112,8 @@ le commandlet montre que le moteur lit **les mêmes fichiers** et obtient **des 
   tient — à trancher par l'auteur avant de le suivre. Le passage de l'ancien dépôt en privé est fait.
 - **Ni livre source ni texte extrait** dans le dépôt public (EX-CNT-023) : l'étude des métiers
   (`Documentation/Metiers/`) en portait trois copies — le corpus par livre, le lecteur plein texte,
-  le cache de l'atelier —, écartées par `.gitignore` avec la copie de l'atelier, le site rendu et
-  trois fichiers au-delà de 5 Mio. `scripts/checks/check_no_sourcebook.py` refuse, avant le commit
+  le cache de l'atelier —, écartées par `.gitignore` avec la copie de l'atelier ; le site rendu et les trois fichiers au-delà
+  de 5 Mio sont suivis, ces derniers en Git LFS. `scripts/checks/check_no_sourcebook.py` refuse, avant le commit
   et en CI, un livre numérique ou un fichier qui a la forme d'une extraction. Les pages
   `Documentation/Metiers/Sources/` gardent leurs liens vers ces fichiers, qui ne mènent plus nulle
   part dans le dépôt : à reprendre par leur générateur.
@@ -126,7 +126,8 @@ le commandlet montre que le moteur lit **les mêmes fichiers** et obtient **des 
   `lint_docs` (93 liens vers le moteur maison), `generate_cahier_test`, `check_assets_brief`,
   `check_orphans` ; `check_map_assets` et `check_hd_assets` lisent les kits, publiés sur l'ancien
   dépôt devenu privé — où publier les kits est à décider. Restent à refaire : la publication d'une
-  version, le site de documentation, `scripts/setup_dev.ps1` (il lit encore la version de Qt).
+  version, la référence Doxygen et la page qualité du site (republié sans elles par `docs.yml`),
+  `scripts/setup_dev.ps1` (il lit encore la version de Qt).
 - **`Documentation/`** à relire : les guides du moteur maison (`guide-ihm-qt.md`, `guide-rendu.md`,
   `guide-editeur.md`, `guide-ecrans.md`, `guide-design-ihm.md`, `guide-audio.md`,
   `guide-entrees.md`), les spécifications `rendu-technique.md`, `interface-ihm.md`,

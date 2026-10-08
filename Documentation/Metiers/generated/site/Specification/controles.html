@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contrôles &amp;amp; entrées — Documentation</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body data-root="..">
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Documentation</a>
+  <nav><a href="../index.html">Accueil</a><a href="../Guide/index.html">Guide</a><a href="index.html" class="active">Spécifications</a><a href="../CahierTest/index.html">Cahier de test</a><a href="../Metiers/index.html">Métiers de Tanares</a></nav>
+  <form class="search" role="search"><input type="search" placeholder="Chercher…" aria-label="Chercher dans la documentation"><div class="results" hidden></div></form>
+  <div class="links"><a class="active" href="../index.html">Documentation</a><a href="../planning/">Planification</a><a href="../qualite/">Qualité</a></div>
+</header>
+<div class="shell with-sidebar">
+<aside class="sidebar"><h4>Spécifications</h4><a class="depth-0" href="index.html">Spécifications</a><a class="depth-1" href="vision.html">Vision &amp;amp; périmètre</a><a class="depth-1" href="gameplay.html">Gameplay</a><a class="depth-1" href="regles-d20.html">Règles d20</a><a class="depth-1" href="rpg.html">Personnage et progression</a><a class="depth-1" href="combat.html">Combat tactique</a><a class="depth-1" href="inventaire.html">Inventaire et économie</a><a class="depth-1" href="contenu.html">Contenu et données</a><a class="depth-1" href="niveaux.html">Cartes &amp;amp; format</a><a class="depth-1" href="exploration.html">Exploration</a><a class="depth-1 active" href="controles.html">Contrôles &amp;amp; entrées</a><a class="toc depth-2" href="#1-périphériques">1. Périphériques</a><a class="toc depth-2" href="#2-commandes-du-jeu">2. Commandes du jeu</a><a class="toc depth-2" href="#3-réactivité">3. Réactivité</a><a class="toc depth-2" href="#ctrl-retirees">Exigences retirées</a><a class="toc depth-2" href="#traçabilité">Traçabilité</a><a class="depth-1" href="rendu-technique.html">Rendu &amp;amp; cible technique</a><a class="depth-1" href="interface-ihm.html">Interface utilisateur (IHM)</a><a class="depth-1" href="editeur-niveaux.html">Éditeur de cartes</a><a class="depth-1" href="exigences-non-fonctionnelles.html">Exigences non fonctionnelles</a><a class="depth-1" href="conventions.html">Conventions de code</a><a class="depth-1" href="architecture.html">Architecture (décisions dimensionnantes)</a><a class="depth-1" href="exigences-retirees.html">Exigences retirées</a></aside>
+<main>
+<article class="prose"><h1 id="contrôles-amp-entrées">Contrôles &amp; entrées</h1>
+<blockquote><p>Statut : <strong>livré</strong> pour l'exploration, les écrans et le combat, au clavier et à la souris. Dépend de <a href="gameplay.html"><code>gameplay.md</code></a>.</p></blockquote>
+<h2 id="1-périphériques">1. Périphériques</h2>
+<ul><li id="EX-CTRL-001" class="identified"><strong>EX-CTRL-001</strong> — Le jeu doit être jouable <strong>entièrement au clavier</strong>.</li></ul>
+<h2 id="2-commandes-du-jeu">2. Commandes du jeu</h2>
+<p>Les entrées sont traduites en <strong>commandes nommées</strong> : un écran réagit à « déplacer », « valider » ou « retour », jamais à une touche en particulier.</p>
+<div class="table-wrap"><table><thead><tr><th>Commande</th><th>Clavier</th></tr></thead><tbody><tr><td>Se déplacer (exploration)</td><td>← ↑ → ↓, ZQSD ou WASD</td></tr><tr><td>Interagir (<a class="ref" href="controles.html#EX-CTRL-022"><code>EX-CTRL-022</code></a>)</td><td>E ou Espace</td></tr><tr><td>Pause (exploration)</td><td>Échap</td></tr><tr><td>Passer la main au suivant du groupe (exploration, <a class="ref" href="exploration.html#EX-EXP-014"><code>EX-EXP-014</code></a>)</td><td>Tab</td></tr><tr><td>Écran du groupe (exploration)</td><td>G</td></tr><tr><td>Qui parle pour le groupe (dialogue, D-28)</td><td>Tab, Maj+Tab</td></tr><tr><td>Groupe : prendre ou laisser, mener, avancer, reculer</td><td>Entrée, M, Page préc., Page suiv.</td></tr><tr><td>Naviguer (écrans, combat)</td><td>← ↑ → ↓</td></tr><tr><td>Valider</td><td>Entrée</td></tr><tr><td>Retour</td><td>Échap</td></tr></tbody></table></div>
+<ul><li id="EX-CTRL-010" class="identified"><strong>EX-CTRL-010</strong> — Chaque commande du jeu est une <strong>commande nommée</strong>, dissociée de la touche physique qui la déclenche : plusieurs touches peuvent mener à la même intention de jeu.</li><li id="EX-CTRL-012" class="identified"><strong>EX-CTRL-012</strong> — Les raccourcis de l'<strong>éditeur</strong> doivent être <strong>reconfigurables</strong> par fichier (<code>Settings/keybindings.json</code>) ; un fichier absent ou partiel retombe sur les valeurs par défaut.</li><li id="EX-CTRL-022" class="identified"><strong>EX-CTRL-022</strong> — <strong>Interagir</strong> doit être une commande dédiée (E ou Espace) qui déclenche l'entité à portée du héros — à moins de 1,5 case, celle qu'il regarde d'abord — dialogue, coffre, portail (<a class="ref" href="exploration.html#EX-EXP-004"><code>EX-EXP-004</code></a>).</li></ul>
+<p>Les événements Qt sont traduits en intentions avant d'atteindre <code>Core</code>, qui ne connaît aucun périphérique physique.</p>
+<h2 id="3-réactivité">3. Réactivité</h2>
+<ul><li id="EX-CTRL-020" class="identified"><strong>EX-CTRL-020</strong> — La latence entre une entrée et son effet ne doit pas dépasser <strong>un pas</strong> de simulation : une touche enfoncée est lue au pas suivant, jamais perdue entre deux.</li></ul>
+<h2 id="ctrl-retirees">Exigences retirées</h2>
+<blockquote><p>Ancres conservées, jamais renumérotées : les lots livrés s'y réfèrent.</p></blockquote>
+<ul><li id="EX-CTRL-013" class="identified"><strong>EX-CTRL-013</strong> <em>(retirée au <a class="ref" href="../planning/lots/lot-88.html"><code>LOT-88</code></a>)</em> — commande de ruée (dash) : le jeu n'a pas de ruée.</li><li id="EX-CTRL-002" class="identified"><strong>EX-CTRL-002</strong> <em>(retirée le 2 octobre 2026)</em> — prise en charge de la manette XInput.</li><li id="EX-CTRL-011" class="identified"><strong>EX-CTRL-011</strong> <em>(retirée le 2 octobre 2026)</em> — échantillonnage des fronts d'un bouton de manette.</li><li id="EX-CTRL-021" class="identified"><strong>EX-CTRL-021</strong> <em>(retirée au <a class="ref" href="../planning/lots/lot-88.html"><code>LOT-88</code></a>)</em> — échantillonnage des entrées par la boucle d'une fenêtre native : Qt distribue désormais les événements.</li></ul>
+<h2 id="traçabilité">Traçabilité</h2>
+<p>L'acquisition des touches du jeu relève des événements Qt Quick. <code>Source/HMI/Input</code> conserve la traduction des touches de l'éditeur ; <code>Source/Core</code> ne reçoit que des intentions (<code>core::ExplorationIntent</code>), sans dépendance inverse. Voir <a href="exigences-non-fonctionnelles.html"><code>exigences-non-fonctionnelles.md</code></a> pour l'architecture.</p></article><nav class="pager"><a class="prev" href="exploration.html"><span>Précédent</span>Exploration</a><a class="next" href="rendu-technique.html"><span>Suivant</span>Rendu &amp;amp; cible technique</a></nav><p class="source">Source : <code>Documentation/Specification/controles.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Documentation/</code> le 2026-10-07. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

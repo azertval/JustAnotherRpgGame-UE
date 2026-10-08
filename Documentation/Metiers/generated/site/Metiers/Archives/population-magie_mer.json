@@ -1,0 +1,863 @@
+{
+  "scope": [
+    "Magocracy of Mage Tower",
+    "Seashores",
+    "Sindile Forest",
+    "Stravian Domains"
+  ],
+  "source_policy": "SB = Tanares Sourcebook; PG = Player's Guide to Tanares; CC = Character Compendium. Pages imprimées. Effectifs régionaux approximatifs; aucun effectif municipal trouvé. Profils économiques proposés ne sont pas des statistiques canoniques.",
+  "demography_policy": "Les professions couvrent personnes employées; sans métier principal distingue recherche d'emploi, découragement, subsistance par mendicité et inactivité. Mendicité peut aussi être complément de revenu. L'activité productive inclut agriculture familiale; pauvreté n'implique pas absence de métier. Agents invoqués, morts-vivants, automates et esprits sont une capacité de travail distincte du recensement des habitants vivants.",
+  "regions": [
+    {
+      "id": "magocracy-of-mage-tower",
+      "name": "Magocracy of Mage Tower",
+      "population": 867000,
+      "population_approximate": true,
+      "species_pct": {
+        "human": 72,
+        "cirrus": 19,
+        "winter_elf": 6,
+        "other": 3
+      },
+      "demographic_source": "SB 138-139",
+      "common_attested": [
+        "Pêcheur d'eau douce",
+        "Papetier",
+        "Marchand d'objets et composants magiques",
+        "Enseignant",
+        "Chercheur en magie",
+        "Fabricant d'objets magiques",
+        "Préparateur de potions",
+        "Fabricant de parchemins magiques",
+        "Expert en évaluation arcanique"
+      ],
+      "common_sources": [
+        "SB 15",
+        "SB 138-139"
+      ],
+      "common_inferred": [
+        "Cuisinier",
+        "Aubergiste",
+        "Tavernier",
+        "Agriculteur",
+        "Transporteur",
+        "Tailleur",
+        "Copiste",
+        "Relieur",
+        "Manœuvre",
+        "Soigneur",
+        "Maçon"
+      ],
+      "specific_attested": [
+        "Certificateur arcanique",
+        "Inspecteur d'objets magiques",
+        "Commissaire-priseur d'objets magiques",
+        "Récupérateur de matières d'objets magiques épuisés",
+        "Fabricant de souvenirs magiques",
+        "Chasseur ou fournisseur de créatures et composants",
+        "Warden des Arcane Enforcers",
+        "Détective arcanique",
+        "Spellshield",
+        "Extracteur de mémoire",
+        "Désenchanteur",
+        "Chercheur en aethermancy",
+        "Chercheur en biomancy"
+      ],
+      "specific_sources": [
+        "SB 139-140"
+      ],
+      "specific_inferred": [
+        "Modiste de chapeaux arcanes",
+        "Architecte d'édifices vivants",
+        "Mainteneur de pylônes de tameranium",
+        "Exploitant de cercles de transport",
+        "Pilote de bateau volant",
+        "Régulateur climatique",
+        "Illusionniste de spectacle",
+        "Opérateur de thérapie onirique",
+        "Secouriste extraplanaire"
+      ],
+      "specific_basis_sources": [
+        "SB 139",
+        "SB 141-142"
+      ],
+      "expertise": [
+        {
+          "domain": "Enseignement de la magie arcanique",
+          "level": "supériorité explicite",
+          "source": "SB 15",
+          "excerpt": "the finest arcane magic schools in Tanares",
+          "limits": "Qualifie les établissements, pas chaque mage ni toute production magique."
+        },
+        {
+          "domain": "Arcane University près de Dawn of Light",
+          "level": "supériorité explicite locale",
+          "source": "SB 141",
+          "excerpt": "the best place to learn spells",
+          "limits": "Campus sélectif et très cher, dix ans de cursus; un tiers termine."
+        },
+        {
+          "domain": "Fabrication d'objets, potions et parchemins",
+          "level": "spécialisation économique attestée",
+          "source": "SB 138-139",
+          "excerpt": null,
+          "limits": "Pas de classement général meilleur; plus de moitié des objets non certifiés, fonctionnement potentiellement irrégulier."
+        }
+      ],
+      "places": [
+        {
+          "name": "Mesoriver",
+          "kind": "ville capitale",
+          "parent": "magocracy-of-mage-tower",
+          "population": null,
+          "species_profile": "Non chiffré; ne pas appliquer automatiquement les 72/19/6/3 régionaux",
+          "sources": [
+            "SB 142"
+          ],
+          "attested": "Ville de tours, îles et châteaux flottants, transport magique, utilités magiques, spectacles illusoires, architecture vivante et climat contrôlé.",
+          "proposed_profile": "Forte magie de production et services, commerce, maintenance et transport; métiers de subsistance urbains nécessaires; inégalité par puissance magique."
+        },
+        {
+          "name": "Dawn of Light",
+          "kind": "ville",
+          "parent": "magocracy-of-mage-tower",
+          "population": null,
+          "sources": [
+            "SB 141"
+          ],
+          "attested": "Ville nommée uniquement comme voisine du campus.",
+          "proposed_profile": "Pôle universitaire: enseignement, copie et livres, potions, logement/restauration, commerce et assistance de recherche; tout dosage est proposition."
+        },
+        {
+          "name": "Arcane University",
+          "kind": "campus",
+          "parent": "Dawn of Light et environs",
+          "population": null,
+          "sources": [
+            "SB 141"
+          ],
+          "attested": "Huit tours et île flottante; frais élevés, attente, certificat dix ans, un tiers des entrants finit.",
+          "proposed_profile": "Sous-zone du profil universitaire, éviter double compte avec Dawn of Light; étudiants sans emploi principal en inactivité d'études."
+        },
+        {
+          "name": "Crystal Tower",
+          "kind": "institution de recherche et gouvernement",
+          "parent": "magocracy-of-mage-tower",
+          "population": null,
+          "sources": [
+            "SB 141"
+          ],
+          "attested": "Tour cent étages, siège du Council; laboratoire et zones scellées.",
+          "proposed_profile": "Rattacher à capitale seulement par convention cartographique, pas certitude dans texte; chercheurs, administration, gardes, archivistes."
+        },
+        {
+          "name": "Summer Island",
+          "kind": "île visitée et site d'entraînement",
+          "parent": "magocracy-of-mage-tower",
+          "population": null,
+          "sources": [
+            "SB 141"
+          ],
+          "attested": "Visiteurs dont nobles, eaux chaudes, entraînement dragonblades, portail Elemental Grounds et secours.",
+          "proposed_profile": "Accueil, guides, gardes de portail et secouristes; taille de communauté permanente inconnue."
+        },
+        {
+          "name": "Asylum Eberek",
+          "kind": "établissement de résidence et soins",
+          "parent": "Alkira Mountain",
+          "population": null,
+          "sources": [
+            "SB 141-142"
+          ],
+          "attested": "Résidents oubliés par proches, rêves illusoires; récupération de conscience astrale exceptionnelle.",
+          "proposed_profile": "Personnel soignant et services plus résidents dépendants; résidents demeurent habitants même si oubliés."
+        },
+        {
+          "name": "Magic Duel Arena",
+          "kind": "équipement sportif",
+          "parent": "magocracy-of-mage-tower",
+          "population": null,
+          "sources": [
+            "SB 142"
+          ],
+          "attested": "Duel de mages, combats simulés et épreuves de baguettes.",
+          "proposed_profile": "Exploitants, entraîneurs, maintenance des barrières; ne pas inventer une ville autonome."
+        }
+      ],
+      "social_constraints": [
+        "Non-lanceurs de sorts en bas de hiérarchie; lanceurs divins respectés hors hiérarchie mais exclus du sommet arcanique (SB15)",
+        "Puissance/école par rune et taille de chapeau, habits 1-5000po (SB139)",
+        "Universités payantes avec bourses exceptionnelles (SB15), chercheurs très concurrents, sabotage et trafic clandestin (SB138-140)",
+        "Libertés importantes mais police sévère (SB138-140)"
+      ],
+      "noncitizen_labor": [
+        "Élémentaires liés en bauronite servant de carburant ou pièces d'objets (SB139)",
+        "Élémentaires et pylônes alimentent utilités, transport et architecture; risques de rupture/évasion (SB142)"
+      ],
+      "gaps": [
+        "Aucun pourcentage professionnel publié",
+        "Aucune population ni proportions d'espèces municipales publiées dans chapitre",
+        "Aucun slum nommé dans ce chapitre; ne pas inventer un quartier canonique",
+        "Alkira Mountain est montagne, pas une ville; Chowillawu Acchoda est source magique, pas une agglomération",
+        "Elemental Grounds est extraplanaire et à exclure du total régional vivant"
+      ]
+    },
+    {
+      "id": "seashores",
+      "name": "Seashores",
+      "population": 617000,
+      "population_approximate": true,
+      "species_pct": {
+        "human": 74,
+        "gnome": 12,
+        "elf": 7,
+        "merfolk": 5,
+        "other": 2
+      },
+      "demographic_source": "SB 146-147; SB16 précise elfes d'été mais l'encadré statistique dit elves",
+      "common_attested": [
+        "Pêcheur",
+        "Marchand de perles et produits marins",
+        "Constructeur naval",
+        "Marin",
+        "Capitaine",
+        "Tavernier",
+        "Mercenaire",
+        "Espion",
+        "Bourreau",
+        "Assassin",
+        "Pirate",
+        "Contrebandier",
+        "Receleur"
+      ],
+      "common_sources": [
+        "SB 16",
+        "SB 146-149",
+        "SB 150-151"
+      ],
+      "common_inferred": [
+        "Poissonnier",
+        "Saleur de poisson",
+        "Fumeur de poisson",
+        "Sécheur de poisson",
+        "Docker",
+        "Portefaix",
+        "Magasinier",
+        "Cordier",
+        "Voilier",
+        "Calfat",
+        "Tonnelier",
+        "Charpentier naval",
+        "Navigateur",
+        "Aubergiste",
+        "Cultivateur insulaire",
+        "Gardien de phare",
+        "Plongeur",
+        "Luthier / facteur d’instruments",
+        "Salinier maritime (hypothèse de chaîne du salage, non attesté)"
+      ],
+      "specific_attested": [
+        "Courtier de navires et objets magiques",
+        "Chercheur de reliques sous-marines",
+        "Chasseur de monstres marins",
+        "Enseignant des Academies of Light",
+        "Musicien",
+        "Compositeur",
+        "Peintre",
+        "Sculpteur",
+        "Poète",
+        "Cuisinier de haute cuisine gnome",
+        "Opérateur de dreamscaping"
+      ],
+      "specific_sources": [
+        "SB 148-149",
+        "SB 228-229",
+        "PG 28-29",
+        "CC 52"
+      ],
+      "specific_inferred": [
+        "Collecteur et trieur de perles",
+        "Cultivateur marin",
+        "Pilote de passages rocheux",
+        "Mainteneur d'habitats subaquatiques",
+        "Restaurateur d'objets submergés",
+        "Formateur en étiquette",
+        "Collecteur d'ingrédients gastronomiques magiques"
+      ],
+      "expertise": [
+        {
+          "domain": "Construction navale",
+          "level": "supériorité explicite",
+          "source": "SB 148",
+          "excerpt": "the finest shipbuilders in Tanares",
+          "limits": "Les maîtres insaisissables travaillent pour quelques clients liés au Parlement; bois de Sindile, minerais nains, cristaux de Mage Tower, acier impérial nécessaires."
+        },
+        {
+          "domain": "Écoles musicales de Mustardseed",
+          "level": "réputation explicite",
+          "source": "SB 149",
+          "excerpt": "the largest and most highly regarded music schools",
+          "limits": "Réseau Academies of Light présent ailleurs; prestige d'institutions, pas de chaque musicien."
+        },
+        {
+          "domain": "Arts gnomes: peinture, composition et sculpture",
+          "level": "réputation de supériorité explicite de peuple",
+          "source": "PG 28-29",
+          "excerpt": "acclaimed as the finest artists",
+          "limits": "Concerne gnomes de Tanares, concentration à Mustardseed; ne pas transformer en exclusivité géographique."
+        },
+        {
+          "domain": "Haute cuisine gnome",
+          "level": "réputation de peuple et maître nommé",
+          "source": "PG 28-29; CC 52",
+          "excerpt": "one of the best on Tanares",
+          "limits": "Phrase CC52 porte sur Gearot formé aux restaurants de Mustardseed, maintenant dans Capitale impériale. Pas affirmation que tout cuisinier local est meilleur."
+        }
+      ],
+      "places": [
+        {
+          "name": "Bluhaven",
+          "kind": "ville capitale",
+          "parent": "seashores",
+          "population": null,
+          "sources": [
+            "SB148"
+          ],
+          "attested": "Docks, jetées, pauvres tavernes, chantiers fortement gardés, marché maritime et armes/biens/navires volés; régent William tolère crimes dont il profite.",
+          "proposed_profile": "Port et construction navale, commerce/recèlement, transport manutention, restauration et protection dominants; pauvreté et absence de métier vraisemblablement plus élevées qu'à Mustardseed, valeurs à proposer."
+        },
+        {
+          "name": "Mustardseed",
+          "kind": "ville insulaire autonome soumise au tribut",
+          "parent": "seashores",
+          "population": null,
+          "species_profile": "Communauté gnome explicite, pourcentage inconnu",
+          "sources": [
+            "SB146",
+            "SB149",
+            "SB229",
+            "PG28-29",
+            "CC52"
+          ],
+          "attested": "Ville d'art et savoir, Academy of Light et Ancient Lumina Academy; restaurants raffinés; étiquette stricte, instruments animés, patrimoine submergé recherché.",
+          "proposed_profile": "Surpondérer arts/enseignement, restauration de luxe, artisanat décoratif, archives et expéditions patrimoniales; alimentation importée et services urbains requis."
+        },
+        {
+          "name": "Pearl Town",
+          "kind": "ville sous-marine autonome soumise au tribut",
+          "parent": "seashores",
+          "population": null,
+          "species_profile": "Ville fondée par merfolk; visiteurs respirent grâce à magie; aucun pourcentage cité",
+          "sources": [
+            "SB146",
+            "SB149"
+          ],
+          "attested": "Centre commerce de perles/trésors; échanges en faveurs fréquents, merfolk et élémentaires pour gardes; accès depuis petite île.",
+          "proposed_profile": "Commerce marin, collecte, maintenance magique, services aquatiques; différencier résidents merfolk et visiteurs de surface, transposer agronomie seulement après décision explicite."
+        },
+        {
+          "name": "Fishtail City",
+          "kind": "ville",
+          "parent": "seashores",
+          "population": null,
+          "sources": [
+            "SB150",
+            "CC38"
+          ],
+          "attested": "Dorro y a survécu dans les rues dans sa jeunesse; ville absente des titres Places of Interest.",
+          "proposed_profile": "Profil port ordinaire et précarité proposé; aucune économie détaillée canonique."
+        },
+        {
+          "name": "Turtledragon Island",
+          "kind": "île avec garnison",
+          "parent": "seashores",
+          "population": null,
+          "sources": [
+            "SB146"
+          ],
+          "attested": "Quartier général Ironhand à fonction de surveillance symbolique.",
+          "proposed_profile": "Garnison/soutien logistique et ravitaillement; pas ville prouvée."
+        },
+        {
+          "name": "Uncle Joe's Tavern et île",
+          "kind": "comptoir avec auberge et gardes",
+          "parent": "Fire Archipelago",
+          "population": null,
+          "sources": [
+            "SB149"
+          ],
+          "attested": "Marché noir, courtage achat-vente-location de bateaux/objets; banquet et luxueuse auberge; gardes ogres, géants, kobolds et invocations.",
+          "proposed_profile": "Sous-zone comptoir, ne pas appliquer profil criminel à tous habitants; pas effectif publié."
+        },
+        {
+          "name": "Villages de pêcheurs et villages insulaires anonymes",
+          "kind": "ensemble de peuplements",
+          "parent": "seashores",
+          "population": null,
+          "sources": [
+            "SB16",
+            "SB151"
+          ],
+          "attested": "Villages de pêcheurs cherchent protection; villages îles éloignées attaqués par équipage de Black Soul.",
+          "proposed_profile": "Pêche et conservation, réparation navale, agriculture insulaire et petits commerces; plus subsistance que piraterie."
+        },
+        {
+          "name": "Undersea prison",
+          "kind": "prison avec gardes sahuagin",
+          "parent": "seashores",
+          "population": null,
+          "sources": [
+            "SB148"
+          ],
+          "attested": "Gardes sahuagin et requins, prisonniers dépendants de potions durant période sans air.",
+          "proposed_profile": "Dépendants et service carcéral hors profil ville; raccordement administratif inconnu."
+        }
+      ],
+      "social_constraints": [
+        "Tributs lourds mensuels, pillage si défaut, dirigeants changent annuellement (SB146)",
+        "Liberté économique avec insécurité, prospérité faible; pirates et marchés noirs première activité économique ne prouve pas majorité de population pirate (SB146-147)",
+        "Mustardseed éducation et étiquette valorisées avec répression sociale; accès Academy sélectif au mérite (SB149; PG28-29)",
+        "Pearl Town échange souvent contre faveurs et accueil respiratoire magique (SB149)"
+      ],
+      "noncitizen_labor": [
+        "Élémentaires gardiens Pearl Town et instruments animés Mustardseed (SB149)",
+        "Black Soul a équipage mort-vivant et armée sous-marine, cas clandestin, ne pas projeter nécromancie partout (SB151)"
+      ],
+      "gaps": [
+        "Aucune ville avec population chiffrée dans ces passages",
+        "Blink Island abrite hag mais piège temporel, pas ville normale; Whirlpool phénomène, Underwater dungeon donjon; cursed sunken city produit morts-vivants, hors comptage vivant",
+        "Pas proportions d'espèces municipales ni proportion d'habitants criminels",
+        "Aucun slum nommé mais précarité urbaine attestée à Bluhaven et dans passé de Dorro"
+      ]
+    },
+    {
+      "id": "sindile-forest",
+      "name": "Sindile Forest",
+      "population": 432000,
+      "population_approximate": true,
+      "species_pct": {
+        "elf": 91,
+        "halfling": 3,
+        "human": 2,
+        "cirrus": 1,
+        "other": 3
+      },
+      "demographic_source": "SB152-153; texte dit spring elves, encadré elves; winter elves présents SB154",
+      "common_attested": [
+        "Collecteur d'herbes rares",
+        "Marchand",
+        "Artisan du bois",
+        "Fabricant d'arcs et flèches magiques",
+        "Musicien harpiste",
+        "Gardien forestier",
+        "Guide",
+        "Prêtre",
+        "Druide",
+        "Élémentaliste"
+      ],
+      "common_sources": [
+        "SB152-155"
+      ],
+      "common_inferred": [
+        "Horticulteur",
+        "Cultivateur de denrées végétales",
+        "Cuisinier",
+        "Apiculteur",
+        "Menuisier",
+        "Charpentier de passerelles",
+        "Cordier",
+        "Réparateur de transport vertical",
+        "Tisseur",
+        "Tailleur",
+        "Soigneur",
+        "Aubergiste de passage",
+        "Scieur de bois (hypothèse, pratiques forestières à limiter selon usages sacrés)",
+        "Luthier de harpes"
+      ],
+      "specific_attested": [
+        "Préparateur d'Estelindea",
+        "Gardien et purificateur des Mother Trees",
+        "Jardinier de roses magiques",
+        "Préparateur de potions curatives de Mirror Lake",
+        "Archer Wood Hunter",
+        "Formateur de tir à l'arc",
+        "Juge et gardien de prisonniers kemets",
+        "Espion"
+      ],
+      "specific_sources": [
+        "SB153-155",
+        "SB157-159"
+      ],
+      "specific_inferred": [
+        "Arboriculteur de breithwood",
+        "Récolteur de sève sacrée",
+        "Transporteur de canopée",
+        "Gardien d'archives mémorielles de Cindergrove",
+        "Pépiniériste funéraire",
+        "Fabricant de flèches de grappin"
+      ],
+      "expertise": [
+        {
+          "domain": "Breithwood et artisanat de bois léger/résistant",
+          "level": "caractéristiques de matériau attestées",
+          "source": "SB152",
+          "excerpt": null,
+          "limits": "Qualités du matériau, pas classement des artisans."
+        },
+        {
+          "domain": "Estelindea",
+          "level": "produit régional unique/fortement recherché",
+          "source": "SB153",
+          "excerpt": null,
+          "limits": "Élixir de sève Mother Trees; renommée et rareté, pas titre meilleur apothicaire."
+        },
+        {
+          "domain": "Potions de roses et énergie druidique Mirror Lake",
+          "level": "puissance du site explicite",
+          "source": "SB157",
+          "excerpt": "greater natural power here than anywhere else in Tanares",
+          "limits": "Énergie du lieu et remèdes exceptionnels ne prouvent pas excellence universelle des herboristes de toute Sindile."
+        },
+        {
+          "domain": "Formation archers Hunter's Nest",
+          "level": "formation efficace et maître renommée",
+          "source": "SB155,158",
+          "excerpt": null,
+          "limits": "Niary réputée mais derniers concours gagnés par deux humains; ne pas déclarer elfes biologiquement meilleurs."
+        }
+      ],
+      "places": [
+        {
+          "name": "Sweetsprings",
+          "kind": "ville capitale dans canopée",
+          "parent": "sindile-forest",
+          "population": null,
+          "species_profile": "Capitale elfes de printemps; étrangers confinés niveaux inférieurs, pourcentages inconnus",
+          "sources": [
+            "SB154"
+          ],
+          "attested": "Anneaux autour arbres, ponts/ascenseurs, équipements de breithwood; niveaux supérieurs Conseil, prêtres, élémentalistes.",
+          "proposed_profile": "Gouvernement/culte, bois et fabrication, transport canopée, commerce inférieur; horticulture/récolte alentour."
+        },
+        {
+          "name": "Hunter's Nest",
+          "kind": "ville fortifiée militaire au sol",
+          "parent": "sindile-forest",
+          "population": null,
+          "sources": [
+            "SB155"
+          ],
+          "attested": "Majorité guerriers réunis, arsenaux, entraînement et préparation explorations.",
+          "proposed_profile": "Forte sécurité et formation d'archers, fabrication/réparation arcs, intendance et soins; ravitaillement externe."
+        },
+        {
+          "name": "Petits villages de Sindile Road",
+          "kind": "peuplements anonymes",
+          "parent": "sindile-forest",
+          "population": null,
+          "sources": [
+            "SB155"
+          ],
+          "attested": "Quelques petits villages elfiques échangent et guident malgré restrictions.",
+          "proposed_profile": "Récolte/culture, bois, guides, services aux voyageurs, faible négoce."
+        },
+        {
+          "name": "Autres communautés arboricoles",
+          "kind": "peuplements anonymes",
+          "parent": "sindile-forest",
+          "population": null,
+          "sources": [
+            "SB152"
+          ],
+          "attested": "Communautés majoritairement dans hautes cimes, rares villages au sol.",
+          "proposed_profile": "Habitat/récolte/horticulture de forêt, transport vertical et rituels; pas forêt exploitée comme coupe industrielle."
+        },
+        {
+          "name": "Mirror Lake et temples de Mountain Gate",
+          "kind": "sanctuaire fréquenté et jardins entretenus",
+          "parent": "sindile-forest",
+          "population": null,
+          "sources": [
+            "SB157"
+          ],
+          "attested": "Thalia, nymphes et archidruides entretiennent jardins roses; soins suivis serment tâche pour Breith.",
+          "proposed_profile": "Sous-zone de sanctuaire: horticulture et soins, culte/garde; comptabiliser personnel vivant seulement, fréquentation ≠ habitants."
+        },
+        {
+          "name": "Cindergrove",
+          "kind": "cimetière et transmission mémorielle",
+          "parent": "sindile-forest",
+          "population": null,
+          "sources": [
+            "SB155"
+          ],
+          "attested": "Arbres essence d'elfes morts, enseignement et transmission temporaire de compétences.",
+          "proposed_profile": "Personnel gardien/rituel possible; essences ancestrales hors population vivante, pas ville de tous les morts."
+        },
+        {
+          "name": "Mother Trees",
+          "kind": "dix sites sacrés gardés",
+          "parent": "sindile-forest",
+          "population": null,
+          "sources": [
+            "SB153"
+          ],
+          "attested": "Rituel Renewal, herbes et tameranium, garnisons; Trail of Blossoms.",
+          "proposed_profile": "Personnel rituels, récolte et sécurité rattachés à communautés régionales."
+        }
+      ],
+      "social_constraints": [
+        "Végétarisme majoritaire, animaux souvent compagnons; réduire métier boucher/élevage à viande sans les interdire (SB152)",
+        "Fonctions sociales et spirituelles imbriquées dans chemins hiérarchisés (SB152)",
+        "Déficit métaux et import minerais magiques, autosuffisance alimentaire (SB152)",
+        "Isolation, surveillance étrangers, Eternal Circle sabotages et restrictions d'accès (SB154-155)",
+        "Hauts niveaux Sweetsprings réservés à Conseil/prêtres/élémentalistes; winter elves réfugiés sous surveillance et préjugés (SB154)",
+        "Rites funéraires graines/arbres plutôt que fosses ordinaires (SB152,155)"
+      ],
+      "noncitizen_labor": [
+        "Élémentaires terre ont construit route et servent de guides (SB155)",
+        "Essences des arbres Cindergrove transmettent maîtrise outils/langues temporaire, capacité éducative magique hors travail salarié courant (SB155)"
+      ],
+      "gaps": [
+        "Aucun pourcentage professionnel ni municipal",
+        "Pas source affirmant ensemble artisans Sindile meilleurs du continent",
+        "Yrthak est autre plan: temples lizardfolk habités, pas dans population Sindile",
+        "Verdant Colossus est donjon habité par druide dément et gardiens végétaux, pas commune normale; Gateway Tree portail, pas ville",
+        "Estelindea nom de potion, pas lieu habité"
+      ]
+    },
+    {
+      "id": "stravian-domains",
+      "name": "Stravian Domains",
+      "population": 960000,
+      "population_approximate": true,
+      "species_pct": {
+        "dwarf": 51,
+        "human": 22,
+        "halfling": 18,
+        "gloomfolk": 4,
+        "cirrus": 3,
+        "other": 2
+      },
+      "demographic_source": "SB160-161",
+      "common_attested": [
+        "Mineur",
+        "Forgeron",
+        "Maçon",
+        "Artisan de pierre",
+        "Bijoutier",
+        "Marchand",
+        "Agriculteur",
+        "Cultivateur d'épices",
+        "Transporteur",
+        "Mercenaire",
+        "Prêtre",
+        "Explorateur",
+        "Soldat"
+      ],
+      "common_sources": [
+        "SB14",
+        "SB160-163",
+        "PG12-13"
+      ],
+      "common_inferred": [
+        "Prospecteur",
+        "Métallurgiste-fondeur",
+        "Trieur de minerai",
+        "Lapidaire",
+        "Carrier",
+        "Tailleur de pierre",
+        "Armurier",
+        "Charbonnier",
+        "Fabricant d'outils",
+        "Meunier",
+        "Boulanger",
+        "Maraîcher",
+        "Arboriculteur",
+        "Cuisinier",
+        "Tavernier",
+        "Magasinier",
+        "Portefaix"
+      ],
+      "specific_attested": [
+        "Opérateur de Stone Disks: prêtre Dorsi spécialement formé",
+        "Restaurateur de runes de tunnels",
+        "Créateur de statues de Stone Spirits",
+        "Prêtre protecteur des unités militaires",
+        "Gardien de verger sacré",
+        "Protecteur de ferme monté sur sanglier géant",
+        "Fournisseur de minerais extraplanaires",
+        "Mineur et forgeron ethérique à Moolooite"
+      ],
+      "specific_sources": [
+        "SB160-164",
+        "SB167",
+        "PG12-13"
+      ],
+      "specific_inferred": [
+        "Ingénieur de mine et sécurité souterraine",
+        "Inspecteur d'éboulement et gaz",
+        "Mainteneur de disques et ascenseurs de pierre",
+        "Armurier de moonstone",
+        "Conservateur de trouvailles minérales dangereuses",
+        "Dresseur de sangliers de monte",
+        "Producteur de fruits géants",
+        "Organisateur de banquets rituels"
+      ],
+      "expertise": [
+        {
+          "domain": "Métal, pierre et extraction nains",
+          "level": "excellence et réputation attestées",
+          "source": "SB14; PG12",
+          "excerpt": "excel in metalcraft, stonecraft, and mining",
+          "limits": "Ne signifie pas meilleurs du continent sur chaque métier; emplois ouverts à autres espèces."
+        },
+        {
+          "domain": "Maçonnerie, forge, commerce et bijoux de Stonelair",
+          "level": "réputation locale explicite",
+          "source": "SB163",
+          "excerpt": "Known for its masonry, forging, trade, and jewel crafting",
+          "limits": "Réputation ≠ classement universel."
+        },
+        {
+          "domain": "Forge Dorsienne",
+          "level": "supériorité explicite d'installation ancienne",
+          "source": "SB163",
+          "excerpt": "the mightiest forge on the Material Plane",
+          "limits": "Actuellement contrôlée par duergar, mode combiné non activé; ne pas l'attribuer à capacité actuelle de Stonelair."
+        },
+        {
+          "domain": "Agriculture halfeline et Mirare",
+          "level": "réputation et abondance explicites",
+          "source": "SB162; PG21",
+          "excerpt": "the granary of Tanares",
+          "limits": "Grand grenier et techniques recherchées, pas meilleurs pour chaque culture; magie féerique et rendement, ne pas exiger majorité population agricole."
+        },
+        {
+          "domain": "Transport souterrain à disques",
+          "level": "exclusivité actuelle attestée de savoir",
+          "source": "PG13",
+          "excerpt": "only the dwarven priests of Dorsi",
+          "limits": "Seuls prêtres spécialement formés savent opérer à présent; pas métier ouvert sans formation rituelle."
+        }
+      ],
+      "places": [
+        {
+          "name": "Stonelair",
+          "kind": "ville capitale à surface et souterrain",
+          "parent": "stravian-domains",
+          "population": null,
+          "species_profile": "Fondation et culture naines, recrutement toutes espèces; pas fractions municipales",
+          "sources": [
+            "SB160",
+            "SB163",
+            "SB167"
+          ],
+          "attested": "Innombrables forges, bijoux/maçonnerie/commerce, entrée Undertanares et chars de mines, ascenseurs de pierre, tombeaux suspendus.",
+          "proposed_profile": "Métal et pierre, extraction/transport, construction, commerce, religion et protection dominants; travailleurs peuvent résider ailleurs grâce disques."
+        },
+        {
+          "name": "Mirare",
+          "kind": "ville côtière halfeline",
+          "parent": "stravian-domains",
+          "population": null,
+          "species_profile": "Plus grande communauté halfeline; quartier étrangers à maisons taille ordinaire, pas pourcentages",
+          "sources": [
+            "SB160-162",
+            "SB166"
+          ],
+          "attested": "Grenier Tanares, fermes autour, tavernes nombreuses, festivités/jeux, beach loisirs, alimentation exportée; réseau clandestin Aldo manipule marchés.",
+          "proposed_profile": "Ville: commerce nourriture, stockage/transformation, hôtellerie/festivités, administration; fermes alentour: cultures majoritaires; éviter compter toutes fermes comme ville."
+        },
+        {
+          "name": "Sacred Orchard of Mirare",
+          "kind": "verger-sanctuaire",
+          "parent": "Mirare et environs",
+          "population": null,
+          "sources": [
+            "SB161"
+          ],
+          "attested": "Priestess Alluna et archfey douze ailes gardent verger, fruits magiques.",
+          "proposed_profile": "Sous-zone horticulture/culte/garde, pas ville autonome."
+        },
+        {
+          "name": "Eclipse Village",
+          "kind": "village refuge",
+          "parent": "stravian-domains",
+          "population": null,
+          "sources": [
+            "SB163"
+          ],
+          "attested": "Bandits, salters, mercenaires, saloons, inns, general stores, blacksmiths, stables, ranches, bardes; autorité Kibral.",
+          "proposed_profile": "Mercenariat/criminalité/protection, tavernes, élevage et logistique équestre, commerce/recel et forge; forte précarité possible mais sans taux canonique."
+        },
+        {
+          "name": "Eb’boria",
+          "kind": "village",
+          "parent": "stravian-domains",
+          "population": null,
+          "species_profile": "Lignée efreet à sorcellerie; proportions d'espèces inconnues",
+          "sources": [
+            "SB144",
+            "CC157"
+          ],
+          "attested": "Village d'origine de Zanac; honte sociale pour absence de pouvoirs puis exil après ravages.",
+          "proposed_profile": "Profil village générique et magie de feu à proposer; pas production industrielle canonique attestée."
+        },
+        {
+          "name": "Autres villes naines et villages/fermes halfelines",
+          "kind": "peuplements anonymes",
+          "parent": "stravian-domains",
+          "population": null,
+          "sources": [
+            "SB160-162"
+          ],
+          "attested": "Nains fondent autres villes, halfelins villages et fermes; nord peu peuplé, sud fertile densément peuplé.",
+          "proposed_profile": "Villes proches mines: extraction/transformation; sud fermes: végétaux; commerce caravanes et escorte dans axes de surface."
+        },
+        {
+          "name": "Moolooite Mines",
+          "kind": "mine matérielle scellée et village ethérique",
+          "parent": "Undertanares lié Stravian",
+          "population": null,
+          "sources": [
+            "SB163"
+          ],
+          "attested": "Tous travailleurs morts, restent mineurs et forgerons dans village du plan Ethereal.",
+          "proposed_profile": "Zéro habitant vivant imposé par description; village spectral à suivre dans capacité séparée, pas total 960000."
+        },
+        {
+          "name": "Dorsian Forge",
+          "kind": "complexe artisanal occupé par duergar",
+          "parent": "Undertanares lié Stravian",
+          "population": null,
+          "sources": [
+            "SB162-163"
+          ],
+          "attested": "Duergar contrôlent forge; fonctions de base mais pas fusion complète; Iron Spirits développés.",
+          "proposed_profile": "Territoire rival distinct de ville Stonelair; nombre travailleurs non publié, affiliation au total régional incertaine."
+        }
+      ],
+      "social_constraints": [
+        "Recrutement all species, dignité/merit, partage savoir, salaires mines généreux mais danger élevé (SB160-161)",
+        "Dwarf Lion: militaire/exploration; Goat: mines/forge/construction; Dragon: prêtres/savants/sentinelles, orientations culturelles non interdictions biologiques (PG12)",
+        "Halflings travaillent comme nécessaire, banquets hebdomadaires pacte féerique; fruits géants par magie (SB160; PG20-21)",
+        "Élevage et cuir déficitaires import Kolbjörn/Freelands (SB160); ne pas distribuer élevage dominant partout malgré animaux géants en tradition halfeline",
+        "Routes bandits et escortes; mines gaz/éboulements/créatures; tensions anti-autres espèces Order Bringers (SB161-162,167)"
+      ],
+      "noncitizen_labor": [
+        "Stone Spirits défense et conseils ancestraux, pas main-d'œuvre industrielle banale (SB161; PG13)",
+        "Stone Disks créent navettes domicile-travail hors commune, relation lieu résidence/emploi indispensable (SB161)",
+        "Moolooite production ethérique des morts non disponible normalement sur plan matériel (SB163)",
+        "Fey agriculture améliore rendement et météo, modèle emploi alimentaire différent du Moyen Age historique (PG21)"
+      ],
+      "gaps": [
+        "Aucune ville avec chiffre démographique dans ces chapitres",
+        "Malland King/Hing Halls donjon scellé, pas ville habitée prouvée",
+        "Population duergar totale ni inclusion dans région non spécifiées",
+        "Salters Eclipse Village mot anglais ambigu, ne pas traduire automatiquement saunier sans autre preuve",
+        "Valeurs % professions et âge par espèce à créer comme hypothèses explicites"
+      ]
+    }
+  ]
+}

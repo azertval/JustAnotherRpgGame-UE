@@ -1,0 +1,95 @@
+name: Site
+
+# Publie le site du projet sur la branche `gh-pages` (GitHub Pages), à chaque merge sur main :
+#   /           les pages de documentation — guide, spécifications, cahier de test, métiers de
+#               Tanares (Documentation/outils/build_docs_site.py) ;
+#   /Metiers/   avec ses annexes : explorateur interactif, tableaux, données ;
+#   /planning/  le site de planification (Planning/outils/build_planning_site.py).
+#
+# Pas encore refaits pour le nouveau moteur, et donc absents du site : la référence du code
+# (Doxygen : son gabarit d'en-tête est resté dans l'ancien dépôt) et la page qualité (couverture,
+# mesures de performance). Le lien « Référence du code » de l'accueil ne mène nulle part d'ici là.
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+# Deux publications concurrentes pousseraient sur gh-pages l'une sur l'autre.
+concurrency:
+  group: site
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    # Seule la branche main publie : une relance manuelle depuis une autre branche ne remplace pas
+    # le site.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      # Pousse le site engendré sur la branche gh-pages.
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # L'explorateur et les données de l'étude des métiers sont en Git LFS. Le cache évite de
+      # retélécharger 60 Mo à chaque merge : la bande passante LFS du compte est comptée.
+      - name: Liste des objets LFS
+        run: git lfs ls-files --long | cut -d' ' -f1 | sort > "$RUNNER_TEMP/lfs-ids.txt"
+
+      - name: Cache des objets LFS
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .git/lfs
+          key: lfs-${{ hashFiles('.gitattributes') }}-${{ github.sha }}
+          restore-keys: lfs-${{ hashFiles('.gitattributes') }}-
+
+      - name: Objets LFS
+        run: git lfs pull
+
+      - name: Pages de documentation
+        env:
+          COMMIT: ${{ github.sha }}
+        run: python3 Documentation/outils/build_docs_site.py --out site --commit "$COMMIT"
+
+      # Le moteur de pages ne rend que le Markdown et ses images ; l'étude des métiers a des annexes
+      # qui se consultent telles quelles. Ni le site rendu, ni la copie de l'atelier, ni le texte
+      # des livres — absents du dépôt, écartés ici une seconde fois.
+      - name: Annexes de l'etude des metiers
+        run: |
+          rsync -a --ignore-existing \
+            --exclude 'generated/' --exclude 'Reproduction/Etude/' --exclude '__pycache__/' \
+            --exclude 'Sources/Corpus/' --exclude 'lecture-corpus.html' --exclude '*.md' \
+            Documentation/Metiers/ site/Metiers/
+
+      - name: Site de planification
+        env:
+          COMMIT: ${{ github.sha }}
+        run: |
+          python3 Planning/outils/build_planning_site.py --out site/planning --docs-url ../ \
+            --commit "$COMMIT"
+
+      # Dernier garde-fou avant de rendre public : rien de ce qui part n'a la forme d'un livre.
+      - name: Aucun livre source dans le site (EX-CNT-023)
+        run: find site -type f -print0 | xargs -0 python3 scripts/checks/check_no_sourcebook.py
+
+      - name: Resume
+        run: |
+          {
+            echo '### Site'
+            echo
+            echo "- $(find site -name '*.html' | wc -l) pages, $(du -sh site | cut -f1)"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publier sur gh-pages
+        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4.1.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site
+          publish_branch: gh-pages

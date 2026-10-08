@@ -9,7 +9,9 @@ chaque binaire ajouté y reste pour toujours, même supprimé ensuite. Deux règ
 commit (hook pre-commit, sur les fichiers indexés) et en CI (sur tout le dépôt) :
 
 1. **Aucun fichier au-delà de MAX_BYTES.** Le plus gros fichier suivi fait 4,2 Mio (une maquette de
-   la charte v2) ; au-delà, la place d'un fichier est hors du dépôt, ou il doit être réduit.
+   la charte v2) ; au-delà, la place d'un fichier est hors du dépôt, ou il doit être réduit. Un
+   fichier que `.gitattributes` range en **Git LFS** en est exempt : le plafond protège le pack,
+   où un pointeur LFS ne pèse rien. C'est le cas des `.uasset` et `.umap` régénérés (D-52).
 2. **Un fichier binaire porte une extension déclarée `binary` dans `.gitattributes`.** C'est la
    liste des familles d'assets admises, écrite une seule fois : un binaire d'une autre famille (un
    PDF du corpus, que `EX-CNT-023` interdit de versionner, un exécutable, une archive) est refusé,
@@ -57,14 +59,24 @@ def is_binary(path):
         return b'\0' in handle.read(SNIFF_BYTES)
 
 
-def violations(paths, extensions, max_bytes=MAX_BYTES):
+def lfs_tracked(paths):
+    """Ceux de @p paths que `.gitattributes` range en Git LFS (`filter=lfs`)."""
+    if not paths:
+        return set()
+    output = subprocess.run(['git', 'check-attr', '-z', '--stdin', 'filter'], capture_output=True,
+                            input='\0'.join(paths).encode('utf-8'), check=True).stdout
+    fields = output.decode('utf-8').split('\0')
+    return {fields[i] for i in range(0, len(fields) - 2, 3) if fields[i + 2] == 'lfs'}
+
+
+def violations(paths, extensions, max_bytes=MAX_BYTES, in_lfs=()):
     """Liste des messages d'erreur pour @p paths ; vide si tout est admis."""
     found = []
     for path in paths:
         if not os.path.isfile(path):
             continue  # supprimé dans l'index, ou lien symbolique cassé : rien à peser
         size = os.path.getsize(path)
-        if size > max_bytes:
+        if size > max_bytes and path not in in_lfs:
             found.append('%s : %.1f Mio, au-delà du plafond de %.0f Mio.'
                          % (path, size / 1048576, max_bytes / 1048576))
         if is_binary(path) and os.path.splitext(path)[1].lower() not in extensions:
@@ -116,6 +128,7 @@ def auto_test():
         assert violations([image, text], extensions, 1024) == []
         assert len(violations([pdf], extensions, 1024)) == 1
         assert len(violations([big], extensions, 1024)) == 1
+        assert violations([big], extensions, 1024, in_lfs={big}) == []
         assert violations([os.path.join(root, 'absent.png')], extensions, 1024) == []
     kits = locked_kit_paths('{"version": 1, "kits": [{"path": "UI"}, {"path": "Regions/r/zone"}]}')
     assert locked_image_violations(['Source/Elements/Assets/UI/hud/a.png',
@@ -154,7 +167,7 @@ def main():
     else:
         paths = arguments.files
 
-    found = violations(paths, extensions)
+    found = violations(paths, extensions, in_lfs=lfs_tracked(paths))
     if os.path.exists(KITS_LOCK):
         # Seules comptent les images de l'index : une image retirée du suivi reste sur le disque, et
         # `pre-commit --from-ref` la passe encore comme fichier changé.

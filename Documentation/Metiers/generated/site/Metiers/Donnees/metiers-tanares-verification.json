@@ -1,0 +1,591 @@
+{
+  "all_passed": true,
+  "checks": [
+    {
+      "check": "Identifiants uniques",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Chaque feuille a un unique parent, arbre sans cycle",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "49 entrées initiales couvertes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Pourcentages actifs : somme 100",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Pourcentages habitants : somme 100",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Valeurs finies non négatives",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Deux dénominateurs concordants",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Bases = somme des enfants",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Effectifs territoriaux : 13 régions calibrées",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Marges espèces source à 100",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Marges espèces locales et régionales conservées",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Emplois × espèces : marges conformes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Stone Disks réservés aux nains formés",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "G’bagede : enseignants et chercheurs en golems uniquement",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Mendicité chez les inactifs et somme des contributions",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Aucune ville ruinée/abandonnée comme profil vivant",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Garnisons concordantes sous convention explicite de résidence",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Profils inconnus sans effectifs absolus",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Bloomburgs : majorité des occupés en travail physique ou activités criminelles",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Ben’net : pas riz/soie/chameaux/thé professionnels du scénario",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Pearl Town : aucun métier agricole terrestre ou élevage",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Habilitations psychosurgery et mages impériaux cirrus",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Great Valley quasi exclusivement géante",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Les villes de Magocracy et Sindile ont des mélanges distincts",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Cultes Storm/Yama : pas shamans/druides inventés",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Compétences secondaires renvoient à des bases existantes",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Strates résidentes = 100 %, emplois/chômage/inactivité par strate",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Métier × social : marges des professions et des strates",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Vues conditionnelles sociales : sommes 100 ou groupe vide explicite",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Noblesse inconnue reste non renseignée, élites indépendantes",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Downtown : tous les non nobles résidents ont affiliation temple et métiers admissibles",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Roses magiques concentrées au lac, aucune diffusion régionale arbitraire",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Réacteurs secrets : au plus 0,01 % des occupés",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Chaque cellule professionnelle a justification et calcul, zéros inclus",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Audit vivrier exclut productions non caloriques et ne valide aucun rendement",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Totaux militaires civils sans double compte",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Références de toutes règles et héritages résolues",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Toutes cellules positives ont contexte local/régional référencé",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Inquisiteurs bauroniens exclus des cultes et ordres incompatibles",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Brightlight : aucun rite Ba-Akhu ajouté aux tribus non converties",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Kepesh : dépendance à eau/imports visible même avec nombreux producteurs",
+      "passed": true,
+      "detail": "v2"
+    },
+    {
+      "check": "Dawn : pas enseignement martial/arc arbitraire ; Eberek soins devant barbiers/enfants",
+      "passed": true,
+      "detail": "v2"
+    }
+  ],
+  "base_count": 66,
+  "occupation_count": 267,
+  "profile_count": 118,
+  "calibrated_regions": 13,
+  "known_regional_population_total": 11081000,
+  "resident_leaf_count": 94,
+  "status": "validite_arithmetique_et_contraintes_ciblees_pas_validation_economique",
+  "version": 3,
+  "food_v3_checks": [
+    {
+      "name": "Catalogue et profils conservés",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "13 populations source conservées",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Calendrier tanaréen : 360 jours et M1 début été",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Toutes les lignes sociales restent conservées par métier",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Deux dénominateurs totalisent 100 %",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Noblesse inconnue jamais convertie en zéro",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "V3 conserve tous les statuts sociaux lors des réaffectations",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Bases = somme des feuilles",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Garnisons source sous convention résidentielle inchangées",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "G’bagede conserve uniquement enseignants et chercheurs de golems",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Terres en rotation et irrigation plafonnées indépendamment",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Travail annuel et pics bornés, quotité 0,65 une fois",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Stock semences séparé et non consommé",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Nourriture magique non stockée et cohortes disjointes",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "13 bilans annuels conservés, déficits affichés",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Flux respectent capacités et pertes",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Transits conservent tonnes et arrivées",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Stocks mensuels ordinaires non négatifs",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Bilans des 12 mois exacts",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "13 budgets hydrologiques saisonniers non négatifs",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Paniers physiques conservent énergie et publient leur déficit",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Masse alimentaire géants supérieure au seuil 8 kg/j",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Sindile : aucune viande/poisson/gibier servi",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "13 budgets publics proposés non déficitaires",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Quota ferroviaire net bauronite respecté",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Tous 118 profils ont un bilan ou une référence relative",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Matrices emplois–espèces : chaque ligne rejoint le métier actif",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Matrices sociales : marges résidentes et statut par strate conservés",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Produits naturels : chaque calorie classée une fois",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Huile et tourteaux : énergie et masse de pressage conservées",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Masses consommées emploient les densités des produits réels",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Cargaisons huile/grain : masse et énergie sans tonnes équivalent déguisées",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Équipages et conducteurs partagés plafonnés au pool de métiers",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Techniciens ferroviaires qualifiés bornés et retirés des aides",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Agents agricoles identiques aux affectations exclusives du registre",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Taii : entretien minimum source 8 h par mois borne le stock",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Hydrologie : recharge annuelle indépendante des besoins et du plafond",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Coût du pompage débité au prix source de bauronite",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Scénarios de stress réutilisent les mêmes stocks initiaux ordinaires",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Stress route : liaison utilisée fermée réellement durant 90 jours",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne empire",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants empire",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne freelands",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants freelands",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne bennet",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants bennet",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne kolbjorn",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants kolbjorn",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne magocracy",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants magocracy",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne seashores",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants seashores",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne sindile",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants sindile",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne stravian",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants stravian",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne storm",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants storm",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne taiimaku",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants taiimaku",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne kepesh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants kepesh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne tsvetan",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants tsvetan",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Conservation interne yama",
+      "passed": true,
+      "details": null
+    },
+    {
+      "name": "Demande territoriale = somme des habitants yama",
+      "passed": true,
+      "details": null
+    }
+  ],
+  "food_balance_scenario_closed": true,
+  "all_food_numerical_checks_passed": true,
+  "baseline_demographic_checks_version": "V2 conservée avant réaffectation ; invariants modifiés recomputés dans food_v3_checks",
+  "explorer_checks": {
+    "version": "3",
+    "javascript_syntax_and_execution": true,
+    "initialization": true,
+    "search": true,
+    "base_view": true,
+    "zero_filter": true,
+    "gbagede_only_two_jobs": true,
+    "mystical_no_civilian_denominator": true,
+    "csv_export": true,
+    "nobles_commoners_elite_filters": true,
+    "unknown_nobility_display": true,
+    "downtown_temple_rule": true,
+    "positive_and_zero_justifications": true,
+    "all_16_regions": true,
+    "all_118_profiles": true,
+    "all_social_conditional_views": true,
+    "no_network_dependency": true,
+    "visual_render_checked": false,
+    "food_v3": {
+      "all_118_panels": true,
+      "absolute_profiles": 109,
+      "relative_profiles": 9,
+      "all_118_food_csv": true,
+      "real_crlf_utf8": true,
+      "monthly_stocks": true,
+      "product_nutrition_limits": true,
+      "finance": true,
+      "stress": true,
+      "relative_reference_only": true,
+      "mystical_without_false_population": true
+    }
+  }
+}

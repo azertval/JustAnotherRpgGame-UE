@@ -45,7 +45,9 @@ FORBIDDEN_NAMES = ('lecture-corpus.html',)
 # chaînes n'en approche pas.
 MIN_PAGES = 15
 MIN_CHARS = 40_000
-EMBEDDED_PAGES_RE = re.compile(r'"pages"\s*:\s*\[')
+# Une liste `pages` de CHAÎNES : les pages d'un livre. Une liste de numéros de page (les renvois
+# d'une fiche vers ses sources) n'en est pas une.
+EMBEDDED_PAGES_RE = re.compile(r'"pages"\s*:\s*\[\s*"')
 EMBEDDED_MIN_BYTES = 200_000
 
 
@@ -125,6 +127,8 @@ def auto_test():
                              % (page * 60)))
         assert problem(write('catalogue.json', json.dumps({'entries': [{'id': 'a'}] * 400}))) is None
         assert problem(write('page.html', '<p>%s</p>' % (page * 60))) is None
+        assert problem(write('renvois.html', '<script>{"pages":[210,211]}</script>%s'
+                             % (page * 60))) is None
         assert problem(write('tronque.json', '[')) is None
     print('OK : auto-test du garde-fou des livres sources.')
 

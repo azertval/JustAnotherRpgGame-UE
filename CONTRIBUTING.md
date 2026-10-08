@@ -123,10 +123,13 @@ rejoue chaque nuit sur le poste de référence et à la demande (onglet *Actions
 - **CI** (`ci.yml`) et **CHANGELOG** (`changelog.yml`) : sur chaque PR vers `main`. Un nouveau push
   annule le run précédent ; tout workflow se relance à la main (`workflow_dispatch`).
 - **Unreal** (`unreal.yml`) : la nuit et à la demande, sur le poste de référence.
+- **Site** (`docs.yml`) : à chaque merge sur `main`, publie sur la branche **`gh-pages`** les pages
+  de documentation, l'étude des métiers et le site de planification (`/planning/`). Le voir en
+  local : `python Documentation/outils/build_docs_site.py --out build/site`.
 - Les actions GitHub sont **épinglées par SHA** de commit, le tag en commentaire ; **Dependabot**
   (`.github/dependabot.yml`) propose leur mise à jour chaque semaine, en une PR, ainsi que celle des
   dépendances Python (`uv.lock`).
 
 Ne sont pas encore refaits dans ce dépôt, et le seront par leur lot : la publication d'une version
-(empaquetage du jeu, notes de version), le site de documentation, les tests d'automatisation du
-moteur et leurs captures (LOT-1014, LOT-1023 ; voir [`PASSATION.md`](PASSATION.md)).
+(empaquetage du jeu, notes de version), la référence du code et la page qualité du site, les tests
+d'automatisation du moteur et leurs captures (LOT-1014, LOT-1023 ; voir [`PASSATION.md`](PASSATION.md)).
