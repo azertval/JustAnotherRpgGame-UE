@@ -20,7 +20,7 @@ Le site du projet est publié à chaque merge sur `main` : **<https://azertval.g
 
 | Partie | La question | En ligne | Dans le dépôt |
 |---|---|---|---|
-| Guide | **Comment** ça marche, et comment s'en servir ? | [Guide](https://azertval.github.io/JustAnotherRpgGame-UE/Guide/index.html) · [Manuel du joueur](https://azertval.github.io/JustAnotherRpgGame-UE/Guide/Manuel/index.html) | [`Documentation/Guide/`](Documentation/Guide/README.md) |
+| Guide | **Comment** ça marche, et comment s'en servir ? | [Guide](https://azertval.github.io/JustAnotherRpgGame-UE/Guide/index.html) | [`Documentation/Guide/`](Documentation/Guide/README.md) |
 | Spécifications | **Quoi**, et **pourquoi** ? Les exigences `EX-…` | [Spécifications](https://azertval.github.io/JustAnotherRpgGame-UE/Specification/index.html) | [`Documentation/Specification/`](Documentation/Specification/README.md) |
 | Cahier de test | Qu'est-ce qui est **vérifié** ? | [Cahier de test](https://azertval.github.io/JustAnotherRpgGame-UE/CahierTest/index.html) | [`Documentation/CahierTest/`](Documentation/CahierTest/README.md) |
 | Métiers de Tanares | Quels métiers, quelles populations, et pourquoi ces choix ? | [Étude](https://azertval.github.io/JustAnotherRpgGame-UE/Metiers/index.html) · [Explorateur interactif](https://azertval.github.io/JustAnotherRpgGame-UE/Metiers/explorateur.html) | [`Documentation/Metiers/`](Documentation/Metiers/README.md) |
@@ -61,14 +61,31 @@ encore republiées. Contribuer : [CONTRIBUTING.md](CONTRIBUTING.md).
 # Les tests de Core hors du moteur (CMake + Ninja + GoogleTest, environnement MSVC x64 établi par le script)
 pwsh scripts/build.ps1
 
-# Le projet Unreal : la cible d'éditeur, puis le contrôle du contenu, sans fenêtre
+# Le projet Unreal : la cible d'éditeur, le contenu, les tests du moteur, une capture comparée — sans fenêtre
 pwsh scripts/build.ps1 -Unreal
 ```
 
-Le second enchaîne `Build.bat JustAnotherRpgGameEditor Win64 Development` et
-`UnrealEditor-Cmd.exe JustAnotherRpgGame.uproject -run=JadgContentCheck -nullrhi` : le commandlet
-lit les catalogues de `Source/Elements/Rpg` par les lecteurs de Core, construit les fiches du
-groupe préformé et sort en 1 à la première erreur de contenu.
+Le second enchaîne cinq temps et sort en 1 à la première erreur :
+
+1. `Build.bat JustAnotherRpgGameEditor Win64 Development` ;
+2. le commandlet `JadgContentCheck`, qui lit les catalogues de `Source/Elements/Rpg` par les
+   lecteurs de Core et construit les fiches du groupe préformé ;
+3. les tests d'automatisation du moteur (`Automation RunTests Jadg`, sans processeur graphique) :
+   une carte vide s'ouvre sous l'instance et le mode de jeu, les quatre fiches du groupe préformé
+   ont les valeurs de leur page, les options du jeu atteignent le moteur ;
+4. la carte de la scène du socle, reconstruite par script depuis
+   `Source/Elements/Scenes/socle-1014.json` — elle ne lit aucun kit d'assets ;
+5. ses captures à midi et à 22 h, prises hors écran, puis comparées à tolérance et par blocs à
+   leur référence (`Source/Test/Fixtures/Captures/socle-1014/`).
+
+`-NoCapture` saute les temps 4 et 5 sur un poste sans processeur graphique ; `-Scene porte-1012
+-Capture` construit et capture la scène de la porte à la place ; `-UpdateReference` réécrit la
+référence d'une image qui a changé exprès. Le moteur doit être la version que `ci.yml` épingle
+(`UNREAL_ENGINE_VERSION`).
+
+Les **options du jeu** — définition, échelle de rendu, qualité des ombres, volume — sont un fichier
+texte, `Source/Elements/Options/options.json`, lu au lancement ; un poste peut porter les siennes
+dans `Saved/Options/options.json`. Le **numéro de version** a une seule source, `VERSION.txt`.
 
 ## Les maillages au maître
 

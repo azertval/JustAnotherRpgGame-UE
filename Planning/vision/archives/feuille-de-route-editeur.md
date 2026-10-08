@@ -345,7 +345,7 @@ livrée s'ouvre et s'enregistre dans l'éditeur sans changer d'un octet (`EX-EDI
 sa retouche par `--apply` : la porte sud et la loge du Colisée (plus aucun chevauchement), les
 boutiques du marché de Martpart, un angle de mur égaré sur le parvis d'Arenarea. La fenêtre ouvre
 enfin l'arbre des sources, et non la copie de la construction ; une nouvelle carte choisit son lieu
-et passe le contrôle telle quelle (`EX-EDIT-077`). Guide : [Faire une carte dans l'éditeur](../../../Documentation/Guide/Manuel/utiliser-l-editeur.md).
+et passe le contrôle telle quelle (`EX-EDIT-077`). Guide : Faire une carte dans l'éditeur.
 
 ### LOT-EDITOR-07 — Contrôle du contenu
 

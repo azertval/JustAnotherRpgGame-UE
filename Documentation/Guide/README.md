@@ -14,14 +14,12 @@ les concepts.
 - Les noms de types et de fonctions écrits avec leur espace de noms (`core::World`,
   `core::ExplorationSession`, …) sont **cliquables** sur le site : ils mènent à la
   [référence du code](../reference/index.html), l'annexe de ce guide (signature, doc détaillée).
-- Le guide s'ouvre sur le [manuel utilisateur](Manuel/README.md) : on comprend mieux un moteur
-  quand on a vu ce qu'il fait tourner.
 - Les liens externes (⧉) pointent vers les **fondements mathématiques/algorithmiques**.
 - Le *quoi* et le *pourquoi* vivent dans les [spécifications](../Specification/README.md) ; ce guide
   couvre le *comment* — y compris les notions de game dev prérequises pour le comprendre.
 - Les pages sont **indépendantes mais s'appuient les unes sur les autres** (voir leurs sections
   « Voir aussi ») : [Mathématiques du moteur](guide-maths.md) pose le vocabulaire (vecteurs, rectangles, unités) réutilisé
-  par [Niveaux : modèle, couches, entités, chargement](guide-niveaux.md) et [Rendu 2D : de la scène à l'écran](guide-rendu.md) ; [Boucle de jeu et pas de temps fixe](guide-boucle.md) et [ECS : entités, composants, systèmes](guide-ecs.md) posent les deux
+  par [Niveaux : modèle, couches, entités, chargement](guide-niveaux.md) et Rendu 2D : de la scène à l'écran ; [Boucle de jeu et pas de temps fixe](guide-boucle.md) et [ECS : entités, composants, systèmes](guide-ecs.md) posent les deux
   piliers d'architecture (déterminisme, données/logique) sur lesquels tout le reste s'appuie. En cas
   de doute sur un terme, remonter à la page qui le définit plutôt que de le supposer connu.
 
@@ -42,13 +40,6 @@ affiche. Cette frontière est ce qui rend le moteur analysable domaine par domai
 
 ## Plan du guide
 
-### Prendre en main
-
-- [Manuel utilisateur](Manuel/README.md) — pour qui **joue** ou **fait des cartes**, sans lire de code :
-  [télécharger et lancer](Manuel/telecharger-et-lancer.md), [jouer](Manuel/jouer.md),
-  [utiliser l'éditeur de cartes](Manuel/utiliser-l-editeur.md),
-  [créer et partager une carte](Manuel/partager-un-niveau.md).
-
 ### Le cœur de simulation (`Core`)
 
 - [Boucle de jeu et pas de temps fixe](guide-boucle.md) — la boucle de jeu et le **pas de temps fixe** (déterminisme).
@@ -61,24 +52,15 @@ affiche. Cette frontière est ce qui rend le moteur analysable domaine par domai
 - [Données, corpus et ressources](guide-donnees.md) — catalogues JSON, schémas, clés d'assets, chaîne d'extraction, localisation.
 - [Journalisation et assertions](guide-journalisation.md) — niveaux, sinks, macros, rapport de plantage.
 
-### La présentation (`HMI`)
+### La présentation
 
-- [Entrées et actions logiques](guide-entrees.md) — clavier, souris et leur traduction en **actions**.
-- [Rendu 2D : de la scène à l'écran](guide-rendu.md) — QRhi, lot de sprites, atlas, caméra, composition de scène isométrique.
-- [Écrans, navigation et boucle de jeu](guide-ecrans.md) — table de transitions, routeur et pile d'écrans QML, pause.
-- [IHM Qt — deux applications, deux technologies](guide-ihm-qt.md) — le jeu en Qt Quick, l'éditeur en Widgets, les vues-modèles.
-- [Concevoir les écrans dans Qt Design Studio](guide-conception-qds.md) — ce qui se modifie sans ouvrir un fichier source.
-- [Système de design et architecture de l'information](guide-design-ihm.md) — jetons, échelle, panneaux, barre d'état.
-- [Audio](guide-audio.md) — moteur Qt Multimedia et réglage du volume.
-
-### L'éditeur de cartes
-
-- [Éditeur de niveaux](guide-editeur.md) — le document, les gestes, le canevas isométrique, le contrôle du contenu, le mode sans fenêtre.
+Les pages qui décrivaient la présentation et l'éditeur de cartes du moteur maison ne sont pas venues
+dans ce dépôt (D-58). Celles du nouveau moteur s'écrivent avec leur lot : la caméra et les entrées
+au LOT-1016, le format de carte au LOT-1018, l'interface au LOT-1020.
 
 ### Construire, vérifier, documenter
 
-- [Build, tests et intégration continue](guide-outils.md) — la chaîne de build, les scripts, les lints, la CI, la page qualité.
-- [Outils de développement du jeu](guide-outils-developpement.md) — le menu de développement (<kbd>F9</kbd>), le lanceur de cartes, la ligne de commande, la racine d'essai, les captures.
+- Construire, tester, la CI : `README.md` et `CONTRIBUTING.md`, à la racine du dépôt.
 - [Écrire la documentation](guide-documentation.md) — le format des pages, les conventions, les figures, la publication.
 
 ### Annexe

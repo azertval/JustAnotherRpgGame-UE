@@ -33,7 +33,7 @@
       "lines": [
         {
           "role": { "fr": "Bibliothèques", "en": "Libraries" },
-          "names": ["Qt 6 (www.qt.io), LGPL v3", "nlohmann/json, MIT"]
+          "names": ["Unreal Engine 5 (www.unrealengine.com), Epic Games", "nlohmann/json, MIT"]
         },
         {
           "role": { "fr": "Licence", "en": "License" },

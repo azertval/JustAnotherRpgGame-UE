@@ -14,16 +14,15 @@ JustAnotherRpgGame est un **fan game non commercial**. Son code est sous **PolyF
 > tierces et les univers dont le jeu s'inspire gardent chacun leur propre régime, listé ci-dessous.
 > Voir un fichier `.cpp` marqué PolyForm ne dit **rien** de la licence d'un `.png` du même dépôt.
 
-Ces mentions sont également affichées **dans le jeu**, à l'écran *Crédits* : un utilisateur qui
-n'ouvrira jamais ce fichier doit tout de même savoir que le jeu embarque Qt sous LGPLv3 et des
-polices sous SIL OFL, et qu'il emprunte à Dungeons & Dragons et à Tanares. La LGPLv3 et la SIL OFL
-l'exigent.
+Ces mentions doivent aussi paraître **dans le jeu**, à l'écran *Crédits* : un utilisateur qui
+n'ouvrira jamais ce fichier doit tout de même savoir que le jeu est construit avec Unreal Engine,
+qu'il embarque des polices sous SIL OFL, et qu'il emprunte à Dungeons & Dragons et à Tanares. Le
+texte de l'écran est dans [`credits.json`](Source/Elements/Credits/credits.json) ; l'écran lui-même
+se refait sur le nouveau moteur (`LOT-1020`).
 
-Compatibilité vérifiée : la **LGPLv3** n'impose rien à la licence d'une application **liée
-dynamiquement** à la bibliothèque, donc Qt et une licence non commerciale cohabitent sans conflit.
-La licence des polices (SIL OFL) et celles des bibliothèques (MIT, BSD 3-Clause, Apache 2.0) sont
-permissives : elles autorisent leur usage dans un projet sous une autre licence, à charge d'en
-conserver les mentions.
+La licence des polices (SIL OFL) et celles des bibliothèques (MIT, BSD 3-Clause) sont permissives :
+elles autorisent leur usage dans un projet sous une autre licence, à charge d'en conserver les
+mentions. Le moteur a son propre contrat, décrit plus bas.
 
 ## Univers, règles et marques
 
@@ -47,44 +46,43 @@ Attribution exigée par la CC BY 4.0 du SRD :
 > SRD 5.1 is licensed under the Creative Commons Attribution 4.0 International License available at
 > <https://creativecommons.org/licenses/by/4.0/legalcode>.
 
-**Pourquoi c'est tenable, et jusqu'où.** Le projet est privé, gratuit et non commercial. Ce statut ne
-vaut **pas** autorisation : la politique de *fan content* de Wizards of the Coast exclut
-explicitement les jeux, même gratuits, et Dragori Games ne publie aucune politique équivalente.
-Toute diffusion publique supposerait donc l'accord écrit de Dragori Games pour Tanares, et de ne
-garder de D&D que le SRD. Un ayant droit qui demande le retrait d'un élément l'obtient.
+**Pourquoi c'est tenable, et jusqu'où.** Le dépôt est public, le projet gratuit et non commercial ;
+aucun livre ni texte extrait d'un livre n'y entre (`EX-CNT-023`), et aucun paquet du jeu n'est
+diffusé. Ce statut ne vaut **pas** autorisation : la politique de *fan content* de Wizards of the
+Coast exclut explicitement les jeux, même gratuits, et Dragori Games ne publie aucune politique
+équivalente. Diffuser le jeu supposerait donc l'accord écrit de Dragori Games pour Tanares, et de
+ne garder de D&D que le SRD. Un ayant droit qui demande le retrait d'un élément l'obtient.
 
 ## Bibliothèques
 
 | Composant | Version | Licence | Mode | Redistribué ? |
 |---|---|---|---|---|
-| [Qt](https://www.qt.io/) | 6.11.2 (`win64_msvc2022_64`) | **LGPLv3** | Provisionné hors dépôt | **Oui** — DLL déployées à côté de l'exécutable (`windeployqt`) |
-| [GoogleTest](https://github.com/google/googletest) | v1.15.2 | BSD 3-Clause | FetchContent | Non — tests seulement |
-| [nlohmann/json](https://github.com/nlohmann/json) | v3.11.3 | MIT | FetchContent | Non — en-têtes compilés dans l'exécutable |
-| [Google Benchmark](https://github.com/google/benchmark) | v1.9.5 | Apache 2.0 | FetchContent, avec `BUILD_BENCHMARKS` | Non — mesures de performance seulement |
-| [aqtinstall](https://github.com/miurahr/aqtinstall) | commit épinglé | MIT | Outil de build | Non |
+| [Unreal Engine](https://www.unrealengine.com/) | 5.8 (`UNREAL_ENGINE_VERSION`, `ci.yml`) | **contrat de licence d'Unreal Engine** (EULA d'Epic Games) | Installé hors dépôt | Pas par ce dépôt ; un jeu empaqueté en embarque le code objet (voir plus bas) |
+| [GoogleTest](https://github.com/google/googletest) | v1.15.2 | BSD 3-Clause | FetchContent (`CMakeLists.txt`) | Non — tests de Core seulement |
+| [nlohmann/json](https://github.com/nlohmann/json) | v3.11.3 | MIT | En-tête unique vendu dans `Source/ThirdParty/nlohmann/`, avec sa licence | **Oui** — le fichier est dans le dépôt, et il est compilé dans le jeu |
 
 Le **chargeur de maillages** (`core::readMeshFile`, `LOT-1003`) lit le format glTF 2.0 binaire
 (`.glb`), spécification ouverte du Khronos Group, sans bibliothèque dédiée : l'enveloppe binaire est
-lue par le code du projet, son bloc JSON par **nlohmann/json**, déjà lié, et l'image incorporée est
-décodée par **Qt** (`QImage`). Qt Quick 3D n'est pas utilisé — il n'est distribué que sous GPLv3 ou
-licence commerciale.
+lue par le code du projet, son bloc JSON par **nlohmann/json**, déjà lié. Dans le jeu, c'est le
+moteur qui importe les maillages et leurs images (Interchange), par les scripts du dépôt.
 
 `DirectX` ne figure pas ici : il provient du **Windows SDK** et relève de sa licence, comme tout
 composant du système d'exploitation.
 
-### Qt et la LGPLv3 — la seule obligation qui pèse réellement
+### Unreal Engine et son contrat de licence
 
-Qt est utilisé sous **LGPLv3**, en **lien dynamique**. C'est ce qui permet de ne pas publier le
-source du jeu. En contrepartie, trois obligations doivent rester vraies, et elles le sont :
+Le jeu est construit avec **Unreal Engine 5** (décision D-48), sous le contrat de licence
+d'Unreal Engine d'Epic Games. Ce que cela veut dire pour ce dépôt :
 
-1. **Le lien reste dynamique.** Les DLL Qt sont déployées à côté de l'exécutable par `windeployqt`,
-   jamais liées statiquement — un utilisateur peut donc les remplacer par sa propre version de Qt.
-2. **L'usage de Qt et sa licence sont mentionnés** — c'est l'objet de ce fichier.
-3. **Aucune modification de Qt n'est distribuée.** Le projet consomme Qt tel quel ; si cela changeait
-   un jour, les sources modifiées devraient être publiées sous LGPLv3.
-
-Passer Qt en lien **statique** invaliderait le point 1 et changerait les obligations du projet : ce
-n'est pas un détail d'optimisation, c'est une décision de licence.
+1. **Le moteur n'est pas dans le dépôt.** Ni ses sources ni ses binaires n'y sont suivis : il
+   s'installe à part, et `scripts/build.ps1 -Unreal` vérifie sa version. Le dépôt ne porte que le
+   code du jeu et les scripts qui pilotent le moteur.
+2. **Les sorties du moteur** (`.uasset`, `.umap`) se régénèrent par script depuis les données du
+   dépôt (D-52).
+3. **Un jeu empaqueté embarque le code objet du moteur.** Les mentions que le contrat demande à un
+   produit distribué (la marque Unreal® et le droit d'auteur d'Epic Games dans les crédits) sont
+   **à relire sur le texte du contrat** au premier paquet (`LOT-1023`) : aucun paquet n'est
+   produit avant.
 
 ## Ressources
 
@@ -105,6 +103,4 @@ partout où elles sont redistribuées.
 
 Ce fichier se met à jour **avec** la dépendance qu'il décrit, jamais après coup : ajouter une
 bibliothèque ou une ressource tierce sans l'inscrire ici, c'est perdre l'information au moment où
-elle est encore connue. Le tableau des dépendances de build vit en double dans
-[`External/README.md`](External/README.md), qui en donne le *mode de provisionnement* ; ici, seule
-la **licence** compte.
+elle est encore connue.

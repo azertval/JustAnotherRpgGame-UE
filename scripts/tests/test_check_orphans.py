@@ -99,6 +99,38 @@ def test_l_atlas_cite_depuis_la_racine_des_assets(tmp_path):
     assert O.check_assets(assets, CODE, atlas) == []
 
 
+def test_un_manifeste_cite_aussi_depuis_la_racine_des_assets(tmp_path):
+    """Le manifeste des maîtres nomme ses pièces depuis la racine, et ses doublons écartés ne citent rien."""
+    assets = kit(tmp_path)
+    ecrire(assets / 'Master/manifest.json', {
+        'pieces': [{'file': 'Master/Npc/guard.glb', 'source': 'Npc/Meshy_guard.glb'}],
+        'duplicates': [{'file': 'Npc/Meshy_guard (1).glb'}]})
+    ecrire(assets / 'Master/Npc/guard.glb')
+    assert O.check_assets(assets, CODE) == []
+    (assets / 'Master/Npc/guard.glb').unlink()
+    (error,) = O.check_assets(assets, CODE)
+    assert 'fichier absent Master/Npc/guard.glb' in error
+
+
+def test_une_piece_en_attente_de_son_lecteur_n_est_pas_orpheline(tmp_path):
+    assets = kit(tmp_path)
+    ecrire(assets / 'Fonts/Attendue.ttf')
+    assert len(O.check_assets(assets, CODE)) == 1
+    ecrire(assets / 'awaiting.json', {'awaiting': [{'file': 'Fonts/Attendue.ttf', 'lot': 'LOT-1020'}]})
+    planning = tmp_path / 'Planning'
+    fiche = ecrire(planning / 'versions/v0/lots/LOT-1020-interface.md', '+++\nstatut = "a-faire"\n+++\n')
+    code = CODE + ' "awaiting.json"'
+    assert O.check_assets(assets, code, planning=planning) == []
+    # Le lot livré, la pièce n'attend plus : son lecteur la cite, ou elle se supprime.
+    ecrire(fiche, '+++\nstatut = "livre"\n+++\n')
+    (error,) = O.check_assets(assets, code, planning=planning)
+    assert 'Fonts/Attendue.ttf attend le LOT-1020, qui est livré' in error
+    # Une entrée sans lot n'attend rien.
+    ecrire(assets / 'awaiting.json', {'awaiting': [{'file': 'Fonts/Attendue.ttf'}]})
+    (error,) = O.check_assets(assets, code, planning=planning)
+    assert "n'attend aucun lot" in error
+
+
 def depot(tmp_path):
     scripts = tmp_path / 'scripts'
     ecrire(scripts / 'checks/check_a.py', 'import helper\n')
@@ -147,6 +179,50 @@ def test_l_histoire_n_appelle_rien(tmp_path):
     ecrire(tmp_path / 'Documentation/Guide/guide.md', 'python scripts/neuf.py')
     text = O.callers(tmp_path)
     assert 'neuf.py' in text and 'vieux.py' not in text
+
+
+def projet(tmp_path):
+    """Un dépôt dont deux scripts et une description de scène produisent des sorties du moteur."""
+    ecrire(tmp_path / 'scripts/maps/build_scene.py', 'KIT_ROOT = "/Game/Kit"\nCUBE = "/Game/Scenes/Common/T_White"\n')
+    ecrire(tmp_path / 'scripts/assets/build_manifest.py', 'FAMILIES = {"npc": "/Game/Master/Npc"}\n')
+    ecrire(tmp_path / 'scripts/tests/test_build_scene.py', 'assert "/Game/Essai/SM_Test"\n')
+    ecrire(tmp_path / 'Source/Elements/Scenes/porte.json', {'map': '/Game/Maps/Porte'})
+    content = tmp_path / 'Content'
+    ecrire(content / 'Kit/Regions/arena/af-pyre/StaticMeshes/SM_af-pyre.uasset')
+    ecrire(content / 'Master/Npc/guard/StaticMeshes/SM_Npc_Guard.uasset')
+    ecrire(content / 'Scenes/Common/T_White.uasset')
+    ecrire(content / 'Maps/Porte.umap')
+    return content
+
+
+def test_une_sortie_du_moteur_citee_par_son_script_n_est_pas_orpheline(tmp_path):
+    content = projet(tmp_path)
+    cited = O.content_citations(tmp_path)
+    assert cited == {'/Game/Kit', '/Game/Scenes/Common/T_White', '/Game/Master/Npc', '/Game/Maps/Porte'}
+    assert O.check_content(content, cited) == []
+
+
+def test_un_uasset_qu_aucun_script_ne_produit_est_une_erreur(tmp_path):
+    content = projet(tmp_path)
+    ecrire(content / 'Developers/auteur/BP_Essai.uasset')
+    ecrire(content / 'Maps/Porte_Essai.umap')       # un nom plus long n'est pas la carte citée
+    ecrire(content / 'Scenes/Common/T_Whiter.uasset')
+    ecrire(content / 'Essai/SM_Test.uasset')        # un test n'est pas un script qui produit
+    errors = O.check_content(content, O.content_citations(tmp_path))
+    assert sorted(e.split(' : ')[0] for e in errors) == [
+        'Content/Developers/auteur/BP_Essai.uasset', 'Content/Essai/SM_Test.uasset',
+        'Content/Maps/Porte_Essai.umap', 'Content/Scenes/Common/T_Whiter.uasset']
+
+
+def test_un_fichier_qui_n_est_pas_une_sortie_du_moteur_n_a_rien_a_faire_sous_content(tmp_path):
+    content = projet(tmp_path)
+    ecrire(content / 'Kit/notes.txt')
+    (error,) = O.check_content(content, O.content_citations(tmp_path))
+    assert error.startswith('Content/Kit/notes.txt')
+
+
+def test_sans_dossier_content_il_n_y_a_rien_a_verifier(tmp_path):
+    assert O.check_content(tmp_path / 'Content', set()) == []
 
 
 def test_le_depot_n_a_pas_de_script_orphelin():

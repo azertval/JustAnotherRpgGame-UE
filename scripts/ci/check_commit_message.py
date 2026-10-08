@@ -56,7 +56,7 @@ def auto_test():
         'fix: corriger le ratio',
         'ci!: changer le déclencheur',
         'build(deps): monter GoogleTest',
-        'LOT-86 — Phase 7 : suppression du chemin QML déclaratif',
+        'LOT-1014 — Le socle : options du jeu en fichier texte',
         "Merge branch 'main' into ci/phase-1",
         'Revert "feat: x"',
         'fixup! ci: refonte phase 1',

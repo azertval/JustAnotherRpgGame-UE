@@ -128,7 +128,7 @@ vigueur ; voici ce qui les tient aujourd'hui.
 | `EX-REN-030` | Le menu principal en Qt Quick (`MainMenu.qml`) |
 | `EX-GP-014` | Le déplacement de `core::ExplorationSession`, résolu axe par axe contre les tuiles solides |
 | `EX-NFR-001` | Le compteur de diagnostic des options ; la cadence se constate, elle ne se vérifie pas en CI |
-| `EX-EDIT-020`, `EX-EDIT-021`, `EX-EDIT-022` | `LevelEditor.exe`, livré à côté du jeu ; les cartes dans `Source/Elements/Levels/` ; le guide [Créer et partager une carte](../../../../../Documentation/Guide/Manuel/partager-un-niveau.md) |
+| `EX-EDIT-020`, `EX-EDIT-021`, `EX-EDIT-022` | `LevelEditor.exe`, livré à côté du jeu ; les cartes dans `Source/Elements/Levels/` ; le guide Créer et partager une carte |
 
 ## Tags du jeu d'origine
 

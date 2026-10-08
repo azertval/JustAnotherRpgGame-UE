@@ -15,7 +15,7 @@ installé. Tous les contrôles s'exécutent même après un échec, comme en CI,
 donne le verdict de chacun.
 
 Ce que ce script ne rejoue pas : les builds, les tests, clang-tidy et la documentation — ils
-demandent MSVC, Qt, LLVM ou Doxygen, et passent par `scripts/build.ps1`.
+demandent MSVC ou Unreal Engine, et passent par `scripts/build.ps1`.
 
 L'interpréteur courant doit être celui de `.venv/` (phase 4) : `uv run scripts/check.py` le garantit,
 et installe au passage les versions de `uv.lock`, celles du runner.

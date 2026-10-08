@@ -69,7 +69,7 @@ initializers*), et regroupe :
 
 C'est l'objet que le chargeur produit et que le reste du moteur (exploration, combat, rendu)
 consomme en lecture seule : un `Level` n'a **aucun** mutateur. L'édition passe par un type
-distinct, `core::LevelDraft` ([Éditeur de niveaux](guide-editeur.md)).
+distinct, `core::LevelDraft` (Éditeur de niveaux).
 
 ### Couches : ce qu'on voit n'est pas ce qui bloque
 
@@ -191,7 +191,7 @@ ne lit que les couches visuelles à `floor == 0` — un étage de mur ou un toit
 rez, et c'est le rez qui dit si l'on passe. Un personnage ne monte pas encore à l'étage : les
 terrasses et remparts praticables relèvent de l'`elevation` par case, toujours réservée
 (`EX-LVL-024`). Ce que l'étage change au **rendu** — l'élévation, le rang de tri, l'effacement d'un
-toit qui masque le héros — est décrit dans [Rendu 2D : de la scène à l'écran](guide-rendu.md).
+toit qui masque le héros — est décrit dans Rendu 2D : de la scène à l'écran.
 
 ### Entités et propriétés libres
 
@@ -365,6 +365,6 @@ la déduction est un geste d'**édition**, la lecture reste un simple accès.
 - `core::LevelLoader`, `core::LevelLoadResult`, `core::LevelWriter`, `core::MAX_LEVEL_SIDE`,
   `core::applyVariant`, `core::findVariantBase`.
 - `core::ExplorationSession`, `core::WorldTravel`, `core::knownEntityKinds`.
-- [Éditeur de niveaux](guide-editeur.md) — le brouillon mutable, qui repasse par ce chargeur pour valider.
-- [Écrans, navigation et boucle de jeu](guide-ecrans.md) — les écrans du jeu qui mettent une carte à l'écran.
+- Éditeur de niveaux — le brouillon mutable, qui repasse par ce chargeur pour valider.
+- Écrans, navigation et boucle de jeu — les écrans du jeu qui mettent une carte à l'écran.
 - [`niveaux.md`](../Specification/niveaux.md) — le format de carte et ses exigences.

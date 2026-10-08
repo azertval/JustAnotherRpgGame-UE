@@ -42,9 +42,11 @@ public class JustAnotherRpgGame : ModuleRules
 		// système pour que ses avertissements ne remontent pas.
 		PublicSystemIncludePaths.Add(Path.Combine(ModuleDirectory, "..", "ThirdParty", "nlohmann", "include"));
 
-		// Le numéro de version a une seule source : ici, jusqu'à ce que `scripts/release`
-		// le reprenne (il venait de `project(... VERSION ...)` dans la construction CMake).
-		PublicDefinitions.Add("JADG_VERSION=\"0.0.3\"");
+		// Le numéro de version a une seule source, `VERSION.txt` à la racine du dépôt : la
+		// construction CMake des tests de Core lit le même fichier.
+		string VersionFile = Path.GetFullPath(Path.Combine(ModuleDirectory, "..", "..", "VERSION.txt"));
+		ExternalDependencies.Add(VersionFile);
+		PublicDefinitions.Add("JADG_VERSION=\"" + File.ReadAllText(VersionFile).Trim() + "\"");
 
 		// AIModule et NavigationSystem : la marche au clic sur le maillage de navigation (LOT-1012) ;
 		// RenderCore et RHI : les temps de trame que la mesure de cadence relève.

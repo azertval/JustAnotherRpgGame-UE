@@ -21,7 +21,7 @@ dependencies = []
 
 [dependency-groups]
 dev = [
-    # Contrats des catalogues RPG et du cahier des assets (check_rpg_data, check_assets_brief).
+    # Contrats des catalogues RPG (check_rpg_data).
     "jsonschema==4.26.0",
     # Tests des scripts eux-mêmes (scripts/tests).
     "pytest==9.1.1",

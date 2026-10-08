@@ -94,4 +94,4 @@ aucun lot n'est donc pas une exigence orpheline.
 > (frontière simulation ↔ rendu) et `EX-ARCH-050` (rendu au travers de QRhi) sont **inchangées** :
 > le portage déplace l'hôte du rendu (`QRhiWidget` → `QQuickRhiItem`), jamais sa cible. Voir
 > [`interface-ihm.md`](interface-ihm.md) §11 (`EX-IHM-100` → `EX-IHM-105`) et
-> [Concevoir les écrans dans Qt Design Studio](../Guide/guide-conception-qds.md).
+> Concevoir les écrans dans Qt Design Studio.

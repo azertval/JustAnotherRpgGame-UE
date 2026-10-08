@@ -649,7 +649,7 @@ quelle que soit la faute d'extraction.
 
 `Core/Rpg/` ne dépend ni de Qt, ni de l'ECS, ni du rendu (`EX-NFR-010`) : il compile et se teste
 seul. Ce que le jeu en affiche passe par deux couches décrites avec
-[l'IHM Qt](guide-ihm-qt.md) :
+l'IHM Qt :
 
 - une fonction **pure** `identifiant → texte` par écran, sans Qt ni disque —
   `hmi::characterSheetValues` (`Source/HMI/Presentation/CharacterSheetValues.h`, `LOT-38`) et
@@ -671,7 +671,7 @@ seul. Ce que le jeu en affiche passe par deux couches décrites avec
 Les deux vues-modèles chargent le même personnage de démonstration par
 `hmi::loadDemonstrationState`, avec ses catalogues, en journalisant chaque manque. Les écrans
 eux-mêmes — leur table, leur navigation, leur place dans la pile — sont décrits avec
-[les écrans et la boucle de jeu](guide-ecrans.md).
+les écrans et la boucle de jeu.
 
 Trois autres écrans du jeu portent des mots de cette page sans encore en lire les briques. L'écran
 **Compétences** (`Skills.qml`) est celui des sorts : il pose les huit écoles de `core::MagicSchool`,
@@ -721,7 +721,7 @@ prix en cuivre des catalogues et la bourse de `core::Inventory`, modulés par la
   et d'une fiche.
 - [Données, corpus et ressources](guide-donnees.md) — les catalogues de `Source/Elements/Rpg/`,
   leurs schémas et la chaîne d'extraction qui les produit.
-- [IHM Qt](guide-ihm-qt.md) et [Écrans, navigation et boucle de jeu](guide-ecrans.md) — les
+- IHM Qt et Écrans, navigation et boucle de jeu — les
   vues-modèles et les écrans qui montrent la fiche et l'inventaire.
 - [`regles-d20.md`](../Specification/regles-d20.md), [`rpg.md`](../Specification/rpg.md),
   [`inventaire.md`](../Specification/inventaire.md), [`contenu.md`](../Specification/contenu.md) —

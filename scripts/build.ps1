@@ -8,23 +8,43 @@
     - Par défaut, les tests de Core HORS du moteur : CMake + Ninja + GoogleTest sur
       Source/JustAnotherRpgGame/Core, dans un environnement MSVC x64 que le script établit lui-même
       (vswhere, puis vcvars64.bat : une « Developer PowerShell » démarre en x86).
-    - Avec -Unreal, le projet du moteur : UnrealBuildTool construit la cible d'éditeur, puis
-      UnrealEditor-Cmd lance le commandlet JadgContentCheck, qui lit les données de contenu par les
-      lecteurs de Core et compte ses erreurs. Le moteur est trouvé par l'association du .uproject
-      (registre HKCU\Software\Epic Games\Unreal Engine\Builds), ou par -EnginePath.
+    - Avec -Unreal, le projet du moteur, en cinq temps :
+        1. UnrealBuildTool construit la cible d'éditeur ;
+        2. le commandlet JadgContentCheck lit les données de contenu par les lecteurs de Core et
+           compte ses erreurs ;
+        3. les tests d'automatisation du moteur (Jadg.*) tournent sans processeur graphique, et
+           leur rapport est relu : aucun échec, aucun test non lancé, au moins un test passé ;
+        4. la carte d'une scène est reconstruite par script depuis sa description ;
+        5. le jeu est lancé hors écran sur cette carte, ses captures sont prises, puis comparées
+           à tolérance à leur référence si la scène en a une (Source/Test/Fixtures/Captures/).
+      Sans -Scene, la scène est celle du socle (socle-1014) : elle ne lit aucun kit d'assets, ses
+      captures ont une référence, et les temps 4 et 5 se font d'office. -NoCapture les saute, sur
+      un poste sans processeur graphique.
+      Le moteur est trouvé par l'association du .uproject (registre HKCU\Software\Epic Games\
+      Unreal Engine\Builds), ou par -EnginePath ; sa version doit être celle que ci.yml épingle
+      (UNREAL_ENGINE_VERSION).
 
 .PARAMETER Unreal
-    Construire le projet Unreal et lancer le commandlet de contrôle du contenu.
+    Construire le projet Unreal, contrôler le contenu, lancer les tests d'automatisation, puis
+    construire la scène du socle et comparer ses captures à leur référence.
 
 .PARAMETER Scene
-    Avec -Unreal : construire ensuite la carte de cette description de scène
+    Avec -Unreal : construire la carte de cette description de scène
     (Source/Elements/Scenes/<Scene>.json) par scripts/maps/build_scene_unreal.py, sans fenêtre
-    (LOT-1012).
+    (LOT-1012), à la place de celle du socle. Ses captures ne se prennent qu'avec -Capture.
 
 .PARAMETER Capture
     Avec -Scene : lancer ensuite le jeu hors écran sur cette carte, prendre les captures aux
     cadrages et aux heures de la description, mesurer la cadence, et vérifier que chaque image est
     écrite. Sorties dans Saved/Captures/<Scene>/. Demande un processeur graphique.
+
+.PARAMETER NoCapture
+    Avec -Unreal, sans -Scene : ne pas construire la scène du socle ni prendre ses captures.
+
+.PARAMETER UpdateReference
+    Avec des captures : réécrire leur référence (les images de blocs de
+    Source/Test/Fixtures/Captures/<Scene>/) au lieu de les y comparer. Pour une image qui a changé
+    exprès ; les vignettes se relisent dans la PR.
 
 .PARAMETER MeasureSeconds
     Durée de la mesure de cadence, par heure (défaut : 10 s, caméra en mouvement).
@@ -48,7 +68,8 @@
 
 .EXAMPLE
     pwsh scripts/build.ps1 -Unreal
-    Construit l'éditeur du projet et vérifie le contenu, sans fenêtre.
+    Construit l'éditeur du projet, vérifie le contenu, lance les tests du moteur, reconstruit la
+    carte du socle et compare ses captures à leur référence, sans fenêtre.
 
 .EXAMPLE
     pwsh scripts/build.ps1 -Unreal -Scene porte-1012 -Capture
@@ -59,6 +80,8 @@ param(
     [switch]$Unreal,
     [string]$Scene,
     [switch]$Capture,
+    [switch]$NoCapture,
+    [switch]$UpdateReference,
     [int]$MeasureSeconds = 10,
     [string]$EnginePath,
     [ValidateSet('Development', 'DebugGame', 'Debug')]
@@ -75,6 +98,25 @@ $uproject = Join-Path $root 'JustAnotherRpgGame.uproject'
 function Fail([string]$message) {
     Write-Error $message
     exit 1
+}
+
+# La scène que -Unreal construit et capture d'office : elle ne lit aucun kit d'assets (LOT-1014).
+$SocleScene = 'socle-1014'
+
+function Get-Python {
+    # L'environnement du dépôt (uv sync) s'il existe : ses versions sont celles de uv.lock.
+    $venv = Join-Path $root '.venv\Scripts\python.exe'
+    if (Test-Path $venv) { return $venv }
+    return 'python'
+}
+
+function Get-PinnedEngineVersion {
+    # Une version par outil, écrite dans le bloc env: de ci.yml et nulle part ailleurs.
+    $ci = Get-Content (Join-Path $root '.github\workflows\ci.yml') -Encoding UTF8
+    foreach ($line in $ci) {
+        if ($line -match '^\s+UNREAL_ENGINE_VERSION:\D*([0-9.]+)') { return $Matches[1] }
+    }
+    Fail 'UNREAL_ENGINE_VERSION introuvable dans .github/workflows/ci.yml.'
 }
 
 function Find-VisualStudio {
@@ -116,6 +158,21 @@ if ($Unreal) {
         if (-not (Test-Path $tool)) { Fail "Outil du moteur introuvable : $tool" }
     }
 
+    # Le moteur trouvé est celui que le dépôt épingle : une autre version construit peut-être,
+    # mais ne rend ni n'importe pareil.
+    $pinned = Get-PinnedEngineVersion
+    $installed = Get-Content (Join-Path $EnginePath 'Engine\Build\Build.version') -Raw | ConvertFrom-Json
+    $found = "$($installed.MajorVersion).$($installed.MinorVersion)"
+    if ($found -ne $pinned) {
+        Fail "Moteur $found.$($installed.PatchVersion) sous $EnginePath : le dépôt épingle Unreal Engine $pinned (UNREAL_ENGINE_VERSION, ci.yml)."
+    }
+    Write-Host "Unreal Engine $found.$($installed.PatchVersion) : $EnginePath" -ForegroundColor DarkGray
+
+    if (-not $Scene -and -not $NoCapture) {
+        $Scene = $SocleScene
+        $Capture = $true
+    }
+
     Write-Host "== UnrealBuildTool : JustAnotherRpgGameEditor Win64 $Configuration ==" -ForegroundColor Cyan
     & $build JustAnotherRpgGameEditor Win64 $Configuration -Project="$uproject" -WaitMutex -NoHotReload
     if ($LASTEXITCODE -ne 0) { Fail "La construction du moteur a échoué (code $LASTEXITCODE)." }
@@ -124,14 +181,41 @@ if ($Unreal) {
     & $editorCmd "$uproject" -run=JadgContentCheck -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
     if ($LASTEXITCODE -ne 0) { Fail "Le contrôle du contenu a échoué (code $LASTEXITCODE)." }
 
+    Write-Host "== Tests d'automatisation du moteur : Jadg (sans fenêtre) ==" -ForegroundColor Cyan
+    $report = Join-Path $root 'Saved\Automation\Jadg'
+    if (Test-Path $report) { Remove-Item -Recurse -Force $report }
+    & $editorCmd "$uproject" '-ExecCmds=Automation RunTests Jadg; Quit' "-ReportExportPath=$report" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
+    $automationExit = $LASTEXITCODE
+    $index = Join-Path $report 'index.json'
+    if (-not (Test-Path $index)) { Fail "Les tests d'automatisation n'ont pas écrit leur rapport (code $automationExit) : $index" }
+    $results = Get-Content $index -Raw -Encoding UTF8 | ConvertFrom-Json
+    foreach ($test in $results.tests) {
+        $colour = if ($test.state -ne 'Success') { 'Red' } elseif ($test.warnings -gt 0) { 'Yellow' } else { 'Green' }
+        Write-Host "  $($test.state.PadRight(8)) $($test.fullTestPath)" -ForegroundColor $colour
+        foreach ($entry in $test.entries) {
+            if ($entry.event.type -ne 'Info') { Write-Host "             $($entry.event.type) : $($entry.event.message)" -ForegroundColor $colour }
+        }
+    }
+    # Un rapport sans test passé serait vert par vacuité : le filtre ne trouverait plus rien.
+    $passed = $results.succeeded + $results.succeededWithWarnings
+    if ($results.failed -ne 0 -or $results.notRun -ne 0 -or $passed -lt 1 -or $automationExit -ne 0) {
+        Fail "Tests d'automatisation : $passed passé(s), $($results.failed) en échec, $($results.notRun) non lancé(s) (code $automationExit). Rapport : $report"
+    }
+    Write-Host "Tests d'automatisation : $passed passé(s), dont $($results.succeededWithWarnings) avec avertissement." -ForegroundColor Green
+
     if ($Scene) {
         $description = Join-Path $root "Source\Elements\Scenes\$Scene.json"
         if (-not (Test-Path $description)) { Fail "Description de scène absente : $description" }
 
         if ($Scene -eq 'porte-1012') {
             # Le groupe du Colisée est une sortie de script : la carte ne se construit pas sur un fichier périmé.
-            & python (Join-Path $root 'scripts\maps\build_gate_scene.py') --check
+            & (Get-Python) (Join-Path $root 'scripts\maps\build_gate_scene.py') --check
             if ($LASTEXITCODE -ne 0) { Fail 'Le groupe du Colisée (colisee.json) est périmé : python scripts/maps/build_gate_scene.py' }
+        }
+        if ($Scene -eq $SocleScene) {
+            # Le repère du socle est une donnée d'essai écrite par script : pas de carte sur un fichier périmé.
+            & (Get-Python) (Join-Path $root 'scripts\assetsGeneration\build_mesh_fixture.py') --check
+            if ($LASTEXITCODE -ne 0) { Fail "Les données d'essai en maillages sont périmées : python scripts/assetsGeneration/build_mesh_fixture.py" }
         }
 
         Write-Host "== Scène « $Scene » : construction de la carte par script (sans fenêtre) ==" -ForegroundColor Cyan
@@ -159,6 +243,21 @@ if ($Unreal) {
             }
             Write-Host "Captures et mesure : $output" -ForegroundColor Green
             Get-Content $measureFile
+
+            # Une scène qui a une référence s'y compare, à tolérance et par blocs ; -UpdateReference la réécrit.
+            $reference = Join-Path $root "Source\Test\Fixtures\Captures\$Scene"
+            $compare = Join-Path $root 'scripts\checks\compare_captures.py'
+            if ($UpdateReference) {
+                Write-Host "== Scène « $Scene » : la référence des captures est réécrite ==" -ForegroundColor Yellow
+                & (Get-Python) $compare --reference $reference --captures $output --update
+                if ($LASTEXITCODE -ne 0) { Fail "La référence des captures n'a pas pu être écrite (code $LASTEXITCODE)." }
+            } elseif (Test-Path (Join-Path $reference 'reference.json')) {
+                Write-Host "== Scène « $Scene » : captures comparées à leur référence ==" -ForegroundColor Cyan
+                & (Get-Python) $compare --reference $reference --captures $output
+                if ($LASTEXITCODE -ne 0) { Fail "Une capture s'écarte de sa référence : $reference" }
+            } elseif ($Scene -eq $SocleScene) {
+                Fail "La scène du socle n'a pas de référence de captures : $reference (-UpdateReference pour l'écrire)."
+            }
         }
     }
     exit 0

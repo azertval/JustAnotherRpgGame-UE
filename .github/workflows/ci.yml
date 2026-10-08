@@ -36,6 +36,10 @@ env:
   UV_VERSION: 0.12.15
   PSSCRIPTANALYZER_VERSION: 1.25.0
   PRE_COMMIT_VERSION: 4.6.2
+  # Le moteur. Aucun job de ce workflow ne le construit : `scripts/build.ps1 -Unreal` refuse une
+  # installation d'une autre version (Engine/Build/Build.version), et `check_tool_pins.py` tient
+  # les deux cibles du projet (`IncludeOrderVersion`) sur la même.
+  UNREAL_ENGINE_VERSION: '5.8'
 
 jobs:
   core-tests:
@@ -101,10 +105,10 @@ jobs:
     #
     # Ne sont PAS repris de l'ancienne CI, parce qu'ils sont rouges tant que leur script n'est pas
     # relu pour le nouveau moteur (PASSATION.md, « Ce qui reste à faire ») : lint_planning et
-    # lint_docs (liens vers le moteur maison), generate_cahier_test (étages de tests restés là-bas),
-    # check_assets_brief (jetons de Tokens.qml), check_orphans (ne connaît pas les .uasset
-    # régénérés). check_map_assets et check_hd_assets lisent les images des kits, publiées sur
-    # l'ancien dépôt, désormais privé : ils se rejouent sur un poste qui a les kits.
+    # lint_docs (liens vers le moteur maison), generate_cahier_test (étages de tests restés
+    # là-bas). check_map_assets et check_hd_assets lisent les images des kits, publiées sur
+    # l'ancien dépôt, désormais privé : ils se rejouent sur un poste qui a les kits, comme la part
+    # « assets » de check_orphans.
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -195,6 +199,14 @@ jobs:
         if: ${{ !cancelled() }}
         run: python3 scripts/checks/check_json_files.py --all
 
+      # D-32 et D-52 : pas de script sans appelant, pas de sortie du moteur qu'aucun script ne
+      # produit. `--sans-kits` : les images des kits ne sont pas sur le runner ; la part « assets »
+      # se rejoue sur le poste (`python scripts/checks/check_orphans.py`).
+      - name: Scripts appeles, sorties du moteur regenerees par script (D-32, D-52)
+        id: orphans
+        if: ${{ !cancelled() }}
+        run: python3 scripts/checks/check_orphans.py --sans-kits
+
       # `test_le_depot_est_conforme` lit les images des kits, absentes du runner (voir l'en-tête).
       - name: Tests des scripts (pytest)
         id: pytest
@@ -218,6 +230,7 @@ jobs:
             Versions d'outils CI / hooks=${{ steps.tool_pins.outcome }}
             Garde-fou binaires=${{ steps.binaries.outcome }}
             JSON valides=${{ steps.json_files.outcome }}
+            Scripts et sorties du moteur=${{ steps.orphans.outcome }}
             Tests des scripts (pytest)=${{ steps.pytest.outcome }}
         run: |
           {

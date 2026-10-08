@@ -17,7 +17,8 @@ Build/
 *.VC.opendb
 *.ipch
 
-# --- Les sorties binaires du moteur (D-52) sont des sorties de script : Git LFS, jamais en clair ---
+# --- Les sorties binaires du moteur (D-52, D-60) : régénérées par script, elles restent sur le poste ---
+/Content/
 # Déclarées par .gitattributes ; `check_binary_files.py` refuse ce qui n'y est pas.
 
 # --- Construction CMake des tests de Core (hors moteur) ---

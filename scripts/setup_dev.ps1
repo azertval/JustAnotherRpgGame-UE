@@ -6,23 +6,26 @@
     Le fil de ci.yml est qu'un contrôle qui ne prédit pas le résultat local ne sert à rien. Ce script
     en tire la conséquence pour le poste (refonte de la chaîne d'outillage, phase 2) : il ne porte
     AUCUNE version. Il lit le bloc `env:` de .github/workflows/ci.yml et compare ce qui est installé
-    à ce que le runner installe, comme check_qt_version_pin.py le fait pour Qt. Monter un outil se
-    fait donc dans ci.yml, et nulle part ailleurs.
+    à ce que le runner installe. Monter un outil se fait donc dans ci.yml, et nulle part ailleurs.
 
     Sans paramètre, il ne modifie rien : il affiche un tableau (outil, version attendue, version
     trouvée) et échoue si un écart existe. Avec -Install, il installe ce qui manque ou diverge :
-      - winget pour LLVM (clang-tidy, clangd), Doxygen et OpenCppCoverage ;
-      - l'archive officielle pour sccache, que winget ne publie pas à la version épinglée ;
       - pip (lanceur `py`) pour pre-commit, clang-format et uv ;
       - le paquet de la PowerShell Gallery pour PSScriptAnalyzer, dans les modules de l'utilisateur ;
     puis crée l'environnement Python du dépôt (`uv sync --locked`, versions de uv.lock) et installe
     les hooks de .pre-commit-config.yaml dans le clone courant.
 
-    Ne sont que vérifiés, jamais installés : Visual Studio (outils C++ x64) et Qt, trop lourds et
-    trop personnels pour un script. Pour Qt, la version attendue est `QT_VERSION`.
+    Ne sont que vérifiés, jamais installés : Visual Studio (outils C++ x64) et Unreal Engine, trop
+    lourds et trop personnels pour un script. Pour le moteur, la version attendue est
+    `UNREAL_ENGINE_VERSION` ; il est cherché comme `scripts/build.ps1 -Unreal` le cherche (par
+    l'association du .uproject dans le registre), ou sous -EnginePath.
 
 .PARAMETER Install
     Installer ou mettre à niveau ce qui ne correspond pas à ci.yml. Accepte -WhatIf.
+
+.PARAMETER EnginePath
+    Racine d'une installation du moteur (ex. « E:\Epic Games\UE_5.8 »), si le registre ne la
+    donne pas.
 
 .EXAMPLE
     powershell -ExecutionPolicy Bypass -File scripts/setup_dev.ps1
@@ -34,7 +37,8 @@
 #>
 [CmdletBinding(SupportsShouldProcess = $true)]
 param(
-    [switch]$Install
+    [switch]$Install,
+    [string]$EnginePath
 )
 
 $ErrorActionPreference = 'Stop'
@@ -60,8 +64,8 @@ function Read-CiEnv {
 }
 
 $ci = Read-CiEnv $ciPath
-$required = 'LLVM_VERSION', 'DOXYGEN_VERSION', 'OPENCPPCOVERAGE_VERSION', 'UV_VERSION',
-            'PSSCRIPTANALYZER_VERSION', 'SCCACHE_VERSION', 'PRE_COMMIT_VERSION', 'QT_VERSION'
+$required = 'LLVM_VERSION', 'UV_VERSION', 'PSSCRIPTANALYZER_VERSION', 'PRE_COMMIT_VERSION',
+            'UNREAL_ENGINE_VERSION'
 foreach ($name in $required) {
     if (-not $ci.ContainsKey($name)) {
         throw "$name introuvable dans le bloc env: de $ciPath : la lecture est à corriger."
@@ -118,10 +122,6 @@ function Get-PipVersion {
     return $null
 }
 
-$sccacheHome = Join-Path $env:LOCALAPPDATA 'Programs\sccache'
-$llvmBin = Join-Path $env:ProgramFiles 'LLVM\bin'
-$occExe = Join-Path $env:ProgramFiles 'OpenCppCoverage\OpenCppCoverage.exe'
-
 $tools = @(
     # Pour un outil qui a un exécutable, c'est la version de l'exécutable APPELÉ qui compte : avec
     # plusieurs Python installés, pip peut répondre pour un autre que celui du PATH.
@@ -157,41 +157,13 @@ $tools = @(
             $exe = Find-Exe 'clang-format'
             if ($exe) { Get-VersionFrom (Invoke-Quiet $exe @('--version')) }
         }
-    },
-    [pscustomobject]@{
-        Name = 'LLVM (clang-tidy, clangd)'; Expected = $ci.LLVM_VERSION; Kind = 'winget'; Package = 'LLVM.LLVM'
-        Detect = {
-            $exe = Find-Exe 'clang-tidy' @((Join-Path $llvmBin 'clang-tidy.exe'))
-            if ($exe) { Get-VersionFrom (Invoke-Quiet $exe @('--version')) }
-        }
-    },
-    [pscustomobject]@{
-        Name = 'Doxygen'; Expected = $ci.DOXYGEN_VERSION; Kind = 'winget'; Package = 'DimitriVanHeesch.Doxygen'
-        Detect = {
-            $exe = Find-Exe 'doxygen'
-            if ($exe) { Get-VersionFrom (Invoke-Quiet $exe @('--version')) }
-        }
-    },
-    [pscustomobject]@{
-        Name = 'OpenCppCoverage'; Expected = $ci.OPENCPPCOVERAGE_VERSION; Kind = 'winget'; Package = 'OpenCppCoverage.OpenCppCoverage'
-        Detect = {
-            $exe = Find-Exe 'OpenCppCoverage' @($occExe)
-            if ($exe) { (Get-Item $exe).VersionInfo.ProductVersion -replace ',\s*', '.' }
-        }
-    },
-    [pscustomobject]@{
-        Name = 'sccache'; Expected = $ci.SCCACHE_VERSION; Kind = 'archive'; Package = 'mozilla/sccache'
-        Detect = {
-            $exe = Find-Exe 'sccache' @((Join-Path $sccacheHome 'sccache.exe'))
-            if ($exe) { Get-VersionFrom (Invoke-Quiet $exe @('--version')) }
-        }
     }
 )
 
 function Test-VersionMatch {
     param([string]$Expected, [string]$Found)
     if (-not $Found) { return $false }
-    # OpenCppCoverage rapporte 0.9.9.0 ou 0.9.9 selon la source : on compare les composantes lues.
+    # Un outil rapporte 1.2.3.0 ou 1.2.3 selon la source : on compare les composantes lues.
     $e = $Expected.Split('.'); $f = $Found.Split('.')
     for ($i = 0; $i -lt [Math]::Max($e.Count, $f.Count); $i++) {
         $a = if ($i -lt $e.Count) { $e[$i] } else { '0' }
@@ -213,36 +185,6 @@ function Install-Tool {
             if ($PSCmdlet.ShouldProcess($spec, 'py -3 -m pip install')) {
                 & $py -3 -m pip install --disable-pip-version-check $spec
                 if ($LASTEXITCODE -ne 0) { throw "pip install $spec : échec ($LASTEXITCODE)." }
-            }
-        }
-        'winget' {
-            $winget = Find-Exe 'winget'
-            if (-not $winget) { throw 'winget introuvable (App Installer, Microsoft Store).' }
-            if ($PSCmdlet.ShouldProcess("$($Tool.Package) $($Tool.Expected)", 'winget install')) {
-                & $winget install --id $Tool.Package --exact --version $Tool.Expected `
-                    --accept-package-agreements --accept-source-agreements --disable-interactivity --force
-                if ($LASTEXITCODE -ne 0) { throw "winget install $($Tool.Package) : échec ($LASTEXITCODE)." }
-            }
-        }
-        'archive' {
-            $version = $Tool.Expected
-            $name = "sccache-v$version-x86_64-pc-windows-msvc"
-            $url = "https://github.com/mozilla/sccache/releases/download/v$version/$name.zip"
-            if ($PSCmdlet.ShouldProcess($url, "Télécharger dans $sccacheHome et l'ajouter au PATH utilisateur")) {
-                $zip = Join-Path $env:TEMP "$name.zip"
-                [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-                Invoke-WebRequest -UseBasicParsing -Uri $url -OutFile $zip
-                $extract = Join-Path $env:TEMP $name
-                if (Test-Path $extract) { Remove-Item -Recurse -Force $extract }
-                Expand-Archive $zip $extract
-                New-Item -ItemType Directory -Force $sccacheHome | Out-Null
-                Copy-Item (Join-Path $extract "$name\sccache.exe") (Join-Path $sccacheHome 'sccache.exe') -Force
-                $userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
-                if (-not $userPath) { $userPath = '' }
-                if (($userPath.Split(';') | Where-Object { $_ -eq $sccacheHome }).Count -eq 0) {
-                    [Environment]::SetEnvironmentVariable('Path', ($userPath.TrimEnd(';') + ";$sccacheHome").TrimStart(';'), 'User')
-                }
-                $env:PATH = "$sccacheHome;$env:PATH"
             }
         }
         'psgallery' {
@@ -279,7 +221,7 @@ foreach ($tool in $tools) {
     }
 }
 
-# Visual Studio et Qt : vérifiés, jamais installés.
+# Visual Studio et Unreal Engine : vérifiés, jamais installés.
 $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
 $vsPath = $null
 if (Test-Path $vswhere) {
@@ -288,12 +230,31 @@ if (Test-Path $vswhere) {
 $rows += [pscustomobject]@{ Outil = 'Visual Studio (C++ x64)'; Attendue = '2022+'
     Trouvee = $(if ($vsPath) { $vsPath } else { '-' }); Verdict = $(if ($vsPath) { 'OK' } else { 'A INSTALLER' }) }
 
-$qtCandidates = @()
-if ($env:QT_ROOT_DIR) { $qtCandidates += $env:QT_ROOT_DIR }
-foreach ($drive in 'C:', 'D:') { $qtCandidates += "$drive\Qt\$($ci.QT_VERSION)\msvc2022_64" }
-$qt = $qtCandidates | Where-Object { Test-Path (Join-Path $_ 'bin\qmake.exe') } | Select-Object -First 1
-$rows += [pscustomobject]@{ Outil = 'Qt (msvc2022_64)'; Attendue = $ci.QT_VERSION
-    Trouvee = $(if ($qt) { $qt } else { '-' }); Verdict = $(if ($qt) { 'OK' } else { 'A INSTALLER' }) }
+# Le moteur : celui que le .uproject associe (registre de l'utilisateur, puis de la machine), comme
+# `scripts/build.ps1 -Unreal` le cherche ; sa version est lue dans Engine/Build/Build.version.
+if (-not $EnginePath) {
+    $association = (Get-Content (Join-Path $repoRoot 'JustAnotherRpgGame.uproject') -Raw | ConvertFrom-Json).EngineAssociation
+    $builds = Get-ItemProperty 'HKCU:\Software\Epic Games\Unreal Engine\Builds' -ErrorAction SilentlyContinue
+    if ($builds -and $builds.PSObject.Properties[$association]) {
+        $EnginePath = $builds.PSObject.Properties[$association].Value
+    }
+    if (-not $EnginePath) {
+        $installed = Get-ItemProperty "HKLM:\SOFTWARE\EpicGames\Unreal Engine\$association" -ErrorAction SilentlyContinue
+        if ($installed) { $EnginePath = $installed.InstalledDirectory }
+    }
+}
+$engineFound = $null
+if ($EnginePath) {
+    $versionFile = Join-Path $EnginePath 'Engine\Build\Build.version'
+    if (Test-Path $versionFile) {
+        $engine = Get-Content $versionFile -Raw | ConvertFrom-Json
+        $engineFound = "$($engine.MajorVersion).$($engine.MinorVersion)"
+    }
+}
+$engineOk = $engineFound -eq $ci.UNREAL_ENGINE_VERSION
+$rows += [pscustomobject]@{ Outil = 'Unreal Engine'; Attendue = $ci.UNREAL_ENGINE_VERSION
+    Trouvee = $(if ($engineFound) { "$engineFound ($EnginePath)" } else { '-' })
+    Verdict = $(if ($engineOk) { 'OK' } elseif ($engineFound) { 'ECART' } else { 'A INSTALLER (ou -EnginePath)' }) }
 
 Write-Host "Versions lues dans $ciPath" -ForegroundColor DarkGray
 $rows | Format-Table -AutoSize | Out-String -Width 200 | Write-Host

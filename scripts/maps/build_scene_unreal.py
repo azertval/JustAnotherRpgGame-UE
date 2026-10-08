@@ -29,7 +29,11 @@ mètres. Elle porte :
 - `characters` : un personnage lié, ses clips de repos et de marche, sa ronde ;
 - `navigation`, `shots`, `daylight` : le volume de navigation, les cadrages de capture, la table
   du jour ;
-- `frameReference` : la pièce de kit sur laquelle le changement de repère se mesure.
+- `frameReference` : la pièce sur laquelle le changement de repère se mesure ;
+- `assetsRoot` (facultatif) : le dossier, relatif au dépôt, où se lisent les maillages de la
+  scène, à la place des kits. La scène du socle (`socle-1014`, LOT-1014) lit ainsi les données
+  d'essai suivies par Git (`Source/Test/Fixtures/Meshes/Assets`) : elle se construit sur un poste
+  sans kit, et ses assets vont sous `/Game/Fixtures/…`.
 
 Ce que le script fait, dans l'ordre :
 
@@ -67,6 +71,7 @@ sys.path.insert(0, str(PROJECT_DIR / "scripts" / "assetsGeneration"))
 import import_master_unreal as master_import  # noqa: E402
 
 KIT_ROOT = "/Game/Kit"
+FIXTURE_ROOT = "/Game/Fixtures"
 AMBIENT_CUBE = "/Game/Scenes/Common/T_AmbientWhite"
 CHARACTER_MATERIAL = "/Game/Scenes/Common/M_Character"
 GROUND_MATERIAL = "/Game/Scenes/Common/M_Ground"
@@ -220,10 +225,10 @@ class Frame:
         return unreal.MathLibrary.find_look_at_rotation(unreal.Vector(0, 0, 0), self.direction(toward))
 
 
-def kit_folder(mesh: str) -> str:
+def kit_folder(mesh: str, root: str = KIT_ROOT) -> str:
     """`Regions/…/arena-of-fate/Scene/af-pyre.glb` → `/Game/Kit/Regions/…/arena-of-fate`."""
     parts = [p for p in Path(mesh).parent.parts if p != "Scene"]
-    return "/".join([KIT_ROOT, *parts])
+    return "/".join([root, *parts])
 
 
 class Library:
@@ -231,10 +236,14 @@ class Library:
 
     Une pièce **construite par script** (`Built/…`, `build_colosseum.py`) change quand son script
     change : l'empreinte du `.glb` importé est notée (`Intermediate/Jadg/imports.json`), et une
-    pièce dont l'empreinte diffère est réimportée. Un maître ne change jamais (son manifeste le
-    vérifie) ; une pièce de kit ne change qu'avec le verrou des kits."""
+    pièce dont l'empreinte diffère est réimportée ; de même une donnée d'essai (`assetsRoot`,
+    `build_mesh_fixture.py`). Un maître ne change jamais (son manifeste le vérifie) ; une pièce de
+    kit ne change qu'avec le verrou des kits."""
 
-    def __init__(self) -> None:
+    def __init__(self, assets_root: str | None = None) -> None:
+        # Les maillages de la scène : les kits, ou le dossier que la description nomme.
+        self.assets = PROJECT_DIR / assets_root if assets_root else ASSETS
+        self.content_root = FIXTURE_ROOT if assets_root else KIT_ROOT
         manifest = json.loads(master_import.MANIFEST.read_text(encoding="utf-8"))
         self.master = {piece["file"]: piece for piece in manifest["pieces"]}
         self.static: dict[str, unreal.StaticMesh] = {}
@@ -246,21 +255,22 @@ class Library:
     def static_mesh(self, mesh: str) -> unreal.StaticMesh:
         if mesh in self.static:
             return self.static[mesh]
-        glb = ASSETS / mesh
+        glb = self.assets / mesh
         if not glb.exists():
             fail(f"{mesh} : fichier absent (kits : python scripts/fetch_assets.py ; "
                  f"Colisée : python scripts/assetsGeneration/build_colosseum.py)")
-        piece = self.master.get(mesh)
+        scripted = mesh.startswith("Built/") or self.assets != ASSETS
+        piece = None if self.assets != ASSETS else self.master.get(mesh)
         stale = False
         if piece is not None:
             asset_path = piece["asset"]
             if master_import.sha256_of(glb) != piece["sha256"]:
                 fail(f"{mesh} : empreinte différente du manifeste du maître")
-        elif mesh.startswith("Master/"):
+        elif mesh.startswith("Master/") and not scripted:
             fail(f"{mesh} : absent du manifeste du maître")
         else:
-            asset_path = f"{kit_folder(mesh)}/{glb.stem}/StaticMeshes/SM_{glb.stem}"
-            if mesh.startswith("Built/"):
+            asset_path = f"{kit_folder(mesh, self.content_root)}/{glb.stem}/StaticMeshes/SM_{glb.stem}"
+            if scripted:
                 digest = master_import.sha256_of(glb)
                 stale = self.imports.get(asset_path) != digest
                 self.imports[asset_path] = digest
@@ -287,10 +297,10 @@ class Library:
 
     def character(self, mesh: str) -> tuple[unreal.SkeletalMesh, list, dict[str, unreal.AnimSequence]]:
         """Le maillage lié d'un personnage, ses matières (une par emplacement) et ses clips, par nom."""
-        glb = ASSETS / mesh
+        glb = self.assets / mesh
         if not glb.exists():
             fail(f"{mesh} : fichier absent (kits : python scripts/fetch_assets.py)")
-        parent = kit_folder(mesh)
+        parent = kit_folder(mesh, self.content_root)
         folder = f"{parent}/{glb.stem}"
         registry = unreal.AssetRegistryHelpers.get_asset_registry()
 
@@ -590,6 +600,8 @@ def place_sky(level: Level, scene: dict, frame: Frame) -> None:
 
 
 def place_navigation(level: Level, scene: dict, frame: Frame) -> None:
+    if "navigation" not in scene:
+        return  # une scène sans marche (le socle) n'a pas de volume de navigation
     x0, z0, x1, z1 = scene["navigation"]["area"]
     height = scene["navigation"]["height"]
     centre = frame.point([(x0 + x1) / 2, height / 2 - 0.5, (z0 + z1) / 2])
@@ -646,12 +658,12 @@ def place_shots(level: Level, scene: dict, frame: Frame) -> None:
 def main() -> None:
     name = master_import.command_line_option("JadgScene") or "porte-1012"
     scene = load_scene(name)
-    library = Library()
+    library = Library(scene.get("assetsRoot"))
 
     # Le repère se mesure sur une pièce que la description nomme : il la faut dissymétrique sur
-    # ses trois axes (la coque du Colisée l'est), sans quoi un signe ne se lit pas.
+    # ses trois axes (le quart de gradins du Colisée l'est), sans quoi un signe ne se lit pas.
     reference = scene["frameReference"]
-    frame = Frame(ASSETS / reference, library.static_mesh(reference))
+    frame = Frame(library.assets / reference, library.static_mesh(reference))
 
     world = unreal.EditorLoadingAndSavingUtils.new_blank_map(False)
     if world is None:

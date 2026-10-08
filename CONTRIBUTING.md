@@ -29,9 +29,13 @@ Le dépôt est celui du **nouveau moteur** : Unreal Engine 5.8, version `0.0.3`
 - **Construire et vérifier sans fenêtre** :
   - `pwsh scripts/build.ps1` — les tests de Core **hors du moteur** (CMake + Ninja + GoogleTest) ;
     `-Preset ninja-release` pour la configuration Release, `-Clean` pour repartir de rien ;
-  - `pwsh scripts/build.ps1 -Unreal` — la cible d'éditeur par UnrealBuildTool, puis le commandlet
-    `JadgContentCheck`, qui lit les données de contenu par les lecteurs de Core. `-EnginePath` si
-    le registre ne donne pas le moteur.
+  - `pwsh scripts/build.ps1 -Unreal` — la cible d'éditeur par UnrealBuildTool, le commandlet
+    `JadgContentCheck`, qui lit les données de contenu par les lecteurs de Core, les tests
+    d'automatisation du moteur (`Jadg.*`), puis la carte du socle reconstruite par script et ses
+    captures comparées à leur référence. `-EnginePath` si le registre ne donne pas le moteur,
+    `-NoCapture` sans processeur graphique.
+- **Vérifier le poste** : `powershell -ExecutionPolicy Bypass -File scripts/setup_dev.ps1` compare
+  les outils installés aux versions de `ci.yml` (moteur compris) ; `-Install` installe ce qui manque.
 - **Python des scripts** (`pyproject.toml`, `uv.lock`) : `uv sync --locked` crée `.venv/` avec
   exactement les dépendances du runner. Tests des scripts : `uv run pytest`.
 - **Hooks** (`.pre-commit-config.yaml`) : avant chaque commit, livres sources, clang-format, ruff,
@@ -94,13 +98,13 @@ contrôles requis d'une PR sont donc ceux qui ne dépendent pas du moteur :
 |---|---|
 | `core-tests (ninja)`, `core-tests (ninja-release)` | Construit `Core` seule et lance ses tests GoogleTest, en Debug et en Release |
 | `format` | clang-format sur `Core` et ses tests |
-| `lint-exigences` | Livres sources, exigences, lexique, manifeste du corpus, clés d'assets, catalogues RPG contre leurs schémas, traductions, scripts PowerShell, versions d'outils, binaires, JSON, tests des scripts |
+| `lint-exigences` | Livres sources, exigences, lexique, manifeste du corpus, clés d'assets, catalogues RPG contre leurs schémas, traductions, scripts PowerShell, versions d'outils (moteur compris), binaires, JSON, scripts sans appelant et sorties du moteur sans script, tests des scripts |
 | `pre-commit` | Les hooks du poste, sur tout le dépôt |
 | `changelog` | La PR ajoute une ligne à `## [Non publié]`, ou porte le label `no-changelog` |
 
-**La construction du moteur se vérifie sur le poste, avant d'ouvrir la PR** :
-`pwsh scripts/build.ps1 -Unreal`, case à cocher du gabarit. Le workflow `Unreal` (`unreal.yml`) la
-rejoue chaque nuit sur le poste de référence et à la demande (onglet *Actions*).
+**La construction du moteur, ses tests et ses captures se vérifient sur le poste, avant d'ouvrir
+la PR** : `pwsh scripts/build.ps1 -Unreal`, case à cocher du gabarit. Le workflow `Unreal`
+(`unreal.yml`) les rejoue chaque nuit sur le poste de référence et à la demande (onglet *Actions*).
 
 > Ce workflow ne se déclenche **jamais** sur une PR : le dépôt est public, et un runner
 > auto-hébergé exécuterait le code d'un fork sur le poste de l'auteur. Sa mise en service (runner,
@@ -109,12 +113,14 @@ rejoue chaque nuit sur le poste de référence et à la demande (onglet *Actions
 ### Avant d'ouvrir une PR
 
 1. `pwsh scripts/build.ps1` passe à 100 %.
-2. `pwsh scripts/build.ps1 -Unreal` construit sans erreur ni avertissement, et le commandlet sort
-   en 0.
-3. `uv run scripts/check.py` est vert.
-4. Une PR qui **change l'image** livre ses captures, à midi et à 22 h, au cadrage du joueur.
+2. `pwsh scripts/build.ps1 -Unreal` construit sans erreur ni avertissement, le commandlet sort en
+   0, les tests d'automatisation passent et les captures du socle tiennent leur référence.
+3. `uv run scripts/check.py` est vert ; sur un poste qui a les kits,
+   `python scripts/checks/check_orphans.py` aussi (la CI ne voit pas leurs images).
+4. Une PR qui **change l'image** livre ses captures, à midi et à 22 h, au cadrage du joueur ; si
+   elle change celle du socle, elle réécrit sa référence (`-UpdateReference`) et le dit.
 5. Une PR qui ajoute ou modifie un `.uasset` ou un `.umap` nomme le **script qui le produit** ;
-   `git lfs ls-files` le liste.
+   `git lfs ls-files` le liste, et `check_orphans.py` refuse celui qu'aucun script ne cite.
 6. Ce que la PR remplace — asset, script, document — est **supprimé dans la PR** (D-32).
 7. `CHANGELOG.md` (section `## [Non publié]`) consigne l'apport, sinon label `no-changelog`.
 
@@ -131,5 +137,5 @@ rejoue chaque nuit sur le poste de référence et à la demande (onglet *Actions
   dépendances Python (`uv.lock`).
 
 Ne sont pas encore refaits dans ce dépôt, et le seront par leur lot : la publication d'une version
-(empaquetage du jeu, notes de version), la référence du code et la page qualité du site, les tests
-d'automatisation du moteur et leurs captures (LOT-1014, LOT-1023 ; voir [`PASSATION.md`](PASSATION.md)).
+(empaquetage du jeu, notes de version), la référence du code et la page qualité du site
+(LOT-1023 ; voir [`PASSATION.md`](PASSATION.md)).

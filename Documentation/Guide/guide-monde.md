@@ -52,8 +52,8 @@ l'**écran** qui ouvre le dialogue ou le combat sur la carte, et qui **gèle** l
 modèle ne décide rien du monde. Le singleton n'est pas un détail : la pile d'écrans détruit la vue
 de jeu quand un autre écran la recouvre, et une session possédée par l'écran mourrait avec elle —
 on reviendrait du sable sur une carte neuve, héros à la porte, exactement ce que le `LOT-09`
-interdit. Le détail est dans [Écrans, navigation et boucle de jeu](guide-ecrans.md) ; le dessin de
-la scène (composeur, caméra qui suit le héros) dans [Rendu 2D : de la scène à l'écran](guide-rendu.md).
+interdit. Le détail est dans Écrans, navigation et boucle de jeu ; le dessin de
+la scène (composeur, caméra qui suit le héros) dans Rendu 2D : de la scène à l'écran.
 
 > **Note** — Les premiers lots avaient posé l'exploration dans un orchestrateur `GameSession` et
 > des **modes de jeu** (`LOT-05` : exploration, dialogue, combat, chacun avec son ordre de passes ;
@@ -437,7 +437,7 @@ et il compte, puisque `arrivalPointAt` prend le premier ; puis les zones de comb
 
 Fichier : [`WorldGraph.h`](../../Source/Core/World/WorldGraph.h) (`LOT-11`, étendu au `LOT-09`).
 C'est la **lecture** du graphe — ce que la vue « graphe du monde » de l'éditeur montre
-([Éditeur de niveaux](guide-editeur.md)) — et son ordre est **déterministe** : cartes par
+(Éditeur de niveaux) — et son ordre est **déterministe** : cartes par
 identifiant, portails par carte source puis dans l'ordre des entités, pour que deux lectures du
 même dossier donnent le même graphe et la même vue.
 
@@ -566,7 +566,7 @@ ajouté le quartier et l'îlot. Les positions vivent à part de l'atlas, dans `M
 parce que l'atlas est extrait du livre qui ne donne aucune coordonnée (`EX-IHM-107`) ; on ne s'y
 déplace pas, la carte sert à s'orienter (`EX-IHM-106`). La jointure entre l'atlas et ces positions
 est `hmi::readWorldMaps` et `hmi::joinWorldMaps` (`Source/HMI/Presentation/WorldMaps.h`), et
-l'écran est décrit dans [Écrans, navigation et boucle de jeu](guide-ecrans.md) et la section 12
+l'écran est décrit dans Écrans, navigation et boucle de jeu et la section 12
 de [`interface-ihm.md`](../Specification/interface-ihm.md).
 
 ## Les familles d'entités : `EntityKinds.h`
@@ -1029,7 +1029,7 @@ drapeaux, sans Qt, en `hmi::QuestJournalValues` : les quêtes commencées (`ques
 `hmi::questStatusKey` (`journal.status.<active|succeeded|failed>`), la choisie (`selected`)
 marquée `›`, l'entrée de sa dernière étape atteinte (`detail`), et ses étapes (`objectives`), `✓`
 pour les franchies, l'issue pour la dernière ; `hmi::neighbourQuest` donne la voisine dans la
-liste, sans en sortir. `hmi::QuestJournalModel` ([IHM Qt](guide-ihm-qt.md)) le relit à
+liste, sans en sortir. `hmi::QuestJournalModel` (IHM Qt) le relit à
 l'ouverture et à chaque `questAdvanced` de `hmi::WorldModel`. Au clavier :
 <kbd>Haut</kbd>, <kbd>Bas</kbd> changent de quête, <kbd>Échap</kbd> referme.
 
@@ -1097,10 +1097,10 @@ de la fuite un moyen de nettoyer une carte. La grille, l'initiative et les tours
 - `core::CombatZone`, `core::analyzeCombatZones`, `core::cropLevelToZone`.
 - [Niveaux : modèle, couches, entités, chargement](guide-niveaux.md) — la carte que tout ceci
   fait vivre.
-- [Écrans, navigation et boucle de jeu](guide-ecrans.md) — `hmi::WorldModel`, le gel, l'écran
-  « Carte » ; [Rendu 2D : de la scène à l'écran](guide-rendu.md) — le composeur et la caméra.
+- Écrans, navigation et boucle de jeu — `hmi::WorldModel`, le gel, l'écran
+  « Carte » ; Rendu 2D : de la scène à l'écran — le composeur et la caméra.
 - [Combat tactique](guide-combat.md) — ce qui se joue sur la carte réduite à la zone.
-- [Éditeur de niveaux](guide-editeur.md) — où l'on pose portails, PNJ, zones et îlots.
+- Éditeur de niveaux — où l'on pose portails, PNJ, zones et îlots.
 - [`exploration.md`](../Specification/exploration.md), [`gameplay.md`](../Specification/gameplay.md),
   [`niveaux.md`](../Specification/niveaux.md), [`contenu.md`](../Specification/contenu.md),
   [`rpg.md`](../Specification/rpg.md) — les exigences citées ici.

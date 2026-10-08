@@ -12,7 +12,7 @@ Règles de la version :
 
 - **Tout ce qui s'écrit est du texte** (D-52) : C++, JSON de contenu, scripts Python d'éditeur,
   descriptions de carte. Tout ce qui est binaire (`.umap`, `.uasset`) se régénère par un script du
-  dépôt et va en Git LFS ; `check_orphans.py` cite chaque sortie par le script qui la produit. **Pas
+  dépôt et reste sur le poste (`Content/` n'est pas suivi, D-60) ; `check_orphans.py` cite chaque sortie par le script qui la produit. **Pas
   de logique en Blueprint.**
 - **`Source/JustAnotherRpgGame/Core` est la bibliothèque des règles, sans dépendance au moteur.**
   Elle se compile dans le module du jeu et, à part, avec GoogleTest (`CMakeLists.txt` racine). Une
@@ -28,7 +28,11 @@ Règles de la version :
 - Un lot qui remplace un asset, un script ou un document le supprime dans sa propre PR (D-32).
 
 Construire et vérifier sans fenêtre : `pwsh scripts/build.ps1` (tests de Core) et
-`pwsh scripts/build.ps1 -Unreal` (cible d'éditeur, puis commandlet `JadgContentCheck`).
+`pwsh scripts/build.ps1 -Unreal` (cible d'éditeur, commandlet `JadgContentCheck`, tests
+d'automatisation `Jadg.*`, puis carte du socle et captures comparées à leur référence ;
+`-NoCapture` sans processeur graphique). Un test du moteur s'écrit sous
+`Source/JustAnotherRpgGame/Tests/`, son nom commence par `Jadg.` ; une règle se teste d'abord hors
+du moteur (`Source/Test/Unit/Core`).
 
 ## Lots d'assets 3D
 

@@ -15,7 +15,7 @@ y est resté, et pourquoi. Elle est le premier livrable du
 | Les données de contenu : `Rpg/`, `World/`, `Levels/`, `Maps/`, `Localization/`, `Credits/`, `Editor/` | `Source/Elements/` | Les 721 fichiers suivis par Git (le dépôt en comptait 486 hors polices, manifestes et fiches de carte ; tous sont venus). Les kits d'assets (images, maillages, 2,2 Go hors Git) se réinstallent par `scripts/fetch_assets.py` d'après `kits.lock.json`, qui est venu |
 | Les tests unitaires de Core (89 fichiers, 88 compilés), leurs fixtures | `Source/Test/Unit/Core/`, `Source/Test/Fixtures/` | Construits hors du moteur par `CMakeLists.txt` à la racine ; voir « Les tests de Core » |
 | `Planning/` (429 fichiers) | `Planning/` | Tel quel : versions, lots, standards, décisions, référentiels |
-| `Documentation/` (169 fichiers) | `Documentation/` | Tel quel, **non relu** : ce qui décrit le moteur maison est à archiver, voir « Ce qui reste à faire » |
+| `Documentation/` (169 fichiers) | `Documentation/` | Venu tel quel ; ce qui ne décrivait que le moteur maison est supprimé le 8 octobre (D-59), voir « Ce qui reste à faire » |
 | `scripts/` (assets, checks, docs, i18n, maps, release, sourcebook, tests) | `scripts/` | Sans les quatre contrôles propres à QML ni l'épingle de version Qt, voir ci-dessous |
 | `LICENSE`, `LICENSE-CONTENT`, `THIRD-PARTY-NOTICES.md`, `CHANGELOG.md`, `CONTRIBUTING.md` | racine | Le CHANGELOG continue à la `0.0.3` ; `CONTRIBUTING.md` et `THIRD-PARTY-NOTICES.md` sont à relire (ils citent Qt) |
 | `.editorconfig`, `.clang-format`, `.clang-tidy`, `.clangd`, `pyproject.toml`, `ruff.toml`, `uv.lock`, `.pre-commit-config.yaml`, `lychee.toml` | racine | Tels quels ; `.pre-commit-config.yaml` cite des contrôles qui n'existent plus ici, à relire au LOT-1014 (CI) |
@@ -106,10 +106,9 @@ le commandlet montre que le moteur lit **les mêmes fichiers** et obtient **des 
 
 ## Ce qui reste à faire (LOT-1014)
 
-- **Le dépôt Git** : fait le 8 octobre 2026. Le dépôt est **public** ; `.uasset` et `.umap` vont en
-  Git LFS. Le premier commit ne porte pas `Content/` : l'import des maillages au maître était en
-  cours, et son poids (753 Mo à dix pièces sur soixante-dix) dépasse ce que le quota LFS gratuit
-  tient — à trancher par l'auteur avant de le suivre. Le passage de l'ancien dépôt en privé est fait.
+- **Le dépôt Git** : fait le 8 octobre 2026. Le dépôt est **public**. `Content/` n'est pas suivi
+  (D-60) : 3,3 Go de `.uasset` et de `.umap` que le quota LFS d'un compte gratuit ne tient pas, et
+  que les scripts du dépôt régénèrent. Le passage de l'ancien dépôt en privé est fait.
 - **Ni livre source ni texte extrait** dans le dépôt public (EX-CNT-023) : l'étude des métiers
   (`Documentation/Metiers/`) en portait trois copies — le corpus par livre, le lecteur plein texte,
   le cache de l'atelier —, écartées par `.gitignore` avec la copie de l'atelier ; le site rendu et les trois fichiers au-delà
@@ -119,32 +118,35 @@ le commandlet montre que le moteur lit **les mêmes fichiers** et obtient **des 
   part dans le dépôt : à reprendre par leur générateur.
 - **La CI** : refaite à neuf (`.github/workflows/`). Sur les runners hébergés, à chaque PR : les
   tests de Core hors moteur en Debug et en Release, clang-format sur Core et ses tests, douze
-  contrôles du référentiel, les hooks, le CHANGELOG. Sur le poste de référence, la nuit et à la
-  demande : la cible d'éditeur et `JadgContentCheck` (`unreal.yml`) — jamais sur une PR, le dépôt
-  étant public ; le runner et ses deux variables restent à enregistrer par l'auteur. Ne sont pas
-  repris tant que leur script n'est pas relu : `lint_planning` (un lien vers `Site/README.md`),
-  `lint_docs` (93 liens vers le moteur maison), `generate_cahier_test`, `check_assets_brief`,
-  `check_orphans` ; `check_map_assets` et `check_hd_assets` lisent les kits, publiés sur l'ancien
-  dépôt devenu privé — où publier les kits est à décider. Restent à refaire : la publication d'une
-  version, la référence Doxygen et la page qualité du site (republié sans elles par `docs.yml`),
-  `scripts/setup_dev.ps1` (il lit encore la version de Qt).
-- **`Documentation/`** à relire : les guides du moteur maison (`guide-ihm-qt.md`, `guide-rendu.md`,
-  `guide-editeur.md`, `guide-ecrans.md`, `guide-design-ihm.md`, `guide-audio.md`,
-  `guide-entrees.md`), les spécifications `rendu-technique.md`, `interface-ihm.md`,
-  `editeur-niveaux.md`, `controles.md`, et `architecture.md` décrivent un moteur qui n'est plus là.
-  Les archiver ou les réécrire, un par un, avec la justification dans la fiche.
-- **`scripts/`** à relire : `check_orphans.py` compte encore le `.qml` parmi les suffixes de code ;
-  `check_tool_pins.py` épingle des outils de la CI disparue et doit épingler la version du moteur
-  (5.8) ; `check_translations.py`, `seed_translations.py`, `build_quality_site.py`,
-  `smoke_test_release.ps1`, `check_commit_message.py`, `receive_ui_assets.py`,
-  `check_assets_brief.py` citent Qt ou `Source/Ui`. `check_orphans.py` et `check_binary_files.py`
-  doivent apprendre les `.uasset` régénérés.
-- **Le numéro de version** : une seule source, lue par le `Build.cs`, le CMake des tests et
-  `scripts/release`.
-- **Les options du jeu** en fichier texte, lues au lancement.
-- **Deux tests de Core à ramener** : `test_dialogue.cpp` (localisation) et le balayage des familles d'entités, écartés parce qu'ils lisent `Source/HMI` ; le reste des tests passe **sans modification de leur code** (critère du LOT-1014).
-- **Les tests d'automatisation du moteur** (carte vide, chargement d'un personnage, capture à
-  tolérance) : rien n'existe encore ; le commandlet est le premier contrôle sans fenêtre.
+  contrôles du référentiel, les hooks, le CHANGELOG. La construction du moteur, ses tests et ses
+  captures se vérifient sur le poste avant chaque PR (`scripts/build.ps1 -Unreal`) : `unreal.yml`
+  est écrit mais dormant, sans runner auto-hébergé pour l'instant (D-61). Ne sont pas repris tant
+  que leur script n'est pas relu : `lint_planning` (un lien vers `Site/README.md`), `lint_docs`
+  (des liens vers l'ancien chemin de Core et vers `Source/HMI`), `generate_cahier_test` ;
+  `check_map_assets` et `check_hd_assets` lisent les kits, qui se publient sur ce dépôt à la
+  `0.0.3` (D-62). Restent à refaire : la publication d'une version, la référence Doxygen et la
+  page qualité du site (republié sans elles par `docs.yml`).
+- **`Documentation/`** : ce qui ne décrivait que le moteur maison est **supprimé** (D-59, 8 octobre ;
+  fiche du LOT-1014, « Rien d'hérité ») : dix guides, le Manuel, vingt-cinq images. Restent à
+  reprendre, exigence par exigence : les spécifications `rendu-technique.md`, `interface-ihm.md`,
+  `editeur-niveaux.md`, `controles.md` et `architecture.md`, qui déclarent des exigences que Core
+  cite encore, et le cahier de tests, dont le générateur décrit des étages restés dans l'ancien
+  dépôt.
+- **`scripts/`**, relu le 8 octobre (fiche du LOT-1014, « Avancement ») : `check_orphans.py` ne
+  connaît plus le `.qml` ni les arbres de l'ancien dépôt et lit `Content/` ; `check_tool_pins.py`
+  épingle le moteur ; `check_binary_files.py` refuse une sortie du moteur hors de Git LFS ;
+  `setup_dev.ps1` vérifie le moteur à la place de Qt. Neuf scripts que seul l'ancien moteur
+  faisait tourner sont supprimés (D-59 : `receive_ui_assets.py`, `check_assets_brief.py`,
+  `seed_translations.py`, `package_release.ps1`, `smoke_test_release.ps1`,
+  `write_sha256sums.ps1`, `clang_tidy_sarif.py`, `merge_sarif.py`, `ci_summary.py`).
+  `check_translations.py` et `jadg_en.ts` restent : le format du catalogue se décide au LOT-1020.
+- **Le numéro de version** : fait, `VERSION.txt` à la racine, lu par le `Build.cs` et par le CMake
+  des tests.
+- **Les options du jeu** : fait, `Source/Elements/Options/options.json`, lues au lancement.
+- **Deux tests de Core à ramener** : `test_dialogue.cpp` (localisation) et le balayage des familles d'entités, écartés parce qu'ils lisent `Source/HMI` ; le reste des tests passe **sans modification de leur code** (critère du LOT-1014). Ils reviennent avec le lecteur de localisation (LOT-1020) et la lecture des entités par le moteur (LOT-1016).
+- **Les tests d'automatisation du moteur** : faits, trois tests `Jadg.Socle.*` et une capture
+  comparée à tolérance sur une scène sans kit ; `scripts/build.ps1 -Unreal` les enchaîne, sur le
+  poste : pas de runner auto-hébergé pour l'instant (D-61).
 - **L'empaquetage** : `Source/Elements` est hors de `Content/`, exprès — l'importation automatique
   de l'éditeur surveillerait les images des kits. Les répertoires à embarquer dans une version
   livrée se déclarent au moment du premier paquet.

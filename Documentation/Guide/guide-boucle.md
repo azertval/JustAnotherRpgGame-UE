@@ -21,7 +21,7 @@ donc une boucle qui tourne **en permanence**, tant que le jeu est ouvert, et qui
 Un tour de cette boucle correspond à une **frame** (image). Un jeu qui tourne à 60 *frames per
 second* (FPS) exécute ces quatre étapes 60 fois par seconde, soit un tour toutes les ~16,7 ms. Dans
 ce moteur, Qt possède la boucle d'événements ; la logique et le rendu s'y branchent de deux façons
-([IHM Qt — deux applications, deux technologies](guide-ihm-qt.md)) :
+(IHM Qt — deux applications, deux technologies) :
 
 - dans le **jeu**, `hmi::WorldModel` avance l'exploration sur un `QTimer` de précision
   (`hmi::WorldModel::STEP_MILLISECONDS`, 16 ms), et la surface de rendu (`hmi::WorldViewportItem`)
@@ -180,7 +180,7 @@ est découplé). Elles imposent en revanche une précaution sur les **entrées**
 une telle frame doit **survivre** jusqu'à ce qu'un pas de simulation le lise, au lieu d'être effacé
 par la frame suivante. C'est pourquoi l'essai immédiat note la demande d'interaction (`E`/Espace)
 dans un drapeau que **le premier pas consommé** remet à zéro, et non la frame de rendu — voir
-[Entrées et actions logiques](guide-entrees.md). Sans cette précaution, à 144 Hz environ deux appuis sur trois seraient perdus.
+Entrées et actions logiques. Sans cette précaution, à 144 Hz environ deux appuis sur trois seraient perdus.
 
 ## Conséquence pratique pour tout le code de simulation
 
@@ -203,7 +203,7 @@ qui reste au tour par tour dans `Core`.
 ## Voir aussi
 - `core::FixedTimestep`.
 - `hmi::WorldModel` (pas du jeu), `hmi::EditorViewport` (essai immédiat), `hmi::WorldPlay`.
-- [IHM Qt — deux applications, deux technologies](guide-ihm-qt.md), [Écrans, navigation et boucle de jeu](guide-ecrans.md) (navigation).
+- IHM Qt — deux applications, deux technologies, Écrans, navigation et boucle de jeu (navigation).
 - [ECS : entités, composants, systèmes](guide-ecs.md) — les entités que la logique manipule, et `core::World::update` qui reçoit ce pas.
 - [Mathématiques du moteur](guide-maths.md) — le hasard déterministe, l'autre moitié de la reproductibilité.
 - [`exigences-non-fonctionnelles.md`](../Specification/exigences-non-fonctionnelles.md) — le déterminisme exigé (`EX-NFR-002`).

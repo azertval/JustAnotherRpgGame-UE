@@ -16,11 +16,15 @@ commit (hook pre-commit, sur les fichiers indexés) et en CI (sur tout le dépô
    liste des familles d'assets admises, écrite une seule fois : un binaire d'une autre famille (un
    PDF du corpus, que `EX-CNT-023` interdit de versionner, un exécutable, une archive) est refusé,
    et l'admettre revient à le déclarer — une décision relue, pas un accident. Un fichier est
-   binaire s'il contient un octet nul dans ses premiers 8 Kio, le critère de git lui-même.
+   binaire s'il contient un octet nul dans ses premiers 8 Kio, le critère de git lui-même. Un
+   fichier rangé en Git LFS est déclaré par la ligne qui l'y range.
 3. **Aucune image suivie sous un kit verrouillé** (LOT-108). Les images d'un dossier cité par
    `Source/Elements/Assets/kits.lock.json` viennent d'archives publiées (`scripts/fetch_assets.py`) :
    les suivre à nouveau les remettrait dans l'historique pour toujours. Une retouche se publie
    (`scripts/release/publish_asset_kit.py`), elle ne se commite pas.
+4. **Une sortie du moteur suivie est en Git LFS** (LOT-1014, D-52). Un `.uasset` ou un `.umap`
+   n'entre jamais en clair dans le pack, quelle que soit sa taille. Qu'il soit bien **régénéré par
+   un script du dépôt** est l'affaire de `check_orphans.py`, qui lit `Content/` sur le disque.
 
 Usage :
   python scripts/checks/check_binary_files.py FICHIER...   (fichiers passés par pre-commit)
@@ -41,6 +45,8 @@ GITATTRIBUTES = '.gitattributes'
 KITS_LOCK = 'Source/Elements/Assets/kits.lock.json'
 # Ce que porte l'archive d'un kit : ses images et, depuis le LOT-1003, ses modèles.
 KIT_IMAGES = ('.png', '.jpg', '.jpeg', '.glb')
+# Les sorties binaires du moteur (D-52) : régénérées par script, suivies en Git LFS seulement.
+ENGINE_OUTPUTS = ('.uasset', '.umap')
 BINARY_PATTERN_RE = re.compile(r'^\*(\.[A-Za-z0-9]+)\s+(?:.*\s)?binary(?:\s|$)')
 
 
@@ -79,7 +85,14 @@ def violations(paths, extensions, max_bytes=MAX_BYTES, in_lfs=()):
         if size > max_bytes and path not in in_lfs:
             found.append('%s : %.1f Mio, au-delà du plafond de %.0f Mio.'
                          % (path, size / 1048576, max_bytes / 1048576))
-        if is_binary(path) and os.path.splitext(path)[1].lower() not in extensions:
+        extension = os.path.splitext(path)[1].lower()
+        if extension in ENGINE_OUTPUTS and path not in in_lfs:
+            found.append('%s : sortie du moteur suivie hors de Git LFS (D-52) ; %s doit la ranger '
+                         'en LFS (`filter=lfs`).' % (path, GITATTRIBUTES))
+            continue
+        if path in in_lfs:
+            continue  # déclaré par la ligne qui le range en LFS ; sur le poste, ses octets sont là
+        if is_binary(path) and extension not in extensions:
             ext = os.path.splitext(path)[1] or '(sans extension)'
             found.append('%s : fichier binaire d\'extension %s, non déclarée `binary` dans %s.'
                          % (path, ext, GITATTRIBUTES))
@@ -130,6 +143,13 @@ def auto_test():
         assert len(violations([big], extensions, 1024)) == 1
         assert violations([big], extensions, 1024, in_lfs={big}) == []
         assert violations([os.path.join(root, 'absent.png')], extensions, 1024) == []
+        # Une sortie du moteur : admise en LFS (ses octets sont sur le poste), refusée en clair,
+        # même réduite à un pointeur de quelques octets.
+        asset = write('SM_Mur.uasset', b'\xc1\x83\x2a\x9e\0\0\0\0')
+        level = write('Porte.umap', b'version https://git-lfs.github.com/spec/v1\n')
+        assert violations([asset, level], extensions, 1024, in_lfs={asset, level}) == []
+        assert len(violations([asset, level], extensions, 1024)) == 2
+        assert violations([pdf], extensions, 1024, in_lfs={pdf}) == []
     kits = locked_kit_paths('{"version": 1, "kits": [{"path": "UI"}, {"path": "Regions/r/zone"}]}')
     assert locked_image_violations(['Source/Elements/Assets/UI/hud/a.png',
                                     'Source/Elements/Assets/Regions/r/zone/Scene/b.PNG'], kits) != []

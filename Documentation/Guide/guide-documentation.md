@@ -31,7 +31,6 @@ dans `Site/tokens.css`.
 | Je veux écrire… | Je crée… | Et je la cite dans… |
 |---|---|---|
 | une page du guide | `Documentation/Guide/guide-<sujet>.md` | le plan de `Guide/README.md` |
-| une page du manuel | `Documentation/Guide/Manuel/<sujet>.md` | `Guide/Manuel/README.md` |
 | une spécification | `Documentation/Specification/<sujet>.md` | la liste de `Specification/README.md` |
 | un lot | `Planning/versions/<version>/lots/LOT-NNN-<objet>.md` | rien : le site le trouve |
 
@@ -105,7 +104,6 @@ qui doit donc dire ce qu'on regarde, pas « capture 3 » :
 
 | Nature | Dossier | Fabrication |
 |---|---|---|
-| Capture du jeu ou de l'éditeur | `Guide/captures/` | `python Documentation/outils/capture_screens.py --bin build/ninja/bin` — jamais à la main : une capture se refait |
 | Schéma, diagramme du guide (ce que le code **fait**) | `Guide/figures/` | SVG écrit à la main |
 | Maquette de spécification (ce qu'un écran ou un mécanisme **doit** être) | `Specification/maquettes/` | SVG écrit à la main ; les maquettes peintes de la charte v2 restent dans les annexes du `LOT-87` |
 

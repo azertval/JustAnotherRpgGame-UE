@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "comment": "Les options d'usine du jeu (LOT-1014), lues au lancement par core::loadGameOptions et appliquées par Bridge/JadgOptions. Le poste du joueur peut porter les siennes dans Saved/Options/options.json : un champ présent là-bas remplace celui d'ici. Bornes et sens de chaque champ : Source/JustAnotherRpgGame/Core/Data/GameOptions.h.",
+  "display": {"width": 1920, "height": 1080, "fullscreen": true},
+  "rendering": {"renderScalePercent": 100, "shadowQuality": 3},
+  "audio": {"volumePercent": 100}
+}

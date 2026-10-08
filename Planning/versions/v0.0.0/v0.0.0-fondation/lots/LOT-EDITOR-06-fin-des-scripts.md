@@ -32,7 +32,7 @@ Arenarea se modifient, s'enregistrent et se rechargent dans l'éditeur, sans per
 **Premier jalon du module** : les cartes du jeu se font désormais dans l'éditeur. Feuille de
 route : [éditeur](../../../../vision/archives/feuille-de-route-editeur.md). Le lot alimente `LOT-EDITOR-07` (contrôles),
 `LOT-EDITOR-14` (renommer, remplacer), et les cartes du [LOT-27](../../../../vision/archives/feuille-de-route-jeu.md#lot-27).
-Guide : [Faire une carte dans l'éditeur](../../../../../Documentation/Guide/Manuel/utiliser-l-editeur.md).
+Guide : Faire une carte dans l'éditeur.
 
 ## Ce que le dépôt contenait à l'ouverture (19 septembre 2026)
 
@@ -67,7 +67,7 @@ Les deux derniers constats bloquaient le jalon : ils sont traités dans ce lot, 
 | `Editor/Logic` | `DataRoot` (`resolveDataRoot`, `editorDataRoot`) ; `scenePlaces` ; `LevelFileOperations::create` avec lieu |
 | `Editor/Ui`, `App/Editor` | la fenêtre ouvre `editorDataRoot()` et l'affiche ; dialogue « New map » (nom, taille, lieu) ; `Main.cpp` résout la racine une fois |
 | Tests | `test_shipped_maps.cpp` (3) ; `test_level_file_operations.cpp` (+2) ; `test_level_draft_editing.cpp` (+1) |
-| Documentation | guide d'usage [Faire une carte dans l'éditeur](../../../../../Documentation/Guide/Manuel/utiliser-l-editeur.md) ; `editeur-niveaux.md` §15 ; README du module et de `Levels/` |
+| Documentation | guide d'usage Faire une carte dans l'éditeur ; `editeur-niveaux.md` §15 ; README du module et de `Levels/` |
 
 ### Ce qui reste hors du lot, nommément
 
@@ -134,7 +134,7 @@ Les deux derniers constats bloquaient le jalon : ils sont traités dans ce lot, 
 - **Une vraie retouche faite dans l'éditeur sur chacune des trois cartes.** ✔ Par `--apply`, voir
   « Conception » ; rendus relus à l'œil. La CI publie le rendu des trois cartes dans `map-renders` :
   c'est la première PR qui éprouve cette étape du `LOT-EDITOR-13`.
-- **Guide d'usage : créer une carte de bout en bout.** ✔ [Faire une carte dans l'éditeur](../../../../../Documentation/Guide/Manuel/utiliser-l-editeur.md) ;
+- **Guide d'usage : créer une carte de bout en bout.** ✔ Faire une carte dans l'éditeur ;
   `LevelFileOps.UneCarteCreeeAvecUnLieuASesDeuxCouches` garde le premier pas, et
   `ContentCheckTest.UneCarteNeuveASonNomDansChaqueCatalogue` le contrôle (`LOT-EDITOR-07`).
 

@@ -535,7 +535,7 @@ scripts, hors CI, tiennent la chaîne, et chacun dit dans son en-tête ce qu'il 
   clé ne change pas. Les **personnages** ne passent plus par lui (`LOT-1008`) : un descripteur
   dont la cible est un `Characters/` est refusé, leur fiche s'écrit et s'installe par l'atelier
   des assets de l'éditeur — la fenêtre *Asset workshop*, ou `LevelEditor --apply <fiche
-  d'atelier>` ([guide de l'éditeur](guide-editeur.md)). Un personnage **sans modèle** n'existe
+  d'atelier>` (guide de l'éditeur). Un personnage **sans modèle** n'existe
   plus : le portrait d'attente du `LOT-145` (la liste `portraits` du manifeste) part avec le
   `LOT-1011`, `check_hd_assets.py` refuse la clé et tout nom cité par `npcs` a sa fiche et son
   modèle.
@@ -798,7 +798,7 @@ que les taire reviendrait à choisir à la place du lecteur.
 
 La CI ne lit aucun PDF : elle valide les **données produites**, pas l'extraction. Chaque contrôle
 est un script Python sans dépendance ou presque, appelé par le job de lint (`uv run scripts/check.py`
-les rejoue tous en local, voir [Build, tests et intégration continue](guide-outils.md)). Plusieurs
+les rejoue tous en local, voir `CONTRIBUTING.md`). Plusieurs
 s'**auto-testent** avant de se prononcer : un contrôle sans entrée est vert par vacuité, et personne
 ne sait s'il fonctionne — c'est la panne du `LOT-78`, où une règle de lint contenait un caractère
 invisible qui l'empêchait de jamais correspondre.
@@ -962,7 +962,7 @@ qu'il quitte et à celui qu'il rejoint :
 | descente des catacombes | (22-23, 4-6) | le niveau −1 et les catacombes |
 
 Les gestes se rejouent par l'éditeur ; une carte d'une autre taille se ramène d'abord à 34 × 24
-(`--resize`, avec `--crop` pour une réduction — voir le [manuel de l'éditeur](Manuel/utiliser-l-editeur.md)) :
+(`--resize`, avec `--crop` pour une réduction — voir le manuel de l'éditeur) :
 
 ```powershell
 py -3.13 scripts/maps/arena_fate_levels.py --preview
@@ -1009,9 +1009,9 @@ diverge du kit publié tant que `scripts/release/publish_asset_kit.py` n'a pas �
   porte sa propre garde de version.
 - [Règles d20 et personnages](guide-regles.md) et [Combat tactique](guide-combat.md) — ce que
   contiennent les catalogues et comment le moteur les joue.
-- [Rendu 2D : de la scène à l'écran](guide-rendu.md) — les textures, du côté qui les possède.
-- [Éditeur de niveaux](guide-editeur.md) — le seul outil qui écrit dans `Source/Elements/`.
-- [Build, tests et intégration continue](guide-outils.md) — le job de lint qui rejoue les contrôles.
+- Rendu 2D : de la scène à l'écran — les textures, du côté qui les possède.
+- Éditeur de niveaux — le seul outil qui écrit dans `Source/Elements/`.
+- `CONTRIBUTING.md`, à la racine du dépôt — le job de lint qui rejoue les contrôles.
 - [`arborescence-assets.md`](../../Planning/standards/arborescence-assets.md) — les cinq niveaux et
   les règles de rangement ; [`assets-hors-git-lot108.md`](../../Planning/standards/assets-hors-git-lot108.md)
   — la décision de sortir les images de Git.

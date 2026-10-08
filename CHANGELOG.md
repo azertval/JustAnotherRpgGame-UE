@@ -6,6 +6,33 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **Le socle du nouveau moteur se construit, se teste et se capture en une commande** (LOT-1014,
+  8 octobre 2026). `scripts/build.ps1 -Unreal` enchaîne désormais cinq temps, sans fenêtre : la
+  cible d'éditeur, le commandlet `JadgContentCheck`, les **premiers tests d'automatisation du
+  moteur** (`Jadg.Socle.*` : une carte vide s'ouvre sous l'instance et le mode de jeu, les quatre
+  fiches du groupe préformé ont les valeurs de leur page, les options atteignent le moteur), la
+  carte d'une **scène du socle** reconstruite par script sans aucun kit d'assets
+  (`Source/Elements/Scenes/socle-1014.json`), et ses captures à midi et à 22 h **comparées à
+  tolérance, par blocs**, à leur référence (`scripts/checks/compare_captures.py` ; une référence
+  est une image de blocs de quelques kilo-octets). Mesuré : 133 s, code 0 ; d'un lancement à
+  l'autre le pire bloc s'écarte de 1 niveau sur 255, la tolérance est à 8. Les **options du jeu**
+  — définition, échelle de rendu, qualité des ombres, volume — sont un fichier texte
+  (`Source/Elements/Options/options.json`), lu par Core (`core::loadGameOptions`) et appliqué au
+  lancement par l'instance du jeu ; un poste porte les siennes dans `Saved/Options/`. Le **numéro
+  de version** a une seule source, `VERSION.txt`, lue par le module du jeu et par la construction
+  des tests de Core. La **version du moteur** est épinglée (`UNREAL_ENGINE_VERSION`, `ci.yml`) :
+  `build.ps1` refuse une autre installation, `check_tool_pins.py` tient les deux cibles d'accord.
+  `check_orphans.py` refuse un `.uasset` ou un `.umap` qu'aucun script du dépôt ne produit (D-52)
+  et entre dans la CI ; `check_binary_files.py` refuse une sortie du moteur suivie hors de Git
+  LFS ; les polices et l'apparence d'Arenarea, dont le lecteur arrive aux LOT-1020 et LOT-1018,
+  sont en liste d'attente nommée (`Assets/awaiting.json`) au lieu de passer pour mortes.
+  `setup_dev.ps1` vérifie le moteur à la place de Qt ; les mentions de tiers et les crédits
+  nomment Unreal Engine, et disent le dépôt public. **Rien d'hérité ne reste** (D-59) : neuf
+  scripts que seul le moteur maison faisait tourner, dix guides, le Manuel du jeu Qt et
+  vingt-cinq images sont supprimés, sans archive — l'ancien dépôt en est la mémoire. `Content/`
+  n'est pas suivi par Git et se régénère par script (D-60) ; pas de runner auto-hébergé pour
+  l'instant (D-61) ; les kits se publient sur ce dépôt à la `0.0.3` (D-62). La fiche dit ce qui
+  reste.
 - **Le Colisée de la porte est reconstruit en pièces modulaires, aux dimensions de celui de Rome**
   (LOT-1012, 8 octobre 2026). La coque d'un seul tenant de l'ancien kit, agrandie 2,7 fois, ne
   tenait pas le gros plan : `scripts/assetsGeneration/build_colosseum.py` (Blender sans fenêtre)

@@ -979,7 +979,7 @@ rien ne restait à basculer sous `Source/Elements/Assets/UI/icons/`.
   **Écart assumé** : les deux fichiers de police et leurs licences restent dans
   `Source/Elements/Assets/Fonts/`. Ils sont encore chargés par `hmi::applyFont()`
   (`Source/HMI/Interface/ApplicationTheme.cpp`), qui sert une portée entièrement distincte — la
-  portée **identité** du châssis d'édition en Qt Widgets (`LOT-56`/`LOT-68`, [Conception de l'IHM](../../../../../Documentation/Guide/guide-design-ihm.md)), avec son propre système de jetons (`hmi::identityTokens()`,
+  portée **identité** du châssis d'édition en Qt Widgets (`LOT-56`/`LOT-68`, Conception de l'IHM), avec son propre système de jetons (`hmi::identityTokens()`,
   `DesignTokens.cpp`) construit sur une échelle entière en pixels, sans rapport avec
   `Source/Ui/Theme/Tokens.qml`. Ce plan ne couvre que les écrans QML du jeu (`Source/Ui/**`) ; faire
   suivre cette seconde portée à la charte v2 — ou trancher qu'elle reste en pixel art — est une

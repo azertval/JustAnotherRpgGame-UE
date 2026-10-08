@@ -1,9 +1,8 @@
 # Elements/Assets/Fonts/
 
-Polices TTF des écrans du jeu et leurs licences, déployées à côté de l'exécutable. Aucune police
-n'est dessinée dans la scène rendue : tout le texte passe par Qt Quick. L'éditeur, outil interne,
-écrit avec la police du système (style Fusion) depuis le `LOT-EDITOR-01`, qui a retiré *Inter*, sa
-police embarquée.
+Polices TTF des écrans du jeu et leurs licences. Elles sont venues par passation (`LOT-1014`) :
+l'interface du nouveau moteur (`LOT-1020`) les reprend, et jusque-là
+[`awaiting.json`](../awaiting.json) dit celles qu'aucun code de ce dépôt ne charge encore.
 
 ## Règles communes
 
@@ -16,12 +15,10 @@ rien ne le signale.
 
 ## Polices des ecrans du jeu, charte v2 (`LOT-87`, `T2.3`)
 
-Enregistrees par `registerIdentityFonts()` (`App/Game/Main.cpp`) : ce sont les polices des ecrans
-du jeu. `Tokens.qml` designe les familles par leur nom
-(`bodyFamily`, `titleFamily`, `loreFamily`) : Design Studio les voit via `FontFiles` du
-`.qmlproject`, qui pointe sur ce dossier entier — aucune liste de fichiers a tenir a jour ailleurs.
+Ce sont les polices des ecrans du jeu. La charte v2 designe les familles par leur role
+(`bodyFamily`, `titleFamily`, `loreFamily`, `signatureFamily`).
 
-| Fichier | Famille rapportee a Qt | Sert a |
+| Fichier | Famille et style du fichier | Sert a |
 |---|---|---|
 | `Cinzel-Regular.ttf` | `Cinzel`, style `Regular` | Titres, plaques et bandeaux (`titleFamily`). |
 | `Cinzel-SemiBold.ttf` | `Cinzel SemiBold`, style `Regular` | Graisse intermediaire ; famille legacy distincte faute d'entree `STAT` a 600 dans la police source, nom typographique prefere `Cinzel`/`SemiBold` conserve pour les moteurs qui le lisent. |
@@ -39,5 +36,5 @@ figees par `fonttools varLib.instancer`, sans modification de dessin — seul le
 par les deux licences (pas de `Reserved Font Name` apres la mention de copyright) : cette
 derivation reste couverte par l'OFL.
 
-**Repli.** Un fichier absent ou refuse par Qt journalise un avertissement (`EX-NFR-040`) et Qt
-Quick retombe sur la famille demandee telle quelle, resolue par le systeme.
+**Repli.** Un fichier absent ou refuse journalise un avertissement (`EX-NFR-040`) ; le repli
+lui-meme est celui de l'interface du nouveau moteur (`LOT-1020`).
