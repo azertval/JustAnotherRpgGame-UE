@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Valentin Eloy
 # SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
-"""Écrit les deux cartes d'essai de l'exploration (LOT-1016), chacune sous ses deux formes.
+"""Écrit les cartes d'essai de l'exploration (LOT-1016) : deux cartes de Core sous leurs deux
+formes, et une arène vide.
 
 Le LOT-1016 fait jouer une carte de Core — ses portails, ses PNJ, ses lumières, posés sur des
 cases — dans une carte du moteur. Tant que le format de carte du LOT-1018 n'existe pas, les deux
@@ -13,16 +14,24 @@ Les deux cartes rejouent, en petit, le début de la quête « Des pommes pour l'
 dialogues et sa quête livrés (`Source/Elements/World`) :
 
 - `essai/etals` : la mère à son étal, l'enfant qui n'y revient qu'une fois libéré, une lanterne
-  devant un pan de mur (une lumière de nuit porte une ombre), le portail vers le parvis ;
+  devant un pan de mur (une lumière de nuit porte une ombre), un coffre et un panneau, le portail
+  vers le parvis ;
 - `essai/parvis` : le garde et l'enfant, que l'acceptation de la quête fait paraître, la zone qui
-  déclenche le garde, un passage condamné, un passage que la libération de l'enfant ouvre.
+  déclenche le garde, un passage condamné, un passage que la libération de l'enfant ouvre, et le
+  maître d'arène, dont le dialogue engage une rencontre.
+
+La troisième scène, `essai-1016-arene`, ne joue aucune carte de Core : c'est l'**arène vide** où
+mène la bascule vers le combat tant que le combat n'existe pas (LOT-1017).
+
+Un PNJ nomme sa figurine par son dossier depuis `Assets/` : le jeu y lit son portrait quand les
+kits sont sur le poste. Son maillage, lui, reste le pantin des données d'essai.
 
 Elles ne lisent aucun kit d'assets : sol, mur et pantin sont les données d'essai du dépôt
 (`build_mesh_fixture.py`). Les cartes de Core vont sous `Source/Test/Fixtures/Exploration/Levels`,
 hors des cartes du jeu ; la description de scène nomme ce dossier (`level.root`).
 
 Usage :
-    python scripts/maps/build_essai_maps.py           # écrit les quatre fichiers
+    python scripts/maps/build_essai_maps.py           # écrit les cinq fichiers
     python scripts/maps/build_essai_maps.py --check   # vérifie qu'ils sont à jour
 """
 
@@ -54,12 +63,22 @@ ETALS_PLAN = """
 #..c.....L.....#
 #........##....#
 #............A.P
-#..............#
+#......K.......#
 #..............#
 #..E...........#
-#..............#
+#...T..........#
 #..............#
 ################
+"""
+
+ARENE_PLAN = """
+############
+#..........#
+#..........#
+#....E.....#
+#..........#
+#..........#
+############
 """
 
 PARVIS_PLAN = """
@@ -70,12 +89,19 @@ PARVIS_PLAN = """
 #..............#
 P.A............#
 #..............#
-#.........L....#
+#.........L.B..#
 #..............#
 #..............R
 #..............#
 ################
 """
+
+# Les figurines des PNJ, par leur dossier depuis `Assets/` (`core::figureDirectory`).
+CAPITAL = "Regions/central-empire/capital"
+MOTHER = f"{CAPITAL}/martpart/Characters/mother"
+CHILD = f"{CAPITAL}/Common/Characters/child"
+GUARD = "Regions/central-empire/Common/Characters/ironhand-soldier"
+ARENA_MASTER = f"{CAPITAL}/arenarea/arena-of-fate/Characters/arena-master"
 
 LANTERN = {"color": "#ffbe7a", "radius": 4, "height": 22, "intensity": 100, "flicker": False, "always": False}
 # La présence de l'enfant et du garde suit la quête, comme sur les cartes livrées.
@@ -88,13 +114,16 @@ MAPS = {
         "plan": ETALS_PLAN,
         "marks": {
             "E": {"entry": True},
-            "M": {"type": "npc", "dialogue": "mere", "figure": "pantin", "heading": 180.0},
-            "c": {"type": "npc", "dialogue": "enfant", "figure": "pantin", "heading": 180.0,
+            "M": {"type": "npc", "dialogue": "mere", "figure": MOTHER, "heading": 180.0},
+            "c": {"type": "npc", "dialogue": "enfant", "figure": CHILD, "heading": 180.0,
                   "presenceFlag": "quete.pommes", "presenceTest": "equals", "presenceValue": "enfant-libere"},
             "A": {"type": "spawnPoint", "name": "from-parvis"},
             "P": {"type": "portal", "arrival": "from-etals", "requiresFlag": "", "sealed": False,
                   "targetMap": "essai/parvis"},
             "L": {"type": "light", **LANTERN},
+            # Un coffre ne s'ouvre qu'une fois, un panneau se relit : la scène leur donne un bloc.
+            "K": {"type": "chest", "block": 0.7},
+            "T": {"type": "sign", "block": 1.4},
         },
         "zones": [],
         "shots": [
@@ -112,8 +141,10 @@ MAPS = {
             "A": {"type": "spawnPoint", "name": "from-etals", "entry": True},
             "P": {"type": "portal", "arrival": "from-parvis", "requiresFlag": "", "sealed": False,
                   "targetMap": "essai/etals"},
-            "G": {"type": "npc", "dialogue": "garde", "figure": "pantin", "heading": 270.0, **WITH_GUARD},
-            "c": {"type": "npc", "dialogue": "enfant", "figure": "pantin", "heading": 270.0, **WITH_GUARD},
+            "G": {"type": "npc", "dialogue": "garde", "figure": GUARD, "heading": 270.0, **WITH_GUARD},
+            "c": {"type": "npc", "dialogue": "enfant", "figure": CHILD, "heading": 270.0, **WITH_GUARD},
+            # Le maître d'arène : « combattre » engage une rencontre, donc la bascule vers le combat.
+            "B": {"type": "npc", "dialogue": "maitre-arene", "figure": ARENA_MASTER, "heading": 270.0},
             "S": {"type": "portal", "arrival": "", "requiresFlag": "", "sealed": True, "targetMap": ""},
             "R": {"type": "portal", "arrival": "from-parvis", "sealed": False, "targetMap": "essai/etals",
                   "requiresFlag": "quest/pommes/step/enfant-libere"},
@@ -132,6 +163,20 @@ MAPS = {
     },
 }
 
+# L'arène vide : une scène sans carte de Core.
+ARENA = {
+    "scene": "essai-1016-arene",
+    "name": "Essai1016Arene",
+    "map": "/Game/Maps/Essai1016Arene",
+    "plan": ARENE_PLAN,
+    "marks": {"E": {"entry": True}},
+    "zones": [],
+    "shots": [
+        {"id": "arene", "target": [9.0, 1.0, 5.25], "heading": 0.0, "pitch": 42.0, "distance": 18.0,
+         "comment": "L'arène vide, depuis le sud : le groupe y attend le combat du LOT-1017."},
+    ],
+}
+
 LIGHTING = {
     "comment": "Les réglages de la porte (porte-1012.json), repris tels quels.",
     "lampCandelas": 60.0,
@@ -143,6 +188,10 @@ LIGHTING = {
     "fog": {"density": 0.004, "falloff": 0.05, "volumetric": True},
     "post": {"bloom_intensity": 0.6, "vignette_intensity": 0.3},
 }
+
+
+# Ce qu'une marque du plan dit à la scène seule : la carte de Core ne l'écrit pas.
+SCENE_ONLY = ("entry", "heading", "block")
 
 
 def rows_of(plan: str) -> list[str]:
@@ -173,10 +222,11 @@ def entities_of(spec: dict) -> tuple[list[dict], tuple[int, int]]:
                 entry = (column, row)
             if "type" not in mark:
                 continue
-            properties = {key: value for key, value in mark.items() if key not in ("type", "entry", "heading")}
-            entities.append({"type": mark["type"], "x": column, "y": row, **properties, "heading": mark.get("heading")})
+            properties = {key: value for key, value in mark.items() if key not in SCENE_ONLY}
+            entities.append({"x": column, "y": row, **properties,
+                             "heading": mark.get("heading"), "block": mark.get("block")})
     for zone in spec["zones"]:
-        entities.append({**zone, "heading": None})
+        entities.append({**zone, "heading": None, "block": None})
     if entry is None:
         raise ValueError("plan : aucune entrée")
     for number, entity in enumerate(entities, start=1):
@@ -194,7 +244,7 @@ def level_text(identifier: str, spec: dict) -> str:
     written = []
     for entity in entities:
         fields = {"id": entity["id"], "type": entity["type"], "x": entity["x"], "y": entity["y"]}
-        fields |= {key: entity[key] for key in sorted(entity) if key not in ("id", "type", "x", "y", "heading")}
+        fields |= {key: entity[key] for key in sorted(entity) if key not in ("id", "type", "x", "y", *SCENE_ONLY)}
         # Une propriété par ligne : la forme canonique de l'éditeur de cartes.
         written.append("\n".join("    " + line for line in json.dumps(fields, indent=2, ensure_ascii=False).splitlines()))
     tile_lines = ",\n".join("    " + json.dumps(tile) for tile in tiles)
@@ -214,14 +264,20 @@ def level_text(identifier: str, spec: dict) -> str:
 """
 
 
-def scene_text(identifier: str, spec: dict) -> str:
-    """La description de scène : le sol, les murs, les quatre du groupe, les PNJ, les cadrages."""
+def scene_text(identifier: str | None, spec: dict) -> str:
+    """La description de scène : le sol, les murs, le mobilier, les quatre du groupe, les PNJ, les
+    cadrages. Sans `identifier`, la scène ne joue aucune carte de Core (l'arène vide)."""
     rows = rows_of(spec["plan"])
     entities, entry = entities_of(spec)
     width, height = len(rows[0]) * CELL, len(rows) * CELL
     walls = [{"id": f"mur/{column},{row}", "folder": "murs", "mesh": WALL_MESH, "position": centre(column, row),
               "yaw": 0.0, "scale": 1.0}
              for row, line in enumerate(rows) for column, sign in enumerate(line) if sign == WALL]
+    # Ce qu'on sollicite sans lui parler : un bloc de la hauteur dite, qui montre son entité.
+    furniture = [{"id": f"{entity['type']}-{entity['id']}", "folder": "mobilier", "mesh": WALL_MESH,
+                  "position": centre(entity["x"], entity["y"]), "yaw": 0.0, "height": entity["block"],
+                  "entity": entity["id"]}
+                 for entity in entities if entity["block"] is not None]
     puppet = {"mesh": PUPPET, "idle": "idle", "walk": "walk", "walkSpeed": 3.0}
     # Le groupe : sa place est celle que Core donne au lancement (l'entrée, ou le point d'arrivée
     # du portail) ; la scène le pose à l'entrée pour qu'il existe.
@@ -235,8 +291,12 @@ def scene_text(identifier: str, spec: dict) -> str:
         "name": spec["name"],
         "comment": (f"Carte d'essai de l'exploration (LOT-1016), écrite par scripts/maps/build_essai_maps.py, jamais à "
                     f"la main : la carte de Core « {identifier} » ({LEVELS_ROOT}) et cette scène viennent du même plan. "
-                    f"Elle ne lit aucun kit d'assets. Même repère et mêmes champs que porte-1012.json."),
-        "map": f"/Game/Maps/Levels/{identifier}",
+                    f"Elle ne lit aucun kit d'assets. Même repère et mêmes champs que porte-1012.json."
+                    if identifier else
+                    "L'arène vide de l'exploration (LOT-1016), écrite par scripts/maps/build_essai_maps.py, jamais à la "
+                    "main : où mène la bascule vers le combat tant que le combat n'existe pas (LOT-1017). Elle ne joue "
+                    "aucune carte de Core et ne lit aucun kit d'assets."),
+        "map": f"/Game/Maps/Levels/{identifier}" if identifier else spec["map"],
         "assetsRoot": "Source/Test/Fixtures/Meshes/Assets",
         "level": {"id": identifier, "root": LEVELS_ROOT, "origin": [0.0, 0.0], "cell": CELL},
         "daylight": "Common/Lighting/daylight.json",
@@ -244,12 +304,14 @@ def scene_text(identifier: str, spec: dict) -> str:
         "lighting": LIGHTING,
         "ground": {"colour": "#8f7d62", "size": 4000.0, "height": -0.02},
         "fills": [{"id": "sol", "meshes": [FLOOR_MESH], "cell": CELL, "areas": [[0.0, 0.0, width, height]]}],
-        "objects": walls,
+        "objects": walls + furniture,
         "characters": characters,
         "navigation": {"area": [0.0, 0.0, width, height], "height": 4.0},
         "shots": spec["shots"],
         "hours": ["12:00", "22:00"],
     }
+    if identifier is None:
+        del scene["level"]
     head = json.dumps({key: value for key, value in scene.items() if key not in ("objects", "characters", "shots")},
                       indent=2, ensure_ascii=False)
     # Une ligne par objet, par personnage, par cadrage : le fichier se relit et se compare.
@@ -264,6 +326,7 @@ def files() -> dict[Path, str]:
     for identifier, spec in MAPS.items():
         written[LEVELS / f"{identifier}.json"] = level_text(identifier, spec)
         written[SCENES / f"{spec['scene']}.json"] = scene_text(identifier, spec)
+    written[SCENES / f"{ARENA['scene']}.json"] = scene_text(None, ARENA)
     return written
 
 

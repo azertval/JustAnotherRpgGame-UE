@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "name": "Essai1016Arene",
+  "comment": "L'arène vide de l'exploration (LOT-1016), écrite par scripts/maps/build_essai_maps.py, jamais à la main : où mène la bascule vers le combat tant que le combat n'existe pas (LOT-1017). Elle ne joue aucune carte de Core et ne lit aucun kit d'assets.",
+  "map": "/Game/Maps/Essai1016Arene",
+  "assetsRoot": "Source/Test/Fixtures/Meshes/Assets",
+  "daylight": "Common/Lighting/daylight.json",
+  "frameReference": "Scene/socle/repere.glb",
+  "lighting": {
+    "comment": "Les réglages de la porte (porte-1012.json), repris tels quels.",
+    "lampCandelas": 60.0,
+    "fireCandelas": 30.0,
+    "sunScale": 1.8,
+    "ambientScale": 0.45,
+    "skyLuminance": 3.0,
+    "exposureBias": 0.0,
+    "fog": {
+      "density": 0.004,
+      "falloff": 0.05,
+      "volumetric": true
+    },
+    "post": {
+      "bloom_intensity": 0.6,
+      "vignette_intensity": 0.3
+    }
+  },
+  "ground": {
+    "colour": "#8f7d62",
+    "size": 4000.0,
+    "height": -0.02
+  },
+  "fills": [
+    {
+      "id": "sol",
+      "meshes": [
+        "Scene/ilot/floor.glb"
+      ],
+      "cell": 1.5,
+      "areas": [
+        [
+          0.0,
+          0.0,
+          18.0,
+          10.5
+        ]
+      ]
+    }
+  ],
+  "navigation": {
+    "area": [
+      0.0,
+      0.0,
+      18.0,
+      10.5
+    ],
+    "height": 4.0
+  },
+  "hours": [
+    "12:00",
+    "22:00"
+  ],
+  "objects": [
+    {"id": "mur/0,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/1,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [2.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/2,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [3.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/3,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [5.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/4,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [6.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/5,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [8.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/6,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [9.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/7,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [11.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/8,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [12.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/9,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/10,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/11,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,1", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 2.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/11,1", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.0, 2.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,2", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 3.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/11,2", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.0, 3.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,3", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 5.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/11,3", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.0, 5.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,4", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 6.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/11,4", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.0, 6.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,5", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 8.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/11,5", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.0, 8.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/1,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [2.25, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/2,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [3.75, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/3,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [5.25, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/4,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [6.75, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/5,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [8.25, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/6,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [9.75, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/7,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [11.25, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/8,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [12.75, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/9,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/10,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/11,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.0, 9.75], "yaw": 0.0, "scale": 1.0}
+  ],
+  "characters": [
+    {"id": "groupe-1", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 0},
+    {"id": "groupe-2", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 1},
+    {"id": "groupe-3", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 2},
+    {"id": "groupe-4", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [8.25, 0.0, 5.25], "heading": 90.0, "party": 3}
+  ],
+  "shots": [
+    {"id": "arene", "target": [9.0, 1.0, 5.25], "heading": 0.0, "pitch": 42.0, "distance": 18.0, "comment": "L'arène vide, depuis le sud : le groupe y attend le combat du LOT-1017."}
+  ]
+}

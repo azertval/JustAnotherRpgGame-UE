@@ -8,7 +8,11 @@
 #include "Engine/Engine.h"
 #include "Engine/Font.h"
 #include "Engine/GameInstance.h"
+#include "Engine/Texture2D.h"
 #include "Game/JadgExploration.h"
+#include "ImageUtils.h"
+#include "TextureResource.h"
+#include "Player/JadgControls.h"
 
 namespace
 {
@@ -26,6 +30,21 @@ namespace
 		if (Key == TEXT("interaction.sign")) { return TEXT("Lire"); }
 		return TEXT("Interagir");
 	}
+}
+
+UTexture2D* AJadgHud::PortraitOf(const FString& File)
+{
+	if (File.IsEmpty())
+	{
+		return nullptr;
+	}
+	if (const TObjectPtr<UTexture2D>* Known = Portraits.Find(File))
+	{
+		return Known->Get();
+	}
+	UTexture2D* Read = FImageUtils::ImportFileAsTexture2D(File);
+	Portraits.Add(File, Read);
+	return Read;
 }
 
 float AJadgHud::Measure(const FString& Text, float Scale) const
@@ -82,6 +101,7 @@ void AJadgHud::DrawHUD()
 	{
 		return;
 	}
+	const FString InteractKey = TEXT("[") + UJadgControls::KeyLabel(TEXT("Interact")) + TEXT("]  ");
 	const float Width = Canvas->SizeX;
 	const float Height = Canvas->SizeY;
 	// Les tailles sont écrites pour 1080 lignes et suivent la définition.
@@ -117,9 +137,17 @@ void AJadgHud::DrawHUD()
 	{
 		FIntPoint Cell;
 		FString Key;
-		if (Exploration->Target(Cell, Key))
+		if (!Exploration->Encounter().IsEmpty())
 		{
-			const FString Prompt = TEXT("[Espace]  ") + PromptFor(Key);
+			// La bascule vers le combat : le combat lui-même est le LOT-1017.
+			const FString Title = TEXT("Rencontre : ") + Exploration->Encounter();
+			const FString Back = InteractKey + TEXT("Revenir — le combat n'est pas encore joué");
+			Write(Title, (Width - Measure(Title, Scale * 1.3f)) / 2.0f, Height * 0.40f, Gold, Scale * 1.3f);
+			Write(Back, (Width - Measure(Back, Scale)) / 2.0f, Height * 0.46f, Ink, Scale);
+		}
+		else if (Exploration->Target(Cell, Key))
+		{
+			const FString Prompt = InteractKey + PromptFor(Key);
 			Write(Prompt, (Width - Measure(Prompt, Scale)) / 2.0f, Height * 0.82f, Ink, Scale);
 		}
 		return;
@@ -127,11 +155,23 @@ void AJadgHud::DrawHUD()
 
 	// Le dialogue : un bandeau en bas de l'écran.
 	const float Top = Height * 0.72f;
-	const float Left = Width * 0.14f;
-	const float Inner = Width * 0.72f;
-	FCanvasTileItem Back(FVector2D(Left - Margin, Top - Margin), FVector2D(Inner + 2.0f * Margin, Height - Top), Panel);
+	const float Edge = Width * 0.14f;
+	const float Whole = Width * 0.72f;
+	FCanvasTileItem Back(FVector2D(Edge - Margin, Top - Margin), FVector2D(Whole + 2.0f * Margin, Height - Top), Panel);
 	Back.BlendMode = SE_BLEND_Translucent;
 	Canvas->DrawItem(Back);
+
+	// Le portrait de qui parle, à gauche du texte, s'il en a un.
+	float Left = Edge;
+	if (const UTexture2D* Face = PortraitOf(Exploration->SpeakerPortrait()))
+	{
+		const float Side = Height - Top - Margin;
+		FCanvasTileItem Picture(FVector2D(Edge, Top), Face->GetResource(), FVector2D(Side, Side), FLinearColor::White);
+		Picture.BlendMode = SE_BLEND_Translucent;
+		Canvas->DrawItem(Picture);
+		Left += Side + Margin;
+	}
+	const float Inner = Whole - (Left - Edge);
 
 	Y = Top;
 	Y += Write(Exploration->Speaker(), Left, Y, Gold, Scale * 1.15f);

@@ -34,10 +34,16 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
   une graine par issue), 108 images par seconde sur les cartes d'essai à midi comme à 22 h. La
   porte du LOT-1012 reçoit le groupe de quatre ; elle se rend à 88 images par seconde, 89 avec le code
   d'avant ce lot — plus les 119 de sa clôture, et la cause n'est pas dans ce
-  lot. **Ce qui n'est pas fait** est dans la fiche : personne n'a joué dans une fenêtre (les tests
-  ne passent pas par le clavier ni la souris), le portrait du PNJ, les étages, un coffre à l'essai ;
-  la touche d'interaction est Espace, pas E, qui tourne la caméra. La fiche reste `a-faire` tant
-  que le LOT-1014, son prérequis, n'est pas clos.
+  lot. **Reprise du même jour**, sur décision de l'auteur : `F` interagit, `C` tenue fait tourner la
+  caméra à la souris. Le parcours joue désormais **par les touches et les clics du joueur**,
+  injectés dans son contrôleur : quinze commandes jugées à leur effet, puis la quête au clic et au
+  clavier. Le dialogue affiche le **portrait** de la figurine de celui qui parle ; les étals
+  portent un **coffre**, qui ne s'ouvre qu'une fois, et un panneau ; la file monte une **rampe**
+  jusqu'à une terrasse ; un talus garde la caméra **au-dessus du sol** ; « combattre » engage la
+  **bascule vers le combat**, vers une arène vide d'où `F` ramène, sans issue (le combat est le
+  LOT-1017). Dix tests du moteur, 274 tests des scripts, quête rendue en 52 s. **Ce qui reste**
+  est dans la fiche : la main sur la souris, deux étages superposés, la carte de Core de la porte.
+  Le LOT-1014 est clos par l'auteur le 8 octobre 2026.
 - **Le socle du nouveau moteur se construit, se teste et se capture en une commande** (LOT-1014,
   8 octobre 2026). `scripts/build.ps1 -Unreal` enchaîne désormais cinq temps, sans fenêtre : la
   cible d'éditeur, le commandlet `JadgContentCheck`, les **premiers tests d'automatisation du

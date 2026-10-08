@@ -145,6 +145,9 @@ public:
 	/// La case de ce que le meneur solliciterait maintenant, et sa clé d'invite.
 	bool Target(FIntPoint& OutCell, FString& OutPrompt) const;
 
+	/// Vrai si l'entité @p EntityId ne se sollicite qu'une fois et l'a été : un coffre ouvert.
+	bool IsConsumed(const FString& EntityId) const;
+
 	/// La valeur d'un drapeau déclaré à valeurs, ou « 1 » / vide pour un fait posé ou non.
 	FString Flag(const FString& Key) const;
 
@@ -163,6 +166,9 @@ public:
 
 	bool InDialogue() const;
 	FString Speaker() const;
+	/// Le fichier du portrait de celui qui parle (`<figurine>/portrait.png`, la figurine étant celle
+	/// que son entité nomme) ; vide s'il n'en a pas — pas de figurine, ou les kits absents du poste.
+	FString SpeakerPortrait() const { return Portrait; }
 	FString Line() const;
 	/// Le jet joué par le dernier geste, écrit pour le joueur ; vide s'il n'y en a pas eu.
 	FString LastCheck() const;
@@ -175,6 +181,20 @@ public:
 	void SetSeed(uint64 Seed);
 	/// Ce que le dernier dialogue a demandé au jeu : `encounter:<id>`, `ending:<voie>`.
 	const TArray<FString>& Requests() const { return Asked; }
+
+	// --- La rencontre -------------------------------------------------------------------------
+
+	/**
+	 * @brief La rencontre qu'un dialogue ou une interaction vient d'engager ; vide s'il n'y en a pas.
+	 *
+	 * C'est la **bascule vers le combat** : tant qu'elle tient, la carte est gelée et l'heure ne
+	 * passe pas. Le combat lui-même est le LOT-1017 ; d'ici là le groupe attend dans l'arène vide,
+	 * et `LeaveEncounter` le ramène, sans victoire ni défaite.
+	 */
+	FString Encounter() const { return EncounterId; }
+
+	/// Quitte la rencontre engagée, sans issue : la carte se dégèle.
+	void LeaveEncounter();
 
 	// --- Le groupe ----------------------------------------------------------------------------
 
@@ -199,10 +219,13 @@ private:
 	TArray<FString> Errors;
 	TArray<FString> Asked;
 	TMap<FString, FString> Texts;
+	FString Portrait;
+	FString EncounterId;
 	FString NoticeText;
 	double NoticeUntil = 0.0;
 
 	void Announce(const FString& Message);
 	void OpenDialogue(const FString& DialogueId);
+	void Engage(const FString& Id);
 	void CloseDialogueIfEnded();
 };

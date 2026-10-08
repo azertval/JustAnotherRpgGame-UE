@@ -3,7 +3,7 @@ id = "LOT-1014"
 titre = "Le socle : Core en module, données, build, tests, CI"
 version = "0.0.3"
 filiere = "moteur"
-statut = "en-cours"
+statut = "livre"
 taille = "L"
 resume = "Le nouveau dépôt existe (D-58), reçoit par passation ce que la version garde, construit Core comme module du projet Unreal, lit les données de contenu, se teste et se contrôle en ligne de commande : tout lot suivant s'y pose."
 prerequis = ["LOT-1012"]
@@ -270,3 +270,24 @@ retirés. `lint_planning`, `lint_docs` et `generate_cahier_test --check` sont ve
   relevé ;
 - la publication d'une version, la référence Doxygen et la page qualité du site, que le LOT-1023
   reprend ; les répertoires de `Source/Elements` à embarquer dans un paquet.
+
+## Clôture — 8 octobre 2026
+
+L'auteur clôt le lot le 8 octobre 2026 : « le lot 1014 est livrée ». La fiche passe à `livre` sur
+cette décision, PR #4. Il n'a pas écrit d'autre verdict que celui-là.
+
+Le lot est clos **sans que tous ses critères soient tenus** ; ce qui manque est écrit plus haut
+(« Les critères », « Ce qui reste au lot ») et passe aux lots qui le reprennent :
+
+- **Le runner auto-hébergé** n'existe pas, par décision (D-61) : la construction du moteur, ses
+  tests et ses captures se vérifient sur le poste avant chaque PR.
+- **« Aucune ligne de Qt »** n'est pas tenu : le catalogue des traductions anglaises reste au
+  format Qt Linguist (LOT-1020), les commentaires de Core et `test_iso_projection.cpp` partent
+  avec la grille (LOT-1017).
+- **Les cinq spécifications** et la recette manuelle du cahier de tests décrivent encore l'ancien
+  jeu : LOT-1023.
+- **`test_dialogue.cpp`** n'est toujours pas compilé (LOT-1020) ; le balayage des familles
+  d'entités est revenu au LOT-1016.
+- **Aucune partie ne se crée** depuis un écran : LOT-1020.
+- La publication d'une version, la référence Doxygen, la page qualité du site et les répertoires
+  à embarquer dans un paquet : LOT-1023.

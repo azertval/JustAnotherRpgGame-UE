@@ -3,7 +3,7 @@
   "name": "essai/etals",
   "width": 16,
   "height": 12,
-  "nextEntityId": 6,
+  "nextEntityId": 8,
   "tiles": [
     {"x": 0, "y": 0, "type": "wall"},
     {"x": 1, "y": 0, "type": "wall"},
@@ -67,7 +67,7 @@
       "x": 3,
       "y": 2,
       "dialogue": "mere",
-      "figure": "pantin"
+      "figure": "Regions/central-empire/capital/martpart/Characters/mother"
     },
     {
       "id": "e2",
@@ -75,7 +75,7 @@
       "x": 3,
       "y": 3,
       "dialogue": "enfant",
-      "figure": "pantin",
+      "figure": "Regions/central-empire/capital/Common/Characters/child",
       "presenceFlag": "quete.pommes",
       "presenceTest": "equals",
       "presenceValue": "enfant-libere"
@@ -108,6 +108,18 @@
       "requiresFlag": "",
       "sealed": false,
       "targetMap": "essai/parvis"
+    },
+    {
+      "id": "e6",
+      "type": "chest",
+      "x": 7,
+      "y": 6
+    },
+    {
+      "id": "e7",
+      "type": "sign",
+      "x": 4,
+      "y": 9
     }
   ]
 }

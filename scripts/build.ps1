@@ -42,12 +42,13 @@
     Avec -Unreal, sans -Scene : ne pas construire la scène du socle ni prendre ses captures.
 
 .PARAMETER Parcours
-    Avec -Unreal, à la place de -Scene : construire les deux cartes d'essai de l'exploration
-    (essai-1016-etals, essai-1016-parvis, LOT-1016), puis lancer le jeu hors écran sur la première
-    et y jouer la quête « Des pommes pour l'arène » sans personne : le meneur va parler à la mère,
-    passe le portail, plaide devant le garde (jet de Persuasion, graine -Seed), revient. Chaque
-    réplique est capturée, HUD compris. Sorties dans Saved/Captures/parcours-1016/. Demande un
-    processeur graphique.
+    Avec -Unreal, à la place de -Scene : construire les cartes d'essai de l'exploration
+    (essai-1016-etals, essai-1016-parvis et l'arène vide essai-1016-arene, LOT-1016), puis lancer
+    le jeu hors écran sur la première et y jouer la quête « Des pommes pour l'arène » sans
+    personne, par les touches et les clics du joueur, injectés dans son contrôleur : l'essai de
+    chaque commande de caméra, la mère, le coffre, le portail, le garde (jet de Persuasion, graine
+    -Seed), le maître d'arène et l'arène vide, le retour. Chaque réplique est capturée, HUD
+    compris. Sorties dans Saved/Captures/parcours-1016/. Demande un processeur graphique.
 
 .PARAMETER Seed
     Avec -Parcours : la graine du jet de Persuasion (défaut : 1, qui le réussit — relevé par le
@@ -89,8 +90,8 @@
 
 .EXAMPLE
     pwsh scripts/build.ps1 -Unreal -Parcours
-    Construit, vérifie, reconstruit les deux cartes d'essai de l'exploration, puis y joue la quête
-    des pommes dans le jeu lancé hors écran.
+    Construit, vérifie, reconstruit les cartes d'essai de l'exploration, puis y joue la quête des
+    pommes dans le jeu lancé hors écran.
 #>
 [CmdletBinding()]
 param(
@@ -228,7 +229,7 @@ if ($Unreal) {
         & (Get-Python) (Join-Path $root 'scripts\maps\build_essai_maps.py') --check
         if ($LASTEXITCODE -ne 0) { Fail "Les cartes d'essai de l'exploration sont périmées : python scripts/maps/build_essai_maps.py" }
         $builder = (Join-Path $root 'scripts\maps\build_scene_unreal.py') -replace '\\', '/'
-        foreach ($trial in @('essai-1016-etals', 'essai-1016-parvis')) {
+        foreach ($trial in @('essai-1016-etals', 'essai-1016-parvis', 'essai-1016-arene')) {
             Write-Host "== Scène « $trial » : construction de la carte par script (sans fenêtre) ==" -ForegroundColor Cyan
             & $editorCmd "$uproject" -run=pythonscript "-script=$builder" "-JadgScene=$trial" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
             if ($LASTEXITCODE -ne 0) { Fail "La construction de la scène $trial a échoué (code $LASTEXITCODE)." }

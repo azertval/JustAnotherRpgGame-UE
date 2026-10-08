@@ -49,6 +49,24 @@ bool UJadgControls::IsKnown(FName Command)
 		|| Command == RecenterCommand;
 }
 
+FKey UJadgControls::KeyOf(FName Command)
+{
+	for (const FJadgBinding& Binding : GetDefault<UJadgControls>()->Bindings)
+	{
+		if (Binding.Command == Command)
+		{
+			return Binding.Key;
+		}
+	}
+	return FKey();
+}
+
+FString UJadgControls::KeyLabel(FName Command)
+{
+	const FKey Key = KeyOf(Command);
+	return Key.IsValid() ? Key.GetDisplayName(false).ToString() : FString();
+}
+
 AJadgPlayerController::AJadgPlayerController()
 {
 	bShowMouseCursor = true;
@@ -226,11 +244,22 @@ void AJadgPlayerController::Press(FName Command)
 	}
 }
 
+void AJadgPlayerController::PointAt(const FVector2D& ScreenPosition)
+{
+	Pointer = ScreenPosition;
+}
+
+bool AJadgPlayerController::PointerHit(FHitResult& OutHit) const
+{
+	return Pointer.IsSet() ? GetHitResultAtScreenPosition(Pointer.GetValue(), ECC_Visibility, true, OutHit)
+						   : GetHitResultUnderCursor(ECC_Visibility, true, OutHit);
+}
+
 void AJadgPlayerController::OrderUnderCursor()
 {
 	AJadgParty* Party = AJadgParty::Find(GetWorld());
 	FHitResult Hit;
-	if (Party == nullptr || !GetHitResultUnderCursor(ECC_Visibility, true, Hit))
+	if (Party == nullptr || !PointerHit(Hit))
 	{
 		return;
 	}

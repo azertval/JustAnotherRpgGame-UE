@@ -33,14 +33,26 @@ class UJadgExploration;
  * Il tient aussi ce que la carte de Core fait paraître : les PNJ présents ou non sous les
  * drapeaux, les lumières posées comme entité `light`, le contour de ce que le meneur peut
  * solliciter.
+ *
+ * **La bascule vers le combat** : une rencontre engagée (`UJadgExploration::Encounter`) ouvre
+ * l'arène vide (`EmptyArenaMap`, `Config/DefaultGame.ini`). Le combat est le LOT-1017 : dans
+ * l'arène, la touche d'interaction quitte la rencontre sans issue et rouvre la carte quittée, le
+ * groupe là où il était.
  */
-UCLASS()
+UCLASS(config = Game)
 class AJadgParty : public AInfo
 {
 	GENERATED_BODY()
 
 public:
 	AJadgParty();
+
+	/// La carte du moteur où mène une rencontre engagée, tant que le combat n'existe pas.
+	UPROPERTY(config)
+	FString EmptyArenaMap;
+
+	/// Vrai si la carte en cours est l'arène vide d'une rencontre engagée.
+	bool InArena() const;
 
 	/// Le groupe de la carte, ou rien avant que le mode de jeu ne l'ait créé.
 	static AJadgParty* Find(const UWorld* World);
@@ -115,6 +127,7 @@ private:
 	void PlaceParty(const FVector2D& LeaderCell);
 	void ResetTrail();
 	void Travel(const FString& MapId);
+	void Open(const FString& Package);
 	void FollowLeader();
 	void RefreshEntities();
 	void SetOutlined(const FString& EntityId, bool bOutlined);

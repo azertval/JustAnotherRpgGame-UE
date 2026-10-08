@@ -20,6 +20,7 @@
 #include "Misc/PackageName.h"
 #include "NavigationSystem.h"
 #include "Player/JadgCameraPawn.h"
+#include "UObject/Package.h"
 #include "World/JadgDayLight.h"
 #include "World/JadgMapFrame.h"
 
@@ -126,6 +127,12 @@ void AJadgParty::BeginPlay()
 			// Une carte de Core qui ne se lit pas : la carte du moteur se joue sans elle.
 			Frame = nullptr;
 		}
+	}
+	if (Frame == nullptr)
+	{
+		// Sans carte de Core, le groupe reste où la scène le pose ; posé sur un seul point (une
+		// arène vide), il se range comme à une arrivée.
+		bLinedUp = Members.Num() < 2 || FVector::Dist2D(Members[0]->Feet(), Members[1]->Feet()) > 10.0;
 	}
 	ResetTrail();
 	FollowWithCamera();
@@ -253,7 +260,7 @@ void AJadgParty::Tick(float DeltaSeconds)
 		return;
 	}
 
-	if (!bLinedUp && Head != nullptr && Frame != nullptr)
+	if (!bLinedUp && Head != nullptr)
 	{
 		PlaceParty(CellOf(Head->Feet()));
 		ResetTrail();
@@ -281,6 +288,28 @@ void AJadgParty::Tick(float DeltaSeconds)
 		}
 	}
 
+	if (!Exploration->Encounter().IsEmpty() && !Exploration->InDialogue())
+	{
+		if (!InArena())
+		{
+			// La bascule vers le combat : l'arène vide, tant que le combat n'existe pas (LOT-1017).
+			if (FPackageName::DoesPackageExist(EmptyArenaMap))
+			{
+				Open(EmptyArenaMap);
+				return;
+			}
+			UE_LOG(LogJadg, Error, TEXT("[Groupe] l'arène vide « %s » n'existe pas : la rencontre est quittée"), *EmptyArenaMap);
+			Exploration->LeaveEncounter();
+		}
+		else if (bInteract)
+		{
+			// Dans l'arène, la touche d'interaction ramène sur la carte quittée.
+			Exploration->LeaveEncounter();
+			Open(AJadgMapFrame::MapPackage(Exploration->MapId()));
+			return;
+		}
+	}
+
 	const bool bOnCoreMap = Frame != nullptr && Head != nullptr;
 	const TArray<FJadgEvent> Events = Exploration->Step(bOnCoreMap ? &Cell : nullptr, bInteract, DeltaSeconds);
 	for (const FJadgEvent& Event : Events)
@@ -289,11 +318,6 @@ void AJadgParty::Tick(float DeltaSeconds)
 		{
 			Travel(Event.Value);
 			return;
-		}
-		if (Event.Kind == EJadgEventKind::Encounter)
-		{
-			// La bascule vers le combat se pose ici ; le combat lui-même est le LOT-1017.
-			UE_LOG(LogJadg, Display, TEXT("[Groupe] rencontre « %s » engagée : le combat est le LOT-1017"), *Event.Value);
 		}
 	}
 	if (Head == nullptr)
@@ -433,9 +457,20 @@ void AJadgParty::Travel(const FString& MapId)
 			*Package);
 		return;
 	}
-	UE_LOG(LogJadg, Display, TEXT("[Groupe] portail vers « %s » : %s"), *MapId, *Package);
+	UE_LOG(LogJadg, Display, TEXT("[Groupe] portail vers « %s »"), *MapId);
+	Open(Package);
+}
+
+void AJadgParty::Open(const FString& Package)
+{
+	UE_LOG(LogJadg, Display, TEXT("[Groupe] carte du moteur : %s"), *Package);
 	bTravelling = true;
 	UGameplayStatics::OpenLevel(this, FName(*Package));
+}
+
+bool AJadgParty::InArena() const
+{
+	return !EmptyArenaMap.IsEmpty() && GetWorld()->GetOutermost()->GetName() == EmptyArenaMap;
 }
 
 void AJadgParty::RefreshEntities()

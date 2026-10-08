@@ -26,9 +26,15 @@ def test_un_mur_de_la_carte_est_un_mur_de_la_scene(identifier):
     level, scene = written(identifier)
     walls = {(tile["x"], tile["y"]) for tile in level["tiles"] if tile["type"] == "wall"}
     blocks = {(round(item["position"][0] / essai.CELL - 0.5), round(item["position"][2] / essai.CELL - 0.5))
-              for item in scene["objects"]}
+              for item in scene["objects"] if item["folder"] == "murs"}
     assert walls == blocks
-    assert len(scene["objects"]) == len(walls)
+    # Le reste du décor montre une entité de la carte, sur sa case : un coffre, un panneau.
+    shown = {item["entity"]: item for item in scene["objects"] if item["folder"] != "murs"}
+    places = {entity["id"]: entity for entity in level["entities"]}
+    assert sorted(places[key]["type"] for key in shown) == (["chest", "sign"] if identifier == "essai/etals" else [])
+    for key, item in shown.items():
+        assert item["position"] == essai.centre(places[key]["x"], places[key]["y"])
+    assert len(scene["objects"]) == len(walls) + len(shown)
     # Le sol et la navigation couvrent la grille entière, coin de la case (0, 0) à l'origine.
     extent = [0.0, 0.0, level["width"] * essai.CELL, level["height"] * essai.CELL]
     assert scene["fills"][0]["areas"] == [extent]
@@ -73,6 +79,24 @@ def test_une_entite_ne_tient_pas_dans_un_mur():
             assert (entity["x"], entity["y"]) not in walls, f"{identifier} : {entity['id']} est dans un mur"
         entries = [tile for tile in level["tiles"] if tile["type"] == "entry"]
         assert len(entries) == 1 and (entries[0]["x"], entries[0]["y"]) not in walls
+
+
+def test_une_figurine_se_nomme_par_son_dossier_et_ne_s_ecrit_que_pour_un_pnj():
+    for identifier in essai.MAPS:
+        level, _ = written(identifier)
+        for entity in level["entities"]:
+            assert ("figure" in entity) == (entity["type"] == "npc")
+            assert not {"heading", "block", "entry"} & set(entity), "ce que la scène seule lit n'entre pas dans la carte"
+            if entity["type"] == "npc":
+                assert entity["figure"].startswith("Regions/") and entity["figure"].count("/") >= 3
+
+
+def test_l_arene_vide_ne_joue_aucune_carte_de_core():
+    scene = json.loads(essai.scene_text(None, essai.ARENA))
+    assert "level" not in scene
+    assert scene["map"] == "/Game/Maps/Essai1016Arene"
+    assert sorted(character["party"] for character in scene["characters"]) == [0, 1, 2, 3]
+    assert all(item["folder"] == "murs" for item in scene["objects"])
 
 
 def test_un_plan_irregulier_est_refuse():

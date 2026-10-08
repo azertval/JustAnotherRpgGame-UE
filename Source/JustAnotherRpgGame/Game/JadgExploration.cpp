@@ -13,6 +13,7 @@
 #include "Core/Rpg/Dialogue.h"
 #include "Core/Rpg/Inventory.h"
 #include "Core/Rpg/Party.h"
+#include "Core/Resources/ScenePlace.h"
 #include "Core/Rpg/Skill.h"
 #include "Core/World/ExplorationSession.h"
 #include "Core/World/LightSource.h"
@@ -316,9 +317,13 @@ TArray<FJadgEvent> UJadgExploration::Step(const FVector2D* LeaderCell, bool bInt
 			break;
 		case core::ExplorationEventKind::Encounter:
 			Added.Kind = EJadgEventKind::Encounter;
+			Engage(Added.Value);
 			break;
 		case core::ExplorationEventKind::Interacted:
 			Added.Kind = EJadgEventKind::Interacted;
+			// Core ne dit que la famille : ce qu'un coffre contient vient avec l'inventaire à l'écran.
+			Announce(Added.Value == TEXT("chest") ? TEXT("Le coffre est ouvert.")
+				: Added.Value == TEXT("sign") ? TEXT("Vous lisez le panneau.") : TEXT("C'est fait."));
 			break;
 		case core::ExplorationEventKind::QuestAdvanced:
 		{
@@ -406,6 +411,40 @@ bool UJadgExploration::Target(FIntPoint& OutCell, FString& OutPrompt) const
 	return true;
 }
 
+bool UJadgExploration::IsConsumed(const FString& EntityId) const
+{
+	const core::MapEntity* Entity = State->Find(ToUtf8(EntityId));
+	if (Entity == nullptr)
+	{
+		return false;
+	}
+	for (const core::Interactable& Candidate : State->Session->interactables())
+	{
+		if (Candidate.position == Entity->position && Candidate.type == Entity->type)
+		{
+			return Candidate.isConsumable() && State->Session->flags().isSet(Candidate.consumedFlag);
+		}
+	}
+	return false;
+}
+
+void UJadgExploration::Engage(const FString& Id)
+{
+	EncounterId = Id;
+	State->Session->freeze(true);
+	UE_LOG(LogJadg, Display, TEXT("[Exploration] rencontre « %s » engagée"), *Id);
+}
+
+void UJadgExploration::LeaveEncounter()
+{
+	if (!EncounterId.IsEmpty())
+	{
+		UE_LOG(LogJadg, Display, TEXT("[Exploration] rencontre « %s » quittée sans issue : le combat est le LOT-1017"), *EncounterId);
+		EncounterId.Reset();
+		State->Session->freeze(false);
+	}
+}
+
 FString UJadgExploration::Flag(const FString& Key) const
 {
 	const core::WorldFlags& Flags = State->Session->flags();
@@ -447,6 +486,32 @@ void UJadgExploration::OpenDialogue(const FString& DialogueId)
 		return;
 	}
 	Asked.Reset();
+	// Le portrait de celui qui parle : la figurine du PNJ présent qui porte ce dialogue.
+	Portrait.Reset();
+	if (const core::Level* Map = State->Session->map())
+	{
+		const std::filesystem::path Assets = FJadgPaths::ToPath(FJadgPaths::ElementsDir()) / "Assets";
+		for (const core::MapEntity& Entity : Map->entities())
+		{
+			const auto Spoken = Entity.properties.find(std::string(core::NPC_DIALOGUE_PROPERTY));
+			const auto Figure = Entity.properties.find(std::string(core::NPC_FIGURE_PROPERTY));
+			const std::string* Name = Spoken != Entity.properties.end() ? std::get_if<std::string>(&Spoken->second) : nullptr;
+			const std::string* Slug = Figure != Entity.properties.end() ? std::get_if<std::string>(&Figure->second) : nullptr;
+			if (Entity.type != core::NPC_ENTITY_TYPE || Name == nullptr || *Name != Graph->id || Slug == nullptr
+				|| !State->Session->isPresent(Entity))
+			{
+				continue;
+			}
+			const std::string Folder = core::figureDirectory(core::resolveFigures(Assets, ""), *Slug);
+			const std::filesystem::path File = Assets / Folder / "portrait.png";
+			std::error_code Ignored;
+			if (!Folder.empty() && std::filesystem::is_regular_file(File, Ignored))
+			{
+				Portrait = FString(File.wstring().c_str()).Replace(TEXT("\\"), TEXT("/"));
+			}
+			break;
+		}
+	}
 	++State->Conversations;
 	const std::uint64_t Seed = State->NextSeed != 0 ? State->NextSeed : State->Conversations;
 	State->NextSeed = 0;
@@ -471,11 +536,16 @@ void UJadgExploration::CloseDialogueIfEnded()
 		State->Listener.reset();
 		State->Random.reset();
 		State->Session->freeze(false);
+		Portrait.Reset();
 		for (const FString& Request : Asked)
 		{
-			// La bascule vers le combat et l'écran de fin sont posés ici ; le LOT-1017 et le LOT-1020
-			// les ouvrent.
+			// L'écran de fin est posé ici, le LOT-1020 l'ouvre ; une rencontre engage la bascule.
 			UE_LOG(LogJadg, Display, TEXT("[Exploration] le dialogue demande : %s"), *Request);
+			FString Id;
+			if (Request.Split(TEXT("encounter:"), nullptr, &Id))
+			{
+				Engage(Id);
+			}
 		}
 	}
 }

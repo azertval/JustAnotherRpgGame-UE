@@ -3,7 +3,7 @@
   "name": "essai/parvis",
   "width": 16,
   "height": 12,
-  "nextEntityId": 9,
+  "nextEntityId": 10,
   "tiles": [
     {"x": 0, "y": 0, "type": "wall"},
     {"x": 1, "y": 0, "type": "wall"},
@@ -73,7 +73,7 @@
       "x": 8,
       "y": 3,
       "dialogue": "garde",
-      "figure": "pantin",
+      "figure": "Regions/central-empire/Common/Characters/ironhand-soldier",
       "presenceFlag": "quete.pommes",
       "presenceTest": "equals",
       "presenceValue": "acceptee|persuasion-echouee"
@@ -84,7 +84,7 @@
       "x": 9,
       "y": 3,
       "dialogue": "enfant",
-      "figure": "pantin",
+      "figure": "Regions/central-empire/capital/Common/Characters/child",
       "presenceFlag": "quete.pommes",
       "presenceTest": "equals",
       "presenceValue": "acceptee|persuasion-echouee"
@@ -120,6 +120,14 @@
     },
     {
       "id": "e7",
+      "type": "npc",
+      "x": 12,
+      "y": 7,
+      "dialogue": "maitre-arene",
+      "figure": "Regions/central-empire/capital/arenarea/arena-of-fate/Characters/arena-master"
+    },
+    {
+      "id": "e8",
       "type": "portal",
       "x": 15,
       "y": 9,
@@ -129,7 +137,7 @@
       "targetMap": "essai/etals"
     },
     {
-      "id": "e8",
+      "id": "e9",
       "type": "zone",
       "x": 5,
       "y": 2,

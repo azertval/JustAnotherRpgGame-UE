@@ -121,7 +121,9 @@
     {"id": "mur/12,11", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [18.75, 0.0, 17.25], "yaw": 0.0, "scale": 1.0},
     {"id": "mur/13,11", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [20.25, 0.0, 17.25], "yaw": 0.0, "scale": 1.0},
     {"id": "mur/14,11", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [21.75, 0.0, 17.25], "yaw": 0.0, "scale": 1.0},
-    {"id": "mur/15,11", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 0.0, 17.25], "yaw": 0.0, "scale": 1.0}
+    {"id": "mur/15,11", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 0.0, 17.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "chest-e6", "folder": "mobilier", "mesh": "Scene/ilot/wall.glb", "position": [11.25, 0.0, 9.75], "yaw": 0.0, "height": 0.7, "entity": "e6"},
+    {"id": "sign-e7", "folder": "mobilier", "mesh": "Scene/ilot/wall.glb", "position": [6.75, 0.0, 14.25], "yaw": 0.0, "height": 1.4, "entity": "e7"}
   ],
   "characters": [
     {"id": "groupe-1", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [5.25, 0.0, 12.75], "heading": 90.0, "party": 0},

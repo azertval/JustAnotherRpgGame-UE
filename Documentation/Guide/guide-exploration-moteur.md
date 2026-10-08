@@ -33,8 +33,8 @@ deux constructions : elle se teste hors du moteur
 | `AJadgCameraPawn` | `Player/JadgCameraPawn.h` | la caméra libre de D-49, à ressort |
 | `AJadgPlayerController`, `UJadgControls` | `Player/` | les commandes, lues dans un fichier texte |
 | `AJadgDayLight` | `World/JadgDayLight.h` | l'heure du monde appliquée au soleil, au ciel et aux lumières de nuit |
-| `AJadgHud` | `UI/JadgHud.h` | le HUD minimal : groupe, heure, annonce, invite, dialogue |
-| `AJadgWalkthrough` | `Capture/JadgWalkthrough.h` | joue la quête des pommes sur les cartes d'essai, sans personne |
+| `AJadgHud` | `UI/JadgHud.h` | le HUD minimal : groupe, heure, annonce, invite, dialogue et portrait, rencontre |
+| `AJadgWalkthrough` | `Capture/JadgWalkthrough.h` | joue la quête des pommes sur les cartes d'essai, sans personne, par les touches et les clics du joueur |
 
 Aucun en-tête du moteur ne montre un type de Core : `UJadgExploration` parle en `FString` et en
 `FVector2D`, et garde l'état de Core derrière un pointeur (`FState`). Une case est une position
@@ -66,7 +66,7 @@ Ce que la carte de Core fait paraître :
   (`AJadgDayLight::AddLamp`) : une lumière de nuit porte une ombre et suit `lamps` de la table du
   jour, un feu toujours allumé éclaire sans ombre portée ;
 - un **objet du décor** peut montrer une entité (`"entity"` sur un objet) : il est présent et
-  désignable avec elle ;
+  désignable avec elle — un coffre, qui ne s'ouvre qu'une fois, un panneau, qui se relit ;
 - les **portails**, les **points d'arrivée** et les **zones** n'ont pas d'acteur : c'est la case du
   meneur qui les déclenche.
 
@@ -102,14 +102,31 @@ solliciter** : l'écran la montre avant qu'on appuie.
 - Le **contour** : l'acteur désigné est marqué dans le tampon de gabarit (profondeur
   personnalisée), et une matière de post-traitement dessine son contour (`M_Outline`, écrite par
   `build_scene_unreal.py` ; `r.CustomDepth=3`).
-- La **touche** d'interaction sollicite la cible du moment.
-- Le **clic** sur un PNJ envoie le meneur à une case de lui, puis le fait interagir dès qu'il l'a
-  à portée.
+- La **touche** d'interaction (`F`) sollicite la cible du moment.
+- Le **clic** sur un PNJ, un coffre ou un panneau envoie le meneur à une case de lui, puis le fait
+  interagir dès qu'il l'a à portée.
+
+Un coffre ouvert n'est plus une cible : Core ne le désigne plus, le contour le quitte. Core ne dit
+que la famille de ce qu'on sollicite ; ce qu'un coffre contient viendra avec l'inventaire à l'écran.
 
 Un dialogue qui s'ouvre **gèle la carte** : le meneur s'arrête, l'heure ne passe plus. Le HUD
 écrit qui parle, la réplique, les réponses numérotées — une réponse qui mène à un jet l'annonce
 (« Persuasion · DD 15 ») — et le jet qui vient d'être joué. La graine du jet est un compteur de la
 partie, ou celle que `UJadgExploration::SetSeed` fixe.
+
+**Le portrait** de celui qui parle est celui de sa figurine : la propriété `figure` de son entité,
+résolue par Core (`core::figureDirectory`), donne un dossier de `Source/Elements/Assets`, et le HUD
+y lit `portrait.png`. Rien n'en est importé dans le projet. Sans figurine, ou sur un poste sans les
+kits, le dialogue s'écrit sans portrait.
+
+## La bascule vers le combat
+
+Une rencontre s'engage par un dialogue (`startEncounter`, le maître d'arène) ou par une entité de
+la carte. `UJadgExploration::Encounter` la nomme ; tant qu'elle tient, la carte est gelée et
+l'heure ne passe pas. Le combat lui-même est le `LOT-1017` : d'ici là, `AJadgParty` ouvre
+l'**arène vide** (`EmptyArenaMap`, dans `Config/DefaultGame.ini`), le HUD y nomme la rencontre, et
+la touche d'interaction la quitte **sans issue** — ni victoire ni défaite, aucun drapeau — puis
+rouvre la carte quittée, le groupe là où il était.
 
 ## La caméra
 
@@ -141,14 +158,17 @@ en fait des actions d'Enhanced Input créées en C++, sans asset ni Blueprint.
 | Commande | Effet | Touches livrées |
 |---|---|---|
 | `Walk` | le meneur marche vers le point cliqué ; sur un PNJ, il va lui parler | clic gauche |
-| `Interact` | solliciter la cible ; en dialogue, « continuer » | Espace, Entrée |
+| `Interact` | solliciter la cible ; en dialogue, « continuer » ; dans l'arène vide, revenir | F |
 | `NextLeader` | passer la main au suivant | Tab |
-| `Recenter` | ramener la caméra sur le meneur | C, Début |
+| `Recenter` | ramener la caméra sur le meneur | Début |
 | `Choice1` … `Choice6` | donner la réponse de ce rang | 1 … 6 |
-| `Turn`, `Tilt` | tourner, incliner la caméra | A / E, R / F |
-| `Look` + `LookTurn`, `LookTilt` | tourner et incliner à la souris | clic droit tenu |
+| `Turn`, `Tilt` | tourner, incliner la caméra | A / E, R / V |
+| `Look` + `LookTurn`, `LookTilt` | tourner et incliner à la souris | C tenue, ou clic droit tenu |
 | `Zoom` | rapprocher, éloigner | molette |
 | `PanForward`, `PanRight` | déplacer le point visé | Z / S, D / Q, flèches |
+
+`F` pour interagir et `C` pour tourner la caméra sont une décision de l'auteur (8 octobre 2026) ;
+l'invite du HUD écrit la touche que le fichier donne à `Interact`.
 
 ## L'heure
 
@@ -166,7 +186,17 @@ qui déclare une heure fixe (`hour`) se montre à cette heure. `Jadg.Time 22:00`
 | une carte d'essai et ses captures | `pwsh scripts/build.ps1 -Unreal -Scene essai-1016-etals -Capture` |
 | la quête des pommes jouée dans le jeu lancé | `pwsh scripts/build.ps1 -Unreal -Parcours` |
 
-Les deux cartes d'essai sont écrites par `scripts/maps/build_essai_maps.py`, carte de Core et
-description de scène tirées du même plan. Le **parcours** ne triche pas : il donne au groupe les
-ordres qu'un joueur donne et au dialogue les réponses qu'il choisit, capture chaque réplique et
-quitte en erreur si la quête ne se rend pas.
+Les cartes d'essai sont écrites par `scripts/maps/build_essai_maps.py` : deux cartes de Core, chacune
+avec sa description de scène tirée du même plan, et l'arène vide.
+
+Le **parcours** joue par les entrées du joueur : il presse les touches que le fichier donne aux
+commandes, injectées dans le contrôleur (`APlayerController::InputKey`), qui passent donc par
+Enhanced Input comme celles d'un clavier ; un clic est le bouton gauche pressé, le pointeur posé sur
+sa cible (`AJadgPlayerController::PointAt`), après vérification qu'il la désigne. Il essaie d'abord
+chaque commande de caméra et la juge à son effet, puis joue la quête : le clic au sol, la touche
+d'interaction, les réponses au clavier, le clic sur le coffre, sur le maître d'arène, sur la mère.
+Les trois marches vers un portail ou une zone restent des ordres donnés au groupe. Il capture
+chaque réplique et quitte en erreur dès qu'une commande n'a pas son effet.
+
+Ce qu'il ne remplace pas : une main sur la souris. La sensation — vitesse de rotation, pas de la
+molette, précision du clic — se juge dans une fenêtre.

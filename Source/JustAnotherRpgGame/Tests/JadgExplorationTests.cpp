@@ -22,6 +22,7 @@
 #include "Game/JadgExploration.h"
 #include "Game/JadgGameInstance.h"
 #include "Game/JadgGameMode.h"
+#include "HAL/FileManager.h"
 #include "GameFramework/WorldSettings.h"
 #include "Misc/AutomationTest.h"
 #include "NavMesh/NavMeshBoundsVolume.h"
@@ -127,6 +128,37 @@ namespace
 		return Has(Exploration.Step(&From, true, 1.0f / 30.0f), EJadgEventKind::Dialogue, Dialogue) && Exploration.InDialogue();
 	}
 
+	/// Le meneur en @p From se tourne vers @p Direction et sollicite ce qu'il a à portée. Vrai si
+	/// l'interaction a eu lieu sur une entité de la famille @p Type.
+	bool Use(UJadgExploration& Exploration, const FVector2D& From, const FVector2D& Direction, const FString& Type)
+	{
+		Exploration.PlaceHero(From - Direction * 0.05);
+		Exploration.Step(&From, false, 1.0f / 30.0f);
+		return Has(Exploration.Step(&From, true, 1.0f / 30.0f), EJadgEventKind::Interacted, Type);
+	}
+
+	/// Vrai si @p Point est dans le volume du cube du moteur que porte @p Block.
+	bool Inside(const AStaticMeshActor& Block, const FVector& Point)
+	{
+		const FVector Local = Block.GetActorTransform().InverseTransformPosition(Point);
+		return FMath::Abs(Local.X) < 50.0 && FMath::Abs(Local.Y) < 50.0 && FMath::Abs(Local.Z) < 50.0;
+	}
+
+	/// Un cube du moteur posé dans le monde, avant ou après son lancement.
+	AStaticMeshActor* Block(UWorld* World, const FVector& Centre, const FRotator& Rotation, const FVector& Scale)
+	{
+		UStaticMesh* Cube = LoadObject<UStaticMesh>(nullptr, TEXT("/Engine/BasicShapes/Cube.Cube"));
+		AStaticMeshActor* Actor = World->SpawnActor<AStaticMeshActor>(Centre, Rotation);
+		if (Cube == nullptr || Actor == nullptr)
+		{
+			return nullptr;
+		}
+		Actor->GetStaticMeshComponent()->SetMobility(EComponentMobility::Movable);
+		Actor->GetStaticMeshComponent()->SetStaticMesh(Cube);
+		Actor->SetActorScale3D(Scale);
+		return Actor;
+	}
+
 	/// Donne les réponses @p Answers, les répliques à une seule suite se passant d'elles-mêmes.
 	/// Faux si une réponse n'est pas proposée ou si la conversation ne se termine pas.
 	bool Converse(UJadgExploration& Exploration, const TArray<FString>& Answers)
@@ -168,8 +200,9 @@ namespace
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FJadgExplorationTrialMapsTest, "Jadg.Exploration.CartesDEssai", ExplorationFlags)
 
-/// Les deux cartes d'essai se lisent, leurs entités et leur lumière avec elles, et le portail de
-/// l'une dépose au point d'arrivée de l'autre.
+/// Les deux cartes d'essai se lisent, leurs entités et leur lumière avec elles ; un coffre ne
+/// s'ouvre qu'une fois, un panneau se relit ; celui qui parle a son portrait ; le portail de l'une
+/// dépose au point d'arrivée de l'autre ; un dialogue engage une rencontre, qui gèle la carte.
 bool FJadgExplorationTrialMapsTest::RunTest(const FString& Parameters)
 {
 	FGame Game;
@@ -185,15 +218,60 @@ bool FJadgExplorationTrialMapsTest::RunTest(const FString& Parameters)
 		return false;
 	}
 	TestEqual(TEXT("le meneur est à l'entrée"), Exploration.HeroCell(), Centre(3, 8));
-	TestEqual(TEXT("les entités de la carte"), Exploration.Entities().Num(), 5);
+	TestEqual(TEXT("les entités de la carte"), Exploration.Entities().Num(), 7);
 	TestEqual(TEXT("une lanterne"), Exploration.Lamps().Num(), 1);
 	TestTrue(TEXT("la mère est à son étal"), Exploration.IsPresent(TEXT("e1")));
 	TestFalse(TEXT("l'enfant n'y est pas encore"), Exploration.IsPresent(TEXT("e2")));
+
+	// Le coffre (7, 6) ne s'ouvre qu'une fois ; le panneau (4, 9) se relit.
+	TestFalse(TEXT("le coffre est fermé"), Exploration.IsConsumed(TEXT("e6")));
+	TestTrue(TEXT("le coffre s'ouvre"), Use(Exploration, Centre(6, 6), FVector2D(1.0, 0.0), TEXT("chest")));
+	TestTrue(TEXT("le coffre est ouvert"), Exploration.IsConsumed(TEXT("e6")));
+	FIntPoint Aimed;
+	FString Prompt;
+	TestFalse(TEXT("un coffre ouvert n'est plus désigné"), Exploration.Target(Aimed, Prompt));
+	TestFalse(TEXT("il ne s'ouvre pas deux fois"), Use(Exploration, Centre(6, 6), FVector2D(1.0, 0.0), TEXT("chest")));
+	TestTrue(TEXT("le panneau se lit"), Use(Exploration, Centre(3, 9), FVector2D(1.0, 0.0), TEXT("sign")));
+	TestTrue(TEXT("il se relit"), Use(Exploration, Centre(3, 9), FVector2D(1.0, 0.0), TEXT("sign")));
+	TestFalse(TEXT("un panneau ne se consomme pas"), Exploration.IsConsumed(TEXT("e7")));
+
+	// Celle qui parle a son portrait : celui de sa figurine, si les kits sont sur le poste.
+	if (TestTrue(TEXT("la mère répond"), TalkFrom(Exploration, Centre(4, 2), FVector2D(-1.0, 0.0), TEXT("mere"))))
+	{
+		const FString Portrait = Exploration.SpeakerPortrait();
+		if (Portrait.IsEmpty())
+		{
+			AddInfo(TEXT("pas de portrait : les kits ne sont pas sur ce poste"));
+		}
+		else
+		{
+			TestTrue(TEXT("le portrait est celui de la figurine de la mère"), Portrait.EndsWith(TEXT("/Characters/mother/portrait.png")));
+			TestTrue(TEXT("le fichier du portrait existe"), IFileManager::Get().FileExists(*Portrait));
+		}
+		TestTrue(TEXT("refuser referme la conversation"), Converse(Exploration, {TEXT("refuser")}));
+		TestTrue(TEXT("le portrait part avec elle"), Exploration.SpeakerPortrait().IsEmpty());
+	}
 
 	TestTrue(TEXT("le portail de l'est mène au parvis"),
 		WalkUntil(Exploration, Centre(13, 5), FVector2D(1.0, 0.0), EJadgEventKind::MapEntered, TEXT("essai/parvis")));
 	TestEqual(TEXT("la carte courante est le parvis"), Exploration.MapId(), FString(TEXT("essai/parvis")));
 	TestEqual(TEXT("le meneur est au point d'arrivée"), Exploration.HeroCell(), Centre(2, 5));
+
+	// La bascule vers le combat : le maître d'arène (12, 7) engage une rencontre, la carte se gèle.
+	if (TestTrue(TEXT("le maître d'arène répond"), TalkFrom(Exploration, Centre(11, 7), FVector2D(1.0, 0.0), TEXT("maitre-arene"))))
+	{
+		TestTrue(TEXT("combattre se dit"), Converse(Exploration, {TEXT("combattre")}));
+		TestEqual(TEXT("la rencontre est engagée"), Exploration.Encounter(), FString(TEXT("arene-bandits")));
+		const float Hour = Exploration.Minutes();
+		const FVector2D Away = Centre(9, 7);
+		Exploration.Step(&Away, false, 60.0f);
+		TestEqual(TEXT("l'heure ne passe pas pendant la rencontre"), Exploration.Minutes(), Hour);
+		TestEqual(TEXT("la carte est gelée : le meneur n'y bouge pas"), Exploration.HeroCell(), Centre(11, 7));
+		Exploration.LeaveEncounter();
+		TestTrue(TEXT("la rencontre se quitte"), Exploration.Encounter().IsEmpty());
+		Exploration.Step(&Away, false, 60.0f);
+		TestEqual(TEXT("la carte reprend"), Exploration.HeroCell(), Away);
+	}
 
 	// Le passage du nord est condamné, celui de l'est attend que l'enfant soit libre.
 	TestTrue(TEXT("le passage condamné ne s'ouvre pas"),
@@ -368,6 +446,22 @@ bool FJadgExplorationCameraTest::RunTest(const FString& Parameters)
 	View->SetView(Target, 0.0f, 40.0f, 1600.0f);
 	Game.Tick(3);
 	TestTrue(TEXT("un cadrage traverse le mur"), FMath::IsNearlyEqual(FVector::Dist(View->GetCameraLocation(), Target), 1600.0, 5.0));
+
+	// Le sol : un talus qui monte derrière le point visé, plus raide que le regard. La caméra, qui
+	// serait dessous au bout de son bras, reste au-dessus.
+	Wall->Destroy();
+	const AStaticMeshActor* Bank = Block(Game.World, FVector(-800.0, 0.0, 750.0), FRotator(51.3, 180.0, 0.0), FVector(22.0, 30.0, 0.2));
+	if (!TestNotNull(TEXT("le talus"), Bank))
+	{
+		return false;
+	}
+	TestTrue(TEXT("au bout de son bras, la caméra serait sous le talus"), Bank->GetActorTransform().InverseTransformPosition(View->GetCameraLocation()).Z < -50.0);
+	View->Follow(Anchor);
+	Game.Tick(3);
+	const FVector OnBank = View->GetCameraLocation();
+	TestTrue(*FString::Printf(TEXT("le talus rapproche la caméra (%.0f cm)"), FVector::Dist(OnBank, Target)), FVector::Dist(OnBank, Target) < 1200.0);
+	TestFalse(TEXT("la caméra n'est pas dans le sol"), Inside(*Bank, OnBank));
+	TestTrue(TEXT("la caméra est au-dessus du sol"), Bank->GetActorTransform().InverseTransformPosition(OnBank).Z > 50.0);
 	return true;
 }
 
@@ -486,6 +580,90 @@ bool FJadgExplorationPartyTest::RunTest(const FString& Parameters)
 	TestTrue(TEXT("le suivant mène"), Party->Leader() == Second);
 	TestTrue(TEXT("l'ancien meneur ferme la file"), Party->GetMembers().Last() == First);
 	TestEqual(TEXT("le groupe de Core a tourné avec lui"), Game.Exploration->Members()[0].Name, SecondName);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FJadgExplorationStoreyTest, "Jadg.Exploration.Etage", ExplorationFlags)
+
+/// Une terrasse à 1,2 m et sa rampe : le meneur y monte par le maillage de navigation, et la file
+/// le suit en hauteur.
+bool FJadgExplorationStoreyTest::RunTest(const FString& Parameters)
+{
+	AddExpectedError(TEXT("Unable to find RecastNavMesh instance"), EAutomationExpectedErrorFlags::Contains, 0);
+	FGame Game;
+	UWorld* World = Game.World;
+
+	// Le sol jusqu'à X = 15 m, la terrasse au-delà, haute de 1,2 m, et une rampe de deux cases de
+	// large (lignes 5 et 6) qui monte de X = 10,5 m à X = 15 m : 15 degrés.
+	constexpr double Rise = 120.0;
+	constexpr double RampStart = 1050.0;
+	constexpr double RampEnd = 1500.0;
+	const double Slope = FMath::RadiansToDegrees(FMath::Atan2(Rise, RampEnd - RampStart));
+	const double Length = FMath::Sqrt(FMath::Square(RampEnd - RampStart) + FMath::Square(Rise));
+	const FVector Normal = FRotator(Slope, 0.0, 0.0).RotateVector(FVector::UpVector);
+	const AStaticMeshActor* Floor = Block(World, FVector(750.0, 900.0, -50.0), FRotator::ZeroRotator, FVector(15.0, 18.0, 1.0));
+	const AStaticMeshActor* Terrace = Block(World, FVector(1950.0, 900.0, Rise - 50.0), FRotator::ZeroRotator, FVector(9.0, 18.0, 1.0));
+	const AStaticMeshActor* Ramp = Block(World, FVector((RampStart + RampEnd) / 2.0, 900.0, Rise / 2.0) - Normal * 10.0,
+		FRotator(Slope, 0.0, 0.0), FVector(Length / 100.0, 3.0, 0.2));
+	if (!TestNotNull(TEXT("le sol"), Floor) || !TestNotNull(TEXT("la terrasse"), Terrace) || !TestNotNull(TEXT("la rampe"), Ramp))
+	{
+		return false;
+	}
+	UJadgSceneBuild::SpawnBoxVolume(World, ANavMeshBoundsVolume::StaticClass(), FVector(1200.0, 900.0, 150.0), FVector(2400.0, 1800.0, 700.0));
+
+	World->SpawnActor<AJadgDayLight>();
+	AJadgMapFrame* Frame = World->SpawnActor<AJadgMapFrame>();
+	Frame->LevelId = TEXT("essai/etals");
+	Frame->LevelsRoot = TrialLevels;
+	for (int32 Rank = 0; Rank < 4; ++Rank)
+	{
+		AJadgWalker* Walker = World->SpawnActor<AJadgWalker>(FVector(525.0, 1275.0, 100.0), FRotator::ZeroRotator);
+		Walker->PartyRank = Rank;
+	}
+	Game.Play();
+	if (FNavigationSystem::GetCurrent<UNavigationSystemV1>(World) == nullptr)
+	{
+		FNavigationSystem::AddNavigationSystemToWorld(*World, FNavigationSystemRunMode::GameMode);
+	}
+	UNavigationSystemV1* Navigation = FNavigationSystem::GetCurrent<UNavigationSystemV1>(World);
+	if (!TestNotNull(TEXT("le système de navigation du monde"), Navigation))
+	{
+		return false;
+	}
+	Navigation->Build();
+	FNavLocation Up;
+	if (!TestTrue(TEXT("la terrasse porte un maillage de navigation"),
+			Navigation->ProjectPointToNavigation(FVector(2025.0, 900.0, Rise), Up, FVector(50.0, 50.0, 50.0))))
+	{
+		return false;
+	}
+	Game.Tick(2);
+
+	AJadgParty* Party = AJadgParty::Find(World);
+	if (!TestNotNull(TEXT("le groupe"), Party) || !TestEqual(TEXT("quatre membres"), Party->GetMembers().Num(), 4))
+	{
+		return false;
+	}
+	// De l'entrée (3, 8) à la terrasse : dix cases plus à l'est, par la rampe.
+	Party->OrderWalk(Frame->ToWorld(FVector2D(13.5, 6.0)) + FVector(0.0, 0.0, Rise));
+	Game.Tick(30 * 10);
+
+	const TArray<TObjectPtr<AJadgWalker>>& Members = Party->GetMembers();
+	TestTrue(*FString::Printf(TEXT("le meneur est sur la terrasse (%.2f ; %.2f)"), Party->CellOf(Members[0]->Feet()).X, Party->CellOf(Members[0]->Feet()).Y),
+		FVector2D::Distance(Party->CellOf(Members[0]->Feet()), FVector2D(13.5, 6.0)) < 0.3);
+	for (int32 Rank = 0; Rank < Members.Num(); ++Rank)
+	{
+		// La hauteur du sol sous chacun : zéro, la rampe, ou la terrasse.
+		const FVector Feet = Members[Rank]->Feet();
+		const double Ground = Rise * FMath::Clamp((Feet.X - RampStart) / (RampEnd - RampStart), 0.0, 1.0);
+		TestTrue(*FString::Printf(TEXT("le membre %d a les pieds sur le sol (%.0f cm pour %.0f)"), Rank, Feet.Z, Ground), FMath::Abs(Feet.Z - Ground) < 15.0);
+		TestTrue(*FString::Printf(TEXT("le membre %d a quitté le rez-de-chaussée (%.0f cm)"), Rank, Feet.Z), Feet.Z > 30.0);
+		if (Rank > 0)
+		{
+			const double Apart = FVector2D::Distance(Party->CellOf(Feet), Party->CellOf(Members[Rank - 1]->Feet()));
+			TestTrue(*FString::Printf(TEXT("%d suit %d à une case (%.2f)"), Rank, Rank - 1, Apart), Apart > 0.6 && Apart < 1.5);
+		}
+	}
 	return true;
 }
 

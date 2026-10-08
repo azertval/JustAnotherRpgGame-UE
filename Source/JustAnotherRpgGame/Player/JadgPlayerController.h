@@ -38,6 +38,17 @@ public:
 	/// Joue le geste de la commande @p Command, comme si sa touche venait d'être pressée.
 	void Press(FName Command);
 
+	/**
+	 * @brief Tient le pointeur en @p ScreenPosition, en pixels, à la place du curseur de la souris.
+	 *
+	 * Un jeu lancé hors écran n'a pas de curseur : le parcours (`AJadgWalkthrough`) dit où il
+	 * clique, puis presse le bouton comme un joueur. Tout le reste du clic est celui du joueur.
+	 */
+	void PointAt(const FVector2D& ScreenPosition);
+
+	/// Ce que le pointeur désigne dans la carte : sous le curseur, ou là où `PointAt` l'a posé.
+	bool PointerHit(FHitResult& OutHit) const;
+
 	/// Le nombre de commandes qui ont au moins une touche.
 	int32 CommandCount() const { return Actions.Num(); }
 
@@ -47,6 +58,8 @@ private:
 
 	UPROPERTY()
 	TMap<FName, TObjectPtr<UInputAction>> Actions;
+
+	TOptional<FVector2D> Pointer;
 
 	/// La valeur de chaque axe pour la trame en cours.
 	TMap<FName, float> Axes;
