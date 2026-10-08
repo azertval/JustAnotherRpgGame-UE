@@ -41,7 +41,6 @@ DEFAULT_DEST = ROOT / "Source" / "Elements" / "Assets" / "Master"
 # Famille du dossier Meshy -> dossier du kit, dossier de contenu Unreal, préfixe d'asset.
 FAMILIES = {
     "gods statues": ("Statues", "/Game/Master/Statues", "SM_Statue_"),
-    "npc": ("Npc", "/Game/Master/Npc", "SM_Npc_"),
     "weapon": ("Weapons", "/Game/Master/Weapons", "SM_Weapon_"),
 }
 # Famille de la référence -> dossier du kit, dossier de contenu, préfixe. Un retour rangé dans le
@@ -54,7 +53,7 @@ MESHY_NAME = re.compile(r"^Meshy_AI_(?P<name>.+?)_(?P<id>\d{10})_texture(?: \(\d
 
 def asset_name(prefix: str, reference_id: str) -> str:
     """`Statues/statue-bauron` -> `SM_Statue_Statue_Bauron` serait redondant : le préfixe de famille
-    suffit, le reste est la référence en CamelCase (`SM_Statue_Bauron`, `SM_Npc_Arena_Fighter`)."""
+    suffit, le reste est la référence en CamelCase (`SM_Statue_Bauron`, `SM_Weapon_Longbow`)."""
     leaf = reference_id.rsplit("/", 1)[1]
     family_word = prefix.split("_")[1].lower()
     parts = [part for part in leaf.split("-") if part]

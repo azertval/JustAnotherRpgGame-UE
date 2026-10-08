@@ -199,7 +199,8 @@ if ($Unreal) {
     if ($LASTEXITCODE -ne 0) { Fail "La construction du moteur a échoué (code $LASTEXITCODE)." }
 
     Write-Host '== Les personnages : mannequin du moteur, créateur Mutable (LOT-1015) ==' -ForegroundColor Cyan
-    & $venv (Join-Path $root 'scriptsssetsGeneration\import_mannequin_unreal.py') --engine "$EnginePath"
+    $python = Join-Path $root '.venv\Scripts\python.exe'
+    & $python (Join-Path $root 'scripts\assetsGeneration\import_mannequin_unreal.py') --engine "$EnginePath"
     if ($LASTEXITCODE -ne 0) { Fail "Le mannequin du moteur ne s'est pas posé (code $LASTEXITCODE)." }
     & $editorCmd "$uproject" -run=JadgBuildCharacterCreator -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
     if ($LASTEXITCODE -ne 0) { Fail "Le créateur de personnage ne s'est pas construit (code $LASTEXITCODE)." }

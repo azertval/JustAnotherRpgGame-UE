@@ -565,8 +565,8 @@ des données écrites à la main.
   quart de tour.
 - **EX-EDIT-103** — L'atelier fait l'**aller-retour par Blender** d'un personnage (décision
   D-44) : *Edit in Blender* ouvre le modèle lié dans Blender, *Import from Blender* relit ce que
-  l'auteur y a réglé. L'éditeur ne parle pas à Blender : il lance
-  `scripts/assetsGeneration/retouch_character.py` (`hmi::openInBlenderCommand`,
+  l'auteur y a réglé. L'éditeur ne parle pas à Blender : il lançait
+  `retouch_character.py` (retiré au `LOT-1015`, D-64) (`hmi::openInBlenderCommand`,
   `hmi::importFromBlenderCommand`), qui ne retient que ce qui a changé par rapport au repère
   pris à l'ouverture — une articulation déplacée dans la fiche de liaison, un clip modifié dans la
   fiche de retouche —, relie le modèle par la chaîne et le contrôle. Rien ne revient de Blender

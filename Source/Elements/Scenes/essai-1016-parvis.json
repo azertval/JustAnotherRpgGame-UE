@@ -120,13 +120,13 @@
     {"id": "mur/15,11", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 0.0, 17.25], "yaw": 0.0, "scale": 1.0}
   ],
   "characters": [
-    {"id": "groupe-1", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [3.75, 0.0, 8.25], "heading": 90.0, "party": 0},
-    {"id": "groupe-2", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [3.75, 0.0, 8.25], "heading": 90.0, "party": 1},
-    {"id": "groupe-3", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [3.75, 0.0, 8.25], "heading": 90.0, "party": 2},
-    {"id": "groupe-4", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [3.75, 0.0, 8.25], "heading": 90.0, "party": 3},
-    {"id": "pnj-e2", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [12.75, 0.0, 5.25], "heading": 270.0, "entity": "e2"},
-    {"id": "pnj-e3", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [14.25, 0.0, 5.25], "heading": 270.0, "entity": "e3"},
-    {"id": "pnj-e7", "mesh": "Npc/pantin/pantin.glb", "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "position": [18.75, 0.0, 11.25], "heading": 270.0, "entity": "e7"}
+    {"id": "groupe-1", "appearance": "heros-brawler", "walkSpeed": 3.0, "position": [3.75, 0.0, 8.25], "heading": 90.0, "party": 0},
+    {"id": "groupe-2", "appearance": "heros-mage", "walkSpeed": 3.0, "position": [3.75, 0.0, 8.25], "heading": 90.0, "party": 1},
+    {"id": "groupe-3", "appearance": "heros-priest", "walkSpeed": 3.0, "position": [3.75, 0.0, 8.25], "heading": 90.0, "party": 2},
+    {"id": "groupe-4", "appearance": "heros-scoundrel", "walkSpeed": 3.0, "position": [3.75, 0.0, 8.25], "heading": 90.0, "party": 3},
+    {"id": "pnj-e2", "appearance": "pantin", "walkSpeed": 3.0, "position": [12.75, 0.0, 5.25], "heading": 270.0, "entity": "e2"},
+    {"id": "pnj-e3", "appearance": "pantin", "walkSpeed": 3.0, "position": [14.25, 0.0, 5.25], "heading": 270.0, "entity": "e3"},
+    {"id": "pnj-e7", "appearance": "pantin", "walkSpeed": 3.0, "position": [18.75, 0.0, 11.25], "heading": 270.0, "entity": "e7"}
   ],
   "shots": [
     {"id": "parvis", "target": [12.0, 1.0, 9.0], "heading": 0.0, "pitch": 42.0, "distance": 24.0, "comment": "La carte entière depuis le sud : le point d'arrivée à l'ouest, le passage condamné au nord, celui que la quête ouvre à l'est."}

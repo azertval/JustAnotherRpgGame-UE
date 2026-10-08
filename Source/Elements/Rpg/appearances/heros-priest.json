@@ -4,7 +4,7 @@
   "source": "tanares",
   "status": {
     "provisoire": true,
-    "raison": "LOT-1015 : premiere apparence ecrite par l'assistant, sans que l'auteur l'ait vue ; les valeurs (taille, couleurs, pieces) sont des choix de depart.",
+    "raison": "LOT-1015 : premiere apparence ecrite par l'assistant, sans que l'auteur l'ait vue ; le corps est le mannequin du moteur tant que le contenu optionnel de MetaHuman Creator n'est pas installe sur le poste (le bloc metahuman attend) ; taille, couleurs, pieces sont des choix de depart.",
     "retraitSi": "l'auteur juge les captures de controle a la recette du lot et fixe les valeurs"
   },
   "creator": "humanoid",
@@ -16,8 +16,8 @@
       "key": 0.5
     }
   },
-  "body": "metahuman",
-  "head": "metahuman",
+  "body": "quinn",
+  "head": "quinn",
   "height": 1.45,
   "colors": {
     "skin": [

@@ -34,8 +34,9 @@ L'histoire (`CHANGELOG.md`, fiches de lots, archives) n'est pas un document en v
 **Les sorties du moteur** — sous `Content/` (LOT-1014, D-52) : un `.uasset` ou un `.umap` est la
 sortie d'un script du dépôt, jamais un fichier fait à la main dans l'éditeur. Chacun est donc
 **cité par le script qui le produit** : son chemin de contenu (`/Game/…`), ou un dossier qui le
-contient, est écrit dans un script appelé, ou dans une description de scène que
-`build_scene_unreal.py` lit (`Source/Elements/Scenes/*.json`, champ `map`). Un asset que rien ne
+contient, est écrit dans un script appelé, dans une description de scène que
+`build_scene_unreal.py` lit (`Source/Elements/Scenes/*.json`, champ `map`), ou dans une
+description du créateur de personnage (`Source/Elements/Assets/Characters/*.json`, LOT-1015). Un asset que rien ne
 cite ne se régénère pas : c'est une erreur, comme tout autre fichier trouvé sous `Content/`.
 
 Les images des kits ne sont pas suivies par Git : le contrôle lit le **disque**, après
@@ -94,6 +95,9 @@ HISTORY_DIRS = ("Planning/standards/archives/", "Documentation/Archives/", "Sour
 ENGINE_OUTPUTS = (".uasset", ".umap")
 CONTENT_PATH = re.compile(r"/Game(?:/[\w.\-]+)+")
 SCENE_DESCRIPTIONS = "Source/Elements/Scenes"
+# Les descriptions du créateur de personnage (LOT-1015) : elles nomment l'objet personnalisable
+# que `JadgBuildCharacterCreator` construit, et les corps et clips qu'il assemble.
+CREATOR_DESCRIPTIONS = "Source/Elements/Assets/Characters"
 
 
 def walk(base: Path):
@@ -287,9 +291,10 @@ def content_citations(root: Path) -> set[str]:
     for path in walk(root / "scripts"):
         if path.suffix in SCRIPT_SUFFIXES and "tests" not in path.relative_to(root / "scripts").parts:
             cited.update(CONTENT_PATH.findall(read(path)))
-    for path in walk(root / SCENE_DESCRIPTIONS):
-        if path.suffix == ".json":
-            cited.update(CONTENT_PATH.findall(read(path)))
+    for tree in (SCENE_DESCRIPTIONS, CREATOR_DESCRIPTIONS):
+        for path in walk(root / tree):
+            if path.suffix == ".json":
+                cited.update(CONTENT_PATH.findall(read(path)))
     return cited
 
 

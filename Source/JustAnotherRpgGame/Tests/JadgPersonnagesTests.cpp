@@ -165,10 +165,10 @@ bool FJadgPersonnagesFicheTest::RunTest(const FString& Parameters)
 	TestFalse(TEXT("un clip inconnu ne se joue pas"), Grom->PlayOnce(TEXT("danse")));
 
 	// La taille : Helga est plus petite que Grom, chacun à l'échelle de sa fiche.
-	TestEqual(TEXT("l'échelle de Grom"), Grom->GetActorScale3D().Z, FicheGrom.height / Creator.referenceHeight, 0.001f);
-	TestEqual(TEXT("l'échelle de Helga"), Helga->GetActorScale3D().Z, FicheHelga.height / Creator.referenceHeight, 0.001f);
+	TestEqual(TEXT("l'échelle de Grom"), static_cast<float>(Grom->GetActorScale3D().Z), FicheGrom.height / Creator.referenceHeight, 0.001f);
+	TestEqual(TEXT("l'échelle de Helga"), static_cast<float>(Helga->GetActorScale3D().Z), FicheHelga.height / Creator.referenceHeight, 0.001f);
 	TestTrue(TEXT("Helga est plus petite"), Helga->GetActorScale3D().Z < Grom->GetActorScale3D().Z);
-	TestEqual(TEXT("Grom reste debout au sol"), Grom->Feet().Z, 100.0 - Grom->GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight(), 1.0);
+	TestEqual(TEXT("Grom reste debout au sol"), Grom->Feet().Z, static_cast<double>(100.0f - Grom->GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight()), 1.0);
 
 	// Les armes : une pour Grom (la hache), deux pour Helga (marteau et bouclier), aux sockets.
 	TestEqual(TEXT("Grom tient une arme"), Grom->Weapons.Num(), 1);
