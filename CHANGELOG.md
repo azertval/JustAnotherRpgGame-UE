@@ -6,6 +6,10 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **Le site est republié depuis ce dépôt** (8 octobre 2026), sur sa branche `gh-pages`, à chaque
+  merge sur `main` (`docs.yml`) : les pages de documentation, l'étude des métiers avec son
+  explorateur et ses données, le site de planification. La référence du code (Doxygen) et la page
+  qualité restent à refaire pour le nouveau moteur.
 - **L'étude des métiers entre entière dans le dépôt** (8 octobre 2026) : son site rendu
   (`Documentation/Metiers/generated/`), l'explorateur interactif et les deux fichiers de données
   qui dépassaient le plafond de 5 Mio. Ces trois fichiers, et leur copie dans le site, vont en

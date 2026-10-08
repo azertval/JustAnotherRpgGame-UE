@@ -41,6 +41,11 @@ INTENTIONALLY_INVALID = {
 }
 
 
+# Un JSON rangé en Git LFS (.gitattributes) n'est, sur un clone sans LFS — le runner de la CI —,
+# que son pointeur : trois lignes de texte, pas le JSON. Il se contrôle là où ses octets sont.
+LFS_POINTER = b'version https://git-lfs.github.com/spec/v1\n'
+
+
 class DuplicateKey(ValueError):
     pass
 
@@ -57,6 +62,8 @@ def _reject_duplicates(pairs):
 def problems(raw):
     """Liste des défauts du contenu @p raw (octets) ; vide s'il est admis."""
     found = []
+    if raw.startswith(LFS_POINTER):
+        return found
     if raw.startswith(b'\xef\xbb\xbf'):
         found.append('commence par un BOM UTF-8')
         raw = raw[3:]
@@ -99,6 +106,7 @@ def auto_test():
     assert problems(b'\xef\xbb\xbf{}\n') == ['commence par un BOM UTF-8']
     assert problems(b'{}') == ['pas de retour à la ligne final']
     assert problems(b'{"a": 1,}\n')[0].startswith('JSON invalide')
+    assert problems(LFS_POINTER + b'oid sha256:0\nsize 1\n') == []
     with tempfile.TemporaryDirectory() as root:
         path = os.path.join(root, 'ok.json')
         with open(path, 'wb') as handle:

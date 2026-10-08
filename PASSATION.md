@@ -126,7 +126,8 @@ le commandlet montre que le moteur lit **les mêmes fichiers** et obtient **des 
   `lint_docs` (93 liens vers le moteur maison), `generate_cahier_test`, `check_assets_brief`,
   `check_orphans` ; `check_map_assets` et `check_hd_assets` lisent les kits, publiés sur l'ancien
   dépôt devenu privé — où publier les kits est à décider. Restent à refaire : la publication d'une
-  version, le site de documentation, `scripts/setup_dev.ps1` (il lit encore la version de Qt).
+  version, la référence Doxygen et la page qualité du site (republié sans elles par `docs.yml`),
+  `scripts/setup_dev.ps1` (il lit encore la version de Qt).
 - **`Documentation/`** à relire : les guides du moteur maison (`guide-ihm-qt.md`, `guide-rendu.md`,
   `guide-editeur.md`, `guide-ecrans.md`, `guide-design-ihm.md`, `guide-audio.md`,
   `guide-entrees.md`), les spécifications `rendu-technique.md`, `interface-ihm.md`,
