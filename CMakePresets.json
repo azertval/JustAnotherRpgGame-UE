@@ -1,0 +1,31 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 21, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "ninja",
+      "displayName": "Ninja (Debug) — tests de Core hors moteur",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/ninja",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    },
+    {
+      "name": "ninja-release",
+      "displayName": "Ninja (Release) — tests de Core hors moteur",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/ninja-release",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    }
+  ],
+  "buildPresets": [
+    { "name": "ninja", "configurePreset": "ninja" },
+    { "name": "ninja-release", "configurePreset": "ninja-release" }
+  ],
+  "testPresets": [
+    { "name": "ninja", "configurePreset": "ninja", "output": { "outputOnFailure": true } },
+    { "name": "ninja-release", "configurePreset": "ninja-release", "output": { "outputOnFailure": true } }
+  ]
+}

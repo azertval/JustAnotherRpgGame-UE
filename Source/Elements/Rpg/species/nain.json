@@ -1,0 +1,42 @@
+{
+  "id": "nain",
+  "name": "Nain",
+  "source": "srd",
+  "abilityScoreIncrease": {
+    "constitution": 2
+  },
+  "size": "medium",
+  "speed": 7.5,
+  "languages": [
+    "common",
+    "dwarvish"
+  ],
+  "weaponProficiencies": [
+    "hache-d-armes",
+    "hachette",
+    "marteau-leger",
+    "marteau-de-guerre"
+  ],
+  "traits": [
+    {
+      "name": "Vision dans le noir",
+      "text": "Vous pouvez voir à 18 mètres dans une lumière faible comme vous verriez avec une lumière vive, et dans le noir comme vous verriez avec une lumière faible. Dans le noir, vous ne discernez pas les couleurs, uniquement des nuances de gris."
+    },
+    {
+      "name": "Résistance naine",
+      "text": "Vous avez un avantage aux jets de sauvegarde contre le poison et obtenez la résistance contre les dégâts de poison."
+    },
+    {
+      "name": "Entraînement aux armes naines",
+      "text": "Vous obtenez la maîtrise des hachettes, des haches d'armes, des marteaux légers et des marteaux de guerre."
+    },
+    {
+      "name": "Maîtrise des outils",
+      "text": "Vous obtenez la maîtrise d'un des outils d'artisan suivant au choix : outils de forgeron, outils de brasseur ou outils de maçon."
+    },
+    {
+      "name": "Connaissance de la pierre",
+      "text": "Chaque fois que vous effectuez un jet d'Intelligence (Histoire) en relation avec l'origine d'un travail lié à la pierre, considérez que vous maîtrisez la compétence Histoire et ajoutez le double de votre bonus de maîtrise au jet, au lieu du bonus de maîtrise normal."
+    }
+  ]
+}

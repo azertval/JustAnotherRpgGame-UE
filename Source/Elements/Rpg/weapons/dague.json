@@ -1,0 +1,18 @@
+{
+  "id": "dague",
+  "name": "Dague",
+  "source": "srd",
+  "category": "simple",
+  "damage": "1d4",
+  "damageType": "piercing",
+  "weightGrams": 500,
+  "price": 200,
+  "text": "Finesse, légère, lancer (portée 6 m/18 m)",
+  "properties": [
+    "finesse",
+    "light",
+    "thrown"
+  ],
+  "rangeNormal": 6,
+  "rangeLong": 18
+}

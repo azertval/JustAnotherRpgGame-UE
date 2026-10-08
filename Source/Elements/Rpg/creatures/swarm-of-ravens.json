@@ -1,0 +1,61 @@
+{
+  "id": "swarm-of-ravens",
+  "name": "Nuée de corbeaux",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "nuée de bêtes TP",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 6,
+    "dexterity": 14,
+    "constitution": 8,
+    "intelligence": 3,
+    "wisdom": 12,
+    "charisma": 6
+  },
+  "armorClass": 12,
+  "hitPoints": 24,
+  "hitDice": "7d8-7",
+  "speed": {
+    "walk": 3,
+    "fly": 15
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "Perception passive 15"
+  ],
+  "skills": {
+    "perception": 5
+  },
+  "damageResistances": [
+    "bludgeoning",
+    "piercing",
+    "slashing"
+  ],
+  "conditionImmunities": [
+    "prone",
+    "grappled",
+    "charmed",
+    "frightened",
+    "restrained",
+    "stunned",
+    "paralyzed",
+    "petrified"
+  ],
+  "traits": [
+    {
+      "name": "Nuée",
+      "text": "La nuée peut occuper l'espace d'une créature et vice versa, et peut passer par une ouverture suffisamment grande pour un corbeau de taille TP. La nuée ne peut pas regagner de points de vie ou gagner des points de vie temporaires."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Becs",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible dans l'espace de la nuée. Touché : 7 (2d6) dégâts perforants, ou 3 (1d6) dégâts perforants si la nuée ne possède plus que la moitié ou moins de ses points de vie.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "2d6",
+      "damageType": "piercing"
+    }
+  ]
+}

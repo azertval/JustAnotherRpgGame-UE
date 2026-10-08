@@ -1,0 +1,160 @@
+{
+  "notes": [
+    {
+      "column": 11,
+      "row": 2,
+      "text": "Delegation : yama | Alliance : allied-forces"
+    },
+    {
+      "column": 16,
+      "row": 2,
+      "text": "Delegation : empire | Alliance : tanarean-empire"
+    },
+    {
+      "column": 22,
+      "row": 3,
+      "text": "Delegation : kolbjorn | Alliance : tanarean-empire"
+    },
+    {
+      "column": 7,
+      "row": 4,
+      "text": "Delegation : stravian | Alliance : allied-forces"
+    },
+    {
+      "column": 11,
+      "row": 4,
+      "text": "Divinite Meshy : Breith"
+    },
+    {
+      "column": 17,
+      "row": 4,
+      "text": "Divinite Meshy : Bauron"
+    },
+    {
+      "column": 22,
+      "row": 4,
+      "text": "Divinite Meshy : Bás"
+    },
+    {
+      "column": 27,
+      "row": 5,
+      "text": "Delegation : bennet | Alliance : tanarean-empire"
+    },
+    {
+      "column": 3,
+      "row": 7,
+      "text": "Delegation : sindile | Alliance : allied-forces"
+    },
+    {
+      "column": 7,
+      "row": 7,
+      "text": "Divinite Meshy : Dorsi"
+    },
+    {
+      "column": 26,
+      "row": 7,
+      "text": "Divinite Meshy : Ba-Ka"
+    },
+    {
+      "column": 29,
+      "row": 8,
+      "text": "Delegation : seashores | Alliance : tanarean-empire"
+    },
+    {
+      "column": 2,
+      "row": 10,
+      "text": "Delegation : freelands | Alliance : allied-forces"
+    },
+    {
+      "column": 5,
+      "row": 10,
+      "text": "Divinite Meshy : Fruitful"
+    },
+    {
+      "column": 28,
+      "row": 10,
+      "text": "Divinite Meshy : Aibidh"
+    },
+    {
+      "column": 4,
+      "row": 12,
+      "text": "Porte du triomphe — escalier partagé avec les deux parcours du niveau inférieur."
+    },
+    {
+      "column": 29,
+      "row": 12,
+      "text": "Porte des morts — retour au couloir de la prison."
+    },
+    {
+      "column": 5,
+      "row": 13,
+      "text": "Divinite Meshy : Fumetsu Tenshikin"
+    },
+    {
+      "column": 28,
+      "row": 13,
+      "text": "Divinite Meshy : Les Esprits de la Nature"
+    },
+    {
+      "column": 2,
+      "row": 14,
+      "text": "Delegation : tsvetan | Independante"
+    },
+    {
+      "column": 7,
+      "row": 16,
+      "text": "Divinite Meshy : Glorious One"
+    },
+    {
+      "column": 26,
+      "row": 16,
+      "text": "Divinite Meshy : Tamera"
+    },
+    {
+      "column": 29,
+      "row": 16,
+      "text": "Delegation : mage-tower | Alliance : arcanum"
+    },
+    {
+      "column": 4,
+      "row": 17,
+      "text": "Delegation : taii-maku | Independante"
+    },
+    {
+      "column": 7,
+      "row": 19,
+      "text": "Delegation : storm-islands | Alliance : darkall"
+    },
+    {
+      "column": 11,
+      "row": 19,
+      "text": "Divinite Meshy : Lumina"
+    },
+    {
+      "column": 16,
+      "row": 19,
+      "text": "Divinite Meshy : Òigridh"
+    },
+    {
+      "column": 22,
+      "row": 19,
+      "text": "Divinite Meshy : Tamera et Bauron — Foi du Parlevent"
+    },
+    {
+      "column": 25,
+      "row": 19,
+      "text": "Delegation : kepesh | Alliance : arcanum"
+    },
+    {
+      "column": 12,
+      "row": 21,
+      "text": "Lion gardien Meshy : Lion gardien left"
+    },
+    {
+      "column": 19,
+      "row": 21,
+      "text": "Lion gardien Meshy : Lion gardien right"
+    }
+  ],
+  "version": 1
+}

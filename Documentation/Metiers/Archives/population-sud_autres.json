@@ -1,0 +1,1065 @@
+{
+  "schema": "regional_evidence_v1",
+  "date": "2026-10-07",
+  "author": "research_subagent_sud_autres",
+  "notes": "All profession prevalence/percentages absent canon. City populations unknown. Manual noncitizen labor capacities excluded living employment denominator. Named places not all cities.",
+  "regions": [
+    {
+      "id": "storm-islands",
+      "name": "Storm Islands",
+      "population": 386000,
+      "population_precision": "around",
+      "species_percent": {
+        "kemets": 96,
+        "other_elves": 2,
+        "humans": 1,
+        "others": 1
+      },
+      "source": "Tanares_Sourcebook",
+      "printed_pages": [
+        168,
+        169,
+        170,
+        171,
+        172,
+        173
+      ],
+      "common_fact": [
+        "culture tubercules et céréales",
+        "pêche avancée",
+        "mines dont tameranium",
+        "armée recrute majorité",
+        "piraterie et navigation militaire",
+        "prêtres Bás"
+      ],
+      "specific_fact": [
+        "nécromancie glaciale et recherche nouvelles formes morts-vivants",
+        "élémentalisme de glace",
+        "fabrication pylônes",
+        "navires morts-vivants",
+        "laboratoire réanimation"
+      ],
+      "expertise": [
+        {
+          "field": "flotte morts-vivants",
+          "level": "explicit_superlative_asset",
+          "evidence": "the most impressive fleet in the Ocean",
+          "pages": [
+            170,
+            171
+          ]
+        },
+        {
+          "field": "pêche",
+          "level": "advanced_not_world_best",
+          "pages": [
+            168,
+            169
+          ]
+        },
+        {
+          "field": "astronomie et magie stellaire Cantala",
+          "level": "historical_lost_expertise_not_current_kemet",
+          "pages": [
+            170,
+            171
+          ]
+        },
+        {
+          "field": "Cildroly archer",
+          "level": "individual_historical_not_current_region",
+          "evidence": "best archer in all Kemet history",
+          "pages": [
+            168,
+            169
+          ]
+        }
+      ],
+      "settlements": [
+        {
+          "name": "Night Mansions",
+          "kind": "urban_concentration",
+          "population": null,
+          "activity_profile": "military_religious_undead_assisted",
+          "counting": "disjoint_city"
+        },
+        {
+          "name": "Dark Lab",
+          "kind": "laboratory",
+          "population": null,
+          "activity_profile": "necromancy_experiments",
+          "counting": "included_night_mansions_area"
+        },
+        {
+          "name": "Shrines of Bás / Frost Pylons",
+          "kind": "distributed_sites",
+          "population": null,
+          "activity_profile": "priests_guards_undead",
+          "counting": "included_host_units_minimum_three_priests_per_typical_shrine"
+        },
+        {
+          "name": "Boneheart",
+          "kind": "inhabited_warship",
+          "population": null,
+          "activity_profile": "hundreds_kemet_and_undead_crew",
+          "counting": "mobile_avoid_double_count"
+        },
+        {
+          "name": "Cantala Ruins",
+          "kind": "abandoned_ruins",
+          "population": null,
+          "activity_profile": "not_current_productive_city",
+          "counting": "exclude_living_city_profile"
+        },
+        {
+          "name": "Thyra Cave",
+          "kind": "secret_dragon_lair",
+          "population": null,
+          "activity_profile": "status_uncertain",
+          "counting": "exclude_normal_city_profile"
+        },
+        {
+          "name": "Rural islands unnamed",
+          "kind": "residual_countryside",
+          "population": null,
+          "activity_profile": "cultivation_fishing_mining",
+          "counting": "regional_remainder"
+        }
+      ],
+      "allocation_constraints": [
+        "Most recruited to military; manual jobs performed by undead outside living active denominator.",
+        "Bás mandatory; scarce other species unconditional conversion.",
+        "No undead headcount; no occupation percentages source."
+      ]
+    },
+    {
+      "id": "taiimaku-city-states",
+      "name": "Taii’Maku City States",
+      "population": 698000,
+      "population_precision": "around",
+      "species_percent": {
+        "taiimaku": 86,
+        "humans": 8,
+        "dwarves": 3,
+        "others": 3
+      },
+      "source": "Tanares_Sourcebook",
+      "printed_pages": [
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181
+      ],
+      "common_fact": [
+        "mathématiciens",
+        "ingénieurs",
+        "architectes",
+        "enseignants",
+        "chercheurs et mages",
+        "inventeurs",
+        "artistes et philosophes",
+        "mine extraction or purchase metals",
+        "émissaires"
+      ],
+      "specific_fact": [
+        "golemiciens",
+        "réacteurs bauronite",
+        "outils précision",
+        "horloges et compas",
+        "lentilles longues-vues lunettes vitraux",
+        "communications runiques",
+        "aqueducs et climat mystiques",
+        "transport lévitation et aérien",
+        "extraction bauronite alchimique/antimagique/résonance"
+      ],
+      "expertise": [
+        {
+          "field": "mathématiques ingénierie métiers techniques",
+          "level": "explicit_excellence",
+          "pages": [
+            174,
+            175
+          ]
+        },
+        {
+          "field": "compas horloges outils précision mécanismes",
+          "level": "explicit_sole_exporters",
+          "pages": [
+            174,
+            175
+          ]
+        },
+        {
+          "field": "architecture",
+          "level": "explicit_best_results",
+          "pages": [
+            174,
+            175
+          ]
+        },
+        {
+          "field": "réacteurs",
+          "level": "secret_few_know",
+          "pages": [
+            174,
+            175
+          ]
+        },
+        {
+          "field": "U’Tibam",
+          "level": "individual_greatest_mind",
+          "pages": [
+            180,
+            181
+          ]
+        },
+        {
+          "field": "A’Laafia production masse golems",
+          "level": "individual_leading_expert",
+          "pages": [
+            180,
+            181
+          ]
+        }
+      ],
+      "settlements": [
+        {
+          "name": "Awo Irin Illu",
+          "kind": "mobile_city",
+          "population": null,
+          "activity_profile": "practical_engineering_combat_innovation_ASG",
+          "counting": "disjoint_city"
+        },
+        {
+          "name": "G’bagede Illu",
+          "kind": "mobile_city",
+          "population": null,
+          "activity_profile": "only_teachers_and_golem_researchers_work",
+          "counting": "disjoint_city"
+        },
+        {
+          "name": "Ilaorun Illu",
+          "kind": "mobile_city",
+          "population": null,
+          "activity_profile": "artists_philosophers_inventors_refugee_scholars",
+          "counting": "disjoint_city"
+        },
+        {
+          "name": "Maro’Si Illu",
+          "kind": "mobile_city",
+          "population": null,
+          "activity_profile": "generic_illu_no_specific_economy_documented",
+          "counting": "disjoint_city"
+        },
+        {
+          "name": "Penumbral Illu",
+          "kind": "lost_expedition_mobile_city",
+          "population": null,
+          "activity_profile": "location_status_unknown",
+          "counting": "exclude_material_region_without_confirmed_return"
+        },
+        {
+          "name": "Other Illus unnamed",
+          "kind": "mobile_cities",
+          "population": null,
+          "activity_profile": "generic_illu",
+          "counting": "residual_settlements"
+        },
+        {
+          "name": "Human villages unnamed",
+          "kind": "villages",
+          "population": null,
+          "activity_profile": "kikoku_threat_services_unspecified",
+          "counting": "residual_countryside"
+        },
+        {
+          "name": "Ubellian Fire Pits Dragon Tower",
+          "kind": "draconic_garrison",
+          "population": null,
+          "activity_profile": "dragonborn_dragonblade_training",
+          "counting": "included_host_unit"
+        },
+        {
+          "name": "ASG laboratories",
+          "kind": "institutions",
+          "population": null,
+          "activity_profile": "construct_biology_magic_experiments",
+          "counting": "included_cities_not_additional_population"
+        },
+        {
+          "name": "Sha’Numi hidden lab / Ahr’Arthra lair",
+          "kind": "secret_sites",
+          "population": null,
+          "activity_profile": "not_normal_civilian_city",
+          "counting": "exclude_normal_profile"
+        }
+      ],
+      "allocation_constraints": [
+        "G’bagede only employed living teachers/golem researchers; mining, domestic service, guards done by golems.",
+        "Citizen contemplation nonparticipation distinct poverty.",
+        "Golems do manual tasks across Illus; count capacity separately, not as taiimaku species share.",
+        "Source faction divergence PG50-51 vs SB174 noted in notes.",
+        "Human rural settlements exist; no 100 percent urban assumption."
+      ]
+    },
+    {
+      "id": "kepesh",
+      "name": "Theocracy of Kepesh",
+      "population": 695000,
+      "population_precision": "around",
+      "species_percent": {
+        "humans": 81,
+        "cirrus": 6,
+        "taiimaku": 6,
+        "elves": 5,
+        "others": 2
+      },
+      "source": "Tanares_Sourcebook",
+      "printed_pages": [
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189
+      ],
+      "common_fact": [
+        "épices désertiques",
+        "agriculture irriguée/magique",
+        "mines bauronite or fer gemmes",
+        "bijouterie",
+        "élevage chevaux/chameaux",
+        "pêche côtière",
+        "construction temples pyramides statues",
+        "clercs mages savants"
+      ],
+      "specific_fact": [
+        "momification",
+        "rituels funéraires",
+        "communication ethérée Ba-Akhu",
+        "immortalisation Renkhet-Netjer",
+        "restauration culture/langue anciennes",
+        "fabrication magique utilisant élémentaires liés"
+      ],
+      "expertise": [
+        {
+          "field": "chevaux/chameaux",
+          "level": "explicit_continental_reputation_endurance_not_best",
+          "pages": [
+            182,
+            183
+          ]
+        },
+        {
+          "field": "bijouterie ancestrale",
+          "level": "explicit_exquisite_high_value_not_best",
+          "pages": [
+            182,
+            183
+          ]
+        },
+        {
+          "field": "rituels Ba-Ka",
+          "level": "distinctive_techniques",
+          "pages": [
+            182,
+            183,
+            184,
+            185
+          ]
+        }
+      ],
+      "settlements": [
+        {
+          "name": "Pakaitos",
+          "kind": "capital",
+          "population": null,
+          "activity_profile": "clergy_magic_administration_construction_jewelry_ceramics_markets",
+          "counting": "disjoint_city"
+        },
+        {
+          "name": "Bright Coast fishing villages unnamed",
+          "kind": "coastal_villages",
+          "population": null,
+          "activity_profile": "fishing_local_catch_mercenary_corsair_defense",
+          "counting": "residual_coast"
+        },
+        {
+          "name": "Merfolk coral forest cities unnamed",
+          "kind": "underwater_cities",
+          "population": null,
+          "activity_profile": "distinct_aquatic_settlements",
+          "counting": "do_not_add_to_human_coastal_citizens"
+        },
+        {
+          "name": "Samudara nomadic boats",
+          "kind": "tribal_mobile_settlements",
+          "population": null,
+          "activity_profile": "raiding_navigation_swimming_Kraken_tribute",
+          "counting": "resident_vs_visiting_convention_needed"
+        },
+        {
+          "name": "Great Nothing mountain tribes unnamed",
+          "kind": "tribal_villages",
+          "population": null,
+          "activity_profile": "raiding_survival",
+          "counting": "residual_countryside"
+        },
+        {
+          "name": "Sphinx moving oasis",
+          "kind": "sacred_site",
+          "population": null,
+          "activity_profile": "not_normal_city",
+          "counting": "exclude_normal_city_profile"
+        },
+        {
+          "name": "Hag’Salar / Alchemist Oasis",
+          "kind": "ruins_seasonal_bazaar",
+          "population": null,
+          "activity_profile": "ten_day_summer_solstice_trade",
+          "counting": "visitors_not_residents"
+        },
+        {
+          "name": "Sirocchi cliff fortresses",
+          "kind": "tribal_settlements",
+          "population": null,
+          "activity_profile": "law_king_canals_Tamera_sword_shield",
+          "counting": "residual_brightlight"
+        },
+        {
+          "name": "Zaphyrus silk tents",
+          "kind": "tribal_nomads",
+          "population": null,
+          "activity_profile": "freedom_dances_Glorious_One_peace",
+          "counting": "residual_brightlight"
+        },
+        {
+          "name": "Verdani / Verdane dwellings",
+          "kind": "tribal_settlements",
+          "population": null,
+          "activity_profile": "falconry_sandstone_fibers_dew_capture_raiding",
+          "counting": "residual_brightlight"
+        },
+        {
+          "name": "City of Eternity",
+          "kind": "ethereal_city",
+          "population": null,
+          "activity_profile": "Akhu_spirits",
+          "counting": "exclude_material_citizen_total"
+        }
+      ],
+      "allocation_constraints": [
+        "Castes rigid; magical aptitude can elevate family.",
+        "Refugee integration and poor welcomed, do not infer fixed unemployed share.",
+        "Food imports compensate low efficiency; magic water.",
+        "No evidence mass zombie labor economy like kemets; bound elementals forge under spellcasters.",
+        "Other religions potentially violent intolerance; anti Ba-Ka speech capital crime."
+      ]
+    },
+    {
+      "id": "tsvetan",
+      "name": "Tsvetan",
+      "population": 468000,
+      "population_precision": "around",
+      "species_percent": {
+        "orcs": 88,
+        "humans": 5,
+        "goblinoids": 4,
+        "others": 3
+      },
+      "source": "Tanares_Sourcebook",
+      "printed_pages": [
+        190,
+        191,
+        192,
+        193,
+        194,
+        195,
+        196,
+        197
+      ],
+      "common_fact": [
+        "obsidienne extraction taille outils",
+        "soufre médicinal",
+        "platine bijoux",
+        "peaux vêtements abris",
+        "os construction",
+        "shamans",
+        "chasse et élevage",
+        "agriculture aride",
+        "mercenaires services"
+      ],
+      "specific_fact": [
+        "peintures guerre spirituelles",
+        "totems",
+        "élevage loups géants",
+        "poisons bêtes magiques",
+        "agriculture champs funéraires"
+      ],
+      "expertise": [
+        {
+          "field": "Hot Bloods guerriers",
+          "level": "explicit_best_among_orcs_not_world",
+          "pages": [
+            190,
+            191
+          ]
+        },
+        {
+          "field": "Spiked Bones éclaireurs/élevage",
+          "level": "explicit_excellent_clan",
+          "pages": [
+            190,
+            191
+          ]
+        },
+        {
+          "field": "Stone Fangs embuscade chasse pistage",
+          "level": "explicit_most_skilled_clan_context",
+          "pages": [
+            190,
+            191
+          ]
+        },
+        {
+          "field": "Stone Fangs poisons/herbes",
+          "level": "explicit_experts",
+          "pages": [
+            192,
+            193
+          ]
+        },
+        {
+          "field": "Strong Fists agriculture aride",
+          "level": "explicit_activity_no_world_best",
+          "pages": [
+            190,
+            191
+          ]
+        }
+      ],
+      "settlements": [
+        {
+          "name": "Feargus",
+          "kind": "capital",
+          "population": null,
+          "activity_profile": "precarious_housing_mercenary_services_arena_opulent_palace",
+          "counting": "disjoint_city"
+        },
+        {
+          "name": "Eferhild Citadel",
+          "kind": "city",
+          "population": null,
+          "activity_profile": "lava_forging_communal_food_water_shamans",
+          "counting": "disjoint_city"
+        },
+        {
+          "name": "Obsidian Fortress",
+          "kind": "abandoned_fortress",
+          "population": null,
+          "activity_profile": "spirit_imbuing_forbidden_historical_not_current_industry",
+          "counting": "exclude_productive_city"
+        },
+        {
+          "name": "Poison Grounds",
+          "kind": "clan_production_site",
+          "population": null,
+          "activity_profile": "venom_extraction_Stone_Fangs",
+          "counting": "included_clan_residual"
+        },
+        {
+          "name": "Bone Fields",
+          "kind": "sacred_agriculture_site",
+          "population": null,
+          "activity_profile": "Strong_Fist_burial_fields",
+          "counting": "included_clan_residual"
+        },
+        {
+          "name": "Greatwolf Race Course / Cave of Sacrifice / Stormgrounds",
+          "kind": "route_annual_event",
+          "population": null,
+          "activity_profile": "direwolf_races",
+          "counting": "not_city_population"
+        },
+        {
+          "name": "Twinspikes",
+          "kind": "sacred_site",
+          "population": null,
+          "activity_profile": "spirit_violence_Red_Mother_death",
+          "counting": "not_city"
+        },
+        {
+          "name": "Bruld hideout",
+          "kind": "hostile_site",
+          "population": null,
+          "activity_profile": "goblin_mercenaries_soul_magic",
+          "counting": "not_normal_city"
+        },
+        {
+          "name": "Hot Bloods / Spiked Bones / Stone Fangs / Strong Fists settlements unnamed",
+          "kind": "clan_camps_villages",
+          "population": null,
+          "activity_profile": "clan_specialties",
+          "counting": "regional_remainder"
+        }
+      ],
+      "allocation_constraints": [
+        "Feargus greater poverty/unemployment/begging plausible; source no numerical share.",
+        "Eferhild communal provision and work expectation, low begging hypothesis only.",
+        "Wood/metals imports or raids required.",
+        "Goblins often laborers/mercenaries but shaman counterexample; no race hard ban.",
+        "Red sacred paint restricted Red Mother/apprentices; anticorruption recipe lost/not fully learned Grizza."
+      ]
+    },
+    {
+      "id": "yama",
+      "name": "Yama",
+      "population": 793000,
+      "population_precision": "around",
+      "species_percent": {
+        "humans": 83,
+        "elves": 8,
+        "cirrus": 4,
+        "soulborn": 3,
+        "others": 2
+      },
+      "source": "Tanares_Sourcebook",
+      "printed_pages": [
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        220,
+        221
+      ],
+      "common_fact": [
+        "riziculture",
+        "sériciculture",
+        "acier haute qualité",
+        "herbes et thé",
+        "tameranium",
+        "bureaucratie diplomatie",
+        "sugenjas",
+        "samurai ninjas moines",
+        "commerce fluvial"
+      ],
+      "specific_fact": [
+        "thés rituels activés maître cérémonie",
+        "traduction Édits",
+        "Ki et armes tameranium",
+        "temples Eido diplomatiques",
+        "tatouages Dragon Clan et spectres ninjas criminels"
+      ],
+      "expertise": [
+        {
+          "field": "acier",
+          "level": "explicit_high_quality_not_world_best",
+          "pages": [
+            198,
+            199
+          ]
+        },
+        {
+          "field": "Ki et thé rituel",
+          "level": "distinctive_techniques",
+          "pages": [
+            198,
+            199,
+            200,
+            201
+          ]
+        },
+        {
+          "field": "Tiger Monastery moines maîtres",
+          "level": "institution_specific_mastery",
+          "pages": [
+            200,
+            201,
+            204,
+            205
+          ]
+        },
+        {
+          "field": "Rokaru samurai",
+          "level": "individual_most_renowned",
+          "pages": [
+            204,
+            205
+          ]
+        }
+      ],
+      "settlements": [
+        {
+          "name": "Yamanoma",
+          "kind": "capital",
+          "population": null,
+          "activity_profile": "hierarchical_districts_rites_administration_trade",
+          "counting": "disjoint_city"
+        },
+        {
+          "name": "Tengoku Palace / Kinshi forbidden city",
+          "kind": "capital_complex",
+          "population": null,
+          "activity_profile": "priests_guards_relics",
+          "counting": "included_Yamanoma"
+        },
+        {
+          "name": "Tiger Monastery",
+          "kind": "inhabited_institution",
+          "population": null,
+          "activity_profile": "monks_Ki_teachers_students",
+          "counting": "institution_distinct_if_N_allocated"
+        },
+        {
+          "name": "Neshin",
+          "kind": "village",
+          "population": null,
+          "activity_profile": "dreamers_creature_table_only_no_economic_specialty",
+          "counting": "disjoint_if_N_allocated"
+        },
+        {
+          "name": "Umay",
+          "kind": "city",
+          "population": null,
+          "activity_profile": "Dragonends_Fortress_Dragon_Avengers_other_economy_unknown",
+          "counting": "disjoint_if_N_allocated"
+        },
+        {
+          "name": "Dragonends Fortress",
+          "kind": "faction_headquarters",
+          "population": null,
+          "activity_profile": "scholars_arcanists_dragon_hunters_mercenaries",
+          "counting": "included_Umay"
+        },
+        {
+          "name": "Bushi",
+          "kind": "inhabited_village",
+          "population": null,
+          "activity_profile": "shadows_disappear_economy_unknown",
+          "counting": "disjoint_if_N_allocated"
+        },
+        {
+          "name": "Kagemori Village",
+          "kind": "empty_haunted_village",
+          "population": null,
+          "activity_profile": "porcelain_tapestry_legacy_not_current_workers",
+          "counting": "exclude_productive_city"
+        },
+        {
+          "name": "Hazarmaveth",
+          "kind": "abandoned_town",
+          "population": null,
+          "activity_profile": "ghosts",
+          "counting": "exclude_productive_city"
+        },
+        {
+          "name": "Five Rocks",
+          "kind": "unspecified_site",
+          "population": null,
+          "activity_profile": "giant_skeletons",
+          "counting": "no_civilian_profile_evidence"
+        },
+        {
+          "name": "Floating Markets",
+          "kind": "river_markets",
+          "population": null,
+          "activity_profile": "boat_shops_ritual_tea",
+          "counting": "included_city_village_hosts"
+        },
+        {
+          "name": "Other towns villages rice fields silk farms unnamed",
+          "kind": "residual_settlements",
+          "population": null,
+          "activity_profile": "rice_silk_tea_steel",
+          "counting": "regional_remainder"
+        }
+      ],
+      "allocation_constraints": [
+        "Castes workers/priests/warriors within Chiyori/Kageryoushi/Goukuden clans; profession counts distinct class skills.",
+        "Ascension by Tenshikin grace; clan tameranium tributes select training/clergy.",
+        "No proof all jade carving or porcelain makers best; isolated artifact not profession excellence.",
+        "Banishment can lead Dragon Clan underground services or no profession; count once.",
+        "No city-specific species percentages source."
+      ]
+    },
+    {
+      "id": "undertanares",
+      "name": "Undertanares",
+      "population": null,
+      "population_precision": "unknown",
+      "species_percent": {},
+      "source": "Tanares_Sourcebook",
+      "printed_pages": [
+        206,
+        207
+      ],
+      "common_fact": [
+        "mineurs forgerons constructeurs nains",
+        "Stonehide mineurs guerriers gardes chantiers",
+        "gloomfolk artisans chasseurs cultivateurs scouts gardiens enfants anciens mystiques",
+        "duergars forge et guerre"
+      ],
+      "specific_fact": [
+        "Stone Spirits clôture failles",
+        "gardiens mémoires hivestone",
+        "préparation venin gloomfolk",
+        "chasse penumbral nourrit jeunes",
+        "Spawners élevage monstres magique/alchimique clandestin"
+      ],
+      "expertise": [
+        {
+          "field": "Dorsian Forge",
+          "level": "legendary_asset_not_current_full_mastery",
+          "pages": [
+            162,
+            163,
+            206,
+            207
+          ]
+        },
+        {
+          "field": "gloomfolk venin chasse subterfuge",
+          "level": "species_mastery_not_universal_world_best",
+          "PG_pages": [
+            40,
+            41,
+            42,
+            43,
+            44
+          ]
+        }
+      ],
+      "settlements": [
+        {
+          "name": "Stonelair underground",
+          "kind": "city_part",
+          "population": null,
+          "activity_profile": "dwarven_mining_forging",
+          "counting": "included_Stravian_Stonelair_no_double_count"
+        },
+        {
+          "name": "Other dwarf cities unnamed",
+          "kind": "cities",
+          "population": null,
+          "activity_profile": "mining_forging_protection",
+          "counting": "N_null_profiles_only"
+        },
+        {
+          "name": "Dorsian Forge",
+          "kind": "occupied_forge_fort",
+          "population": null,
+          "activity_profile": "duergar_weapons_partial_power",
+          "counting": "N_null_profiles_only"
+        },
+        {
+          "name": "Invisible Patrol Hive",
+          "kind": "gloomfolk_hive",
+          "population": null,
+          "activity_profile": "named_PG40_41_communal_hunting_roles",
+          "counting": "N_null_profiles_only"
+        },
+        {
+          "name": "Other gloomfolk hives unnamed",
+          "kind": "hives",
+          "population": null,
+          "activity_profile": "flexible_communal_roles",
+          "counting": "N_null_profiles_only"
+        },
+        {
+          "name": "Bloodgod / Skullcrusher / Stonehide / Shadoweye territories",
+          "kind": "tribal_settlements",
+          "population": null,
+          "activity_profile": "distinct_clan_raid_mining_alliance_profiles",
+          "counting": "N_null_profiles_only"
+        },
+        {
+          "name": "Cult hideouts temples nests unnamed",
+          "kind": "hostile_sites",
+          "population": null,
+          "activity_profile": "cultists_spawners_arachnes",
+          "counting": "N_null_hostile_profiles_only"
+        }
+      ],
+      "allocation_constraints": [
+        "Unknown total and species margins; no absolute totals invent.",
+        "Gloomfolk communal labor and occupations fluid; market unemployment definition may not apply.",
+        "Stonelair counted in Stravian unless disjoint underground N assigned.",
+        "Forge mastery textual nuance partial_use vs not_yet_learned."
+      ]
+    },
+    {
+      "id": "darkall",
+      "name": "Darkall",
+      "population": null,
+      "population_precision": "unknown",
+      "species_percent": {},
+      "source": "Tanares_Sourcebook",
+      "printed_pages": [
+        208,
+        209,
+        210
+      ],
+      "common_fact": [
+        "industry war necromancy siege warships North",
+        "subsistence/resources and soldiers necromancers Central",
+        "mercenaries among demon conflict"
+      ],
+      "specific_fact": [
+        "constant demon war supplies",
+        "undead servants elite North and legions Central"
+      ],
+      "expertise": [],
+      "settlements": [
+        {
+          "name": "North Kemet city-states unnamed",
+          "kind": "cities",
+          "population": null,
+          "activity_profile": "war_industry_elite_undead_servants",
+          "counting": "N_null_profiles_only"
+        },
+        {
+          "name": "Central fortified strongholds / walled cities unnamed",
+          "kind": "cities_forts",
+          "population": null,
+          "activity_profile": "sustenance_forced_poor_defense",
+          "counting": "N_null_profiles_only"
+        },
+        {
+          "name": "Nine Demonic Lands fortresses",
+          "kind": "demon_fortresses",
+          "population": null,
+          "activity_profile": "demon_lords_portals_war",
+          "counting": "not_normal_civilian_workforce"
+        },
+        {
+          "name": "Cave of the Damned",
+          "kind": "prison_dungeon",
+          "population": null,
+          "activity_profile": "torture_prisoners",
+          "counting": "not_normal_civilian_city"
+        },
+        {
+          "name": "Elemental Maelstrom",
+          "kind": "hazard_region",
+          "population": null,
+          "activity_profile": "not_inhabited_city_attested",
+          "counting": "exclude_city_profile"
+        }
+      ],
+      "allocation_constraints": [
+        "No total population species margins.",
+        "Northern elite vs Central poverty/coercion; undead capacity separate.",
+        "Do not treat demon military as normal employed civilian demographic."
+      ]
+    },
+    {
+      "id": "mystical",
+      "name": "Mystical / Wasteland",
+      "population": null,
+      "population_precision": "unknown",
+      "species_percent": {},
+      "source": "Tanares_Sourcebook",
+      "printed_pages": [
+        210,
+        211
+      ],
+      "common_fact": [
+        "visiting relic hunters adventurers",
+        "hired undead hunters mercenaries",
+        "cultists bases"
+      ],
+      "specific_fact": [
+        "ruins magical research legacy",
+        "undead rule and guardian golems"
+      ],
+      "expertise": [
+        {
+          "field": "ancient magic",
+          "level": "historical_not_current_productive_expertise",
+          "pages": [
+            210,
+            211
+          ]
+        }
+      ],
+      "settlements": [
+        {
+          "name": "Arcana",
+          "kind": "ruined_capital",
+          "population": null,
+          "activity_profile": "undead_ruler_hordes_golems_no_ordinary_live_city",
+          "counting": "exclude_normal_civilian_profile"
+        },
+        {
+          "name": "Cult bases / towers / dungeons unnamed",
+          "kind": "hostile_sites",
+          "population": null,
+          "activity_profile": "expeditions_and_cultists",
+          "counting": "no_resident_total"
+        },
+        {
+          "name": "Borders",
+          "kind": "hazard_frontier",
+          "population": null,
+          "activity_profile": "patrols_expeditions_half_healing",
+          "counting": "conditional_relative_outpost_only"
+        }
+      ],
+      "allocation_constraints": [
+        "Unknown living resident denominator; no normal civilian labor quota central.",
+        "Central no healing or HP recovery; border half; settlement hypothetical must address supply survival.",
+        "Undead not living civilian labor assumption."
+      ]
+    }
+  ],
+  "penumbral_annex": {
+    "population": null,
+    "civilian_percentages": "not_applicable_without_explicit_sanctuary_model",
+    "activities": [
+      "Collectors psychic artificers relic scavengers traders",
+      "gloomfolk hunters protected hives",
+      "draconic outposts guards researchers expedition parties"
+    ],
+    "sources": [
+      {
+        "book": "PG",
+        "pages": [
+          8,
+          9,
+          40,
+          41,
+          42,
+          43
+        ]
+      },
+      {
+        "book": "SB",
+        "pages": [
+          218,
+          219,
+          308,
+          309
+        ]
+      }
+    ]
+  },
+  "unemployment_model": {
+    "employed": "one_primary_profession_per_person",
+    "active": "employed_plus_jobseekers",
+    "inactive": "children_students_retired_incapacity_voluntary_contemplation_other_nonparticipants",
+    "begging": "subsistence_flag_can_coexist_with_work_or_unemployment",
+    "percent_total": "profession_headcount/resident_population",
+    "percent_active": "profession_headcount/(employed+jobseekers)",
+    "all_values_are_design_hypotheses": true
+  }
+}

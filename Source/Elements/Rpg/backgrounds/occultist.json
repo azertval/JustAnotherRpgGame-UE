@@ -1,0 +1,14 @@
+{
+  "id": "occultist",
+  "name": "Occultist",
+  "source": "tanares",
+  "skillProficiencies": [
+    "arcana",
+    "deception"
+  ],
+  "feature": {
+    "name": "Hidden Contact",
+    "text": "Your tenuous connection to the cult that you abandoned has borne fruit in the form of a valuable ally. You have a hidden contact, a member of the cult who remains loyal to you despite your departure. This contact may have once been a close friend or confidante, or may simply share your distaste for the cult's methods and beliefs. Regardless of their history, you maintain good relations with them, even with little contact. Thanks to this hidden contact, you have access to valuable information about the cult's activities and plans. They can provide you with insider knowledge of the cult's rituals, be- liefs, and hierarchy, as well as the identities of its members."
+  },
+  "text": "Y ou were once a member of a dark and forbid- den cult, feared and reviled by all who knew of its existence. This cult may have worshiped one of the Ungods, aberrant deities of insanity, or the ancient god Bás, whose vengeful motivation and icy deathly powers are the stuff of legend. The cult's practices were cruel and malevo- lent, invoking dark powers and twisted rituals that still haunt your dreams. Driven by a growing sense of horror and disgust, you left the cult and began a new life, seeking to find a new path in life. But the cult remains active, its members lurking in the shadows and continuing to sow fear among the populace. You maintain a tenuous connection to the cult, a delicate balance of secrecy and danger that provides you with access to valuable information and resources. 268 Valentin Eloy (Order #42142262)"
+}

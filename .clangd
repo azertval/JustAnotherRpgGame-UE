@@ -1,0 +1,27 @@
+# clangd : diagnostics et clang-tidy dans l'éditeur (refonte de la chaîne d'outillage, phase 2).
+#
+# Le diagnostic apparaît en tapant, pas quinze minutes après le push. Les checks sont ceux de
+# .clang-tidy, que clangd lit de lui-même : rien n'est redéclaré ici. Version à utiliser : clangd de
+# LLVM `LLVM_VERSION` (ci.yml), installé par scripts/setup_dev.ps1 -Install.
+#
+# Base de compilation : `build/ninja/compile_commands.json`, produit par le preset `ninja`
+# (`scripts/build.ps1`, le preset par défaut).
+CompileFlags:
+  CompilationDatabase: build/ninja
+  Remove:
+    # En-têtes précompilés MSVC : le .pch est un format que clang ne lit pas, et chaque fichier
+    # échouerait sur une erreur qui ne parle pas de PCH (même raison qu'ENABLE_PCH=OFF dans le job
+    # clang-tidy). /FI reste : l'en-tête inclus de force est du texte, clang le lit.
+    - /Yu*
+    - /Yc*
+    - /Fp*
+  Add:
+    # Options MSVC sans équivalent clang (/MP, /external:*) : ignorées sans avertir, comme dans le
+    # job clang-tidy de ci.yml.
+    - -Wno-unused-command-line-argument
+
+Diagnostics:
+  ClangTidy:
+    # Par défaut, clangd n'exécute que les checks qu'il juge rapides : l'éditeur montrerait moins que
+    # la CI. Tous ceux de .clang-tidy, sur le seul fichier ouvert.
+    FastCheckFilter: None

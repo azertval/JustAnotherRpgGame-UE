@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/item.schema.json",
+  "title": "Objet",
+  "description": "Tout objet transportable qui n'est ni une arme ni une armure : materiel d'aventurier, outils, montures, marchandises, babioles, objets magiques. Les tables d'equipement des Basic Rules en sont la source (LOT-34). Le prix est en pieces de CUIVRE : une seule unite interne evite les conversions dispersees, et l'affichage en po/pa/pc reste une affaire de presentation.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "category": {
+      "type": "string",
+      "minLength": 2,
+      "description": "Famille d'usage : outil, materiel, monture, marchandise, babiole, objet magique."
+    },
+    "price": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/money"
+    },
+    "weightGrams": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Poids en GRAMMES, entier. Le corpus donne des valeurs comme << 500 g >> et << 2 kg >> ; un flottant y introduirait des arrondis la ou l'encombrement se calcule par somme."
+    },
+    "rarity": {
+      "type": "string",
+      "enum": [
+        "common",
+        "uncommon",
+        "rare",
+        "very-rare",
+        "legendary",
+        "artifact"
+      ]
+    },
+    "requiresAttunement": {
+      "type": "boolean"
+    },
+    "stackable": {
+      "type": "boolean"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "category"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,66 @@
+{
+  "id": "giant-elk",
+  "name": "Élan géant",
+  "source": "srd",
+  "size": "huge",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 19,
+    "dexterity": 16,
+    "constitution": 14,
+    "intelligence": 7,
+    "wisdom": 14,
+    "charisma": 10
+  },
+  "armorClass": 14,
+  "hitPoints": 42,
+  "hitDice": "5d12+10",
+  "speed": {
+    "walk": 18
+  },
+  "challengeRating": 2,
+  "senses": [
+    "Perception passive 14"
+  ],
+  "skills": {
+    "perception": 4
+  },
+  "languages": [
+    "common",
+    "elvish",
+    "sylvan"
+  ],
+  "traits": [
+    {
+      "name": "Langues",
+      "text": "Un élan géant comprend le commun, l'elfique et le sylvestre mais ne peut pas les parler"
+    },
+    {
+      "name": "Charge",
+      "text": "Si l'élan se déplace d'au moins 6 mètres en ligne droite vers une cible, puis la touche lors d'une attaque avec un coup de tête dans le même tour, la cible subit 7 (2d6) dégâts supplémentaires. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 14 ou tomber à terre."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Coup de tête",
+      "text": "Attaque au corps à corps avec une arme : +6 au toucher, allonge 3 m, une cible. Touché : 11 (2d6 + 4) dégâts contondants.",
+      "attackBonus": 6,
+      "reach": 3,
+      "damage": "2d6+4",
+      "damageType": "bludgeoning"
+    },
+    {
+      "name": "Sabots",
+      "text": "Attaque au corps à corps avec une arme : +6 au toucher, allonge 1,50 m, une créature au sol. Touché : 22 (4d8 + 4) dégâts contondants.",
+      "attackBonus": 6,
+      "reach": 1.5,
+      "damage": "4d8+4",
+      "damageType": "bludgeoning"
+    }
+  ],
+  "description": "Le majestueux élan géant est rare, au point que son apparence est souvent considérée comme la préfiguration d'un événement important, comme la naissance d'un roi. Des légendes racontent que les dieux prennent la forme d'un élan géant lorsqu'ils visitent le plan matériel. Beaucoup de cultures croient donc que chasser ces créatures déclenche la colère divine.",
+  "mecanismesRequis": [
+    "langue-comprise-non-parlee"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "giant-constrictor-snake",
+  "name": "Serpent constricteur géant",
+  "source": "srd",
+  "size": "huge",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 19,
+    "dexterity": 14,
+    "constitution": 12,
+    "intelligence": 1,
+    "wisdom": 10,
+    "charisma": 3
+  },
+  "armorClass": 12,
+  "hitPoints": 60,
+  "hitDice": "8d12+8",
+  "speed": {
+    "walk": 9,
+    "swim": 9
+  },
+  "challengeRating": 2,
+  "senses": [
+    "vision aveugle 3 m",
+    "Perception passive 12"
+  ],
+  "skills": {
+    "perception": 2
+  },
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +6 au toucher, allonge 3 m, une créature. Touché : 11 (2d6 + 4) dégâts perforants.",
+      "attackBonus": 6,
+      "reach": 3,
+      "damage": "2d6+4",
+      "damageType": "piercing"
+    },
+    {
+      "name": "Constriction",
+      "text": "Attaque au corps à corps avec une arme : +6 au toucher, allonge 1,50 m, une créature. Touché : 13 (2d8 + 4) dégâts contondants, et la cible est agrippée (DD 16 pour s'échapper). Tant qu'elle est agrippée, la créature est entravée, et le serpent ne peut pas étreindre une autre cible.",
+      "attackBonus": 6,
+      "reach": 1.5,
+      "damage": "2d8+4",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "goat",
+  "name": "Chèvre",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 12,
+    "dexterity": 10,
+    "constitution": 11,
+    "intelligence": 2,
+    "wisdom": 10,
+    "charisma": 5
+  },
+  "armorClass": 10,
+  "hitPoints": 4,
+  "hitDice": "1d8",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 0,
+  "senses": [
+    "Perception passive 10"
+  ],
+  "traits": [
+    {
+      "name": "Charge",
+      "text": "Si la chèvre se déplace d'au moins 6 mètres en ligne droite vers une cible, puis la touche lors d'une attaque avec un coup de tête dans le même tour, la cible subit 2 (1d4) dégâts contondants supplémentaires. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 10 ou tomber à terre."
+    },
+    {
+      "name": "Stable",
+      "text": "La chèvre a un avantage aux jets de sauvegarde de Force et de Dextérité contre les effets susceptibles de la faire tomber à terre."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Coup de tête",
+      "text": "Attaque au corps à corps avec une arme : +3 au toucher, allonge 1,50 m, une cible. Touché : 3 (1d4 + 1) dégâts contondants.",
+      "attackBonus": 3,
+      "reach": 1.5,
+      "damage": "1d4+1",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

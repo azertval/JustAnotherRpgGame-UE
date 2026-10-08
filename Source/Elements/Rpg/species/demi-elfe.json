@@ -1,0 +1,24 @@
+{
+  "id": "demi-elfe",
+  "name": "Demi-elfe",
+  "source": "phb-fr",
+  "abilityScoreIncrease": {
+    "charisma": 2
+  },
+  "size": "medium",
+  "speed": 9,
+  "languages": [
+    "common",
+    "elvish"
+  ],
+  "traits": [
+    {
+      "name": "Ascendance féerique",
+      "text": "Vous êtes avantagé sur les jets de sauvegarde contre l'effet charmé et vous ne pouvez être contraint à dormir par la magie."
+    },
+    {
+      "name": "Polyvalence",
+      "text": "Vous gagnez la maîtrise de deux compétences de votre choix. Langues. Vous pouvez parler, lire et écrire le commun, l'elfique et une autre langue de votre choix. DEMI-ORC MHURREN, LE CHEF DE GUERRE, S'EXTIRPA DE SOUS SES fourrures et d'entre ses femmes et passa un court haubert aux lourds anneaux d'acier sur son torse épais et musculeux. n se levait généralement avant la plupart de ses guerriers, car grâce au sang humain qui coulait dans ses veines il supportait mieux la dérangeante lumière du soleil que le reste de sa tribu. Chez les Crânes sanglants, un guerrier étaitjugé sur sa force, sa férocité et sa ruse. Le fait de compter des humains parmi ses ancêtres ne représentait pas une tare pour un guerrier. À condition qu'il soit aussi fort, endurant et assoiffé de sang que ses frères au sang pur. Les demi-ores qui se révélaient plus faibles que les ores à part entière ne survivaientjamais longtemps chez les Crânes sanglants. Ni dans aucune autre tribu, d'ailleurs. Et il fallait bien admettre qu'un peu de sang humain donnait souvent à un guerrier le mélange de ruse, d'ambition et d'autodiscipline qui lui permettait de s'élever au-dessus des autres comme Mhurren l'avait fait. n était à la tête d'une tribu capable de rassembler deux mille lances, il était le plus puissant chef du Thar. - Richard Baker, Swordmage C.11 \\l'lrRI- '.! l r.S R.\\(.! S Qu'elles soient unies sous les ordres d'un puissant sorcier ou qu'elles se soient battues pendant des années jusqu'à arriver à un statu quo, il arrive que des tribus orques et humaines forment une alliance et unissent leurs forces pour terroriser les contrées civilisées voisines. Et quand ces alliances sont scellées par un mariage, il naît des demi-ores. Certains s'élèvent au rang de puissant chef de clan, leur sang humain leur donnant un certain avantage sur leurs rivaux purement ores. D'autres sillonnent le monde afin de prouver leur valeur parmi les humains et les autres races plus civilisées. Nombre d'entre ceux-là optent pour une carrière d'aventurier. Ils atteignent la grandeur par leurs tours de force et la notoriété par leurs traditions barbares et leur férocité sauvage. PUISSANT ET BALAFRÉ Avec sa pigmentation grisâtre, son front bas, sa mâchoire prognathe, ses dents proéminentes et son imposante stature, le demi-ore ne peut cacher son sang ore. Il mesure entre 1,50 mètre et 2,15 mètres et pèse généralement entre 90 et 125 kilos. Les ores tirent orgueil des cicatrices reçues au combat et considèrent les scarifications comme des ornements. Cependant, certaines cicatrices indiquent que !'ore ou le demi-ore est un ancien esclave ou un banni. Tout demi-ore qui a vécu un temps auprès des ores porte des cicatrices; qu'elles soient des marques d'orgueil ou d'humiliation, elles racontent ses exploits et ses blessures. Si un tel demi-ore vit ensuite parmi les humains, il peut exhiber fièrement ces balafres ou les cacher honteusement. LA MARQUE DE GR_U_U_M_S_H____ C'est Gruumsh, le dieu borgne, qui a créé les ores; ainsi, même ceux qui se détournent de son culte ne peuvent se soustraire complètement à son influence. Il en va de même pour les demi­ orcs, bien que leur sang humain limite l'impact de leur héritage ore. Certains entendent les murmures de Gruumsh dans leurs rêves, des murmures qui les incitent à libérer la rage qui bouillonne en eux. D'autres ressentent l'exaltation de Gruumsh quand ils rejoignent la mêlée lors d'une bataille. Ils exultent alors avec lui ou frissonnent de peur et de dégoût. Les demi­ ores ne sont pas maléfiques par nature, mais le mal rôde en leur cœur, qu'ils l'embrassent ou se rebellent contre lui."
+    }
+  ]
+}

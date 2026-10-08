@@ -1,0 +1,12 @@
+{
+  "id": "demi-plate",
+  "name": "Demi-plate",
+  "source": "srd",
+  "category": "medium",
+  "baseArmorClass": 15,
+  "dexterityBonus": true,
+  "dexterityBonusMax": 2,
+  "stealthDisadvantage": true,
+  "weightGrams": 20000,
+  "price": 75000
+}

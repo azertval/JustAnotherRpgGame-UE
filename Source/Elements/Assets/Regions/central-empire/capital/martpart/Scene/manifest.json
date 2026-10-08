@@ -1,0 +1,348 @@
+{
+  "version": 1,
+  "tile": [
+    256,
+    159
+  ],
+  "storey": 224,
+  "textures": {
+    "scene/martpart/mp-paving-1": {
+      "mesh": "mp-paving-1.glb",
+      "class": "floor",
+      "footprint": [
+        1,
+        1
+      ],
+      "tactical": "open"
+    },
+    "scene/martpart/mp-paving-2": {
+      "mesh": "mp-paving-2.glb",
+      "class": "floor",
+      "footprint": [
+        1,
+        1
+      ],
+      "tactical": "open"
+    },
+    "scene/martpart/mp-paving-3": {
+      "mesh": "mp-paving-3.glb",
+      "class": "floor",
+      "footprint": [
+        1,
+        1
+      ],
+      "tactical": "open"
+    },
+    "scene/martpart/mp-water": {
+      "mesh": "mp-water.glb",
+      "class": "floor",
+      "footprint": [
+        1,
+        1
+      ],
+      "tactical": "open"
+    },
+    "scene/martpart/mp-marble": {
+      "mesh": "mp-marble.glb",
+      "class": "floor",
+      "footprint": [
+        1,
+        1
+      ],
+      "tactical": "open"
+    },
+    "scene/martpart/mp-hall": {
+      "mesh": "mp-hall.glb",
+      "class": "wide",
+      "footprint": [
+        36,
+        10
+      ],
+      "tactical": "open"
+    },
+    "scene/martpart/mp-illu-die": {
+      "mesh": "mp-illu-die.glb",
+      "class": "wide",
+      "footprint": [
+        20,
+        20
+      ],
+      "tactical": "open"
+    },
+    "scene/martpart/mp-gate": {
+      "mesh": "mp-gate.glb",
+      "class": "wide",
+      "footprint": [
+        6,
+        2
+      ],
+      "tactical": "open"
+    },
+    "scene/martpart/mp-bridge": {
+      "mesh": "mp-bridge.glb",
+      "class": "wide",
+      "footprint": [
+        8,
+        3
+      ],
+      "tactical": "open"
+    },
+    "scene/martpart/mp-stairs": {
+      "mesh": "mp-stairs.glb",
+      "class": "wide",
+      "footprint": [
+        4,
+        2
+      ],
+      "tactical": "open"
+    },
+    "scene/martpart/mp-stall-fruit": {
+      "mesh": "mp-stall-fruit.glb",
+      "class": "tall",
+      "footprint": [
+        2,
+        2
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-stall-pottery": {
+      "mesh": "mp-stall-pottery.glb",
+      "class": "tall",
+      "footprint": [
+        2,
+        2
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-stall-spices": {
+      "mesh": "mp-stall-spices.glb",
+      "class": "tall",
+      "footprint": [
+        2,
+        2
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-stall-fabric": {
+      "mesh": "mp-stall-fabric.glb",
+      "class": "tall",
+      "footprint": [
+        2,
+        2
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-lamp": {
+      "mesh": "mp-lamp.glb",
+      "class": "tall",
+      "footprint": [
+        1,
+        1
+      ],
+      "tactical": "solid",
+      "light": {
+        "color": "#ffd69a",
+        "range": 7.5,
+        "height": 2.9
+      },
+      "glow": 0.15
+    },
+    "scene/martpart/mp-crate": {
+      "mesh": "mp-crate.glb",
+      "class": "tall",
+      "footprint": [
+        1,
+        1
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-barrel": {
+      "mesh": "mp-barrel.glb",
+      "class": "tall",
+      "footprint": [
+        1,
+        1
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-laundry": {
+      "mesh": "mp-laundry.glb",
+      "class": "tall",
+      "footprint": [
+        3,
+        1
+      ],
+      "tactical": "open"
+    },
+    "scene/martpart/mp-fountain": {
+      "mesh": "mp-fountain.glb",
+      "class": "tall",
+      "footprint": [
+        3,
+        3
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-bench": {
+      "mesh": "mp-bench.glb",
+      "class": "tall",
+      "footprint": [
+        2,
+        1
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-rampart-x": {
+      "mesh": "mp-rampart-x.glb",
+      "class": "tall",
+      "footprint": [
+        2,
+        1
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-quay-x": {
+      "mesh": "mp-quay-x.glb",
+      "class": "tall",
+      "footprint": [
+        2,
+        1
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-hedge-x": {
+      "mesh": "mp-hedge-x.glb",
+      "class": "tall",
+      "footprint": [
+        2,
+        1
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-balustrade-x": {
+      "mesh": "mp-balustrade-x.glb",
+      "class": "tall",
+      "footprint": [
+        2,
+        1
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-rampart-y": {
+      "mesh": "mp-rampart-y.glb",
+      "class": "tall",
+      "footprint": [
+        1,
+        2
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-quay-y": {
+      "mesh": "mp-quay-y.glb",
+      "class": "tall",
+      "footprint": [
+        1,
+        2
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-hedge-y": {
+      "mesh": "mp-hedge-y.glb",
+      "class": "tall",
+      "footprint": [
+        1,
+        2
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-balustrade-y": {
+      "mesh": "mp-balustrade-y.glb",
+      "class": "tall",
+      "footprint": [
+        1,
+        2
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-cypress": {
+      "mesh": "../../arenarea/Scene/ar-meshy-cypres.glb",
+      "class": "tall",
+      "footprint": [
+        1,
+        1
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-tree": {
+      "mesh": "../../arenarea/Scene/ar-meshy-arbre-ombrage.glb",
+      "class": "tall",
+      "footprint": [
+        3,
+        3
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-meshy-illu-die-light-standard": {
+      "mesh": "mp-meshy-illu-die-light-standard.glb",
+      "class": "tall",
+      "footprint": [
+        1,
+        1
+      ],
+      "tactical": "solid",
+      "light": {
+        "color": "#71e5e6",
+        "range": 6.5,
+        "height": 3.915,
+        "always": true,
+        "flicker": false
+      },
+      "glow": 0.3
+    },
+    "scene/martpart/mp-meshy-shaft-capstan": {
+      "mesh": "mp-meshy-shaft-capstan.glb",
+      "class": "tall",
+      "footprint": [
+        6,
+        6
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-meshy-market-end-fronton": {
+      "mesh": "mp-meshy-market-end-fronton.glb",
+      "class": "tall",
+      "footprint": [
+        2,
+        10
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-meshy-merchant-house-imperial": {
+      "mesh": "mp-meshy-merchant-house-imperial.glb",
+      "class": "tall",
+      "footprint": [
+        4,
+        4
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-meshy-merchant-house-timber": {
+      "mesh": "mp-meshy-merchant-house-timber.glb",
+      "class": "tall",
+      "footprint": [
+        4,
+        4
+      ],
+      "tactical": "solid"
+    },
+    "scene/martpart/mp-meshy-merchant-house-taiimaku": {
+      "mesh": "mp-meshy-merchant-house-taiimaku.glb",
+      "class": "tall",
+      "footprint": [
+        4,
+        4
+      ],
+      "tactical": "solid"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "epee-longue",
+  "name": "Épée longue",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "slashing",
+  "weightGrams": 1500,
+  "price": 1500,
+  "text": "Polyvalente (1d10)",
+  "versatileDamage": "1d10",
+  "properties": [
+    "versatile"
+  ]
+}

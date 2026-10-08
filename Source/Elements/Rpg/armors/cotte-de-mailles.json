@@ -1,0 +1,11 @@
+{
+  "id": "cotte-de-mailles",
+  "name": "Cotte de mailles",
+  "source": "srd",
+  "category": "heavy",
+  "baseArmorClass": 16,
+  "strengthRequired": 13,
+  "stealthDisadvantage": true,
+  "weightGrams": 27500,
+  "price": 7500
+}

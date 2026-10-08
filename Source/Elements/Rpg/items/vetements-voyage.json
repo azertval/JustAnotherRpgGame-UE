@@ -1,0 +1,8 @@
+{
+  "id": "vetements-voyage",
+  "name": "Vêtements, voyage",
+  "source": "srd",
+  "category": "gear",
+  "price": 200,
+  "weightGrams": 2000
+}

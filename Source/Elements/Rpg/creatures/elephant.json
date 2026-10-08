@@ -1,0 +1,50 @@
+{
+  "id": "elephant",
+  "name": "Éléphant",
+  "source": "srd",
+  "size": "huge",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 22,
+    "dexterity": 9,
+    "constitution": 17,
+    "intelligence": 3,
+    "wisdom": 11,
+    "charisma": 6
+  },
+  "armorClass": 12,
+  "hitPoints": 76,
+  "hitDice": "8d12+24",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 4,
+  "senses": [
+    "Perception passive 10"
+  ],
+  "traits": [
+    {
+      "name": "Charge écrasante",
+      "text": "Si l'éléphant se déplace d'au moins 6 mètres en ligne droite vers une créature, puis la touche lors d'une attaque avec ses défenses dans le même tour, la cible doit réussir un jet de sauvegarde de Force DD 12 pour ne pas être jetée à terre. Si la cible est à terre, l'éléphant peut réaliser une attaque de piétinement contre celle-ci par une action bonus."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Défenses",
+      "text": "Attaque au corps à corps avec une arme : +8 au toucher, allonge 1,50 m, une cible. Touché : 19 (3d8 + 6) dégâts perforants.",
+      "attackBonus": 8,
+      "reach": 1.5,
+      "damage": "3d8+6",
+      "damageType": "piercing"
+    },
+    {
+      "name": "Piétinement",
+      "text": "Attaque au corps à corps avec une arme : +8 au toucher, allonge 1,50 m, une créature à terre. Touché : 22 (3d10 + 6) dégâts contondants.",
+      "attackBonus": 8,
+      "reach": 1.5,
+      "damage": "3d10+6",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

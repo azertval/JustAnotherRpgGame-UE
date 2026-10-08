@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/creature.schema.json",
+  "title": "Creature",
+  "description": "Un bloc de statistiques : les 94 betes d'Animaux.pdf (LOT-33), puis les 82 de Tanares (LOT-46). Le gabarit suit celui du corpus, ce qui rend l'extraction automatisable -- toujours le meme ordre, toujours les memes libelles.",
+  "allOf": [{ "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree" }],
+  "type": "object",
+  "properties": {
+    "id": true, "name": true, "source": true, "status": true, "asset": true,
+    "mecanismesRequis": true, "narratif": true,
+    "size": { "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/size" },
+    "creatureType": {
+      "description": "Type de creature (bete, mort-vivant, aberration...). Ouvert : le Sourcebook en introduit qui ne sont pas au SRD.",
+      "type": "string", "minLength": 2
+    },
+    "alignment": { "type": "string" },
+    "multiattack": {
+      "description": "Attaques multiples (LOT-142) : le nombre d'attaques de l'action Attaquer, chacune choisie parmi les actions du bloc. Absent : une seule.",
+      "type": "integer", "minimum": 2, "maximum": 6
+    },
+    "silhouette": {
+      "description": "Le mannequin de remplacement de la creature tant qu'elle n'a pas de figurine (LOT-145).",
+      "type": "string", "enum": ["humanoid", "quadruped", "flying"]
+    },
+    "description": {
+      "description": "Le paragraphe d'ambiance qui clot le bloc dans le livre -- << Les araignees-loups geantes chassent en terrain decouvert ou se cachent dans des terriers >>. Il ne porte aucune regle, et c'est pourtant ce que le bestiaire affichera. Champ ajoute au premier remplissage de la famille (LOT-33) : le laisser tomber obligerait a reextraire le document le jour ou l'ecran existe.",
+      "type": "string", "minLength": 8
+    },
+    "armorClass": { "type": "integer", "minimum": 0, "maximum": 40 },
+    "hitPoints": { "type": "integer", "minimum": 1 },
+    "hitDice": { "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/des" },
+    "speed": {
+      "description": "Vitesses en metres, par mode de deplacement. `walk` est requise : une creature sans vitesse de marche est une extraction incomplete, pas une creature immobile -- celle-la porte `walk: 0`.",
+      "type": "object",
+      "properties": {
+        "walk": { "type": "number", "minimum": 0 },
+        "fly": { "type": "number", "minimum": 0 },
+        "swim": { "type": "number", "minimum": 0 },
+        "climb": { "type": "number", "minimum": 0 },
+        "burrow": { "type": "number", "minimum": 0 }
+      },
+      "required": ["walk"],
+      "additionalProperties": false
+    },
+    "abilities": { "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/abilityScores" },
+    "challengeRating": {
+      "description": "Facteur de puissance. Fractionnaire sous 1 (1/8, 1/4, 1/2), d'ou le nombre plutot que l'entier.",
+      "type": "number", "minimum": 0, "maximum": 30
+    },
+    "skills": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": -10, "maximum": 20 }
+    },
+    "senses": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "languages": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "damageResistances": { "type": "array", "items": { "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/damageType" }, "uniqueItems": true },
+    "damageImmunities": { "type": "array", "items": { "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/damageType" }, "uniqueItems": true },
+    "damageVulnerabilities": { "type": "array", "items": { "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/damageType" }, "uniqueItems": true },
+    "conditionImmunities": { "type": "array", "items": { "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/conditionRef" }, "uniqueItems": true },
+    "traits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": { "name": { "type": "string", "minLength": 1 }, "text": { "type": "string", "minLength": 1 } },
+        "required": ["name", "text"], "additionalProperties": false
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "text": { "type": "string", "minLength": 1 },
+          "attackBonus": { "type": "integer", "minimum": -5, "maximum": 20 },
+          "reach": { "type": "number", "minimum": 0 },
+          "rangeNormal": { "type": "number", "minimum": 0 },
+          "rangeLong": { "type": "number", "minimum": 0 },
+          "damage": { "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/des" },
+          "damageType": { "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/damageType" }
+        },
+        "required": ["name", "text"], "additionalProperties": false
+      }
+    }
+  },
+  "required": ["id", "name", "source", "size", "creatureType", "armorClass", "hitPoints",
+               "speed", "abilities", "challengeRating"],
+  "additionalProperties": false
+}

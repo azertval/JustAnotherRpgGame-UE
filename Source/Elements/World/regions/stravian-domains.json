@@ -1,0 +1,93 @@
+{
+  "id": "stravian-domains",
+  "name": "Stravian Domains",
+  "source": "tanares",
+  "government": "Governed by the three Dwarf Kings of the underground Kingdom of Stonelair, keeping all surface communities under their rule.",
+  "faction": "The dwarves of Stonelair have forged an alliance with the Allied Forces, although there may be individuals sympathetic to the Tanarean Empire or other factions, particularly among the surface dwellers.",
+  "population": {
+    "total": 960000,
+    "species": [
+      {
+        "species": "dwarf",
+        "label": "dwarves",
+        "percent": 51
+      },
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 22
+      },
+      {
+        "species": "halfling",
+        "label": "halflings",
+        "percent": 18
+      },
+      {
+        "species": "gloomfolk",
+        "label": "gloomfolks",
+        "percent": 4
+      },
+      {
+        "species": "cirrus",
+        "label": "cirrus",
+        "percent": 3
+      }
+    ],
+    "otherPercent": 2
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "high"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "low",
+        "scope": "underground"
+      },
+      {
+        "grade": "high",
+        "scope": "surface"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "high"
+      }
+    ]
+  },
+  "neighbors": [
+    "central-empire",
+    "magocracy-of-mage-tower",
+    "republic-of-freelands"
+  ],
+  "locations": [
+    "stravian-domains-mirare",
+    "stravian-domains-eclipse-village",
+    "stravian-domains-moolooite-mines",
+    "stravian-domains-dorsian-forge",
+    "stravian-domains-malland-hing-halls",
+    "stravian-domains-stonelair-city"
+  ]
+}

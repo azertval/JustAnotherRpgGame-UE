@@ -1,0 +1,8 @@
+{
+  "id": "boule-de-cristal",
+  "name": "Boule de cristal",
+  "source": "srd",
+  "category": "gear",
+  "price": 1000,
+  "weightGrams": 500
+}

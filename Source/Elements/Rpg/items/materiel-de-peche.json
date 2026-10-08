@@ -1,0 +1,8 @@
+{
+  "id": "materiel-de-peche",
+  "name": "Matériel de pêche",
+  "source": "srd",
+  "category": "gear",
+  "price": 100,
+  "weightGrams": 2000
+}

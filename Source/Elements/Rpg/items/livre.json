@@ -1,0 +1,8 @@
+{
+  "id": "livre",
+  "name": "Livre",
+  "source": "srd",
+  "category": "gear",
+  "price": 2500,
+  "weightGrams": 2500
+}

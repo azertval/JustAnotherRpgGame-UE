@@ -1,0 +1,16 @@
+{
+  "id": "javeline",
+  "name": "Javeline",
+  "source": "srd",
+  "category": "simple",
+  "damage": "1d6",
+  "damageType": "piercing",
+  "weightGrams": 1000,
+  "price": 50,
+  "text": "Lancer (portée 9 m/36 m)",
+  "properties": [
+    "thrown"
+  ],
+  "rangeNormal": 9,
+  "rangeLong": 36
+}

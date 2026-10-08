@@ -1,0 +1,38 @@
+{
+  "id": "giant-centipede",
+  "name": "Mille-pattes géant",
+  "source": "srd",
+  "size": "small",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 5,
+    "dexterity": 14,
+    "constitution": 12,
+    "intelligence": 1,
+    "wisdom": 7,
+    "charisma": 3
+  },
+  "armorClass": 13,
+  "hitPoints": 4,
+  "hitDice": "1d6+1",
+  "speed": {
+    "walk": 9,
+    "climb": 9
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "vision aveugle 9 m",
+    "Perception passive 8"
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une créature. Touché : 4 (1d4 + 2) dégâts perforants, et la cible doit réussir un jet de sauvegarde de Constitution DD 11 ou subir 10 (3d6) dégâts de poison. Si le poison réduit les points de vie de la cible à 0, celle-ci est stable mais empoisonnée durant 1 heure, même si elle récupère des points de vie par la suite, et paralysée tant qu'elle est empoisonnée de cette manière.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d4+2",
+      "damageType": "piercing"
+    }
+  ]
+}

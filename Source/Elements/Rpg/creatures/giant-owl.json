@@ -1,0 +1,65 @@
+{
+  "id": "giant-owl",
+  "name": "Chouette géante",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "neutre",
+  "abilities": {
+    "strength": 13,
+    "dexterity": 15,
+    "constitution": 12,
+    "intelligence": 8,
+    "wisdom": 13,
+    "charisma": 10
+  },
+  "armorClass": 12,
+  "hitPoints": 19,
+  "hitDice": "3d10+3",
+  "speed": {
+    "walk": 1.5,
+    "fly": 18
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "vision dans le noir 36 m",
+    "Perception passive 15"
+  ],
+  "skills": {
+    "stealth": 4,
+    "perception": 5
+  },
+  "languages": [
+    "common",
+    "elvish",
+    "sylvan"
+  ],
+  "traits": [
+    {
+      "name": "Langues",
+      "text": "Une chouette géante comprend le commun, l'elfique et le sylvestre mais ne peut pas les parler"
+    },
+    {
+      "name": "Repli aérien",
+      "text": "La chouette ne provoque pas d'attaques d'opportunité lorsqu'elle quitte l'allonge d'un ennemi en volant."
+    },
+    {
+      "name": "Ouïe et vue aiguisées",
+      "text": "La chouette a un avantage aux jets de Sagesse (Perception) faisant appel à l'ouïe ou à la vue."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Serres",
+      "text": "Attaque au corps à corps avec une arme : +3 au toucher, allonge 1,50 m, une cible. Touché : 8 (2d6 + 1) dégâts tranchants.",
+      "attackBonus": 3,
+      "reach": 1.5,
+      "damage": "2d6+1",
+      "damageType": "slashing"
+    }
+  ],
+  "description": "Les chouettes géantes sont des créatures intelligentes protectrices de leurs royaumes forestiers.",
+  "mecanismesRequis": [
+    "langue-comprise-non-parlee"
+  ]
+}

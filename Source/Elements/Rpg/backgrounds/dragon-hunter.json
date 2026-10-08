@@ -1,0 +1,14 @@
+{
+  "id": "dragon-hunter",
+  "name": "Dragon Hunter",
+  "source": "tanares",
+  "skillProficiencies": [
+    "investigation",
+    "nature"
+  ],
+  "feature": {
+    "name": "Draconic Whispers",
+    "text": "Through your long years of dragon hunting, you have built up a vast network of contacts. From magic scholars to local rangers and renegade dragonblades, you have gleaned valu- able insights and knowledge about draconic activity. Your keen eye for detail and your experience in the field allow you to identify patterns and supernatural phenomena that others might miss. When arriving at a city you can reach for your contacts to have access to privileged information regarding dragon ac- tivities, their schemes as well as the presence and actions of their servants in the region."
+  },
+  "text": "Y our life is dedicated to the pursuit of the world's greatest natural predators, the dragons. From the majesty of their wings to the ferocity of their flames, you have witnessed the chaos and destruction that these creatures can cause. Driven by a fierce determina- tion to prevent them from spreading further terror, you have spent years studying every aspect of their existence. You have learned the nuances of their language, the intricacies of their customs, and the depths of their abilities. You have delved into the history of the world to better understand their in- fluence, their origins, and their place in the tapestry of time."
+}

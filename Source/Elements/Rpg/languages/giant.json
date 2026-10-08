@@ -1,0 +1,8 @@
+{
+  "id": "giant",
+  "name": "géant",
+  "source": "srd",
+  "exotic": false,
+  "typicalSpeakers": "Ogres, géants",
+  "script": "Nain"
+}

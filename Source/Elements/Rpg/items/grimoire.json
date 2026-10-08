@@ -1,0 +1,8 @@
+{
+  "id": "grimoire",
+  "name": "Grimoire",
+  "source": "srd",
+  "category": "gear",
+  "price": 5000,
+  "weightGrams": 1500
+}

@@ -1,0 +1,8 @@
+{
+  "id": "char",
+  "name": "Char",
+  "source": "srd",
+  "category": "mount",
+  "price": 25000,
+  "weightGrams": 50000
+}

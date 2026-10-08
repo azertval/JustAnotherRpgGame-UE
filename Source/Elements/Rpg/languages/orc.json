@@ -1,0 +1,8 @@
+{
+  "id": "orc",
+  "name": "orc",
+  "source": "srd",
+  "exotic": false,
+  "typicalSpeakers": "Orcs",
+  "script": "Nain"
+}

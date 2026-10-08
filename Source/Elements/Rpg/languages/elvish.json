@@ -1,0 +1,8 @@
+{
+  "id": "elvish",
+  "name": "elfe",
+  "source": "srd",
+  "exotic": false,
+  "typicalSpeakers": "Elfes",
+  "script": "Elfique"
+}

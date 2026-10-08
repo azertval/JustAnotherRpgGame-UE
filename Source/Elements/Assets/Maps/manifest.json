@@ -1,0 +1,2721 @@
+{
+  "version": 1,
+  "note": "Atlas illustre original ; references absolues du 6 octobre 2026 ; cartes paysage 1536 x 1024 ; emblemes separes.",
+  "maps": [
+    {
+      "file": "factions/central-empire.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/empire.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3251411,
+      "sha256": "e8121c12e0d1d2427d0bf1288f79f91c2491aa9a05855a44a7b11ab4abf661f8"
+    },
+    {
+      "file": "factions/imperial-benenet.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/bennet.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3529272,
+      "sha256": "61374797d77525325b22d69cb062604ed4af1ad4c50216bb77ff199414388dbf"
+    },
+    {
+      "file": "factions/kingdom-of-kolbjorn.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/kolbjorn.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3040243,
+      "sha256": "7ed552138e35e0e13cb0099677130c07eed379da0e367316aad27d6fd7b65a9e"
+    },
+    {
+      "file": "factions/magocracy-of-mage-tower.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/mage-tower.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3686878,
+      "sha256": "c23f35a1a28b0d5c93650071a0d64ef127d8597829eac46aa6812830b1e0275a"
+    },
+    {
+      "file": "factions/republic-of-freelands.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/freelands.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3215174,
+      "sha256": "9136c70ef9bd8aee509bd352681457bba253cdbbd42be8b7ea61cfc2107d400f"
+    },
+    {
+      "file": "factions/seashores.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/seashores.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3233293,
+      "sha256": "dc9a5c0bc3314315a2a1ca98f739ecc5deba8746f1f8d6976743db8faee9354b"
+    },
+    {
+      "file": "factions/sindile-forest.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/sindile.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3711060,
+      "sha256": "c604c2d8569241e0ef0000e1ce4c131492a4d1c7edc4a29935295187a723edd3"
+    },
+    {
+      "file": "factions/storm-islands.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/storm-islands.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3377411,
+      "sha256": "7699c46d17c5743b2a106560ce9f64bab683fbdd5a7387327ac7915fa60b8211"
+    },
+    {
+      "file": "factions/stravian-domains.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/stravian.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3350948,
+      "sha256": "33c5c2cb4f07e66920ec5785666271e68b2b2c3f11524a0a5a2f69ec885413f6"
+    },
+    {
+      "file": "factions/taii-maku-city-states.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/taii-maku.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3263317,
+      "sha256": "64725f8da5f5571e9b9e83f9055f7a0a83a217e4a17b76abc40404fb7f50fc2e"
+    },
+    {
+      "file": "factions/theocracy-of-kepesh.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/kepesh.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3548988,
+      "sha256": "cbaaf58af8ce05aa7b79a946ca704b03740917ced31c251361e90effe480c319"
+    },
+    {
+      "file": "factions/tsvetan.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/tsvetan.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3025538,
+      "sha256": "01f3e3ed8e4740b50672dbec76fa5d430e2e78961d07c16ca6dc5998122f9415"
+    },
+    {
+      "file": "factions/yama.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/yama.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 3104566,
+      "sha256": "7a64776bf618802f6ffbe05bc1cdde7a7367a665815421e9d2d3d42df1a0e23d"
+    },
+    {
+      "file": "factions/cultists.png",
+      "level": "emblem",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/Iconography/cult.png",
+      "date": "2026-10-06",
+      "size": [
+        1024,
+        1536
+      ],
+      "bytes": 2354457,
+      "sha256": "aa536231aed63be148dd06de1596a5c5b84a84d071c216439948f40c13f2dbe8"
+    },
+    {
+      "file": "world.png",
+      "level": "world",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/world.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3897572,
+      "sha256": "2785f3ab17b17722392f8a95be8e3175429a92fda7a30460155e3d95aa60361d"
+    },
+    {
+      "file": "world/central-empire.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/central-empire.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3244575,
+      "sha256": "4664a6c61dfac693e398bf2270f1b2f486afb60c052878e7561c114d6db6b103"
+    },
+    {
+      "file": "world/imperial-benenet.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/imperial-benenet.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3578912,
+      "sha256": "67c5ec96035f8e0313a1eb6f31d8b371156f2638783c84b7912e488c1e793ca9"
+    },
+    {
+      "file": "world/kingdom-of-kolbjorn.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/kingdom-of-kolbjorn.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3683935,
+      "sha256": "d04fd3cdee895826d73d66bc1f2836f617bc6330758f1ad20f5f666820d6690e"
+    },
+    {
+      "file": "world/magocracy-of-mage-tower.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/magocracy-of-mage-tower.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3648596,
+      "sha256": "3468301307de7ed7fba84ed1a74be08641cbbc0b007f93eb7808804bc19bcd2d"
+    },
+    {
+      "file": "world/republic-of-freelands.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/republic-of-freelands.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3026606,
+      "sha256": "bbb4b477b3dc79fc5d6af00d9d163c5ac7e78f4e2b398ec34df83c13b7eb9908"
+    },
+    {
+      "file": "world/seashores.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/seashores.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3303355,
+      "sha256": "69676eb85098fdd230908510756226d03120a9f38350ed15898d8591972d9227"
+    },
+    {
+      "file": "world/sindile-forest.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/sindile-forest.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3856197,
+      "sha256": "ebef19aa6cdc90ee55f9bf843f98cd1e8ce91e27bc475ee0ab6884139934fb00"
+    },
+    {
+      "file": "world/storm-islands.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/storm-islands.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3715944,
+      "sha256": "3137e7f77b5723f32d4e519e60892e65ffa030252171088da94e4621793148f4"
+    },
+    {
+      "file": "world/stravian-domains.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/stravian-domains.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3893698,
+      "sha256": "6ac135bdaaa861f1c72ab17a2eb7bb97bee4dc1851b577af3f50c61a9a29cd93"
+    },
+    {
+      "file": "world/taii-maku-city-states.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/taii-maku-city-states.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3636777,
+      "sha256": "121d2f72399e53715a263a5d286e96f9ebbe9c8cac3f2c4cfb4e4ba042d6a595"
+    },
+    {
+      "file": "world/theocracy-of-kepesh.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/theocracy-of-kepesh.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3352360,
+      "sha256": "563881acccab2a2cbe5143336c7adb7c379937f94c10c12d487c042f91f30ff1"
+    },
+    {
+      "file": "world/tsvetan.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/tsvetan.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3974465,
+      "sha256": "d1e79b93bae2515b26e61248520c9749da42b93c03006f99d49fc9d5a0e989a5"
+    },
+    {
+      "file": "world/yama.png",
+      "level": "region",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/yama.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3977580,
+      "sha256": "ed87e8b3bb2650f21e60ef3efde54a0bf1f32e034e7238dd5a386c2d9baadef1"
+    },
+    {
+      "file": "world/central-empire-ancient-heargs.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/central-empire-ancient-heargs.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3609439,
+      "sha256": "4b4d13b1db308145a836b8fa14ecd1b18076b29780eb30bcaf305b2773d57f35"
+    },
+    {
+      "file": "world/central-empire-cursed-ground.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/central-empire-cursed-ground.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3830363,
+      "sha256": "cde51f73afa7045a307cf57f62a897e47ea0f14c77294d9d3cd75300961b5544"
+    },
+    {
+      "file": "world/central-empire-hajal-city.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/central-empire-hajal-city.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4218086,
+      "sha256": "52a7f5e294dc58fbbf26d14e0daab117adb1126ec0b79343abf5a511aae6797d"
+    },
+    {
+      "file": "world/central-empire-odraz-monastery.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/central-empire-odraz-monastery.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3895371,
+      "sha256": "1f8e7dc87eb6f879bf845aa1c6ebc90d595efcde743bc75fe9baa45628fdd088"
+    },
+    {
+      "file": "world/central-empire-phantom-fortress.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/central-empire-phantom-fortress.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3986527,
+      "sha256": "ef8b8b048aaaa86c3b8f414d370f48d370c04a56b92140fb5a0a0256c1908e48"
+    },
+    {
+      "file": "world/central-empire-skybell-city.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/central-empire-skybell-city.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3935847,
+      "sha256": "ac061071b1350e43ad8a0e3d2dec930ba7cca589f1b60dbb3510e6756705e665"
+    },
+    {
+      "file": "world/central-empire-the-great-forest-of-bak.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/central-empire-the-great-forest-of-bak.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3938433,
+      "sha256": "211a225826b3cd7928585fb097ebb2bcc654a546145ddb2ef3076f9fd6213d7b"
+    },
+    {
+      "file": "world/imperial-benenet-begraense.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/imperial-benenet-begraense.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3742822,
+      "sha256": "73db2fa082e0b7ff017217b0318cf892c7a369ae06d31c6bf97f7e07c3652208"
+    },
+    {
+      "file": "world/imperial-benenet-crystal-mountains.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/imperial-benenet-crystal-mountains.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3707288,
+      "sha256": "35d0706f4c097f78eed3765e1a25e5fbb184c6468d967fd63420ffd3bac3b013"
+    },
+    {
+      "file": "world/imperial-benenet-mistvale.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/imperial-benenet-mistvale.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3913335,
+      "sha256": "f963a7397e3f166ec626a4465ff6bb38d12f6267340c5e7e79d43f9fc25c2b03"
+    },
+    {
+      "file": "world/kingdom-of-kolbjorn-falun-mountain.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/kingdom-of-kolbjorn-falun-mountain.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3685055,
+      "sha256": "c4b18acbe0a331566dca12b6ba8c4a49efe7cdc7f5a07b1a8679fec0ec439eef"
+    },
+    {
+      "file": "world/kingdom-of-kolbjorn-great-valley.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/kingdom-of-kolbjorn-great-valley.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3921306,
+      "sha256": "722d1cca2e02ff3d05e253ff5a729aaaa5ebab5beedfc9ed23b082cdab6dd67f"
+    },
+    {
+      "file": "world/kingdom-of-kolbjorn-irongauntlet.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/kingdom-of-kolbjorn-irongauntlet.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4053172,
+      "sha256": "b061e8c483a88776a3c3db83668e76cdc71f9352ef851785a8b2a3fa8a05d238"
+    },
+    {
+      "file": "world/kingdom-of-kolbjorn-kolbjorn-capital.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/kingdom-of-kolbjorn-kolbjorn-capital.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3584489,
+      "sha256": "dec3846b0d25be2e16f0354c555afa70e6fc4e82db7b0547b43e1d0ee6e19e36"
+    },
+    {
+      "file": "world/kingdom-of-kolbjorn-northharbor.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/kingdom-of-kolbjorn-northharbor.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4100023,
+      "sha256": "61ab5e799f6cf72d093a5553674ab72bee1c366e23b293cecc3e43a4487db3a3"
+    },
+    {
+      "file": "world/magocracy-of-mage-tower-arcane-university.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/magocracy-of-mage-tower-arcane-university.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4105836,
+      "sha256": "6bb8858d1c4b3abb09b41dadff8b99c8dad4e322943a94be80458eb5917721d5"
+    },
+    {
+      "file": "world/magocracy-of-mage-tower-asylum-eberek.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/magocracy-of-mage-tower-asylum-eberek.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4046355,
+      "sha256": "d4e8d7af0586ff5c3b0115c7012e3bcf5bc510edf38128f7c586b81c45674c78"
+    },
+    {
+      "file": "world/magocracy-of-mage-tower-crystal-tower.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/magocracy-of-mage-tower-crystal-tower.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4100948,
+      "sha256": "12c437320e95947f415d321035588758c34f0865dc725b4639c88d6d1fb036ff"
+    },
+    {
+      "file": "world/magocracy-of-mage-tower-magic-duel-arena.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/magocracy-of-mage-tower-magic-duel-arena.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4013739,
+      "sha256": "38058c05bd0612c6ced8d9a7fe27363fe548a5b61d9114582d499f6825b4e8c2"
+    },
+    {
+      "file": "world/magocracy-of-mage-tower-mesoriver.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/magocracy-of-mage-tower-mesoriver.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3693177,
+      "sha256": "8d394c9e897a5fbefd28564c8cf63999d4816efad39bf0a5721e6a66da2d463f"
+    },
+    {
+      "file": "world/magocracy-of-mage-tower-summer-island.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/magocracy-of-mage-tower-summer-island.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3785743,
+      "sha256": "1e509c408261dcf0cede899cb3d92d8148e0cebe3b54999889ec5e5d92733cc6"
+    },
+    {
+      "file": "world/republic-of-freelands-aurindunnum.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/republic-of-freelands-aurindunnum.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3216808,
+      "sha256": "09e0885bb160602ebc5bf5a5ce5b5d7bbe5409a79a74b727cc7ca05825d92f9e"
+    },
+    {
+      "file": "world/republic-of-freelands-city-of-heroes-rise.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/republic-of-freelands-city-of-heroes-rise.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3866353,
+      "sha256": "86675e486cbd8e57ad14e9c28b47b818ccc779dd1091b93f135c88545701837a"
+    },
+    {
+      "file": "world/republic-of-freelands-fisherman-s-wharf.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/republic-of-freelands-fisherman-s-wharf.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3919427,
+      "sha256": "7a3638e7146badd7ab55f4e04977e0135eca03717410b0f8a34ac4179fa1b5b4"
+    },
+    {
+      "file": "world/republic-of-freelands-outunmoor.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/republic-of-freelands-outunmoor.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3860628,
+      "sha256": "f7d330af913669e83564e47d5ff2aea4e82108081988c3216bafbfcd0037943f"
+    },
+    {
+      "file": "world/republic-of-freelands-shortfall-forest.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/republic-of-freelands-shortfall-forest.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4065853,
+      "sha256": "dcbbd222254d32cd8023b22e39fabf531cc00f6fd1a8fe7ef687b51772fb5430"
+    },
+    {
+      "file": "world/republic-of-freelands-the-city-of-aeyefall.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/republic-of-freelands-the-city-of-aeyefall.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4017761,
+      "sha256": "431fcb4921f47a0c0085b706365c98cd21b978b3a06b96c269d67a66fd032751"
+    },
+    {
+      "file": "world/republic-of-freelands-the-port-city-of-goldraft.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/republic-of-freelands-the-port-city-of-goldraft.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3549490,
+      "sha256": "5cc80ff4c31c7845736d1ae7e31b428b2bd0816d112b4736097ddfebf4c6e47a"
+    },
+    {
+      "file": "world/republic-of-freelands-the-winterhold-city.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/republic-of-freelands-the-winterhold-city.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3217759,
+      "sha256": "78835c9d223565c80569a8ad00ad3696ef05d6bbdfa87aa7bf0fac3a5f13e2ff"
+    },
+    {
+      "file": "world/republic-of-freelands-yellow-creek.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/republic-of-freelands-yellow-creek.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4036912,
+      "sha256": "5c4880d249d1e594a338b6427b195055a8c0da7a038eed68b4b569d2eb84e256"
+    },
+    {
+      "file": "world/seashores-bluhaven-the-capital.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/seashores-bluhaven-the-capital.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3923710,
+      "sha256": "4d28823fc954b3d11feefd334ea51fb40836ae973bec22c216db651a712e4f93"
+    },
+    {
+      "file": "world/seashores-mustardseed.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/seashores-mustardseed.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4126916,
+      "sha256": "7d2694896db1023cb5ecb99a7ed48b8a636114ab8cc2f2067c231a413f1ec087"
+    },
+    {
+      "file": "world/seashores-pearl-town.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/seashores-pearl-town.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3785880,
+      "sha256": "a9d4ad7db9f951bfe3f04aae0af027d9f0d9f5ad0fd393d1af923ba1c05a114d"
+    },
+    {
+      "file": "world/seashores-the-whirlpool.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/seashores-the-whirlpool.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3971784,
+      "sha256": "2af3c0d08a8a2d5c498cb3721e57852462b97d163c1cdd87c9edb78e98d19819"
+    },
+    {
+      "file": "world/seashores-uncle-joe-s-tavern.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/seashores-uncle-joe-s-tavern.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3716653,
+      "sha256": "532c219f56271d58a495ab3e72eb52d2ce7152913994096ca85b63494c87fccf"
+    },
+    {
+      "file": "world/seashores-underwater-dungeon.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/seashores-underwater-dungeon.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3854150,
+      "sha256": "9374df48731b8d9f2e346ea786fc79cd30c9e0eef5ba9a2becaf1fa823152a93"
+    },
+    {
+      "file": "world/sindile-forest-cindergrove.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/sindile-forest-cindergrove.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4051341,
+      "sha256": "73806b6eecb5ea53df391349e3653cf085ad6330eb079bbdc3cb328ad66ddbaf"
+    },
+    {
+      "file": "world/sindile-forest-hunter-s-nest.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/sindile-forest-hunter-s-nest.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4071508,
+      "sha256": "7c029d5a8ad1b83e37df4c02dfa5eb8245083f7e335650faaa2695aafb658d50"
+    },
+    {
+      "file": "world/sindile-forest-mirror-lake.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/sindile-forest-mirror-lake.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4095385,
+      "sha256": "362ec52aa054dbf87ed497bf751ea49844c687bcccfcfafc9572b7aed12a4514"
+    },
+    {
+      "file": "world/sindile-forest-sindile-road.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/sindile-forest-sindile-road.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4177982,
+      "sha256": "8701e3bb7c2430f29f405fddbb7bd3d3503e5347c09a743760c180751d36d2c4"
+    },
+    {
+      "file": "world/sindile-forest-sweetsprings.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/sindile-forest-sweetsprings.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3969502,
+      "sha256": "530d627deb7e08f2414e9b604bd311bbe38a73fe6e8bd213004bab3b6fbce3a2"
+    },
+    {
+      "file": "world/sindile-forest-verdant-colossus.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/sindile-forest-verdant-colossus.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3937557,
+      "sha256": "9a602ec9d37a1e4ec8346316aa95748a3a3d08e9ac472d5b1e0a84a6b7354a5c"
+    },
+    {
+      "file": "world/sindile-forest-verdant-expanse-of-yrthak.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/sindile-forest-verdant-expanse-of-yrthak.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4152828,
+      "sha256": "aa3abef1ddb702bfa9decb2efde9984f0fa70a3217c5047bbf82e9edad35fde2"
+    },
+    {
+      "file": "world/storm-islands-cantala-ruins.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/storm-islands-cantala-ruins.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3676306,
+      "sha256": "b08a492b671c858607c43d645c18dd9ca3e80e32fbfe905c3bf51e2aafadec63"
+    },
+    {
+      "file": "world/storm-islands-dark-lab.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/storm-islands-dark-lab.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3828983,
+      "sha256": "83278b1d7386d3b8d3363d871e8b62b691d6f69f9d88c121fbe4cac9781aa9cb"
+    },
+    {
+      "file": "world/storm-islands-night-mansions.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/storm-islands-night-mansions.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3844661,
+      "sha256": "5dfaefe0b994073b5e637f24bd530969775e3b2ea595b8b050318c54c021ca5a"
+    },
+    {
+      "file": "world/storm-islands-shrine-of-bas.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/storm-islands-shrine-of-bas.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3927247,
+      "sha256": "41ad0ba0674d9adc9a0e04a8b693d82d5a953a2117a3539e03cec07b1282ff5e"
+    },
+    {
+      "file": "world/storm-islands-thyra-cave.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/storm-islands-thyra-cave.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3589823,
+      "sha256": "fe95a959ef479bf38d3837df64911236fdfa16bf420b2f1523c0a3001f6baa02"
+    },
+    {
+      "file": "world/stravian-domains-dorsian-forge.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/stravian-domains-dorsian-forge.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3780643,
+      "sha256": "a0c5a65cd106045ee4b3eff6e3f4069fa57c959a671a08408c6ab2ebb84e5654"
+    },
+    {
+      "file": "world/stravian-domains-eclipse-village.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/stravian-domains-eclipse-village.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4111767,
+      "sha256": "fddbdd7afb15b030deeae6abf35483010bf3b04cdcd998a93d1a2a882769c3c1"
+    },
+    {
+      "file": "world/stravian-domains-malland-hing-halls.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/stravian-domains-malland-hing-halls.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3958064,
+      "sha256": "283676385b7fef9d663d6412b9c73695ceee076213e79a32b7127227d0250eb7"
+    },
+    {
+      "file": "world/stravian-domains-mirare.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/stravian-domains-mirare.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4048557,
+      "sha256": "136c652a92d4ae6b365c42b13cd4aa37188dcae0c0468a8423ccacafd94a6a98"
+    },
+    {
+      "file": "world/stravian-domains-moolooite-mines.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/stravian-domains-moolooite-mines.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4118093,
+      "sha256": "b42e3cf0887dbac160e39c46eaedde2faed9c51a04b146e71009a42ee24bddc4"
+    },
+    {
+      "file": "world/stravian-domains-stonelair-city.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/stravian-domains-stonelair-city.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4168307,
+      "sha256": "0a5ff17a722a10ff56661de8619fadc66b402f8b78b90f4f8a2b6636850c6f43"
+    },
+    {
+      "file": "world/taii-maku-city-states-awo-irin-illu.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/taii-maku-city-states-awo-irin-illu.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3941873,
+      "sha256": "fc749e68d2e750ba544ea21eba53fad9b38cfe251575fb3118e663e1955fbd7f"
+    },
+    {
+      "file": "world/taii-maku-city-states-g-bagede-illu.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/taii-maku-city-states-g-bagede-illu.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3896971,
+      "sha256": "b7509b8ad47aad4a75ce0947b723976df6de48724ed1d4a822fb88ea24328b2c"
+    },
+    {
+      "file": "world/taii-maku-city-states-ilaorun-illu.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/taii-maku-city-states-ilaorun-illu.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4172417,
+      "sha256": "b741beb1b0d9add33b34c311316c661c5ecfab285fa6d4f3cbbd483f7e87fabd"
+    },
+    {
+      "file": "world/taii-maku-city-states-ubellian-fire-pits.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/taii-maku-city-states-ubellian-fire-pits.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3641944,
+      "sha256": "3043ff73605e6fa816088e768246292b80ec037582337e2383ee55d8156c16c0"
+    },
+    {
+      "file": "world/theocracy-of-kepesh-bright-coast.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/theocracy-of-kepesh-bright-coast.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3771476,
+      "sha256": "bcdc617fcf08aaa54543505fd33e049883871cc2dabee111918c9d265d9f6b40"
+    },
+    {
+      "file": "world/theocracy-of-kepesh-brightlight-desert.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/theocracy-of-kepesh-brightlight-desert.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3387499,
+      "sha256": "6048ad15677f103bfd62d41310845231d2888a13444ab1ef34387c73b864299f"
+    },
+    {
+      "file": "world/theocracy-of-kepesh-hag-salar.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/theocracy-of-kepesh-hag-salar.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3634393,
+      "sha256": "9e701258cc434f394bea911168522dc922d3c26ef075e46026878c199227eebd"
+    },
+    {
+      "file": "world/theocracy-of-kepesh-pakaitos-the-new-capital.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/theocracy-of-kepesh-pakaitos-the-new-capital.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3516826,
+      "sha256": "c5ae1395e333668499ac7255d40167f57ede66328fa17de6848d242e72a1dece"
+    },
+    {
+      "file": "world/theocracy-of-kepesh-the-great-nothing.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/theocracy-of-kepesh-the-great-nothing.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3537269,
+      "sha256": "ee0ff0f5ee3a83058eef90dd02b70ae8c271647ac1bf0e22adf8f55e29843cd9"
+    },
+    {
+      "file": "world/tsvetan-bone-fields.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/tsvetan-bone-fields.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3940189,
+      "sha256": "0a9c641a8fb63a0a31caa8ef4fb19146178e9bfd88405e10c87ccc753b6cda96"
+    },
+    {
+      "file": "world/tsvetan-eferhild-citadel.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/tsvetan-eferhild-citadel.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3674815,
+      "sha256": "8534e8b2936f2d8982781234e880f1f46fc707b756f4dd10096d7fa50051c4d5"
+    },
+    {
+      "file": "world/tsvetan-feargus-the-capital.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/tsvetan-feargus-the-capital.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3499409,
+      "sha256": "2e39b88f5eb4ea845a2a147fdf4147b6cc127b6c04999475b43f925e97531dc2"
+    },
+    {
+      "file": "world/tsvetan-obsidian-fortress.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/tsvetan-obsidian-fortress.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3474357,
+      "sha256": "81965f873cbb62dfb8a793806c240b801760944122185abcbebb2aa54cfeea22"
+    },
+    {
+      "file": "world/tsvetan-poison-grounds.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasReview20261006/images/tsvetan-poison-grounds.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3825205,
+      "sha256": "f07374ae469c2437a3efa200243ea4b7e556e6340ce573711b142fe8de81ec38"
+    },
+    {
+      "file": "world/tsvetan-the-greatwolf-race-course.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/tsvetan-the-greatwolf-race-course.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3574611,
+      "sha256": "736f2ab7d9f59042eaebd702c6e7f0fb4d6ba4180a8de9d5234781466ede23c8"
+    },
+    {
+      "file": "world/yama-floating-markets.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/yama-floating-markets.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4131726,
+      "sha256": "b019223095b09a382312e2940696c28680dd133b33ff9e8efa2f91c38f6d55f8"
+    },
+    {
+      "file": "world/yama-kagemori-village.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/yama-kagemori-village.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4140685,
+      "sha256": "53850d84ce257a1dc05d89a82dd6c00ce3389422bfb3a8ce0ca3ff3f78bde0e8"
+    },
+    {
+      "file": "world/yama-tengoku-palace-and-kinshi-the-forbidden-city.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/yama-tengoku-palace-and-kinshi-the-forbidden-city.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4198480,
+      "sha256": "609c381b5250fb8de54aef1928aae2bfa3407c152a2f4ca8f0cb665f0ca6dd1c"
+    },
+    {
+      "file": "world/yama-tiger-monastery.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/yama-tiger-monastery.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4129545,
+      "sha256": "65c4911bc9c17161f1f0417044d7eba672fa335eca16e0ff8668a1474bd121d1"
+    },
+    {
+      "file": "world/yama-yama-bunkatsu-forest.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/yama-yama-bunkatsu-forest.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4053699,
+      "sha256": "1e2059ad1d9b10e3f467b3cb5af7550b00c1018e37a0a69fb5062514ee748b16"
+    },
+    {
+      "file": "world/yama-yamanoma.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/yama-yamanoma.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3847538,
+      "sha256": "836922d9464f91ed2752ec8cf8971e1cdb00562ffb1f2e64e4a7b11f522dcd58"
+    },
+    {
+      "file": "world/mystical.png",
+      "level": "geographic",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/world/mystical.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3606246,
+      "sha256": "799b304bc82dde90e4089bb949c66e2c888c614df80411c0a8b5d744ac4e7e3b"
+    },
+    {
+      "file": "world/undertanares.png",
+      "level": "territory",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/undertanares.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3492381,
+      "sha256": "7107f4805f443c4b2cbf522e4b59fefcd12d362eb37decbd9a4562c10b42893a"
+    },
+    {
+      "file": "world/darkall.png",
+      "level": "territory",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/darkall.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 2804968,
+      "sha256": "5e51d282b94c2d594107c09ca19105a52d771e2bfbfd72a54055f0c3a03d9652"
+    },
+    {
+      "file": "world/darkall-cave-of-the-damned.png",
+      "level": "zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlas20261005/images/darkall-cave-of-the-damned.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3103208,
+      "sha256": "2d9b6fd071f5cc1e108dc42efc788d7b9cdeddb457012dee9e06621d39865bc2"
+    },
+    {
+      "file": "capital/images/capital.png",
+      "level": "ensemble",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/capital.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3458293,
+      "sha256": "3a2b521a3fbc6c5d496d9ad8b6f8ed3878f295dd8ebf6ece45f4af0d7e7bd4e3"
+    },
+    {
+      "file": "capital/plans/capital.png",
+      "level": "ensemble",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/capital.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 96978,
+      "sha256": "ce2c0165e22eb4263d31eb14ee3f14daf9935a3bbd0a04b939f421b5914a0e7e"
+    },
+    {
+      "file": "capital/images/sloghood.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/sloghood.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3868596,
+      "sha256": "809dd7c946993ad6b138ad2704bb99556e0e1c5b2dc4d7761f111da136d550e8"
+    },
+    {
+      "file": "capital/plans/sloghood.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/sloghood.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 35191,
+      "sha256": "d761176ea3657457606f23d4313b5788c186fe0ea8364ed553914aeada6d7f7f"
+    },
+    {
+      "file": "capital/images/uptown.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/uptown.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3553386,
+      "sha256": "b3fa8e6b25f71c76154f83cd90d8d3b289419e2451c16f0f177c3ae67811f75b"
+    },
+    {
+      "file": "capital/plans/uptown.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/uptown.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 34741,
+      "sha256": "6cb54172a72454a5c64e253bd844783e12c1278582cc72eed161247eba440d87"
+    },
+    {
+      "file": "capital/images/artisansquare.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/artisansquare.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3654981,
+      "sha256": "2a5b86bbe50f1df314303370f5cd62302225f2f36796301042239eb1bc595d9a"
+    },
+    {
+      "file": "capital/plans/artisansquare.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/artisansquare.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 54457,
+      "sha256": "13d6627098fbe3ea48f9e100eab41f4a3940a79d095bdc7ed2083989b2aa36ab"
+    },
+    {
+      "file": "capital/images/scholarnest.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/scholarnest.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3766943,
+      "sha256": "0215e0dfa7504636c3eb383d240ea9fd197084b65199e8b2a3b5f4b0ba759a91"
+    },
+    {
+      "file": "capital/plans/scholarnest.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/scholarnest.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 34113,
+      "sha256": "5837328e6af96786b5f78950865ee1a990fd9ac0398ba8413e22b89a0da4f777"
+    },
+    {
+      "file": "capital/images/dweomer.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/dweomer.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4154256,
+      "sha256": "faad92f21c1eace3c5f1ae5676eca4fa6701b8c35ecfe512228733e9879cf252"
+    },
+    {
+      "file": "capital/plans/dweomer.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/dweomer.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 39572,
+      "sha256": "3db56b7987919702d105b2cf0b44b522709e8e0a62f50a15cec25bdee18df66d"
+    },
+    {
+      "file": "capital/images/martpart.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/martpart.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4086798,
+      "sha256": "1e244fd84c9c275f26676ad5e73a95d906746816ac2d4177ba7c66bc07292a4c"
+    },
+    {
+      "file": "capital/plans/martpart.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/martpart.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 29854,
+      "sha256": "e6f63bb262bd6dafa95a07884f1abbcaffb056bcb70e4551db20c09eea1b1af3"
+    },
+    {
+      "file": "capital/images/arenarea.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/arenarea.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3647744,
+      "sha256": "f75abd71e64112735565f8f95f291247cebd3b66f1fcdd7c2ead1ca62453b7a3"
+    },
+    {
+      "file": "capital/plans/arenarea.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/arenarea.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 47704,
+      "sha256": "813a0da7cc8633f8941a58ee5aba1089276409c4723d0c71fbe5b3ac2573e180"
+    },
+    {
+      "file": "capital/images/oldtown.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/oldtown.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3698352,
+      "sha256": "4e30d0bdda3433a40a4acc0eb022ab0e3c8f2f0d00d3f0373aaacee0f8135dbf"
+    },
+    {
+      "file": "capital/plans/oldtown.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/oldtown.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 42764,
+      "sha256": "614cdf481fb58c10b1e6169824604c332574f77138492d9c68c2b0998b0b5c35"
+    },
+    {
+      "file": "capital/images/neckoffoods.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/neckoffoods.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3751804,
+      "sha256": "4ef516214c3a843262f070244f90adb1e9cbff89f63288ef503d49d4c493dcb2"
+    },
+    {
+      "file": "capital/plans/neckoffoods.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/neckoffoods.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 30545,
+      "sha256": "cf18a3ea9a6c888d9cfb1265d20f588ccbf7994cec30cb478f2a1a08c4121108"
+    },
+    {
+      "file": "capital/images/bloomburgs.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/bloomburgs.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4206729,
+      "sha256": "a56762189868b78ffc94c3c48205b953dbdeaa07d1aa0509b88fe8f690e982eb"
+    },
+    {
+      "file": "capital/plans/bloomburgs.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/bloomburgs.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 29590,
+      "sha256": "70c291c419d878d78cdf4c95b145681155c2436f33ff3dcfb671639c462746db"
+    },
+    {
+      "file": "capital/images/downtown.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/downtown.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4121609,
+      "sha256": "15bbe34ebfd49b0f000cc581433e9a73f6ce3f407dda6d279eaea2206ec28f81"
+    },
+    {
+      "file": "capital/plans/downtown.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/downtown.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 45334,
+      "sha256": "a190e4bb53b1025cdc0773b0003189d50e1e9f266b2b5d2c713d063b2afcb0cc"
+    },
+    {
+      "file": "capital/images/palacedomain.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/palacedomain.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3855237,
+      "sha256": "f7fba85933408235e79e5fc7413966948ba2ab0236470972142be08947367308"
+    },
+    {
+      "file": "capital/plans/palacedomain.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/palacedomain.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 53282,
+      "sha256": "c308f224e0306f866faf63adbee9c653443d369d43105a0d344c185e30f19dca"
+    },
+    {
+      "file": "capital/images/docks.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/docks.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3812128,
+      "sha256": "43ec06b9bf5205b03ad5f7a8689f254a36af31e8902786dc4d53ff456e427520"
+    },
+    {
+      "file": "capital/plans/docks.png",
+      "level": "quartier",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/docks.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 28781,
+      "sha256": "f2846a90d2440e28d1483e99fc9289c497caa7f296f3fc381d9e9ff684068128"
+    },
+    {
+      "file": "capital/images/arena-of-fate.png",
+      "level": "niveau",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/arena-of-fate.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 2853296,
+      "sha256": "3c68f015352af01f7258306db40a0d2b6851fb4a39a9fbe0fd702598d490970b"
+    },
+    {
+      "file": "capital/plans/arena-of-fate.png",
+      "level": "niveau",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/plans/arena-of-fate.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 238826,
+      "sha256": "b26627554e0912cc93590b5e73a942659cf369fa42ee2d734ed3eda6b7644207"
+    },
+    {
+      "file": "capital/images/undercroft.png",
+      "level": "niveau",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/undercroft.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 2967151,
+      "sha256": "0aca4db95097ca9bf9f0151ee146325de36cf943a73daa89c866636bed8f9713"
+    },
+    {
+      "file": "capital/plans/undercroft.png",
+      "level": "niveau",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/undercroft.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 27283,
+      "sha256": "61e2d76c0b6f7635b3d603dab11d09bb4fd7e47d166cd59e0c2a50bde3f040f9"
+    },
+    {
+      "file": "capital/images/catacombs.png",
+      "level": "niveau",
+      "provenance": "author",
+      "source": "Tools/Assets3D/Regions/central-empire/capital/AtlasCoherent20261005/images/catacombs.png",
+      "date": "2026-10-06",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3014120,
+      "sha256": "86215efe2f4295b57ffa6ec93d0a1921bac24d97548a01d0c406b37d157147c1"
+    },
+    {
+      "file": "capital/plans/catacombs.png",
+      "level": "niveau",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/catacombs.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 27680,
+      "sha256": "88928e85ebc4dcb78dbbf9b16c190306bb559dfbd3a0cf50d287be405b955c56"
+    },
+    {
+      "file": "capital/images/illu-die-arena.png",
+      "level": "sous-zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/illu-die-arena.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4095393,
+      "sha256": "e4991f0f4ca0c434949b8a54dfb688f813990a5a6b12faaeff724ba2da2ca080"
+    },
+    {
+      "file": "capital/plans/illu-die-arena-architecture.png",
+      "level": "sous-zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/illu-die-arena-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 21431,
+      "sha256": "57f6861cba6bfb3c7ea49864fb1a3e49f0a06d3c4567f13e74cb1f3e9aea716f"
+    },
+    {
+      "file": "capital/images/braves-arena.png",
+      "level": "sous-zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/braves-arena.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3957370,
+      "sha256": "71582462b24fce31abe6e5842ed67d9460be2cfd6a251163c84b909d81b6b2e7"
+    },
+    {
+      "file": "capital/plans/braves-arena-architecture.png",
+      "level": "sous-zone",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/braves-arena-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 21299,
+      "sha256": "5e160f30f9c807363e1570be198388314bdb4a2284eaa2013a2fb1d6c2110862"
+    },
+    {
+      "file": "capital/images/municipal-market.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/municipal-market.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4316453,
+      "sha256": "f8ca52e2b9ba973890085783961e0d01b63a4ab570c7c1515bb031ce090b9cbb"
+    },
+    {
+      "file": "capital/plans/municipal-market-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/municipal-market-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 19147,
+      "sha256": "0750e8d5690b53eebedcdd3d80c022d23920477d539c058ebfafcaec9f272bc2"
+    },
+    {
+      "file": "capital/images/hippodrome.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/hippodrome.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4146056,
+      "sha256": "55af9e3958737f60089646b55f9fc67b653c9b4030ff552632ed8938b3119e09"
+    },
+    {
+      "file": "capital/plans/hippodrome-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/hippodrome-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 24360,
+      "sha256": "48b889b14cccfe52137fcee0b131d678014a6b2575c46c2f2cd5014deaa86be2"
+    },
+    {
+      "file": "capital/images/golden-chalice.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/golden-chalice.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4150841,
+      "sha256": "efc3a53fd2505503ea36d8aa3d678716d1c8637d36ea23b12322777d393bdbd5"
+    },
+    {
+      "file": "capital/plans/golden-chalice-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/golden-chalice-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 21182,
+      "sha256": "898c37555346989abdee58cf6c81df345981e1fb95478f566590b48fd293de10"
+    },
+    {
+      "file": "capital/images/dusk-of-justice.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/dusk-of-justice.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3907331,
+      "sha256": "7a968412c973fab4a5cceec307c87e2e48d6e976069e61e51a50a64ce1bf64b9"
+    },
+    {
+      "file": "capital/plans/dusk-of-justice-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/dusk-of-justice-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 21179,
+      "sha256": "6fee480d2621ee5c6cdc7eaa2055a63d10eaf0919ca2eed1d5ccc9cc51d9390a"
+    },
+    {
+      "file": "capital/images/imperial-palace.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/imperial-palace.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4068925,
+      "sha256": "5bf08c06ffee0dffaa80fd350cd223fee04c7cbf8a80430a7154e0efe1a11ee9"
+    },
+    {
+      "file": "capital/plans/imperial-palace-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/imperial-palace-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 23438,
+      "sha256": "0a12966cafb8666db1f25b6f9c2e7937c863953aaa2b0afde8536289f67f8746"
+    },
+    {
+      "file": "capital/images/cathedral-eight.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/cathedral-eight.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4134688,
+      "sha256": "90a738318c99bf0211e49b5712f09c94eea6ef1fe28485315c17b08ef74f8304"
+    },
+    {
+      "file": "capital/plans/cathedral-eight-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/cathedral-eight-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 24848,
+      "sha256": "ea214bc61bfb2dc10b73611a99a2b0d2e49e4d6c5ee050bb5a63ca2dd99318a1"
+    },
+    {
+      "file": "capital/images/municipal-palace.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/municipal-palace.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4267761,
+      "sha256": "902d6f21ba19d93afc7de144f8236dc85d762a91ce90598bc3476086b9bf72ed"
+    },
+    {
+      "file": "capital/plans/municipal-palace-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/municipal-palace-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 20471,
+      "sha256": "0ffae9ca9625b7ad25c4c0d09eba3ad1864b58f2b9234202594ac2dbd29c9393"
+    },
+    {
+      "file": "capital/images/imperial-university.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/imperial-university.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3884269,
+      "sha256": "34689272643393ca7744713a5a19709358e575cbe4500cdf3ba67423644f5191"
+    },
+    {
+      "file": "capital/plans/imperial-university-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/imperial-university-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 27621,
+      "sha256": "84eccde86faae5f44e957f949c0c019e10b2dad70607f1bbbad62ad2ca0184da"
+    },
+    {
+      "file": "capital/images/torygg-tower.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/torygg-tower.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3962575,
+      "sha256": "36cf0ce12c451264cb1e5e63b5acc5f5e722032d4d541b48a52313044d975cea"
+    },
+    {
+      "file": "capital/plans/torygg-tower-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/torygg-tower-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 23880,
+      "sha256": "451a4807405e1fde196ef782f6b717f26bcc6986b06bc4c9ac1a162676bf9677"
+    },
+    {
+      "file": "capital/images/ironhand-headquarters.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/ironhand-headquarters.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4273368,
+      "sha256": "b8c5c7ba4df9405442e955755feda60f0f768d1ac8275a2c8cc5e68d9cf2850e"
+    },
+    {
+      "file": "capital/plans/ironhand-headquarters-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/ironhand-headquarters-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 25973,
+      "sha256": "d5970b625c4a46588894eba1ec1bec19d351730070a8b8afd146bebc199ef9cd"
+    },
+    {
+      "file": "capital/images/wicar-war-school.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/wicar-war-school.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4079743,
+      "sha256": "f8e8ed5248d185dffa921616598f95bd24cc60895fba69798ebcfe30f33082c3"
+    },
+    {
+      "file": "capital/plans/wicar-war-school-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/wicar-war-school-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 25802,
+      "sha256": "3a4923db93bf2204a6800b64051fafd40adc6045b28de917180f8de83a3c8261"
+    },
+    {
+      "file": "capital/images/cemetery-moon-tower.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/cemetery-moon-tower.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3945074,
+      "sha256": "06287a82161234352b8e523b2d17bf75f362c41ba9c55aa4072931f7a55c3dc7"
+    },
+    {
+      "file": "capital/plans/cemetery-moon-tower-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/cemetery-moon-tower-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 27750,
+      "sha256": "06d2cb26dcf2a448e3067a02342ede550c9784b7940e08be5c1edc26343dea2c"
+    },
+    {
+      "file": "capital/images/baleroth-library.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/baleroth-library.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3907987,
+      "sha256": "d43b59a9432a653263f45d97b9c5efdabc2bbabdc3f7c97aac4299ab94e2fb56"
+    },
+    {
+      "file": "capital/plans/baleroth-library-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/baleroth-library-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 22827,
+      "sha256": "c403eae713c9a8b65494591403a2805a1b417174b30ce904284a68ab06c86234"
+    },
+    {
+      "file": "capital/images/the-vault.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/the-vault.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4158058,
+      "sha256": "b396c57e81c33d68e9048024dc0aeeb01e09936357f933956b025e8bcc39b9d6"
+    },
+    {
+      "file": "capital/plans/the-vault-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/the-vault-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 24079,
+      "sha256": "308d3245f3c1cbba538fc22ed070d1931f8f56c121436b1aee79df9c5fdd741a"
+    },
+    {
+      "file": "capital/images/sara-hospital.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/sara-hospital.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4210612,
+      "sha256": "193a7eda2b0bd4b05e0a99cc23e41878f1c340a3a331c3790ee76dbf7a443491"
+    },
+    {
+      "file": "capital/plans/sara-hospital-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/sara-hospital-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 25187,
+      "sha256": "8b26a5fec75038c98ca962fce51fe3c11739d4cae9a78a3cddbe13eb3ae74b97"
+    },
+    {
+      "file": "capital/images/imperial-museum.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/imperial-museum.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3865647,
+      "sha256": "fc253d5df7bb9da9b03a11170b7c274ef635452d45be8acd5b6b250395a92034"
+    },
+    {
+      "file": "capital/plans/imperial-museum-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/imperial-museum-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 20326,
+      "sha256": "1d80f62c853a2d17193cb10063f0cd94b1c419ca50b5019dfe0e2c9388e1a0ae"
+    },
+    {
+      "file": "capital/images/wizards-headquarters.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/wizards-headquarters.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4448700,
+      "sha256": "8d57d3a1d91227100ac68128801aeb06b9cbbbeb853ac07f92a2403378aea399"
+    },
+    {
+      "file": "capital/plans/wizards-headquarters-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/wizards-headquarters-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 26796,
+      "sha256": "52024078f827ff216861c9508001120b9f6aa3ee1511b0734acadf06bff4f2b1"
+    },
+    {
+      "file": "capital/images/tamera-temple.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/tamera-temple.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4116568,
+      "sha256": "232021a0d73bf77de1a8638b5ef75b58cf4bc8a24f2fb982c8205d94b47d02d3"
+    },
+    {
+      "file": "capital/plans/tamera-temple-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/tamera-temple-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 25378,
+      "sha256": "fd457ad6cead8d0cc13377f4ec5651f661ee334e40a84c4e15c2519c7196cc6a"
+    },
+    {
+      "file": "capital/images/capital-portals.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/capital-portals.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4213380,
+      "sha256": "e1bf640729714f61362f416428d1a9148a06f1f5468a77a248b52f4492c5f621"
+    },
+    {
+      "file": "capital/plans/capital-portals-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/capital-portals-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 25250,
+      "sha256": "248ea1fea70d7b7e67fa0393553689fdf044317052b3323c13ce5c1cb74dda2c"
+    },
+    {
+      "file": "capital/images/omathyr-manor.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/omathyr-manor.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4197131,
+      "sha256": "cd3083156ddf908b26cfdd420625e07afafd94f213d9a3a23c92f42ed47b788f"
+    },
+    {
+      "file": "capital/plans/omathyr-manor-architecture.png",
+      "level": "lieu-majeur",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/plans/omathyr-manor-architecture.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 23587,
+      "sha256": "d4c3608bf4f9a2c819123f4e007d2390c8325143f178e5c5e44663747e2a1bec"
+    },
+    {
+      "file": "capital/images/tamera-temple-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/tamera-temple-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4068311,
+      "sha256": "499ade99edca8825c21d608f33290b928d4f9f24f0d50e58d801279a8f8b7abb"
+    },
+    {
+      "file": "capital/images/baleroth-library-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/baleroth-library-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3785984,
+      "sha256": "cca2ae62d26247f2784341be0534bb513e7e7a5d45febb8fab1bf73dcdef61d8"
+    },
+    {
+      "file": "capital/images/capital-portals-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/capital-portals-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3950337,
+      "sha256": "01d5990ffe48fc9a14b9e6b64dbd19c63a948e15a57cd70360761e086094d673"
+    },
+    {
+      "file": "capital/images/cathedral-eight-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/cathedral-eight-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3874472,
+      "sha256": "07d7b60edf596fc4751a85259c2ff1f17d858feb03d550da66b9dac99f8eded7"
+    },
+    {
+      "file": "capital/images/cemetery-moon-tower-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/cemetery-moon-tower-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3739196,
+      "sha256": "60893e0af8a2ed8d6dd76243790a3f3602e58e108866bbdc0f94351d7d1bd6d4"
+    },
+    {
+      "file": "capital/images/dusk-of-justice-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/dusk-of-justice-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3644816,
+      "sha256": "9f06e9a06afeee49337e3e6e59a1d76c8952df970eb002234de2dd15ae0637db"
+    },
+    {
+      "file": "capital/images/golden-chalice-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/golden-chalice-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3809385,
+      "sha256": "3defad8bd13af2cfdf5afb91c261f3c89d8d2e80515f4ac5af696640a8d22c67"
+    },
+    {
+      "file": "capital/images/imperial-museum-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/imperial-museum-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3679206,
+      "sha256": "5ca77aac8a1a9badcb83a8cced19db471a778b75869edc37632acfdaa78b04a7"
+    },
+    {
+      "file": "capital/images/imperial-university-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/imperial-university-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3683730,
+      "sha256": "1c03418b6a0b763f38179e89792adbea686e16ab6eaf1dcf698ccb62097f5549"
+    },
+    {
+      "file": "capital/images/braves-arena-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/braves-arena-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3717742,
+      "sha256": "f516c2398455c4132a7a37757586a90fa02424466910fa3aa9af43b1fd7a96f1"
+    },
+    {
+      "file": "capital/images/hippodrome-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/hippodrome-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3862942,
+      "sha256": "b0e2a72067c69ebe6d32530e49f7e83b4f06dbc66e3e995d5bc61470dad51c45"
+    },
+    {
+      "file": "capital/images/illu-die-arena-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/illu-die-arena-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3826584,
+      "sha256": "f33471239d439797476a0d8b7a9d649bce88f61e33b89f2ebe8d57359cc19c72"
+    },
+    {
+      "file": "capital/images/imperial-palace-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/imperial-palace-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3789798,
+      "sha256": "f1b9bf98df663c9b59b344797db016754855572a61da9d3b5e04a55506f6638a"
+    },
+    {
+      "file": "capital/images/ironhand-headquarters-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/ironhand-headquarters-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3918512,
+      "sha256": "f09377c74ea02cbff53858a7d0fd94c95aa489bf75833dbd071566a489b43165"
+    },
+    {
+      "file": "capital/images/municipal-market-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/municipal-market-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4011698,
+      "sha256": "562d0c4dbb315b975e7f054b1c04dcf89e4cf922330a8009314b36c6bfdfc12f"
+    },
+    {
+      "file": "capital/images/municipal-palace-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/municipal-palace-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4042867,
+      "sha256": "db3b7df0abc995452e2c938e91ddaef8197edd6adc5eed4ce5724cfecac355e2"
+    },
+    {
+      "file": "capital/images/omathyr-manor-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/omathyr-manor-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3983928,
+      "sha256": "476d307c23fff7a74b5f16f9ab00be36623cecb14a0ef7db8f8ef3a04528beed"
+    },
+    {
+      "file": "capital/images/sara-hospital-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/sara-hospital-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3913960,
+      "sha256": "bbfcff0b376bae1260596145f30451a0032b10dcd7a601a68c2679da873ff387"
+    },
+    {
+      "file": "capital/images/the-vault-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/the-vault-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3955001,
+      "sha256": "a672ca6533b7b1fa536e63d36373ba943897229e226ee162376bc0c7829adc81"
+    },
+    {
+      "file": "capital/images/torygg-tower-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/torygg-tower-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3796070,
+      "sha256": "7a510a744a7e853be6b2fc74f8d2912f4534ededef968d153efc383f7db914be"
+    },
+    {
+      "file": "capital/images/wicar-war-school-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/wicar-war-school-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 3702467,
+      "sha256": "37cac1aa118b13de874932a18b9190a12126680dd85dc22f8bb6cca55c4653cb"
+    },
+    {
+      "file": "capital/images/wizards-headquarters-interior.png",
+      "level": "interior",
+      "provenance": "author",
+      "source": "Tools/WorldAtlasAudit20261007/capital/images/wizards-headquarters-interior.png",
+      "date": "2026-10-07",
+      "size": [
+        1536,
+        1024
+      ],
+      "bytes": 4076006,
+      "sha256": "62ec03ab502a32868277949150fb8bc45ba244a76d59edd62e5ac62c56da5a10"
+    }
+  ],
+  "format": "illustrated-atlas-v2",
+  "deliverySize": [
+    1536,
+    1024
+  ],
+  "styleMasters": {
+    "date": "2026-10-06",
+    "deliverySize": [
+      1536,
+      1024
+    ],
+    "references": [
+      {
+        "role": "urban",
+        "path": "D:\\JustAnotherDnDGame\\Tools\\WorldAtlas20261005\\generated-images\\exec-3f2751ae-d49b-4e2c-ad21-07f0bb8d8ee2.png",
+        "sha256": "195e523c0881d0e3d75528e50a34e5259c06345a1a182c062420d0ef22eecf10"
+      },
+      {
+        "role": "terrain",
+        "path": "D:\\JustAnotherDnDGame\\Tools\\WorldAtlas20261005\\generated-images\\exec-ea864bc9-a14c-4f2b-bae3-e56209bdae6d.png",
+        "sha256": "c37bd7d7cd364c8597e0ba8beed17abcc1e3ff69947f2152ff3a88f8cb03a2af"
+      }
+    ]
+  }
+}

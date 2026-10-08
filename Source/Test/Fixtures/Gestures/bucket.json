@@ -1,0 +1,9 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "note": "Le seau : une place pavée, puis la ruelle versée dans la place seule — la rue qui l'entoure n'a pas le même contenu.",
+  "gestures": [
+    {"piece": "square", "tool": "rectangle", "from": [0, 6], "to": [2, 9]},
+    {"piece": "alley", "tool": "bucket", "at": [0, 9]}
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "tile": [
+    68,
+    42
+  ],
+  "comment": "Monde d'essai : le mannequin humanoïde (LOT-145), en modèle depuis le LOT-1006 — le pantin de trois os de Fixtures/Meshes.",
+  "npcs": [
+    "Mannequins/humanoid"
+  ]
+}

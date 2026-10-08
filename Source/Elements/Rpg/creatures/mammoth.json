@@ -1,0 +1,51 @@
+{
+  "id": "mammoth",
+  "name": "Mammouth",
+  "source": "srd",
+  "size": "huge",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 24,
+    "dexterity": 9,
+    "constitution": 21,
+    "intelligence": 3,
+    "wisdom": 11,
+    "charisma": 6
+  },
+  "armorClass": 13,
+  "hitPoints": 126,
+  "hitDice": "11d12+55",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 6,
+  "senses": [
+    "Perception passive 10"
+  ],
+  "traits": [
+    {
+      "name": "Charge écrasante",
+      "text": "Si le mammouth se déplace d'au moins 6 mètres en ligne droite vers une créature, puis la touche lors d'une attaque avec ses défenses dans le même tour, la cible doit réussir un jet de sauvegarde de Force DD 18 pour ne pas être jetée à terre. Si la cible est à terre, le mammouth peut réaliser une attaque de piétinement contre celle-ci par une action bonus."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Défenses",
+      "text": "Attaque au corps à corps avec une arme : +10 au toucher, allonge 3 m, une cible. Touché : 25 (4d8 + 7) dégâts perforants.",
+      "attackBonus": 10,
+      "reach": 3,
+      "damage": "4d8+7",
+      "damageType": "piercing"
+    },
+    {
+      "name": "Piétinement",
+      "text": "Attaque au corps à corps avec une arme : +10 au toucher, allonge 1,50 m, une créature à terre. Touché : 29 (4d10 + 7) dégâts contondants.",
+      "attackBonus": 10,
+      "reach": 1.5,
+      "damage": "4d10+7",
+      "damageType": "bludgeoning"
+    }
+  ],
+  "description": "Un mammouth est une créature éléphantesque qui possède une épaisse fourrure et de longues défenses."
+}

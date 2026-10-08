@@ -1,0 +1,11 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "note": "La gomme : un trait sur la façade, puis une case d'une pièce large, qui part entière ; le pinceau armé avant la gomme repeint ensuite.",
+  "gestures": [
+    {"piece": "light"},
+    {"layer": "relief", "tool": "eraser", "path": [[3, 0], [4, 0]]},
+    {"tool": "eraser", "at": [8, 6]},
+    {"tool": "paint", "at": [6, 3]}
+  ]
+}

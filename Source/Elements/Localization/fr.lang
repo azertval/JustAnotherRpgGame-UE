@@ -1,0 +1,159 @@
+# Catalogue de traduction - francais (langue par defaut).
+# Format : cle = valeur (encodage UTF-8). Les cles sont en anglais (convention d'identifiants) ;
+# les valeurs sont traduites. Les lignes vides et les lignes commencant par # sont ignorees.
+# Seul le premier '=' separe la cle de la valeur ; les espaces de bordure sont retires.
+
+# Menu principal
+# Titre AFFICHE du jeu : « Just Another RPG Game », avec espaces.
+# A ne pas confondre avec l'identifiant technique « JustAnotherRpgGame » (cible CMake,
+# binaire, depot, prefixe de macro JADG_) : un renommage global de l'un a deja ecrase
+# l'autre une fois (LOT-01). Les deux sont distincts, et doivent le rester.
+menu.new_game = Nouvelle partie
+menu.quit = Quitter
+
+# Options
+options.back = Retour
+
+# --- Ecrans du RPG -----------------------------------------------------------------------------
+# Les libelles des ecrans vivent dans les formulaires QML (qsTr, jadg_en.ts) ; ici, ce que les
+# vues-modeles traduisent par cle : le journal de quetes.
+
+journal.empty = Aucune quête pour l'instant.
+journal.status.active = En cours
+journal.status.failed = Échouée
+journal.status.succeeded = Terminée
+
+# --- Fiche de personnage : la maquette du LOT-38 ----------------------------------------------
+# Libelles releves sur les cinq planches VIERGES de `VTT/Blank Sheets RPG (1).pdf`. Les noms de
+# competences et de caracteristiques sont ceux du LEXIQUE (rpg.glossary.csv) et non des synonymes :
+# `check_glossary.py` controle ces deux espaces de noms, comme il controle deja les etats.
+
+rpg.ability.strength = Force
+rpg.ability.dexterity = Dextérité
+rpg.ability.constitution = Constitution
+rpg.ability.intelligence = Intelligence
+rpg.ability.wisdom = Sagesse
+rpg.ability.charisma = Charisme
+
+rpg.skill.acrobatics = Acrobaties
+rpg.skill.animal_handling = Dressage
+rpg.skill.arcana = Arcanes
+rpg.skill.athletics = Athlétisme
+rpg.skill.deception = Tromperie
+rpg.skill.history = Histoire
+rpg.skill.insight = Intuition
+rpg.skill.intimidation = Intimidation
+rpg.skill.investigation = Investigation
+rpg.skill.medicine = Médecine
+rpg.skill.nature = Nature
+rpg.skill.perception = Perception
+rpg.skill.performance = Représentation
+rpg.skill.persuasion = Persuasion
+rpg.skill.religion = Religion
+rpg.skill.sleight_of_hand = Escamotage
+rpg.skill.stealth = Discrétion
+rpg.skill.survival = Survie
+
+# Dialogues (LOT-15). Les cles des repliques et des reponses sont FABRIQUEES depuis les
+# identifiants du graphe (dialogue.<dialogue>.<noeud>[.<reponse>]) : un test verifie que chaque
+# cle qu'un dialogue reclame existe ici ET dans en.lang.
+dialogue.continue = Continuer
+dialogue.leave = Quitter la conversation
+dialogue.refused = Votre interlocuteur ne parle aucune langue que vous comprenez. Il hausse les épaules et se détourne.
+dialogue.unavailable = Aucune conversation à afficher.
+dialogue.check.success = réussite
+dialogue.check.failure = échec
+dialogue.check.announce = %1 · DD %2
+dialogue.check.summary = %1 · DD %2 — d20 : %3, total %4 — %5
+dialogue.check.repeat = %1 · DD %2 — déjà tenté — %3
+dialogue.check.already-failed = déjà tenté, le dé ne roule plus
+dialogue.attitude.friendly = Amical
+dialogue.attitude.indifferent = Indifférent
+dialogue.attitude.hostile = Hostile
+
+# Les voies de la fin de la démo (LOT-119) : l'action `endDemo` d'un dialogue en nomme une, et
+# l'écran « Fin de la démo » la dit (ending.<voie>).
+ending.arene = par la voie de l'arène
+ending.parole = par la parole
+
+# La quête de la démo, « Des pommes pour l'arène » (LOT-120) : ses quatre dialogues et son journal.
+dialogue.mere.speaker = La mère
+dialogue.mere.appel = Vous ! Vous avez l'air de savoir vous battre. Mon fils a pris trois pommes sur mon étal — mes pommes, à moi ! — et un garde Ironhand l'emmène à l'Arena of Fate pour « vol sur la voie publique ». Il a dix ans. Rattrapez-les sur le parvis, je vous en supplie.
+dialogue.mere.appel.accepter = Je vous le ramènerai. Par où sont-ils partis ?
+dialogue.mere.appel.refuser = Ce ne sont pas mes affaires.
+dialogue.mere.merci = Par Stravian Avenue, à l'est : le garde l'a pris par là, vers le parvis de l'arène. Ramenez-le-moi.
+dialogue.mere.attente = Vite… ils sont sur le parvis d'Arenarea, par l'avenue à l'est. Je n'ose pas quitter l'étal.
+dialogue.mere.retrouvailles = Il est là ! Il est là… Je ne sais pas comment vous avez fait, et je ne veux pas le savoir. Prenez des pommes. Prenez-les toutes.
+dialogue.mere.retrouvailles.sourire = Gardez-les. Il aura faim.
+dialogue.garde.speaker = Le garde Ironhand
+dialogue.garde.halte = Circulez. Ce gamin a volé sur un étal du marché, et l'Arena of Fate juge les voleurs comme les autres. Le sable décidera.
+dialogue.garde.halte.convaincre = Trois pommes, sur l'étal de sa propre mère. Laissez-le partir.
+dialogue.garde.halte.endosser = C'est moi qui lui ai dit de les prendre. Emmenez-moi à sa place.
+dialogue.garde.halte.partir = Faites votre travail.
+dialogue.garde.adieu = …Sa propre mère ? Foutu marché. File, gamin, et que je ne te revoie pas. Vous, l'étranger : je ne vous ai jamais vu.
+dialogue.garde.refus = Non. La loi ne fait pas le tri entre les étals. Vous avez autre chose à me dire, ou vous circulez ?
+dialogue.garde.refus.endosser = C'est moi qui lui ai dit de les prendre. Emmenez-moi à sa place.
+dialogue.garde.refus.partir = Rien. Je circule.
+dialogue.garde.refus-encore = Je vous l'ai déjà dit : non. Vous avez autre chose ?
+dialogue.garde.refus-encore.endosser = C'est moi qui lui ai dit de les prendre. Emmenez-moi à sa place.
+dialogue.garde.refus-encore.partir = Non. Rien.
+dialogue.garde.escorte = Vous ? Soit. Un adulte qui se bat, la foule préfère ça. File, gamin. Vous, suivez-moi jusqu'à l'escalier de l'arène : le vestiaire des condamnés est en bas, et la porte se ferme derrière vous.
+dialogue.enfant.speaker = L'enfant
+dialogue.enfant.escorte = Elles étaient tombées, les pommes… Elles étaient par terre. Je ne veux pas aller dans l'arène.
+dialogue.enfant.libre = Maman dit que vous êtes un héros. Moi je dis que vous êtes bizarre. Merci quand même.
+dialogue.maitre-arene.speaker = Le maître d'arène
+dialogue.maitre-arene.defi = Le condamné du marché, et sa bande. La foule attend un jugement, pas une exécution : cinq combats, chacun plus dur que le précédent. Gagnez-les tous, et elle vous rendra votre liberté. Perdez-en un seul… le sable garde tout. Prêts ?
+dialogue.maitre-arene.defi.combattre = Qu'on lâche tes bandits.
+dialogue.maitre-arene.defi.attendre = Un instant encore.
+dialogue.maitre-arene.annonce-1 = Un combat de gagné, et la foule en veut quatre autres avant de rendre son jugement. Reposez-vous, soignez-vous, apprenez de vos coups : chaque victoire vous rendra plus forts, et chaque combat sera plus dur.
+dialogue.maitre-arene.defi-2 = Des gladiateurs de la maison, et deux arbalétriers pour les couvrir. Ils ne vous feront pas de cadeau. Prêts ?
+dialogue.maitre-arene.defi-2.combattre = Qu'on ouvre les grilles.
+dialogue.maitre-arene.defi-2.attendre = Pas encore.
+dialogue.maitre-arene.annonce-2 = Bien combattu. Le public scande vos noms. Reposez-vous : ce qui suit ne saigne plus.
+dialogue.maitre-arene.defi-3 = Les morts du sable. Zombis et squelettes, levés de la fosse sous les gradins. Ils ne craignent ni la douleur ni la peur. Prêts ?
+dialogue.maitre-arene.defi-3.combattre = Qu'on ouvre les grilles.
+dialogue.maitre-arene.defi-3.attendre = Pas encore.
+dialogue.maitre-arene.annonce-3 = Vous avez renvoyé les morts à leur fosse. Reposez-vous ; demain, des soldats.
+dialogue.maitre-arene.defi-4 = Un vétéran des guerres de l'Empire, deux de ses hommes de main et deux arbalétriers. Lui ne cédera pas un pas. Prêts ?
+dialogue.maitre-arene.defi-4.combattre = Qu'on ouvre les grilles.
+dialogue.maitre-arene.defi-4.attendre = Pas encore.
+dialogue.maitre-arene.annonce-4 = Le vétéran salue en tombant — c'est rare. Reposez-vous : la bande du capitaine vous attend.
+dialogue.maitre-arene.defi-5 = Un capitaine bandit, ses trois berserkers et ses malfrats. Ils frappent fort et souvent. Prêts ?
+dialogue.maitre-arene.defi-5.combattre = Qu'on ouvre les grilles.
+dialogue.maitre-arene.defi-5.attendre = Pas encore.
+dialogue.maitre-arene.annonce-5 = Cinq combats, cinq victoires : la foule a rendu son jugement, la porte des vestiaires est ouverte et l'enfant est libre. Il reste le champion, pour la gloire seule. Reposez-vous bien : vous n'aurez pas de seconde chance.
+dialogue.maitre-arene.defi-6 = Le champion de l'arène. Un gladiateur qui n'a jamais perdu, un capitaine à ses côtés, et leur escorte. Prêts ?
+dialogue.maitre-arene.defi-6.combattre = Qu'on ouvre les grilles.
+dialogue.maitre-arene.defi-6.attendre = Pas encore.
+dialogue.maitre-arene.gloire = Le champion est tombé. L'Arena of Fate n'a plus rien à vous apprendre : la foule chantera vos noms longtemps après que le sable aura tout recouvert.
+quest.pommes.title = Des pommes pour l'arène
+quest.pommes.acceptee = Rattraper le garde et l'enfant sur le parvis d'Arenarea, par Stravian Avenue.
+quest.pommes.persuasion-echouee = Le garde a refusé de relâcher l'enfant. Reste à prendre le crime à sa charge.
+quest.pommes.condamne = Condamné à la place de l'enfant : descendre au vestiaire, monter sur le sable, et gagner les cinq combats du jugement.
+quest.pommes.victoire = Les cinq combats sont gagnés : la foule a rendu son jugement.
+quest.pommes.enfant-libere = L'enfant est libre. Le ramener à sa mère, sur la place des étals de Martpart.
+quest.pommes.rendue = L'enfant est rendu à sa mère.
+city_block.place-du-marche = La place du marché
+city_block.avenue-d-arenarea = L'avenue d'Arenarea
+city_block.arene-illu-die = L'arène Illu Die
+city_block.porte-de-l-est = La porte de l'Est
+city_block.ruelles-du-sud = Les ruelles du sud
+city_block.parvis = Le parvis
+city_block.colisee = Le Colisée
+city_block.arene-du-destin = L'Arène du Destin
+city_block.porte-de-martpart = La porte de Martpart
+city_block.portes-du-sud = Les portes du sud
+
+# Noms des cartes (LOT-EDITOR-07) : le champ `name` d'une carte est la clé map.<identifiant>.name,
+# que le bandeau du jeu traduit. Le contrôle de l'éditeur exige la clé dans chaque catalogue.
+map.coliseum.name = Le Colisée
+map.capital.martpart.name = Martpart
+map.capital.arenarea.name = Arenarea
+map.capital.arena-of-brave.name = Arena of Brave — Colisée
+map.capital.arena-of-brave-camp-a.name = Arena of Brave — Vestiaire A
+map.capital.arena-of-brave-camp-b.name = Arena of Brave — Vestiaire B
+map.central-empire.capital.arenarea.name = Arenarea
+map.central-empire.capital.martpart.name = Martpart
+map.central-empire.capital.arenarea.arena-of-fate.name = Arena of Fate
+map.central-empire.capital.arenarea.arena-of-fate.undercroft.name = Arena of Fate — sous les tribunes
+map.central-empire.capital.arenarea.arena-of-fate.catacombs.name = Catacombes de l’Arena of Fate

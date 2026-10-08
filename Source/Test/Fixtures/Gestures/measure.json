@@ -1,0 +1,8 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "note": "La mesure : écrite dans le compte rendu, sans toucher à la carte.",
+  "gestures": [
+    {"tool": "measure", "from": [0, 0], "to": [6, 3]}
+  ]
+}

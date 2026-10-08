@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/damage-type.schema.json",
+  "title": "Type de degats",
+  "description": "Le catalogue des treize types de degats. L'identifiant est contraint aux treize valeurs de `core::DamageType`. Le catalogue existe MALGRE l'enumeration parce que le nom affiche, la description et l'habillage sont des donnees, pas du C++ (EX-VIS-007).",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/damageType"
+    },
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "physical": {
+      "type": "boolean",
+      "description": "Vrai pour contondant, perforant et tranchant. C'est cette distinction, et elle seule, qui fait fonctionner la resistance aux armes non magiques."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "physical"
+  ],
+  "additionalProperties": false
+}

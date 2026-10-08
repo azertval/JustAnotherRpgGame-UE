@@ -1,0 +1,8 @@
+{
+  "id": "potion-de-guerison",
+  "name": "Potion de guérison",
+  "source": "srd",
+  "category": "gear",
+  "price": 5000,
+  "weightGrams": 250
+}

@@ -1,0 +1,83 @@
+{
+  "id": "kingdom-of-kolbjorn",
+  "name": "Kingdom of Kolbjörn",
+  "source": "tanares",
+  "government": "The entire territory is ruled by a king, who delegates to his Jarls the responsibility of governing each region, all under the banner of the Tanarean Empire.",
+  "faction": "The king rules under the Tanarean Empire, but there are revolutionary groups sympathetic to The Allied Forces.",
+  "population": {
+    "total": 720000,
+    "species": [
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 71
+      },
+      {
+        "species": "dwarf",
+        "label": "dwarves",
+        "percent": 10
+      },
+      {
+        "species": "giant",
+        "label": "giants",
+        "percent": 10
+      },
+      {
+        "species": "winter-elf",
+        "label": "winter elves",
+        "percent": 6
+      }
+    ],
+    "otherPercent": 3
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "low"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "low"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "high"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "low"
+      }
+    ]
+  },
+  "neighbors": [
+    "imperial-benenet",
+    "magocracy-of-mage-tower",
+    "storm-islands"
+  ],
+  "locations": [
+    "kingdom-of-kolbjorn-kolbjorn-capital",
+    "kingdom-of-kolbjorn-irongauntlet",
+    "kingdom-of-kolbjorn-northharbor",
+    "kingdom-of-kolbjorn-falun-mountain",
+    "kingdom-of-kolbjorn-great-valley",
+    "kingdom-of-kolbjorn-the-giant-kins"
+  ]
+}

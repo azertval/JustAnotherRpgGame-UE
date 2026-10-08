@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/encounter.schema.json",
+  "title": "Rencontre",
+  "description": "Qui se dresse, et en quelle formation, quand un combat s'engage (LOT-18). Une rencontre dit QUI et OU LES UNS PAR RAPPORT AUX AUTRES, jamais OU sur la carte : les positions sont relatives au declencheur, si bien qu'une meme rencontre se joue partout ou un declencheur la nomme. Des coordonnees absolues feraient apparaitre les memes ennemis au meme endroit a chaque fois, ou hors de la carte.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "escapable": {
+      "type": "boolean",
+      "description": "Vrai si le joueur peut rompre le contact. Une rencontre dont on ne peut pas fuir est une decision de CONTENU -- un combat de scenario -- et s'ecrit donc ici plutot que de se deviner d'un type d'ennemi. Absent vaut vrai : l'inverse enfermerait le joueur dans toute rencontre qu'un auteur aurait oublie de renseigner."
+    },
+    "combatants": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Les combattants. Au moins un : une rencontre vide se declencherait et se terminerait aussitot par une victoire, en posant son drapeau -- le joueur verrait un ennemi disparaitre sans combat.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "creatureId": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Identifiant de creature du bestiaire (LOT-33)."
+          },
+          "columnOffset": {
+            "type": "integer",
+            "description": "Decalage en cases depuis la case du declencheur, vers la droite."
+          },
+          "rowOffset": {
+            "type": "integer",
+            "description": "Decalage en cases depuis la case du declencheur, vers le bas."
+          }
+        },
+        "required": ["creatureId"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["id", "name", "source", "combatants"],
+  "additionalProperties": false
+}

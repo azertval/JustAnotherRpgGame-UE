@@ -1,0 +1,37 @@
+{
+  "id": "scorpion",
+  "name": "Scorpion",
+  "source": "srd",
+  "size": "tiny",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 2,
+    "dexterity": 11,
+    "constitution": 8,
+    "intelligence": 1,
+    "wisdom": 8,
+    "charisma": 2
+  },
+  "armorClass": 11,
+  "hitPoints": 1,
+  "hitDice": "1d4-1",
+  "speed": {
+    "walk": 3
+  },
+  "challengeRating": 0,
+  "senses": [
+    "vision aveugle 3 m",
+    "Perception passive 9"
+  ],
+  "actions": [
+    {
+      "name": "Dard",
+      "text": "Attaque au corps à corps avec une arme : +2 au toucher, allonge 1,50 m, une créature. Touché : 1 dégât perforant et la cible doit réaliser un jet de sauvegarde de Constitution DD 9, subissant 4 (1d8) dégâts de poison en cas d'échec, ou la moitié de ces dégâts en cas de réussite.",
+      "attackBonus": 2,
+      "reach": 1.5,
+      "damage": "1",
+      "damageType": "piercing"
+    }
+  ]
+}

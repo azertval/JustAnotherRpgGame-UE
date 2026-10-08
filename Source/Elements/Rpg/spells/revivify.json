@@ -1,0 +1,23 @@
+{
+  "id": "revivify",
+  "name": "Revigorer",
+  "source": "phb-fr",
+  "level": 3,
+  "school": "necromancy",
+  "castingTime": "1 action",
+  "range": "contact",
+  "rangeMeters": 1.5,
+  "target": "ally",
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": true,
+    "materialText": "un diamant d'une valeur de 300 po, que le sort consume"
+  },
+  "duration": "instantanee",
+  "revives": {
+    "hitPoints": 1,
+    "withinRounds": 10
+  },
+  "text": "Manuel des Joueurs, PDF p. 278 (revivify). Une creature morte depuis moins d'une minute (dix rounds) revient a la vie avec 1 point de vie. Le combat ne tient pas l'inventaire : le diamant de 300 po n'est pas decompte."
+}

@@ -1,0 +1,25 @@
+{
+  "id": "haut-elfe",
+  "name": "Haut-elfe",
+  "source": "srd",
+  "parentSpecies": "elfe",
+  "size": "medium",
+  "speed": 9,
+  "abilityScoreIncrease": {
+    "intelligence": 1
+  },
+  "traits": [
+    {
+      "name": "Entraînement aux armes elfiques",
+      "text": "Vous obtenez la maîtrise des épées (longues et courtes) et des arcs (longs et courts)."
+    },
+    {
+      "name": "Sort mineur",
+      "text": "Vous connaissez un sort mineur de votre choix parmi la liste des sorts mineurs de magicien. L'Intelligence est votre caractéristique d'incantation pour ce sort."
+    },
+    {
+      "name": "Langue supplémentaire",
+      "text": "Vous parlez, lisez et écrivez une langue supplémentaire de votre choix."
+    }
+  ]
+}

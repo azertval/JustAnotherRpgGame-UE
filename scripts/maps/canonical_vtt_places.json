@@ -1,0 +1,3258 @@
+[
+  {
+    "name": "Rainbow Dale",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.2,
+      0.23720349563046192
+    ]
+  },
+  {
+    "name": "Olumar",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.20777777777777778,
+      0.24344569288389514
+    ]
+  },
+  {
+    "name": "Tamera’s Blessing",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.23777777777777778,
+      0.32459425717852686
+    ]
+  },
+  {
+    "name": "Odraz Monastery",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.17777777777777778,
+      0.39325842696629215
+    ]
+  },
+  {
+    "name": "Threshold Forests",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.1738888888888889,
+      0.47191011235955055
+    ]
+  },
+  {
+    "name": "Orgoth Valley",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.1238888888888889,
+      0.4369538077403246
+    ]
+  },
+  {
+    "name": "Avatarbreath",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.21777777777777776,
+      0.5143570536828964
+    ]
+  },
+  {
+    "name": "Hall of Seasons",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.08333333333333333,
+      0.5630461922596754
+    ]
+  },
+  {
+    "name": "Fourcreeks",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.20166666666666666,
+      0.6491885143570537
+    ]
+  },
+  {
+    "name": "Deverell, the Split City",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.07055555555555555,
+      0.7203495630461922
+    ]
+  },
+  {
+    "name": "Spikedboulder",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.2877777777777778,
+      0.47191011235955055
+    ]
+  },
+  {
+    "name": "Greenbarrows",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.3511111111111111,
+      0.6117353308364545
+    ]
+  },
+  {
+    "name": "Blink Village",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.30444444444444446,
+      0.6716604244694132
+    ]
+  },
+  {
+    "name": "Cursed Ground",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.2461111111111111,
+      0.7228464419475655
+    ]
+  },
+  {
+    "name": "Skybell",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.2511111111111111,
+      0.8077403245942572
+    ]
+  },
+  {
+    "name": "O’Myre View",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.34944444444444445,
+      0.7578027465667915
+    ]
+  },
+  {
+    "name": "O’Myre",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.3572222222222222,
+      0.8227215980024969
+    ]
+  },
+  {
+    "name": "Imperial Capital",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.40444444444444444,
+      0.7453183520599251
+    ]
+  },
+  {
+    "name": "Phantom Fortress",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.4388888888888889,
+      0.766541822721598
+    ]
+  },
+  {
+    "name": "Northcross",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.42,
+      0.4818976279650437
+    ]
+  },
+  {
+    "name": "I.S.H.",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.39,
+      0.39325842696629215
+    ]
+  },
+  {
+    "name": "Hajal",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.47888888888888886,
+      0.22347066167290885
+    ]
+  },
+  {
+    "name": "Fox Crossing",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.5055555555555555,
+      0.2784019975031211
+    ]
+  },
+  {
+    "name": "Vault Village",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.5477777777777778,
+      0.3732833957553059
+    ]
+  },
+  {
+    "name": "Old Dwarf Boat",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.6366666666666667,
+      0.4069912609238452
+    ]
+  },
+  {
+    "name": "New Gardens",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.48333333333333334,
+      0.5031210986267166
+    ]
+  },
+  {
+    "name": "Ancient Heargs",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.4666666666666667,
+      0.5555555555555556
+    ]
+  },
+  {
+    "name": "Lake Plavo",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.555,
+      0.5543071161048689
+    ]
+  },
+  {
+    "name": "Bakurve",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.5233333333333333,
+      0.5730337078651685
+    ]
+  },
+  {
+    "name": "Bak Swamp",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.595,
+      0.6117353308364545
+    ]
+  },
+  {
+    "name": "Western Bak",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.39444444444444443,
+      0.5705368289637952
+    ]
+  },
+  {
+    "name": "Eastern Bak",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.5722222222222222,
+      0.6716604244694132
+    ]
+  },
+  {
+    "name": "Southcross",
+    "parent": "central-empire",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "central-empire",
+    "referencePoint": [
+      0.43333333333333335,
+      0.5905118601747815
+    ]
+  },
+  {
+    "name": "Crystal Mountains",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.6111111111111112,
+      0.27662037037037035
+    ]
+  },
+  {
+    "name": "Bystander",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.09944444444444445,
+      0.4363425925925926
+    ]
+  },
+  {
+    "name": "Ice Fortress",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.1827777777777778,
+      0.4270833333333333
+    ]
+  },
+  {
+    "name": "Dark Glacier",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.2411111111111111,
+      0.47685185185185186
+    ]
+  },
+  {
+    "name": "Cold Valley’s Crater",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.19166666666666668,
+      0.5208333333333334
+    ]
+  },
+  {
+    "name": "Snaystorm",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.38555555555555554,
+      0.4224537037037037
+    ]
+  },
+  {
+    "name": "Sawyer’s Village",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.5094444444444445,
+      0.5601851851851852
+    ]
+  },
+  {
+    "name": "Plateaus of Eternal Ice",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.6444444444444445,
+      0.5486111111111112
+    ]
+  },
+  {
+    "name": "Mistvale",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.7555555555555555,
+      0.48148148148148145
+    ]
+  },
+  {
+    "name": "True Ice",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.8544444444444445,
+      0.5057870370370371
+    ]
+  },
+  {
+    "name": "Iceheart",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.225,
+      0.6307870370370371
+    ]
+  },
+  {
+    "name": "Begraense",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.3333333333333333,
+      0.7175925925925926
+    ]
+  },
+  {
+    "name": "Septentrional Passing",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.3477777777777778,
+      0.7581018518518519
+    ]
+  },
+  {
+    "name": "Feather House",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.6233333333333333,
+      0.6932870370370371
+    ]
+  },
+  {
+    "name": "Vaeg",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.7311111111111112,
+      0.6689814814814815
+    ]
+  },
+  {
+    "name": "Frozen Tomb",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.5355555555555556,
+      0.7592592592592593
+    ]
+  },
+  {
+    "name": "Maska Prastyr",
+    "parent": "imperial-benenet",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "imperial-benenet",
+    "referencePoint": [
+      0.125,
+      0.7893518518518519
+    ]
+  },
+  {
+    "name": "Lone Man’s Island",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.494910941475827,
+      0.04642857142857143
+    ]
+  },
+  {
+    "name": "Stormbird Islands",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.21501272264631044,
+      0.24642857142857144
+    ]
+  },
+  {
+    "name": "Ljómandi Himinn",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.5114503816793893,
+      0.13857142857142857
+    ]
+  },
+  {
+    "name": "Coldwater Fen",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.4586513994910941,
+      0.24785714285714286
+    ]
+  },
+  {
+    "name": "Twin Heads Forest",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.4758269720101781,
+      0.3057142857142857
+    ]
+  },
+  {
+    "name": "Rapujen Syöjät",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.31234096692111957,
+      0.3514285714285714
+    ]
+  },
+  {
+    "name": "Gazini Island",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.07442748091603053,
+      0.4392857142857143
+    ]
+  },
+  {
+    "name": "Blood Castle",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.12213740458015267,
+      0.45357142857142857
+    ]
+  },
+  {
+    "name": "Northharbor",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.24427480916030533,
+      0.44642857142857145
+    ]
+  },
+  {
+    "name": "Great Valley",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.6424936386768448,
+      0.34285714285714286
+    ]
+  },
+  {
+    "name": "Lightning Temple",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.4128498727735369,
+      0.55
+    ]
+  },
+  {
+    "name": "Hammer Passing",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.5954198473282443,
+      0.5178571428571429
+    ]
+  },
+  {
+    "name": "Storm Valley",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.38549618320610685,
+      0.5928571428571429
+    ]
+  },
+  {
+    "name": "Roundtop Hill",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.537531806615776,
+      0.5542857142857143
+    ]
+  },
+  {
+    "name": "Märkä Koira",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.23791348600508905,
+      0.6392857142857142
+    ]
+  },
+  {
+    "name": "Irongauntlet",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.4198473282442748,
+      0.6921428571428572
+    ]
+  },
+  {
+    "name": "Hangedelf",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.5330788804071247,
+      0.6735714285714286
+    ]
+  },
+  {
+    "name": "Maëd Range",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.3155216284987277,
+      0.7728571428571429
+    ]
+  },
+  {
+    "name": "Blake Island",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.14376590330788805,
+      0.8014285714285714
+    ]
+  },
+  {
+    "name": "Blake Castle",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.19783715012722647,
+      0.81
+    ]
+  },
+  {
+    "name": "Falum City",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.3702290076335878,
+      0.79
+    ]
+  },
+  {
+    "name": "Soulless Coast",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.31806615776081426,
+      0.8321428571428572
+    ]
+  },
+  {
+    "name": "Kolbjörn",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.47391857506361323,
+      0.7878571428571428
+    ]
+  },
+  {
+    "name": "Valehtelee Sumussa",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.4115776081424936,
+      0.86
+    ]
+  },
+  {
+    "name": "Kukkakenttä Ruins",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.544529262086514,
+      0.88
+    ]
+  },
+  {
+    "name": "Ruins of Kölm",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.49363867684478374,
+      0.9271428571428572
+    ]
+  },
+  {
+    "name": "Yksinäisyyden Kivi",
+    "parent": "kingdom-of-kolbjorn",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.5674300254452926,
+      0.98
+    ]
+  },
+  {
+    "name": "Wind Temple",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.12291169451073986,
+      0.5114285714285715
+    ]
+  },
+  {
+    "name": "Ucaima Pani Lake",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.6921241050119332,
+      0.4642857142857143
+    ]
+  },
+  {
+    "name": "Mountain Pass",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.46837708830548924,
+      0.5357142857142857
+    ]
+  },
+  {
+    "name": "Deepfreeze Cave",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.3162291169451074,
+      0.565
+    ]
+  },
+  {
+    "name": "Nabhendu Monastery",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.5280429594272077,
+      0.6171428571428571
+    ]
+  },
+  {
+    "name": "Winter Elves Ruins",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.7147971360381862,
+      0.6107142857142858
+    ]
+  },
+  {
+    "name": "Mountain Blight",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.4451073985680191,
+      0.6578571428571428
+    ]
+  },
+  {
+    "name": "Alkira Mountain",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.5626491646778043,
+      0.6928571428571428
+    ]
+  },
+  {
+    "name": "Asylum Eberek",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.6336515513126492,
+      0.7035714285714286
+    ]
+  },
+  {
+    "name": "Mesoriver",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.46539379474940334,
+      0.7342857142857143
+    ]
+  },
+  {
+    "name": "Chowillawu Acchoda",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.8890214797136038,
+      0.5628571428571428
+    ]
+  },
+  {
+    "name": "Summer Island",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.8985680190930787,
+      0.6264285714285714
+    ]
+  },
+  {
+    "name": "Calmwaters",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.8460620525059666,
+      0.7185714285714285
+    ]
+  },
+  {
+    "name": "Wintersheet",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.6682577565632458,
+      0.8271428571428572
+    ]
+  },
+  {
+    "name": "Arcane University",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.5023866348448688,
+      0.8564285714285714
+    ]
+  },
+  {
+    "name": "Dawn of Light",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.5220763723150358,
+      0.9171428571428571
+    ]
+  },
+  {
+    "name": "Porcupine Rest",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.6229116945107399,
+      0.8864285714285715
+    ]
+  },
+  {
+    "name": "Magic Duel Arena",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.5745823389021479,
+      0.965
+    ]
+  },
+  {
+    "name": "Crystal Tower",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.6056085918854416,
+      0.9678571428571429
+    ]
+  },
+  {
+    "name": "Green Hallow",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.6676610978520287,
+      0.9892857142857143
+    ]
+  },
+  {
+    "name": "Dragon Nest",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.5864734299516908,
+      0.235
+    ]
+  },
+  {
+    "name": "The Womb",
+    "parent": "magocracy-of-mage-tower",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "magocracy-of-mage-tower",
+    "referencePoint": [
+      0.7291169451073986,
+      0.9471428571428572
+    ]
+  },
+  {
+    "name": "Empty Eyes Cave",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.3227777777777778,
+      0.10228233305156383
+    ]
+  },
+  {
+    "name": "Tumma Reikä",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.285,
+      0.17413355874894337
+    ]
+  },
+  {
+    "name": "Scar Reservoir",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.36666666666666664,
+      0.18681318681318682
+    ]
+  },
+  {
+    "name": "Anatar",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.48277777777777775,
+      0.16737109044801352
+    ]
+  },
+  {
+    "name": "Dingleberry Rock",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.3827777777777778,
+      0.2510566356720203
+    ]
+  },
+  {
+    "name": "Lakitalo Ruins",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.30833333333333335,
+      0.2890955198647506
+    ]
+  },
+  {
+    "name": "Outumn Forest",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.5133333333333333,
+      0.23922231614539308
+    ]
+  },
+  {
+    "name": "Aurindunnum",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.46555555555555556,
+      0.30177514792899407
+    ]
+  },
+  {
+    "name": "Outunmoor",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.35888888888888887,
+      0.3609467455621302
+    ]
+  },
+  {
+    "name": "Cragplateaus Mountain Range",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.4255555555555556,
+      0.4708368554522401
+    ]
+  },
+  {
+    "name": "Willow Lake",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.5605555555555556,
+      0.37531699070160607
+    ]
+  },
+  {
+    "name": "Calm Waters Harbor",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.7188888888888889,
+      0.34573119188503804
+    ]
+  },
+  {
+    "name": "Heroes Rise",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.6205555555555555,
+      0.4175824175824176
+    ]
+  },
+  {
+    "name": "Dragonsting Forest",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.7488888888888889,
+      0.45646661031276414
+    ]
+  },
+  {
+    "name": "Gambit",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.44,
+      0.4801352493660186
+    ]
+  },
+  {
+    "name": "Boscage Archipelago",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.14166666666666666,
+      0.5274725274725275
+    ]
+  },
+  {
+    "name": "Fisherman’s Wharf",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.17055555555555554,
+      0.6077768385460693
+    ]
+  },
+  {
+    "name": "Winter Hold City",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.1388888888888889,
+      0.6272189349112426
+    ]
+  },
+  {
+    "name": "Jagged Bay",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.13333333333333333,
+      0.6939983093829247
+    ]
+  },
+  {
+    "name": "Forgotten Cathedral",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.4627777777777778,
+      0.577345731191885
+    ]
+  },
+  {
+    "name": "Grassroot Island",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.45611111111111113,
+      0.6170752324598479
+    ]
+  },
+  {
+    "name": "Lunar Valley",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.61,
+      0.6517328825021133
+    ]
+  },
+  {
+    "name": "Bentspine",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.3161111111111111,
+      0.6923076923076923
+    ]
+  },
+  {
+    "name": "Aeyefall",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.5216666666666666,
+      0.7066779374471682
+    ]
+  },
+  {
+    "name": "Lumbershack",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.5044444444444445,
+      0.7776838546069316
+    ]
+  },
+  {
+    "name": "Goldraft",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.7144444444444444,
+      0.7802197802197802
+    ]
+  },
+  {
+    "name": "Shortfall",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.4722222222222222,
+      0.8444632290786137
+    ]
+  },
+  {
+    "name": "Lost Bridge",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.34944444444444445,
+      0.8385460693153001
+    ]
+  },
+  {
+    "name": "Humming Gulf",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.16722222222222222,
+      0.7616229923922232
+    ]
+  },
+  {
+    "name": "Anariel Strait",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.1511111111111111,
+      0.8182586644125106
+    ]
+  },
+  {
+    "name": "Crystalline Sea",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.21722222222222223,
+      0.8605240912933221
+    ]
+  },
+  {
+    "name": "Coastsummits",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.145,
+      0.9340659340659341
+    ]
+  },
+  {
+    "name": "The Rubicunds",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.2927777777777778,
+      0.9459002535925612
+    ]
+  },
+  {
+    "name": "Yellow Creek",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.45166666666666666,
+      0.073541842772612
+    ]
+  },
+  {
+    "name": "Cattywampus",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.7754452926208651,
+      0.6585714285714286
+    ]
+  },
+  {
+    "name": "Kolachi",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.8842239185750637,
+      0.6178571428571429
+    ]
+  },
+  {
+    "name": "Blossom",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.6571246819338422,
+      0.5928571428571429
+    ]
+  },
+  {
+    "name": "Doohickey Grotto",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.5405555555555556,
+      0.08284023668639054
+    ]
+  },
+  {
+    "name": "Hog’s Lair",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.6155555555555555,
+      0.15469146238377007
+    ]
+  },
+  {
+    "name": "Crying Stone",
+    "parent": "republic-of-freelands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "republic-of-freelands",
+    "referencePoint": [
+      0.7433333333333333,
+      0.231614539306847
+    ]
+  },
+  {
+    "name": "Left Island",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.21296296296296297,
+      0.2671428571428571
+    ]
+  },
+  {
+    "name": "Devil’s Nostril",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.29976851851851855,
+      0.2057142857142857
+    ]
+  },
+  {
+    "name": "Talltree Pond",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.37037037037037035,
+      0.25214285714285717
+    ]
+  },
+  {
+    "name": "Jellyfish Bay",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.4212962962962963,
+      0.3
+    ]
+  },
+  {
+    "name": "Galleys Town",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.33796296296296297,
+      0.32071428571428573
+    ]
+  },
+  {
+    "name": "Whitecoven",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.4635416666666667,
+      0.27285714285714285
+    ]
+  },
+  {
+    "name": "Narrowedge",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.7245370370370371,
+      0.2735714285714286
+    ]
+  },
+  {
+    "name": "Coldrock",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.6765046296296297,
+      0.31785714285714284
+    ]
+  },
+  {
+    "name": "Bones Valley",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.6047453703703703,
+      0.3678571428571429
+    ]
+  },
+  {
+    "name": "Turtledragon Island",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.7899305555555556,
+      0.4107142857142857
+    ]
+  },
+  {
+    "name": "Agamidae Bog",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.8026620370370371,
+      0.46214285714285713
+    ]
+  },
+  {
+    "name": "Turtlepoint Peninsula",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.9288194444444444,
+      0.4564285714285714
+    ]
+  },
+  {
+    "name": "Central Sea",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.2818287037037037,
+      0.4085714285714286
+    ]
+  },
+  {
+    "name": "Corral Sea Realm",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.28125,
+      0.4742857142857143
+    ]
+  },
+  {
+    "name": "Underwater Obelisk",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.38599537037037035,
+      0.37642857142857145
+    ]
+  },
+  {
+    "name": "Whatnot House",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.42476851851851855,
+      0.4592857142857143
+    ]
+  },
+  {
+    "name": "Blühaven",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.43171296296296297,
+      0.4857142857142857
+    ]
+  },
+  {
+    "name": "Mustardseed",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.5827546296296297,
+      0.5035714285714286
+    ]
+  },
+  {
+    "name": "Pearl Town",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.24768518518518517,
+      0.5035714285714286
+    ]
+  },
+  {
+    "name": "Fire Islands Archipelago",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.13599537037037038,
+      0.6007142857142858
+    ]
+  },
+  {
+    "name": "Uncle Joe’s Tavern",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.20717592592592593,
+      0.5821428571428572
+    ]
+  },
+  {
+    "name": "Blacksand",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.18981481481481483,
+      0.6478571428571429
+    ]
+  },
+  {
+    "name": "The Whirlpool",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.6319444444444444,
+      0.6271428571428571
+    ]
+  },
+  {
+    "name": "Ship Graveyard",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.5625,
+      0.725
+    ]
+  },
+  {
+    "name": "Fishtail",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.6099537037037037,
+      0.7921428571428571
+    ]
+  },
+  {
+    "name": "Southern Basin",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.6221064814814815,
+      0.85
+    ]
+  },
+  {
+    "name": "Rudderhelm",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.8553240740740741,
+      0.5792857142857143
+    ]
+  },
+  {
+    "name": "Sandport",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.7268518518518519,
+      0.7085714285714285
+    ]
+  },
+  {
+    "name": "Unknown God Shrine",
+    "parent": "seashores",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.7800925925925926,
+      0.5471428571428572
+    ]
+  },
+  {
+    "name": "Kingfisher Island",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "seashores",
+    "referencePoint": [
+      0.9253472222222222,
+      0.5221428571428571
+    ]
+  },
+  {
+    "name": "Mother Trees",
+    "parent": "sindile-forest",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "sindile-forest",
+    "referencePoint": [
+      0.807533843437316,
+      0.4607142857142857
+    ]
+  },
+  {
+    "name": "Sindile Forest (Outskirts)",
+    "parent": "sindile-forest",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "sindile-forest",
+    "referencePoint": [
+      0.5491465567981165,
+      0.4328571428571429
+    ]
+  },
+  {
+    "name": "Sindile Forest (Depths)",
+    "parent": "sindile-forest",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "sindile-forest",
+    "referencePoint": [
+      0.835197174808711,
+      0.5821428571428572
+    ]
+  },
+  {
+    "name": "Hunter’s Nest",
+    "parent": "sindile-forest",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "sindile-forest",
+    "referencePoint": [
+      0.6374337845791642,
+      0.41714285714285715
+    ]
+  },
+  {
+    "name": "Mirror Lake",
+    "parent": "sindile-forest",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "sindile-forest",
+    "referencePoint": [
+      0.7763390229546793,
+      0.27071428571428574
+    ]
+  },
+  {
+    "name": "Sweetsprings",
+    "parent": "sindile-forest",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "sindile-forest",
+    "referencePoint": [
+      0.4920541494997057,
+      0.5742857142857143
+    ]
+  },
+  {
+    "name": "Cindergrove",
+    "parent": "sindile-forest",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "sindile-forest",
+    "referencePoint": [
+      0.4114184814596822,
+      0.6292857142857143
+    ]
+  },
+  {
+    "name": "Verdant Colossus",
+    "parent": "sindile-forest",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "sindile-forest",
+    "referencePoint": [
+      0.8816951147733961,
+      0.6564285714285715
+    ]
+  },
+  {
+    "name": "Mountain Gate",
+    "parent": "sindile-forest",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "sindile-forest",
+    "referencePoint": [
+      0.8198940553266627,
+      0.7207142857142858
+    ]
+  },
+  {
+    "name": "Dead Islands Archipelago",
+    "parent": "storm-islands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "kingdom-of-kolbjorn",
+    "referencePoint": [
+      0.08587786259541985,
+      0.87
+    ]
+  },
+  {
+    "name": "Catala Ruins",
+    "parent": "storm-islands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "storm-islands",
+    "referencePoint": [
+      0.48737373737373735,
+      0.0035714285714285713
+    ]
+  },
+  {
+    "name": "Dark Lab",
+    "parent": "storm-islands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "storm-islands",
+    "referencePoint": [
+      0.08712121212121213,
+      0.18071428571428572
+    ]
+  },
+  {
+    "name": "Cold Forest",
+    "parent": "storm-islands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "storm-islands",
+    "referencePoint": [
+      0.1755050505050505,
+      0.2885714285714286
+    ]
+  },
+  {
+    "name": "Night Mansions City",
+    "parent": "storm-islands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "storm-islands",
+    "referencePoint": [
+      0.14267676767676768,
+      0.3464285714285714
+    ]
+  },
+  {
+    "name": "West Pylon Site",
+    "parent": "storm-islands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "storm-islands",
+    "referencePoint": [
+      0.08838383838383838,
+      0.5664285714285714
+    ]
+  },
+  {
+    "name": "The Ice Fortress Site",
+    "parent": "storm-islands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "storm-islands",
+    "referencePoint": [
+      0.1111111111111111,
+      0.6514285714285715
+    ]
+  },
+  {
+    "name": "Boneheart Shipyard Site",
+    "parent": "storm-islands",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "storm-islands",
+    "referencePoint": [
+      0.523989898989899,
+      0.6107142857142858
+    ]
+  },
+  {
+    "name": "Gróft Sjó",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.2299349240780911,
+      0.11714285714285715
+    ]
+  },
+  {
+    "name": "Shivering Pines",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.1373825018076645,
+      0.23642857142857143
+    ]
+  },
+  {
+    "name": "Borg Undir",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.18655097613882862,
+      0.31214285714285717
+    ]
+  },
+  {
+    "name": "Swiftwater",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.32393347794649313,
+      0.35214285714285715
+    ]
+  },
+  {
+    "name": "Stór Fiskur",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.2935647143890094,
+      0.3678571428571429
+    ]
+  },
+  {
+    "name": "Cracked Hoof Tundra Fields",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.4150397686189443,
+      0.29642857142857143
+    ]
+  },
+  {
+    "name": "Witch’s Hut",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.5408532176428055,
+      0.31285714285714283
+    ]
+  },
+  {
+    "name": "Gianthead Valley",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.6775126536514823,
+      0.20357142857142857
+    ]
+  },
+  {
+    "name": "Oath Mountain",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.7505422993492408,
+      0.24214285714285713
+    ]
+  },
+  {
+    "name": "Verdens Ende",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.7881417208966016,
+      0.010714285714285714
+    ]
+  },
+  {
+    "name": "Shadowy Forest",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.7418655097613883,
+      0.38785714285714284
+    ]
+  },
+  {
+    "name": "Sunless Grove",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.8054953000723066,
+      0.3921428571428571
+    ]
+  },
+  {
+    "name": "Snowberry",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.8322487346348517,
+      0.43857142857142856
+    ]
+  },
+  {
+    "name": "Stravian Range",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.5039768618944324,
+      0.46214285714285713
+    ]
+  },
+  {
+    "name": "High Forest",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.3543022415039769,
+      0.48142857142857143
+    ]
+  },
+  {
+    "name": "Dale of the Lost",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.21330441070137382,
+      0.49642857142857144
+    ]
+  },
+  {
+    "name": "Tiger’s Bridge",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.14533622559652928,
+      0.5678571428571428
+    ]
+  },
+  {
+    "name": "Eb’boria",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.42516268980477223,
+      0.515
+    ]
+  },
+  {
+    "name": "Proudbeard Citadel",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.4063629790310918,
+      0.6
+    ]
+  },
+  {
+    "name": "Malland Range",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.6811279826464208,
+      0.5114285714285715
+    ]
+  },
+  {
+    "name": "Moolooite Mines",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.561822125813449,
+      0.5185714285714286
+    ]
+  },
+  {
+    "name": "Old Malland",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.883586406362979,
+      0.5021428571428571
+    ]
+  },
+  {
+    "name": "Stonelair",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.8568329718004338,
+      0.5435714285714286
+    ]
+  },
+  {
+    "name": "Varswater",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.5726681127982647,
+      0.6571428571428571
+    ]
+  },
+  {
+    "name": "Dorsi’s Forest",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.6890817064352857,
+      0.6828571428571428
+    ]
+  },
+  {
+    "name": "Eclipse",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.5177151120751988,
+      0.7135714285714285
+    ]
+  },
+  {
+    "name": "Spyvtz’s Castle",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.5762834417932032,
+      0.7721428571428571
+    ]
+  },
+  {
+    "name": "Stonepines",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.6963123644251626,
+      0.7535714285714286
+    ]
+  },
+  {
+    "name": "Mirare",
+    "parent": "stravian-domains",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.7114967462039046,
+      0.8535714285714285
+    ]
+  },
+  {
+    "name": "Gbagede Illu",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.35888888888888887,
+      0.20090497737556562
+    ]
+  },
+  {
+    "name": "Ember Mountains",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.7216666666666667,
+      0.16108597285067874
+    ]
+  },
+  {
+    "name": "Ubellian Fire Pits",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.6205555555555555,
+      0.4461538461538462
+    ]
+  },
+  {
+    "name": "Ubellian Cauldron",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.5388888888888889,
+      0.6398190045248868
+    ]
+  },
+  {
+    "name": "Taii’Maku Memorial",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.4816666666666667,
+      0.6923076923076923
+    ]
+  },
+  {
+    "name": "Stacked Stones",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.6155555555555555,
+      0.6895927601809955
+    ]
+  },
+  {
+    "name": "Awo Irin Illu",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.37833333333333335,
+      0.7085972850678733
+    ]
+  },
+  {
+    "name": "Okuta Akoko Illu",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.5027777777777778,
+      0.7809954751131222
+    ]
+  },
+  {
+    "name": "Ilaorun Illu",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.58,
+      0.7601809954751131
+    ]
+  },
+  {
+    "name": "Desert Poppy Fields",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.37833333333333335,
+      0.8316742081447964
+    ]
+  },
+  {
+    "name": "Ina Ina Illu",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.37222222222222223,
+      0.8986425339366516
+    ]
+  },
+  {
+    "name": "Bauron’s Ridge",
+    "parent": "taii-maku-city-states",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.5777777777777777,
+      0.8552036199095022
+    ]
+  },
+  {
+    "name": "Astérion",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.7088888888888889,
+      0.2772837510105093
+    ]
+  },
+  {
+    "name": "Countrysummits",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.5333333333333333,
+      0.32740501212611156
+    ]
+  },
+  {
+    "name": "Infinite Sand Banks",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.45222222222222225,
+      0.41875505254648343
+    ]
+  },
+  {
+    "name": "Ipade",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.5994444444444444,
+      0.47049312853678255
+    ]
+  },
+  {
+    "name": "Sandstorm Fort",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.6261111111111111,
+      0.5941794664510913
+    ]
+  },
+  {
+    "name": "Nowhere Bridge",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.44722222222222224,
+      0.5173807599029911
+    ]
+  },
+  {
+    "name": "Pakaitos Capital",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.5105555555555555,
+      0.549717057396928
+    ]
+  },
+  {
+    "name": "Alchemist’s Oasis",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.36944444444444446,
+      0.7348423605497171
+    ]
+  },
+  {
+    "name": "Hag’Salar",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.44722222222222224,
+      0.6895715440582053
+    ]
+  },
+  {
+    "name": "The Great Nothing",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.315,
+      0.8286176232821342
+    ]
+  },
+  {
+    "name": "Brightlight Desert",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.8105555555555556,
+      0.37510105092966856
+    ]
+  },
+  {
+    "name": "Bright Coast",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.15833333333333333,
+      0.5941794664510913
+    ]
+  },
+  {
+    "name": "Rock Islands",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.2361111111111111,
+      0.47534357316087306
+    ]
+  },
+  {
+    "name": "Desdemona",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.09277777777777778,
+      0.8084074373484236
+    ]
+  },
+  {
+    "name": "Bauron’s Denture",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.7261111111111112,
+      0.8698464025869038
+    ]
+  },
+  {
+    "name": "Malrokian Opening",
+    "parent": "theocracy-of-kepesh",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "theocracy-of-kepesh",
+    "referencePoint": [
+      0.4866666666666667,
+      0.2675828617623282
+    ]
+  },
+  {
+    "name": "Feargus",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.22777777777777777,
+      0.3645461043602573
+    ]
+  },
+  {
+    "name": "Stonefangs",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.385,
+      0.29735525375268046
+    ]
+  },
+  {
+    "name": "Spikedbones",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.39944444444444444,
+      0.41029306647605435
+    ]
+  },
+  {
+    "name": "Eferhild Citadel",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.5272222222222223,
+      0.42172980700500357
+    ]
+  },
+  {
+    "name": "Obsidian Fortress",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.44166666666666665,
+      0.46175839885632597
+    ]
+  },
+  {
+    "name": "Strongfists",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.20055555555555554,
+      0.505360972122945
+    ]
+  },
+  {
+    "name": "Eferhild’s Cauldron",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.5588888888888889,
+      0.5303788420300214
+    ]
+  },
+  {
+    "name": "Tsvetan Twinspikes",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.31333333333333335,
+      0.5646890636168692
+    ]
+  },
+  {
+    "name": "Hotbloods",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.39666666666666667,
+      0.6540385989992852
+    ]
+  },
+  {
+    "name": "Stormground",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.5938888888888889,
+      0.6669049320943531
+    ]
+  },
+  {
+    "name": "City of Rorth",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.15166666666666667,
+      0.7719799857040743
+    ]
+  },
+  {
+    "name": "Sulfur Path",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "tsvetan",
+    "referencePoint": [
+      0.04388888888888889,
+      0.5453895639742673
+    ]
+  },
+  {
+    "name": "Cave of Sacrifice",
+    "parent": "tsvetan",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "taii-maku-city-states",
+    "referencePoint": [
+      0.6966666666666667,
+      0.8289592760180996
+    ]
+  },
+  {
+    "name": "Umay",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.24734299516908212,
+      0.32785714285714285
+    ]
+  },
+  {
+    "name": "Midorinohara",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.4492753623188406,
+      0.31857142857142856
+    ]
+  },
+  {
+    "name": "Yabanhito",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.7111111111111111,
+      0.34285714285714286
+    ]
+  },
+  {
+    "name": "Wakai",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.6376811594202898,
+      0.26571428571428574
+    ]
+  },
+  {
+    "name": "Tiger Monastery",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.8714975845410629,
+      0.3492857142857143
+    ]
+  },
+  {
+    "name": "Higashiyama",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.893719806763285,
+      0.2735714285714286
+    ]
+  },
+  {
+    "name": "Green Path",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.5845410628019324,
+      0.38857142857142857
+    ]
+  },
+  {
+    "name": "Hazarmaveth",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.35555555555555557,
+      0.4307142857142857
+    ]
+  },
+  {
+    "name": "Sakura’s Bridge",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.47439613526570046,
+      0.45
+    ]
+  },
+  {
+    "name": "Semio",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.5458937198067633,
+      0.4642857142857143
+    ]
+  },
+  {
+    "name": "Kyokai",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.6550724637681159,
+      0.42214285714285715
+    ]
+  },
+  {
+    "name": "Neshin",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.7458937198067633,
+      0.5028571428571429
+    ]
+  },
+  {
+    "name": "Hayaiken",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.8106280193236715,
+      0.5771428571428572
+    ]
+  },
+  {
+    "name": "Watchkeeper’s Town",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.6057971014492753,
+      0.6307142857142857
+    ]
+  },
+  {
+    "name": "Watcher’s Lake",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.5091787439613527,
+      0.6157142857142858
+    ]
+  },
+  {
+    "name": "Yamanoma",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.8589371980676328,
+      0.6671428571428571
+    ]
+  },
+  {
+    "name": "Nikunokabe",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.6502415458937199,
+      0.73
+    ]
+  },
+  {
+    "name": "Kinshi, Forbidden City",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.8454106280193237,
+      0.7278571428571429
+    ]
+  },
+  {
+    "name": "Tengoku Palace",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.8386473429951691,
+      0.7678571428571429
+    ]
+  },
+  {
+    "name": "Yama Bunkatsu",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.7371980676328502,
+      0.7864285714285715
+    ]
+  },
+  {
+    "name": "Kagemori",
+    "parent": "yama",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "yama",
+    "referencePoint": [
+      0.6975845410628019,
+      0.8235714285714286
+    ]
+  },
+  {
+    "name": "Five Rocks",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.5628382441371016,
+      0.07428571428571429
+    ]
+  },
+  {
+    "name": "Thaisan Fields",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.5045099218280217,
+      0.21428571428571427
+    ]
+  },
+  {
+    "name": "Ruins of Arcana",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.46422128683102826,
+      0.34714285714285714
+    ]
+  },
+  {
+    "name": "Dragon Cemetery",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.5195429945880938,
+      0.3742857142857143
+    ]
+  },
+  {
+    "name": "Wasteland Forest",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.4107035478051714,
+      0.42
+    ]
+  },
+  {
+    "name": "Hook Jungle",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.6674684305472038,
+      0.5657142857142857
+    ]
+  },
+  {
+    "name": "Ruins of Aghytur",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.5309681298857486,
+      0.61
+    ]
+  },
+  {
+    "name": "Ruins of Tharnhelm",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.36981358989777513,
+      0.5292857142857142
+    ]
+  },
+  {
+    "name": "Harpoon Chasm",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.2832230907997595,
+      0.47285714285714286
+    ]
+  },
+  {
+    "name": "Laststand Pass",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.23331328923631992,
+      0.6135714285714285
+    ]
+  },
+  {
+    "name": "Ventana Village",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.40348767288033677,
+      0.79
+    ]
+  },
+  {
+    "name": "Wasteland Savannas",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.7101623571858088,
+      0.8121428571428572
+    ]
+  },
+  {
+    "name": "The Hook",
+    "parent": "mystical",
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Releve visuel des recadrages canoniques, 5 octobre 2026",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.47865303668069753,
+      0.65
+    ]
+  },
+  {
+    "name": "Ruins of Lowford",
+    "parent": "mystical",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.35057125676488277,
+      0.19357142857142856
+    ],
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Relevé visuel des recadrages canoniques, 5 octobre 2026"
+  },
+  {
+    "name": "Rainy Pass",
+    "parent": "mystical",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.27059530968129886,
+      0.22214285714285714
+    ],
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Relevé visuel des recadrages canoniques, 5 octobre 2026"
+  },
+  {
+    "name": "Ahimoth Woodland",
+    "parent": "central-empire",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.2152736019242333,
+      0.05
+    ],
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Relevé visuel des recadrages canoniques, 5 octobre 2026"
+  },
+  {
+    "name": "Ahimoth",
+    "parent": "central-empire",
+    "referenceRegion": "mystical",
+    "referencePoint": [
+      0.28743235117257965,
+      0.07285714285714286
+    ],
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Relevé visuel des recadrages canoniques, 5 octobre 2026"
+  },
+  {
+    "name": "Shredded Coast",
+    "parent": "world",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.08098336948662328,
+      0.11214285714285714
+    ],
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Relevé visuel des recadrages canoniques, 5 octobre 2026"
+  },
+  {
+    "name": "The Ice Coast",
+    "parent": "world",
+    "referenceRegion": "stravian-domains",
+    "referencePoint": [
+      0.46059291395516994,
+      0.07357142857142857
+    ],
+    "source": "Documentation/SourceBook/VTT/Map - World.jpg",
+    "verified": "Relevé visuel des recadrages canoniques, 5 octobre 2026"
+  }
+]

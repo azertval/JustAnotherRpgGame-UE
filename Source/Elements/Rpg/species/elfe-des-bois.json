@@ -1,0 +1,25 @@
+{
+  "id": "elfe-des-bois",
+  "name": "Elfe des bois",
+  "source": "srd",
+  "parentSpecies": "elfe",
+  "size": "medium",
+  "speed": 9,
+  "abilityScoreIncrease": {
+    "wisdom": 1
+  },
+  "traits": [
+    {
+      "name": "Entraînement aux armes elfiques",
+      "text": "Vous obtenez la maîtrise des épées (longues et courtes) et des arcs (longs et courts)."
+    },
+    {
+      "name": "Foulée légère",
+      "text": "Votre vitesse de base passe à 10,50 mètres."
+    },
+    {
+      "name": "Cachette naturelle",
+      "text": "Vous pouvez tenter de vous cacher dans une zone à visibilité réduite, comme en présence de branchages, de forte pluie, de neige qui tombe, de brume ou autre phénomène naturel."
+    }
+  ]
+}

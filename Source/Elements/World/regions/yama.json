@@ -1,0 +1,82 @@
+{
+  "id": "yama",
+  "name": "Yama",
+  "source": "tanares",
+  "government": "Ruled by the eldest tameranium dragon, Fumetsu Tenshikin, the Emperor sanctified as a deity dwelling amidst his devoted adherents, beneath whom stand the clergy and the clans forged by the most distinguished lineages.",
+  "faction": "They have a strong alignment with the Allied Forces, maintaining some relations with Arcanum.",
+  "population": {
+    "total": 793000,
+    "species": [
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 83
+      },
+      {
+        "species": "elf",
+        "label": "elves",
+        "percent": 8
+      },
+      {
+        "species": "cirrus",
+        "label": "cirrus",
+        "percent": 4
+      },
+      {
+        "species": "soulborn",
+        "label": "soulborn",
+        "percent": 3
+      }
+    ],
+    "otherPercent": 2
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "low"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "veryHigh"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "low"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "high"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "low"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "veryHigh"
+      }
+    ]
+  },
+  "neighbors": [
+    "seashores"
+  ],
+  "locations": [
+    "yama-tengoku-palace-and-kinshi-the-forbidden-city",
+    "yama-jade-dragon-statuette",
+    "yama-floating-markets",
+    "yama-yama-bunkatsu-forest",
+    "yama-tiger-monastery",
+    "yama-kagemori-village",
+    "yama-yamanoma"
+  ]
+}

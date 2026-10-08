@@ -1,0 +1,7 @@
+CREATURE: a wolf of the Coliseum pens, hunting in a pack (Medium beast, no spells).
+LOOK: a grey wolf, thick fur darker grey on the back and paler, almost cream, on the belly, legs and muzzle; yellow eyes; pointed upright ears; a bushy tail with a dark tip; lean, hungry, hackles raised.
+SILHOUETTE: pointed ears and a long narrow muzzle; a lean body on four long legs; the bushy tail held low behind. At its small size the shape must read as a wolf, never as a big cat.
+SIZE: MEDIUM, one tile. Seen in three-quarter view from the front, slightly from above, facing the viewer's right: about 56 px tall from the paws to the tips of the ears, about 88 px long from the nose to the rump, the tail hanging down so it adds little length.
+WEAPON: bite; the strike is a snapping lunge to the right, jaws wide open, forelegs braced.
+PALETTE (taken from reference image 3; use only these plus their darker/lighter tones): #A1958A, #4E525B, #F9E3BC, #303643, #FBE6C0, #222A36, #8C847C.
+ANIMATION SET: rows 1 to 6; rows 7 and 8 empty.

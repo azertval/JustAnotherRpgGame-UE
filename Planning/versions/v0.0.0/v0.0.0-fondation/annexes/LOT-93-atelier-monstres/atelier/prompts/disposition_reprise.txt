@@ -1,0 +1,18 @@
+LAYOUT v1 — 2026-09-18 (passe par animation d'une créature : la reprise des PNJ, les règles de corps venant de la fiche)
+
+LAYOUT — ONE ANIMATION: create ONE pixel-art sprite strip, a single {TAILLE} landscape
+image with a transparent background, holding ONLY the {ANIM} animation of the creature
+shown in reference image 1, organised as an invisible grid of {NRANGS} row(s) of cells, each
+{CELLULE} px wide and 256 px tall, one frame per cell, frames read left to right. Each row
+contains EXACTLY the number of separate figures given below, never more, never fewer, with
+clearly visible empty space (at least 16 px) between two neighbouring figures and their
+effects; nothing touches or crosses into a neighbouring cell. In every frame the feet rest on
+the same baseline, 40 px above the bottom of the cell.
+
+Reference image 1 is the finished sprite sheet of this very creature: copy it EXACTLY (same
+head, body, markings, equipment, effects, colours, pixel size and size as its first row), but
+do NOT copy its {ANIM} frames, which are wrong: draw the poses described below.
+
+{CORPS}
+
+{RANGEES}

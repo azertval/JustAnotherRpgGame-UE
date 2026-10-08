@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/city.schema.json",
+  "title": "Ville jouable",
+  "description": "Le graphe d'une ville qu'on parcourt, quartier par quartier (LOT-96) : ses quartiers, la carte de chacun ou la porte gardee qui le ferme, et la porte ou << Nouvelle partie >> pose le heros. Un quartier est une fiche d'atlas (LOT-37) ; il n'est pas redecrit ici, il est designe.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "location": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id",
+      "description": "La fiche d'atlas de la ville (World/locations/), et la cle de son plan dans Maps/world-maps.json (section `cities`)."
+    },
+    "start": {
+      "type": "object",
+      "description": "Ou << Nouvelle partie >> pose le heros : un quartier qui a sa carte, et un point d'arrivee nomme de cette carte.",
+      "properties": {
+        "district": {
+          "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+        },
+        "arrival": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": ["district", "arrival"],
+      "additionalProperties": false
+    },
+    "districts": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Les quartiers, chacun SOIT avec sa carte, SOIT ferme par une porte gardee : un quartier sans l'un ni l'autre serait un point du plan qu'aucun chemin n'atteint.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id",
+            "description": "La fiche d'atlas du quartier (World/locations/)."
+          },
+          "map": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+(/[a-z0-9-]+)*$",
+            "description": "Identifiant de la carte du quartier : son chemin relatif dans Source/Elements/Levels/, sans extension (`capital/martpart`)."
+          },
+          "guard": {
+            "type": "object",
+            "description": "La porte gardee d'un quartier sans carte : la carte d'un quartier voisin ou elle se tient.",
+            "properties": {
+              "map": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+(/[a-z0-9-]+)*$"
+              }
+            },
+            "required": ["map"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["id"],
+        "oneOf": [
+          { "required": ["map"], "not": { "required": ["guard"] } },
+          { "required": ["guard"], "not": { "required": ["map"] } }
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["id", "name", "source", "location", "start", "districts"],
+  "additionalProperties": false
+}

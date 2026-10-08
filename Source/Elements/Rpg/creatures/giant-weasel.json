@@ -1,0 +1,47 @@
+{
+  "id": "giant-weasel",
+  "name": "Belette géante",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 11,
+    "dexterity": 16,
+    "constitution": 10,
+    "intelligence": 4,
+    "wisdom": 12,
+    "charisma": 5
+  },
+  "armorClass": 13,
+  "hitPoints": 9,
+  "hitDice": "2d8",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 0.125,
+  "senses": [
+    "vision dans le noir 18 m",
+    "Perception passive 13"
+  ],
+  "skills": {
+    "stealth": 5,
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Odorat et ouïe aiguisés",
+      "text": "La belette a un avantage aux jets de Sagesse (Perception) basés sur l'odorat ou l'ouïe."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 1,50 m, une cible. Touché : 5 (1d4 + 3) dégâts perforants.",
+      "attackBonus": 5,
+      "reach": 1.5,
+      "damage": "1d4+3",
+      "damageType": "piercing"
+    }
+  ]
+}

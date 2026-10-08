@@ -1,0 +1,8 @@
+{
+  "id": "vetements-fins",
+  "name": "Vêtements, fins",
+  "source": "srd",
+  "category": "gear",
+  "price": 1500,
+  "weightGrams": 3000
+}

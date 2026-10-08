@@ -1,0 +1,8 @@
+{
+  "id": "lampe",
+  "name": "Lampe",
+  "source": "srd",
+  "category": "gear",
+  "price": 50,
+  "weightGrams": 500
+}

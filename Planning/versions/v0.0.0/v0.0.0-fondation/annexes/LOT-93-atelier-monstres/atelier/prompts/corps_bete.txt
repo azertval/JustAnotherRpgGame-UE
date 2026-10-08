@@ -1,0 +1,7 @@
+CORPS v1 — 2026-09-18 (bête : elle se bat avec son corps, tournée vers la droite)
+
+The creature fights with its own body, named in the WEAPON line: no weapon, no armour,
+no saddle, no collar, nothing held. It always faces the viewer's right, where it
+strikes: the head is on the right of the figure, the tail on the left, in every frame
+of every row. A strike may leave a short trail of claw or fang marks that starts at the
+claws or the jaws and stays inside the cell; nothing else glows or sparkles.

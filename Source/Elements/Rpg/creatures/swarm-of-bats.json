@@ -1,0 +1,67 @@
+{
+  "id": "swarm-of-bats",
+  "name": "Nuée de chauves-souris",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "nuée de bêtes TP",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 5,
+    "dexterity": 15,
+    "constitution": 10,
+    "intelligence": 2,
+    "wisdom": 12,
+    "charisma": 4
+  },
+  "armorClass": 12,
+  "hitPoints": 22,
+  "hitDice": "5d8",
+  "speed": {
+    "walk": 0,
+    "fly": 9
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "vision aveugle 18 m",
+    "Perception passive 11"
+  ],
+  "damageResistances": [
+    "bludgeoning",
+    "piercing",
+    "slashing"
+  ],
+  "conditionImmunities": [
+    "prone",
+    "grappled",
+    "charmed",
+    "frightened",
+    "restrained",
+    "stunned",
+    "paralyzed",
+    "petrified"
+  ],
+  "traits": [
+    {
+      "name": "Écholocalisation",
+      "text": "La nuée ne peut pas utiliser sa vision aveugle si elle est assourdie."
+    },
+    {
+      "name": "Ouïe aiguisée",
+      "text": "La nuée a un avantage aux jets de Sagesse (Perception) basés sur l'ouïe."
+    },
+    {
+      "name": "Nuée",
+      "text": "La nuée peut occuper l'espace d'une créature et vice versa, et peut passer par une ouverture suffisamment grande pour une chauve-souris de taille TP. La nuée ne peut pas regagner de points de vie ou gagner des points de vie temporaires."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsures",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 0 m, une créature dans l'espace de la nuée. Touché : 5 (2d4) dégâts perforants, ou 2 (1d4) dégâts perforants si la nuée ne possède plus que la moitié ou moins de ses points de vie.",
+      "attackBonus": 4,
+      "reach": 0,
+      "damage": "2d4",
+      "damageType": "piercing"
+    }
+  ]
+}

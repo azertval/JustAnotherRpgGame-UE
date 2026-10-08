@@ -1,0 +1,8 @@
+{
+  "id": "halfling",
+  "name": "halfelin",
+  "source": "srd",
+  "exotic": false,
+  "typicalSpeakers": "Halfelins",
+  "script": "Commun"
+}

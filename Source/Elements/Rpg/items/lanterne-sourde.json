@@ -1,0 +1,8 @@
+{
+  "id": "lanterne-sourde",
+  "name": "Lanterne sourde",
+  "source": "srd",
+  "category": "gear",
+  "price": 1000,
+  "weightGrams": 1000
+}

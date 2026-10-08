@@ -1,0 +1,60 @@
+{
+  "id": "octopus",
+  "name": "Pieuvre",
+  "source": "srd",
+  "size": "small",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 4,
+    "dexterity": 15,
+    "constitution": 11,
+    "intelligence": 3,
+    "wisdom": 10,
+    "charisma": 4
+  },
+  "armorClass": 12,
+  "hitPoints": 3,
+  "hitDice": "1d6",
+  "speed": {
+    "walk": 1.5,
+    "swim": 9
+  },
+  "challengeRating": 0,
+  "senses": [
+    "vision dans le noir 9 m",
+    "Perception passive 12"
+  ],
+  "skills": {
+    "stealth": 4,
+    "perception": 2
+  },
+  "traits": [
+    {
+      "name": "Apnée",
+      "text": "La pieuvre peut retenir son souffle durant 30 minutes hors de l'eau."
+    },
+    {
+      "name": "Camouflage dans l'eau",
+      "text": "La pieuvre a un avantage aux jets de Dextérité (Discrétion) réalisés lorsqu'elle se trouve sous l'eau."
+    },
+    {
+      "name": "Respiration aquatique",
+      "text": "La pieuvre ne peut respirer que sous l'eau."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Tentacules",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 1 dégât contondant et la cible est agrippée (évasion DD 10). Tant qu'elle reste agrippée, la pieuvre ne peut utiliser ses tentacules contre une autre cible.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1",
+      "damageType": "bludgeoning"
+    },
+    {
+      "name": "Nuage d'encre (Recharges après un repos court ou long)",
+      "text": "Un nuage d'encre de 1,50 mètre de rayon s'étend tout autour de la pieuvre si elle est sous l'eau. La visibilité dans la zone est nulle pendant 1 minute, mais un courant important peut disperser l'encre. Après avoir relâché l'encre, la pieuvre peut utiliser l'action Foncer en tant qu'action bonus."
+    }
+  ]
+}

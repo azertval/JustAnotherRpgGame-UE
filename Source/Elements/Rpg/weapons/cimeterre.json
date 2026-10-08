@@ -1,0 +1,15 @@
+{
+  "id": "cimeterre",
+  "name": "Cimeterre",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d6",
+  "damageType": "slashing",
+  "weightGrams": 1500,
+  "price": 2500,
+  "text": "Finesse, légère",
+  "properties": [
+    "finesse",
+    "light"
+  ]
+}

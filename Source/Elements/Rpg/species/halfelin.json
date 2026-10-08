@@ -1,0 +1,28 @@
+{
+  "id": "halfelin",
+  "name": "Halfelin",
+  "source": "srd",
+  "abilityScoreIncrease": {
+    "dexterity": 2
+  },
+  "size": "small",
+  "speed": 7.5,
+  "languages": [
+    "common",
+    "halfling"
+  ],
+  "traits": [
+    {
+      "name": "Chanceux",
+      "text": "Lorsque vous obtenez un 1 au dé d'un jet d'attaque, de caractéristique ou de sauvegarde, vous pouvez relancer le dé et devez alors utiliser ce nouveau résultat."
+    },
+    {
+      "name": "Brave",
+      "text": "Vous avez un avantage aux jets de sauvegarde pour ne pas être effrayé."
+    },
+    {
+      "name": "Agilité halfeline",
+      "text": "Vous pouvez passer dans l'espace de toute créature d'une taille supérieure à la vôtre."
+    }
+  ]
+}

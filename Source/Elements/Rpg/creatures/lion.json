@@ -1,0 +1,67 @@
+{
+  "id": "lion",
+  "name": "Lion",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "silhouette": "quadruped",
+  "abilities": {
+    "strength": 17,
+    "dexterity": 15,
+    "constitution": 13,
+    "intelligence": 3,
+    "wisdom": 12,
+    "charisma": 8
+  },
+  "armorClass": 12,
+  "hitPoints": 26,
+  "hitDice": "4d10+4",
+  "speed": {
+    "walk": 15
+  },
+  "challengeRating": 1,
+  "senses": [
+    "Perception passive 13"
+  ],
+  "skills": {
+    "stealth": 6,
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Odorat aiguisé",
+      "text": "Le lion a un avantage aux jets de Sagesse (Perception) basés sur l'odorat."
+    },
+    {
+      "name": "Tactique de groupe",
+      "text": "Le lion a un avantage aux jets d'attaque contre une créature si au moins l'un de ses alliés est à 1,50 mètre ou moins de la créature et n'est pas incapable d'agir."
+    },
+    {
+      "name": "Bond agressif",
+      "text": "Si le lion se déplace d'au moins 6 mètres en ligne droite vers une créature, puis la touche lors d'une attaque avec ses griffes dans le même tour, la cible doit réussir un jet de sauvegarde de Force DD 13 pour ne pas tomber à terre. Si la cible est à terre, le lion peut effectuer une attaque de morsure contre elle en tant qu'action bonus."
+    },
+    {
+      "name": "Saut avec élan",
+      "text": "S'il peut prendre une course d'élan de 3 mètres, un lion peut sauter jusqu'à 7,50 mètres."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Griffes",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 1,50 m, une cible. Touché : 6 (1d6 + 3) dégâts tranchants.",
+      "attackBonus": 5,
+      "reach": 1.5,
+      "damage": "1d6+3",
+      "damageType": "slashing"
+    },
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 1,50 m, une cible. Touché : 7 (1d8 + 3) dégâts perforants.",
+      "attackBonus": 5,
+      "reach": 1.5,
+      "damage": "1d8+3",
+      "damageType": "piercing"
+    }
+  ]
+}

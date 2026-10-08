@@ -1,0 +1,17 @@
+{
+  "problemMatcher": [
+    {
+      "owner": "clang-format",
+      "pattern": [
+        {
+          "regexp": "^([^\\s:][^:]*):(\\d+):(\\d+): (error|warning): (.*) \\[-Wclang-format-violations\\]$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      ]
+    }
+  ]
+}

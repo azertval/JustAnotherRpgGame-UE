@@ -1,0 +1,43 @@
+{
+  "id": "frog",
+  "name": "Grenouille",
+  "source": "srd",
+  "size": "tiny",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 1,
+    "dexterity": 13,
+    "constitution": 8,
+    "intelligence": 1,
+    "wisdom": 8,
+    "charisma": 3
+  },
+  "armorClass": 11,
+  "hitPoints": 1,
+  "hitDice": "1d4-1",
+  "speed": {
+    "walk": 6,
+    "swim": 6
+  },
+  "challengeRating": 0,
+  "senses": [
+    "vision dans le noir 9 m",
+    "Perception passive 11"
+  ],
+  "skills": {
+    "stealth": 3,
+    "perception": 1
+  },
+  "traits": [
+    {
+      "name": "Amphibien",
+      "text": "La grenouille peut respirer aussi bien dans l'air que sous l'eau."
+    },
+    {
+      "name": "Saut sans élan",
+      "text": "La grenouille peut sauter en longueur jusqu'à 3 mètres ou en hauteur jusqu'à 1,50 mètre, avec ou sans élan."
+    }
+  ],
+  "description": "Une grenouille n'a pas d'attaque efficace. Elle se nourrit de petits insectes et reste en général près de l'eau, des arbres, ou sous terre."
+}

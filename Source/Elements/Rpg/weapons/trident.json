@@ -1,0 +1,18 @@
+{
+  "id": "trident",
+  "name": "Trident",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d6",
+  "damageType": "piercing",
+  "weightGrams": 2000,
+  "price": 500,
+  "text": "Lancer (portée 6 m/18 m), polyvalente (1d8)",
+  "versatileDamage": "1d8",
+  "properties": [
+    "thrown",
+    "versatile"
+  ],
+  "rangeNormal": 6,
+  "rangeLong": 18
+}

@@ -1,0 +1,14 @@
+{
+  "id": "penumbral-survivor",
+  "name": "Penumbral Survivor",
+  "source": "tanares",
+  "skillProficiencies": [
+    "stealth",
+    "survival"
+  ],
+  "feature": {
+    "name": "Penumbral Walker",
+    "text": "Your time spent in the Penumbral Plane has made you an expert in navigating its treacherous terrain. You have ad- vantage on all Dexterity (Stealth) and Wisdom (Survival) skill checks while in the Penumbra."
+  },
+  "text": "O nce in your life, you were lost in the dark and hostile Penumbral Plane. Perhaps you were lured in by whispers of forbidden knowledge, or maybe you stumbled into a portal or rift by accident. Whatever the reason, you found yourself alone in an un- forgiving environment, surrounded by monstrous creatures and toxic fumes. The Penumbral Plane is a place of eternal darkness, where shadows writhe and slither just beyond the edge of your vision. The air is thick with the stench of decay and ma- levolence that seeps into your very soul. Every moment in this twisted landscape feels like an eternity, the oppressive weight of the environment slowly chipping away at your sanity and willpower. But you refused to let the Penumbral Plane break you. Through a combination of sheer guts, cunning, and pure luck, you navigated the treacherous terrain and escaped through another portal. The experience left a deep and lasting scar on your mind and soul, haunting you with memories of the hor- rors you faced and the dangers that still lurk in the shadows. 270 Valentin Eloy (Order #42142262)"
+}

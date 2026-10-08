@@ -1,0 +1,11 @@
+{
+  "id": "peaux",
+  "name": "Peaux",
+  "source": "srd",
+  "category": "medium",
+  "baseArmorClass": 12,
+  "dexterityBonus": true,
+  "dexterityBonusMax": 2,
+  "weightGrams": 6000,
+  "price": 1000
+}

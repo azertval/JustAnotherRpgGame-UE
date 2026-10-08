@@ -1,0 +1,15 @@
+{
+  "id": "maillet",
+  "name": "Maillet",
+  "source": "srd",
+  "category": "martial",
+  "damage": "2d6",
+  "damageType": "bludgeoning",
+  "weightGrams": 5000,
+  "price": 1000,
+  "text": "Lourde, à deux mains",
+  "properties": [
+    "heavy",
+    "two-handed"
+  ]
+}

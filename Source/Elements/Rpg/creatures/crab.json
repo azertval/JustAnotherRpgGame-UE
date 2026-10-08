@@ -1,0 +1,47 @@
+{
+  "id": "crab",
+  "name": "Crabe",
+  "source": "srd",
+  "size": "tiny",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 2,
+    "dexterity": 11,
+    "constitution": 10,
+    "intelligence": 1,
+    "wisdom": 8,
+    "charisma": 2
+  },
+  "armorClass": 11,
+  "hitPoints": 2,
+  "hitDice": "1d4",
+  "speed": {
+    "walk": 6,
+    "swim": 6
+  },
+  "challengeRating": 0,
+  "senses": [
+    "vision aveugle 9 m",
+    "Perception passive 9"
+  ],
+  "skills": {
+    "stealth": 2
+  },
+  "traits": [
+    {
+      "name": "Amphibien",
+      "text": "Le crabe peut respirer aussi bien dans l'air que sous l'eau."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Pinces",
+      "text": "Attaque au corps à corps avec une arme : +0 au toucher, allonge 1,50 m, une cible. Touché : 1 dégât contondant.",
+      "attackBonus": 0,
+      "reach": 1.5,
+      "damage": "1",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

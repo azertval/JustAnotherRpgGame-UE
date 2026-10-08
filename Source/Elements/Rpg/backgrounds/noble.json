@@ -1,0 +1,15 @@
+{
+  "id": "noble",
+  "name": "Noble",
+  "source": "srd",
+  "skillProficiencies": [
+    "history",
+    "persuasion"
+  ],
+  "languageCount": 1,
+  "feature": {
+    "name": "Apanage de la noblesse",
+    "text": "Grâce à votre noble naissance, les gens sont enclins à penser le meilleur de vous. Vous êtes le bienvenu dans la haute société, et les gens supposent que vous avez le droit d'être là où vous êtes. Les gens ordinaires font tout pour vous accueillir et éviter de vous déplaire, et les personnes de haute naissance vous traitent comme un membre de leur sphère sociale. Vous pouvez obtenir une audience avec un noble local si vous en avez besoin."
+  },
+  "text": "Vous savez ce qu'est la richesse, le pouvoir et les privilèges. Vous portez un titre de noblesse, et votre famille possède des terres, perçoit des impôts, et exerce une influence politique significative. Vous pourriez être un aristocrate choyé qui ne connaît pas le travail et l'inconfort, un ancien marchand qui vient d'être élevé au rang de noble, ou une fripouille déshéritée avec un attrait pour les titres disproportionnés. Ou vous pourriez être un honnête propriétaire terrien qui travaille dur et qui se soucie profondément des gens qui vivent et travaillent sur ses terres, tout à fait conscient de votre responsabilité envers eux. Travaillez avec votre MD pour définir un titre approprié et quelle autorité ce titre vous donne. Un titre de noblesse n'est pas une chose personnelle, il concerne une famille entière, et, quel que soit le titre que vous détenez, vous le transmettrez à vos enfants. Donc non seulement vous devez déterminer votre titre de noblesse, mais vous devez également travailler avec votre MD pour décrire votre famille et l'influence qu'elle a sur vous. Votre famille est-elle ancienne et établie, ou votre titre ne vous a-t-il été que récemment accordé ? Quelle influence exerce-t-elle et sur quelle superficie ? Quelle est la réputation de votre famille parmi les autres aristocrates de la région ? Comment les gens ordinaires la considèrent-ils ? Quelle est votre position au sein de votre famille ? Êtes- vous l'héritier du chef de la famille ? Avez-vous déjà hérité du titre ? Comment sentez-vous cette responsabilité ? Ou êtes-vous si loin de la ligne de l'héritage qu'on ne se soucie pas de ce que vous faites, tant que vous ne gênez personne ? Que pense le chef de votre famille de votre carrière d'aventurier ? Êtes-vous en bonnes grâces de votre famille, ou êtes-vous rejeté par le reste de votre famille ? Votre famille a-t-elle un blason ? Un insigne que vous pourriez porter sur une chevalière ? Des couleurs particulières que vous portez tout le temps ? Un animal que vous considérez comme un symbole de votre lignée ou même un membre spirituel de la famille ? Ces détails permettent d'insérer votre famille et votre titre dans le monde de la campagne."
+}

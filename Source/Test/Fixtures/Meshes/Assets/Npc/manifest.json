@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "comment": "Les PNJ de la carte d'essai : le pantin, un modèle (LOT-1005).",
+  "tile": [
+    64,
+    40
+  ],
+  "npcs": [
+    "pantin"
+  ]
+}

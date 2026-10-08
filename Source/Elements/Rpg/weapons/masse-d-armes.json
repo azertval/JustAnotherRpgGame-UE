@@ -1,0 +1,10 @@
+{
+  "id": "masse-d-armes",
+  "name": "Masse d'armes",
+  "source": "srd",
+  "category": "simple",
+  "damage": "1d6",
+  "damageType": "bludgeoning",
+  "weightGrams": 2000,
+  "price": 500
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/difficulty.schema.json",
+  "title": "Echelle de difficulte",
+  "description": "Les degres de difficulte, nommes. EX-REG-021 interdit qu'un nombre de difficulte apparaisse LITTERALEMENT dans le code : regler l'equilibre du jeu ne doit pas demander de recompiler, et une valeur nue dans un `if` ne dit pas ce qu'elle represente. Source : table << Tache / DD >> des Basic Rules p. 64.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "tiers": {
+      "type": "array",
+      "minItems": 2,
+      "description": "Les paliers, du plus facile au plus difficile. L'ordre est significatif : une interface qui propose une difficulte les presente dans cet ordre.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 2
+          },
+          "dc": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 40
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "dc"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "tiers"
+  ],
+  "additionalProperties": false
+}

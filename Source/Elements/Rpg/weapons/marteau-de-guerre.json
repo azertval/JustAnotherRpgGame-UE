@@ -1,0 +1,15 @@
+{
+  "id": "marteau-de-guerre",
+  "name": "Marteau de guerre",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "bludgeoning",
+  "weightGrams": 1000,
+  "price": 1500,
+  "text": "Polyvalente (1d10)",
+  "versatileDamage": "1d10",
+  "properties": [
+    "versatile"
+  ]
+}

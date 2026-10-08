@@ -1,0 +1,8 @@
+{
+  "id": "trousse-de-soins",
+  "name": "Trousse de soins",
+  "source": "srd",
+  "category": "gear",
+  "price": 500,
+  "weightGrams": 1500
+}

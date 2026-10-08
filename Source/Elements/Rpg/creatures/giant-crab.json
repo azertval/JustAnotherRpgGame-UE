@@ -1,0 +1,47 @@
+{
+  "id": "giant-crab",
+  "name": "Crabe géant",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 13,
+    "dexterity": 15,
+    "constitution": 11,
+    "intelligence": 1,
+    "wisdom": 9,
+    "charisma": 3
+  },
+  "armorClass": 15,
+  "hitPoints": 13,
+  "hitDice": "3d8",
+  "speed": {
+    "walk": 9,
+    "swim": 9
+  },
+  "challengeRating": 0.125,
+  "senses": [
+    "vision aveugle 9 m",
+    "Perception passive 9"
+  ],
+  "skills": {
+    "stealth": 4
+  },
+  "traits": [
+    {
+      "name": "Amphibien",
+      "text": "Le crabe peut respirer aussi bien dans l'air que sous l'eau."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Pinces",
+      "text": "Attaque au corps à corps avec une arme : +3 au toucher, allonge 1,50 m, une cible. Touché : 4 (1d6 + 1) dégâts contondants, et la cible est agrippée (DD 11 pour s'échapper). Le crabe a deux pinces, chacune lui permettant d'agripper une cible.",
+      "attackBonus": 3,
+      "reach": 1.5,
+      "damage": "1d6+1",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

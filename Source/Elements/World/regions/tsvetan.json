@@ -1,0 +1,78 @@
+{
+  "id": "tsvetan",
+  "name": "Tsvetan",
+  "source": "tanares",
+  "government": "Fragmented into two groups of clans, each claiming to have their legitimate War Lord and Red Mother.",
+  "faction": "No alliance.",
+  "population": {
+    "total": 468000,
+    "species": [
+      {
+        "species": "orc",
+        "label": "orcs",
+        "percent": 88
+      },
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 5
+      },
+      {
+        "species": "goblinoid",
+        "label": "goblinoids",
+        "percent": 4
+      }
+    ],
+    "otherPercent": 3
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "veryHigh"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "veryLow"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "low"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "veryLow"
+      }
+    ]
+  },
+  "neighbors": [
+    "central-empire",
+    "republic-of-freelands",
+    "taii-maku-city-states"
+  ],
+  "locations": [
+    "tsvetan-feargus-the-capital",
+    "tsvetan-eferhild-citadel",
+    "tsvetan-obsidian-fortress",
+    "tsvetan-the-greatwolf-race-course",
+    "tsvetan-poison-grounds",
+    "tsvetan-bone-fields"
+  ]
+}

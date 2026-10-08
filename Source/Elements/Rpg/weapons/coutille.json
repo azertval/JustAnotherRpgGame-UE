@@ -1,0 +1,16 @@
+{
+  "id": "coutille",
+  "name": "Coutille",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d10",
+  "damageType": "slashing",
+  "weightGrams": 3000,
+  "price": 2000,
+  "text": "Lourde, allonge, à deux mains",
+  "properties": [
+    "heavy",
+    "reach",
+    "two-handed"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "broigne",
+  "name": "Broigne",
+  "source": "srd",
+  "category": "heavy",
+  "baseArmorClass": 14,
+  "stealthDisadvantage": true,
+  "weightGrams": 20000,
+  "price": 3000
+}

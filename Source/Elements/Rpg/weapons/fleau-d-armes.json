@@ -1,0 +1,10 @@
+{
+  "id": "fleau-d-armes",
+  "name": "Fléau d'armes",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "bludgeoning",
+  "weightGrams": 1000,
+  "price": 1000
+}

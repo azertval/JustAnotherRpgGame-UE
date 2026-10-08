@@ -1,0 +1,55 @@
+name: Unreal
+
+# La construction du moteur, sur le poste de référence (LOT-1014) : UnrealBuildTool construit la
+# cible d'éditeur, puis le commandlet `JadgContentCheck` lit les données de contenu par les lecteurs
+# de Core, sans fenêtre. C'est `scripts/build.ps1 -Unreal`, la commande du poste.
+#
+# Pourquoi pas sur chaque PR. Le dépôt est public, et un runner auto-hébergé exécute le code qu'on
+# lui donne : une PR venue d'un fork ferait tourner le sien sur le poste de l'auteur. Ce workflow ne
+# se déclenche donc JAMAIS par `pull_request` — seulement la nuit et à la main, sur une branche du
+# dépôt. Ne pas ajouter ce déclencheur sans avoir d'abord fermé cette porte.
+#
+# Mise en service, une fois, par l'auteur (Settings > Actions) :
+#   1. enregistrer un runner sur le poste, avec l'étiquette `unreal` ;
+#   2. variable `UNREAL_RUNNER` = `true` — sans elle le job est sauté, au lieu d'attendre un jour
+#      entier un runner qui n'existe pas ;
+#   3. variable `UNREAL_ENGINE_PATH` = la racine du moteur (ex. `E:\Epic Games\UE_5.8`) : le service
+#      du runner ne lit pas le registre de l'utilisateur, où l'éditeur range son association.
+on:
+  schedule:
+    # 02 h 17 UTC : hors de l'heure ronde, où les files de GitHub sont les plus chargées.
+    - cron: '17 2 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: unreal-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  editor:
+    name: editor (build + JadgContentCheck)
+    if: ${{ vars.UNREAL_RUNNER == 'true' }}
+    runs-on: [ self-hosted, Windows, unreal ]
+    # Une construction complète de la cible d'éditeur depuis rien : 109 s mesurées le 7 octobre sur
+    # 94 actions ; la borne laisse la place au premier run, qui compile aussi les en-têtes partagés.
+    timeout-minutes: 120
+    steps:
+      # Sans LFS : ni la cible d'éditeur ni le commandlet ne lisent Content/ ; les .uasset
+      # régénérés se téléchargeront quand un test d'automatisation ouvrira une carte.
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Annotations du compilateur
+        shell: powershell
+        run: Write-Output "::add-matcher::.github/problem-matchers/msvc.json"
+
+      - name: Cible d'editeur, puis controle du contenu
+        shell: powershell
+        env:
+          UNREAL_ENGINE_PATH: ${{ vars.UNREAL_ENGINE_PATH }}
+        run: ./scripts/build.ps1 -Unreal -EnginePath $env:UNREAL_ENGINE_PATH

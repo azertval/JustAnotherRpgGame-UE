@@ -1,0 +1,789 @@
+// SPDX-FileCopyrightText: 2026 Valentin Eloy
+// SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+
+#include "Core/Gameplay/Quest.h"
+
+#include <algorithm>
+#include <fstream>
+#include <iterator>
+#include <set>
+#include <system_error>
+
+#include "Core/Data/JsonDocument.h"
+#include "Core/Gameplay/WorldFlags.h"
+#include "Core/Rpg/Dialogue.h"
+
+namespace core {
+
+namespace {
+
+using Json = nlohmann::json;
+using Pointeur = Json::json_pointer;
+
+// Aucune garde de version : le format naît avec ce lot, et un champ `version` absent ne dit rien.
+constexpr int SANS_GARDE_DE_VERSION = 0;
+
+// Rassemble les erreurs d'un document, chacune préfixée de son fichier et de sa ligne.
+class Rapport {
+public:
+    Rapport(std::string_view texte, std::string_view origine) : _texte(texte), _origine(origine) {}
+
+    void signaler(const Pointeur& ou, const std::string& message) {
+        const TextPosition position = positionOfPointer(_texte, ou);
+        std::string prefixe = _origine;
+        if (position.line > 0) {
+            prefixe += ':' + std::to_string(position.line);
+        }
+        _erreurs.push_back(prefixe + " : " + message);
+    }
+    [[nodiscard]] bool vide() const noexcept {
+        return _erreurs.empty();
+    }
+    [[nodiscard]] std::vector<std::string> extraire() {
+        return std::move(_erreurs);
+    }
+
+private:
+    std::string_view _texte;
+    std::string _origine;
+    std::vector<std::string> _erreurs;
+};
+
+[[nodiscard]] std::optional<std::string> texte(const Json& objet, const char* champ) {
+    const auto trouve = objet.find(champ);
+    if (trouve == objet.end() || !trouve->is_string() || trouve->get<std::string>().empty()) {
+        return std::nullopt;
+    }
+    return trouve->get<std::string>();
+}
+
+[[nodiscard]] bool contient(const std::vector<std::string>& valeurs, std::string_view valeur) {
+    return std::ranges::find(valeurs, valeur) != valeurs.end();
+}
+
+// Les valeurs déclarées d'un drapeau : chacune un texte non vide, sans doublon.
+void lireValeursDrapeau(const Json& valeurs, const Pointeur& ou, QuestFlag& drapeau,
+                        Rapport& rapport) {
+    for (std::size_t v = 0; v < valeurs.size(); ++v) {
+        const Json& valeur = valeurs[v];
+        if (!valeur.is_string() || valeur.get<std::string>().empty()) {
+            rapport.signaler(ou / "values" / v,
+                             "drapeau '" + drapeau.id + "' : une valeur n'est pas un texte.");
+        } else if (contient(drapeau.values, valeur.get<std::string>())) {
+            rapport.signaler(ou / "values" / v, "drapeau '" + drapeau.id + "' : valeur '" +
+                                                    valeur.get<std::string>() + "' en double.");
+        } else {
+            drapeau.values.push_back(valeur.get<std::string>());
+        }
+    }
+}
+
+void lireDrapeaux(const Json& racine, Quest& quete, Rapport& rapport) {
+    const auto drapeaux = racine.find("flags");
+    if (drapeaux == racine.end()) {
+        return;
+    }
+    if (!drapeaux->is_array()) {
+        rapport.signaler(Pointeur("/flags"), "'flags' doit etre un tableau.");
+        return;
+    }
+    std::set<std::string, std::less<>> vus;
+    for (std::size_t i = 0; i < drapeaux->size(); ++i) {
+        const Json& brut = (*drapeaux)[i];
+        const Pointeur ou = Pointeur("/flags") / i;
+        const auto id = brut.is_object() ? texte(brut, "id") : std::nullopt;
+        if (!id) {
+            rapport.signaler(ou, "drapeau sans 'id'.");
+            continue;
+        }
+        QuestFlag drapeau{.id = *id, .values = {}, .initial = {}};
+        if (!vus.insert(drapeau.id).second) {
+            rapport.signaler(ou, "drapeau '" + drapeau.id + "' declare deux fois.");
+        }
+        const auto valeurs = brut.find("values");
+        if (valeurs == brut.end() || !valeurs->is_array() || valeurs->empty()) {
+            rapport.signaler(ou, "drapeau '" + drapeau.id + "' : 'values' absent ou vide.");
+            continue;
+        }
+        lireValeursDrapeau(*valeurs, ou, drapeau, rapport);
+        if (const auto initiale = texte(brut, "initial")) {
+            drapeau.initial = *initiale;
+        } else if (!drapeau.values.empty()) {
+            drapeau.initial = drapeau.values.front();
+        }
+        if (!drapeau.values.empty() && !contient(drapeau.values, drapeau.initial)) {
+            rapport.signaler(ou / "initial", "drapeau '" + drapeau.id + "' : initiale '" +
+                                                 drapeau.initial + "' hors de ses valeurs.");
+        }
+        quete.flags.push_back(std::move(drapeau));
+    }
+}
+
+// Une valeur comparée ou posée doit être l'une de celles que la quête déclare pour ce drapeau.
+// L'erreur nomme l'étape : c'est elle que l'auteur corrige (LOT-144).
+void verifierValeur(const Quest& quete, const QuestStep& etape, std::string_view drapeau,
+                    std::string_view valeur, const Pointeur& ou, Rapport& rapport) {
+    const auto declaration = std::ranges::find(quete.flags, drapeau, &QuestFlag::id);
+    if (declaration != quete.flags.end() && !contient(declaration->values, valeur)) {
+        rapport.signaler(ou, "etape '" + etape.id + "' : valeur '" + std::string(valeur) +
+                                 "' que le drapeau '" + std::string(drapeau) + "' ne declare pas.");
+    }
+}
+
+void lireConditions(const Json& brut, const Pointeur& ou, const Quest& quete, QuestStep& etape,
+                    Rapport& rapport) {
+    const auto conditions = brut.find("when");
+    if (conditions == brut.end() || !conditions->is_array() || conditions->empty()) {
+        rapport.signaler(ou, "etape '" + etape.id + "' : 'when' absent ou vide.");
+        return;
+    }
+    for (std::size_t c = 0; c < conditions->size(); ++c) {
+        const Pointeur ici = ou / "when" / c;
+        FlagConditionRead lue = readFlagCondition((*conditions)[c]);
+        if (!lue.condition) {
+            rapport.signaler(ici, "etape '" + etape.id + "' : " + lue.error);
+            continue;
+        }
+        for (const std::string& valeur : lue.condition->values) {
+            verifierValeur(quete, etape, lue.condition->flag, valeur, ici, rapport);
+        }
+        etape.when.push_back(std::move(*lue.condition));
+    }
+}
+
+void lireEffets(const Json& brut, const Pointeur& ou, const Quest& quete, QuestStep& etape,
+                Rapport& rapport) {
+    const auto effets = brut.find("effects");
+    if (effets == brut.end()) {
+        return;
+    }
+    if (!effets->is_array()) {
+        rapport.signaler(ou / "effects", "etape '" + etape.id + "' : 'effects' non tableau.");
+        return;
+    }
+    for (std::size_t e = 0; e < effets->size(); ++e) {
+        const Json& effet = (*effets)[e];
+        const Pointeur ici = ou / "effects" / e;
+        const auto type = effet.is_object() ? texte(effet, "type") : std::nullopt;
+        const auto drapeau = effet.is_object() ? texte(effet, "flag") : std::nullopt;
+        if (type != "setFlag" && type != "clearFlag") {
+            rapport.signaler(
+                ici, "etape '" + etape.id + "' : effet de type inconnu (setFlag, clearFlag).");
+            continue;
+        }
+        if (!drapeau) {
+            rapport.signaler(ici, "etape '" + etape.id + "' : effet sans 'flag'.");
+            continue;
+        }
+        QuestEffect lu{
+            .kind = type == "setFlag" ? QuestEffect::Kind::SetFlag : QuestEffect::Kind::ClearFlag,
+            .flag = *drapeau,
+            .value = {}};
+        if (const auto valeur = effet.find("value"); valeur != effet.end()) {
+            if (lu.kind != QuestEffect::Kind::SetFlag || !valeur->is_string() ||
+                valeur->get<std::string>().empty()) {
+                rapport.signaler(ici / "value",
+                                 "etape '" + etape.id + "' : 'value' est un texte, pour setFlag.");
+                continue;
+            }
+            lu.value = valeur->get<std::string>();
+            verifierValeur(quete, etape, lu.flag, lu.value, ici / "value", rapport);
+        } else if (lu.kind == QuestEffect::Kind::SetFlag &&
+                   std::ranges::find(quete.flags, lu.flag, &QuestFlag::id) != quete.flags.end()) {
+            rapport.signaler(ici, "etape '" + etape.id + "' : le drapeau '" + lu.flag +
+                                      "' a des valeurs ; 'value' manque.");
+        }
+        etape.effects.push_back(std::move(lu));
+    }
+}
+
+// Le lieu d'une étape, `carte#id` : une carte, puis une entité ; l'existence se contrôle au
+// `--check` de l'éditeur (LOT-144).
+void lireLieu(const Json& brut, const Pointeur& ou, QuestStep& etape, Rapport& rapport) {
+    if (!brut.contains("at")) {
+        return;
+    }
+    const auto lieu = texte(brut, "at");
+    const std::size_t diese = lieu ? lieu->find('#') : std::string::npos;
+    if (diese == std::string::npos || diese == 0 || diese + 1 == lieu->size()) {
+        rapport.signaler(ou / "at", "etape '" + etape.id + "' : 'at' s'ecrit carte#entite.");
+        return;
+    }
+    etape.at = *lieu;
+}
+
+// L'issue d'une étape, si elle en a une : `success` ou `failure`.
+void lireIssue(const Json& brut, const Pointeur& ou, QuestStep& etape, Rapport& rapport) {
+    const auto issue = brut.find("outcome");
+    if (issue == brut.end()) {
+        return;
+    }
+    if (*issue == "success") {
+        etape.outcome = QuestOutcome::Success;
+    } else if (*issue == "failure") {
+        etape.outcome = QuestOutcome::Failure;
+    } else {
+        rapport.signaler(ou / "outcome",
+                         "etape '" + etape.id + "' : issue inconnue (success, failure).");
+    }
+}
+
+void lireEtapes(const Json& racine, Quest& quete, Rapport& rapport) {
+    const auto etapes = racine.find("steps");
+    if (etapes == racine.end() || !etapes->is_array() || etapes->empty()) {
+        rapport.signaler(Pointeur(), "'steps' absent, vide ou non tableau.");
+        return;
+    }
+    std::set<std::string, std::less<>> vus;
+    for (std::size_t i = 0; i < etapes->size(); ++i) {
+        const Json& brut = (*etapes)[i];
+        const Pointeur ou = Pointeur("/steps") / i;
+        const auto id = brut.is_object() ? texte(brut, "id") : std::nullopt;
+        if (!id) {
+            rapport.signaler(ou, "etape sans 'id'.");
+            continue;
+        }
+        QuestStep etape;
+        etape.id = *id;
+        if (!vus.insert(etape.id).second) {
+            rapport.signaler(ou, "etape '" + etape.id + "' en double.");
+        }
+        lireLieu(brut, ou, etape, rapport);
+        lireConditions(brut, ou, quete, etape, rapport);
+        lireEffets(brut, ou, quete, etape, rapport);
+        lireIssue(brut, ou, etape, rapport);
+        quete.steps.push_back(std::move(etape));
+    }
+}
+
+[[nodiscard]] std::optional<std::string> lireFichier(const std::filesystem::path& chemin) {
+    std::ifstream flux(chemin, std::ios::binary);
+    if (!flux) {
+        return std::nullopt;
+    }
+    return std::string(std::istreambuf_iterator<char>(flux), std::istreambuf_iterator<char>());
+}
+
+}  // namespace
+
+namespace {
+
+// Une chaîne JSON entre guillemets, UTF-8 gardé tel quel : `"l'arène"`, pas `"l'arène"`.
+[[nodiscard]] std::string chaine(std::string_view texte) {
+    return Json(std::string(texte)).dump();
+}
+
+// `["a", "b"]` : une liste de textes sur une ligne.
+[[nodiscard]] std::string listeEnLigne(const std::vector<std::string>& valeurs) {
+    std::string ligne = "[";
+    for (std::size_t i = 0; i < valeurs.size(); ++i) {
+        ligne += (i == 0 ? "" : ", ") + chaine(valeurs[i]);
+    }
+    return ligne + "]";
+}
+
+// `{ "flag": "f", "equals": "v" }` : la forme la plus courte que `readFlagCondition` relit.
+[[nodiscard]] std::string conditionEnLigne(const FlagCondition& condition) {
+    std::string ligne = "{ \"flag\": " + chaine(condition.flag);
+    const auto valeurs = [&condition] {
+        return condition.values.size() == 1 ? chaine(condition.values.front())
+                                            : listeEnLigne(condition.values);
+    };
+    switch (condition.test) {
+        case FlagTest::IsSet:
+            break;
+        case FlagTest::IsUnset:
+            ligne += ", \"isSet\": false";
+            break;
+        case FlagTest::Equals:
+            ligne += ", \"equals\": " + valeurs();
+            break;
+        case FlagTest::NotEquals:
+            ligne += ", \"notEquals\": " + valeurs();
+            break;
+    }
+    return ligne + " }";
+}
+
+[[nodiscard]] std::string effetEnLigne(const QuestEffect& effet) {
+    std::string ligne = "{ \"type\": ";
+    ligne += effet.kind == QuestEffect::Kind::SetFlag ? "\"setFlag\"" : "\"clearFlag\"";
+    ligne += ", \"flag\": " + chaine(effet.flag);
+    if (!effet.value.empty()) {
+        ligne += ", \"value\": " + chaine(effet.value);
+    }
+    return ligne + " }";
+}
+
+// `[{ … }, { … }]` : des objets en ligne.
+template <typename T, typename Ecrire>
+[[nodiscard]] std::string objetsEnLigne(const std::vector<T>& objets, Ecrire ecrire) {
+    std::string ligne = "[";
+    for (std::size_t i = 0; i < objets.size(); ++i) {
+        ligne += (i == 0 ? "" : ", ") + ecrire(objets[i]);
+    }
+    return ligne + "]";
+}
+
+// Les lignes `"clé": valeur` d'un objet, séparées par des virgules, à l'indentation donnée.
+[[nodiscard]] std::string champs(const std::vector<std::pair<std::string, std::string>>& lignes,
+                                 std::string_view marge) {
+    std::string texte;
+    for (std::size_t i = 0; i < lignes.size(); ++i) {
+        texte.append(marge).append(chaine(lignes[i].first)).append(": ").append(lignes[i].second);
+        texte += i + 1 < lignes.size() ? ",\n" : "\n";
+    }
+    return texte;
+}
+
+// `[` puis un objet multiligne par élément, puis `]` à la marge de la clé.
+template <typename T, typename Champs>
+[[nodiscard]] std::string objetsEnBloc(const std::vector<T>& objets, Champs champsDe) {
+    if (objets.empty()) {
+        return "[]";
+    }
+    std::string texte = "[\n";
+    for (std::size_t i = 0; i < objets.size(); ++i) {
+        texte += "    {\n" + champs(champsDe(objets[i]), "      ") + "    }";
+        texte += i + 1 < objets.size() ? ",\n" : "\n";
+    }
+    return texte + "  ]";
+}
+
+}  // namespace
+
+std::string writeQuest(const Quest& quest) {
+    std::vector<std::pair<std::string, std::string>> racine{{"id", chaine(quest.id)}};
+    if (!quest.name.empty()) {
+        racine.emplace_back("name", chaine(quest.name));
+    }
+    if (!quest.source.empty()) {
+        racine.emplace_back("source", chaine(quest.source));
+    }
+    if (!quest.status.empty()) {
+        racine.emplace_back("status", chaine(quest.status));
+    }
+    if (!quest.flags.empty()) {
+        racine.emplace_back("flags", objetsEnBloc(quest.flags, [](const QuestFlag& drapeau) {
+                                return std::vector<std::pair<std::string, std::string>>{
+                                    {"id", chaine(drapeau.id)},
+                                    {"values", listeEnLigne(drapeau.values)},
+                                    {"initial", chaine(drapeau.initial)}};
+                            }));
+    }
+    racine.emplace_back(
+        "steps", objetsEnBloc(quest.steps, [](const QuestStep& etape) {
+            std::vector<std::pair<std::string, std::string>> lignes{{"id", chaine(etape.id)}};
+            if (!etape.at.empty()) {
+                lignes.emplace_back("at", chaine(etape.at));
+            }
+            lignes.emplace_back("when", objetsEnLigne(etape.when, conditionEnLigne));
+            if (!etape.effects.empty()) {
+                lignes.emplace_back("effects", objetsEnLigne(etape.effects, effetEnLigne));
+            }
+            if (etape.outcome != QuestOutcome::None) {
+                lignes.emplace_back("outcome", etape.outcome == QuestOutcome::Success
+                                                   ? "\"success\""
+                                                   : "\"failure\"");
+            }
+            return lignes;
+        }));
+    return "{\n" + champs(racine, "  ") + "}\n";
+}
+
+const QuestStep* Quest::find(std::string_view stepId) const {
+    const auto trouve = std::ranges::find(steps, stepId, &QuestStep::id);
+    return trouve == steps.end() ? nullptr : &*trouve;
+}
+
+std::string questStepFlag(std::string_view questId, std::string_view stepId) {
+    return "quest/" + std::string(questId) + "/step/" + std::string(stepId);
+}
+
+std::string questTitleKey(std::string_view questId) {
+    return "quest." + std::string(questId) + ".title";
+}
+
+std::string questStepKey(std::string_view questId, std::string_view stepId) {
+    return "quest." + std::string(questId) + '.' + std::string(stepId);
+}
+
+std::vector<std::string> questTextKeys(const Quest& quest) {
+    std::vector<std::string> cles{questTitleKey(quest.id)};
+    for (const QuestStep& etape : quest.steps) {
+        cles.push_back(questStepKey(quest.id, etape.id));
+    }
+    return cles;
+}
+
+QuestLoad readQuest(std::string_view json, std::string_view origin) {
+    QuestLoad resultat;
+    const JsonDocument document = readJsonObject(json, SANS_GARDE_DE_VERSION, origin);
+    if (!document.ok()) {
+        // Le message de la brique commune porte déjà `fichier:ligne:colonne`.
+        resultat.errors.push_back(document.message);
+        return resultat;
+    }
+    Rapport rapport(json, origin);
+    const Json& racine = document.root;
+
+    Quest quete;
+    if (const auto id = texte(racine, "id")) {
+        quete.id = *id;
+    } else {
+        rapport.signaler(Pointeur(), "champ 'id' absent ou vide.");
+    }
+    for (const auto& [champ, cible] :
+         {std::pair{"name", &quete.name}, {"source", &quete.source}, {"status", &quete.status}}) {
+        if (const auto trouve = racine.find(champ); trouve != racine.end()) {
+            if (trouve->is_string()) {
+                *cible = trouve->get<std::string>();
+            } else {
+                rapport.signaler(Pointeur(std::string("/") + champ),
+                                 std::string("'") + champ + "' doit etre un texte.");
+            }
+        }
+    }
+    lireDrapeaux(racine, quete, rapport);
+    lireEtapes(racine, quete, rapport);
+
+    if (!rapport.vide()) {
+        resultat.errors = rapport.extraire();
+        return resultat;
+    }
+    resultat.quest = std::move(quete);
+    return resultat;
+}
+
+QuestLoad loadQuest(const std::filesystem::path& path) {
+    const std::optional<std::string> contenu = lireFichier(path);
+    if (!contenu) {
+        QuestLoad echec;
+        echec.errors.push_back(path.string() + " : fichier absent ou illisible.");
+        return echec;
+    }
+    // Le texte d'origine, pas un arbre réécrit : c'est lui qui porte les numéros de ligne.
+    return readQuest(*contenu, path.string());
+}
+
+const Quest* QuestCatalog::find(std::string_view id) const {
+    const auto trouve = std::ranges::find(quests, id, &Quest::id);
+    return trouve == quests.end() ? nullptr : &*trouve;
+}
+
+const QuestFlag* QuestCatalog::findFlag(std::string_view flag) const {
+    for (const Quest& quete : quests) {
+        const auto trouve = std::ranges::find(quete.flags, flag, &QuestFlag::id);
+        if (trouve != quete.flags.end()) {
+            return &*trouve;
+        }
+    }
+    return nullptr;
+}
+
+QuestCatalog loadQuests(const std::filesystem::path& directory) {
+    QuestCatalog catalogue;
+    std::error_code code;
+    if (!std::filesystem::is_directory(directory, code)) {
+        return catalogue;
+    }
+    std::vector<std::filesystem::path> fichiers;
+    for (const auto& entree : std::filesystem::directory_iterator(directory, code)) {
+        if (entree.is_regular_file() && entree.path().extension() == ".json") {
+            fichiers.push_back(entree.path());
+        }
+    }
+    std::ranges::sort(fichiers);
+
+    std::set<std::string, std::less<>> drapeaux;
+    for (const std::filesystem::path& fichier : fichiers) {
+        QuestLoad lue = loadQuest(fichier);
+        if (!lue.quest) {
+            catalogue.errors.insert(catalogue.errors.end(), lue.errors.begin(), lue.errors.end());
+            continue;
+        }
+        const std::string attendu = fichier.stem().string();
+        if (lue.quest->id != attendu) {
+            catalogue.errors.push_back(fichier.string() + " : l'identifiant '" + lue.quest->id +
+                                       "' n'est pas le nom du fichier ('" + attendu + "').");
+            continue;
+        }
+        if (catalogue.find(lue.quest->id) != nullptr) {
+            catalogue.errors.push_back(fichier.string() + " : quete '" + lue.quest->id +
+                                       "' en double.");
+            continue;
+        }
+        bool doublon = false;
+        for (const QuestFlag& drapeau : lue.quest->flags) {
+            if (drapeaux.contains(drapeau.id)) {
+                catalogue.errors.push_back(fichier.string() + " : le drapeau '" + drapeau.id +
+                                           "' est deja declare par une autre quete.");
+                doublon = true;
+            }
+        }
+        if (doublon) {
+            continue;
+        }
+        for (const QuestFlag& drapeau : lue.quest->flags) {
+            drapeaux.insert(drapeau.id);
+        }
+        catalogue.quests.push_back(std::move(*lue.quest));
+    }
+    return catalogue;
+}
+
+void declareQuestFlags(const QuestCatalog& catalog, WorldFlags& flags) {
+    for (const Quest& quete : catalog.quests) {
+        for (const QuestFlag& drapeau : quete.flags) {
+            flags.declare(drapeau.id, drapeau.values, drapeau.initial);
+        }
+    }
+}
+
+namespace {
+
+// Les effets d'une étape franchie : effacer, poser, ou donner sa valeur au drapeau.
+void appliquerEffets(const QuestStep& etape, WorldFlags& flags) {
+    for (const QuestEffect& effet : etape.effects) {
+        if (effet.kind == QuestEffect::Kind::ClearFlag) {
+            flags.clear(effet.flag);
+        } else if (effet.value.empty()) {
+            flags.set(effet.flag);
+        } else {
+            flags.setValue(effet.flag, effet.value);
+        }
+    }
+}
+
+// Vrai si l'étape n'est pas déjà franchie et que toutes ses conditions tiennent.
+[[nodiscard]] bool etapeFranchissable(const QuestStep& etape, std::string_view fait,
+                                      const WorldFlags& flags) {
+    return !flags.isSet(fait) &&
+           std::ranges::all_of(etape.when, [&flags](const FlagCondition& condition) {
+               return condition.holds(flags);
+           });
+}
+
+}  // namespace
+
+std::vector<QuestEvent> advanceQuests(const QuestCatalog& catalog, WorldFlags& flags) {
+    std::vector<QuestEvent> evenements;
+    bool bouge = true;
+    while (bouge) {
+        bouge = false;
+        for (const Quest& quete : catalog.quests) {
+            const QuestStatus statut = questProgress(quete, flags).status;
+            if (statut == QuestStatus::Succeeded || statut == QuestStatus::Failed) {
+                continue;
+            }
+            for (const QuestStep& etape : quete.steps) {
+                const std::string fait = questStepFlag(quete.id, etape.id);
+                if (!etapeFranchissable(etape, fait, flags)) {
+                    continue;
+                }
+                flags.set(fait);
+                appliquerEffets(etape, flags);
+                evenements.push_back(
+                    {.quest = quete.id, .step = etape.id, .outcome = etape.outcome});
+                bouge = true;
+                if (etape.outcome != QuestOutcome::None) {
+                    break;
+                }
+            }
+        }
+    }
+    return evenements;
+}
+
+QuestProgress questProgress(const Quest& quest, const WorldFlags& flags) {
+    QuestProgress avancement;
+    for (const QuestStep& etape : quest.steps) {
+        if (!flags.isSet(questStepFlag(quest.id, etape.id))) {
+            continue;
+        }
+        avancement.reachedSteps.push_back(etape.id);
+        if (etape.outcome == QuestOutcome::Success) {
+            avancement.status = QuestStatus::Succeeded;
+        } else if (etape.outcome == QuestOutcome::Failure) {
+            avancement.status = QuestStatus::Failed;
+        } else if (avancement.status == QuestStatus::NotStarted) {
+            avancement.status = QuestStatus::Active;
+        }
+    }
+    return avancement;
+}
+
+namespace {
+
+// Confronte une valeur comparée ou posée à la déclaration du drapeau, s'il en a une.
+void verifierUsage(const QuestCatalog& quetes, std::string_view drapeau,
+                   const std::vector<std::string>& valeurs, bool poseSansValeur,
+                   const std::string& ou, std::vector<std::string>& erreurs) {
+    const QuestFlag* declaration = quetes.findFlag(drapeau);
+    if (declaration == nullptr) {
+        if (!valeurs.empty()) {
+            erreurs.push_back(ou + " : le drapeau '" + std::string(drapeau) +
+                              "' n'est declare par aucune quete ; il n'a pas de valeurs.");
+        }
+        return;
+    }
+    if (poseSansValeur) {
+        erreurs.push_back(ou + " : le drapeau '" + std::string(drapeau) +
+                          "' a des valeurs ; il se pose avec 'value'.");
+    }
+    for (const std::string& valeur : valeurs) {
+        if (!contient(declaration->values, valeur)) {
+            std::string message = ou;
+            message.append(" : valeur '").append(valeur).append("' que le drapeau '");
+            message.append(drapeau).append("' ne declare pas.");
+            erreurs.push_back(std::move(message));
+        }
+    }
+}
+
+}  // namespace
+
+namespace {
+
+// Les valeurs qu'une action ou un effet pose : aucune, ou la seule qu'il nomme.
+[[nodiscard]] std::vector<std::string> valeursPosees(const std::string& valeur) {
+    std::vector<std::string> valeurs;
+    if (!valeur.empty()) {
+        valeurs.push_back(valeur);
+    }
+    return valeurs;
+}
+
+void verifierDialogues(const QuestCatalog& quests, const DialogueCatalog& dialogues,
+                       std::vector<std::string>& erreurs) {
+    for (const DialogueGraph& graphe : dialogues.dialogues) {
+        for (const DialogueNode& noeud : graphe.nodes) {
+            const std::string ou = "dialogue '" + graphe.id + "' : noeud '" + noeud.id + "'";
+            if (noeud.kind == DialogueNodeKind::Condition) {
+                verifierUsage(quests, noeud.condition.flag, noeud.condition.values, false, ou,
+                              erreurs);
+            }
+            for (const DialogueChoice& choix : noeud.choices) {
+                if (choix.condition) {
+                    verifierUsage(quests, choix.condition->flag, choix.condition->values, false,
+                                  ou + " / reponse '" + choix.id + "'", erreurs);
+                }
+            }
+            for (const DialogueAction& action : noeud.actions) {
+                if (action.kind == DialogueActionKind::SetFlag) {
+                    verifierUsage(quests, action.target, valeursPosees(action.value),
+                                  action.value.empty(), ou, erreurs);
+                }
+            }
+        }
+    }
+}
+
+// Les quêtes entre elles : une étape peut lire ou poser le drapeau qu'une autre déclare.
+void verifierQuetes(const QuestCatalog& quests, std::vector<std::string>& erreurs) {
+    for (const Quest& quete : quests.quests) {
+        for (const QuestStep& etape : quete.steps) {
+            const std::string ou = "quete '" + quete.id + "' : etape '" + etape.id + "'";
+            for (const FlagCondition& condition : etape.when) {
+                verifierUsage(quests, condition.flag, condition.values, false, ou, erreurs);
+            }
+            for (const QuestEffect& effet : etape.effects) {
+                if (effet.kind == QuestEffect::Kind::SetFlag) {
+                    verifierUsage(quests, effet.flag, valeursPosees(effet.value),
+                                  effet.value.empty(), ou, erreurs);
+                }
+            }
+        }
+    }
+}
+
+}  // namespace
+
+std::vector<std::string> validateFlagUses(const QuestCatalog& quests,
+                                          const DialogueCatalog& dialogues) {
+    std::vector<std::string> erreurs;
+    verifierDialogues(quests, dialogues, erreurs);
+    verifierQuetes(quests, erreurs);
+    return erreurs;
+}
+
+namespace {
+
+// Ce qu'un noeud de dialogue pose : son jet raté, et le drapeau de chacune de ses actions.
+void poserDepuisNoeud(const DialogueGraph& graphe, const DialogueNode& noeud,
+                      std::set<std::string, std::less<>>& poses) {
+    // Un jet rate pose son drapeau de lui-meme (LOT-117) : une quete peut le lire.
+    if (noeud.kind == DialogueNodeKind::Check) {
+        poses.insert(dialogueCheckFailedFlag(graphe.id, noeud.id));
+    }
+    for (const DialogueAction& action : noeud.actions) {
+        if (action.kind == DialogueActionKind::SetFlag) {
+            poses.insert(action.target);
+        } else if (action.kind == DialogueActionKind::StartQuest) {
+            poses.insert(questStartedFlag(action.target));
+        } else if (action.kind == DialogueActionKind::StartEncounter) {
+            // La victoire pose son fait (`core::endEncounter`, LOT-120) : une quete le lit.
+            poses.insert(encounterWonFlag(action.target));
+        }
+    }
+}
+
+// Ce qu'une quête pose : ses drapeaux déclarés, le fait de chaque étape, et ses effets de pose.
+void poserDepuisQuete(const Quest& quete, std::set<std::string, std::less<>>& poses) {
+    for (const QuestFlag& drapeau : quete.flags) {
+        poses.insert(drapeau.id);
+    }
+    for (const QuestStep& etape : quete.steps) {
+        poses.insert(questStepFlag(quete.id, etape.id));
+        for (const QuestEffect& effet : etape.effects) {
+            if (effet.kind == QuestEffect::Kind::SetFlag) {
+                poses.insert(effet.flag);
+            }
+        }
+    }
+}
+
+}  // namespace
+
+std::set<std::string, std::less<>> flagsWrittenBy(const QuestCatalog& quests,
+                                                  const DialogueCatalog& dialogues) {
+    std::set<std::string, std::less<>> poses;
+    for (const DialogueGraph& graphe : dialogues.dialogues) {
+        for (const DialogueNode& noeud : graphe.nodes) {
+            poserDepuisNoeud(graphe, noeud, poses);
+        }
+    }
+    for (const Quest& quete : quests.quests) {
+        poserDepuisQuete(quete, poses);
+    }
+    return poses;
+}
+
+std::vector<FlagRead> flagsReadBy(const QuestCatalog& quests, const DialogueCatalog& dialogues) {
+    std::vector<FlagRead> lus;
+    for (const DialogueGraph& graphe : dialogues.dialogues) {
+        for (const DialogueNode& noeud : graphe.nodes) {
+            const std::string ou = "dialogue '" + graphe.id + "' : noeud '" + noeud.id + "'";
+            if (noeud.kind == DialogueNodeKind::Condition) {
+                lus.push_back({.flag = noeud.condition.flag, .where = ou});
+            }
+            for (const DialogueChoice& choix : noeud.choices) {
+                if (choix.condition) {
+                    lus.push_back({.flag = choix.condition->flag,
+                                   .where = ou + " / reponse '" + choix.id + "'"});
+                }
+            }
+        }
+    }
+    for (const Quest& quete : quests.quests) {
+        for (const QuestStep& etape : quete.steps) {
+            for (const FlagCondition& condition : etape.when) {
+                lus.push_back({.flag = condition.flag,
+                               .where = "quete '" + quete.id + "' : etape '" + etape.id + "'"});
+            }
+        }
+    }
+    return lus;
+}
+
+}  // namespace core

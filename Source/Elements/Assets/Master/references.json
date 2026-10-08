@@ -1,0 +1,362 @@
+{
+  "version": 1,
+  "note": "Chaque retour Meshy (famille/nom, ou famille/nom_idMeshy quand deux retours portent le même nom) reçoit l'identifiant de sa référence : le dieu de Tanares, la fiche de personnage, la pièce d'équipement. build_master_manifest.py nomme les fichiers et les assets d'après cette table ; un retour absent de la table arrête le script. La colonne basis dit d'où vient l'attribution ; rien n'est deviné. Les entrées « à confirmer » attendent l'auteur.",
+  "sources": [
+    "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/V2/MeshyReferences/meshy-identification.json (3 octobre 2026, 15 statues, confiance haute, attribution visuelle sur deux rendus)",
+    "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/V3/Sculptures/identification.json (8 sculptures des sous-sols, confiance haute)",
+    "Tools/Assets3D/Personnages/<fiche>/Meshy_AI_<nom>_<id>_texture.glb (le retour Meshy rangé par fiche de personnage, 2 octobre 2026)",
+    "Tools/Assets3D/Equipements/meshy-inputs/generation.json et apercu.jpg (les 28 références d'équipement du 2 octobre 2026), comparées aux vignettes Blender des retours du 7 octobre"
+  ],
+  "references": {
+    "Gods Statues/Archangel_of_the_Twil": {
+      "id": "Statues/statue-bauron",
+      "name": "Bauron",
+      "basis": "V2 meshy-identification #1"
+    },
+    "Gods Statues/Bronze_Guardian": {
+      "id": "Statues/portal-guardian-lion",
+      "name": "Lion gardien du portail",
+      "basis": "V2 meshy-identification #2"
+    },
+    "Gods Statues/Dawn_and_Dusk_Guardia": {
+      "id": "Statues/statue-duality",
+      "name": "Tamera et Bauron — Foi du Parlevent",
+      "basis": "V2 meshy-identification #3"
+    },
+    "Gods Statues/Elven_Oracle_of_the_G": {
+      "id": "Statues/statue-lumina",
+      "name": "Lumina",
+      "basis": "V2 meshy-identification #4"
+    },
+    "Gods Statues/Frostbound_Star_Reape": {
+      "id": "Statues/statue-bas",
+      "name": "Bás",
+      "basis": "V2 meshy-identification #5"
+    },
+    "Gods Statues/Gilded_Sun_Muse": {
+      "id": "Statues/statue-oigridh",
+      "name": "Òigridh",
+      "basis": "V2 meshy-identification #6"
+    },
+    "Gods Statues/Golden_Sentinel_of_Au": {
+      "id": "Statues/statue-glorious-one",
+      "name": "Glorious One",
+      "basis": "V2 meshy-identification #7"
+    },
+    "Gods Statues/Guardian_of_the_Sacre": {
+      "id": "Statues/statue-tamera",
+      "name": "Tamera",
+      "basis": "V2 meshy-identification #8"
+    },
+    "Gods Statues/Harvest_Fairy": {
+      "id": "Statues/statue-fruitful",
+      "name": "Fruitful",
+      "basis": "V2 meshy-identification #9"
+    },
+    "Gods Statues/Imperial_Sage_of_the_": {
+      "id": "Statues/statue-fumetsu",
+      "name": "Fumetsu Tenshinkin",
+      "basis": "V2 meshy-identification #10"
+    },
+    "Gods Statues/Ivory_Guardian": {
+      "id": "Statues/statue-nature-spirits",
+      "name": "Les Esprits de la Nature (l'ours)",
+      "basis": "V2 meshy-identification #11"
+    },
+    "Gods Statues/Ivory_Sovereign_of_th": {
+      "id": "Statues/statue-aibidh",
+      "name": "Aibidh",
+      "basis": "V2 meshy-identification #12"
+    },
+    "Gods Statues/Serpent_Oracle_of_the": {
+      "id": "Statues/statue-ba-ka",
+      "name": "Ba-Ka",
+      "basis": "V2 meshy-identification #13"
+    },
+    "Gods Statues/The_Lionforged_King": {
+      "id": "Statues/statue-dorsi",
+      "name": "Dorsi",
+      "basis": "V2 meshy-identification #14"
+    },
+    "Gods Statues/Verdant_Archer_of_the": {
+      "id": "Statues/statue-breith",
+      "name": "Breith",
+      "basis": "V2 meshy-identification #15"
+    },
+    "Gods Statues/Bound_Wings_of_the_On": {
+      "id": "Statues/effigy-zulvath",
+      "name": "Z'ulvath, effigie enchaînée",
+      "basis": "V3 Sculptures/identification"
+    },
+    "Gods Statues/Spiked_Abyss_Guardian": {
+      "id": "Statues/effigy-droggath",
+      "name": "Droggath, effigie enchaînée",
+      "basis": "V3 Sculptures/identification"
+    },
+    "Gods Statues/Triune_Serpent_Oracle": {
+      "id": "Statues/effigy-krynnethoth",
+      "name": "Krynnethoth, effigie enchaînée",
+      "basis": "V3 Sculptures/identification"
+    },
+    "Gods Statues/Veiled_Empress_of_the": {
+      "id": "Statues/effigy-cthraxis",
+      "name": "C'thraxis, effigie enchaînée",
+      "basis": "V3 Sculptures/identification"
+    },
+    "Gods Statues/Memento_Mori_Pyramid": {
+      "id": "Statues/ossuary-insert",
+      "name": "Insert d'ossuaire",
+      "basis": "V3 Sculptures/identification"
+    },
+    "Gods Statues/Silent_Devotion": {
+      "id": "Statues/funerary-statue",
+      "name": "Figure funéraire",
+      "basis": "V3 Sculptures/identification"
+    },
+    "Gods Statues/The_Marble_Guardian": {
+      "id": "Statues/neutral-athlete",
+      "name": "Athlète neutre",
+      "basis": "V3 Sculptures/identification"
+    },
+    "NPC/Aurelian_Emberleaf": {
+      "id": "Npc/mage",
+      "name": "Faelar, le mage (héros)",
+      "basis": "Personnages/mage"
+    },
+    "NPC/Ironbraid_Matriarch": {
+      "id": "Npc/priest",
+      "name": "Helga, la prêtresse (héros)",
+      "basis": "Personnages/priest"
+    },
+    "NPC/LOT_1009_Brawler_T_": {
+      "id": "Npc/brawler",
+      "name": "Grom, le brawler (héros)",
+      "basis": "Personnages/brawler"
+    },
+    "NPC/Scarlet_Ranger": {
+      "id": "Npc/scoundrel",
+      "name": "Nessa, la scoundrel (héros)",
+      "basis": "Personnages/scoundrel portait « Auburn Ranger » le 2 octobre ; même fiche ; confirmé sur vignette Blender du 8 octobre (femme rousse, cuir, sacoche)"
+    },
+    "NPC/Ironclad_Sentinel_1007175750": {
+      "id": "Npc/arena-fighter",
+      "name": "Combattant de l'arène",
+      "basis": "Personnages/arena-fighter porte le même nom Meshy ; confirmé sur vignette Blender du 8 octobre : femme, cheveux courts, cuir clouté, comme reference/face.png"
+    },
+    "NPC/Ironclad_Sentinel_1007180054": {
+      "id": "Npc/veteran",
+      "name": "Vétéran",
+      "basis": "Personnages/veteran porte le même nom Meshy ; confirmé sur vignette Blender du 8 octobre : homme à barbe grise, armure de plates, comme reference/face.png"
+    },
+    "NPC/The_Crimson_Baron": {
+      "id": "Npc/arena-master",
+      "name": "Maître d'arène",
+      "basis": "Personnages/arena-master"
+    },
+    "NPC/The_Dustbound_Corsair": {
+      "id": "Npc/bandit",
+      "name": "Bandit",
+      "basis": "Personnages/bandit"
+    },
+    "NPC/Rugged_Outrider": {
+      "id": "Npc/bandit-archer",
+      "name": "Bandit archer",
+      "basis": "Personnages/bandit-archer"
+    },
+    "NPC/Crimson_Corsair": {
+      "id": "Npc/bandit-captain",
+      "name": "Capitaine des bandits",
+      "basis": "Personnages/bandit-captain"
+    },
+    "NPC/Stormhide_Warlord": {
+      "id": "Npc/berserker",
+      "name": "Berserker",
+      "basis": "Personnages/berserker"
+    },
+    "NPC/Little_Wanderer": {
+      "id": "Npc/child",
+      "name": "L'enfant",
+      "basis": "Personnages/child"
+    },
+    "NPC/Gladiator_Champion": {
+      "id": "Npc/gladiator",
+      "name": "Gladiateur",
+      "basis": "Personnages/gladiator"
+    },
+    "NPC/Crimson_Paladin": {
+      "id": "Npc/ironhand-soldier",
+      "name": "Soldat Ironhand",
+      "basis": "Personnages/ironhand-soldier"
+    },
+    "NPC/Scarred_Lion_King": {
+      "id": "Npc/lion",
+      "name": "Le lion",
+      "basis": "Personnages/lion"
+    },
+    "NPC/The_Village_Seamstres": {
+      "id": "Npc/mother",
+      "name": "La mère",
+      "basis": "Personnages/mother"
+    },
+    "NPC/Rustbone_Sentinel": {
+      "id": "Npc/skeleton",
+      "name": "Squelette",
+      "basis": "Personnages/skeleton"
+    },
+    "NPC/Ironbound_Brawler": {
+      "id": "Npc/thug",
+      "name": "Brute",
+      "basis": "Personnages/thug"
+    },
+    "NPC/Silverfang": {
+      "id": "Npc/wolf",
+      "name": "Le loup",
+      "basis": "Personnages/wolf"
+    },
+    "NPC/The_Tattered_Undead": {
+      "id": "Npc/zombie",
+      "name": "Zombie",
+      "basis": "Personnages/zombie"
+    },
+    "NPC/Chromatic_Sentinel": {
+      "id": "Npc/mannequin",
+      "name": "Mannequin humanoïde",
+      "basis": "Personnages/mannequin"
+    },
+    "Weapon/Bronze_Guardian_Shiel": {
+      "id": "Weapons/gladiator-shield",
+      "name": "Bouclier du gladiateur",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : rond, bronze, anneaux rouges"
+    },
+    "Weapon/Crimson_Oathblade": {
+      "id": "Weapons/ironhand-longsword",
+      "name": "Épée longue Ironhand",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : garde dorée, poignée rouge ; veteran-longsword (garde d'acier, pommeau rond) n'a pas de retour"
+    },
+    "Weapon/Elven_Longbow": {
+      "id": "Weapons/longbow",
+      "name": "Arc long",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : à confirmer — deux arcs reçus pour trois références (shortbow, longbow, skeleton-shortbow)"
+    },
+    "Weapon/Twisted_Timber_Bow": {
+      "id": "Weapons/skeleton-shortbow",
+      "name": "Arc court du squelette",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : bois tordu ; à confirmer, shortbow n'a pas de retour"
+    },
+    "Weapon/Emberheart_Staff": {
+      "id": "Weapons/mage-staff",
+      "name": "Bâton de Faelar",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : cristal ambré"
+    },
+    "Weapon/Gilded_Crescent_Saber": {
+      "id": "Weapons/captain-scimitar",
+      "name": "Cimeterre du capitaine",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : garde dorée"
+    },
+    "Weapon/Worn_Crescent_Saber": {
+      "id": "Weapons/bandit-scimitar",
+      "name": "Cimeterre du bandit",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : lame usée, garde noire"
+    },
+    "Weapon/Gilded_War_Axe": {
+      "id": "Weapons/brawler-axe",
+      "name": "Hache de Grom",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : manche rouge, ferrures dorées"
+    },
+    "Weapon/Ironclad_Mace": {
+      "id": "Weapons/thug-mace",
+      "name": "Masse de la brute",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg"
+    },
+    "Weapon/Ironfang_Battleaxe": {
+      "id": "Weapons/berserker-axe",
+      "name": "Hache du berserker",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : hache barbue à pointe"
+    },
+    "Weapon/Ironfang_Shieldbreake": {
+      "id": "Weapons/dagger",
+      "name": "Dague",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : lame large, poignée gainée"
+    },
+    "Weapon/Ironfeather_Spear": {
+      "id": "Weapons/bolt",
+      "name": "Carreau d'arbalète",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : court, tête lourde, empennage"
+    },
+    "Weapon/Ironwood_Crossbow": {
+      "id": "Weapons/heavy-crossbow",
+      "name": "Arbalète lourde",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : à confirmer — levier visible, l'autre retour est plus simple"
+    },
+    "Weapon/Weathered_Crossbow": {
+      "id": "Weapons/light-crossbow",
+      "name": "Arbalète légère",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : à confirmer"
+    },
+    "Weapon/Ironwood_Guardian": {
+      "id": "Weapons/arena-shield",
+      "name": "Bouclier de l'arène",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : à confirmer — un seul bouclier de bois reçu pour arena-shield et priest-shield"
+    },
+    "Weapon/Ironwood_Hatchet_1007180245": {
+      "id": "Weapons/handaxe",
+      "name": "Hachette",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg"
+    },
+    "Weapon/Ironwood_Hatchet_1007180252": {
+      "id": "Weapons/handaxe-variant",
+      "name": "Hachette, second retour",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : même référence, second retour Meshy ; à garder ou retirer"
+    },
+    "Weapon/Ironwood_Spear_1007180120": {
+      "id": "Weapons/arrow",
+      "name": "Flèche",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : fine, empennée"
+    },
+    "Weapon/Ironwood_Spear_1007180233": {
+      "id": "Weapons/gladiator-spear",
+      "name": "Lance du gladiateur",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : poignée rouge comme la référence"
+    },
+    "Weapon/Ironwood_Spear_1007180310": {
+      "id": "Weapons/javelin",
+      "name": "Javeline",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : hampe nue"
+    },
+    "Weapon/Leather_Arrow_Quiver": {
+      "id": "Weapons/quiver",
+      "name": "Carquois",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg"
+    },
+    "Weapon/Runebreaker_Hammer": {
+      "id": "Weapons/priest-warhammer",
+      "name": "Marteau de guerre de Helga",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg"
+    },
+    "Weapon/Rustbound_Blade": {
+      "id": "Weapons/skeleton-shortsword",
+      "name": "Épée courte du squelette",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : lame rouillée ; shortsword n'a pas de retour"
+    },
+    "Weapon/Silver_Rapier_with_Sw": {
+      "id": "Weapons/scoundrel-rapier",
+      "name": "Rapière de Nessa",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg"
+    },
+    "Weapon/The_Shield_of_the_Ope": {
+      "id": "Weapons/ironhand-shield",
+      "name": "Bouclier Ironhand",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : la paume ouverte"
+    },
+    "Weapon/Wooden_Wanderer’s_S": {
+      "id": "Weapons/staff",
+      "name": "Bâton",
+      "basis": "vignette Blender du 8 octobre comparée à apercu.jpg : bâton nu (images/staff.png, hors generation.json)"
+    },
+    "NPC/Terracotta_Palazzo": {
+      "id": "Scenery/arenarea-palazzo-terracotta",
+      "name": "Façade d'Arenarea : palazzo aux tuiles de terre cuite",
+      "basis": "vignette Blender du 8 octobre : un immeuble à deux étages, pas un personnage ; rangé par erreur sous NPC. Aucune référence nommée dans l'ancien dépôt : nom descriptif, à remplacer par celui de la commande"
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "id": "giant-boar",
+  "name": "Sanglier géant",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 17,
+    "dexterity": 10,
+    "constitution": 16,
+    "intelligence": 2,
+    "wisdom": 7,
+    "charisma": 5
+  },
+  "armorClass": 12,
+  "hitPoints": 42,
+  "hitDice": "5d10+15",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 2,
+  "senses": [
+    "Perception passive 8"
+  ],
+  "traits": [
+    {
+      "name": "Charge",
+      "text": "Si le sanglier se déplace d'au moins 6 mètres en ligne droite vers une cible, puis la touche lors d'une attaque avec ses défenses dans le même tour, la cible subit 7 (2d6) dégâts tranchants supplémentaires. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 13 ou tomber à terre."
+    },
+    {
+      "name": "Implacable (Recharge après un Repos court ou long)",
+      "text": "Si le sanglier subit 10 points de dégâts ou moins qui réduiraient ses points de vie à 0, il se retrouve à la place avec 1 point de vie."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Défenses",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 1,50 m, une cible. Touché : 10 (2d6 + 3) dégâts tranchants.",
+      "attackBonus": 5,
+      "reach": 1.5,
+      "damage": "2d6+3",
+      "damageType": "slashing"
+    }
+  ]
+}

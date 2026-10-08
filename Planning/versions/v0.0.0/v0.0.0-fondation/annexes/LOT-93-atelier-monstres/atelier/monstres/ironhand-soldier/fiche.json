@@ -1,0 +1,12 @@
+{
+  "slug": "ironhand-soldier",
+  "nom": "Soldat Ironhand",
+  "creature": null,
+  "attend": "LOT-46",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "corps": "humanoide",
+  "hauteur": 45,
+  "cast": false,
+  "source": "Tanares Sourcebook, page 164 du PDF : le bloc « Ironhand Soldier » et l'encadré « Ironhand »"
+}

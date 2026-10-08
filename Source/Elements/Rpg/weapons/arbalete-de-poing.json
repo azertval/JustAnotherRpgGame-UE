@@ -1,0 +1,19 @@
+{
+  "id": "arbalete-de-poing",
+  "name": "Arbalète de poing",
+  "source": "srd",
+  "category": "martial",
+  "ranged": true,
+  "damage": "1d6",
+  "damageType": "piercing",
+  "weightGrams": 1500,
+  "price": 7500,
+  "text": "Munitions (portée 9 m/36 m), légère, chargement",
+  "properties": [
+    "ammunition",
+    "light",
+    "loading"
+  ],
+  "rangeNormal": 9,
+  "rangeLong": 36
+}

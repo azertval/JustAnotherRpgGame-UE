@@ -1,0 +1,44 @@
+{
+  "id": "giant-fire-beetle",
+  "name": "Scarabée de feu géant",
+  "source": "srd",
+  "size": "small",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 8,
+    "dexterity": 10,
+    "constitution": 12,
+    "intelligence": 1,
+    "wisdom": 7,
+    "charisma": 3
+  },
+  "armorClass": 13,
+  "hitPoints": 4,
+  "hitDice": "1d6+1",
+  "speed": {
+    "walk": 9
+  },
+  "challengeRating": 0,
+  "senses": [
+    "vision aveugle 9 m",
+    "Perception passive 8"
+  ],
+  "traits": [
+    {
+      "name": "Illumination",
+      "text": "Le scarabée émet une lumière vive dans un rayon de 3 mètres et une lumière faible sur 3 mètres supplémentaires."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +1 au toucher, allonge 1,50 m, une cible. Touché : 2 (1d6 - 1) dégâts tranchants.",
+      "attackBonus": 1,
+      "reach": 1.5,
+      "damage": "1d6-1",
+      "damageType": "slashing"
+    }
+  ],
+  "description": "La scarabée de feu géant est une créature nocturne possédant deux glandes au-dessus des yeux, qui produisent de la lumière pendant encore 1d6 jours après que celle-ci soit morte."
+}

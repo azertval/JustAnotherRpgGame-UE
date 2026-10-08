@@ -1,0 +1,103 @@
+{
+  "id": "republic-of-freelands",
+  "name": "Republic of Freelands",
+  "source": "tanares",
+  "government": "The Republic of Freelands holds a democratic system with a parliament led by a Prime Minister.",
+  "faction": "The Allied Forces",
+  "population": {
+    "total": 1700000,
+    "species": [
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 70
+      },
+      {
+        "species": "autumn-elf",
+        "label": "autumn elves",
+        "percent": 11
+      },
+      {
+        "species": "winter-elf",
+        "label": "winter elves",
+        "percent": 8
+      },
+      {
+        "species": "summer-elf",
+        "label": "summer elves",
+        "percent": 4
+      },
+      {
+        "species": "gnome",
+        "label": "gnomes",
+        "percent": 4
+      },
+      {
+        "species": "dwarf",
+        "label": "dwarves",
+        "percent": 1
+      }
+    ],
+    "otherPercent": 2
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "veryHigh"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "low"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "low"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "high"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "high"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "low"
+      }
+    ]
+  },
+  "neighbors": [
+    "seashores",
+    "stravian-domains",
+    "taii-maku-city-states",
+    "tsvetan"
+  ],
+  "locations": [
+    "republic-of-freelands-aurindunnum",
+    "republic-of-freelands-the-city-of-aeyefall",
+    "republic-of-freelands-unique-characteristics-of-the-citadel-s-dungeons",
+    "republic-of-freelands-random-undead-encounters",
+    "republic-of-freelands-shortfall-forest",
+    "republic-of-freelands-city-of-heroes-rise",
+    "republic-of-freelands-the-winterhold-city",
+    "republic-of-freelands-outunmoor",
+    "republic-of-freelands-yellow-creek",
+    "republic-of-freelands-the-creek-s-water",
+    "republic-of-freelands-the-port-city-of-goldraft",
+    "republic-of-freelands-the-goldraft-plague",
+    "republic-of-freelands-fisherman-s-wharf-republic-s-capital",
+    "republic-of-freelands-fisherman-s-wharf",
+    "republic-of-freelands-locations-in-fisherman-s-wharf"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "piege-a-machoires",
+  "name": "Piège à mâchoires",
+  "source": "srd",
+  "category": "gear",
+  "price": 500,
+  "weightGrams": 12500
+}

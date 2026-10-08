@@ -1,0 +1,14 @@
+{
+  "id": "cartographer",
+  "name": "Cartographer",
+  "source": "tanares",
+  "skillProficiencies": [
+    "history",
+    "survival"
+  ],
+  "feature": {
+    "name": "Dynamic Maps",
+    "text": "You can recall the geographic features of all places you've visited, and spend 10 minutes to sketch an accurate map of one of these locations — as long as you have cartographer's tools available."
+  },
+  "text": "Y ou are a master in the making and copying of maps, measuring and conveying the geography of various regions through your extensive studies. Whether apprenticed to a master or self-taught, you have made a name for yourself both for your unrivaled under- standing of terrain changes and your ability to represent them in beautiful maps."
+}

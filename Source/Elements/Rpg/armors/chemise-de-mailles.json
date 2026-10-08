@@ -1,0 +1,11 @@
+{
+  "id": "chemise-de-mailles",
+  "name": "Chemise de mailles",
+  "source": "srd",
+  "category": "medium",
+  "baseArmorClass": 13,
+  "dexterityBonus": true,
+  "dexterityBonusMax": 2,
+  "weightGrams": 10000,
+  "price": 5000
+}

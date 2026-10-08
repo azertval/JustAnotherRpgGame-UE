@@ -1,0 +1,8 @@
+{
+  "id": "bouteille-en-verre",
+  "name": "Bouteille en verre",
+  "source": "srd",
+  "category": "gear",
+  "price": 200,
+  "weightGrams": 1000
+}

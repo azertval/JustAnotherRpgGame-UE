@@ -1,0 +1,12 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "map": "capital/martpart",
+  "note": "LOT-EDITOR-06 : le marché prend ses boutiques. Deux devantures sur la façade nord de la place, une sur la façade ouest, chacune à la place de deux pans de mur nus ; un grand étal au sud de la place.",
+  "gestures": [
+    {"piece": "front-right", "tool": "paint", "at": [21, 11]},
+    {"tool": "paint", "at": [26, 11]},
+    {"piece": "front-left", "tool": "paint", "at": [12, 21]},
+    {"piece": "feature-1", "tool": "paint", "at": [21, 24]}
+  ]
+}

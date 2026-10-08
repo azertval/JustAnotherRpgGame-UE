@@ -1,0 +1,9 @@
+{
+  "id": "bouclier",
+  "name": "Bouclier",
+  "source": "srd",
+  "category": "shield",
+  "baseArmorClass": 2,
+  "weightGrams": 3000,
+  "price": 1000
+}

@@ -1,0 +1,32 @@
+{
+  "id": "elfe",
+  "name": "Elfe",
+  "source": "srd",
+  "abilityScoreIncrease": {
+    "dexterity": 2
+  },
+  "size": "medium",
+  "speed": 9,
+  "languages": [
+    "common",
+    "elvish"
+  ],
+  "traits": [
+    {
+      "name": "Vision dans le noir",
+      "text": "Vous pouvez voir à 18 mètres dans une lumière faible comme vous verriez avec une lumière vive, et dans le noir comme vous verriez avec une lumière"
+    },
+    {
+      "name": "Sens aiguisés",
+      "text": "Vous maîtrisez la compétence Perception."
+    },
+    {
+      "name": "Ascendance féérique",
+      "text": "Vous avez un avantage aux jets de sauvegarde contre les effets de charme et la magie ne peut pas vous endormir."
+    },
+    {
+      "name": "Transe",
+      "text": "Les elfes n'ont pas besoin de dormir. Au lieu de cela, ils méditent profondément, restant à demi conscients, 4 heures par jour (le mot commun pour désigner cette méditation est « transe »). En méditant, vous pouvez rêver, tant bien que mal ; ces rêves sont en fait des exercices mentaux qui deviennent un réflexe après des années de pratique. Après un repos de ce type, vous obtenez les mêmes avantages qu'un humain après 8 heures de sommeil."
+    }
+  ]
+}

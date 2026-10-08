@@ -1,0 +1,116 @@
+{
+  "statues": [
+    {
+      "piece": "statue-aibidh",
+      "at": [
+        28,
+        10
+      ],
+      "name": "Socle reserve - aibidh"
+    },
+    {
+      "piece": "statue-ba-ka",
+      "at": [
+        26,
+        7
+      ],
+      "name": "Socle reserve - ba-ka"
+    },
+    {
+      "piece": "statue-bas",
+      "at": [
+        22,
+        4
+      ],
+      "name": "Socle reserve - bas"
+    },
+    {
+      "piece": "statue-bauron",
+      "at": [
+        17,
+        4
+      ],
+      "name": "Socle reserve - bauron"
+    },
+    {
+      "piece": "statue-breith",
+      "at": [
+        11,
+        4
+      ],
+      "name": "Socle reserve - breith"
+    },
+    {
+      "piece": "statue-dorsi",
+      "at": [
+        7,
+        7
+      ],
+      "name": "Socle reserve - dorsi"
+    },
+    {
+      "piece": "statue-fruitful",
+      "at": [
+        5,
+        10
+      ],
+      "name": "Socle reserve - fruitful"
+    },
+    {
+      "piece": "statue-fumetsu",
+      "at": [
+        5,
+        13
+      ],
+      "name": "Socle reserve - fumetsu"
+    },
+    {
+      "piece": "statue-glorious-one",
+      "at": [
+        7,
+        16
+      ],
+      "name": "Socle reserve - glorious-one"
+    },
+    {
+      "piece": "statue-lumina",
+      "at": [
+        11,
+        19
+      ],
+      "name": "Socle reserve - lumina"
+    },
+    {
+      "piece": "statue-oigridh",
+      "at": [
+        16,
+        19
+      ],
+      "name": "Socle reserve - oigridh"
+    },
+    {
+      "piece": "statue-duality",
+      "at": [
+        22,
+        19
+      ],
+      "name": "Socle reserve - duality"
+    },
+    {
+      "piece": "statue-tamera",
+      "at": [
+        26,
+        16
+      ],
+      "name": "Socle reserve - tamera"
+    },
+    {
+      "piece": "statue-nature-spirits",
+      "at": [
+        28,
+        13
+      ],
+      "name": "Socle reserve - nature-spirits"
+    }
+  ]
+}

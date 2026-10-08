@@ -1,0 +1,18 @@
+{
+  "id": "arc-court",
+  "name": "Arc court",
+  "source": "srd",
+  "category": "simple",
+  "ranged": true,
+  "damage": "1d6",
+  "damageType": "piercing",
+  "weightGrams": 1000,
+  "price": 2500,
+  "text": "Munitions (portée 24 m/96 m), à deux mains",
+  "properties": [
+    "ammunition",
+    "two-handed"
+  ],
+  "rangeNormal": 24,
+  "rangeLong": 96
+}

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/condition.schema.json",
+  "title": "Etat",
+  "description": "Le catalogue des quinze etats. Chaque entree doit avoir un EFFET OBSERVABLE en jeu, ou porter `narratif: true` (EX-REG-041). L'identifiant est contraint aux quinze valeurs de `core::Condition` : c'est ici que le catalogue et l'enumeration se rejoignent.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/conditionRef"
+    },
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "effects": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "description": "Les effets, un par ligne, tels que l'annexe des Basic Rules les enonce."
+    },
+    "levels": {
+      "type": "integer",
+      "minimum": 2,
+      "maximum": 10,
+      "description": "Nombre de paliers, pour la seule condition qui ne soit pas binaire : `exhaustion`, six niveaux."
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "text"
+  ],
+  "additionalProperties": false
+}

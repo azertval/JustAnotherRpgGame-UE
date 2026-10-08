@@ -1,0 +1,83 @@
+# --- Unreal Engine : tout ce qui se régénère ---
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
+.vs/
+.vsconfig
+*.sln
+*.slnx
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.suo
+*.user
+*.VC.db
+*.VC.opendb
+*.ipch
+
+# --- Les sorties binaires du moteur (D-52) sont des sorties de script : Git LFS, jamais en clair ---
+# Déclarées par .gitattributes ; `check_binary_files.py` refuse ce qui n'y est pas.
+
+# --- Construction CMake des tests de Core (hors moteur) ---
+build/
+CMakeUserPresets.json
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
+
+# --- Kits d'assets hors de Git (LOT-108) : les images et maillages viennent d'archives publiées,
+# installées par scripts/fetch_assets.py d'après Source/Elements/Assets/kits.lock.json. Les manifestes
+# JSON, les README et les polices restent suivis ; seuls les binaires des kits sont ignorés, avec les
+# témoins d'installation.
+/Source/Elements/Assets/.kits/
+/Source/Elements/Assets/Common/**/*.png
+/Source/Elements/Assets/Common/**/*.jpg
+/Source/Elements/Assets/Common/**/*.jpeg
+/Source/Elements/Assets/Common/**/*.glb
+/Source/Elements/Assets/Regions/**/*.glb
+/Source/Elements/Assets/Regions/**/*.png
+/Source/Elements/Assets/Regions/**/*.jpg
+/Source/Elements/Assets/Regions/**/*.jpeg
+/Source/Elements/Assets/Maps/**/*.png
+/Source/Elements/Assets/Maps/**/*.jpg
+/Source/Elements/Assets/Maps/**/*.jpeg
+/Source/Elements/Assets/UI/**/*.png
+/Source/Elements/Assets/UI/**/*.jpg
+/Source/Elements/Assets/UI/**/*.jpeg
+# Les maillages au maître (2,7 Go) : le manifeste est suivi, les .glb viennent du kit.
+/Source/Elements/Assets/Master/**/*.glb
+
+# --- Python ---
+__pycache__/
+.ruff_cache/
+.pytest_cache/
+.venv/
+
+# --- Documentation générée ---
+Documentation/generated/
+Documentation/html/
+Documentation/xml/
+
+# --- Corpus source (EX-CNT-023) : déposé à la main, jamais versionné ---
+Documentation/SourceBook/
+/.cache/
+# Le texte extrait des livres ne se publie pas plus que leurs PDF : l'étude des métiers en porte
+# trois copies (le corpus par livre, le lecteur plein texte qui l'embarque, le cache de l'atelier).
+# `scripts/checks/check_no_sourcebook.py` refuse ce qui passerait à côté de ces motifs.
+/Documentation/Metiers/Sources/Corpus/
+/Documentation/Metiers/Sources/lecture-corpus.html
+# Copie de l'atelier local (Tools/, hors Git) : extractions des livres, fichiers de travail de 25 Mio.
+/Documentation/Metiers/Reproduction/Etude/
+# Site rendu de l'étude : une sortie, comme Documentation/generated/.
+/Documentation/Metiers/generated/
+# Au-delà du plafond de 5 Mio de check_binary_files.py ; régénérés par Reproduction/.
+/Documentation/Metiers/explorateur.html
+/Documentation/Metiers/Donnees/metiers-tanares-modele.json
+/Documentation/Metiers/Donnees/metiers-tanares-alimentation-v3.json
+
+# --- Outillage d'agent ---
+/.claude/worktrees/
+/.claude/jobs/
+/.tmp/

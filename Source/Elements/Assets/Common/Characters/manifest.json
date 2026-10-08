@@ -1,0 +1,159 @@
+{
+  "version": 1,
+  "tile": [
+    256,
+    159
+  ],
+  "npcs": [
+    "Heroes/brawler",
+    "Heroes/mage",
+    "Heroes/priest",
+    "Heroes/scoundrel",
+    "Mannequins/humanoid",
+    "Mannequins/quadruped"
+  ],
+  "sources": {
+    "Heroes/brawler/portrait.png": {
+      "file": "Common/Characters/Heroes/brawler/portrait.png",
+      "sha256": "afd793c8970117e06d3b82028b63e1c7e7c0395ce4939bdef91bfb1bbc62aded"
+    },
+    "Heroes/brawler/token.png": {
+      "file": "Common/Characters/Heroes/brawler/portrait.png",
+      "sha256": "afd793c8970117e06d3b82028b63e1c7e7c0395ce4939bdef91bfb1bbc62aded"
+    },
+    "Heroes/mage/portrait.png": {
+      "file": "Common/Characters/Heroes/mage/portrait.png",
+      "sha256": "bf60c4dfd0c88546daa0b09c1fc0e16f98aeb0f09c39546e5f9701ded814d3b4"
+    },
+    "Heroes/mage/token.png": {
+      "file": "Common/Characters/Heroes/mage/portrait.png",
+      "sha256": "bf60c4dfd0c88546daa0b09c1fc0e16f98aeb0f09c39546e5f9701ded814d3b4"
+    },
+    "Heroes/priest/portrait.png": {
+      "file": "Common/Characters/Heroes/priest/portrait-dorsi-v2.png",
+      "sha256": "014d69985a3fbee57f676e28dfd9f36a57c4607b9b6276967084c29abceca5e9"
+    },
+    "Heroes/priest/token.png": {
+      "file": "Common/Characters/Heroes/priest/portrait-dorsi-v2.png",
+      "sha256": "014d69985a3fbee57f676e28dfd9f36a57c4607b9b6276967084c29abceca5e9"
+    },
+    "Heroes/scoundrel/portrait.png": {
+      "file": "Common/Characters/Heroes/scoundrel/portrait.png",
+      "sha256": "768b1ef0b3c7ed1dd99adc66aacccdfe9918629079c05dca53bbf8c59c0ff4c8"
+    },
+    "Heroes/scoundrel/token.png": {
+      "file": "Common/Characters/Heroes/scoundrel/portrait.png",
+      "sha256": "768b1ef0b3c7ed1dd99adc66aacccdfe9918629079c05dca53bbf8c59c0ff4c8"
+    }
+  },
+  "models": {
+    "Heroes/brawler": {
+      "model": "Heroes/brawler/brawler.glb",
+      "skeleton": "humanoid",
+      "triangles": 100000,
+      "size": [
+        1.92,
+        1.88,
+        0.574
+      ],
+      "sha256": "a3cac2c8547ad55c431b3d99f6810bf3b043e1d8d24da522337661827323709b",
+      "source": {
+        "file": "Lies/brawler/brawler.glb",
+        "sha256": "a3cac2c8547ad55c431b3d99f6810bf3b043e1d8d24da522337661827323709b"
+      }
+    },
+    "Heroes/mage": {
+      "model": "Heroes/mage/mage.glb",
+      "skeleton": "humanoid",
+      "triangles": 99999,
+      "size": [
+        1.762,
+        1.903,
+        0.534
+      ],
+      "sha256": "86a0db5c6df1deb0b15029ab77b64b5da10a8e282354ae5ceda4026405681dd1",
+      "source": {
+        "file": "Lies/mage/mage.glb",
+        "sha256": "86a0db5c6df1deb0b15029ab77b64b5da10a8e282354ae5ceda4026405681dd1"
+      }
+    },
+    "Heroes/priest": {
+      "model": "Heroes/priest/priest.glb",
+      "skeleton": "humanoid",
+      "triangles": 100000,
+      "size": [
+        1.904,
+        1.851,
+        0.601
+      ],
+      "sha256": "cc6eddebab6b52674fe67f72ac2a25306d5910b34aa1c0c1918b8487ac93fa88",
+      "source": {
+        "file": "Lies/priest/priest.glb",
+        "sha256": "cc6eddebab6b52674fe67f72ac2a25306d5910b34aa1c0c1918b8487ac93fa88"
+      }
+    },
+    "Heroes/scoundrel": {
+      "model": "Heroes/scoundrel/scoundrel.glb",
+      "skeleton": "humanoid",
+      "triangles": 100000,
+      "size": [
+        1.75,
+        1.902,
+        0.434
+      ],
+      "sha256": "20f4b7c5db7adc1d9ae51aa3ca9017410dfaa8d9b64939892cda787d33e7e1d9",
+      "source": {
+        "file": "Lies/scoundrel/scoundrel.glb",
+        "sha256": "20f4b7c5db7adc1d9ae51aa3ca9017410dfaa8d9b64939892cda787d33e7e1d9"
+      }
+    },
+    "Mannequins/humanoid": {
+      "model": "Mannequins/humanoid/humanoid.glb",
+      "skeleton": "humanoid",
+      "triangles": 100000,
+      "size": [
+        1.888,
+        1.8,
+        0.35
+      ],
+      "sha256": "5bfd989a7639baba601831618172c5f4f4be7d5fc0f822e4658fcf17ed12ec16",
+      "source": {
+        "file": "Lies/mannequin/mannequin.glb",
+        "sha256": "5bfd989a7639baba601831618172c5f4f4be7d5fc0f822e4658fcf17ed12ec16"
+      }
+    },
+    "Mannequins/quadruped": {
+      "model": "Mannequins/quadruped/quadruped.glb",
+      "skeleton": "quadruped",
+      "triangles": 100000,
+      "size": [
+        0.607,
+        1.359,
+        1.903
+      ],
+      "sha256": "4bee8fc755eae7270216cf71d51f9c115d510bd1e1d6949edbc80b71d9cd6345",
+      "source": {
+        "file": "Lies/mannequin-quadruped/quadruped.glb",
+        "sha256": "4bee8fc755eae7270216cf71d51f9c115d510bd1e1d6949edbc80b71d9cd6345"
+      }
+    }
+  },
+  "skeletons": {
+    "humanoid": {
+      "file": "Skeletons/humanoid/skeleton.json",
+      "sha256": "1b32c6bedcd686a333df592d148df26c5e118250dd30a333294ae64e94e60020",
+      "source": {
+        "file": "Lies/skeleton.json",
+        "sha256": "1b32c6bedcd686a333df592d148df26c5e118250dd30a333294ae64e94e60020"
+      }
+    },
+    "quadruped": {
+      "file": "Skeletons/quadruped/skeleton.json",
+      "sha256": "87c1823a2c629b4ca10365aadd3296352fadf714fd146581b143335a0ba07ae2",
+      "source": {
+        "file": "Lies/quadruped.json",
+        "sha256": "87c1823a2c629b4ca10365aadd3296352fadf714fd146581b143335a0ba07ae2"
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "id": "giant-scorpion",
+  "name": "Scorpion géant",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 15,
+    "dexterity": 13,
+    "constitution": 15,
+    "intelligence": 1,
+    "wisdom": 9,
+    "charisma": 3
+  },
+  "armorClass": 15,
+  "hitPoints": 52,
+  "hitDice": "7d10+14",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 3,
+  "senses": [
+    "vision aveugle 18 m",
+    "Perception passive 9"
+  ],
+  "actions": [
+    {
+      "name": "Attaques multiples",
+      "text": "Le scorpion réalise trois attaques : deux avec ses pinces et une avec son aiguillon."
+    },
+    {
+      "name": "Pinces",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 6 (1d8 + 2) dégâts contondants, et la cible est agrippée (DD 12 pour s'échapper). Le scorpion a deux pinces, chacune lui permettant d'agripper une cible.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d8+2",
+      "damageType": "bludgeoning"
+    },
+    {
+      "name": "Dard",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une créature. Touché : 7 (1d10 + 2) dégâts perforants et la cible doit réaliser un jet de sauvegarde de Constitution DD 12, subissant 22 (4d10) dégâts de poison en cas d'échec, ou la moitié de ces dégâts en cas de réussite.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d10+2",
+      "damageType": "piercing"
+    }
+  ]
+}

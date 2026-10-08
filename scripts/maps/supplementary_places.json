@@ -1,0 +1,54 @@
+[
+  {
+    "id": "undertanares", "name": "The Undertanares", "parent": "world", "kind": "territory",
+    "source": "Tanares Sourcebook, p. 206-207 ; Planning/referentiels/monde/regions.md",
+    "description": "Réseau souterrain aussi vaste que le continent : champignons bioluminescents, rivières de magma, forêts de cristal, lacs et anciennes salles naines. Les sources ne fixent pas un plan continu des tunnels ni un contrôle politique unique. Vue d'ensemble de l'environnement, sans tracé inventé d'un itinéraire continental."
+  },
+  {
+    "id": "darkall", "name": "Continent of Darkall", "parent": "world", "kind": "territory",
+    "source": "Tanares Sourcebook, p. 208-210 ; Planning/referentiels/monde/regions.md",
+    "description": "Continent séparé de Tanares par l'Eternal Storm, tombée il y a vingt ans. Au nord : cités-États kemets et ruines pyramidales. Au centre : places fortes, villes fortifiées et terres désolées squelettiques. Au sud : Demonic Lands, deux portails vers les Abysses et neuf forteresses de seigneurs démons. Son contour et sa position ne sont pas fixés sur la carte mondiale VTT : vue d'ensemble sans côte, coordonnées ou distances inventées."
+  },
+  {
+    "id": "darkall-north", "name": "The North — Darkall", "parent": "darkall", "kind": "zone",
+    "source": "Tanares Sourcebook, p. 208-209",
+    "description": "Nord de Darkall : cités-États kemets, ancienne terre des Kepesh et ruines pyramidales. Aucun plan précis de cité ni contour régional n'est établi. Vue d'ensemble du paysage documenté, sans nouvelle cité nommée."
+  },
+  {
+    "id": "darkall-central", "name": "Central Darkall", "parent": "darkall", "kind": "zone",
+    "source": "Tanares Sourcebook, p. 209",
+    "description": "Centre de Darkall : places fortes, villes fortifiées et Wasteland squelettique, affecté par l'Elemental Maelstrom. Aucun emplacement précis de forteresse ni salle n'est établi. Les limites restent non cartographiées."
+  },
+  {
+    "id": "darkall-demonic-lands", "name": "Demonic Lands", "parent": "darkall", "kind": "zone",
+    "source": "Tanares Sourcebook, p. 209-210",
+    "description": "Sud de Darkall : territoires démoniaques comprenant deux portails vers les Abysses et neuf forteresses de seigneurs démons. Leurs noms, empreintes et positions ne sont pas établis. Préserver le nombre documenté sans dessiner une disposition précise inventée. Vue d'ensemble du paysage, limites non cartographiées."
+  },
+  {
+    "id": "darkall-cave-of-the-damned", "name": "The Cave of the Damned", "parent": "darkall-demonic-lands", "kind": "zone",
+    "source": "Tanares Sourcebook, p. 209-210",
+    "description": "Caverne nommée dans les Demonic Lands de Darkall. Aucun plan de salles ou réseau de tunnels n'est établi : vue de la caverne et de son environnement, sans embranchements ou accès ajoutés."
+  },
+  {
+    "id": "mystical", "name": "Mystical — The Wasteland", "parent": "world", "kind": "territory",
+    "frame": [0.66, 0.55, 0.26, 0.31],
+    "source": "Tanares Sourcebook, p. 210-211 ; carte du monde VTT",
+    "description": "Ancien Mystical Kingdom situé entre Yama, Sindile, Tsvetan, Central Empire et Seashores. Terres violettes maudites, ruines et morts-vivants. Le centre contient les ruines de l'ancienne capitale Arcana ; les bordures sont moins corrompues. Garder les limites, reliefs, rivières et positions de la référence VTT. Le contrôle local des cultistes sur toute la région n'est pas établi."
+  },
+  {
+    "id": "mystical-central", "name": "Central Mystical", "parent": "mystical", "kind": "zone",
+    "source": "Tanares Sourcebook, p. 210-211",
+    "description": "Centre du Wasteland de Mystical : territoire maudit violet, anciennes ruines du royaume, présence de morts-vivants. Aucune nouvelle ville, côte, salle ou forteresse nommée ne doit être ajoutée."
+  },
+  {
+    "id": "mystical-borders", "name": "Wasteland Borders", "parent": "mystical", "kind": "zone",
+    "source": "Tanares Sourcebook, p. 210-211",
+    "description": "Bordures du Wasteland de Mystical, zone de transition moins corrompue vers les régions voisines documentées. Vue du paysage frontalier existant ; aucun nouveau poste de garde, village ou relief nommé."
+  },
+  {
+    "id": "mystical-arcana", "name": "Ruins of Arcana", "parent": "mystical-central", "kind": "zone",
+    "frame": [0.66, 0.55, 0.26, 0.31],
+    "source": "Tanares Sourcebook, p. 210-211 ; carte du monde VTT",
+    "description": "Ruines d'Arcana, ancienne capitale du Mystical Kingdom, dans les terres violettes maudites. Conserver la position et la silhouette ruinée indiquées par le VTT. Aucun plan intérieur ou étage n'est établi."
+  }
+]

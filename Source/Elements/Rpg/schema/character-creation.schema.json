@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/character-creation.schema.json",
+  "title": "Constantes de creation de personnage",
+  "description": "Les deux nombres que la construction d'une fiche emploie et qui sont des REGLES, non des choix d'implementation : la classe d'armure sans armure et le plafond d'une valeur de caracteristique. EX-VIS-007 interdit qu'ils vivent dans le C++ -- un `10` nu dans un calcul de CA ne dit pas ce qu'il represente, et l'ajuster demanderait une recompilation. Chacun porte la PHRASE du livre qui l'atteste : une constante extraite sans son attestation est une constante tapee de memoire.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "unarmoredArmorClass": {
+      "description": "La CA de base d'un personnage sans armure ni bouclier, a laquelle s'ajoute le modificateur de Dexterite.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30
+    },
+    "maximumAbilityScore": {
+      "description": "Le plafond d'une valeur de caracteristique, que ni une augmentation d'espece ni une montee de niveau ne franchissent.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30
+    },
+    "attestations": {
+      "description": "La phrase du livre dont chaque valeur est tiree, avec sa page. C'est ce qui distingue une constante EXTRAITE d'une constante recopiee de memoire, et c'est verifiable en ouvrant le document.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "page": { "type": "integer", "minimum": 1 },
+          "text": { "type": "string", "minLength": 10 }
+        },
+        "required": ["page", "text"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "unarmoredArmorClass",
+    "maximumAbilityScore",
+    "attestations"
+  ],
+  "additionalProperties": false
+}

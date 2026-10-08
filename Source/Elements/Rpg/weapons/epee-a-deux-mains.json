@@ -1,0 +1,15 @@
+{
+  "id": "epee-a-deux-mains",
+  "name": "Épée à deux mains",
+  "source": "srd",
+  "category": "martial",
+  "damage": "2d6",
+  "damageType": "slashing",
+  "weightGrams": 3000,
+  "price": 5000,
+  "text": "Lourde, à deux mains",
+  "properties": [
+    "heavy",
+    "two-handed"
+  ]
+}

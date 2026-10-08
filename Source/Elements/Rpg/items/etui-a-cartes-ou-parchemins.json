@@ -1,0 +1,8 @@
+{
+  "id": "etui-a-cartes-ou-parchemins",
+  "name": "Étui à cartes ou parchemins",
+  "source": "srd",
+  "category": "gear",
+  "price": 100,
+  "weightGrams": 500
+}

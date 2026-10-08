@@ -1,0 +1,8 @@
+{
+  "id": "common",
+  "name": "commun",
+  "source": "srd",
+  "exotic": false,
+  "typicalSpeakers": "Humains",
+  "script": "Commun"
+}

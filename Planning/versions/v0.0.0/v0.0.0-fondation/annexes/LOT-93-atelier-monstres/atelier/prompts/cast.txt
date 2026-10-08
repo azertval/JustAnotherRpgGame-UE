@@ -1,0 +1,4 @@
+CAST v1 — 2026-09-18 (les rangées 7-8 d'une créature qui lance des sorts)
+
+Row 7 - CAST frames 1-4: gather energy, as the CAST line describes.
+Row 8 - CAST frames 5-8: release toward the right as a short burst that stays inside the cell, not a long beam (5-6), recover (7-8). Effects use the palette colours only.

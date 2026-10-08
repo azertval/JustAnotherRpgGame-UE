@@ -1,0 +1,8 @@
+{
+  "id": "carrosse",
+  "name": "Carrosse",
+  "source": "srd",
+  "category": "mount",
+  "price": 10000,
+  "weightGrams": 300000
+}

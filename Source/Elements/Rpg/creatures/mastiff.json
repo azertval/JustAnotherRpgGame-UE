@@ -1,0 +1,46 @@
+{
+  "id": "mastiff",
+  "name": "Molosse",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 13,
+    "dexterity": 14,
+    "constitution": 12,
+    "intelligence": 3,
+    "wisdom": 12,
+    "charisma": 7
+  },
+  "armorClass": 12,
+  "hitPoints": 5,
+  "hitDice": "1d8+1",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 0.125,
+  "senses": [
+    "Perception passive 13"
+  ],
+  "skills": {
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Odorat et ouïe aiguisés",
+      "text": "Le molosse a un avantage aux jets de Sagesse (Perception) basés sur l'odorat ou l'ouïe."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +3 au toucher, allonge 1,50 m, une cible. Touché : 4 (1d6 + 1) dégâts perforants. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 11 pour ne pas tomber à terre.",
+      "attackBonus": 3,
+      "reach": 1.5,
+      "damage": "1d6+1",
+      "damageType": "piercing"
+    }
+  ],
+  "description": "Les molosses sont d'impressionnants chiens prisés par les humanoïdes pour leur loyauté et leur sens aiguisés."
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/location.schema.json",
+  "title": "Lieu d'une region",
+  "description": "Un lieu nomme d'une region : une CARTE a creer (LOT-09, LOT-40). Le livre les range sous << Places of Interest >> et y melange des endroits ou l'on se rend et des particularites de l'endroit precedent -- une source d'eau qui soigne, un flau qui frappe une ville. Il ne donne aucun signal pour les separer, et ce lot ne s'en invente pas : tout ce que la section porte est ici, et un lieu se distingue par sa description, pas par un champ qui aurait ete devine.",
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+
+    "region": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id",
+      "description": "Region qui porte ce lieu. Obligatoire : aucun lieu sans region, ce que verifie l'extraction."
+    },
+    "description": {
+      "type": "string",
+      "description": "Le texte du livre, cesures recollees. Vide pour une entree que le livre ne fait que nommer."
+    }
+  },
+  "required": ["id", "name", "source", "region", "description"],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ]
+}

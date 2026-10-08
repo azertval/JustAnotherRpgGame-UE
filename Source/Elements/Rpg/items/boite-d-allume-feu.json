@@ -1,0 +1,8 @@
+{
+  "id": "boite-d-allume-feu",
+  "name": "Boite d'allume-feu",
+  "source": "srd",
+  "category": "gear",
+  "price": 50,
+  "weightGrams": 500
+}

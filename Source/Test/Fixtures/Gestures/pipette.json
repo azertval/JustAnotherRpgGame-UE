@@ -1,0 +1,11 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "note": "La pipette : la fenêtre prise sur la façade se repose plus loin ; puis le type d'un mur pris sur la collision se peint dans un coin.",
+  "gestures": [
+    {"layer": "relief", "tool": "pipette", "at": [4, 0]},
+    {"tool": "paint", "at": [9, 0]},
+    {"layer": "collision", "tool": "pipette", "at": [3, 0]},
+    {"tool": "paint", "at": [0, 9]}
+  ]
+}

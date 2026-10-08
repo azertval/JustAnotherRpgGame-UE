@@ -1,0 +1,15 @@
+{
+  "id": "fouet",
+  "name": "Fouet",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d4",
+  "damageType": "slashing",
+  "weightGrams": 1500,
+  "price": 200,
+  "text": "Finesse, allonge",
+  "properties": [
+    "finesse",
+    "reach"
+  ]
+}

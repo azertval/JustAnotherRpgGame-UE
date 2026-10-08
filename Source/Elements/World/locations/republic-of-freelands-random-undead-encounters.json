@@ -1,0 +1,7 @@
+{
+  "id": "republic-of-freelands-random-undead-encounters",
+  "name": "Random Undead Encounters",
+  "region": "republic-of-freelands",
+  "source": "tanares",
+  "description": "To determine an undead encounter or a new possession by a spirit, roll 1d6 and reference the table below. Roll (1d6) Undead CR 1-2 Zombie 1/4 3 Skeleton 1/4 4 Wight 3 5 Ghast 2 6 Revenant 5"
+}

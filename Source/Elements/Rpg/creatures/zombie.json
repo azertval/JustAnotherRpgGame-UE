@@ -1,0 +1,61 @@
+{
+  "id": "zombie",
+  "name": "Zombi",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "mort-vivant",
+  "alignment": "neutre mauvais",
+  "abilities": {
+    "strength": 13,
+    "dexterity": 6,
+    "constitution": 16,
+    "intelligence": 3,
+    "wisdom": 6,
+    "charisma": 5
+  },
+  "armorClass": 8,
+  "hitPoints": 22,
+  "hitDice": "3d8+9",
+  "speed": {
+    "walk": 6
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "vision dans le noir 18 m",
+    "Perception passive 8"
+  ],
+  "damageImmunities": [
+    "poison"
+  ],
+  "conditionImmunities": [
+    "poisoned"
+  ],
+  "traits": [
+    {
+      "name": "Jets de sauvegarde",
+      "text": "Sag +0"
+    },
+    {
+      "name": "Langues",
+      "text": "comprend les langues qu'il connaissait de son vivant mais ne peut pas parler"
+    },
+    {
+      "name": "Tenacité de mort-vivant",
+      "text": "Si des dégâts font tomber le zombi à 0 point de vie, celui-ci doit effectuer un jet de sauvegarde de Constitution DD 5 + les dégâts subis, sauf en cas de dégâts radiants ou coup critique. En cas de réussite, il tombe à 1 point de vie à la place."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Coup",
+      "text": "Attaque au corps à corps avec une arme : +3 au toucher, allonge 1,50 m, une cible. Touché : 4 (1d6 + 1) dégâts contondants.",
+      "attackBonus": 3,
+      "reach": 1.5,
+      "damage": "1d6+1",
+      "damageType": "bludgeoning"
+    }
+  ],
+  "description": "Un zombi est le résultat obéissant d'une magie nécromantique lancée dans le but de réanimer un cadavre le plus souvent humanoïde. Parfois un zombi se relève aussi tout seul s'il se trouve dans un lieu fortement imprégné d'une aura de mort ou d'énergie nécromantique. Les zombis se déplacent d'une démarche saccadée et inégale, vêtus des habits maintenant moisis qu'ils portaient lors de leur mort. Ils sécrètent une puanteur nauséabonde.",
+  "mecanismesRequis": [
+    "langue-comprise-non-parlee"
+  ]
+}

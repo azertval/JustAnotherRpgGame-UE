@@ -1,0 +1,42 @@
+# Mises à jour automatiques des dépendances que Dependabot sait lire.
+#
+# Les actions GitHub sont épinglées par SHA de commit (le tag en commentaire) : un tag se réécrit, un
+# commit non. Ce fichier fait bouger l'épinglage, par PR, pour qu'une montée de version reste une
+# décision relue et passée par la CI.
+#
+# Hors de portée de Dependabot, suivis à la main :
+# - la version du moteur (Unreal Engine 5.8, construit des sources) ;
+# - le `GIT_TAG` de GoogleTest (CMakeLists.txt racine) et nlohmann/json, vendu dans Source/ThirdParty ;
+# - les versions d'outils du bloc `env:` de ci.yml ;
+# - les hooks de .pre-commit-config.yaml — `pre-commit autoupdate --freeze`, puis
+#   `scripts/ci/check_tool_pins.py` pour clang-format.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    # Une version publiée depuis moins d'une semaine n'est pas proposée : le temps qu'une
+    # publication compromise soit repérée et retirée en amont.
+    cooldown:
+      default-days: 7
+    groups:
+      actions:
+        patterns: [ "*" ]
+    commit-message:
+      prefix: ci
+
+  # Dépendances Python des scripts : pyproject.toml et uv.lock, dans la même PR.
+  - package-ecosystem: uv
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    cooldown:
+      default-days: 7
+    groups:
+      python:
+        patterns: [ "*" ]
+    commit-message:
+      prefix: build

@@ -1,0 +1,17 @@
+{
+  "id": "marteau-leger",
+  "name": "Marteau léger",
+  "source": "srd",
+  "category": "simple",
+  "damage": "1d4",
+  "damageType": "bludgeoning",
+  "weightGrams": 1000,
+  "price": 200,
+  "text": "Légère, lancer (portée 6 m/18 m)",
+  "properties": [
+    "light",
+    "thrown"
+  ],
+  "rangeNormal": 6,
+  "rangeLong": 18
+}

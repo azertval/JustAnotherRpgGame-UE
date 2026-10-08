@@ -1,0 +1,8 @@
+{
+  "id": "billes-sac-de-1000",
+  "name": "Billes (sac de 1000)",
+  "source": "srd",
+  "category": "gear",
+  "price": 100,
+  "weightGrams": 1000
+}

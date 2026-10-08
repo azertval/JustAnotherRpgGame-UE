@@ -1,0 +1,48 @@
+{
+  "id": "giant-bat",
+  "name": "Chauve-souris géante",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 15,
+    "dexterity": 16,
+    "constitution": 11,
+    "intelligence": 2,
+    "wisdom": 12,
+    "charisma": 6
+  },
+  "armorClass": 13,
+  "hitPoints": 22,
+  "hitDice": "4d10",
+  "speed": {
+    "walk": 3,
+    "fly": 18
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "vision aveugle 18 m",
+    "Perception passive 11"
+  ],
+  "traits": [
+    {
+      "name": "Écholocalisation",
+      "text": "La chauve-souris ne peut utiliser sa vision aveugle quand elle est assourdie."
+    },
+    {
+      "name": "Ouïe aiguisée",
+      "text": "La chauve-souris a un avantage aux jets de Sagesse (Perception) faisant appel à l'ouïe."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 5 (1d6 + 2) dégâts perforants.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d6+2",
+      "damageType": "piercing"
+    }
+  ]
+}

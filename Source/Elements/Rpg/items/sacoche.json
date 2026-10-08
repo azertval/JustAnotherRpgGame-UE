@@ -1,0 +1,8 @@
+{
+  "id": "sacoche",
+  "name": "Sacoche",
+  "source": "srd",
+  "category": "gear",
+  "price": 50,
+  "weightGrams": 500
+}

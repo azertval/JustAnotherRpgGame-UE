@@ -1,0 +1,17 @@
+{
+  "id": "halfelin-robuste",
+  "name": "Halfelin robuste",
+  "source": "srd",
+  "parentSpecies": "halfelin",
+  "size": "small",
+  "speed": 7.5,
+  "abilityScoreIncrease": {
+    "constitution": 1
+  },
+  "traits": [
+    {
+      "name": "Résistance des robustes",
+      "text": "Vous obtenez un avantage aux jets de sauvegarde contre le poison et la résistance contre les dégâts de poison."
+    }
+  ]
+}

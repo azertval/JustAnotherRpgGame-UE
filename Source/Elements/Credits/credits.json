@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "sections": [
+    {
+      "id": "development",
+      "column": 0,
+      "title": { "fr": "Développement", "en": "Development" },
+      "lines": [
+        {
+          "role": { "fr": "Conception et programmation", "en": "Design and programming" },
+          "names": ["Valentin Eloy"]
+        }
+      ]
+    },
+    {
+      "id": "art-direction",
+      "column": 0,
+      "title": { "fr": "Direction artistique", "en": "Art direction" },
+      "lines": [
+        {
+          "role": { "fr": "Polices", "en": "Fonts" },
+          "names": [
+            "Cinzel, IM Fell English, Pinyon Script, Inter",
+            "SIL Open Font License 1.1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "column": 0,
+      "title": { "fr": "Autres contributions", "en": "Other contributions" },
+      "lines": [
+        {
+          "role": { "fr": "Bibliothèques", "en": "Libraries" },
+          "names": ["Qt 6 (www.qt.io), LGPL v3", "nlohmann/json, MIT"]
+        },
+        {
+          "role": { "fr": "Licence", "en": "License" },
+          "names": [
+            { "fr": "Code : PolyForm Noncommercial 1.0.0", "en": "Code: PolyForm Noncommercial 1.0.0" },
+            { "fr": "Contenus : CC BY-NC-SA 4.0", "en": "Content: CC BY-NC-SA 4.0" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "story",
+      "column": 1,
+      "title": { "fr": "Univers et inspirations", "en": "Worlds and inspirations" },
+      "lines": [
+        {
+          "role": { "fr": "Fan game", "en": "Fan game" },
+          "names": [
+            { "fr": "Non officiel et non commercial", "en": "Unofficial and non-commercial" },
+            {
+              "fr": "Ni affilié ni approuvé par les ayants droit ci-dessous",
+              "en": "Not affiliated with or endorsed by the rights holders below"
+            }
+          ]
+        },
+        {
+          "role": { "fr": "Dungeons & Dragons", "en": "Dungeons & Dragons" },
+          "names": [
+            { "fr": "Marque de Wizards of the Coast LLC", "en": "Trademark of Wizards of the Coast LLC" },
+            { "fr": "Manuels en français : Black Book Éditions", "en": "French rulebooks: Black Book Éditions" }
+          ]
+        },
+        {
+          "role": { "fr": "Règles ouvertes", "en": "Open rules" },
+          "names": [
+            "System Reference Document 5.1",
+            "Wizards of the Coast LLC, CC BY 4.0"
+          ]
+        },
+        {
+          "role": { "fr": "Tanares", "en": "Tanares" },
+          "names": ["© Dragori Games, Inc."]
+        }
+      ]
+    }
+  ]
+}

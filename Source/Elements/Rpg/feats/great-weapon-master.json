@@ -1,0 +1,15 @@
+{
+  "id": "great-weapon-master",
+  "name": "Maître des armes à deux mains",
+  "source": "phb-fr",
+  "narratif": true,
+  "status": {
+    "provisoire": true,
+    "raison": "nom et provenance seulement : aucun mécanisme de don n'existe encore dans le moteur",
+    "retraitSi": "le LOT-13 a livré la fiche et les mécanismes que ce don exige, et l'effet est décrit en `mecanismesRequis`"
+  },
+  "variantes": [
+    "Cogneur lourd",
+    "Grand maître d'armes"
+  ]
+}

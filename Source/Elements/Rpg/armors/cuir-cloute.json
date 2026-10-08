@@ -1,0 +1,10 @@
+{
+  "id": "cuir-cloute",
+  "name": "Cuir clouté",
+  "source": "srd",
+  "category": "light",
+  "baseArmorClass": 12,
+  "dexterityBonus": true,
+  "weightGrams": 6500,
+  "price": 4500
+}

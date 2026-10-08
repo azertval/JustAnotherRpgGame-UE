@@ -1,0 +1,8 @@
+{
+  "id": "baguette",
+  "name": "Baguette",
+  "source": "srd",
+  "category": "gear",
+  "price": 1000,
+  "weightGrams": 500
+}

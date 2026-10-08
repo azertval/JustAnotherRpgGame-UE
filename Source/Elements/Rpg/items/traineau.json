@@ -1,0 +1,8 @@
+{
+  "id": "traineau",
+  "name": "Traîneau",
+  "source": "srd",
+  "category": "mount",
+  "price": 2000,
+  "weightGrams": 150000
+}

@@ -1,0 +1,8 @@
+{
+  "id": "boulier",
+  "name": "Boulier",
+  "source": "srd",
+  "category": "gear",
+  "price": 200,
+  "weightGrams": 1000
+}

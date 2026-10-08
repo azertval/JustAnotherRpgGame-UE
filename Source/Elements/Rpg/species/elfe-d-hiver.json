@@ -1,0 +1,14 @@
+{
+  "id": "elfe-d-hiver",
+  "name": "Elfe d'hiver",
+  "source": "tanares",
+  "parentSpecies": "elfe",
+  "size": "medium",
+  "speed": 9,
+  "abilityScoreIncrease": {
+    "constitution": 1
+  },
+  "mecanismesRequis": [
+    "augmentation-de-caracteristique-au-choix"
+  ]
+}

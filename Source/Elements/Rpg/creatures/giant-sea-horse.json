@@ -1,0 +1,48 @@
+{
+  "id": "giant-sea-horse",
+  "name": "Hippocampe géant",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 12,
+    "dexterity": 15,
+    "constitution": 11,
+    "intelligence": 2,
+    "wisdom": 12,
+    "charisma": 5
+  },
+  "armorClass": 13,
+  "hitPoints": 16,
+  "hitDice": "3d10",
+  "speed": {
+    "walk": 0,
+    "swim": 12
+  },
+  "challengeRating": 0.5,
+  "senses": [
+    "Perception passive 11"
+  ],
+  "traits": [
+    {
+      "name": "Charge",
+      "text": "Si l'hippocampe se déplace d'au moins 6 mètres en ligne droite vers une cible, puis la touche lors d'une attaque avec un coup de tête dans le même tour, la cible subit 7 (2d6) dégâts contondants supplémentaires. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 11 ou tomber à terre."
+    },
+    {
+      "name": "Respiration aquatique",
+      "text": "L'hippocampe ne peut respirer que sous l'eau."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Coup de tête",
+      "text": "Attaque au corps à corps avec une arme : +3 au toucher, allonge 1,50 m, une cible. Touché : 4 (1d6 + 1) dégâts contondants.",
+      "attackBonus": 3,
+      "reach": 1.5,
+      "damage": "1d6+1",
+      "damageType": "bludgeoning"
+    }
+  ],
+  "description": "Les hippocampes géants sont souvent utilisés comme monture par les créatures aquatiques."
+}

@@ -1,0 +1,19 @@
+{
+  "id": "spare-the-dying",
+  "name": "Epargner les mourants",
+  "source": "phb-fr",
+  "level": 0,
+  "school": "necromancy",
+  "castingTime": "1 action",
+  "range": "contact",
+  "rangeMeters": 1.5,
+  "target": "ally",
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false
+  },
+  "duration": "instantanee",
+  "stabilizes": true,
+  "text": "Manuel des Joueurs, PDF p. 239 (spare the dying). La creature vivante a 0 point de vie touchee est stabilisee : elle ne fait plus de jets contre la mort et reste inconsciente jusqu'a ce qu'on la soigne ; de nouveaux degats la refont agoniser."
+}

@@ -1,0 +1,17 @@
+{
+  "id": "halfelin-pied-leger",
+  "name": "Halfelin pied-léger",
+  "source": "srd",
+  "parentSpecies": "halfelin",
+  "size": "small",
+  "speed": 7.5,
+  "abilityScoreIncrease": {
+    "charisma": 1
+  },
+  "traits": [
+    {
+      "name": "Discrétion naturelle",
+      "text": "Vous pouvez tenter de vous cacher si vous vous trouvez derrière une créature d'une taille supérieure à la vôtre."
+    }
+  ]
+}

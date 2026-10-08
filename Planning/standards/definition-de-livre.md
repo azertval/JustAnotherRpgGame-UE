@@ -1,0 +1,32 @@
+# Ce que « livré » veut dire
+
+Un lot passe à `statut = "livre"` quand **tous** ses critères d'acceptation sont tenus **et** que
+les conditions de sa filière le sont. Un lot « presque fini » est `en-cours`.
+
+## Pour tout lot
+
+- La PR est fusionnée sur `main`, CI verte, entrée au `CHANGELOG.md`.
+- `uv run scripts/check.py` et `scripts/docs/build_docs.py` passent en local avant la PR.
+- La fiche porte le numéro de la PR et, s'il y en a, ses **décisions de réalisation**.
+- Ce que le lot n'a pas fait et devait faire est **écrit** : dans un autre lot, ou dans une question ouverte.
+
+## Par filière
+
+| Filière | Conditions |
+|---|---|
+| **Assets** | chaque pièce est au [standard 3D](style-3d.md) — un maillage, ou une [image tolérée](style-3d.md#7-les-images-tolérées) —, citée par un manifeste, visible dans la galerie de débug ; aucune ne vient d'une image du corpus ; les sources, scripts et relevés sont rangés dans l'atelier (`Tools/AssetsHD/`, `Tools/Assets3D/`) ; ce que le lot remplace est **supprimé dans sa PR** (`check_orphans.py`, [D-32](../vision/decisions.md)) ; le kit est **publié et verrouillé** (`publish_asset_kit.py`, [le stockage](arborescence-assets.md#le-stockage)), pas seulement installé |
+| **Cartes** | dessinée dans l'éditeur ; `LevelEditor --check` passe ; aucune case inatteignable ; le rendu de la carte est joint à la PR ; l'image de l'onglet « Carte » existe |
+| **PNJ** | son **modèle** au [standard des personnages](personnages-3d.md) — maillage lié au squelette commun, contrôles de l'export tenus, jugé par l'auteur dans le jeu —, portrait et jeton peints ; une fiche de règles quand le PNJ peut combattre ; placé sur sa carte ; ses textes en français et en anglais |
+| **Quêtes et dialogues** | chaque issue se joue en test, sans fenêtre, à graine fixée ; aucun drapeau lu sans être posé ; textes dans les deux langues |
+| **Moteur** | tests unitaires et d'intégration ; pas de régression des mesures de performance ; la spécification dit ce que le code fait |
+| **Règles et données** | chaque valeur vient d'une page citée ; schéma validé ; un test recalcule les valeurs dérivées ; les écarts au livre sont écrits |
+| **Interface** | à la charte v2 ; capture de référence QML ; jouable sans souris ; textes dans les deux langues |
+| **Éditeur** | logique en fonctions pures testées ; un scénario `--apply` par outil, comparé à un fichier attendu ; une famille ou une propriété nouvelle passe par `EntityKinds`, sans code par famille ; le guide d'usage est à jour ; **le geste est fait à la main par l'auteur** ; textes en anglais, hors charte v2 |
+| **Recette et version** | les critères de sortie de la version sont tenus ; installeur éprouvé sur un poste vierge ; tag posé ; **bilan** écrit dans le dossier de la version |
+
+## La vérification manuelle
+
+Plusieurs lots passés ont été livrés « vérification à la souris due ». La règle change : ce qui
+demande une main — un parcours à la manette, un contrôle visuel du scintillement, l'approbation
+d'une maquette — est un **critère d'acceptation**, et le lot reste `en-cours` tant qu'il n'est pas
+tenu.

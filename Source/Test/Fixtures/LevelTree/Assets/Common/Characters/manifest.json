@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "tile": [
+    68,
+    42
+  ],
+  "comment": "Monde : un garde générique.",
+  "npcs": [
+    "Peoples/human/guard"
+  ]
+}

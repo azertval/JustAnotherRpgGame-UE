@@ -1,0 +1,10 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "map": "capital/arenarea",
+  "note": "LOT-EDITOR-06 : un angle de mur isolé, posé sans sol au débouché de la ruelle est du parvis, laissait un trou dans le pavé ; il part, et la ruelle rejoint le parvis.",
+  "gestures": [
+    {"layer": "relief", "tool": "eraser", "at": [32, 13]},
+    {"piece": "alley", "tool": "paint", "at": [32, 13]}
+  ]
+}

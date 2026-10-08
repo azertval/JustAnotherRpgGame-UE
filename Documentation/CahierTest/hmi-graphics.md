@@ -1,0 +1,4155 @@
+# HMI · Graphics
+
+Tests unitaires — **202 cas** (59 bloquants, 52 critiques, 85 majeurs, 6 mineurs). [Retour à la synthèse](README.md).
+
+## Ce que cette page couvre
+
+| Fichier de test | Cas | Bloquant | Critique | Majeur | Mineur |
+|---|---|---|---|---|---|
+| [`test_animation_catalog.cpp`](#test-animation-catalogcpp) | 12 | - | 5 | 7 | - |
+| [`test_asset_gallery.cpp`](#test-asset-gallerycpp) | 11 | 5 | 1 | 5 | - |
+| [`test_asset_gallery_renderer.cpp`](#test-asset-gallery-renderercpp) | 3 | 2 | - | 1 | - |
+| [`test_capital_kit_render.cpp`](#test-capital-kit-rendercpp) | 1 | 1 | - | - | - |
+| [`test_city_block_render.cpp`](#test-city-block-rendercpp) | 2 | - | - | 2 | - |
+| [`test_depth_sort.cpp`](#test-depth-sortcpp) | 5 | - | 4 | 1 | - |
+| [`test_entity_markers.cpp`](#test-entity-markerscpp) | 5 | - | 1 | 4 | - |
+| [`test_figure_model.cpp`](#test-figure-modelcpp) | 5 | 1 | 3 | 1 | - |
+| [`test_figure_model_render.cpp`](#test-figure-model-rendercpp) | 5 | 3 | 1 | - | 1 |
+| [`test_hd_mockup_render.cpp`](#test-hd-mockup-rendercpp) | 3 | 2 | - | - | 1 |
+| [`test_image_encode.cpp`](#test-image-encodecpp) | 5 | - | 1 | 4 | - |
+| [`test_iso_view.cpp`](#test-iso-viewcpp) | 6 | 3 | - | 3 | - |
+| [`test_lit_render.cpp`](#test-lit-rendercpp) | 4 | 4 | - | - | - |
+| [`test_maquette_tokens.cpp`](#test-maquette-tokenscpp) | 6 | - | 2 | 4 | - |
+| [`test_material_render.cpp`](#test-material-rendercpp) | 2 | 1 | - | 1 | - |
+| [`test_mesh_composition.cpp`](#test-mesh-compositioncpp) | 7 | 3 | - | 4 | - |
+| [`test_mesh_render.cpp`](#test-mesh-rendercpp) | 8 | 5 | - | 3 | - |
+| [`test_missing_texture.cpp`](#test-missing-texturecpp) | 5 | - | 2 | 3 | - |
+| [`test_offscreen_render.cpp`](#test-offscreen-rendercpp) | 5 | 3 | - | 2 | - |
+| [`test_place_camera.cpp`](#test-place-cameracpp) | 13 | 2 | - | 10 | 1 |
+| [`test_poly_quad.cpp`](#test-poly-quadcpp) | 4 | - | 2 | 2 | - |
+| [`test_procedural_atlas.cpp`](#test-procedural-atlascpp) | 4 | - | 1 | 2 | 1 |
+| [`test_quad_recorder.cpp`](#test-quad-recordercpp) | 7 | - | 3 | 3 | 1 |
+| [`test_render_culling.cpp`](#test-render-cullingcpp) | 10 | - | 5 | 4 | 1 |
+| [`test_rhi_offscreen.cpp`](#test-rhi-offscreencpp) | 4 | 2 | 1 | 1 | - |
+| [`test_scene_folders.cpp`](#test-scene-folderscpp) | 2 | 2 | - | - | - |
+| [`test_scene_lighting.cpp`](#test-scene-lightingcpp) | 6 | 5 | - | 1 | - |
+| [`test_static_world_scene.cpp`](#test-static-world-scenecpp) | 3 | 2 | - | 1 | - |
+| [`test_texture_atlas.cpp`](#test-texture-atlascpp) | 1 | - | 1 | - | - |
+| [`test_world_scene_composer.cpp`](#test-world-scene-composercpp) | 35 | 4 | 16 | 15 | - |
+| [`test_world_scene_renderer.cpp`](#test-world-scene-renderercpp) | 6 | 3 | 3 | - | - |
+| [`test_world_storeys.cpp`](#test-world-storeyscpp) | 7 | 6 | - | 1 | - |
+
+## Exigences vérifiées par cette page
+
+Chaque exigence citée par un cas de cette page, avec les cas qui la citent ; la [matrice de traçabilité](couverture-exigences.md) les rassemble toutes.
+
+| Exigence | Cas |
+|---|---|
+| `EX-CNT-042` | [`AssetGalleryTest.ToutAssetLivreEstDansLaGalerie`](#assetgallerytesttoutassetlivreestdanslagalerie), [`AssetGalleryTest.UnHerosEnModeleRangeParClasse`](#assetgallerytestunherosenmodelerangeparclasse), [`AssetGalleryTest.UnEffetSeJoueDansLaGalerie`](#assetgallerytestuneffetsejouedanslagalerie) |
+| `EX-EXP-005` | [`OffscreenRenderTest.UneCarteSansAucuneImageSeVoit`](#offscreenrendertestunecartesansaucuneimagesevoit) |
+| `EX-NFR-040` | [`ProceduralAtlasTest.ChaqueTypeDeTuileAUneCouleurDeRepliDistincte`](#proceduralatlastestchaquetypedetuileaunecouleurdereplidistincte) |
+| `EX-REN-005` | [`WorldSceneComposerTest.LaCadenceEstCelleQueDitLaBande`](#worldscenecomposertestlacadenceestcellequeditlabande) |
+| `EX-REN-014` | [`TriParProfondeurTest.LaProfondeurNeDebordePasDeSaBande`](#triparprofondeurtestlaprofondeurnedebordepasdesabande), [`QuadRecorderTest.OrdonnancementDeclare`](#quadrecordertestordonnancementdeclare) |
+| `EX-REN-018` | [`TriParProfondeurTest.TroisPrimitivesSortentParPiedCroissant`](#triparprofondeurtesttroisprimitivessortentparpiedcroissant), [`TriParProfondeurTest.PersonnageEntreDeuxObjets`](#triparprofondeurtestpersonnageentredeuxobjets), [`TriParProfondeurTest.PiedEgalConserveLOrdreDeComposition`](#triparprofondeurtestpiedegalconservelordredecomposition), [`TriParProfondeurTest.QuantificationAuPixel`](#triparprofondeurtestquantificationaupixel) |
+
+## test_animation_catalog.cpp
+
+### AnimationCatalogTest.RoundTripClipsMultiplesDureeParDefautEtOneShot
+
+*Critique · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:31`
+
+Un descripteur valide se relit intégralement, durée par défaut et clip suivant compris.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.ok()` est vrai.
+- Vérifie que `description.frameWidth` vaut `16`.
+- Vérifie que `description.frameHeight` vaut `16`.
+- Vérifie que `description.clips.clipCount()` vaut `3`.
+- Vérifie que `closed.frames` vaut `(std::vector<int>{0})`.
+- Vérifie que `closed.endMode` vaut `core::ClipEndMode::Loop`.
+- Vérifie que `closed.frameDuration` vaut `hmi::AnimationCatalog::DEFAULT_FRAME_DURATION_SECONDS` (comparaison flottante).
+- Vérifie que `opening.frames` vaut `(std::vector<int>{1, 2, 3, 4})`.
+- Vérifie que `opening.frameDuration` vaut `0.06f` (comparaison flottante).
+- Vérifie que `opening.endMode` vaut `core::ClipEndMode::OneShot`.
+- Vérifie que `opening.nextClip` vaut `"open"`.
+- Vérifie que `description.clips.indexOf(opening.nextClip)` est supérieur ou égal à `0`.
+
+### AnimationCatalogTest.JsonInvalideEstUneErreurExploitable
+
+*Majeur · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:69`
+
+Un JSON invalide donne une erreur d'analyse avec un message exploitable.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.ok()` est faux.
+- Vérifie que `result.errorCode` vaut `hmi::AnimationCatalogError::ParseError`.
+- Vérifie que `result.error.empty()` est faux.
+
+### AnimationCatalogTest.VersionInconnueEstRefusee
+
+*Majeur · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:87`
+
+Une version de format inconnue est refusée.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.ok()` est faux.
+- Vérifie que `result.errorCode` vaut `hmi::AnimationCatalogError::UnsupportedVersion`.
+
+### AnimationCatalogTest.ClipSuivantInexistantEstRefuse
+
+*Critique · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:108`
+
+Un clip suivant inexistant est refusé au chargement.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.ok()` est faux.
+- Vérifie que `result.errorCode` vaut `hmi::AnimationCatalogError::MalformedStructure`.
+
+### AnimationCatalogTest.IndiceDImageNegatifEstRefuse
+
+*Majeur · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:130`
+
+Un indice d'image négatif est refusé.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.ok()` est faux.
+- Vérifie que `result.errorCode` vaut `hmi::AnimationCatalogError::MalformedStructure`.
+
+### AnimationCatalogTest.ClipSansFramesEstRefuse
+
+*Majeur · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:151`
+
+Un clip sans images est refusé.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.ok()` est faux.
+- Vérifie que `result.errorCode` vaut `hmi::AnimationCatalogError::MalformedStructure`.
+
+### AnimationCatalogTest.FichierAbsentEstFileNotFoundSansException
+
+*Critique · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:172`
+
+Un fichier absent donne un code dédié, sans exception.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.ok()` est faux.
+- Vérifie que `result.errorCode` vaut `hmi::AnimationCatalogError::FileNotFound`.
+
+### AnimationCatalogTest.DescriptorFileNameRemplaceLExtension
+
+*Critique · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:190`
+
+Le nom du descripteur remplace l'extension en conservant le chemin.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::AnimationCatalog::descriptorFileName("water.png")` vaut `"water.anim.json"`.
+- Vérifie que `hmi::AnimationCatalog::descriptorFileName("Npc/anariel/attack.png")` vaut `"Npc/anariel/attack.anim.json"`.
+
+### AnimationCatalogTest.CoherenceAvecLePngValideeSurSpritesheetAUnRang
+
+*Majeur · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:206`
+
+Un descripteur cohérent avec les dimensions du PNG est validé.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.ok()` est vrai.
+- Vérifie que `valid.valid` est vrai.
+
+### AnimationCatalogTest.TailleDImageIncoherenteAvecLePngEstRefusee
+
+*Majeur · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:228`
+
+Des dimensions de PNG incohérentes avec l'image sont refusées.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.ok()` est vrai.
+- Vérifie que `wrongHeight.valid` est faux.
+- Vérifie que `wrongHeight.message.empty()` est faux.
+- Vérifie que `wrongWidth.valid` est faux.
+
+### AnimationCatalogTest.IndiceDImageHorsBornesDeLaSpritesheetReelleEstRefuse
+
+*Critique · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:256`
+
+Un indice d'image hors des bornes réelles de la spritesheet est refusé.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.ok()` est vrai.
+- Vérifie que `tooShort.valid` est faux.
+- Vérifie que `tooShort.message.empty()` est faux.
+
+### AnimationCatalogTest.FrameRegionPremiereEtDerniereImageSpritesheetAUnRang
+
+*Majeur · Unitaire · Catalogue d'animations* — `Source/Test/Unit/HMI/Graphics/test_animation_catalog.cpp:280`
+
+La région d'une image se déduit de son indice par décalage horizontal, ordonnée constante.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `first.x` vaut `0`.
+- Vérifie que `first.y` vaut `0`.
+- Vérifie que `first.width` vaut `16`.
+- Vérifie que `first.height` vaut `16`.
+- Vérifie que `last.x` vaut `5 * 16`.
+- Vérifie que `last.y` vaut `0`.
+- Vérifie que `last.width` vaut `16`.
+- Vérifie que `last.height` vaut `16`.
+
+## test_asset_gallery.cpp
+
+### AssetGalleryTest.FormeDesBlocs
+
+*Majeur · Unitaire · Galerie des assets* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery.cpp:60`
+
+Un bloc contient son dessin, marge comprise.
+
+**Étapes**
+
+1. Calculer le bloc d'une figure, d'une attaque large, d'un mur, d'une pièce 2×1 et d'une grande pièce.
+
+**Résultat attendu**
+
+- Vérifie que `figure.columns` vaut `3`.
+- Vérifie que `figure.rows` vaut `3`.
+- Vérifie que `figure.footprintColumn` vaut `1`.
+- Vérifie que `figure.footprintRow` vaut `1`.
+- Vérifie que `attaque.columns` vaut `4`.
+- Vérifie que `attaque.rows` vaut `3`.
+- Vérifie que `attaque.footprintColumn` vaut `1`.
+- Vérifie que `mur.columns` vaut `3`.
+- Vérifie que `mur.rows` vaut `4`.
+- Vérifie que `mur.footprintRow` vaut `2`.
+- Vérifie que `large.columns` vaut `4`.
+- Vérifie que `large.rows` vaut `4`.
+- Vérifie que `large.footprintColumn` vaut `1`.
+- Vérifie que `large.footprintRow` vaut `2`.
+- Vérifie que `piece.columns` vaut `9`.
+- Vérifie que `piece.rows` vaut `6`.
+
+### AssetGalleryTest.UneCaseVautLeLosangeDuLieu
+
+*Majeur · Unitaire · Galerie des assets* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery.cpp:99`
+
+La galerie mesure chaque forme au losange de son lieu.
+
+**Étapes**
+
+1. Calculer le bloc d'une figurine 192 x 256 et d'une creature 384 x 384 a un losange de 256, puis d'une figurine 192 x 256 sans losange declare.
+
+**Résultat attendu**
+
+- Vérifie que `figure.columns` vaut `3`.
+- Vérifie que `figure.rows` vaut `3`.
+- Vérifie que `creature.columns` vaut `4`.
+- Vérifie que `creature.rows` vaut `4`.
+- Vérifie que `sansLosange.tileWidthPixels()` vaut `192`.
+- Vérifie que `hmi::assetGalleryBlocShape(sansLosange).columns` vaut `3`.
+
+### AssetGalleryTest.DispositionEnBandes
+
+*Majeur · Unitaire · Galerie des assets* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery.cpp:125`
+
+La galerie se dispose en bandes, lignes et colonnes.
+
+**Étapes**
+
+1. Disposer deux modèles de deux formes (dont un mur) sur six cases, puis sur cinq.
+
+**Résultat attendu**
+
+- Vérifie que `layout.bands.size()` vaut `1U`.
+- Vérifie que `layout.bands[0].row` vaut `0`.
+- Vérifie que `layout.blocs.size()` vaut `4U`.
+- Vérifie que `layout.blocs[0].entry` vaut `0`.
+- Vérifie que `layout.blocs[0].row` vaut `1`.
+- Vérifie que `layout.blocs[1].entry` vaut `2`.
+- Vérifie que `layout.blocs[1].column` vaut `3`.
+- Vérifie que `layout.blocs[1].row` vaut `1`.
+- Vérifie que `layout.blocs[2].entry` vaut `1`.
+- Vérifie que `layout.blocs[3].entry` vaut `3`.
+- Vérifie que `layout.blocs[3].row` vaut `4`.
+- Vérifie que `layout.blocs[2].row` vaut `5`.
+- Vérifie que `layout.rows` vaut `8`.
+- Vérifie que `layout.columns` vaut `6`.
+- Vérifie que `narrow.blocs.size()` vaut `4U`.
+- Vérifie que `narrow.blocs[1].column` vaut `0`.
+- Vérifie que `narrow.blocs[1].row` vaut `4`.
+
+### AssetGalleryTest.VisibiliteParLaVue
+
+*Bloquant · Unitaire · Galerie des assets* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery.cpp:171`
+
+Seuls les blocs à l'écran sont dessinés.
+
+**Étapes**
+
+1. Classer un bloc 3×3 pour une vue qui le couvre, qui s'en écarte de deux cases, puis de sept.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::assetGalleryVisibility(bloc, {0.0, 0.0, 10.0, 10.0})` vaut `hmi::AssetGalleryVisibility::Drawn`.
+- Vérifie que `hmi::assetGalleryVisibility(bloc, {5.0, 0.0, 10.0, 10.0})` vaut `hmi::AssetGalleryVisibility::Preloaded`.
+- Vérifie que `hmi::assetGalleryVisibility(bloc, {10.0, 0.0, 10.0, 10.0})` vaut `hmi::AssetGalleryVisibility::Unloaded`.
+
+### AssetGalleryTest.ImageJouee
+
+*Majeur · Unitaire · Galerie des assets* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery.cpp:191`
+
+L'image jouée suit le temps.
+
+**Étapes**
+
+1. Demander l'image d'un clip bouclé et d'un clip joué une fois à plusieurs instants.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::assetGalleryFrameRank(boucle, 0.16)` vaut `1`.
+- Vérifie que `hmi::assetGalleryFrameRank(boucle, 0.91)` vaut `0`.
+- Vérifie que `hmi::assetGalleryFrameRank(unique, 0.35)` vaut `3`.
+- Vérifie que `hmi::assetGalleryFrameRank(unique, 0.75)` vaut `3`.
+- Vérifie que `hmi::assetGalleryFrameRank(unique, 1.05)` vaut `0`.
+- Vérifie que `hmi::assetGalleryFrameRank(entry("fixe", 16, 16), 3.0)` vaut `0`.
+
+### AssetGalleryTest.AssetsDEssai
+
+*Bloquant · Unitaire · Galerie des assets* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery.cpp:214`
+
+La galerie lit les assets d'une racine.
+
+**Étapes**
+
+1. Lire le catalogue de la racine d'essai.
+
+**Résultat attendu**
+
+- Vérifie que `npcs` diffère de `nullptr`.
+- Vérifie que `attack` diffère de `npcs->entries.end()`.
+- Vérifie que `attack->mesh` est vrai.
+- Vérifie que `attack->path` vaut `"Npc/figurant/figurant.glb"`.
+- Vérifie que `attack->clip` vaut `"attack"`.
+- Vérifie que `attack->clipDuration` vaut `0.8F` (comparaison flottante).
+- Vérifie que `attack->loop` est faux.
+- Vérifie que `attack->frameCount()` vaut `1`.
+- Vérifie que `familyNamed(catalog, "Monstres")` diffère de `nullptr`.
+- Vérifie que `familyNamed(catalog, "Scène · bourg")` diffère de `nullptr`.
+- Vérifie que `std::filesystem::is_regular_file(root / value.path)` est vrai.
+- Vérifie que `value.frameWidth` est strictement supérieur à `0`.
+- Vérifie que `value.frameHeight` est strictement supérieur à `0`.
+- Vérifie que `hmi::layoutAssetGallery(catalog).blocs.empty()` est faux.
+
+### AssetGalleryTest.ToutAssetLivreEstDansLaGalerie
+
+*Bloquant · Unitaire · Galerie des assets* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery.cpp:259`
+
+Exigences : `EX-CNT-042`
+
+Aucun asset livré n'échappe à la galerie.
+
+**Étapes**
+
+1. Lire le catalogue de Source/Elements/Assets. 2. Parcourir toutes les images livrées.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::assetGalleryExcludes("UI/background/menu-scene.png")` est vrai.
+- Vérifie que `hmi::assetGalleryExcludes("Maps/world.jpg")` est vrai.
+- Vérifie que `hmi::assetGalleryExcludes("Fonts/Cinzel.ttf")` est vrai.
+- Vérifie que `hmi::assetGalleryExcludes("Regions/central-empire/capital/martpart/Map/martpart.jpg")` est vrai.
+- Vérifie que `hmi::assetGalleryExcludes("Regions/central-empire/capital/martpart/Scene/street.png")` est faux.
+- Vérifie que `hmi::assetGalleryExcludes("Npc/figurant/portrait.png")` est faux.
+
+### AssetGalleryTest.ArborescenceParNiveaux
+
+*Bloquant · Unitaire · Galerie des assets* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery.cpp:291`
+
+Les pièces de l'arborescence par niveaux paraissent dans la galerie.
+
+**Étapes**
+
+1. Écrire `Regions/r/ville/zone/Scene/manifest.json` avec un mur 3 × 1, et `Common/Terrain/manifest.json` sans pièce. 2. Lire le catalogue. 3. Chercher les images non listées.
+
+**Résultat attendu**
+
+- Vérifie que `catalog.errors.empty()` est vrai.
+- Vérifie que `unlisted.empty()` est vrai.
+- Vérifie que `catalog.families.size()` vaut `1U`.
+- Vérifie que `family.title` vaut `"Scène · r/ville/zone"`.
+- Vérifie que `family.directory` vaut `"Regions/r/ville/zone/Scene"`.
+- Vérifie que `family.entries.size()` vaut `1U`.
+- Vérifie que `wall.form` vaut `"wall-arcade-u"`.
+- Vérifie que `wall.model` vaut `"wide"`.
+- Vérifie que `wall.path` vaut `"Regions/r/ville/zone/Scene/wall-arcade-u.png"`.
+- Vérifie que `wall.frameWidth` vaut `426`.
+- Vérifie que `wall.frameHeight` vaut `539`.
+- Vérifie que `wall.footprintColumns` vaut `3`.
+- Vérifie que `wall.footprintRows` vaut `1`.
+- Vérifie que `wall.anchorX` vaut `6`.
+- Vérifie que `wall.anchorY` vaut `295`.
+
+### AssetGalleryTest.LesPersonnagesParaissentEnModeles
+
+*Bloquant · Unitaire · Galerie des assets* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery.cpp:343`
+
+Les personnages paraissent en modeles, clip par clip.
+
+**Étapes**
+
+1. Écrire un dossier Monsters/ : un lion avec sa fiche, son modèle et un squelette à deux clips ; un tigre inscrit au manifeste (`models`) sans fiche ; un fantôme dont la fiche nomme un fichier absent ; un vestige qui n'a qu'une bande d'images. 2. Lire le catalogue.
+
+**Résultat attendu**
+
+- Vérifie que `family` diffère de `nullptr`.
+- Vérifie que `family->directory` vaut `"Monsters"`.
+- Vérifie que `family->entries.size()` vaut `3U`.
+- Vérifie que `idle.model` vaut `"lion"`.
+- Vérifie que `idle.form` vaut `"idle"`.
+- Vérifie que `idle.path` vaut `"Monsters/lion/lion.glb"`.
+- Vérifie que `idle.mesh` est vrai.
+- Vérifie que `idle.clip` vaut `"idle"`.
+- Vérifie que `idle.loop` est vrai.
+- Vérifie que `idle.clipDuration` vaut `1.0` (comparaison flottante).
+- Vérifie que `idle.frameWidth` vaut `384`.
+- Vérifie que `idle.frameHeight` vaut `256`.
+- Vérifie que `attack.form` vaut `"attack"`.
+- Vérifie que `attack.loop` est faux.
+- Vérifie que `attack.clipDuration` vaut `0.8F` (comparaison flottante).
+- Vérifie que `still.model` vaut `"tigre"`.
+- Vérifie que `still.form` vaut `"model"`.
+- Vérifie que `still.path` vaut `"Monsters/tigre/tigre.glb"`.
+- Vérifie que `still.mesh` est vrai.
+- Vérifie que `still.clip.empty()` est vrai.
+- Vérifie que `hmi::assetGalleryClipSeconds(idle, 2.25)` vaut `0.25`, à `1e-9` près.
+- Vérifie que `hmi::assetGalleryClipSeconds(attack, 0.5)` vaut `0.5`, à `1e-6` près.
+- Vérifie que `hmi::assetGalleryClipSeconds(attack, 1.2)` vaut `0.8`, à `1e-6` près.
+- Vérifie que `hmi::assetGalleryClipSeconds(attack, 1.5)` vaut `0.1`, à `1e-6` près.
+- Vérifie que `hmi::assetGalleryClipSeconds(still, 3.0)` vaut `0.0` (comparaison flottante).
+
+### AssetGalleryTest.UnHerosEnModeleRangeParClasse
+
+*Critique · Unitaire · Galerie des assets* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery.cpp:435`
+
+Exigences : `EX-CNT-042`
+
+Le modele du heros, son portrait et son jeton paraissent dans la galerie.
+
+**Étapes**
+
+1. Ecrire `Common/Characters/manifest.json`, qui nomme `Heroes/brawler` dans `npcs`, sa fiche, son modele, le squelette humanoide a deux clips, un portrait et un jeton ; a cote, un modele que rien n'inscrit.
+2. Lire le catalogue.
+3. Chercher les assets non listes.
+
+**Résultat attendu**
+
+- Vérifie que `catalog.errors.empty()` est vrai.
+- Vérifie que `figurines` diffère de `nullptr`.
+- Vérifie que `entry.model` vaut `"Heroes/brawler"`.
+- Vérifie que `entry.path` vaut `"Common/Characters/Heroes/brawler/brawler.glb"`.
+- Vérifie que `entry.mesh` est vrai.
+- Vérifie que `entry.clipDuration` vaut `0.5` (comparaison flottante).
+- Vérifie que `formes` vaut `(std::vector<std::string>{"idle", "walk", "portrait", "token"})`.
+- Vérifie que `unlisted` vaut `(std::vector<std::string>{"Common/Characters/Heroes/oublie/oublie.glb"})`.
+
+### AssetGalleryTest.UnEffetSeJoueDansLaGalerie
+
+*Majeur · Unitaire · Galerie des assets* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery.cpp:492`
+
+Exigences : `EX-CNT-042`
+
+Un effet parait anime dans la galerie.
+
+**Étapes**
+
+1. Ecrire `Common/Fx/manifest.json` qui cite `fire-bolt.png` (2048 x 256), et son `.anim.json` a huit images de 256 x 256.
+2. Lire le catalogue.
+3. Chercher les images non listees.
+
+**Résultat attendu**
+
+- Vérifie que `catalog.errors.empty()` est vrai.
+- Vérifie que `effets` diffère de `nullptr`.
+- Vérifie que `effets->entries.size()` vaut `1U`.
+- Vérifie que `trait.form` vaut `"fire-bolt"`.
+- Vérifie que `trait.frameWidth` vaut `256`.
+- Vérifie que `trait.frameHeight` vaut `256`.
+- Vérifie que `trait.frameCount()` vaut `8`.
+- Vérifie que `trait.loop` est faux.
+- Vérifie que `unlisted.empty()` est vrai.
+
+## test_asset_gallery_renderer.cpp
+
+### AssetGalleryRendererTest.ChargementEtLiberation
+
+*Bloquant · Unitaire · Galerie des assets (rendu)* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery_renderer.cpp:119`
+
+La galerie ne garde que les textures voulues.
+
+**Étapes**
+
+1. Dessiner le portrait d'un PNJ. 2. Ne plus rien vouloir, 1 s puis 1,5 s.
+
+**Résultat attendu**
+
+- Vérifie que `renderer.ensureResources(rhi.get())` est vrai.
+- Vérifie que `renderer.cachedTextureCount()` vaut `1U`.
+- Vérifie que `paintedPixels(image)` est strictement supérieur à `100U`.
+- Vérifie que `renderer.cachedTextureCount()` vaut `1U`.
+- Vérifie que `renderer.cachedTextureCount()` vaut `0U`.
+
+### AssetGalleryRendererTest.ChargementsEtalesEtFichierAbsent
+
+*Majeur · Unitaire · Galerie des assets (rendu)* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery_renderer.cpp:149`
+
+Les chargements s'étalent, un fichier absent ne bloque rien.
+
+**Étapes**
+
+1. Vouloir 30 textures d'un coup. 2. Dessiner une texture absente.
+
+**Résultat attendu**
+
+- Vérifie que `renderer.ensureResources(rhi.get())` est vrai.
+- Vérifie que `renderer.cachedTextureCount()` vaut `static_cast<std::size_t>(hmi::AssetGalleryRenderer::UPLOADS_PER_FRAME)`.
+- Vérifie que `renderer.loading()` est vrai.
+- Vérifie que `renderer.cachedTextureCount()` vaut `28U`.
+- Vérifie que `renderer.loading()` est faux.
+- Vérifie que `absent.ensureResources(rhi.get())` est vrai.
+- Vérifie que `absent.cachedTextureCount()` vaut `1U`.
+- Vérifie que `paintedPixels(image)` est strictement supérieur à `100U`.
+
+### AssetGalleryRendererTest.UnModeleSeDessineEtSAnime
+
+*Bloquant · Unitaire · Galerie des assets (rendu)* — `Source/Test/Unit/HMI/Graphics/test_asset_gallery_renderer.cpp:193`
+
+La galerie dessine un modele de personnage, anime par son clip.
+
+**Étapes**
+
+1. Dessiner le modèle du PNJ d'essai au début de son attaque, puis à son image clé.
+2. Dessiner un modèle absent.
+
+**Résultat attendu**
+
+- Vérifie que `renderer.ensureResources(rhi.get())` est vrai.
+- Vérifie que `renderer.cachedModelCount()` vaut `1U`.
+- Vérifie que `renderer.cachedTextureCount()` vaut `0U`.
+- Vérifie que `green(start)` est strictement supérieur à `200U`.
+- Vérifie que `green(strike)` est strictement supérieur à `200U`.
+- Vérifie que `start` diffère de `strike`.
+- Vérifie que `renderer.cachedModelCount()` vaut `2U`.
+- Vérifie que `green(absent)` vaut `0U`.
+
+## test_capital_kit_render.cpp
+
+### CapitalKitRender.AStreetOfTwelveCellsIsComposedWithTheKitAlone
+
+*Bloquant · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_capital_kit_render.cpp:134`
+
+Le moteur rend une rue de douze cases composee du seul kit de la Capitale.
+
+**Étapes**
+
+1. Copier le Scene/ installe du kit sous une racine temporaire.
+2. Composer douze cases sur cinq : facades, chaussee bordee, dallage et mobilier.
+3. La rendre hors ecran en 1920 x 1080 et ecrire l'image.
+
+**Résultat attendu**
+
+- Vérifie que `manifest.ok()` est vrai.
+- Vérifie que `manifest.manifest.find(placed.piece)` diffère de `nullptr`.
+- Vérifie que `manifest.manifest.find(streetFloor(column, row))` diffère de `nullptr`.
+- Vérifie que `texture->create()` est vrai.
+- Vérifie que `target->create()` est vrai.
+- Vérifie que `renderer.ensureResources(rhi.get())` est vrai.
+- Vérifie que `rhi->beginOffscreenFrame(&commandBuffer)` vaut `QRhi::FrameOpSuccess`.
+- Vérifie que `rhi->endOffscreenFrame()` vaut `QRhi::FrameOpSuccess`.
+- Vérifie que `rendered.size()` vaut `size`.
+- Vérifie que `share` est strictement supérieur à `0.08`.
+
+## test_city_block_render.cpp
+
+### CityBlockRenderTest.LeCadrageContientLIlot
+
+*Majeur · Unitaire · Plan de la ville* — `Source/Test/Unit/HMI/Graphics/test_city_block_render.cpp:36`
+
+Le cadrage d'un ilot couvre son losange englobant, plus la hauteur des pieces.
+
+**Étapes**
+
+1. Cadrer un ilot de 10 x 8 cases, puis un de 20 x 16, sur une carte de 48 x 40, pour un lieu dont la piece la plus haute s'eleve d'une case et demie.
+
+**Résultat attendu**
+
+- Vérifie que `cadrePetit.pixelWidth` est strictement supérieur à `0`.
+- Vérifie que `cadreGrand.pixelWidth` vaut `2 * cadrePetit.pixelWidth`.
+- Vérifie que `static_cast<float>(cadrePetit.pixelHeight)` vaut `losange + (ELEVATION * hmi::CITY_BLOCK_TILE_PIXELS)`, à `1.0F` près.
+- Vérifie que `static_cast<float>(cadrePetit.pixelWidth)` vaut `static_cast<float>(petit.columns + petit.rows) / 2.0F * hmi::CITY_BLOCK_TILE_PIXELS`, à `1.0F` près.
+- Vérifie que `cadrePetit.focus.x + cadrePetit.focus.y` est strictement inférieur à `15.0F + 14.0F`.
+- Vérifie que `cadrePetit.focus.x - cadrePetit.focus.y` vaut `15.0F - 14.0F`, à `0.01F` près.
+
+### CityBlockRenderTest.UnIlotDevientUneImage
+
+*Majeur · Unitaire · Plan de la ville* — `Source/Test/Unit/HMI/Graphics/test_city_block_render.cpp:76`
+
+Un ilot d'un lieu se dessine hors ecran, a la taille de son cadrage.
+
+**Étapes**
+
+1. Charger une carte de ville, sa table d'apparence et son plus grand ilot.
+2. Le dessiner hors ecran.
+
+**Résultat attendu**
+
+- Vérifie que `lu.ok()` est vrai.
+- Vérifie que `table.ok()` est vrai.
+- Vérifie que `place` diffère de `ilots.end()`.
+- Vérifie que `instantane.maximumRise` est strictement supérieur à `0.0F`.
+- Vérifie que `image.width()` vaut `cadrage.pixelWidth`.
+- Vérifie que `image.height()` vaut `cadrage.pixelHeight`.
+- Vérifie que `peints * 3` est strictement supérieur à `echantillons`.
+
+## test_depth_sort.cpp
+
+### TriParProfondeurTest.TroisPrimitivesSortentParPiedCroissant
+
+*Critique · Unitaire · Tri par profondeur* — `Source/Test/Unit/HMI/Graphics/test_depth_sort.cpp:46`
+
+Exigences : `EX-REN-018`
+
+Trois primitives a Y croissants sortent dans l'ordre de leur pied.
+
+**Étapes**
+
+1. Composer trois primitives de la bande de profondeur, dans le desordre, avec deux textures differentes.
+2. Trier la scene.
+
+**Résultat attendu**
+
+- Vérifie que `scene.size()` vaut `3u`.
+- Vérifie que `scene.quads()[0].sprite.x` vaut `1.0f` (comparaison flottante).
+- Vérifie que `scene.quads()[1].sprite.x` vaut `2.0f` (comparaison flottante).
+- Vérifie que `scene.quads()[2].sprite.x` vaut `0.0f` (comparaison flottante).
+
+### TriParProfondeurTest.PersonnageEntreDeuxObjets
+
+*Critique · Unitaire · Tri par profondeur* — `Source/Test/Unit/HMI/Graphics/test_depth_sort.cpp:73`
+
+Exigences : `EX-REN-018`
+
+Le personnage passe derriere un objet plus bas et devant un objet plus haut.
+
+**Étapes**
+
+1. Composer un arbre au-dessus du personnage, le personnage, puis un arbre en dessous.
+2. Trier.
+
+**Résultat attendu**
+
+- Vérifie que `scene.size()` vaut `3u`.
+- Vérifie que `scene.quads()[0].layer` vaut `hmi::RenderLayer::Object`.
+- Vérifie que `scene.quads()[1].layer` vaut `hmi::RenderLayer::Player`.
+- Vérifie que `scene.quads()[2].layer` vaut `hmi::RenderLayer::Object`.
+- Vérifie que `scene.quads()[2].sprite.x` vaut `2.0f` (comparaison flottante).
+
+### TriParProfondeurTest.PiedEgalConserveLOrdreDeComposition
+
+*Critique · Unitaire · Tri par profondeur* — `Source/Test/Unit/HMI/Graphics/test_depth_sort.cpp:101`
+
+Exigences : `EX-REN-018`
+
+A pied egal, l'ordre de composition est preserve : aucun scintillement.
+
+**Étapes**
+
+1. Composer trois primitives de meme pied, a des positions differentes.
+2. Trier.
+3. Recomposer et retrier a l'identique.
+
+**Résultat attendu**
+
+- Vérifie que `first` vaut `second`.
+- Vérifie que `first.size()` vaut `3u`.
+- Vérifie que `first[0]` vaut `3.0f` (comparaison flottante).
+
+### TriParProfondeurTest.QuantificationAuPixel
+
+*Majeur · Unitaire · Tri par profondeur* — `Source/Test/Unit/HMI/Graphics/test_depth_sort.cpp:137`
+
+Exigences : `EX-REN-018`
+
+Un ecart inferieur au pixel ne departage pas deux profondeurs.
+
+**Étapes**
+
+1. Calculer l'ordre de deux pieds distants d'un centieme d'unite.
+2. Le comparer a celui de deux pieds distants d'une demi-unite.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::depthSortOrder(4.0f)` vaut `hmi::depthSortOrder(4.01f)`.
+- Vérifie que `hmi::depthSortOrder(4.0f)` est strictement inférieur à `hmi::depthSortOrder(4.5f)`.
+- Vérifie que `hmi::depthSortOrder(1.0f)` est strictement inférieur à `hmi::depthSortOrder(9.0f)`.
+
+### TriParProfondeurTest.LaProfondeurNeDebordePasDeSaBande
+
+*Critique · Unitaire · Tri par profondeur* — `Source/Test/Unit/HMI/Graphics/test_depth_sort.cpp:155`
+
+Exigences : `EX-REN-014`
+
+La profondeur ne deborde pas de sa bande.
+
+**Étapes**
+
+1. Composer une tuile, un objet tres bas, un element d'interface tres haut.
+2. Trier.
+
+**Résultat attendu**
+
+- Vérifie que `scene.size()` vaut `3u`.
+- Vérifie que `scene.quads()[0].layer` vaut `hmi::RenderLayer::Tile`.
+- Vérifie que `scene.quads()[1].layer` vaut `hmi::RenderLayer::Object`.
+- Vérifie que `scene.quads()[2].layer` vaut `hmi::RenderLayer::UI`.
+- Vérifie que `recorder.isLayerOrderRespected()` est vrai.
+
+## test_entity_markers.cpp
+
+### EntityMarkersTest.TypeCamelCaseDevientUneCleKebabCase
+
+*Majeur · Unitaire · Marqueurs d'entite* — `Source/Test/Unit/HMI/Graphics/test_entity_markers.cpp:22`
+
+Le type d'entite devient une cle de marqueur en kebab-case.
+
+**Étapes**
+
+1. Convertir spawnPoint, arenaEntry, chest, NPCGuard et chest2.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::entityMarkerKey("spawnPoint")` vaut `"marker/spawn-point"`.
+- Vérifie que `hmi::entityMarkerKey("arenaEntry")` vaut `"marker/arena-entry"`.
+- Vérifie que `hmi::entityMarkerKey("chest")` vaut `"marker/chest"`.
+- Vérifie que `hmi::entityMarkerKey("NPCGuard")` vaut `"marker/npc-guard"`.
+- Vérifie que `hmi::entityMarkerKey("chest2")` vaut `"marker/chest2"`.
+
+### EntityMarkersTest.CaracteresInterditsIgnoresEtSeparateursNormalises
+
+*Majeur · Unitaire · Marqueurs d'entite* — `Source/Test/Unit/HMI/Graphics/test_entity_markers.cpp:39`
+
+Caracteres interdits ignores, separateurs normalises.
+
+**Étapes**
+
+1. Convertir des types avec tirets bas, espaces, ponctuation et accents.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::entityMarkerKey("_old__chest_")` vaut `"marker/old-chest"`.
+- Vérifie que `hmi::entityMarkerKey(" wooden - sign ")` vaut `"marker/wooden-sign"`.
+- Vérifie que `hmi::entityMarkerKey("a.b!c")` vaut `"marker/abc"`.
+- Vérifie que `hmi::entityMarkerKey("a.B")` vaut `"marker/a-b"`.
+- Vérifie que `hmi::entityMarkerKey("coffre\xC3\xA9")` vaut `"marker/coffre"`.
+
+### EntityMarkersTest.TypeVideDonneLeMarqueurInconnu
+
+*Majeur · Unitaire · Marqueurs d'entite* — `Source/Test/Unit/HMI/Graphics/test_entity_markers.cpp:56`
+
+Un type vide donne le marqueur inconnu.
+
+**Étapes**
+
+1. Convertir "", "---" et "!?".
+
+**Résultat attendu**
+
+- Vérifie que `hmi::entityMarkerKey("")` vaut `"marker/inconnu"`.
+- Vérifie que `hmi::entityMarkerKey("---")` vaut `"marker/inconnu"`.
+- Vérifie que `hmi::entityMarkerKey("!?")` vaut `"marker/inconnu"`.
+
+### EntityMarkersTest.ChaqueCleEstValideEtSePeint
+
+*Critique · Unitaire · Marqueurs d'entite* — `Source/Test/Unit/HMI/Graphics/test_entity_markers.cpp:72`
+
+Chaque cle de marqueur est une cle d'asset valide qui se peint.
+
+**Étapes**
+
+1. Convertir chaque type de knownEntityKinds et des types hostiles.
+2. Valider la cle et peindre le marqueur.
+
+**Résultat attendu**
+
+- Vérifie que `core::isValidAssetKey(key)` est vrai.
+- Vérifie que `image.isEmpty()` est faux.
+
+### EntityMarkersTest.PixelsEmpaquetesEnRgba8
+
+*Majeur · Unitaire · Marqueurs d'entite* — `Source/Test/Unit/HMI/Graphics/test_entity_markers.cpp:97`
+
+Les pixels du marqueur sont empaquetes au format de createTexture.
+
+**Étapes**
+
+1. Empaqueter une image 2x1 connue.
+2. Empaqueter une image vide.
+
+**Résultat attendu**
+
+- Vérifie que `pixels.size()` vaut `2u`.
+- Vérifie que `pixels[0]` vaut `0x44332211u`.
+- Vérifie que `pixels[1]` vaut `0xFFCCBBAAu`.
+- Vérifie que `hmi::markerPixelsRgba8(core::MarkerImage{}).empty()` est vrai.
+
+## test_figure_model.cpp
+
+### FigureModelTest.UneFigurineSeComposeEnMaillage
+
+*Bloquant · Unitaire · Rendu d'un lieu · Squelette* — `Source/Test/Unit/HMI/Graphics/test_figure_model.cpp:112`
+
+Une figurine se compose en maillage ; un effet en image ; sans modele, son marqueur.
+
+**Étapes**
+
+1. Composer le pantin a 0,4 s de son attaque, un effet et une figurine dont aucun modele n'est charge.
+2. Lire la scene composee et les chemins demandes.
+
+**Résultat attendu**
+
+- Vérifie que `scene.meshes().size()` vaut `1U`.
+- Vérifie que `mesh.layer` vaut `hmi::RenderLayer::Player`.
+- Vérifie que `mesh.mesh` vaut `&place.identities[0]`.
+- Vérifie que `mesh.poseFloats` vaut `3U * 16U`.
+- Vérifie que `top[1]` vaut `0.9F + (0.9F * 0.5F)`, à `TOLERANCE` près.
+- Vérifie que `top[2]` vaut `0.9F * std::sin(std::numbers::pi_v<float> / 3.0F)`, à `TOLERANCE` près.
+- Vérifie que `scene.quads().size()` vaut `2U`.
+- Vérifie que `scene.quads()[0].texture` vaut `&place.identities[1]`.
+- Vérifie que `scene.quads()[1].texture` vaut `&place.identities[3]`.
+- Vérifie que `hmi::worldFigureTexturePaths(place.snapshot, figures)` vaut `(std::vector<std::string>{EFFECT, MARKER})`.
+- Vérifie que `hmi::worldFigureModelPaths(figures)` vaut `(std::vector<std::string>{MODEL})`.
+- Vérifie que `hmi::figureMarkerKey(MARKER)` vaut `"npc/inconnu"`.
+- Vérifie que `hmi::effectStripPath("temoin")` vaut `EFFECT`.
+
+### FigureModelTest.LaFicheDuDossierDonneLeModele
+
+*Critique · Unitaire · Rendu d'un lieu · Squelette* — `Source/Test/Unit/HMI/Graphics/test_figure_model.cpp:159`
+
+Sans modele nomme, la fiche du dossier de la figurine le donne.
+
+**Étapes**
+
+1. Composer la figurine `pantin`, sans modele nomme, le rendu ayant lu la fiche de son dossier.
+2. La composer pour un dossier dont la fiche ne donne rien.
+
+**Résultat attendu**
+
+- Vérifie que `found.meshes().size()` vaut `1U`.
+- Vérifie que `found.meshes().front().mesh` vaut `&place.identities[0]`.
+- Vérifie que `found.quads().empty()` est vrai.
+- Vérifie que `none.meshes().empty()` est vrai.
+- Vérifie que `none.quads().empty()` est vrai.
+
+### FigureModelTest.UnClipBoucleOuSeFige
+
+*Critique · Unitaire · Rendu d'un lieu · Squelette* — `Source/Test/Unit/HMI/Graphics/test_figure_model.cpp:187`
+
+Un clip boucle ou se fige selon ce que son squelette declare.
+
+**Étapes**
+
+1. Composer le pantin a 0,125 s puis a 0,625 s de sa marche (clip de 0,5 s, en boucle).
+2. Le composer a 0,8 s puis a 30 s de sa chute (jouee une fois).
+3. Le composer sur un tir, qu'il n'a pas, puis sur un clip inconnu.
+
+**Résultat attendu**
+
+- Vérifie que `scene.meshes().size()` vaut `1U`.
+- Vérifie que `step.size()` vaut `nextCycle.size()`.
+- Vérifie que `step[index]` vaut `nextCycle[index]`, à `TOLERANCE` près.
+- Vérifie que `step` diffère de `poseOf("walk", 0.0F)`.
+- Vérifie que `poseOf("death", 0.8F)` vaut `poseOf("death", 30.0F)`.
+- Vérifie que `crown(fallen, fallen.meshes().front())[1]` vaut `0.2F`, à `TOLERANCE` près.
+- Vérifie que `poseOf("ranged", 0.4F)` vaut `poseOf("attack", 0.4F)`.
+- Vérifie que `poseOf("dance", 0.25F)` vaut `poseOf("idle", 0.25F)`.
+
+### FigureModelTest.UnModeleFaitFaceASonCap
+
+*Critique · Unitaire · Rendu d'un lieu · Squelette* — `Source/Test/Unit/HMI/Graphics/test_figure_model.cpp:225`
+
+Un modele fait face a son cap, sans table de quatre orientations.
+
+**Étapes**
+
+1. Composer le pantin avec un cap vers les colonnes croissantes, vers les lignes croissantes, puis a 30 degres entre les deux.
+2. Le composer sans cap.
+3. Lire ou sa pose dans la vue met un point situe un metre devant lui.
+
+**Résultat attendu**
+
+- Vérifie que `scene.meshes().size()` vaut `1U`.
+- Vérifie que `foot[0]` vaut `expected.x`, à `TOLERANCE` près.
+- Vérifie que `foot[1]` vaut `expected.y`, à `TOLERANCE` près.
+- Vérifie que `point[0]` vaut `target.x`, à `TOLERANCE` près.
+- Vérifie que `point[1]` vaut `target.y`, à `TOLERANCE` près.
+- Vérifie que `hmi::figureHeadingFor({1.0F, 1.0F}, 0.0F)` vaut `QUARTER / 2.0F`, à `TOLERANCE` près.
+- Vérifie que `hmi::figureHeadingFor({0.0F, 0.0F}, 1.25F)` vaut `1.25F` (comparaison flottante).
+
+### FigureModelTest.UnModeleAbsentNeDessineRien
+
+*Majeur · Unitaire · Rendu d'un lieu · Squelette* — `Source/Test/Unit/HMI/Graphics/test_figure_model.cpp:272`
+
+Un modele qui ne s'est pas charge ne dessine rien.
+
+**Étapes**
+
+1. Composer une figurine dont le modele n'est pas parmi ceux du rendu.
+
+**Résultat attendu**
+
+- Vérifie que `scene.meshes().empty()` est vrai.
+- Vérifie que `scene.quads().empty()` est vrai.
+
+## test_figure_model_render.cpp
+
+### FigureModelRenderTest.LeModeleDEssaiSeDessineEtJoueSesClips
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Squelette* — `Source/Test/Unit/HMI/Graphics/test_figure_model_render.cpp:145`
+
+Le modele d'essai se dessine et joue ses clips par ses os.
+
+**Étapes**
+
+1. Rendre la carte d'essai, le pantin au repos devant l'îlot.
+2. Le rendre à 0,4 s de son attaque : le buste penché de 60° vers la caméra.
+3. Le tourner vers la droite de l'écran et le rendre à la fin de sa chute, puis trente secondes plus tard.
+
+**Résultat attendu**
+
+- Vérifie que `model` diffère de `nullptr`.
+- Vérifie que `model->rig` diffère de `nullptr`.
+- Vérifie que `model->rig->joints.size()` vaut `3U`.
+- Vérifie que `model->skeleton` diffère de `nullptr`.
+- Vérifie que `model->skeleton->silhouette` vaut `"pantin"`.
+- Vérifie que `path.starts_with("Npc/pantin/") && path.ends_with(".png")` est faux.
+- Vérifie que `idle.pixels` est strictement supérieur à `300U`.
+- Vérifie que `idle.height()` est strictement supérieur à `40`.
+- Vérifie que `idle.height()` est strictement inférieur à `62`.
+- Vérifie que `strike.pixels` est strictement supérieur à `300U`.
+- Vérifie que `strike.top` est strictement supérieur à `idle.top + (idle.height() / 5)`.
+- Vérifie que `std::abs(strike.left - idle.left)` est inférieur ou égal à `1`.
+- Vérifie que `fallen.pixels` est strictement supérieur à `300U`.
+- Vérifie que `fallen.width()` est strictement supérieur à `fallen.height() * 2`.
+- Vérifie que `fallen.left` est strictement inférieur à `idle.left - 20`.
+- Vérifie que `fallen.pixels` vaut `later.pixels`.
+- Vérifie que `fallen.left` vaut `later.left`.
+
+### FigureModelRenderTest.UnModeleSeDepartageParLaProfondeur
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Squelette* — `Source/Test/Unit/HMI/Graphics/test_figure_model_render.cpp:211`
+
+Un modele passe derriere un mur, et se tient entier sur un sol en image.
+
+**Étapes**
+
+1. Rendre le pantin devant l'îlot, sur la cour en maillages (5, 5).
+2. Le rendre derrière l'îlot (5, 1).
+3. Le rendre sur le sol en images, hors de la cour (1, 6).
+
+**Résultat attendu**
+
+- Vérifie que `front.pixels` est strictement supérieur à `300U`.
+- Vérifie que `behind.pixels` est strictement inférieur à `front.pixels / 4`.
+- Vérifie que `behind.height()` est strictement inférieur à `front.height() / 3`.
+- Vérifie que `paved.pixels` est strictement supérieur à `(front.pixels * 95) / 100`.
+- Vérifie que `paved.pixels` est strictement inférieur à `(front.pixels * 105) / 100`.
+- Vérifie que `paved.height()` vaut `front.height()`, à `1` près.
+
+### FigureModelRenderTest.BandesEtModeleCohabitent
+
+*Critique · Unitaire · Rendu QRhi d'un lieu · Squelette* — `Source/Test/Unit/HMI/Graphics/test_figure_model_render.cpp:247`
+
+Bandes et modele cohabitent ; sans modele, l'image est celle d'avant.
+
+**Étapes**
+
+1. Rendre la carte d'essai avec la figurine témoin, en bandes.
+2. La rendre avec la figurine témoin et le pantin.
+3. La rendre de nouveau avec la figurine témoin seule.
+
+**Résultat attendu**
+
+- Vérifie que `seen(before).pixels` vaut `0U`.
+- Vérifie que `renderer.composed().meshes().size()` vaut `meshesBefore + 1`.
+- Vérifie que `seen(together).pixels` est strictement supérieur à `300U`.
+- Vérifie que `before.size()` vaut `after.size()`.
+- Vérifie que `differing` vaut `0U`.
+
+### FigureModelRenderTest.LeMannequinDEssaiMarche
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Squelette* — `Source/Test/Unit/HMI/Graphics/test_figure_model_render.cpp:297`
+
+Le mannequin d'essai marche sur la carte d'essai.
+
+**Étapes**
+
+1. Rendre la carte d'essai sans figurine.
+2. La rendre avec le mannequin d'essai a deux instants de sa marche, puis a la fin de sa chute.
+
+**Résultat attendu**
+
+- Vérifie que `loaded` diffère de `nullptr`.
+- Vérifie que `loaded->rig` diffère de `nullptr`.
+- Vérifie que `loaded->rig->joints.size()` vaut `53U`.
+- Vérifie que `differing(bare, first)` est strictement supérieur à `300U`.
+- Vérifie que `differing(bare, second)` est strictement supérieur à `300U`.
+- Vérifie que `differing(bare, fallen)` est strictement supérieur à `300U`.
+- Vérifie que `differing(first, second)` est strictement supérieur à `100U`.
+
+### FigureModelRenderTest.UnModeleDeLAtelierSeRendClipParClip
+
+*Mineur · Unitaire · Rendu QRhi d'un lieu · Squelette* — `Source/Test/Unit/HMI/Graphics/test_figure_model_render.cpp:360`
+
+Un modele de l'atelier se rend clip par clip, a la taille du jeu.
+
+**Étapes**
+
+1. Désigner un `.glb` lié par la variable d'environnement `JADG_FIGURE_MODEL`.
+2. Le rendre sur la carte d'essai, une case à 100 px puis à 200 px, à quatre instants de chacun de ses clips, face à la caméra puis de dos.
+
+**Résultat attendu**
+
+- Vérifie que `loaded` diffère de `nullptr`.
+- Vérifie que `loaded->rig` diffère de `nullptr`.
+- Vérifie que `clips.empty()` est faux.
+
+## test_hd_mockup_render.cpp
+
+### HdMockupRender.MatchesTheHandMadeMockupAt1080p
+
+*Bloquant · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_hd_mockup_render.cpp:221`
+
+Le moteur rend la maquette du standard 2D HD a 1080p.
+
+**Étapes**
+
+1. Lire la scene et les pieces installees de Fixtures/HdMockup.
+2. La rendre hors ecran en 1920 x 1080, cadree sur le milieu de la place.
+3. La comparer a maquette-2d-hd-1080.png.
+
+**Résultat attendu**
+
+- L'ecart moyen par canal reste sous le seuil ecrit dans le test.
+
+### HdMockupRender.MatchesTheHandMadeMockupAt2160p
+
+*Bloquant · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_hd_mockup_render.cpp:237`
+
+Le moteur rend la maquette du standard 2D HD a 2160p.
+
+**Étapes**
+
+1. Rendre la meme scene en 3840 x 2160.
+2. En extraire la fenetre centrale de 1920 x 1080.
+3. La comparer a maquette-2d-hd-2160.png.
+
+**Résultat attendu**
+
+- L'ecart moyen par canal reste sous le seuil ecrit dans le test.
+
+### HdMockupRender.WritesASlowTravellingForTheAuthor
+
+*Mineur · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_hd_mockup_render.cpp:259`
+
+Le travelling de la maquette s'ecrit pour le controle visuel.
+
+**Étapes**
+
+1. Nommer un dossier dans JADG_TRAVELLING_DIR.
+2. Rendre 96 images de la maquette, la camera glissant d'un quart de pixel par image.
+
+**Résultat attendu**
+
+- Vérifie que `scene.is_discarded()` est faux.
+- Vérifie que `images.size()` vaut `focuses.size()`.
+- Vérifie que `images[index].save(QString::fromStdWString((output / name).wstring()))` est vrai.
+
+## test_image_encode.cpp
+
+### ImageEncode.AllerRetourExactAlphaCompris
+
+*Critique · Unitaire · Encodage image* — `Source/Test/Unit/HMI/Graphics/test_image_encode.cpp:75`
+
+Encoder puis decoder une image restitue exactement les memes pixels, alpha compris.
+
+**Étapes**
+
+1. Encoder une image 2x2 couvrant plusieurs niveaux d'alpha vers un fichier PNG.
+2. Decoder ce fichier.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::encodeImageFile(path, original)` est vrai.
+- Vérifie que `decoded.has_value()` est vrai.
+- Vérifie que `decoded->width` vaut `original.width`.
+- Vérifie que `decoded->height` vaut `original.height`.
+- Vérifie que `decoded->pixels` vaut `original.pixels`.
+
+### ImageEncode.DossierInexistantEchoueProprement
+
+*Majeur · Unitaire · Encodage image* — `Source/Test/Unit/HMI/Graphics/test_image_encode.cpp:100`
+
+Encoder vers un dossier inexistant echoue proprement, sans exception.
+
+**Étapes**
+
+1. Tenter d'encoder une image vers un chemin dont le dossier parent n'existe pas.
+
+**Résultat attendu**
+
+- `EXPECT_NO_THROW(result = hmi::encodeImageFile(path, original))`
+- Vérifie que `result` est faux.
+
+### ImageEncode.DimensionsIncoherentesEchouentProprement
+
+*Majeur · Unitaire · Encodage image* — `Source/Test/Unit/HMI/Graphics/test_image_encode.cpp:119`
+
+Encoder une image aux dimensions incoherentes echoue proprement.
+
+**Étapes**
+
+1. Construire une image dont le nombre de pixels ne correspond pas a largeur*hauteur.
+2. Tenter de l'encoder.
+
+**Résultat attendu**
+
+- `EXPECT_NO_THROW(result = hmi::encodeImageFile(path, broken))`
+- Vérifie que `result` est faux.
+- Vérifie que `fileCount()` vaut `0U`.
+
+### ImageEncode.AucunFichierTemporaireApresSucces
+
+*Majeur · Unitaire · Encodage image* — `Source/Test/Unit/HMI/Graphics/test_image_encode.cpp:142`
+
+Aucun fichier temporaire ne subsiste apres un encodage reussi.
+
+**Étapes**
+
+1. Encoder une image vers un fichier.
+2. Lister le dossier de destination.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::encodeImageFile(dir / "asset.png", sampleImage())` est vrai.
+- Vérifie que `fileCount()` vaut `1U`.
+- Vérifie que `std::filesystem::exists(dir / "asset.png")` est vrai.
+
+### ImageEncode.EcrasementAtomiqueSansResidu
+
+*Majeur · Unitaire · Encodage image* — `Source/Test/Unit/HMI/Graphics/test_image_encode.cpp:160`
+
+Enregistrer par-dessus un asset existant remplace son contenu sans residu.
+
+**Étapes**
+
+1. Encoder une premiere image vers un fichier.
+2. Encoder une seconde image differente vers le meme fichier.
+3. Decoder le fichier et lister le dossier.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::encodeImageFile(path, sampleImage())` est vrai.
+- Vérifie que `hmi::encodeImageFile(path, second)` est vrai.
+- Vérifie que `decoded.has_value()` est vrai.
+- Vérifie que `decoded->width` vaut `1`.
+- Vérifie que `decoded->height` vaut `1`.
+- Vérifie que `fileCount()` vaut `1U`.
+
+## test_iso_view.cpp
+
+### IsoViewTest.LeSolDUnMaillageTombeSurLaGrille
+
+*Bloquant · Unitaire · Vue en volume* — `Source/Test/Unit/HMI/Graphics/test_iso_view.cpp:45`
+
+Le sol d'un maillage tombe sur la grille.
+
+**Étapes**
+
+1. Poser un maillage au point de grille (4,5 ; 2,5).
+2. Relever où tombent son origine, le point à 1,5 m en +X et le point à 1,5 m en +Z.
+
+**Résultat attendu**
+
+- Vérifie que `point[0]` vaut `world.x`, à `TOLERANCE` près.
+- Vérifie que `point[1]` vaut `world.y`, à `TOLERANCE` près.
+- Vérifie que `point[2]` vaut `view.groundDepth(world.y)`, à `TOLERANCE` près.
+
+### IsoViewTest.LesMesuresDuStandardSortentDeLaVue
+
+*Bloquant · Unitaire · Vue en volume* — `Source/Test/Unit/HMI/Graphics/test_iso_view.cpp:73`
+
+Les mesures du standard 3D sortent de la vue sans reglage.
+
+**Étapes**
+
+1. Rapporter la vue au losange d'art de 256 pixels.
+2. Mesurer un mètre à l'horizontale, un corps de 1,80 m, un étage de 2,366 m.
+
+**Résultat attendu**
+
+- Vérifie que `view.sine()` vaut `0.62F`, à `1e-6F` près.
+- Vérifie que `view.unitsPerMetre() * artPixelsPerUnit` vaut `120.7F`, à `0.05F` près.
+- Vérifie que `view.riseOf(1.80F) * artPixelsPerUnit` vaut `170.0F`, à `0.5F` près.
+- Vérifie que `view.riseOf(2.36573F) / projection.tileWidth()` vaut `0.875F`, à `1e-4F` près.
+- Vérifie que `head[0]` vaut `ground[0]`, à `TOLERANCE` près.
+- Vérifie que `ground[1] - head[1]` vaut `view.riseOf(1.80F)`, à `TOLERANCE` près.
+- Vérifie que `head[2]` est strictement inférieur à `ground[2]`.
+
+### IsoViewTest.LaVueEstUneRotation
+
+*Majeur · Unitaire · Vue en volume* — `Source/Test/Unit/HMI/Graphics/test_iso_view.cpp:103`
+
+La vue est une rotation : les distances sont gardees.
+
+**Étapes**
+
+1. Prendre des couples de points quelconques d'un maillage.
+2. Comparer leur distance dans la vue à leur distance en mètres.
+
+**Résultat attendu**
+
+- Vérifie que `units` vaut `metres * view.unitsPerMetre()`, à `1e-3F` près.
+
+### IsoViewTest.UnEtageEleveUnMaillage
+
+*Majeur · Unitaire · Vue en volume* — `Source/Test/Unit/HMI/Graphics/test_iso_view.cpp:130`
+
+Un etage eleve un maillage sans le deplacer au sol.
+
+**Étapes**
+
+1. Poser le même maillage au rez, puis élevé d'un étage de 0,875 largeur de case.
+2. Comparer avec le sommet d'un mur haut d'un étage, posé au rez.
+
+**Résultat attendu**
+
+- Vérifie que `raised[0]` vaut `wallTop[0]`, à `TOLERANCE` près.
+- Vérifie que `raised[1]` vaut `wallTop[1]`, à `TOLERANCE` près.
+- Vérifie que `raised[2]` vaut `wallTop[2]`, à `TOLERANCE` près.
+
+### IsoViewTest.UneImageDresseeSeRangeCommeUnPlanVertical
+
+*Bloquant · Unitaire · Vue en volume* — `Source/Test/Unit/HMI/Graphics/test_iso_view.cpp:156`
+
+Une image dressee se range comme un plan vertical.
+
+**Étapes**
+
+1. Dresser une image sur une ligne de pied.
+2. Comparer sa profondeur, de son pied à 2 m de haut, à celle d'un flanc de mur vertical placé 0,3 m derrière elle, puis 0,3 m devant.
+3. Comparer, sous son pied, sa profondeur à celle du sol.
+
+**Résultat attendu**
+
+- Vérifie que `view.standingDepth(footY, behind[1])` est strictement inférieur à `behind[2]`.
+- Vérifie que `front[1]` est strictement inférieur à `footY`.
+- Vérifie que `view.standingDepth(footY, front[1])` est strictement supérieur à `front[2]`.
+- Vérifie que `view.groundDepth(footY)` est strictement supérieur à `behindHead[2]`.
+- Vérifie que `view.standingDepth(footY, footY + 0.4F)` vaut `view.groundDepth(footY + 0.4F)` (comparaison flottante).
+- Vérifie que `view.standingDepth(footY, footY)` vaut `view.groundDepth(footY)` (comparaison flottante).
+
+### IsoViewTest.LEtendueDeProfondeurContientLaScene
+
+*Majeur · Unitaire · Vue en volume* — `Source/Test/Unit/HMI/Graphics/test_iso_view.cpp:206`
+
+L'etendue de profondeur contient la scene.
+
+**Étapes**
+
+1. Demander l'étendue de profondeur d'une grille.
+2. Y chercher le sol de ses quatre coins et le sommet d'un volume de 20 m.
+3. Projeter la boîte d'un mur d'une case.
+
+**Résultat attendu**
+
+- Vérifie que `range.nearest` est strictement inférieur à `range.farthest`.
+- Vérifie que `ground[2]` est strictement supérieur à `range.nearest`.
+- Vérifie que `ground[2]` est strictement inférieur à `range.farthest`.
+- Vérifie que `top[2]` est strictement supérieur à `range.nearest`.
+- Vérifie que `top[2]` est strictement inférieur à `range.farthest`.
+- Vérifie que `bounds.position.x` vaut `tile.position.x`, à `TOLERANCE` près.
+- Vérifie que `bounds.size.x` vaut `tile.size.x`, à `TOLERANCE` près.
+- Vérifie que `bounds.position.y + bounds.size.y` vaut `tile.position.y + tile.size.y`, à `TOLERANCE` près.
+- Vérifie que `bounds.position.y` vaut `tile.position.y - view.riseOf(2.0F)`, à `TOLERANCE` près.
+
+## test_lit_render.cpp
+
+### LitRenderTest.LaCarteDEssaiSeRendAuxQuatreHeures
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Lumière* — `Source/Test/Unit/HMI/Graphics/test_lit_render.cpp:125`
+
+La carte d'essai se rend a l'aube, a midi, au crepuscule et la nuit.
+
+**Étapes**
+
+1. Rendre la carte d'essai et son mannequin sans éclairage.
+2. La rendre à 06:30, 12:00, 19:00 et 00:00, avec les ombres.
+
+**Résultat attendu**
+
+- Vérifie que `image.size()` vaut `SIZE`.
+- Vérifie que `unlit.isNull()` est faux.
+- Vérifie que `meanLuminance(dawn, everywhere)` est strictement inférieur à `noonLight`.
+- Vérifie que `meanLuminance(dusk, everywhere)` est strictement inférieur à `noonLight`.
+- Vérifie que `nightLight` est strictement inférieur à `meanLuminance(dawn, everywhere)`.
+- Vérifie que `nightLight` est strictement inférieur à `meanLuminance(dusk, everywhere)`.
+- Vérifie que `nightLight` est strictement supérieur à `noonLight / 3.0`.
+- Vérifie que `nightBlue / nightRed` est strictement supérieur à `noonBlue / noonRed`.
+- Vérifie que `duskRed / duskBlue` est strictement supérieur à `noonRed / noonBlue`.
+
+### LitRenderTest.AMidiLaLumiereNeChangePasLaFacture
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Lumière* — `Source/Test/Unit/HMI/Graphics/test_lit_render.cpp:188`
+
+A midi, la lumiere ne change pas la facture.
+
+**Étapes**
+
+1. Rendre la carte d'essai, sans mannequin, sans éclairage.
+2. La rendre à midi, sans ombres.
+
+**Résultat attendu**
+
+- Vérifie que `unlit.size()` vaut `SIZE`.
+- Vérifie que `noon.size()` vaut `SIZE`.
+- Vérifie que `same` est strictement supérieur à `static_cast<std::size_t>(SIZE.width() * SIZE.height()) / 2U`.
+- Vérifie que `unlitRoof` est strictement supérieur à `0.0`.
+- Vérifie que `noonRoof` est strictement supérieur à `0.0`.
+- Vérifie que `noonRoof / unlitRoof` vaut `1.0`, à `0.2` près.
+- Vérifie que `redToBlue(noon) / redToBlue(unlit)` vaut `1.0`, à `0.1` près.
+
+### LitRenderTest.LesMaillagesJettentUneOmbreQueLeReglageRetire
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Lumière* — `Source/Test/Unit/HMI/Graphics/test_lit_render.cpp:253`
+
+Les maillages jettent une ombre, que le reglage retire.
+
+**Étapes**
+
+1. Rendre la carte d'essai et son mannequin à 16:00, ombres éteintes.
+2. La rendre à la même heure, ombres allumées, à 2048 puis à 512 texels.
+3. La rendre de nouveau ombres éteintes.
+
+**Résultat attendu**
+
+- Vérifie que `flat.size()` vaut `SIZE`.
+- Vérifie que `fine` est strictement supérieur à `2000U`.
+- Vérifie que `brighter` vaut `0U`.
+- Vérifie que `static_cast<double>(rough)` vaut `static_cast<double>(fine)`, à `static_cast<double>(fine) / 5.0` près.
+- Vérifie que `again` vaut `flat`.
+
+### LitRenderTest.UneLumiereDeNuitEclaireAutourDElle
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Lumière* — `Source/Test/Unit/HMI/Graphics/test_lit_render.cpp:312`
+
+Une lumiere de nuit eclaire autour d'elle, la nuit.
+
+**Étapes**
+
+1. Rendre la carte d'essai à minuit, sans source.
+2. Y poser une lanterne en (2, 6), de 4,5 m de portée, et la rendre à minuit.
+3. La rendre à midi ; puis à midi, la lanterne toujours allumée.
+
+**Résultat attendu**
+
+- Vérifie que `lamp.size()` vaut `SIZE`.
+- Vérifie que `QRect(QPoint(0, 0), SIZE).contains(under)` est vrai.
+- Vérifie que `meanLuminance(lamp, around)` est strictement supérieur à `meanLuminance(dark, around) * 1.4`.
+- Vérifie que `warm.red() - warm.blue()` est strictement supérieur à `cold.red() - cold.blue()`.
+- Vérifie que `QRect(QPoint(0, 0), SIZE).contains(away)` est vrai.
+- Vérifie que `lamp.pixel(away)` vaut `dark.pixel(away)`.
+- Vérifie que `lampAtNoon` vaut `noon`.
+- Vérifie que `alwaysAtNoon` diffère de `noon`.
+
+## test_maquette_tokens.cpp
+
+### MaquetteTokenTest.LaLettreEstLaPremiereAlphanumerique
+
+*Majeur · Unitaire · Jetons de maquette* — `Source/Test/Unit/HMI/Graphics/test_maquette_tokens.cpp:16`
+
+La lettre d'un jeton est la premiere alphanumerique de son nom.
+
+**Étapes**
+
+1. Demander la lettre de plusieurs noms, dont un vide et un sans lettre.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::maquetteTokenLetter("market-mother")` vaut `'M'`.
+- Vérifie que `hmi::maquetteTokenLetter("-- arenarea")` vaut `'A'`.
+- Vérifie que `hmi::maquetteTokenLetter("2e-porte")` vaut `'2'`.
+- Vérifie que `hmi::maquetteTokenLetter("")` vaut `'?'`.
+- Vérifie que `hmi::maquetteTokenLetter("---")` vaut `'?'`.
+
+### MaquetteTokenTest.LeCheminSeRelit
+
+*Critique · Unitaire · Jetons de maquette* — `Source/Test/Unit/HMI/Graphics/test_maquette_tokens.cpp:34`
+
+Le chemin d'un jeton se relit en sa nature et sa lettre.
+
+**Étapes**
+
+1. Ecrire puis relire le chemin de chaque nature.
+2. Relire des chemins qui n'en sont pas.
+
+**Résultat attendu**
+
+- Vérifie que `relu.has_value()` est vrai.
+- Vérifie que `relu->kind` vaut `kind`.
+- Vérifie que `relu->letter` vaut `'W'`.
+- Vérifie que `hmi::parseMaquetteTokenPath("Scene/coliseum/sand.png").has_value()` est faux.
+- Vérifie que `hmi::parseMaquetteTokenPath("Npc/anariel/idle.png").has_value()` est faux.
+- Vérifie que `hmi::parseMaquetteTokenPath("Token/inconnu/W.png").has_value()` est faux.
+- Vérifie que `hmi::parseMaquetteTokenPath("Token/player/MOT.png").has_value()` est faux.
+
+### MaquetteTokenTest.UneLettreIllisibleDonneUnPointDInterrogation
+
+*Majeur · Unitaire · Jetons de maquette* — `Source/Test/Unit/HMI/Graphics/test_maquette_tokens.cpp:62`
+
+Un nom illisible donne le chemin du point d'interrogation.
+
+**Étapes**
+
+1. Ecrire le chemin d'un jeton dont la lettre est un caractere de ponctuation.
+
+**Résultat attendu**
+
+- Vérifie que `relu.has_value()` est vrai.
+- Vérifie que `relu->letter` vaut `'?'`.
+
+### MaquetteTokenTest.LImageEstUnDisqueALettreDeterministe
+
+*Critique · Unitaire · Jetons de maquette* — `Source/Test/Unit/HMI/Graphics/test_maquette_tokens.cpp:79`
+
+L'image d'un jeton est un disque a lettre, deterministe.
+
+**Étapes**
+
+1. Peindre deux fois le meme jeton.
+2. Examiner le centre, un coin, et deux lettres differentes.
+
+**Résultat attendu**
+
+- Vérifie que `premiere.isEmpty()` est faux.
+- Vérifie que `premiere.width` vaut `44`.
+- Vérifie que `premiere.height` vaut `44`.
+- Vérifie que `premiere.pixels` vaut `seconde.pixels`.
+- Vérifie que `premiere.at(0, 0).a` vaut `0`.
+- Vérifie que `premiere.at(43, 43).a` vaut `0`.
+- Vérifie que `premiere.at(22, 22).a` vaut `255`.
+- Vérifie que `premiere.pixels` diffère de `autre.pixels`.
+
+### MaquetteTokenTest.UneDemandeImpossibleRendUneImageVide
+
+*Majeur · Unitaire · Jetons de maquette* — `Source/Test/Unit/HMI/Graphics/test_maquette_tokens.cpp:111`
+
+Une demande impossible rend une image vide.
+
+**Étapes**
+
+1. Demander un jeton de cote nul, puis l'image d'un chemin de planche.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::maquetteTokenImage(hmi::MaquetteTokenRequest{}, 0).isEmpty()` est vrai.
+- Vérifie que `hmi::maquetteTokenImage("Scene/coliseum/sand.png", 44).isEmpty()` est vrai.
+
+### MaquetteTokenTest.LesSixNaturesOntSixTeintes
+
+*Majeur · Unitaire · Jetons de maquette* — `Source/Test/Unit/HMI/Graphics/test_maquette_tokens.cpp:126`
+
+Les six natures de jeton ont six teintes distinctes.
+
+**Étapes**
+
+1. Comparer les teintes des six natures deux a deux.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::maquetteTokenColor(natures[i]) == hmi::maquetteTokenColor(natures[j])` est faux.
+- Vérifie que `hmi::maquetteTokenKindKey(natures[i])` diffère de `hmi::maquetteTokenKindKey(natures[j])`.
+
+## test_material_render.cpp
+
+### MaterialRenderTest.LesCartesDeMatiereChangentLImageEclairee
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Matière* — `Source/Test/Unit/HMI/Graphics/test_material_render.cpp:211`
+
+Les cartes de matiere changent l'image eclairee.
+
+**Étapes**
+
+1. Rendre la carte d'essai à midi, ses maillages n'ayant qu'une couleur de base.
+2. La rendre avec des cartes neutres : relief plat, matière mate sans occlusion.
+3. La rendre polie (rugosité 0,15), puis occluse de moitié, puis au relief penché.
+
+**Résultat attendu**
+
+- Vérifie que `temporary.isValid()` est vrai.
+- Vérifie que `plain.image.size()` vaut `SIZE`.
+- Vérifie que `same.brighter + same.darker` vaut `0U`.
+- Vérifie que `shine.brighter` est strictement supérieur à `500U`.
+- Vérifie que `shine.darker` vaut `0U`.
+- Vérifie que `shade.darker` est strictement supérieur à `500U`.
+- Vérifie que `shade.brighter` vaut `0U`.
+- Vérifie que `ignored.brighter + ignored.darker` vaut `0U`.
+- Vérifie que `bent.brighter + bent.darker` est strictement supérieur à `500U`.
+
+### MaterialRenderTest.UneImageDeMatiereCommuneNEstTeleverseeQuUneFois
+
+*Majeur · Unitaire · Rendu QRhi d'un lieu · Matière* — `Source/Test/Unit/HMI/Graphics/test_material_render.cpp:265`
+
+Une image de matiere commune n'est televersee qu'une fois.
+
+**Étapes**
+
+1. Rendre la carte d'essai telle quelle, puis ses trois maillages portant les mêmes cartes de relief et de matière de 4 × 4 pixels.
+
+**Résultat attendu**
+
+- Vérifie que `temporary.isValid()` est vrai.
+- Vérifie que `mapped.bytes` est strictement supérieur à `plain.bytes`.
+- Vérifie que `mapped.bytes - plain.bytes` est inférieur ou égal à `2U * ONE_MAP`.
+
+## test_mesh_composition.cpp
+
+### MeshCompositionTest.LeManifesteCiteUnMaillageOuUneImage
+
+*Bloquant · Unitaire · Maillages d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_mesh_composition.cpp:104`
+
+Le manifeste d'un lieu cite un maillage ou une image.
+
+**Étapes**
+
+1. Lire un manifeste dont une clé cite `"mesh"`, une `"file"`, une les deux, une aucun.
+2. Lire le lieu d'essai par `PlaceAppearance::loadForPlace`.
+
+**Résultat attendu**
+
+- Vérifie que `read.ok()` est vrai.
+- Vérifie que `read.manifest.pieces().size()` vaut `3U`.
+- Vérifie que `mur` diffère de `nullptr`.
+- Vérifie que `mur->isMesh()` est vrai.
+- Vérifie que `mur->path()` vaut `"walls/mur.glb"`.
+- Vérifie que `core::isMeshPath(mur->path())` est vrai.
+- Vérifie que `mur->footprintColumns` vaut `2`.
+- Vérifie que `mur->tactical` vaut `core::PieceTactical::Solid`.
+- Vérifie que `banc` diffère de `nullptr`.
+- Vérifie que `banc->isMesh()` est faux.
+- Vérifie que `banc->path()` vaut `"banc.png"`.
+- Vérifie que `read.manifest.find("les-deux")` diffère de `nullptr`.
+- Vérifie que `read.manifest.find("les-deux")->path()` vaut `"a.glb"`.
+- Vérifie que `read.manifest.find("rien")` vaut `nullptr`.
+- Vérifie que `read.manifest.find("vide")` vaut `nullptr`.
+- Vérifie que `place.ok()` est vrai.
+- Vérifie que `place.appearance.pieceFile("wall")` vaut `WALL`.
+- Vérifie que `place.appearance.pieceFile("paving")` vaut `PAVING`.
+- Vérifie que `place.appearance.pieceFootprint("roof")` vaut `(core::PieceFootprint{.columns = 3, .rows = 3})`.
+
+### MeshCompositionTest.UneCarteDemandeSesMaillagesAPart
+
+*Majeur · Unitaire · Maillages d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_mesh_composition.cpp:154`
+
+Une carte demande ses maillages a part de ses textures.
+
+**Étapes**
+
+1. Tirer l'instantané de la carte d'essai.
+2. Lister ses chemins de texture, puis ses chemins de maillage.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::worldMeshPaths(place.snapshot)` vaut `(std::vector<std::string>{FLOOR, ROOF, WALL})`.
+- Vérifie que `std::ranges::find(textures, PAVING)` diffère de `textures.end()`.
+- Vérifie que `core::isMeshPath(path)` est faux.
+
+### MeshCompositionTest.LaCompositionProduitUneListeDeMaillagesPlaces
+
+*Bloquant · Unitaire · Maillages d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_mesh_composition.cpp:175`
+
+La composition produit une liste de maillages places.
+
+**Étapes**
+
+1. Composer la carte d'essai, ses trois maillages chargés.
+2. Compter les maillages placés et les primitives, par pièce.
+3. Relever la pose d'un mur et celle du toit.
+
+**Résultat attendu**
+
+- Vérifie que `countMeshes(scene, place.textures, FLOOR)` vaut `25U`.
+- Vérifie que `countMeshes(scene, place.textures, WALL)` vaut `8U`.
+- Vérifie que `countMeshes(scene, place.textures, ROOF)` vaut `1U`.
+- Vérifie que `quad.layer` diffère de `hmi::RenderLayer::Object`.
+- Vérifie que `quad.stance` vaut `hmi::QuadStance::Ground`.
+- Vérifie que `floorImages` vaut `55U`.
+- Vérifie que `mesh.layer` vaut `hmi::RenderLayer::Tile`.
+- Vérifie que `mesh.storey` vaut `0`.
+- Vérifie que `mesh.layer` vaut `hmi::RenderLayer::Object`.
+- Vérifie que `mesh.toView` vaut `view.meshTransform({4.5F, 2.5F}, 0.0F)`.
+- Vérifie que `mesh.bounds.position.x` vaut `tile.position.x`, à `TOLERANCE` près.
+- Vérifie que `mesh.bounds.size.x` vaut `tile.size.x`, à `TOLERANCE` près.
+- Vérifie que `mesh.layer` vaut `hmi::RenderLayer::Object`.
+- Vérifie que `mesh.storey` vaut `1`.
+- Vérifie que `mesh.toView` vaut `view.meshTransform({5.5F, 3.5F}, 0.875F * projection.tileWidth())`.
+- Vérifie que `mesh.bounds.size.x` vaut `3.0F * projection.tileWidth()`, à `TOLERANCE` près.
+
+### MeshCompositionTest.UnMaillageManquantSeVoit
+
+*Majeur · Unitaire · Maillages d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_mesh_composition.cpp:235`
+
+Un maillage manquant se voit, par le damier.
+
+**Étapes**
+
+1. Composer la carte d'essai sans qu'aucun maillage ne soit chargé.
+
+**Résultat attendu**
+
+- Vérifie que `scene.meshes().empty()` est vrai.
+- Vérifie que `checker` vaut `25U + 8U + 1U`.
+
+### MeshCompositionTest.LesImagesDisentCommentEllesSeTiennent
+
+*Majeur · Unitaire · Maillages d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_mesh_composition.cpp:258`
+
+Les images disent comment elles se tiennent dans la scene en volume.
+
+**Étapes**
+
+1. Composer la carte d'essai avec une figurine au centre de la case (5, 6).
+2. Relever la tenue de la figurine, d'un jeton, d'une dalle.
+3. Composer une carte de maquette et relever l'élévation des sommets d'un bloc.
+
+**Résultat attendu**
+
+- Vérifie que `quad.stance` vaut `hmi::QuadStance::Upright`.
+- Vérifie que `quad.footY` vaut `projection.gridToWorld({5.5F, 6.5F}).y`, à `TOLERANCE` près.
+- Vérifie que `figureSeen` est vrai.
+- Vérifie que `hmi::defaultStance(hmi::RenderLayer::UI)` vaut `hmi::QuadStance::Overlay`.
+- Vérifie que `hmi::defaultStance(hmi::RenderLayer::Tile)` vaut `hmi::QuadStance::Ground`.
+- Vérifie que `hmi::defaultStance(hmi::RenderLayer::Object)` vaut `hmi::QuadStance::Upright`.
+- Vérifie que `quad.stance` vaut `hmi::QuadStance::Ground`.
+- Vérifie que `groundVertices` vaut `4U`.
+- Vérifie que `raisedVertices` vaut `8U`.
+
+### MeshCompositionTest.LeLieuComposeUneFoisGardeSesMaillages
+
+*Majeur · Unitaire · Maillages d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_mesh_composition.cpp:322`
+
+Le lieu compose une fois garde ses maillages et les cadre.
+
+**Étapes**
+
+1. Composer la carte d'essai dans une `StaticWorldScene`.
+2. En tirer une image sans cadrage, puis une image cadrée loin de l'îlot.
+
+**Résultat attendu**
+
+- Vérifie que `statics.empty()` est faux.
+- Vérifie que `whole.meshes().size()` vaut `34U`.
+- Vérifie que `countMeshes(corner, place.textures, WALL)` vaut `0U`.
+- Vérifie que `countMeshes(corner, place.textures, ROOF)` vaut `0U`.
+- Vérifie que `corner.meshes().size()` est strictement inférieur à `whole.meshes().size()`.
+- Vérifie que `countMeshes(corner, place.textures, WALL)` vaut `0U`.
+
+### MeshCompositionTest.DeuxCalquesDuRezComposentLeSocleEtLeVolume
+
+*Bloquant · Unitaire · Maillages d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_mesh_composition.cpp:358`
+
+Deux calques de decor du rez ne perdent aucune piece superposee.
+
+**Étapes**
+
+1. Lire une carte portant deux GLB distincts sur la meme case, dans deux calques de decor a l'etage zero.
+2. Relever les fichiers demandes, charger les GLB d'essai et composer la scene.
+
+**Résultat attendu**
+
+- Vérifie que `map.ok()` est vrai.
+- Vérifie que `appearance.ok()` est vrai.
+- Vérifie que `hmi::worldMeshPaths(place.snapshot)` vaut `(std::vector<std::string>{FLOOR, WALL})`.
+- Vérifie que `place.snapshot.reliefAt({.column = 0, .row = 0})` vaut `"floor"`.
+- Vérifie que `place.snapshot.storeys.size()` vaut `1U`.
+- Vérifie que `place.snapshot.storeys.front().floor` vaut `0`.
+- Vérifie que `countMeshes(scene, place.textures, FLOOR)` vaut `1U`.
+- Vérifie que `countMeshes(scene, place.textures, WALL)` vaut `1U`.
+- Vérifie que `scene.meshes().size()` vaut `2U`.
+- Vérifie que `mesh.layer` vaut `hmi::RenderLayer::Object`.
+- Vérifie que `mesh.storey` vaut `0`.
+- Vérifie que `mesh.toView` vaut `view.meshTransform({0.5F, 0.5F}, 0.0F)`.
+
+## test_mesh_render.cpp
+
+### MeshRenderTest.LaCarteDEssaiSeRendEnMaillages
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Maillages* — `Source/Test/Unit/HMI/Graphics/test_mesh_render.cpp:129`
+
+La carte d'essai se rend en maillages.
+
+**Étapes**
+
+1. Donner la carte d'essai au rendu du jeu, hors écran.
+2. La rendre, cadrée sur l'îlot.
+
+**Résultat attendu**
+
+- Vérifie que `image.size()` vaut `SIZE`.
+- Vérifie que `renderer.textures().meshes.size()` vaut `3U`.
+- Vérifie que `path.ends_with(".glb")` est faux.
+- Vérifie que `renderer.composed().meshes().size()` vaut `34U`.
+- Vérifie que `renderer.textureBytes()` est strictement supérieur à `0U`.
+- Vérifie que `countPixels(image, isRoof)` est strictement supérieur à `3000U`.
+- Vérifie que `countPixels(image, isWall)` est strictement supérieur à `3000U`.
+- Vérifie que `countPixels(image, isWitness)` est strictement supérieur à `300U`.
+- Vérifie que `countPixels(image, [](const QColor& color) { return color == BACKGROUND; })` est strictement inférieur à `static_cast<std::size_t>(SIZE.width() * SIZE.height() * 3 / 4)`.
+
+### MeshRenderTest.UneFigurinePasseDevantPuisDerriereUnMur
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Maillages* — `Source/Test/Unit/HMI/Graphics/test_mesh_render.cpp:170`
+
+Une figurine passe devant puis derriere un mur en maillage.
+
+**Étapes**
+
+1. Rendre la carte d'essai, la figurine témoin devant l'îlot, case (5, 5).
+2. La rendre, la figurine derrière l'îlot, case (5, 1).
+3. Rendre de nouveau la figurine derrière, les maillages éteints.
+
+**Résultat attendu**
+
+- Vérifie que `front.isNull()` est faux.
+- Vérifie que `figureQuads()` vaut `1U`.
+- Vérifie que `behind.isNull()` est faux.
+- Vérifie que `figureQuads()` vaut `1U`.
+- Vérifie que `renderer.composed().meshes().empty()` est faux.
+- Vérifie que `visibleInFront` est strictement supérieur à `250U`.
+- Vérifie que `visibleBehind` est strictement inférieur à `visibleInFront / 10`.
+- Vérifie que `visibleAlone` est strictement supérieur à `(visibleInFront * 9) / 10`.
+- Vérifie que `visibleAlone` est strictement inférieur à `(visibleInFront * 11) / 10`.
+
+### MeshRenderTest.LOpaciteDesCalquesVautPourLesMaillages
+
+*Majeur · Unitaire · Rendu QRhi d'un lieu · Maillages* — `Source/Test/Unit/HMI/Graphics/test_mesh_render.cpp:231`
+
+L'opacite des calques vaut pour les maillages.
+
+**Étapes**
+
+1. Rendre la carte d'essai sans réglage.
+2. La rendre le relief éteint, puis l'étage seul éteint.
+
+**Résultat attendu**
+
+- Vérifie que `countPixels(plain, isRoof)` est strictement supérieur à `3000U`.
+- Vérifie que `countPixels(flat, isRoof)` vaut `0U`.
+- Vérifie que `countPixels(flat, isWall)` vaut `0U`.
+- Vérifie que `renderer.composed().meshes().size()` vaut `25U`.
+- Vérifie que `countPixels(open, isRoof)` vaut `0U`.
+- Vérifie que `countPixels(open, isWall)` est strictement supérieur à `3000U`.
+- Vérifie que `countPixels(again, isRoof)` vaut `countPixels(plain, isRoof)`.
+- Vérifie que `differing` vaut `0U`.
+
+### MeshRenderTest.UneCarteEnMaillagesRendueParTuilesEstLaMemeImage
+
+*Majeur · Unitaire · Rendu QRhi d'un lieu · Maillages* — `Source/Test/Unit/HMI/Graphics/test_mesh_render.cpp:281`
+
+Une carte en maillages rendue par tuiles est la meme image.
+
+**Étapes**
+
+1. Rendre la carte d'essai en 640 × 480 d'un coup.
+2. La rendre par tuiles de 256 pixels.
+
+**Résultat attendu**
+
+- Vérifie que `whole.size()` vaut `tiled.size()`.
+- Vérifie que `differing` est strictement inférieur à `static_cast<std::size_t>(SIZE.width() * SIZE.height() / 100)`.
+
+### MeshRenderTest.UnFichierDeMaillageAbsentLaisseVoirLeDamier
+
+*Majeur · Unitaire · Rendu QRhi d'un lieu · Maillages* — `Source/Test/Unit/HMI/Graphics/test_mesh_render.cpp:315`
+
+Un fichier de maillage absent laisse voir le damier.
+
+**Étapes**
+
+1. Donner au rendu la carte d'essai, le fichier du mur remplacé par un `.glb` qui n'existe pas.
+2. La rendre deux fois.
+
+**Résultat attendu**
+
+- Vérifie que `snapshot.pieceFiles.contains("wall")` est vrai.
+- Vérifie que `image.isNull()` est faux.
+- Vérifie que `renderer.textures().meshes.size()` vaut `2U`.
+- Vérifie que `renderer.requested().contains("Scene/ilot/absent.glb")` est vrai.
+- Vérifie que `countPixels(image, isWall)` vaut `0U`.
+- Vérifie que `relief` vaut `8U`.
+- Vérifie que `again.size()` vaut `image.size()`.
+
+### MeshRenderTest.LePointageDUneCaseEstCeluiDAvant
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Maillages* — `Source/Test/Unit/HMI/Graphics/test_mesh_render.cpp:353`
+
+Le pointage d'une case au sol est celui d'avant, sur toute la carte d'Arenarea.
+
+**Étapes**
+
+1. Lire la carte d'Arenarea livrée.
+2. Pour chaque case, cadrer le jeu sur elle à 1080p, avec et sans étendue de profondeur.
+3. Envoyer à l'écran le centre et les quatre quarts de la case par la caméra, puis par la formule de la caméra 2D d'avant le lot ; revenir de l'écran à la case.
+
+**Résultat attendu**
+
+- Vérifie que `map.ok()` est vrai.
+- Vérifie que `screen.x` vaut `before(world).x`.
+- Vérifie que `screen.y` vaut `before(world).y`.
+- Vérifie que `deep.worldToScreen(world).x` vaut `screen.x`.
+- Vérifie que `deep.worldToScreen(world).y` vaut `screen.y`.
+- Vérifie que `picked.has_value()` est vrai.
+- Vérifie que `*picked` vaut `cell`.
+- Vérifie que `checked` vaut `static_cast<std::size_t>(projection.columns()) * static_cast<std::size_t>(projection.rows()) * 5U`.
+
+### MeshRenderTest.LAnticrenelageAdoucitLeBordDesMaillages
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Maillages* — `Source/Test/Unit/HMI/Graphics/test_mesh_render.cpp:413`
+
+L'anticrenelage adoucit le bord des maillages.
+
+**Étapes**
+
+1. Rendre la carte d'essai à un échantillon par pixel.
+2. La rendre à quatre échantillons, résolus dans la même image.
+
+**Résultat attendu**
+
+- Vérifie que `plain.size()` vaut `SIZE`.
+- Vérifie que `smooth.size()` vaut `SIZE`.
+- Vérifie que `static_cast<double>(countPixels(smooth, isWall))` vaut `walls`, à `walls / 10.0` près.
+- Vérifie que `static_cast<double>(countPixels(smooth, isRoof))` vaut `roof`, à `roof / 10.0` près.
+- Vérifie que `different` est strictement supérieur à `500U`.
+- Vérifie que `smoothTints.size()` est strictement supérieur à `plainTints.size()`.
+
+### MeshRenderTest.LesTexelsTransparentsNeMasquentPasLaFigurine
+
+*Bloquant · Unitaire · Rendu QRhi · Decoupes alpha* — `Source/Test/Unit/HMI/Graphics/test_mesh_render.cpp:465`
+
+Les trous transparents des maillages restent traversants.
+
+**Étapes**
+
+1. Rendre la figurine derriere les murs de l'ilot dont la texture incorporee est transparente, puis masquer ces maillages.
+
+**Résultat attendu**
+
+- Vérifie que `temporary.isValid()` est vrai.
+- Vérifie que `pngBuffer.open(QIODevice::WriteOnly)` est vrai.
+- Vérifie que `clear.save(&pngBuffer, "PNG")` est vrai.
+- Vérifie que `file.open(QIODevice::ReadOnly)` est vrai.
+- Vérifie que `file.open(QIODevice::WriteOnly | QIODevice::Truncate)` est vrai.
+- Vérifie que `file.write(changed)` vaut `changed.size()`.
+- Vérifie que `throughTexture.isNull()` est faux.
+- Vérifie que `renderer.textures().meshes.size()` vaut `3U`.
+- Vérifie que `withoutMeshes.isNull()` est faux.
+- Vérifie que `visible` est strictement supérieur à `250U`.
+- Vérifie que `countPixels(throughTexture, isWitness)` vaut `visible`.
+
+## test_missing_texture.cpp
+
+### MissingTextureTest.DimensionsAttendues
+
+*Majeur · Unitaire · Missing Texture* — `Source/Test/Unit/HMI/Graphics/test_missing_texture.cpp:30`
+
+Le damier genere a les dimensions demandees.
+
+**Étapes**
+
+1. Generer le damier par defaut, puis un damier de 32 px.
+
+**Résultat attendu**
+
+- Vérifie que `image.width` vaut `hmi::MISSING_TEXTURE_SIZE`.
+- Vérifie que `image.height` vaut `hmi::MISSING_TEXTURE_SIZE`.
+- Vérifie que `image.pixels.size()` vaut `static_cast<std::size_t>(image.width) * static_cast<std::size_t>(image.height)`.
+- Vérifie que `large.width` vaut `32`.
+- Vérifie que `large.height` vaut `32`.
+
+### MissingTextureTest.GenerationDeterministe
+
+*Majeur · Unitaire · Missing Texture* — `Source/Test/Unit/HMI/Graphics/test_missing_texture.cpp:52`
+
+La generation du damier est deterministe.
+
+**Étapes**
+
+1. Generer deux fois le damier.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::buildMissingTextureImage().pixels` vaut `hmi::buildMissingTextureImage().pixels`.
+
+### MissingTextureTest.CarreauxAlternesMagentaEtNoir
+
+*Critique · Unitaire · Missing Texture* — `Source/Test/Unit/HMI/Graphics/test_missing_texture.cpp:66`
+
+Les carreaux du damier alternent magenta et noir.
+
+**Étapes**
+
+1. Generer le damier.
+2. Lire un pixel de chacun des quatre premiers carreaux.
+
+**Résultat attendu**
+
+- Vérifie que `pixelAt(image, 0, 0)` vaut `MAGENTA`.
+- Vérifie que `pixelAt(image, STEP, 0)` vaut `BLACK`.
+- Vérifie que `pixelAt(image, 0, STEP)` vaut `BLACK`.
+- Vérifie que `pixelAt(image, STEP, STEP)` vaut `MAGENTA`.
+
+### MissingTextureTest.DamierEntierementOpaque
+
+*Critique · Unitaire · Missing Texture* — `Source/Test/Unit/HMI/Graphics/test_missing_texture.cpp:87`
+
+Tous les pixels du damier sont opaques.
+
+**Étapes**
+
+1. Generer le damier.
+2. Verifier le canal alpha de chaque pixel.
+
+**Résultat attendu**
+
+- Vérifie que `pixel >> 24` vaut `0xFFu`.
+
+### MissingTextureTest.AvertissementNommeAsset
+
+*Majeur · Unitaire · Missing Texture* — `Source/Test/Unit/HMI/Graphics/test_missing_texture.cpp:105`
+
+L'avertissement de texture manquante nomme l'asset attendu.
+
+**Étapes**
+
+1. Construire le message pour un asset donne.
+
+**Résultat attendu**
+
+- Vérifie que `message.find("Backgrounds/foret.png")` diffère de `std::string::npos`.
+
+## test_offscreen_render.cpp
+
+### OffscreenRenderTest.UnCadrageImposeRemplaceLaCameraQuiSuitLeHeros
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Editeur* — `Source/Test/Unit/HMI/Graphics/test_offscreen_render.cpp:89`
+
+Un cadrage impose remplace la camera qui suit le heros.
+
+**Étapes**
+
+1. Construire la camera d'un cadrage : un centre, une echelle.
+2. Rendre le donjon cadre sur le heros, puis par un cadrage impose, puis de nouveau sans.
+
+**Résultat attendu**
+
+- Vérifie que `camera.center().x` vaut `12.5F` (comparaison flottante).
+- Vérifie que `camera.center().y` vaut `-3.0F` (comparaison flottante).
+- Vérifie que `camera.zoom() * hmi::PlaceCamera::PIXELS_PER_UNIT` vaut `24.0F` (comparaison flottante).
+- Vérifie que `camera.worldToScreen(framing.center).x` vaut `400.0F` (comparaison flottante).
+- Vérifie que `camera.worldToScreen(framing.center).y` vaut `300.0F` (comparaison flottante).
+- Vérifie que `hmi::OffscreenRhi::shared()` vaut `offscreen`.
+- Vérifie que `framed.size()` vaut `size`.
+- Vérifie que `renderer.framing().has_value()` est faux.
+- Vérifie que `differingPixels(framed, moved)` est strictement supérieur à `1000U`.
+- Vérifie que `differingPixels(framed, again)` vaut `0U`.
+
+### OffscreenRenderTest.LOpaciteDesCalquesEstUnParametreDuRendu
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu · Editeur* — `Source/Test/Unit/HMI/Graphics/test_offscreen_render.cpp:136`
+
+L'opacite des calques est un parametre du rendu.
+
+**Étapes**
+
+1. Rendre le donjon sans reglage.
+2. Le rendre avec une opacite de 1 pour toute primitive.
+3. Le rendre le relief eteint, puis le relief a demi.
+
+**Résultat attendu**
+
+- Vérifie que `relief(renderer)` est strictement supérieur à `0U`.
+- Vérifie que `differingPixels(plain, offscreen->render(renderer, size, framing, BACKGROUND))` vaut `0U`.
+- Vérifie que `relief(renderer)` vaut `0U`.
+- Vérifie que `differingPixels(plain, hidden)` est strictement supérieur à `1000U`.
+- Vérifie que `quad.sprite.a` est inférieur ou égal à `0.5F`.
+- Vérifie que `differingPixels(plain, half)` est strictement supérieur à `1000U`.
+- Vérifie que `differingPixels(hidden, half)` est strictement supérieur à `1000U`.
+- Vérifie que `differingPixels(plain, offscreen->render(renderer, size, framing, BACKGROUND))` vaut `0U`.
+
+### OffscreenRenderTest.LaCarteSePrepareEtSeMesureAvantLaPremiereImage
+
+*Majeur · Unitaire · Rendu QRhi d'un lieu · Editeur* — `Source/Test/Unit/HMI/Graphics/test_offscreen_render.cpp:198`
+
+La carte se prepare et se mesure avant la premiere image.
+
+**Étapes**
+
+1. Demander ce qu'occupe le donjon a un rendu sans ressources.
+2. Creer les ressources, redemander, sans dessiner.
+3. Dessiner.
+
+**Résultat attendu**
+
+- Vérifie que `bare.prepare()` est faux.
+- Vérifie que `without.size.x` vaut `base.size.x` (comparaison flottante).
+- Vérifie que `without.size.y` vaut `base.size.y` (comparaison flottante).
+- Vérifie que `renderer.ensureResources(offscreen->rhi())` est vrai.
+- Vérifie que `renderer.textures().byPath.empty()` est faux.
+- Vérifie que `renderer.statics().size()` est strictement supérieur à `700U`.
+- Vérifie que `painted.position.y` est inférieur ou égal à `base.position.y`.
+- Vérifie que `painted.position.x` est inférieur ou égal à `base.position.x`.
+- Vérifie que `painted.position.x + painted.size.x` est supérieur ou égal à `base.position.x + base.size.x`.
+- Vérifie que `painted.position.y + painted.size.y` est supérieur ou égal à `base.position.y + base.size.y`.
+- Vérifie que `image.isNull()` est faux.
+- Vérifie que `paintedPixels` est strictement supérieur à `static_cast<std::size_t>(image.width() * image.height() / 4)`.
+
+### OffscreenRenderTest.UneImageRendueParTuilesEstLaMemeImage
+
+*Majeur · Unitaire · Rendu QRhi d'un lieu · Editeur* — `Source/Test/Unit/HMI/Graphics/test_offscreen_render.cpp:252`
+
+Une image rendue par tuiles est la meme image.
+
+**Étapes**
+
+1. Rendre le donjon en 700 x 500 d'un seul coup.
+2. Le rendre par tuiles de 256 pixels : trois colonnes, deux rangees, les dernieres debordant de l'image.
+
+**Résultat attendu**
+
+- Vérifie que `whole.size()` vaut `size`.
+- Vérifie que `tiled.size()` vaut `size`.
+- Vérifie que `differing` est strictement inférieur à `pixels / 100`.
+- Vérifie que `beyondRounding` est inférieur ou égal à `pixels / 100000`.
+
+### OffscreenRenderTest.UneCarteSansAucuneImageSeVoit
+
+*Bloquant · Unitaire · Rendu de maquette* — `Source/Test/Unit/HMI/Graphics/test_offscreen_render.cpp:355`
+
+Exigences : `EX-EXP-005`
+
+Une carte sans aucun fichier d'image se voit.
+
+**Étapes**
+
+1. Batir en memoire une carte sans lieu : sols, eau, enceinte de murs, quatre entites.
+2. La rendre hors ecran par le rendu du jeu, cadree sur son milieu.
+
+**Résultat attendu**
+
+- Vérifie que `maquette.place.empty()` est vrai.
+- Vérifie que `hmi::parseMaquetteTokenPath(path).has_value()` est vrai.
+- Vérifie que `image.isNull()` est faux.
+- Vérifie que `painted` est strictement supérieur à `static_cast<std::size_t>(image.width() * image.height() / 2)`.
+
+## test_place_camera.cpp
+
+### PlaceCameraTest.CentreAuMilieuDeLEcran
+
+*Majeur · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:30`
+
+Le centre de la caméra se projette au centre de l'écran.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `screen.x` vaut `WIDTH * 0.5f`, à `TOLERANCE` près.
+- Vérifie que `screen.y` vaut `HEIGHT * 0.5f`, à `TOLERANCE` près.
+
+### PlaceCameraTest.CenterEtZoomRenvoientLesValeursPosees
+
+*Majeur · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:50`
+
+center() et zoom() renvoient exactement les valeurs posées.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `camera.center().x` vaut `3.0f` (comparaison flottante).
+- Vérifie que `camera.center().y` vaut `4.0f` (comparaison flottante).
+- Vérifie que `camera.zoom()` vaut `2.5f` (comparaison flottante).
+
+### PlaceCameraTest.EchelleEtAxeY
+
+*Majeur · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:69`
+
+Une unité monde vaut 16 pixels ; l'axe Y va vers le bas.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `right.x` vaut `WIDTH * 0.5f + 16.0f`, à `TOLERANCE` près.
+- Vérifie que `right.y` vaut `HEIGHT * 0.5f`, à `TOLERANCE` près.
+- Vérifie que `down.y` vaut `HEIGHT * 0.5f + 16.0f`, à `TOLERANCE` près.
+
+### PlaceCameraTest.Zoom
+
+*Majeur · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:91`
+
+Le zoom multiplie l'échelle en pixels.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `right.x` vaut `WIDTH * 0.5f + 32.0f`, à `TOLERANCE` près.
+
+### PlaceCameraTest.ConversionsReciproques
+
+*Majeur · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:109`
+
+`screenToWorld` est la réciproque de `worldToScreen`.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `roundTrip.x` vaut `world.x`, à `TOLERANCE` près.
+- Vérifie que `roundTrip.y` vaut `world.y`, à `TOLERANCE` près.
+
+### PlaceCameraTest.ProjectionCentreVersOrigineClip
+
+*Majeur · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:130`
+
+La matrice de projection envoie le centre de la caméra à l'origine du clip space.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.x` vaut `0.0f`, à `TOLERANCE` près.
+- Vérifie que `result.y` vaut `0.0f`, à `TOLERANCE` près.
+- Vérifie que `result.w` vaut `1.0f`, à `TOLERANCE` près.
+
+### PlaceCameraTest.BordEcranVersBordClip
+
+*Majeur · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:157`
+
+Un coin de l'écran correspond à un bord du clip space (±1).
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `result.x` vaut `1.0f`, à `TOLERANCE` près.
+
+### PlaceCameraTest.FitZoomRemplitSansArrondi
+
+*Majeur · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:181`
+
+fitZoom remplit la surface sans arrondi a l'entier.
+
+**Étapes**
+
+1. Cadrer un niveau de 14 x 8 unites dans une fenetre de 1280 x 720, marge 0,85.
+
+**Résultat attendu**
+
+- Vérifie que `zoom` vaut `5.625f * 0.85f` (comparaison flottante).
+
+### PlaceCameraTest.FitZoomFractionnairePourGrandNiveau
+
+*Majeur · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:197`
+
+fitZoom devient fractionnaire pour un niveau plus grand que la surface disponible.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `zoom` est strictement supérieur à `0.0f`.
+- Vérifie que `zoom` est strictement inférieur à `1.0f`.
+- Vérifie que `100.0f * hmi::PlaceCamera::PIXELS_PER_UNIT * zoom` est inférieur ou égal à `1280.0f + TOLERANCE`.
+- Vérifie que `100.0f * hmi::PlaceCamera::PIXELS_PER_UNIT * zoom` est inférieur ou égal à `720.0f + TOLERANCE`.
+
+### PlaceCameraTest.FitZoomAppliqueLaMarge
+
+*Mineur · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:218`
+
+fitZoom applique la marge telle quelle.
+
+**Étapes**
+
+1. Cadrer 16 x 16 unites dans 1280 x 1280 pixels, sans marge puis a 0,85.
+
+**Résultat attendu**
+
+- Vérifie que `zoomSansMarge` vaut `5.0f` (comparaison flottante).
+- Vérifie que `zoomAvecMarge` vaut `4.25f` (comparaison flottante).
+
+### PlaceCameraTest.SansProfondeurLaMatriceEstCelleDeLaCamera2D
+
+*Bloquant · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:236`
+
+Sans etendue de profondeur, la matrice est celle de la camera 2D.
+
+**Étapes**
+
+1. Construire une caméra, la centrer, la zoomer, sans toucher à sa profondeur.
+2. Lire les seize coefficients de sa matrice.
+
+**Résultat attendu**
+
+- Vérifie que `m(0, 0)` vaut `scaleX`.
+- Vérifie que `m(1, 1)` vaut `-scaleY`.
+- Vérifie que `m(3, 0)` vaut `-12.0f * scaleX`.
+- Vérifie que `m(3, 1)` vaut `-8.0f * scaleY`.
+- Vérifie que `m(2, 2)` vaut `1.0f`.
+- Vérifie que `m(3, 2)` vaut `0.0f`.
+- Vérifie que `std::signbit(m(3, 2))` est faux.
+- Vérifie que `m(3, 3)` vaut `1.0f`.
+- Vérifie que `m(static_cast<std::size_t>(row), static_cast<std::size_t>(column))` vaut `0.0f`.
+
+### PlaceCameraTest.LEtendueDeProfondeurSeRameneEntreLesDeuxPlans
+
+*Majeur · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:272`
+
+L'etendue de profondeur se ramene entre les deux plans de la camera.
+
+**Étapes**
+
+1. Fixer l'étendue de profondeur d'une grille.
+2. Projeter un point à la profondeur la plus proche, la plus lointaine, puis au milieu.
+3. Fixer une étendue vide.
+
+**Résultat attendu**
+
+- Vérifie que `camera.depthRange()` vaut `range`.
+- Vérifie que `project(camera, 3.0f, 4.0f, range.nearest).z` vaut `-1.0f`, à `TOLERANCE` près.
+- Vérifie que `project(camera, 3.0f, 4.0f, range.farthest).z` vaut `1.0f`, à `TOLERANCE` près.
+- Vérifie que `project(camera, 3.0f, 4.0f, (range.nearest + range.farthest) / 2.0f).z` vaut `0.0f`, à `TOLERANCE` près.
+- Vérifie que `project(camera, 3.0f, 4.0f, 7.0f).x` vaut `project(flat, 3.0f, 4.0f, 7.0f).x`.
+- Vérifie que `project(camera, 3.0f, 4.0f, 7.0f).y` vaut `project(flat, 3.0f, 4.0f, 7.0f).y`.
+- Vérifie que `camera.projectionMatrix()(2, 2)` vaut `1.0f`.
+- Vérifie que `camera.projectionMatrix()(3, 2)` vaut `0.0f`.
+
+### PlaceCameraTest.LaMatriceDUnMaillageComposeLaPoseEtLaProjection
+
+*Bloquant · Unitaire · PlaceCamera* — `Source/Test/Unit/HMI/Graphics/test_place_camera.cpp:316`
+
+La matrice d'un maillage pose compose la pose et la projection.
+
+**Étapes**
+
+1. Poser un maillage au centre d'une case, sous une caméra cadrée et à l'étendue de profondeur de la grille.
+2. Projeter des points du maillage par sa matrice, puis par la pose suivie de la projection.
+
+**Résultat attendu**
+
+- Vérifie que `direct.x` vaut `chained.x`, à `1e-4f` près.
+- Vérifie que `direct.y` vaut `chained.y`, à `1e-4f` près.
+- Vérifie que `direct.z` vaut `chained.z`, à `1e-4f` près.
+- Vérifie que `direct.w` vaut `1.0f`, à `TOLERANCE` près.
+- Vérifie que `direct.z` est strictement supérieur à `-1.0f`.
+- Vérifie que `direct.z` est strictement inférieur à `1.0f`.
+- Vérifie que `(origin.x + 1.0f) * WIDTH * 0.5f` vaut `screen.x`, à `1e-2f` près.
+- Vérifie que `(1.0f - origin.y) * HEIGHT * 0.5f` vaut `screen.y`, à `1e-2f` près.
+
+## test_poly_quad.cpp
+
+### PolyQuadTest.BoiteEnglobanteDesSommets
+
+*Majeur · Unitaire · PolyQuad* — `Source/Test/Unit/HMI/Graphics/test_poly_quad.cpp:38`
+
+La boite englobante d'un losange est celle de ses quatre sommets.
+
+**Étapes**
+
+1. Borner un losange de 4 x 2 pose en (10, 20).
+
+**Résultat attendu**
+
+- Vérifie que `bounds.position.x` vaut `10.0f` (comparaison flottante).
+- Vérifie que `bounds.position.y` vaut `20.0f` (comparaison flottante).
+- Vérifie que `bounds.size.x` vaut `4.0f` (comparaison flottante).
+- Vérifie que `bounds.size.y` vaut `2.0f` (comparaison flottante).
+
+### PolyQuadTest.CullingCommeLesAutres
+
+*Critique · Unitaire · PolyQuad* — `Source/Test/Unit/HMI/Graphics/test_poly_quad.cpp:57`
+
+Un losange hors cadrage est ecarte, celui du cadrage est conserve.
+
+**Étapes**
+
+1. Fixer un cadrage.
+2. Composer un losange dedans, puis un losange loin dehors.
+
+**Résultat attendu**
+
+- Vérifie que `scene.addPoly(hmi::RenderLayer::Tile, solid, 0, diamond(15.0f, 15.0f, 2.0f, 1.0f))` est vrai.
+- Vérifie que `scene.addPoly(hmi::RenderLayer::Tile, solid, 0, diamond(800.0f, 15.0f, 2.0f, 1.0f))` est faux.
+- Vérifie que `scene.statistics().considered` vaut `2`.
+- Vérifie que `scene.statistics().culled` vaut `1`.
+- Vérifie que `scene.statistics().submitted` vaut `1`.
+
+### PolyQuadTest.NatureEtSommetsPreserves
+
+*Majeur · Unitaire · PolyQuad* — `Source/Test/Unit/HMI/Graphics/test_poly_quad.cpp:81`
+
+Le quad compose porte bien la nature Poly et ses sommets intacts.
+
+**Étapes**
+
+1. Composer un losange sans cadrage.
+
+**Résultat attendu**
+
+- Vérifie que `scene.addPoly(hmi::RenderLayer::Tile, solid, 7, given)` est vrai.
+- Vérifie que `composed.kind` vaut `hmi::QuadKind::Poly`.
+- Vérifie que `composed.sortOrder` vaut `7`.
+- Vérifie que `composed.poly.x[i]` vaut `given.x[i]` (comparaison flottante).
+- Vérifie que `composed.poly.y[i]` vaut `given.y[i]` (comparaison flottante).
+
+### PolyQuadTest.TrieAvecLesAutresPrimitives
+
+*Critique · Unitaire · PolyQuad* — `Source/Test/Unit/HMI/Graphics/test_poly_quad.cpp:106`
+
+Un losange se trie avec les autres primitives, par calque puis par texture.
+
+**Étapes**
+
+1. Composer un sprite de decor, puis un losange de sol, puis un second losange de sol.
+2. Trier.
+
+**Résultat attendu**
+
+- Vérifie que `scene.size()` vaut `3U`.
+- Vérifie que `scene.quads()[0].layer` vaut `hmi::RenderLayer::Tile`.
+- Vérifie que `scene.quads()[1].layer` vaut `hmi::RenderLayer::Tile`.
+- Vérifie que `scene.quads()[2].layer` vaut `hmi::RenderLayer::Object`.
+- Vérifie que `scene.batchCount()` vaut `2`.
+
+## test_procedural_atlas.cpp
+
+### ProceduralAtlasTest.DimensionsAttendues
+
+*Majeur · Unitaire · Procedural Atlas* — `Source/Test/Unit/HMI/Graphics/test_procedural_atlas.cpp:21`
+
+L'image générée a les dimensions attendues (grille de tuiles).
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `image.width` vaut `gridSide`.
+- Vérifie que `image.height` vaut `gridSide`.
+- Vérifie que `image.pixels.size()` vaut `static_cast<std::size_t>(image.width) * static_cast<std::size_t>(image.height)`.
+
+### ProceduralAtlasTest.GenerationDeterministe
+
+*Majeur · Unitaire · Procedural Atlas* — `Source/Test/Unit/HMI/Graphics/test_procedural_atlas.cpp:42`
+
+La génération est déterministe : deux appels produisent des pixels identiques.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `first.width` vaut `second.width`.
+- Vérifie que `first.height` vaut `second.height`.
+- Vérifie que `first.pixels` vaut `second.pixels`.
+
+### ProceduralAtlasTest.DamierDeTransparenceDansLaDerniereTuile
+
+*Mineur · Unitaire · Procedural Atlas* — `Source/Test/Unit/HMI/Graphics/test_procedural_atlas.cpp:63`
+
+La dernière tuile de la grille contient des pixels opaques et transparents (damier).
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `sawOpaque` est vrai.
+- Vérifie que `sawTransparent` est vrai.
+
+### ProceduralAtlasTest.ChaqueTypeDeTuileAUneCouleurDeRepliDistincte
+
+*Critique · Unitaire · Atlas procedural* — `Source/Test/Unit/HMI/Graphics/test_procedural_atlas.cpp:107`
+
+Exigences : `EX-NFR-040`
+
+Chaque type de tuile a une couleur de repli visible et distincte.
+
+**Étapes**
+
+1. Generer l'atlas procedural.
+2. Echantillonner le centre de la case de chaque type de tuile, hors case vide.
+
+**Résultat attendu**
+
+- Vérifie que `color` diffère de `0xFF000000u`.
+- Vérifie que `inserted.second` est vrai.
+
+## test_quad_recorder.cpp
+
+### QuadRecorderTest.CalquePrimeSurTexture
+
+*Critique · Unitaire · Quad Recorder* — `Source/Test/Unit/HMI/Graphics/test_quad_recorder.cpp:41`
+
+Le calque prime sur la texture dans l'ordre de soumission.
+
+**Étapes**
+
+1. Composer un quad Player (texture A) puis un quad Tile (texture B).
+2. Trier et capturer la scene.
+
+**Résultat attendu**
+
+- Vérifie que `recorder.size()` vaut `2u`.
+- Vérifie que `recorder.quads()[0].layer` vaut `hmi::RenderLayer::Tile`.
+- Vérifie que `recorder.quads()[1].layer` vaut `hmi::RenderLayer::Player`.
+- Vérifie que `recorder.isLayerOrderRespected()` est vrai.
+
+### QuadRecorderTest.TroisCalquesDeuxTexturesOrdonnes
+
+*Critique · Unitaire · Quad Recorder* — `Source/Test/Unit/HMI/Graphics/test_quad_recorder.cpp:67`
+
+Trois calques et deux textures : ordre des calques et groupes de texture contigus.
+
+**Étapes**
+
+1. Composer six quads en alternant calques et textures.
+2. Trier et capturer.
+
+**Résultat attendu**
+
+- Vérifie que `recorder.isLayerOrderRespected()` est vrai.
+- Vérifie que `recorder.areTextureGroupsContiguous()` est vrai.
+- Vérifie que `layers.size()` vaut `3u`.
+- Vérifie que `layers[0]` vaut `hmi::RenderLayer::Background`.
+- Vérifie que `layers[1]` vaut `hmi::RenderLayer::Tile`.
+- Vérifie que `layers[2]` vaut `hmi::RenderLayer::Player`.
+- Vérifie que `recorder.countOnLayer(hmi::RenderLayer::Tile)` vaut `3`.
+- Vérifie que `recorder.countWithTexture(textureA)` vaut `3`.
+- Vérifie que `recorder.countWithTexture(textureB)` vaut `3`.
+
+### QuadRecorderTest.TriStableAClefEgale
+
+*Majeur · Unitaire · Quad Recorder* — `Source/Test/Unit/HMI/Graphics/test_quad_recorder.cpp:104`
+
+Le tri est stable : a cle egale l'ordre de composition est preserve.
+
+**Étapes**
+
+1. Composer trois quads identiques en cle, a des positions differentes.
+2. Trier.
+
+**Résultat attendu**
+
+- Vérifie que `scene.size()` vaut `3u`.
+- Vérifie que `scene.quads()[0].sprite.x` vaut `3.0f` (comparaison flottante).
+- Vérifie que `scene.quads()[1].sprite.x` vaut `1.0f` (comparaison flottante).
+- Vérifie que `scene.quads()[2].sprite.x` vaut `2.0f` (comparaison flottante).
+
+### QuadRecorderTest.TriFinParSpriteLayer
+
+*Majeur · Unitaire · Quad Recorder* — `Source/Test/Unit/HMI/Graphics/test_quad_recorder.cpp:128`
+
+Le tri fin par Sprite::layer subsiste a l'interieur d'un calque.
+
+**Étapes**
+
+1. Composer trois quads du meme calque avec des tris fins decroissants.
+2. Trier.
+
+**Résultat attendu**
+
+- Vérifie que `scene.size()` vaut `3u`.
+- Vérifie que `scene.quads()[0].sortOrder` vaut `0`.
+- Vérifie que `scene.quads()[1].sortOrder` vaut `1`.
+- Vérifie que `scene.quads()[2].sortOrder` vaut `2`.
+
+### QuadRecorderTest.DeuxTexturesDeuxPasses
+
+*Majeur · Unitaire · Quad Recorder* — `Source/Test/Unit/HMI/Graphics/test_quad_recorder.cpp:152`
+
+Le nombre de passes egale le nombre de groupes de texture.
+
+**Étapes**
+
+1. Composer quatre quads d'un meme calque en alternant deux textures.
+2. Trier.
+
+**Résultat attendu**
+
+- Vérifie que `scene.batchCount()` vaut `2`.
+- Vérifie que `recorder.textureSequence().size()` vaut `2u`.
+- Vérifie que `recorder.areTextureGroupsContiguous()` est vrai.
+
+### QuadRecorderTest.RectanglesEtSegmentsMelanges
+
+*Mineur · Unitaire · Quad Recorder* — `Source/Test/Unit/HMI/Graphics/test_quad_recorder.cpp:179`
+
+Segments et rectangles cohabitent dans la meme scene ordonnee.
+
+**Étapes**
+
+1. Composer un rectangle puis un segment sur le meme calque.
+2. Trier et capturer.
+
+**Résultat attendu**
+
+- Vérifie que `scene.size()` vaut `2u`.
+- Vérifie que `scene.quads()[0].kind` vaut `hmi::QuadKind::Sprite`.
+- Vérifie que `scene.quads()[1].kind` vaut `hmi::QuadKind::Line`.
+
+### QuadRecorderTest.OrdonnancementDeclare
+
+*Critique · Unitaire · Quad Recorder* — `Source/Test/Unit/HMI/Graphics/test_quad_recorder.cpp:208`
+
+Exigences : `EX-REN-014`
+
+L'ordonnancement place l'interface au-dessus du personnage.
+
+**Étapes**
+
+1. Comparer les valeurs declarees de l'enumeration des calques.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::RenderLayer::Background` est strictement inférieur à `hmi::RenderLayer::Shadow`.
+- Vérifie que `hmi::RenderLayer::Shadow` est strictement inférieur à `hmi::RenderLayer::Tile`.
+- Vérifie que `hmi::RenderLayer::Tile` est strictement inférieur à `hmi::RenderLayer::Object`.
+- Vérifie que `hmi::RenderLayer::Object` est strictement inférieur à `hmi::RenderLayer::Player`.
+- Vérifie que `hmi::RenderLayer::Player` est strictement inférieur à `hmi::RenderLayer::UI`.
+- Vérifie que `hmi::RenderLayer::UI` est strictement inférieur à `hmi::RenderLayer::EditorOverlay`.
+
+## test_render_culling.cpp
+
+### RenderCullingTest.SansCadrageAucunRejet
+
+*Majeur · Unitaire · Render Culling* — `Source/Test/Unit/HMI/Graphics/test_render_culling.cpp:39`
+
+Sans cadrage fixe, aucune primitive n'est ecartee.
+
+**Étapes**
+
+1. Composer un quad tres eloigne dans une scene sans cadrage.
+
+**Résultat attendu**
+
+- Vérifie que `scene.isCullingEnabled()` est faux.
+- Vérifie que `scene.addSprite(hmi::RenderLayer::Tile, texture, 0, tileQuad(9999.0f, 9999.0f))` est vrai.
+- Vérifie que `scene.statistics().culled` vaut `0`.
+
+### RenderCullingTest.HorsCadrageEcarte
+
+*Critique · Unitaire · Render Culling* — `Source/Test/Unit/HMI/Graphics/test_render_culling.cpp:57`
+
+Une primitive hors cadrage est ecartee, la meme dans le cadrage est conservee.
+
+**Étapes**
+
+1. Fixer le cadrage de reference.
+2. Composer un quad dedans, puis un quad loin dehors.
+
+**Résultat attendu**
+
+- Vérifie que `scene.addSprite(hmi::RenderLayer::Tile, texture, 0, tileQuad(15.0f, 15.0f))` est vrai.
+- Vérifie que `scene.addSprite(hmi::RenderLayer::Tile, texture, 0, tileQuad(80.0f, 15.0f))` est faux.
+- Vérifie que `recorder.size()` vaut `1u`.
+- Vérifie que `recorder.containsSpriteAt(15.0f, 15.0f)` est vrai.
+- Vérifie que `recorder.statistics().considered` vaut `2`.
+- Vérifie que `recorder.statistics().culled` vaut `1`.
+- Vérifie que `recorder.statistics().submitted` vaut `1`.
+
+### RenderCullingTest.AChevalSurLaFrontiereConserve
+
+*Critique · Unitaire · Render Culling* — `Source/Test/Unit/HMI/Graphics/test_render_culling.cpp:86`
+
+Une primitive a cheval sur la frontiere du cadrage est conservee.
+
+**Étapes**
+
+1. Fixer le cadrage de reference.
+2. Composer un quad chevauchant le bord droit, puis un quad entierement dans la marge.
+
+**Résultat attendu**
+
+- Vérifie que `scene.addSprite(hmi::RenderLayer::Tile, texture, 0, tileQuad(29.5f, 15.0f))` est vrai.
+- Vérifie que `scene.addSprite(hmi::RenderLayer::Tile, texture, 0, tileQuad(30.2f, 15.0f))` est vrai.
+- Vérifie que `scene.addSprite(hmi::RenderLayer::Tile, texture, 0, tileQuad(31.5f, 15.0f))` est faux.
+
+### RenderCullingTest.SegmentHorizontalConserve
+
+*Majeur · Unitaire · Render Culling* — `Source/Test/Unit/HMI/Graphics/test_render_culling.cpp:109`
+
+Un segment horizontal traversant le cadrage est conserve.
+
+**Étapes**
+
+1. Fixer le cadrage de reference.
+2. Composer un segment horizontal a l'interieur, puis un segment horizontal tres au-dessus.
+
+**Résultat attendu**
+
+- Vérifie que `scene.addLine(hmi::RenderLayer::EditorOverlay, texture, 0, inside)` est vrai.
+- Vérifie que `scene.addLine(hmi::RenderLayer::EditorOverlay, texture, 0, outside)` est faux.
+
+### RenderCullingTest.PrimitiveEtireeConservee
+
+*Critique · Unitaire · Render Culling* — `Source/Test/Unit/HMI/Graphics/test_render_culling.cpp:139`
+
+Une primitive etiree dont l'ancrage est hors cadrage reste soumise.
+
+**Étapes**
+
+1. Fixer le cadrage de reference.
+2. Composer un quad ancre en (0, 0) et large de 200 unites.
+
+**Résultat attendu**
+
+- Vérifie que `scene.addSprite(hmi::RenderLayer::Background, texture, 0, background)` est vrai.
+
+### RenderCullingTest.SpriteQuadBoundsSansRotationEstLeRectangleBrut
+
+*Majeur · Unitaire · Render Culling* — `Source/Test/Unit/HMI/Graphics/test_render_culling.cpp:163`
+
+spriteQuadBounds sans rotation vaut le rectangle brut.
+
+**Étapes**
+
+1. Calculer la boite englobante d'un quad de rotation nulle.
+
+**Résultat attendu**
+
+- Vérifie que `bounds.position.x` vaut `5.0f` (comparaison flottante).
+- Vérifie que `bounds.position.y` vaut `3.0f` (comparaison flottante).
+- Vérifie que `bounds.size.x` vaut `4.0f` (comparaison flottante).
+- Vérifie que `bounds.size.y` vaut `2.0f` (comparaison flottante).
+
+### RenderCullingTest.SpriteQuadBoundsA90DegresPermuteLargeurEtHauteur
+
+*Critique · Unitaire · Render Culling* — `Source/Test/Unit/HMI/Graphics/test_render_culling.cpp:189`
+
+spriteQuadBounds a 90 degres permute largeur et hauteur.
+
+**Étapes**
+
+1. Calculer la boite englobante d'un quad large tourne de 90 degres.
+
+**Résultat attendu**
+
+- Vérifie que `bounds.size.x` vaut `2.0f`, à `1e-3f` près.
+- Vérifie que `bounds.size.y` vaut `4.0f`, à `1e-3f` près.
+- Vérifie que `bounds.position.x + bounds.size.x * 0.5f` vaut `2.0f`, à `1e-3f` près.
+- Vérifie que `bounds.position.y + bounds.size.y * 0.5f` vaut `1.0f`, à `1e-3f` près.
+
+### RenderCullingTest.QuadTourneChevauchantLeCadrageResteSoumis
+
+*Critique · Unitaire · Render Culling* — `Source/Test/Unit/HMI/Graphics/test_render_culling.cpp:217`
+
+Un quad tourne dont la boite reelle chevauche le cadrage reste soumis.
+
+**Étapes**
+
+1. Fixer un cadrage de reference.
+2. Composer un quad tourne de 45 degres juste a l'exterieur du rectangle non tourne, mais dont la diagonale rentre dans le cadrage.
+
+**Résultat attendu**
+
+- Vérifie que `scene.addSprite(hmi::RenderLayer::EditorOverlay, texture, 0, quad)` est vrai.
+
+### RenderCullingTest.MargeAppliqueeSurLesQuatreCotes
+
+*Mineur · Unitaire · Render Culling* — `Source/Test/Unit/HMI/Graphics/test_render_culling.cpp:246`
+
+Le cadrage de culling est le cadrage visible elargi de la marge.
+
+**Étapes**
+
+1. Fixer le cadrage de reference.
+2. Lire le rectangle de culling.
+
+**Résultat attendu**
+
+- Vérifie que `bounds.left()` vaut `VISIBLE_BOUNDS.left() - MARGIN` (comparaison flottante).
+- Vérifie que `bounds.top()` vaut `VISIBLE_BOUNDS.top() - MARGIN` (comparaison flottante).
+- Vérifie que `bounds.right()` vaut `VISIBLE_BOUNDS.right() + MARGIN` (comparaison flottante).
+- Vérifie que `bounds.bottom()` vaut `VISIBLE_BOUNDS.bottom() + MARGIN` (comparaison flottante).
+
+### RenderCullingTest.CadrageDeLaCamera
+
+*Majeur · Unitaire · Render Culling* — `Source/Test/Unit/HMI/Graphics/test_render_culling.cpp:267`
+
+La camera fournit le rectangle monde qu'elle cadre.
+
+**Étapes**
+
+1. Centrer une camera 320x160 sur (10, 5) au zoom 1.
+2. Lire son cadrage.
+
+**Résultat attendu**
+
+- Vérifie que `bounds.left()` vaut `0.0f` (comparaison flottante).
+- Vérifie que `bounds.top()` vaut `0.0f` (comparaison flottante).
+- Vérifie que `bounds.size.x` vaut `20.0f` (comparaison flottante).
+- Vérifie que `bounds.size.y` vaut `10.0f` (comparaison flottante).
+- Vérifie que `camera.visibleBounds().size.x` vaut `10.0f` (comparaison flottante).
+
+## test_rhi_offscreen.cpp
+
+### RhiOffscreenTest.LArtPeintReduitSeMoyenneParSesMipmaps
+
+*Bloquant · Unitaire · Rendu QRhi* — `Source/Test/Unit/HMI/Graphics/test_rhi_offscreen.cpp:140`
+
+L'art peint reduit ne scintille pas : ses mipmaps le moyennent.
+
+**Étapes**
+
+1. Creer une texture lissee de 64 x 64, damier noir et blanc d'un pixel.
+2. La dessiner reduite dans une cible de 16 x 16.
+
+**Résultat attendu**
+
+- Vérifie que `rendered.size()` vaut `QSize(16, 16)`.
+- Vérifie que `pixel.green()` est supérieur ou égal à `96`.
+- Vérifie que `pixel.green()` est inférieur ou égal à `160`.
+
+### RhiOffscreenTest.LaTransparenceEstPremultipliee
+
+*Bloquant · Unitaire · Rendu QRhi* — `Source/Test/Unit/HMI/Graphics/test_rhi_offscreen.cpp:177`
+
+Une texture a demi transparente se melange en alpha premultiplie.
+
+**Étapes**
+
+1. Dessiner une texture rouge d'alpha 128 sur un fond bleu.
+
+**Résultat attendu**
+
+- Vérifie que `pixel.red()` vaut `128`, à `2` près.
+- Vérifie que `pixel.green()` vaut `0`.
+- Vérifie que `pixel.blue()` vaut `127`, à `2` près.
+
+### RhiOffscreenTest.ZoomEntierResteNetEnFiltrageNearest
+
+*Critique · Unitaire · Rendu QRhi* — `Source/Test/Unit/HMI/Graphics/test_rhi_offscreen.cpp:204`
+
+Le rendu QRhi garde nette une image engendree agrandie.
+
+**Étapes**
+
+1. Rendre hors ecran une texture temoin 4x4 agrandie 4 fois.
+2. Relire les pixels de la cible.
+
+**Résultat attendu**
+
+- Vérifie que `target->create()` est vrai.
+- Vérifie que `renderTarget->create()` est vrai.
+- Vérifie que `rhi->beginOffscreenFrame(&commandBuffer)` vaut `QRhi::FrameOpSuccess`.
+- Vérifie que `source.has_value()` est vrai.
+- Vérifie que `rhi->endOffscreenFrame()` vaut `QRhi::FrameOpSuccess`.
+- Vérifie que `readback.pixelSize` vaut `QSize(TARGET_SIZE, TARGET_SIZE)`.
+- Vérifie que `pixel.red()` vaut `red`.
+- Vérifie que `pixel.green()` vaut `green`.
+- Vérifie que `pixel.blue()` vaut `blue`.
+
+### RhiOffscreenTest.TeinteMultiplieeEtEffacementConserve
+
+*Majeur · Unitaire · Rendu QRhi* — `Source/Test/Unit/HMI/Graphics/test_rhi_offscreen.cpp:295`
+
+La teinte multiplie la texture et l'effacement subsiste hors du quad.
+
+**Étapes**
+
+1. Rendre hors ecran un quad teinte couvrant un quart de la cible.
+2. Relire un pixel dans le quad et un pixel hors du quad.
+
+**Résultat attendu**
+
+- Vérifie que `target->create()` est vrai.
+- Vérifie que `renderTarget->create()` est vrai.
+- Vérifie que `rhi->beginOffscreenFrame(&commandBuffer)` vaut `QRhi::FrameOpSuccess`.
+- Vérifie que `source.has_value()` est vrai.
+- Vérifie que `rhi->endOffscreenFrame()` vaut `QRhi::FrameOpSuccess`.
+- Vérifie que `inside.red()` vaut `0`.
+- Vérifie que `inside.green()` vaut `255`.
+- Vérifie que `inside.blue()` vaut `0`.
+- Vérifie que `outside.red()` vaut `0`.
+- Vérifie que `outside.green()` vaut `0`.
+- Vérifie que `outside.blue()` vaut `255`.
+
+## test_scene_folders.cpp
+
+### SceneFoldersTest.UnePieceRangeeSeRetrouveParSonChemin
+
+*Bloquant · Unitaire · Lieu compose · Arborescence* — `Source/Test/Unit/HMI/Graphics/test_scene_folders.cpp:47`
+
+Une piece rangee en sous-dossier se retrouve par son chemin.
+
+**Étapes**
+
+1. Adopter un manifeste dont un sol et un toit sont ranges en sous-dossiers, un tonneau a plat.
+2. Tirer l'instantane d'une carte qui les pose, et ses chemins d'images.
+
+**Résultat attendu**
+
+- Vérifie que `read.ok()` est vrai.
+- Vérifie que `manifest.ok()` est vrai.
+- Vérifie que `read.appearance.pieceFile("roof-l-d3-ne-c0r0")` vaut `"Scene/ville/roofs/l/d3/roof-l-d3-ne-c0r0.png"`.
+- Vérifie que `read.appearance.pieceFile("prop-barrel")` vaut `"Scene/ville/prop-barrel.png"`.
+- Vérifie que `paths` vaut `(std::vector<std::string>{"Scene/ville/floors/floor-paving-01.png", "Scene/ville/prop-barrel.png", "Scene/ville/roofs/l/d3/roof-l-d3-ne-c0r0.png"})`.
+
+### SceneFoldersTest.LAncreDUnePieceRangeeSeLitDansLeManifesteDuLieu
+
+*Bloquant · Unitaire · Lieu compose · Arborescence* — `Source/Test/Unit/HMI/Graphics/test_scene_folders.cpp:100`
+
+L'ancre d'une piece rangee se lit dans le manifeste du lieu.
+
+**Étapes**
+
+1. Ecrire le manifeste d'un lieu, et un toit sous roofs/l/d3/.
+2. Lire les traits de l'image du toit.
+
+**Résultat attendu**
+
+- Vérifie que `traits.anchor.has_value()` est vrai.
+- Vérifie que `traits.anchor->x` vaut `97.0F` (comparaison flottante).
+- Vérifie que `traits.anchor->y` vaut `40.0F` (comparaison flottante).
+- Vérifie que `traits.artTile.x` vaut `256.0F` (comparaison flottante).
+- Vérifie que `traits.storeyHeight.has_value()` est vrai.
+- Vérifie que `*traits.storeyHeight` vaut `224.0F` (comparaison flottante).
+
+## test_scene_lighting.cpp
+
+### SceneLightingTest.LeBlocEstNeutreParDefautEtDitLaLumiereDeLHeure
+
+*Bloquant · Unitaire · Rendu d'un lieu · Lumière* — `Source/Test/Unit/HMI/Graphics/test_scene_lighting.cpp:165`
+
+Le bloc d'eclairage est neutre par defaut, et dit la lumiere de l'heure.
+
+**Étapes**
+
+1. Lire un bloc `LightingUniforms` d'usine.
+2. Bâtir l'éclairage de midi sur le cadrage d'essai.
+3. Le bâtir sans ombres, puis à une heure où la lumière dirigée est noire (20:30).
+
+**Résultat attendu**
+
+- Vérifie que `neutral.tint[3]` vaut `0.0F` (comparaison flottante).
+- Vérifie que `neutral.sun[3]` vaut `0.0F` (comparaison flottante).
+- Vérifie que `neutral.up[3]` vaut `0.0F` (comparaison flottante).
+- Vérifie que `noon.uniforms.tint[3]` vaut `1.0F` (comparaison flottante).
+- Vérifie que `noon.uniforms.tint[0]` vaut `1.0F` (comparaison flottante).
+- Vérifie que `length(noon.uniforms.toSun)` vaut `1.0F`, à `1e-4F` près.
+- Vérifie que `length(noon.uniforms.up)` vaut `1.0F`, à `1e-4F` près.
+- Vérifie que `noon.uniforms.up[1]` est strictement inférieur à `0.0F`.
+- Vérifie que `noon.shadows` est vrai.
+- Vérifie que `noon.uniforms.sun[3]` vaut `1.0F` (comparaison flottante).
+- Vérifie que `noon.uniforms.toSun[3]` vaut `1.0F / 2048.0F` (comparaison flottante).
+- Vérifie que `noon.uniforms.ambient[3]` vaut `lightingAt(720.0F).light.shadow` (comparaison flottante).
+- Vérifie que `flat.shadows` est faux.
+- Vérifie que `flat.uniforms.sun[3]` vaut `0.0F` (comparaison flottante).
+- Vérifie que `flat.uniforms.tint[3]` vaut `1.0F` (comparaison flottante).
+- Vérifie que `dark.shadows` est faux.
+
+### SceneLightingTest.LaCarteDOmbresCouvreLImageEtGlisseParTexels
+
+*Bloquant · Unitaire · Rendu d'un lieu · Lumière* — `Source/Test/Unit/HMI/Graphics/test_scene_lighting.cpp:213`
+
+La carte d'ombres couvre l'image et glisse par texels entiers.
+
+**Étapes**
+
+1. Bâtir l'éclairage de midi et amener dans la carte d'ombres le point du sol au centre de l'image, ses quatre coins, et le centre élevé de deux mètres.
+2. Décaler le cadrage de quelques centièmes d'unité, cent fois, et relever à chaque fois où tombe un même point du lieu.
+
+**Résultat attendu**
+
+- Vérifie que `frame.shadows` est vrai.
+- Vérifie que `centre[0]` vaut `0.5F`, à `2.0F * texel` près.
+- Vérifie que `centre[1]` vaut `0.5F`, à `2.0F * texel` près.
+- Vérifie que `centre[2]` est strictement supérieur à `0.0F`.
+- Vérifie que `centre[2]` est strictement inférieur à `1.0F`.
+- Vérifie que `corner[0]` est strictement supérieur à `0.0F`.
+- Vérifie que `corner[0]` est strictement inférieur à `1.0F`.
+- Vérifie que `corner[1]` est strictement supérieur à `0.0F`.
+- Vérifie que `corner[1]` est strictement inférieur à `1.0F`.
+- Vérifie que `corner[2]` est strictement supérieur à `0.0F`.
+- Vérifie que `corner[2]` est strictement inférieur à `1.0F`.
+- Vérifie que `raised[2]` est strictement inférieur à `centre[2]`.
+- Vérifie que `metres[1]` vaut `0.0F`, à `1e-3F` près.
+- Vérifie que `(clip[0] * 0.5F) + 0.5F` vaut `centre[0]`, à `1e-4F` près.
+- Vérifie que `(clip[2] * 0.5F) + 0.5F` vaut `centre[2]`, à `1e-4F` près.
+- Vérifie que `texelsX` vaut `std::round(texelsX)`, à `0.02F` près.
+- Vérifie que `texelsY` vaut `std::round(texelsY)`, à `0.02F` près.
+
+### SceneLightingTest.LesLumieresDeNuitSontChoisiesPourLImage
+
+*Bloquant · Unitaire · Rendu d'un lieu · Lumière* — `Source/Test/Unit/HMI/Graphics/test_scene_lighting.cpp:289`
+
+Les lumieres de nuit sont choisies pour l'image.
+
+**Étapes**
+
+1. Donner deux sources, dont une toujours allumée, à midi puis à minuit.
+2. Donner une source hors de l'image, au-delà de sa portée.
+3. Donner quarante sources en ligne, de plus en plus loin du centre.
+4. Donner une flamme et lire sa couleur à cent instants.
+
+**Résultat attendu**
+
+- Vérifie que `middle.has_value()` est vrai.
+- Vérifie que `noon.uniforms.up[3]` vaut `1.0F` (comparaison flottante).
+- Vérifie que `midnight.uniforms.up[3]` vaut `2.0F` (comparaison flottante).
+- Vérifie que `midnight.uniforms.lightPosition[0][3]` vaut `6.0F * view.unitsPerMetre()`, à `1e-3F` près.
+- Vérifie que `midnight.uniforms.lightColor[0][0]` vaut `1.0F`, à `1e-4F` près.
+- Vérifie que `midnight.uniforms.lightColor[0][2]` vaut `0.6F`, à `1e-4F` près.
+- Vérifie que `hmi::buildSceneLighting(view, shown, lightingAt(0.0F), far, true).uniforms.up[3]` vaut `0.0F` (comparaison flottante).
+- Vérifie que `crowded.uniforms.up[3]` vaut `static_cast<float>(hmi::MAXIMUM_SCENE_LIGHTS)` (comparaison flottante).
+- Vérifie que `crowded.uniforms.lightPosition[index][0]` est strictement inférieur à `beyond[0]`.
+- Vérifie que `highest` est inférieur ou égal à `1.0F + 1e-4F`.
+- Vérifie que `lowest` est supérieur ou égal à `0.8F`.
+- Vérifie que `highest - lowest` est strictement supérieur à `0.03F`.
+
+### SceneLightingTest.LesMatricesSInversentEtSeComposent
+
+*Majeur · Unitaire · Rendu d'un lieu · Lumière* — `Source/Test/Unit/HMI/Graphics/test_scene_lighting.cpp:361`
+
+Les matrices de l'eclairage s'inversent et se composent.
+
+**Étapes**
+
+1. Prendre la matrice qui amène le lieu en mètres dans la vue, et son inverse.
+2. Amener trois points dans la vue, puis les ramener.
+3. Comparer la vue du point de grille (3, 2) à celle de sa projection.
+
+**Résultat attendu**
+
+- Vérifie que `back[0]` vaut `point[0]`, à `1e-3F` près.
+- Vérifie que `back[1]` vaut `point[1]`, à `1e-3F` près.
+- Vérifie que `back[2]` vaut `point[2]`, à `1e-3F` près.
+- Vérifie que `identity[index]` vaut `index % 5 == 0 ? 1.0F : 0.0F`, à `1e-4F` près.
+- Vérifie que `seen[0]` vaut `projected.x`, à `1e-3F` près.
+- Vérifie que `seen[1]` vaut `projected.y`, à `1e-3F` près.
+- Vérifie que `seen[2]` vaut `view.groundDepth(projected.y)`, à `1e-3F` près.
+
+### SceneLightingTest.UneCarteReleveSesLumieresEtSesBoitesDOmbre
+
+*Bloquant · Unitaire · Rendu d'un lieu · Lumière* — `Source/Test/Unit/HMI/Graphics/test_scene_lighting.cpp:398`
+
+Une carte releve ses lumieres, ses eclats et ses boites d'ombre.
+
+**Étapes**
+
+1. Écrire un lieu d'essai : un mur, un lampadaire qui éclaire, un brasero qui éclaire et garde son éclat, un tapis, un dallage.
+2. Composer une carte de 4 × 4 : le mur en (0, 0) et à l'étage au-dessus, le lampadaire en (1, 1), le brasero en (2, 2), le tapis en (3, 3), une entité `light` en (3, 0).
+
+**Résultat attendu**
+
+- Vérifie que `appearance.pieceManifest()` diffère de `nullptr`.
+- Vérifie que `snapshot.lights.size()` vaut `3U`.
+- Vérifie que `lamppost.column` vaut `1.5F` (comparaison flottante).
+- Vérifie que `lamppost.row` vaut `1.5F` (comparaison flottante).
+- Vérifie que `lamppost.emission.height` vaut `3.0F` (comparaison flottante).
+- Vérifie que `lamppost.emission.radius` vaut `7.5F` (comparaison flottante).
+- Vérifie que `lamppost.emission.flicker` est faux.
+- Vérifie que `snapshot.lights[1].emission.flicker` est vrai.
+- Vérifie que `snapshot.lights[1].column` vaut `2.5F` (comparaison flottante).
+- Vérifie que `snapshot.lights[2].emission.always` est vrai.
+- Vérifie que `snapshot.lights[2].column` vaut `3.5F` (comparaison flottante).
+- Vérifie que `snapshot.lights[2].row` vaut `0.5F` (comparaison flottante).
+- Vérifie que `snapshot.glows.size()` vaut `1U`.
+- Vérifie que `snapshot.glows.at("brazier")` vaut `0.8F` (comparaison flottante).
+- Vérifie que `snapshot.shadowBoxes.size()` vaut `4U`.
+- Vérifie que `wall.column` vaut `0.0F` (comparaison flottante).
+- Vérifie que `wall.columns` vaut `1.0F` (comparaison flottante).
+- Vérifie que `wall.base` vaut `0.0F` (comparaison flottante).
+- Vérifie que `wall.height` vaut `227.0F / pixelsPerMetre`, à `1e-3F` près.
+- Vérifie que `wall.height` vaut `2.4F`, à `0.05F` près.
+- Vérifie que `wall.top` vaut `1.0F` (comparaison flottante).
+- Vérifie que `upper.column` vaut `0.0F` (comparaison flottante).
+- Vérifie que `upper.base` vaut `2.4F` (comparaison flottante).
+- Vérifie que `pole.columns` vaut `0.25F`, à `1e-4F` près.
+- Vérifie que `pole.column` vaut `1.375F`, à `1e-4F` près.
+- Vérifie que `pole.height` vaut `3.0F`, à `0.05F` près.
+- Vérifie que `pole.top` est strictement inférieur à `1.0F`.
+- Vérifie que `snapshot.shadowBoxes[3].column` vaut `2.25F`, à `1e-4F` près.
+
+### SceneLightingTest.ChaquePrimitiveDitCeQuElleRecoit
+
+*Bloquant · Unitaire · Rendu d'un lieu · Lumière* — `Source/Test/Unit/HMI/Graphics/test_scene_lighting.cpp:466`
+
+Chaque primitive dit ce qu'elle recoit de la lumiere.
+
+**Étapes**
+
+1. Composer un sol, une pièce dressée, une pièce dressée d'éclat 0,8, un effet (éclat 1), une marque d'interface, une face de bloc de maquette élevée et son losange à plat.
+2. Lire ce que chacune reçoit (`ComposedQuad::shading`).
+
+**Résultat attendu**
+
+- Vérifie que `scene.addSprite(hmi::RenderLayer::Tile, texture, 0, quad)` est vrai.
+- Vérifie que `scene.addSprite(hmi::RenderLayer::Object, texture, 1, quad)` est vrai.
+- Vérifie que `scene.addSprite(hmi::RenderLayer::Object, texture, 2, quad, 0, {}, std::nullopt, 0.8F)` est vrai.
+- Vérifie que `scene.addSprite(hmi::RenderLayer::Player, texture, 3, quad, 0, {}, std::nullopt, 1.0F)` est vrai.
+- Vérifie que `scene.addSprite(hmi::RenderLayer::UI, texture, 4, quad)` est vrai.
+- Vérifie que `scene.addPoly(hmi::RenderLayer::Tile, texture, 5, raised)` est vrai.
+- Vérifie que `scene.addPoly(hmi::RenderLayer::Tile, texture, 6, flat)` est vrai.
+- Vérifie que `quads.size()` vaut `7U`.
+- Vérifie que `quads[0].shading()` vaut `(hmi::SpriteShading{.lit = 1.0F, .shadowed = true})`.
+- Vérifie que `quads[1].shading()` vaut `(hmi::SpriteShading{.lit = 1.0F, .shadowed = false})`.
+- Vérifie que `quads[2].shading().lit` vaut `0.2F`, à `1e-5F` près.
+- Vérifie que `quads[2].shading().shadowed` est faux.
+- Vérifie que `quads[3].shading().lit` vaut `0.0F` (comparaison flottante).
+- Vérifie que `quads[4].shading()` vaut `hmi::SpriteShading{}`.
+- Vérifie que `quads[5].shading()` vaut `(hmi::SpriteShading{.lit = 1.0F, .shadowed = false})`.
+- Vérifie que `quads[6].shading()` vaut `(hmi::SpriteShading{.lit = 1.0F, .shadowed = true})`.
+
+## test_static_world_scene.cpp
+
+### StaticWorldSceneTest.SansCadrageLImageEstLaCompositionComplete
+
+*Bloquant · Unitaire · Rendu d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_static_world_scene.cpp:205`
+
+Composer la carte une fois ne change rien a ce qui se dessine.
+
+**Étapes**
+
+1. Composer la place du bourg, puis une maquette a etages, par la composition complete triee.
+2. Composer les memes lieux une fois par la scene statique, puis une image sans cadrage, heros compris.
+
+**Résultat attendu**
+
+- Vérifie que `expected.size()` est strictement supérieur à `100U`.
+
+### StaticWorldSceneTest.UnCadrageNeGardeQueCeQuIlMontre
+
+*Bloquant · Unitaire · Rendu d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_static_world_scene.cpp:227`
+
+Une image ne compose que ce que la camera montre.
+
+**Étapes**
+
+1. Composer la place du bourg une fois.
+2. Composer une image cadree sur dix cases autour du heros, puis sur un coin de la carte.
+
+**Résultat attendu**
+
+- Vérifie que `framed.size()` est strictement inférieur à `complete.size()`.
+- Vérifie que `framed.statistics().culled` est strictement supérieur à `0`.
+
+### StaticWorldSceneTest.LEtageSEffaceDevantLeHerosAChaqueImage
+
+*Majeur · Unitaire · Rendu d'un lieu · Etages* — `Source/Test/Unit/HMI/Graphics/test_static_world_scene.cpp:262`
+
+Un etage s'efface devant le heros a chaque image.
+
+**Étapes**
+
+1. Composer une fois une maquette a etages.
+2. Composer une image le heros au pied d'un ilot de murs, puis une le heros en rase campagne, avec la meme scene statique.
+
+**Résultat attendu**
+
+- Vérifie que `fadedStoreys(image(place, statics))` est strictement supérieur à `0`.
+- Vérifie que `fadedStoreys(image(place, statics))` vaut `0`.
+- Vérifie que `fadedStoreys(statics.scene())` vaut `0`.
+
+## test_texture_atlas.cpp
+
+### TextureAtlasTest.TileRenvoieLeRectangleAttendu
+
+*Critique · Unitaire · Texture Atlas* — `Source/Test/Unit/HMI/Graphics/test_texture_atlas.cpp:18`
+
+tile(colonne, ligne) renvoie un rectangle de 16x16 pixels à l'origine attendue.
+
+**Étapes**
+
+1. Mettre en place le contexte du test (arrangement).
+2. Executer le scenario et verifier les assertions.
+
+**Résultat attendu**
+
+- Vérifie que `origin.x` vaut `0`.
+- Vérifie que `origin.y` vaut `0`.
+- Vérifie que `origin.width` vaut `hmi::TextureAtlas::TILE_SIZE`.
+- Vérifie que `origin.height` vaut `hmi::TextureAtlas::TILE_SIZE`.
+- Vérifie que `secondRow.x` vaut `2 * hmi::TextureAtlas::TILE_SIZE`.
+- Vérifie que `secondRow.y` vaut `1 * hmi::TextureAtlas::TILE_SIZE`.
+- Vérifie que `secondRow.width` vaut `hmi::TextureAtlas::TILE_SIZE`.
+- Vérifie que `secondRow.height` vaut `hmi::TextureAtlas::TILE_SIZE`.
+
+## test_world_scene_composer.cpp
+
+### ScenePiecePlacement.APieceTakesTheScaleItsPlaceDeclares
+
+*Bloquant · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:46`
+
+Une piece prend l'echelle que son lieu declare.
+
+**Étapes**
+
+1. Poser une piece de 512 x 400 d'un lieu qui declare un losange de 256 x 159, sur une case de 100 unites.
+
+**Résultat attendu**
+
+- Vérifie que `quad.width` vaut `200.0F` (comparaison flottante).
+- Vérifie que `quad.height` vaut `156.25F` (comparaison flottante).
+- Vérifie que `quad.x` vaut `1000.0F - 50.0F` (comparaison flottante).
+- Vérifie que `quad.y` vaut `500.0F - (241.0F * 100.0F / 256.0F)` (comparaison flottante).
+
+### ScenePiecePlacement.AFinerPlaceDrawsAtTheSameSize
+
+*Majeur · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:68`
+
+Un lieu plus fin se dessine a la meme taille.
+
+**Étapes**
+
+1. Poser la meme piece a 256 px de losange, puis a 512 px, deux fois plus grande.
+
+**Résultat attendu**
+
+- Vérifie que `a.x` vaut `b.x` (comparaison flottante).
+- Vérifie que `a.y` vaut `b.y` (comparaison flottante).
+- Vérifie que `a.width` vaut `b.width` (comparaison flottante).
+- Vérifie que `a.height` vaut `b.height` (comparaison flottante).
+
+### ScenePiecePlacement.WithoutADeclaredScaleAPieceIsOneCellWide
+
+*Majeur · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:88`
+
+Une piece sans echelle declaree a la largeur d'une case.
+
+**Étapes**
+
+1. Poser une piece de 256 x 256 sans losange declare, sur une case de 512 unites.
+
+**Résultat attendu**
+
+- Vérifie que `quad.width` vaut `512.0F` (comparaison flottante).
+- Vérifie que `quad.x` vaut `100.0F - 256.0F` (comparaison flottante).
+
+### ScenePiecePlacement.AlignsFractionalOriginWithoutChangingDimensions
+
+*Critique · Unitaire · Rendu du Colisée* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:104`
+
+Une ancre fractionnaire aligne la pièce.
+
+**Étapes**
+
+1. Lire une origine fractionnaire d'un manifeste sans placementVersion puis composer la pièce.
+
+**Résultat attendu**
+
+- Vérifie que `anchor` est vrai.
+- Vérifie que `quad.x + anchor->x * 2` vaut `100` (comparaison flottante).
+- Vérifie que `quad.y + anchor->y * 2` vaut `200` (comparaison flottante).
+- Vérifie que `quad.width` vaut `512` (comparaison flottante).
+- Vérifie que `quad.height` vaut `512` (comparaison flottante).
+- Vérifie que `hmi::scenePieceAnchor(manifest, "unknown.png")` est faux.
+
+### ScenePiecePlacement.RejectsMalformedAnchor
+
+*Critique · Unitaire · Rendu du Colisée* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:129`
+
+Une ancre invalide est ignorée.
+
+**Étapes**
+
+1. Lire une ancre contenant une chaîne à la place d’un nombre.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::scenePieceAnchor(manifest, "wall.png")` est faux.
+
+### ScenePiecePlacement.ReadsTheArtTileOfAManifest
+
+*Majeur · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:144`
+
+Le losange d'art se lit dans le manifeste.
+
+**Étapes**
+
+1. Lire `tile` d'un manifeste valide, absent, nul et non numerique.
+
+**Résultat attendu**
+
+- Vérifie que `tile.x` vaut `256.0F` (comparaison flottante).
+- Vérifie que `tile.y` vaut `159.0F` (comparaison flottante).
+- Vérifie que `hmi::manifestArtTile(nlohmann::json::parse(text)).x` vaut `0.0F` (comparaison flottante).
+
+### ScenePiecePlacement.AnEffectFrameOf256By256IsDrawnWhole
+
+*Bloquant · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:163`
+
+Une image d'effet de 256 x 256 s'affiche entiere.
+
+**Étapes**
+
+1. Poser l'image 2 d'une bande de six cellules de 256 x 256, a l'echelle d'un losange de 256, sur une case de 100 unites.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::frameCountOf(band)` vaut `6`.
+- Vérifie que `quad.v0` vaut `0.0F` (comparaison flottante).
+- Vérifie que `quad.v1` vaut `1.0F` (comparaison flottante).
+- Vérifie que `quad.width` vaut `100.0F` (comparaison flottante).
+- Vérifie que `quad.height` vaut `100.0F` (comparaison flottante).
+- Vérifie que `quad.u0` vaut `2.0F / 6.0F` (comparaison flottante).
+- Vérifie que `quad.u1` vaut `3.0F / 6.0F` (comparaison flottante).
+- Vérifie que `quad.y + quad.height` vaut `400.0F` (comparaison flottante).
+- Vérifie que `quad.x + (quad.width / 2.0F)` vaut `500.0F` (comparaison flottante).
+
+### ScenePiecePlacement.ProjectionIsOptInAndRejectsInvalidRatios
+
+*Critique · Unitaire · Rendu du Colisée* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:192`
+
+La projection explicite est contrôlée.
+
+**Étapes**
+
+1. Lire les tables sans ratio, avec ratio valide et avec ratios invalides.
+
+**Résultat attendu**
+
+- Vérifie que `normal.ok()` est vrai.
+- Vérifie que `normal.appearance.diamondRatio()` vaut `core::ARENA_DIAMOND_RATIO` (comparaison flottante).
+- Vérifie que `modular.ok()` est vrai.
+- Vérifie que `modular.appearance.diamondRatio()` vaut `42.0F / 68.0F` (comparaison flottante).
+- Vérifie que `hmi::PlaceAppearance::loadFromString(R"({"version":1,"place":"bad","diamondRatio":0})") .ok()` est faux.
+- Vérifie que `hmi::PlaceAppearance::loadFromString( R"({"version":1,"place":"bad","diamondRatio":"wrong"})") .ok()` est faux.
+
+### WorldSceneComposerTest.LInstantaneTireLeSolDuTypeEtLeReliefDeLaCase
+
+*Critique · Unitaire · Lieu compose* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:279`
+
+Le sol vient du type de tuile, le relief de la piece nommee a la case.
+
+**Étapes**
+
+1. Batir une carte de sable avec une case de pierre, un mur de decor et une piece nommee a une case du decor.
+2. En tirer l'instantane.
+
+**Résultat attendu**
+
+- Vérifie que `instantane.columns` vaut `4`.
+- Vérifie que `instantane.rows` vaut `3`.
+- Vérifie que `instantane.place` vaut `"coliseum"`.
+- Vérifie que `instantane.floorAt({0, 0})` vaut `"sand"`.
+- Vérifie que `instantane.floorAt({1, 0})` vaut `"sand-2"`.
+- Vérifie que `instantane.floorAt({2, 0})` vaut `"sand-3"`.
+- Vérifie que `instantane.floorAt({3, 0})` vaut `"stone-slab"`.
+- Vérifie que `instantane.floorAt({0, 0})` vaut `hmi::snapshotWorldScene(carte(), table(), {}).floorAt({0, 0})`.
+- Vérifie que `instantane.reliefAt({0, 0})` vaut `"wall-left"`.
+- Vérifie que `instantane.reliefAt({2, 2})` vaut `"torch-left"`.
+- Vérifie que `instantane.reliefAt({1, 1}).empty()` est vrai.
+- Vérifie que `instantane.floorAt({9, 9}).empty()` est vrai.
+
+### WorldSceneComposerTest.LesCheminsCouvrentLeLieuEtLesFigurines
+
+*Majeur · Unitaire · Lieu compose* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:312`
+
+La liste des textures a charger couvre exactement ce que la composition resout.
+
+**Étapes**
+
+1. Tirer l'instantane d'une carte avec une figurine.
+2. Lister les chemins de texture.
+
+**Résultat attendu**
+
+- Vérifie que `std::ranges::is_sorted(chemins)` est vrai.
+- Vérifie que `std::ranges::find(chemins, "Scene/coliseum/sand.png")` diffère de `chemins.end()`.
+- Vérifie que `std::ranges::find(chemins, "Scene/coliseum/stone-slab.png")` diffère de `chemins.end()`.
+- Vérifie que `std::ranges::find(chemins, "Scene/coliseum/wall-left.png")` diffère de `chemins.end()`.
+- Vérifie que `std::ranges::find(chemins, "Scene/coliseum/torch-left.png")` diffère de `chemins.end()`.
+- Vérifie que `std::ranges::find(chemins, "Npc/anariel/@marker")` diffère de `chemins.end()`.
+- Vérifie que `std::ranges::find(chemins, "Npc/anariel/idle.png")` vaut `chemins.end()`.
+- Vérifie que `std::ranges::find(chemins, "Npc/anariel/walk.png")` vaut `chemins.end()`.
+- Vérifie que `std::ranges::count(chemins, "Scene/coliseum/sand.png")` vaut `1`.
+
+### WorldSceneComposerTest.LaCompositionPoseChaquePieceSurSonCalque
+
+*Critique · Unitaire · Lieu compose* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:342`
+
+Sol, relief et figurine tombent sur les calques Tile, Object et Player.
+
+**Étapes**
+
+1. Composer une carte de douze cases avec un mur, une torche et une figurine.
+
+**Résultat attendu**
+
+- Vérifie que `sols` vaut `12`.
+- Vérifie que `reliefs` vaut `2`.
+- Vérifie que `figurines` vaut `1`.
+- Vérifie que `quad.sprite.y + quad.sprite.height` est strictement inférieur à `piedDeLaCase`.
+
+### WorldSceneComposerTest.UneFigurineSansImageAUneCleDeMarqueur
+
+*Majeur · Unitaire · Rendu du lieu* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:392`
+
+La cle du marqueur d'une figurine se tire de son chemin.
+
+**Étapes**
+
+1. Demander la cle de marqueur de chemins de figurine, de piece et de chemins malformes.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::figureMarkerKey(hmi::figureMarkerPath("sentinelle-ironhand"))` vaut `"npc/sentinelle-ironhand"`.
+- Vérifie que `hmi::figureMarkerKey(hmi::figureMarkerPath("Common/Characters/Heroes/brawler"))` vaut `"characters/heroes/brawler"`.
+- Vérifie que `hmi::figureMarkerKey("Npc/sentinelle-ironhand/idle.png")` vaut `"npc/sentinelle-ironhand"`.
+- Vérifie que `hmi::figureMarkerKey("Npc/sentinelle-ironhand/walk.png")` vaut `"npc/sentinelle-ironhand"`.
+- Vérifie que `hmi::figureMarkerKey("Scene/martpart/street.png")` vaut `""`.
+- Vérifie que `hmi::figureMarkerKey("Npc/")` vaut `""`.
+- Vérifie que `hmi::figureMarkerKey("Npc//idle.png")` vaut `""`.
+- Vérifie que `hmi::figureMarkerKey("Npc/jade")` vaut `""`.
+- Vérifie que `hmi::figureMarkerKey("Monsters/ironhand-soldier/idle.png")` vaut `"monsters/ironhand-soldier"`.
+- Vérifie que `hmi::figureMarkerKey("Common/Characters/Heroes/brawler/idle-se.png")` vaut `"characters/heroes/brawler"`.
+- Vérifie que `hmi::figureMarkerKey("Regions/central-empire/capital/Common/Characters/guard/walk.png")` vaut `"characters/guard"`.
+- Vérifie que `hmi::figureMarkerKey("Common/Characters/manifest.json")` vaut `""`.
+- Vérifie que `hmi::figureMarkerKey("Common/Characters/Heroes/brawler/")` vaut `""`.
+- Vérifie que `hmi::figureMarkerKey("Common/OtherCharacters/x/idle.png")` vaut `""`.
+
+### WorldSceneComposerTest.UneFigurineSeNommeParSlugOuParDossier
+
+*Majeur · Unitaire · Scène du monde* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:428`
+
+Le soldat Ironhand se lit dans les monstres, Anariel dans les PNJ.
+
+**Étapes**
+
+1. Demander le dossier d'« anariel », puis celui de « Monsters/ironhand-soldier », sans table de lieu puis avec une table qui range anariel dans sa zone.
+2. Demander le chemin de leur marqueur, et celui de la bande de l'effet `impact`.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::worldFigureDirectory(instantane, "anariel")` vaut `"Npc/anariel"`.
+- Vérifie que `hmi::worldFigureDirectory(instantane, "Monsters/ironhand-soldier")` vaut `"Monsters/ironhand-soldier"`.
+- Vérifie que `hmi::worldFigureDirectory(instantane, "anariel")` vaut `"Regions/zone/Characters/anariel"`.
+- Vérifie que `hmi::figureMarkerPath("anariel")` vaut `"Npc/anariel/@marker"`.
+- Vérifie que `hmi::figureMarkerPath("Monsters/ironhand-soldier")` vaut `"Monsters/ironhand-soldier/@marker"`.
+- Vérifie que `hmi::effectStripPath("impact")` vaut `"Common/Fx/impact.png"`.
+
+### WorldSceneComposerTest.LaPieceNommeeLEmporteSousSonNomCourant
+
+*Critique · Unitaire · Lieu compose* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:455`
+
+La pièce nommée l'emporte, sous son nom courant.
+
+**Étapes**
+
+1. Nommer `stone-slab` sur une case de sable, et `old-torch`, ancien nom de `torch-left`, sur le décor.
+2. Tirer l'instantané avec le manifeste des alias.
+
+**Résultat attendu**
+
+- Vérifie que `manifeste.ok()` est vrai.
+- Vérifie que `instantane.floorAt({0, 1})` vaut `"stone-slab"`.
+- Vérifie que `instantane.reliefAt({2, 2})` vaut `"torch-left"`.
+
+### WorldSceneComposerTest.UnePieceLargeSeTrieAuPiedDeSonEmprise
+
+*Majeur · Unitaire · Lieu compose* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:484`
+
+Une pièce large se trie au pied de son emprise.
+
+**Étapes**
+
+1. Poser un étal 2 × 1 et un mur 1 × 1 sur la même case d'ancrage de deux cartes.
+2. Composer les deux.
+
+**Résultat attendu**
+
+- Vérifie que `manifeste.ok()` est vrai.
+- Vérifie que `large.footprints.at("stall")` vaut `(core::PieceFootprint{.columns = 2, .rows = 1})`.
+- Vérifie que `ordreDuRelief(large)` est strictement supérieur à `ordreDuRelief(simple)`.
+
+### ScenePiecePlacement.DepthRequiresAValidAnchor
+
+*Critique · Unitaire · Rendu du Colisée* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:525`
+
+La profondeur exige une ancre valide.
+
+**Étapes**
+
+1. Lire une pièce valide, une inconnue et une pièce sans ancre.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::scenePieceDepthOffset(manifest, "gate.png")` vaut `4.5F`.
+- Vérifie que `hmi::scenePieceDepthOffset(manifest, "unknown.png")` est faux.
+- Vérifie que `hmi::scenePieceDepthOffset(manifest, "loose.png")` est faux.
+
+### MaquetteRenderTest.UneCarteSansLieuSeComposeEnLosangesDeCouleur
+
+*Critique · Unitaire · Rendu de maquette* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:570`
+
+Une carte sans lieu se compose en losanges de couleur.
+
+**Étapes**
+
+1. Composer une carte de deux cases qui ne nomme aucun lieu.
+
+**Résultat attendu**
+
+- Vérifie que `instantane.typeAt({0, 0})` vaut `core::TileType::Water`.
+- Vérifie que `instantane.typeAt({1, 0})` vaut `core::TileType::Wall`.
+- Vérifie que `scene.size()` vaut `4U`.
+- Vérifie que `quad.kind` vaut `hmi::QuadKind::Poly`.
+- Vérifie que `quad.texture` vaut `aplat()`.
+- Vérifie que `scene.quads()[0].layer` vaut `hmi::RenderLayer::Tile`.
+- Vérifie que `scene.quads()[0].poly.r` vaut `eau.r` (comparaison flottante).
+- Vérifie que `scene.quads()[0].poly.b` vaut `eau.b` (comparaison flottante).
+- Vérifie que `scene.quads()[i].layer` vaut `hmi::RenderLayer::Object`.
+
+### MaquetteRenderTest.UnTypeNonCouvertParLeLieuPrendLaMaquette
+
+*Critique · Unitaire · Rendu de maquette* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:607`
+
+Un type absent de la table du lieu prend le rendu de maquette.
+
+**Étapes**
+
+1. Peindre une case d'eau sur la carte du Colisee, dont la table ne couvre que le sable et la pierre.
+2. Composer.
+
+**Résultat attendu**
+
+- Vérifie que `instantane.floorAt({0, 0}).empty()` est faux.
+- Vérifie que `instantane.floorAt({1, 0}).empty()` est vrai.
+- Vérifie que `scene.size()` vaut `2U`.
+- Vérifie que `sprites` vaut `1`.
+- Vérifie que `losanges` vaut `1`.
+
+### MaquetteRenderTest.SansAplatRienNEstCompose
+
+*Majeur · Unitaire · Rendu de maquette* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:649`
+
+Sans aplat, la maquette ne compose rien.
+
+**Étapes**
+
+1. Composer une carte sans lieu avec une table de textures sans aplat.
+
+**Résultat attendu**
+
+- Vérifie que `scene.size()` vaut `0U`.
+
+### MaquetteRenderTest.UnMurSeComposeEnBlocDeTroisFaces
+
+*Critique · Unitaire · Rendu de maquette* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:668`
+
+Un mur se compose en bloc de trois faces, haut d'une case.
+
+**Étapes**
+
+1. Composer une carte d'une seule case de mur, sans lieu.
+
+**Résultat attendu**
+
+- Vérifie que `scene.size()` vaut `3U`.
+- Vérifie que `quad.layer` vaut `hmi::RenderLayer::Object`.
+- Vérifie que `quad.kind` vaut `hmi::QuadKind::Poly`.
+- Vérifie que `premiere` diffère de `deuxieme`.
+- Vérifie que `deuxieme` diffère de `troisieme`.
+- Vérifie que `plusHaut` vaut `bounds.position.y - bounds.size.y` (comparaison flottante).
+
+### MaquetteRenderTest.UnMurDeDecorSeCoucheAPlatSurLePlan
+
+*Majeur · Unitaire · Rendu de maquette* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:714`
+
+Un mur de decor se couche a plat sur le plan.
+
+**Étapes**
+
+1. Composer une carte d'une case dont le mur est sur la couche de decor, sans lieu, une fois extrude, une fois a plat.
+
+**Résultat attendu**
+
+- Vérifie que `instantane.reliefTypeAt({0, 0})` vaut `core::TileType::Wall`.
+- Vérifie que `extrude.size()` vaut `3U`.
+- Vérifie que `plat.size()` vaut `1U`.
+- Vérifie que `plat.quads()[0].kind` vaut `hmi::QuadKind::Poly`.
+- Vérifie que `plat.quads()[0].poly.r` vaut `teinte.r` (comparaison flottante).
+- Vérifie que `plat.quads()[0].poly.g` vaut `teinte.g` (comparaison flottante).
+- Vérifie que `plat.quads()[0].poly.b` vaut `teinte.b` (comparaison flottante).
+
+### MaquetteRenderTest.LEauProfondeNeSExtrudePas
+
+*Majeur · Unitaire · Rendu de maquette* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:762`
+
+L'eau profonde reste un losange plat, plus sombre que l'eau vive.
+
+**Étapes**
+
+1. Interroger l'extrusion et la palette pour l'eau profonde.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::maquetteExtrudes(core::TileType::DeepWater)` est faux.
+- Vérifie que `hmi::maquetteExtrudes(core::TileType::Wall)` est vrai.
+- Vérifie que `hmi::maquetteExtrudes(core::TileType::Solid)` est vrai.
+- Vérifie que `hmi::maquetteExtrudes(core::TileType::Cliff)` est vrai.
+- Vérifie que `profonde.r + profonde.g + profonde.b` est strictement inférieur à `vive.r + vive.g + vive.b`.
+
+### MaquetteRenderTest.ChaqueTypeASaTeinteEtSaForme
+
+*Majeur · Unitaire · Rendu de maquette* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:783`
+
+Deux types de tuile ne partagent jamais une teinte de maquette.
+
+**Étapes**
+
+1. Relever la teinte de maquette de chaque type, hors case vide.
+2. Interroger la forme de la fosse, de la lave, de la colonne et de la palissade.
+
+**Résultat attendu**
+
+- Vérifie que `std::find(vues.begin(), vues.end(), teinte)` vaut `vues.end()`.
+- Vérifie que `hmi::maquetteExtrudes(core::TileType::Pit)` est faux.
+- Vérifie que `hmi::maquetteExtrudes(core::TileType::Lava)` est faux.
+- Vérifie que `colonne.height` est strictement supérieur à `mur.height`.
+- Vérifie que `colonne.footprint` est strictement inférieur à `mur.footprint`.
+- Vérifie que `palissade.height` est strictement supérieur à `0.0F`.
+- Vérifie que `palissade.height` est strictement inférieur à `mur.height`.
+
+### MaquetteRenderTest.UneColonneSeComposeEnBlocEtroitSurSonSocle
+
+*Majeur · Unitaire · Rendu de maquette* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:822`
+
+Une colonne se compose en bloc etroit, sur son socle.
+
+**Étapes**
+
+1. Composer une carte d'une seule case de colonne, sans lieu.
+
+**Résultat attendu**
+
+- Vérifie que `scene.size()` vaut `4U`.
+- Vérifie que `quad.layer` vaut `hmi::RenderLayer::Object`.
+- Vérifie que `quad.poly.x[i]` est strictement supérieur à `bounds.position.x`.
+- Vérifie que `quad.poly.x[i]` est strictement inférieur à `bounds.position.x + bounds.size.x`.
+- Vérifie que `socles` vaut `1`.
+- Vérifie que `plusHaut` vaut `dessusDuSommet - hauteur` (comparaison flottante).
+
+### MaquetteRenderTest.LaCouleurDuJetonSeDeduitDeLEntite
+
+*Critique · Unitaire · Jetons de maquette* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:870`
+
+La couleur d'un jeton se deduit de ce que le format dit deja.
+
+**Étapes**
+
+1. Poser un PNJ avec dialogue, un sans, un avec figurine, une rencontre, deux entrees d'arene, un point d'apparition, un portail et un coffre.
+2. En tirer les marques.
+
+**Résultat attendu**
+
+- Vérifie que `marques.tokens.size()` vaut `8U`.
+- Vérifie que `marques.tokens[0].kind` vaut `hmi::MaquetteTokenKind::Talker`.
+- Vérifie que `marques.tokens[0].letter` vaut `'M'`.
+- Vérifie que `marques.tokens[1].kind` vaut `hmi::MaquetteTokenKind::Neutral`.
+- Vérifie que `marques.tokens[1].letter` vaut `'N'`.
+- Vérifie que `marques.tokens[2].kind` vaut `hmi::MaquetteTokenKind::Hostile`.
+- Vérifie que `marques.tokens[2].letter` vaut `'W'`.
+- Vérifie que `marques.tokens[3].kind` vaut `hmi::MaquetteTokenKind::Hostile`.
+- Vérifie que `marques.tokens[4].kind` vaut `hmi::MaquetteTokenKind::Player`.
+- Vérifie que `marques.tokens[5].kind` vaut `hmi::MaquetteTokenKind::Player`.
+- Vérifie que `marques.tokens[5].letter` vaut `'G'`.
+- Vérifie que `marques.tokens[6].kind` vaut `hmi::MaquetteTokenKind::Portal`.
+- Vérifie que `marques.tokens[6].letter` vaut `'A'`.
+- Vérifie que `marques.tokens[6].arrow` est vrai.
+- Vérifie que `marques.tokens[7].kind` vaut `hmi::MaquetteTokenKind::Object`.
+
+### MaquetteRenderTest.LesTracesNeParaissentQuEnMaquette
+
+*Critique · Unitaire · Jetons de maquette* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:920`
+
+Une carte habillee garde ses jetons mais perd ses traces.
+
+**Étapes**
+
+1. Tirer les marques d'un portail, d'une zone de combat et d'un trajet, en maquette puis hors maquette.
+
+**Résultat attendu**
+
+- Vérifie que `maquette.tokens.size()` vaut `1U`.
+- Vérifie que `maquette.tokens.front().arrow` est vrai.
+- Vérifie que `maquette.traces.size()` vaut `2U`.
+- Vérifie que `maquette.traces[0].shape` vaut `hmi::MaquetteTraceShape::Outline`.
+- Vérifie que `maquette.traces[0].cells.size()` vaut `6U`.
+- Vérifie que `maquette.traces[1].shape` vaut `hmi::MaquetteTraceShape::Path`.
+- Vérifie que `habillee.tokens.size()` vaut `1U`.
+- Vérifie que `habillee.tokens.front().arrow` est faux.
+- Vérifie que `habillee.traces.empty()` est vrai.
+
+### MaquetteRenderTest.LesCheminsContiennentLesJetons
+
+*Majeur · Unitaire · Jetons de maquette* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:963`
+
+Les chemins de textures d'une carte contiennent ceux de ses jetons.
+
+**Étapes**
+
+1. Batir une carte sans lieu portant une rencontre.
+2. Lister ses chemins de texture.
+
+**Résultat attendu**
+
+- Vérifie que `std::ranges::find(chemins, hmi::maquetteTokenPath(hmi::MaquetteTokenKind::Hostile, 'W'))` diffère de `chemins.end()`.
+
+### WorldSceneComposerTest.LeCapDUneFigurineSuitSonDeplacement
+
+*Critique · Unitaire · Scene du monde* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:993`
+
+Le cap d'une figurine suit son deplacement, sans table de quatre orientations.
+
+**Étapes**
+
+1. Demander le cap d'un pas le long de chaque axe de la grille.
+2. Demander celui d'un pas en diagonale de la grille, et d'un pas quelconque.
+3. Demander celui d'un pas nul.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::figureHeadingFor({1.0F, 0.0F}, AVANT)` vaut `0.0F`, à `1.0e-5F` près.
+- Vérifie que `hmi::figureHeadingFor({0.0F, 1.0F}, AVANT)` vaut `QUART`, à `1.0e-5F` près.
+- Vérifie que `std::abs(hmi::figureHeadingFor({-1.0F, 0.0F}, AVANT))` vaut `2.0F * QUART`, à `1.0e-5F` près.
+- Vérifie que `hmi::figureHeadingFor({0.0F, -1.0F}, AVANT)` vaut `-QUART`, à `1.0e-5F` près.
+- Vérifie que `hmi::figureHeadingFor({0.7F, 0.7F}, AVANT)` vaut `hmi::FIGURE_HEADING_FRONT`, à `1.0e-5F` près.
+- Vérifie que `hmi::figureHeadingFor({0.8F, -0.6F}, AVANT)` vaut `std::atan2(-0.6F, 0.8F)`, à `1.0e-5F` près.
+- Vérifie que `hmi::figureHeadingFor({0.0F, 0.0F}, AVANT)` vaut `AVANT` (comparaison flottante).
+
+### WorldSceneComposerTest.LaLigneDeSolDUnEffetTombeAuCentreDeSaCase
+
+*Bloquant · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:1063`
+
+La ligne de sol d'un effet tombe au centre de sa case, ni au-dessus ni au-dessous.
+
+**Étapes**
+
+1. Poser la bande d'un effet (cellule 256 x 256, sol a 252, losange de 256) au centre d'une case, puis a mi-chemin entre deux cases.
+
+**Résultat attendu**
+
+- Vérifie que `quad.y + (252.0F * unitesParPixel)` vaut `sol.y`, à `1.0e-3F` près.
+- Vérifie que `quad.x + (quad.width / 2.0F)` vaut `sol.x`, à `1.0e-3F` près.
+- Vérifie que `quad.height` vaut `256.0F * unitesParPixel`, à `1.0e-3F` près.
+
+### WorldSceneComposerTest.LaCadenceEstCelleQueDitLaBande
+
+*Majeur · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:1094`
+
+Exigences : `EX-REN-005`
+
+L'image affichee suit la duree que declare la bande.
+
+**Étapes**
+
+1. Composer un effet (0,1 s par image) a 0,25 s, 0,75 s et 0,85 s.
+2. Le composer sans temps connu, a l'image 5.
+
+**Résultat attendu**
+
+- Vérifie que `imageA(0.25F, 0)` vaut `2`.
+- Vérifie que `imageA(0.75F, 0)` vaut `7`.
+- Vérifie que `imageA(0.85F, 0)` vaut `0`.
+- Vérifie que `imageA(-1.0F, 5)` vaut `5`.
+
+### WorldSceneComposerTest.UnEffetLitLEchelleEtLeSolDeSonDossier
+
+*Critique · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:1122`
+
+Un effet lit l'echelle et le sol de Common/Fx/manifest.json.
+
+**Étapes**
+
+1. Ecrire `Common/Fx/manifest.json` (losange 256 x 159, sol 252) et la description de `impact.png` (256 x 256, 0,1 s, jouee une fois).
+2. Lire les traits de la bande.
+3. Lire ceux d'une image hors de tout atelier.
+
+**Résultat attendu**
+
+- Vérifie que `traits.artTile.x` vaut `256.0F` (comparaison flottante).
+- Vérifie que `traits.artTile.y` vaut `159.0F` (comparaison flottante).
+- Vérifie que `traits.groundLine.has_value()` est vrai.
+- Vérifie que `*traits.groundLine` vaut `252.0F` (comparaison flottante).
+- Vérifie que `traits.frameWidth` vaut `256`.
+- Vérifie que `traits.frameHeight` vaut `256`.
+- Vérifie que `traits.frameDuration` vaut `0.1F` (comparaison flottante).
+- Vérifie que `traits.loop` est faux.
+- Vérifie que `ailleurs.artTile.x` vaut `0.0F` (comparaison flottante).
+- Vérifie que `ailleurs.groundLine.has_value()` est faux.
+
+### WorldSceneComposerTest.UneBandeAUnCoupSeFigeSurSaDerniereImage
+
+*Critique · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:1166`
+
+Une bande a un coup se fige sur sa derniere image.
+
+**Étapes**
+
+1. Composer un effet sur une bande de huit images a 0,1 s, `loop` faux, a 0,25 s, 0,75 s et 3 s.
+2. La meme bande `loop` vrai, a 3 s.
+
+**Résultat attendu**
+
+- Vérifie que `imageA(0.25F, false)` vaut `2`.
+- Vérifie que `imageA(0.75F, false)` vaut `7`.
+- Vérifie que `imageA(3.0F, false)` vaut `7`.
+- Vérifie que `imageA(3.0F, true)` vaut `6`.
+
+### WorldSceneComposerTest.UneFigurineNeDemandePlusAucuneBande
+
+*Bloquant · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:1197`
+
+Une figurine ne demande plus aucune bande.
+
+**Étapes**
+
+1. Lister les textures d'un heros au repos, combattant ou non.
+2. Lister celles du meme heros, son modele nomme.
+3. Lister celles d'un effet.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::worldFigureTexturePaths(instantane, instantane.figures)` vaut `marqueur`.
+- Vérifie que `hmi::worldFigureTexturePaths(instantane, {&figure, 1})` vaut `marqueur`.
+- Vérifie que `hmi::worldFigureTexturePaths(instantane, {&figure, 1}).empty()` est vrai.
+- Vérifie que `hmi::worldFigureModelPaths({&figure, 1})` vaut `(std::vector<std::string>{heros + "/brawler.glb"})`.
+- Vérifie que `hmi::worldFigureTexturePaths(instantane, {&impact, 1})` vaut `(std::vector<std::string>{"Common/Fx/impact.png"})`.
+- Vérifie que `hmi::worldFigureModelPaths({&impact, 1}).empty()` est vrai.
+
+### MaquetteRenderTest.LeMannequinRemplaceLeJetonDUnPnjSansFigurine
+
+*Critique · Unitaire · Mannequins* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:1229`
+
+Le mannequin remplace le jeton d'un PNJ sans figurine.
+
+**Étapes**
+
+1. Tirer les figurines de trois PNJ -- sans figurine, silhouette quadrupede, figurine nommee -- sans puis avec mannequins.
+2. Tirer les marques avec ces figurines.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::npcFigures(entites, 0).size()` vaut `1U`.
+- Vérifie que `figurines.size()` vaut `3U`.
+- Vérifie que `figurines[0].figure` vaut `hmi::mannequinFigureDirectory("humanoid")`.
+- Vérifie que `figurines[1].figure` vaut `hmi::mannequinFigureDirectory("quadruped")`.
+- Vérifie que `figurines[2].figure` vaut `"anariel"`.
+- Vérifie que `sansFigurine.tokens.size()` vaut `3U`.
+- Vérifie que `avec.tokens.size()` vaut `1U`.
+- Vérifie que `avec.tokens.front().kind` vaut `hmi::MaquetteTokenKind::Object`.
+
+### WorldSceneComposerTest.LeTirSansBandeJoueLAttaque
+
+*Majeur · Unitaire · Rendu HD* — `Source/Test/Unit/HMI/Graphics/test_world_scene_composer.cpp:1266`
+
+Le tir se replie sur l'attaque, et rien d'autre ne se replie.
+
+**Étapes**
+
+1. Lire le repli de `ranged` et de `cast`.
+
+**Résultat attendu**
+
+- Vérifie que `hmi::figure_clips::fallbackOf(hmi::figure_clips::RANGED)` vaut `hmi::figure_clips::ATTACK`.
+- Vérifie que `hmi::figure_clips::fallbackOf(hmi::figure_clips::CAST).empty()` est vrai.
+
+## test_world_scene_renderer.cpp
+
+### WorldSceneRendererTest.CreationLiberationRecreation
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_world_scene_renderer.cpp:133`
+
+Le cycle de vie des ressources QRhi d'un lieu est sur.
+
+**Étapes**
+
+1. Creer les ressources hors ecran, sans dessiner.
+2. Liberer, puis liberer encore.
+3. Recreer, dessiner une image d'un lieu, detruire le rendu avant l'interface.
+
+**Résultat attendu**
+
+- Vérifie que `renderer.ensureResources(nullptr)` est faux.
+- Vérifie que `renderer.created()` est faux.
+- Vérifie que `renderer.ensureResources(rhi.get())` est vrai.
+- Vérifie que `renderer.created()` est vrai.
+- Vérifie que `renderer.rhi()` vaut `rhi.get()`.
+- Vérifie que `renderer.textures().missing.texture` diffère de `nullptr`.
+- Vérifie que `renderer.textures().byPath.empty()` est vrai.
+- Vérifie que `renderer.ensureResources(rhi.get())` est vrai.
+- Vérifie que `renderer.textures().byPath.empty()` est faux.
+- Vérifie que `renderer.textures().byPath.size()` vaut `chargees`.
+- Vérifie que `renderer.requested().size()` vaut `demandees`.
+- Vérifie que `renderer.created()` est faux.
+- Vérifie que `renderer.rhi()` vaut `nullptr`.
+- Vérifie que `renderer.textures().byPath.empty()` est vrai.
+- Vérifie que `renderer.requested().empty()` est vrai.
+- Vérifie que `renderer.ensureResources(rhi.get())` est vrai.
+- Vérifie que `image.size()` vaut `QSize(TARGET_SIZE, TARGET_SIZE)`.
+
+### WorldSceneRendererTest.UnLieuDevientDesPixels
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_world_scene_renderer.cpp:193`
+
+Le donjon d'essai se dessine, sans une seule piece manquante.
+
+**Étapes**
+
+1. Charger la carte du donjon d'essai et la table d'apparence du lieu.
+2. Dessiner une image hors ecran, cadree sur le heros a la porte.
+
+**Résultat attendu**
+
+- Vérifie que `renderer.ensureResources(rhi.get())` est vrai.
+- Vérifie que `image.size()` vaut `QSize(TARGET_SIZE, TARGET_SIZE)`.
+- Vérifie que `renderer.statics().size()` est strictement supérieur à `700U`.
+- Vérifie que `quad.texture` diffère de `nullptr`.
+- Vérifie que `quad.texture` diffère de `renderer.textures().missing.texture`.
+- Vérifie que `renderer.composed().size()` est strictement supérieur à `0U`.
+- Vérifie que `renderer.composed().size()` est inférieur ou égal à `renderer.statics().size() + 1U`.
+- Vérifie que `renderer.composed().statistics().culled` est strictement supérieur à `0`.
+- Vérifie que `quad.texture` diffère de `nullptr`.
+- Vérifie que `quad.texture` diffère de `renderer.textures().missing.texture`.
+- Vérifie que `paintedPixels(image)` est strictement supérieur à `static_cast<std::size_t>(TARGET_SIZE * TARGET_SIZE / 4)`.
+- Vérifie que `renderer.composed().size()` vaut `0U`.
+- Vérifie que `paintedPixels(empty)` vaut `0U`.
+
+### WorldSceneRendererTest.LaCameraSuitLeHerosSansSortirDeLaCarte
+
+*Critique · Unitaire · Rendu QRhi d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_world_scene_renderer.cpp:247`
+
+Le cadrage d'un lieu suit le heros, borne a la scene, une case a la hauteur de la vue divisee par 10,8.
+
+**Étapes**
+
+1. Cadrer une grande carte sur son centre, puis sur un coin.
+2. Cadrer une carte plus petite que la vue.
+3. Cadrer la meme carte a 1080p et a 2160p.
+
+**Résultat attendu**
+
+- Vérifie que `casesAlEcran(suivie, grande)` vaut `720.0F / 10.8F`, à `0.01F` près.
+- Vérifie que `suivie.center().x` vaut `centre.x`, à `0.001F` près.
+- Vérifie que `suivie.center().y` vaut `centre.y`, à `0.001F` près.
+- Vérifie que `bornee.center().x` est strictement supérieur à `coin.x`.
+- Vérifie que `bornee.visibleBounds().position.x` est supérieur ou égal à `-0.001F`.
+- Vérifie que `bornee.visibleBounds().position.x + bornee.visibleBounds().size.x` est inférieur ou égal à `grande.sceneSize().x + 0.001F`.
+- Vérifie que `petiteVue.center().x` vaut `petite.sceneSize().x / 2.0F`, à `0.001F` près.
+- Vérifie que `petiteVue.center().y` vaut `petite.sceneSize().y / 2.0F`, à `0.001F` près.
+- Vérifie que `casesAlEcran(hd, grande)` vaut `100.0F`, à `0.01F` près.
+- Vérifie que `casesAlEcran(uhd, grande)` vaut `200.0F`, à `0.01F` près.
+- Vérifie que `hd.visibleBounds().size.x` vaut `uhd.visibleBounds().size.x`, à `0.001F` près.
+- Vérifie que `hd.visibleBounds().size.y` vaut `uhd.visibleBounds().size.y`, à `0.001F` près.
+
+### WorldSceneRendererTest.DeuxLieuxDeviennentDesPixels
+
+*Bloquant · Unitaire · Rendu QRhi d'un lieu* — `Source/Test/Unit/HMI/Graphics/test_world_scene_renderer.cpp:298`
+
+Deux lieux se dessinent sans une piece sur le damier, sentinelles sous les traits de leur figurine.
+
+**Étapes**
+
+1. Charger deux cartes d'essai, et la table du lieu.
+2. Dessiner chacune hors ecran, cadre sur une sentinelle, le heros a cote.
+
+**Résultat attendu**
+
+- Vérifie que `table.ok()` est vrai.
+- Vérifie que `carte.ok()` est vrai.
+- Vérifie que `figurines.empty()` est faux.
+- Vérifie que `renderer.ensureResources(rhi.get())` est vrai.
+- Vérifie que `quad.texture` diffère de `renderer.textures().missing.texture`.
+- Vérifie que `soldat` diffère de `nullptr`.
+- Vérifie que `soldat->rig` diffère de `nullptr`.
+- Vérifie que `renderer.textures().byPath.contains("Monsters/sentinelle/@marker")` est faux.
+- Vérifie que `paintedPixels(image)` est strictement supérieur à `static_cast<std::size_t>(TARGET_SIZE * TARGET_SIZE / 4)`.
+
+### WorldSceneRendererTest.LesCartesSeSauvegardentEtSeRendentAvecLeurKit
+
+*Critique · Unitaire · Rendu du donjon d'essai* — `Source/Test/Unit/HMI/Graphics/test_world_scene_renderer.cpp:366`
+
+Les trois cartes se sauvegardent et se rendent avec leur kit.
+
+**Étapes**
+
+1. Charger et enregistrer chaque carte ; la rendre avec les textures de son kit.
+
+**Résultat attendu**
+
+- Vérifie que `rhi` diffère de `nullptr`.
+- Vérifie que `table.ok()` est vrai.
+- Vérifie que `loaded.ok()` est vrai.
+- Vérifie que `saved.ok()` est vrai.
+- Vérifie que `saved.level->layers().size()` vaut `loaded.level->layers().size()`.
+- Vérifie que `saved.level->entities().size()` vaut `loaded.level->entities().size()`.
+- Vérifie que `renderer.ensureResources(rhi.get())` est vrai.
+- Vérifie que `paintedPixels(image)` est strictement supérieur à `static_cast<std::size_t>(TARGET_SIZE * TARGET_SIZE / 4)`.
+- Vérifie que `quad.texture` diffère de `renderer.textures().missing.texture`.
+- Vérifie que `renderer.textures().byPath.contains(path)` est vrai.
+- Vérifie que `image.save(QString::fromStdWString((captures / file).wstring()))` est vrai.
+
+### WorldSceneRendererTest.TousLesPortailsSeTraversent
+
+*Critique · Unitaire · Rendu du donjon d'essai* — `Source/Test/Unit/HMI/Graphics/test_world_scene_renderer.cpp:418`
+
+Tous les portails des cartes se traversent.
+
+**Étapes**
+
+1. Entrer dans chaque carte et traverser chaque portail avec WorldTravel.
+
+**Résultat attendu**
+
+- Vérifie que `travel.enter(id, {})` vaut `core::TravelResult::Moved`.
+- Vérifie que `travel.enter(id, {})` vaut `core::TravelResult::Moved`.
+- Vérifie que `travel.cross(entity.position, flags)` vaut `core::TravelResult::Moved`.
+- Vérifie que `core::isSolid(travel.currentMap()->tileMap().tile(pos.column, pos.row))` est faux.
+- Vérifie que `core::portalAt(*travel.currentMap(), pos).has_value()` est faux.
+
+## test_world_storeys.cpp
+
+### WorldStoreysTest.LesEtagesEntrentDansLInstantaneRangesParEtage
+
+*Bloquant · Unitaire · Lieu compose · Etages* — `Source/Test/Unit/HMI/Graphics/test_world_storeys.cpp:130`
+
+Les couches d'etage entrent dans l'instantane, rangees par etage.
+
+**Étapes**
+
+1. Batir une carte dont les couches de decor sont declarees toit, etage, rez.
+2. En tirer l'instantane.
+
+**Résultat attendu**
+
+- Vérifie que `snapshot.reliefAt({.column = 1, .row = 1})` vaut `"wall"`.
+- Vérifie que `snapshot.storeys.size()` vaut `2U`.
+- Vérifie que `snapshot.storeys[0].floor` vaut `1`.
+- Vérifie que `snapshot.storeys[1].floor` vaut `2`.
+- Vérifie que `snapshot.storeys[0].relief[4]` vaut `"wall-upper"`.
+- Vérifie que `snapshot.storeys[1].relief[4]` vaut `"roof"`.
+- Vérifie que `std::ranges::find(paths, "Scene/haut/roof.png")` diffère de `paths.end()`.
+
+### WorldStoreysTest.UnEtageSEleveDeLaHauteurDeclareeParSonLieu
+
+*Bloquant · Unitaire · Lieu compose · Etages* — `Source/Test/Unit/HMI/Graphics/test_world_storeys.cpp:154`
+
+Un etage s'eleve de la hauteur declaree par son lieu.
+
+**Étapes**
+
+1. Composer l'ilot avec une hauteur d'etage de 224 pixels d'art, puis sans.
+
+**Résultat attendu**
+
+- Vérifie que `declared.byStorey[static_cast<std::size_t>(storey)]` diffère de `nullptr`.
+- Vérifie que `declared.byStorey[static_cast<std::size_t>(storey)]->storey` vaut `storey`.
+- Vérifie que `declared.byStorey[0]->sprite.y - declared.byStorey[1]->sprite.y` vaut `step`, à `1e-3F` près.
+- Vérifie que `declared.byStorey[1]->sprite.y - declared.byStorey[2]->sprite.y` vaut `step`, à `1e-3F` près.
+- Vérifie que `declared.byStorey[0]->sprite.x` vaut `declared.byStorey[2]->sprite.x` (comparaison flottante).
+- Vérifie que `undeclared.byStorey[0]->sprite.y - undeclared.byStorey[1]->sprite.y` vaut `hmi::DEFAULT_STOREY_TILES * projection.tileWidth()`, à `1e-3F` près.
+
+### WorldStoreysTest.UnEtageSeTrieAuDessusDuRezDeSaCase
+
+*Bloquant · Unitaire · Lieu compose · Etages* — `Source/Test/Unit/HMI/Graphics/test_world_storeys.cpp:184`
+
+Un etage se trie au-dessus du rez de sa case.
+
+**Étapes**
+
+1. Composer l'ilot, un heros sur la case devant le batiment.
+
+**Résultat attendu**
+
+- Vérifie que `composed.hero` diffère de `nullptr`.
+- Vérifie que `composed.byStorey[0]->sortOrder` est strictement inférieur à `composed.byStorey[1]->sortOrder`.
+- Vérifie que `composed.byStorey[1]->sortOrder` est strictement inférieur à `composed.byStorey[2]->sortOrder`.
+- Vérifie que `composed.hero->sortOrder` est strictement supérieur à `composed.byStorey[2]->sortOrder`.
+
+### WorldStoreysTest.UnEtageQuiMasqueLeHerosSEfface
+
+*Bloquant · Unitaire · Lieu compose · Etages* — `Source/Test/Unit/HMI/Graphics/test_world_storeys.cpp:204`
+
+Un etage qui masque le heros s'efface.
+
+**Étapes**
+
+1. Poser le heros derriere le batiment, sur la case (1, 0).
+2. Le poser devant, sur la case (2, 2).
+3. Poser un PNJ derriere, sans heros.
+
+**Résultat attendu**
+
+- Vérifie que `behind.byStorey[0]->sprite.a` vaut `1.0F` (comparaison flottante).
+- Vérifie que `behind.byStorey[1]->sprite.a` vaut `hmi::STOREY_SEE_THROUGH_OPACITY` (comparaison flottante).
+- Vérifie que `behind.byStorey[2]->sprite.a` vaut `hmi::STOREY_SEE_THROUGH_OPACITY` (comparaison flottante).
+- Vérifie que `quad->sprite.a` vaut `1.0F` (comparaison flottante).
+- Vérifie que `quad->sprite.a` vaut `1.0F` (comparaison flottante).
+
+### WorldStoreysTest.UnEtageHorsBornesNEstPasJoue
+
+*Majeur · Unitaire · Lieu compose · Etages* — `Source/Test/Unit/HMI/Graphics/test_world_storeys.cpp:241`
+
+Un etage hors bornes n'est pas joue.
+
+**Étapes**
+
+1. Ajouter une couche de decor a l'etage 9 et une couche de sol a l'etage 1.
+
+**Résultat attendu**
+
+- Vérifie que `snapshot.storeys.size()` vaut `2U`.
+
+### WorldStoreysTest.UnEtagePasseApresLaPieceLargeQuiLePorte
+
+*Bloquant · Unitaire · Lieu compose · Etages* — `Source/Test/Unit/HMI/Graphics/test_world_storeys.cpp:265`
+
+Un etage passe apres la piece large qui le porte.
+
+**Étapes**
+
+1. Poser au rez un mur de 2 x 1 ancre en (0, 1), et un toit a l'etage 1 sur la case (0, 1), la premiere du mur.
+2. Composer.
+
+**Résultat attendu**
+
+- Vérifie que `composed.byStorey[0]` diffère de `nullptr`.
+- Vérifie que `composed.byStorey[1]` diffère de `nullptr`.
+- Vérifie que `composed.byStorey[1]->sortOrder` est strictement supérieur à `composed.byStorey[0]->sortOrder`.
+
+### WorldStoreysTest.EnMaquetteUnEtagePeintSeVoit
+
+*Bloquant · Unitaire · Lieu compose · Etages* — `Source/Test/Unit/HMI/Graphics/test_world_storeys.cpp:298`
+
+En maquette, un etage peint se voit.
+
+**Étapes**
+
+1. Batir une carte sans lieu : un mur peint au rez en (1, 1), un mur peint sur une couche d'etage 1 a la meme case, sans piece.
+2. Composer.
+
+**Résultat attendu**
+
+- Vérifie que `snapshot.storeys.size()` vaut `1U`.
+- Vérifie que `storeyFaces` vaut `3U`.
+- Vérifie que `storeyTop` est strictement inférieur à `rezTop`.
+- Vérifie que `storeyOrder` est strictement supérieur à `rezOrder`.

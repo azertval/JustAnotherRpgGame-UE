@@ -1,0 +1,28 @@
+{
+  "id": "humain",
+  "name": "Humain",
+  "source": "srd",
+  "abilityScoreIncrease": {
+    "strength": 1,
+    "dexterity": 1,
+    "constitution": 1,
+    "intelligence": 1,
+    "wisdom": 1,
+    "charisma": 1
+  },
+  "size": "medium",
+  "speed": 9,
+  "languages": [
+    "common"
+  ],
+  "traits": [
+    {
+      "name": "Compétence",
+      "text": "Vous gagnez la maîtrise d'une compétence de votre choix."
+    },
+    {
+      "name": "Don",
+      "text": "Vous obtenez un don de votre choix."
+    }
+  ]
+}

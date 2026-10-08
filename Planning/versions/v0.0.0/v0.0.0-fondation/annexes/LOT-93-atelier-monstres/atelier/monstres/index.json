@@ -1,0 +1,1465 @@
+[
+ {
+  "slug": "ape",
+  "nom": "Grand singe",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "ape"
+ },
+ {
+  "slug": "axe-beak",
+  "nom": "Bec de hache",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "axe-beak"
+ },
+ {
+  "slug": "baboon",
+  "nom": "Babouin",
+  "taille": "small",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "baboon"
+ },
+ {
+  "slug": "badger",
+  "nom": "Blaireau",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "badger"
+ },
+ {
+  "slug": "bat",
+  "nom": "Chauve-souris",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "bat"
+ },
+ {
+  "slug": "black-bear",
+  "nom": "Ours noir",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "black-bear"
+ },
+ {
+  "slug": "blood-hawk",
+  "nom": "Faucon de sang",
+  "taille": "small",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "blood-hawk"
+ },
+ {
+  "slug": "boar",
+  "nom": "Sanglier",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "boar"
+ },
+ {
+  "slug": "brown-bear",
+  "nom": "Ours brun",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "brown-bear"
+ },
+ {
+  "slug": "camel",
+  "nom": "Chameau",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "camel"
+ },
+ {
+  "slug": "cat",
+  "nom": "Chat",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "cat"
+ },
+ {
+  "slug": "constrictor-snake",
+  "nom": "Serpent constricteur",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "constrictor-snake"
+ },
+ {
+  "slug": "crab",
+  "nom": "Crabe",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "crab"
+ },
+ {
+  "slug": "crocodile",
+  "nom": "Crocodile",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "crocodile"
+ },
+ {
+  "slug": "deer",
+  "nom": "Cerf",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "deer"
+ },
+ {
+  "slug": "dire-wolf",
+  "nom": "Loup sanguinaire",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "dire-wolf"
+ },
+ {
+  "slug": "draft-horse",
+  "nom": "Cheval de trait",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "draft-horse"
+ },
+ {
+  "slug": "eagle",
+  "nom": "Aigle",
+  "taille": "small",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "eagle"
+ },
+ {
+  "slug": "elephant",
+  "nom": "Éléphant",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-33",
+  "creature": "elephant"
+ },
+ {
+  "slug": "elk",
+  "nom": "Élan",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "elk"
+ },
+ {
+  "slug": "flying-snake",
+  "nom": "Serpent volant",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "flying-snake"
+ },
+ {
+  "slug": "frog",
+  "nom": "Grenouille",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "frog"
+ },
+ {
+  "slug": "giant-ape",
+  "nom": "Singe géant",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-33",
+  "creature": "giant-ape"
+ },
+ {
+  "slug": "giant-badger",
+  "nom": "Blaireau géant",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "giant-badger"
+ },
+ {
+  "slug": "giant-bat",
+  "nom": "Chauve-souris géante",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-bat"
+ },
+ {
+  "slug": "giant-boar",
+  "nom": "Sanglier géant",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-boar"
+ },
+ {
+  "slug": "giant-centipede",
+  "nom": "Mille-pattes géant",
+  "taille": "small",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "giant-centipede"
+ },
+ {
+  "slug": "giant-constrictor-snake",
+  "nom": "Serpent constricteur géant",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-33",
+  "creature": "giant-constrictor-snake"
+ },
+ {
+  "slug": "giant-crab",
+  "nom": "Crabe géant",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "giant-crab"
+ },
+ {
+  "slug": "giant-crocodile",
+  "nom": "Crocodile géant",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-33",
+  "creature": "giant-crocodile"
+ },
+ {
+  "slug": "giant-eagle",
+  "nom": "Aigle géant",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-eagle"
+ },
+ {
+  "slug": "giant-elk",
+  "nom": "Élan géant",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-33",
+  "creature": "giant-elk"
+ },
+ {
+  "slug": "giant-fire-beetle",
+  "nom": "Scarabée de feu géant",
+  "taille": "small",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "giant-fire-beetle"
+ },
+ {
+  "slug": "giant-frog",
+  "nom": "Grenouille géante",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "giant-frog"
+ },
+ {
+  "slug": "giant-goat",
+  "nom": "Chèvre géante",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-goat"
+ },
+ {
+  "slug": "giant-hyena",
+  "nom": "Hyène géante",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-hyena"
+ },
+ {
+  "slug": "giant-lizard",
+  "nom": "Lézard géant",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-lizard"
+ },
+ {
+  "slug": "giant-octopus",
+  "nom": "Pieuvre géante",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-octopus"
+ },
+ {
+  "slug": "giant-owl",
+  "nom": "Chouette géante",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-owl"
+ },
+ {
+  "slug": "giant-poisonous-snake",
+  "nom": "Serpent venimeux géant",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "giant-poisonous-snake"
+ },
+ {
+  "slug": "giant-rat",
+  "nom": "Rat géant",
+  "taille": "small",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "giant-rat"
+ },
+ {
+  "slug": "giant-scorpion",
+  "nom": "Scorpion géant",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-scorpion"
+ },
+ {
+  "slug": "giant-sea-horse",
+  "nom": "Hippocampe géant",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-sea-horse"
+ },
+ {
+  "slug": "giant-shark",
+  "nom": "Requin géant",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-33",
+  "creature": "giant-shark"
+ },
+ {
+  "slug": "giant-spider",
+  "nom": "Araignée géante",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-spider"
+ },
+ {
+  "slug": "giant-toad",
+  "nom": "Crapaud géant",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-toad"
+ },
+ {
+  "slug": "giant-vulture",
+  "nom": "Vautour géant",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "giant-vulture"
+ },
+ {
+  "slug": "giant-wasp",
+  "nom": "Guêpe géante",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "giant-wasp"
+ },
+ {
+  "slug": "giant-weasel",
+  "nom": "Belette géante",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "giant-weasel"
+ },
+ {
+  "slug": "giant-wolf-spider",
+  "nom": "Araignée-loup géante",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "giant-wolf-spider"
+ },
+ {
+  "slug": "goat",
+  "nom": "Chèvre",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "goat"
+ },
+ {
+  "slug": "hawk",
+  "nom": "Faucon",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "hawk"
+ },
+ {
+  "slug": "hunter-shark",
+  "nom": "Requin-chasseur",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "hunter-shark"
+ },
+ {
+  "slug": "hyena",
+  "nom": "Hyène",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "hyena"
+ },
+ {
+  "slug": "imp",
+  "nom": "Diablotin",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "imp"
+ },
+ {
+  "slug": "jackal",
+  "nom": "Chacal",
+  "taille": "small",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "jackal"
+ },
+ {
+  "slug": "killer-whale",
+  "nom": "Épaulard",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-33",
+  "creature": "killer-whale"
+ },
+ {
+  "slug": "lion",
+  "nom": "Lion",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "lion"
+ },
+ {
+  "slug": "lizard",
+  "nom": "Lézard",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "lizard"
+ },
+ {
+  "slug": "mammoth",
+  "nom": "Mammouth",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-33",
+  "creature": "mammoth"
+ },
+ {
+  "slug": "mastiff",
+  "nom": "Molosse",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "mastiff"
+ },
+ {
+  "slug": "mule",
+  "nom": "Mule",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "mule"
+ },
+ {
+  "slug": "octopus",
+  "nom": "Pieuvre",
+  "taille": "small",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "octopus"
+ },
+ {
+  "slug": "owl",
+  "nom": "Chouette",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "owl"
+ },
+ {
+  "slug": "panther",
+  "nom": "Panthère",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "panther"
+ },
+ {
+  "slug": "poisonous-snake",
+  "nom": "Serpent venimeux",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "poisonous-snake"
+ },
+ {
+  "slug": "polar-bear",
+  "nom": "Ours polaire",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "polar-bear"
+ },
+ {
+  "slug": "pony",
+  "nom": "Poney",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "pony"
+ },
+ {
+  "slug": "pseudodragon",
+  "nom": "Pseudodragon",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "pseudodragon"
+ },
+ {
+  "slug": "quasit",
+  "nom": "Quasit",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "quasit"
+ },
+ {
+  "slug": "quipper",
+  "nom": "Piranha",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "quipper"
+ },
+ {
+  "slug": "rat",
+  "nom": "Rat",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "rat"
+ },
+ {
+  "slug": "raven",
+  "nom": "Corbeau",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "raven"
+ },
+ {
+  "slug": "reef-shark",
+  "nom": "Requin de récif",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "reef-shark"
+ },
+ {
+  "slug": "rhinoceros",
+  "nom": "Rhinocéros",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "rhinoceros"
+ },
+ {
+  "slug": "riding-horse",
+  "nom": "Cheval de selle",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "riding-horse"
+ },
+ {
+  "slug": "saber-toothed-tiger",
+  "nom": "Tigre à dents de sabre",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "saber-toothed-tiger"
+ },
+ {
+  "slug": "scorpion",
+  "nom": "Scorpion",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "scorpion"
+ },
+ {
+  "slug": "sea-horse",
+  "nom": "Hippocampe",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "sea-horse"
+ },
+ {
+  "slug": "skeleton",
+  "nom": "Squelette",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "skeleton"
+ },
+ {
+  "slug": "spider",
+  "nom": "Araignée",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "spider"
+ },
+ {
+  "slug": "sprite",
+  "nom": "Esprit follet",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "sprite"
+ },
+ {
+  "slug": "swarm-of-bats",
+  "nom": "Nuée de chauves-souris",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "swarm-of-bats"
+ },
+ {
+  "slug": "swarm-of-insects",
+  "nom": "Nuée d'insectes",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "swarm-of-insects"
+ },
+ {
+  "slug": "swarm-of-poisonous-snakes",
+  "nom": "Nuée de serpents venimeux",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "swarm-of-poisonous-snakes"
+ },
+ {
+  "slug": "swarm-of-quippers",
+  "nom": "Nuée de piranhas",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "swarm-of-quippers"
+ },
+ {
+  "slug": "swarm-of-rats",
+  "nom": "Nuée de rats",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "swarm-of-rats"
+ },
+ {
+  "slug": "swarm-of-ravens",
+  "nom": "Nuée de corbeaux",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "swarm-of-ravens"
+ },
+ {
+  "slug": "tiger",
+  "nom": "Tigre",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "tiger"
+ },
+ {
+  "slug": "vulture",
+  "nom": "Vautour",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "vulture"
+ },
+ {
+  "slug": "warhorse",
+  "nom": "Cheval de guerre",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-33",
+  "creature": "warhorse"
+ },
+ {
+  "slug": "weasel",
+  "nom": "Belette",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "weasel"
+ },
+ {
+  "slug": "wolf",
+  "nom": "Loup",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "wolf"
+ },
+ {
+  "slug": "zombie",
+  "nom": "Zombi",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-33",
+  "creature": "zombie"
+ },
+ {
+  "slug": "giant-beetle",
+  "nom": "Giant Beetle",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 79,
+  "creature": null
+ },
+ {
+  "slug": "giant-wasp-queen",
+  "nom": "Giant Wasp Queen",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 79,
+  "creature": null
+ },
+ {
+  "slug": "kitsune",
+  "nom": "Kitsune",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 102,
+  "creature": null
+ },
+ {
+  "slug": "etoraax-manifestation",
+  "nom": "Etoraax Manifestation",
+  "taille": "gargantuan",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 118,
+  "creature": null
+ },
+ {
+  "slug": "chosen-of-ba-ka",
+  "nom": "Chosen of Ba-Ka",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 133,
+  "creature": null
+ },
+ {
+  "slug": "akhu-knight",
+  "nom": "Akhu Knight",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 134,
+  "creature": null
+ },
+ {
+  "slug": "zealot-of-ba-ka",
+  "nom": "Zealot of Ba-Ka",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 134,
+  "creature": null
+ },
+ {
+  "slug": "nightmare-warrior",
+  "nom": "Nightmare Warrior",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 135,
+  "creature": null
+ },
+ {
+  "slug": "nightmare-lord",
+  "nom": "Nightmare Lord",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 136,
+  "creature": null
+ },
+ {
+  "slug": "archnightmare",
+  "nom": "Archnightmare",
+  "taille": "gargantuan",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 136,
+  "creature": null
+ },
+ {
+  "slug": "scouting-eye",
+  "nom": "Scouting Eye",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 137,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-guardian",
+  "nom": "Penumbral Guardian",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 138,
+  "creature": null
+ },
+ {
+  "slug": "watcher-overlord",
+  "nom": "Watcher Overlord",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 138,
+  "creature": null
+ },
+ {
+  "slug": "purple-witches-sorcerer",
+  "nom": "Purple Witches Sorcerer",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 140,
+  "creature": null
+ },
+ {
+  "slug": "purple-witch-initiate",
+  "nom": "Purple Witch Initiate",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 140,
+  "creature": null
+ },
+ {
+  "slug": "purple-witch-mistress",
+  "nom": "Purple Witch Mistress",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 141,
+  "creature": null
+ },
+ {
+  "slug": "arachne-ambusher",
+  "nom": "Arachne Ambusher",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 142,
+  "creature": null
+ },
+ {
+  "slug": "arachne-commander",
+  "nom": "Arachne Commander",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 142,
+  "creature": null
+ },
+ {
+  "slug": "arachne-elder-matriarch",
+  "nom": "Arachne Elder Matriarch",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 142,
+  "creature": null
+ },
+ {
+  "slug": "collector",
+  "nom": "Collector",
+  "taille": "small",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 143,
+  "creature": null
+ },
+ {
+  "slug": "ancient-collector",
+  "nom": "Ancient Collector",
+  "taille": "small",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 143,
+  "creature": null
+ },
+ {
+  "slug": "shadow-wing-initiate",
+  "nom": "Shadow Wing Initiate",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 144,
+  "creature": null
+ },
+ {
+  "slug": "shadow-mage",
+  "nom": "Shadow Mage",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 145,
+  "creature": null
+ },
+ {
+  "slug": "prophet-of-shadows",
+  "nom": "Prophet of Shadows",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 145,
+  "creature": null
+ },
+ {
+  "slug": "master-of-pain",
+  "nom": "Master of Pain",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 145,
+  "creature": null
+ },
+ {
+  "slug": "bauronite-dragon-wyrmling",
+  "nom": "Bauronite Dragon Wyrmling",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 146,
+  "creature": null
+ },
+ {
+  "slug": "adult-bauronite-dragon",
+  "nom": "Adult Bauronite Dragon",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 147,
+  "creature": null
+ },
+ {
+  "slug": "young-bauronite-dragon",
+  "nom": "Young Bauronite Dragon",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 147,
+  "creature": null
+ },
+ {
+  "slug": "ancient-bauronite-dragon",
+  "nom": "Ancient Bauronite Dragon",
+  "taille": "gargantuan",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 148,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-dragon-wyrmling",
+  "nom": "Penumbral Dragon Wyrmling",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 149,
+  "creature": null
+ },
+ {
+  "slug": "young-penumbral-dragon",
+  "nom": "Young Penumbral Dragon",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 149,
+  "creature": null
+ },
+ {
+  "slug": "adult-penumbral-dragon",
+  "nom": "Adult Penumbral Dragon",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 149,
+  "creature": null
+ },
+ {
+  "slug": "ancient-penumbral-dragon",
+  "nom": "Ancient Penumbral Dragon",
+  "taille": "gargantuan",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 150,
+  "creature": null
+ },
+ {
+  "slug": "tameranium-dragon-wyrmling",
+  "nom": "Tameranium Dragon Wyrmling",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 152,
+  "creature": null
+ },
+ {
+  "slug": "young-tameranium-dragon",
+  "nom": "Young Tameranium Dragon",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 152,
+  "creature": null
+ },
+ {
+  "slug": "adult-tameranium-dragon",
+  "nom": "Adult Tameranium Dragon",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 153,
+  "creature": null
+ },
+ {
+  "slug": "ancient-tameranium-dragon",
+  "nom": "Ancient Tameranium Dragon",
+  "taille": "gargantuan",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 153,
+  "creature": null
+ },
+ {
+  "slug": "ridge-drake",
+  "nom": "Ridge Drake",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 154,
+  "creature": null
+ },
+ {
+  "slug": "desert-drake",
+  "nom": "Desert Drake",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 154,
+  "creature": null
+ },
+ {
+  "slug": "jungle-drake",
+  "nom": "Jungle Drake",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 154,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-anger",
+  "nom": "Penumbral Anger",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 155,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-envy",
+  "nom": "Penumbral Envy",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 156,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-disgust",
+  "nom": "Penumbral Disgust",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 156,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-fear",
+  "nom": "Penumbral Fear",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 157,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-gluttony",
+  "nom": "Penumbral Gluttony",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 158,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-grudge",
+  "nom": "Penumbral Grudge",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 158,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-greed",
+  "nom": "Penumbral Greed",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 159,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-misery",
+  "nom": "Penumbral Misery",
+  "taille": "tiny",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 160,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-lust",
+  "nom": "Penumbral Lust",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 160,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-pride",
+  "nom": "Penumbral Pride",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 161,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-pain",
+  "nom": "Penumbral Pain",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 161,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-sadness",
+  "nom": "Penumbral Sadness",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 162,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-sloth",
+  "nom": "Penumbral Sloth",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 162,
+  "creature": null
+ },
+ {
+  "slug": "gloomfolk-hive-hunter",
+  "nom": "Gloomfolk Hive Hunter",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 163,
+  "creature": null
+ },
+ {
+  "slug": "gloomfolk-hero",
+  "nom": "Gloomfolk Hero",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 163,
+  "creature": null
+ },
+ {
+  "slug": "ironhand-brute",
+  "nom": "Ironhand Brute",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 164,
+  "creature": null
+ },
+ {
+  "slug": "ironhand-arbalist",
+  "nom": "Ironhand Arbalist",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 164,
+  "creature": null
+ },
+ {
+  "slug": "ironhand-soldier",
+  "nom": "Ironhand Soldier",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 164,
+  "creature": null
+ },
+ {
+  "slug": "kemet-warrior",
+  "nom": "Kemet Warrior",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 165,
+  "creature": null
+ },
+ {
+  "slug": "kemet-archer",
+  "nom": "Kemet Archer",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 165,
+  "creature": null
+ },
+ {
+  "slug": "kemet-berserker",
+  "nom": "Kemet Berserker",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 166,
+  "creature": null
+ },
+ {
+  "slug": "kemet-assassin",
+  "nom": "Kemet Assassin",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 166,
+  "creature": null
+ },
+ {
+  "slug": "kemet-necromancer",
+  "nom": "Kemet Necromancer",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 167,
+  "creature": null
+ },
+ {
+  "slug": "kemet-ice-elementalist",
+  "nom": "Kemet Ice Elementalist",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 167,
+  "creature": null
+ },
+ {
+  "slug": "kepesh-elite-warrior",
+  "nom": "Kepesh Elite Warrior",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 168,
+  "creature": null
+ },
+ {
+  "slug": "ba-ka-faithful-servant",
+  "nom": "Ba-Ka Faithful Servant",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 168,
+  "creature": null
+ },
+ {
+  "slug": "high-priest-of-ba-ka",
+  "nom": "High Priest of Ba-Ka",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 169,
+  "creature": null
+ },
+ {
+  "slug": "sand-wizard",
+  "nom": "Sand Wizard",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 169,
+  "creature": null
+ },
+ {
+  "slug": "kikoku-soldier",
+  "nom": "Kikoku Soldier",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 170,
+  "creature": null
+ },
+ {
+  "slug": "kikoku-worker",
+  "nom": "Kikoku Worker",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 170,
+  "creature": null
+ },
+ {
+  "slug": "lindwurm",
+  "nom": "Lindwurm",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 171,
+  "creature": null
+ },
+ {
+  "slug": "kikoku-queen",
+  "nom": "Kikoku Queen",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 171,
+  "creature": null
+ },
+ {
+  "slug": "penumbral-aberration",
+  "nom": "Penumbral Aberration",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 172,
+  "creature": null
+ },
+ {
+  "slug": "stone-spirit",
+  "nom": "Stone Spirit",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 173,
+  "creature": null
+ },
+ {
+  "slug": "spectral-ninja",
+  "nom": "Spectral Ninja",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 173,
+  "creature": null
+ },
+ {
+  "slug": "makian-guard",
+  "nom": "Makian Guard",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 174,
+  "creature": null
+ },
+ {
+  "slug": "makian-thopter",
+  "nom": "Makian Thopter",
+  "taille": "large",
+  "gabarit": "grand",
+  "source": "LOT-46",
+  "page": 175,
+  "creature": null
+ },
+ {
+  "slug": "makian-shaker",
+  "nom": "Makian Shaker",
+  "taille": "huge",
+  "gabarit": null,
+  "source": "LOT-46",
+  "page": 175,
+  "creature": null
+ },
+ {
+  "slug": "makian-tool",
+  "nom": "Makian Tool",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "source": "LOT-46",
+  "page": 175,
+  "creature": null
+ }
+]

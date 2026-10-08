@@ -1,0 +1,7 @@
+CORPS v1 — 2026-09-18 (humanoïde armé : les règles d'arme de la disposition v2 des PNJ)
+
+The weapon never changes hand: in every frame it stays in the hand named in the WEAPON
+line, as in the idle pose of row 1, and a strike toward the right sweeps across the
+body with that hand. There is only ONE weapon in each frame: a weapon arc effect is the
+trail of that single weapon and starts at its blade, never a second copy of the weapon.
+The free hand keeps what it holds in the idle pose in every frame.

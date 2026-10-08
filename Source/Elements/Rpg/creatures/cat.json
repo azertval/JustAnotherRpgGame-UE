@@ -1,0 +1,47 @@
+{
+  "id": "cat",
+  "name": "Chat",
+  "source": "srd",
+  "size": "tiny",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 3,
+    "dexterity": 15,
+    "constitution": 10,
+    "intelligence": 3,
+    "wisdom": 12,
+    "charisma": 7
+  },
+  "armorClass": 12,
+  "hitPoints": 2,
+  "hitDice": "1d4",
+  "speed": {
+    "walk": 12,
+    "climb": 9
+  },
+  "challengeRating": 0,
+  "senses": [
+    "Perception passive 13"
+  ],
+  "skills": {
+    "stealth": 4,
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Odorat aiguisé",
+      "text": "Le chat a un avantage aux jets de Sagesse (Perception) basés sur l'odorat."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Griffes",
+      "text": "Attaque au corps à corps avec une arme : +0 au toucher, allonge 1,50 m, une cible. Touché : 1 dégât tranchant.",
+      "attackBonus": 0,
+      "reach": 1.5,
+      "damage": "1",
+      "damageType": "slashing"
+    }
+  ]
+}

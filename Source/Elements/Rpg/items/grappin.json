@@ -1,0 +1,8 @@
+{
+  "id": "grappin",
+  "name": "Grappin",
+  "source": "srd",
+  "category": "gear",
+  "price": 200,
+  "weightGrams": 2000
+}

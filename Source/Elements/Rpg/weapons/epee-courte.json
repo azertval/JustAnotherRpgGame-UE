@@ -1,0 +1,15 @@
+{
+  "id": "epee-courte",
+  "name": "Épée courte",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d6",
+  "damageType": "piercing",
+  "weightGrams": 1000,
+  "price": 1000,
+  "text": "Finesse, légère",
+  "properties": [
+    "finesse",
+    "light"
+  ]
+}

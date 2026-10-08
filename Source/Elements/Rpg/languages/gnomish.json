@@ -1,0 +1,8 @@
+{
+  "id": "gnomish",
+  "name": "gnome",
+  "source": "srd",
+  "exotic": false,
+  "typicalSpeakers": "Gnomes",
+  "script": "Nain"
+}

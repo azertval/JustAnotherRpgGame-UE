@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "tile": [
+    68,
+    42
+  ],
+  "comment": "Zone : un PNJ nommé, et un citadin propre qui masque celui de la ville.",
+  "npcs": [
+    "anariel",
+    "citizen"
+  ]
+}

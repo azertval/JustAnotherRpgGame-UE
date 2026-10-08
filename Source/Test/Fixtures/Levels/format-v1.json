@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "name": "format-v1",
+  "width": 3,
+  "height": 2,
+  "tiles": [
+    { "x": 0, "y": 0, "type": "entry" },
+    { "x": 2, "y": 1, "type": "wall" }
+  ]
+}

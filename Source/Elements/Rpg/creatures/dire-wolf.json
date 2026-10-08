@@ -1,0 +1,50 @@
+{
+  "id": "dire-wolf",
+  "name": "Loup sanguinaire",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 17,
+    "dexterity": 15,
+    "constitution": 15,
+    "intelligence": 3,
+    "wisdom": 12,
+    "charisma": 7
+  },
+  "armorClass": 14,
+  "hitPoints": 37,
+  "hitDice": "5d10+10",
+  "speed": {
+    "walk": 15
+  },
+  "challengeRating": 1,
+  "senses": [
+    "Perception passive 13"
+  ],
+  "skills": {
+    "stealth": 4,
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Odorat et ouïe aiguisés",
+      "text": "Le loup a un avantage aux jets de Sagesse (Perception) basés sur l'odorat ou l'ouïe."
+    },
+    {
+      "name": "Tactique de groupe",
+      "text": "Le loup a un avantage aux jets d'attaque contre une créature si au moins l'un de ses alliés est à 1,50 mètre ou moins de la créature et n'est pas incapable d'agir."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 1,50 m, une cible. Touché : 10 (2d6 + 3) dégâts perforants. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 13 pour ne pas être jetée à terre.",
+      "attackBonus": 5,
+      "reach": 1.5,
+      "damage": "2d6+3",
+      "damageType": "piercing"
+    }
+  ]
+}

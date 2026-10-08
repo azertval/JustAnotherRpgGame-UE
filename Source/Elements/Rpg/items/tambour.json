@@ -1,0 +1,8 @@
+{
+  "id": "tambour",
+  "name": "Tambour",
+  "source": "srd",
+  "category": "tool",
+  "price": 600,
+  "weightGrams": 1500
+}

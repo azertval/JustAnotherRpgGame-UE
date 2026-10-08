@@ -1,0 +1,33 @@
+{
+  "id": "sea-horse",
+  "name": "Hippocampe",
+  "source": "srd",
+  "size": "tiny",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 1,
+    "dexterity": 12,
+    "constitution": 8,
+    "intelligence": 1,
+    "wisdom": 10,
+    "charisma": 2
+  },
+  "armorClass": 11,
+  "hitPoints": 1,
+  "hitDice": "1d4-1",
+  "speed": {
+    "walk": 0,
+    "swim": 6
+  },
+  "challengeRating": 0,
+  "senses": [
+    "Perception passive 10"
+  ],
+  "traits": [
+    {
+      "name": "Respiration aquatique",
+      "text": "L'hippocampe ne peut respirer que sous l'eau."
+    }
+  ]
+}

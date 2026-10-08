@@ -1,0 +1,8 @@
+{
+  "id": "lyre",
+  "name": "Lyre",
+  "source": "srd",
+  "category": "tool",
+  "price": 3000,
+  "weightGrams": 1000
+}

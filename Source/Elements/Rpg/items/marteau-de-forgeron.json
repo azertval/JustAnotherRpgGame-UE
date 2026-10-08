@@ -1,0 +1,8 @@
+{
+  "id": "marteau-de-forgeron",
+  "name": "Marteau de forgeron",
+  "source": "srd",
+  "category": "gear",
+  "price": 200,
+  "weightGrams": 5000
+}

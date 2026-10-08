@@ -1,0 +1,33 @@
+---
+# Style de formatage — JustAnotherRpgGame (voir Documentation/conventions.md)
+Language: Cpp
+BasedOnStyle: Google
+
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 100
+
+NamespaceIndentation: None
+AccessModifierOffset: -4
+PointerAlignment: Left
+DerivePointerAlignment: false
+
+BreakBeforeBraces: Attach
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Empty
+
+# Ordre des #include :
+#   0. en-tête principal du fichier (auto)  1. STL <...>  2. tiers <lib/...>  3. projet "..."
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+IncludeIsMainRegex: '$'
+IncludeCategories:
+  - Regex:    '^<[^/.]+>'   # bibliothèque standard : <string>, <vector>
+    Priority: 2
+  - Regex:    '^<.*>'       # tiers / DirectX : <gtest/gtest.h>, <d3d11.h>
+    Priority: 3
+  - Regex:    '^".*"'       # en-têtes du projet : "Core/Core.h"
+    Priority: 4

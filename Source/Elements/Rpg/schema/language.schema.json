@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/language.schema.json",
+  "title": "Langue",
+  "description": "Une des seize langues, avec son ecriture et ses locuteurs typiques. Elles ne sont PAS decoratives (EX-RPG-042) : chaque bloc de creature declare ses langues, chaque espece en accorde, et un dialogue doit pouvoir etre refuse faute de langue commune -- sans quoi un monde a treize especes parle partout la meme.",
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "exotic": {
+      "type": "boolean",
+      "description": "Vrai pour les huit langues exotiques, qui ne s'obtiennent pas librement a la creation."
+    },
+    "typicalSpeakers": {
+      "type": "string",
+      "minLength": 2
+    },
+    "script": {
+      "type": "string",
+      "minLength": 2,
+      "description": "Alphabet employe. Absent pour le profond, qui ne s'ecrit pas."
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "exotic",
+    "typicalSpeakers"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ]
+}

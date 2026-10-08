@@ -1,0 +1,55 @@
+{
+  "id": "spider",
+  "name": "Araignée",
+  "source": "srd",
+  "size": "tiny",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 2,
+    "dexterity": 14,
+    "constitution": 8,
+    "intelligence": 1,
+    "wisdom": 10,
+    "charisma": 2
+  },
+  "armorClass": 12,
+  "hitPoints": 1,
+  "hitDice": "1d4-1",
+  "speed": {
+    "walk": 6,
+    "climb": 6
+  },
+  "challengeRating": 0,
+  "senses": [
+    "vision dans le noir 9 m",
+    "Perception passive 10"
+  ],
+  "skills": {
+    "stealth": 4
+  },
+  "traits": [
+    {
+      "name": "Pattes d'araignée",
+      "text": "L'araignée peut escalader des surfaces difficiles et être au plafond la tête en bas sans avoir besoin d'effectuer un jet de caractéristique."
+    },
+    {
+      "name": "Sens de la toile",
+      "text": "Lorsqu'elle est en contact avec une toile, l'araignée connait l'emplacement exact de toutes les créatures qui sont en contact avec cette toile."
+    },
+    {
+      "name": "Déplacement sur la toile",
+      "text": "L'araignée ignore les restrictions de mouvement causées par une toile d'araignée."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une créature. Touché : 1 dégât perforant et la cible doit réussir un jet de sauvegarde de Constitution DD 9 ou subir 2 (1d4) dégâts de poison.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1",
+      "damageType": "piercing"
+    }
+  ]
+}

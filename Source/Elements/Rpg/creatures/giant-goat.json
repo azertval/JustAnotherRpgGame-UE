@@ -1,0 +1,46 @@
+{
+  "id": "giant-goat",
+  "name": "Chèvre géante",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 17,
+    "dexterity": 11,
+    "constitution": 12,
+    "intelligence": 3,
+    "wisdom": 12,
+    "charisma": 6
+  },
+  "armorClass": 11,
+  "hitPoints": 19,
+  "hitDice": "3d10+3",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 0.5,
+  "senses": [
+    "Perception passive 11"
+  ],
+  "traits": [
+    {
+      "name": "Charge",
+      "text": "Si la chèvre se déplace d'au moins 6 mètres en ligne droite vers une cible, puis la touche lors d'une attaque avec un coup de tête dans le même tour, la cible subit 5 (2d4) dégâts contondants supplémentaires. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 13 ou tomber à terre."
+    },
+    {
+      "name": "Stable",
+      "text": "La chèvre a un avantage aux jets de sauvegarde de Force et de Dextérité contre les effets susceptibles de la faire tomber à terre."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Coup de tête",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 1,50 m, une cible. Touché : 8 (2d4 + 3) dégâts contondants.",
+      "attackBonus": 5,
+      "reach": 1.5,
+      "damage": "2d4+3",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

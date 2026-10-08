@@ -1,0 +1,47 @@
+{
+  "id": "heroic-marks",
+  "name": "Marques Heroiques",
+  "source": "tanares",
+  "marks": [
+    {
+      "id": "bruiser",
+      "name": "Bruiser",
+      "text": "Frappe fort et souvent : porte le plus de degats au contact."
+    },
+    {
+      "id": "brute",
+      "name": "Brute",
+      "text": "Encaisse et renverse : la force brute, au premier rang."
+    },
+    {
+      "id": "commander",
+      "name": "Commander",
+      "text": "Commande : donne des actions et des avantages a ses allies."
+    },
+    {
+      "id": "controller",
+      "name": "Controller",
+      "text": "Controle le terrain et les ennemis : zones, entraves, deplacements forces."
+    },
+    {
+      "id": "healer",
+      "name": "Healer",
+      "text": "Soigne et releve : garde le camp debout."
+    },
+    {
+      "id": "shooter",
+      "name": "Shooter",
+      "text": "Frappe a distance, hors de portee des lames."
+    },
+    {
+      "id": "tactician",
+      "name": "Tactician",
+      "text": "Lit le combat : positions, opportunites, reactions."
+    },
+    {
+      "id": "tank",
+      "name": "Tank",
+      "text": "Attire les coups et les tient : protege les autres de sa personne."
+    }
+  ]
+}

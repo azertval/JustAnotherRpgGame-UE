@@ -1,0 +1,83 @@
+{
+  "id": "theocracy-of-kepesh",
+  "name": "Theocracy of Kepesh",
+  "source": "tanares",
+  "government": "Governed by the religion dedicated to Ba-ka, whose main representative is the Pharaoh Lich Kalistessenâmun.",
+  "faction": "Allied with the arcanists of the Arcanum, they believe that only through magic will they reach fulfillment and salvation.",
+  "population": {
+    "total": 695000,
+    "species": [
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 81
+      },
+      {
+        "species": "cirrus",
+        "label": "cirrus",
+        "percent": 6
+      },
+      {
+        "species": "taii-maku",
+        "label": "taii’maku",
+        "percent": 6
+      },
+      {
+        "species": "elf",
+        "label": "elves",
+        "percent": 5
+      }
+    ],
+    "otherPercent": 2
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "low"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "low"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "high"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "high"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "veryHigh"
+      }
+    ]
+  },
+  "neighbors": [
+    "central-empire",
+    "seashores",
+    "sindile-forest"
+  ],
+  "locations": [
+    "theocracy-of-kepesh-pakaitos-the-new-capital",
+    "theocracy-of-kepesh-pakaitos-mystical-enhancement",
+    "theocracy-of-kepesh-bright-coast",
+    "theocracy-of-kepesh-the-great-nothing",
+    "theocracy-of-kepesh-hag-salar",
+    "theocracy-of-kepesh-brightlight-desert"
+  ]
+}

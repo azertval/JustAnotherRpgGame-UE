@@ -1,0 +1,12 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "note": "L'outil Forme : deux cases peintes dans la flaque et une retirée ; au trajet, un point ajouté, un point glissé, un point retiré.",
+  "gestures": [
+    {"select": ["e2"], "tool": "shape", "path": [[8, 3], [9, 3]]},
+    {"tool": "shape", "ctrl": true, "at": [8, 2]},
+    {"select": ["e3"], "tool": "shape", "at": [8, 9]},
+    {"tool": "shape", "at": [5, 8], "to": [6, 7]},
+    {"tool": "shape", "ctrl": true, "at": [1, 8]}
+  ]
+}

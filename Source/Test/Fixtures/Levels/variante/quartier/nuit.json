@@ -1,0 +1,16 @@
+{
+  "version": 4,
+  "name": "Arène du Destin",
+  "base": "base",
+  "scene": "coliseum-doom",
+  "nextEntityId": 2,
+  "entities": [
+    {
+      "id": "e1",
+      "type": "spawnPoint",
+      "x": 1,
+      "y": 1,
+      "name": "fosse"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "pioche-de-mineur",
+  "name": "Pioche de mineur",
+  "source": "srd",
+  "category": "gear",
+  "price": 200,
+  "weightGrams": 5000
+}

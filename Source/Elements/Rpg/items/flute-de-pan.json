@@ -1,0 +1,8 @@
+{
+  "id": "flute-de-pan",
+  "name": "Flûte de pan",
+  "source": "srd",
+  "category": "tool",
+  "price": 1200,
+  "weightGrams": 1000
+}

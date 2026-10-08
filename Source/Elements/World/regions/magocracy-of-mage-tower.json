@@ -1,0 +1,78 @@
+{
+  "id": "magocracy-of-mage-tower",
+  "name": "Magocracy of Mage Tower",
+  "source": "tanares",
+  "government": "Magocratic regime headed by a council containing one representative from each specialty.",
+  "faction": "The Arcanum",
+  "population": {
+    "total": 867000,
+    "species": [
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 72
+      },
+      {
+        "species": "cirrus",
+        "label": "cirrus",
+        "percent": 19
+      },
+      {
+        "species": "winter-elf",
+        "label": "winter elves",
+        "percent": 6
+      }
+    ],
+    "otherPercent": 3
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "high"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "low"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "high"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "high"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "normal"
+      }
+    ]
+  },
+  "neighbors": [
+    "imperial-benenet",
+    "kingdom-of-kolbjorn",
+    "stravian-domains"
+  ],
+  "locations": [
+    "magocracy-of-mage-tower-arcane-university",
+    "magocracy-of-mage-tower-crystal-tower",
+    "magocracy-of-mage-tower-summer-island",
+    "magocracy-of-mage-tower-asylum-eberek",
+    "magocracy-of-mage-tower-magic-duel-arena",
+    "magocracy-of-mage-tower-mesoriver"
+  ]
+}

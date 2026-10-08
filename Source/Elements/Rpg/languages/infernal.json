@@ -1,0 +1,8 @@
+{
+  "id": "infernal",
+  "name": "infernal",
+  "source": "srd",
+  "exotic": true,
+  "typicalSpeakers": "Diables",
+  "script": "Infernal"
+}

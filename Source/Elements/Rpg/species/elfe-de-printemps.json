@@ -1,0 +1,14 @@
+{
+  "id": "elfe-de-printemps",
+  "name": "Elfe de printemps",
+  "source": "tanares",
+  "parentSpecies": "elfe",
+  "size": "medium",
+  "speed": 9,
+  "abilityScoreIncrease": {
+    "wisdom": 1
+  },
+  "mecanismesRequis": [
+    "augmentation-de-caracteristique-au-choix"
+  ]
+}

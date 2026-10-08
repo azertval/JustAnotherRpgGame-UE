@@ -1,0 +1,67 @@
+{
+  "id": "swarm-of-quippers",
+  "name": "Nuée de piranhas",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "nuée de bêtes TP",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 13,
+    "dexterity": 16,
+    "constitution": 9,
+    "intelligence": 1,
+    "wisdom": 7,
+    "charisma": 2
+  },
+  "armorClass": 13,
+  "hitPoints": 28,
+  "hitDice": "8d8-8",
+  "speed": {
+    "walk": 0,
+    "swim": 12
+  },
+  "challengeRating": 1,
+  "senses": [
+    "vision dans le noir 18 m",
+    "Perception passive 8"
+  ],
+  "damageResistances": [
+    "bludgeoning",
+    "piercing",
+    "slashing"
+  ],
+  "conditionImmunities": [
+    "prone",
+    "grappled",
+    "charmed",
+    "frightened",
+    "restrained",
+    "stunned",
+    "paralyzed",
+    "petrified"
+  ],
+  "traits": [
+    {
+      "name": "Frénésie sanguinaire",
+      "text": "La nuée a un avantage aux jets d'attaque au corps à corps contre une créature qui n'a pas tous ses points de vie."
+    },
+    {
+      "name": "Nuée",
+      "text": "La nuée peut occuper l'espace d'une créature et vice versa, et peut passer par une ouverture suffisamment grande pour un piranha de taille TP. La nuée ne peut pas regagner de points de vie ou gagner des points de vie temporaires."
+    },
+    {
+      "name": "Respiration aquatique",
+      "text": "La nuée ne peut respirer que sous l'eau."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsures",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 0 m, une créature dans l'espace de la nuée. Touché : 14 (4d6) dégâts perforants, ou 7 (2d6) dégâts perforants si la nuée ne possède plus que la moitié ou moins de ses points de vie.",
+      "attackBonus": 5,
+      "reach": 0,
+      "damage": "4d6",
+      "damageType": "piercing"
+    }
+  ]
+}

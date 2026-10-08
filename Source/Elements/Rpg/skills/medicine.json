@@ -1,0 +1,6 @@
+{
+  "id": "medicine",
+  "name": "Médecine",
+  "source": "srd",
+  "ability": "wisdom"
+}

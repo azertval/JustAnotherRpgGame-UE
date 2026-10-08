@@ -1,0 +1,36 @@
+{
+  "id": "camel",
+  "name": "Chameau",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 16,
+    "dexterity": 8,
+    "constitution": 14,
+    "intelligence": 2,
+    "wisdom": 8,
+    "charisma": 5
+  },
+  "armorClass": 9,
+  "hitPoints": 15,
+  "hitDice": "2d10+4",
+  "speed": {
+    "walk": 15
+  },
+  "challengeRating": 0.125,
+  "senses": [
+    "Perception passive 9"
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 1,50 m, une cible. Touché : 2 (1d4) dégâts contondants.",
+      "attackBonus": 5,
+      "reach": 1.5,
+      "damage": "1d4",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

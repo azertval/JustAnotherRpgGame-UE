@@ -1,0 +1,455 @@
+# Catalogue des versions, dans l'ordre où elles se livrent. C'est ce fichier que lisent le lint
+# (`outils/lint_planning.py`) et le site (`outils/build_planning_site.py`).
+#
+#   nature = "detaillee"       la version a ses lots, ses livrables, ses maquettes
+#   nature = "previsionnelle"  la version a un périmètre, pas encore de lots : elle se détaille
+#                              quand la précédente approche de sa fin — pas avant
+#
+# `referentiel` regroupe les versions sous le jalon majeur qu'elles servent.
+
+# ------------------------------------------------------------------------------------------------
+# Référentiel 0.0.0 — la fondation
+# ------------------------------------------------------------------------------------------------
+
+[[version]]
+id = "0.0.0"
+titre = "Fondation du moteur"
+nature = "detaillee"
+referentiel = "0.0.0"
+dossier = "v0.0.0/v0.0.0-fondation"
+resume = "Tout ce qui a été livré avant la refonte du 20 septembre 2026 : le moteur, les règles d20, le combat tactique, l'interface Qt Quick, la chaîne de données et l'éditeur de cartes."
+objectifs = [
+  "Un **moteur** C++20 / Qt QRhi debout : boucle, ECS, cartes multicouches, rendu isométrique trié, exploration et bascule vers le combat.",
+  "Les **règles d20** et le **combat tactique** complets : jets, fiche, inventaire, grille, initiative, attaques, portée et ligne de vue, IA, interface de combat.",
+  "La **chaîne de données** du corpus : extraction, schémas, bestiaire, équipement, espèces et classes, atlas des régions, clés d'assets.",
+  "L'**interface** Qt Quick à la charte v2 et l'**éditeur de cartes** (`LevelEditor`), du socle au format v4, jusqu'à l'essai dans le jeu.",
+]
+criteres_de_sortie = [
+  "Chaque lot de l'ancienne feuille de route du jeu (`LOT-01` à `LOT-96`) et de celle de l'éditeur (`LOT-EDITOR-01` à `LOT-EDITOR-14`) qui a été démarré a sa fiche ici, au format commun.",
+  "Les deux anciennes feuilles de route sont archivées sous `Planning/vision/archives/` : elles ne se lisent plus que pour l'histoire.",
+]
+
+# ------------------------------------------------------------------------------------------------
+# Référentiel 0.1.0 — la démo, jusqu'à sa qualité finale
+# ------------------------------------------------------------------------------------------------
+
+[[version]]
+id = "0.0.1"
+titre = "Démo basique"
+nature = "detaillee"
+referentiel = "0.1.0"
+dossier = "v0.1.0/v0.0.1-demo"
+resume = "Le standard 2D HD, le moteur de la quête, et une quête jouée de bout en bout sur trois cartes de principe : du marché de Martpart au sable de l'Arena of Fate."
+objectifs = [
+  "Le **standard 2D HD** : un style écrit, une arborescence d'assets durable, et plus un seul asset pixel art dans le dépôt.",
+  "Trois **cartes de principe** enchaînées — **Martpart**, **Arenarea**, et dans Arenarea le donjon de l'**Arena of Fate** —, jouables en maquette (LOT-146) ; leurs assets, leurs PNJ et leurs cartes définitives sont à la `0.0.3` (décision D-25).",
+  "Les cinq PNJ de la quête, tenus par le **mannequin** humanoïde installé au LOT-118 ou des **jetons** (LOT-128) jusqu'à leur production ; les mannequins complets (LOT-145) sont à la `0.0.2` (décision D-26).",
+  "La quête **« Des pommes pour l'arène »**, jouable de bout en bout : dialogue, jet de Persuasion, combat seul contre un, deux fins.",
+]
+criteres_de_sortie = [
+  "Un joueur qui ne connaît pas le projet termine la démo par chacune de ses **trois issues** (persuasion réussie, victoire, mort) sans aide.",
+  "Aucun asset pixel art ne reste dans `Source/Elements/Assets/` (les cartes peintes et le HUD, déjà au standard, sont gardés) ; la galerie de débug montre tous les assets HD.",
+  "Les trois cartes de principe — l'Arena of Fate en compte deux, un niveau étant une carte — s'enchaînent par leurs portails, passent le contrôle de l'éditeur (`--check`) et se parcourent sans case inatteignable.",
+  "La CI est verte, l'installeur se lance sur un poste vierge, le tag `v0.0.1` est posé.",
+]
+sources = [
+  "Tanares Sourcebook — la Capitale et ses quartiers (chapitre Central Empire)",
+  "Character Compendium — PNJ de l'Empire central (index p. 166)",
+]
+
+[[version]]
+id = "0.0.2"
+titre = "Système de combat"
+nature = "detaillee"
+referentiel = "0.1.0"
+dossier = "v0.1.0/v0.0.2-combat"
+resume = "Les quatre classes de base, d'après leurs fiches préfabriquées, et le combat de groupe."
+objectifs = [
+  "Les **quatre classes de base** du *Player's Guide*, fidèles aux fiches préfabriquées (p. 195, 199, 203, 207) : compétences, capacités, assets.",
+  "Le **combat de groupe** : plusieurs personnages joués contre plusieurs adversaires.",
+  "Une **interface à jour** : les profils des personnages dans le combat, la fiche et le groupe.",
+  "Les **mannequins de remplacement** (LOT-145, repris de la `0.0.1` par la décision D-26) : l'humanoïde dans les quatre orientations, pour que chaque créature d'une rencontre se voie et s'anime avant sa figurine ; les silhouettes quadrupède et volante ne sont pas produites en 2D (décision D-34).",
+]
+criteres_de_sortie = [
+  "Chacune des quatre fiches préfabriquées se recrée dans le jeu, valeur pour valeur.",
+  "Un combat à quatre contre quatre se joue de bout en bout dans l'Arena of Fate, au clavier comme à la manette.",
+  "Chaque capacité de classe des fiches a un effet en combat et une ligne dans le journal.",
+]
+sources = [
+  "Player's Guide to Tanares — classes simplifiées, p. 192-208 ; fiches préfabriquées p. 195, 199, 203, 207",
+]
+
+[[version]]
+id = "0.0.2.5"
+titre = "Passage à la 3D"
+nature = "detaillee"
+referentiel = "0.1.0"
+dossier = "v0.1.0/v0.0.2.5-passage-3d"
+resume = "Le jeu garde sa vue isométrique et passe en 3D : un personnage est un maillage qui lui est propre, lié à un squelette partagé ; la scène est éclairée, avec un cycle jour / nuit ; l'Arena of Fate est en maillages. Chaque lot retire ce qu'il remplace."
+objectifs = [
+  "Une **production de personnages stable** : un maillage par personnage, généré depuis une image de référence et lié par script au squelette commun de sa silhouette, dont les clips sont réglés une fois (décision D-38, qui remplace les huit corps de D-31).",
+  "Un **cycle jour / nuit** sous la même caméra isométrique : soleil, ombres portées, lumières de nuit. Le **décor d'architecture en maillages** du kit de la Capitale est reporté à la version des trois lieux (décision D-43, 2 octobre 2026 ; la `0.0.4` depuis D-48) ; celui de l'Arena of Fate est livré (décision D-46).",
+  "Un **atelier des assets 3D** dans l'éditeur : la fiche d'un personnage, son aperçu, son installation, et l'aller-retour par Blender (décisions D-33 et D-44).",
+  "Un **dépôt sans asset mort** : chaque lot nomme ce qu'il supprime, et le supprime dans sa propre PR (décision D-32).",
+]
+criteres_de_sortie = [
+  "La quête « Des pommes pour l'arène » et un combat à quatre contre quatre se rejouent de bout en bout en 3D, de jour comme de nuit, au clavier et à la souris — la manette, que ce critère nommait, a été retirée du jeu le 2 octobre 2026.",
+  "Les quatre héros sont des modèles installés par l'atelier ; plus aucune bande d'animation de figurine ne reste dans le dépôt ni dans les kits (les effets de `Common/Fx/` restent des bandes).",
+  "L'éditeur montre exactement ce que le jeu dessine : ils partagent un seul rendu, et plus aucun peintre `QPainter` ne dessine la scène.",
+  "Le contrôle des orphelins passe : tout fichier installé est cité par un manifeste ou une fiche, toute entrée citée existe, et les seules images de décor restantes sont celles de la dette déclarée pour la version des trois lieux (la `0.0.4` depuis D-48).",
+]
+sources = [
+  "Audit de faisabilité du 30 septembre 2026 — https://claude.ai/code/artifact/9cffa31b-7b23-4e0a-8df9-1c0cb9534523",
+]
+
+[[version]]
+id = "0.0.3"
+titre = "Le nouveau moteur"
+nature = "detaillee"
+referentiel = "0.1.0"
+dossier = "v0.1.0/v0.0.3-nouveau-moteur"
+resume = "Le jeu passe sur Unreal Engine 5 (décision D-48) : caméra libre en perspective, combat en distance à la manière de Baldur's Gate 3, cartes composées librement, lumière et matière au niveau d'un moteur du commerce. Core reste la bibliothèque des règles ; le moteur maison, l'interface Qt Quick et le LevelEditor sont retirés."
+objectifs = [
+  "Un **rendu au niveau de l'atlas** : Lumen, Nanite, ombres virtuelles, anticrénelage temporel ; un lieu se juge sur captures du moteur à midi et à 22 h contre sa carte peinte (décision D-54).",
+  "Le **combat en distance** (décision D-50) : mètres du *Manuel*, maillage de navigation, ligne de vue par rayon, zones en volumes, hauteur comptée ; les règles, les classes et les capacités de la `0.0.2` ne changent pas.",
+  "Une **carte composée** (décision D-51) : terrain, objets à transformation libre, étages praticables, construite par script depuis une description en texte (décision D-52).",
+  "Les **vingt personnages** et les maillages de l'Arena of Fate importés au maître (décision D-53) ; la chaîne Meshy et l'atelier Blender gardés.",
+  "Un **dépôt sans moteur mort** : Qt, QRhi, QML, le LevelEditor et le format de carte v4 sont supprimés dans la PR de la recette (décision D-32).",
+]
+criteres_de_sortie = [
+  "La porte (LOT-1012) a été vue et acceptée par l'auteur avant tout autre lot : parvis d'Arenarea rendu à midi et à 22 h, 60 images par seconde à 1080p, carte construite par script.",
+  "La quête « Des pommes pour l'arène » et la série de l'arène se rejouent de bout en bout sur le nouveau moteur, en distance, de jour comme de nuit, au clavier et à la souris.",
+  "Arenarea est reconstruit au standard D-54 et validé par l'auteur sur le rendu du moteur ; l'Arena of Fate et Martpart sont portés.",
+  "Plus une ligne de Qt, de QML ni de QRhi dans `Source/` ; les tests, les lints et `check_orphans.py` passent sur le nouveau projet ; le tag `v0.0.3` est posé.",
+]
+sources = [
+  "Plan d'action du 7 octobre 2026 — https://claude.ai/artifact/AHU61AmvLTCPBmDmUBd2Em",
+]
+
+[[version]]
+id = "0.0.4"
+titre = "Les trois lieux de la démo"
+nature = "detaillee"
+referentiel = "0.1.0"
+dossier = "v0.1.0/v0.0.4-lieux-de-la-demo"
+resume = "Martpart, Arenarea et l'Arena of Fate — son sable, ses vestiaires et sa prison, ses catacombes — produits pour de bon sur le nouveau moteur : décor au maître, PNJ en modèles, cartes définitives. Numérotée 0.0.3 jusqu'au 7 octobre 2026 (décision D-48) ; ses fiches se réécrivent à la recette de la 0.0.3."
+objectifs = [
+  "L'**Arena of Fate et son donjon** : ses trois niveaux à la qualité finale (LOT-106, LOT-107, LOT-157), portés par la `0.0.3` (LOT-1022).",
+  "**Arenarea** (LOT-147, dont la reconstruction est faite par le LOT-1021 de la `0.0.3`) et **Martpart** (LOT-110, LOT-111) ; les cartes de principe de la démo leur cèdent la place.",
+  "Le **kit commun de la Capitale** repris en maillages pour ces lieux (LOT-151) : la dette d'images de la `0.0.2.5` est soldée.",
+  "Les **PNJ** des trois lieux en modèles, au standard des personnages (LOT-113, LOT-114, LOT-115).",
+]
+criteres_de_sortie = [
+  "La quête « Des pommes pour l'arène » et la série de l'arène se rejouent de bout en bout sur les cartes définitives de Martpart, d'Arenarea et de l'Arena of Fate, sans changer une ligne de la quête.",
+  "Plus aucune image de décor ne reste hors de celles que le standard tolère sans date : la dette déclarée par la `0.0.2.5` est retirée, et `check_orphans.py` passe.",
+  "L'auteur a validé chacun des trois lieux sur le rendu du moteur, de jour comme de nuit.",
+]
+sources = ["Tanares Sourcebook, p. 91-92, 96-99 ; plan VTT de la Capitale (référence seule)"]
+
+[[version]]
+id = "0.1.0"
+titre = "La démo, à sa qualité finale"
+nature = "detaillee"
+referentiel = "0.1.0"
+dossier = "v0.1.0/v0.1.0-demo-finale"
+resume = "Les trois lieux de la démo, relus d'un bloc et publiés : c'est la première version qu'on montre. Le reste de l'Empire central attend la `0.4.0`, après les systèmes (décision D-47)."
+objectifs = [
+  "La **recette** des trois lieux : cohérence, performances, un joueur extérieur.",
+  "La **version publiée** : installeur, notes de version, tag `v0.1.0`.",
+]
+criteres_de_sortie = [
+  "Un joueur qui ne connaît pas le projet termine la démo par chacune de ses issues, sur les cartes définitives, sans aide.",
+  "Chaque carte tient 60 images par seconde à 1080p sur le poste de référence, de jour comme de nuit.",
+  "La CI est verte, l'installeur se lance sur un poste vierge, le tag `v0.1.0` est posé.",
+]
+
+# ------------------------------------------------------------------------------------------------
+# Référentiels 0.2.0 et 0.3.0 — les systèmes, finis avant le monde (décision D-47)
+# ------------------------------------------------------------------------------------------------
+
+[[version]]
+id = "0.2.0"
+titre = "La compagnie"
+nature = "detaillee"
+referentiel = "0.2.0"
+dossier = "v0.2.0"
+resume = "La compagnie d'aventuriers, la sauvegarde, le voyage et les dernières fonctionnalités du jeu et de l'éditeur : après elle, on n'ajoute plus que du contenu."
+objectifs = [
+  "La **compagnie** : recrutement, rangs de Guilde, contrats, quartier général.",
+  "Les **dernières fonctionnalités** : économie et marchands, expérience et progression, repos, calendrier, voyage.",
+  "Les **systèmes que portaient les versions de zone** (décision D-47) : la sauvegarde, le voyage et la carte de région, et les outils de l'éditeur — peupler une zone, l'onglet « Carte », les grandes cartes de plein air, le semis, les horaires, les dettes de l'atelier.",
+]
+criteres_de_sortie = [
+  "La liste des fonctionnalités du jeu est **close** : tout ce qui suit la 0.2.0 est du contenu ou de la correction.",
+  "Une compagnie se fonde, prend un contrat, le remplit et monte en rang.",
+  "Une partie se sauvegarde et se reprend, drapeaux de quête compris.",
+]
+
+[[version]]
+id = "0.3.0"
+titre = "Classes et espèces, pour de vrai"
+nature = "detaillee"
+referentiel = "0.3.0"
+dossier = "v0.3.0"
+resume = "La vraie complexité : toutes les espèces, les classes complètes et leurs sous-classes, les sorts."
+objectifs = [
+  "Toutes les **espèces** du *Player's Guide* et du *Manuel des Joueurs*, avec leurs assets.",
+  "Les **classes complètes** : progression par niveau, sous-classes, sorts.",
+  "La **création de personnage** complète.",
+]
+criteres_de_sortie = [
+  "Tout personnage que les livres permettent de créer se crée dans le jeu.",
+  "Chaque classe se joue du niveau 1 au niveau maximal retenu, capacités en main.",
+]
+sources = [
+  "Player's Guide to Tanares — espèces p. 11-56, classes p. 56-192, sous-classes p. 208-260",
+  "Manuel des Joueurs — races p. 17-45, classes p. 45-141",
+]
+
+# ------------------------------------------------------------------------------------------------
+# Référentiel 0.4.0 — l'Empire central, le premier monde : après les systèmes (décision D-47)
+# ------------------------------------------------------------------------------------------------
+
+[[version]]
+id = "0.3.1"
+titre = "Zone — la Capitale dans ses murs"
+nature = "detaillee"
+referentiel = "0.4.0"
+dossier = "v0.4.0/v0.3.1-capitale-intra-muros"
+resume = "Les six autres quartiers intra-muros — Uptown, Artisansquare, Scholarnest, Dweomer, Downtown, Palacedomain — autour des trois lieux de la `0.1.0`."
+objectifs = [
+  "Les **six quartiers** intra-muros restants : assets, PNJ, carte jouable et carte de l'onglet.",
+  "Ce que ces quartiers partagent et que le kit de la Capitale n'a pas : marbre blanc, lanternes magiques, statues, grilles, enseignes de guilde.",
+  "La quête du livre **« Les enfants de Martpart »**, à travers quatre quartiers.",
+]
+criteres_de_sortie = [
+  "On traverse la Capitale intra-muros par ses portails, sans quitter le jeu.",
+  "Les PNJ nommés de la cour, de la cathédrale et de Dweomer sont à leur place.",
+  "Une partie se sauvegarde et se reprend dans n'importe quel quartier.",
+]
+sources = ["Tanares Sourcebook, p. 96-99 ; plan VTT de la Capitale (référence seule)"]
+
+[[version]]
+id = "0.3.2"
+titre = "Zone — les faubourgs"
+nature = "detaillee"
+referentiel = "0.4.0"
+dossier = "v0.4.0/v0.3.2-faubourgs"
+resume = "Hors les murs : Sloghood, Oldtown, Neckoffoods, Bloomburgs, les docks — et les deux autres arènes."
+objectifs = [
+  "Les **faubourgs** : Sloghood, Oldtown, Neckoffoods, Bloomburgs, Docks District.",
+  "Les **trois arènes** de la Capitale en gradation : Braves Arena, Illu Die Arena, Arena of Fate.",
+]
+criteres_de_sortie = [
+  "Les six portes de la ville s'ouvrent sur leur faubourg.",
+  "On combat dans les trois arènes, de la plus modeste à la plus prestigieuse.",
+]
+sources = ["Tanares Sourcebook, p. 98-99"]
+
+[[version]]
+id = "0.3.3"
+titre = "Zone — les abords de la Capitale"
+nature = "detaillee"
+referentiel = "0.4.0"
+dossier = "v0.4.0/v0.3.3-abords-de-la-capitale"
+resume = "La campagne proche et le premier donjon : Phantom Fortress. Le premier trajet du jeu."
+objectifs = [
+  "**Phantom Fortress**, forteresse Ironhand et prison hantée : le premier donjon.",
+  "Le **kit de nature**, et le premier **trajet** par la carte de région — le voyage lui-même est livré à la `0.2.0`.",
+  "Les **animaux** des prairies et des routes.",
+]
+criteres_de_sortie = [
+  "On quitte la Capitale, on voyage, on entre dans la forteresse et on en ressort.",
+]
+sources = ["Tanares Sourcebook, p. 94"]
+
+[[version]]
+id = "0.3.4"
+titre = "Zone — la côte sud"
+nature = "detaillee"
+referentiel = "0.4.0"
+dossier = "v0.4.0/v0.3.4-cote-sud"
+resume = "Skybell City, la ville sainte ; le marais salant d'O'Myre ; le Cursed Ground et ses êtres fongiques."
+objectifs = [
+  "**Skybell City** et son pèlerinage.",
+  "**Cursed Ground** : trois factions, aucun animal.",
+  "Le **Cult of Shadow Wing**, premier adversaire organisé.",
+]
+criteres_de_sortie = [
+  "Le pèlerinage de Skybell se fait et donne ses bénédictions.",
+  "Le Cursed Ground se traverse, et l'on y choisit un camp.",
+]
+sources = ["Tanares Sourcebook, p. 92-95"]
+
+[[version]]
+id = "0.3.5"
+titre = "Zone — la forêt de Bak"
+nature = "detaillee"
+referentiel = "0.4.0"
+dossier = "v0.4.0/v0.3.5-foret-de-bak"
+resume = "La grande forêt protégée, ses étangs sacrés, les anciens heargs, la peste qui corrompt la faune."
+objectifs = [
+  "**The Great Forest of Bak**, est et ouest ; **The Sacred Ponds** ; **Ancient Heargs**.",
+  "Les **aberrations** de la peste et la faune de la forêt.",
+]
+criteres_de_sortie = [
+  "Un repos dans un étang sacré a l'effet que le livre lui donne.",
+  "Les druides confient une quête à un étranger.",
+]
+sources = ["Tanares Sourcebook, p. 93-94"]
+
+[[version]]
+id = "0.3.6"
+titre = "Zone — le nord"
+nature = "detaillee"
+referentiel = "0.4.0"
+dossier = "v0.4.0/v0.3.6-nord"
+resume = "Hajal City, la ville de la Banque, et les hautes terres froides."
+objectifs = [
+  "**Hajal City** : la hiérarchie sociale lisible au vêtement, la Bank of Hajal.",
+]
+criteres_de_sortie = [
+  "Tiwilade reçoit le joueur ; le rang social des passants se lit à l'écran.",
+]
+sources = ["Tanares Sourcebook, p. 93, 212-213"]
+
+[[version]]
+id = "0.3.7"
+titre = "Zone — l'ouest"
+nature = "detaillee"
+referentiel = "0.4.0"
+dossier = "v0.4.0/v0.3.7-ouest"
+resume = "Le monastère d'albâtre d'Odraz, au pied des monts Rainbow Dale."
+objectifs = [
+  "**Odraz Monastery** et son entraînement.",
+]
+criteres_de_sortie = [
+  "L'entraînement du monastère donne ses variantes de classe.",
+]
+sources = ["Tanares Sourcebook, p. 95"]
+
+[[version]]
+id = "0.4.0"
+titre = "L'Empire central"
+nature = "detaillee"
+referentiel = "0.4.0"
+dossier = "v0.4.0/v0.4.0-empire-central"
+resume = "La région entière, relue d'un bloc : toutes ses zones, ses PNJ nommés, ses peuples, ses animaux, ses monstres."
+objectifs = [
+  "La **recette** de la région : équilibrage, cohérence, performances, sauvegarde.",
+  "La **version publiée** : installeur, notes de version, tag `v0.4.0`.",
+]
+criteres_de_sortie = [
+  "Toutes les zones de l'Empire central de l'atlas se visitent.",
+  "Tous les PNJ nommés de l'Empire central du compendium sont dans le jeu, avec leurs assets.",
+  "Une partie se sauvegarde et se reprend dans n'importe quelle zone.",
+]
+
+# ------------------------------------------------------------------------------------------------
+# Prévisionnel — une version par région majeure, du voisinage de l'Empire vers les confins
+# ------------------------------------------------------------------------------------------------
+
+[[version]]
+id = "0.5.0"
+titre = "Imperial Benênet"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Voisine de l'Empire central. 7 lieux à l'atlas, 445 000 habitants."
+
+[[version]]
+id = "0.6.0"
+titre = "Seashores"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Voisine de l'Empire central, porte de la mer. 6 lieux, 617 000 habitants."
+
+[[version]]
+id = "0.7.0"
+titre = "Sindile Forest"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Voisine de l'Empire central. 7 lieux, 432 000 habitants."
+
+[[version]]
+id = "0.8.0"
+titre = "Theocracy of Kepesh"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Voisine de l'Empire central. 6 lieux, 695 000 habitants."
+
+[[version]]
+id = "0.9.0"
+titre = "Stravian Domains"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Voisine de l'Empire central. 6 lieux, 960 000 habitants."
+
+[[version]]
+id = "0.10.0"
+titre = "Tsvetan"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Voisine de l'Empire central. 6 lieux, 468 000 habitants."
+
+[[version]]
+id = "0.11.0"
+titre = "Republic of Freelands"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Second cercle. La plus vaste après l'Empire : 15 lieux, 1 700 000 habitants."
+
+[[version]]
+id = "0.12.0"
+titre = "Magocracy of Mage Tower"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Second cercle. 6 lieux, 867 000 habitants."
+
+[[version]]
+id = "0.13.0"
+titre = "Kingdom of Kolbjörn"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Second cercle. 6 lieux, 720 000 habitants."
+
+[[version]]
+id = "0.14.0"
+titre = "Taii-Maku City States"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Second cercle. 4 lieux, 698 000 habitants."
+
+[[version]]
+id = "0.15.0"
+titre = "Storm Islands"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Les confins. 6 lieux, 386 000 habitants."
+
+[[version]]
+id = "0.16.0"
+titre = "Yama"
+nature = "previsionnelle"
+referentiel = "Régions"
+resume = "Les confins : on n'y accède que par Seashores. 7 lieux, 793 000 habitants."
+
+[[version]]
+id = "0.17.0"
+titre = "Les autres régions"
+nature = "previsionnelle"
+referentiel = "Au-delà"
+resume = "Undertanares, Darkall, Mystical : ce qui n'est pas une région majeure."
+
+[[version]]
+id = "0.18.0"
+titre = "Le plan pénombral"
+nature = "previsionnelle"
+referentiel = "Au-delà"
+resume = "Le second monde du Sourcebook (p. 50-68)."
+
+[[version]]
+id = "1.0.0"
+titre = "Le monde complet"
+nature = "previsionnelle"
+referentiel = "1.0.0"
+resume = "Le bac à sable de Tanares, entier : toutes les régions, relues et équilibrées d'un bloc."

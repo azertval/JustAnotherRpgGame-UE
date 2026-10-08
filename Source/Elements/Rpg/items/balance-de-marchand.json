@@ -1,0 +1,8 @@
+{
+  "id": "balance-de-marchand",
+  "name": "Balance de marchand",
+  "source": "srd",
+  "category": "gear",
+  "price": 500,
+  "weightGrams": 1500
+}

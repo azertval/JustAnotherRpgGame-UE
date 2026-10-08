@@ -1,0 +1,19 @@
+{
+  "id": "arbalete-legere",
+  "name": "Arbalète légère",
+  "source": "srd",
+  "category": "simple",
+  "ranged": true,
+  "damage": "1d8",
+  "damageType": "piercing",
+  "weightGrams": 2500,
+  "price": 2500,
+  "text": "Munitions (portée 24 m/96 m), chargement, à deux mains",
+  "properties": [
+    "ammunition",
+    "loading",
+    "two-handed"
+  ],
+  "rangeNormal": 24,
+  "rangeLong": 96
+}

@@ -1,0 +1,20 @@
+{
+  "id": "taii-maku",
+  "name": "Taii'maku",
+  "source": "tanares",
+  "abilityScoreIncrease": {
+    "constitution": 1
+  },
+  "size": "medium",
+  "speed": 9,
+  "traits": [
+    {
+      "name": "Historical Nomadism",
+      "text": "You gain proficiency in one of the following skills of your choice: History or Survival. Strong Hands. Endowed with six fingers, taii'makus possess enhanced hand strength. You have advantage on Strength (Athletics) checks related to climbing and saving throws against disarming effects. Mathematical Mind. The unique and logical thought pro- cess of the taii'maku grant them an edge with numbers and math. You have advantage on all ability checks directly in- volving mathematical or accounting tasks. Languages. You can speak, read, and write Common and Taii'makian."
+    },
+    {
+      "name": "Mind Inclination",
+      "text": "Rather than subspecies, taii'maku dis- play dispositions inclined either towards Philosophy, with a comprehensive approach, or Engineering, focusing on spe- cific areas of study."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "baton",
+  "name": "Bâton",
+  "source": "srd",
+  "category": "simple",
+  "damage": "1d6",
+  "damageType": "bludgeoning",
+  "weightGrams": 2000,
+  "price": 20,
+  "text": "Polyvalente (1d8)",
+  "versatileDamage": "1d8",
+  "properties": [
+    "versatile"
+  ]
+}

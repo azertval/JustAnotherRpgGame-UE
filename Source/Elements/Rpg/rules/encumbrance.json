@@ -1,0 +1,32 @@
+{
+  "id": "encumbrance",
+  "name": "Capacite de charge et encombrement",
+  "source": "srd",
+  "carryingCapacityGramsPerStrength": 7500,
+  "encumberedGramsPerStrength": 2500,
+  "heavilyEncumberedGramsPerStrength": 5000,
+  "encumberedSpeedPenaltyMeters": 3.0,
+  "heavilyEncumberedSpeedPenaltyMeters": 6.0,
+  "attestations": {
+    "carryingCapacityGramsPerStrength": {
+      "page": 68,
+      "text": "Capacité de charge. Votre capacité de charge est votre valeur de Force multipliée par 7,5. C'est le poids (en kg) que vous pouvez porter, ce qui est suffisamment élevé pour que la plupart des personnages n'aient généralement pas à s'inquiéter à ce sujet."
+    },
+    "encumberedGramsPerStrength": {
+      "page": 68,
+      "text": "Si vous portez un poids qui excède plus de 2,5 fois votre valeur de Force, vous êtes encombré, ce qui signifie que votre vitesse est diminuée de 3 mètres."
+    },
+    "heavilyEncumberedGramsPerStrength": {
+      "page": 68,
+      "text": "Si vous portez un poids qui excède plus de 5 fois votre valeur de Force, sans dépasser votre capacité de charge maximale, vous êtes fortement encombré, ce qui signifie que votre vitesse est diminuée de 6 mètres et vous avez un désavantage aux jets de caractéristique, d'attaque et de sauvegarde."
+    },
+    "encumberedSpeedPenaltyMeters": {
+      "page": 68,
+      "text": "vous êtes encombré, ce qui signifie que votre vitesse est diminuée de 3 mètres"
+    },
+    "heavilyEncumberedSpeedPenaltyMeters": {
+      "page": 68,
+      "text": "vous êtes fortement encombré, ce qui signifie que votre vitesse est diminuée de 6 mètres"
+    }
+  }
+}

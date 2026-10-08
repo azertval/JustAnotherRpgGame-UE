@@ -1,0 +1,162 @@
+# Translation catalog - English.
+# Format: key = value (UTF-8 encoding). Keys are in English (identifier convention); values are
+# translated. Blank lines and lines starting with # are ignored.
+
+# Main menu
+# Titre AFFICHE du jeu : « Just Another RPG Game », avec espaces.
+# A ne pas confondre avec l'identifiant technique « JustAnotherRpgGame » (cible CMake,
+# binaire, depot, prefixe de macro JADG_) : un renommage global de l'un a deja ecrase
+# l'autre une fois (LOT-01). Les deux sont distincts, et doivent le rester.
+menu.new_game = New Game
+menu.quit = Quit
+
+# Options
+options.back = Back
+
+# --- RPG screens: the LOT-68 chassis ----------------------------------------------------------
+# The eight screens exist, and are EMPTY: this lot delivers their frame, not their content (sheet
+# in LOT-38, map in LOT-42, guild in LOT-45, combat in LOT-24). The labels below name SLOTS, never
+# values -- every displayed value is the dash of `rpg.empty`.
+
+journal.empty = No quest yet.
+journal.status.active = In progress
+journal.status.failed = Failed
+journal.status.succeeded = Completed
+
+# Fields taken from core::CharacterSheet (LOT-13) and core::Equipment (LOT-34). "Level" here is a
+# CHARACTER level (LOT-74), not a map.
+
+# --- Character sheet: the LOT-38 mock-up ------------------------------------------------------
+# Labels taken from the five BLANK plates of `VTT/Blank Sheets RPG (1).pdf`. Skill and ability
+# names are the LEXICON's (rpg.glossary.csv), not synonyms: `check_glossary.py` guards these two
+# namespaces the way it already guards conditions.
+
+rpg.ability.strength = Strength
+rpg.ability.dexterity = Dexterity
+rpg.ability.constitution = Constitution
+rpg.ability.intelligence = Intelligence
+rpg.ability.wisdom = Wisdom
+rpg.ability.charisma = Charisma
+
+rpg.skill.acrobatics = Acrobatics
+rpg.skill.animal_handling = Animal Handling
+rpg.skill.arcana = Arcana
+rpg.skill.athletics = Athletics
+rpg.skill.deception = Deception
+rpg.skill.history = History
+rpg.skill.insight = Insight
+rpg.skill.intimidation = Intimidation
+rpg.skill.investigation = Investigation
+rpg.skill.medicine = Medicine
+rpg.skill.nature = Nature
+rpg.skill.perception = Perception
+rpg.skill.performance = Performance
+rpg.skill.persuasion = Persuasion
+rpg.skill.religion = Religion
+rpg.skill.sleight_of_hand = Sleight of Hand
+rpg.skill.stealth = Stealth
+rpg.skill.survival = Survival
+
+# Dialogues (LOT-15). Line and reply keys are BUILT from the graph identifiers
+# (dialogue.<dialogue>.<node>[.<reply>]): a test checks that every key a dialogue needs exists
+# here AND in fr.lang.
+dialogue.continue = Continue
+dialogue.leave = Leave the conversation
+dialogue.refused = Your interlocutor speaks no language you understand. They shrug and turn away.
+dialogue.unavailable = No conversation to show.
+dialogue.check.success = success
+dialogue.check.failure = failure
+dialogue.check.announce = %1 · DC %2
+dialogue.check.summary = %1 · DC %2 — d20: %3, total %4 — %5
+dialogue.check.repeat = %1 · DC %2 — already attempted — %3
+dialogue.check.already-failed = already attempted, no second roll
+dialogue.attitude.friendly = Friendly
+dialogue.attitude.indifferent = Indifferent
+dialogue.attitude.hostile = Hostile
+
+# The ways the demo can end (LOT-119): a dialogue's `endDemo` action names one, and the
+# "End of the demo" screen says it (ending.<way>).
+ending.arene = through the arena
+ending.parole = by words alone
+
+# The demo quest, "Apples for the Arena" (LOT-120): its four dialogues and its journal.
+dialogue.mere.speaker = The mother
+dialogue.mere.appel = You! You look like someone who can fight. My son took three apples from my stall — my own apples! — and an Ironhand guard is taking him to the Arena of Fate for "theft on the public way". He is ten. Catch them on the forecourt, I beg you.
+dialogue.mere.appel.accepter = I will bring him back. Which way did they go?
+dialogue.mere.appel.refuser = None of my business.
+dialogue.mere.merci = Down Stravian Avenue, to the east: the guard took him that way, towards the arena forecourt. Bring him back to me.
+dialogue.mere.attente = Hurry… they are on the Arenarea forecourt, down the avenue to the east. I dare not leave the stall.
+dialogue.mere.retrouvailles = He is here! He is here… I do not know how you did it, and I do not want to know. Take some apples. Take them all.
+dialogue.mere.retrouvailles.sourire = Keep them. He will be hungry.
+dialogue.garde.speaker = The Ironhand guard
+dialogue.garde.halte = Move along. This boy stole from a market stall, and the Arena of Fate judges thieves like anyone else. The sand will decide.
+dialogue.garde.halte.convaincre = Three apples, from his own mother's stall. Let him go.
+dialogue.garde.halte.endosser = I told him to take them. Take me in his place.
+dialogue.garde.halte.partir = Do your job.
+dialogue.garde.adieu = …His own mother? Damned market. Off you go, boy, and don't let me see you again. You, stranger: I never saw you.
+dialogue.garde.refus = No. The law does not sort between stalls. Anything else to tell me, or will you move along?
+dialogue.garde.refus.endosser = I told him to take them. Take me in his place.
+dialogue.garde.refus.partir = Nothing. I'm moving along.
+dialogue.garde.refus-encore = I already told you: no. Anything else?
+dialogue.garde.refus-encore.endosser = I told him to take them. Take me in his place.
+dialogue.garde.refus-encore.partir = No. Nothing.
+dialogue.garde.escorte = You? So be it. A grown man who fights, the crowd prefers that. Off you go, boy. You, follow me to the arena stairs: the convicts' changing room is below, and the door closes behind you.
+dialogue.enfant.speaker = The child
+dialogue.enfant.escorte = They had fallen, the apples… They were on the ground. I don't want to go into the arena.
+dialogue.enfant.libre = Mum says you are a hero. I say you are weird. Thanks anyway.
+dialogue.maitre-arene.speaker = The arena master
+dialogue.maitre-arene.defi = The convict from the market, and their band. The crowd wants a judgement, not an execution: five fights, each harder than the last. Win them all, and it will give you your freedom. Lose a single one… the sand keeps everything. Ready?
+dialogue.maitre-arene.defi.combattre = Let your bandits loose.
+dialogue.maitre-arene.defi.attendre = One more moment.
+dialogue.maitre-arene.annonce-1 = One fight won, and the crowd wants four more before it gives its judgement. Rest, heal, learn from your wounds: each victory will make you stronger, and each fight will be harder.
+dialogue.maitre-arene.defi-2 = Gladiators of the house, and two crossbowmen to cover them. They will give you nothing. Ready?
+dialogue.maitre-arene.defi-2.combattre = Open the gates.
+dialogue.maitre-arene.defi-2.attendre = Not yet.
+dialogue.maitre-arene.annonce-2 = Well fought. The crowd chants your names. Rest: what comes next no longer bleeds.
+dialogue.maitre-arene.defi-3 = The dead of the sand. Zombies and skeletons, raised from the pit under the stands. They fear neither pain nor dread. Ready?
+dialogue.maitre-arene.defi-3.combattre = Open the gates.
+dialogue.maitre-arene.defi-3.attendre = Not yet.
+dialogue.maitre-arene.annonce-3 = You sent the dead back to their pit. Rest; tomorrow, soldiers.
+dialogue.maitre-arene.defi-4 = A veteran of the Empire's wars, two of his thugs and two crossbowmen. He will not give an inch. Ready?
+dialogue.maitre-arene.defi-4.combattre = Open the gates.
+dialogue.maitre-arene.defi-4.attendre = Not yet.
+dialogue.maitre-arene.annonce-4 = The veteran salutes as he falls — that is rare. Rest: the captain's band is waiting.
+dialogue.maitre-arene.defi-5 = A bandit captain, his three berserkers and his thugs. They hit hard and often. Ready?
+dialogue.maitre-arene.defi-5.combattre = Open the gates.
+dialogue.maitre-arene.defi-5.attendre = Not yet.
+dialogue.maitre-arene.annonce-5 = Five fights, five victories: the crowd has given its judgement, the changing-room door is open and the child is free. Only the champion remains, for glory alone. Rest well: there will be no second chance.
+dialogue.maitre-arene.defi-6 = The arena's champion. A gladiator who has never lost, a captain at his side, and their escort. Ready?
+dialogue.maitre-arene.defi-6.combattre = Open the gates.
+dialogue.maitre-arene.defi-6.attendre = Not yet.
+dialogue.maitre-arene.gloire = The champion has fallen. The Arena of Fate has nothing left to teach you: the crowd will sing your names long after the sand has covered everything.
+quest.pommes.title = Apples for the Arena
+quest.pommes.acceptee = Catch up with the guard and the child on the Arenarea forecourt, down Stravian Avenue.
+quest.pommes.persuasion-echouee = The guard refused to release the child. What remains is to take the blame.
+quest.pommes.condamne = Convicted in the child's place: go down to the changing room, up onto the sand, and win the five fights of the judgement.
+quest.pommes.victoire = The five fights are won: the crowd has given its judgement.
+quest.pommes.enfant-libere = The child is free. Bring him back to his mother, on the stall square of Martpart.
+quest.pommes.rendue = The child is back with his mother.
+city_block.place-du-marche = The market square
+city_block.avenue-d-arenarea = The Arenarea avenue
+city_block.arene-illu-die = The Illu Die Arena
+city_block.porte-de-l-est = The East Gate
+city_block.ruelles-du-sud = The southern alleys
+city_block.parvis = The forecourt
+city_block.colisee = The Coliseum
+city_block.arene-du-destin = The Arena of Fate
+city_block.porte-de-martpart = The Martpart gate
+city_block.portes-du-sud = The southern gates
+
+# Map names (LOT-EDITOR-07): a map's `name` field is the key map.<identifier>.name, which
+# the game's banner translates. The editor's check requires the key in every catalog.
+map.coliseum.name = The Coliseum
+map.capital.martpart.name = Martpart
+map.capital.arenarea.name = Arenarea
+map.capital.arena-of-brave.name = Arena of Brave — Coliseum
+map.capital.arena-of-brave-camp-a.name = Arena of Brave — Changing room A
+map.capital.arena-of-brave-camp-b.name = Arena of Brave — Changing room B
+map.central-empire.capital.arenarea.name = Arenarea
+map.central-empire.capital.martpart.name = Martpart
+map.central-empire.capital.arenarea.arena-of-fate.name = Arena of Fate
+map.central-empire.capital.arenarea.arena-of-fate.undercroft.name = Arena of Fate — Undercroft
+map.central-empire.capital.arenarea.arena-of-fate.catacombs.name = Arena of Fate Catacombs

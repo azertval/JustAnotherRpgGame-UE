@@ -1,0 +1,22 @@
+STYLE v1 — 2026-09-16 (gelé à R4)
+
+STYLE (match reference image 1 exactly): 16-bit pixel art, 2 screen pixels per
+art pixel, crisp square pixels, no anti-aliasing, no gradients, no blur. One-pixel
+dark outline (deep navy, never pure black). Flat shading, three tones per colour.
+Single light source top-left. No drop shadow, no ground shadow, no floor, no
+scenery, no glow bloom.
+
+VIEW AND SCALE: same viewpoint and camera as reference image 1 (front view,
+slightly from above). The character's right hand is on the viewer's left; the
+weapon is held in the hand named in the WEAPON line. The character is exactly as
+tall as the second figure in reference image 2 (about 90 px). The character, its
+weapon, hair, clothing and colours are IDENTICAL in every frame: same face, same
+outfit, same proportions.
+
+BACKGROUND: fully transparent (alpha 0) everywhere outside the character and
+its effects. Every pixel is either fully opaque or fully transparent: no soft
+halo, no semi-transparent glow around figures or effects. No checkerboard, no
+colour fill, nothing else on the image.
+
+FORBIDDEN: any text, letters, numbers, labels, captions, frame numbers, borders,
+panels, boxes, colour swatches, portrait, title, logo, watermark, grid lines.

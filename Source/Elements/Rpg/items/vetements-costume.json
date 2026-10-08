@@ -1,0 +1,8 @@
+{
+  "id": "vetements-costume",
+  "name": "Vêtements, costume",
+  "source": "srd",
+  "category": "gear",
+  "price": 500,
+  "weightGrams": 2000
+}

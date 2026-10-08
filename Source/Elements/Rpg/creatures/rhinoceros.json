@@ -1,0 +1,42 @@
+{
+  "id": "rhinoceros",
+  "name": "Rhinocéros",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 21,
+    "dexterity": 8,
+    "constitution": 15,
+    "intelligence": 2,
+    "wisdom": 12,
+    "charisma": 6
+  },
+  "armorClass": 11,
+  "hitPoints": 45,
+  "hitDice": "6d10+12",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 2,
+  "senses": [
+    "Perception passive 11"
+  ],
+  "traits": [
+    {
+      "name": "Charge",
+      "text": "Si le rhinocéros se déplace d'au moins 6 mètres en ligne droite vers une cible, puis la touche lors d'une attaque avec sa corne dans le même tour, la cible subit 9 (2d8) dégâts contondants supplémentaires. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 15 ou tomber à terre."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Corne",
+      "text": "Attaque au corps à corps avec une arme : +7 au toucher, allonge 1,50 m, une cible. Touché : 14 (2d8 + 5) dégâts contondants.",
+      "attackBonus": 7,
+      "reach": 1.5,
+      "damage": "2d8+5",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "amulette",
+  "name": "Amulette",
+  "source": "srd",
+  "category": "gear",
+  "price": 500,
+  "weightGrams": 500
+}

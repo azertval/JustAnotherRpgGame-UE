@@ -1,0 +1,19 @@
+{
+  "id": "gloomfolk",
+  "name": "Gloomfolk",
+  "source": "tanares",
+  "abilityScoreIncrease": {
+    "constitution": 2
+  },
+  "size": "medium",
+  "speed": 9,
+  "traits": [
+    {
+      "name": "Pincers",
+      "text": "You possess a pair of pincers that can be used to pull, drag, lift, and hold objects (hold a torch, pull a lever, hang from a ledge, drag a box, lift a chest, or do other actions your GM deems appropriate). You are not able to wield a shield or handle a weapon with your pincers. You can make unarmed strikes with them, causing slashing damage instead of blunt damage. When you use them to grab, you receive a bonus equal to half your proficiency bonus (rounded up) on checks to keep the target grappled. Stinger. Your elongated tail ends with a stinger, a natural melee weapon used to deliver unarmed strikes against ad- jacent creatures. If you have grappled a creature with your pincers, you have advantage on attacks with your stinger. On a hit, deal 1d4 + your Strength modifier piercing damage. Poison. When your stinger hits a creature, you may choose to inject it with poison. The target must make a Constitution saving throw (DC = 8 + your proficiency bonus + your Constitution modifier). Failure results in 1d6 poison dam- age, and the creature must make additional saving throws at the end of each of its turns for the next minute. It takes 1d6 poison damage for each failed save, or ends the effect upon a successful save. You can't use your poison again until you have completed a short or long rest."
+    }
+  ],
+  "mecanismesRequis": [
+    "augmentation-de-caracteristique-au-choix"
+  ]
+}

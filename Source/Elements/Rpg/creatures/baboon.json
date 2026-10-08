@@ -1,0 +1,43 @@
+{
+  "id": "baboon",
+  "name": "Babouin",
+  "source": "srd",
+  "size": "small",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 8,
+    "dexterity": 14,
+    "constitution": 11,
+    "intelligence": 4,
+    "wisdom": 12,
+    "charisma": 6
+  },
+  "armorClass": 12,
+  "hitPoints": 3,
+  "hitDice": "1d6",
+  "speed": {
+    "walk": 9,
+    "climb": 9
+  },
+  "challengeRating": 0,
+  "senses": [
+    "Perception passive 11"
+  ],
+  "traits": [
+    {
+      "name": "Tactique de groupe",
+      "text": "Le babouin a un avantage aux jets d'attaque contre une créature si au moins l'un de ses alliés est à 1,50 mètre ou moins de la créature et n'est pas incapable d'agir."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +1 au toucher, allonge 1,50 m, une cible. Touché : 1 (1d4 – 1) dégâts perforants.",
+      "attackBonus": 1,
+      "reach": 1.5,
+      "damage": "1d4-1",
+      "damageType": "piercing"
+    }
+  ]
+}

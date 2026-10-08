@@ -1,0 +1,9 @@
+MARCHE v1 — 2026-09-18 (quadrupède : un pas complet en huit silhouettes, paires diagonales)
+
+WALK, exactly 8 frames, walking on the spot on four legs, seen from the same three-quarter view as the other rows, facing the viewer's right. The legs move, and it must be unmistakable at a glance: in the idle pose the four paws stay planted; in the walk the LEG SILHOUETTE is different in every frame. One full stride in eight silhouettes, the diagonal pairs of legs moving together:
+ 1 the right foreleg and left hind leg reach forward, the other two push back; body at normal height.
+ 2 the forward legs take the weight, body at its LOWEST.
+ 3 the back legs swing forward under the body, their paws in the air.
+ 4 all four legs gathered under the body, body at its HIGHEST.
+ 5 to 8: the same four silhouettes with the other diagonal pair: the left foreleg and right hind leg reach forward; frame 8 leads back into frame 1.
+ The head bobs with the stride and the tail sways opposite to it. Only the lifted paws leave the baseline; the body rises and drops by a few pixels only. The creature keeps exactly the size and proportions of the idle pose. Loops.

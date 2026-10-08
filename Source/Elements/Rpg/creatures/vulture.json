@@ -1,0 +1,50 @@
+{
+  "id": "vulture",
+  "name": "Vautour",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 7,
+    "dexterity": 10,
+    "constitution": 13,
+    "intelligence": 2,
+    "wisdom": 12,
+    "charisma": 4
+  },
+  "armorClass": 10,
+  "hitPoints": 5,
+  "hitDice": "1d8+1",
+  "speed": {
+    "walk": 3,
+    "fly": 15
+  },
+  "challengeRating": 0,
+  "senses": [
+    "Perception passive 13"
+  ],
+  "skills": {
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Odorat et vue aiguisés",
+      "text": "Le vautour a un avantage aux jets de Sagesse (Perception) basés sur la vue ou l'odorat."
+    },
+    {
+      "name": "Tactique de groupe",
+      "text": "Le vautour a un avantage aux jets d'attaque contre une créature si au moins l'un de ses alliés est à 1,50 mètre ou moins de la créature et n'est pas incapable d'agir."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bec",
+      "text": "Attaque au corps à corps avec une arme : +2 au toucher, allonge 1,50 m, une cible. Touché : 2 (1d4) dégâts perforants.",
+      "attackBonus": 2,
+      "reach": 1.5,
+      "damage": "1d4",
+      "damageType": "piercing"
+    }
+  ]
+}

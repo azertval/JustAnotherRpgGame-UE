@@ -1,0 +1,58 @@
+{
+  "id": "giant-crocodile",
+  "name": "Crocodile géant",
+  "source": "srd",
+  "size": "huge",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 21,
+    "dexterity": 9,
+    "constitution": 17,
+    "intelligence": 2,
+    "wisdom": 10,
+    "charisma": 7
+  },
+  "armorClass": 14,
+  "hitPoints": 85,
+  "hitDice": "9d12+27",
+  "speed": {
+    "walk": 9,
+    "swim": 15
+  },
+  "challengeRating": 5,
+  "senses": [
+    "Perception passive 10"
+  ],
+  "skills": {
+    "stealth": 5
+  },
+  "traits": [
+    {
+      "name": "Apnée",
+      "text": "Le crocodile peut retenir son souffle durant 30 minutes."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Attaques multiples",
+      "text": "Le crocodile réalise deux attaques : une de morsure et une avec sa queue."
+    },
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +8 au toucher, allonge 1,50 m, une cible. Touché : 21 (3d10 + 5) dégâts perforants, et la cible est agrippée (DD 16 pour s'échapper). Tant qu'elle est agrippée, la créature est entravée, et le crocodile ne peut pas mordre une autre cible.",
+      "attackBonus": 8,
+      "reach": 1.5,
+      "damage": "3d10+5",
+      "damageType": "piercing"
+    },
+    {
+      "name": "Queue",
+      "text": "Attaque au corps à corps avec une arme : +8 au toucher, allonge 3 m, une cible qui n'est pas agrippée par le crocodile. Touché : 14 (2d8 + 5) dégâts contondants. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 16 pour ne pas être jetée au sol.",
+      "attackBonus": 8,
+      "reach": 3,
+      "damage": "2d8+5",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

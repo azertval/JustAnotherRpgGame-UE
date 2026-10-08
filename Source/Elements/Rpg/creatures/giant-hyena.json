@@ -1,0 +1,45 @@
+{
+  "id": "giant-hyena",
+  "name": "Hyène géante",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 16,
+    "dexterity": 14,
+    "constitution": 14,
+    "intelligence": 2,
+    "wisdom": 12,
+    "charisma": 7
+  },
+  "armorClass": 12,
+  "hitPoints": 45,
+  "hitDice": "6d10+12",
+  "speed": {
+    "walk": 15
+  },
+  "challengeRating": 1,
+  "senses": [
+    "Perception passive 13"
+  ],
+  "skills": {
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Déchaînement",
+      "text": "Lorsque durant son tour la hyène fait tomber les points de vie d'une créature à 0 avec une attaque au corps à corps, elle peut utiliser une action bonus pour se déplacer de la moitié de sa vitesse et effectuer une attaque de morsure."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 1,50 m, une cible. Touché : 10 (2d6 + 3) dégâts perforants.",
+      "attackBonus": 5,
+      "reach": 1.5,
+      "damage": "2d6+3",
+      "damageType": "piercing"
+    }
+  ]
+}

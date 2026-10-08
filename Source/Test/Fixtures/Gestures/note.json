@@ -1,0 +1,10 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "note": "Les notes : deux notes épinglées, l'une retirée ; elles vont dans l'annexe, pas dans la carte.",
+  "gestures": [
+    {"tool": "note", "at": [2, 2], "text": "Puits à placer ici"},
+    {"tool": "note", "at": [9, 9], "text": "Sortie vers le port ?"},
+    {"tool": "note", "at": [9, 9], "text": ""}
+  ]
+}

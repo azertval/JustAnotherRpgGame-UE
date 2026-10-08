@@ -1,0 +1,14 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "note": "L'outil Entité : un coffre posé puis retiré, un point d'arrivée renommé, le trajet ajouté à la sélection d'un Maj-clic et le groupe déplacé, une zone de combat tirée, le coffre d'origine glissé d'une case.",
+  "gestures": [
+    {"kind": "chest", "tool": "entity", "at": [6, 3]},
+    {"tool": "entity", "then": "delete"},
+    {"kind": "", "tool": "entity", "select": ["e1"], "set": {"name": "arrivee"}},
+    {"tool": "entity", "shift": true, "at": [1, 8]},
+    {"tool": "entity", "at": [1, 1], "to": [2, 1]},
+    {"kind": "combatZone", "tool": "entity", "at": [3, 3], "to": [6, 5]},
+    {"kind": "", "tool": "entity", "at": [10, 8], "to": [10, 9]}
+  ]
+}

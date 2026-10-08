@@ -1,0 +1,11 @@
+{
+  "id": "cuirasse",
+  "name": "Cuirasse",
+  "source": "srd",
+  "category": "medium",
+  "baseArmorClass": 14,
+  "dexterityBonus": true,
+  "dexterityBonusMax": 2,
+  "weightGrams": 10000,
+  "price": 40000
+}

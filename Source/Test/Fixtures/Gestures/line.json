@@ -1,0 +1,9 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "note": "La ligne, au miroir : une façade gauche tracée de haut en bas, et sa jumelle droite posée de l'autre côté de l'axe qui passe par (6, 5).",
+  "gestures": [
+    {"mirror": [6, 5], "piece": "wall-left", "tool": "line", "from": [1, 4], "to": [1, 7]},
+    {"mirror": false}
+  ]
+}

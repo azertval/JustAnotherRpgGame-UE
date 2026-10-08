@@ -1,0 +1,52 @@
+{
+  "id": "giant-shark",
+  "name": "Requin géant",
+  "source": "srd",
+  "size": "huge",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 23,
+    "dexterity": 11,
+    "constitution": 21,
+    "intelligence": 1,
+    "wisdom": 10,
+    "charisma": 5
+  },
+  "armorClass": 13,
+  "hitPoints": 126,
+  "hitDice": "11d12+55",
+  "speed": {
+    "walk": 0,
+    "swim": 15
+  },
+  "challengeRating": 5,
+  "senses": [
+    "vision aveugle 18 m",
+    "Perception passive 13"
+  ],
+  "skills": {
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Frénésie sanguinaire",
+      "text": "Le requin a un avantage aux jets d'attaque au corps à corps contre une créature qui n'a pas tous ses points de vie."
+    },
+    {
+      "name": "Respiration aquatique",
+      "text": "Le requin ne peut respirer que sous l'eau."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +9 au toucher, allonge 1,50 m, une cible. Touché : 22 (3d10 + 6) dégâts perforants.",
+      "attackBonus": 9,
+      "reach": 1.5,
+      "damage": "3d10+6",
+      "damageType": "piercing"
+    }
+  ],
+  "description": "Un requin géant mesure 9 mètres de long et se trouve généralement dans les profondeurs des océans."
+}

@@ -1,0 +1,35 @@
+{
+  "version": 4,
+  "name": "base",
+  "width": 3,
+  "height": 2,
+  "nextEntityId": 2,
+  "tiles": [
+    {"x": 0, "y": 0, "type": "entry"},
+    {"x": 2, "y": 1, "type": "wall"}
+  ],
+  "layers": [
+    {
+      "name": "sol",
+      "kind": "ground",
+      "scene": "coliseum",
+      "tiles": [
+        {"x": 0, "y": 0, "type": "sand", "piece": "sand"},
+        {"x": 1, "y": 0, "type": "sand", "piece": "sand-2"},
+        {"x": 2, "y": 0, "type": "sand", "piece": "sand-3"},
+        {"x": 0, "y": 1, "type": "sand", "piece": "sand"},
+        {"x": 1, "y": 1, "type": "sand", "piece": "sand-2"},
+        {"x": 2, "y": 1, "type": "wall"}
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "e1",
+      "type": "npc",
+      "x": 1,
+      "y": 0,
+      "name": "héraut"
+    }
+  ]
+}

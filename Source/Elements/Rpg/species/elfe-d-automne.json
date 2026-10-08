@@ -1,0 +1,14 @@
+{
+  "id": "elfe-d-automne",
+  "name": "Elfe d'automne",
+  "source": "tanares",
+  "parentSpecies": "elfe",
+  "size": "medium",
+  "speed": 9,
+  "abilityScoreIncrease": {
+    "intelligence": 1
+  },
+  "mecanismesRequis": [
+    "augmentation-de-caracteristique-au-choix"
+  ]
+}

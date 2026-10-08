@@ -1,0 +1,8 @@
+{
+  "id": "rations-1-jour",
+  "name": "Rations (1 jour)",
+  "source": "srd",
+  "category": "gear",
+  "price": 50,
+  "weightGrams": 1000
+}

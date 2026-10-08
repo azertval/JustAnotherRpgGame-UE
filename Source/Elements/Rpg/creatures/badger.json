@@ -1,0 +1,44 @@
+{
+  "id": "badger",
+  "name": "Blaireau",
+  "source": "srd",
+  "size": "tiny",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 4,
+    "dexterity": 11,
+    "constitution": 12,
+    "intelligence": 2,
+    "wisdom": 12,
+    "charisma": 5
+  },
+  "armorClass": 10,
+  "hitPoints": 3,
+  "hitDice": "1d4+1",
+  "speed": {
+    "walk": 6,
+    "burrow": 1.5
+  },
+  "challengeRating": 0,
+  "senses": [
+    "vision dans le noir 9 m",
+    "Perception passive 11"
+  ],
+  "traits": [
+    {
+      "name": "Odorat aiguisé",
+      "text": "Le blaireau a un avantage aux jets de Sagesse (Perception) basés sur l'odorat."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +2 au toucher, allonge 1,50 m, une cible. Touché : 1 dégât perforant.",
+      "attackBonus": 2,
+      "reach": 1.5,
+      "damage": "1",
+      "damageType": "piercing"
+    }
+  ]
+}

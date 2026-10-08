@@ -1,0 +1,88 @@
+# Doxyfile minimal — JustAnotherRpgGame
+# Génération : depuis Documentation/, exécuter `doxygen Doxyfile`.
+# Les options non spécifiées gardent les valeurs par défaut de Doxygen.
+
+PROJECT_NAME           = "JustAnotherRpgGame"
+# PROJECT_NUMBER n'est pas écrit ici : scripts/docs/build_docs.py l'injecte depuis project(VERSION)
+# du CMakeLists.txt racine (source unique de vérité), sur l'entrée standard de Doxygen. Lancer
+# `doxygen Doxyfile` directement (sans passer par le script) produit un numéro vide, pas périmé.
+PROJECT_NUMBER         =
+PROJECT_BRIEF          = "Jeu de rôle tactique au d20, vue de dessus, en C++/Qt"
+
+OUTPUT_DIRECTORY       = generated
+CREATE_SUBDIRS         = NO
+
+# Entrées : le code, et lui seul. Les pages (guide, spécifications, cahier de test) sont du Markdown nu
+# rendu par `outils/build_docs_site.py` ; Doxygen ne garde que la référence de code, publiée sous
+# `reference/` du site — l'annexe du guide. `reference.md` en est la page d'accueil.
+# Les chemins sont relatifs à ce dossier (Documentation/).
+INPUT                  = reference.md \
+                         ../Source
+RECURSIVE              = YES
+FILE_PATTERNS          = *.cpp *.h *.hpp *.md
+# Exclusions : build, dépendances, sortie générée, et les README de modules de
+# Source/ (notes internes, non voulues comme pages du site).
+EXCLUDE_PATTERNS       = */build/* */External/* */generated/* */Source/*README.md
+
+# Page d'accueil de la référence (mainpage) et arbre de navigation latéral.
+USE_MDFILE_AS_MAINPAGE = reference.md
+GENERATE_TREEVIEW      = YES
+# Les onglets de Doxygen laissent la place à la barre commune du site (cf. HTML_HEADER) : deux
+# rangées de navigation qui ne disent pas la même chose, c'est une de trop. L'arbre latéral reste,
+# et la recherche rejoint le bandeau de titre.
+DISABLE_INDEX          = YES
+
+# --- Habillage : la charte du site (Site/) ---
+# Le site publié a quatre parties — la documentation à la racine, cette référence de code sous
+# `reference/`, la planification sous `planning/`, la page qualité sous `qualite/`. Elles partagent une palette, des fontes et une
+# barre d'en-tête, toutes trois tenues dans `Site/`, et aucune n'en redéfinit une seule valeur.
+# Ici : le gabarit d'en-tête qui porte la barre, puis les feuilles, dans l'ordre. Elles passent
+# après la `doxygen.css` engendrée, dont elles rebranchent les variables sur les jetons.
+HTML_HEADER            = ../Site/header.html
+HTML_EXTRA_STYLESHEET  = ../Site/tokens.css \
+                         ../Site/topbar.css \
+                         ../Site/reference.css
+# AUTO_LIGHT, et pas LIGHT : en LIGHT (comme en DARK), Doxygen résout ses variables à la
+# génération et écrit les couleurs en dur — il n'y aurait plus rien à rebrancher. AUTO_LIGHT laisse
+# les `var(--…)` dans la feuille, que Site/reference.css redéfinit. TOGGLE les laisserait aussi,
+# mais ajouterait un bouton de bascule que les deux autres parties du site n'ont pas : ici le
+# sombre suit la préférence du système, et nulle part on n'en décide autrement.
+HTML_COLORSTYLE        = AUTO_LIGHT
+
+# Extraction.
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+JAVADOC_AUTOBRIEF      = YES
+BUILTIN_STL_SUPPORT    = YES
+OPTIMIZE_OUTPUT_FOR_C  = NO
+
+# Sorties.
+GENERATE_HTML          = YES
+HTML_OUTPUT            = html
+# Le fichier d'étiquettes : pour chaque symbole, la page et l'ancre qui le documentent. Le site de
+# documentation le lit (`build_docs_site.py --tagfile`) pour relier un `core::World` cité en code
+# dans le guide à sa page de référence. Écrit dans `html/` pour voyager avec l'artefact.
+GENERATE_TAGFILE       = generated/html/reference.tag
+GENERATE_LATEX         = NO
+
+# Verbosité.
+QUIET                  = YES
+WARN_IF_UNDOCUMENTED   = NO
+# Garde-fou qualité (esprit /W4 /WX) : tout avertissement Doxygen (référence
+# cassée, @param en conflit, symbole introuvable) fait échouer la génération.
+# FAIL_ON_WARNINGS : liste tous les avertissements puis retourne un code non nul.
+WARN_AS_ERROR          = FAIL_ON_WARNINGS
+
+# --- Cahier de test (LOT-13, restructure en LOT-20) ---
+# \castest{...} : UN seul argument (accolades) -> les virgules du contenu sont autorisees.
+# Formate le cas directement dans la doc du test (pas d'agregation via \xrefitem : la page
+# "Cahier de test" agregee sur un seul niveau, illisible au-dela de quelques dizaines de cas,
+# est desormais reconstruite - une page par domaine, un cas par fiche - par
+# scripts/docs/generate_cahier_test.py a partir de ces memes blocs, dans Documentation/CahierTest/).
+# Sous-commandes pour structurer le contenu (categorie, criticite, etapes, resultat attendu).
+ALIASES += "castest{1}=<b>Cas de test :</b> \1"
+ALIASES += "tcat=<b>Categorie :</b> "
+ALIASES += "tcrit=<b>Criticite :</b> "
+ALIASES += "tetapes=<b>Etapes :</b><br/>"
+ALIASES += "tattendu=<b>Resultat attendu :</b> "

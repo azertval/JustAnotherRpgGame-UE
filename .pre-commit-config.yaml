@@ -1,0 +1,98 @@
+# Hooks exécutés avant chaque commit.
+#
+# Un contrôle qui ne prédit pas le résultat local ne sert à rien. Ce fichier en est la moitié
+# poste : les mêmes outils, aux mêmes versions, tournent avant le commit et dans le job `pre-commit`
+# de ci.yml. La CI confirme ; elle ne découvre plus.
+#
+# Installation (une fois par clone ou worktree) :
+#   pip install pre-commit==<PRE_COMMIT_VERSION de ci.yml> && pre-commit install
+# Tout rejouer : `pre-commit run --all-files`. Contourner une fois : `git commit --no-verify`.
+#
+# Chaque dépôt est épinglé par SHA de commit, le tag en commentaire (même règle que les actions de
+# ci.yml) : un tag se réécrit, un commit non. `pre-commit autoupdate --freeze` les monte.
+# La version de clang-format DOIT être celle de `LLVM_VERSION` dans ci.yml : vérifié par
+# `scripts/ci/check_tool_pins.py`.
+#
+# Écartés, avec leur raison :
+# - `ruff-format` : ~10 000 lignes réécrites dans 41 scripts, sans rien corriger (voir ruff.toml).
+# - `pretty-format-json` : les JSON écrits à la main gardent leurs tableaux sur une ligne (voir
+#   scripts/checks/check_json_files.py).
+default_install_hook_types: [ pre-commit, commit-msg ]
+default_stages: [ pre-commit ]
+minimum_pre_commit_version: '4.6.0'
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
+    hooks:
+      # Un marqueur <<<<<<< oublié compile parfois (dans un commentaire, un .md, un JSON de texte).
+      - id: check-merge-conflict
+      # Deux chemins qui ne diffèrent que par la casse : un seul survit sur le poste Windows, les
+      # deux existent sur le runner Linux.
+      - id: check-case-conflict
+      - id: check-yaml
+
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: 182152eb8c5ce1cf5299b956b04392c86bd8a126  # frozen: v20.1.8
+    hooks:
+      # Même périmètre que le job `format` de ci.yml : Core et ses tests. Le code du pont Unreal
+      # (Bridge/, Commandlets/, le module) en est exclu exprès : clang-format trie les inclusions,
+      # et « Core avant le moteur » (AGENTS.md) est un ordre qu'il déferait. Le hook reformate le
+      # fichier ; le commit s'arrête pour que la correction soit relue et indexée.
+      - id: clang-format
+        types_or: [ c++ ]
+        files: ^Source/(JustAnotherRpgGame/Core|Test)/.*\.(cpp|h)$
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: e8f7d69b957a30acb2c875078d5fd012de24b64c  # frozen: v0.16.7
+    hooks:
+      - id: ruff-check
+
+  - repo: https://github.com/Mateusz-Grzelinski/actionlint-py
+    rev: 2f3dbd354aa118b539dee99d8eed05a83097a199  # frozen: v1.7.12.24
+    hooks:
+      # Syntaxe des workflows : expression mal formée, `needs` inconnu, sortie d'étape inexistante.
+      # actionlint passe aussi chaque `run:` à shellcheck S'IL le trouve : présent sur le runner
+      # Linux, absent d'un poste Windows. Embarqué dans l'environnement du hook pour que les deux
+      # voient les mêmes remarques.
+      - id: actionlint
+        additional_dependencies: [ shellcheck-py==0.11.0.1 ]
+
+  - repo: https://github.com/zizmorcore/zizmor-pre-commit
+    rev: fa412071e4f5d44d44f9e365f4676f9df92456a2  # frozen: v1.30.1
+    hooks:
+      # Sécurité des workflows : injection par ${{ }} dans un `run`, droits trop larges, action non
+      # épinglée. Hors ligne : aucun jeton requis.
+      - id: zizmor
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: 83d9cd684c87d95d656c1458ef04895a7f1cbd8e  # frozen: v8.30.1
+    hooks:
+      # Refuse un jeton ou une clé dans les fichiers INDEXÉS, avant qu'ils ne quittent le poste.
+      # Poste seulement : en CI, rien n'est indexé (ce hook est sauté par le job `pre-commit`).
+      - id: gitleaks
+
+  - repo: local
+    hooks:
+      # Le dépôt est public : ni livre source ni texte extrait d'un livre (EX-CNT-023).
+      - id: check-no-sourcebook
+        name: Aucun livre source ni texte extrait
+        entry: python scripts/checks/check_no_sourcebook.py
+        language: python
+
+      - id: check-json-files
+        name: JSON valides, sans clé en double ni BOM
+        entry: python scripts/checks/check_json_files.py
+        language: python
+        types: [ json ]
+
+      - id: check-binary-files
+        name: Garde-fou binaires (taille, familles déclarées)
+        entry: python scripts/checks/check_binary_files.py
+        language: python
+
+      - id: check-commit-message
+        name: Message de commit (CONTRIBUTING.md)
+        entry: python scripts/ci/check_commit_message.py
+        language: python
+        stages: [ commit-msg ]

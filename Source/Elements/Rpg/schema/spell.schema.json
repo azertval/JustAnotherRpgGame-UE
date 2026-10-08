@@ -1,0 +1,239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/spell.schema.json",
+  "title": "Sort",
+  "description": "Un sort est une COMBINAISON DECLAREE de mecanismes existants, jamais une fonction (EX-RPG-050). Un sort dont l'effet n'entre dans aucun mecanisme porte `narratif: true` (EX-RPG-051) : le catalogue reste enumerable, et aucun sort ne tombe en silence dans un cas par defaut.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "level": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 9,
+      "description": "0 = sort mineur (cantrip)."
+    },
+    "school": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/magicSchool"
+    },
+    "castingTime": {
+      "type": "string",
+      "minLength": 1
+    },
+    "range": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rangeMeters": {
+      "type": "number",
+      "minimum": 0,
+      "description": "La portee en METRES, l'unite du corpus, quand le sort vise une cible a distance (LOT-131) : `range` garde le texte du livre, le moteur lit ce nombre. 0 ou absent : le sort ne vise pas a distance."
+    },
+    "attackRoll": {
+      "type": "boolean",
+      "description": "Vrai pour un sort qui demande un JET D'ATTAQUE de sort contre la CA (fire bolt) : le moteur le joue comme une attaque a distance, au modificateur de la caracteristique d'incantation plus la maitrise (LOT-131). Un sort a jet de sauvegarde ou sans jet declare ses mecanismes autrement."
+    },
+    "autoHit": {
+      "type": "boolean",
+      "description": "Vrai pour un sort qui touche SANS JET (magic missile) : chaque projectile inflige ses des (LOT-133)."
+    },
+    "projectiles": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Le nombre de projectiles ou de rayons, chacun ses des -- et son jet d'attaque si `attackRoll` (scorching ray : 3). Le moteur les dirige tous sur la meme cible (LOT-133). 1 par defaut."
+    },
+    "cantripScaling": {
+      "type": "boolean",
+      "description": "Sort mineur dont les des augmentent d'un de aux niveaux 5, 11 et 17 du lanceur (Manuel, tours de magie)."
+    },
+    "attackKind": {
+      "enum": [
+        "ranged",
+        "melee"
+      ],
+      "description": "Attaque de sort a distance (le defaut) ou au corps a corps (spiritual weapon, LOT-134) : au corps a corps, pas de desavantage au contact, et la portee du sort sert d'allonge."
+    },
+    "addsAbilityModifier": {
+      "type": "boolean",
+      "description": "Le modificateur de la caracteristique d'incantation s'ajoute aux degats ou au soin (cure wounds, spiritual weapon)."
+    },
+    "healing": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/des",
+      "description": "Les des de soin (cure wounds : 1d8) ; une creature a terre se releve (LOT-134)."
+    },
+    "stabilizes": {
+      "type": "boolean",
+      "description": "Le sort stabilise une creature a terre : elle ne fait plus de jets contre la mort (spare the dying, LOT-137)."
+    },
+    "revives": {
+      "type": "object",
+      "description": "Le sort ramene un mort de son camp (revivify, LOT-137).",
+      "properties": {
+        "hitPoints": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Les points de vie du revenant."
+        },
+        "withinRounds": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Mort depuis au plus ce nombre de rounds (moins d'une minute : 10)."
+        }
+      },
+      "required": [
+        "hitPoints",
+        "withinRounds"
+      ],
+      "additionalProperties": false
+    },
+    "bonusAction": {
+      "type": "boolean",
+      "description": "Le sort se lance par une ACTION BONUS, pas par l'action (spiritual weapon)."
+    },
+    "maxTargets": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Le nombre de creatures qu'un sort qui aide peut viser (bless : 3). Le moteur prend la cible choisie, puis les allies les plus proches du lanceur a portee."
+    },
+    "saveEffect": {
+      "enum": [
+        "negates",
+        "half"
+      ],
+      "description": "Ce qu'une sauvegarde reussie fait des degats : `negates` (rien, le defaut), `half` (la moitie, fireball)."
+    },
+    "area": {
+      "type": "object",
+      "description": "La zone que le sort remplit, centree sur la cible (LOT-133). Le moteur pose la sphere ; une autre forme se charge et ne se joue pas.",
+      "properties": {
+        "shape": {
+          "enum": [
+            "sphere",
+            "cone",
+            "cube",
+            "cylinder",
+            "line"
+          ]
+        },
+        "meters": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Rayon de la sphere, du cylindre ; longueur du cone, de la ligne ; arete du cube."
+        }
+      },
+      "required": [
+        "shape",
+        "meters"
+      ],
+      "additionalProperties": false
+    },
+    "target": {
+      "enum": [
+        "enemy",
+        "ally",
+        "self"
+      ],
+      "description": "Qui le sort peut viser : une creature hostile (`enemy`, le defaut), une creature de son camp, soi compris (`ally`), le lanceur seul (`self`)."
+    },
+    "effect": {
+      "type": "object",
+      "description": "L'effet qui dure que le sort pose (LOT-133, LOT-134) : `fly` (vol, a `meters` de vitesse), `invisible`, `bless` (`dice` ajoutes aux jets d'attaque et de sauvegarde), `spiritual-weapon` (l'arme invoquee : relancer le sort pendant la duree la fait frapper sans depenser de lancer). `durationRounds` : 0 ou absent pour tout le combat.",
+      "properties": {
+        "kind": {
+          "enum": [
+            "fly",
+            "invisible",
+            "bless",
+            "spiritual-weapon"
+          ]
+        },
+        "meters": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "durationRounds": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "dice": {
+          "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/des"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "additionalProperties": false
+    },
+    "components": {
+      "type": "object",
+      "properties": {
+        "verbal": {
+          "type": "boolean"
+        },
+        "somatic": {
+          "type": "boolean"
+        },
+        "material": {
+          "type": "boolean"
+        },
+        "materialText": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "verbal",
+        "somatic",
+        "material"
+      ],
+      "additionalProperties": false
+    },
+    "duration": {
+      "type": "string",
+      "minLength": 1
+    },
+    "concentration": {
+      "type": "boolean"
+    },
+    "ritual": {
+      "type": "boolean"
+    },
+    "damage": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/des"
+    },
+    "damageType": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/damageType"
+    },
+    "savingThrow": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/ability"
+    },
+    "appliesCondition": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/conditionRef"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "level",
+    "school",
+    "castingTime",
+    "range",
+    "duration",
+    "text"
+  ],
+  "additionalProperties": false
+}

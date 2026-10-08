@@ -1,0 +1,66 @@
+{
+  "id": "skeleton",
+  "name": "Squelette",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "mort-vivant",
+  "alignment": "loyal mauvais",
+  "abilities": {
+    "strength": 10,
+    "dexterity": 14,
+    "constitution": 15,
+    "intelligence": 6,
+    "wisdom": 8,
+    "charisma": 5
+  },
+  "armorClass": 13,
+  "hitPoints": 13,
+  "hitDice": "2d8+4",
+  "speed": {
+    "walk": 9
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "vision dans le noir 18 m",
+    "Perception passive 9"
+  ],
+  "damageImmunities": [
+    "poison"
+  ],
+  "damageVulnerabilities": [
+    "bludgeoning"
+  ],
+  "conditionImmunities": [
+    "exhaustion",
+    "poisoned"
+  ],
+  "traits": [
+    {
+      "name": "Langues",
+      "text": "comprend les langues qu'il connaissait de son vivant mais ne peut pas parler"
+    }
+  ],
+  "actions": [
+    {
+      "name": "Épée courte",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 5 (1d6 + 2) dégâts perforants.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d6+2",
+      "damageType": "piercing"
+    },
+    {
+      "name": "Arc court",
+      "text": "Attaque à distance avec une arme : +4 au toucher, portée 24/96 m, une cible. Touché : 5 (1d6 + 2) dégâts perforants.",
+      "attackBonus": 4,
+      "rangeNormal": 24,
+      "rangeLong": 96,
+      "damage": "1d6+2",
+      "damageType": "piercing"
+    }
+  ],
+  "description": "Un squelette est le résultat obéissant d'une magie nécromantique lancée dans le but de réanimer des ossements le plus souvent humanoïdes. Parfois un squelette se relève aussi tout seul s'il se trouve dans un lieu fortement imprégné d'une aura de mort ou d'énergie nécromantique.",
+  "mecanismesRequis": [
+    "langue-comprise-non-parlee"
+  ]
+}

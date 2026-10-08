@@ -1,0 +1,11 @@
+{
+  "id": "matelassee",
+  "name": "Matelassée",
+  "source": "srd",
+  "category": "light",
+  "baseArmorClass": 11,
+  "dexterityBonus": true,
+  "stealthDisadvantage": true,
+  "weightGrams": 4000,
+  "price": 500
+}

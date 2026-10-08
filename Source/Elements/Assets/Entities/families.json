@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "note": "Les familles d'assets d'ENTITE (LOT-39, EX-CNT-040). Le LOT-08 a fixe le vocabulaire des tuiles de terrain ; celui-ci fixe celui des entites. La taille attendue vit ICI et non dans le C++ (EX-VIS-007) : un 96 nu dans un calcul de decoupe ne dit pas ce qu'il represente, et l'ajuster demanderait une recompilation. Les dossiers cites sont ceux dont chaque entree attend une illustration -- competences, langues et dons n'en attendent pas, et ne figurent donc pas.",
+  "families": [
+    {
+      "name": "beast",
+      "width": 96,
+      "height": 96,
+      "catalogues": ["creatures"],
+      "note": "Jeton rond de table virtuelle : la creature vue de dessus, dans le cercle du plateau."
+    },
+    {
+      "name": "item",
+      "width": 48,
+      "height": 48,
+      "catalogues": ["items"],
+      "note": "Icone d'inventaire, sur la case du sac."
+    },
+    {
+      "name": "weapon",
+      "width": 48,
+      "height": 48,
+      "catalogues": ["weapons"],
+      "note": "Icone d'inventaire : meme contrat que l'objet, famille distincte parce que le catalogue l'est."
+    },
+    {
+      "name": "armor",
+      "width": 48,
+      "height": 48,
+      "catalogues": ["armors"],
+      "note": "Icone d'inventaire."
+    },
+    {
+      "name": "species",
+      "width": 128,
+      "height": 128,
+      "catalogues": ["species"],
+      "note": "Portrait d'espece, a la creation de personnage."
+    },
+    {
+      "name": "background",
+      "width": 128,
+      "height": 128,
+      "catalogues": ["backgrounds"],
+      "note": "Embleme d'historique, a la creation de personnage."
+    },
+    {
+      "name": "class",
+      "width": 128,
+      "height": 128,
+      "catalogues": ["classes"],
+      "note": "Embleme de classe, a la creation de personnage."
+    }
+  ]
+}

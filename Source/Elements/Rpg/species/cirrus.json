@@ -1,0 +1,16 @@
+{
+  "id": "cirrus",
+  "name": "Cirrus",
+  "source": "tanares",
+  "size": "medium",
+  "speed": 9,
+  "traits": [
+    {
+      "name": "Two In One",
+      "text": "When creating a cirrus, you must create two distinct character sheets, one representing your Tamerian side and another representing your Bauronean side. Throughout a day, you will use only one of these character sheets, keeping the other stored, and you must switch to the other immedi- ately after the first long rest performed in a 24-hour period (counted from the time the last long rest where you changed your character sheet began). Both character sheets have the same amount of experience, ensuring they will always have the same character level. The benefits granted by a long rest will apply to the character sheet that will assume control after it is performed. Magic items attuned to one side will not be attuned to the other. Some effects will apply to both character sheets, regardless of their origin. They are:"
+    }
+  ],
+  "mecanismesRequis": [
+    "augmentation-de-caracteristique-au-choix"
+  ]
+}

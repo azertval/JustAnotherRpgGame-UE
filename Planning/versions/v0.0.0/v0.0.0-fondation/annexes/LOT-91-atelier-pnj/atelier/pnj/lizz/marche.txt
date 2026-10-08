@@ -1,0 +1,7 @@
+WALK, exactly 8 frames, slithering on the spot, seen from the same front view as the other rows. She has NO legs: the snake tail moves, and it must be unmistakable at a glance: in the idle pose the tail coil lies still; in the walk the TAIL SILHOUETTE is different in every frame. A wave travels along the tail in four shapes, each used twice (frames 5-8 mirror frames 1-4):
+ 1 S-CURVE LEFT: the tail bends in a wide S, its lowest loop pushed to the viewer's left on the baseline; body at normal height.
+ 2 GATHER: the coil bunches up under the body, the body at its LOWEST, leaning slightly forward.
+ 3 S-CURVE RIGHT: the tail bends in a wide S, its lowest loop pushed to the viewer's right on the baseline; body at normal height.
+ 4 STRETCH: the tail straightens under her, the body raised to its HIGHEST, the tail tip lifted off the ground behind.
+ 5 to 8: same as 1 to 4, mirrored left-right; frame 8 leads back into frame 1.
+ The arms sway opposite to the tail's loop, the snakes of her hair trail behind; the claws stay raised in guard. Only the tail tip may leave the baseline; the body rises and drops by a few pixels only. The character keeps exactly the height and proportions of the idle pose. Loops.

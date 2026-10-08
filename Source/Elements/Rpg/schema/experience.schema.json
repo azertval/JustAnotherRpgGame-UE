@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/experience.schema.json",
+  "title": "Table d'experience",
+  "description": "Les seuils de points d'experience et le bonus de maitrise, du niveau 1 au niveau 20. EX-VIS-007 interdit qu'une valeur de regle apparaisse dans le C++ : equilibrer la progression d'un RPG ne doit pas demander de recompiler, et sans equilibrage un RPG n'est pas jouable. Source : la table << Points d'experience / Niveau / Bonus de maitrise >> des Basic Rules p. 11.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "levels": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "description": "Une entree par niveau, du 1er au 20e, dans l'ordre. Le cardinal est FERME a vingt : c'est la borne des regles, et une table amputee ne se voit qu'au niveau ou elle manque -- c'est-a-dire tard, et en cours de partie.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "experience": {
+            "description": "Le total de points d'experience a atteindre pour ce niveau. Le niveau 1 vaut 0 : c'est un seuil, pas un cout.",
+            "type": "integer",
+            "minimum": 0
+          },
+          "proficiencyBonus": {
+            "type": "integer",
+            "minimum": 2,
+            "maximum": 6
+          }
+        },
+        "required": [
+          "level",
+          "experience",
+          "proficiencyBonus"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "levels"
+  ],
+  "additionalProperties": false
+}

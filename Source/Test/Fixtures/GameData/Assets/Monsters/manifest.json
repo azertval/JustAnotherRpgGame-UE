@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "tile": [
+    68,
+    42
+  ],
+  "templates": {
+    "medium": {
+      "frame": [
+        48,
+        64
+      ],
+      "wideFrame": [
+        96,
+        64
+      ],
+      "deathWide": true
+    }
+  },
+  "monsters": [
+    {
+      "slug": "sentinelle",
+      "template": "medium",
+      "creature": null,
+      "animations": [
+        "idle",
+        "walk",
+        "attack",
+        "hit",
+        "death",
+        "cast"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "community-leader",
+  "name": "Community Leader",
+  "source": "tanares",
+  "skillProficiencies": [
+    "insight",
+    "persuasion"
+  ],
+  "languageCount": 2,
+  "feature": {
+    "name": "Cherished By The People",
+    "text": "Your reputation precedes you as a respected leader who has earned the love and admiration of the people you serve. Those who consider you a leader are willing to follow your commands, provided that your actions align with their values and do not put them in harm's way. Your status as a commu- nity leader also grants you access to resources, allies, and information that can aid you in your endeavors."
+  },
+  "text": "Y ou are a natural leader, possessing a vision that inspires others to follow you. Whether you have built a community from scratch or have taken the helm of an existing one, your charisma and persuasiveness have earned the trust of the people under your care, and your leadership has brought about positive change. You are a born leader, possessing an unyielding vision that ignites a flame of inspiration within those around you. Whether you have founded a community from the ground up or taken over the reins of an existing one, your determi- nation have earned you the trust and loyalty of those under your guidance, leading to remarkable progress and positive transformation. Your leadership is not without its challenges, however. Many obstacles and detractors will try to impede your efforts and undermine your influence. Yet, you stand tall, firmly believing in your convictions and knowing that the path to true success requires perseverance and courage. Will you 262 Valentin Eloy (Order #42142262) rise to the occasion and guide your people towards a brighter future, or will you falter under the pres- sure and relinquish your leadership to others?"
+}

@@ -1,0 +1,3117 @@
+# Changelog
+
+Toutes les évolutions notables du projet sont consignées ici.
+Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) ;
+le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
+
+## [Non publié]
+
+- **Le dépôt du nouveau moteur est public, avec sa CI refaite à neuf** (LOT-1014, 8 octobre 2026).
+  À chaque PR, sur les runners hébergés : les tests de Core hors moteur (Debug et Release),
+  clang-format sur Core et ses tests — pas sur le code du pont, dont il déferait l'ordre « Core
+  avant le moteur » —, les contrôles du référentiel, les hooks et le CHANGELOG. La cible d'éditeur
+  et `JadgContentCheck` se rejouent la nuit sur le poste de référence (`unreal.yml`), jamais sur une
+  PR. `main` est protégée ; le gabarit de PR porte les règles de la version (D-52, D-32).
+  Un garde-fou neuf, `check_no_sourcebook.py`, refuse tout livre source et tout texte extrait d'un
+  livre (EX-CNT-023) : le corpus, le lecteur plein texte et le cache de l'étude des métiers restent
+  hors du dépôt.
+- **Les maillages Meshy au maître entrent dans le moteur** (7 octobre 2026). Soixante-dix pièces
+  — statues, PNJ, armes, 77 millions de triangles — rangées sous `Source/Elements/Assets/Master/`
+  par `build_master_manifest.py` (manifeste suivi : empreintes, triangles, asset produit) et
+  importées en Nanite par `import_master_unreal.py`, script Python d'éditeur sans fenêtre,
+  rejouable, qui refuse une pièce dont l'empreinte a changé (D-52, D-53). Les PNJ sont des
+  maillages statiques jusqu'au LOT-1015. Le 8 octobre, les pièces prennent le nom de leur référence
+  (`references.json` : dieux de Tanares, fiches de personnage, pièces d'équipement), attribuées par
+  les relevés d'identification de l'ancien atelier et par vignettes Blender ; sept attributions
+  restent à confirmer par l'auteur.
+- **La passation vers le nouveau dépôt est commencée** (LOT-1014, 7 octobre 2026). Le projet
+  Unreal Engine 5.8 (`JustAnotherRpgGame.uproject`) reçoit `Source/Core` tel quel, compilé dans le
+  module du jeu avec exceptions et RTTI, sans en-tête précompilé ni compilation unitaire ;
+  nlohmann/json 3.11.3 vendu dans `Source/ThirdParty` ; les 721 fichiers de données de
+  `Source/Elements` ; les tests de Core et leurs fixtures, construits hors du moteur par un
+  `CMakeLists.txt` réduit (629 tests passés le 7 octobre, un test de dialogue et un balayage de `Source/HMI` écartés) ; `Planning/`, `Documentation/`, `scripts/` (sans les contrôles QML),
+  les licences. Un pont minimal (`Bridge/JadgPaths`, `Bridge/JadgLog`) et le commandlet
+  `JadgContentCheck`, qui lit les catalogues et construit les quatre fiches du groupe préformé
+  (D-28) sans fenêtre : 0 erreur le 7 octobre. `scripts/build.ps1` réécrit : tests de Core par
+  défaut, `-Unreal` pour la cible d'éditeur et le commandlet. `PASSATION.md` dit ce qui est venu,
+  ce qui est resté et ce qui reste à faire (dépôt Git, CI, relecture de la documentation et des
+  scripts, version à source unique).
+- **Le jeu passe sur Unreal Engine 5 : la version `0.0.3`, « le nouveau moteur », est planifiée**
+  (décisions D-48 à D-54, 7 octobre 2026). Douze fiches sous
+  `Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/` (`LOT-1012` à `LOT-1023`) : une porte sur le
+  parvis d'Arenarea, le socle, les personnages, l'exploration, le combat en distance à la manière
+  de Baldur's Gate 3, les cartes composées, la chaîne de décor au maître, l'interface, Arenarea
+  reconstruit, le portage de l'Arena of Fate et de Martpart, la recette qui retire Qt, QML et le
+  LevelEditor. Les trois lieux de la démo deviennent la `0.0.4` (dossier renommé, liens et champs
+  `version` mis à jour) ; `trajectoire.md`, `risques.md` (R-14 à R-16), le standard 3D et
+  `AGENTS.md` portent la révision. Les questions Q-17 à Q-20 sont tranchées le même jour (D-55 à
+  D-58) : bibliothèques du moteur admises pour la nature, caméra libre, pas de repli Godot
+  (`LOT-1013` abandonné), un nouveau dépôt pour le nouveau moteur et l'ancien en privé sans CI.
+- **L'écran « Carte » et son atelier sont refondus** (7 octobre 2026). L’habillage reprend les
+  parchemins, ornements et polices du jeu. Les noms imprimés deviennent cliquables ; leur survol
+  souligne en noir le territoire, sans jeton ni cadre générique. Un clic ouvre la fiche et un
+  double clic rejoint la carte avec un zoom animé. Recherche, fil d’Ariane, filtres, favoris
+  persistants, vue dégagée et couches complètent la navigation. En développement, **Atelier des
+  zones** règle les zones des noms et les contours avec poignées, îles multiples, zoom,
+  annulation/rétablissement et sauvegarde atomique. `map-interactions.json` lie les relevés à
+  l’empreinte de l’illustration ; les tracés initiaux restent des brouillons à affiner. Les
+  sauvegardes refusent les contours croisés et les modifications concurrentes du fichier.
+  Le relevé couvre le monde et toutes les sous-cartes ; les noms de lieux voisins imprimés sur une
+  illustration y sont cliquables aussi (`neighbours`, un contour par carte hôte). Sur la carte du
+  monde, la bannière de chaque faction s’affiche à côté du nom de sa région.
+- **L'atlas illustré remplace toutes les cartes du jeu** (standard `Planning/standards/cartographie.md`,
+  décisions de l'auteur du 5 octobre 2026). Le monde, les treize régions, les lieux documentés, la
+  Capitale et ses quartiers sont des illustrations originales aux proportions natives, 381 fiches
+  dans `world-maps.json` (`cartographyVersion: 2`) et 207 images sous `Assets/Maps/` (kit `Maps@2`,
+  à publier). Un seul écran « Carte » les parcourt à toutes les échelles : liste des lieux et
+  recherche, couches `illustration`/`plan`/`interior`, bande réservée à l'emblème de la faction
+  dominante parmi les quatorze (treize régionales et les cultistes), hors du dessin. Chaque fiche
+  dit sur quoi repose sa faction (`factionBasis` : `regional`, `local` ou `non-etablie`) et
+  l'écran l'écrit quand rien n'est établi. Les lieux sont accessibles par leurs noms et les
+  contours territoriaux relevés dans l’atelier. Les écrans Région, Ville, Quartier et Îlot, leurs
+  captures et `MapMarker` sont retirés ; `--map-plate=` ouvre n'importe quelle carte, et la plus
+  précise des options `--map-*` l'emporte. `build_world_atlas.py` prépare et installe l'atlas ;
+  `check_map_assets.py` le vérifie ; `architectures.json` conserve les enveloppes validées de la
+  Capitale.
+- **Arenarea et Martpart : la v0 des cartes en maillages est installée** (`LOT-147`, `LOT-110`,
+  `LOT-111` — les trois lots restent à faire). Les deux cartes de principe de la démo cèdent la
+  place, sous le même identifiant, aux prototypes sortis de l'atelier le 5 octobre 2026 : Arenarea
+  en 128 × 88 cases sur 137 maillages, Martpart en 112 × 88 cases sur 34 maillages et les deux
+  arbres d'Arenarea, toutes deux créées et assemblées par les commandes natives de l'éditeur.
+  Les kits `arenarea@3` (890 Mio) et `martpart@4` (93 Mio) sont publiés et verrouillés.
+  `LevelEditor --check` passe sur les cinq cartes. C'est une **v0** : la validation artistique, la
+  mesure à 60 images par seconde, le contrôle à 2160p et le retrait des images du `LOT-108`
+  (D-32) restent dus aux lots.
+- **Éditeur : une carte se crée jusqu'à 128 cases de côté** (100 auparavant), en ligne de commande
+  comme au dialogue — la borne est commune (`NEW_MAP_MAXIMUM_SIDE`). Le quartier entier d'Arenarea
+  en demande 128.
+
+## [0.0.2.5] - 2026-10-05
+
+**Le passage à la 3D.** Le jeu garde sa vue isométrique et change de matière. Un personnage est un
+**modèle** — un maillage qui lui est propre, lié à un squelette commun dont les clips sont réglés
+une fois : les quatre héros, les PNJ de la quête, les adversaires de l'arène, le lion et le loup.
+Le monde a une **heure** : le soleil tourne, les ombres s'allongent, les lampes s'allument à la
+nuit. L'**Arena of Fate** est en maillages sur ses trois niveaux — le Colisée, ses vestiaires et sa
+prison, ses catacombes. L'éditeur dessine par le rendu du jeu et reçoit un **atelier des assets**.
+Chaque lot a retiré ce qu'il remplaçait : plus aucune bande de figurine, plus de second rendu.
+Martpart et Arenarea restent des cartes de principe, et le kit de la Capitale des images : leur
+reprise en maillages est à la `0.0.3`. Le jeu se joue au clavier et à la souris.
+
+- **LOT-1010 — Recette et version 0.0.2.5.** La quête « Des pommes pour l'arène » et la série de
+  l'arène sont rejouées en 3D, de jour comme de nuit ; le [bilan](Planning/versions/v0.1.0/v0.0.2.5-passage-3d/bilan.md)
+  dit ce que la version a coûté — treize PR en cinq jours, vingt modèles de personnage, des kits
+  passés de 225 à 703 Mio — et ce que la suivante en retient. Le balayage final ne trouve aucun
+  orphelin ; les documents en vigueur ne prescrivent plus la 2D HD. Version `0.0.2.5` :
+  `extract_release_notes.py` reconnaît un tag à quatre nombres, sans quoi la release n'aurait pas
+  trouvé ses notes.
+- **Planification : la `0.1.0` se resserre sur les trois lieux de la démo** (décision D-47).
+  L'Arena of Fate et son donjon, Arenarea et Martpart se produisent à leur qualité finale (`0.0.3`),
+  puis se publient (`0.1.0`). Le reste de l'Empire central part à la `0.4.0`, en sous-versions par
+  zone (`0.3.1` à `0.3.7`), et les autres régions glissent d'un cran — le plan pénombral à la
+  `0.18.0`. Les lots de système des versions de zone rejoignent la `0.2.0` : sauvegarde, voyage,
+  outils de l'éditeur. Les lots gardent leur numéro ; les fiches de décor et de PNJ de la `0.0.3`
+  sont réécrites pour commander des maillages et des modèles, celles des zones marquées à réécrire
+  (D-35).
+
+- **Arena of Fate — les trois niveaux en 3D** (LOT-106, LOT-107, LOT-157 ; D-46). Le Colisée, ses
+  vestiaires et sa prison, ses catacombes : trois cartes de **même emprise** (34 × 24 cases), en
+  maillages, éclairées.
+  - **Les niveaux se superposent.** L'escalier de la porte du triomphe, celui de la porte des
+    morts et la descente des catacombes ont les mêmes cases à l'étage qu'ils quittent et à celui
+    qu'ils rejoignent ; les deux sous-sols portent une **enceinte ovale**, celle de la coque du
+    Colisée. Le niveau −1 sépare les vestiaires (ouest) de la prison (est), reliés par la seule
+    galerie axiale ; les catacombes rangent leurs quatre chapelles en croix autour du sanctuaire.
+  - **Le Colisée gagne son attique** — pilastres, fenêtres, mâts de velum — et les **feux de son
+    pourtour** : onze vasques entre les statues de la coursive, qui éclairent le sable de nuit.
+  - **La matière des maillages est complète** : relief et occlusion-rugosité-métal, lus dans le
+    `.glb` (`core::MeshData::normalImage`, `materialImage`) et rendus par `mesh.frag`. Les
+    sculptures gardent les cartes de leur original ; l'architecture les dérive de sa couleur par
+    `scripts/assetsGeneration/material_maps.py`. Un modèle sans cartes se dessine comme avant.
+  - **Les textures identiques se partagent** entre maillages (`hmi::MeshBatch`), et une image
+    éclaire **trente-deux** lumières de nuit au lieu de seize.
+  - **L'éditeur** crée et redimensionne une carte sans fenêtre (`--new`, `--resize`, `--crop`),
+    crée une couche par geste (`"tool": "layer"`), et garde les couches de décor supplémentaires
+    du rez-de-chaussée. La **galerie des assets** montre les maillages de scène.
+  - Kit `arena-of-fate` : 105 maillages remplacent les 18 images de la carte de principe.
+
+- **LOT-1007 — Éclairage et cycle jour / nuit.** Le monde a une heure, et la lumière la suit.
+  - **L'heure du monde** (`core::WorldClock`) avance avec l'exploration — une heure du monde par
+    minute réelle — et se fige en dialogue et en combat. L'option de débug `--hour=<HH:MM|run>`
+    la règle et la fige, à la ligne de commande comme dans la console. Une carte peut déclarer
+    une **heure fixe** (propriété `hour`) : le sous-sol de l'arène reste dans sa nuit.
+  - **La lumière de l'heure** se lit dans une table en données
+    (`Assets/Common/Lighting/daylight.json`) : teinte des images, ambiance et lumière dirigée des
+    maillages — le soleil le jour, la lune la nuit —, ombres, allumage des lampes. La nuit se
+    règle là, sans recompiler.
+  - **Les personnages sont éclairés** par leur normale ; **les images** prennent la teinte de
+    l'heure et gardent la lumière qu'on leur a peinte. À midi, une image est telle que peinte.
+  - **Les ombres portées** tournent et s'allongent : une carte d'ombres vue du soleil, où les
+    personnages portent leur vraie silhouette et chaque pièce de décor en image la boîte de son
+    emprise.
+  - **Les lumières de nuit** s'allument au crépuscule : quatorze pièces du kit de la Capitale —
+    lampadaires, lanternes, braseros — déclarent la leur dans le manifeste (`light`, `glow`), et
+    la famille d'entité **light** se pose dans l'éditeur. Seize au plus par image.
+  - **Options › Graphismes › Rendu** gagne **Ombres** (désactivées, basses, moyennes, hautes).
+  - **L'éditeur** : la case **Lighting** et son curseur d'heure éclairent le canevas comme le
+    jeu, et l'essai part de cette heure ; *Map properties…* règle l'heure fixe ;
+    `--render --hour HH:MM` écrit l'image éclairée, `--hour=HH:MM` ouvre la fenêtre l'éclairage
+    allumé ; un scénario de gestes règle les propriétés de carte (`mapProperties`) ; l'aperçu de
+    l'atelier des assets choisit son heure (*Light*).
+  - Rien n'est précalculé : l'éclairage entier coûte 0,3 ms par image à 1080p, huit modèles de
+    100 000 triangles à l'écran (`WorldFrameShadowedEightModels1080p`, 6,47 ms contre 6,18).
+    L'étude est dans la fiche du lot (décision D-45).
+
+- **Rendu : anticrénelage et définition du rendu.** Les vues du lieu sont multi-échantillonnées
+  (MSAA) : les pipelines des maillages et des images suivent le nombre d'échantillons de leur
+  cible. Deux réglages s'ajoutent à **Options > Graphismes > Rendu** et s'appliquent aussitôt :
+  **Anticrénelage** (désactivé, 2×, 4×, 8× ; 4× par défaut) et **Définition du rendu** (100, 125,
+  150, 200 % ; 100 % par défaut — au-delà, le lieu est dessiné plus grand puis réduit à l'écran).
+  Le rendu hors écran (`hmi::OffscreenRhi::render`) accepte un nombre d'échantillons.
+
+- **LOT-1011 — Les fauves de l'arène : le squelette `quadruped`.** Le lion et le loup du Colisée
+  marchent sur quatre appuis ; plus aucun personnage de la démo n'est un portrait d'attente.
+  - Le squelette **`quadruped`** (29 os : tronc, queue, deux pattes avant de cinq os, deux pattes
+    arrière de quatre) et ses **cinq clips** — repos, marche au **trot** (appuis diagonaux,
+    3 m/s, pas de `cast`), attaque en bond, touché, chute sur le flanc —, écrits dans
+    `scripts/assetsGeneration/rig_quadruped.py` ; `rig_character.py` lie une silhouette ou
+    l'autre (`--silhouette`, ou le champ `silhouette` de la fiche de liaison), et sa fiche
+    quadrupède porte le **cap** du maillage reçu (un fauve généré de trois quarts arrive en
+    diagonale), tous les os et le bout des appuis. Le recalage au sol évalue aussi le maillage
+    entre deux images, comme le moteur l'interpole.
+  - Le **lion**, le **loup** et le **mannequin quadrupède** sont liés et installés par l'atelier
+    (`LevelEditor --apply`), `Common/Characters/Skeletons/quadruped/skeleton.json` avec eux ;
+    leurs fiches de règles nomment leur silhouette. `check_character_model.py` contrôle les deux
+    silhouettes (os, clips et appuis d'après le squelette du fichier) ; `retouch_character.py`
+    ouvre un quadrupède dans Blender avec ses 29 os. Kits republiés et verrouillés : `Common@9`,
+    `arena-of-fate@5`.
+  - **Fin du portrait d'attente** (D-32) : la liste `portraits` quitte les manifestes
+    `Characters/`, et sa prise en charge quitte `check_hd_assets.py` (qui la refuse désormais),
+    `check_orphans.py`, `core::resolveFigures`, `hmi::AssetGallery`, l'atelier et leurs tests.
+  - Le **portrait de l'interlocuteur** paraît dans l'écran de dialogue : le monde lit la figurine
+    que le PNJ nomme sur la carte à l'interaction (`WorldModel::interlocutorPortrait`),
+    `DialogueModel.speakerPortrait` l'expose, `Dialogue.qml` le lie au cadre — absent depuis le
+    LOT-15.
+  - Le standard des personnages dit le squelette quadrupède (§5 bis), sa fiche (§6), ses clips
+    (§7) et ses relevés (§9) ; le trot reste à approuver par l'auteur dans le jeu.
+
+- **LOT-1009 — Les personnages de la démo.** Les dix-huit humanoïdes de la démo — les quatre
+  héros refaits, la mère, l'enfant, le garde Ironhand, le maître d'arène et les neuf adversaires de
+  l'arène — sont des modèles liés au squelette commun, installés par l'atelier des assets
+  (`LevelEditor --apply`, une fiche d'atelier par personnage) : plus aucun ne s'affiche par le
+  mannequin. Le lion et le loup attendent le squelette `quadruped`, lot à part (`LOT-1011`) ; la
+  liste `portraits` ne porte plus qu'eux. `check_hd_assets.py` refuse un héros sans modèle. Kits
+  republiés : `Common@8`, `central-empire/Common@3`, `capital/Common@3`, `arena-of-fate@4`,
+  `martpart@3`.
+
+- **LOT-1008 — L'atelier des assets, vue Character.** La fiche d'un personnage s'écrit dans
+  l'éditeur, sans ouvrir un fichier, et se règle dans Blender.
+  - La fenêtre **Asset workshop** (*Assets* › *Asset workshop…*) : les personnages installés, la
+    **fiche d'atelier** d'un personnage (niveau, nom, silhouette, modèle lié, portrait, jeton —
+    un JSON `jadg-editor-character` rangé avec ses sources), l'**aperçu** par le rendu du jeu
+    (damier de maquette, clip par clip, quart de tour), l'**installation** sous `Assets/` et au
+    manifeste, et le **contrôle** des personnages installés (`EX-EDIT-102`).
+  - **Sans fenêtre** : `LevelEditor --apply <fiche d'atelier>` installe le personnage, à l'octet
+    près comme la fenêtre ; `--check` contrôle les personnages installés — fiche, squelette,
+    modèle et ses clips, portrait et jeton aux tailles du standard (`EX-EDIT-104`) ; `--workshop`
+    ouvre l'atelier au démarrage.
+  - L'**aller-retour par Blender** (décision D-44, `EX-EDIT-103`) :
+    `scripts/assetsGeneration/retouch_character.py` ouvre le modèle lié dans Blender et relit ce
+    que l'auteur y a réglé — une articulation déplacée revient dans la fiche de liaison, un clip
+    modifié dans une fiche de retouche (`retouche.json`), que `rig_character.py --retouch` rejoue
+    — puis relie et contrôle. Rien ne revient de Blender qu'en données.
+  - Les trois fiches livrées (mannequin, brawler, bandit) se réenregistrent par l'atelier sans
+    différence ; la part « personnage » de `install_hd_asset.py` et ses tests sont retirés
+    (D-32) ; le standard des personnages (§6 bis) et `AGENTS.md` disent la règle de la retouche.
+  - La vue Scenery de l'atelier suit le kit en maillages à la `0.0.3` (D-43) ; l'heure du jour
+    de l'aperçu vient avec l'éclairage (LOT-1007).
+
+- **LOT-1004 — clos sans modification.** Le kit de la Capitale ne se convertit pas en maillages
+  dans la `0.0.2.5` : l'auteur reprend l'intégralité des assets à la `0.0.3` (décision D-43). La
+  fiche passe à `abandonne` ; ses livrables, ses suppressions et les questions que le standard 3D
+  lui laissait (contour sombre, forme des pièces, budget d'un maillage de décor) passent au
+  `LOT-151`. L'architecture du kit rejoint la dette d'images déclarée de la version ; les
+  `LOT-1007` et `LOT-1008` ne l'attendent plus. Aucun code, aucun asset ne change.
+
+- **LOT-1006 — Le squelette commun et le mannequin.** Tout personnage paraît par son modèle ou
+  par le mannequin de sa silhouette : il ne reste aucune bande de figurine.
+  - Le mannequin humanoïde est lié au squelette commun (`Common/Characters/Mannequins/humanoid/`,
+    fiche `character.json`) et joue ses six clips ; le brawler s'affiche par son modèle de la
+    preuve, les trois autres héros par le mannequin, et tous gardent portrait et jeton.
+  - `hmi::FigureResolver` ne connaît plus qu'une forme de figurine, le modèle ; la lecture d'une
+    bande de figurine (cellule, ligne de sol, suffixes d'orientation) quitte
+    `hmi::WorldSceneComposer`, `hmi::WorldSceneRenderer` et la galerie de débug, qui montre chaque
+    modèle de personnage, clip par clip.
+  - Les 132 bandes de figurine et leurs `.anim.json` sont retirées de `Common/Characters`, ainsi
+    que celles des données d'essai, remplacées par un modèle d'essai. Les 24 bandes d'effets de
+    `Common/Fx/` restent.
+  - `check_hd_assets.py` et `install_hd_asset.py` connaissent squelettes et modèles de personnage
+    et n'ont plus de règle de bande de figurine ; `render_character_strips.py` et ses tests sont
+    supprimés.
+  - `EX-REN-012` (bandes de figurine) est retirée, `EX-REN-051` la remplace : une figurine est un
+    modèle. Guide du rendu, guide des données et cahier de test suivent.
+  - Le kit `Common` est republié et verrouillé (`Common@7`, 35 fichiers) : sans bande de figurine,
+    avec le mannequin lié et le modèle du brawler.
+  - Le **bandit** est le premier personnage produit au standard : généré depuis une vue de face,
+    mains vides, lié par sa seule fiche de liaison et installé dans sa zone
+    (`arena-of-fate/Characters/bandit`). `install_hd_asset.py` lie un personnage de zone au
+    squelette du monde. Le standard des personnages en reçoit les mesures (image de référence,
+    clips, contrôles, constats de la preuve).
+  - **Portraits et jetons des PNJ et des créatures de la démo** : seize personnages (adversaires
+    de l'arène, maître d'arène, mère, enfant, garde Ironhand), rangés par zone. L'ordre
+    d'initiative montre le jeton d'une créature, même quand un mannequin la dessine
+    (`hmi::ResolvedFigure::named`) ; `core::resolveFigures` lit aussi la liste `portraits` des
+    manifestes. Les PNJ des cartes nomment leur personnage (`figure`).
+
+- **La quête de la démo exige les cinq combats de l'arène.** L'enfant n'est libéré qu'après les
+  cinq combats du jugement — bandits, gladiateurs, morts du sable, vétéran, capitaine —, gagnés à
+  la suite ; le maître d'arène donne un niveau et un repos entre deux combats (niveaux 1 à 5), et
+  une défaite renvoie au début de la partie. L'étape `victoire` de la quête attend
+  `encounter/arene-capitaine/won` ; chaque marqueur de combat ne paraît qu'après la récompense du
+  précédent (`arene/recompense-N`), pour qu'aucun combat ni aucune montée de niveau ne se saute.
+  Le champion reste un sixième combat, pour la gloire. Les répliques du maître et le journal de
+  quête suivent, en français et en anglais.
+
+- **Révision de l'interface : la manette est retirée.** Le jeu se joue au clavier et à la souris.
+  `EX-CTRL-002` et la chaîne d'entrées de la manette quittent le code (`hmi::GamepadPoller`,
+  `hmi::GamepadNavigator`, `hmi::InputState`, `hmi::ButtonRepeat`, `hmi::GamepadButton`) ; les
+  touches de l'éditeur gardent leur énumération (`hmi::Key`). Les formulaires du combat, du
+  groupe, du journal, des options, des crédits, de la carte du monde et des écrans de fin sont
+  retouchés ; spécification des contrôles, guide des entrées et manuel suivent.
+
+- **Menus du mercenaire et HUD.** Menu principal en codex illustré, fiche d'identité ornementée,
+  capacités de classe et grimoire réunis, compétences et équipement sur leurs propres pages.
+  Recherche dans les sorts, capacités et objets, comparaison avant équipement et confirmation
+  avant abandon. Les changements d'équipement suivent chaque mercenaire pendant la partie,
+  y compris après un repos et au combat. HUD d'exploration avec groupe et interaction de proximité ;
+  HUD de combat compact, filtres d'actions et détails dépliables. Dans **Options > Graphismes**,
+  **Taille du HUD** règle les deux affichages de **75 % à 130 %**, indépendamment des menus et
+  du terrain ; la valeur est enregistrée avec **Appliquer**.
+- **Formulaires éditables dans Qt Design Studio.** Les `.ui.qml` ne portent plus d'appel de
+  fonction hors d'un objet `Connections` (M222) ni d'identifiant ambigu (M209). La maîtrise d'une
+  compétence quitte le texte de sa valeur (« +5 • ») : clé `sheet.skill.<id>.proficient` et rôle
+  `marked` de `SheetRowModel`.
+
+- **CI remise au vert.** Les contrôles des formulaires (`check_ui_layers.py`,
+  `check_qml_designer_compat.py`) admettent les gestionnaires de signal rangés dans un objet
+  `Connections` — la forme que Qt Design Studio écrit et garde, adoptée par la refonte des menus ;
+  une fonction hors d'un `Connections` reste refusée. Le test du rendu par tuiles
+  (`OffscreenRenderTest`) est étalonné sur les deux rendus : sous le rendu logiciel de la CI,
+  1 132 pixels s'écartent d'un ou deux niveaux et un seul bascule de couverture, sans couture.
+  Deux fichiers de la refonte des menus sont remis au format.
+
+- **LOT-1005 — Squelette et animations.** Le moteur anime un modèle par son squelette. Le chargeur
+  `.glb` lit les os, la liaison de chaque sommet (quatre os, quatre poids) et les clips ; la pose
+  d'un squelette à un instant se calcule sans GPU (`core::poseSkeleton`), et `hmi::MeshBatch`
+  déforme le maillage par un second pipeline (`mesh_skinned.vert`, 64 os au plus). Un personnage
+  en modèle se déclare par une fiche (`character.json` : son modèle, son squelette) ; la
+  description du squelette (`Common/Characters/Skeletons/<silhouette>/skeleton.json`) dit la durée,
+  la boucle et l'**image clé** de chaque clip, et le combat y accroche le touché de la cible
+  (`hmi::CombatCueTrack::setTimings`). Un modèle s'oriente librement, vers son pas ou sa cible
+  (`WorldFigureSnapshot::heading`). `hmi::FigureResolver` cherche la fiche avant les bandes, pour
+  la figurine nommée comme pour le mannequin ; aucun personnage livré n'ayant encore de fiche, le
+  jeu se rend comme avant — les bandes partent au LOT-1006. Données d'essai : un pantin de trois os
+  (`Fixtures/Meshes`) et le mannequin humanoïde réduit, lié aux 53 os (`Fixtures/Characters`). La
+  chaîne de liaison est réécrite : `scripts/assetsGeneration/rig_character.py` lie un maillage
+  Meshy en T au squelette commun et pose les six clips, `scripts/checks/check_character_model.py`
+  contrôle l'export (structure, poids, contact, glissement),
+  `scripts/assetsGeneration/render_character_review.py` rend les planches de revue. Le budget d'un
+  modèle est au standard 3D : 100 000 triangles, texture de 2048 px, 64 os, quatre influences —
+  huit modèles animés coûtent 0,5 ms par image à 1080p.
+
+- **LOT-1003 — Maillages et profondeur.** Le moteur dessine des volumes : une pièce dont le
+  manifeste cite un maillage (`"mesh"`, un `.glb`) au lieu d'une image se dessine par une passe de
+  maillages (`hmi::MeshBatch` : sommets, normales, coordonnées de texture, couleur de base, sans
+  éclairage) et se départage par le **tampon de profondeur**, sans tri. La caméra du lieu devient
+  `hmi::PlaceCamera` — le cadrage de `Camera2D`, gardé au flottant près, et l'axe de la profondeur
+  — avec `hmi::IsoView` pour l'orientation (45°, élévation de sinus 0,62). Les images restent dans
+  la scène : un sol à plat, le reste dressé en plan vertical sur la ligne de son pied ; elles
+  testent la profondeur sans l'écrire et gardent entre elles l'ordre du peintre. Rien de cela n'a
+  lieu sans maillage dans l'image : les quatre cartes livrées se rendent **identiques au pixel**.
+  Le chargeur `.glb` (`core::readMeshFile`) est dans `Core`, sans bibliothèque nouvelle ni Qt
+  Quick 3D, éprouvé par une cible de fuzzing (`fuzz_mesh`) et sur les 48 exports Meshy de
+  l'atelier. Données d'essai : `Source/Test/Fixtures/Meshes` (un îlot de murs, un sol, un toit),
+  écrites par `scripts/assetsGeneration/build_mesh_fixture.py` ; l'éditeur les montre sans code
+  propre. Retiré : `hmi::Camera2D`. Les kits d'assets portent désormais les modèles `.glb` comme
+  les images, hors de Git ; `scripts/assetsGeneration/reduce_model.py` ramène un export Meshy au
+  standard (au sol, couleur de base seule, 100 000 triangles au plus, texture d'origine gardée), et
+  le kit `Common@6` reçoit les deux mannequins, humanoïde et quadrupède, en attente de leur
+  squelette (LOT-1006).
+
+- **LOT-1002 — Le canevas de l'éditeur sur le rendu du jeu.** Le canevas ne peint plus la scène par
+  `QPainter` : il la fait dessiner par `hmi::WorldSceneRenderer`, le rendu du jeu, dans un
+  `QRhiWidget` (`hmi::SceneSurface`) posé sous la `QGraphicsView`, qui garde le zoom, le défilement,
+  le pointage et peint les aides d'édition par-dessus. L'essai (`P`) cadre par la caméra du jeu.
+  `LevelEditor --render` et les vignettes passent par le même rendu, hors écran
+  (`hmi::OffscreenRhi`, par tuiles de 4 096 pixels, WARP sans carte graphique) : une carte rendue
+  par `--render` est **identique au pixel** à celle que le rendu du jeu dessine, et le seuil de
+  parité disparaît avec le second rendu. Le rendu reçoit trois réglages pour l'édition — cadrage
+  imposé, opacité par primitive (calques, reliefs en transparence), carte préparée et mesurée avant
+  l'image. Retirés : `ScenePainter`, `SceneImages` et son budget commun de 256 Mio (chaque onglet
+  tient désormais les textures de sa carte ; le rendu hors écran gardé reste borné à 256 Mio),
+  leurs tests, `bench_canvas_paint` — remplacé par `bench_canvas_frame`, un travelling sur
+  Arenarea. La vue à plat et la mini-carte restent peintes. Les tests de rendu écrivent leurs
+  captures sous le répertoire de construction (`render-captures/`), plus à la racine.
+
+- **LOT-1001 — Le standard 3D.** `Planning/standards/style-3d.md` (unités, caméra, format `.glb`,
+  matières, lumière, familles de pièces, images tolérées) et `personnages-3d.md` remplacent le
+  standard 2D HD, sa consigne et le workflow de revue des marches, archivés. Chaque valeur est
+  mesurée au LOT-1000 ou décidée et datée par l'auteur ; le reste est écrit comme ouvert, avec le
+  lot qui le tranche. Décisions de l'auteur : **un maillage Meshy par personnage**, lié au
+  squelette commun de 53 os — les huit corps et la bibliothèque de pièces sont abandonnés
+  (D-38) ; image de référence **de face, en pose neutre** (D-39) ; budget d'un modèle au LOT-1005
+  et contour sombre au LOT-1004 (D-40) ; **les modèles se génèrent sans arme** (D-42), et le LOT-1009
+  devient « les personnages de la démo », vingt modèles dont deux fauves. Les exigences `EX-VIS-008`, `EX-VIS-009`, `EX-REN-013`,
+  `EX-REN-014` et `EX-REN-018` sont réécrites, leurs anciens textes gardés dans
+  `exigences-retirees.md`. La chaîne de génération de figurines 2D (`prepare_envois_figure.py`,
+  `check_figure_walk.py`, `preview_figure_walk.py`) est supprimée. Nouveau contrôle en CI,
+  `check_orphans.py` : tout fichier d'asset est cité par un manifeste, toute entrée citée existe,
+  tout script a un appelant (D-32). Les fiches des LOT-1003 à 1010 sont amendées en conséquence.
+
+- **LOT-1000 — La preuve de la chaîne de personnages.** Après le refus des corps communs MPFB et
+  des essais TripoSR, le personnage vient d'un maillage texturé généré par Meshy d'après sa
+  figurine (révision de D-31), lié dans Blender à un squelette de 53 os et animé par des poses en
+  cibles (la marche garde les pieds au sol à la vitesse du moteur). `render_character_strips.py`
+  le rend sous la caméra du jeu en bandes au format du moteur ; `install_hd_asset.py` installe ces
+  bandes `placed`, telles quelles. Les 20 bandes du brawler sont ainsi rendues et remplacent les
+  bandes générées (kit `Common@5`) ; l'avis de refus de ses anciennes marches est retiré.
+
+## [0.0.2] - 2026-09-30
+
+**Le système de combat.** Les quatre classes de base du *Player's Guide to Tanares* — Brawler,
+Mage, Priest, Scoundrel —, fidèles à leurs fiches pré-tirées, montent du niveau 1 au niveau 5 ; le
+groupe de quatre se joue sur la carte, contre plusieurs adversaires, au clavier comme à la
+manette, avec sa fiche, son écran de groupe et son interface de combat. La démo se rejoue avec le
+meneur qu'on choisit, et le maître d'arène propose après elle une **série de six combats** de
+difficulté croissante, équilibrée par simulation. Les lieux restent des cartes de principe : leur
+production est à la `0.0.3`, après le passage à la 3D (`0.0.2.5`).
+
+- **LOT-142 — Recette et version 0.0.2.** La série de l'arène : après les bandits, le maître
+  d'arène reste sur le sable et propose cinq combats — gladiateurs, morts du sable, vétéran, bande
+  du capitaine, champion —, un niveau (jusqu'au 5) et un repos entre deux ; cinq PNJ du *Manuel
+  des Monstres* (malfrat, berserker, capitaine bandit, vétéran, gladiateur) et les **attaques
+  multiples** des créatures. L'IA joue les **sorts** (jet d'attaque, sauvegarde, sphère qui
+  épargne les alliés), les **soins** et la *bénédiction*, l'arme spirituelle en action bonus, les
+  attaques supplémentaires, et compte les capacités de l'acteur (`EX-CBT-052`). L'équilibrage se
+  mesure par simulation, groupe entier et quatre trios sans une classe, sur cent graines
+  (`EX-CBT-065`) : la résistance du Brawler (*Tough as Nails*) devient **graduée** (décision de
+  l'auteur, écart au livre écrit), et l'écart entre trios passe de 35 à 16 points. Le registre du
+  groupe garde le niveau donné d'un combat à l'autre et connaît le **repos long** (action de
+  dialogue `rest`, `EX-CBT-064`). « Nouvelle partie » ouvre l'écran Groupe pour **choisir le
+  meneur**. Version `0.0.2` ; les deux dernières alertes clang-tidy de Code scanning (concaténation
+  du journal de `--apply`, réservation des verdicts d'entité) sont corrigées.
+
+- **LOT-144 — Éditeur : le mode Quêtes.** Une quête s'écrit dans l'éditeur, à côté des cartes
+  qu'elle traverse : le panneau **Quests** liste les quêtes, en crée, en renomme, en retire, et
+  édite sans JSON les drapeaux déclarés, les étapes dans l'ordre du récit (conditions choisies
+  parmi les drapeaux et valeurs connus, effets, issue, lieu `carte#id`) et les textes du journal
+  dans chaque langue. **Save** écrit la forme canonique (`core::writeQuest`) relue par le jeu : ce
+  qu'il refuserait ne s'enregistre pas, l'erreur nommant l'étape. **Uses** montre qui déclare, lit
+  ou pose un drapeau et ses valeurs — entités, dialogues, quêtes — et y mène ; renommer un
+  drapeau, une valeur ou une quête est un plan montré puis écrit, les dialogues retouchés chaîne
+  par chaîne ; **Play this step** règle l'état de partie du canevas, de `P` et de `F5`. La quête
+  des pommes, saisie champ par champ, rend son fichier octet pour octet. Sans fenêtre :
+  `--who-cites flag`, `--rename-flag`, `--rename-flag-value`, `--rename-quest`, `--save-quest`,
+  `--quest-state`. Le champ facultatif `at` d'une étape est contrôlé par `--check`
+  (`EX-EDIT-100`). Les tests de renommage de cartes prennent un dossier temporaire propre à
+  chaque processus : sous `ctest -j`, ils se le partageaient.
+
+- **Qualité — les alertes clang-tidy de la nightly.** Les 85 alertes ouvertes sur `main`
+  (analyse complète de la nuit) sont corrigées, sans changer ce que fait le code : champs
+  d'initialiseurs désignés complétés (l'arène, les dégâts, l'aperçu de combat, les modèles de
+  combat et de rencontre), fonctions trop complexes découpées en aides nommées (sorts, capacités de
+  classe, arène, budget des rencontres, montée de niveau, fiche, galerie, démarrage), et quelques
+  corrections locales — boucle sans compteur flottant dans la session d'exploration, `ranges`,
+  réservation, concaténations. Les accesseurs du modèle de groupe lus par QML gardent leur forme
+  d'instance, l'exception dite en commentaire.
+
+- **CI — le fuzzing de la nightly tenu en laisse.** La nuit du 30 septembre, le runner du job
+  `fuzz` a lâché en pleine étape, sans journal ni entrée fautive ; rejouées dix minutes chacune sur
+  le poste, les quatre cibles n'ont rien montré. Chaque cible est désormais arrêtée au-delà de son
+  temps et d'une marge (comptée en échec), écrit une ligne par minute — mémoire, mémoire libre,
+  dernière ligne de libFuzzer — dans le journal du job, et sa sortie part toujours en artefact
+  (`fuzz-logs`) ; `-malloc_limit_mb` borne une allocation démesurée. Quatre fichiers du `LOT-143`
+  arrivés hors format sur `main` sont reformatés.
+
+- **Planification — la version 0.0.2.5, passage à la 3D.** Le jeu garde sa vue isométrique et
+  passe en 3D, entre la recette de la `0.0.2` et la `0.0.3` (décisions D-29 à D-35) : décor
+  d'architecture en maillages, personnages **composés** — un corps parmi huit, une texture, des
+  pièces d'équipement sur un squelette commun —, cycle jour / nuit, et un atelier des assets 3D
+  dans l'éditeur. Onze lots, `LOT-1000` à `LOT-1010`, ouverts par une preuve de la chaîne de
+  personnages ; **chaque fiche nomme ce qu'elle supprime** (rubrique « À supprimer »), et ce qui
+  reste en image jusqu'à la `0.0.3` est écrit comme dette. Le `LOT-145` est clos sur son mannequin
+  humanoïde. Les identifiants de lot admettent quatre chiffres (`lint_planning.py`,
+  `lint_docs.py`). Aucun code du jeu ne change.
+  
+- **LOT-143 — Éditeur : des zones de combat pour un groupe.** Le verdict d'une zone de combat
+  compte désormais le **groupe de quatre** et **toute la rencontre** qui s'y joue : la formation
+  adverse posée sur la zone seule (un bandit hors du sable est dit), les **quatre places** du
+  groupe — entrées d'arène alliées d'abord, puis le front opposé au marqueur — reliées à la
+  formation, et assez de cases libres pour manœuvrer (`core::analyzePartyDeployment`). Le canevas
+  écrit à côté de chaque zone et de chaque rencontre la première ligne de son verdict, toutes pour
+  l'entité sélectionnée, marque formation et places, et recalcule pendant qu'on tire : le sable de
+  l'Arena of Fate porte quatre contre six, réduit de moitié il passe au rouge. À côté de l'entité
+  `encounter`, le **budget de difficulté** du *Guide du Maître* (300 PX, « difficile » pour les
+  bandits de l'arène) pour quatre personnages du niveau choisi dans le panneau des entités
+  (« Party level »). `LevelEditor --check` refuse une rencontre face à laquelle le groupe ne se
+  déploie pas ; `--apply` gagne l'outil `inspect` et le réglage `partyLevel` (`EX-EDIT-101`).
+
+- **LOT-141 — La fiche et l'écran de groupe.** La fiche de personnage s'ouvre pour **chaque
+  membre** (`Tab` passe au suivant ; depuis l'écran Groupe, `F` ouvre la fiche du personnage
+  désigné) et gagne deux onglets (`Page suiv.` / `Page préc.`, `RB` / `LB`) : **Classe** — les
+  capacités acquises avec leur icône et le niveau qui les donne, celles à venir aux quatre
+  prochains niveaux — et **Sorts** — les sorts connus, portée, durée, dés, et leurs **lancers
+  restants**. L'écran **Groupe** montre les **quatre profils côte à côte**, meneur marqué, portrait,
+  niveau, points de vie, CA, vitesse. La **montée de niveau est donnée** (`WorldModel.levelUp`,
+  `core::levelUpTo`) : par une action de dialogue `levelUp` (un personnage ou `party`), par le
+  menu `F9` ; le registre du groupe retient le niveau et les points de vie gagnés — la montée
+  n'est pas un soin —, et la fiche, l'écran de groupe et le combat lisent la **même** fiche
+  (`loadDemonstrationState` applique le registre). Les quatre fiches pré-tirées s'affichent
+  comme leur page du livre, valeur pour valeur (`EX-IHM-109`). L'écran **Compétences et sorts**
+  lit enfin la fiche : l'attaque de l'arme en main, les sorts mineurs, les sorts par école et le
+  détail du sort désigné (portée, dés, incantation, composantes, durée, lancers) ; les descriptions
+  affichées ne citent plus la page du livre. La barre d'actions du combat pose une icône sur
+  chaque attaque et chaque action du *Manuel* (pièce `ui/icon/action` du cahier, sept icônes
+  livrées, kit UI@6). Une **croix** referme
+  tout écran du RPG pour revenir au jeu, et le bouton **Options** du HUD ouvre enfin les réglages
+  (depuis le jeu comme depuis le combat, avec retour au même endroit).
+
+- **LOT-140 — L'interface de combat, à jour.** Le HUD de combat montre le **groupe** : l'ordre
+  d'initiative **aux jetons** des personnages (le jeton de la figurine, deux lettres pour une
+  créature, l'actif cerclé d'or) et le round ; sous le nom du personnage actif, le **panneau du
+  tour** — niveau, CA, états, ce qu'il reste à dépenser (action, action bonus, déplacement), ses
+  capacités de classe — à la place de la jauge d'expérience ; la **prévisualisation** de l'action
+  choisie sur la case du curseur, à la place des quêtes : le jet (« d20 +5 contre CA 15 · 55 % »),
+  les dés, l'avantage, **la capacité qui jouera** (*Sneak Attack* si un allié est au contact) ou
+  pourquoi elle ne jouera pas, l'espérance de dégâts ; pour un sort, ses lancers, sa portée, sa
+  zone, son jet ou son DD. La prévisualisation **est le jet** : `core::previewAttack` compte
+  désormais le bonus au jet et les dés des capacités de classe, aux mêmes conditions que la
+  session. La barre d'actions glisse sur **huit cases** autour de l'action choisie (un mage de
+  niveau 5 en a quatorze), chaque sort avec son icône et ses lancers restants, et la case
+  **Attendre** rend la main. Tout se pilote sans souris ; la capture de référence du HUD est
+  refaite (`EX-IHM-108`).
+
+- **LOT-136 — Les figurines des quatre classes et leurs effets.** Le Brawler, le Mage, le Priest et
+  le Scoundrel ont leurs figurines HD : repos, marche, attaque, touché, mort, et selon la classe
+  l'incantation ou le **tir à l'arc**, huit images, quatre orientations — le Brawler du `LOT-112`
+  est remplacé. Les quatre se distinguent à la taille : demi-orc massif, elfe élancée, naine
+  trapue, humaine fine. Une nouvelle bande `ranged` se joue pour une attaque à distance ; une
+  figurine qui n'en a pas joue son attaque. L'écran joue désormais l'**incantation** d'un sort
+  (`core::ArenaSession::setActionObserver`), et vingt **effets** paraissent en combat
+  (`Common/Fx/`) : les sorts du Mage et du Priest jusqu'au niveau 5, la flèche, l'impact d'un coup,
+  le raté. Les projectiles volent du lanceur à la cible. La galerie des assets joue les effets. Le
+  mannequin humanoïde gagne les attaques par arme de l'atelier : l'arc (sa bande `ranged`), la
+  dague, l'arme à une main et à deux mains (`dagger`, `onehand`, `twohand`).
+
+- **LOT-139 — Le combat de groupe.** Les **quatre** entrent en combat, là où l'exploration les a
+  laissés — le meneur garde sa case, chaque suiveur la sienne dans ses pas, ou la case libre la
+  plus proche (`core::prepareMapEncounter` prend les cases du groupe) —, et chacun est **joué par
+  le joueur à son tour** d'initiative, par les gestes du HUD de combat ; l'IA ne joue que les
+  ennemis. Le portrait en avant est celui du membre dont c'est le tour, la case du groupe du cadre
+  suit (`EncounterModel.partyMembers`, `activeMember`). Le combat **laisse aux fiches** ce qu'il
+  en reste (`core::PartyLedger`, tenu par la partie) : points de vie, lancers de sorts ; un membre
+  à terre à la victoire se relève à 1 PV ; un membre **mort** quitte le groupe et ne suit plus.
+  La **prise en tenaille** se joue sur la carte. L'IA **répartit ses coups** : elle n'achève pas
+  un personnage à terre tant qu'un autre la menace au contact. Le **budget d'une rencontre**
+  (`core::rateEncounter`, `Rpg/rules/encounter-difficulty.json`) juge une rencontre contre le
+  groupe par la méthode du *Guide du Maître* (p. 82-83, 274). La démo change de combat : le
+  maître d'arène lâche **six bandits** (`arene-bandits`, trois au cimeterre, trois à l'arbalète,
+  créatures `bandit` et `bandit-archer`), qui partent du côté droit du sable, une rencontre
+  **difficile** au budget pour le groupe de départ — le groupe joué par l'IA, à l'arme seule, la
+  gagne une fois sur deux ; la rencontre `arene-combattant` est retirée.
+
+- **LOT-145 — Le mannequin humanoïde aux quatre orientations, et les portraits des alliés.** Le
+  mannequin humanoïde a désormais ses 24 bandes orientées (SE, SW, NE, NW ; repos, marche,
+  attaque, sort, touché, mort, huit images), installées par `install_hd_asset.py` ; les bandes sans
+  orientation sont retirées. Les portraits du Mage, du Priest et du Scoundrel (atelier du
+  `LOT-136`) s'installent comme **portraits d'attente** : une figurine sans bande dont le nom va dans
+  la liste `portraits` du manifeste `Characters/`, que l'installateur, `check_hd_assets.py` et la
+  galerie des assets connaissent. Le HUD, l'écran Groupe et le dialogue montrent les quatre visages
+  du groupe. Kit `Common@3`.
+- **LOT-138 — Le groupe de quatre.** Le joueur mène un **groupe** de un à quatre personnages,
+  pris parmi les fiches pré-tirées (`core::Party`, `Rpg/characters/`) : le premier de l'ordre de
+  marche est le **meneur**, qu'on déplace, qui interagit et combat sur la carte ; la fiche et
+  l'inventaire s'ouvrent sur lui. « Nouvelle partie » impose le groupe préformé : Brawler, Priest,
+  Scoundrel, Mage. Dans un dialogue, **le joueur choisit qui parle** (D-28) dans un menu en bas de
+  l'écran (`Tab`) : celui-là jette les dés, avec ses modificateurs. Les suiveurs **mettent
+  leurs pas dans ceux du meneur** (`core::FollowTrail`), à une case l'un de l'autre : ils ne
+  peuvent ni entrer dans un mur ni rester coincés derrière un angle ; à l'arrivée sur une carte,
+  ils se rangent dans son dos. `Tab` passe la main au suivant ; l'écran **Groupe** (`G`) prend,
+  laisse, fait mener et change l'ordre de marche, au clavier et à la manette. La figurine d'un
+  membre est celle de sa classe (le mannequin tant que le `LOT-136` ne l'a pas livrée) ; le
+  portrait du meneur paraît au HUD, dont la case du groupe se remplit. Exigences `EX-EXP-013`, `EX-EXP-014`. Tests : `test_party.cpp`,
+  `test_party_model.cpp`, `test_exploration_session.cpp`.
+- **LOT-137 — Fiche du lot : livré** (PR #152).
+- **LOT-137 — États, agonie et mort.** Un personnage à 0 PV tombe **inconscient et à terre** et
+  jette contre la mort à sa place dans l'ordre (*Manuel des Joueurs*, p. 199) : trois succès le
+  stabilisent, trois échecs le tuent, un 1 compte double, un 20 le relève et le fait jouer ; blessé
+  à terre, il note un échec (deux sur un critique) ; des dégâts restants au moins égaux à son
+  maximum le tuent sur le coup ; un monstre meurt à 0 PV (`core::AtZeroHitPoints`). Nouveau statut
+  `Dead`, crochets `DeathSaveDue` et `CombatantDied`, `CombatState::recordDeathSave`,
+  `stabilize`, `revive`, `setLethal` (la Marque Héroïque ne tue personne). Un soin relève et remet
+  le compteur à zéro ; le relevé se remet debout au début de son tour pour la moitié de son
+  déplacement. Une cible inconsciente s'attaque avec avantage, et un coup au contact est critique ;
+  la concentration se rompt sous les dégâts (Constitution, DD 10 ou la moitié). *Épargner les
+  mourants* (`stabilizes`) et *revigorer* (`revives`, moins de dix rounds) se jouent.
+  `ArenaSession::conditionsOf` nomme les états (inconscient, à terre, stabilisé, mort, béni,
+  invisible, en vol, concentré), que l'inspecteur affiche. L'IA achève ou épargne selon le poids
+  `finishDowned` de son profil (agressif 75, meute 100, les autres 0). Tests :
+  `test_death_and_dying.cpp`.
+- **LOT-135 — Classe Scoundrel.** Le Scoundrel du *Player's Guide to Tanares* (p. 204-207) se
+  joue du niveau 1 au niveau 5. Sa table est reprise niveau par niveau, et la colonne de l'attaque
+  sournoise devient une capacité par palier qui remplace la précédente. *Sneak Attack Simplified*
+  ajoute ses dés (1d8, 2d8 au 3, 3d8 au 5) une fois par tour, **seulement** contre une cible
+  adjacente à un allié debout (`allyAdjacentToTarget`, `core::isAdjacentToAllyOf`) ; sans allié,
+  la fois du tour n'est pas consommée. *Scoundrel's Agility* donne 40 ft à la fiche de la page 207
+  (écart n° 9 du registre du `LOT-130` refermé) et +2 CA au niveau 5. *Adventurer's Aptitude* est
+  le nouvel effet `proficient-check-bonus`, lu par `skillModifier`. *Precise Striker* : +1 au jet.
+  Les icônes des quatre capacités sont générées et publiées dans le kit `UI@5`. Tests :
+  `test_class_scoundrel.cpp`.
+- **LOT-134 — Classe Priest.** Le Priest du *Player's Guide to Tanares* (p. 200-203) se joue du
+  niveau 1 au niveau 5. Sa table est reprise niveau par niveau jusqu'au 20, et neuf sorts entrent
+  au catalogue d'après le *Manuel des Joueurs*. *Flamme sacrée* réemploie la sauvegarde du Mage
+  (une réussite annule, 2d8 au niveau 5). Le moteur gagne le **soin** (*soin des blessures* :
+  1d8 + Sag à un allié au contact, qui se relève s'il était à terre), l'effet posé sur **trois
+  alliés** (*bénédiction* : un d4 nommé à chaque jet d'attaque et de sauvegarde, dix rounds), le
+  sort d'**action bonus** et l'attaque de sort **au corps à corps** (*arme spirituelle*, qui
+  frappe de nouveau à chaque tour sans dépenser de lancer). *Épargner les mourants*,
+  *restauration inférieure* et *revigorer* attendent le `LOT-137` et le déclarent. Les icônes des
+  huit sorts nouveaux sont générées et publiées dans le kit `UI@4`. Tests : `test_class_priest.cpp`.
+- **LOT-133 — Classe Mage.** Le Mage du *Player's Guide to Tanares* (p. 196-199) se joue du
+  niveau 1 au niveau 5. Sa table est reprise niveau par niveau jusqu'au 20, sorts mineurs et sorts
+  compris ; *Arcane Protection* (CA 13 + Dex) donne 15 à la fiche de la page 199 au niveau 2.
+  Neuf sorts entrent au catalogue `Rpg/spells/`, nommés d'après le *Manuel des Joueurs*, et le
+  moteur gagne les mécanismes qu'ils déclarent (`spell.schema.json`, `core::spellMechanism`) :
+  **projectiles** à un jet chacun (*rayon ardent*, rayons perdus écrits au journal), sort qui
+  **touche sans jet** (*projectile magique*), **sauvegarde** dans une **sphère** qui prend alliés
+  et lanceur, la moitié à qui réussit (*boule de feu*, une ligne par créature), **effets qui
+  durent** sous **concentration** (*vol* : locomotion et budget changés ; *invisibilité* :
+  désavantage contre, avantage pour, pas d'attaque d'opportunité, fin à la première attaque ou
+  au premier sort), dés des sorts mineurs qui montent au niveau 5. Le profil de combat porte ses
+  sauvegardes ; l'écran lance un sort sur la créature cliquée, alliée ou non. Les icônes des
+  trois capacités et des neuf sorts (nouvelle pièce `ui/icon/spell`) sont générées, recadrées à
+  128 px et publiées dans le kit `UI@3`. Tests : `test_class_mage.cpp`.
+- **LOT-132 — Classe Brawler.** Le Brawler du *Player's Guide to Tanares* (p. 192-195) se joue
+  du niveau 1 au niveau 5 : ses capacités entrent au catalogue `Rpg/capacities/` et le moteur n'y
+  gagne qu'un genre d'effet. *Tough as Nails* (CA sans armure 10 + Dex + Con, bouclier permis ;
+  résistance à tous les types) rend à la fiche de la page 195 sa **CA 14** et referme l'écart n° 1
+  du registre du `LOT-130`. *Hit the Mark* (+2) se nomme au jet. *Extra Attack* est le nouvel effet
+  `extra-attack` : l'action *Attaquer* octroie des attaques que seul le même tour peut dépenser
+  (`EXTRA_ATTACK_RESOURCE`), nommées au journal (« attaque supplementaire … (Extra Attack) ») ; la
+  barre d'actions ne propose plus alors que les attaques. *Experience* et *Ability Score
+  Improvement*, communes aux quatre classes, sont narratives et déclarent leur mécanisme requis :
+  monter de 1 à 5 ne laisse plus d'avertissement. La pièce `ui/icon/capacity` entre au cahier de la
+  charte v2 ; ses cinq icônes sont livrées dans le kit `UI@2`.
+  Tests : `test_class_brawler.cpp`, sur le support partagé `Test/Support/ClassArena.h`.
+- **LOT-131 — Le socle de classe simplifiée.** Une classe est une donnée qui agit en combat sans
+  une ligne de C++ qui la nomme. Les **capacités** sont un catalogue d'**effets nommés**
+  (`Rpg/capacities/`, `capacity.schema.json`, sept genres : bonus au jet, bonus de CA, formule de CA
+  sans armure, résistance, vitesse, pas d'attaque d'opportunité, dés en plus une fois par tour) que
+  la table de progression désigne par identifiant et que la fiche porte au niveau atteint
+  (`CharacterSheet::capacities`, `applyClassFeatures`). Le moteur les branche sur ses crochets :
+  bonus au jet nommé au journal (« + 2 (Coup precis) »), nouvelle étape `Hit` du jet d'attaque pour
+  les dés ajoutés (« 1d6 : 4 tranchant (Coup precis) »), résistance qui nomme sa source
+  (« resistance (tranchant ; Peau de fer) »), déplacement sans attaque d'opportunité écrit au
+  journal, CA sans armure recalculée par la meilleure formule (`EX-CBT-030`). L'**incantation
+  simplifiée** du *Player's Guide* (p. 196, 200) tient un compte de lancers **par sort et par jour**
+  sur la fiche (`knownSpells`), que `longRest` rend ; dans l'arène, `castSpell` refuse un sort épuisé
+  avant toute dépense et la barre le grise. Seul le sort à **jet d'attaque** est joué ici
+  (`spell.schema.json` : `attackRoll`, `rangeMeters`). Les **maîtrises d'armes** viennent de la
+  classe (catégorie ou arme) et de l'espèce (`weaponProficiencies` du nain), et le test des fiches du
+  `LOT-130` les lit au lieu de les supposer. Les quatre classes reçoivent maîtrises, compétences au
+  choix et incantation (Int et Sag, 2/jour) ; leurs capacités et sorts restent aux `LOT-132` à
+  `LOT-135`. Une classe d'essai à quatre capacités et trois sorts vit dans la racine de données
+  d'essai et joue chaque critère en test (`test_class_capacities.cpp`, `test_class_in_arena.cpp`).
+  Exigences `EX-RPG-024` et `EX-RPG-025`.
+- **LOT-130 — Les quatre fiches préfabriquées, en données.** Le Mage, le Priest et le Scoundrel du
+  *Player's Guide to Tanares* (p. 199, 203, 207) rejoignent le Brawler dans `Rpg/characters/`,
+  valeur pour valeur : `heros-mage.json`, `heros-priest.json`, `heros-scoundrel.json`, provisoires
+  avec leur classe. Un test par fiche (`test_premade_characters.cpp`) recalcule tout ce que la page
+  imprime — caractéristiques, PV, CA armure et bouclier compris, initiative, vitesse, Perception
+  passive, six sauvegardes, dix-huit compétences, chaque attaque avec ses dés et ses portées — et
+  la fiche du lot tient le **registre des coquilles** du livre et des écarts, avec la valeur retenue
+  (la règle prime : handaxe tranchante, Perception passive 14, 40 ft au Scoundrel dès que
+  *Scoundrel's Agility* sera jouée). Trois mécanismes que les pages exigent entrent dans le moteur : l'**héritage d'une sous-espèce** (le nain des collines reçoit les augmentations, langues et traits du nain ; `parentSpecies` n'était qu'une étiquette),
+  la *Ténacité naine* comme nombre de points de vie par niveau de l'espèce (`hitPointsPerLevel`,
+  compté au niveau 1 et à chaque montée, hors du plancher), et le **+1 au choix** de l'elfe
+  d'automne comme choix de la fiche (`speciesAbilityChoice`, appliqué après la table de l'espèce
+  sous le même plafond ; l'espèce garde son mécanisme requis, le moteur n'offre pas encore le
+  choix). Le trait *Sauvagerie* du demi-orc perd la demi-page d'OCR sur les gnomes qu'il
+  embarquait.
+
+## [0.0.1] - 2026-09-27
+
+- **Les deux dernières alertes clang-tidy de Code scanning.** La mini-carte de l'éditeur appelle
+  `EditorViewport::tileColor` par sa classe, sans capturer la fenêtre, et la mise en page des
+  drapeaux de quête de `WorldStateEditor` est confiée à sa boîte par `setLayout`, où l'analyseur
+  voit le transfert de propriété. Comportement inchangé.
+
+**La démo basique.** Première version publiée du jeu : une quête, « Des pommes pour l'arène »,
+jouée de bout en bout sur trois cartes de principe — le marché de **Martpart**, le parvis
+d'**Arenarea**, le sable et le niveau −1 de l'**Arena of Fate** — et qui se termine par l'une de
+ses trois issues : la persuasion du garde, la victoire seul contre un sur le sable, ou la mort.
+« Nouvelle partie » ouvre Martpart à la Market Gate ; un dialogue à jet de compétence, un combat
+tactique **sur la carte**, un journal de quête et deux écrans de fin font le reste. Les PNJ sont
+des mannequins et les cartes ne portent qu'un habillage de principe : les lieux définitifs, leurs
+assets et leurs figurines sont à la `0.0.3` (décision D-25).
+
+Sous la démo, la version pose ce qui servira à tout le jeu : le **standard 2D HD** et sa chaîne de
+production (le pixel art a quitté le dépôt), le kit commun de la Capitale, les étages et les toits,
+l'arborescence des assets par niveaux et leurs kits publiés hors de Git, le moteur de la quête
+(drapeaux, étapes, présence conditionnelle, jets en dialogue, rencontres sur la carte), l'éditeur
+de cartes remis d'aplomb (base vide, canevas HD, maquettes jouables, tout ce que la quête demande à
+une carte, recette à la main), le menu de développement **F9**, et la planification par versions
+dans `Planning/`, avec son site. Le détail par lot, du plus récent au plus ancien :
+
+- **LOT-122 — Recette et version 0.0.1.** La démo est jouée par l'auteur jusqu'à ses trois fins
+  (les trois `SystemGameTests` les couvrent), le numéro de version passe de `0.1.0` — un contresens :
+  `0.1.0` est le référentiel de l'Empire central — à `0.0.1` dans `CMakeLists.txt`, ce CHANGELOG
+  reçoit sa première section de version (et une section `0.0.0` pour tout ce qui précédait la
+  refonte du 20 septembre), le README et le manuel décrivent la démo telle qu'elle se joue, le
+  bilan de la version est écrit dans `Planning/versions/v0.1.0/v0.0.1-demo/bilan.md`. Les
+  mannequins (`LOT-145`) partent à la `0.0.2` (D-26) : la démo n'en dépend pas ; Q-09 est tranchée
+  (D-27 : le lint de l'ancienne feuille de route était déjà parti, les archives restent). Le code a
+  été **audité** : dans `Core`, sept symboles sans appelant, six includes inutiles et la convention
+  « Doxygen dans le `.h`, `//` dans le `.cpp` » rétablie dans 27 fichiers, un `@brief` sur
+  cinquante-trois fonctions publiques ; dans `HMI`, la **chaîne de rendu du Colisée**
+  (`ArenaSceneRenderer`, `ArenaSceneComposer`, `ArenaAppearanceCatalog`, `ArenaAnimationDriver`,
+  2 000 lignes compilées dans les deux exécutables sans appelant depuis le retrait de l'écran) part
+  avec ses quatre tests, ainsi que `TextureCache`, 22 traductions orphelines, la section
+  « Colisée » de la galerie de l'atelier, un alias vers une carte disparue, des signaux et des
+  propriétés que plus aucun écran ne lisait ; l'outillage Python perd quatre symboles morts et deux
+  chemins cassants (le cahier des assets d'interface, l'écran `Arena` des captures). Les guides
+  suivent (`guide-rendu`, `guide-combat`, `guide-ihm-qt`, le manuel de l'éditeur), le cahier de
+  test est régénéré. Le job **`format`** de la CI annotait les écarts de `clang-format` sans jamais
+  échouer (`xargs | tee` sans `pipefail`) : il échoue désormais, et les trente-six fichiers en
+  défaut sur `main` sont reformatés. Les huit PNG de sortie de test commités à la racine partent.
+  Ce que l'audit avait soumis à l'auteur est **tranché** à la recette : la prévisualisation du
+  combat de l'écran du Colisée (`CombatModel.preview`, 16 chaînes) part ; un portail fermé,
+  bloqué ou condamné le **dit au joueur** (message bref dans la vue de jeu) ; le cycle des écrans
+  aux gâchettes et la table `RpgScreens` de l'ère Widgets partent, `EX-IHM-090` et `EX-IHM-091`
+  disent la pile d'écrans QML et le gel tels qu'ils sont ; `InputState` ne garde que la manette ;
+  `CacheRegistry` part ; le catalogue d'arène (`core::Arena`, `loadArenas`, `heroic-marks`) et
+  l'action de dialogue `startCombat` partent, `core::ArenaSession` reste ; les six dialogues du
+  Colisée partent avec leurs textes et 147 clés de traduction sans lecteur (châssis, champs de
+  fiche, emplacements d'équipement, titres d'écran), les tests lisant désormais les dialogues de la
+  démo ou une fixture. Les briques de règles de la fondation (`AreaOfEffect`, `Multiclassing`…)
+  restent pour la `0.0.2`.
+
+- **LOT-121 — L'onglet « Carte » : le plan de la Capitale.** Le plan peint par l'auteur montre ses
+  douze quartiers : Martpart et Arenarea s'ouvrent sur leur carte, les dix autres s'annoncent
+  grisés, avec leur nom. La carte d'un quartier est son rendu (`LevelEditor --render --canvas
+  1920x1080`, JPEG, rangé dans le `Map/` de la zone et dans son kit) ; `world-maps.json` le nomme
+  avec sa **grille**, qui pose le héros et les repères en isométrie. L'Arena of Fate est une
+  **sous-zone** d'Arenarea (D-16) : un repère à son entrée, qui ouvre sa carte ; le héros qui s'y
+  tient, ou dessous, est marqué à cette entrée, et son quartier reste Arenarea
+  (`CityPlan::districtOfMap`). `check_map_assets.py` contrôle les cartes rendues et leurs
+  sous-zones ; `--render` écrit le JPEG (greffons d'image chargés sans application).
+- **Éditeur — les cartes de la démo reçoivent leurs pièces.** Martpart, Arenarea et le sable de
+  l'Arena of Fate nomment leur lieu (`scene`, par `--change-scene`) : l'onglet des pièces de la
+  palette s'ouvre sur leur catalogue, au lieu de rester grisé depuis le `LOT-128`. Les types
+  couverts par la table d'Arenarea s'y peignent en pièces (pavé en marbre, sable en piste), en jeu
+  comme dans l'éditeur. Le niveau −1 reste une maquette : sa porte close nomme une pièce d'attente
+  (`porte-de-l-arene`) à apparier au passage de « Change sheet… ». L'onglet grisé d'une carte
+  sans lieu le dit dans son infobulle.
+- **Démo — les trois cartes habillées.** Arenarea redessinée par l'auteur (jardins, bassins, médaillons,
+  façade du Colisée). Martpart et l'Arena of Fate reçoivent le même soin, par `--apply` : échoppes à
+  auvent, étals sur estrade, placette gravillonnée et sa fontaine, jardin clos au marché ; tribunes de
+  l'hippodrome tournées vers le sable, galerie de marbre, barrière du podium et braseros aux portes à
+  l'arène. La collision de l'arène est inchangée (cases forcées là où le décor s'ouvre) ; les PNJ de
+  l'arène sont à la place que l'auteur leur a donnée, et les tests de bout en bout et de la quête
+  suivent ces nouvelles cases.
+- **LOT-146 — Les quatre cartes de principe de la démo.** Martpart (24 × 11), Arenarea (24 × 13),
+  le sable de l'Arena of Fate (34 × 24, zone de combat 22 × 14) et son niveau −1 (le vestiaire A,
+  le couloir et sa porte close, l'escalier de la porte du triomphe) sont dessinés dans l'éditeur
+  par `--apply`, sans une seule pièce, à l'échelle des plans du planning ; les gestes sont
+  l'annexe du lot. Portails et points d'arrivée nommés, zone du parvis à déclencheur, portails
+  condamnés (la porte des morts, le casino), les cinq PNJ de la quête en jetons ou mannequins
+  avec leur condition de présence ; `--check` vert, `--render --plan` de chaque carte joint. La
+  carte d'Arenarea du `LOT-109` (128 × 88) cède son identifiant (D-25). Le plan de principe
+  (`--render --plan`) couche désormais aussi les blocs de la couche de **décor** : une carte neuve
+  y met ses murs, et le plan ne les montrait pas.
+- **LOT-120 — La quête « Des pommes pour l'arène ».** La quête en données (`World/quests/pommes.json`,
+  un drapeau à cinq valeurs, six étapes), ses quatre dialogues (la mère, le garde et son jet de
+  Persuasion au degré « moyenne », l'enfant, le maître d'arène), la rencontre de l'arène et la
+  fiche du combattant (`Rpg/creatures/combattant-de-l-arene.json`, joué par le mannequin), les
+  textes en français et en anglais. **« Nouvelle partie » entre dans la démo** : un plan de la
+  Capitale provisoire (`World/cities/capital.json`, deux quartiers, Martpart en départ à
+  `market-gate`) jusqu'au plan complet du `LOT-121`. Le moteur pose à la victoire le fait
+  `encounter/<rencontre>/won` (`core::encounterWonFlag`) : une rencontre engagée par un dialogue
+  n'avait pas de trace, la quête le lit ; `DialogueModel.seed` fixe la graine d'une conversation,
+  comme `EncounterModel.seed` celle d'un combat. Tests : la chaîne entière sans fenêtre par ses
+  trois issues (`IntegrationTests`), la démo **par les modèles du jeu** de « Nouvelle partie » à
+  chaque fin (`SystemGameTests`, étiquette `systeme`), et l'équilibrage à cent graines (le héros
+  l'emporte entre 60 et 70 fois) et à mille graines tirées d'une graine maîtresse.
+- **Démo — deux retours de jeu corrigés.** Le héros ne repart plus seul en sortie de dialogue :
+  la vue de jeu, remplacée par le dialogue, ne voyait jamais le relâchement de la touche, et
+  `WorldModel` gardait la dernière direction ; figer la carte, ou recevoir un dialogue ou une
+  rencontre, l'oublie désormais. Et l'on aborde un PNJ (ou tout objet interactif) **à moins de
+  1,5 case** de la position du héros, diagonales et dos compris, et non plus seulement sur la
+  case qu'il regarde ; celle-ci garde la priorité, puis la plus proche. Deux murs en coin ferment
+  toujours la diagonale (`core::INTERACTION_REACH_CELLS`).
+
+- **Menu de développement (F9) — un seul outil.** Le menu gagne une section **Dialogue** (ouvrir
+  n'importe quel dialogue du contenu, comme un PNJ l'ouvrirait), une section **Fins** (écran de
+  mort, fin de la démo par voie), le **lanceur de cartes** (`--screen=MapLauncher` : toutes les
+  cartes du contenu et des brouillons, ouvertes à la case et dans l'état voulus) et une **ligne de
+  commande** qui rejoue à chaud les options du binaire (`hmi::DebugConsoleModel` ; le catalogue
+  `hmi::debugOptionCatalog` est recoupé par un test avec les options que le jeu lit ; « Relancer
+  avec » pour celles qui ne se lisent qu'au lancement). Le sélecteur d'écrans ◀ ▶ du bas de la
+  fenêtre est retiré : le menu épingle les écrans (`ScreenStack.pinnedScreen`). L'écran du
+  **Colisée** est retiré (`Arena.qml`, `ArenaModel`, `ArenaViewportItem`, l'état `Arena` de la
+  table) : le combat se joue sur la carte depuis le `LOT-118`. `ScreenRouter.jumpToGame()` ouvre la
+  vue de jeu hors de la table, en développement seulement. Le guide « Outils de développement du
+  jeu » est à jour.
+- **LOT-117 — Un jet de compétence dans un dialogue.** Une réponse qui mène à un jet l'annonce
+  avec son seuil (« [Persuasion · DD 15] ») ; une fois jouée, l'écran de dialogue montre le d20
+  tiré dans son losange, ce qui était jeté, le calcul (« 12 + 4 = 16 ») et l'issue. Un jet **raté**
+  pose `dialogue/<dialogue>/<jet>/failed` : la réponse qui y menait ne se propose plus, dans cette
+  conversation comme dans les suivantes, et le même jet atteint par un autre chemin échoue sans
+  relancer le dé. Le chargement refuse un jet sans branche d'échec (ou dont l'échec mène où mène
+  la réussite), et une réplique que des jets ratés pourraient laisser sans réponse.
+- **LOT-119 — Les écrans de fin.** L'**écran de mort** s'ouvre dès que le héros tombe dans un
+  combat sur la carte, par-dessus la scène figée et assombrie : « Recommencer » rouvre une partie
+  neuve, « Menu » rend le menu. L'écran **« Fin de la démo »** s'ouvre par la nouvelle action de
+  dialogue `endDemo` (champ `ending`) et dit la voie suivie (`ending.<voie>` : « par la voie de
+  l'arène », « par la parole »), ce qui vient ensuite, puis mène aux crédits ou au menu. Les deux
+  ferment la partie (`WorldModel.endGame`) : « Nouvelle partie » ne reprend plus la partie où l'on
+  vient de mourir.
+
+- **Planning — la démo se joue sur des cartes de principe (D-25).** Les lots de *world building*
+  de la `0.0.1` — assets, cartes et PNJ de l'Arena of Fate et de Martpart, PNJ d'Arenarea
+  (`LOT-106`, `LOT-107`, `LOT-110`, `LOT-111`, `LOT-113`, `LOT-114`, et `LOT-115`, de même nature)
+  — partent à la `0.0.3`, où ils s'inscrivent avec les six autres quartiers ; ils gardent leur
+  numéro. Les trois cartes enchaînées restent, fortement réduites à des cartes de principe jouées
+  en maquette, en un seul lot (`LOT-146`) ; les PNJ y sont les mannequins du `LOT-145` ou des
+  jetons. Les livraisons des `LOT-108` et `LOT-109` sont loin du standard voulu pour le jeu final :
+  elles se refont à la `0.0.3` (`LOT-147`), et la démo n'en dépend plus. La quête (`LOT-120`) et
+  l'onglet « Carte » (`LOT-121`) n'attendent plus que le `LOT-146` ; le catalogue des versions, les
+  README des deux versions, la trajectoire, les risques (R-13) et les fiches touchées suivent.
+- **Le menu de développement (F9).** Dans un binaire de développement, **F9** ouvre un panneau
+  par-dessus l'écran courant (`Source/App/Game/Qml/Tools/DevMenu.qml`) : ouvrir un écran par son
+  nom, entrer sur une carte à un point d'arrivée, engager une rencontre ou le Colisée, geler la
+  carte, montrer le compteur de diagnostic, écrire les journaux de la session — ce qu'on faisait
+  par la ligne de commande, en cours de partie. Il n'appelle que les vues-modèles, emprunte la
+  palette ambiante sans écrire une couleur, se lie à `ScreenRouter.developerBuild` comme le
+  sélecteur d'écrans (un binaire livré n'a ni le panneau ni la touche) et rend le clavier à
+  l'écran en se fermant. Le sélecteur gagne `select(name)`, par lequel le menu ouvre un écran.
+- **Guide — « Outils de développement du jeu ».** Une page réunit ce que le jeu offre à qui le
+  développe : le menu F9, le sélecteur d'écrans, toutes les options de la ligne de commande en
+  une table (`--data=` du `LOT-118` comprise), la racine de contenu d'essai, la galerie des
+  assets, les captures, les journaux, et la règle qui tient tout cela hors d'un binaire livré.
+- **Site de documentation — l'accueil ne casse plus ses cartes.** Le résumé d'une partie (le
+  premier paragraphe de son README) était rendu tel quel dans la carte de l'accueil, elle-même un
+  lien : dès qu'il citait une page, le navigateur refermait la carte au premier lien imbriqué et
+  la grille éclatait. Le résumé garde ses mots sans ses liens ; un test le vérifie.
+- **LOT-118 — Le combat sur la carte.** Une rencontre engagée pendant l'exploration se joue sur
+  place : la carte se fige, la grille paraît sur sa zone de combat, le combat se joue avec les
+  gestes du Colisée, l'exploration reprend. Ce qui entre :
+  - `core::prepareMapEncounter` : la zone de combat du déclencheur (à défaut du héros), la carte
+    découpée à la zone, les places ramenées dedans et notées ;
+  - `hmi::CombatModel`, la partie du combat commune au Colisée (`hmi::ArenaModel`) et à la carte
+    (`hmi::EncounterModel`) : curseur, actions, gestes, tours de l'IA ; aucune régression du
+    Colisée ;
+  - la **file des mouvements** (`hmi::CombatCueTrack`) : les pas, les coups et les chutes se
+    rejouent à la vitesse du monde, l'IA joue ses tours un par un, et les figurines de la carte
+    gelée jouent leurs six bandes — la marche, l'attaque, le touché, la mort, et le sort (prêt,
+    encore appelé par rien). Les bandes à un coup se figent sur leur dernière image ; le repos
+    respire à l'arrêt ;
+  - l'action de dialogue `startEncounter` (le maître d'arène) et l'entité `encounter` de la carte
+    ouvrent l'affichage de combat (`CombatHud.qml`) par-dessus la carte ; le calque tactique
+    (`TacticalLayer`) est commun aux deux écrans ;
+  - les issues : victoire (drapeau posé, exploration reprise là où le combat a laissé le héros),
+    fuite, défaite (retour au menu en attendant le `LOT-119`) ;
+  - `--data=<racine>` : le jeu joue une racine de contenu comme l'éditeur l'ouvre — c'est ainsi
+    que la carte de test du combat se joue :
+    `JustAnotherRpgGame.exe --data=Source/Test/Fixtures/GameData --map=donjon@sable --at=24,19`.
+  - **Audit de l'IA** : elle marchait bien vers le joueur ; c'est l'affichage qui ne le montrait
+    pas (tous les tours joués d'un bloc, un seul instantané). Un déplacement refusé s'écrit
+    désormais au journal, et un test la fait marcher sur la vraie zone d'une carte.
+  - un bouton **« Fin du tour »** sous la fiche de la cible : le HUD de combat n'offrait la fin du
+    tour qu'au clavier (Espace) et à la manette (Y), la souris ne rendait jamais la main.
+- **LOT-145 — Les mannequins de remplacement** (en cours). Un personnage sans figurine se dessine
+  par le mannequin de sa silhouette (`hmi::FigureResolver`) : le mannequin humanoïde SE-v1 de
+  l'atelier est installé sous `Common/Characters/Placeholders/humanoid/`, sa seule orientation
+  servie aux quatre ; les créatures et les PNJ déclarent leur `silhouette` (`humanoid`,
+  `quadruped`, `flying`). Un PNJ dessiné par un mannequin n'a plus de jeton.
+
+- **LOT-127 — La recette de l'éditeur, à la main.** L'auteur a passé l'éditeur à la souris et au
+  clavier en construisant les cartes 2D HD, puis a essayé le résultat dans le jeu. Le cahier de
+  recette (`Planning/versions/v0.1.0/v0.0.1-demo/annexes/LOT-127-…/cahier-de-recette.md`) compte
+  48 gestes, des lots `LOT-EDITOR-03` à `10`, `13` et `14`, **tous OK**. Les fiches de l'éditeur
+  ne portent plus de « vérification à la souris due ».
+
+- **Affichage d'un lieu — un quartier entier à 60 images/s.** L'audit de l'affichage d'un lieu
+  (`Planning/standards/audit-affichage-lieu.md`) a établi que le rendu recomposait et triait
+  **toute** la carte à chaque image, refaisait son instantané à chaque pas du héros et relisait le
+  manifeste de 862 Kio de la planche pour chaque texture. Les changements :
+  - la carte se compose une fois dans une scène indexée (`hmi::StaticWorldScene`), découpée à la
+    vue à chaque image, où les figurines se fusionnent ; jeu, essai de l'éditeur, canevas et tests
+    partagent ce chemin ;
+  - l'instantané de la carte est partagé et ne se refait qu'au changement de carte ou de drapeaux ;
+  - les manifestes sont lus une fois et indexés ;
+  - les PNG se décodent sur tous les cœurs ;
+  - une seule matrice de projection est téléversée par image ;
+  - une passe de plus de 16 384 quads se découpe au lieu d'être tronquée.
+
+  Sur Arenarea, une image passe de 11 ms à 0,07 ms de CPU et l'ouverture en Debug de 82 s à 5 s.
+  Nouveau banc : `bench_world_frame.cpp`.
+
+- **LOT-109 — Arenarea, le quartier entier.** Première carte 2D HD du jeu :
+  `Levels/central-empire/capital/arenarea.json`, 128 × 88 cases, d'après le Sourcebook et le plan
+  de la Capitale. On y trouve :
+  - l'enceinte sur la baie et la rivière, la Water Gate, l'Arena Gate et l'Arching Bridge ;
+  - le Natural Pool ;
+  - l'Arena of Fate (façade à quatre ordres), son parvis et la Dusk of Justice ;
+  - Herofate Avenue ;
+  - Inlet's Bazaar, le Golden Chalice Casino, la Cloaked Brewer, Mapleleaf Plaza, l'Hippodrome et
+    ses écuries ;
+  - des îlots de manoirs et de maisons.
+
+  La carte est dessinée par `LevelEditor --apply`, avec les assemblages validés du LOT-108 et les
+  pièces livrées, sans en produire aucune. Les portails vers Martpart, l'Arena of Fate, Oldtown et
+  les Docks sont condamnés, en attendant leurs cartes. `--check` ne relève aucune erreur. L'image
+  de l'onglet « Carte » part au LOT-121, avec celles de Martpart et de l'Arena of Fate.
+
+- **Documentation — la refonte se poursuit : ce que les lots ont livré sans l'écrire.** Les
+  **spécifications** gagnent dix-neuf exigences pour des fonctions livrées sans engagement écrit :
+  la famille `prop`, le portail condamné, la zone déclencheuse, l'arborescence des lieux et la
+  borne de côté du chargeur (`EX-LVL-026` → `EX-LVL-030`) ; la vitesse de marche et l'avancement
+  recalculé des quêtes (`EX-EXP-011`, `EX-EXP-012`) ; l'état de partie de l'éditeur, l'inspecteur
+  qui pose tout, les étages, l'arbre des lieux et le mode Quêtes à venir (`EX-EDIT-096` →
+  `EX-EDIT-100`) ; les kits d'assets hors Git, le poids sans budget et le contrôle HD
+  (`EX-CNT-070` → `EX-CNT-072`) ; le cadre 16:9 et le rendu sans texture (`EX-REN-019`,
+  `EX-REN-023`) ; la sauvegarde (`EX-GP-070`, `EX-GP-071`). Quatorze passages périmés sont
+  corrigés (vitesse de 4 cases/s, nombre d'images « ouvert », `Assets/Scene/<lieu>/`, trois
+  modèles, palette par classe…) et **chaque page porte désormais au moins une maquette** : dix-huit
+  dessins nouveaux ou refaits — le jet, la fiche agrégat, la bascule et l'agonie, les emplacements,
+  la filière des données et les kits, les étages, les entités de quête, l'arbre des lieux, le circuit
+  des drapeaux, le journal de quêtes, l'état de partie, la chaîne des entrées, l'ordre de tri (sa
+  clé était fausse), le cadre 16:9, la maquette sans texture, la machine à états, les modules — et
+  la fenêtre de l'éditeur montre l'étage, l'état de partie et la palette par niveau. Le **guide**
+  documente ce qu'il taisait : l'arborescence des lieux (`ScenePlace.h`), les kits hors Git, les
+  étages et la translucidité, l'orientation des figurines, l'état de partie de l'éditeur, le
+  canevas HD, le journal de quêtes, la ligne de commande de l'éditeur en une table, et corrige une
+  quinzaine d'affirmations que les lots récents avaient rendues fausses (`WORLD_DEPTH_SLOTS`, la
+  figurine par défaut, les préfabriqués par lieu…). Le **cahier de test** gagne sa **matrice de
+  traçabilité** (`couverture-exigences.md`, engendrée : chaque exigence en vigueur et les cas qui la
+  citent, les exigences sans garde laissées visibles), chaque fiche cite ses exigences, chaque
+  domaine récapitule les siennes, le README dit les trois étages de vérification, et une seule
+  page s'écrit à la main, la **recette manuelle** (`RM-…` : ce qu'un humain contrôle avant de dire
+  « livré », avec ce qui vaut refus). Les fiches des lots concernés citent leurs exigences.
+
+- **LOT-126 — Ce que la quête demande aux cartes.** Tout ce que « Des pommes pour l'arène » pose
+  sur une carte s'écrit à l'inspecteur de l'éditeur, sans toucher au JSON. La **condition de
+  présence** est déclarée pour toute famille (`core::commonEntityProperties`) et propose les
+  valeurs que la quête déclare ; `--check` refuse une valeur qu'aucune quête ne déclare. Nouvelle
+  famille **`prop`** : une pièce du lieu posée comme entité, qui se compose et arrête le pas sur
+  son emprise tant qu'elle est présente — les portes de l'arène, closes sous `condamne`. Un
+  portail **condamné** (`sealed`) est légal sans cible ni arrivée, se montre en pointillé au graphe
+  et ne s'ouvre pas en jeu. Une **zone** déclenche à l'entrée un dialogue, un drapeau posé ou un
+  transfert vers une carte et un point d'arrivée (`triggerOnce` pour une seule fois) ; le transfert
+  compte pour l'atteignabilité du `--check`. *Map* › *World state…* règle l'**état de partie**
+  dont partent l'essai immédiat (`P`) et le jeu (`F5`), et montre au canevas la carte dans cet
+  état, ce qui est absent grisé.
+
+- **Planning — le mode Quêtes de l'éditeur (LOT-144, `0.0.2`).** Décision D-24 : les quêtes
+  s'écriront dans l'éditeur, à côté des cartes qu'elles traversent ; « Les enfants de Martpart »
+  (LOT-155) sera la première écrite ainsi.
+
+- **LOT-116 — Quêtes et drapeaux de monde.** Le jeu se souvient de ce que le joueur a fait. Un
+  drapeau peut être **déclaré à valeurs** par une quête (`quete.pommes`, de `inconnue` à
+  `enfant-libere`) : `core::WorldFlags` refuse alors une valeur hors liste, et sa révision avance à
+  chaque changement. Les quêtes sont des données (`World/quests/<id>.json`, schéma
+  `quest.schema.json`) : drapeaux déclarés, étapes atteintes dès que leurs conditions tiennent,
+  effets, issue ; lues et validées au démarrage, chaque erreur nommant **le fichier et la ligne**.
+  Les dialogues comparent (`equals`, `notEquals`) et posent (`setFlag` + `value`) ces valeurs, et
+  écrivent enfin dans les drapeaux **de la partie** — ceux que la carte lit. Une entité de carte
+  peut porter une **condition de présence** (`presenceFlag`, `presenceTest`, `presenceValue`) : un
+  PNJ paraît et disparaît quand le drapeau change, sans recharger la carte. Le **journal de
+  quêtes** est branché (`QuestJournalModel`, `Haut`/`Bas`/`Échap`). `LevelEditor --check` refuse
+  un drapeau lu par un dialogue, une quête ou une condition de présence qu'aucun dialogue ni aucune
+  quête ne pose, une quête mal formée et une valeur non déclarée. `--flags=` accepte
+  `drapeau=valeur`.
+
+- **LOT-108 — Arenarea : le quartier extérieur complet.** 1 491 pièces HD installées d'après la
+  checklist de 102 postes validée par l'auteur : 1 029 dans le commun de la Capitale (raccords de
+  murs, portes et fenêtres de service, soubassements, corniches, accents et solins de toiture,
+  auvents, clôtures, grilles, murets, haies, bassins, bordures, caniveaux, seuils, berges, quais,
+  remparts, tours, écuries, mobilier de rue et de jardin) et 462 propres à Arenarea (dallage de
+  marbre et incrustations, médaillons, piste et équipements de l'hippodrome, Golden Chalice, Dusk
+  of Justice, Inlet's Bazaar, Cloaked Brewer, Arena Gate, Arching Bridge, extérieur du Colisée).
+  Les 705 pièces communes antérieures sont inchangées ; les nouvelles se rangent par famille sous
+  `Scene/`. `appearance.json` d'Arenarea donne ses variantes de marbre et de piste. Commun de la
+  Capitale : 101 Mio ; Arenarea : 57 Mio (sans budget, D-23). Les trois manoirs et les deux
+  parvis témoins sont des préfabriqués de l'éditeur (`Source/Elements/Editor/Prefabs/`).
+
+- **Les images des kits d'assets sortent de l'historique Git.** Celles de `Common/`, `Regions/`,
+  `Maps/` et `UI/` sont publiées en archives immuables sur les releases du dépôt ; Git ne garde
+  que les manifestes et le verrou `Source/Elements/Assets/kits.lock.json`. **Après le `git pull`
+  de ce changement, lancer `python scripts/fetch_assets.py`** (le pull retire les images de
+  l'arbre ; `build.ps1` et `setup_dev.ps1` l'appellent d'eux-mêmes, CMake refuse de configurer
+  sans). Une retouche se publie par `scripts/release/publish_asset_kit.py` et ne se commite jamais :
+  `check_binary_files.py` refuse une image suivie sous un kit verrouillé. L'historique n'est pas
+  réécrit.
+
+- **Assets HD — plus de budget de poids par zone (D-23).** Décision de l'auteur du 24 septembre
+  2026 : un jeu lourd mais riche et immersif plutôt que des kits bridés. `check_hd_assets.py` ne
+  borne plus une zone à 40 Mio ; il la pèse et publie son poids dans le résumé du job, pour
+  mémoire. Le plafond de 5 Mio par fichier (`check_binary_files.py`) demeure. Le critère de poids
+  quitte les fiches des lots d'assets à venir, l'arborescence et la définition de « livré » ;
+  le risque R-03 et la question du stockage (Q-08) en tiennent compte.
+
+- **LOT-125 — livré.** L'auteur a fait les contrôles à la main, derniers critères du lot : le
+  travelling et le zoom restent fluides, trois onglets HD ouverts. La fiche passe à `livre`.
+
+- **CI — le test de fumée de l'archive Debug n'échoue plus par lenteur.** Le jeu en mode
+  `--screenshot=` abandonnait au bout de 15 s ; le build Debug, sur un runner chargé, les a dépassées
+  trois fois en trente publications (21, 23 et 24 septembre 2026), sans rien de cassé. Le filet passe
+  à 45 s, sous les 90 s du script, et le journal dit désormais si l'interface a été chargée avant
+  le délai.
+
+- **LOT-124 — L'éditeur et l'arborescence par niveaux.** Une carte puise dans son lieu **et** dans
+  ses niveaux communs : son lieu est un chemin (`central-empire/capital/arenarea`), et ses pièces se
+  cherchent dans la zone, puis la ville, la région et le monde (`core::sceneLevelCandidates`). Le
+  catalogue résolu (`core::ScenePieceManifest::resolve`) empile les manifestes du plus propre au
+  plus commun ; chaque pièce garde son dossier d'origine et son fichier vient du champ `file` du
+  manifeste. Le brouillon, la déduction de collision, `--check`, le rendu du jeu et de l'éditeur le
+  lisent ; les tables d'apparence s'empilent de même, la plus propre gagnant par type. La palette
+  groupe les pièces par niveau et signale la pièce propre qui en masque une commune ; « New map »
+  propose l'arbre des lieux et range la carte sous le même chemin dans `Levels/` ;
+  `--who-cites piece` et `--replace-piece --level` suivent le niveau d'où une carte tient sa pièce,
+  si bien que promouvoir une pièce au commun ne réécrit que les cartes qui changent vraiment. Les
+  préfabriqués se rangent au plus bas niveau qui voit toutes leurs pièces et, avec les modèles,
+  servent tout lieu qui en descend. Les **figurines** suivent la même règle : un PNJ se cherche dans
+  le `Characters/` de sa zone, puis de sa ville, de sa région et du monde, et l'éditeur ne propose un
+  PNJ nommé qu'aux cartes de sa zone. Racine d'essai `Source/Test/Fixtures/LevelTree` et scénario
+  `--apply` `niveaux.json`.
+
+- **Nightly et Code scanning au vert.** Le chargeur de carte refuse un côté de plus de 1024 cases
+  (`MAX_LEVEL_SIDE`) avant d'allouer la grille : le fuzzing de `fuzz_level` y trouvait une carte
+  de dix gigaoctets. Les quinze alertes ouvertes sont corrigées : déplacements sans effet dans
+  l'image de scène de l'éditeur, rang d'étage hors de l'énumération `WorldDepthSlot` (qui nomme
+  désormais ses quatre étages), complexité de `composeWorldScene`, `snapshotWorldScene` et
+  `stampToJson` découpée, et quelques retouches de lisibilité.
+- **LOT-129 — Les étages et les toits de la scène.** Une couche de décor à l'étage 1 à 4 se dessine
+  élevée d'autant de hauteurs d'étage, déclarées par le manifeste du lieu (`"storey"`, 224 pixels
+  d'art pour le kit de la Capitale), triée au-dessus de ce qui la porte ; un étage qui masque le
+  héros devient translucide, et aucun étage ne compte dans la collision (`EX-LVL-025`). L'éditeur
+  règle l'étage d'une couche (« Floor »), peint la couche d'étage active, montre ou cache chaque
+  étage, et ses préfabriqués gardent leurs étages. La Capitale reçoit sa **toiture** : toits romains
+  à deux pans et pignons de pierre, quatre matières générées puis projetées en 112 pièces d'une case
+  (deux sens, profondeur 2 à 5), validées par le moteur (cartes d'essai `Fixtures/Storeys/`), complétées de 486 raccords
+  en L, en T et en croix (598 toits). La consigne du générateur gagne les cadrages « surface » et
+  « élévation » des matières peintes à plat. Le kit de la Capitale se **range en sous-dossiers** —
+  `floors/`, `walls/`, `roofs/l/d3/`… — sous un seul manifeste qui cite chaque pièce par son chemin :
+  le rendu, la palette de l'éditeur (groupée par dossier), l'installateur (règle `folders`) et le
+  contrôle HD suivent, sans qu'aucune carte change. La bibliothèque commune s'agrandit de 73 pièces,
+  rangées de même : sols de terre, d'herbe, d'eau et de planches, allées de jardin, murs à porte, à
+  volets et de boutique, quais, remparts et soutènements, corniches, pilastres et auvents, accès,
+  escaliers, ponts et pontons, et un mobilier de place et de port (fontaine, puits, statue, barque).
+  Les **scripts du dépôt se rangent par usage** — `scripts/checks/`, `ci/`, `docs/`, `release/`,
+  `assetsGeneration/`, `i18n/`, les points d'entrée du poste restant à la racine — et les scripts à
+  usage unique (fabrication du kit de la Capitale et de ses toitures, relevé de palette du `LOT-87`,
+  lanceur de l'ancienne arène) sont retirés.
+  La comparaison du peintre de l'éditeur au rendu du jeu sur la maquette HD (`LOT-125`) reçoit
+  les seuils du rendu logiciel WARP de la CI, qui échantillonne autrement les jointures des dalles.
+
+- **LOT-125 — Le canevas de l'éditeur en HD.** Le canevas, l'essai immédiat, les vignettes et
+  `--render` peignent l'art HD comme le jeu : lissé, lu sur des **niveaux réduits** calculés à la
+  demande (`QPainter` n'a pas de mipmaps), les images engendrées restant au plus proche. Le cadre se
+  mesure sur ce qui est peint : une pièce haute n'est plus rognée. `--render` : l'échelle 1 est la
+  carte vue à 1080p, et l'image ne dépasse jamais 8 192 pixels de côté. Un seul cache d'images par
+  dossier d'assets, partagé par les onglets et les vignettes, borné à 256 Mio de pixels et qui ne lit
+  plus un manifeste par image. La parité avec le rendu du jeu se mesure désormais sur la maquette HD
+  du LOT-101, et le seuil des cartes d'essai redescend de 2,5 % à 0,5 %. Une nouvelle mesure,
+  `CanvasBenchmarks`, suit chaque nuit le coût de la peinture.
+  
+- **Planning — LOT-129, les étages et les toits de la scène.** Nouveau lot moteur de la démo, entrant
+  du `LOT-108` : un décor se bâtit en niveaux modulaires (un étage de mur sur un autre, une toiture
+  au sommet, sur la couche `floor` réservée par le format v4), ce qui masque le héros s'efface, et la
+  toiture commune de la Capitale est produite. Il devient prérequis des assets d'Arenarea
+  (`LOT-108`, production suspendue), de l'Arena of Fate (`LOT-106`) et de Martpart (`LOT-110`).
+
+- **LOT-105 — Le kit commun de la Capitale.** Trente-huit pièces HD que Martpart, Arenarea et
+  l'Arena of Fate prendront telles quelles : dans `Regions/central-empire/capital/Common/Scene/`,
+  pavés et dallages de fond en trois variantes et bordures de trottoir, murs de calcaire pleins et à
+  fenêtre dans les deux sens de la grille avec leurs angles, balustrades, haies, cyprès, massif,
+  lampadaire, bancs, vasque, tonneau, caisse et étal nu ; dans `Regions/central-empire/Common/Scene/`,
+  le kit impérial au lion couronné (bannière sur mât, murs à bannière, colonne). La commande du
+  kit passe les dix familles en revue, et `prepare_envois_scene.py` en tire les envois au
+  générateur ; la consigne gagne la planche de sols
+  et la référence d'un même kit. Les sources sont recalées sur la grille par
+  `rectify_capital_kit.py` et `build_capital_v4.py`, avec l'accord de l'auteur. `region.json`
+  reçoit la palette et les matières de l'Empire. Un test rend par le moteur une rue de douze cases
+  composée du seul kit (`test_capital_kit_render.cpp`) ; le moteur ne résolvant pas encore l'arbre
+  `Regions/`, il copie le kit sous un lieu temporaire.
+- **Le jeu s'affiche toujours en 16:9.** Quelle que soit la forme de la fenêtre, la scène est le
+  plus grand rectangle 16:9 qui y tient, centré au pixel près ; le reste est peint en noir —
+  bandes latérales pour une fenêtre plus large, horizontales pour une plus haute. Les deux
+  facteurs d'échelle se lisent désormais sur la scène et non sur la fenêtre.
+- **LOT-112 — Le héros de la démo.** Le personnage joué est la **fiche pré-tirée du
+  Brawler** du *Player's Guide to Tanares* (p. 195), reprise telle quelle sur décision de l'auteur :
+  Grom Tranche-Écaille, demi-orc, Dragon Hunter, grande hache (`Rpg/characters/heros-brawler.json`).
+  Il remplace Brenna ; sa Persuasion vaut −1, si bien que le jet à DD 18 de la quête réussit une fois
+  sur dix, et le `LOT-120` en est averti. Le moteur reçoit le **gabarit de figurine HD** que les PNJ
+  suivront : **quatre orientations** peintes, une bande par animation et par diagonale
+  (`walk-se.png`…), choisies d'après le déplacement (`hmi::figureFacingFor`) ; une **ligne de sol**
+  déclarée par les manifestes `Characters/` (`"ground": 252`), qui pose les pieds au centre du
+  losange comme la maquette du `LOT-101` ; une **cadence lue dans la bande** (`frameDuration`). La
+  marche ralentit de 4 à **2 cases par seconde** (3 m/s) : un cycle couvre une case, et plus vite les
+  pieds glissaient. `install_hd_asset.py` installe une planche de marche (découpe, échelle au cadre
+  debout, pieds sur 252, portrait et jeton), `check_hd_assets.py` et la galerie connaissent les
+  bandes orientées et les héros rangés par classe, et `preview_figure_walk.py` fait marcher une
+  figurine sur la maquette pour juger sa cadence. L'essai a fixé **huit images** par animation
+  (le standard le dit), et le héros est installé : vingt bandes (cinq animations en quatre
+  orientations), portrait et jeton, dans `Common/Characters/Heroes/brawler/`. La mort passe en
+  cellule large, et l'installateur pose le pied le plus bas de la bande sur le sol, découpe par
+  morceaux entiers au lieu de trancher aux bornes, et réduit une pose trop haute pour qu'elle
+  tienne.
+
+- **La nightly repasse au vert.** Le fuzzing de `fuzz_level` refusait de démarrer : son amorce
+  `Source/Elements/Levels/capital` a disparu avec la table rase du `LOT-102` ; il part désormais des
+  cartes de la racine d'essai (`Fixtures/GameData/Levels`, `Fixtures/Levels`), et CMake refuse une
+  amorce absente au lieu de laisser le job échouer dix minutes plus tard sur une erreur PowerShell.
+  Le job `links` rougissait sur les renvois vers la référence Doxygen, qui n'existe que sur le site
+  publié : `lychee.toml` exclut ces pages comme cibles.
+  
+- **LOT-103 — livré.** L'auteur a fait le contrôle visuel du travelling, dernier critère du lot :
+  la maquette ne scintille pas. La fiche passe à `livre`.
+
+- **Éditeur — le rendu sans texture s'étoffe.** Une carte maquette ne disposait que de douze types
+  de tuile : pavé et ruelle se confondaient, et rien ne disait un étal, un gradin, une colonne ou un
+  arbre. Vingt types s'ajoutent au format (`core::TileType`) et à la palette *Types*, rangés par
+  famille : sols (`pavement`, `alley`, `planks`, `flagstone`, `snow`), terrain difficile (`mud`,
+  `rubble`, `bush`), obstacles (`tree`, `rock`, `pit`, `lava`), bâti et mobilier (`roof`,
+  `column`, `tiers`, `fence`, `lowWall`, `stall`, `crate`) et passage (`door`). Chacun a sa règle
+  de pas, déduite comme celle d'une pièce (`core::tacticalOfTileType`) : l'arbre, la colonne, le toit
+  et les gradins arrêtent le pas et la vue, le rocher, la palissade, l'étal, les caisses, la fosse
+  et la lave seulement le pas ; boue, éboulis, buisson et muret restent traversables, et `--check`
+  avertit qu'ils ne sont pas encore joués. La maquette donne à chaque type **sa teinte** — celle de
+  la légende des plans de principe pour le pavé, la ruelle, les étals, les gradins et le marbre — et
+  **sa forme** (`hmi::maquetteShape`) : un bloc d'une hauteur et d'une emprise propres, une colonne
+  étroite de deux cases sur son socle, une palissade basse, un toit d'une case et demie. La terre
+  battue et l'escalier changent de teinte, pour laisser au pavé et à la ruelle celles des plans.
+
+- **LOT-103 — Le rendu HD.** Le moteur affiche une pièce HD à la bonne taille, entière et sans
+  scintillement. L'**échelle de l'art devient une donnée du lieu** : le manifeste déclare son losange
+  (`"tile": [256, 159]`), `hmi::readSceneTextureTraits` le lit avec la découpe et l'ancre — une seule
+  lecture pour le jeu, l'arène et l'éditeur, qui en faisaient trois —, et `SCENE_TILE_WIDTH_PIXELS`,
+  `FIGURE_FRAME_*`, `FIGURE_SCALE`, les 135 px des îlots et la cellule de 68 px de la galerie
+  disparaissent ; un lieu livré deux fois plus fin se dessine à la même taille. `SceneTexture` gagne
+  `frameHeight` : une figurine de 192 × 256 et une créature de 384 × 384 s'affichent **entières**,
+  sans agrandissement. Toute texture est **prémultipliée** au chargement, et l'art peint reçoit ses
+  **mipmaps** et un échantillonneur **bilinéaire** ; seule une image engendrée (damier, aplat,
+  marqueur) reste au plus proche. Le **zoom est libre** : une case occupe la hauteur de la fenêtre
+  divisée par 10,8 (100 px à 1080p, 200 à 2160p, la même étendue de monde), et `fitZoom` ne
+  s'arrondit plus. Les dalles débordent d'1/256 de case, sans quoi leur bord adouci dessinait un
+  treillis sombre sur tout le sol. `scripts/assetsGeneration/build_hd_mockup.py` installe la maquette du `LOT-101` en
+  données d'essai, et `test_hd_mockup_render` la fait rendre par le moteur à 1080p et à 2160p, puis
+  la compare aux deux vues montées à la main, sous un seuil qui attrape chaque défaut provoqué ;
+  un travelling s'écrit à la demande pour le contrôle visuel du scintillement.
+
+- **LOT-104 — La chaîne de production des assets HD.** Du brut du générateur à l'asset installé,
+  une commande et rien à la main : `scripts/assetsGeneration/install_hd_asset.py` lit le descripteur `install.json`
+  posé à côté des sources,
+  **détoure** (voile d'alpha effacé, intérieur remis à 255, îlots retirés), **découpe** une planche
+  en ses morceaux et les nomme dans l'ordre de lecture, **réduit** à l'échelle du standard en alpha
+  prémultiplié — jamais agrandi —, **ancre** chaque pièce debout à ses deux pointes de socle lues sur
+  l'enveloppe basse de l'art, et **inscrit** l'image au manifeste du dossier `Scene/` visé, avec sa
+  famille et l'empreinte de sa source (`--check` rejoue et compare, `--measure` n'écrit rien). Les
+  **18 pièces du Colisée** (sable, pavé, bordures, murs à arcades U et V, angles rentrant et sortant)
+  s'installent ainsi dans `arena-of-fate/Scene/` sans une retouche, à un arc par case dans les murs
+  comme dans les angles. En CI, `scripts/checks/check_hd_assets.py` refuse toute image qu'aucun manifeste ne
+  cite, tout fichier cité absent, toute pièce hors des bornes du standard (PNG RGBA 8 bits, taille
+  déclarée, 4096 px, dalle au losange exact, ancre dans l'image), et toute zone au-delà de **40 Mio**
+  — le poids de chaque zone s'écrit dans le résumé du job. La **galerie de débug** lit désormais
+  l'arborescence par niveaux (`Common/`, `Regions/`), et le **gabarit de la commande d'une zone**
+  (`Planning/standards/gabarit-commande-zone.md`) passe les dix familles en revue et suit chaque pièce
+  de sa commande à la galerie.
+  
+- **Les 71 alertes ouvertes de Code scanning (clang-tidy) résolues.** Table de glyphes de
+  `MaquetteTokens` en initialisateurs désignés, calcul d'indice de pixel factorisé et fonctions de
+  peinture séparées ; `Stamps.cpp` découpé (`cutStamp`, `pasteStamp`, `stampBodyFromJson` en
+  sous-fonctions), messages d'erreur en littéraux bruts, concaténations en `append()` ;
+  comparaisons signé/non signé remplacées par `std::cmp_less`/`std::cmp_greater_equal` dans
+  `LevelBrowserPanel` et `MapPropertiesDialog` ; `MainWindow::_tabs` initialisé dans la liste,
+  `offerRecovery` scindée par brouillon ; copies évitées (`editorDataRoot()` par référence),
+  déplacement automatique restauré dans `MapRender` ; aucun changement de comportement.
+
+- **Le guide poussé à fond, le manuel remis d'aplomb, le cahier de test navigable.** Les treize
+  pages déjà refondues du guide reçoivent trente figures SVG — l'accumulateur du pas de temps fixe,
+  le *sparse set* de l'ECS, la pile du routeur, le cycle d'un tour, l'évaluation de l'IA, la ligne
+  de vue et l'abri, la résolution d'une clé d'asset, l'ordre de tri, la projection isométrique, le
+  document et les gestes de l'éditeur — et `capture_screens.py` photographie désormais l'éditeur
+  sur la racine de données d'essai. Les pages restées en arrière sont reprises à leur tour :
+  **guide-audio** documente chaque fonction de `hmi::AudioEngine` (le préchargement qui ne peut pas
+  être paresseux, le tourniquet de trois instances, l'état muet qu'il faut pouvoir forcer) ;
+  **guide-design-ihm** ne décrivait qu'une règle d'échelle héritée du pixel art alors qu'il y en a
+  **deux**, un réel pour les écrans peints et un entier pour le viewport, et dit pourquoi chacune a
+  son type ; **guide-niveaux** décrivait le **format v3** — il passe en **v4** : collision
+  **déduite** des pièces posées, cases forcées, relevés `unplayed` et `unknownPieces`, identifiants
+  d'entités, variantes, hauteur réservée, écriture canonique ; **guide-journalisation** gagne le
+  **rapport de plantage** que le plan du guide lui attribuait sans qu'il le couvre — les quatre
+  tentatives d'écriture du minidump et pourquoi la dernière se replie sur le seul thread fautif, le
+  relevé par tentative qu'il faut lire au lieu de relancer le job, les assertions CRT routées vers
+  `stderr`. Le **manuel** promettait un monde qui n'existe plus depuis la table rase du `LOT-102` —
+  une partie ouverte à Martpart, une avenue vers Arenarea, un héraut au Colisée — alors que
+  « Nouvelle partie » affiche *« La ville de départ ne s'ouvre pas »* : il dit maintenant l'état
+  réel, châssis fini et contenu à revenir, et reçoit huit captures, lui qui n'en avait aucune. Le
+  **cahier de test** ouvre chaque page de domaine sur un sommaire — un fichier de test par ligne,
+  ses cas et leur criticité, chaque ligne menant à sa section — et son index explique enfin comment
+  **écrire un bloc `\castest`**, et ce que le cahier ne dit pas.
+
+- **Les spécifications reprises, et onze maquettes qui les argumentent.** Chaque page de
+  `Documentation/Specification/` porte désormais un **statut exact** : celles qui annonçaient « à
+  faire (LOT-77 écrit ce document) » disent ce qui est livré, ce qui manque et quel lot le porte —
+  le combat est livré dans l'arène et reste à porter sur la carte, la fiche de personnage est là
+  mais pas la progression, le mécanisme des catalogues est en place et c'est le contenu qui
+  manque. Onze **maquettes** SVG entrent dans les pages qu'elles argumentent : la grille tactique
+  avec ses portées, sa ligne de vue et son abri ; la tenaille et les zones d'effet ; la projection
+  isométrique et l'échelle HD ; l'ordre de dessin et sa clé de tri ; les couches du format v4 en
+  regard du JSON qu'elles écrivent ; le portail et la zone de combat sur une carte ; le châssis des
+  écrans du RPG, le HUD d'exploration, l'interface de combat et l'écran « Carte » ; la fenêtre de
+  l'éditeur et ses six panneaux. L'index des spécifications est réécrit — les documents groupés par
+  thème, la table des familles `EX-…` et la page qui déclare chacune, ce qu'une exigence bien écrite
+  doit dire — et perd ses dernières consignes d'époque Doxygen (`@subpage`, ancres `{#spec-…}`) et
+  son renvoi à `lint_lots.py`, supprimé. Corrections au passage : la perspective annoncée est
+  l'**isométrie** et non plus la « vue de dessus », les renvois aux lots renumérotés par la refonte
+  du 20 septembre mènent à leurs fiches vivantes, et le chemin mort `../Lot/` disparaît.
+
+- **La documentation quitte Doxygen, et tous les lots livrés entrent au planning.** Les pages
+  (guide, spécifications, cahier de test, manuel) sont désormais du **Markdown nu**, rendu par le
+  moteur et la charte du site de planification (`Documentation/outils/build_docs_site.py`) : plus un
+  `@ref`, une exigence se déclare par une puce `- **EX-…** —` et se cite en code, un symbole
+  `core::…` cité dans le guide mène à sa page de référence. **Doxygen ne garde que le code**,
+  publié sous `reference/` comme annexe du guide. Le **manuel** devient l'entrée « Prendre en main »
+  du guide, qui gagne cinq pages (monde, règles, combat, données, outils) et une page « Écrire la
+  documentation ». Le **cahier de test** devient un dossier — une page par domaine, un cas par
+  fiche, filtrable par criticité — au lieu d'une page de 640 Ko. Les 47 epics de l'ancienne feuille
+  de route et les 13 lots de l'éditeur deviennent des **fiches de la version 0.0.0 « Fondation du
+  moteur »** dans `Planning/` (identifiants d'époque conservés, annexes déplacées à côté) ; les deux
+  feuilles de route sont archivées sous `Planning/vision/archives/`, et `lint_lots.py` part avec
+  elles. Nouveaux garde-fous : `Documentation/outils/lint_docs.py` (commandes Doxygen, liens et
+  ancres morts, pages orphelines, lots cités inexistants) en CI, et 17 captures d'écran refaites par
+  `Documentation/outils/capture_screens.py`.
+- **Une carte se dessine et se joue sans texture (LOT-128).** Jusqu'ici, une carte qui ne nommait
+  aucun lieu était un **écran uniforme** : ni sol ni mur, on butait sans savoir pourquoi, et
+  `EX-EXP-005` — « une carte lisible sans qu'aucun fichier d'image ne soit présent » — n'était pas
+  tenue. Le **rendu de maquette** vit désormais dans la composition que le jeu et l'éditeur
+  partagent : une case qui ne nomme aucune pièce se dessine à la couleur de son type, `wall`,
+  `solid` et `cliff` en bloc de trois faces qui masque ce qui est derrière, et une entité sans
+  figurine en **jeton** rond à lettre — vert le joueur, jaune le PNJ qui parle, rouge l'hostile, or
+  le portail, avec sa flèche. La couleur se déduit de ce que le format dit déjà, sans propriété
+  nouvelle. Le repli se déclenche sur « cette case n'a nommé aucune pièce », si bien que le même
+  geste referme la carte sans lieu **et** le type qu'`appearance.json` ne couvre pas, jusqu'ici
+  invisible et que `--check` signale maintenant.
+
+  Il a fallu pour cela une primitive nouvelle, `hmi::PolyQuad` — un quad à quatre sommets libres,
+  d'une seule teinte : un losange isométrique au rapport 0,62 n'est ni un rectangle aligné ni un
+  segment. Le pipeline, lui, ne bouge pas. Les jetons sont des **images engendrées en code pur**,
+  lettre comprise, à la manière du marqueur d'asset manquant : il n'existe aucun rendu de texte en
+  scène côté jeu, et le jeu comme l'éditeur montrent ainsi la même image au pixel près — ce qu'un
+  test prouve en rendant une carte sans un seul fichier d'image par les deux chemins.
+
+  L'atelier suit : « New map » crée ses couches lieu ou pas — sans elles, `Change sheet…` refusait
+  d'habiller la carte plus tard —, un modèle **Blockout** s'ajoute, l'annexe connaît l'état
+  `blockout`, et `--render --plan` rend la carte au vocabulaire des plans de principe du planning,
+  légende comprise. Une seule palette, enfin, pour le canevas isométrique, le canevas à plat, la
+  vignette de la palette et la mini-carte, là où quatre teintes voisines se ressemblaient.
+
+- **Un seul site, une seule charte.** Le site publié avait trois rendus pour trois générateurs :
+  le bleu et blanc de Doxygen à la racine, l'ivoire de la planification sous `planning/`, et une
+  troisième palette écrite à la main dans la page qualité. Ils partagent désormais `Site/` —
+  `tokens.css` (la palette et les fontes, le sombre compris, écrit une seule fois) et `topbar.css`
+  (la barre d'en-tête, mêmes libellés et même ordre partout, la partie courante marquée). La page
+  qualité perd sa feuille propre et reprend les classes de `theme.css` ; la référence de code reçoit
+  `reference.css`, qui rebranche les ~140 variables CSS de Doxygen sur les jetons, et `header.html`,
+  qui porte la barre à la place des onglets de Doxygen (`DISABLE_INDEX`). `HTML_COLORSTYLE` passe à
+  `AUTO_LIGHT` : en `LIGHT`, Doxygen résout ses variables à la génération et écrit ses couleurs en
+  dur, ne laissant rien à rebrancher. Aucun contenu ne change, et plus aucune couleur ne s'écrit
+  ailleurs que dans `Site/tokens.css`.
+  
+- **Table rase : plus un asset de scène, plus une carte (LOT-102).** Le jeu quitte le pixel art, et
+  deux styles ne cohabitent pas, même provisoirement : **704 fichiers** dont 621 images
+  disparaissent — `Assets/Scene/`, `Assets/Coliseum/`, `Assets/Npc/`, `Assets/Monsters/`,
+  `Levels/coliseum.json`, `Levels/capital/`, `World/arena/`. Les seize cartes peintes de
+  `Assets/Maps/`, le HUD de la charte v2, l'atlas, les règles et les textes restent : ils sont déjà
+  au standard. Ce n'était pas un `git rm` : une règle CMake, quatre contrôles Python et une
+  quarantaine de tests lisaient ces fichiers. Les tests qui prouvaient un **mécanisme** — un
+  manifeste se lit, un portail se traverse, une zone se découpe, le GPU et l'éditeur tombent
+  d'accord — lisent désormais une **racine de données d'essai** (`Source/Test/Fixtures/GameData/`,
+  née pour l'éditeur au `LOT-123`, élargie d'un kit d'arène, de figurines et de deux arènes) ;
+  quatre tests qui ne prouvaient qu'un **contenu** sont supprimés, leur liste est dans la PR. Deux
+  noms de contenu quittent le moteur au passage : le dossier de pièces d'une arène vient de son
+  manifeste, et le décor derrière une zone de combat, de la carte que l'arène nomme. À la place,
+  l'**arborescence** du standard est posée, vide, avec ses manifestes à l'échelle 2D HD et un README
+  par niveau : `Common/` pour ce qui existe partout, puis `Regions/central-empire/` jusqu'aux trois
+  lieux de la démo. L'atelier pixel art part avec son art. Le jeu démarre et affiche ses écrans sur
+  cette base vide, l'éditeur s'ouvre sur une carte vierge, et les 906 tests sont verts.
+
+- **L'éditeur debout sur une base vide (LOT-123).** `LevelEditor --check` ne tient plus l'absence
+  de carte pour une erreur : il dit « no map under … », « checked 0 maps », et rend **0** — la table
+  rase du `LOT-102` videra `Levels/` sans faire rougir la CI. Le `README.md` du dossier des
+  niveaux est nommé son **gardien** : git ne gardant pas un dossier vide, le retirer ferait
+  retomber la fenêtre, en silence, sur la copie de la construction. Surtout, les tests de l'éditeur
+  ne lisent plus les cartes livrées : une **racine de données d'essai** complète
+  (`Source/Test/Fixtures/EditorData/`) porte trois cartes — une dans un sous-dossier, une reliée à
+  elle dans les deux sens, une troisième avec sa zone de combat et ses entrées d'arène —, une
+  planche synthétique, une ville, ses quartiers d'atlas, un dialogue, une rencontre, leurs textes.
+  Vingt-deux tests unitaires, deux tests d'intégration et le parcours système l'ouvrent désormais,
+  ainsi que le scénario `--apply` de référence et les deux mesures de l'éditeur. Aucun test n'a été
+  supprimé ; `test_shipped_maps` garde son objet — **toute** carte livrée s'ouvre et se réenregistre
+  à l'octet — et admet qu'il n'y en ait aucune.
+
+- **L'éditeur entre au planning.** Un audit de l'éditeur de cartes face au planning par versions
+  (`Planning/standards/audit-editeur.md`) : ce qu'il sait faire, ce que la table rase, l'arborescence
+  d'assets par niveaux et la 2D HD lui cassent, ce que chaque version du jeu demandera aux cartes.
+  Treize lots en sortent, dans une nouvelle filière `editeur` — `LOT-123` à `LOT-128` pour la démo,
+  puis `LOT-143`, `LOT-158`, `LOT-159`, `LOT-166` à `LOT-169` —, et les lots de cartes les déclarent
+  en prérequis. `LOT-EDITOR-11` (génération assistée) est abandonné avec le générateur qu'il
+  pilotait ; son besoin réel devient le semis assisté du `LOT-168`. La feuille de route de
+  l'éditeur est close. Le `LOT-128` ouvre les **cartes maquettes** : une carte se dessine et se joue
+  sans texture — sols et murs en couleurs, jetons ronds vert (joueur), jaune (PNJ de quête) et rouge
+  (hostile) —, puis s'habille sans refaire sa physique.
+
+- **L'essai complet dans le jeu (LOT-EDITOR-10).** *Map* › *Run in game* (**F5**) lance
+  `JustAnotherRpgGame` sur la carte ouverte dans l'éditeur : le jeu s'ouvre **directement sur
+  elle**, sans passer par ses menus, avec ses dialogues, ses écrans et son rendu. **Maj+F5** part
+  de la case survolée, **Ctrl+F5** demande d'abord la case de départ et les **drapeaux de monde** à
+  poser — la même carte avant et après une quête. Ce qui est joué, ce sont les **brouillons** de
+  tous les onglets ouverts, écrits dans un dossier temporaire hors du dépôt que le jeu sert avant
+  ses propres cartes : la retouche qu'on vient de faire se voit sans enregistrer, et la carte d'à
+  côté aussi quand on passe son portail. Côté jeu, rien d'autre n'a changé que sa ligne de commande
+  — `--at=<colonne>,<ligne>`, `--flags=`, `--levels=`, en build de développement seulement.
+  L'essai immédiat du canevas (**P**) reste ce qu'il est : la marche et les portails, sans quitter
+  la fenêtre. Une rencontre, elle, ne se déclenche toujours pas depuis une carte d'exploration :
+  c'est le LOT-27.
+
+- **Une assertion Debug ne bloque plus un programme sans fenêtre.** Une assertion de la CRT ou de
+  la bibliothèque standard ouvrait une boîte « Microsoft Visual C++ Runtime Library » et attendait
+  un clic : `LevelEditor --check`, la fenêtre de l'éditeur au démarrage et `UnitTests.exe`
+  restaient bloqués, sans un mot dans leur journal — sur le poste comme dans un job de CI. Les
+  rapports de la CRT vont désormais sur la **sortie d'erreur** (`hmi::routeCrtReportsToStderr`),
+  où ils nomment leur fichier et leur ligne, et le programme poursuit son chemin d'erreur habituel,
+  minidump compris. `scripts/build.ps1` refuse par ailleurs de construire un répertoire Ninja qui a
+  perdu ses dépendances d'en-têtes (`.ninja_deps`) : une structure modifiée n'y serait recompilée
+  que d'un côté, et le binaire corromprait sa pile sans rien dire.
+
+- **Le monde dans l'éditeur : onglets, liens, ville (LOT-EDITOR-09).** Les cartes s'ouvrent
+  désormais en **onglets** — chacun son brouillon, son historique, son cadrage et sa sauvegarde
+  automatique ; ouvrir une carte déjà ouverte y revient, ouvrir n'écrase plus rien, et c'est
+  **fermer** un onglet (ou la fenêtre) qui demande quoi faire d'un brouillon modifié. Sur le
+  **graphe du monde**, tirer d'une carte à une autre pose la paire **portail / point d'arrivée des
+  deux côtés**, au plus près de l'entrée et sur des cases atteignables : les deux cartes se
+  traversent aussitôt, dans les deux sens. Comme un renommage, c'est un plan montré avant d'être
+  écrit ; `LevelEditor --link-maps <carte> <carte>` le fait sans fenêtre. Un onglet **City** pose
+  les quartiers d'une ville jouable sur son plan peint et ouvre celui qu'on double-clique. Une
+  carte porte enfin sa **région** et son **ambiance** (des propriétés de la carte, que le jeu
+  pourra lire ; toute clé racine inconnue d'un fichier de carte est désormais gardée et réémise),
+  et son annexe dit **où elle en est** — générée, retouchée, finie —, que le navigateur affiche,
+  filtre, et illustre de **vignettes**.
+
+- **Tampons et préfabriqués dans l'éditeur (LOT-EDITOR-08).** Une sélection se copie désormais
+  **entière** : les types de chaque couche, les pièces qui y sont ancrées (prises entières, le
+  rectangle s'agrandissant jusqu'à leur emprise), les entités et les cases de collision forcées.
+  Coller pose le tampon au curseur en **un pas d'annulation**, chaque entité recevant un
+  identifiant neuf ; `Ctrl+Maj+V` pose son reflet, pièces jumelles comprises. Un tampon
+  s'enregistre comme **préfabriqué** du lieu (`Editor/Prefabs/<lieu>/`), que la palette montre dans
+  un onglet avec une vignette générée de son propre contenu, et que `LevelEditor --list-prefabs` et
+  `--save-prefab` servent sans fenêtre. Une carte neuve part enfin d'un **modèle** —
+  intérieur, rue, arène —, qui donne ses couches, sa taille et son entrée sans nommer aucune pièce.
+  `--check` nomme tout fichier de la bibliothèque qu'il ne sait pas relire.
+
+- **Un minidump n'échoue plus sur la pile d'un autre thread.** Le test
+  `CrashDumpTest.EcritUnMinidumpAvecLeContexteDUneException` échouait par intermittence sur les
+  runners de CI (`ERROR_PARTIAL_COPY`), jamais sur le poste. Le rappel posé en `#78` ne pouvait pas
+  l'éviter : la documentation de `MINIDUMP_CALLBACK_TYPE` dit qu'un échec de lecture *dans une pile*
+  est tenu pour irrécupérable et n'appelle aucun rappel. `writeMiniDump` tente donc, en dernier
+  recours, un dump restreint au seul thread du plantage : les piles des autres threads ne sont plus
+  lues, donc plus une cause d'échec. Cette dernière tentative est de plus réessayée : sur les
+  runners, la même version donne une exécution verte et une rouge, l'échec tenant à un état que
+  `dbghelp` lit au mauvais moment. Le relevé des erreurs de chaque tentative
+  (`hmi::lastMiniDumpAttemptErrors`) est affiché par le test, pour qu'une prochaine panne se lise
+  dans le journal de la CI — il a déjà servi : `ERROR_INVALID_USER_BUFFER` sous OpenCppCoverage,
+  là où `ctest` passait.
+- **La direction artistique de l'Arena of Fate est tranchée (D-17, D-18).** Le style de la planche
+  d'origine est abandonné : l'arène se dessine désormais **d'après le Colisée de Rome** — enceinte
+  ovale à trois niveaux d'arcades superposées, attique à pilastres et corbeaux de mâts, podium de
+  marbre, sable en contrebas. Le monument compte **trois niveaux**. Au niveau de l'arène, le
+  panthéon et la politique deviennent lisibles depuis le sable : les **14 divinités reconnues** ont
+  chacune leur **statue** sur la coursive qui couronne le podium, et les **4 factions reçues** ont
+  chacune leur **tribune d'honneur** à drapeau, adossée à une **immense tribune de peuple** à ses
+  couleurs. Sous les tribunes, un second niveau tient les **vestiaires des gladiateurs** et la
+  **prison des condamnés envoyés au jeu**, par deux chemins distincts. **Ni Ungod ni Culte dans le
+  colisée** : les quatre Ungods sont représentés **enchaînés dans les catacombes**, deux niveaux
+  plus bas, dont l'accès passe **par la prison** — un donjon cultiste à part entière, ouvert par le
+  nouveau `LOT-157` ; le `LOT-107` pose l'escalier et le condamne. Le référentiel de la Capitale
+  porte la DA complète (les dix-huit divinités et où chacune se trouve, les factions et leurs
+  nations membres, l'héraldique — inventée, rien n'est décalqué du livre) ; `LOT-106` en tire son
+  inventaire de pièces par famille, `LOT-107` son tracé en quatre anneaux sur 34 × 24 cases dont
+  seuls le sable et le niveau −1 se parcourent, et le plan de principe est redessiné.
+
+- **Le standard 2D HD devient normatif (LOT-101).** Le style qui remplace le pixel art est chiffré
+  et éprouvé : une maquette de huit cases sur huit d'Arenarea, montée par `scripts/assetsGeneration/build_hd_mockup.py`
+  depuis la planche de référence et cadrée à 1080p et à 2160p, sert désormais de référence de
+  non-régression au rendu HD. Trois exigences sont réécrites — `EX-VIS-008` (la scène peinte,
+  losange de 256 × 159, figurine de 170 px, alpha continu, échelle de l'art donnée par le lieu),
+  `EX-VIS-009` (la frontière scène / interface, qui sépare désormais deux échelles et non deux
+  factures) et `EX-REN-013` (zoom libre, une case valant la hauteur de la fenêtre divisée par 10,8,
+  soit la même étendue de monde à toute définition). La consigne du générateur est réécrite en trois
+  blocs (`Planning/standards/consigne-2d-hd.md`), et sait commander une planche d'animation. Le
+  standard de la scène est complet ; le nombre d'images par animation se fixe au `LOT-112`, sur la
+  première figurine, parce qu'une cadence se juge à côté d'une ancre et d'un sol, pas sur une place
+  vide.
+
+- **Planification par versions (`Planning/`, LOT-100).** Le jeu quitte le pixel art pour la 2D HD,
+  le référentiel `0.1.0` devient l'Empire central seul et la `0.0.1` une démo basique : trois
+  quartiers de la Capitale et une quête. Le nouveau dossier `Planning/` porte la trajectoire
+  jusqu'à la `1.0.0`, 101 fiches de lots pour les versions `0.0.1` à `0.3.0` (livrables, critères,
+  maquettes), les référentiels de contenu tirés du corpus, le standard 2D HD, l'arborescence des
+  assets et l'audit du passage à la HD. Un lint (`Planning/outils/lint_planning.py`) le garde en
+  CI, et un site engendré depuis le dossier est publié sous `/planning/`. L'ancienne feuille de
+  route est figée.
+
+### Corrigé
+
+- **Alertes clang-tidy de Code scanning** : une soixantaine d'alertes de `main` levées dans 26
+  fichiers, sans `NOLINT` ni changement de configuration. Les fonctions à complexité cognitive
+  supérieure à 25 sont découpées en aides, les initialiseurs sont désignés, les singletons globaux
+  passent en accesseurs à statique locale, la comparaison mémoire de `XMFLOAT4X4` compare les
+  membres, et un itérateur de sous-intervalle temporaire dans `EntityReferences` est corrigé.
+  Comportement inchangé.
+
+- **Test du minidump fiabilisé sous la couverture.** Le cas
+  `CrashDumpTest.EcritUnMinidumpAvecLeContexteDUneException` échouait par intermittence dans le job
+  `build-test-coverage` (dbghelp refusant le contexte de l'exception, `ERROR_INVALID_USER_BUFFER`
+  sur toutes les tentatives), et seulement là : OpenCppCoverage est un débogueur, et sous débogueur
+  Windows n'appelle jamais le filtre de plantage que ce test reproduit. Le test s'y déclare sauté
+  (`GTEST_SKIP`) ; les quatre autres builds de la CI l'exécutent toujours.
+
+
+## [0.0.0] - 2026-09-20
+
+**La fondation du moteur** — tout ce qui a été livré avant la refonte du 20 septembre 2026 : le
+moteur C++20 / Qt QRhi, les règles d20, le combat tactique, l'interface Qt Quick à la charte v2, la
+chaîne de données du corpus et l'éditeur de cartes, du socle au format v4. Cette version n'a jamais
+été publiée ni taguée : la `0.0.1` est la première release. Ses lots sont les fiches de
+`Planning/versions/v0.0.0/v0.0.0-fondation/`, sous leur identifiant d'époque (`LOT-01` à `LOT-96`,
+`LOT-EDITOR-01` à `14`) ; les deux anciennes feuilles de route sont archivées sous
+`Planning/vision/archives/`.
+
+- **`scripts/` de nouveau versionné.** Le dossier avait été supprimé (#92) alors que la CI, les
+  hooks pre-commit et les workflows de release en dépendent ; il est restauré et retiré du
+  `.gitignore`. `editor-captures` reste supprimé.
+
+- **Alertes Code scanning (clang-tidy) corrigées.** Une centaine d’alertes de l’analyse de
+  `main` : champs de structures initialisés par défaut, fonctions trop denses découpées
+  (`BattleGrid`, `deriveCollision`, `MapRefactor`, `MainWindow`, `EditorViewport`…), méthodes
+  rendues statiques, `const_cast` confiné à un seul point, tableaux C remplacés par `std::array`.
+  Aucun changement de comportement.
+
+- **Nouvelle interface du Colisée : Arena of Brave.** Le parvis, la piste et les deux
+  vestiaires remplacent l’ancienne carte en exploration et servent de décor au combat.
+  Le kit de 366 pièces conserve ses ancrages, sa profondeur et sa projection dans le jeu
+  et l’éditeur ; les portails relient Arenarea, la piste et les deux camps.
+  Guide : [Arena of Brave](Documentation/arena-of-brave-map.md).
+
+- **Renommer et remplacer (LOT-EDITOR-14).**
+  - **Un renommage suit tout ce qui cite** : renommer une carte — dossier compris,
+    `coliseum` → `capital/coliseum` — récrit les portails, les variantes, les quartiers et portes
+    gardées des villes, la clé de son nom dans chaque catalogue, et déplace ses notes ; un point
+    d'arrivée ou un identifiant d'entité, de même. Rien n'est écrit si le renommage est impossible,
+    et la fenêtre montre d'abord ce qui sera récrit.
+  - **« Qui cite ceci ? »** pour une carte, une entité, un point d'arrivée ou une pièce ; un
+    double-clic mène à la citation.
+  - **Remplacer une pièce** par une autre, sur la carte ouverte (un `Ctrl+Z` le défait) ou sur
+    toutes les cartes qui la posent.
+  - **Changer une carte de planche sans la repeindre** : chaque pièce va à son homonyme, une table
+    de correspondance donne les autres, la collision se redéduit. La planche d'Arenarea se
+    commande à l'atelier des textures ; la carte y passera d'une commande.
+  - Les mêmes opérations sans fenêtre : `--who-cites`, `--rename-map`, `--rename-arrival`,
+    `--rename-id`, `--replace-piece`, `--change-scene`.
+- **Contrôle du contenu (LOT-EDITOR-07).**
+  - **`--check` dit si une carte se joue**, sur toutes les cartes, et la CI échoue sinon :
+    références des entités et drapeaux de monde, rencontres qui ne tiennent pas, PNJ, coffre,
+    portail ou zone hors d'atteinte depuis l'entrée et les points d'arrivée ; il avertit d'un
+    portail sans retour ou d'un point d'arrivée que rien ne nomme. Une variante se contrôle sur les
+    cases de sa base.
+  - **Panneau « Problems »** : les constats de toutes les cartes, au lancement et à chaque
+    enregistrement ; un double-clic ouvre la carte, sélectionne l'entité et cerne la case.
+  - **Le nom d'une carte est une clé de traduction** (`map.coliseum.name`), que le jeu traduit :
+    « The Coliseum » en anglais. Créer, renommer ou dupliquer une carte complète les catalogues.
+- **Les cartes quittent leurs scripts (LOT-EDITOR-06)** — premier jalon de l'éditeur.
+  - **L'éditeur fait foi** : le Colisée, Martpart et Arenarea s'ouvrent et s'enregistrent dans
+    l'éditeur sans changer d'un octet ; les scripts qui les posaient restent comme trace et
+    refusent d'écrire dans les cartes du jeu.
+  - **Une retouche par carte**, rejouée par `--apply` : la porte sud et la loge du Colisée ne se
+    chevauchent plus (`--check` sans avertissement), le marché de Martpart prend trois devantures
+    et un grand étal, un angle de mur égaré quitte le parvis d'Arenarea.
+  - **La fenêtre édite enfin le dépôt** : elle ouvre `Source/Elements`, et non la copie que la
+    construction refait (et écrasait) à côté de l'exécutable ; le titre montre le dossier ouvert.
+  - **Une nouvelle carte choisit son lieu** : nom, taille et planche ; elle naît avec son sol et
+    son relief, et passe le contrôle telle quelle.
+  - **Guide d'usage** : faire une carte de bout en bout, dans l'éditeur.
+- **L'éditeur sans fenêtre (LOT-EDITOR-13).**
+  - **`LevelEditor --apply gestes.json`** rejoue sur une carte ce que ferait la main — outil, appui,
+    glisser, pièce ou couche armée — par les fonctions mêmes que le canevas appelle ; un geste
+    refusé est nommé, et la carte n'est pas touchée. Les onze outils s'y rejouent.
+  - **`LevelEditor --render`** rend une carte en PNG, en isométrie, sans ouvrir de fenêtre ; la CI
+    publie le rendu de chaque carte qu'une PR ajoute ou change (artefact `map-renders`).
+  - **Un scénario par outil**, comparé à un fichier attendu, tient lieu de test d'IHM ; une rue de
+    Martpart gommée puis retracée par `--apply` redonne la carte livrée octet pour octet.
+- **Entités et zones sur le canevas (LOT-EDITOR-05).**
+  - **Les zones se tirent à la souris** : une zone de combat, un îlot ou une zone de règles se
+    tire entre deux coins et se redimensionne par huit poignées ; pendant qu'on tire la zone de
+    combat du Colisée, son verdict tactique suit (cases libres, entrées d'arène dedans et dehors).
+  - **L'outil Forme** (`Z`) peint une zone de règles case par case et trace un trajet de PNJ point
+    par point ; la famille « trajet » entre dans la table, prête pour les rondes.
+  - **Les entités se voient** : figurine à la place du marqueur, étiquette (la carte cible d'un
+    portail, le nom d'une zone), formation d'une rencontre par ses figurines.
+  - **Sélection multiple et déplacement en groupe** (`Maj` + clic), liste filtrable avec
+    identifiants ; l'inspecteur borne les entiers et propose figurines, drapeaux, lieux, objets et
+    `carte#id`.
+  - **Un test bloque toute famille d'entité lue par le jeu et inconnue de l'éditeur** : il a
+    trouvé la zone de règles, que l'éditeur ne savait pas poser.
+
+- **Les outils du peintre (LOT-EDITOR-04).**
+  - **Ligne, seau, gomme et pipette**, chacun à sa touche ; `Alt` + clic prend la pièce qu'on
+    voit depuis n'importe quel outil, et la palette la montre.
+  - **Un geste se défait d'un coup** : un trait de vingt cases, une ligne ou un seau, c'est un seul
+    `Ctrl+Z` (il en fallait un par case).
+  - **Le miroir** (`M`) reflète chaque geste de l'autre côté d'un axe vertical de l'écran et pose la
+    jumelle des pièces : une ligne de `wall-right` trace aussi la façade en `wall-left`. Une maison
+    de Martpart se trace en cinq gestes.
+  - **La mesure** dit cases et pieds ; **les notes d'auteur** s'épinglent aux cases, dans
+    `<carte>.editor.json` ; **l'essai** part de la case survolée (`Shift+P`).
+
+- **L'éditeur pose les pièces du lieu (LOT-EDITOR-03).**
+  - **La palette est la planche du lieu** : vignettes groupées par classe, recherche, et à part les
+    pièces que la carte cite sans que la planche les ait, en damier. Les types de tuile restent dans
+    leur onglet, repli d'une carte sans lieu.
+  - **Une pièce se pose en un geste** sur sa couche, avec le type de sa case et la collision de son
+    emprise ; un étal 2 × 1 occupe ses deux cases, et la gomme le retire entier.
+  - **La collision suit chaque geste**, sur ses seules cases. Peindre la collision force la case,
+    la gomme la libère, et un masque magenta montre les cases forcées.
+  - **Le Colisée n'a plus de case forcée** : on ne sort plus par la porte dans le vide qui entoure
+    l'amphithéâtre, et les deux piliers du couloir ouest arrêtent le pas comme ceux de l'est.
+
+- **Le format de carte v4, gardé en CI (LOT-EDITOR-12).**
+  - **Chaque case de couche nomme sa pièce** ; la pièce ne vit plus sur la grille de collision. Les
+    trois cartes (Colisée, Martpart, Arenarea) ont été migrées et se jouent à l'identique.
+  - **La collision se déduit des pièces** (type tactique déclaré par le manifeste du lieu), hors
+    des cases que l'auteur force à la main ; une pièce large occupe et trie toute son emprise.
+  - **Identifiants d'entité** jamais réemployés, **zones peintes**, **variantes** de carte, et une
+    place réservée à la hauteur.
+  - `LevelEditor --migrate` convertit une carte ; `LevelEditor --check` contrôle toutes les cartes
+    en CI. Schéma publié : `Documentation/Editeur/level.schema.json`.
+
+- **Un minidump s'écrit même quand une zone mémoire est illisible.** Si une zone ne peut pas
+  être lue pendant le dump (la pile d'un thread qui se termine, par exemple), elle est sautée au
+  lieu de faire échouer tout le fichier (`ERROR_PARTIAL_COPY`). Vu sur la Nightly du 19 septembre.
+
+- **Fabrique d’assets, premier essai PNJ (LOT-CREATION-ASSETS, hors roadmap).**
+  Préparation A+B+C, mémoire par asset, réception, reprises ciblées, contrôles bloquants,
+  comparaisons et journaux en ligne de commande, avec génération dans le chat local.
+  39 tours sur les cinq PNJ du pilote ; aucun remplacement des assets livrés : échelle,
+  palette et animation restent insuffisantes pour valider le pilote.
+
+- **L'éditeur montre le lieu tel qu'on le jouera (LOT-EDITOR-02).**
+  - **Vue iso par défaut** : le canevas peint les pièces des planches comme le jeu, même liste,
+    même ordre ; son image égale celle du jeu à 0,06 % des pixels près. `F9` bascule vers la vue à
+    plat, qui lit types et collision.
+  - **Pointage juste** : on désigne la case par son losange, y compris derrière un mur haut ; la
+    barre d'état donne la case survolée et ses pièces.
+  - **Calques** : une couche peut être grisée ou verrouillée ; `F8` passe les reliefs en
+    transparence ; une mini-carte (« Overview ») montre toute la carte et ramène la vue d'un clic.
+  - **L'essai immédiat** est peint de la même façon : l'éditeur ne passe plus par le GPU.
+
+- **L'éditeur de cartes devient un module à part, et ne perd plus de travail (LOT-EDITOR-01).**
+  - **Un module** : le code quitte `Source/HMI` pour `Source/Editor` (`Logic/`, bibliothèque
+    `EditorLogic` ; `Ui/`, l'exécutable `LevelEditor`) ; le jeu n'en dépend plus.
+  - **Un outil interne** : style Fusion de Qt (clair ou sombre selon le système), textes en
+    anglais, fenêtre et panneaux construits en code. Retirés : la charte de l'éditeur (jetons,
+    feuille de style, icônes tracées, menu Thème, police Inter), ses formulaires `.ui` et ses
+    189 clés de traduction.
+  - **Reprise après plantage** : un brouillon modifié est sauvegardé deux secondes après le dernier
+    geste, et proposé à la reprise au démarrage suivant (`%LOCALAPPDATA%\JustAnotherRpgGame\Editor`).
+  - **Une carte changée sur disque n'est plus écrasée** : l'éditeur la relit si rien n'est modifié,
+    sinon il demande de relire ou de garder, et met l'autre version de côté.
+  - **« Modified » suit le contenu** : défaire jusqu'à l'état enregistré rend une carte non
+    modifiée ; fermer avec des modifications demande quoi en faire ; l'historique d'annulation est
+    plafonné à 200 pas.
+  - **Corrigé** : déplacer la fenêtre vers un autre écran pouvait remplacer le brouillon en cours
+    par le Colisée relu sur disque.
+
+- **Les premiers monstres : le lion, le loup et le soldat Ironhand (LOT-93).** L'atelier des
+  monstres dessine une créature depuis le texte seul de son bloc, au style des PNJ, et les trois
+  dont la version `0.0.1` a besoin sont livrés, animés, dans la galerie des assets (famille
+  « Monstres »).
+  - **Deux gabarits** : Moyen (une case, 48 × 64) et Grand (2 × 2 cases, 96 × 96) ; le lion est le
+    premier Grand.
+  - **Pas de sort, pas de `cast`** : une créature qui n'en lance pas n'en livre pas, et
+    `check_asset_keys.py` l'accepte ; il refuse une figurine hors catalogue, une bande mal
+    dimensionnée ou un `cast` livré sans être déclaré.
+  - **Les sentinelles Ironhand** des portes de Martpart et d'Arenarea portent la figurine du
+    soldat : une carte nomme une figurine de l'atelier des monstres par son dossier
+    (`"figure": "Monsters/ironhand-soldier"`), et le marqueur qui les dessinait s'efface.
+  - Le lion et les loups ne paraissent pas encore au Colisée : c'est le `LOT-27`.
+
+- **L'éditeur de cartes a sa feuille de route (`Documentation/Editeur/feuille-de-route.md`).**
+  Quatorze lots `LOT-EDITOR`, une piste à part de celle du jeu : édition en iso avec les pièces du
+  lieu, format de carte version 4, pilotage sans fenêtre, fin des cartes écrites par script. Aucun
+  code ne change encore.
+
+- **Correctif : l'éditeur plantait au démarrage.** Depuis le passage des panneaux de l'éditeur
+  en `.ui` (#71), la palette lisait son arbre avant de construire sa mise en page : un pointeur
+  nul, et `LevelEditor` s'arrêtait sur une violation d'accès avant d'ouvrir sa fenêtre.
+
+- **Les écrans du jeu portent leurs images peintes : les 213 pièces de la charte v2 (LOT-87).**
+  Cadres, plaques, boutons, onglets, contrôles, médaillons, emplacements, jauges, ornements et
+  icônes remplacent les aplats de repli sur les dix-neuf écrans, sans qu'un formulaire change.
+  - **Provenance** : chaque image garde le prompt réellement envoyé au générateur ; planches et
+    inventaire de la livraison dans la documentation du lot.
+  - **Corrigés** : la mini-carte du HUD n'affiche plus de silhouette de portrait, et un titre de
+    plaque se réduit plutôt que de déborder de ses ornements.
+  - **Fiche de personnage** : les six caractéristiques et les statistiques de la compagnie portent
+    leur icône ; abréviations et modificateurs passent sous le médaillon, hors des ornements qui
+    les masquaient. La signature s'écrit à la plume (*Pinyon Script*, SIL OFL 1.1), au-dessus du
+    paraphe.
+  - **Pause et compagnie** : les entrées de la pause sont centrées dans leur panneau ; le fond des
+    portraits suit l'ouverture de chaque cadre et ne déborde plus de l'anneau.
+
+- **Retrait de l'héritage : le dépôt ne garde plus rien du jeu d'origine (LOT-88).**
+  - **L'essai de l'éditeur joue le jeu** : **P** lance l'exploration du jeu sur le brouillon —
+    marcher, interagir, franchir un portail vers une autre carte —, et **Échap** revient à
+    l'édition. `hmi::WorldPlay` est la mise en scène partagée par le jeu et l'éditeur.
+  - **Retirés** : l'ancien runtime que l'essai faisait tourner (physique de plateforme,
+    mécanismes, tuile de sortie, caméra de suivi et zones de caméra, plans et parallaxe, ombres,
+    skins et raccords, bruitages), et l'habillage de l'éditeur qui les servait — panneaux Liens,
+    Textures, Plans, atelier pixel art (le `LOT-69` est absorbé), bibliothèque d'assets, espaces
+    de travail, remappage.
+  - **Le format de carte ne porte plus que le RPG** : douze types de tuiles, une entrée exigée ;
+    les trois cartes livrées perdent leur sortie et leur cadrage.
+  - **Assets et scripts** de l'ancien jeu supprimés ; l'atlas de tuiles est procédural.
+  - **Polices pixel** (`Pixelify Sans`, `Press Start 2P`) supprimées, crédits compris ; les tags
+    du jeu d'origine (`v0.0.1` à `v0.1.3`) sont retirés du dépôt.
+  - **Spécifications** : 120 exigences retirées, ancres conservées ; `ia.md` et `decors.md`
+    partent pour `exigences-retirees.md` ; `Documentation/Heritage/` et la notation `LOT-H-NN`
+    sont supprimées. Une exigence retirée ne peut plus être citée par le code
+    (`lint_exigences.py`). Guides, manuel et README décrivent le jeu tel qu'il est.
+
+- **Martpart et Arenarea se parcourent : le graphe des quartiers de la Capitale (LOT-96).**
+  « Nouvelle partie » ouvre le jeu à la **porte de l'Est de Martpart**, le quartier du marché ;
+  on passe à **Arenarea** par l'avenue et l'on revient au point d'arrivée nommé.
+  - **Deux quartiers tracés depuis le plan de la ville** peint par l'auteur : un script d'atelier
+    pose chaque porte sur le bord que coupe la direction du quartier voisin, puis les rues, la
+    place, les îlots et les ruelles ; les cartes se retouchent dans l'éditeur. Martpart porte sa
+    planche (`LOT-92`) ; Arenarea l'emprunte, faute de planche propre.
+  - **La ville a son graphe** (`World/cities/capital.json`) : ses douze quartiers, chacun avec sa
+    carte ou la porte gardée qui le ferme, et la porte de départ. `check_rpg_data.py` relie chaque
+    quartier à sa fiche d'atlas, à son point du plan et à sa carte.
+  - **Dix portes gardées** par une sentinelle de l'Armée Ironhand, qui refuse le passage. Sa
+    figurine n'existe pas encore : une figurine sans image se dessine désormais par son
+    **marqueur** (`LOT-39`) plutôt que par le damier.
+  - **L'écran « Carte » descend au quartier, puis à l'îlot** : le plan montre le quartier du héros
+    et ceux qu'il a parcourus. Le quartier agrandit le plan de la ville (*provisoire*, en attendant
+    sa carte peinte) ; l'îlot est la carte du quartier telle que le jeu la dessine, rendue hors
+    écran.
+  - Les cartes d'un sous-dossier (`capital/martpart`) entrent au graphe du monde et au
+    navigateur de l'éditeur sous leur chemin relatif ; `--map=<carte>[@<arrivée>]` ouvre une carte
+    dans un build de développement.
+
+- **Analyse statique : les 27 alertes restantes de Code scanning corrigées.** Les fichiers
+  arrivés avec `LOT-09`/`LOT-94` (exploration, zones de combat, carte du monde) et une alerte
+  plus ancienne d'`ArenaModel` étaient hors du périmètre des corrections précédentes.
+  Initialiseurs désignés complets, tableau C remplacé par `std::array`, parenthèses explicites
+  sur des calculs mélangeant les opérateurs, `return {...}` pour les constructions déjà typées,
+  concaténation de chaîne sans copies intermédiaires, un usage après déplacement détecté par
+  l'analyseur corrigé, deux branches identiques fusionnées, un paramètre pris par référence, et
+  `ArenaModel::loadCatalogs` découpée pour réduire sa complexité cognitive.
+- **Le Colisée se parcourt : l'exploration dans le jeu, et la première carte (LOT-09).**
+  « Nouvelle partie » ouvre le **Colisée en version finale** à sa porte : 40 × 34 cases, dont le
+  sable du `LOT-50` (20 × 14) au centre comme **zone de combat déclarée**. On parcourt au clavier
+  le hall, les couloirs sous les gradins, les deux vestiaires, les tribunes et la loge impériale ;
+  on parle aux PNJ ; le héraut envoie sur le sable, et l'on en revient sur la carte, au même
+  endroit.
+  - **Un seul moteur de rendu** : le lieu se dessine comme l'arène — même pipeline QRhi, même
+    projection isométrique, mêmes planches de l'atelier des textures (`LOT-92`). `WorldViewport`
+    est le jumeau d'`ArenaViewport` ; la caméra **suit** le héros, à un agrandissement entier, et
+    ne sort pas de la carte. *Décision de l'auteur* : plutôt que de compiler dans le jeu la session
+    de l'éditeur (qui aurait amené un second rendu, en tuiles carrées), une **session
+    d'exploration** neuve vit dans `Core`, jumelle de la session d'arène.
+  - **Le graphe du monde se joue** : traversée d'un portail par **point d'arrivée nommé**, jamais
+    par des coordonnées ; une carte visitée n'est pas rechargée (le lieu reste ce qu'on a quitté) ;
+    un portail peut exiger un drapeau de monde. Un portail orphelin, une zone de combat qui déborde
+    ou qu'aucune case ne laisse libre sont refusés **au chargement**, avec un code exploitable.
+  - **Ce qu'une case porte** (*décision de l'auteur*) : le sol vient du type de tuile de la couche
+    « sol », traduit par la table du lieu (`Assets/Scene/<lieu>/appearance.json`) ; le relief nomme
+    sa pièce **à la case**, par l'assignation de texture que l'éditeur pose déjà. Aucun changement
+    du format de niveau.
+  - **Parler à qui l'on regarde** : l'écran de dialogue n'a plus d'identifiant écrit en dur — la
+    carte nomme le dialogue du PNJ visé. Un dialogue peut envoyer se battre (nouvelle action
+    `startCombat`), et le héraut du Colisée perd sa marque « provisoire ».
+  - **Le contenu provisoire s'en va** : le niveau nu de l'arène (`arena-of-the-future.json`), les
+    six fonds de test et leur script, la rencontre de démonstration — remplacée par les fauves du
+    Colisée. Restent le personnage de démonstration et la planche source du `LOT-50`, pour les
+    raisons écrites dans l'epic du lot.
+  - **Vérifié** : 1 297 tests, dont le parcours de cinq cartes aller-retour, la carte livrée
+    (chaque dialogue, chaque figurine et chaque pièce qu'elle nomme existent ; ses six lieux
+    s'atteignent depuis la porte) et le rendu hors écran du Colisée sur un vrai `QRhi`.
+
+- **Les images du corpus quittent le dépôt, et l'écran « Carte » revient sur les cartes de l'auteur
+  (LOT-94).** Les deux cartes du monde extraites du corpus étaient les seules images du corpus
+  commises : elles partent, avec l'écran qui les affichait et la commande
+  `sourcebook illustrations` qui les extrayait. L'écran « Carte » revient aussitôt, refondu, sur
+  **seize cartes peintes par l'auteur**, sans lettrage : le monde, les treize régions de l'atlas,
+  les plans de la Capitale impériale et de Fisherman's Wharf.
+  - **Trois niveaux** : la vue d'ensemble, une région, le plan d'une ville. Les mêmes commandes aux
+    trois, au clavier, à la manette et à la souris — flèches pour le repère voisin, Tab ou LB/RB
+    pour le lieu suivant de la liste, Entrée, clic ou A pour ouvrir, Retour arrière, Échap, clic
+    droit ou B pour remonter, +/−, molette ou X/Y pour agrandir, glisser pour déplacer la carte.
+    On ne s'y déplace pas : la carte sert à s'orienter. Le bouton « Carte » du cadre de jeu est
+    rallumé, et les écrans du RPG sont de nouveau neuf. `--map-region=<id>` et `--map-city=<id>`
+    ouvrent un niveau directement.
+  - **Les lieux placés** : 61 lieux de l'atlas sur les cartes de région, les douze quartiers de la
+    Capitale et les douze sites numérotés de Fisherman's Wharf sur leur plan, 103 noms de
+    géographie ; 19 entrées de l'atlas qui ne sont pas des lieux sont écartées nommément. Les noms
+    sont posés par le jeu, jamais peints. Un lieu que le livre ne situe pas, ou qui sort du cadre
+    peint, reste dans la liste de sa région sans repère : le jeu n'invente pas de position — les
+    îles de la Tempête n'en ont ainsi aucun. Ctrl+clic journalise la fraction sous le pointeur,
+    pour retoucher le relevé.
+  - **Données et outil** : `Source/Elements/Assets/Maps/` (seize JPEG, 15,9 Mo, et leur
+    manifeste de provenance `author`), `Source/Elements/Maps/world-maps.json` (les positions, à
+    part de l'atlas) ; `scripts/checks/check_map_assets.py` les recoupe en intégration continue avec
+    l'atlas.
+  - **Le fond du menu principal est produit** (`ui/background/menu-scene`) ; les captures de
+    référence du menu et des crédits sont régénérées.
+  - **Spécification** : une illustration d'interface est produite, jamais extraite
+    (`EX-IHM-076`, refondue — les cartes de l'auteur ont leur propre manifeste) ;
+    `check_ui_assets.py` refuse toute provenance autre que `produced` ; l'écran à trois niveaux
+    (`EX-IHM-106`) ; aucun nom peint, des positions tenues à part de l'atlas et jamais inventées
+    (`EX-IHM-107`).
+  - **Feuille de route** : le `LOT-94` est livré et absorbe le `LOT-95` (le plan de la Capitale),
+    retiré par fusion ; `capital.json`, les niveaux quartier et îlot du plan et la position du
+    héros passent au `LOT-96` ; le `LOT-42` bâtit sur l'écran livré et n'a plus de carte du monde à
+    produire.
+
+- **Analyse statique : les 113 alertes restantes de Code scanning corrigées.** L'analyse de main
+  en relevait encore dans l'éditeur et la galerie des assets, arrivés hors du périmètre de la
+  correction précédente. Réécritures mécaniques, quatre fonctions trop complexes découpées,
+  transtypages vérifiés (`qobject_cast`, `dynamic_cast`), un `std::visit` que l'analyseur ne
+  suivait pas remplacé, et une boucle sur un temporaire rendue explicite. Deux `NOLINT` justifiés.
+- **Analyse statique : les 896 alertes clang-tidy de Code scanning corrigées.** Sur les cent
+  fichiers signalés, les réécritures mécaniques sont appliquées, les fonctions trop complexes
+  découpées en étapes nommées, et quelques défauts réels corrigés : conversions élargissantes
+  après une multiplication, arrondi manuel, compteurs de boucle flottants, déréférencement
+  possible d'un dock nul dans l'éditeur. Neuf `NOLINT` restent, chacun justifié en ligne.
+- **Galerie des assets, un outil de débug.** `--screen=AssetGallery` (ou le sélecteur d'écrans en
+  build de développement) montre tous les assets livrés d'un coup : PNJ, héros et gladiateurs du
+  Colisée, pièces de la planche, textures des scènes, skins animés. Chaque forme occupe un bloc —
+  son emprise plus une case de marge — et joue son animation ; l'inspecteur donne taille, images,
+  durée, boucle, emprise et ancre, et avance image par image. On s'y déplace au clic maintenu, on
+  zoome à la molette, une minicarte situe la vue. Seuls les blocs à l'écran sont dessinés, ceux
+  d'un anneau autour gardent leur texture, les autres la libèrent après deux secondes. Ce n'est
+  pas un écran du jeu, et il n'appartient à aucun lot de la feuille de route.
+  - **Spécification** : tout asset livré doit y paraître (`EX-CNT-042`). Un test parcourt toutes
+    les images de `Assets/` et échoue sur celle que la galerie ne montre pas, hors exclusions
+    nommées (planches sources, atlas, interface, polices) ; portraits, joueur, objets, fonds et
+    skins fixes y entrent donc aussi.
+
+- **Atelier des textures : la scène a son style (LOT-92).** Une maquette approuvée par l'auteur
+  fixe le style de la scène — pixel art isométrique, soir, lanternes, pierre et bois sombres —
+  et une méthode commande ensuite une planche de textures **par lieu**, depuis sa fiche d'atlas.
+  - **La Capitale dans l'atlas** : la Capitale et ses douze quartiers (Martpart, Arenarea…)
+    entrent dans l'atlas, qui passe à 107 lieux ; les filigranes de commande sortent des fiches.
+  - **L'arène se dessine avec l'atelier** : sable, dalles, murs, arches, torches et bannières du
+    Colisée remplacent le décor de la planche du `LOT-50`, orientés et posés par leur ancre.
+  - **Martpart** a sa planche, commandée sans rien rédiger pour ce quartier : 22 textures de rue,
+    de murs, d'étals et de marchandises.
+  - **Outil** : `scripts/extract_texture_sheet.py` prépare l'envoi au générateur, découpe les
+    planches reçues (pièces lues dans l'ordre, orientation contrôlée, miroirs, palette commune),
+    installe et revérifie (`--check`).
+  - **Spécification** : la scène en pixel art et l'interface à la charte v2, avec leur frontière
+    (`EX-VIS-008`, `EX-VIS-009`).
+
+- **Feuille de route : le *vertical slice* se joue dans la Capitale.** Les quatre lots du chemin
+  critique — `LOT-09`, `LOT-16`, `LOT-17`, `LOT-27` — étaient rédigés sans lieu, sans PNJ, sans
+  quête, et ne se vérifiaient qu'en test. Ils sont réécrits autour de la **Capitale du Central
+  Empire** (Sourcebook, pages 94 à 103 ; plan `VTT/Map - Capital.jpg`), où se trouve déjà le
+  Colisée : l'exploration dans le jeu et le graphe des douze quartiers (`LOT-09`), la quête
+  « Les enfants de Martpart » tirée du livre (`LOT-16`), la reprise de partie (`LOT-17`), la
+  ville habillée — cartes, figurines, textures — et le combat sur la carte (`LOT-27`). La
+  région de départ passe des Freelands à la Capitale (§8) ; un plan d'intégration (§6) dit ce
+  qu'on voit dans le jeu à la fin de chaque lot. Le `LOT-09` devient le prochain lot calculé.
+- **L'éditeur produit les cartes du RPG (LOT-11).** `LevelEditor` reste l'outil d'auteur — décision
+  tranchée, `EX-EDIT-030` refondue — et sait désormais tout ce qu'il faut pour écrire une carte sans
+  toucher au JSON.
+  - **Trois couches** (panneau « Couches ») : la collision, le sol et le décor, chacun peint à part,
+    montré ou masqué, estompé ; la collision se superpose en masque coloré. Ajouter le premier sol
+    reprend l'image de la carte, et une couche d'image refuse les tuiles qui portent une règle.
+  - **Entités** (outil « Entité », panneau « Entités ») : coffre, panneau, PNJ, rencontre, portail,
+    point d'arrivée, entrée d'arène — posés, déplacés, retirés, renseignés dans un formulaire tiré
+    de la table des familles. Les dialogues, rencontres, cartes et points d'arrivée se choisissent
+    dans les catalogues livrés, et une référence cassée est signalée à sa case.
+  - **Portails** : une carte cible et un point d'arrivée nommé, jamais des coordonnées ; l'onglet
+    « Graphe » du navigateur de cartes montre le monde qu'ils relient, portails cassés compris.
+  - **Terrain tactique** : une rencontre posée dans un couloir, ou dont la formation tombe dans un
+    mur, est signalée, et sa zone se voit sur la carte.
+  - **Essai immédiat** : les entités posées s'y voient, avec leur marqueur généré, et répondent à la
+    touche d'interaction.
+  - **Correctif** : la fenêtre de l'éditeur construisait tous ses panneaux deux fois — la barre
+    d'outils montrait chaque outil en double.
+- **Atelier des PNJ : la preuve de concept (LOT-91).** Cinq figurines animées au style du jeu,
+  produites par une méthode reproductible, entrent dans le dépôt — premières des 160 fiches du
+  *Character Compendium*.
+  - **Assets** (`Source/Elements/Assets/Npc/`) : Anariel, Lizz, Xorius, Nakral et Jade, six bandes
+    chacun (`idle`, `walk`, `hit` en 48 × 64 ; `death`, `attack`, `cast` en 96 × 64), leurs
+    `.anim.json` et un portrait pixel art, listés par `manifest.json`.
+  - **Au Colisée**, quatre héros prennent l'apparence d'un PNJ (champ `replaces` du manifeste) ;
+    chaque bande se dessine à sa largeur réelle, centrée au même pied. Sans manifeste, rien ne
+    change.
+  - **La méthode** (`Documentation/Lot/LOT-91-atelier-pnj/`) : l'epic, le journal du PoC et son
+    verdict, et l'atelier versionné (prompts, ancres, références par PNJ, scripts).
+- **Fan game non commercial : licence, crédits et nom.** Le projet dit enfin ce qu'il est — un jeu
+  gratuit, non officiel, inspiré de *Dungeons & Dragons* et de *Tanares* — et sa licence cesse de
+  le contredire.
+  - **Licence non commerciale.** La GPL v3 autorisait la vente du jeu ; le code passe sous
+    **PolyForm Noncommercial 1.0.0** (`LICENSE`, ~690 en-têtes SPDX) et les contenus originaux sous
+    **CC BY-NC-SA 4.0** (`LICENSE-CONTENT`). Le code reste lisible, mais n'est plus *open source* au
+    sens de l'OSI. Qt, en lien dynamique sous LGPLv3, n'en est pas affecté.
+  - **Univers et ayants droit nommés** (`README.md`, `THIRD-PARTY-NOTICES.md`, écran *Crédits*) :
+    Wizards of the Coast, Black Book Éditions, Dragori Games ; non-affiliation ; attribution
+    CC BY 4.0 du SRD 5.1. `THIRD-PARTY-NOTICES.md` gagne aussi les polices Cinzel et IM Fell
+    English, qui y manquaient.
+  - **`JustAnotherDnDGame` devient `JustAnotherRpgGame`** : cible CMake, exécutable, archives de
+    release, dossier de réglages Qt (les options et la progression locales repartent de zéro),
+    documentation. Le titre affiché et le logotype disent « Just Another RPG Game ». La famille
+    d'exigences `EX-DND` devient `EX-REG` (`regles-d20.md`).
+  - **Crédits défilants** : la section *Univers et inspirations* rejoint l'écran, dont les colonnes
+    défilent (souris, molette, flèches) quand elles dépassent le panneau (`OrnateScrollBar`). Un nom
+    de `credits.json` peut désormais être un libellé traduit, pour une mention qui n'est pas un nom
+    propre.
+- **Nightly ne tourne plus sur les PR.** Une PR qui touchait `Source/Fuzz/`, `Source/Benchmark/` ou le
+  workflow lançait toute la nuit (fuzzing, clang-tidy complet, Qt suivant…) ; il ne part plus qu'à
+  2 h 17 UTC, ou à la demande (*Run workflow*).
+
+- **CI : Qt, données, vitrine** (refonte de la chaîne d'outillage, phase 4). La filière contenu et
+  l'interface ont les mêmes garde-fous que le C++.
+  - **Tests Qt Quick** (`QmlTests`) : les 47 fichiers `.ui.qml` de `Jadg.Ui` se construisent sans un
+    avertissement, les boutons et cases de la charte v2 déduisent le bon état, et les **15 écrans
+    sont comparés à leur capture de référence** (rendu logiciel, identique sur le poste et le
+    runner). Une couleur de jeton changée fait échouer 12 écrans sur 15.
+  - **Traductions vérifiées** (`scripts/checks/check_translations.py`) : aucune traduction inachevée ou
+    disparue, marqueurs `%1` identiques ; `build-ninja` relance `lupdate` pour prouver que le
+    catalogue est à jour du code. Deux chaînes qu'il manquait déjà (l'aide souris de l'arène, une
+    étiquette de la galerie de l'atelier) traduites, trois entrées mortes retirées.
+  - **Minidump sur plantage** : le jeu et l'éditeur écrivent `Crashes/<application>_<version>_<date>.dmp`,
+    lisible avec le zip de symboles de la release ; le test de fumée des archives le prouve
+    (`--crash-test`). Les archives n'embarquent plus `Logs/` ni `Crashes/` du poste qui les construit.
+  - **Scripts Python** : dépendances figées par `uv.lock` (jsonschema quitte `ci.yml`), **pytest**
+    (`scripts/tests`) qui rend nommés et comptés les auto-tests et chaque fixture RPG, rapport dans
+    la PR avec ceux des builds.
+  - **Scripts PowerShell** lus par **PSScriptAnalyzer** (compatibilité Windows PowerShell 5.1
+    comprise) ; deux défauts de `setup_dev.ps1` corrigés.
+  - **Site qualité** sur gh-pages (`/qualite/`) : couverture de `main` par domaine, rapport détaillé,
+    dernières mesures de performance et leurs courbes, à côté de la Doxygen.
+  - **Renovate** pour les `GIT_TAG` de FetchContent, **Dependabot** pour `uv.lock`.
+
+- **CI : nuit et profondeur** (refonte de la chaîne d'outillage, phase 3). Les défauts lents à
+  trouver se cherchent la nuit, sans allonger une PR.
+  - **`nightly.yml`**, non bloquant : clang-tidy sur tout `Source/` (tendance par famille), tests
+    en ordre aléatoire répété à graine affichée, MSVC `/analyze` et cppcheck en SARIF, build contre
+    la version de Qt suivante, liens internes de la documentation (lychee, hors ligne).
+  - **Fuzzing des lecteurs de données** (`Source/Fuzz`, `-DBUILD_FUZZERS=ON`, libFuzzer de MSVC) :
+    l'enveloppe JSON, les niveaux, les dialogues, l'habillage et les traductions, sous
+    AddressSanitizer, avec un corpus qui grandit d'une nuit à l'autre.
+  - **Mesures de performance** (`Source/Benchmark`, Google Benchmark) : déplacement, ligne de vue,
+    abri, tour d'IA, chargement de niveau ; historique dans la branche `benchmarks`, alerte au-delà
+    de 150 %.
+  - **CodeQL** (`codeql.yml`) sur chaque PR : C++ sans build, Python et workflows.
+  - **Archives lancées avant publication** (`scripts/release/smoke_test_release.ps1`) et **attestation de
+    provenance** de chaque fichier publié (`gh attestation verify`).
+  - Six liens relatifs cassés de la documentation réparés, trouvés par le nouveau contrôle.
+  - **Premier défaut trouvé par le fuzzing** : un nombre JSON hors de portée (`1e400`) faisait lever
+    `readJsonObject` au lieu de rendre un échec décrit — n'importe quel catalogue ainsi écrit
+    arrêtait le jeu. Corrigé, avec son test.
+
+- **CI : parité du poste** (refonte de la chaîne d'outillage, phase 2). La CI confirme ce que le
+  poste a déjà vérifié, elle ne le découvre plus.
+  - **Hooks avant chaque commit** (`.pre-commit-config.yaml`) : clang-format, ruff, actionlint,
+    zizmor, gitleaks, conflits de fusion et de casse, YAML, JSON (invalide, clé en double, BOM),
+    garde-fou binaires, et format du message de commit. Rejoués sur tout le dépôt par le job
+    `pre-commit` de la CI.
+  - **`scripts/setup_dev.ps1`** compare les outils du poste aux versions de `ci.yml`, qu'il lit
+    sans en recopier aucune, et installe ce qui diverge avec `-Install`.
+  - **`scripts/check.py`** rejoue en une commande les contrôles du job `lint-exigences`, lus dans
+    `ci.yml`, puis les hooks.
+  - **Cache de compilation sccache** sur les presets Ninja (jobs Ninja, ASan et clang-tidy de la CI,
+    et poste où `sccache` est dans le PATH) : un build refait à cache plein passe de 487 s à 247 s.
+    **Inactif avec un MSVC en français** : sccache y réécrit la sortie `/showIncludes`, et Ninja
+    perdrait des dépendances d'en-têtes ; CMake le détecte et s'en passe.
+  - **Garde-fou binaires** : aucun fichier au-delà de 5 Mio, et un binaire doit appartenir à une
+    famille déclarée `binary` dans `.gitattributes`.
+  - **Versions croisées vérifiées** (`scripts/ci/check_tool_pins.py`) : clang-format dans `ci.yml` et
+    dans les hooks, Doxygen dans `ci.yml` et `docs.yml`.
+  - **`.clangd`** pour les diagnostics clang-tidy dans l'éditeur ; **`build.ps1 -Label`** pour ne
+    lancer qu'un étage de tests.
+  - Écartés, avec leur raison dans `.pre-commit-config.yaml` : `qmlformat` (Qt 6.11 dé-indente les
+    blocs de documentation QML), `ruff format` et le reformatage des JSON écrits à la main.
+
+- **CI : voir dans la PR** (refonte de la chaîne d'outillage, phase 1). Savoir ce qui a cassé sans
+  ouvrir un log.
+  - **Résultats des tests** des builds Debug, Release et Ninja publiés en commentaire de PR et en
+    check run : échecs avec leur message, tests ajoutés ou retirés.
+  - **Couverture des lignes ajoutées** commentée par Codecov, à titre informatif : le cliquet
+    bloquant reste celui de `ci.yml`.
+  - **Annotations sur la ligne** : avertissements MSVC, assertions GoogleTest en échec, écarts
+    `clang-format`, et tous les diagnostics `clang-tidy` — bloquants ou non — convertis en SARIF
+    (`scripts/ci/clang_tidy_sarif.py`) et visibles dans *Code scanning*.
+  - **Un résumé en tête de chaque job** : nombre de tests et les plus lents, couverture, taille des
+    exécutables, diagnostics `clang-tidy` par famille, verdict de chaque contrôle du référentiel.
+    Ces contrôles s'exécutent désormais tous, même après un premier échec.
+  - **CHANGELOG vérifié en PR** (`changelog.yml`, `scripts/ci/check_changelog.py`) : une ligne ajoutée
+    à cette section, ou le label `no-changelog`.
+
+- **CI : plus vite, plus propre** (refonte de la chaîne d'outillage, phase 0).
+  - **Compilation parallèle sous Visual Studio** (`/MP`) : MSBuild compilait les fichiers d'un
+    projet un par un, et les jobs `vs` prenaient deux fois le temps du job Ninja.
+  - **Un run obsolète est annulé** au push suivant sur la même PR ; chaque job a un **délai
+    maximal** au lieu des six heures par défaut ; le jeton est **en lecture seule** sauf dans les
+    jobs qui publient, et aucun checkout ne le conserve.
+  - **L'installation de Qt est écrite une fois** (`.github/actions/setup-qt`) au lieu de six.
+  - **Tous les workflows se relancent à la main** (`workflow_dispatch`).
+  - **Actions épinglées par SHA**, mises à jour par **Dependabot** une fois par semaine.
+  - **Release** : une version n'est publiée que depuis un tag **sur `main`** dont les tests passent
+    en Debug et en Release ; `debug-latest` n'est plus supprimée puis recréée, elle est mise à jour
+    sur place ; chaque release porte ses **symboles `.pdb`** (Release compris, jusqu'ici sans) dans
+    une archive à part, et un fichier **`SHA256SUMS`**.
+
+- **Colisée : deux bugs vus en jouant.**
+  - **L'IA ne fuit plus le combat** (`LOT-23`). Trois causes dans la comparaison des candidats
+    (`core::planTurn`) : la clé anti-suicide comptait les tireurs sur toute leur portée, donc toute
+    case atteignable dépassait le seuil dès deux archers ou armes de jet en face, et la case de
+    contact perdait contre n'importe quelle case lointaine — elle ne compte plus que les attaques
+    **de contact** ; la menace d'un round entier, une marche d'escalier au bord de la zone où
+    l'ennemi peut frapper, pesait plus que quelques cases d'approche, et un prudent restait hors de
+    portée ou reculait — **avancer** quand on ne peut pas attaquer est désormais une **clé**, avant
+    le score ; enfin, à score égal, le premier candidat examiné l'emportait, c'est-à-dire la case
+    de plus petit indice : le repli après attaque filait au coin haut-gauche, et un tireur allait y
+    tirer — à score égal, toute famille de candidats préfère désormais la case qui demande le moins
+    de déplacement. Trois tests, dont un dans une salle aux dimensions de l'arène.
+  - **Le chemin prévisualisé suit la droite** (`LOT-19`). Le départage « prédécesseur d'indice le
+    plus petit » faisait monter le chemin pour le redescendre, d'où un tracé en triangle vers une
+    case en haut à droite. L'exploration retient tous les prédécesseurs au meilleur coût, et la
+    remontée choisit le plus proche de la droite départ→arrivée, à égalité le plus petit indice ;
+    `findPath` et `ReachableArea::pathTo` restent d'accord sur deux cents cartes.
+
+- **IHM de combat** (`LOT-24`, `EX-IHM-003`, `EX-CBT-020`). Le combat du Colisée se lit avant de se
+  jouer, et se joue sans souris.
+  - **Un curseur de ciblage** au clavier (flèches, Tab, Entrée, 1 à 9, Espace) et **à la manette**
+    (croix, X, A, LB / RB, Y) : le jeu Qt Quick lit enfin la manette (`hmi::GamepadNavigator`), la
+    croix se répète quand on la tient.
+  - **Une prévisualisation qui est le jet** (`core::previewAttack`, `core::previewMove`) : le chemin
+    tracé jusqu'au curseur et ce qu'il restera de déplacement, qui frappera en chemin ; ou l'attaque,
+    son jet requis et sa chance de toucher, la CA abri compris, chaque source d'avantage et de
+    désavantage. Un test compare la prévisualisation au jet jeté ensuite.
+  - **La barre d'actions** : les attaques, esquiver, se désengager, se précipiter, et la réaction —
+    le joueur choisit de **laisser passer** les attaques d'opportunité de son combattant.
+  - **Les PV des ennemis ne s'affichent plus** : « ensanglanté » sous la moitié, comme le *Guide du
+    Maître* le laisse voir, et comme l'IA le lit.
+  - Le curseur a son propre calque et son propre signal : le déplacer ne reconstruit plus la scène.
+  - L'écran du Colisée traduit en anglais, vues-modèles comprises ; un exécutable de test pour les
+    vues-modèles (`RuntimeTests`).
+  - Hors du lot, nommément : le combat sur la carte d'exploration et le HUD qui s'y superpose, que
+    le jeu Qt Quick n'a pas encore (repris au `LOT-27`), les gabarits de zone (avec les sorts), le
+    journal traduit (il vient du `Core`).
+
+- **IA tactique ennemie** (`LOT-23`, `EX-CBT-050`). Les ennemis du Colisée jouent seuls, par les
+  règles du *Guide du Maître* (chapitre 8, « Le combat ») et les mêmes actions que le joueur.
+  - **Ce que la table sait, et rien de plus** : l'état **ensanglanté** d'un adversaire sous la
+    moitié de ses points de vie (`core::isBloodied`), jamais ses PV ; la chance de toucher tirée du
+    **jet requis**, CA moins bonus d'attaque (`core::requiredRoll`, `core::hitChance`) ; les dégâts
+    moyens, et au critique les dés ajoutés (`core::expectedDamage`). Tout en entiers : deux
+    exécutions donnent le même tour, et le rejeu le même journal.
+  - **Un tour décidé case par case** (`core::planTurn`) : chaque case atteignable, chaque attaque,
+    chaque cible en vue, pesée contre la menace du prochain round et les attaques d'opportunité du
+    chemin ; sinon s'avancer par le chemin, se précipiter, esquiver ou se désengager ; un prudent
+    recule après avoir frappé. La décision s'écrit au journal avant d'être jouée (`core::playTurn`).
+  - **Ni suicide, ni blocage** : une case à portée de plus d'ennemis que le profil n'en tolère perd
+    contre toute case plus sûre, quel que soit son score ; une IA qui peut attaquer attaque, sinon
+    elle avance. Trente combats générés, joués par l'IA des deux côtés, atteignent tous leur issue.
+  - **Cinq profils en données** (`Source/Elements/Rpg/rules/behaviors.json`) — agressif, prudent,
+    soutien, archer, meute — et leurs règles d'attribution : le loup, qui porte *Tactique de
+    groupe*, chasse en meute ; le singe, dont le rocher frappe plus fort que le poing, tire.
+  - **La prise en tenaille**, règle optionnelle du Guide (`core::isFlanked`) : avantage au corps à
+    corps pour deux alliés de part et d'autre d'un ennemi, la ligne des centres tranche. L'Arène du
+    Futur la joue (`flanking` dans sa donnée).
+  - **Dans l'arène** : l'action *se précipiter* (`core::ArenaSession::dash`), une politique qui
+    décide des attaques d'opportunité au lieu de toutes les prendre, et une case à cocher pour
+    commander soi-même les ennemis.
+  - Hors du lot, nommément : les lanceurs de sorts (`LOT-25`, `LOT-35`), les actions de repaire et
+    les traits de groupe comme mécanismes (`LOT-46`), l'intention de l'IA montrée autrement qu'au
+    journal (`LOT-24`).
+
+- **Portée, ligne de vue et zones d'effet** (`LOT-22`, `EX-CBT-021`, `EX-CBT-022`). Le terrain compte :
+  un mur cache, un muret abrite, une boule de feu s'arrête contre une paroi.
+  - **Une ligne de vue symétrique par construction** (`core::hasLineOfSight`) : des segments entre
+    points de grille, testés en arithmétique entière exacte contre les cases qu'ils touchent — rien
+    n'avance case par case, et A voit B si et seulement si B voit A, vérifié sur des grilles
+    générées. Le coin commun de deux murs arrête le regard comme il arrête le pas ; l'eau profonde
+    et la falaise ne l'arrêtent pas.
+  - **L'abri du Manuel** (`core::coverFrom`, `core::coverBetween`) : partiel (+2), important (+5),
+    total (on ne vise pas). Les murs abritent selon les lignes qu'ils coupent, une créature ou un
+    muret partiellement, une herse de façon importante — et les abris **ne s'additionnent pas**.
+    L'abri se pose sur le jet une fois et une seule (`core::AttackRoll::applyCover`), et le journal
+    l'écrit : « [abri partiel : CA 15 -> 17] ».
+  - **Viser demande la portée, puis la vue** (`core::checkTarget`) ; le tir au contact n'est
+    désavantagé que par un ennemi qui voit le tireur ; l'esquive et l'attaque d'opportunité
+    demandent de voir.
+  - **Les cinq zones d'effet** (`core::AreaOfEffect` : cône, cube, cylindre, ligne, sphère) : une case
+    est dans la zone si la forme en couvre au moins la moitié, calculée exactement ; les cases
+    qu'aucune ligne droite ne relie à l'origine en sortent (`core::affectedCells`).
+  - **Les armes déclarent leurs propriétés et leurs portées** : `properties`, `versatileDamage`,
+    `rangeNormal`, `rangeLong` sont tirés de la table des *Basic Rules* à l'extraction, et les
+    actions à distance du bestiaire portent leurs portées. La hallebarde frappe à deux cases, la
+    dague se lance (`core::thrownAttackFor`), l'arc du squelette tire à 16/64 cases, et les armes de
+    finesse le sont vraiment.
+  - **Dans l'arène**, un pilier cache ou abrite ; l'écran choisit la première attaque qui peut viser
+    la cible, et dit quand elle est hors de vue.
+  - Hors du lot, nommément : les sorts et leurs sauvegardes (avec les classes), la lumière et les
+    sens, l'affichage des portées et des gabarits (`LOT-24`).
+
+- **Attaques, dégâts et états** (`LOT-21`, `EX-CBT-030`, `EX-CBT-031`, `EX-CBT-032`). Une attaque se
+  résout selon le Manuel des Joueurs, chapitre 9, et ses dégâts traversent un pipeline.
+  - **Le jet d'attaque est un objet** (`core::AttackRoll`) que trois points d'insertion lisent et
+    amendent avant que l'issue ne soit figée : ajouter un avantage ou un désavantage nommé, relancer
+    ou substituer un d20, ajouter un modificateur après avoir vu le total. Un 20 naturel touche
+    quelle que soit la CA et fait un critique ; un 1 naturel rate toujours.
+  - **Le critique double les dés, jamais le modificateur** (`core::rollDamage`) ; des dégâts ne sont
+    jamais négatifs ; une salve se lance une fois pour toutes ses cibles.
+  - **Un pipeline à étapes nommées** (`core::DamagePipeline`) : source, conversion, résistances,
+    réserves, points de vie — chaque étape est un point d'insertion, et la dernière est un seul
+    appel à `CombatState::applyDamage`. Résistance **puis** vulnérabilité, après tous les autres
+    modificateurs, une seule fois chacune (l'exemple du Manuel est rejoué par test) ; des affinités
+    contournables par la source (« non magique ») ; des **points de vie temporaires** qui se perdent
+    d'abord, ne se cumulent pas et ne se soignent pas ; des **structures** qui ont des PV et des
+    résistances.
+  - **Des profils d'attaque** tirés du bestiaire (`core::attacksFor` : allonge en cases, attaque à
+    distance, refus nommé d'une action sans type de dégâts) et de l'arme de la fiche
+    (`core::weaponAttackFor` : Force ou Dextérité, finesse, maîtrise, coup à mains nues).
+  - **Un journal qui dit tout** (`core::AttackOutcome::describe`) : « d20 = 12 + 3 (Force) + 2
+    (maitrise) = 17 contre CA 15 : touche ; degats 1d8+3 : 5 + 3 = 8 tranchant ; resistance
+    (tranchant) 8 -> 4 ; PV 30 -> 26 ».
+  - **Ce que l'agonie lira** : deux crochets de plus, `DamageTaken` (annoncé même à 0 PV) et
+    `CombatantDowned`, avec l'excédent au-delà de 0 et le drapeau critique.
+  - **Dans l'arène**, le coup d'essai du `LOT-50` laisse la place à l'action *attaquer*, et
+    s'ajoutent *esquiver*, *se désengager* et l'**attaque d'opportunité** à la sortie de l'allonge.
+    Le personnage de démonstration frappe avec son épée longue, contre la CA de son armure.
+  - Hors du lot, nommément : l'inconscience, les jets contre la mort et la mort instantanée
+    (`LOT-72`), la portée, la ligne de vue et l'abri (`LOT-22`), les sorts (avec les classes).
+
+- **PNJ et dialogues** (`LOT-15`, `EX-VIS-003`, `EX-RPG-042`). On parle à un PNJ par un arbre
+  scripté : répliques, réponses, conditions sur drapeau, actions, jets de compétence.
+  - **Un graphe en JSON, sans aucun texte** (`core::DialogueGraph`, `Source/Elements/World/dialogues/`).
+    Chaque réplique et chaque réponse ont une clé de traduction fabriquée depuis les identifiants ;
+    un test vérifie que toutes existent en français et en anglais.
+  - **Refusé au chargement, pas découvert en jeu** : cible inconnue, choix vide, réponses toutes
+    conditionnelles, cycle qui ne passe par aucune réponse à donner, nœud orphelin, impasse,
+    difficulté écrite en nombre. Toutes les fautes d'un fichier d'un coup, chacune nommant son
+    nœud ; les compétences, degrés, objets et langues nommés sont confrontés aux catalogues.
+  - **`core::DialogueRunner`, pur** : il enchaîne conditions, actions et jets jusqu'à la réplique
+    suivante, réévalue la condition d'une réponse au moment du geste, pose les drapeaux, donne les
+    objets, démarre une quête par `quest/<id>/started`, et jette ses d20 contre le degré lu dans
+    `rules/difficulty.json`. Une conversation se joue nœud par nœud sans fenêtre, et se rejoue à
+    l'identique à graine égale.
+  - **Refusé faute de langue commune** : un PNJ déclare ses langues, la fiche porte les siennes —
+    celles de l'espèce et celles qu'elle choisit (`core::CharacterSheet::languages`).
+  - **`hmi::DialogueMode`**, troisième mode de jeu : le monde est gelé pendant la conversation.
+  - **L'écran est branché** : `hmi::DialogueModel` remplace `PendingData` ; on clique une réponse
+    (ou `1` à `9`), une réponse qui mène à un jet l'annonce, le jet se restitue sur la réplique
+    suivante, et la conversation finie referme l'écran. Dialogue de démonstration provisoire : le
+    héraut du Colisée, quatorze nœuds, une Persuasion de difficulté moyenne.
+  - **Autour** : l'échelle des degrés de difficulté a enfin un lecteur
+    (`core::loadDifficultyScale`), la table des interactifs connaît les PNJ (`npc`, qui nomme son
+    dialogue), `LedgerList` sait rendre ses lignes cliquables.
+  - Hors du lot, nommément : ouvrir la conversation depuis la carte (l'interaction ne tourne pas
+    encore dans la session de jeu, `LOT-27`), les quêtes et leur journal (`LOT-16`), la
+    persistance (`LOT-17`), les portraits.
+
+- **Le Colisée : bac à sable de combat** (`LOT-50`). Un lieu pour éprouver le combat, encore et
+  encore, sans monter une partie — et qui est une zone du jeu final : les Arènes de Tanares.
+  - **La première carte** de `Source/Elements/Levels/`, vide depuis le `LOT-01` : l'Arène du
+    Futur, une enceinte de murs et de gradins, du sable, deux portes, douze points d'entrée écrits
+    comme des entités `arenaEntry` de la carte — six par camp, rangés par rang.
+  - **`core::ArenaSession` tient le combat** : le premier objet du jeu à tenir un
+    `core::CombatState`. Il monte la composition sur la carte en nommant chaque refus, jette
+    l'initiative à graine fixée, joue — déplacement, coup, fin de tour, retrait — et **rejoue** :
+    une seule suite aléatoire pour l'initiative, les jets et les dégâts, et un journal ; même
+    graine, même journal, vérifié par test.
+  - **Personne n'y meurt** : le rituel de Marque Héroïque relève tout le monde à l'issue, sauf dans
+    une arène létale, qui est l'exception écrite dans la donnée. La **troisième économie
+    d'action** (`heroicAction`) est déclarée à chaque combattant marqué, par le crochet du `LOT-20`.
+  - **Un coup d'essai, provisoire et dit comme tel** : déclaration, action, d20 contre la classe
+    d'armure, dés, `applyDamage`. Le kit vient de la première action qui frappe d'une créature, ou
+    du coup à mains nues du SRD pour un personnage. Le `LOT-21` remplace la façon, garde le lieu.
+  - **La donnée** : trois arènes du Sourcebook dans `Source/Elements/World/arena/` (`lethal`,
+    `heroicMark`, `map`), les huit Marques Héroïques en règle, et leurs deux schémas ;
+    `check_rpg_data.py` connaît les deux familles.
+  - **L'écran** : « Nouvelle partie » ouvre l'arène ; un écran de développeur en QML, sans charte, qui
+    compose deux camps depuis le bestiaire et le personnage de démonstration, choisit une Marque et
+    une graine, lance, joue case par case, rejoue. `hmi::ScreenId::Arena` dans la table de
+    navigation, `hmi::ArenaModel` dans `Jadg.Runtime`, sa doublure pour l'atelier.
+  - Hors du lot, nommément : l'ouverture de l'arène depuis le monde (`LOT-42`), le dessin du combat
+    sur la carte et la manette (`LOT-24`), les capacités qui dépenseront la *Heroic Action*.
+
+- **Initiative et tour par tour** (`LOT-20`, `EX-CBT-010`, `EX-CBT-011`, `EX-CBT-012`). Le combat a
+  son horloge : qui joue avant qui, ce qu'un tour permet, et comment un combat finit.
+  - **L'initiative est jetée une fois, et départagée par une règle écrite.** Total, modificateur,
+    Dextérité, alliés avant ennemis, identifiant — l'ordre de la donnée, jamais celui de la mémoire.
+    La relance d'un d20 que le Manuel laisse au MD est écartée : elle ferait dépendre l'ordre du
+    nombre d'égalités survenues avant. Cent vingt ordres d'insertion donnent la même suite.
+  - **Le tour ne finit que sur demande** (`endTurn`) : épuiser ses ressources ne termine rien. Le
+    curseur du round est une **place**, pas un indice — un renfort ou un fuyard ne fait sauter aucun
+    tour, et un renfort rangé après la place en cours joue ce round-ci.
+  - **L'économie d'action est une liste** (`core::ActionEconomy`) : la troisième économie des
+    Marques Héroïques se déclare, une réaction s'octroie. Chaque ressource revient au début du tour
+    de son porteur, jamais à la fin du tour courant ; le déplacement se fractionne.
+  - **Les trois fins** — victoire, défaite, fuite —, évaluées après chaque changement. Une salve qui
+    abat les deux camps est une défaite, quel que soit l'ordre des cibles ; un ennemi en fuite
+    compte pour la victoire ; une rencontre dont on ne fuit pas refuse la sortie d'un allié.
+  - **Neuf crochets nommés** (`core::CombatHook`), des repères d'initiative fixe qui perdent les
+    égalités (repaire à 20, renforts à 0), un acteur flottant, des compteurs par tour, round,
+    rencontre et jour, et une mémoire d'immunité par couple (créature, source). Ce qu'un abonné
+    change se règle en sortant de l'appel, jamais au milieu d'une annonce.
+  - **La grille est remplie** : `core::mountEncounter` pose le groupe et la rencontre en nommant
+    chaque refus ; `moverFor` dit qui l'on traverse (un allié, un ennemi à deux tailles d'écart).
+  - Un combat à cinq se joue sans fenêtre jusqu'à sa fin et se rejoue à l'identique ; un autre en
+    monte quatre alliés.
+  - **Corrigé en chemin** (`LOT-19`) : traverser la case d'une autre créature coûte double, comme
+    le dit le Manuel. Le défaut était latent tant que personne ne traversait personne.
+
+- **Grille tactique et déplacement** (`LOT-19`, `EX-CBT-020`, `EX-REG-051`). Le combat a sa grille :
+  qui se tient où, jusqu'où l'on va ce tour-ci, et par où.
+  - **La règle vient du Manuel, et elle a contredit la feuille de route.** « Jouer sur un
+    quadrillage » : une case coûte 1 **même en diagonale**, 2 en terrain difficile — à condition
+    de pouvoir les payer —, et l'on ne coupe pas le coin d'un mur. `core::GridDistanceField`, qu'on
+    devait réemployer, est un parcours à quatre voisins et à coût uniforme : il ne sait rien de
+    cela. Il reste l'outil de la récompense de progression ; le déplacement est un Dijkstra à huit
+    voisins (`core::ReachableArea`) et un A* (`core::findPath`).
+  - **Même entrée, même chemin — et le même dans les deux algorithmes.** À coût égal, le
+    prédécesseur d'indice de case le plus petit l'emporte : une règle posée sur le graphe, pas sur
+    l'ordre d'exploration. L'A* ne s'arrête donc pas à la première sortie de la destination ; le
+    test qui compare les deux algorithmes sur deux cents cartes aléatoires à graine fixe échoue
+    quand on l'y arrête.
+  - **Deux créatures ne partagent jamais une case**, par **emprise** : une créature de taille G
+    tient 2 × 2, et ne passe pas là où un humain passe. `place` et `moveTo` refusent avec leur
+    raison plutôt que de corriger. On traverse qui la requête autorise (`canPassThrough`), jamais
+    personne par défaut, et l'on ne s'arrête sur aucun.
+  - **L'altitude est un attribut, jamais une géométrie.** Un volant survole l'eau profonde et la
+    falaise et ignore la boue ; il ne traverse pas les murs, que la grille de collision ne sait
+    pas distinguer d'un muret.
+  - **Le budget tronque** : 9 m font 6 cases, 10 m aussi — un segment de 1,50 m entamé n'en est
+    pas un.
+  - **Le crochet des zones** : une couche à propriétés déclare une zone (`zonesAt`) ; seul
+    `difficultTerrain: true` — le booléen, pas un `1` — est interprété ici. Le terrain difficile
+    naît aussi en combat, et un objet de grille a des points de vie.
+  - Huit cas de test du cahier s'affichaient sans criticité ni étapes : leurs balises `\tcat`
+    avaient été écrites avec une tabulation. Corrigé.
+
+- **Charte v2 et intégration des maquettes** (`LOT-87`, en cours). Les dix maquettes du pack UI
+  deviennent la charte visuelle ; les cadres, plaques et fonds seront produits à part, à 1080p.
+  - **Phase 0 — socle vert.** Branches mortes archivées, débris retirés, maquettes déplacées dans
+    l'epic, lot inscrit.
+  - **Phase 1 — le module de conception.** Qt Design Studio ouvre chaque formulaire *et* chaque
+    jumeau en mode conception, et le jeu démarre — ce que 125 commits d'une branche abandonnée
+    n'avaient pas obtenu. Trois modules QML, chacun déclaré **dans le répertoire de ses fichiers**,
+    sans un seul alias de ressource : `Jadg.Ui` (`Source/Ui`, QML pur, `designersupported`),
+    `Jadg.Runtime` (`Source/HMI/Runtime`, les types C++, bibliothèque statique) et `Jadg.App`
+    (`Source/App/Game/Qml`, la fenêtre, la pile d'écrans et les jumeaux de câblage, module de
+    l'exécutable). Le diagnostic qui fonde ce découpage : l'atelier n'était pas grisé ; les jumeaux
+    nommant un type C++ restaient irrésolus, et un formulaire nommait lui-même un type C++. Sa
+    bibliothèque de composants, elle, liste chaque dossier « (vide) » avant comme après —
+    `designersupported` posé, deux dispositions essayées — et reste à instruire. Des **doublures** QML des types C++
+    (`Source/Ui/Mocks/`) rendent les jumeaux ouvrables dans l'atelier. Le garde-fou
+    `check_qml_designer_compat.py` vérifie désormais un **contrat** (imports, motifs, doublures
+    complètes, jumeaux appareillés, fichiers listés) et non une structure CMake. La surface de rendu
+    C++ quitte `GameViewForm.ui.qml` pour son jumeau. Le pin de Qt et la découverte de Qt vivent
+    dans `Source/CMakeLists.txt`, visibles des trois répertoires qui en dépendent.
+  - **Phase 2 — la charte v2 écrite, et ses jetons (T2.1, T2.2).** L'epic porte la charte : ce qui
+    est gardé (le parchemin, l'or et le grenat du corpus), ce qui change (panneaux sombres pour les
+    écrans posés sur une scène, `Cinzel` et `IM Fell English`, ornements en images 9-patch
+    produites, facteur d'agrandissement réel), ce qui est écarté et pourquoi (polices pixel, facteur
+    entier hors du viewport, tracé des ornements, découpage des maquettes). Les dix rôles nouveaux
+    sont **relevés** sur les maquettes par `scripts/measure_mockup_palette.py`, qui nomme maquette
+    et zone pour chacun et vérifie `Tokens.qml` (`--check`). La mesure a corrigé l'œil : les
+    sémantiques `success`, `danger` et `info` sont des matières de plaque, illisibles en texte.
+    `EX-IHM-070`, `EX-IHM-075` et `EX-IHM-076` refondues, `EX-IHM-081` précisée. `Tokens.qml` gagne
+    ces rôles, `uiScale` (lié à la fenêtre par `Main.qml`), `loreFamily` et une échelle `font*` de
+    cinq tailles à 1080p ; les grandeurs v1 restent, marquées obsolètes. Jusqu'au dépôt des polices
+    (T2.3), les écrans v1 s'affichent dans la famille de repli.
+  - **Phase 2 — les briques de la charte v2 (T2.7).** Treize contrôles `.ui.qml` que la phase 3
+    transcrira dans les écrans : `PanelFrame`, `TitlePlate`, `SectionBanner`, `OrnateButton`,
+    `OrnateTab`, `OrnateCheck`, `OrnateSlider`, `OrnateCombo`, `StatMedallion`, `PortraitFrame`,
+    `ItemSlot`, `Gauge`, `GoldDivider`. Les contrôles interactifs sont des contrôles Qt restylés ;
+    les états sont des propriétés, et `forcedState` les impose. Chaque brique nomme une **clé du
+    cahier** et pose l'image livrée — à la taille de conception, réduite d'un bloc par `uiScale` —
+    ou, tant qu'elle manque, l'aplat de jetons que le cahier prévoit. `Theme/Artwork.qml` dit quelles
+    pièces sont livrées ; `receive_ui_assets.py` l'écrit, `check_ui_assets.py` le vérifie. La galerie
+    (`DesignStudio/Main.ui.qml`) pose chaque brique dans ses états, dans l'atelier comme dans le jeu
+    (`--screen=Gallery`).
+
+- **Refonte de l'IHM sur Qt Quick, avec la conception séparée du code** (`LOT-86`).
+  L'objectif n'est pas technique : **un artiste doit pouvoir modifier les interfaces sans ouvrir un
+  fichier source**, en travaillant directement dans Qt Design Studio.
+  - **Deux applications, deux technologies d'IHM.** `JustAnotherRpgGame` est le jeu, en Qt Quick,
+    sur `QGuiApplication` ; `LevelEditor` est l'éditeur de niveaux, inchangé, en Qt Widgets. Ils
+    partagent `Core`, le rendu, les entrées, l'audio et l'amorçage — jamais une technologie
+    d'interface. Le jeu **ne lie pas `Qt6::Widgets`**, et c'est la garantie qui porte tout le lot :
+    un widget ne peut pas y réapparaître par inadvertance, l'édition de liens échouerait. Les tenir
+    dans une seule application obligeait à choisir une technologie pour deux besoins opposés — un
+    outil d'auteur à docks détachables d'un côté, une image agrandie d'un facteur entier de l'autre.
+    C'est de là que venaient les 2 472 lignes de `MainWindow.cpp`.
+  - **La couche de maquettes HTML disparaît.** `.design-mockups/` portait des planches dessinées à
+    la main, transcrites ensuite en C++ par un développeur, et un lint vérifiait que les deux copies
+    de la palette n'avaient pas divergé — trois représentations du même écran, deux transcriptions
+    manuelles, un garde-fou pour rattraper les erreurs. La maquette et l'écran sont désormais **le
+    même fichier**. Ce que les planches décidaient est reporté dans l'epic du lot, y compris le fait
+    que leur texte était **périmé** : elles annonçaient encore la direction « Ambre nuit » du
+    `LOT-68`, alors que les `LOT-66` et `LOT-76` avaient remplacé l'identité par le parchemin de
+    Tanares. Le contrôle qui les reliait comparait les couleurs, pas les mots.
+  - **Les jetons d'identité vivent en QML, écrits à la main, et nulle part ailleurs.** Engendrer
+    `Tokens.qml` depuis le C++ aurait remis la conception derrière un générateur et un contrôle de
+    fraîcheur : la surcouche qu'on supprime ailleurs. Le raisonnement qui l'évite est simple —
+    après la refonte, **plus aucun C++ n'a besoin des couleurs d'identité**, leurs seuls
+    consommateurs étant les écrans, qui deviennent du QML. `DesignTokens` perd donc sa portée
+    identité et ne garde que celle de l'éditeur. L'étanchéité des deux portées, jusqu'ici garantie
+    par un test, devient **structurelle** : deux langages, deux binaires, aucun chemin entre eux.
+  - **Éditer un écran sans rien reconstruire.** `qt_add_qml_module` embarque les `.qml` dans la
+    ressource ; on écrit donc un second `qmldir` dont les chemins désignent les **sources**, et
+    `JADG_QML_FROM_SOURCE=1` le place en tête des chemins d'import. Ce `qmldir` est **engendré
+    depuis la même liste** que la ressource : ajouter un écran ne crée pas un second endroit à
+    synchroniser. Vérifié de bout en bout — deux couleurs changées dans `Tokens.qml`, relance, le
+    changement est à l'écran, sans qu'aucun compilateur ait été lancé.
+  - **Une tranche verticale complète** : vue-modèle C++ → formulaire `.ui.qml` → écran affichant les
+    vraies données du personnage de démonstration. Le **formatage** n'est pas refait : le signe d'un
+    modificateur, le « 25 / 30 » des points de vie, le point qui marque une maîtrise restent dans
+    `hmi::characterSheetValues`, fonction pure et testée — deux endroits qui savent écrire un
+    modificateur finiraient par ne plus l'écrire pareil. Les libellés sont des **données** : les
+    compétences viennent du catalogue de règles, les caractéristiques du lexique, qui garantit une
+    seule traduction par terme.
+  - **Le garde-fou est le cœur du lot, pas la bascule QML.** Une refonte qui ne produit que du QML
+    redérive. `scripts/checks/check_ui_layers.py` vérifie six règles (`EX-IHM-100` à `EX-IHM-105`) et
+    **verrouille** en outre `EX-ARCH-001`/`EX-NFR-010` — `Core` sans un seul en-tête Qt, vrai depuis
+    le `LOT-01`, qu'un seul `QString` suffirait à rendre faux — sans les redéclarer. Les six règles
+    ont été vérifiées **en mordant** : une violation injectée dans chacune, le contrôle rouge à
+    chaque fois. Un lint qui passe sur du code propre mais ne se déclenche jamais ne vaut rien, et
+    il s'auto-vérifie contre la vacuité — la panne du `LOT-78`, où un contrôle vert ne lisait rien.
+  - **Six pièges silencieux, tous consignés là où ils se reproduiraient** : le `qmldir` engendré qui
+    ne déclare pas un singleton malgré son `pragma` (chaque import en construirait une instance
+    neuve, et le facteur d'agrandissement ne serait vu par aucun écran) ; le module embarqué sous un
+    préfixe où l'engine ne regarde pas ; `windeployqt` sans `--qmldir`, qui produit un jeu se
+    lançant sans interface ; le fichier d'enregistrement des types qui inclut les en-têtes par nom
+    de base dans un `__has_include` échouant sans bruit ; `qmlcachegen` dont le C++ engendré
+    déclenche `C4702` depuis les en-têtes de Qt ; et un tableau JavaScript qui n'expose que
+    `modelData` là où un modèle expose ses rôles — un écran validé sur des données d'exemple se
+    serait affiché vide une fois branché aux vraies.
+  - `--screenshot=<chemin>` capture la fenêtre **par Qt lui-même** : les API de capture de Windows
+    rendent une image noire d'une fenêtre Qt Quick, dessinée par le GPU. La vérification visuelle
+    des écrans devient reproductible au lieu de dépendre d'un œil devant l'écran au bon moment.
+  - `scripts/build.ps1` accepte `-Target` : le contrôle QML se lance localement comme en CI, sans
+    contourner l'environnement MSVC que ce script existe pour établir.
+  - **Les treize écrans existent, et l'ancienne couche est retirée du châssis d'édition**
+    (−3 879 lignes). `MainWindow` redevient ce que son nom dit : le viewport est de nouveau le
+    widget central, là où il partageait une pile avec cinq écrans du jeu. La pile disparaissant,
+    disparaît aussi l'enveloppe défilante que chaque écran traversait — elle existait parce qu'une
+    pile propage le minimum de **toutes** ses pages, y compris masquées, et qu'un écran dense
+    fixait à lui seul le plancher de la fenêtre. Sans pile d'écrans, le mécanisme du défaut n'existe
+    plus. L'éditeur s'ouvre désormais **directement** sur son espace de travail.
+  - **La navigation est réelle.** `hmi::ScreenRouter` ne décide rien : toute la règle vit dans la
+    table de transitions pure et testée, et une transition non déclarée est **refusée**, jamais
+    silencieusement acceptée. Il publie un **état**, jamais un chemin de fichier — la conception
+    peut réorganiser `Screens/` sans qu'une ligne de C++ ne s'en aperçoive.
+  - **Les options sont branchées : chaque réglage atteint le moteur** (`EX-IHM-083`). Plein écran
+    par liaison sur la fenêtre, volume vers `hmi::AudioEngine`, langue par échange de `QTranslator`
+    suivi de `QQmlEngine::retranslate()`, compteur de diagnostic vers un recouvrement qui affiche la
+    cadence — et synchronisation verticale sur le format de surface, donc **au prochain lancement**,
+    ce que l'écran **dit** au lieu de le taire. `hmi::OptionsModel` se borne à persister et à
+    prévenir ; c'est l'application qui branche. Le faire dans la vue-modèle lui aurait fait
+    connaître le moteur audio et la fenêtre, c'est-à-dire la frontière même que ce lot établit. Les
+    clés de configuration historiques sont **reprises telles quelles** : les renommer aurait
+    réinitialisé en silence les préférences de qui jouait avant la refonte.
+  - **Les contrôles Qt prennent la couleur des jetons, et il a fallu imposer le style pour cela.**
+    Sous Windows, Qt choisit « FluentWinUI3 », qui peint avec les couleurs du système et ignore
+    largement la palette : interrupteurs et curseur de volume ressortaient en **bleu** au milieu du
+    parchemin, et aucune retouche de `Tokens.qml` n'y pouvait rien. Le jeu impose « Basic », dont
+    tout le rendu vient de la palette, que `Main.qml` dérive des jetons. Sans cela, la seule issue
+    aurait été d'écrire une couleur dans chaque écran — exactement ce que `Tokens.qml` existe pour
+    empêcher.
+  - **Un sélecteur d'écrans, pour pouvoir tout vérifier avant qu'un niveau n'existe.** Deux boutons
+    font défiler les quatorze écrans (`Logic/ScreenProbe.qml`) : sans eux, les sept écrans dessinés
+    mais pas encore alimentés ne sont atteignables par aucun chemin de jeu. Ce n'est pas une
+    fonctionnalité, et le code le garantit — il se lie à `ScreenRouter.developerBuild`, faux dans un
+    binaire livré. Il **rend la main au routeur** dès que le jeu navigue de lui-même : épinglé, il
+    aurait empêché `Échap` de fermer quoi que ce soit et fait paraître la navigation cassée par
+    l'outil censé permettre de la vérifier.
+  - **`EX-IHM-075` n'est pas retirée, contrairement à ce que le cadrage avait conclu.** Les trois
+    raisons qu'elle invoque — une image ne s'étire pas honnêtement, fige ses couleurs hors des
+    jetons, et ne suit pas le facteur entier — restent vraies en QML, et **Qt Quick Shapes** les
+    honore toutes en restant éditable dans Qt Design Studio. Ce qui change n'est pas « tracé par du
+    code » mais « tracé par du **C++** ». La géométrie pure relevée sur le corpus est conservée dans
+    `Presentation` comme source du portage, plutôt que jetée puis redessinée de mémoire.
+  - **Les ornements sont tracés, en Qt Quick Shapes.** Cadre à cabochons, bandeau à ailes, fleuron
+    de focus : portés depuis les géométries relevées sur `Character_Sheets_Tanares.pdf`. Un détail
+    manquait au premier essai et se voyait — la pierre **déborde** du carré d'angle d'un facteur
+    deux, sans quoi elle fait l'épaisseur de l'encadrement et son octogone se confond avec le filet ;
+    elle reste ancrée **au coin** et jamais centrée, faute de quoi elle sortirait du panneau et se
+    ferait rogner.
+  - **Le jeu est traduisible, et le français est sa langue source.** Les 101 chaînes des écrans QML
+    n'étaient portées par aucun catalogue. 89 traductions anglaises sont **reprises** du catalogue
+    maison par `scripts/i18n/seed_translations.py`, qui ne devine rien : une source sans correspondance
+    exacte reste à traduire et il la signale. Il a d'ailleurs trouvé une vraie ambiguïté du corpus —
+    « Bourse » traduit **Purse** (l'argent) et **Pouch** (l'emplacement) — et a refusé de choisir.
+    Les libellés à clé **calculée** (caractéristiques, emplacements) restent au lexique, dont
+    `rpg.glossary.csv` garantit une traduction unique par terme de règle.
+  - **La surface de rendu du jeu est un `QQuickRhiItem`** : QRhi rend en **Direct3D 11 dans une
+    fenêtre Qt Quick**, et le QML se compose par-dessus — la garantie que le portage sur
+    `QRhiWidget` cherchait côté éditeur, obtenue sans un seul widget. Elle n'affiche encore aucune
+    scène : `Source/Elements/Levels/` est vide par construction, et bâtir une session autour d'un
+    niveau inexistant aurait produit du code que rien ne peut vérifier.
+  - **Documentation refondue** : `interface-ihm.md` §11, la traçabilité d'`architecture.md`, et cinq
+    guides — dont un nouveau, **`guide-conception-qds`**, qui ne s'adresse pas au développeur mais à
+    qui dessine les écrans : ce qui se modifie sans jamais ouvrir un fichier source, ce qui demande
+    encore un développeur, et pourquoi la frontière est là.
+  - **Quatre tests retirés, aucune garantie perdue.** Celui des tailles de police dans les `.ui` est
+    remplacé par un lint qui couvre **tous** les écrans et non deux. Les trois tests d'étanchéité
+    des portées tombent parce que l'étanchéité est devenue **structurelle** : l'identité vit en QML,
+    dans un autre binaire, et aucun chemin ne relie plus les deux. C'est le meilleur sort qu'on
+    puisse réserver à un test — que ce qu'il surveillait devienne impossible.
+  - **Les sept écrans sans données sont dessinés, et leur travail est mis à l'abri.** Journal,
+    carte, dialogue, marchand, tableau de la Guilde, ATH de combat et feuille d'équipe existent
+    comme formulaires `.ui.qml`, fidèles aux blocs que la table décrivait et aux libellés de
+    `fr.lang`, mot pour mot. Chacun de leurs **41 champs** porte une **clé d'attribution** nommée
+    qui aboutit à l'ancre `hmi::PendingData`. Le jour où un lot fonctionnel livre sa donnée, il
+    remplace `PendingData` par sa vraie vue-modèle dans le fichier de **câblage** : le formulaire
+    ne bouge pas. `python scripts/i18n/list_pending_bindings.py` en donne l'inventaire — **dérivé du
+    QML**, donc toujours exact, là où une liste écrite à côté aurait cessé d'être vraie au premier
+    écran branché.
+  - **Des tirets cadratins, jamais de fausses données.** Un écran rempli de valeurs plausibles se
+    prend pour un écran fini : il passe les relectures, on l'oublie, et un jour quelqu'un s'étonne
+    que le marchand vende toujours les mêmes trois objets. Le pied de l'écran l'avoue en outre —
+    « Écran dessiné, données à brancher ». Les **valeurs d'exemple**, elles, vivent dans les
+    formulaires : Qt Design Studio les affiche, la conception juge sa mise en page dessus, et le
+    jeu ne les voit jamais.
+  - **Le châssis fait défiler ce qui ne tient pas**, sur le chemin commun et non écran par écran.
+    C'est la leçon payée trois fois du côté des widgets, où le même débordement fut corrigé deux
+    fois écran par écran avant qu'on ne comprenne qu'une règle à réappliquer se reperd au premier
+    écran ajouté.
+  - Quatre défauts trouvés par `qmllint`, dont deux propres à Qt Design Studio et donc invisibles
+    autrement : `screen` redéfinissait une propriété de `Window` (l'écran **physique**), et deux
+    identifiants trop génériques dans des `.ui.qml` que le designer ne sait pas garantir. Plus un
+    délégué qui lisait la portée de son fichier par un mécanisme que QML ne garantit plus.
+
+- **Inventaire et équipement** (`LOT-14`). Porter, équiper et consommer des objets, avec un effet
+  **mesurable** sur la fiche.
+  - **Aucune statistique n'est stockée, et c'est tout le lot.** `core::Inventory` ne porte ni classe
+    d'armure, ni poids total, ni encombrement : toutes sont des **fonctions** de ce qu'il contient,
+    recalculées à chaque lecture. Le défaut classique — appliquer un bonus à la volée (`ca += 2`) et
+    le retrancher au retrait — fait **dériver** la CA après trois équipements et deux retraits dans
+    le désordre, sans que rien ne le signale. Une valeur qu'on ne stocke pas ne peut pas dériver ;
+    un test joue quand même six ordres différents pour que la propriété le reste.
+  - **La règle est relevée sur le livre**, pas devinée : `rules/encumbrance.json` porte la capacité
+    de charge (7,5 kg par point de Force), les deux seuils d'encombrement et les pénalités de
+    vitesse, chacun avec la **phrase du corpus** qui l'atteste (page 68). Tout est en **grammes** —
+    le livre écrit des kilogrammes, les catalogues donnent des grammes, et mêler les deux dans une
+    somme donnerait un sac de cinq cents kilos pour une poignée de fléchettes.
+  - **C'est la catégorie qui décide, pas l'emplacement** : un bouclier rangé au torse compte comme
+    un bouclier — il *ajoute* à la CA au lieu de la remplacer. Les confondre donnerait un personnage
+    en bouclier seul avec une CA de 2.
+  - **La classe d'armure de la fiche vient de l'équipement porté** : elle est calculée à la
+    construction, sans rien savoir de l'armure endossée depuis. Le personnage de démonstration passe
+    de 11 à 15 dès qu'il porte son cuir clouté et son bouclier — le critère du lot, visible à
+    l'écran.
+  - **La finesse attend sa donnée** : la branche existe, mais aucune arme ne déclare encore la
+    propriété autrement qu'en toutes lettres dans son texte français, et lire une règle dans de la
+    prose est ce que ce projet évite. `Weapon` lit désormais le tableau `properties` que le schéma
+    prévoyait déjà.
+
+- **Fiche de personnage : maquette et interface** (`LOT-38`). Le `LOT-68` avait livré neuf écrans
+  vides ; celui-ci en **remplit un**, relevé sur les cinq feuilles Tanares **vierges** du corpus et
+  alimenté par un personnage réel.
+  - **Un champ affiché, ou écrit comme non alimenté** — et cette liste n'est pas un document à
+    côté, elle est **dans la table** : chaque ligne de l'ossature porte un identifiant de valeur,
+    ou une chaîne vide qui dit « ce champ existe, rien ne l'alimente encore ». Il reste au tiret
+    cadratin, jamais à zéro : un « 0 » se lirait comme un état du jeu et mentirait. La colonne des
+    identifiants vides **est** le périmètre restant — agonie (`LOT-72`), inventaire (`LOT-14`),
+    dons (`LOT-47`), sorts (`LOT-35`), Guilde (`LOT-45`).
+  - **La cinquième planche est une feuille d'ÉQUIPE, pas une fiche** : blason, quartier général,
+    mécénat. Elle a donc son écran — le **neuvième** — et c'est la preuve de ce que le `LOT-68`
+    affirmait : il s'ajoute par une entrée de table et ses clés de traduction, sans qu'aucun des
+    huit autres, ni la feuille de style, ni le châssis, n'aient été touchés (`EX-IHM-090`).
+  - **Les valeurs sont calculées par la règle, pas recopiées** : modificateurs signés, maîtrises
+    marquées, points de vie lus contre leur maximum, Perception passive dérivée. Le tout dans une
+    fonction **pure**, vérifiable sans ouvrir de fenêtre — et un test tient le seul contrat qui
+    relie les deux côtés, l'identifiant de valeur.
+  - **Le personnage affiché est une donnée**, `Rpg/characters/demonstration-brenna.json`, avec son
+    schéma et sa validation en CI. Elle ne porte que des **choix** — espèce, classe, historique,
+    caractéristiques de base, niveau : le reste est dérivé par le moteur, et le niveau s'atteint
+    par gain d'expérience, le chemin qu'une partie empruntera. Déclarée **provisoire** avec son
+    critère de retrait : elle disparaît quand une partie fournira un personnage réel (`LOT-29`,
+    `LOT-17`).
+  - **Le lexique tient maintenant les compétences et les caractéristiques.** Les dix-huit
+    compétences et les six caractéristiques s'affichent, donc s'écrivent dans le catalogue de
+    traduction — et ce sont des termes de règle, « Escamotage » et non « Tour de main ». Deux
+    espaces de noms de plus sous `check_glossary.py`, qui passe de 0 à **24 clés de règle
+    contrôlées**.
+  - **La planche gravée a été essayée, puis écartée** — et la raison est écrite plutôt que perdue.
+    La feuille du corpus a été vectorisée, son lettrage anglais retiré du tracé (2 565 sous-chemins
+    sur 21 906) et les intitulés traduits reposés aux mêmes rectangles : cela fonctionnait. Ce qui
+    l'a arrêtée est en deux temps. **Qt ne sait pas rendre ce tracé** : `QSvgHandler` rejette tout
+    `<path>` de plus de 32 768 éléments — sans le dire, `isValid()` reste vrai et le rendu est vide
+    — et celui-ci en demande 540 094. Le **découper** ne marche pas davantage : un remplissage se
+    calcule sur l'ensemble des contours d'un même chemin, et le contour du cadre de page fait à lui
+    seul 24 535 points en enveloppant toute la feuille — trois découpes essayées, trois images
+    fausses. Restait le masque d'encre en PNG, qui marchait ; mais **un fond monolithique n'est pas
+    un asset** : on ne peut ni déplacer un cartouche, ni réutiliser un anneau sans rejouer toute la
+    chaîne. La feuille reviendra en assets **unitaires**.
+  - **L'écran est donc l'ossature du `LOT-68`, remplie** : identité, progression, six
+    caractéristiques avec leur modificateur, combat, six jets de sauvegarde, dix-huit compétences.
+    La table des écrans reste la seule description de la fiche — le jour des assets unitaires, ce
+    sont les widgets qui changeront, pas ce qu'ils affichent.
+
+- **Le châssis des écrans du RPG** (`LOT-68`). Huit écrans manquaient au jeu, et aucun n'existait
+  même en ébauche : fiche de personnage, inventaire et équipement, journal de quêtes, carte du
+  monde, dialogue, marchand, tableau de la Guilde, ATH de combat. Ce lot ne les **remplit** pas —
+  c'est le travail des `LOT-38`, `LOT-42`, `LOT-45` et `LOT-24` — il livre ce qu'ils ont en commun
+  et qu'aucun ne doit réinventer.
+  - **L'ossature est une table, et c'est tout le lot.** Le critère de la feuille de route disait :
+    *ajouter un neuvième écran ne demande de toucher à aucun des huit*. Il ne se tient pas avec huit
+    fichiers d'interface, fussent-ils bien écrits — le premier pied de page à corriger le serait
+    huit fois. `hmi::rpgScreens()` décrit donc chaque écran en **données pures** (blocs, genres,
+    libellés, `EX-IHM-090`), et le châssis Qt ne connaît **aucun** écran par son nom. Même règle
+    pour la feuille de style, qui habille par **rôle** et jamais par nom d'objet.
+  - **Les champs annoncés sont relevés sur les modèles déjà livrés** — `core::CharacterSheet`,
+    `core::Ability`, `core::Equipment`. Une ossature qui annonce des champs que le modèle ne porte
+    pas promet ce que le jeu ne pourra pas tenir. Les valeurs, elles, sont des **tirets** : ce lot
+    livre le cadre, et une valeur d'exemple se lirait comme un état du jeu (`EX-IHM-072`).
+  - **La règle de superposition appartient à l'écran, pas à l'appelant** (`EX-IHM-091`). La carte du
+    monde et l'ATH de combat se consultent **en marchant** — on ouvre une carte pour savoir où l'on
+    va sans s'arrêter ; les six autres suspendent la simulation. Décidée au point d'appel, cette
+    règle se contredirait d'un appel à l'autre sans que rien ne le signale.
+  - **« Nouvelle partie » ouvre le châssis, et c'est un échafaudage assumé.** Cette entrée n'a
+    aucune carte à charger — `demo-deplacement.json` n'existe pas, le `LOT-67` l'avait écrit — et
+    huit écrans qu'aucun chemin n'atteint ne se relisent ni ne se valident. La ligne à rendre à son
+    usage le jour où le `LOT-27` livrera une carte est **une seule**, et elle le dit. En attendant,
+    l'écran de jeu et celui de pause ne sont plus atteignables depuis le menu ; la table de
+    transitions déclare et teste déjà l'ouverture d'un écran du RPG depuis l'un et l'autre.
+  - **Trois défauts d'agencement, trouvés en ouvrant l'application** et invisibles dans le code : le
+    pied d'actions passait sous la ligne de flottaison (une seconde zone défilante borne désormais
+    le contenu seul, le pied reste posé au bas du cadre) ; le bandeau de titre débordait de la
+    fenêtre à la taille des titres d'écran, sortant la colonne de droite du cadre sans qu'aucune
+    erreur ne soit levée ; et les rappels de touches imposaient leur largeur — une aide ne décide
+    pas de la largeur d'une fenêtre.
+
+- **Menus et vocabulaire d'un RPG** (`LOT-67`). Le jeu décrivait un autre jeu : « Choisir un
+  niveau » au menu, « Recommencer le niveau » en pause, et un avertissement de sortie qui parlait
+  de « la progression du **tableau** en cours ». Ce lot retire la **notion de niveau discret** —
+  des écrans, du code, du vocabulaire et des exigences — et remplace le décor du menu principal par
+  la **carte du monde de Tanares**.
+  - **Le menu principal perd deux entrées, parce qu'elles ne menaient plus nulle part.**
+    « Continuer » reposait sur une progression au tableau, « Choisir un niveau » sur une séquence :
+    les deux sont retirées. Les griser aurait coûté plus de confiance qu'elles n'apportaient
+    d'information (`EX-IHM-072`). « Continuer » revient avec la sauvegarde du `LOT-17`, les entrées
+    RPG de la pause avec les écrans du `LOT-68`.
+  - **Il perd aussi son titre** : le fond *est* la carte du monde, et un bandeau posé dessus
+    répétait en lettres ce que l'image dit déjà. Les autres écrans gardent le leur — sans image à
+    eux, on ne saurait pas où l'on est.
+  - **La carte du monde trace la frontière que le `LOT-76` avait ouverte.** Ce lot-là concluait que
+    l'habillage se **trace** (`EX-IHM-075`) ; celui-ci livre une image, et c'est la même frontière
+    prise de l'autre côté (`EX-IHM-076`) : un ornement se trace parce qu'il doit se redimensionner
+    et suivre les jetons, une carte peinte ne le peut pas. Mêmes garde-fous — région déclarée,
+    manifeste recoupé en CI avec les fichiers et le code, repli si l'image manque.
+  - **Du JPEG, seul du dépôt, et c'est délibéré** : le PNG de cette carte pèse 4,4 Mo, son JPEG
+    0,7, pour une différence que personne ne voit sous un voile. Le poids du dépôt est un sujet du
+    corpus depuis le début (`EX-CNT-023`). Le filigrane d'achat est **recadré**, jamais effacé :
+    l'effacer demanderait de repeindre ce qu'il recouvre.
+  - **~1 300 lignes retirées** : deux écrans (sélection de niveau, fin de niveau), deux modèles
+    (`Progression`, `LevelSequence`), un bilan de partie (`LevelRunStats`), deux maquettes. C'étaient
+    les mises en œuvre des exigences retirées ; les garder aurait laissé du code que plus aucune
+    exigence ne justifie.
+  - **Seize exigences traitées : douze retirées, trois refondues, une conservée.** `EX-GP-040`,
+    `EX-IHM-003` et `EX-IHM-004` avaient un objet **au-delà** du niveau discret — le jeu a toujours
+    des états, un ATH et un écran de pause — et les retirer aurait laissé leur mise en œuvre
+    orpheline. Les douze autres sont **retirées, pas supprimées** : leurs ancres restent, avec le
+    motif du retrait.
+  - **« niveau » devient « carte », partout**, y compris côté éditeur où la famille de clés
+    `level.*` devient `map.*` : l'éditeur n'édite pas des niveaux, il édite les cartes du monde.
+    Les deux catalogues restent synchrones, 376 clés de chaque côté. L'événement `LevelCompleted`
+    devient `ExitReached`, et `SequenceCompleted` disparaît avec son bruitage.
+  - **Ce que le lot ne rend pas jouable, et le dit** : « Nouvelle partie » ouvre
+    `demo-deplacement.json`, qui **n'existe pas** — le `LOT-01` a purgé les niveaux du jeu de
+    plateforme et aucun lot n'en a livré depuis. Le constat est antérieur à ce lot (la « Nouvelle
+    partie » d'avant chargeait une séquence tout aussi absente) mais il devient visible.
+
+- **Habillage d'interface extrait des livres** (`LOT-76`). Les écrans du jeu portent enfin ce qui
+  fait reconnaître une page de Tanares en une seconde : la **pierre sertie** à l'angle des panneaux
+  et le **bandeau de titre à ailes**. Tous deux **tracés**, donc nets à tout facteur
+  d'agrandissement et pilotés par les jetons de la charte.
+  - **Le découpage d'images a été construit, puis abandonné.** Vingt et une planches PNG à 300 ppp,
+    leur manifeste et leur lint d'intégrité existaient ; c'est l'écran qui a tranché. Un cabochon de
+    108 pixels sur un panneau haut de 340 mangeait le tiers de sa hauteur, et le bandeau demandait
+    l'impossible à un découpage en tranches — une plaque qui s'allonge avec le titre, des ailes qui
+    n'en font rien. À ce point-là, on ne redimensionnait plus une image, on la redessinait mal.
+  - **Ce que le corpus donne reste entier : la mesure, pas la matière.** Le grenat des cabochons
+    (`#701010`) est la dominante quantifiée des pixels rouges d'un cabochon, mesurée **séparément
+    sur deux angles opposés** de la planche — même méthode que la palette du `LOT-66`, même
+    vérification croisée. Le grenat profond des plaques (`#400000`) vient du bandeau du livre.
+  - **`error` n'est plus le seul rôle inventé.** Le `LOT-66` le signalait comme non attesté, « une
+    feuille de personnage n'ayant pas d'état d'erreur à montrer ». C'était vrai d'un état d'erreur
+    et faux du rouge : il est dans les gemmes. Deux jetons neufs, `gem` et `gemShadow`, relevés.
+  - **L'invariant du bandeau : l'envergure des ailes suit la hauteur, jamais la largeur.** Un titre
+    long allonge la plaque et rien d'autre — ce qu'une image étirée ne sait pas faire. Quand la
+    largeur manque, ce sont les ailes qui cèdent, puis disparaissent ; jamais la plaque, qui porte
+    le titre.
+  - **La variante accentuée garde ses angles nus.** Son filet passe à la couleur d'accent pour
+    signaler un écran superposé ; une pierre par-dessus rendrait ce signal illisible.
+  - **Les six titres d'écran deviennent des bandeaux.** Le texte tient **entre** les ailes par les
+    marges de contenu, et non par un décalage au moment de peindre — sinon l'élision décide sur la
+    mauvaise largeur, et le mot coupé n'apparaît que sur le titre le plus long. Sa couleur passe à
+    l'or pâle : l'or des filets tenait sur du parchemin, il disparaît sur le grenat.
+  - Exigence ajoutée : `EX-IHM-075` — l'habillage ornemental se **trace**, il ne se livre pas en
+    image. `EX-IHM-070` imposait de relever les **couleurs** ; rien n'était écrit des **formes**.
+
+- **Charte visuelle : sortir de l'identité pixel art** (`LOT-66`). L'interface héritée du jeu de
+  plateforme laisse place à l'identité du **parchemin de Tanares** — parchemin, encre sépia, filets
+  et cabochons dorés, titrage à empattements.
+  - **La palette est relevée, pas choisie.** Chaque teinte vient de l'histogramme quantifié des
+    pages rendues de `Character_Sheets_Tanares.pdf`. C'est la règle du corpus transposée à la
+    couleur : une couleur inventée ressemble à la source sans en venir, et rien ne le dit jamais.
+    Un seul rôle n'est pas attesté — `error`, une feuille de personnage n'ayant pas d'état d'erreur
+    à montrer — et il est **signalé comme tel dans le code** plutôt que glissé dans la liste.
+  - **Les rôles de cadre changent de nom, et c'est le cœur du lot.** `outline`, `bevelLight`,
+    `bevelDark` nommaient un **biseau** : une lumière venue d'en haut à gauche. Le parchemin n'a pas
+    de relief à simuler. Garder ces noms en peignant un encadrement plat aurait produit du code
+    juste dont les noms décrivent autre chose. Ils deviennent `frameEdge`, `frameOrnament`,
+    `frameShadow`.
+  - **Ce qui fait un encadrement, c'est la réserve.** Un trait d'encre, une **réserve de
+    parchemin**, un filet doré : sans la réserve du milieu, les deux traits se touchent et
+    l'ensemble devient une bordure épaisse de deux tons — sans qu'aucune erreur ne soit levée,
+    toutes les bandes étant toujours là. Un test relève donc le rôle **visible** à mi-hauteur et
+    exige d'y trouver du parchemin.
+  - **Le facteur d'agrandissement reste entier, pour une autre raison.** Le filtrage au plus proche
+    voisin ne le justifie plus ; les longueurs de la feuille de style, elles, sont des entiers de
+    pixels, et à 1,5× le trait et le filet s'arrondissent à la même épaisseur — la réserve
+    disparaît. Une échelle fractionnaire ne serait pas *floue*, elle serait **fausse**.
+  - **641 lignes de widgets pixel art supprimées** de `Source/HMI/Interface/`. Quatre des cinq
+    modules disparaissent ; `PixelArtScale` est **renommé** `IdentityScale` parce qu'`EX-IHM-081`,
+    que le lot ne touche pas, est écrite en fonction de ce facteur — le supprimer laisserait une
+    exigence sans mise en œuvre.
+  - **Le focus n'est jamais perdu de vue.** `EX-IHM-071` et `EX-IHM-072` sont tenues sans
+    changement. Le curseur en escalier devient un **fleuron** anticrénelé, tracé **une seule fois**
+    et appelé des deux côtés : deux tracés séparés dériveraient l'un de l'autre, et le joueur
+    croirait à deux états différents.
+  - **Onze exigences refondues**, à commencer par la racine `EX-ARCH-022` — dont dix tenaient
+    d'elle leur justification.
+  - `ctest` reste à **1009** cas, tous verts.
+
+- **Équipement : armes, armures et matériel** (`LOT-34`). Les tables des *Basic Rules* vers
+  `Source/Elements/Rpg/` — **37 armes**, **13 armures** et **125 objets** (matériel, outils,
+  montures et véhicules).
+  - **C'est le lot où le §4 se paie.** « Un tableau ne s'extrait pas en flux de texte » est une
+    règle du projet depuis le `LOT-30` ; nulle part sa conséquence n'est aussi silencieuse qu'ici :
+    une valeur de prix décalée d'une ligne ne casse rien, ne lève aucune alerte, et déséquilibre
+    l'économie sans que personne ne comprenne pourquoi.
+  - **Le groupe d'une arme n'est pas dans sa rangée.** Ce sont les intertitres du livre — « Armes
+    courantes de corps à corps », « Armes de guerre à distance » — et eux seuls qui disent qu'une
+    arme est courante ou de guerre. Une extraction qui ne lirait que les rangées produirait
+    trente-sept armes sans catégorie, et `category` est requis au schéma sans que rien ne dise
+    qu'il est **juste**. Le défaut s'est manifesté à la première exécution : la bande d'ordonnées
+    commençait après le premier intertitre, et dix armes sortaient sans catégorie — c'est le
+    contrôle de cardinal, 27 au lieu de 37, qui l'a dit.
+  - **Les trois formes de la colonne CA disent trois règles.** `11 + Mod.Dex` sans plafond,
+    `14 + Mod.Dex (max +2)` plafonné, `18` sans Dextérité du tout. Les réduire à leur premier
+    nombre appliquerait la Dextérité au harnois — ce qui rend le personnage **plus** résistant,
+    jamais moins, ne provoque aucune erreur et passe pour de l'équilibrage. Le test choisit une
+    Dextérité de +4 précisément pour que l'écart se voie.
+  - **Trois cas que le livre écrit et qu'un schéma refusait.** Le **filet** n'inflige aucun dégât —
+    il entrave — et `damage` est devenu facultatif plutôt que de lui inventer des dés ; la
+    **fronde** n'a pas de poids, et le tiret du livre vaut *absent*, jamais zéro ; le **bouclier**
+    n'est pas une armure, il ajoute au lieu de remplacer, et le traiter comme telle donnerait une
+    CA de 2 à un personnage en bouclier seul.
+  - **La table du matériel est composée en deux sous-tables côte à côte** : une rangée y porte six
+    cellules, donc deux objets. Les lire d'un bloc donnerait un objet pesant
+    « 500 g Billes de fronde (20) ».
+  - **Deux unités converties une seule fois.** Le livre mêle kilogrammes et grammes dans la même
+    table, et compte en pièces d'or, d'argent et de cuivre ; les catalogues ne connaissent que les
+    grammes et les pièces de cuivre.
+  - `ctest` passe de 1001 à **1008** cas, tous verts.
+
+- **Entités de carte et interaction** (`LOT-10`). Les cartes se peuplent d'entités qui ne sont
+  **pas des tuiles** — coffres, panneaux, et demain PNJ et portails — et le joueur peut interagir
+  avec elles.
+  - **Le piège du lot est un coffre ouvert deux fois.** Le critère est facile à énoncer et facile à
+    rater : *y compris après un aller-retour de carte*. C'est cette moitié de phrase qui décide de
+    la conception — quand le joueur revient, l'entité du coffre est **recréée depuis le fichier de
+    niveau**, qui ne sait rien de ce qui s'est passé. Un booléen porté par l'entité disparaîtrait
+    avec elle, et le coffre redonnerait son butin à chaque passage : un défaut qui ne casse rien,
+    ne lève aucune alerte, et se confond avec de la générosité de conception. L'état vit donc dans
+    `core::WorldFlags`, à côté des entités. **Le test détruit le monde et le reconstruit** pour le
+    vérifier.
+  - **La clé de drapeau est fabriquée, jamais écrite à la main** : `<carte>/<type>@<colonne>,<ligne>`.
+    Deux coffres d'une carte se distinguent par leur case, et le nom de carte empêche que vider un
+    coffre au village en vide un autre au donjon. Corollaire assumé : déplacer un coffre dans
+    l'éditeur le remet à neuf pour une partie en cours — l'inverse demanderait un identifiant
+    stable que le `LOT-11` devrait générer et maintenir unique.
+  - **Un coffre vidé n'est plus une cible du tout**, et pas seulement une cible qui ne fait rien :
+    continuer à l'afficher promettrait au joueur quelque chose qui n'arrivera pas.
+  - **La case visée suit la direction dominante, jamais une diagonale.** Un personnage qui regarde
+    à 30° vise la case de droite : viser en diagonale rendrait la cible imprévisible à la manette
+    analogique, alors que le joueur doit savoir ce qu'il désigne **avant** d'appuyer. Une
+    orientation nulle ne vise rien.
+  - **L'interaction ne traverse pas un mur**, et **à plusieurs candidats le choix est
+    déterministe** — le plus proche du centre de la case visée, puis le plus petit indice. Sans
+    départage, deux objets sur la même case donneraient tantôt l'un tantôt l'autre selon l'ordre de
+    parcours de l'ECS, qui n'est pas stable.
+  - **Un type d'entité inconnu produit tout de même une entité**, sans composant interactif : la
+    refuser ferait disparaître un objet de la carte sans que son auteur comprenne pourquoi
+    (`EX-NFR-040`). Les familles connues sont une table, non un `if` par cas — le `LOT-15` et le
+    `LOT-09` en ajouteront sans retoucher la fonction.
+  - `ctest` passe de 992 à **1001** cas, tous verts.
+
+- **La fiche de personnage** (`LOT-13`). Toute créature — héros, PNJ, ennemi — a désormais une
+  fiche complète : caractéristiques, points de vie, classe d'armure, niveau, bonus de maîtrise,
+  jets de sauvegarde, compétences, vitesse. Et elle **monte de niveau**.
+  - **« Aucune valeur de règle dans le C++ » se vérifie sur le diff, pas sur l'intention.** C'est le
+    critère le plus facile à croire tenu : une valeur de règle a l'air d'une constante
+    d'implémentation, et rien ne les distingue une fois écrites. Ce lot en a trouvé **trois**.
+  - **La table d'expérience est une donnée** : vingt seuils et vingt bonus de maîtrise, extraits de
+    la table des *Basic Rules* p. 11 et lus **par coordonnée** — ses trois colonnes n'ont ni filet
+    ni séparateur. Elle tiendrait en trois lignes de C++, et c'est ce qui la rend dangereuse :
+    équilibrer la progression demanderait alors une recompilation à chaque essai. Deux contrôles
+    arrêtent la génération — les vingt niveaux présents **et dans l'ordre**, les seuils
+    **strictement croissants** : deux seuils inversés rendent une montée infranchissable, ou
+    franchissable deux fois.
+  - **Deux constantes extraites avec la phrase qui les atteste.** La classe d'armure sans armure et
+    le plafond d'une caractéristique — 10 et 20 — sont cherchés dans leur phrase du livre, et la
+    phrase est écrite dans la donnée produite. C'est ce qui distingue une constante extraite d'une
+    constante tapée de mémoire : la seconde a l'air de la première.
+  - **Le `20` que le `LOT-36` avait codé en dur est parti.** `abilityScoreWith()` bornait une
+    augmentation d'espèce à une constante ; le plafond est désormais un paramètre lu dans la
+    donnée, et le test du `LOT-36` a été repris pour le lire **au même endroit que le moteur** —
+    sinon il vérifierait sa propre copie de la règle.
+  - **La fiche est un objet autonome, jamais un singleton joueur.** Le test construit **quatre**
+    fiches, en blesse une, en fait monter une autre de deux niveaux, et vérifie que les deux
+    dernières n'ont pas bougé : si `CharacterSheet` devenait un singleton, ce cas tomberait le
+    premier. Le bonus de maîtrise n'y est d'ailleurs pas stocké — il se lit dans la table au niveau
+    courant, sans quoi une montée de niveau laisserait un personnage avec le bonus de l'ancien.
+  - **Le composant ECS ne porte pas la fiche, il la désigne.** Une fiche n'appartient pas à une
+    entité : un personnage garde la sienne quand il change de carte et que son entité est détruite
+    puis recréée. `INDICE_ABSENT` distingue une entité **sans** fiche d'une entité liée à la
+    première du registre — les confondre ferait attaquer un tonneau avec les caractéristiques du
+    héros.
+  - **Trois décisions de règle, écrites là où on les lit.** Les points de vie sont
+    **déterministes** (le livre laisse le choix ; des PV tirés au dé rendraient une partie
+    irrejouable) ; monter de niveau **n'est pas un soin**, les PV courants montent du gain et non
+    jusqu'au maximum ; et **perdre de l'expérience n'est pas une règle de ce jeu**, un gain négatif
+    est ignoré plutôt que d'aboutir à une descente de niveau silencieuse.
+  - **Le lot n'a pas écrit de `ClassDefinition`** : le `LOT-36` l'avait déjà livrée sous le nom de
+    `PlayableClass`. Un second type pour la même chose aurait créé deux vérités sur ce qu'est une
+    classe.
+  - `ctest` passe de 983 à **992** cas, tous verts.
+
+- **Espèces, historiques et classes provisoires** (`LOT-36`). De quoi construire un personnage
+  jouable au plus tôt : **22 espèces**, **13 historiques** et les **4 classes simplifiées** qui
+  serviront de socle au premier modèle de combat — 39 fichiers tirés de **trois documents et deux
+  langues**, et c'est ce mélange qui fait la difficulté du lot.
+  - **Le *Manuel des Joueurs* est un scan, et sa graisse ment.** La méthode du `LOT-33` — la
+    graisse porte la structure — n'y tient pas : « Vitesse. » ne porte aucune graisse, « Âge. » en
+    porte sur deux fragments non contigus, et les titres sont mutilés (`TaiJJe`,
+    `Vision dans Je noir`, `tliaumaturgie`). Deux parades : les mécaniques se lisent par **leur
+    phrase** et non par leur titre, et les noms de traits viennent du **lexique**, qui les porte
+    proprement — la parade que le `LOT-43` employait déjà pour les dons.
+  - **Le recoupement a servi dès la première exécution.** Les augmentations de caractéristique
+    figurent deux fois dans le *Manuel* : dans le bloc de la race et dans la table de la page 12.
+    L'OCR a **entièrement effacé** la ligne d'augmentation du demi-elfe — son bloc commence au
+    milieu d'une phrase — et c'est la table qui la restitue. Une valeur présente des deux côtés et
+    différente **arrête** la génération ; une valeur présente d'un seul côté est une ligne
+    escamotée, rapportée et non fatale.
+  - **Quatre corruptions d'OCR déclarées une par une** : `!'ore` pour « l'orc » (le `l` ressort en
+    point d'exclamation, le `c` en `e`), `commwi` pour « commun », `(+l)` pour `(+1)` sur toute la
+    table. Sans les deux premières, le demi-orc ne parle que le commun et le tieffelin pas du tout.
+    Une substitution non déclarée serait indiscernable d'une règle du jeu.
+  - **La gouttière du *Manuel* bouge d'une page à l'autre** — `[288, 309]` p. 41, `[272, 296]`
+    p. 42, rien du tout p. 44. Un blanc figé y couperait tantôt dans une colonne, tantôt dans
+    l'autre. La coupe est désormais **mesurée** page par page.
+  - **Le *Player's Guide* dessine ses titres deux fois**, à la coordonnée exacte : un titre
+    contourné, dont le remplissage et le trait forment deux passes. Invisible à l'écran, et cela
+    double tout ce qui se compte — les douze espèces du chapitre 1 s'y relèvent vingt-quatre fois.
+  - **Ce que le schéma ne peut pas dire n'est ni jeté ni inventé.** Les espèces de Tanares laissent
+    une augmentation **au choix du joueur** : la partie fixe entre dans la table, le mécanisme est
+    déclaré (`EX-CNT-030`) et listé au chargement (`EX-CNT-031`). Le **soulborn**, lui, hérite sa
+    taille et sa vitesse des parents du personnage et n'en a donc aucune ; le schéma les exige, et
+    l'espèce est **écartée en le disant** plutôt que dotée de valeurs inventées.
+  - **Le corpus dit douze espèces de Tanares, pas treize**, et son chapitre des historiques en
+    annonce six pour en porter sept — le sommaire fait foi, il indexe ce que le livre contient.
+    Tanares ne porte d'ailleurs **aucune mécanique** pour les huit espèces classiques : le fond
+    narratif vient de lui, la mécanique des livres français.
+  - **Les quatre classes sont provisoires et le déclarent**, avec un critère de retrait écrit
+    d'avance et à un seul endroit. Un test balaie tout `Source/Elements/Rpg/` et vérifie qu'aucune
+    donnée définitive ne les référence : le jour du retrait, supprimer ces fichiers ne cassera rien.
+  - **La progression du niveau 1 au niveau 5 vient de la donnée.** La formule générale donnerait le
+    même résultat, et c'est le piège : l'écrire en C++ ferait cesser de lire la table, et la
+    première classe dont la progression sort de l'ordinaire passerait inaperçue.
+  - **Un seuil de corps se pose sous la valeur mesurée, jamais dessus.** Le corps rendu par un PDF
+    est un flottant : 16 s'y lit 15,999998. Un seuil à l'égalité laissait passer le titre de
+    chapitre et ratait les quatre races — sans erreur, sans message, avec un catalogue à une entrée.
+  - Trois modules partagés sortent de ce que le `LOT-33` avait écrit pour lui seul — la grille à
+    deux colonnes, la relecture des catalogues livrés, la déduplication des lignes surimprimées ;
+    le bestiaire est reposé dessus et produit une sortie **identique à l'octet près**.
+  - `ctest` passe de 974 à **983** cas, tous verts.
+
+- **Le bestiaire de base : les 94 bêtes du SRD** (`LOT-33`). `Animaux.pdf` vers
+  `Source/Elements/Rpg/creatures/` — 94 fichiers, 136 traits, 135 actions dont 115 portent des
+  dégâts typés. Le premier catalogue rempli du projet, et le premier que le moteur charge.
+  - **L'extraction se fait sur la typographie, pas sur des expressions régulières.** Un bloc de
+    statistiques n'a ni balise ni ponctuation qui sépare le nom d'un trait de sa description :
+    seule la graisse le fait — « **Vue aiguisée**. L'aigle a un avantage… ». Découper au premier
+    point donne « Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m » comme
+    nom d'action. `Extracteur.lignes()` rend désormais police, corps et graisse, et sept
+    discriminants **mesurés** — pas devinés — découpent le document : le corps du titre, la police
+    du paragraphe d'ambiance, celle des encadrés « Variante », l'interligne. Le document ne porte
+    aucun interligne entre 11,3 et 15,2 pt ; le seuil tombe dans ce vide.
+  - **Le mode texte perd des espaces, et la faute est indétectable en aval.** Les titres de traits
+    en sortent collés — `Vueaiguisée`, `Sens dela toile`, `Tactiquedegroupe`. Aucun contrôle ne la
+    rattrape et aucune relecture de la donnée produite ne la signale, puisque la donnée produite
+    *est* la faute. Le fragment de police, lui, porte le texte tel que le document l'écrit.
+  - **Le sommaire est le point d'attestation.** 94 entrées page 2, 94 titres dans le corps, et les
+    deux listes doivent coïncider nom pour nom : c'est le seul contrôle qui détecte un bloc sauté,
+    panne qui ne laisse aucune autre trace — un catalogue de 93 créatures se charge, se valide et
+    se joue exactement comme un de 94. La gouttière des deux colonnes, elle, est re-vérifiée page
+    par page : si elle bouge, la coupe **échoue** au lieu de mélanger deux créatures.
+  - **Ce que le schéma ne peut pas dire n'est ni jeté, ni élargi en silence.** « Résistance aux
+    dégâts contondants provenant d'attaques **non magiques** » : mettre `bludgeoning` dans
+    `damageResistances` rendrait le diablotin résistant à une masse d'armes ordinaire. La clause
+    qualifiée reste dans un trait, et la créature **déclare** le mécanisme
+    `resistance-conditionnelle` (`EX-CNT-030`). Même traitement pour « comprend le commun mais ne
+    peut pas le parler ». Et « l'**aérien** », que l'aigle géant comprend, n'est ni au catalogue
+    des seize langues ni à la table des *Basic Rules* p. 38 : le rapprocher du primordial serait un
+    élargissement muet, la génération le **signale** et ne l'écrit pas.
+  - **Cinq défauts du lexique mis au jour par les 94 noms.** Les variantes séparées par `/`
+    (« Bec de hache / Autrache ») — défaut qui se propage aux catalogues livrés, où
+    « Tromperie / Supercherie » faisait désigner au diablotin une compétence introuvable ; « Zombi
+    Objets magiques D&D 5 », un titre de section happé ; « Tigre à dents de **sabe** », une
+    coquille ; l'entrée « Tigre » dont le côté **anglais** est resté en français, qui sortait un
+    identifiant `tigre` au milieu de quatre-vingt-treize identifiants anglais ; et la langue des
+    elfes nommée « elfe » quand le livre écrit « **elfique** ». Ce dernier était déjà tranché par
+    le `LOT-43` : sa table d'alias est **réutilisée**, pas recopiée. Le quatrième ne se détecte pas
+    mécaniquement — « Quasit = Quasit » est identique des deux côtés et juste — et c'est une
+    relecture des 94 identifiants qui l'a trouvé.
+  - **Le test lit le livre, pas la génération.** Douze profils sont rejoués contre des valeurs
+    recopiées à la main du PDF, chacun avec sa page imprimée. Un test qui comparerait la sortie de
+    la génération à elle-même passerait quelle que soit la faute d'extraction.
+  - **Un champ `description` au schéma de créature** : 21 blocs se terminent par un paragraphe
+    d'ambiance qui ne porte aucune règle et qui est pourtant ce que le bestiaire affichera. Le
+    premier remplissage d'une famille est le moment où le contrat rencontre la réalité.
+  - `core::CreatureSize` rejoint les énumérations fermées, confrontée au **schéma** et non au
+    lexique : celui-ci n'en porte que cinq, « Moyenne » ayant échappé à l'extraction du glossaire.
+  - `ctest` passe de 968 à **974** cas, tous verts.
+
+- **Le cœur chiffré : dés, caractéristiques, jet de d20** (`LOT-12`). Du calcul pur dans `Core`,
+  sans fenêtre ni GPU : la notation `NdF±M`, les six caractéristiques, le d20 avec avantage et
+  désavantage, et les six degrés de difficulté en **donnée**.
+  - **Le défaut que les tests ont trouvé et que la relecture n'aurait pas vu.** `nextInt` rejette
+    la queue de l'intervalle pour éviter le biais modulo ; la formulation naturelle — rejeter
+    au-delà du dernier multiple complet — donne un seuil de 2³² quand l'étendue divise 2³², qui ne
+    tient pas dans un `uint32` et retombe à **0** : boucle infinie. Le défaut ne se voit que sur
+    les **puissances de deux** — un d6 et un d20 passent, un d8 gèle. C'est le test de
+    rejouabilité, écrit sur 3d8, qui l'a attrapé. La version retenue rejette la queue basse, vide
+    dans ce cas.
+  - **Deux arrondis qui ne se voient pas.** `(score - 10) / 2` tronque vers zéro en C++ : un score
+    de 7 donnerait `-1` au lieu de `-2`, et le personnage serait moins pénalisé qu'il ne doit
+    l'être sur chacun de ses jets, pendant toute la partie. Et avantage plus désavantage
+    **s'annulent** (`EX-REG-002`), y compris à deux contre un — la règle annule, elle ne compte
+    pas. Les deux ont leur cas de test explicite.
+  - **Un 20 naturel n'est pas un total de 20** : `isNaturalTwenty()` regarde le dé retenu. Les
+    confondre rendrait critique un jet sur deux à haut niveau, et passerait pour de l'équilibrage.
+  - **La restitution est une exigence, pas un journal** (`EX-REG-003`) : les **deux** dés sont
+    conservés en cas d'avantage, et chaque modificateur porte son origine —
+    `d20 (avantage : 7, 14) = 14 + 3 (Dexterite) + 2 (maitrise) = 19 >= 15 : reussite`.
+  - **Les degrés de difficulté sont une donnée** (`EX-REG-021`), extraits de la table « Tâche / DD »
+    des *Basic Rules* : six paliers de 5 à 30. Le test lui-même lit le seuil dans le fichier plutôt
+    que d'écrire `15`.
+  - **Une case vaut 1,5 m**, figé dans une constante nommée. La conversion mètres ↔ cases existe
+    forcément quelque part ; le seul choix ouvert était *à un endroit, ou à trente*.
+  - `ctest` passe de 954 à **968** cas, tous verts.
+
+- **Les options de personnage : dons, multiclassage, compétences, langues** (`LOT-43`). Quatre
+  catalogues oubliés du premier découpage, que la fiche de personnage suppose sans jamais dire d'où
+  ils viennent : **18 compétences**, **16 langues**, **42 dons** et la règle du multiclassage — 77
+  fichiers de données, quatre schémas, et le mécanisme C++ qui cumule les emplacements de sorts.
+  - **Le multiclassage vient du *Manuel des Joueurs***, seule source complète : les *Basic Rules*
+    n'en portent ni les prérequis ni les maîtrises et renvoient au chapitre 6. Les douze prérequis
+    de caractéristique et les douze lignes de maîtrises en sortent proprement.
+  - **Sa table d'emplacements est recoupée**, et il le fallait : l'OCR y efface les cellules valant
+    `1`, onze lignes sur vingt amputées. La donnée est prise sur la progression du magicien des
+    *Basic Rules* — identique et en texte natif — puis confrontée cellule à cellule au *Manuel* :
+    **26 cellules rétablies**, annoncées à chaque génération. Une divergence qui ne serait pas un
+    `1` manquant **arrête** la génération.
+  - **Les deux sources françaises ne traduisent pas les mêmes dons pareil** : « Adepte des
+    éléments » contre « Adepte élémentaire », « Ritualiste » contre « Magie rituelle » — douze dons
+    sur quarante-deux. Le lexique fait autorité, la graphie du livre est conservée en `variantes`.
+    Les noms viennent d'ailleurs du lexique et non du livre, dont les titres sont des scans
+    mutilés : `DouÉ`, `E(PLOR.) __ TEUR DE DONJONS_`.
+  - **« Sorcier » n'est pas *sorcerer***. Le *Manuel* appelle ainsi la classe que le lexique nomme
+    « occultiste » (*warlock*), alors que l'**ensorceleur** est deux lignes plus haut dans la même
+    table. Un rapprochement par ressemblance aurait interverti leurs prérequis en silence ; l'alias
+    est déclaré, avec la raison.
+  - **Le meilleur test du multiclassage est celui du livre** : *« ce rôdeur 4/magicien 3 […] quatre
+    emplacements de niveau 1, trois de niveau 2 et deux de niveau 3 »*. Le test le reproduit et lit
+    la table **livrée** — c'est le livre qui vérifie l'implémentation. Deux pièges sont couverts :
+    l'arrondi se fait **par classe** (paladin 3/rôdeur 3 donne 2, pas 3) et la **magie de pacte est
+    exclue** de la somme (`EX-RPG-052`).
+  - **Les 42 dons sont livrés `narratif` et `provisoire`**, critère de retrait écrit d'avance
+    (`EX-CNT-032`) : aucun mécanisme de don n'existe encore, et un don qui se présenterait comme
+    jouable coûterait plus cher à diagnostiquer qu'un don déclaré non joué.
+  - **Toute langue citée par une créature ou une espèce doit exister au catalogue** — nouveau
+    contrôle en CI, vérifié par injection d'une créature parlant le « draconien ».
+  - `ctest` passe de 948 à **954** cas, tous verts.
+
+- **L'OCR ne corrompt pas seulement les nombres, il en supprime** (constat de préparation du
+  `LOT-43`). Sur la table du multiclassage du `Manuel-Des-Joueurs`, l'extraction **efface toute
+  cellule valant `1`** : onze lignes sur vingt amputées, et un magicien de niveau 20 y perd ses
+  emplacements de niveau 8 et 9. Une valeur fausse finit par se voir ; une valeur absente ressemble
+  à une case vide légitime, et cette table en contient de vraies — aucune relecture ne pouvait
+  l'attraper. Le défaut a été révélé par **recoupement** avec la table du magicien, identique et en
+  texte natif propre dans les *Basic Rules*. La §4 de la feuille de route porte désormais ce
+  quatrième niveau de bruit, et la règle qui en découle : *une table numérique tirée d'un scan se
+  recoupe contre une seconde source ou contre un invariant.*
+
+- **Les schémas de données RPG** (`LOT-32`). Le contrat **avant** les données : onze schémas JSON,
+  un validateur en CI et trois énumérations C++, livrés alors qu'aucune donnée n'existe encore.
+  C'est l'ordre qui compte — un contrat écrit après coup se contente de décrire ce qui a déjà été
+  produit, défauts compris.
+  - **Onze schémas** sous `Source/Elements/Rpg/schema/` : les dix familles annoncées — créature,
+    objet, arme, armure, sort, espèce, classe, historique, état, type de dégâts — plus
+    `common.schema.json`, qui porte ce que toutes réutilisent. Le champ `source` y est obligatoire
+    (`EX-CNT-001`, `EX-CNT-002`), et `additionalProperties: false` partout : sans lui,
+    `weigthGrams` au lieu de `weightGrams` passe sans un mot et l'arme pèse zéro.
+  - **Un triangle, trois artefacts, deux contrôles.** Le moteur (`core::DamageType`), le contrat
+    (`common.schema.json`) et la table de traduction (`rpg.glossary.csv`) nomment les mêmes choses.
+    `test_rpg_enums.cpp` compare le C++ au schéma **livré** ; `check_rpg_data.py` compare le schéma
+    au lexique. La troisième arête n'est **pas** contrôlée, par transitivité : un troisième contrôle
+    serait bruyant, et le jour où deux des trois échouent ensemble on ne saurait plus lequel dit
+    vrai. Vérifié par injection — ajouter `"sonic"` au seul schéma fait échouer les deux, chacun
+    avec son message.
+  - **Les trois énumérations fermées** : `core::DamageType` (13), `core::Condition` (15),
+    `core::MagicSchool` (8), avec `switch` exhaustif sans `default`, sur le patron de
+    `core::tileTypeName`. Leurs cardinaux sont écrits dans un test : le test de coïncidence
+    resterait vert si les deux côtés perdaient la même valeur, celui-ci non.
+  - **Le validateur s'auto-teste**, faute de données à valider : trois fixtures valides à accepter,
+    **dix invalides à refuser**, chacune nommée d'après son défaut — provenance absente, type de
+    dégâts en français, `ld8` au lieu de `1d8`, caractéristique manquante, champ mal orthographié,
+    donnée provisoire sans critère de retrait, JSON tronqué… Chacune produit **exactement une**
+    violation, située au fichier et à la ligne (`EX-CNT-010`).
+  - **Deux unités internes uniques** : prix en pièces de **cuivre**, poids en **grammes**, entiers.
+    Le corpus mélange « 500 g » et « 2 kg », « 2 pa » et « 25 po » ; convertir à l'entrée évite les
+    arrondis là où l'encombrement se calcule par somme.
+  - **Le formalisme des dés est contraint par expression régulière** — c'est la parade au risque
+    résiduel que le `LOT-30` avait laissé ouvert : un `1d8` devenu `ld8` à l'OCR est invisible à la
+    relecture et fatal à l'exécution.
+  - `ctest` passe de 943 à **948** cas, tous verts.
+
+- **La chaîne d'extraction du corpus, et le lexique bilingue** (`LOT-30`). Premier lot de la
+  filière contenu : l'outillage qui tirera des huit PDF de `Documentation/SourceBook/` les 176
+  créatures, l'équipement, les sorts, les espèces et les dix régions du jeu — puis sa première
+  sortie, qui l'éprouve.
+  - **`scripts/sourcebook/`, sur PyMuPDF** : manifeste des huit documents (empreinte SHA-256,
+    pagination, provenance), texte, tableaux **par coordonnée**, images **par rendu clippé**, cache
+    indexé par empreinte, et une ligne de commande — `info`, `verifier`, `texte`, `tableau`,
+    `image`, `regions`, `stats`, `glossaire`.
+  - **La double page est confirmée** : la page PDF 50 des deux livres Tanares porte les pages
+    imprimées 100 et 101. Les six autres décalages ont été relevés un par un, et deux ne valent pas
+    zéro. Une empreinte qui ne correspond plus **arrête** l'extraction (`EX-CNT-020`) : poursuivre
+    produirait des données décalées sans qu'aucun message ne le dise.
+  - **Le tableau par coordonnée tient sur un scan.** La table de progression du barbare du
+    `Manuel-Des-Joueurs`, en OCR, donne bien « Attaque supplémentaire » au **niveau 5**, là où un
+    rendu en flux décale toute la colonne d'un cran (`EX-CNT-021`). C'était l'affirmation la plus
+    risquée de l'analyse du corpus.
+  - **Le lexique : 2 084 entrées**, et non « environ 1 200 » comme l'annonçait la feuille de route
+    — une estimation à l'œil, fausse de 74 %. La page est corrigée.
+  - **Le glossaire porte de vrais homonymes**, ce qui a changé la clé d'unicité : `light` vaut
+    « légère » comme propriété d'arme et « Lumière » comme sort, `bane` « Fléau / Imprécation »
+    comme sort et « Baine » comme divinité. Dédupliquer sur l'anglais seul en écrasait un des deux
+    en silence — et faisait traduire un sort par un adjectif d'arme. La clé est le couple
+    **(anglais, catégorie)**.
+  - **Le complément des *Basic Rules* est attesté, pas saisi.** Les huit écoles de magie, la
+    propriété `special` et la quinzième condition (`exhaustion`) manquaient ou n'étaient pas
+    catégorisées. Chaque ajout déclare la page où il est attesté, et la construction échoue si le
+    terme ne s'y trouve pas — un complément tapé de mémoire est une donnée inventée qui a
+    l'apparence d'une donnée extraite. Au passage, le lexique fige un faux ami : l'école
+    `conjuration` se dit **« invocation »**.
+  - **`scripts/checks/check_glossary.py`, en CI, s'auto-teste avant de se prononcer.** Aucune clé de règle
+    n'existe encore : le contrôle serait vert par vacuité, et personne ne saurait s'il fonctionne —
+    la panne exacte du `LOT-78`. Six catalogues fictifs le mettent à l'épreuve à chaque appel. La
+    comparaison des traductions ignore la casse mais **pas les accents** : une table d'autorité
+    française qui accepte « etourdi » pour « étourdi » n'impose plus rien.
+  - **Le corpus n'était pas exclu du dépôt**, contrairement à ce que la feuille de route affirmait
+    depuis son écriture : la règle `.gitignore` vivait comme modification locale non commitée sur un
+    seul poste, et un `git add -A` sur un clone neuf embarquait les 280 Mo. Elle est commitée, avec
+    le cache d'extraction et les worktrees d'agent (1,6 Go), et `check_glossary.py` vérifie
+    désormais l'exclusion (`EX-CNT-023`).
+
+- **La feuille de route dit enfin par quoi commencer.** Elle portait un « ordre d'exécution
+  recommandé » en cinq lignes de *quand* flous — « démarrables maintenant », « avec `LOT-09` »,
+  « avant `LOT-13` » — dont aucune ne désignait un premier lot. La question « et maintenant ? » se
+  répondait donc par une relecture de 2 500 lignes, et deux relectures ne donnaient pas forcément
+  la même réponse.
+  - **Une règle, à la place d'un avis** : *à chaque pas, parmi les lots dont tous les prérequis
+    sont faits, celui qui en débloque le plus* — à égalité, le plus petit numéro. « Débloque » se
+    compte : le `LOT-30` débloque quarante-neuf des soixante-neuf lots restants, le `LOT-49` aucun.
+    « Outillage et contrats ; le plus tôt est le mieux » cesse ainsi d'être un avis éditorial pour
+    devenir ce que le graphe dit, chiffre à l'appui. Un premier essai avait pris le **plus petit
+    numéro** comme critère : déterministe, mais bête — il plaçait deux lots de moteur devant la
+    chaîne qui doit leur fournir leurs catalogues.
+  - **Un tableau d'avancement en tête de page**, calculé et non écrit : les soixante-neuf lots
+    restants dans l'ordre, avec ce que chacun débloque et son statut — `prochain`, `prêt` (tous
+    ses prérequis livrés), `en attente`. `scripts/lint_lots.py` gagne une **règle 13** qui le
+    recalcule et le refuse s'il diverge d'une ligne. Le tableau ne figure qu'à un endroit : le
+    recopier en section 6 aurait recréé les deux documents divergents que cette page combat.
+  - **Le regroupement d'intention est conservé** en section 6, sous son propre titre. Il ne donne
+    pas l'ordre — le tableau d'en-tête le donne — mais la *raison* de chaque placement, et c'est
+    la seule chose qu'un calcul ne produira jamais : un graphe dit qu'un lot en attend un autre,
+    il ne dit pas pourquoi on a voulu ce lien.
+  - **Le lint ne voyait pas la moitié du graphe.** Les vingt et un lots absorbés (`LOT-09` à
+    `LOT-29`) écrivent leurs prérequis dans un bloc de citation, `> Prérequis : …`, quand les lots
+    de la filière les écrivent en italique ; le lint ne lisait que la seconde forme. Ni le contrôle
+    d'acyclicité ni celui des prérequis existants ne les avait donc jamais examinés.
+  - **Ce que le calcul a révélé** : le `LOT-09`, plus petit numéro restant, n'attend que des lots
+    livrés à la lecture de sa seule ligne « Prérequis » — mais le `LOT-37` déclare l'alimenter, le
+    graphe de cartes attendant l'atlas des régions sans quoi il relierait des nœuds inventés. Il
+    tombe au rang 33. Un prérequis compte quel que soit le côté où il est déclaré, et c'est aussi
+    ce qui repousse le `LOT-27` au rang 20 : il ne déclare rien, cinq lots de contenu déclarent
+    l'alimenter.
+  - **Le lien `LOT-38` / `LOT-39` était déclaré à l'envers**, et le calcul l'a rendu visible : la
+    plomberie des clés d'assets se disait prérequis de la maquette de fiche, au motif qu'elle lui
+    fournirait ses panneaux de parchemin — mais ces panneaux étaient partis au `LOT-76` lors du
+    même audit, et la ligne « Prérequis » n'avait pas suivi. L'ordre réel est `LOT-38` puis
+    `LOT-39` : on dessine la maquette, *puis* on nomme les clés de ce qu'elle affiche. La section 6
+    l'écrivait déjà en toutes lettres ; c'est la ligne « Prérequis », celle que le graphe lit, qui
+    disait le contraire.
+  - **Conséquence, et elle n'est pas anodine** : le chemin critique jusqu'au *vertical slice* passe
+    de cinq à **huit lots**, et la fiche de personnage y entre — `LOT-30` → `LOT-32` → `LOT-43` →
+    `LOT-36` → `LOT-13` → `LOT-38` → `LOT-39` → `LOT-27`. Aucune version de cette page ne disait
+    que la fiche et sa maquette étaient sur le chemin critique. Le chemin est long parce qu'il est
+    réel : le `LOT-39` produit le marqueur généré sans lequel le slice n'a rien à afficher.
+  - **`lint_lots.py --regenerer`** réécrit les deux tableaux calculés. Les règles 10 et 13 savaient
+    refuser un tableau qui a dérivé ; sans cette option, corriger une ligne « Prérequis » obligeait
+    à recopier jusqu'à cinquante lignes à la main — le geste même qui réintroduit l'erreur qu'on
+    vient de corriger.
+  - **Pas de date pour la `0.1.0`, et la raison est écrite.** La cadence observée — onze lots en
+    deux jours — placerait la version dans deux semaines si on l'extrapolait ; les lots livrés sont
+    des lots de socle, ceux qui restent portent des catalogues de plusieurs centaines d'entrées.
+    L'extrapolation est fausse, et la page le dit plutôt que de laisser le lecteur la faire.
+
+- **Une seule routine de lecture JSON, et des tests paramétrés** (`LOT-79`). Le dépôt comptait
+  **six** réimplémentations de `loadFromFile` — `SkinCatalog`, `AnimationCatalog`, `SoundCatalog`,
+  `PixelPalette`, `LevelLoader`, `LevelSequenceLoader` — répétant la même séquence (`accept()` puis
+  `parse()`, racine objet, version absente valant 1, version supérieure refusée), dont quatre
+  redéfinissaient les **mêmes cinq catégories d'échec** sous quatre noms. La filière contenu
+  s'apprêtait à en ajouter quinze.
+  - `core::JsonDocument` porte l'enveloppe commune une fois pour toutes, et ne lève jamais
+    (`EX-NFR-040`). Les six lecteurs y passent ; chacun garde son énumération publique et traduit
+    depuis la catégorie partagée par un `switch` **exhaustif et sans `default`**, si bien
+    qu'ajouter une catégorie d'un côté fait échouer la compilation.
+  - **Un échec dit désormais où.** `nlohmann` ne rapporte qu'un décalage en octets, que les six
+    lecteurs jetaient : le message était « JSON malformé », devant un catalogue de mille lignes.
+    Il s'annonce maintenant `sounds.json:12:5 : …` (`EX-CNT-010`). C'est la seule différence qui se
+    voit à l'usage, et c'est celle qui compte.
+  - **Premiers tests paramétrés du dépôt.** `Source/Test/` ne comptait aucun `TEST_P` ni aucun
+    parcours de dossier de fixtures. `Source/Test/Fixtures/Json/` en porte six — valide, tronqué,
+    virgule en trop, racine tableau, version future, version non entière — et un test vérifie
+    qu'aucune fixture du dossier n'est **orpheline** : un fichier qu'aucun test ne lit ne protège
+    de rien. C'est la capacité qui compte plus que ces six cas : un bestiaire de 176 créatures se
+    teste en balayant un dossier, pas en écrivant 176 `TEST`.
+  - `nlohmann_json` devient une dépendance **PUBLIC** de `Core` : `JsonDocument.h` expose l'arbre
+    parsé, donc la bibliothèque fait partie de l'interface et non de l'implémentation. L'éviter
+    aurait demandé une façade typée par-dessus `nlohmann`, soit un second modèle d'arbre à
+    maintenir pour ne rien gagner d'observable.
+  - `ctest` passe de 927 à **943** cas, tous verts.
+
+- **Les numéros de lots ne sont plus ambigus** (`LOT-78`). Deux numérotations de lots se
+  recouvraient dans les spécifications ; les renvois à l'ancienne ont été distingués des lots de ce
+  programme, et `scripts/lint_lots.py` gagne une **règle 12** : tout `LOT-NN` d'une spécification
+  doit désigner un lot existant de ce programme. (Le `LOT-88` a depuis retiré l'ancienne
+  numérotation.)
+
+- **La moitié RPG de la spécification** (`LOT-77`). Cinq familles d'exigences étaient **fantômes** —
+  `EX-CNT`, `EX-REG`, `EX-RPG`, `EX-CBT`, `EX-INV` — citées par une vingtaine de lots sans qu'aucun
+  document ne les porte. Cinq documents les portent désormais, pour **69 exigences** :
+  `regles-d20.md` (le jet d20, la maîtrise, le temps et le repos, les conditions), `rpg.md` (la
+  fiche comme agrégat dérivé, classes et ressources, progression, sorts), `combat.md` (tour, espace,
+  attaque, agonie), `inventaire.md` (équipement, encombrement, monnaie) et `contenu.md` (provenance,
+  contrats, extraction, ce qu'une donnée promet).
+  - **La CI était rouge à dessein** depuis la réparation du lint (`FAMILY_REF_RE` captait enfin les
+    références de famille entière, comme `EX-CNT-*`). Ce lot est ce qui la remet au vert, et c'était la
+    seule façon légitime de le faire — pas une entrée ajoutée à la liste des exceptions.
+    `lint_exigences.py` compte **339 exigences déclarées et 339 référencées**.
+  - **Trois généricités décident de la faisabilité du programme**, et sont écrites comme telles :
+    une ressource de classe est *une quantité, une cadence, ce qu'elle alimente* (`EX-RPG-021`) —
+    rage, ki et second souffle sont la même structure, faute de quoi chacun des quinze lots de
+    classes modifierait le code du repos ; ajouter une classe ne touche **aucun** fichier C++
+    existant hors sa mécanique propre (`EX-RPG-023`) ; **plusieurs systèmes d'emplacements de sorts
+    coexistent** (`EX-RPG-052`), parce que la magie de pacte en fournit un second récupéré au repos
+    court, et que coder « les emplacements » au singulier obligerait à tout reprendre.
+  - **Le catalogue sera complet avant le moteur**, et cela devait être écrit : une donnée déclare
+    les mécanismes qu'elle exige (`EX-CNT-030`) et le moteur **refuse en le disant** ce qu'il ne
+    sait pas honorer (`EX-CNT-031`). Une classe dont la ressource propre n'existe pas se signale au
+    chargement plutôt que de se jouer en silence comme une classe ordinaire amputée.
+  - La rubrique **« Exigences couvertes »** est posée sur les 25 lots qui les implémentent. Elle
+    manquait partout, faute de familles à citer.
+
+- **Audit de la feuille de route** (`0.1.0`). `roadmap-0.1.0.md` a été confrontée au dépôt et à
+  elle-même : trois affirmations sur le dépôt étaient fausses, six comptes internes incohérents, et
+  trois travaux annoncés n'avaient aucun porteur.
+  - **Le *vertical slice* n'était plus un jalon précoce** : le `LOT-69` déclarait le Colisée en
+    prérequis, ce qui plaçait le socle de classe et les seize classes **devant** le `LOT-27`, à
+    rebours de l'argument de la page elle-même. Le `LOT-69` est réduit à la suppression de l'atelier
+    pixel art ; l'édition dans la scène devient la cible du `LOT-11`, qui n'est pas commencé.
+  - **Quatre fusions** (numéros retirés, jamais réattribués) : le lexique rejoint la chaîne
+    d'extraction (`LOT-31` → `LOT-30`), le repos rejoint l'horloge (`LOT-71` → `LOT-70`), l'agonie
+    rejoint les conditions (`LOT-73` → `LOT-72`), et le `LOT-48` — « volume long, sans jalon » — est
+    dissous dans chaque lot de catalogue : la page écrivait qu'« un lot sans date de fin est un lot
+    qu'on ne finit pas », puis en gardait un.
+  - **Cinq scissions**, sur une règle unique — le code d'un côté, la donnée de l'autre :
+    `LOT-37`/`LOT-80`, `LOT-40`/`LOT-81`, `LOT-41`/`LOT-82`, `LOT-45`/`LOT-83`, `LOT-47`/`LOT-84`.
+  - **La collision de numéros est bien plus large qu'estimé** : 208 renvois `LOT-NN` ambigus dans
+    **douze** fichiers de spécification, et non « six specs ». D'où le `LOT-78`.
+  - `scripts/lint_lots.py` **refuse en CI** ce que l'audit a dû trouver à la main : cycle de
+    prérequis, lien déclaré d'un seul côté, lot absent du tableau d'ordre, compte annoncé faux,
+    exigence revendiquée par deux lots, tableau récapitulatif périmé, arête de diagramme que rien ne
+    déclare.
+
+- **Vocabulaire de terrain du RPG** (`LOT-08`). Neuf types de tuile là où le `LOT-01` avait laissé
+  le strict minimum hérité : `Grass`, `Dirt`, `Sand`, `Water`, `DeepWater` (sols), `Wall`, `Cliff`
+  (obstacles), `Bridge`, `Stairs` (passages). Il **ajoute** sans rien remplacer — le vocabulaire de
+  puzzle du socle sert tel quel au RPG.
+  - **La chaîne complète pour chacun**, dans le même lot : nom de format, catégorie de palette,
+    libellés `fr` **et** `en`, couleur de repli dans l'atlas procédural, franchissabilité, test
+    d'aller-retour. C'est la leçon la plus chère de l'héritage, où ajouter un type touchait
+    « exactement la même chaîne de huit fichiers » et où l'un d'eux se faisait toujours oublier.
+  - Trois garde-fous nouveaux la tiennent : chaque type a une couleur de repli **non noire et
+    distincte** (le jeu affiche une carte sans aucun fichier d'image), chaque libellé de palette
+    est **traduit dans les deux catalogues**, et la borne de l'énumération reste dérivée du dernier
+    type.
+  - **L'eau profonde arrête, l'eau peu profonde non** : c'est la seule distinction qui rende une
+    rive jouable. `core::isSolid` est le seul endroit d'où la règle de nage la sortira le jour venu
+    — plutôt que des tests « sauf si c'est de l'eau » parsemés dans le code.
+  - Aucune **silhouette** n'est déclarée : le mécanisme conservé par le `LOT-01` découpe la matière
+    qui n'occupe pas toute la case, ce qui décrivait des pentes et des arrondis. Le terrain d'une
+    vue de dessus est carré par nature ; lui inventer des découpes serait du travail contre le
+    genre.
+
+- **Tri par profondeur : le monde en vue de dessus devient crédible** (`LOT-07`). Le personnage
+  passe **devant** ce qui est au-dessus de lui à l'écran, **derrière** ce qui est en dessous.
+  - **Ce que l'epic n'avait pas vu** : alimenter le `sortOrder` existant ne suffisait pas.
+    `ComposedScene::sort()` triait par (calque, **texture**, `sortOrder`) — la texture *avant* le
+    tri fin — et un personnage n'a jamais la texture d'un arbre : le regroupement écrasait l'ordre
+    de profondeur. Pire, `Object` et `Player` étant deux calques distincts, le personnage passait
+    **toujours** devant un objet, où qu'il soit.
+  - Correctif : `Object` et `Player` forment une **bande de profondeur** commune, à l'intérieur de
+    laquelle la profondeur tranche avant la texture (`EX-REN-018`). Le surcoût — des passes de
+    dessin supplémentaires — est assumé : aucun ordre de calque ne peut rendre justes à la fois
+    « derrière l'arbre du bas » et « devant l'arbre du haut ».
+  - La profondeur se lit au **pied** du sprite, pas à son coin haut, et se quantifie au pixel
+    (16 sous-divisions par unité) : deux sprites que l'écran ne peut pas départager ne doivent pas
+    permuter au gré des arrondis flottants. Le tri restant stable, rien ne scintille.
+  - Les tuiles d'une couche de **décor** (`LOT-04`) rejoignent la bande ; le sol reste sous tout le
+    monde. `core::buildLevelScene` annonce désormais le **rôle** de la couche d'origine de chaque
+    tuile — ce qu'elle *est*, pas son rang dans une liste que l'auteur peut réordonner.
+  - **Caméra isotrope** : zone morte carrée (1,5 sur les deux axes, contre 1,5 × 1,0) et
+    anticipation **vectorielle**, qui suit la marche sur les deux axes. Anticiper seulement à
+    gauche et à droite était un reste du jeu de plateforme.
+
+- **Le jeu est de nouveau jouable : déplacement top-down en 8 directions** (`LOT-06`). Referme la
+  parenthèse ouverte par le `LOT-01`, où la physique de plateforme avait été retirée sans
+  remplaçant. `core::TopDownMovementSystem` enchaîne intention → vitesse → balayage continu →
+  position, **sans gravité** : aucun axe n'est privilégié, `x` et `y` sont traités exactement de la
+  même façon.
+  - **La diagonale n'est pas plus rapide** (`EX-EXP-001`) : l'intention est normalisée avant d'être
+    mise à l'échelle. Sans cela, aller en biais donnerait `√2 ≈ 1,41` fois la vitesse cardinale —
+    le défaut le plus courant du genre, et le plus visible en jeu. Vérifié par un test, pas par une
+    relecture.
+  - Le balayage continu déjà en place (`core::sweepAabb`) fait le reste : aucune traversée de mur à
+    vitesse absurde, glissement le long d'un obstacle pris en biais, et vitesse de l'axe bloqué
+    remise à zéro — pousser contre un mur n'accumule aucun élan (`EX-EXP-002`, `EX-EXP-003`).
+  - `core::Actor` remplace `core::Player` : **deux champs au lieu de trente**. Contact au sol,
+    coyote time, jump buffering, dash, wall jump et combos décrivaient un personnage de plateforme
+    et étaient **inertes** depuis le `LOT-01`. Restent l'orientation — un **vecteur**, parce qu'on
+    regarde dans huit directions et que le sprite (`LOT-08`), l'interaction (`LOT-10`) et l'attaque
+    (`LOT-21`) en dépendront — et la masse, seuil des plaques de pression.
+  - Conséquences assumées de cette disparition : l'animation choisit son clip d'après la **norme**
+    de la vitesse (marcher vers le haut est une marche), le HUD perd ses compteurs de sauts et de
+    dashs, et la détection d'événements perd ses transitions de personnage (saut, atterrissage,
+    glissade murale) — sans producteur, faute d'un état qui puisse les justifier.
+
+- **Modes de jeu : l'ordre des passes sort de la session** (`LOT-05`). `hmi::GameSession` mêlait
+  deux rôles — **orchestrateur** du pas fixe (monde ECS, caméra, événements, HUD, `FixedTimestep`,
+  interpolation) et **mode de jeu** (l'ordre des passes lui-même). Tant qu'il n'y avait qu'un genre,
+  la confusion ne coûtait rien ; le RPG a besoin d'au moins trois ordres — exploration, dialogue
+  (`LOT-15`), combat (`LOT-18`) — qui se seraient entassés en `if` dans une fonction déjà longue.
+  - `hmi::IGameModePasses` nomme les onze passes d'un pas fixe ; `hmi::IGameMode` les enchaîne.
+    `GameSession` **implémente** les passes (héritage privé : elles sont offertes au mode, pas à
+    l'appelant) et son `update()` ne fait plus que déléguer — aucun ordre codé en dur, aucun
+    `if (mode == …)`, la sélection est polymorphe (`EX-ARCH-002`).
+  - `hmi::ExplorationMode` est le premier mode, extrait **à comportement constant** du corps de
+    `GameSession::update`. Aucune fonctionnalité ajoutée : mélanger un refactoring et une nouveauté
+    ici aurait rendu indécidable lequel des deux avait cassé quoi.
+  - L'interface des passes ne parle que de `core::` — pas de Qt, pas de GPU. C'est ce qui rend un
+    mode **testable sans fenêtre**, quand `GameSession` exige un atlas, un lot de sprites et une
+    police : le mode se vérifie contre des passes qui **enregistrent** la séquence des appels.
+    `passOrder()` en fait une documentation exécutable, comparée à la séquence réelle par un test
+    — un ordre modifié sans mettre la liste à jour échoue au lieu de mentir aux diagnostics.
+
+- **Format de carte `version: 3` : couches, entités, propriétés libres** (`LOT-04`). Une carte
+  n'est plus une grille plate unique mais **N couches typées** — sol, décor — superposées à la
+  grille de collision, plus une **liste d'entités** (PNJ, coffres, panneaux, portails,
+  déclencheurs). C'est la seule évolution de format structurante du programme, et elle précède
+  toute production de carte : une carte dessinée sur le format plat serait à refaire.
+  - **La collision reste le tableau racine `tiles`**, celui qui porte déjà l'entrée, la sortie et
+    les mécanismes ; `layers` ne décrit que les couches **visibles**, et une couche `collision`
+    déclarée est refusée avec un message qui renvoie à la racine. Deux grilles à tenir d'accord se
+    désynchronisent, et c'est celle qu'on ne voit pas qui gagne (`EX-LVL-016`).
+  - **Migration ascendante** : une carte `version: 2` se charge sans y toucher, sa grille promue en
+    couche unique `legacy` — décor **et** collision, comme avant. Réécrite, elle ressort **sans**
+    tableau `layers` : l'éditeur ne convertit pas un fichier dans le dos de son auteur.
+  - **Propriétés libres et tolérance aux champs inconnus** (`EX-LVL-018`) — le point à ne pas rater
+    du lot. Toute clé qu'une couche ou une entité porte sans que le chargeur la connaisse est
+    conservée et **réémise**. Sans cela, les besoins du combat découverts en phase D (terrain
+    difficile, couverture, hauteur) imposeraient un `version: 4` en plein milieu du programme, avec
+    migration de tout le contenu déjà produit.
+  - Le **brouillon d'édition** transporte couches, entités et propriétés sans encore savoir les
+    modifier (`LOT-11`), redimensionne toutes les couches avec la carte, et écrit la grille éditée
+    dans la couche de collision (`EX-EDIT-011`).
+  - `LevelWriter::buildJson` prend désormais l'agrégat `core::LevelData` du `LOT-03` : les couches
+    et les entités auraient porté sa liste positionnelle à onze paramètres, dont trois `vector`
+    voisins interchangeables sans erreur de compilation.
+  - `buildLevelScene` boucle sur les couches visibles et **ignore la collision** : un masque n'est
+    pas une image. Le rang de la couche ordonne les sprites, le décor par-dessus le sol.
+
+- **Agrégat `LevelData`** (`LOT-03`). Le constructeur de `core::Level` prenait ses composantes en
+  **paramètres positionnels** — jusqu'à 19 avant le `LOT-01`, 11 après lui. Deux
+  `std::optional<std::string>` voisins (`background`, `skinSet`) s'intervertissaient sans que le
+  compilateur bronche, et le RPG s'apprête à rajouter des champs (couches de tuiles, entités,
+  connexions de carte, zones de rencontre). La dette, actée dans l'en-tête lui-même depuis le
+  `LOT-69` d'origine, est soldée alors que la liste est au plus court.
+  - `core::LevelData` s'écrit avec les *designated initializers* de C++20 : chaque site de
+    construction est lisible sans commentaire.
+  - **`tileMap` n'a volontairement pas de défaut** : `core::TileMap` n'étant pas constructible par
+    défaut, l'omettre est une **erreur de compilation**, jamais une grille vide silencieuse. Tous
+    les autres champs ont un défaut utile — un site minimal tient en deux lignes.
+  - Le constructeur positionnel est retiré d'emblée, sans l'étape `[[deprecated]]` prévue : dix
+    sites d'appel seulement, la béquille coûtait plus qu'elle ne rapportait.
+
+- **Remise à nu du moteur** (`LOT-01`). Le dépôt part d'un moteur 2D complet — ECS, boucle à pas
+  fixe, chargeur de niveaux, rendu, éditeur, IHM Qt — dont tout le gameplay propre à la vue de côté
+  est retiré, pour devenir un **RPG en vue de dessus** : exploration temps réel, rencontres en
+  combat tactique au tour par tour régi par un système d20 maison. Au total **63 000 lignes** et
+  376 fichiers retirés ; le personnage ne se déplace plus jusqu'au `LOT-06`.

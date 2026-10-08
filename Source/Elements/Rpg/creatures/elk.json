@@ -1,0 +1,50 @@
+{
+  "id": "elk",
+  "name": "Élan",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 16,
+    "dexterity": 10,
+    "constitution": 12,
+    "intelligence": 2,
+    "wisdom": 10,
+    "charisma": 6
+  },
+  "armorClass": 10,
+  "hitPoints": 13,
+  "hitDice": "2d10+2",
+  "speed": {
+    "walk": 15
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "Perception passive 10"
+  ],
+  "traits": [
+    {
+      "name": "Charge",
+      "text": "Si l'élan se déplace d'au moins 6 mètres en ligne droite vers une cible, puis la touche lors d'une attaque avec un coup de tête dans le même tour, la cible subit 7 (2d6) dégâts supplémentaires. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 13 ou tomber à terre."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Coup de tête",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 1,50 m, une cible. Touché : 6 (1d6 + 3) dégâts contondants.",
+      "attackBonus": 5,
+      "reach": 1.5,
+      "damage": "1d6+3",
+      "damageType": "bludgeoning"
+    },
+    {
+      "name": "Sabots",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 1,50 m, une créature au sol. Touché : 8 (2d4 + 3) dégâts contondants.",
+      "attackBonus": 5,
+      "reach": 1.5,
+      "damage": "2d4+3",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

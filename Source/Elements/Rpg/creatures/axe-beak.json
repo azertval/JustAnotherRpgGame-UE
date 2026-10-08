@@ -1,0 +1,37 @@
+{
+  "id": "axe-beak",
+  "name": "Bec de hache",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 14,
+    "dexterity": 12,
+    "constitution": 12,
+    "intelligence": 2,
+    "wisdom": 10,
+    "charisma": 5
+  },
+  "armorClass": 11,
+  "hitPoints": 19,
+  "hitDice": "3d10+3",
+  "speed": {
+    "walk": 15
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "Perception passive 10"
+  ],
+  "actions": [
+    {
+      "name": "Bec",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 6 (1d8 + 2) dégâts tranchants.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d8+2",
+      "damageType": "slashing"
+    }
+  ],
+  "description": "Un bec de hache est un grand oiseau incapable de voler possédant de puissantes pattes, un bec recourbé, ainsi qu'un déplaisant caractère."
+}

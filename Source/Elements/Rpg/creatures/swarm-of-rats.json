@@ -1,0 +1,62 @@
+{
+  "id": "swarm-of-rats",
+  "name": "Nuée de rats",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "nuée de bêtes TP",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 9,
+    "dexterity": 11,
+    "constitution": 9,
+    "intelligence": 2,
+    "wisdom": 10,
+    "charisma": 3
+  },
+  "armorClass": 10,
+  "hitPoints": 24,
+  "hitDice": "7d8-7",
+  "speed": {
+    "walk": 9
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "vision dans le noir 9 m",
+    "Perception passive 10"
+  ],
+  "damageResistances": [
+    "bludgeoning",
+    "piercing",
+    "slashing"
+  ],
+  "conditionImmunities": [
+    "prone",
+    "grappled",
+    "charmed",
+    "frightened",
+    "restrained",
+    "stunned",
+    "paralyzed",
+    "petrified"
+  ],
+  "traits": [
+    {
+      "name": "Odorat aiguisé",
+      "text": "La nuée a un avantage aux jets de Sagesse (Perception) basés sur l'odorat."
+    },
+    {
+      "name": "Nuée",
+      "text": "La nuée peut occuper l'espace d'une créature et vice versa, et peut passer par une ouverture suffisamment grande pour un rat de taille TP. La nuée ne peut pas regagner de points de vie ou gagner des points de vie temporaires."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsures",
+      "text": "Attaque au corps à corps avec une arme : +2 au toucher, allonge 0 m, une cible dans l'espace de la nuée. Touché : 7 (2d6) dégâts perforants, ou 3 (1d6) si la nuée ne possède plus que la moitié ou moins de ses points de vie.",
+      "attackBonus": 2,
+      "reach": 0,
+      "damage": "2d6",
+      "damageType": "piercing"
+    }
+  ]
+}

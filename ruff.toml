@@ -1,0 +1,47 @@
+# ruff : lint des scripts Python (refonte de la chaîne d'outillage, phase 2).
+#
+# Version épinglée dans .pre-commit-config.yaml, qui l'exécute sur le poste avant chaque commit et
+# dans le job `pre-commit` de ci.yml.
+#
+# Jeu de règles EXPLICITE : sans `select`, le jeu par défaut change avec la version de ruff, et une
+# montée de version rendrait le dépôt rouge sans que rien n'y ait changé. On retient ce qui signale
+# un défaut, pas un style :
+# - E4, E7, E9 : erreurs de syntaxe et d'instruction (pycodestyle, sans la mise en page) ;
+# - F : pyflakes (import mort, nom indéfini, variable jamais lue) ;
+# - B : bugbear (argument par défaut mutable, exception avalée, variable de boucle ignorée).
+#
+# Pas de `ruff format` : il réécrirait ~10 000 lignes des 41 scripts sans rien corriger. À décider
+# à part, dans un commit qui ne contient que cela.
+target-version = "py312"
+line-length = 100
+
+[lint]
+select = ["E4", "E7", "E9", "F", "B"]
+ignore = [
+    # `l` et `O` comme noms : un choix de lisibilité, pas un défaut.
+    "E741",
+    # `zip(strict=...)` : ajouter `strict=True` changerait le comportement de 8 appels existants ;
+    # chacun serait à examiner, ce que la phase 2 ne fait pas.
+    "B905",
+]
+
+[lint.per-file-ignores]
+# Prototypes de l'atelier des PNJ (LOT-91), écrits en style compact pendant la preuve de concept
+# (`if x: y`, `a; b`) : un style, pas un défaut. À lever quand T1-T5 les reprendront.
+"Planning/versions/v0.0.0/v0.0.0-fondation/annexes/LOT-91-atelier-pnj/atelier/scripts/*.py" = ["E701", "E702"]
+"Planning/versions/v0.0.0/v0.0.0-fondation/annexes/LOT-93-atelier-monstres/atelier/scripts/*.py" = ["E701", "E702"]
+# Les scripts de l'atelier de l'Arena of Fate hérités de sa première production (LOT-106, 3 oct.
+# 2026), écrits dans le même style compact. À lever si l'un d'eux est repris en profondeur ; ceux
+# écrits depuis (`arena_fate_enclosures.py`, `arena_fate_levels.py`, `material_maps.py`…) n'en
+# relèvent pas.
+"scripts/assetsGeneration/arena_fate_architecture.py" = ["E701", "E702"]
+"scripts/assetsGeneration/arena_fate_architecture_v2.py" = ["E701", "E702"]
+"scripts/assetsGeneration/arena_fate_iconography.py" = ["E701", "E702"]
+"scripts/assetsGeneration/arena_fate_underground_v3.py" = ["E701", "E702"]
+"scripts/assetsGeneration/import_arena_fate_meshy.py" = ["E701", "E702"]
+"scripts/assetsGeneration/import_arena_fate_subsoil_meshy.py" = ["E701", "E702"]
+"scripts/maps/arena_fate_arena_v2.py" = ["E701", "E702"]
+"scripts/maps/check_arena_fate.py" = ["E701", "E702"]
+# Scripts de l'étude des métiers (8 octobre 2026) : livrés compacts par leur atelier, pas encore
+# relus. La dérogation couvre ce que ruff y relève aujourd'hui ; elle se retire à leur relecture.
+"Documentation/Metiers/Reproduction/*.py" = ["E401", "E701", "E702", "E731", "B007", "B023", "F401", "F841"]

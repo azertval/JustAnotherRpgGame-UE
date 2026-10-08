@@ -1,0 +1,416 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/dialogue.schema.json",
+  "title": "Dialogue",
+  "description": "Une conversation avec un PNJ (LOT-15) : un graphe de noeuds -- repliques, conditions sur drapeau, actions, jets de competence, fins. AUCUN TEXTE : chaque replique et chaque reponse ont une cle de traduction FABRIQUEE depuis les identifiants (dialogue.<id>.<noeud>[.<reponse>]), resolue dans fr.lang et en.lang. Ce schema dit la forme ; ce qu'il ne peut pas dire -- cibles inconnues, cycles sans reponse, orphelins, impasses -- est refuse par core::readDialogue au chargement.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": {
+      "description": "Nom de TRAVAIL, pour l'auteur. Le nom affiche de l'interlocuteur est la cle dialogue.<id>.speaker."
+    },
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "speaker": {
+      "type": "object",
+      "properties": {
+        "languages": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+          },
+          "description": "Langues du PNJ (Rpg/languages/). Aucune en commun avec le personnage : le dialogue est refuse (EX-RPG-042)."
+        },
+        "attitude": {
+          "$ref": "#/$defs/attitude"
+        }
+      },
+      "required": [
+        "languages"
+      ],
+      "additionalProperties": false
+    },
+    "start": {
+      "$ref": "#/$defs/nodeId"
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/node"
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "speaker",
+    "start",
+    "nodes"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "nodeId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Identifiant de noeud : il fabrique une cle de traduction, d'ou l'alphabet restreint."
+    },
+    "attitude": {
+      "enum": [
+        "friendly",
+        "indifferent",
+        "hostile"
+      ],
+      "description": "Attitude de l'interlocuteur, dans le vocabulaire des regles (Guide du Maitre, interactions sociales)."
+    },
+    "flagValues": {
+      "description": "Une valeur, ou une liste de valeurs, d'un drapeau qu'une quete declare (LOT-116).",
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      ]
+    },
+    "flagCondition": {
+      "type": "object",
+      "properties": {
+        "flag": {
+          "type": "string",
+          "minLength": 1
+        },
+        "isSet": {
+          "type": "boolean",
+          "description": "Absent vaut vrai : la condition tient si le drapeau est leve."
+        },
+        "equals": {
+          "$ref": "#/$defs/flagValues"
+        },
+        "notEquals": {
+          "$ref": "#/$defs/flagValues"
+        }
+      },
+      "required": [
+        "flag"
+      ],
+      "additionalProperties": false,
+      "description": "Une condition sur un drapeau (core::readFlagCondition) : `isSet`, `equals` ou `notEquals`, au plus un des trois."
+    },
+    "node": {
+      "type": "object",
+      "required": [
+        "id",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/nodeId"
+        },
+        "type": {
+          "enum": [
+            "line",
+            "condition",
+            "action",
+            "check",
+            "end"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "id": true,
+            "type": {
+              "const": "line"
+            },
+            "attitude": {
+              "$ref": "#/$defs/attitude"
+            },
+            "choices": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "$ref": "#/$defs/nodeId"
+                  },
+                  "next": {
+                    "$ref": "#/$defs/nodeId"
+                  },
+                  "condition": {
+                    "$ref": "#/$defs/flagCondition"
+                  }
+                },
+                "required": [
+                  "id",
+                  "next"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "next": {
+              "$ref": "#/$defs/nodeId"
+            }
+          },
+          "oneOf": [
+            {
+              "required": [
+                "choices"
+              ]
+            },
+            {
+              "required": [
+                "next"
+              ]
+            }
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "id": true,
+            "type": {
+              "const": "condition"
+            },
+            "flag": {
+              "type": "string",
+              "minLength": 1
+            },
+            "isSet": {
+              "type": "boolean"
+            },
+            "equals": {
+              "$ref": "#/$defs/flagValues"
+            },
+            "notEquals": {
+              "$ref": "#/$defs/flagValues"
+            },
+            "then": {
+              "$ref": "#/$defs/nodeId"
+            },
+            "else": {
+              "$ref": "#/$defs/nodeId"
+            }
+          },
+          "required": [
+            "flag",
+            "then",
+            "else"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "id": true,
+            "type": {
+              "const": "action"
+            },
+            "actions": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "enum": [
+                          "setFlag",
+                          "clearFlag"
+                        ]
+                      },
+                      "flag": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "value": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "setFlag seulement : la valeur d'un drapeau qu'une quete declare (LOT-116)."
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "flag"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "giveItem"
+                      },
+                      "item": {
+                        "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+                      },
+                      "quantity": {
+                        "type": "integer",
+                        "minimum": 1
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "item"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "startQuest"
+                      },
+                      "quest": {
+                        "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "quest"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "const": "startEncounter"
+                      },
+                      "encounter": {
+                        "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "encounter"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Termine la demo (LOT-119) : l'ecran de fin dit la voie nommee (cle ending.<voie>).",
+                    "properties": {
+                      "type": {
+                        "const": "endDemo"
+                      },
+                      "ending": {
+                        "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "ending"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Donne un niveau (LOT-141) au personnage nomme (identifiant de fiche), ou a tout le groupe (party).",
+                    "properties": {
+                      "type": {
+                        "const": "levelUp"
+                      },
+                      "character": {
+                        "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "character"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "description": "Donne un repos long (LOT-142) au personnage nomme (identifiant de fiche), ou a tout le groupe (party) : points de vie et lancers rendus, niveau garde.",
+                    "properties": {
+                      "type": {
+                        "const": "rest"
+                      },
+                      "character": {
+                        "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "character"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "next": {
+              "$ref": "#/$defs/nodeId"
+            }
+          },
+          "required": [
+            "actions",
+            "next"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "id": true,
+            "type": {
+              "const": "check"
+            },
+            "skill": {
+              "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id",
+              "description": "Competence (Rpg/skills/)."
+            },
+            "difficulty": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Degre de difficulte NOMME (rules/difficulty.json), jamais un nombre (EX-REG-021)."
+            },
+            "success": {
+              "$ref": "#/$defs/nodeId"
+            },
+            "failure": {
+              "$ref": "#/$defs/nodeId"
+            }
+          },
+          "required": [
+            "skill",
+            "difficulty",
+            "success",
+            "failure"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "properties": {
+            "id": true,
+            "type": {
+              "const": "end"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    }
+  }
+}

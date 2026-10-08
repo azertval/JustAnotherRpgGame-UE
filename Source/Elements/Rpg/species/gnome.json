@@ -1,0 +1,20 @@
+{
+  "id": "gnome",
+  "name": "Gnome",
+  "source": "phb-fr",
+  "abilityScoreIncrease": {
+    "intelligence": 2
+  },
+  "size": "small",
+  "speed": 7.5,
+  "languages": [
+    "common",
+    "gnomish"
+  ],
+  "traits": [
+    {
+      "name": "Ruse gnome",
+      "text": "Vous êtes avantagé pour tous les jets de sauvegarde d'lntelligence, de Sagesse et de Charisme contre la magie. Langues. Vous pouvez parler, lire et écrire le commun et le gnome. La langue gnome utilise l'alphabet nain. Les gnomes sont renommés pour leurs traités techniques et leurs catalogues de connaissances sur la nature. Variante raciale. Les mondes de D&D présentent deux variantes raciales de gnomes : les gnomes des forêts et les gnomes des roches. Choisissez l'une d'elles. GNOME DES FORÊTS Les gnomes des forêts ont un don naturel pour les illusions et disposent d'une rapidité et d'une discrétion naturelles. Dans les mondes de D&D, ils sont rares et mystérieux. Ils se rassemblent en communautés secrètes au cœur des forêts et recourent aux illusions et aux supercheries pour se cacher de tout ce qui pourrait constituer une menace et pour masquer leur fuite si quelqu'un venait à les découvrir. Les gnomes des forêts se montrent amicaux envers les autres habitants affables des bois et considèrent les elfes et les fées bienveillantes comme leurs meilleurs alliés. Ils se lient aussi d'amitié avec de petits animaux des bois qui leur transmettent des informations sur les éventuels dangers rôdant sur leurs terres."
+    }
+  ]
+}

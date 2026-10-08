@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/schemas/level.v4.json",
+  "title": "Carte de JustAnotherRpgGame, format v4",
+  "description": "Format de carte v4 (LOT-EDITOR-12). Écrit par core::LevelWriter, lu par core::LevelLoader, contrôlé par LevelEditor --check. Une carte ordinaire porte ses cases ; une variante (base) ne porte que ses entités. Toute clé inconnue d'une couche ou d'une entité est une propriété libre, gardée et réécrite.",
+  "oneOf": [
+    { "$ref": "#/$defs/map" },
+    { "$ref": "#/$defs/variant" }
+  ],
+  "$defs": {
+    "cell": {
+      "description": "Une case : colonne x, ligne y, origine en haut à gauche.",
+      "type": "object",
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "integer", "minimum": 0 },
+        "y": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "tileType": {
+      "enum": ["empty", "solid", "entry", "grass", "dirt", "sand", "water", "deepWater", "wall",
+               "cliff", "bridge", "stairs", "pavement", "alley", "planks", "flagstone", "snow",
+               "mud", "rubble", "door", "bush", "tree", "rock", "fence", "lowWall", "stall",
+               "crate", "column", "roof", "tiers", "pit", "lava"]
+    },
+    "collisionTile": {
+      "description": "Une case de la grille de collision. Pas de pièce ici : la pièce se nomme sur sa couche.",
+      "type": "object",
+      "required": ["x", "y", "type"],
+      "properties": {
+        "x": { "type": "integer", "minimum": 0 },
+        "y": { "type": "integer", "minimum": 0 },
+        "type": { "$ref": "#/$defs/tileType" }
+      },
+      "additionalProperties": false
+    },
+    "layerTile": {
+      "description": "Une case de couche : son type (le sens des règles), sa pièce (ce qu'on voit), sa hauteur réservée.",
+      "type": "object",
+      "required": ["x", "y", "type"],
+      "properties": {
+        "x": { "type": "integer", "minimum": 0 },
+        "y": { "type": "integer", "minimum": 0 },
+        "type": { "$ref": "#/$defs/tileType" },
+        "piece": { "type": "string", "minLength": 1 },
+        "elevation": { "type": "integer", "not": { "const": 0 } }
+      },
+      "additionalProperties": false
+    },
+    "property": {
+      "description": "Propriété libre : booléen, entier, réel ou chaîne. Une valeur composite n'est pas gardée.",
+      "type": ["boolean", "integer", "number", "string"]
+    },
+    "layer": {
+      "type": "object",
+      "required": ["kind", "tiles"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["ground", "decor"] },
+        "floor": { "type": "integer", "not": { "const": 0 } },
+        "scene": { "type": "string", "description": "Le lieu dont la carte porte les planches : Assets/Scene/<scene>/." },
+        "tiles": { "type": "array", "items": { "$ref": "#/$defs/layerTile" } }
+      },
+      "additionalProperties": { "$ref": "#/$defs/property" }
+    },
+    "entity": {
+      "type": "object",
+      "required": ["id", "type", "x", "y"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^\\S+$", "description": "Unique dans la carte, jamais réemployé ; cité par carte#id." },
+        "type": { "type": "string" },
+        "x": { "type": "integer", "minimum": 0 },
+        "y": { "type": "integer", "minimum": 0 },
+        "elevation": { "type": "integer", "not": { "const": 0 } },
+        "cells": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/cell" }, "description": "Forme peinte d'une zone (triée, sans doublon), ou points d'un trajet (dans l'ordre)." }
+      },
+      "additionalProperties": { "$ref": "#/$defs/property" }
+    },
+    "entities": { "type": "array", "items": { "$ref": "#/$defs/entity" } },
+    "nextEntityId": { "type": "integer", "minimum": 2, "description": "Prochain identifiant e<n> à donner ; omis quand il vaut 1." },
+    "map": {
+      "type": "object",
+      "required": ["version", "name", "width", "height", "tiles"],
+      "properties": {
+        "version": { "const": 4 },
+        "name": { "type": "string" },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "nextEntityId": { "$ref": "#/$defs/nextEntityId" },
+        "tiles": { "type": "array", "items": { "$ref": "#/$defs/collisionTile" }, "description": "La grille de collision, entrée comprise, déduite des couches hors cases forcées." },
+        "forced": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/cell" }, "description": "Cases où la collision s'écarte à dessein de la déduction." },
+        "layers": { "type": "array", "items": { "$ref": "#/$defs/layer" } },
+        "entities": { "$ref": "#/$defs/entities" }
+      },
+      "additionalProperties": false
+    },
+    "variant": {
+      "type": "object",
+      "required": ["version", "name", "base"],
+      "properties": {
+        "version": { "const": 4 },
+        "name": { "type": "string" },
+        "base": { "type": "string", "minLength": 1, "description": "Identifiant de la carte de base (coliseum, capital/martpart)." },
+        "scene": { "type": "string", "minLength": 1, "description": "Planche substituée à celle de la base." },
+        "nextEntityId": { "$ref": "#/$defs/nextEntityId" },
+        "entities": { "$ref": "#/$defs/entities" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

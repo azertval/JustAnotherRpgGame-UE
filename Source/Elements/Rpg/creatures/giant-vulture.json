@@ -1,0 +1,73 @@
+{
+  "id": "giant-vulture",
+  "name": "Vautour géant",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "neutre mauvais",
+  "abilities": {
+    "strength": 15,
+    "dexterity": 10,
+    "constitution": 15,
+    "intelligence": 6,
+    "wisdom": 12,
+    "charisma": 7
+  },
+  "armorClass": 10,
+  "hitPoints": 22,
+  "hitDice": "3d10+6",
+  "speed": {
+    "walk": 3,
+    "fly": 18
+  },
+  "challengeRating": 1,
+  "senses": [
+    "Perception passive 13"
+  ],
+  "skills": {
+    "perception": 3
+  },
+  "languages": [
+    "common"
+  ],
+  "traits": [
+    {
+      "name": "Langues",
+      "text": "comprend le commun mais ne peut pas parler"
+    },
+    {
+      "name": "Odorat et vue aiguisés",
+      "text": "Le vautour a un avantage aux jets de Sagesse (Perception) basés sur l'odorat ou la vue."
+    },
+    {
+      "name": "Tactique de groupe",
+      "text": "Le vautour a un avantage aux jets d'attaque contre une créature si au moins l'un de ses alliés est à 1,50 mètre ou moins de la créature et n'est pas incapable d'agir."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Attaques multiples",
+      "text": "Le vautour réalise deux attaques : une avec son bec et une avec ses serres."
+    },
+    {
+      "name": "Bec",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 7 (2d4 + 2) dégâts perforants.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "2d4+2",
+      "damageType": "piercing"
+    },
+    {
+      "name": "Serres",
+      "text": "Attaque au corps à corps avec une arme : +5 au toucher, allonge 1,50 m, une cible. Touché : 9 (2d6 + 2) dégâts tranchants.",
+      "attackBonus": 5,
+      "reach": 1.5,
+      "damage": "2d6+2",
+      "damageType": "slashing"
+    }
+  ],
+  "description": "Les vautours géants ont une intelligence évoluée et un penchant malveillant.",
+  "mecanismesRequis": [
+    "langue-comprise-non-parlee"
+  ]
+}

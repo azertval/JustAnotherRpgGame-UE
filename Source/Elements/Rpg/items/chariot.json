@@ -1,0 +1,8 @@
+{
+  "id": "chariot",
+  "name": "Chariot",
+  "source": "srd",
+  "category": "mount",
+  "price": 3500,
+  "weightGrams": 200000
+}

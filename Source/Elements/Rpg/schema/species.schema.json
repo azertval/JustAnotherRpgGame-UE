@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/species.schema.json",
+  "title": "Espece",
+  "description": "Les 4 races des Basic Rules, les 5 du Manuel des Joueurs et les 13 du Player's Guide (LOT-36). Les augmentations de caracteristique sont une TABLE et non une phrase : c'est la seule forme que le moteur puisse appliquer.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "size": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/size"
+    },
+    "speed": {
+      "type": "number",
+      "minimum": 0
+    },
+    "abilityScoreIncrease": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": -2,
+        "maximum": 4
+      },
+      "propertyNames": {
+        "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/ability"
+      }
+    },
+    "hitPointsPerLevel": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4,
+      "description": "Points de vie que l'espece ajoute A CHAQUE NIVEAU (LOT-130) : la Tenacite naine du nain des collines, << votre maximum de points de vie augmente de 1 a chaque niveau >>. Un NOMBRE et non la phrase du trait, pour la meme raison que les augmentations de caracteristique sont une table : le moteur ne lit pas la prose."
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "traits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "name",
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "weaponProficiencies": {
+      "type": "array",
+      "description": "Armes que l'espece fait maitriser (LOT-131) : l'Entrainement aux armes naines, en identifiants d'armes du catalogue -- le moteur ne lit pas la prose des traits. La fiche reunit celles de la classe et de l'espece.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "uniqueItems": true
+    },
+    "parentSpecies": {
+      "allOf": [
+        {
+          "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+        }
+      ],
+      "description": "Sous-race : l'espece dont celle-ci derive."
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "size",
+    "speed"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,23 @@
+{
+  "id": "colisee-fauves",
+  "name": "Les fauves du Colisée",
+  "source": "original",
+  "escapable": false,
+  "combatants": [
+    {
+      "creatureId": "lion",
+      "columnOffset": 0,
+      "rowOffset": -1
+    },
+    {
+      "creatureId": "wolf",
+      "columnOffset": 1,
+      "rowOffset": -1
+    },
+    {
+      "creatureId": "wolf",
+      "columnOffset": -1,
+      "rowOffset": -1
+    }
+  ]
+}

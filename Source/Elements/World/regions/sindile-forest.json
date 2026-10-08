@@ -1,0 +1,83 @@
+{
+  "id": "sindile-forest",
+  "name": "Sindile Forest",
+  "source": "tanares",
+  "government": "Governed by a high council of Spring elves, whose last word is a couple, a King and a Queen, who hold office temporarily.",
+  "faction": "Allied Forces.",
+  "population": {
+    "total": 432000,
+    "species": [
+      {
+        "species": "elf",
+        "label": "elves",
+        "percent": 91
+      },
+      {
+        "species": "halfling",
+        "label": "halflings",
+        "percent": 3
+      },
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 2
+      },
+      {
+        "species": "cirrus",
+        "label": "cirrus",
+        "percent": 1
+      }
+    ],
+    "otherPercent": 3
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "high"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "veryLow"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "low"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "high"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "high"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "high"
+      }
+    ]
+  },
+  "neighbors": [
+    "central-empire",
+    "theocracy-of-kepesh"
+  ],
+  "locations": [
+    "sindile-forest-sweetsprings",
+    "sindile-forest-hunter-s-nest",
+    "sindile-forest-cindergrove",
+    "sindile-forest-sindile-road",
+    "sindile-forest-verdant-colossus",
+    "sindile-forest-verdant-expanse-of-yrthak",
+    "sindile-forest-mirror-lake"
+  ]
+}

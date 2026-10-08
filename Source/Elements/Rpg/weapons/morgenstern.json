@@ -1,0 +1,10 @@
+{
+  "id": "morgenstern",
+  "name": "Morgenstern",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "piercing",
+  "weightGrams": 2000,
+  "price": 1500
+}

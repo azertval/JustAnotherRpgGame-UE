@@ -1,0 +1,29 @@
+{
+  "id": "demi-orc",
+  "name": "Demi-orc",
+  "source": "phb-fr",
+  "abilityScoreIncrease": {
+    "strength": 2,
+    "constitution": 1
+  },
+  "size": "medium",
+  "speed": 9,
+  "languages": [
+    "common",
+    "orc"
+  ],
+  "traits": [
+    {
+      "name": "Menaçant",
+      "text": "Vous gagnez la maîtrise de la compétence Intimidation."
+    },
+    {
+      "name": "Acharnement",
+      "text": "Quand vous vous retrouvez à O point de vie mais que vous n'êtes pas tué sur le coup, vous pouvez choisir d'être réduit à 1 point de vie à la place. Vous ne pouvez pas réutiliser cette aptitude tant que vous n'avez pas terminé un repos long."
+    },
+    {
+      "name": "Sauvagerie",
+      "text": "Quand vous réussissez un coup critique avec une attaque de corps à corps, vous pouvez relancer l'un des dés de dégâts de l'arme et ajouter son résultat aux dégâts supplémentaires du coup critique."
+    }
+  ]
+}

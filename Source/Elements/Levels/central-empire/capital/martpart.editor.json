@@ -1,0 +1,130 @@
+{
+  "notes": [
+    {
+      "column": 8,
+      "row": 0,
+      "text": "Stravian Avenue"
+    },
+    {
+      "column": 96,
+      "row": 7,
+      "text": "Market Gate / Old Bridge"
+    },
+    {
+      "column": 17,
+      "row": 8,
+      "text": "Hen's Alley"
+    },
+    {
+      "column": 68,
+      "row": 8,
+      "text": "Monkling Alley"
+    },
+    {
+      "column": 96,
+      "row": 10,
+      "text": "Market Gate / Old Bridge"
+    },
+    {
+      "column": 110,
+      "row": 10,
+      "text": "Market Gate → Oldtown — sortie réservée"
+    },
+    {
+      "column": 76,
+      "row": 16,
+      "text": "Duckbunny Alley"
+    },
+    {
+      "column": 28,
+      "row": 18,
+      "text": "Municipal Market"
+    },
+    {
+      "column": 29,
+      "row": 36,
+      "text": "Étal de pommes — mère / quête existante"
+    },
+    {
+      "column": 0,
+      "row": 46,
+      "text": "Downtown — sortie réservée"
+    },
+    {
+      "column": 67,
+      "row": 47,
+      "text": "Ice Street"
+    },
+    {
+      "column": 69,
+      "row": 50,
+      "text": "Illu Die Arena"
+    },
+    {
+      "column": 18,
+      "row": 52,
+      "text": "Reservoir Street"
+    },
+    {
+      "column": 48,
+      "row": 53,
+      "text": "Witch's Street"
+    },
+    {
+      "column": 30,
+      "row": 56,
+      "text": "The Shaft Loop"
+    },
+    {
+      "column": 35,
+      "row": 60,
+      "text": "Shaft Loop — mécanisme Meshy"
+    },
+    {
+      "column": 78,
+      "row": 60,
+      "text": "Illu Die Arena"
+    },
+    {
+      "column": 91,
+      "row": 63,
+      "text": "Dweomer connection"
+    },
+    {
+      "column": 18,
+      "row": 64,
+      "text": "Blinddagger Corner"
+    },
+    {
+      "column": 8,
+      "row": 70,
+      "text": "Pauper's Street"
+    },
+    {
+      "column": 10,
+      "row": 78,
+      "text": "Ubel Paradise"
+    },
+    {
+      "column": 8,
+      "row": 84,
+      "text": "Saint Malrok Street"
+    },
+    {
+      "column": 48,
+      "row": 84,
+      "text": "Scholarnest connection"
+    },
+    {
+      "column": 48,
+      "row": 87,
+      "text": "Scholarnest — sortie réservée"
+    },
+    {
+      "column": 100,
+      "row": 87,
+      "text": "Dweomer — sortie réservée"
+    }
+  ],
+  "version": 1
+}

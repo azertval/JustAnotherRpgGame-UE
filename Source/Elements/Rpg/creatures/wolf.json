@@ -1,0 +1,51 @@
+{
+  "id": "wolf",
+  "name": "Loup",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "silhouette": "quadruped",
+  "abilities": {
+    "strength": 12,
+    "dexterity": 15,
+    "constitution": 12,
+    "intelligence": 3,
+    "wisdom": 12,
+    "charisma": 6
+  },
+  "armorClass": 13,
+  "hitPoints": 11,
+  "hitDice": "2d8+2",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "Perception passive 13"
+  ],
+  "skills": {
+    "stealth": 4,
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Odorat et ouïe aiguisés",
+      "text": "Le loup a un avantage aux jets de Sagesse (Perception) basés sur l'odorat ou l'ouïe."
+    },
+    {
+      "name": "Tactique de groupe",
+      "text": "Le loup a un avantage aux jets d'attaque contre une créature si au moins l'un de ses alliés est à 1,50 mètre ou moins de la créature et n'est pas incapable d'agir."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 7 (2d4 + 2) dégâts perforants. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 11 pour ne pas tomber à terre.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "2d4+2",
+      "damageType": "piercing"
+    }
+  ]
+}

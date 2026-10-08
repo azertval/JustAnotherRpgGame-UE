@@ -1,0 +1,17 @@
+{
+  "id": "character-creation",
+  "name": "Creation de personnage",
+  "source": "srd",
+  "unarmoredArmorClass": 10,
+  "maximumAbilityScore": 20,
+  "attestations": {
+    "unarmoredArmorClass": {
+      "page": 10,
+      "text": "Sans armure, ni bouclier, la CA de votre personnage est égale à 10 + son modificateur de Dextérité."
+    },
+    "maximumAbilityScore": {
+      "page": 11,
+      "text": "Vous ne pouvez pas augmenter une valeur de caractéristique au-delà de 20."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "elfe-d-ete",
+  "name": "Elfe d'été",
+  "source": "tanares",
+  "parentSpecies": "elfe",
+  "size": "medium",
+  "speed": 9,
+  "abilityScoreIncrease": {
+    "charisma": 1
+  },
+  "mecanismesRequis": [
+    "augmentation-de-caracteristique-au-choix"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "id": "sac-de-couchage",
+  "name": "Sac de couchage",
+  "source": "srd",
+  "category": "gear",
+  "price": 100,
+  "weightGrams": 3500
+}

@@ -1,0 +1,85 @@
+{
+  "id": "seashores",
+  "name": "Seashores",
+  "source": "tanares",
+  "government": "Officially it is still an Imperial province, but it is governed by the Pirate Lords of the Parliament of the Seas, in agreement with Emperor Baleroth.",
+  "faction": "It is part of the Tanarean Empire. But that doesn’t stop its pirates from sailing according to the tides that are most favorable to them, as long as no one knows.",
+  "population": {
+    "total": 617000,
+    "species": [
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 74
+      },
+      {
+        "species": "gnome",
+        "label": "gnomes",
+        "percent": 12
+      },
+      {
+        "species": "elf",
+        "label": "elves",
+        "percent": 7
+      },
+      {
+        "species": "merfolk",
+        "label": "merfolk",
+        "percent": 5
+      }
+    ],
+    "otherPercent": 2
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "high"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "veryHigh"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "low"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "veryHigh"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "high"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "low"
+      }
+    ]
+  },
+  "neighbors": [
+    "central-empire",
+    "republic-of-freelands",
+    "storm-islands",
+    "theocracy-of-kepesh",
+    "yama"
+  ],
+  "locations": [
+    "seashores-bluhaven-the-capital",
+    "seashores-mustardseed",
+    "seashores-pearl-town",
+    "seashores-the-whirlpool",
+    "seashores-uncle-joe-s-tavern",
+    "seashores-underwater-dungeon"
+  ]
+}

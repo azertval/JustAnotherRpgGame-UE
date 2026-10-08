@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/behaviors.schema.json",
+  "title": "Profils de comportement",
+  "description": "Les profils de l'IA tactique (LOT-23) et les regles qui les attribuent aux creatures. Le Guide du Maitre (chapitre 8, PDF p. 247-255) donne ce que l'IA sait -- l'etat ensanglante, le jet requis, l'abri, la prise en tenaille -- ; les POIDS ne sont dans aucun livre : ils sont ecrits ici, et non dans le C++ (EX-VIS-007), pour qu'un ennemi s'ajuste sans recompiler. Chaque poids est un pourcentage : 100 compte un point de degat attendu pour un point.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "default": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Le profil d'une creature qu'aucune regle ne designe."
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z][a-z-]*$" },
+          "name": { "type": "string", "minLength": 1 },
+          "damageDealt": { "type": "integer", "minimum": 0, "description": "Les degats qu'on espere infliger." },
+          "bloodiedTarget": { "type": "integer", "minimum": 0, "description": "En plus, contre une cible ensanglantee : l'achever." },
+          "focusFire": { "type": "integer", "minimum": 0, "description": "En plus, par allie deja au contact de la cible." },
+          "protectBloodiedAlly": { "type": "integer", "minimum": 0, "description": "En plus, contre une cible au contact d'un allie ensanglante." },
+          "threatTaken": { "type": "integer", "minimum": 0, "description": "Les degats attendus au prochain round sur la case de fin." },
+          "threatWhenBloodied": { "type": "integer", "minimum": 0, "description": "La meme menace quand on est soi-meme ensanglante." },
+          "opportunityTaken": { "type": "integer", "minimum": 0, "description": "Les attaques d'opportunite que le chemin provoque." },
+          "approachPerTile": { "type": "integer", "minimum": 1, "description": "Le prix d'une case entre soi et la cible, en pour cent d'un point de degat. Jamais nul : une IA qui ne tient pas a s'approcher peut ne jamais combattre." },
+          "toleratedThreats": { "type": "integer", "minimum": 0, "maximum": 2, "description": "Le nombre d'ennemis qui peuvent frapper la case de fin au contact, sans bouger, au plus, quand une case plus sure existe ; les tireurs, dont la portee couvre l'arene, ne comptent pas. Au plus 2 : finir a portee de trois ennemis quand une case sure existait est le suicide que le lot interdit." },
+          "opportunityMaximumRoll": { "type": "integer", "minimum": 2, "maximum": 21, "description": "Le jet requis (CA - bonus) au-dela duquel on laisse passer une attaque d'opportunite. 21 : toujours." },
+          "dodgeWhenThreatened": { "type": "boolean", "description": "Faute de pouvoir attaquer, et menace, esquiver." },
+          "retreatAfterAttack": { "type": "boolean", "description": "Apres avoir frappe, s'eloigner vers une case moins menacee." },
+          "finishDowned": { "type": "integer", "minimum": 0, "description": "Le poids d'un ennemi a terre dans un combat ou l'on meurt : l'achever (LOT-137), en pour cent de l'esperance de degats. 0 : on l'epargne." }
+        },
+        "required": [
+          "id", "name", "damageDealt", "bloodiedTarget", "focusFire", "protectBloodiedAlly",
+          "threatTaken", "threatWhenBloodied", "opportunityTaken", "approachPerTile",
+          "toleratedThreats", "opportunityMaximumRoll", "dodgeWhenThreatened", "retreatAfterAttack"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "assignments": {
+      "type": "array",
+      "description": "Les regles d'attribution, dans l'ordre : la premiere qui designe la creature l'emporte. Toutes les conditions d'une regle doivent tenir.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "behavior": { "type": "string", "minLength": 1 },
+          "trait": { "type": "string", "minLength": 1, "description": "Le nom d'un trait du bloc, tel que le bestiaire l'ecrit." },
+          "creature": { "type": "string", "minLength": 1, "description": "L'identifiant d'une creature." },
+          "ranged": { "const": true, "description": "Une creature qui frappe au moins aussi fort a distance, a une portee connue, qu'au contact." }
+        },
+        "required": ["behavior"],
+        "minProperties": 2,
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["id", "name", "source", "default", "profiles", "assignments"],
+  "additionalProperties": false
+}

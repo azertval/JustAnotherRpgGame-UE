@@ -1,0 +1,14 @@
+{
+  "id": "undercover",
+  "name": "Undercover",
+  "source": "tanares",
+  "skillProficiencies": [
+    "deception",
+    "investigation"
+  ],
+  "feature": {
+    "name": "Another Life",
+    "text": "You possess a second identity that you've developed over the years, complete with the necessary documentation to au- thenticate each persona. You are known by one identity or the other, depending on the region or location you're in. Your extensive experience in living a double life has made you an expert in secrecy, and you must not need to make any ability check when trying to make people believe you are one of your two established identities."
+  },
+  "text": "Y ou live in the shadows, your true identity shrouded in secrecy, while another identity allows you to navigate the tumultuous world of Tanares with ease. Perhaps you pose as a humble farmer, a stoic sol- dier, or even something more sinister. You have spent so much time in this other skin that it feels like a part of you, and you are recognized for it even in other regions. With the growing tensions of the Cold War, your unique ability to move unnoticed between your two identities provides a dis- tinct advantage, allowing you to gather invaluable informa- tion for espionage purposes. But as the stakes become higher, the lines between your true self and your other identity begin to blur, and the risk of being discovered looms ever larger."
+}

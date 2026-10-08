@@ -1,0 +1,77 @@
+{
+  "id": "storm-islands",
+  "name": "Storm Islands",
+  "source": "tanares",
+  "government": "Ruled by Gullog, the Deathbringer, in league with Bás, the elven deity of winter and death.",
+  "faction": "The Forces of Darkall.",
+  "population": {
+    "total": 386000,
+    "species": [
+      {
+        "species": "kemet",
+        "label": "kemets",
+        "percent": 96
+      },
+      {
+        "species": "other-elf",
+        "label": "other elves",
+        "percent": 2
+      },
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 1
+      }
+    ],
+    "otherPercent": 1
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "veryLow"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "veryLow"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "high"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "low"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "high"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "high"
+      }
+    ]
+  },
+  "neighbors": [
+    "kingdom-of-kolbjorn",
+    "seashores"
+  ],
+  "locations": [
+    "storm-islands-night-mansions",
+    "storm-islands-cantala-ruins",
+    "storm-islands-boneheart",
+    "storm-islands-shrine-of-bas",
+    "storm-islands-thyra-cave",
+    "storm-islands-dark-lab"
+  ]
+}

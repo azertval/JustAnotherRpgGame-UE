@@ -1,0 +1,55 @@
+{
+  "map": "central-empire/capital/arenarea/arena-of-fate",
+  "purpose": "Preserve V2 gameplay topology while changing only visual dressing",
+  "canonicalization": "UTF-8 JSON, ensure_ascii=False, sort_keys=True, separators=comma/colon",
+  "tilesSha256": "448be86b1a004011d1de4d95c61663e2dd77c089fc4744d5d130df38991bdba1",
+  "entitiesSha256": "b240f63eacda3a921a87f63326ebeea46b1884e452e9153b233ef0fb8b081a36",
+  "upstreamGameplayUpdate": {
+    "date": "2026-10-04",
+    "sourceCommit": "197c29683",
+    "reason": "Preserve exactly six upstream gameplay corrections while retaining the complete V2 visual map and collision.",
+    "beforeArchive": "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/V3/Archive/coliseum-before-v3.json",
+    "oldEntitiesSha256": "17c07ab6a7816ad2a100ec7c7b479528dbc04a000b5bd282c9f743eb46b85763",
+    "newEntitiesSha256": "b240f63eacda3a921a87f63326ebeea46b1884e452e9153b233ef0fb8b081a36",
+    "unchangedTilesSha256": "448be86b1a004011d1de4d95c61663e2dd77c089fc4744d5d130df38991bdba1",
+    "unchangedLayersSha256": "13f6132b5382e08af1d5edae56c4213fd840de1430eaf0de760319988b5bcfc4",
+    "differences": [
+      {
+        "jsonPointer": "/entities/4/figure",
+        "before": "",
+        "after": "arena-master",
+        "entityId": "e5"
+      },
+      {
+        "jsonPointer": "/entities/6/presenceFlag",
+        "before": "encounter/arene-bandits/won",
+        "after": "arene/recompense-1",
+        "entityId": "e7"
+      },
+      {
+        "jsonPointer": "/entities/7/presenceFlag",
+        "before": "encounter/arene-bandits/won",
+        "after": "arene/recompense-2",
+        "entityId": "e8"
+      },
+      {
+        "jsonPointer": "/entities/8/presenceFlag",
+        "before": "encounter/arene-bandits/won",
+        "after": "arene/recompense-3",
+        "entityId": "e9"
+      },
+      {
+        "jsonPointer": "/entities/9/presenceFlag",
+        "before": "encounter/arene-bandits/won",
+        "after": "arene/recompense-4",
+        "entityId": "e10"
+      },
+      {
+        "jsonPointer": "/entities/10/presenceFlag",
+        "before": "encounter/arene-bandits/won",
+        "after": "arene/recompense-5",
+        "entityId": "e11"
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "difficulty",
+  "name": "Degres de difficulte",
+  "source": "srd",
+  "tiers": [
+    {
+      "id": "tres-facile",
+      "name": "Très facile",
+      "dc": 5
+    },
+    {
+      "id": "facile",
+      "name": "Facile",
+      "dc": 10
+    },
+    {
+      "id": "moyenne",
+      "name": "Moyenne",
+      "dc": 15
+    },
+    {
+      "id": "difficile",
+      "name": "Difficile",
+      "dc": 20
+    },
+    {
+      "id": "tres-difficile",
+      "name": "Très difficile",
+      "dc": 25
+    },
+    {
+      "id": "quasi-impossible",
+      "name": "Quasi impossible",
+      "dc": 30
+    }
+  ]
+}

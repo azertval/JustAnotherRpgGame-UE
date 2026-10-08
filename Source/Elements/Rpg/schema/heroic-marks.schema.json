@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/heroic-marks.schema.json",
+  "title": "Marques Heroiques",
+  "description": "Les huit roles des Marques Heroiques du Sourcebook (LOT-50) : la taxonomie que les Arenes emploient, et contre laquelle chaque classe livree (LOT-47, LOT-51 a LOT-65) verifie qu'elle remplit bien le sien. Le cardinal est FERME a huit : c'est la liste du livre.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "marks": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "enum": [
+              "bruiser",
+              "brute",
+              "commander",
+              "controller",
+              "healer",
+              "shooter",
+              "tactician",
+              "tank"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "marks"
+  ],
+  "additionalProperties": false
+}

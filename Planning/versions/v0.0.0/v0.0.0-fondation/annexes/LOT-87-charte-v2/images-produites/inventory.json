@@ -1,0 +1,3851 @@
+[
+  {
+    "key": "ui/background/options-backdrop",
+    "file": "Source/Elements/Assets/UI/background/options-backdrop.png",
+    "width": 1920,
+    "height": 1080,
+    "transparent": false,
+    "display": "cover",
+    "margins": null,
+    "status": "produced",
+    "sha256": "9e3b58ee239ceabc60500830f3327a2be79667c496953183af1fbf81fbe552f6",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/background/parchment-tile",
+    "file": "Source/Elements/Assets/UI/background/parchment-tile.png",
+    "width": 512,
+    "height": 512,
+    "transparent": false,
+    "display": "tile",
+    "margins": null,
+    "status": "produced",
+    "sha256": "ee5a0ebf85fe1334457a75539172d6f912bedf916f8ceaca8f392262bc0617c1",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "opposite_tile_edges_identical"
+    ]
+  },
+  {
+    "key": "ui/background/leather-tile",
+    "file": "Source/Elements/Assets/UI/background/leather-tile.png",
+    "width": 512,
+    "height": 512,
+    "transparent": false,
+    "display": "tile",
+    "margins": null,
+    "status": "produced",
+    "sha256": "1317358039f2751acb492f34638d16fb81702a3ec41222316192cfc888aea660",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "opposite_tile_edges_identical"
+    ]
+  },
+  {
+    "key": "ui/frame/panel-dark",
+    "file": "Source/Elements/Assets/UI/frame/panel-dark.png",
+    "width": 512,
+    "height": 512,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 112,
+      "top": 112,
+      "right": 112,
+      "bottom": 112
+    },
+    "status": "produced",
+    "sha256": "8bca038c305cccb2ad4688315584893e39cee370964e87f1bf6de60bd10506be",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/panel-parchment/plain",
+    "file": "Source/Elements/Assets/UI/frame/panel-parchment/plain.png",
+    "width": 768,
+    "height": 768,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 128,
+      "top": 128,
+      "right": 128,
+      "bottom": 128
+    },
+    "status": "produced",
+    "sha256": "ec8da626ed4f4f47097cc11da4e26ae0dd67c8f553ae8f31d987f9465dcd72a4",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/panel-parchment/bound",
+    "file": "Source/Elements/Assets/UI/frame/panel-parchment/bound.png",
+    "width": 768,
+    "height": 768,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 128,
+      "top": 128,
+      "right": 128,
+      "bottom": 128
+    },
+    "status": "produced",
+    "sha256": "700726fc4052ef74cf030fad8e2e65b14243e2fad48a0352d5eab48d41b30a65",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/subpanel-dark",
+    "file": "Source/Elements/Assets/UI/frame/subpanel-dark.png",
+    "width": 256,
+    "height": 256,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 48,
+      "right": 48,
+      "bottom": 48
+    },
+    "status": "produced",
+    "sha256": "043c984e4926c59b70083a7761c7edd366c6a912c5c772cf3bb701ad0f95c04d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/subpanel-parchment/normal",
+    "file": "Source/Elements/Assets/UI/frame/subpanel-parchment/normal.png",
+    "width": 256,
+    "height": 256,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 40,
+      "top": 40,
+      "right": 40,
+      "bottom": 40
+    },
+    "status": "produced",
+    "sha256": "f353848d8b3531d902228dd7dc348fe6d9ddfe7ff5e0257491d133771166c82b",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/subpanel-parchment/empty",
+    "file": "Source/Elements/Assets/UI/frame/subpanel-parchment/empty.png",
+    "width": 256,
+    "height": 256,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 40,
+      "top": 40,
+      "right": 40,
+      "bottom": 40
+    },
+    "status": "produced",
+    "sha256": "9e08e8d31db907edd3b6622bedff984a82063c190b66324f21fe01f8ca045023",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/item-card",
+    "file": "Source/Elements/Assets/UI/frame/item-card.png",
+    "width": 512,
+    "height": 768,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 160,
+      "right": 96,
+      "bottom": 96
+    },
+    "status": "produced",
+    "sha256": "c812aea977f24254a4b48899cb5f035a2aea3daa64a3bbc71bb6c9669ec936dd",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/school-row/abjuration",
+    "file": "Source/Elements/Assets/UI/frame/school-row/abjuration.png",
+    "width": 512,
+    "height": 96,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 24,
+      "right": 48,
+      "bottom": 24
+    },
+    "status": "produced",
+    "sha256": "ddc32fb7a50599f482b4dbc2a7fefaa0fb331a9c051c07ab45c4b597b95cf5ad",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/school-row/conjuration",
+    "file": "Source/Elements/Assets/UI/frame/school-row/conjuration.png",
+    "width": 512,
+    "height": 96,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 24,
+      "right": 48,
+      "bottom": 24
+    },
+    "status": "produced",
+    "sha256": "bdacf16d37e6eee3e46631667901bcf5e064bc1f0e669d30f89b00857beed603",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/school-row/divination",
+    "file": "Source/Elements/Assets/UI/frame/school-row/divination.png",
+    "width": 512,
+    "height": 96,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 24,
+      "right": 48,
+      "bottom": 24
+    },
+    "status": "produced",
+    "sha256": "8a7f206ddcbd04914e96875f1a287313762420e16df3303956b3b18744a2b6eb",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/school-row/enchantment",
+    "file": "Source/Elements/Assets/UI/frame/school-row/enchantment.png",
+    "width": 512,
+    "height": 96,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 24,
+      "right": 48,
+      "bottom": 24
+    },
+    "status": "produced",
+    "sha256": "a253c985e32f26edaacfd4fa64a22514f527a919d391155a81ae87ebdc705c3f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/school-row/evocation",
+    "file": "Source/Elements/Assets/UI/frame/school-row/evocation.png",
+    "width": 512,
+    "height": 96,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 24,
+      "right": 48,
+      "bottom": 24
+    },
+    "status": "produced",
+    "sha256": "1a6971589952e228f0cb53745ba14cb36c17fb3ddd3b3d388835522f5f3ac285",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/school-row/illusion",
+    "file": "Source/Elements/Assets/UI/frame/school-row/illusion.png",
+    "width": 512,
+    "height": 96,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 24,
+      "right": 48,
+      "bottom": 24
+    },
+    "status": "produced",
+    "sha256": "639aad8072c188b2d3d8950976ec4728eec944f2f63ff4479395b8dff36d69a3",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/school-row/necromancy",
+    "file": "Source/Elements/Assets/UI/frame/school-row/necromancy.png",
+    "width": 512,
+    "height": 96,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 24,
+      "right": 48,
+      "bottom": 24
+    },
+    "status": "produced",
+    "sha256": "0292c8a39e5e097d6852b8592569dbf41ef2cde1231bd04911fdd9ab32850ed4",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/school-row/transmutation",
+    "file": "Source/Elements/Assets/UI/frame/school-row/transmutation.png",
+    "width": 512,
+    "height": 96,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 24,
+      "right": 48,
+      "bottom": 24
+    },
+    "status": "produced",
+    "sha256": "e3d1922224d27505e2dc49c4a980931160c659b0f93a91f8834e9a87b7aaef35",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/frame/school-row/thaumaturgy",
+    "file": "Source/Elements/Assets/UI/frame/school-row/thaumaturgy.png",
+    "width": 512,
+    "height": 96,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 24,
+      "right": 48,
+      "bottom": 24
+    },
+    "status": "produced",
+    "sha256": "15bc2152844cb34f2713343fe9c8567db3b295eca9ab2c67e8eab21252557bc3",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/plate/title-garnet",
+    "file": "Source/Elements/Assets/UI/plate/title-garnet.png",
+    "width": 768,
+    "height": 120,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 160,
+      "top": 0,
+      "right": 160,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "7d382307699f7a648d18523bd2d5d5484357c088df6247e7a8062348ca27e1a4",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/plate/title-black",
+    "file": "Source/Elements/Assets/UI/plate/title-black.png",
+    "width": 640,
+    "height": 96,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 120,
+      "top": 0,
+      "right": 120,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "6b9f68d15a1759ccd4cc2b0af7ab24c86318544bb2839fc6d628ac70cb841aeb",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/plate/section-banner",
+    "file": "Source/Elements/Assets/UI/plate/section-banner.png",
+    "width": 512,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 64,
+      "top": 0,
+      "right": 64,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "0cb69c28f47b736e97f328f990a830ed611f9aea98f6e4f0e279046e41ccc634",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/plate/section-bar",
+    "file": "Source/Elements/Assets/UI/plate/section-bar.png",
+    "width": 1024,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 96,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "528e17b98c555c38b144edf709ad7e59f71e52be5b2768ebdae3df319cf9f0fb",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/plate/field-tag",
+    "file": "Source/Elements/Assets/UI/plate/field-tag.png",
+    "width": 192,
+    "height": 40,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 16,
+      "top": 0,
+      "right": 40,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "3f3fd5db989f764858a6d830980e5f9fcc1e5d81f4199f157dc21a794eb2e4f9",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/plate/logo",
+    "file": "Source/Elements/Assets/UI/plate/logo.png",
+    "width": 1024,
+    "height": 640,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "89cb37c7f62138db27c0b52be9b137edd73ad501e821b68c8ba220cd16f716bc",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/plate/quote",
+    "file": "Source/Elements/Assets/UI/plate/quote.png",
+    "width": 512,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 64,
+      "top": 0,
+      "right": 64,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "9939f9353da2855c195ff029de425c437c8452f893cc92e01be87ebfb2ccb792",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/plate/compass-bar",
+    "file": "Source/Elements/Assets/UI/plate/compass-bar.png",
+    "width": 768,
+    "height": 48,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 0,
+      "right": 96,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "90c4b2978fa1222ca609e60d9222aad1dc8d0b8ea6f4aebc9576ed51146a14e4",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/plate/status-bar",
+    "file": "Source/Elements/Assets/UI/plate/status-bar.png",
+    "width": 512,
+    "height": 48,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 24,
+      "top": 0,
+      "right": 64,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "7c57cb99bb37419822f33ff99bf6e8633031594155a643452f701b23d8c7f760",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/plate/parchment-ribbon",
+    "file": "Source/Elements/Assets/UI/plate/parchment-ribbon.png",
+    "width": 512,
+    "height": 48,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 64,
+      "top": 0,
+      "right": 64,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "ff6240fc284b14cfff7b53f12e4a3f95d4288706a521d7b23b61aa1fc9791fc6",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/tab/ribbon/active",
+    "file": "Source/Elements/Assets/UI/tab/ribbon/active.png",
+    "width": 256,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "66f0e2f914fac0f5af4c3a2b7063ddf54da1c9df317d37fd82d93aa9a225a753",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/tab/ribbon/normal",
+    "file": "Source/Elements/Assets/UI/tab/ribbon/normal.png",
+    "width": 256,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "f2dbd0e8b3745245c453886baac2d912b9db9f574ec149d76c31b69fbda8f02d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/tab/ribbon/disabled",
+    "file": "Source/Elements/Assets/UI/tab/ribbon/disabled.png",
+    "width": 256,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "3907f3f84c366d41e6e742b876077d4b55ca0d7f9c250fdb8b640cf7621847f4",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/tab/segment/active",
+    "file": "Source/Elements/Assets/UI/tab/segment/active.png",
+    "width": 320,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 32,
+      "top": 0,
+      "right": 32,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "088fe439691853c9a7c184b52c9ddac5a47bd0d9149822e7e80480ace55b556f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/tab/segment/normal",
+    "file": "Source/Elements/Assets/UI/tab/segment/normal.png",
+    "width": 320,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 32,
+      "top": 0,
+      "right": 32,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "b36dff64dc196d442637be97e3761f996ce8eca0a8caed59d3ca5f547e28ea7e",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/menu/normal",
+    "file": "Source/Elements/Assets/UI/button/menu/normal.png",
+    "width": 480,
+    "height": 72,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "1e19734a5c6f0c92d4eb763806555e6efbcd40c1297019a24d9268ef66b77805",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/menu/hover",
+    "file": "Source/Elements/Assets/UI/button/menu/hover.png",
+    "width": 480,
+    "height": 72,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "7018e646c01d9786aed2cd9a10fd89e8c9d041d7fef3fabbf0874038230c7d73",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/menu/active",
+    "file": "Source/Elements/Assets/UI/button/menu/active.png",
+    "width": 480,
+    "height": 72,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "a0c5ce92fbbdc07e7dcfbfe62b5d146fce6c6a19559d8d31566c6daf3cfd451a",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/menu/disabled",
+    "file": "Source/Elements/Assets/UI/button/menu/disabled.png",
+    "width": 480,
+    "height": 72,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "1345927be3799e5e7978f8d897a5e7af51f75ff75786e326fe14b6650fafe48b",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/primary/normal",
+    "file": "Source/Elements/Assets/UI/button/primary/normal.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "a4c21bb259699b9b765e5ed35a1d53de4ef62949fee17e596e5d3d9dae57a7d6",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/primary/hover",
+    "file": "Source/Elements/Assets/UI/button/primary/hover.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "9451285a834eac3df15773a898f98d8a8464544fbb393e028ba4b1ff4475aabf",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/primary/pressed",
+    "file": "Source/Elements/Assets/UI/button/primary/pressed.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "0cf1aabaeef5024b3b0de769be682549e66a3d534612f62a10b094ab32a0acb5",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/primary/disabled",
+    "file": "Source/Elements/Assets/UI/button/primary/disabled.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "2c1b9b1316b94849294040ad0688fb27c77ab73f8c4b78518295a07de876c1c4",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/secondary/normal",
+    "file": "Source/Elements/Assets/UI/button/secondary/normal.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "2b45ea1a76aae458f10f55820a80311eb18a6392bc29924ffb515dbe631681a7",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/secondary/hover",
+    "file": "Source/Elements/Assets/UI/button/secondary/hover.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "34c9f9a525be297deb5a9911952634a89c90b06ef1a976a5361fb9fb4b71ef34",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/secondary/pressed",
+    "file": "Source/Elements/Assets/UI/button/secondary/pressed.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "50865bef496812406059b12e9bef71564bf876e95268ebf72e577c063197e422",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/secondary/disabled",
+    "file": "Source/Elements/Assets/UI/button/secondary/disabled.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "76e8e02ca1a09e3f7a4c766d6fec6684d6bf8c755dc0bcf71bcdc64b1e630978",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/apply/normal",
+    "file": "Source/Elements/Assets/UI/button/apply/normal.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "8a1ca3f4eefea2367d6e6d8c886b12249e6b517bec3b7203c6014a2bee1fa470",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/apply/hover",
+    "file": "Source/Elements/Assets/UI/button/apply/hover.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "2b0fb02a8d69ce6cf3864c43d44deb97f020480a33a44133fee195a35c596b28",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/apply/pressed",
+    "file": "Source/Elements/Assets/UI/button/apply/pressed.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "5f683f3d1227c489a835ab921d5436b60b02d5d928bfceaa671b00fe9d390cea",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/apply/disabled",
+    "file": "Source/Elements/Assets/UI/button/apply/disabled.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "c057c13cd603a7445ed20f35a242cdcf891ce7f599ca493f0acfb1ae415e59e2",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/cancel/normal",
+    "file": "Source/Elements/Assets/UI/button/cancel/normal.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "4b0e8cc6b13d765b5e7b2f721ae8a4128708f7e64e6c1b6fcffa5f2062928325",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/cancel/hover",
+    "file": "Source/Elements/Assets/UI/button/cancel/hover.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "ab1aac0c84a7858bc76e57ea8a1355a375dd46c3e630a91ae39972e82742d572",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/cancel/pressed",
+    "file": "Source/Elements/Assets/UI/button/cancel/pressed.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "40d923bfd29c8b57c369a3c00149948fb2dd957e850ecd2cd481c3900c0dbb44",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/cancel/disabled",
+    "file": "Source/Elements/Assets/UI/button/cancel/disabled.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "2c769f5958234f2c2bb295a77d05e76c8efd63978a3cc413ea3e8691cbcfd8b4",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/default/normal",
+    "file": "Source/Elements/Assets/UI/button/default/normal.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "bb2ae2a9dd7072dfec46b85e3fc4e968a0afe5aff650d948ad620be623586756",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/default/hover",
+    "file": "Source/Elements/Assets/UI/button/default/hover.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "44b010478b51520060adfbe25c86ba8ca56845cce32188b963f9d5338fb49873",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/default/pressed",
+    "file": "Source/Elements/Assets/UI/button/default/pressed.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "78a0449913e87231dfefaacdb37440b27edb3e6e96e551e300cd26800e4f8d21",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/default/disabled",
+    "file": "Source/Elements/Assets/UI/button/default/disabled.png",
+    "width": 280,
+    "height": 56,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "a23ef774edacc1972731c7e67b45a10b36100ec736c8a067b3134656d6df99ab",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/back/normal",
+    "file": "Source/Elements/Assets/UI/button/back/normal.png",
+    "width": 320,
+    "height": 72,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "7528dc368e078c1dbf7d228ff0c9e269a75790c3b6094ff6524b83b224be4aa4",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/back/hover",
+    "file": "Source/Elements/Assets/UI/button/back/hover.png",
+    "width": 320,
+    "height": 72,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "10ce1ba7ead4482c53060ff3b824130fdea56c1792bbf84b9f82ff925da6eedf",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/back/pressed",
+    "file": "Source/Elements/Assets/UI/button/back/pressed.png",
+    "width": 320,
+    "height": 72,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "521655bc6f0a91aea2ecf431dc3b802c29e18eeac8577beb2bcf0d1918f8b62f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/back/disabled",
+    "file": "Source/Elements/Assets/UI/button/back/disabled.png",
+    "width": 320,
+    "height": 72,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 96,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "9704e572971c8bd9f4dd8d89d3bd4c9347d18773a5f029e3b9f20abd4fe150cc",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/round/normal",
+    "file": "Source/Elements/Assets/UI/button/round/normal.png",
+    "width": 64,
+    "height": 64,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "164d00ce6d86df79b09875f0661bf80fb1aa1e0c153a3f309321b2ef1d00fbad",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/button/round/hover",
+    "file": "Source/Elements/Assets/UI/button/round/hover.png",
+    "width": 64,
+    "height": 64,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "eba1d7f320507fc16a89642ddd2a4b7c09da9f04dcc7f56e456d505584e01bb8",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/button/round/pressed",
+    "file": "Source/Elements/Assets/UI/button/round/pressed.png",
+    "width": 64,
+    "height": 64,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "d2a3df5a13b3c855f6f07eb31de147ccc5b966c006f5445e0705fea5afbf784f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/button/round/disabled",
+    "file": "Source/Elements/Assets/UI/button/round/disabled.png",
+    "width": 64,
+    "height": 64,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "9ba0a65366e9656b921d5787959c8c93c87ab3a1a05ac19c431277b4dd38862a",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/button/chip/normal",
+    "file": "Source/Elements/Assets/UI/button/chip/normal.png",
+    "width": 192,
+    "height": 40,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 24,
+      "top": 0,
+      "right": 24,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "d56866b2f20e443d93cf68d20c96aa9983d37f792080881db3a55250279f2168",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/chip/selected",
+    "file": "Source/Elements/Assets/UI/button/chip/selected.png",
+    "width": 192,
+    "height": 40,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 24,
+      "top": 0,
+      "right": 24,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "00f5c197a228ab12a5c615cbf5e0cc7f219323c4ca12bc3b29998c955288ad9d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/button/chip/disabled",
+    "file": "Source/Elements/Assets/UI/button/chip/disabled.png",
+    "width": 192,
+    "height": 40,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 24,
+      "top": 0,
+      "right": 24,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "1d0144b12613d980514d60a88136e6f4eadb1eaf7b2afed6a89a724db6c42a9b",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/control/checkbox/checked",
+    "file": "Source/Elements/Assets/UI/control/checkbox/checked.png",
+    "width": 48,
+    "height": 48,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "b6b85bcd02138a6573613fda24210424e750e919b337d546398ae07c1466622d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/control/checkbox/unchecked",
+    "file": "Source/Elements/Assets/UI/control/checkbox/unchecked.png",
+    "width": 48,
+    "height": 48,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "757c24b8b5c5fcd1a27f8f0c1b63fcb64168591c184b00b5cf76ffe9dea2d41e",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/control/checkbox/disabled",
+    "file": "Source/Elements/Assets/UI/control/checkbox/disabled.png",
+    "width": 48,
+    "height": 48,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "3aeea59b237d9d7b15c43f9d9df80c75d9303c7155b4cbf8cff99ae3e2b2e867",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/control/slider-track",
+    "file": "Source/Elements/Assets/UI/control/slider-track.png",
+    "width": 256,
+    "height": 24,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 24,
+      "top": 0,
+      "right": 24,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "3d7129d9ff3e180e5f989111b84e50c121db47776300d99ca7dea225f12d46ee",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/control/slider-handle/normal",
+    "file": "Source/Elements/Assets/UI/control/slider-handle/normal.png",
+    "width": 40,
+    "height": 40,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "a3b06e7b3afe6f4897f3922f888da8259dd4c2f13f74d7278c338737f80c475a",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/control/slider-handle/hover",
+    "file": "Source/Elements/Assets/UI/control/slider-handle/hover.png",
+    "width": 40,
+    "height": 40,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "7237453f6602786ad192f80beed68e489c80e755df6e38e55dbf70c9773d7383",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/control/combo/normal",
+    "file": "Source/Elements/Assets/UI/control/combo/normal.png",
+    "width": 320,
+    "height": 48,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 24,
+      "top": 0,
+      "right": 56,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "72abe5d148986b1696134a1f1553395b25f9d549cb32840761ffdf53a7caf86f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/control/combo/hover",
+    "file": "Source/Elements/Assets/UI/control/combo/hover.png",
+    "width": 320,
+    "height": 48,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 24,
+      "top": 0,
+      "right": 56,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "302a26651e32d83702b327b621554fe23ab2e1a9f1d554946d65c40f6a4c44ca",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/control/combo/open",
+    "file": "Source/Elements/Assets/UI/control/combo/open.png",
+    "width": 320,
+    "height": 48,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 24,
+      "top": 0,
+      "right": 56,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "540c167f699e0abfbb89d865f45ab49fc820ab706568bd7dcd446ccec4131b72",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/control/combo/disabled",
+    "file": "Source/Elements/Assets/UI/control/combo/disabled.png",
+    "width": 320,
+    "height": 48,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 24,
+      "top": 0,
+      "right": 56,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "22094ad394a763bb8f2cd22c225a04fa7102dc7fb6d133fce792d4a1036b8c3f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/control/combo-popup",
+    "file": "Source/Elements/Assets/UI/control/combo-popup.png",
+    "width": 320,
+    "height": 256,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 24,
+      "top": 16,
+      "right": 24,
+      "bottom": 24
+    },
+    "status": "produced",
+    "sha256": "a3b7a12d1b6c0c96352506c08dd9dc953ffe1fe7d4049126e0001c89a9894b0d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/control/divider-gold",
+    "file": "Source/Elements/Assets/UI/control/divider-gold.png",
+    "width": 512,
+    "height": 16,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 48,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "23db8dd24e5e7f140154c80925a9ce652ae73d0eb06d58c89b96c1af15bdd4c4",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/control/focus-fleuron",
+    "file": "Source/Elements/Assets/UI/control/focus-fleuron.png",
+    "width": 48,
+    "height": 48,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "20bbd381579d4c4aaa6e75bee4348d2de641c545647fed523b80cf9628bddcbe",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/control/pip/empty",
+    "file": "Source/Elements/Assets/UI/control/pip/empty.png",
+    "width": 32,
+    "height": 32,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "18b8f242e10da7db81d2d9f07baa7a5da54b4dfe859cf2784135951ff655d5be",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/control/pip/filled",
+    "file": "Source/Elements/Assets/UI/control/pip/filled.png",
+    "width": 32,
+    "height": 32,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "e2baaa00f43f72812211159724aca1cfab9b3bba723a47b624fe778f4879ae5c",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/control/ruled-line",
+    "file": "Source/Elements/Assets/UI/control/ruled-line.png",
+    "width": 512,
+    "height": 32,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 16,
+      "top": 0,
+      "right": 48,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "5ea91ecb34fac1d68f7d449a7c5025cf273c621800ccb18d14e12eb417ac53ac",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/control/value-box",
+    "file": "Source/Elements/Assets/UI/control/value-box.png",
+    "width": 64,
+    "height": 40,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 8,
+      "top": 8,
+      "right": 8,
+      "bottom": 8
+    },
+    "status": "produced",
+    "sha256": "cb110c01a5fb30ee38e4971c81c388d3780cc66d3bfeeae28da4d5c3bd6b80f0",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/medallion/ability",
+    "file": "Source/Elements/Assets/UI/medallion/ability.png",
+    "width": 160,
+    "height": 160,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "36c5b5d88e4ea809d65e8e79090126aaf3a1acf5c42b029ce4114d22e8789ed6",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/medallion/derived-stat",
+    "file": "Source/Elements/Assets/UI/medallion/derived-stat.png",
+    "width": 120,
+    "height": 120,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "47ac4444d707e59d56c90e947b499b7b5df28e43482ba3b353dc620eccde6769",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/medallion/icon-ring",
+    "file": "Source/Elements/Assets/UI/medallion/icon-ring.png",
+    "width": 96,
+    "height": 96,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "7cd2818d5f45c48d0ce5fe5ce2e466f8066eebea5cd73e4d7ed76a73720c5db9",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/medallion/portrait-round/filled",
+    "file": "Source/Elements/Assets/UI/medallion/portrait-round/filled.png",
+    "width": 260,
+    "height": 260,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "4e65c57a14bcc10a89154e8556440cd52d4f608b220adbd24a7d088bd44802f4",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/medallion/portrait-round/empty",
+    "file": "Source/Elements/Assets/UI/medallion/portrait-round/empty.png",
+    "width": 260,
+    "height": 260,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "baef1a42f2a6635edac1625701d39d94499154cf2bba7759df11965ac78ef734",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/medallion/portrait-square/normal",
+    "file": "Source/Elements/Assets/UI/medallion/portrait-square/normal.png",
+    "width": 220,
+    "height": 220,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "1199ca59b1b239fcb341aa3c0908ed16ed7cd5856784020bad0441583f001635",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/medallion/portrait-square/active",
+    "file": "Source/Elements/Assets/UI/medallion/portrait-square/active.png",
+    "width": 220,
+    "height": 220,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "017b80ab467984d3d3bcbaf8e0f2745a72c9bcc884a51639cf0f3b4fec20987a",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/medallion/portrait-hud",
+    "file": "Source/Elements/Assets/UI/medallion/portrait-hud.png",
+    "width": 220,
+    "height": 220,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "c862e049453efe75f37d01b9c300bc677a63caa7eeb245a26242fd345d645f23",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/medallion/level-pip",
+    "file": "Source/Elements/Assets/UI/medallion/level-pip.png",
+    "width": 48,
+    "height": 48,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "45711da119463030ab224862ceb31ec14880d9b7c7ac285bf1889024a7edae62",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/medallion/minimap-ring",
+    "file": "Source/Elements/Assets/UI/medallion/minimap-ring.png",
+    "width": 260,
+    "height": 260,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "ee9e5e3664c393b2c4c54fb8203709be13d0cf72eee3a98ec862a99b4dc706c0",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/medallion/action-wheel",
+    "file": "Source/Elements/Assets/UI/medallion/action-wheel.png",
+    "width": 160,
+    "height": 160,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "6e446bd9a3549a38882ff082ed53d2dbdd4049f3bbea5958de281f9d7f3f2d95",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/item/empty",
+    "file": "Source/Elements/Assets/UI/slot/item/empty.png",
+    "width": 96,
+    "height": 96,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "648fa70444fa9e5a16d46d4d827f6a5d0eaa2adccda575718d294f431712c051",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/item/hover",
+    "file": "Source/Elements/Assets/UI/slot/item/hover.png",
+    "width": 96,
+    "height": 96,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "0162c2b4186977a834dc8b98baec91786917ead0f41290a97a5c09b4d038e1b0",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/item/selected",
+    "file": "Source/Elements/Assets/UI/slot/item/selected.png",
+    "width": 96,
+    "height": 96,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "ca05efdb9e89890379c445357b4d3f713ad94023d6ed23c88fb056c2e1908f36",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/item/equipped",
+    "file": "Source/Elements/Assets/UI/slot/item/equipped.png",
+    "width": 96,
+    "height": 96,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "30a35afe1b251509d5f8c32b1940a6acc7bacc815673aef0a14625f7d24ac6fa",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/rarity/common",
+    "file": "Source/Elements/Assets/UI/slot/rarity/common.png",
+    "width": 96,
+    "height": 96,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "0d9c080bc986b3ea42eacca4014976659a0a4f06bff8c2092d3a2ed44807775a",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/rarity/uncommon",
+    "file": "Source/Elements/Assets/UI/slot/rarity/uncommon.png",
+    "width": 96,
+    "height": 96,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "92d9e75a24c30192ae5e902a8cbd2e1c2bd7e753dcc97cf2623296a695b64d4d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/rarity/rare",
+    "file": "Source/Elements/Assets/UI/slot/rarity/rare.png",
+    "width": 96,
+    "height": 96,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "04cc4732fbd465101632bb3dd7f24212b398447893d303aa5a1818b8640a8839",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/rarity/very-rare",
+    "file": "Source/Elements/Assets/UI/slot/rarity/very-rare.png",
+    "width": 96,
+    "height": 96,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "1afd3e03dd6134c87d4abb208c03c787d870e0d8336337836c3738d5790941a0",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/rarity/legendary",
+    "file": "Source/Elements/Assets/UI/slot/rarity/legendary.png",
+    "width": 96,
+    "height": 96,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "c8e7cc9de07e97c1eec1a800910fcfbf62f3ab0317593479b100cb2e8f0652de",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/quantity-pip",
+    "file": "Source/Elements/Assets/UI/slot/quantity-pip.png",
+    "width": 40,
+    "height": 28,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 8,
+      "top": 0,
+      "right": 8,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "1ccf5989bcfce811f822c5bc72207e506c79f3899f610f19e8fd96b15c4b99cc",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/slot/action/normal",
+    "file": "Source/Elements/Assets/UI/slot/action/normal.png",
+    "width": 80,
+    "height": 80,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "a9b5f529b4d81c13874907522326ea8ab12ed525dfdc0fb4143826515217ea4d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/action/active",
+    "file": "Source/Elements/Assets/UI/slot/action/active.png",
+    "width": 80,
+    "height": 80,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "2747a2caa143b2d4253e23549c55e64dd14f580702f67c6435c3e65f39e68f1b",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/slot/action/disabled",
+    "file": "Source/Elements/Assets/UI/slot/action/disabled.png",
+    "width": 80,
+    "height": 80,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "64b55952752c9307a07c93e68c3436603f437f0dfa2782c513048c1de520c6f0",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/gauge/track",
+    "file": "Source/Elements/Assets/UI/gauge/track.png",
+    "width": 512,
+    "height": 28,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 40,
+      "top": 0,
+      "right": 40,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "4091602fcf506b9bc4edbc2d5a8f90df0fcdfe48b741b2a650ac133d635f4c0d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions"
+    ]
+  },
+  {
+    "key": "ui/gauge/fill-sheen",
+    "file": "Source/Elements/Assets/UI/gauge/fill-sheen.png",
+    "width": 256,
+    "height": 20,
+    "transparent": true,
+    "display": "nine-patch",
+    "margins": {
+      "left": 4,
+      "top": 0,
+      "right": 4,
+      "bottom": 0
+    },
+    "status": "produced",
+    "sha256": "3882beb38bb9f088142fa0d9b836fad8b58a85c9c353a15c0f0563ac7d2d09fc",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief",
+      "uniform_repeat_regions",
+      "neutral_grayscale"
+    ]
+  },
+  {
+    "key": "ui/ornament/wax-seal",
+    "file": "Source/Elements/Assets/UI/ornament/wax-seal.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "ed4861ee11fe58542183079c6124e37876534190bf83e7be26f315605448bb23",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/crossed-crest",
+    "file": "Source/Elements/Assets/UI/ornament/crossed-crest.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "294da4aecb8cdce1ffd222fcaf5ef20bd024d094ae97ee308d69238231844f1f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/signature-flourish",
+    "file": "Source/Elements/Assets/UI/ornament/signature-flourish.png",
+    "width": 256,
+    "height": 64,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "c236b035237bdb2d9b8c49f47f5016998a7d3ad153583f1f83c707a89acbe6ed",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/compass-watermark/parchment",
+    "file": "Source/Elements/Assets/UI/ornament/compass-watermark/parchment.png",
+    "width": 512,
+    "height": 512,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "75b08ecbbd84fcf8877b995e85826f4e3e704229c8984aaf72157ac4afa326d8",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/compass-watermark/dark",
+    "file": "Source/Elements/Assets/UI/ornament/compass-watermark/dark.png",
+    "width": 512,
+    "height": 512,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "acad486852a68ceb93c05d52970bb6e535e1ec5b76c11012a0ca1ab0899bf3e0",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/compass-rose",
+    "file": "Source/Elements/Assets/UI/ornament/compass-rose.png",
+    "width": 192,
+    "height": 192,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "0d97bce5d52797aba5ccbc6a852db226c77007c8c79a1d563650a39661ffaf3c",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/corner",
+    "file": "Source/Elements/Assets/UI/ornament/corner.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "e9c6612e125263612ec659e4edbdd8de492c94d0fe4d6428b8164f654f54999f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/divider-star",
+    "file": "Source/Elements/Assets/UI/ornament/divider-star.png",
+    "width": 64,
+    "height": 32,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "f5d40d7efd022931298f7b856beae5539c77bca6e2145c18107d28c03532c88d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/crest-shield",
+    "file": "Source/Elements/Assets/UI/ornament/crest-shield.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "baf2b0a30171413639fe3602ed5c898aed32c7852c82d47c98ca9c0a092a1c4d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/crest-pennant",
+    "file": "Source/Elements/Assets/UI/ornament/crest-pennant.png",
+    "width": 128,
+    "height": 160,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "3eb76b0a11df10c3f5278f7fd676d7f79a95e2c205fe7a703347c383d89f7e31",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/hourglass",
+    "file": "Source/Elements/Assets/UI/ornament/hourglass.png",
+    "width": 64,
+    "height": 64,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "c9680ec15838adca89033d36199adb513d738f84ad923ce73270efc5d27cdee1",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/day-dial/day",
+    "file": "Source/Elements/Assets/UI/ornament/day-dial/day.png",
+    "width": 64,
+    "height": 64,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "113e4b8fe78a83d41e5b2fdbbae1fee8e3bf1746d2f714987c24da4c9964f80b",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/day-dial/dusk",
+    "file": "Source/Elements/Assets/UI/ornament/day-dial/dusk.png",
+    "width": 64,
+    "height": 64,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "a1c6cf5fbafb1dca6971b24e05537a3d0d89c195e240cabb4ab451781f71d265",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/ornament/day-dial/night",
+    "file": "Source/Elements/Assets/UI/ornament/day-dial/night.png",
+    "width": 64,
+    "height": 64,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "21d36bf42756223b4a98c026a04dc7dd9750633860ef0778d770e84bd5822d02",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/menu/continue",
+    "file": "Source/Elements/Assets/UI/icon/menu/continue.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "9f0b9e379582bb3a82e0c8d672bf5f7281913b88895515e9755c6e22e3993f2a",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/menu/new-game",
+    "file": "Source/Elements/Assets/UI/icon/menu/new-game.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "76152bdc3c68d1432cee3081c374ec803bf19aee6d1c1ad01df09ca272a045a7",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/menu/load-game",
+    "file": "Source/Elements/Assets/UI/icon/menu/load-game.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "9ff27e40f566678034d6edd9d776e30055410c674f3510e99089571c3e71fc65",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/menu/options",
+    "file": "Source/Elements/Assets/UI/icon/menu/options.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "3dd3c0862316871187cf6d65326548bb194575f0d4c5f719bd5b354b2fb49b1e",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/menu/credits",
+    "file": "Source/Elements/Assets/UI/icon/menu/credits.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "2527ba34b3f40b47e1867340deb46655b43bc08bc12ec9bb2aff01da126fce7e",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/menu/quit",
+    "file": "Source/Elements/Assets/UI/icon/menu/quit.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "4ea5fb2bc940f23fe96d169b62e419c829b45e6b0df1d33c92756ec6bbec8a98",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-tab/general",
+    "file": "Source/Elements/Assets/UI/icon/options-tab/general.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "fce91d46cc0f7862c032aba2f6c1a52131a7b06e283cd56578d1d0255cf071ad",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-tab/graphics",
+    "file": "Source/Elements/Assets/UI/icon/options-tab/graphics.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "f7409e97b26e6b2bc790612bed3f611f9db115fd3bb94f2f4b4f62cc42813c18",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-tab/audio",
+    "file": "Source/Elements/Assets/UI/icon/options-tab/audio.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "f729448fdde5f9af9b3064882439de350d603cd15403bad35ba08391dfef51dd",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-tab/game",
+    "file": "Source/Elements/Assets/UI/icon/options-tab/game.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "c683520582c4a9192a80d7c915c52e5b563df459792a3e73716d916d72c83f98",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-tab/controls",
+    "file": "Source/Elements/Assets/UI/icon/options-tab/controls.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "3b2a0427caac280e2ac541ec0aac7087e8742548c7c05c6c506ef1e58c11b997",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-tab/accessibility",
+    "file": "Source/Elements/Assets/UI/icon/options-tab/accessibility.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "11eb2d2fbf53f354b2190a9df732ac01cf88a1641aa5ead31e7ef810883d1e51",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-section/language",
+    "file": "Source/Elements/Assets/UI/icon/options-section/language.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "595ffa458ee49f99d9280853db8a689710d1ce5cda8d4baea38516b578857149",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-section/interface",
+    "file": "Source/Elements/Assets/UI/icon/options-section/interface.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "853fe227a2f3a3c91bbc226d34522bda646dcf04d5f7e0d721e942bd5805fa8e",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-section/save",
+    "file": "Source/Elements/Assets/UI/icon/options-section/save.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "fac504e6de815eb6ebc71a023d688146b268bbd0543c40caa33a5b7c62daca40",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-section/difficulty",
+    "file": "Source/Elements/Assets/UI/icon/options-section/difficulty.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "7fc549c09b77837ba66b1811f791a27f5298d3057b0d4b0c683098f82615af79",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-section/network",
+    "file": "Source/Elements/Assets/UI/icon/options-section/network.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "9689da3e826d553456ab229724b414a695ef92c37555c18ad989167cd533bdd5",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/options-section/privacy",
+    "file": "Source/Elements/Assets/UI/icon/options-section/privacy.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "6e29e0ddaf07dcaa1de8846336d5be3e82e88ab59aa4d14e4f2fcdd76fbf018e",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/acrobatics",
+    "file": "Source/Elements/Assets/UI/icon/skill/acrobatics.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "6594eec0717287a9c6deb5a0f876577f9d41553df8ebdb5be9240e998ace3d09",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/animal-handling",
+    "file": "Source/Elements/Assets/UI/icon/skill/animal-handling.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "865aec5452888f11a6ce26e80e4e3b9792d0fa7ba97293f686a993002d6def8b",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/arcana",
+    "file": "Source/Elements/Assets/UI/icon/skill/arcana.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "51a3ba17780f7250610415460507ec9ae7535dd927d8a468fafe3c37154b02d9",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/athletics",
+    "file": "Source/Elements/Assets/UI/icon/skill/athletics.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "59ef219393f84ff03683f6343c96a6f8c947e7e6d682fbad61cf5c2396aa7b40",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/deception",
+    "file": "Source/Elements/Assets/UI/icon/skill/deception.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "35d60e23657e7f29188b19c68155b9efe4d1cc6f4036f17499fdb52e8c83048f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/history",
+    "file": "Source/Elements/Assets/UI/icon/skill/history.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "72de0ca85d7b0efca961a328b569422d9556512871a24cb17a27ac6d179c9d89",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/insight",
+    "file": "Source/Elements/Assets/UI/icon/skill/insight.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "b5cbc9fa8937c25e0f9f9bd216ec29957bcea2ed8232e04cb40ecbd1f94a9465",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/intimidation",
+    "file": "Source/Elements/Assets/UI/icon/skill/intimidation.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "ee3232a8ac6ec4c7e2af8c4aa06314b20481c75085fb18238deee9d3cf636643",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/investigation",
+    "file": "Source/Elements/Assets/UI/icon/skill/investigation.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "d42a5d27dff88be47431f20b6fb959f86b91412932c170d243369c306a4b4ae7",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/medicine",
+    "file": "Source/Elements/Assets/UI/icon/skill/medicine.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "01e46b8301a3505c63e594b40e92441150963dcc74f2192241b7337fdeb0c981",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/nature",
+    "file": "Source/Elements/Assets/UI/icon/skill/nature.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "6276989f11b927511bc074226fb516b85ac459bc62313237a59099b7c6e3dad0",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/perception",
+    "file": "Source/Elements/Assets/UI/icon/skill/perception.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "2addc9459e5d1d07dc7938f51695b7a87c17675ae922b14f9c4bfd72ce054940",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/performance",
+    "file": "Source/Elements/Assets/UI/icon/skill/performance.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "b18124466bc924c29a7a217a34a5a88c4f6b7cb2945e73abac3facbca492bde8",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/persuasion",
+    "file": "Source/Elements/Assets/UI/icon/skill/persuasion.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "12ca31b23358e1e6d93de7dcc2b3d0c87f8179ea36da74c8d15e77d1fe53e0e0",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/religion",
+    "file": "Source/Elements/Assets/UI/icon/skill/religion.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "42aa32f2afa9caad7a322597dbd451ef9405eee58df287d8d52b25232774d16a",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/sleight-of-hand",
+    "file": "Source/Elements/Assets/UI/icon/skill/sleight-of-hand.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "5cace4e42064d46b20331c4fd3371674996da18cd7680c671605d72674f19501",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/stealth",
+    "file": "Source/Elements/Assets/UI/icon/skill/stealth.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "810f569cb4df767f83a93baee84d15406f578535c3458bb18130179e1a6b69b1",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/skill/survival",
+    "file": "Source/Elements/Assets/UI/icon/skill/survival.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "c017840ff9f5d4aa38d35a59101a4ce713dd25647c70b15d44c04a9aaa180e24",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/ability/strength",
+    "file": "Source/Elements/Assets/UI/icon/ability/strength.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "698854756cc61b614d74f19f134e8df2ca6541d3932a47495224e7ca6b001212",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/ability/dexterity",
+    "file": "Source/Elements/Assets/UI/icon/ability/dexterity.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "5fabf95fd43dd9482f1724e4073d23ba47bf368f4ca82781b992657ee1ad979f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/ability/constitution",
+    "file": "Source/Elements/Assets/UI/icon/ability/constitution.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "2df3cbc380d2e08cd0480faebee46ae83a34938d0dc32b75ebf6d723ccb65105",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/ability/intelligence",
+    "file": "Source/Elements/Assets/UI/icon/ability/intelligence.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "fbea344174eb339969c21b9f18c1fb6bcd918a97562a1cbfd0984c73e9c43414",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/ability/wisdom",
+    "file": "Source/Elements/Assets/UI/icon/ability/wisdom.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "0036e486cc840f8625773475df10dee1416ca0736cb47b0fa1760b7650c93937",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/ability/charisma",
+    "file": "Source/Elements/Assets/UI/icon/ability/charisma.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "a7cfc8fc370cea378e1c49c2b14e3cbb846dad8e8eb477b4139a10cdd64141d8",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/poi/city",
+    "file": "Source/Elements/Assets/UI/icon/poi/city.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "8801127c756a21cdfae19097f0252a0fb2f32da3c85613645a34975d60e78b02",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/poi/fortress",
+    "file": "Source/Elements/Assets/UI/icon/poi/fortress.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "3a1d4c51cc4aba8ba2a3ea135ed7df3d2ac1961ab75c567fcf9c9e5e9184ab6e",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/poi/dungeon",
+    "file": "Source/Elements/Assets/UI/icon/poi/dungeon.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "3a6c7d58d23dbe9a30cace9be1436da811e35a3a2d8685548d808c8474a5e4d0",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/poi/camp",
+    "file": "Source/Elements/Assets/UI/icon/poi/camp.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "93162488f75fd64c1a4003c9c71abe90dcf10abe7782d00e90c9d241c05e444b",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/poi/main-quest",
+    "file": "Source/Elements/Assets/UI/icon/poi/main-quest.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "b1a968a655e49975c36e5036bcd040c78e5b169dddf9440377b66467378dcbc1",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/poi/side-quest",
+    "file": "Source/Elements/Assets/UI/icon/poi/side-quest.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "e5e444d38bc1adb6aff3a875eb16f3f91505d7161700abdf667fbae698817c85",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/poi/point-of-interest",
+    "file": "Source/Elements/Assets/UI/icon/poi/point-of-interest.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "bfccfb7ce728fb11b7082748137b43665e4acf99c87a1a244118dad621595994",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/poi/port",
+    "file": "Source/Elements/Assets/UI/icon/poi/port.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "75b9e24107b9fe25bedb3484b22d11da70a52b8019f76dd21130e9aa47d3f538",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/nav/map",
+    "file": "Source/Elements/Assets/UI/icon/nav/map.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "5542bdb80f23a87b7496c20e429a9b95d804c13033c8192ceaceefaf9421e664",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/nav/quests",
+    "file": "Source/Elements/Assets/UI/icon/nav/quests.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "f24764838f62df45363c77742ddbb7edafd577a1f78280fc3b08e8a03218c8db",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/nav/inventory",
+    "file": "Source/Elements/Assets/UI/icon/nav/inventory.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "42be0af51dcec589c3141f71376e9d39adc3995865ff59c53710fcb974c9c686",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/nav/company",
+    "file": "Source/Elements/Assets/UI/icon/nav/company.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "0078965d2dae6d9058b4cc42122af724519f48992c3b5c7b850982aaac41ca03",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/nav/options",
+    "file": "Source/Elements/Assets/UI/icon/nav/options.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "3c159dfc6a50be91931e1048a846f3c4e70971d785002e5f215626e94ffd5b0d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/school/abjuration",
+    "file": "Source/Elements/Assets/UI/icon/school/abjuration.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "7180463e5d7387b738078e875937ee10b901bdd5777c89e5ef052f0f6a3002aa",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/school/conjuration",
+    "file": "Source/Elements/Assets/UI/icon/school/conjuration.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "57a9d5b288b8d004c904b9f7218b438af2b57e769992ab33d8825a126d71d082",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/school/divination",
+    "file": "Source/Elements/Assets/UI/icon/school/divination.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "52ff0532bf34981daa28f1e3fd005f5ea4d62da96206fa7b8a4915bdb4c3f1a6",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/school/enchantment",
+    "file": "Source/Elements/Assets/UI/icon/school/enchantment.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "65c2a33c57f2a2b10ea835774c1587c21e35228eaff6efba84cbb658e9c7c538",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/school/evocation",
+    "file": "Source/Elements/Assets/UI/icon/school/evocation.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "04510c3b915ed950e0215e78af759b28e2ef6bdd621cbe83fdf061b5f1ee9e6f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/school/illusion",
+    "file": "Source/Elements/Assets/UI/icon/school/illusion.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "260b88e99db816d01c68f7447b6d5061e4b917d5ef798a0975a316044949a58b",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/school/necromancy",
+    "file": "Source/Elements/Assets/UI/icon/school/necromancy.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "1b03538f4be6f6b3e56fd7ee89fd85a30acb9b840e9394597239abe1d62a5c9f",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/school/transmutation",
+    "file": "Source/Elements/Assets/UI/icon/school/transmutation.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "60c78a77c3addbfd1af01d41f364d7094adc03edb83a5fe3a66e91c383134c84",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/school/thaumaturgy",
+    "file": "Source/Elements/Assets/UI/icon/school/thaumaturgy.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "e12d29a6824f6265c4685bc0a9e8545867e179c9a4335e93f207292e073c98ef",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/inventory-category/all",
+    "file": "Source/Elements/Assets/UI/icon/inventory-category/all.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "c952ab3ad211cd03a1d0930e9cd084f5e3e114401198474d7cfd6d87a537c064",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/inventory-category/equipment",
+    "file": "Source/Elements/Assets/UI/icon/inventory-category/equipment.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "3006945aeb65acf938c172f8d829d740351a31e5eb64d21c1571122d417cf656",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/inventory-category/consumables",
+    "file": "Source/Elements/Assets/UI/icon/inventory-category/consumables.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "4bcbc466634d2a97c5a46187bfdb3c3657f4774820e0e02989735c3a2eebd831",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/inventory-category/misc",
+    "file": "Source/Elements/Assets/UI/icon/inventory-category/misc.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "025ce97bf90cf7b2f2cbe2632ce4f794686a6903ee267d009fada48750c1a89a",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/credits-section/development",
+    "file": "Source/Elements/Assets/UI/icon/credits-section/development.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "669b68be0120ee0705d5a64f49b63ed9c3862a8441068a28166526ddbc94ebb4",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/credits-section/art-direction",
+    "file": "Source/Elements/Assets/UI/icon/credits-section/art-direction.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "89b0746b2306c47f2ee093245ddac4d8c70a6456dfdd622880df260fd2df17ce",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/credits-section/story",
+    "file": "Source/Elements/Assets/UI/icon/credits-section/story.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "26e2a56c55ba5a9dcc7dcaf4e29fdcc3fc01b315ff7b5f5637c7e175d9f34616",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/credits-section/audio",
+    "file": "Source/Elements/Assets/UI/icon/credits-section/audio.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "46615e62a1d21e443890e372b7bdf9fe5a4192a982a3f6da649b8b11b917aa86",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/credits-section/other",
+    "file": "Source/Elements/Assets/UI/icon/credits-section/other.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "3bd8d16b75bdbec3b5e53ce40cb1d7268ebac3f3867d43c6de15fbe8efd9c96b",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/spell-property/damage-type",
+    "file": "Source/Elements/Assets/UI/icon/spell-property/damage-type.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "fc330f999fae2421fcaad34103b16748a48fe118aed0f6aa843466fbaad7e34a",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/spell-property/range",
+    "file": "Source/Elements/Assets/UI/icon/spell-property/range.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "2d75380e2dad5c06c370a29179a87864e5c1119a91ecd7c5535199ea0fa0a15b",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/spell-property/damage",
+    "file": "Source/Elements/Assets/UI/icon/spell-property/damage.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "dd38ca4a59edb16fcb8e5abeac3297c841080bf78116523d73109e2f85d5f61c",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/spell-property/casting-time",
+    "file": "Source/Elements/Assets/UI/icon/spell-property/casting-time.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "bb0058b8e20338b6176445c7e9a63cfebc849fb028bbce50d905322725b45e78",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/spell-property/components",
+    "file": "Source/Elements/Assets/UI/icon/spell-property/components.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "9e322eebde148f566f54ee042bfb0e84863a5912e92a32e8b672b9d774c48a3d",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/spell-property/special-effects",
+    "file": "Source/Elements/Assets/UI/icon/spell-property/special-effects.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "b206cdba9b769d587b4db3fe6a5a7bcd0ffceb05d32bded5219324e40a8ec292",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/resource/health",
+    "file": "Source/Elements/Assets/UI/icon/resource/health.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "dab3737ea4de7af1f1c37e898e00a6209f819efb87567c565b33ae08bc816ba8",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/resource/experience",
+    "file": "Source/Elements/Assets/UI/icon/resource/experience.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "c3c5a015dae48f48b0e8c4c9f302095b84e3a253563edc15d87c343469b06d09",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/resource/weight",
+    "file": "Source/Elements/Assets/UI/icon/resource/weight.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "5beb9dda6c7737300fc31229a91cc460da3db79f9a4b0be412848d5e661b4b2a",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/resource/gold",
+    "file": "Source/Elements/Assets/UI/icon/resource/gold.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "ce24c90f8ea012122c45165b2ca04f438a04b8f4fbaad2499d0ebc41bf845b1b",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/company-stat/career-points",
+    "file": "Source/Elements/Assets/UI/icon/company-stat/career-points.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "04b2070d4d2b65582c70b4b7e0ed9c76b85adab3b00ec5c4e6e505abf84e1507",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/company-stat/team-level",
+    "file": "Source/Elements/Assets/UI/icon/company-stat/team-level.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "3e4a3b119ede4c6a3d8bfdfc2e4b7a642823851af881ed2af779fe1f7f16f2ef",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/company-stat/prestige",
+    "file": "Source/Elements/Assets/UI/icon/company-stat/prestige.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "abefa0667277c0c7cf6d01567102dfacb0d3b77ca93ea1f8e50d4265297cf8b3",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  },
+  {
+    "key": "ui/icon/company-stat/fame",
+    "file": "Source/Elements/Assets/UI/icon/company-stat/fame.png",
+    "width": 128,
+    "height": 128,
+    "transparent": true,
+    "display": "fixed",
+    "margins": null,
+    "status": "produced",
+    "sha256": "0eb37e090fb515ef6aa68b89962fdb7025bdb35bdd92537b709f85ceaf7cbb03",
+    "checks": [
+      "PNG",
+      "exact_dimensions",
+      "alpha_presence_matches_brief"
+    ]
+  }
+]

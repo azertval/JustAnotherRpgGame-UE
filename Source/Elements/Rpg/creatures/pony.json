@@ -1,0 +1,36 @@
+{
+  "id": "pony",
+  "name": "Poney",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 15,
+    "dexterity": 10,
+    "constitution": 13,
+    "intelligence": 2,
+    "wisdom": 11,
+    "charisma": 7
+  },
+  "armorClass": 10,
+  "hitPoints": 11,
+  "hitDice": "2d8+2",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 0.125,
+  "senses": [
+    "Perception passive 10"
+  ],
+  "actions": [
+    {
+      "name": "Sabots",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 7 (2d4 + 2) dégâts contondants.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "2d4+2",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

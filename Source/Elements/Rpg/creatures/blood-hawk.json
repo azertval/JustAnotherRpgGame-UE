@@ -1,0 +1,51 @@
+{
+  "id": "blood-hawk",
+  "name": "Faucon de sang",
+  "source": "srd",
+  "size": "small",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 6,
+    "dexterity": 14,
+    "constitution": 10,
+    "intelligence": 3,
+    "wisdom": 14,
+    "charisma": 5
+  },
+  "armorClass": 12,
+  "hitPoints": 7,
+  "hitDice": "2d6",
+  "speed": {
+    "walk": 3,
+    "fly": 18
+  },
+  "challengeRating": 0.125,
+  "senses": [
+    "Perception passive 14"
+  ],
+  "skills": {
+    "perception": 4
+  },
+  "traits": [
+    {
+      "name": "Tactique de groupe",
+      "text": "Le faucon a un avantage aux jets d'attaque contre une créature si au moins l'un de ses alliés est à 1,50 mètre ou moins de la créature et n'est pas incapable d'agir."
+    },
+    {
+      "name": "Vue aiguisée",
+      "text": "Le faucon a un avantage aux jets de Sagesse (Perception) faisant appel à la vue."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bec",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 4 (1d4 + 2) dégâts perforants.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d4+2",
+      "damageType": "piercing"
+    }
+  ],
+  "description": "Tenant son nom de ses plumes pourpres et de sa nature agressive, le faucon de sang attaque sans crainte avec son bec aiguisé telle une dague."
+}

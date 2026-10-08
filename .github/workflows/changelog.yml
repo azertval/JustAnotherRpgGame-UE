@@ -1,0 +1,48 @@
+name: CHANGELOG
+
+# Chaque PR consigne ce qu'elle apporte dans la section « ## [Non publié] » de CHANGELOG.md, ou
+# porte le label `no-changelog`. Détail et motif : scripts/ci/check_changelog.py.
+#
+# Un workflow à part plutôt qu'un job de ci.yml : il doit se relancer quand on pose ou retire le
+# label (`labeled`, `unlabeled`), et ces événements dans ci.yml relanceraient aussi les builds
+# Windows — puis annuleraient le run en cours, via son groupe de concurrence.
+on:
+  pull_request:
+    branches: [ main ]
+    types: [ opened, synchronize, reopened, labeled, unlabeled ]
+
+concurrency:
+  group: changelog-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # La base et la tête de la PR doivent être présentes pour le diff à trois points.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Section « Non publie » alimentee par la PR
+        # Dependabot ne rédige pas de CHANGELOG : une montée d'action n'est pas un apport notable.
+        env:
+          EXEMPT: ${{ contains(github.event.pull_request.labels.*.name, 'no-changelog') || github.actor == 'dependabot[bot]' }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          if [ "$EXEMPT" = true ]; then
+            python3 scripts/ci/check_changelog.py --auto-test
+            echo "::notice::PR exemptée (label no-changelog ou Dependabot) : CHANGELOG non vérifié."
+            # shellcheck disable=SC2016 # backticks Markdown littéraux, pas une substitution
+            printf '### CHANGELOG\n\nPR exemptée (label `no-changelog` ou Dependabot).\n' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          python3 scripts/ci/check_changelog.py "$BASE_SHA" "$HEAD_SHA"
+          printf '### CHANGELOG\n\nLa PR consigne son apport dans « ## [Non publié] ».\n' >> "$GITHUB_STEP_SUMMARY"

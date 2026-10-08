@@ -1,0 +1,76 @@
+{
+  "id": "pseudodragon",
+  "name": "Pseudodragon",
+  "source": "srd",
+  "size": "tiny",
+  "creatureType": "dragon",
+  "alignment": "neutre bon",
+  "abilities": {
+    "strength": 6,
+    "dexterity": 15,
+    "constitution": 13,
+    "intelligence": 10,
+    "wisdom": 12,
+    "charisma": 10
+  },
+  "armorClass": 13,
+  "hitPoints": 7,
+  "hitDice": "2d4+2",
+  "speed": {
+    "walk": 4.5,
+    "fly": 18
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "vision aveugle 3 m",
+    "vision dans le noir 18 m",
+    "Perception passive 13"
+  ],
+  "skills": {
+    "stealth": 4,
+    "perception": 3
+  },
+  "languages": [
+    "common",
+    "draconic"
+  ],
+  "traits": [
+    {
+      "name": "Langues",
+      "text": "comprend le commun et le draconique mais ne peut pas parler"
+    },
+    {
+      "name": "Sens aiguisés",
+      "text": "Le pseudodragon a un avantage aux jets de Sagesse (Perception) basés sur la vue, l'ouïe ou l'odorat."
+    },
+    {
+      "name": "Résistance à la magie",
+      "text": "Le pseudodragon a un avantage aux jets de sauvegarde contre les sorts et autres effets magiques."
+    },
+    {
+      "name": "Télépathie limitée",
+      "text": "Le pseudodragon peut communiquer par magie des idées, des émotions, et des images simples par télépathie à toute créature capable de comprendre un langage dans un rayon de 30 mètres autour de lui."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 4 (1d4 + 2) dégâts tranchants.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d4+2",
+      "damageType": "slashing"
+    },
+    {
+      "name": "Dard",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une créature. Touché : 4 (1d4 + 2) dégâts perforants, et la cible doit réussir un jet de sauvegarde de Constitution DD 11 ou être empoisonnée pendant 1 heure. Si le jet de sauvegarde échoue de 5 ou plus, la cible tombe inconsciente pour la même durée, ou jusqu'à ce qu'elle subisse des dégâts ou qu'une autre créature utilise une action pour la réveiller.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d4+2",
+      "damageType": "piercing"
+    }
+  ],
+  "mecanismesRequis": [
+    "langue-comprise-non-parlee"
+  ]
+}

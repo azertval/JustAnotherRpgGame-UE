@@ -1,0 +1,75 @@
+{
+  "id": "taii-maku-city-states",
+  "name": "Taii’Maku City States",
+  "source": "tanares",
+  "government": "With no unified government, each Illu is its independent city-state ruled by a council of the greatest minds. Each year, the Illus sends representatives to a gathering of knowledge exchange to discuss shared goals.",
+  "faction": "The taii’makus are not officially part of any faction and were politically isolated until a decade ago. They have ties with the Allied Forces but are not members.",
+  "population": {
+    "total": 698000,
+    "species": [
+      {
+        "species": "taii-maku",
+        "label": "taii’maku",
+        "percent": 86
+      },
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 8
+      },
+      {
+        "species": "dwarf",
+        "label": "dwarves",
+        "percent": 3
+      }
+    ],
+    "otherPercent": 3
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "high"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "veryLow"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "high"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "veryLow"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "high"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "high"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "high"
+      }
+    ]
+  },
+  "neighbors": [
+    "republic-of-freelands",
+    "tsvetan"
+  ],
+  "locations": [
+    "taii-maku-city-states-ubellian-fire-pits",
+    "taii-maku-city-states-awo-irin-illu",
+    "taii-maku-city-states-g-bagede-illu",
+    "taii-maku-city-states-ilaorun-illu"
+  ]
+}

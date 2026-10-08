@@ -1,0 +1,17 @@
+{
+  "id": "fronde",
+  "name": "Fronde",
+  "source": "srd",
+  "category": "simple",
+  "ranged": true,
+  "damage": "1d4",
+  "damageType": "bludgeoning",
+  "weightGrams": 0,
+  "price": 10,
+  "text": "Munitions (portée 9 m/36 m)",
+  "properties": [
+    "ammunition"
+  ],
+  "rangeNormal": 9,
+  "rangeLong": 36
+}

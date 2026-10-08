@@ -1,0 +1,8 @@
+{
+  "id": "baton",
+  "name": "Bâton",
+  "source": "srd",
+  "category": "gear",
+  "price": 500,
+  "weightGrams": 2000
+}

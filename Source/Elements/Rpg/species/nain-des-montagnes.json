@@ -1,0 +1,17 @@
+{
+  "id": "nain-des-montagnes",
+  "name": "Nain des montagnes",
+  "source": "srd",
+  "parentSpecies": "nain",
+  "size": "medium",
+  "speed": 7.5,
+  "abilityScoreIncrease": {
+    "strength": 2
+  },
+  "traits": [
+    {
+      "name": "Formation au port des armures naines",
+      "text": "Vous maîtrisez les armures légères et intermédiaires."
+    }
+  ]
+}

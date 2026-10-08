@@ -1,0 +1,39 @@
+{
+  "id": "giant-lizard",
+  "name": "Lézard géant",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 15,
+    "dexterity": 12,
+    "constitution": 13,
+    "intelligence": 2,
+    "wisdom": 10,
+    "charisma": 5
+  },
+  "armorClass": 12,
+  "hitPoints": 19,
+  "hitDice": "3d10+3",
+  "speed": {
+    "walk": 9,
+    "climb": 9
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "vision dans le noir 9 m",
+    "Perception passive 10"
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 6 (1d8 + 2) dégâts perforants.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d8+2",
+      "damageType": "piercing"
+    }
+  ],
+  "description": "Les lézards géants sont de terrifiants prédateurs souvent utilisés comme monture ou comme animaux de trait par les humanoïdes reptiliens et les résidents de l'Outreterre."
+}

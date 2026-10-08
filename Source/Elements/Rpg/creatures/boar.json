@@ -1,0 +1,46 @@
+{
+  "id": "boar",
+  "name": "Sanglier",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 13,
+    "dexterity": 11,
+    "constitution": 12,
+    "intelligence": 2,
+    "wisdom": 9,
+    "charisma": 5
+  },
+  "armorClass": 11,
+  "hitPoints": 11,
+  "hitDice": "2d8+2",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "Perception passive 9"
+  ],
+  "traits": [
+    {
+      "name": "Charge",
+      "text": "Si le sanglier se déplace d'au moins 6 mètres en ligne droite vers une cible, puis la touche lors d'une attaque avec ses défenses dans le même tour, la cible subit 3 (1d6) dégâts tranchants supplémentaires. Si la cible est une créature, elle doit réussir un jet de sauvegarde de Force DD 11 ou tomber à terre."
+    },
+    {
+      "name": "Implacable (Recharge après un repos court ou long)",
+      "text": "Si le sanglier subit 7 points de dégâts ou moins qui réduiraient ses points de vie à 0, il se retrouve à la place avec 1 point de vie."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Défenses",
+      "text": "Attaque au corps à corps avec une arme : +3 au toucher, allonge 1,50 m, une cible. Touché : 4 (1d6 + 1) dégâts tranchants.",
+      "attackBonus": 3,
+      "reach": 1.5,
+      "damage": "1d6+1",
+      "damageType": "slashing"
+    }
+  ]
+}

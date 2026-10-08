@@ -1,0 +1,8 @@
+{
+  "id": "feu-gregeois-flasque",
+  "name": "Feu grégeois (flasque)",
+  "source": "srd",
+  "category": "gear",
+  "price": 5000,
+  "weightGrams": 500
+}

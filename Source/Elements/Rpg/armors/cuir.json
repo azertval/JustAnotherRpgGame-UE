@@ -1,0 +1,10 @@
+{
+  "id": "cuir",
+  "name": "Cuir",
+  "source": "srd",
+  "category": "light",
+  "baseArmorClass": 11,
+  "dexterityBonus": true,
+  "weightGrams": 5000,
+  "price": 1000
+}

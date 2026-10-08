@@ -1,0 +1,14 @@
+{
+  "id": "criminel",
+  "name": "Criminel",
+  "source": "srd",
+  "skillProficiencies": [
+    "stealth",
+    "deception"
+  ],
+  "feature": {
+    "name": "Accointances avec la pègre",
+    "text": "Vous avez un contact fiable et digne de confiance qui agit comme votre agent de liaison avec un réseau d'autres criminels. Vous savez comment envoyer et recevoir des messages via votre contact, même sur de grandes distances. Concrètement, vous connaissez les messagers locaux, les maîtres de caravanes corrompus et les marins miteux qui peuvent délivrer des messages pour vous."
+  },
+  "text": "Vous êtes un criminel expérimenté avec un long passif d'infractions à la loi. Vous avez passé beaucoup de temps aux côtés d'autres criminels et avez encore des contacts au sein de la pègre. Vous êtes bien plus familier que la plupart des autres personnes avec le monde du meurtre, du vol et de la violence qui règne au sein de la civilisation, et vous avez survécu jusque-là en bafouant les règles et les lois de la société."
+}

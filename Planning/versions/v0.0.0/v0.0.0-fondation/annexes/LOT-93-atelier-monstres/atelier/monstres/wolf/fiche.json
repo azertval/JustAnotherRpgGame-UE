@@ -1,0 +1,12 @@
+{
+  "slug": "wolf",
+  "nom": "Loup",
+  "creature": "wolf",
+  "taille": "medium",
+  "gabarit": "moyen",
+  "corps": "bete",
+  "hauteur": 28,
+  "longueur": 44,
+  "cast": false,
+  "source": "Source/Elements/Rpg/creatures/wolf.json (LOT-33, SRD) ; deux des fauves de colisee-fauves.json"
+}

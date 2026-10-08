@@ -1,0 +1,18 @@
+{
+  "id": "sarbacane",
+  "name": "Sarbacane",
+  "source": "srd",
+  "category": "martial",
+  "ranged": true,
+  "damage": "1",
+  "damageType": "piercing",
+  "weightGrams": 500,
+  "price": 1000,
+  "text": "Munitions (portée 7,50 m/30 m), chargement",
+  "properties": [
+    "ammunition",
+    "loading"
+  ],
+  "rangeNormal": 7.5,
+  "rangeLong": 30
+}

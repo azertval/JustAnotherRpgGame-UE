@@ -1,0 +1,8 @@
+{
+  "id": "belier-portable",
+  "name": "Bélier portable",
+  "source": "srd",
+  "category": "gear",
+  "price": 400,
+  "weightGrams": 17500
+}

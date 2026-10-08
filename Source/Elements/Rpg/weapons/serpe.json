@@ -1,0 +1,14 @@
+{
+  "id": "serpe",
+  "name": "Serpe",
+  "source": "srd",
+  "category": "simple",
+  "damage": "1d4",
+  "damageType": "slashing",
+  "weightGrams": 1000,
+  "price": 100,
+  "text": "Légère",
+  "properties": [
+    "light"
+  ]
+}

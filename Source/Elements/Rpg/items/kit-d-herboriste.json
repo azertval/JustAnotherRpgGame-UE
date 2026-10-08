@@ -1,0 +1,8 @@
+{
+  "id": "kit-d-herboriste",
+  "name": "Kit d'herboriste",
+  "source": "srd",
+  "category": "tool",
+  "price": 500,
+  "weightGrams": 1500
+}

@@ -1,0 +1,11 @@
+{
+  "id": "harnois",
+  "name": "Harnois",
+  "source": "srd",
+  "category": "heavy",
+  "baseArmorClass": 18,
+  "strengthRequired": 15,
+  "stealthDisadvantage": true,
+  "weightGrams": 32500,
+  "price": 150000
+}

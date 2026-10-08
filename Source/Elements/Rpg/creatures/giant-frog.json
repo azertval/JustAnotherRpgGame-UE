@@ -1,0 +1,56 @@
+{
+  "id": "giant-frog",
+  "name": "Grenouille géante",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 12,
+    "dexterity": 13,
+    "constitution": 11,
+    "intelligence": 2,
+    "wisdom": 10,
+    "charisma": 3
+  },
+  "armorClass": 11,
+  "hitPoints": 18,
+  "hitDice": "4d8",
+  "speed": {
+    "walk": 9,
+    "swim": 9
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "vision dans le noir 9 m",
+    "Perception passive 12"
+  ],
+  "skills": {
+    "stealth": 3,
+    "perception": 2
+  },
+  "traits": [
+    {
+      "name": "Amphibien",
+      "text": "La grenouille peut respirer aussi bien dans l'air que sous l'eau."
+    },
+    {
+      "name": "Saut sans élan",
+      "text": "La grenouille peut sauter en longueur jusqu'à 6 mètres ou en hauteur jusqu'à 3 mètres, avec ou sans élan."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +3 au toucher, allonge 1,50 m, une cible. Touché : 4 (1d6 + 1) dégâts perforants, et la cible est agrippée (DD 11 pour s'échapper). Tant qu'elle est agrippée, la cible est entravée, et la grenouille ne peut pas mordre une autre cible.",
+      "attackBonus": 3,
+      "reach": 1.5,
+      "damage": "1d6+1",
+      "damageType": "piercing"
+    },
+    {
+      "name": "Engloutissement",
+      "text": "La grenouille effectue une attaque de morsure contre une cible de taille P ou inférieure qu'elle agrippe. Si l'attaque réussit, la cible est avalée et elle n'est plus agrippée. La créature avalée est aveuglée est entravée, bénéficie d'un abri total contre les attaques ou autres effets provenant de l'extérieur de la grenouille, et subit 5 (2d4) dégâts d'acide au début de chaque tour de la grenouille. La grenouille ne peut avaler qu'une cible à la fois. Si la grenouille meurt, la créature avalée n'est plus entravée et peut sortir du cadavre en utilisant 1,50 mètre de mouvement, pour alors en émerger et se retrouver à terre."
+    }
+  ]
+}

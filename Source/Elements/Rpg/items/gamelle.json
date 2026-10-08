@@ -1,0 +1,8 @@
+{
+  "id": "gamelle",
+  "name": "Gamelle",
+  "source": "srd",
+  "category": "gear",
+  "price": 20,
+  "weightGrams": 500
+}

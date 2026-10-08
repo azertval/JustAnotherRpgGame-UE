@@ -1,0 +1,8 @@
+{
+  "id": "sac",
+  "name": "Sac",
+  "source": "srd",
+  "category": "gear",
+  "price": 1,
+  "weightGrams": 250
+}

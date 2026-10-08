@@ -1,0 +1,108 @@
+{
+  "id": "behaviors",
+  "name": "Profils de comportement",
+  "source": "original",
+  "status": {
+    "provisoire": true,
+    "raison": "Les poids sont des choix d'equilibrage du LOT-23, qu'aucun livre n'ecrit ; ils n'ont ete rejoues que dans le Colisee.",
+    "retraitSi": "Les rencontres du vertical slice (LOT-27) ont ete jouees et les poids confirmes ou corriges ; le champ status disparait alors."
+  },
+  "default": "aggressive",
+  "profiles": [
+    {
+      "id": "aggressive",
+      "name": "Agressif",
+      "damageDealt": 100,
+      "bloodiedTarget": 50,
+      "focusFire": 0,
+      "protectBloodiedAlly": 0,
+      "threatTaken": 25,
+      "threatWhenBloodied": 50,
+      "opportunityTaken": 50,
+      "approachPerTile": 100,
+      "toleratedThreats": 2,
+      "opportunityMaximumRoll": 21,
+      "dodgeWhenThreatened": false,
+      "retreatAfterAttack": false,
+      "finishDowned": 75
+    },
+    {
+      "id": "cautious",
+      "name": "Prudent",
+      "damageDealt": 100,
+      "bloodiedTarget": 25,
+      "focusFire": 0,
+      "protectBloodiedAlly": 0,
+      "threatTaken": 100,
+      "threatWhenBloodied": 200,
+      "opportunityTaken": 100,
+      "approachPerTile": 50,
+      "toleratedThreats": 1,
+      "opportunityMaximumRoll": 15,
+      "dodgeWhenThreatened": true,
+      "retreatAfterAttack": true,
+      "finishDowned": 0
+    },
+    {
+      "id": "support",
+      "name": "Soutien",
+      "damageDealt": 100,
+      "bloodiedTarget": 25,
+      "focusFire": 25,
+      "protectBloodiedAlly": 100,
+      "threatTaken": 75,
+      "threatWhenBloodied": 150,
+      "opportunityTaken": 100,
+      "approachPerTile": 100,
+      "toleratedThreats": 1,
+      "opportunityMaximumRoll": 18,
+      "dodgeWhenThreatened": true,
+      "retreatAfterAttack": false,
+      "finishDowned": 0
+    },
+    {
+      "id": "archer",
+      "name": "Archer",
+      "damageDealt": 100,
+      "bloodiedTarget": 50,
+      "focusFire": 0,
+      "protectBloodiedAlly": 0,
+      "threatTaken": 100,
+      "threatWhenBloodied": 150,
+      "opportunityTaken": 100,
+      "approachPerTile": 50,
+      "toleratedThreats": 1,
+      "opportunityMaximumRoll": 18,
+      "dodgeWhenThreatened": false,
+      "retreatAfterAttack": true,
+      "finishDowned": 0
+    },
+    {
+      "id": "pack",
+      "name": "Meute",
+      "damageDealt": 100,
+      "bloodiedTarget": 50,
+      "focusFire": 50,
+      "protectBloodiedAlly": 0,
+      "threatTaken": 25,
+      "threatWhenBloodied": 50,
+      "opportunityTaken": 50,
+      "approachPerTile": 100,
+      "toleratedThreats": 2,
+      "opportunityMaximumRoll": 21,
+      "dodgeWhenThreatened": false,
+      "retreatAfterAttack": false,
+      "finishDowned": 100
+    }
+  ],
+  "assignments": [
+    {
+      "trait": "Tactique de groupe",
+      "behavior": "pack"
+    },
+    {
+      "ranged": true,
+      "behavior": "archer"
+    }
+  ]
+}

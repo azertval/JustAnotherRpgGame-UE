@@ -1,0 +1,8 @@
+{
+  "id": "piton",
+  "name": "Piton",
+  "source": "srd",
+  "category": "gear",
+  "price": 5,
+  "weightGrams": 100
+}

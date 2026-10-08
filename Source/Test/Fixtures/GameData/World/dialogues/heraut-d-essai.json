@@ -1,0 +1,150 @@
+{
+  "id": "heraut-d-essai",
+  "name": "Le heraut d'essai",
+  "source": "original",
+  "speaker": {
+    "languages": [
+      "common"
+    ],
+    "attitude": "indifferent"
+  },
+  "start": "accueil",
+  "nodes": [
+    {
+      "id": "accueil",
+      "type": "condition",
+      "flag": "dialogue/heraut-d-essai/rencontre",
+      "then": "retour",
+      "else": "premiere-fois"
+    },
+    {
+      "id": "premiere-fois",
+      "type": "action",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "dialogue/heraut-d-essai/rencontre"
+        }
+      ],
+      "next": "presentation"
+    },
+    {
+      "id": "presentation",
+      "type": "line",
+      "choices": [
+        {
+          "id": "marque",
+          "next": "marque"
+        },
+        {
+          "id": "inscription",
+          "next": "inscription"
+        },
+        {
+          "id": "partir",
+          "next": "fin"
+        }
+      ]
+    },
+    {
+      "id": "retour",
+      "type": "line",
+      "choices": [
+        {
+          "id": "marque",
+          "next": "marque"
+        },
+        {
+          "id": "inscription",
+          "next": "inscription"
+        },
+        {
+          "id": "partir",
+          "next": "fin"
+        }
+      ]
+    },
+    {
+      "id": "marque",
+      "type": "line",
+      "next": "retour"
+    },
+    {
+      "id": "inscription",
+      "type": "condition",
+      "flag": "quest/champion-d-essai/started",
+      "then": "deja-inscrit",
+      "else": "demande"
+    },
+    {
+      "id": "deja-inscrit",
+      "type": "line",
+      "attitude": "friendly",
+      "next": "fin"
+    },
+    {
+      "id": "demande",
+      "type": "line",
+      "choices": [
+        {
+          "id": "convaincre",
+          "next": "jet-persuasion",
+          "condition": {
+            "flag": "dialogue/heraut-d-essai/persuasion-echouee",
+            "isSet": false
+          }
+        },
+        {
+          "id": "renoncer",
+          "next": "fin"
+        }
+      ]
+    },
+    {
+      "id": "jet-persuasion",
+      "type": "check",
+      "skill": "persuasion",
+      "difficulty": "moyenne",
+      "success": "accepte",
+      "failure": "refuse"
+    },
+    {
+      "id": "accepte",
+      "type": "action",
+      "actions": [
+        {
+          "type": "startQuest",
+          "quest": "champion-d-essai"
+        }
+      ],
+      "next": "accepte-replique"
+    },
+    {
+      "id": "accepte-replique",
+      "type": "line",
+      "attitude": "friendly",
+      "next": "fin"
+    },
+    {
+      "id": "refuse",
+      "type": "action",
+      "actions": [
+        {
+          "type": "setFlag",
+          "flag": "dialogue/heraut-d-essai/persuasion-echouee"
+        }
+      ],
+      "next": "refuse-replique"
+    },
+    {
+      "id": "refuse-replique",
+      "type": "line",
+      "attitude": "hostile",
+      "next": "retour"
+    },
+    {
+      "id": "fin",
+      "type": "end"
+    }
+  ]
+}

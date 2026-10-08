@@ -1,0 +1,11 @@
+{
+  "id": "clibanion",
+  "name": "Clibanion",
+  "source": "srd",
+  "category": "heavy",
+  "baseArmorClass": 17,
+  "strengthRequired": 15,
+  "stealthDisadvantage": true,
+  "weightGrams": 30000,
+  "price": 20000
+}

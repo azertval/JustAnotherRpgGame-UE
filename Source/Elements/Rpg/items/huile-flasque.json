@@ -1,0 +1,8 @@
+{
+  "id": "huile-flasque",
+  "name": "Huile (flasque)",
+  "source": "srd",
+  "category": "gear",
+  "price": 10,
+  "weightGrams": 500
+}

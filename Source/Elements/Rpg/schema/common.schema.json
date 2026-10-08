@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/common.schema.json",
+  "title": "Definitions partagees des catalogues RPG",
+  "description": "Ce fichier ne decrit aucune famille : il porte les briques que toutes reutilisent. Une definition ecrite deux fois diverge -- c'est la lecon des six lecteurs JSON du LOT-79, transposee aux contrats.",
+
+  "$defs": {
+    "id": {
+      "description": "Identifiant stable d'une entree, en kebab-case ASCII. C'est la cle par laquelle une donnee en designe une autre ; elle ne change jamais, y compris si le nom affiche change. La borne haute a ete portee de 64 a 96 au LOT-37 : un identifiant de lieu COMPOSE (region + nom du lieu) depasse 64 des que le livre nomme longuement, et tronquer une cle pour tenir dans un chiffre rond la rend illisible sans rien garantir de plus.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "minLength": 2,
+      "maxLength": 96
+    },
+
+    "source": {
+      "description": "Provenance de la donnee (EX-CNT-001, EX-CNT-002). Le jour d'une publication, la question << qu'est-ce qui doit sauter ? >> se repond par une requete et non par une relecture. `original` designe ce que le projet ecrit lui-meme.",
+      "type": "string",
+      "enum": ["srd", "tanares", "phb-fr", "original"]
+    },
+
+    "status": {
+      "description": "Statut d'une donnee PROVISOIRE (EX-CNT-032). Une donnee provisoire non marquee devient permanente par accident : c'est la facon la plus banale dont un echafaudage finit en mur porteur. `retraitSi` ecrit d'avance le critere qui la fera disparaitre -- sans lui, le champ ne serait qu'un aveu sans suite.",
+      "type": "object",
+      "properties": {
+        "provisoire": { "type": "boolean" },
+        "raison": { "type": "string", "minLength": 8 },
+        "retraitSi": { "type": "string", "minLength": 8 }
+      },
+      "required": ["provisoire", "raison", "retraitSi"],
+      "additionalProperties": false
+    },
+
+    "mecanismesRequis": {
+      "description": "Les mecanismes que cette donnee exige du moteur (EX-CNT-030). Une donnee qui ne declare rien promet de ne rien exiger, et le moteur peut la servir en confiance. Le moteur liste au chargement ce qu'il ne sait pas honorer (EX-CNT-031) plutot que de le jouer en silence.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/id" },
+      "uniqueItems": true
+    },
+
+    "narratif": {
+      "description": "Declare que l'effet de cette donnee n'entre dans aucun mecanisme et n'est pas joue (EX-REG-041, EX-RPG-051). Une entree qu'on croit implementee et qui ne fait rien coute bien plus cher a diagnostiquer qu'une entree declaree non jouee.",
+      "type": "boolean"
+    },
+
+    "assetKey": {
+      "description": "Cle d'asset, JAMAIS un chemin de fichier (LOT-39) : un chemin dans une donnee de regle lie le catalogue a l'arborescence du disque, et tout deplacement de dossier casse alors des creatures.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*(/[a-z0-9]+(-[a-z0-9]+)*)+$"
+    },
+
+    "des": {
+      "description": "Expression de des, forme NdF(+/-M) -- << 1d8 >>, << 2d6+3 >>, << 4 >>. Le formalisme est verifie ici parce qu'un `ld8` issu d'un OCR (le risque residuel du LOT-30) est invisible a la relecture et fatal a l'execution.",
+      "type": "string",
+      "pattern": "^([0-9]{1,3}d[0-9]{1,3}|[0-9]{1,4})([+-][0-9]{1,3})?$"
+    },
+
+    "damageType": {
+      "description": "Type de degats. Les treize valeurs sont celles de `core::DamageType` ; la coincidence est verifiee par test (EX-CNT-011) et par scripts/checks/check_rpg_data.py.",
+      "type": "string",
+      "enum": ["acid", "bludgeoning", "cold", "fire", "force", "lightning", "necrotic",
+               "piercing", "poison", "psychic", "radiant", "slashing", "thunder"]
+    },
+
+    "conditionRef": {
+      "description": "Etat. Les quinze valeurs sont celles de `core::Condition`.",
+      "type": "string",
+      "enum": ["blinded", "charmed", "deafened", "exhaustion", "frightened", "grappled",
+               "incapacitated", "invisible", "paralyzed", "petrified", "poisoned", "prone",
+               "restrained", "stunned", "unconscious"]
+    },
+
+    "magicSchool": {
+      "description": "Ecole de magie. Les huit valeurs sont celles de `core::MagicSchool`. Attention : `conjuration` se traduit << invocation >>.",
+      "type": "string",
+      "enum": ["abjuration", "conjuration", "divination", "enchantment", "evocation", "illusion",
+               "necromancy", "transmutation"]
+    },
+
+    "ability": {
+      "description": "Caracteristique. Six valeurs, fermees par les regles.",
+      "type": "string",
+      "enum": ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]
+    },
+
+    "size": {
+      "description": "Categorie de taille d'une creature.",
+      "type": "string",
+      "enum": ["tiny", "small", "medium", "large", "huge", "gargantuan"]
+    },
+
+    "abilityScores": {
+      "description": "Les six valeurs de caracteristique. Les six sont requises : une fiche a cinq caracteristiques n'existe pas, et laisser une valeur par defaut a 10 masquerait une extraction incomplete.",
+      "type": "object",
+      "properties": {
+        "strength": { "$ref": "#/$defs/scoreValue" },
+        "dexterity": { "$ref": "#/$defs/scoreValue" },
+        "constitution": { "$ref": "#/$defs/scoreValue" },
+        "intelligence": { "$ref": "#/$defs/scoreValue" },
+        "wisdom": { "$ref": "#/$defs/scoreValue" },
+        "charisma": { "$ref": "#/$defs/scoreValue" }
+      },
+      "required": ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"],
+      "additionalProperties": false
+    },
+
+    "scoreValue": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 30
+    },
+
+    "money": {
+      "description": "Un prix, en pieces de cuivre. Une seule unite interne evite les conversions dispersees ; l'affichage en po/pa/pc est une affaire de presentation.",
+      "type": "integer",
+      "minimum": 0
+    },
+
+    "entree": {
+      "description": "Le socle de toute entree de catalogue : un identifiant, un nom, et une provenance. Toute famille l'etend.",
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1 },
+        "source": { "$ref": "#/$defs/source" },
+        "status": { "$ref": "#/$defs/status" },
+        "asset": { "$ref": "#/$defs/assetKey" },
+        "mecanismesRequis": { "$ref": "#/$defs/mecanismesRequis" },
+        "narratif": { "$ref": "#/$defs/narratif" }
+      },
+      "required": ["id", "name", "source"]
+    }
+  }
+}

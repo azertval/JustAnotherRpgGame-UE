@@ -1,0 +1,8 @@
+{
+  "id": "kit-d-empoisonneur",
+  "name": "Kit d'empoisonneur",
+  "source": "srd",
+  "category": "tool",
+  "price": 5000,
+  "weightGrams": 1000
+}

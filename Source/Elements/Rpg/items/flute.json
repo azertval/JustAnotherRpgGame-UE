@@ -1,0 +1,8 @@
+{
+  "id": "flute",
+  "name": "Flûte",
+  "source": "srd",
+  "category": "tool",
+  "price": 200,
+  "weightGrams": 500
+}

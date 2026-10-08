@@ -1,0 +1,8 @@
+{
+  "id": "echelle-3-m",
+  "name": "Échelle (3 m)",
+  "source": "srd",
+  "category": "gear",
+  "price": 10,
+  "weightGrams": 12500
+}

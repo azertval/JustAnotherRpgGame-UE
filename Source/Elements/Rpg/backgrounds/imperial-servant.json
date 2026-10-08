@@ -1,0 +1,15 @@
+{
+  "id": "imperial-servant",
+  "name": "Imperial Servant",
+  "source": "tanares",
+  "skillProficiencies": [
+    "history",
+    "intimidation"
+  ],
+  "languageCount": 1,
+  "feature": {
+    "name": "Old Friends",
+    "text": "Your years of service to the Empire allowed you to build a vast network of contacts still working within its various departments. You have at least one ally in each department who can help you obtain meetings, information, or simple items such as an insignia or official document (with no gp value and not magical) like a pass to enter the Empire. These old friends may owe you a favor, or you may owe them one, but the relationship is mutually beneficial and can prove valuable in a variety of situations."
+  },
+  "text": "Y ou are a member of the privileged class of the Empire, given the esteemed position of oversee- ing lands and collecting taxes. Whether born into nobility or having earned your position through hard work, you hold a crucial role in the Empire's functioning society. As an Imperial servant, your job may come with perks, but it also carries the weight of responsibility. You are tasked with upholding the policies of the Empire, a responsibility that many fear and few truly understand. Will you embrace the power and influence that come with your position, or will you question the motives of those in power and fight against the injustices of the Empire? Will you use your position for the greater good, or will you succumb to the corrupting in- fluence of power?"
+}

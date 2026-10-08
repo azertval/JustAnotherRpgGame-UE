@@ -1,0 +1,678 @@
+// SPDX-FileCopyrightText: 2026 Valentin Eloy
+// SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
+
+#pragma once
+
+#include <cstdint>
+#include <functional>
+#include <map>
+#include <memory>
+#include <optional>
+#include <set>
+#include <string>
+#include <string_view>
+#include <utility>
+#include <vector>
+
+#include "Core/Combat/CombatState.h"
+#include "Core/Levels/Level.h"
+#include "Core/Math/DeterministicRandom.h"
+#include "Core/Rpg/Bestiary.h"
+#include "Core/Rpg/CharacterSheet.h"
+#include "Core/Rpg/Check.h"
+#include "Core/Rpg/Dice.h"
+
+/**
+ * @file Core/Combat/Arena.h
+ * @brief Le Colisée : un affrontement qui se monte, se joue et se rejoue à graine fixée
+ *        (`LOT-50`).
+ *
+ * ## Ce que l'arène est, et ce qu'elle n'est pas
+ *
+ * Les Arènes de Tanares sont une institution du monde : deux camps y règlent un litige par leurs
+ * champions, **sans mort**, sous la protection d'un rituel de Marque Héroïque. C'est ce qui en
+ * fait le banc d'essai naturel du combat — un affrontement s'y rejoue indéfiniment, et c'est la
+ * fiction qui l'explique, pas une entorse aux règles.
+ *
+ * Tout ce qui est ici est du `Core` pur : une carte (`core::Level`), une composition
+ * (`core::ArenaBout`), et une session (`core::ArenaSession`) qui tient la machine à états du
+ * combat (`core::CombatState`, `LOT-20`) sur la grille de la carte (`core::BattleGrid`, `LOT-19`).
+ * Rien ne dépend d'une fenêtre : le modèle de présentation du combat (`hmi::CombatModel`) ne fait
+ * que présenter et commander.
+ *
+ * Le **catalogue d'arènes** (une donnée par variante régionale, dans un dossier du monde) et
+ * l'écran de mise en place du Colisée ont été retirés à la recette de la 0.0.1, le 25 septembre
+ * 2026 : aucune arène ne vit dans `Source/Elements`. La composition vient désormais de la
+ * **rencontre de carte** (`core::prepareMapEncounter`, `hmi::EncounterModel`), qui monte cette
+ * session sur la zone de combat d'une carte, aux points d'entrée que la carte déclare
+ * (`core::arenaEntryPoints`).
+ *
+ * ## Les attaques du Manuel
+ *
+ * Le coup d'essai du `LOT-50` est remplacé par les attaques du `LOT-21` (`core::resolveAttack`) :
+ * les profils se tirent du bestiaire (`core::attacksFor`) ou de l'arme de la fiche
+ * (`core::weaponAttackFor`), le jet s'amende par `attackHooks`, les dégâts traversent
+ * `damagePipeline`. Ce que le `LOT-50` avait posé reste : la session, la déclaration avant le jet,
+ * la suite aléatoire unique, le journal. S'y ajoutent, du chapitre 9 du Manuel, l'**attaque
+ * d'opportunité** au déplacement, et les actions **esquiver** et **se désengager** qui la règlent.
+ */
+
+#include <span>
+
+#include "Core/Combat/Attack.h"
+#include "Core/Rpg/CharacterOptions.h"
+#include "Core/Rpg/Spell.h"
+
+namespace core {
+
+/// Type d'entité de carte qui marque un point d'entrée de l'arène (`Source/Elements/Levels/`).
+inline constexpr std::string_view ARENA_ENTRY_ENTITY_TYPE = "arenaEntry";
+/// Propriété d'un point d'entrée : le camp qu'il accueille, `"allies"` ou `"enemies"`.
+inline constexpr std::string_view ARENA_SIDE_PROPERTY = "side";
+/// Propriété d'un point d'entrée : son rang dans l'ordre d'appel. Deux rangs égaux se départagent
+/// par la position (ligne, puis colonne) — l'ordre de la donnée, jamais celui de la mémoire.
+inline constexpr std::string_view ARENA_RANK_PROPERTY = "rank";
+/// La **troisième économie d'action** des Marques Héroïques (§4bis) : une ressource déclarée à
+/// `core::ActionEconomy`, que le rituel de l'arène accorde à chaque combattant marqué.
+inline constexpr std::string_view HEROIC_ACTION_RESOURCE = "heroicAction";
+/// Les attaques qui restent de l'action *Attaquer* déjà prise (*Extra Attack*, `LOT-132`) : un
+/// octroi de `core::ActionEconomy`, que le début du prochain tour efface. Elles ne servent qu'à
+/// attaquer — ni sort, ni esquive, ni précipitation.
+inline constexpr std::string_view EXTRA_ATTACK_RESOURCE = "extraAttack";
+
+/// @brief Un point d'entrée de l'arène : une case, un camp, un rang d'appel.
+struct ArenaEntryPoint {
+    CombatSide side = CombatSide::Allies;
+    int rank = 0;
+    GridPosition position;
+
+    [[nodiscard]] bool operator==(const ArenaEntryPoint&) const = default;
+};
+
+/**
+ * @brief Les points d'entrée d'une carte, rangés par camp, rang, puis position.
+ *
+ * Une entité `arenaEntry` sans camp lisible est ignorée : la carte reste jouable avec les entrées
+ * qu'elle déclare correctement, et c'est le montage qui dira qu'il manque une place.
+ */
+[[nodiscard]] std::vector<ArenaEntryPoint> arenaEntryPoints(const Level& level);
+
+/**
+ * @brief Un sort tel qu'un combattant le lance dans l'arène (`LOT-131`, `LOT-133`) : son
+ *        mécanisme, ce qu'il lui faut pour le jouer, et ses lancers restants dans la journée.
+ *
+ * Les lancers sont ceux de la fiche au moment du montage (`core::KnownSpell`) : la session les
+ * décompte, et qui la tient les reporte sur la fiche.
+ */
+struct ArenaSpell {
+    std::string id;
+    std::string name;
+    /// 0 : sort mineur, à volonté.
+    int level = 0;
+    /// Lancers restants ; `-1` : à volonté.
+    int uses = -1;
+    /// Comment le moteur le joue (`core::spellMechanism`).
+    SpellMechanism mechanism = SpellMechanism::AttackRoll;
+    /**
+     * @brief Le profil du sort : sa portée et ses dés, et pour un sort à jet d'attaque le
+     *        modificateur de la caractéristique d'incantation et la maîtrise
+     *        (`core::spellProfileFor`).
+     */
+    AttackProfile attack;
+    /// Qui il peut viser.
+    SpellTarget target = SpellTarget::Enemy;
+    /// Projectiles ou rayons, chacun ses dés et son jet.
+    int projectiles = 1;
+    /// La caractéristique de la sauvegarde qu'il demande.
+    std::optional<Ability> save;
+    /// Son degré de difficulté : 8 + maîtrise + modificateur d'incantation (*Player's Guide*,
+    /// p. 197).
+    int saveDc = 0;
+    SaveEffect saveEffect = SaveEffect::Negates;
+    /// Le rayon de sa sphère, en cases ; 0 : une seule cible.
+    int areaRadius = 0;
+    /// L'effet qui dure qu'il pose.
+    std::optional<SpellEffect> effect;
+    /// Sous concentration : un second sort de concentration met fin au premier.
+    bool concentration = false;
+    /// Il se lance par une action bonus (`LOT-134`).
+    bool bonusAction = false;
+    /// Les créatures qu'il peut viser à la fois (*bénédiction* : 3).
+    int maxTargets = 1;
+    /// Les dés de soin, modificateur d'incantation compris s'il s'y ajoute.
+    std::optional<Dice> healing;
+    /// Le retour à la vie qu'il accorde (*revigorer*, `LOT-137`).
+    std::optional<SpellRevival> revival;
+
+    /// @brief Vrai si le sort se lance encore.
+    [[nodiscard]] bool available() const noexcept {
+        return uses != 0;
+    }
+};
+
+/**
+ * @brief Un effet de sort qui dure, sur un combattant (`LOT-133`) : le *vol*, l'invisibilité.
+ *
+ * Il prend fin à l'échéance de sa durée, quand son lanceur se concentre sur un autre sort ou
+ * tombe, ou — l'invisibilité — quand son porteur attaque ou lance un sort ; le journal écrit
+ * « fin de l'effet … (raison) ».
+ */
+struct ArenaEffect {
+    CombatantId bearer{};
+    CombatantId caster{};
+    SpellEffectKind kind = SpellEffectKind::Fly;
+    /// Le sort qui le pose, tel que le journal le nomme.
+    std::string source;
+    bool concentration = false;
+    /// Rounds restants ; `-1` : jusqu'à la fin du combat.
+    int roundsLeft = -1;
+    /// `Fly` : ce que le porteur avait avant de voler, rendu à la fin de l'effet.
+    Locomotion previousLocomotion = Locomotion::Walk;
+    int previousMovement = 0;
+    /// `Bless` : les dés ajoutés à ses jets d'attaque et de sauvegarde.
+    std::optional<Dice> dice;
+};
+
+/**
+ * @brief Un état qu'un combattant porte en combat (`LOT-137`) : ceux dont les quatre classes ont
+ *        besoin jusqu'au niveau 5, pas le catalogue du *Manuel* (annexe A).
+ */
+enum class CombatCondition : std::uint8_t {
+    /// À 0 point de vie : attaqué avec avantage, critique au contact, sauvegardes de Force et de
+    /// Dextérité ratées.
+    Unconscious,
+    /// À terre : attaqué avec avantage au contact et désavantage à distance ; ses attaques sont
+    /// désavantagées.
+    Prone,
+    /// Stabilisé : il ne fait plus de jets contre la mort.
+    Stable,
+    /// Mort.
+    Dead,
+    /// Béni : 1d4 à ses jets d'attaque et de sauvegarde (*bénédiction*).
+    Blessed,
+    /// Invisible.
+    Invisible,
+    /// En vol (*vol*).
+    Flying,
+    /// Concentré sur un sort : des dégâts demandent un jet de Constitution.
+    Concentrating,
+};
+
+/// @brief Le nom d'un état, tel que le journal et l'écran l'écrivent (« inconscient »).
+[[nodiscard]] std::string_view combatConditionLabel(CombatCondition condition) noexcept;
+
+/// @brief Un combattant tel que l'écran de mise en place le compose.
+struct ArenaContestant {
+    /// Le profil, classe d'armure et affinités comprises.
+    CombatantProfile profile;
+    /// Ce qu'il sait frapper, la première attaque étant celle qu'on joue par défaut.
+    std::vector<AttackProfile> attacks;
+    /// Case demandée, ou absente : le prochain point d'entrée libre de son camp.
+    std::optional<GridPosition> position;
+    /// Rôle de Marque Héroïque revendiqué (un identifiant de `Rpg/rules/heroic-marks.json`), ou
+    /// vide.
+    std::string markId;
+    /// Le profil de comportement qui le joue (`core::BehaviorProfile::id`, `LOT-23`), ou vide
+    /// pour un combattant que le joueur commande.
+    std::string behavior;
+    /**
+     * @brief Ses capacités de classe actives (`LOT-131`, `EX-RPG-024`) : la session branche
+     *        leurs effets sur ses jets (bonus d'attaque, dés en plus) et ses déplacements (pas
+     *        d'attaque d'opportunité). Les effets **statiques** — classe d'armure, résistances,
+     *        vitesse — sont déjà dans `profile`, qui se construit depuis la fiche.
+     */
+    std::vector<Capacity> capacities;
+    /// Les sorts qu'il sait lancer en combat, avec leurs lancers du jour (`EX-RPG-025`).
+    std::vector<ArenaSpell> spells;
+};
+
+/// @brief Une composition d'affrontement : qui, contre qui, à quelle graine, sous quelle règle.
+struct ArenaBout {
+    std::vector<ArenaContestant> contestants;
+    std::uint64_t seed = 0;
+    bool lethal = false;
+    bool heroicMark = true;
+    /// La prise en tenaille, règle optionnelle du *Guide du Maître* (`core::isFlanked`). Fausse par
+    /// défaut : une règle optionnelle s'active, elle ne se présume pas.
+    bool flanking = false;
+    /// Vrai si l'on peut se retirer : toujours au Colisée ; sur la carte, ce que la rencontre dit
+    /// (`core::Encounter::escapable`, `LOT-118`).
+    bool escapable = true;
+};
+
+class ArenaSession;
+
+/**
+ * @brief Décide si @p reactor prend l'attaque d'opportunité que @p mover lui offre.
+ *
+ * Le Manuel dit qu'une créature « peut » la prendre : c'est une décision, et c'est à qui commande
+ * la créature de la prendre — le comportement (`LOT-23`), l'écran de combat (`LOT-24`).
+ */
+using OpportunityPolicy =
+    std::function<bool(const ArenaSession&, CombatantId reactor, CombatantId mover)>;
+
+/**
+ * @brief Ce que l'écran veut savoir d'un pas : qui a marché, par où (`LOT-118`).
+ *
+ * Le journal note déjà chaque pas en clair ; l'écran, lui, veut le **chemin** pour faire marcher
+ * la figurine case par case — un tour de l'IA se joue d'un bloc, et sans ce crochet il ne resterait
+ * que des positions d'arrivée, ce qui se lit comme une téléportation.
+ */
+using MoveObserver = std::function<void(CombatantId mover, const Path& path)>;
+
+/// @brief Le moment d'une action que l'écran suit : son départ, puis son issue.
+enum class ArenaActionPhase : std::uint8_t {
+    /// L'action est dépensée, rien n'est encore jeté : le geste commence.
+    Begin,
+    /// L'action est résolue : les coups, les chutes, déjà annoncés par le combat.
+    End,
+};
+
+/**
+ * @brief Ce que l'écran veut savoir d'une attaque ou d'un sort du combattant actif (`LOT-136`) :
+ *        le geste à jouer — à l'arme, à distance, un sort —, sa cible, et l'effet à montrer.
+ *
+ * Les crochets du combat (`CombatHook::AttackDeclared`) ne disent ni si l'arme tire, ni quel sort
+ * se lance, ni un sort sans jet d'attaque : c'est la session qui le sait.
+ */
+struct ArenaActionNotice {
+    ArenaActionPhase phase = ArenaActionPhase::Begin;
+    CombatantId actor{};
+    CombatantId target{};
+    /// L'identifiant du sort (`fire-bolt`), vide pour une attaque à l'arme.
+    std::string spell;
+    /// Une attaque à distance : l'arme a une portée (`AttackProfile::range`).
+    bool ranged = false;
+    /// `End` : un jet d'attaque a eu lieu et a manqué.
+    bool missed = false;
+};
+
+/// @brief Prévenu au début et à la fin de chaque attaque et de chaque sort (`LOT-136`).
+using ActionObserver = std::function<void(const ArenaActionNotice& notice)>;
+
+/// @brief Ce que le montage d'un affrontement a produit : les enrôlés par camp, et les refus.
+struct ArenaMount {
+    std::vector<CombatantId> allies;
+    std::vector<CombatantId> enemies;
+    std::vector<MountRefusal> refusals;
+};
+
+/// @brief Ce qu'une action de l'arène a donné.
+enum class ArenaActionResult : std::uint8_t {
+    /// L'action a eu lieu — une attaque a été jetée, qu'elle ait touché ou non.
+    Done,
+    /// Aucun tour actif : le combat n'a pas commencé, ou il est fini.
+    NoActiveTurn,
+    /// L'action de ce tour est déjà dépensée.
+    NoAction,
+    /// La cible est hors d'allonge ou de portée.
+    OutOfReach,
+    /// La cible est sous abri total : aucune ligne de vue ne la relie à l'attaquant (`LOT-22`).
+    TotalCover,
+    /// Inconnue, soi-même, un allié, ou une cible que l'action ne peut pas viser : un mort, un
+    /// debout pour *revigorer*.
+    InvalidTarget,
+    /// Le combattant n'a pas d'attaque de cet indice.
+    NoAttack,
+    /// Le combattant n'a pas de sort de cet indice (`castSpell`).
+    NoSpell,
+    /// Le sort n'a plus de lancer aujourd'hui (`LOT-131`) : un repos long le rend.
+    Exhausted,
+};
+
+/// @brief Une attaque jouée dans l'arène : le refus, ou l'attaque résolue.
+struct ArenaAttack {
+    ArenaActionResult result = ArenaActionResult::InvalidTarget;
+    /// Le premier jet d'attaque, s'il y en a eu un : un sort sans jet n'en a pas.
+    std::optional<AttackOutcome> outcome;
+    /// La ligne du journal qui dit l'action, ce qu'un écran affiche : l'attaque, le sort.
+    std::string summary;
+};
+
+/**
+ * @brief Une session d'arène : la carte, la composition, et le combat qui s'y joue.
+ *
+ * C'est le premier endroit où `core::CombatState` est **tenu** par quelque chose du jeu, et non
+ * seulement par un test. La session garde la carte et la composition pour pouvoir **rejouer** :
+ * `replay` remonte le même affrontement à la même graine, et deux exécutions donnent alors le
+ * même journal — c'est ce qui permet de comparer deux versions d'une mécanique.
+ *
+ * Le journal est une liste de lignes lisibles : crochets du combat, pas, coups, issue. Il est la
+ * matière du rejeu vérifié par test, et ce que l'écran affiche.
+ */
+class ArenaSession {
+public:
+    /// @param level La carte de l'arène, conservée pour chaque rejeu.
+    explicit ArenaSession(Level level);
+
+    /**
+     * @brief Monte l'affrontement : enrôle chaque combattant à sa case ou au prochain point
+     *        d'entrée libre de son camp, en nommant chaque refus.
+     *
+     * Un combattant sans case et sans point d'entrée restant est refusé avec `OutOfBounds` : la
+     * carte n'a plus de place pour lui, et le dire vaut mieux que le poser dans un mur. Le rituel
+     * de Marque Héroïque, s'il s'applique, déclare la troisième économie d'action à chacun.
+     */
+    ArenaMount mount(const ArenaBout& bout);
+
+    /// @brief Jette l'initiative à la graine de la composition, et ouvre le premier tour.
+    bool start();
+
+    /// @brief Remonte la même composition à la même graine, journal vidé.
+    ArenaMount replay();
+
+    /// @return La machine à états du combat, montée ou non.
+    [[nodiscard]] CombatState& combat() noexcept {
+        return *_combat;
+    }
+    /// @brief La machine à états du combat, en lecture seule.
+    [[nodiscard]] const CombatState& combat() const noexcept {
+        return *_combat;
+    }
+
+    /// @return La carte de l'arène.
+    [[nodiscard]] const Level& level() const noexcept {
+        return _level;
+    }
+
+    /// @return La composition montée.
+    [[nodiscard]] const ArenaBout& bout() const noexcept {
+        return _bout;
+    }
+
+    /// @return Les attaques d'un combattant enrôlé, ou `nullptr`.
+    [[nodiscard]] const std::vector<AttackProfile>* attacks(CombatantId combatant) const;
+
+    /// @return Les sorts d'un combattant enrôlé, lancers restants compris, ou `nullptr`.
+    [[nodiscard]] const std::vector<ArenaSpell>* spells(CombatantId combatant) const;
+
+    /// @return Les capacités de classe d'un combattant enrôlé ; vide s'il n'en a pas.
+    [[nodiscard]] std::span<const Capacity> capacitiesOf(CombatantId combatant) const;
+
+    /// @return Les effets de sort qui durent, dans l'ordre où ils ont été posés.
+    [[nodiscard]] const std::vector<ArenaEffect>& effects() const noexcept {
+        return _effects;
+    }
+
+    /// @brief Vrai si @p combatant porte un effet de sort de ce genre.
+    [[nodiscard]] bool hasEffect(CombatantId combatant, SpellEffectKind kind) const;
+
+    /**
+     * @brief Les états que porte @p combatant (`LOT-137`), dans l'ordre de `CombatCondition` :
+     *        ceux de son statut (inconscient, à terre, stabilisé, mort) et ceux de ses sorts
+     *        (béni, invisible, en vol, concentré).
+     */
+    [[nodiscard]] std::vector<CombatCondition> conditionsOf(CombatantId combatant) const;
+
+    /**
+     * @brief L'action *lancer un sort* du combattant actif, avec son sort @p spellIndex
+     *        (`LOT-131`, `LOT-133`, `EX-RPG-025`).
+     *
+     * Un sort épuisé est refusé (`Exhausted`) **avant** toute dépense. La cible doit être celle
+     * que le sort vise (`SpellTarget`) : une créature hostile, une de son camp, ou soi. Puis la
+     * portée et la vue, l'action, un lancer de moins, et le mécanisme :
+     *
+     * - **jet d'attaque** : un jet par projectile, comme une attaque ; les rayons qui restent
+     *   quand la cible tombe sont perdus, et le journal le dit ;
+     * - **sans jet** : les dés de chaque projectile, en une salve ;
+     * - **sauvegarde** : les dés lancés **une fois**, puis chaque créature de la sphère — alliés
+     *   et lanceur compris — ou la cible seule jette sa sauvegarde contre le DD du lanceur ; une
+     *   réussite annule ou divise par deux, selon le sort ;
+     * - **effet** : posé sur la cible — et sur les alliés les plus proches du lanceur, pour un
+     *   sort à plusieurs cibles —, jusqu'à sa fin (`ArenaEffect`) ;
+     * - **soin** : des points de vie rendus à une créature de son camp, qui se relève si elle
+     *   était à terre (`LOT-134`) ;
+     * - **stabiliser** : une créature de son camp à terre ne fait plus de jets contre la mort
+     *   (*épargner les mourants*, `LOT-137`) ;
+     * - **ramener** : une créature de son camp morte depuis au plus `SpellRevival::withinRounds`
+     *   rounds revient avec ses points de vie (*revigorer*, `LOT-137`).
+     *
+     * Un sort qui blesse ne vise qu'une créature debout ; le soin et la stabilisation, aussi une
+     * créature à terre ; *revigorer*, un mort seulement.
+     *
+     * Un sort d'action bonus dépense l'action bonus. Tant que l'arme spirituelle d'un lanceur
+     * dure, relancer le sort la fait frapper **sans** dépenser de lancer.
+     *
+     * Lancer un sort met fin à l'invisibilité du lanceur ; un sort de concentration met fin à
+     * celui qu'il tenait. Le journal préfixe la ligne de « sort ».
+     */
+    ArenaAttack castSpell(CombatantId target, std::size_t spellIndex);
+
+    /**
+     * @brief L'action *attaquer* du combattant actif, avec son attaque @p attackIndex.
+     *
+     * Vérifie la cible, la portée et la vue (`core::checkTarget`), dépense l'action, puis résout
+     * (`core::resolveAttack`) : déclaration, abri, jet, dégâts. Une cible qui esquive et voit son
+     * attaquant impose le désavantage. Une cible **à terre** se vise — l'achever (`LOT-137`) :
+     * avantage, et critique si elle est touchée au contact ; un mort, non. Tout passe par la suite
+     * aléatoire de la session : un rejeu redonne les mêmes coups.
+     *
+     * Une capacité qui ajoute des attaques à l'action (*Extra Attack*, `LOT-132`) les octroie
+     * quand l'action se dépense (`EXTRA_ATTACK_RESOURCE`) : l'attaque suivante du même tour les
+     * consomme **avant** l'action, et le journal nomme la capacité qui l'a permise.
+     */
+    ArenaAttack attack(CombatantId target, std::size_t attackIndex = 0);
+
+    /**
+     * @brief L'action *esquiver* : jusqu'au début de son prochain tour, les attaques contre le
+     *        combattant actif sont désavantagées (Manuel, chapitre 9).
+     * @return Faux sans tour actif, ou sans action.
+     */
+    bool dodge();
+
+    /**
+     * @brief L'action *se désengager* : jusqu'à la fin du tour, le déplacement du combattant actif
+     *        ne provoque pas d'attaque d'opportunité.
+     * @return Faux sans tour actif, ou sans action.
+     */
+    bool disengage();
+
+    /**
+     * @brief L'action *se précipiter* : le combattant actif gagne, pour ce tour, un déplacement
+     *        supplémentaire égal à sa vitesse (Manuel, chapitre 9).
+     * @return Faux sans tour actif, ou sans action.
+     */
+    bool dash();
+
+    /// @brief Vrai si le combattant esquive — ce que la table voit, et donc ce que l'IA lit.
+    [[nodiscard]] bool isDodging(CombatantId combatant) const {
+        return _dodging.contains(combatant);
+    }
+
+    /// @brief Le profil de comportement qui joue ce combattant, vide si c'est le joueur (`LOT-23`).
+    [[nodiscard]] const std::string& behaviorOf(CombatantId combatant) const;
+
+    /**
+     * @brief Le joueur laisse passer, ou non, les attaques d'opportunité de ce combattant
+     *        (`LOT-24`).
+     *
+     * Le Manuel dit qu'une créature « peut » frapper le fuyard. Le choix se fait **avant** que
+     * l'ennemi ne bouge, comme on tient une réaction prête : suspendre le déplacement d'autrui au
+     * milieu de son chemin pour poser la question ferait d'un tour d'IA une suite de fenêtres.
+     * Il survit au rejeu, dont les identifiants sont les mêmes. Vrai par défaut.
+     */
+    void setTakesOpportunities(CombatantId combatant, bool takes);
+    /// @brief Vrai si @p combatant prend ses attaques d'opportunité (le défaut) ; faux s'il y a
+    /// renoncé.
+    [[nodiscard]] bool takesOpportunities(CombatantId combatant) const {
+        return !_declinesOpportunities.contains(combatant);
+    }
+
+    /**
+     * @brief Les créatures qui frapperaient le combattant actif s'il allait en @p destination,
+     *        chacune une fois, dans l'ordre où elles frapperaient — la prévisualisation du
+     *        déplacement. Même règle que `move`, politique et choix du joueur compris.
+     */
+    [[nodiscard]] std::vector<CombatantId> previewOpportunities(GridPosition destination) const;
+
+    /**
+     * @brief Les circonstances qu'ajoute la session à une attaque : l'esquive de la cible, la prise
+     *        en tenaille. Celles de la grille sont dans `core::attackCircumstances`.
+     */
+    [[nodiscard]] AttackCircumstances circumstancesAgainst(CombatantId attacker, CombatantId target,
+                                                           const AttackProfile& profile) const;
+
+    /// @brief Qui décide des attaques d'opportunité. Sans politique, chacune est prise.
+    void setOpportunityPolicy(OpportunityPolicy policy) {
+        _opportunityPolicy = std::move(policy);
+    }
+
+    /// @brief Prévient @p observer à chaque pas effectué, avec son chemin (`LOT-118`).
+    void setMoveObserver(MoveObserver observer) {
+        _moveObserver = std::move(observer);
+    }
+
+    /// @brief Prévient @p observer au début et à la fin de chaque attaque et de chaque sort
+    ///        (`LOT-136`).
+    void setActionObserver(ActionObserver observer) {
+        _actionObserver = std::move(observer);
+    }
+
+    /// @brief Ajoute une ligne au journal : la décision d'un comportement, pour qu'elle se relise.
+    void note(std::string line) {
+        record(std::move(line));
+    }
+
+    /**
+     * @brief Déplace le combattant actif ; le chemin est payé sur son budget restant.
+     *
+     * **Attaque d'opportunité** (Manuel, chapitre 9) : quand le chemin sort de l'allonge d'une
+     * créature hostile debout qui a encore sa réaction et voit le fuyard (« située dans votre
+     * champ de vision », `core::hasLineOfSight`), elle frappe « juste avant que la créature
+     * ne sorte de sa zone d'allonge », avec sa première attaque au corps à corps, et dépense sa
+     * réaction. Le déplacement s'arrête à la dernière case où l'on peut se tenir avant la sortie,
+     * les attaques se jouent par identifiant croissant, et le déplacement reprend si le combattant
+     * tient encore debout. Chaque créature éligible frappe si la politique d'opportunité
+     * (`setOpportunityPolicy`) l'accepte — toutes, sans politique : l'écran qui laisse le joueur
+     * décliner est au `LOT-24`, le comportement qui choisit au `LOT-23`.
+     */
+    MoveOutcome move(GridPosition destination);
+
+    /// @brief Termine le tour actif.
+    bool endTurn();
+
+    /// @brief Le combattant actif quitte l'arène.
+    WithdrawResult withdraw();
+
+    /// @return L'issue du combat, absente tant qu'il court.
+    [[nodiscard]] std::optional<CombatOutcome> outcome() const;
+
+    /// @return Le journal de la partie en cours, dans l'ordre.
+    [[nodiscard]] const std::vector<std::string>& journal() const noexcept {
+        return _journal;
+    }
+
+private:
+    void subscribe();
+    void record(std::string line);
+    /// Relève tout le monde : le rituel de la Marque Héroïque, qui fait des Arènes un lieu
+    /// sans mort. Rien dans une arène létale.
+    void restoreAll();
+    /// Résout une attaque et l'écrit au journal à sa place : après la déclaration, avant ce que
+    /// ses dégâts déclenchent.
+    std::optional<AttackOutcome> resolveAndRecord(CombatantId attacker, CombatantId target,
+                                                  const AttackProfile& profile,
+                                                  const std::string& prefix);
+    /// Les circonstances qu'ajoute la session : l'esquive de la cible, si elle voit l'attaquant ;
+    /// la prise en tenaille au corps à corps, si l'arène la joue.
+    [[nodiscard]] AttackContext contextAgainst(CombatantId attacker, CombatantId target,
+                                               const AttackProfile& profile) const;
+    /// Vrai si @p reactor frappe @p mover quand il passe de @p from à @p to : hostile, debout, la
+    /// réaction disponible, l'allonge quittée, le fuyard vu, et ni le joueur ni la politique ne
+    /// la déclinent.
+    [[nodiscard]] bool provokes(CombatantId mover, CombatantId reactor, GridPosition from,
+                                GridPosition to) const;
+    /// La première attaque au corps à corps d'un combattant, ou `nullptr`.
+    [[nodiscard]] const AttackProfile* meleeAttack(CombatantId combatant) const;
+    /// Le premier pas de @p cases qui sort de l'allonge d'un ennemi, et ceux qu'il provoque,
+    /// ajoutés à @p reactors ; vide pour un combattant désengagé ou qu'une capacité soustrait
+    /// aux attaques d'opportunité (`LOT-131`).
+    [[nodiscard]] std::optional<std::size_t> firstProvokingStep(
+        CombatantId mover, const std::vector<GridPosition>& cases,
+        std::vector<CombatantId>& reactors) const;
+    /// Le même calcul, **sans** tenir compte du désengagement ni des capacités : ce que le pas
+    /// aurait provoqué.
+    [[nodiscard]] std::optional<std::size_t> firstExitFromReach(
+        CombatantId mover, const std::vector<GridPosition>& cases,
+        std::vector<CombatantId>& reactors) const;
+    /// Branche sur @p hooks les effets des capacités de @p attacker : bonus au jet, dés en plus.
+    void hookCapacities(AttackHooks& hooks, CombatantId attacker);
+    /// Le mécanisme d'un sort déjà payé (`castSpell`) : jet, salve, sauvegarde, effet, soin.
+    ArenaAttack resolveSpell(CombatantId lanceurId, CombatantId target, const ArenaSpell& lance,
+                             const std::string& prefixe, bool armeInvoquee);
+    /// Un jet d'attaque par projectile, une fois la cible, la portée et l'action vérifiées.
+    ArenaAttack castAttackRolls(CombatantId caster, CombatantId target, const ArenaSpell& spell,
+                                const std::string& prefix);
+    /// Les dés de chaque projectile, sans jet, en une salve.
+    ArenaAttack castAutoHit(CombatantId caster, CombatantId target, const ArenaSpell& spell,
+                            const std::string& prefix);
+    /// Les dés lancés une fois, puis une sauvegarde par créature atteinte.
+    ArenaAttack castSavingThrow(CombatantId caster, CombatantId target, const ArenaSpell& spell,
+                                const std::string& prefix);
+    /// Les points de vie rendus à la cible.
+    ArenaAttack castHealing(CombatantId caster, CombatantId target, const ArenaSpell& spell,
+                            const std::string& prefix);
+    /// La cible à terre, stabilisée.
+    ArenaAttack castStabilize(CombatantId caster, CombatantId target, const ArenaSpell& spell,
+                              const std::string& prefix);
+    /// La cible morte, ramenée.
+    ArenaAttack castRevive(CombatantId caster, CombatantId target, const ArenaSpell& spell,
+                           const std::string& prefix);
+    /// Le jet contre la mort de @p combatant, à sa place dans l'ordre (`LOT-137`).
+    void rollDeathSave(CombatantId combatant);
+    /// Ce que des dégâts subis déclenchent : l'échec d'un combattant blessé à terre, la mort
+    /// instantanée, le jet de concentration du lanceur.
+    void onDamageTaken(const CombatEvent& event);
+    /// « S succes, F echec(s) » : le compteur des jets contre la mort de @p combatant.
+    [[nodiscard]] std::string deathSaveTally(CombatantId combatant) const;
+    /// Le dé de *bénédiction* de @p combatant, lancé et nommé, s'il en porte une.
+    std::optional<Modifier> blessingFor(CombatantId combatant);
+    /// L'effet qui dure, posé sur la cible.
+    ArenaAttack castEffect(CombatantId caster, CombatantId target, const ArenaSpell& spell,
+                           const std::string& prefix);
+    /// Met fin aux effets qui répondent à @p ends, en rendant ce qu'ils avaient pris, et l'écrit.
+    void endEffects(const std::function<bool(const ArenaEffect&)>& ends, const std::string& reason);
+    /// Les attaques d'opportunité de @p reactors contre @p mover, tant qu'il est debout, que le
+    /// combat dure et que l'opportuniste l'est aussi.
+    void takeOpportunities(CombatantId mover, const std::vector<CombatantId>& reactors);
+
+    Level _level;
+    ArenaBout _bout;
+    DeterministicRandom _random{0};
+    std::unique_ptr<CombatState> _combat;
+    std::map<CombatantId, std::vector<AttackProfile>> _attacks;
+    std::map<CombatantId, std::vector<Capacity>> _capacities;
+    std::map<CombatantId, std::vector<ArenaSpell>> _spells;
+    std::map<CombatantId, std::string> _behaviors;
+    OpportunityPolicy _opportunityPolicy;
+    MoveObserver _moveObserver;
+    ActionObserver _actionObserver;
+    std::set<CombatantId> _declinesOpportunities;
+    AttackHooks _attackHooks;
+    DamagePipeline _damagePipeline;
+    std::set<CombatantId> _dodging;
+    std::set<CombatantId> _disengaged;
+    std::vector<ArenaEffect> _effects;
+    std::vector<std::string> _journal;
+};
+
+/**
+ * @brief Les sorts qu'une fiche sait lancer dans l'arène (`LOT-131`, `LOT-133`) : ceux qu'elle
+ *        connaît (`CharacterSheet::knownSpells`) et que le moteur sait jouer
+ *        (`core::spellMechanism`), avec leurs lancers restants, le profil de sort de sa classe et
+ *        son degré de difficulté.
+ *
+ * @param sheet La fiche du lanceur : ses sorts connus et leurs lancers restants.
+ * @param playableClass Sa classe, pour la caractéristique d'incantation.
+ * @param spells Le catalogue des sorts.
+ * @param proficiencyBonus Le bonus de maîtrise au niveau de la fiche.
+ * @param skipped Reçoit le nom de chaque sort connu que le moteur ne joue pas encore
+ *        (`EX-RPG-051`), pour qu'il soit dit plutôt que tu.
+ */
+[[nodiscard]] std::vector<ArenaSpell> arenaSpellsFor(const CharacterSheet& sheet,
+                                                     const PlayableClass& playableClass,
+                                                     const SpellCatalog& spells,
+                                                     int proficiencyBonus,
+                                                     std::vector<std::string>& skipped);
+
+}  // namespace core

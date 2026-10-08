@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/multiclassing.schema.json",
+  "title": "Multiclassage",
+  "description": "La regle du multiclassage, en un seul document : prerequis de caracteristique, maitrises obtenues, et cumul des emplacements de sorts. C'est la regle la plus facile a implementer de travers et la plus difficile a detecter ensuite (EX-RPG-041) -- un lanceur multiclasse mal calcule reste jouable, simplement faux. Source : Manuel des Joueurs p. 165-167, SEULE source complete ; les Basic Rules y renvoient. La table d'emplacements est recoupee contre la progression du magicien des Basic Rules, dont l'OCR du Manuel escamote les cellules valant 1.",
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "prerequisites": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "properties": {
+          "class": {
+            "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+          },
+          "className": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requirement": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "class",
+          "className",
+          "requirement"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "proficienciesGained": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "items": {
+        "type": "object",
+        "properties": {
+          "class": {
+            "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+          },
+          "className": {
+            "type": "string",
+            "minLength": 1
+          },
+          "proficiencies": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "class",
+          "className",
+          "proficiencies"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Deux classes n'en accordent aucune -- ensorceleur et magicien. C'est la regle, pas un trou d'extraction, d'ou la chaine vide admise."
+    },
+    "spellSlots": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "description": "Une ligne par niveau de lanceur cumule, neuf colonnes. Un 0 est une absence d'emplacement, jamais une cellule non lue : c'est la distinction que le recoupement garantit.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "casterLevel": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "slots": {
+            "type": "array",
+            "minItems": 9,
+            "maxItems": 9,
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 4
+            }
+          }
+        },
+        "required": [
+          "casterLevel",
+          "slots"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "casterProgression": {
+      "type": "array",
+      "minItems": 12,
+      "maxItems": 12,
+      "description": "La progression de lanceur de chaque classe, telle que la phrase de la page 166 l'enonce. `pact` designe la magie de pacte du sorcier (occultiste), qui N'ENTRE PAS dans la somme : ses emplacements sont peu nombreux, toujours au niveau maximal, et recuperes au repos COURT (EX-RPG-052). Les additionner aux autres serait la faute la plus couteuse de cette regle.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "class": {
+            "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+          },
+          "progression": {
+            "type": "string",
+            "enum": [
+              "full",
+              "half",
+              "third",
+              "pact",
+              "none"
+            ]
+          }
+        },
+        "required": [
+          "class",
+          "progression"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "casterProgression",
+    "prerequisites",
+    "proficienciesGained",
+    "spellSlots"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ]
+}

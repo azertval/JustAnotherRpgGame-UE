@@ -1,0 +1,14 @@
+{
+  "id": "heros-du-peuple",
+  "name": "Héros du peuple",
+  "source": "srd",
+  "skillProficiencies": [
+    "animal-handling",
+    "survival"
+  ],
+  "feature": {
+    "name": "Hospitalité rustique",
+    "text": "Puisque vous venez des rangs du petit peuple, vous vous mêlez à eux avec facilité. Vous pouvez trouver un endroit pour vous cacher, vous reposer ou récupérer parmi les gens du peuple, à moins que vous ne représentiez un danger pour eux. Ils vous protégeront des autorités ou de toute autre personne, mais n'iront pas jusqu'à risquer leur vie pour vous."
+  },
+  "text": "Vous venez d'un milieu social humble, mais êtes destiné à beaucoup plus. Déjà, les gens de votre village natal vous considèrent comme leur champion, et votre destin vous appelle à vous dresser face aux tyrans et aux monstres qui menacent les gens du commun un peu partout."
+}

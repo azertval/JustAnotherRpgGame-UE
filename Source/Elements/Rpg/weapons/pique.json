@@ -1,0 +1,16 @@
+{
+  "id": "pique",
+  "name": "Pique",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d10",
+  "damageType": "piercing",
+  "weightGrams": 9000,
+  "price": 500,
+  "text": "Lourde, allonge, à deux mains",
+  "properties": [
+    "heavy",
+    "reach",
+    "two-handed"
+  ]
+}

@@ -1,0 +1,1274 @@
+{
+  "version": "research_V3_inputs_2026-10-07",
+  "status": "proposals_not_canonical_not_closed_trade_balance",
+  "source_model_sha256": "031f4aca3817f515432bb27370a87ae77da73702b0b44478e8ce94d047fa2164",
+  "calendar_days_year": 360,
+  "reference_daily_kcal_equivalent_human": 2400,
+  "daily_range_kcal": [
+    2100,
+    2800
+  ],
+  "species_factors_P": {
+    "humans": 1.0,
+    "gnomes": 0.7,
+    "halflings": 0.7,
+    "giants": 8.0,
+    "orcs": 1.15
+  },
+  "default_other_species_factor_P": 1,
+  "giant_energy_central_P": 8,
+  "giant_energy_sensitivity_P": [
+    4,
+    8,
+    16
+  ],
+  "giant_mass_rules_multiplier_DMGM_Huge": 16,
+  "crop_parameters_P": {
+    "cereal": {
+      "yield_t_ha": 0.8,
+      "yield_range": [
+        0.5,
+        1.2
+      ],
+      "seed_t_ha": 0.16,
+      "seed_range": [
+        0.12,
+        0.22
+      ],
+      "storage_loss": 0.08,
+      "edible_fraction": 0.95,
+      "human_allocation": 0.9,
+      "preparation_loss": 0.02,
+      "kcal_t": 3500000.0,
+      "kcal_range": [
+        3200000.0,
+        3800000.0
+      ],
+      "cropped_fraction": 0.6666666666666666,
+      "labour_days_ha": 65,
+      "labour_range": [
+        40,
+        100
+      ],
+      "net_kcal_cropped_ha": 1726744.32,
+      "net_kcal_rotation_ha": 1151162.88
+    },
+    "rice": {
+      "yield_t_ha": 1.5,
+      "yield_range": [
+        1.0,
+        2.3
+      ],
+      "seed_t_ha": 0.06,
+      "seed_range": [
+        0.03,
+        0.1
+      ],
+      "storage_loss": 0.08,
+      "edible_fraction": 0.67,
+      "human_allocation": 0.9,
+      "preparation_loss": 0.02,
+      "kcal_t": 3600000.0,
+      "kcal_range": [
+        3400000.0,
+        3840000.0
+      ],
+      "cropped_fraction": 1.0,
+      "labour_days_ha": 140,
+      "labour_range": [
+        100,
+        200
+      ],
+      "net_kcal_cropped_ha": 2818358.3232000005,
+      "net_kcal_rotation_ha": 2818358.3232000005
+    },
+    "roots": {
+      "yield_t_ha": 6.0,
+      "yield_range": [
+        3.0,
+        10.0
+      ],
+      "seed_t_ha": 0.8,
+      "seed_range": [
+        0.3,
+        1.2
+      ],
+      "storage_loss": 0.15,
+      "edible_fraction": 0.9,
+      "human_allocation": 0.9,
+      "preparation_loss": 0.02,
+      "kcal_t": 800000.0,
+      "kcal_range": [
+        650000.0,
+        1300000.0
+      ],
+      "cropped_fraction": 0.6666666666666666,
+      "labour_days_ha": 95,
+      "labour_range": [
+        60,
+        150
+      ],
+      "net_kcal_cropped_ha": 2806876.8,
+      "net_kcal_rotation_ha": 1871251.1999999997
+    },
+    "legumes": {
+      "yield_t_ha": 0.55,
+      "yield_range": [
+        0.3,
+        0.85
+      ],
+      "seed_t_ha": 0.08,
+      "seed_range": [
+        0.05,
+        0.12
+      ],
+      "storage_loss": 0.1,
+      "edible_fraction": 0.98,
+      "human_allocation": 0.9,
+      "preparation_loss": 0.02,
+      "kcal_t": 3400000.0,
+      "kcal_range": [
+        3000000.0,
+        3600000.0
+      ],
+      "cropped_fraction": 0.6666666666666666,
+      "labour_days_ha": 70,
+      "labour_range": [
+        40,
+        110
+      ],
+      "net_kcal_cropped_ha": 1243122.5520000001,
+      "net_kcal_rotation_ha": 828748.368
+    },
+    "orchard": {
+      "yield_t_ha": 6.0,
+      "yield_range": [
+        2.0,
+        10.0
+      ],
+      "seed_t_ha": 0.0,
+      "seed_range": [
+        0.0,
+        0.0
+      ],
+      "storage_loss": 0.25,
+      "edible_fraction": 0.9,
+      "human_allocation": 0.9,
+      "preparation_loss": 0.02,
+      "kcal_t": 550000.0,
+      "kcal_range": [
+        300000.0,
+        900000.0
+      ],
+      "cropped_fraction": 1.0,
+      "labour_days_ha": 110,
+      "labour_range": [
+        70,
+        180
+      ],
+      "net_kcal_cropped_ha": 1964655.0,
+      "net_kcal_rotation_ha": 1964655.0
+    }
+  },
+  "regional_calculations": [
+    {
+      "id": "empire",
+      "name": "Central Empire",
+      "population_source_approx": 2300000,
+      "species_energy_factor_proposed": 0.985,
+      "equivalent_humans": 2265500.0,
+      "annual_kcal_demand": 1957392000000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.7,
+        "rice": 0.0,
+        "roots": 0.08,
+        "legumes": 0.07,
+        "orchard": 0.04,
+        "livestock": 0.08,
+        "fish": 0.02,
+        "game": 0.01
+      },
+      "climate_yield_factor_proposed": 1.1,
+      "source_pages_context": [
+        90,
+        91
+      ],
+      "context_note": "Céréales et élevage attestés; terresfertiles. Surplus et export à mesurer, rôle grenier impérial pas rendement canonique.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 705334.7654851414,
+          "rotation_ha": 1058002.1482277121,
+          "yield_t_ha": 0.8800000000000001,
+          "net_kcal_cropped_ha": 1942587.36,
+          "labour_persondays": 45846759.75653419
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 1.6500000000000001,
+          "net_kcal_cropped_ha": 3111937.3152000005,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 50017.24827862179,
+          "rotation_ha": 75025.87241793268,
+          "yield_t_ha": 6.6000000000000005,
+          "net_kcal_cropped_ha": 3130747.2,
+          "labour_persondays": 4751638.58646907
+        },
+        "legumes": {
+          "cropped_ha": 98673.48299864162,
+          "rotation_ha": 148010.22449796242,
+          "yield_t_ha": 0.6050000000000001,
+          "net_kcal_cropped_ha": 1388594.3400000003,
+          "labour_persondays": 6907143.809904913
+        },
+        "orchard": {
+          "cropped_ha": 36229.20609933597,
+          "rotation_ha": 36229.20609933597,
+          "yield_t_ha": 6.6000000000000005,
+          "net_kcal_cropped_ha": 2161120.5,
+          "labour_persondays": 3985212.670926957
+        }
+      },
+      "cropland_rotation_ha": 1317267.4512429433,
+      "cropped_ha_per_year": 890254.7028617408,
+      "pasture_ha_separate_conservative": 949038.5454545454,
+      "land_total_crops_plus_pasture_ha": 2266305.9966974887,
+      "fish_whole_t_required": 55825.79679144384,
+      "freshwater_area_equivalent_ha_at_40kg": 1395644.919786096,
+      "crop_labour_fte_required": 256211.47843264637,
+      "crop_producers_model": 582490.7423231791,
+      "crop_labour_fte_available_proposed": 378618.9825100665,
+      "crop_labour_annual_coverage_ratio": 1.4777596414736702,
+      "seed_stock_t_for_next_year": 160761.2397404114,
+      "reserve_90days_full_energy_cereal_equivalent_t": 151971.42857142858,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "freelands",
+      "name": "Republic of Freelands",
+      "population_source_approx": 1700000,
+      "species_energy_factor_proposed": 0.988,
+      "equivalent_humans": 1679600.0,
+      "annual_kcal_demand": 1451174400000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.6,
+        "rice": 0.0,
+        "roots": 0.08,
+        "legumes": 0.08,
+        "orchard": 0.04,
+        "livestock": 0.1,
+        "fish": 0.06,
+        "game": 0.04
+      },
+      "climate_yield_factor_proposed": 1.0,
+      "source_pages_context": [
+        104,
+        105
+      ],
+      "context_note": "Disponibilités de sols variables/nouvelles communautés; importations et miseenculture prioritaires; Winterhold morts-vivants ajoutent travail, pas terres/kcal.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 504246.4190645202,
+          "rotation_ha": 756369.6285967804,
+          "yield_t_ha": 0.8,
+          "net_kcal_cropped_ha": 1726744.32,
+          "labour_persondays": 32776017.239193816
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 1.5,
+          "net_kcal_cropped_ha": 2818358.3232000005,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 41360.54421768708,
+          "rotation_ha": 62040.81632653062,
+          "yield_t_ha": 6.0,
+          "net_kcal_cropped_ha": 2806876.8,
+          "labour_persondays": 3929251.7006802727
+        },
+        "legumes": {
+          "cropped_ha": 93388.9839044606,
+          "rotation_ha": 140083.47585669093,
+          "yield_t_ha": 0.55,
+          "net_kcal_cropped_ha": 1243122.5520000001,
+          "labour_persondays": 6537228.873312242
+        },
+        "orchard": {
+          "cropped_ha": 29545.633202776058,
+          "rotation_ha": 29545.633202776058,
+          "yield_t_ha": 6.0,
+          "net_kcal_cropped_ha": 1964655.0,
+          "labour_persondays": 3250019.6523053665
+        }
+      },
+      "cropland_rotation_ha": 988039.553982778,
+      "cropped_ha_per_year": 668541.580389444,
+      "pasture_ha_separate_conservative": 967449.6,
+      "land_total_crops_plus_pasture_ha": 1955489.153982778,
+      "fish_whole_t_required": 124164.65454545453,
+      "freshwater_area_equivalent_ha_at_40kg": 3104116.3636363633,
+      "crop_labour_fte_required": 193718.82277288206,
+      "crop_producers_model": 199469.93347019315,
+      "crop_labour_fte_available_proposed": 129655.45675562555,
+      "crop_labour_annual_coverage_ratio": 0.6692971539871215,
+      "seed_stock_t_for_next_year": 121238.98113682975,
+      "reserve_90days_full_energy_cereal_equivalent_t": 112668.81987577639,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "bennet",
+      "name": "Imperial Ben’net",
+      "population_source_approx": 445000,
+      "species_energy_factor_proposed": 1.0,
+      "equivalent_humans": 445000.0,
+      "annual_kcal_demand": 384480000000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.25,
+        "rice": 0.0,
+        "roots": 0.25,
+        "legumes": 0.05,
+        "orchard": 0.0,
+        "livestock": 0.3,
+        "fish": 0.1,
+        "game": 0.05
+      },
+      "climate_yield_factor_proposed": 0.6,
+      "source_pages_context": [
+        120,
+        121
+      ],
+      "context_note": "Tubercules/élevage/pêche attestés, communautés cirrus autosuffisantes localement. Part céréales candidate25% doit souvent être importée; isolément certains villages peuvent remplacer céréales par tubercules.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 111330.90045433014,
+          "rotation_ha": 166996.3506814952,
+          "yield_t_ha": 0.48,
+          "net_kcal_cropped_ha": 863372.16,
+          "labour_persondays": 7236508.529531459
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 0.8999999999999999,
+          "net_kcal_cropped_ha": 1644042.3552,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 63596.867318355915,
+          "rotation_ha": 95395.30097753387,
+          "yield_t_ha": 3.5999999999999996,
+          "net_kcal_cropped_ha": 1511395.2,
+          "labour_persondays": 6041702.395243812
+        },
+        "legumes": {
+          "cropped_ha": 29072.853631248418,
+          "rotation_ha": 43609.28044687263,
+          "yield_t_ha": 0.33,
+          "net_kcal_cropped_ha": 661235.4,
+          "labour_persondays": 2035099.7541873893
+        },
+        "orchard": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 3.5999999999999996,
+          "net_kcal_cropped_ha": 1178792.9999999998,
+          "labour_persondays": 0
+        }
+      },
+      "cropland_rotation_ha": 306000.9321059017,
+      "cropped_ha_per_year": 204000.62140393446,
+      "pasture_ha_separate_conservative": 1281600.0,
+      "land_total_crops_plus_pasture_ha": 1587600.9321059017,
+      "fish_whole_t_required": 54827.807486631005,
+      "freshwater_area_equivalent_ha_at_40kg": 1370695.187165775,
+      "crop_labour_fte_required": 63805.46116234443,
+      "crop_producers_model": 10673.68489640321,
+      "crop_labour_fte_available_proposed": 6937.895182662087,
+      "crop_labour_annual_coverage_ratio": 0.10873513107302123,
+      "seed_stock_t_for_next_year": 71016.26621787743,
+      "reserve_90days_full_energy_cereal_equivalent_t": 29850.93167701863,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "kolbjorn",
+      "name": "Kingdom of Kolbjörn",
+      "population_source_approx": 720000,
+      "species_energy_factor_proposed": 1.7,
+      "equivalent_humans": 1224000.0,
+      "annual_kcal_demand": 1057536000000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.4,
+        "rice": 0.0,
+        "roots": 0.15,
+        "legumes": 0.05,
+        "orchard": 0.0,
+        "livestock": 0.2,
+        "fish": 0.15,
+        "game": 0.05
+      },
+      "climate_yield_factor_proposed": 0.75,
+      "source_pages_context": [
+        128,
+        129
+      ],
+      "context_note": "Froid saisonnier, pêche profonde possible et géants10% créent forte demande; pâture/hiver et transport fourrages contraignants.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 356331.6616134997,
+          "rotation_ha": 534497.4924202496,
+          "yield_t_ha": 0.6000000000000001,
+          "net_kcal_cropped_ha": 1187136.7200000002,
+          "labour_persondays": 23161558.004877478
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 1.125,
+          "net_kcal_cropped_ha": 2084410.8432000002,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 79426.36514065084,
+          "rotation_ha": 119139.54771097627,
+          "yield_t_ha": 4.5,
+          "net_kcal_cropped_ha": 1997200.8000000003,
+          "labour_persondays": 7545504.68836183
+        },
+        "legumes": {
+          "cropped_ha": 60125.323721632274,
+          "rotation_ha": 90187.98558244841,
+          "yield_t_ha": 0.41250000000000003,
+          "net_kcal_cropped_ha": 879443.082,
+          "labour_persondays": 4208772.660514259
+        },
+        "orchard": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 4.5,
+          "net_kcal_cropped_ha": 1473491.25,
+          "labour_persondays": 0
+        }
+      },
+      "cropland_rotation_ha": 743825.0257136743,
+      "cropped_ha_per_year": 495883.3504757828,
+      "pasture_ha_separate_conservative": 1880064.0,
+      "land_total_crops_plus_pasture_ha": 2623889.0257136743,
+      "fish_whole_t_required": 226210.90909090906,
+      "freshwater_area_equivalent_ha_at_40kg": 5655272.727272727,
+      "crop_labour_fte_required": 145482.64730730653,
+      "crop_producers_model": 18698.282514662817,
+      "crop_labour_fte_available_proposed": 12153.883634530832,
+      "crop_labour_annual_coverage_ratio": 0.08354180968990678,
+      "seed_stock_t_for_next_year": 125364.1838684112,
+      "reserve_90days_full_energy_cereal_equivalent_t": 82106.83229813664,
+      "giants_sensitivity": {
+        "4": {
+          "equivalent_humans": 936000.0,
+          "annual_kcal": 808704000000.0,
+          "cropland_rotation_ha_same_diet": 568807.3726045744,
+          "pasture_ha_same_diet": 1437696.0000000002
+        },
+        "8": {
+          "equivalent_humans": 1224000.0,
+          "annual_kcal": 1057536000000.0,
+          "cropland_rotation_ha_same_diet": 743825.0257136743,
+          "pasture_ha_same_diet": 1880064.0
+        },
+        "16": {
+          "equivalent_humans": 1800000.0,
+          "annual_kcal": 1555200000000.0,
+          "cropland_rotation_ha_same_diet": 1093860.331931874,
+          "pasture_ha_same_diet": 2764800.0
+        }
+      },
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "magocracy",
+      "name": "Magocracy of Mage Tower",
+      "population_source_approx": 867000,
+      "species_energy_factor_proposed": 1.0,
+      "equivalent_humans": 867000.0,
+      "annual_kcal_demand": 749088000000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.6,
+        "rice": 0.0,
+        "roots": 0.1,
+        "legumes": 0.1,
+        "orchard": 0.05,
+        "livestock": 0.05,
+        "fish": 0.09,
+        "game": 0.01
+      },
+      "climate_yield_factor_proposed": 1.0,
+      "source_pages_context": [
+        138,
+        139
+      ],
+      "context_note": "Pêche eau douce et agriculture de vallées, beaucoup denonmage travailleurs. Magie réseau ne prouve pas agriculture améliorée; importer vivrier en tours/campus.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 260289.14344423614,
+          "rotation_ha": 390433.7151663542,
+          "yield_t_ha": 0.8,
+          "net_kcal_cropped_ha": 1726744.32,
+          "labour_persondays": 16918794.32387535
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 1.5,
+          "net_kcal_cropped_ha": 2818358.3232000005,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 26687.598116169545,
+          "rotation_ha": 40031.39717425432,
+          "yield_t_ha": 6.0,
+          "net_kcal_cropped_ha": 2806876.8,
+          "labour_persondays": 2535321.821036107
+        },
+        "legumes": {
+          "cropped_ha": 60258.58020151177,
+          "rotation_ha": 90387.87030226766,
+          "yield_t_ha": 0.55,
+          "net_kcal_cropped_ha": 1243122.5520000001,
+          "labour_persondays": 4218100.614105824
+        },
+        "orchard": {
+          "cropped_ha": 19064.11049268192,
+          "rotation_ha": 19064.11049268192,
+          "yield_t_ha": 6.0,
+          "net_kcal_cropped_ha": 1964655.0,
+          "labour_persondays": 2097052.1541950114
+        }
+      },
+      "cropland_rotation_ha": 539917.0931355581,
+      "cropped_ha_per_year": 366299.43225459935,
+      "pasture_ha_separate_conservative": 249696.0,
+      "land_total_crops_plus_pasture_ha": 789613.0931355581,
+      "fish_whole_t_required": 96139.63636363635,
+      "freshwater_area_equivalent_ha_at_40kg": 2403490.9090909087,
+      "crop_labour_fte_required": 107371.95380505122,
+      "crop_producers_model": 162489.6614895838,
+      "crop_labour_fte_available_proposed": 105618.27996822949,
+      "crop_labour_annual_coverage_ratio": 0.9836673006807181,
+      "seed_stock_t_for_next_year": 67817.02786013436,
+      "reserve_90days_full_energy_cereal_equivalent_t": 58159.00621118012,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "seashores",
+      "name": "Seashores",
+      "population_source_approx": 617000,
+      "species_energy_factor_proposed": 0.964,
+      "equivalent_humans": 594788.0,
+      "annual_kcal_demand": 513896832000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.45,
+        "rice": 0.0,
+        "roots": 0.15,
+        "legumes": 0.08,
+        "orchard": 0.07,
+        "livestock": 0.05,
+        "fish": 0.19,
+        "game": 0.01
+      },
+      "climate_yield_factor_proposed": 1.0,
+      "source_pages_context": [
+        146,
+        147
+      ],
+      "context_note": "Pêche et conservation centrales, îles agricoles seulement oùsol; grain importé plausible; forte part pêcheurs ne signifie pas caloriesinfinies.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 133924.6185561508,
+          "rotation_ha": 200886.9278342262,
+          "yield_t_ha": 0.8,
+          "net_kcal_cropped_ha": 1726744.32,
+          "labour_persondays": 8705100.206149802
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 1.5,
+          "net_kcal_cropped_ha": 2818358.3232000005,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 27462.73894173054,
+          "rotation_ha": 41194.10841259581,
+          "yield_t_ha": 6.0,
+          "net_kcal_cropped_ha": 2806876.8,
+          "labour_persondays": 2608960.199464401
+        },
+        "legumes": {
+          "cropped_ha": 33071.35446449531,
+          "rotation_ha": 49607.03169674296,
+          "yield_t_ha": 0.55,
+          "net_kcal_cropped_ha": 1243122.5520000001,
+          "labour_persondays": 2314994.8125146716
+        },
+        "orchard": {
+          "cropped_ha": 18309.972101972104,
+          "rotation_ha": 18309.972101972104,
+          "yield_t_ha": 6.0,
+          "net_kcal_cropped_ha": 1964655.0,
+          "labour_persondays": 2014096.9312169314
+        }
+      },
+      "cropland_rotation_ha": 309998.04004553705,
+      "cropped_ha_per_year": 212768.68406434875,
+      "pasture_ha_separate_conservative": 171298.944,
+      "land_total_crops_plus_pasture_ha": 481296.9840455371,
+      "fish_whole_t_required": 139237.6443208556,
+      "freshwater_area_equivalent_ha_at_40kg": 3480941.1080213897,
+      "crop_labour_fte_required": 65179.80062227419,
+      "crop_producers_model": 1113.9766973380915,
+      "crop_labour_fte_available_proposed": 724.0848532697595,
+      "crop_labour_annual_coverage_ratio": 0.011109037560055296,
+      "seed_stock_t_for_next_year": 46043.83847952818,
+      "reserve_90days_full_energy_cereal_equivalent_t": 39898.82236024844,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "sindile",
+      "name": "Sindile Forest",
+      "population_source_approx": 432000,
+      "species_energy_factor_proposed": 0.991,
+      "equivalent_humans": 428112.0,
+      "annual_kcal_demand": 369888768000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.2,
+        "rice": 0.0,
+        "roots": 0.25,
+        "legumes": 0.15,
+        "orchard": 0.3,
+        "livestock": 0.02,
+        "fish": 0.04,
+        "game": 0.04
+      },
+      "climate_yield_factor_proposed": 0.85,
+      "source_pages_context": [
+        152,
+        153
+      ],
+      "context_note": "Végétarisme majoritaire, miel/bois et rarités; sols dansombre ne deviennent pas champs céréaliers. Terres ci-dessous équivalent champs/jardins entretenus, ni toute forêt ni magiegratuite.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 52729.02411649901,
+          "rotation_ha": 79093.53617474851,
+          "yield_t_ha": 0.68,
+          "net_kcal_cropped_ha": 1402979.7600000002,
+          "labour_persondays": 3427386.5675724354
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 1.275,
+          "net_kcal_cropped_ha": 2377989.8352,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 39840.30821630978,
+          "rotation_ha": 59760.46232446467,
+          "yield_t_ha": 5.1,
+          "net_kcal_cropped_ha": 2321071.2,
+          "labour_persondays": 3784829.280549429
+        },
+        "legumes": {
+          "cropped_ha": 54134.559682991036,
+          "rotation_ha": 81201.83952448655,
+          "yield_t_ha": 0.4675,
+          "net_kcal_cropped_ha": 1024914.87,
+          "labour_persondays": 3789419.1778093725
+        },
+        "orchard": {
+          "cropped_ha": 66448.80497653606,
+          "rotation_ha": 66448.80497653606,
+          "yield_t_ha": 5.1,
+          "net_kcal_cropped_ha": 1669956.75,
+          "labour_persondays": 7309368.547418967
+        }
+      },
+      "cropland_rotation_ha": 286504.6430002358,
+      "cropped_ha_per_year": 213152.6969923359,
+      "pasture_ha_separate_conservative": 58021.767529411765,
+      "land_total_crops_plus_pasture_ha": 344526.41052964755,
+      "fish_whole_t_required": 21098.824556149728,
+      "freshwater_area_equivalent_ha_at_40kg": 527470.6139037432,
+      "crop_labour_fte_required": 76295.84822229252,
+      "crop_producers_model": 111556.80317824773,
+      "crop_labour_fte_available_proposed": 72511.92206586103,
+      "crop_labour_annual_coverage_ratio": 0.9504045600829183,
+      "seed_stock_t_for_next_year": 44639.65520632695,
+      "reserve_90days_full_energy_cereal_equivalent_t": 28718.07204968944,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "stravian",
+      "name": "Stravian Domains",
+      "population_source_approx": 960000,
+      "species_energy_factor_proposed": 0.9460000000000001,
+      "equivalent_humans": 908160.0000000001,
+      "annual_kcal_demand": 784650240000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.65,
+        "rice": 0.0,
+        "roots": 0.1,
+        "legumes": 0.1,
+        "orchard": 0.07,
+        "livestock": 0.05,
+        "fish": 0.02,
+        "game": 0.01
+      },
+      "climate_yield_factor_proposed": 1.05,
+      "source_pages_context": [
+        160,
+        161
+      ],
+      "context_note": "Halfelins vergers et fermes granary explicit; déficit animaux/cuir. Estimer surface fey améliorée et travailleurs avant multiplier rendement.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 277992.1252580797,
+          "rotation_ha": 416988.18788711954,
+          "yield_t_ha": 0.8400000000000001,
+          "net_kcal_cropped_ha": 1834665.84,
+          "labour_persondays": 18069488.14177518
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 1.5750000000000002,
+          "net_kcal_cropped_ha": 2965147.8192000003,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 26429.7719087635,
+          "rotation_ha": 39644.65786314526,
+          "yield_t_ha": 6.300000000000001,
+          "net_kcal_cropped_ha": 2968812.0000000005,
+          "labour_persondays": 2510828.3313325327
+        },
+        "legumes": {
+          "cropped_ha": 59630.29248208358,
+          "rotation_ha": 89445.43872312538,
+          "yield_t_ha": 0.5775000000000001,
+          "net_kcal_cropped_ha": 1315858.4460000002,
+          "labour_persondays": 4174120.473745851
+        },
+        "orchard": {
+          "cropped_ha": 26625.54799697657,
+          "rotation_ha": 26625.54799697657,
+          "yield_t_ha": 6.300000000000001,
+          "net_kcal_cropped_ha": 2062887.7500000002,
+          "labour_persondays": 2928810.2796674226
+        }
+      },
+      "cropland_rotation_ha": 572703.8324703667,
+      "cropped_ha_per_year": 390677.7376459033,
+      "pasture_ha_separate_conservative": 249095.3142857143,
+      "land_total_crops_plus_pasture_ha": 821799.146756081,
+      "fish_whole_t_required": 22378.616470588233,
+      "freshwater_area_equivalent_ha_at_40kg": 559465.4117647058,
+      "crop_labour_fte_required": 115346.86344383744,
+      "crop_producers_model": 297916.337759106,
+      "crop_labour_fte_available_proposed": 193645.61954341893,
+      "crop_labour_annual_coverage_ratio": 1.678811315382713,
+      "seed_stock_t_for_next_year": 70392.98096687024,
+      "reserve_90days_full_energy_cereal_equivalent_t": 60920.04968944099,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "storm",
+      "name": "Storm Islands",
+      "population_source_approx": 386000,
+      "species_energy_factor_proposed": 1.0,
+      "equivalent_humans": 386000.0,
+      "annual_kcal_demand": 333504000000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.55,
+        "rice": 0.0,
+        "roots": 0.25,
+        "legumes": 0.05,
+        "orchard": 0.0,
+        "livestock": 0.05,
+        "fish": 0.08,
+        "game": 0.02
+      },
+      "climate_yield_factor_proposed": 0.5,
+      "source_pages_context": [
+        168,
+        169,
+        170
+      ],
+      "context_note": "Céréales/tubercules/pêche avancée, quasiauautosuffisance explicit, rares producteurs vivants car undead réalisent travail. Leurs ETPdoivent être chiffrés avant valider.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 283272.51135825366,
+          "rotation_ha": 424908.7670373805,
+          "yield_t_ha": 0.4,
+          "net_kcal_cropped_ha": 647529.12,
+          "labour_persondays": 18412713.238286488
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 0.75,
+          "net_kcal_cropped_ha": 1350463.3632,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 70209.90214267524,
+          "rotation_ha": 105314.85321401287,
+          "yield_t_ha": 3.0,
+          "net_kcal_cropped_ha": 1187524.8,
+          "labour_persondays": 6669940.703554148
+        },
+        "legumes": {
+          "cropped_ha": 32331.0904686312,
+          "rotation_ha": 48496.6357029468,
+          "yield_t_ha": 0.275,
+          "net_kcal_cropped_ha": 515763.612,
+          "labour_persondays": 2263176.332804184
+        },
+        "orchard": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 3.0,
+          "net_kcal_cropped_ha": 982327.5,
+          "labour_persondays": 0
+        }
+      },
+      "cropland_rotation_ha": 578720.2559543401,
+      "cropped_ha_per_year": 385813.5039695601,
+      "pasture_ha_separate_conservative": 222336.0,
+      "land_total_crops_plus_pasture_ha": 801056.2559543401,
+      "fish_whole_t_required": 38046.80213903743,
+      "freshwater_area_equivalent_ha_at_40kg": 951170.0534759357,
+      "crop_labour_fte_required": 113940.95947768675,
+      "crop_producers_model": 4878.81102583818,
+      "crop_labour_fte_available_proposed": 3171.227166794817,
+      "crop_labour_annual_coverage_ratio": 0.027832196440436715,
+      "seed_stock_t_for_next_year": 104078.01076895128,
+      "reserve_90days_full_energy_cereal_equivalent_t": 25893.167701863353,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "taiimaku",
+      "name": "Taii’Maku City States",
+      "population_source_approx": 698000,
+      "species_energy_factor_proposed": 1.0,
+      "equivalent_humans": 698000.0,
+      "annual_kcal_demand": 603072000000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.6,
+        "rice": 0.0,
+        "roots": 0.1,
+        "legumes": 0.1,
+        "orchard": 0.05,
+        "livestock": 0.1,
+        "fish": 0.04,
+        "game": 0.01
+      },
+      "climate_yield_factor_proposed": 0.45,
+      "source_pages_context": [
+        174,
+        175,
+        178
+      ],
+      "context_note": "Illus mouvantes et golems; agriculture hors wagon ou imports/foodmagic requis. P coefficientaride. Ne pas créer champs sous mobilecity dans chaque désert.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 670567.278889326,
+          "rotation_ha": 1005850.9183339891,
+          "yield_t_ha": 0.36000000000000004,
+          "net_kcal_cropped_ha": 539607.6000000002,
+          "labour_persondays": 43586873.127806194
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 0.675,
+          "net_kcal_cropped_ha": 1203673.8671999997,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 58802.46835576335,
+          "rotation_ha": 88203.70253364503,
+          "yield_t_ha": 2.7,
+          "net_kcal_cropped_ha": 1025589.6000000002,
+          "labour_persondays": 5586234.493797518
+        },
+        "legumes": {
+          "cropped_ha": 136125.11711964707,
+          "rotation_ha": 204187.67567947062,
+          "yield_t_ha": 0.24750000000000003,
+          "net_kcal_cropped_ha": 443027.71800000017,
+          "labour_persondays": 9528758.198375294
+        },
+        "orchard": {
+          "cropped_ha": 34106.75156706902,
+          "rotation_ha": 34106.75156706902,
+          "yield_t_ha": 2.7,
+          "net_kcal_cropped_ha": 884094.7500000002,
+          "labour_persondays": 3751742.672377592
+        }
+      },
+      "cropland_rotation_ha": 1332349.0481141738,
+      "cropped_ha_per_year": 899601.6159318055,
+      "pasture_ha_separate_conservative": 893440.0,
+      "land_total_crops_plus_pasture_ha": 2225789.048114174,
+      "fish_whole_t_required": 34399.82887700534,
+      "freshwater_area_equivalent_ha_at_40kg": 859995.7219251335,
+      "crop_labour_fte_required": 260223.3687181525,
+      "crop_producers_model": 30681.138113094574,
+      "crop_labour_fte_available_proposed": 19942.739773511472,
+      "crop_labour_annual_coverage_ratio": 0.07663700563000328,
+      "seed_stock_t_for_next_year": 165222.7486764746,
+      "reserve_90days_full_energy_cereal_equivalent_t": 46822.3602484472,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "kepesh",
+      "name": "Theocracy of Kepesh",
+      "population_source_approx": 695000,
+      "species_energy_factor_proposed": 1.0,
+      "equivalent_humans": 695000.0,
+      "annual_kcal_demand": 600480000000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.6,
+        "rice": 0.0,
+        "roots": 0.05,
+        "legumes": 0.1,
+        "orchard": 0.1,
+        "livestock": 0.1,
+        "fish": 0.04,
+        "game": 0.01
+      },
+      "climate_yield_factor_proposed": 0.6,
+      "source_pages_context": [
+        182,
+        183
+      ],
+      "context_note": "Bétail/déserts/vallées irriguées: coefficientcentral suppose oasis/irrigation localisées; sol sec non irrigué n’a pas cesrendements.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 417303.2403546577,
+          "rotation_ha": 625954.8605319866,
+          "yield_t_ha": 0.48,
+          "net_kcal_cropped_ha": 863372.16,
+          "labour_persondays": 27124710.62305275
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 0.8999999999999999,
+          "net_kcal_cropped_ha": 1644042.3552,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 19865.088892699936,
+          "rotation_ha": 29797.633339049906,
+          "yield_t_ha": 3.5999999999999996,
+          "net_kcal_cropped_ha": 1511395.2,
+          "labour_persondays": 1887183.4448064938
+        },
+        "legumes": {
+          "cropped_ha": 90811.83493805685,
+          "rotation_ha": 136217.7524070853,
+          "yield_t_ha": 0.33,
+          "net_kcal_cropped_ha": 661235.4,
+          "labour_persondays": 6356828.44566398
+        },
+        "orchard": {
+          "cropped_ha": 50940.241416431905,
+          "rotation_ha": 50940.241416431905,
+          "yield_t_ha": 3.5999999999999996,
+          "net_kcal_cropped_ha": 1178792.9999999998,
+          "labour_persondays": 5603426.555807509
+        }
+      },
+      "cropland_rotation_ha": 842910.4876945537,
+      "cropped_ha_per_year": 578920.4056018464,
+      "pasture_ha_separate_conservative": 667200.0,
+      "land_total_crops_plus_pasture_ha": 1510110.4876945536,
+      "fish_whole_t_required": 34251.978609625665,
+      "freshwater_area_equivalent_ha_at_40kg": 856299.4652406416,
+      "crop_labour_fte_required": 170717.28778887805,
+      "crop_producers_model": 43035.0223194176,
+      "crop_labour_fte_available_proposed": 27972.76450762144,
+      "crop_labour_annual_coverage_ratio": 0.16385431651312715,
+      "seed_stock_t_for_next_year": 89925.53636594974,
+      "reserve_90days_full_energy_cereal_equivalent_t": 46621.11801242236,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "tsvetan",
+      "name": "Tsvetan",
+      "population_source_approx": 468000,
+      "species_energy_factor_proposed": 1.132,
+      "equivalent_humans": 529776.0,
+      "annual_kcal_demand": 457726463999.99994,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.4,
+        "rice": 0.0,
+        "roots": 0.15,
+        "legumes": 0.1,
+        "orchard": 0.05,
+        "livestock": 0.2,
+        "fish": 0.03,
+        "game": 0.07
+      },
+      "climate_yield_factor_proposed": 0.65,
+      "source_pages_context": [
+        190,
+        191
+      ],
+      "context_note": "Sec/roche/élevage/chasse; plafonner gibier. Faible céréaleslocales peut exiger import; rogner7% game diet si milieu insuffisant.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 188501.77795864994,
+          "rotation_ha": 282752.6669379749,
+          "yield_t_ha": 0.52,
+          "net_kcal_cropped_ha": 971293.68,
+          "labour_persondays": 12252615.567312246
+        },
+        "rice": {
+          "cropped_ha": 0,
+          "rotation_ha": 0.0,
+          "yield_t_ha": 0.9750000000000001,
+          "net_kcal_cropped_ha": 1790831.8512000004,
+          "labour_persondays": 0
+        },
+        "roots": {
+          "cropped_ha": 41031.32866049644,
+          "rotation_ha": 61546.99299074466,
+          "yield_t_ha": 3.9000000000000004,
+          "net_kcal_cropped_ha": 1673330.4000000004,
+          "labour_persondays": 3897976.2227471615
+        },
+        "legumes": {
+          "cropped_ha": 62362.99263224319,
+          "rotation_ha": 93544.4889483648,
+          "yield_t_ha": 0.35750000000000004,
+          "net_kcal_cropped_ha": 733971.294,
+          "labour_persondays": 4365409.484257024
+        },
+        "orchard": {
+          "cropped_ha": 17921.583178726032,
+          "rotation_ha": 17921.583178726032,
+          "yield_t_ha": 3.9000000000000004,
+          "net_kcal_cropped_ha": 1277025.7500000002,
+          "labour_persondays": 1971374.1496598634
+        }
+      },
+      "cropland_rotation_ha": 455765.7320558104,
+      "cropped_ha_per_year": 309817.6824301156,
+      "pasture_ha_separate_conservative": 938926.08,
+      "land_total_crops_plus_pasture_ha": 1394691.8120558104,
+      "fish_whole_t_required": 19581.880812834217,
+      "freshwater_area_equivalent_ha_at_40kg": 489547.02032085543,
+      "crop_labour_fte_required": 93697.39759990123,
+      "crop_producers_model": 78111.04481958045,
+      "crop_labour_fte_available_proposed": 50772.179132727295,
+      "crop_labour_annual_coverage_ratio": 0.5418739520336562,
+      "seed_stock_t_for_next_year": 67974.3868123606,
+      "reserve_90days_full_energy_cereal_equivalent_t": 35537.76894409937,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    },
+    {
+      "id": "yama",
+      "name": "Yama",
+      "population_source_approx": 793000,
+      "species_energy_factor_proposed": 1.0,
+      "equivalent_humans": 793000.0,
+      "annual_kcal_demand": 685152000000.0,
+      "diet_calorie_shares_proposed": {
+        "cereal": 0.1,
+        "rice": 0.6,
+        "roots": 0.05,
+        "legumes": 0.07,
+        "orchard": 0.05,
+        "livestock": 0.06,
+        "fish": 0.06,
+        "game": 0.01
+      },
+      "climate_yield_factor_proposed": 1.0,
+      "source_pages_context": [
+        198,
+        199
+      ],
+      "context_note": "Riz humidité/plaines très cohérents, soie et thé horscalories. Rendement paddy manuel1.5t/ha pas hybrides modernes.",
+      "crop_areas_minimum_for_candidate_diet": {
+        "cereal": {
+          "cropped_ha": 39678.833285520814,
+          "rotation_ha": 59518.24992828122,
+          "yield_t_ha": 0.8,
+          "net_kcal_cropped_ha": 1726744.32,
+          "labour_persondays": 2579124.163558853
+        },
+        "rice": {
+          "cropped_ha": 145861.9355161489,
+          "rotation_ha": 145861.9355161489,
+          "yield_t_ha": 1.5,
+          "net_kcal_cropped_ha": 2818358.3232000005,
+          "labour_persondays": 20420670.972260844
+        },
+        "roots": {
+          "cropped_ha": 12204.881952781114,
+          "rotation_ha": 18307.32292917167,
+          "yield_t_ha": 6.0,
+          "net_kcal_cropped_ha": 2806876.8,
+          "labour_persondays": 1159463.7855142057
+        },
+        "legumes": {
+          "cropped_ha": 38580.78185681568,
+          "rotation_ha": 57871.17278522352,
+          "yield_t_ha": 0.55,
+          "net_kcal_cropped_ha": 1243122.5520000001,
+          "labour_persondays": 2700654.7299770974
+        },
+        "orchard": {
+          "cropped_ha": 17436.95457981172,
+          "rotation_ha": 17436.95457981172,
+          "yield_t_ha": 6.0,
+          "net_kcal_cropped_ha": 1964655.0,
+          "labour_persondays": 1918065.0037792893
+        }
+      },
+      "cropland_rotation_ha": 298995.635738637,
+      "cropped_ha_per_year": 253763.38719107822,
+      "pasture_ha_separate_conservative": 274060.8,
+      "land_total_crops_plus_pasture_ha": 573056.435738637,
+      "fish_whole_t_required": 58622.63101604277,
+      "freshwater_area_equivalent_ha_at_40kg": 1465565.775401069,
+      "crop_labour_fte_required": 119908.24439620953,
+      "crop_producers_model": 315741.29465257534,
+      "crop_labour_fte_available_proposed": 205231.84152417397,
+      "crop_labour_annual_coverage_ratio": 1.7115740669676724,
+      "seed_stock_t_for_next_year": 27950.69756742241,
+      "reserve_90days_full_energy_cereal_equivalent_t": 53195.03105590062,
+      "giants_sensitivity": {},
+      "interpretation": "Conditionnel sans surplus/exports, sécurité/aninitial, marinedisponible ni sortmagique; alimentation autoproduite au régimeP, importsubstitue surfacesàorigine. Tests sols/ETP annuels/pics etnutrition indispensables."
+    }
+  ],
+  "unknown_regions": [
+    {
+      "id": "undertanares",
+      "population": null,
+      "report_per_10000_equivalent_humans_kcal": 8640000000.0,
+      "interpretation": "Ajouter coefficientvivants/espèces connus etpipeline alimentaire avant calculabsolu; Mystical undead non assimilés auxhumainsvivants"
+    },
+    {
+      "id": "darkall",
+      "population": null,
+      "report_per_10000_equivalent_humans_kcal": 8640000000.0,
+      "interpretation": "Ajouter coefficientvivants/espèces connus etpipeline alimentaire avant calculabsolu; Mystical undead non assimilés auxhumainsvivants"
+    },
+    {
+      "id": "mystical",
+      "population": null,
+      "report_per_10000_equivalent_humans_kcal": 8640000000.0,
+      "interpretation": "Ajouter coefficientvivants/espèces connus etpipeline alimentaire avant calculabsolu; Mystical undead non assimilés auxhumainsvivants"
+    }
+  ],
+  "labour": {
+    "days_year_FTE": 240,
+    "hours_day": 8,
+    "FTE_per_counted_primary_producer_P": 0.65,
+    "range_FTE_per_counted_producer_P": [
+      0.45,
+      0.85
+    ],
+    "cereal_monthly_labour_shares_P": [
+      0.02,
+      0.04,
+      0.14,
+      0.12,
+      0.12,
+      0.08,
+      0.15,
+      0.2,
+      0.09,
+      0.03,
+      0.01,
+      0.0
+    ],
+    "max_fieldwork_days_month_P": 20,
+    "traction_required": "bœufs/chevaux manuels, charrues, faucilles, aucun machinisme industriel; journéesanimaux +fourrages séparés"
+  },
+  "sources": {
+    "medieval_yields": {
+      "url": "https://www.bahs.org.uk/crop-yields-database/the-data/",
+      "role": "Dataset original Campbell/Farmer sur comptes seigneuriaux; variabilité, semences et données par récolte. Calibrages centraux du jeu P, non moyenne calculée du dataset."
+    },
+    "yield_chronologies": {
+      "url": "https://www.bahs.org.uk/crop-yields-database/chronologies/",
+      "role": "Séries temporelles historiques, utiles aux scénarios mauvaises récoltes; aucune variance importée ici."
+    },
+    "adult_energy": {
+      "url": "https://www.fao.org/4/y5686e/y5686e07.htm",
+      "role": "FAO/WHO/UNU2004 adultes : BMR×PAL; PAL léger1.40–1.69, modéré1.70–1.99, lourd2.00–2.40; exemple travail agricole non mécanisé3925kcal/j pour homme70kg."
+    },
+    "child_energy": {
+      "url": "https://www.fao.org/4/y5686e/y5686e06.htm",
+      "role": "Besoins enfant/adolescent selon âge/croissance/activité; la pyramide de Tanares n’est pas publiée."
+    },
+    "losses": {
+      "url": "https://www.fao.org/4/t0522e/t0522e04.htm",
+      "role": "Pertes céréales/légumineuses souvent10–15% après récolte; pertes varient selon étape, poids sec vs humidité à distinguer. Paramètres jeu P."
+    },
+    "energy_density": {
+      "url": "https://www.fao.org/4/t0567e/T0567E0d.htm",
+      "role": "Table24 distingue grainssecs et racineshumides; exemple rizbrun384kcal/100g, blé375, pomme de terre70, yam98. Densités conservatrices P ici."
+    },
+    "rice_historical_boundary": {
+      "url": "https://www.fao.org/agriculture/crops/thematic-sitemap/theme/spi/scpi-home/managing-ecosystems/sustainable-rice-systems/rice-how/en/",
+      "role": "Avant1950 rizindica rarement >2.5t/ha; ne pas utiliser10t/ha des variétés modernes. Riz1.5t/ha P pas mesure médiévale Yama."
+    },
+    "rice_labour": {
+      "url": "https://www.fao.org/4/T0715E/t0715e06.htm",
+      "role": "Exemple petit exploitant riz : 150j-personnes/ha avec buffles et200sans;140P de Tanares testé100–200."
+    },
+    "manual_harvest": {
+      "url": "https://www.fao.org/4/t0522e/t0522e05.htm",
+      "role": "Riz faucille80–160h/ha à seule récolte; ne pas assimiler à année complète."
+    },
+    "fish_capacity": {
+      "url": "https://www.fao.org/4/y2785e/y2785e02.htm",
+      "role": "Modèles/données de captures et productivité eauxintérieures très variables, petitscours5–20kg/ha et grandslacs10–100. Ne pas transposer aquaculture intensive400–9300kg/ha à pêche médiévale."
+    },
+    "fish_edible_energy": {
+      "url": "https://www.fao.org/4/T0219E/T0219E02.htm",
+      "role": "Compilation FAO données originales fractioncomestible/composition, forte variation espèces/saison; distinguer poisson entier et chair, séchage ne crée pas kcal."
+    },
+    "milk_traditional": {
+      "url": "https://www.fao.org/4/t0251e/T0251E02.htm",
+      "role": "Lait disponible après veau : souvent1L/j de lactation,2–3L certains cas;5000–10000L vache moderne exclus."
+    },
+    "livestock_feed": {
+      "url": "https://www.fao.org/4/x5303e/x5303e0e.htm",
+      "role": "Distinguer alimentscomestibles humains et fourrages/sousproduits; rendements humains et consommation animale ne s’additionnent pas."
+    },
+    "allometry": {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12637681/",
+      "role": "White/Seymour2003 étude originale619espèces; exponent2/3 vs3/4 contesté. Motivation d’hypothèse fantasy, aucune biologie publiée des géants de Tanares."
+    }
+  }
+}

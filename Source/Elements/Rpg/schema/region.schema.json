@@ -1,0 +1,143 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/region.schema.json",
+  "title": "Region de Tanares",
+  "description": "Une des treize regions du monde : son gouvernement, sa faction, sa population par espece, ses sept statistiques regionales et ses lieux. C'est un NOEUD du graphe de cartes (LOT-09) : `neighbors` porte les aretes, et `locations` les cartes a creer.",
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+
+    "government": {
+      "type": "string",
+      "minLength": 8,
+      "description": "Qui gouverne, en une phrase du livre."
+    },
+    "faction": {
+      "type": "string",
+      "minLength": 8,
+      "description": "Position de la region dans le jeu des factions. Reste en prose tant que le catalogue des factions n'existe pas (LOT-80) ; il le remplacera par des references."
+    },
+    "population": {
+      "type": "object",
+      "description": "Repartition par espece. Ce n'est pas de la couleur : c'est ce qui decide quelle espece un PNJ tire au hasard porte (LOT-82).",
+      "properties": {
+        "total": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "description": "Effectif APPROXIMATIF, tel que le livre l'ecrit (<< Around 2,300,000 >>). Arrondir en silence donnerait une precision que la source n'a pas."
+        },
+        "species": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "properties": {
+              "species": {
+                "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id",
+                "description": "Cle d'espece EN ANGLAIS, normalisee au singulier. Elle ne pointe pas encore vers le catalogue d'especes du LOT-36, qui est en francais et n'en couvre que la moitie ; c'est le LOT-39 qui reliera les deux."
+              },
+              "label": { "type": "string", "minLength": 2 },
+              "percent": { "type": "integer", "minimum": 0, "maximum": 100 }
+            },
+            "required": ["species", "label", "percent"],
+            "additionalProperties": false
+          }
+        },
+        "otherPercent": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Le reste de la repartition, que le livre ecrit << others >>. Range a part : ce n'est pas un peuple, et un tri par frequence le mettrait en tete."
+        }
+      },
+      "required": ["total", "species", "otherPercent"],
+      "additionalProperties": false
+    },
+
+    "statistics": {
+      "type": "object",
+      "description": "Les sept axes de l'encart << Regional Statistics >>, TYPES. Ce sont des parametres de jeu deja tabules : `monsterPresence` regle le taux de rencontre, `magicAccess` le stock d'un marchand, `economicProsperity` ses prix, `crimeAndViolence` la frequence des PNJ hostiles.",
+      "properties": {
+        "citizenFreedom": { "$ref": "#/$defs/appreciations" },
+        "crimeAndViolence": { "$ref": "#/$defs/appreciations" },
+        "economicProsperity": { "$ref": "#/$defs/appreciations" },
+        "governmentCorruption": { "$ref": "#/$defs/appreciations" },
+        "magicAccess": { "$ref": "#/$defs/appreciations" },
+        "monsterPresence": { "$ref": "#/$defs/appreciations" },
+        "politicalStability": { "$ref": "#/$defs/appreciations" }
+      },
+      "required": [
+        "citizenFreedom",
+        "crimeAndViolence",
+        "economicProsperity",
+        "governmentCorruption",
+        "magicAccess",
+        "monsterPresence",
+        "politicalStability"
+      ],
+      "additionalProperties": false
+    },
+
+    "neighbors": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id" },
+      "description": "Regions limitrophes. Le voisinage est SYMETRIQUE et le graphe CONNEXE : les deux sont verifies a l'extraction, faute de quoi une region deviendrait injoignable sans que rien ne le dise."
+    },
+
+    "locations": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id" },
+      "description": "Lieux de la region, prefixes de son identifiant : deux regions peuvent nommer pareillement leur capitale."
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "government",
+    "faction",
+    "population",
+    "statistics",
+    "neighbors",
+    "locations"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+
+  "$defs": {
+    "appreciations": {
+      "description": "Un axe est une LISTE, jamais une chaine. Onze regions sur treize donnent une valeur uniforme, mais le Benenet imperial ecrit << Low (south), High (north) >> et les Domaines straviens << Low underground and High on the surface >>. Aplatir ces deux-la inventerait une donnee ; les laisser en texte libre rendrait les sept axes inexploitables.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "grade": {
+            "type": "string",
+            "enum": ["veryLow", "low", "normal", "high", "veryHigh"],
+            "description": "Les cinq notes du livre. << normal >> est bien son degre median."
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 2,
+            "description": "Portee de l'appreciation quand la region n'est pas uniforme -- << north >>, << underground >>. Absente pour une region uniforme."
+          }
+        },
+        "required": ["grade"],
+        "additionalProperties": false
+      }
+    }
+  }
+}

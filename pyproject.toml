@@ -1,0 +1,42 @@
+# Environnement Python des scripts du dépôt (refonte de la chaîne d'outillage, phase 4).
+#
+# Les scripts de `scripts/` ne sont pas un paquet : ce fichier ne sert qu'à épingler leurs
+# dépendances, et `uv.lock` à les figer. Le poste et le runner installent exactement la même chose
+# en une commande :
+#
+#   uv sync --locked          # crée .venv/ à l'identique du verrou
+#   uv run pytest             # tests des scripts (scripts/tests)
+#   uv run scripts/check.py   # contrôles du job lint-exigences, puis les hooks
+#
+# jsonschema était épinglé dans le bloc `env:` de ci.yml (LOT-32) ; il l'est désormais ici, et
+# Dependabot (écosystème uv) propose ses montées de version. uv lui-même est épinglé par
+# `UV_VERSION` dans ci.yml.
+
+[project]
+name = "jadg-scripts"
+version = "0"
+description = "Outillage Python de JustAnotherRpgGame (contrôles, génération, CI)"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    # Contrats des catalogues RPG et du cahier des assets (check_rpg_data, check_assets_brief).
+    "jsonschema==4.26.0",
+    # Tests des scripts eux-mêmes (scripts/tests).
+    "pytest==9.1.1",
+    # Normalisation et contrôles des candidats de la fabrique (sans génération en CI).
+    "pillow==12.3.0",
+    "numpy==2.5.3",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["scripts/tests", "Planning/outils/tests", "Documentation/outils/tests"]
+addopts = ["-ra", "--strict-markers"]
+# Les dossiers des scripts sont ajoutés au chemin d'import : un test importe `check_json_files` comme
+# le fait un script voisin.
+pythonpath = ["scripts", "scripts/ci", "scripts/checks", "scripts/docs", "scripts/release",
+              "scripts/assetsGeneration", "scripts/i18n"]

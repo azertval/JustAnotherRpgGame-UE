@@ -1,0 +1,17 @@
+LAYOUT — ONE WALK ROW: create ONE pixel-art sprite strip, a single 1536x256 landscape
+image with a transparent background, holding ONLY the WALK animation of the character
+shown in reference image 1, organised as an invisible row of 8 cells, each 192 px wide
+and 256 px tall, one frame per cell, frames read left to right. The row contains EXACTLY
+8 separate figures, never more, never fewer, with clearly visible empty space (at least
+16 px) between two neighbouring figures; nothing touches or crosses into a neighbouring
+cell. In every frame the feet rest on the same baseline, 40 px above the bottom of the
+cell, and the feet are centred horizontally in the cell.
+
+Reference image 1 is the finished sprite sheet of this very character: copy its
+character EXACTLY (same face, hair, headgear, clothing, weapon, effects, colours, pixel
+size and height as its first row), but do NOT copy its poses: the poses of this strip
+are the eight walking poses described below, and none of them is the standing-guard
+pose of reference image 1. The weapon stays in the same hand as in reference image 1,
+held low in guard; the free hand keeps what it holds in the idle pose.
+
+Row 1 - {MARCHE}

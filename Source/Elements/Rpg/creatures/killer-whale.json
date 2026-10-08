@@ -1,0 +1,55 @@
+{
+  "id": "killer-whale",
+  "name": "Épaulard",
+  "source": "srd",
+  "size": "huge",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 19,
+    "dexterity": 10,
+    "constitution": 13,
+    "intelligence": 3,
+    "wisdom": 12,
+    "charisma": 7
+  },
+  "armorClass": 12,
+  "hitPoints": 90,
+  "hitDice": "12d12+12",
+  "speed": {
+    "walk": 0,
+    "swim": 18
+  },
+  "challengeRating": 3,
+  "senses": [
+    "vision aveugle 36 m",
+    "Perception passive 13"
+  ],
+  "skills": {
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Écholocalisation",
+      "text": "L'épaulard ne peut pas utiliser sa vision aveugle s'il est assourdi."
+    },
+    {
+      "name": "Apnée",
+      "text": "L'épaulard peut retenir son souffle durant 30 minutes."
+    },
+    {
+      "name": "Ouïe aiguisée",
+      "text": "L'épaulard a un avantage aux jets de Sagesse (Perception) basés sur l'ouïe."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +6 au toucher, allonge 1,50 m, une cible. Touché : 21 (5d6 + 4) dégâts perforants.",
+      "attackBonus": 6,
+      "reach": 1.5,
+      "damage": "5d6+4",
+      "damageType": "piercing"
+    }
+  ]
+}

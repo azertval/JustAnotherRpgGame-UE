@@ -1,0 +1,2099 @@
+# Lexique de traduction des termes de règle -- table d'autorité du projet (LOT-30).
+#
+# GÉNÉRÉ. Ne pas éditer à la main :
+#     python scripts/sourcebook glossaire
+#
+# Une seule traduction par terme de règle, dans tout le jeu. Ce n'est pas un catalogue
+# d'interface -- fr.lang et en.lang font cela ; c'est ce qui empêche « saving throw » de
+# devenir « jet de sauvegarde » dans la fiche et « JdS » dans le journal de combat.
+#
+# Source : Glossaire.pdf (aidedd.org), complété par Basic-Rules-FR.pdf. Provenance `srd`
+# pour la totalité du fichier (EX-CNT-001), OGL 1.0a -- inutile de la répéter par ligne.
+#
+# Plusieurs traductions d'un même terme sont séparées par « / » ; la première est la
+# forme retenue, les suivantes sont admises en lecture (check_glossary.py).
+anglais;français;catégorie
+Aarakocra;Aarakocra / Aarakocre;
+aberration;aberration;type de créature
+Abi-Dalzim's Horrid Wilting;Flétrissure épouvantable d'Abi-Dalzim (XGtE);
+ability check;jet de caractéristique / test de caractéristique;
+ability score;valeur de caractéristique;
+Ability Score Improvement;Amélioration de caractéristiques;capacité
+Ability Score Increase;Augmentation de caractéristiques;
+abjuration;abjuration;école de magie
+Abjuration Savant;Abjurateur érudit;capacité (magicien)
+Abjure Enemy;condamnation de l'ennemi;capacité (paladin/conduit divin)
+Aboleth;Aboleth;
+Abominable Yeti;Yéti abominable / Yeti abominable;
+Absorb Elements;Absorption des éléments (XGtE);
+Abyss;Abysses;plan
+Abyssal;abyssal;langue
+Acheron;Achéron;plan
+acid;acide;type de dégâts
+Acid Splash;Aspersion d'acide / Aspersion acide;
+Acolyte;Acolyte;
+acolyte;acolyte;historique
+Acolyte of Nature;Acolyte de la nature;capacité (clerc)
+Acrobatics;Acrobaties;compétence
+Action Surge;Fougue;capacité (guerrier)
+Actor;Comédien;don
+Adamantine Armor;Armure d'adamantium;
+Adult Blue Dracolich;Dracoliche bleue, adulte;
+Adult Dragon;Dragon, adulte;
+advantage (to have);avantage (avoir un avantage) / avantage (être avantagé);
+Aganazzar's Scorcher;Flambée d'Aganazzar (XGtE);
+Agonizing Blast;Décharge déchirante;manifestation occulte
+Aid;Aide;
+Air Elemental;Élémentaire de l'air;
+Alarm;Alarme;
+Alchemy Jug;Cruche alchimique;
+Alert;Vigilant;don
+Allosaurus;Allosaure;
+Alter Memories;Altération mémorielle;capacité (magicien)
+Alter Self;Modification d'apparence;
+Ambush;Embuscade;manœuvre (TCoE)
+ammunition;munitions;propriété
+Ammunition +1, +2, or +3;Munition +1, +2 ou +3;
+Amulet of Health;Amulette de bonne santé;
+Amulet of Proof against Detection and Location;Amulette d'anti-détection;
+Amulet of the Planes;Amulette des plans;
+Ancient Dragon;Dragon, ancien / Dragon vénérable;
+Androsphinx;Androsphinx;
+Animal Friendship;Amitié avec les animaux;
+Animal Handling;Dressage;compétence
+Animal Messenger;Messager animal;
+Animal Shapes;Formes animales / Métamorphose animale;
+Animate Dead;Animation des morts;
+Animate Objects;Animation d'objets / Animation des objets;
+Animated Armor;Armure animée;
+Animated Shield;Bouclier animé;
+Ankheg;Ankheg;
+Ankylosaurus;Ankylosaure;
+Antilife Shell;Coquille antivie;
+Antimagic Field;Champ antimagie;
+Antipathy/Sympathy;Aversion/attirance;
+Ape;Grand singe;
+Apparatus of Kwalish;Submersible de Kwalish;
+Aquan;aquatique;langue
+Arborea;Arborée;plan
+Arcadia;Arcadie;plan
+Arcana;Arcanes;compétence
+Arcanaloth;Arcanaloth;
+Arcane Charge;Charge arcanique;capacité (guerrier)
+Arcane Eye;Oeil magique / Oeil du mage;
+Arcane Gate;Portail magique / Portail arcanique;
+Arcane Lock;Verrou magique;
+Arcane Recovery;Restauration arcanique / Restauration magique;capacité (magicien)
+Arcane Tradition;Tradition arcanique;capacité (magicien)
+Arcane Trickster;Escroc arcanique / Arnaqueur arcanique;voie (roublard)
+Arcane Ward;Protection arcanique / Égide arcanique;capacité (magicien)
+Archdruid;Archidruide;capacité (druide)
+Archery;Archerie;style de combat
+Archfey, the;Archifée, l';voie (occultiste)
+Archmage;Archimage;
+Armor +1, +2, or +3;Armure +1, +2 ou +3;
+Armor of Agathys;Armure d'Agathys;
+Armor of Invulnerability;Armure d'invulnérabilité;
+Armor of Resistance;Armure de résistance;
+Armor of Shadows;Armure d'ombres;manifestation occulte
+Armor of Vulnerability;Armure de vulnérabilité;
+Arms of Hadar;Tentacules de Hadar;
+Arrow of Slaying;Flèche tueuse;
+Arrow-Catching Shield;Bouclier antiprojectiles;
+artificer;artificier (TCoE);
+Artificer Initiate;Artificier en herbe;don (TCoE)
+Artificer's Lore;Connaissance en ingénierie;capacité (gnome)
+Ascendant Step;Pas aérien;manifestation occulte
+Aspect of the Beast;Aspect de la bête;capacité (barbare)
+Aspect of the Moon;Aspect de la lune;manifestation occulte (XGtE)
+Assassin;Assassin;
+Assassin;Assassin;voie (roublard)
+Assassinate;Assassinat;capacité (roublard)
+Astral Plane;plan Astral;plan
+Astral Projection;Projection astrale;
+Athlete;Athlète;don
+Athletics;Athlétisme;compétence
+Attack action;Attaquer;action
+attack roll;jet d'attaque;
+attuned;lié;
+Augury;Augure;
+Aura of Courage;Aura de courage;capacité (paladin)
+Aura of Devotion;Aura de dévotion;capacité (paladin)
+Aura of Life;Aura de vie;
+Aura of Protection;Aura de protection;capacité (paladin)
+Aura of Purity;Aura de pureté;
+Aura of Vitality;Aura de vitalité;
+Aura of Warding;Aura de garde;capacité (paladin)
+Auran;aérien;langue
+Auril;Aurile;divinité
+Avatar of Battle;Avatar de bataille / Avatar de la bataille;capacité (clerc)
+Avenging Angel;Ange de la vengeance;capacité (paladin)
+Awaken;Éveil;
+Awakened Mind;Esprit éveillé;capacité (occultiste)
+Awakened Shrub;Arbuste éveillé;
+Awakened Tree;Arbre éveillé;
+Axe Beak;Bec de hache / Autrache;
+Axe of the Dwarvish Lords;Hache des seigneurs nains;
+Azer;Azer;
+Azuth;Azouth;divinité
+Baboon;Babouin;
+background;historique;
+Bad Reputation;Mauvaise réputation;capacité (historique)
+Badger;Blaireau;
+Bag of Beans;Sac de haricots;
+Bag of Devouring;Sac dévoreur;
+Bag of Holding;Sac sans fond;
+Bag of Tricks;Sac à malices;
+Bait and Switch;Chassé-croisé;manœuvre (TCoE)
+Baldur's Gate;Porte de Baldur;
+Balor;Balor;
+Bandit;Bandit;
+Bandit Captain;Bandit, capitaine;
+Bane;Fléau / Imprécation;
+Bane;Baine;divinité
+Banishing Smite;Châtiment du ban;
+Banishment;Bannissement;
+Banshee;Banshie;
+barbarian;barbare;classe
+Barbed Devil;Diable barbelé;
+bard;barde;classe
+Bard College;Collège bardique;capacité (barde)
+Bardic Inspiration;Inspiration bardique;capacité (barde)
+Barkskin;Peau d'écorce;
+Barlgura;Barlgura;
+Basilisk;Basilic;
+Bat;Chauve-souris;
+Battle Magic;Magie de combat / Magie guerrière;capacité (barde)
+Battle Master;Maître de guerre;voie (guerrier)
+battleaxe;hache d'armes;arme
+Beacon of Hope;Lueur d'espoir;
+Bead of Force;Perle de force;
+Bearded Devil;Diable barbu;
+beast;bête;type de créature
+Beast Bond;Lien avec une bête (XGtE);
+Beast Master;Maître des bêtes;voie (rôdeur)
+Beast Sense;Sens animal;
+Beast Speech;Langage animal;manifestation occulte
+Beast Spells;Incantation animale;capacité (druide)
+Beastlands, the;terre des Bêtes, la;plan
+Beguiling Defenses;Défenses captivantes / Charmantes défenses;capacité (occultiste)
+Beguiling Influence;Présence captivante;manifestation occulte
+Behir;Béhir;
+Beholder;Tyrannoeil;
+Beholder Zombie;Zombi tyrannoeil;
+Belt of Dwarvenkind;Ceinturon des nains;
+Belt of Giant Strength;Ceinturon de force de géant / Ceinturon de force du géant;
+Bend Luck;Chance forcée / Comme par hasard;capacité (ensorceleur)
+Benign Transposition;Permutation;capacité (magicien)
+Berserker;Berserker;
+Berserker Axe;Hache du berserker;
+Beshaba;Beshaba;divinité
+Bestial Fury;Fureur bestiale;capacité (rôdeur)
+Bestow curse;Malédiction;
+Bewitching Whispers;Murmures ensorcelants / Murmures impérieux;manifestation occulte
+Bhaal;Bhaal;divinité
+Bigby's Hand;Main de Bigby;
+Black Bear;Ours noir;
+Black Dragon;Dragon noir;
+Black Pudding;Pouding noir;
+Blackrazor;Noir rasoir;
+Blade Barrier;Barrière de lames;
+Blade of Disaster;Lame du desastre (TCoE);
+Blade Ward;Protection contre les armes;
+Bless;Bénédiction;
+Blessed Healer;Guérisseur béni;capacité (clerc)
+Blessed Warrior;Combattant béni;style de combat (TCoE)
+Blessing of the Trickster;Bénédiction de l'escroc / Faveur du filou;capacité (clerc)
+Blessings of Knowledge;Bénédictions du savoir / Faveurs érudites;capacité (clerc)
+Blight;Flétrissement;
+Blind Fighting;Combat en aveugle;style de combat (TCoE)
+blinded;aveuglé;état
+Blinding Smite;Châtiment aveuglant;
+Blindness/Deafness;Cécité/surdité;
+Blindsense;Perception aveugle;capacité (roublard)
+blindsight;vision aveugle;
+Blink;Clignotement;
+Blink Dog;Chien esquiveur;
+Blood Hawk;Faucon de sang;
+blowgun;sarbacane;arme
+bludgeoning;contondant;type de dégâts
+Blue Dragon;Dragon bleu;
+Blue Slaad;Slaad bleu;
+Blur;Flou;
+Boar;Sanglier;
+bond;lien;
+Bond of the Talisman;Lien du Talisman;manifestation occulte (TCoE)
+Bone Devil;Diable osseux;
+Bone Naga;Naga osseux;
+Bones of the Earth;Ossements de la Terre (XGtE);
+bonus action;action bonus;
+Bonus Proficiency;Maîtrise supplémentaire;capacité
+Book of Ancient Secrets;Livre des secrets anciens;manifestation occulte
+Book of the Exalted Deeds;Les Chapitres sacrés;
+Book of Vile Darkness;Les Chapitres interdits;
+Booming Blade;Lame retentissante (TCoE);
+Boots of Elvenkind;Bottes elfiques;
+Boots of Levitation;Bottes de lévitation;
+Boots of Speed;Bottes de rapidité;
+Boots of Striding and Springing;Bottes de sept lieues;
+Boots of the Winterlands;Bottes des terres gelées;
+Bountiful Luck;Chance abondante;don (XGtE)
+Bowl of Commanding Water Elementals;Jatte de contrôle des élémentaires de l'eau;
+Brace;Anticipation;manœuvre (TCoE)
+Bracers of Archery;Bracelets d'archer;
+Bracers of Defense;Bracelets de défense;
+Branding Smite;Châtiment révélateur;
+Brass Dragon;Dragon d'airain;
+Brave;Brave;capacité (halfelin)
+Brazier of Commanding Fire Elementals;Brasero de contrôle des élémentaires du feu / Brasero de contrôle des élémentaires de feu;
+breastplate;cuirasse;armure
+Breath Weapon;Souffle;capacité (drakeide)
+bright light;lumière vive;
+Bronze Dragon;Dragon de bronze;
+Brooch of Shielding;Broche de défense;
+Broom of Flying;Balai volant;
+Brown Bear;Ours brun;
+Brutal Critical;Critique brutal;capacité (barbare)
+Bugbear;Gobelours;
+Bugbear Chief;Gobelours, chef;
+Bulette;Bulette;
+Bullywug;Brutacien;
+Burning Hands;Mains brûlantes;
+By Popular Demand;À la demande du public;capacité (historique)
+Bytopia;Bytopie;plan
+Call Lightning;Appel de la foudre;
+Calm Emotions;Apaisement des émotions;
+Cambion;Cambion;
+Camel;Chameau;
+Candle of Invocation;Cierge d'invocation;
+Candlekeep;Chateau-Suif;
+cantrip;sort mineur;
+Cap of Water Breathing;Capuchon de respiration aquatique;
+Cape of the Mountebank;Cape du prestidigitateur / Cape de prestidigitateur;
+Carceri;Carcères;plan
+Careful Spell;sort prévenant;métamagie
+Carpet of Flying;Tapis volant;
+Carrion Crawler;Charognard rampant;
+Cast a spell;Lancer un sort;action
+Cat;Chat;
+Catapult;Catapulte (XGtE);
+Catnap;Sieste (XGtE);
+Cause Fear;Frayeur (XGtE);
+Celestial;céleste;langue
+celestial;céleste;type de créature
+Censer of Controlling Air Elementals;Encensoir de contrôle des élémentaires de l'air;
+Centaur;Centaure;
+Ceremony;Cérémonie (XGtE);
+Chain Devil;Diable à chaîne / Diable des chaînes;
+Chain Lightning;Chaîne d'éclairs;
+chain mail;cotte de mailles;armure
+chain shirt;chemise de mailles;armure
+Chains of Carceri;Chaînes des Carcères;manifestation occulte
+Challenge Rating (CR);Facteur de Puissance (FP) / Indice de Dangerosité (ID);
+Champion;Champion;voie (guerrier)
+Channel Divinity;Conduit divin;capacité (clerc, paladin)
+Chaos Bolt;Éclair de chaos (XGtE);
+Charger;Expert de la charge;don
+Charisma;Charisme;caractéristique
+charlatan;charlatan;historique
+Charm Animals and Plants;charme des animaux et des plantes / cordialité avec la faune et la flore;capacité (clerc/conduit divin)
+Charm Monster;Charme-monstre (XGtE);
+Charm Person;Charme-personne;
+charmed;charmé;état
+Chasme;Chasme;
+Chauntea;Chauntéa;divinité
+Chef;Chef cuisinier;don (TCoE)
+Chill Touch;Contact glacial;
+Chime of Opening;Carillon d'ouverture;
+Chimera;Chimère;
+Chromatic Orb;Orbe chromatique;
+Chuul;Chuul;
+Circle Forms;Formes du cercle;capacité (druide)
+Circle of Death;Cercle de mort;
+Circle of Power;Cercle de pouvoir;
+Circle of the Land;Cercle de la Terre;voie (druide)
+Circle of the Moon;Cercle de la Lune;voie (druide)
+Circle Spells;Sorts de cercle;capacité (druide)
+Circlet of Blasting;Diadème de destruction;
+City Secrets;Secrets de la ville;capacité (historique)
+Clairvoyance;Clairvoyance;
+Clay Golem;Golem d'argile;
+Cleansing Touch;Contact purificateur;capacité (paladin)
+cleric;clerc;classe
+Cloak of Arachnida;Cape de l'arachnide;
+Cloak of Displacement;Cape de déplacement;
+Cloak of Elvenkind;Cape elfique;
+Cloak of Flies;Voile de mouches;manifestation occulte (XGtE)
+Cloak of Invisibility;Cape d'invisibilité;
+Cloak of Protection;Cape de protection;
+Cloak of Shadows;linceul d'ombre;capacité (clerc/conduit divin, moine)
+Cloak of the Bat;Cape de la chauve-souris;
+Cloak of the Manta Ray;Cape de la raie manta;
+Cloaker;Manteleur;
+Cloakwood;Bois-manteau / Bois Voilé;
+Clone;Clone;
+Cloud Giant;Géant des nuages;
+Cloud of Daggers;Nuée de dagues;
+Cloud Peaks;Pics brumeux / Pics des Nuages;
+Cloudkill;Brume mortelle;
+club;gourdin;arme
+Cockatrice;Cockatrice;
+cold;froid;type de dégâts
+Cold Wood;Bois froid / Bois Glacé;
+College of Lore;Collège du Savoir;voie (barde)
+College of Valor;Collège de la Vaillance;voie (barde)
+Color Spray;Couleurs dansantes;
+Combat Inspiration;Inspiration martiale;capacité (barde)
+Combat Superiority;Supériorité martiale;capacité (guerrier)
+Combat Wild Shape;Forme sauvage de combat;capacité (druide)
+Command;Injonction;
+Command Undead;Contrôle des morts-vivants;capacité (magicien)
+Commander's Strike;Instruction;manœuvre
+Commanding Presence;Autorité naturelle;manœuvre (TCoE)
+Common;commun;langue
+Commoner;Roturier;
+Commune;Communion;
+Commune with Nature;Communion avec la nature;
+Compelled Duel;Duel forcé;
+components;composantes;
+Comprehend Languages;Compréhension des langues;
+Compulsion;Compulsion;
+condition;étât;
+Cone of Cold;Cône de froid;
+Confusion;Confusion;
+conjuration;invocation;école de magie
+Conjuration Savant;Invocateur érudit;capacité (magicien)
+Conjure Animals;Invocation d'animaux;
+Conjure Barrage;Invocation de projectiles / Hérissement de projectiles;
+Conjure Celestial;Invocation de céleste;
+Conjure Elemental;Invocation d'élémentaire;
+Conjure Fey;Invocation de fée;
+Conjure Minor Elementals;Invocation d'élémentaires mineurs;
+Conjure Volley;Invocation de volée;
+Conjure Woodland Beings;Invocation d'êtres sylvestres;
+Constitution;Constitution;caractéristique
+constrict;étreinte;
+Constrictor Snake;Serpent constricteur;
+construct;artificiel;type de créature
+Contact Other Plane;Contact avec un autre plan / Contact avec les plans;
+Contagion;Contagion;
+Contingency;Prévoyance / Anticipation;
+Continual Flame;Flamme éternelle;
+Control Flames;Contrôle des flammes (XGtE);
+Control Water;Contrôle de l'eau;
+Control Weather;Contrôle du climat;
+Control Winds;Contrôle des vents (XGtE);
+Controlled Chaos;Chaos contrôlé;capacité (ensorceleur)
+Copper Dragon;Dragon de cuivre;
+copper piece (cp);pièce de cuivre (pc);pièce
+Cordon of Arrows;Cordon de flèches;
+Corona of Light;Halo de lumière / Auréole;capacité (clerc)
+Couatl;Couatl;
+Countercharm;Contre-charme;capacité (barde)
+Counterspell;Contresort;
+cover;abri;
+Crab;Crabe;
+Crawling Claw;Griffe rampante / Main rampante;
+Create Bonfire;Embrasement (XGtE);
+Create Food and Water;Création de nourriture et d'eau;
+Create Homunculus;Création d'homoncule (XGtE);
+Create or Destroy Water;Création ou destruction d'eau;
+Create Thrall;Asservissement;capacité (occultiste)
+Create Undead;Création de mort-vivant;
+Creation;Création;
+criminal;criminel;historique
+Criminal Contact;Accointances avec la pègre;capacité (historique)
+Crocodile;Crocodile;
+Crossbow Expert;Maître-arbalétrier;don
+crossbow, hand;arbalète de poing;arme
+crossbow, heavy;arbalète lourde;arme
+crossbow, light;arbalète légère;arme
+Crown of Madness;Couronne du dément;
+Crown of Stars;Couronne d'étoiles (XGtE);
+Crusader's Mantle;Aura du croisé;
+Crusher;Broyeur;don (TCoE)
+Crystal Ball;Boule de cristal;
+Cube of Force;Cube de force;
+Cubic Gate;Cube des plans;
+Cult Fanatic;Fanatique / Fanatique de secte;
+Cultist;Cultiste / Membre de secte;
+Cunning Action;Ruse;capacité (roublard)
+Cure Wounds;Soins;
+Cutting Words;Mots cinglants;capacité (barde)
+Cyclops;Cyclope;
+Cyric;Cyric;divinité
+Daern's Instant Fortress;Forteresse instantanée de Daern;
+dagger;dague;arme
+Dagger of Venom;Dague venimeuse;
+damage resistance;résistance aux dégâts;
+Damage Resistance;Résistance aux dégâts;capacité (drakeide)
+damage vulnerability;vulnérabilité aux dégâts;
+Dampen Elements;Atténuation des éléments / Atténuer les éléments;capacité (clerc)
+Dancing Lights;Lumières dansantes;
+Dancing Sword;Épée dansante;
+Danger Sense;Sens du danger;capacité (barbare)
+Danse Macabre;Danse Macabre (XGtE);
+Dao;Dao;
+Dark Delirium;Sombre délire;capacité (occultiste)
+dark elf;elfe noir;sous-race (elfe)
+Dark One's Blessing;Bénédiction du ténébreux;capacité (occultiste)
+Dark One's Own Luck;Chance du ténébreux;capacité (occultiste)
+Darkmantle;Mante obscure;
+darkness;ténèbres;
+darkvision;vision dans le noir;
+dart;fléchette;arme
+Dash action;Foncer;action
+Dawn;Aube (XGtE);
+Daylight;Lumière du jour;
+deafened;assourdi;état
+Death Dog;Chien du trépas;
+Death Knight;Chevalier de la mort;
+death saving throw;Jet de sauvegarde contre la mort;
+Death Slaad;Slaad funeste;
+Death Strike;Frappe meurtrière / Coup meurtrier;capacité (roublard)
+Death Tyrant;Tyramort;
+Death Ward;Protection contre la mort;
+Decanter of Endless Water;Carafe intarissable;
+Deception;Tromperie / Supercherie;compétence
+Deck of Illusions;Cartes d'illusion;
+Deck of Many Things;Cartes merveilleuses;
+deep gnome;gnome des profondeurs;sous-race (gnome)
+Deep Gnome (Svirfneblin);Gnome des profondeurs (svirfnebelin);
+Deep Speech;profond;langue
+Deer;Cerf;
+Defender;Gardienne;
+Defense;Défense;style de combat
+Defensive Duelist;Duelliste défensif;don
+Defensive Tactics;Tactiques défensives;capacité (rôdeur)
+Deflect Missiles;Parade de projectiles;capacité (moine)
+Delayed Blast Fireball;Boule de feu à retardement;
+Demilich;Demi-liche;
+Demiplane;Demi-plan;
+demiplanes;demi-plans;plan
+Demon Armor;Armure démoniaque;
+Deneir;Déneïr;divinité
+Destroy Undead;Destruction des morts-vivants;capacité (clerc)
+Destructive Wave;Vague destructrice;
+Destructive Wrath;fureur destructrice;capacité (clerc/conduit divin)
+Detect Evil and Good;Détection du mal et du bien;
+Detect Magic;Détection de la magie;
+Detect Poison and Disease;Détection du poison et des maladies;
+Detect Thoughts;Détection des pensées;
+Deva;Déva;
+Devil's Sight;Vision du diable;manifestation occulte
+Dexterity;Dextérité;caractéristique
+Diamond Soul;Âme de diamant;capacité (moine)
+Difficulty Class (DC);Degré de Difficulté (DD);
+dim light;lumière faible;
+Dimension Door;Porte dimensionnelle;
+Dimensional Shackles;Menottes dimensionnelles;
+Dire Wolf;Loup sanguinaire;
+disadvantage (to have);désavantage (avoir un désavantage) / désavantage (être désavantagé);
+Disarming Attack;Désarmement;manœuvre
+Disciple of Life;Disciple de la vie;capacité (clerc)
+Disciple of the Elements;Disciple des éléments;capacité (moine)
+Discovery;Découverte;capacité (historique)
+Disengage action;Se désangager;action
+Disguise Self;Déguisement;
+Disintegrate;Désintégration;
+Dispel Evil and Good;Dissipation du mal et du bien;
+Dispel Magic;Dissipation de la magie;
+Displacer Beast;Bête éclipsante;
+Dissonant Whispers;Murmures dissonants;
+Distant Spell;sort ample;métamagie
+Distracting Strike;Diversion;manœuvre
+Divination;Divination;école de magie
+Divination Savant;Devin érudit;capacité (magicien)
+Divine Domain;Domaine divin;capacité (clerc)
+Divine Favor;Faveur divine;
+Divine Health;Santé divine;capacité (paladin)
+Divine Intervention;Intervention divine;capacité (clerc)
+Divine Sense;Sens divin / Perception divine;capacité (paladin)
+Divine Smite;Châtiment divin;capacité (paladin)
+Divine Strike;Frappe divine / Impact divin;capacité (clerc)
+Divine Word;Parole divine;
+Djinni;Djinn;
+Dodge action;Esquiver;action
+Dominate Beast;Domination de bête / Domination d'animal;
+Dominate Monster;Domination de monstre;
+Dominate Person;Domination de personne;
+Doppelganger;Doppelganger;
+Draconic;draconique;langue
+Draconic Ancestry;Ascendance draconique;capacité (drakeide)
+Draconic Bloodline;Lignée draconique;voie (ensorceleur)
+Draconic Presence;Présence draconique;capacité (ensorceleur)
+Draconic Resilience;Résistance draconique;capacité (ensorceleur)
+Draft Horse;Cheval de trait;
+dragon;dragon;type de créature
+Dragon Ancestor;Ancêtre draconique;capacité (ensorceleur)
+Dragon Fear;Peur du dragon;don (XGtE)
+Dragon Hide;Cuir de dragon;don (XGtE)
+Dragon Scale Mail;Armure d'écailles de dragon;
+Dragon Slayer;Tueuse de dragons;
+Dragon Turtle;Dragon-tortue;
+Dragon Wings;Ailes draconiques;capacité (ensorceleur)
+Dragon Wyrmling;Dragon, dragonnet / Dragonnet;
+Dragon's Breath;Souffle du dragon (XGtE);
+dragonborn;drakéide;race
+Dragonspear Castle;Château de Lancedragon;
+Drawmij's Instant Summons;Convocations instantanées de Drawmij;
+Dreadful Word;Mot d'effroi;manifestation occulte
+Dream;Songe;
+Dream of the Blue Veil;Songe du voile bleu (TCoE);
+Dretch;Dretch;
+Drider;Drider;
+Driftglobe;Globe flottant;
+Drow;Drow;
+Drow;drow;sous-race (elfe)
+Drow Elite Warrior;Drow, guerrier d'élite;
+Drow High Magic;Haute magie drow;don (XGtE)
+Drow Mage;Drow, mage;
+Drow Magic;Magie drow;capacité (elfe)
+Drow Priestress of Lolth;Drow, prêtresse de Lolth;
+Drow Weapon Training;Entraînement aux armes drows / Formation martiale drow;capacité (elfe)
+Druid;Druide;
+druid;druide;classe
+Druid Circle;Cercle druidique;capacité (druide)
+Druid Grove;Bosquet des druides (XGtE);
+Druidcraft;Druidisme;
+Druidic;druidique;langue
+Druidic Warrior;Combattant druidique;style de combat (TCoE)
+Dryad;Dryade;
+Dual Wielder;Combattant à deux armes;don
+Dueling;Duel;style de combat
+Duergar;Duergar;
+duergar;duergar;sous-race (nain)
+Dungeon Delver;Explorateur de donjons;don
+Duodrone;Duodrone;
+Durable;Endurant / Gaillard;don
+Durable Summons;Convocations coriaces;capacité (magicien)
+Dust Devil;Tourbillon de poussière (XGtE);
+Dust Mephit;Méphite poussiéreux;
+Dust of Disappearance;Poussière de disparition;
+Dust of Dryness;Poussière dessicative;
+Dust of Sneezing and Choking;Poudre à éternuer / Poussière à éternuer;
+dwarf;nain;race
+Dwarf Fortitude;Vigueur naine;don (XGtE)
+Dwarven Armor Training;Formation au port des armures naines;capacité (nain)
+Dwarven Combat Training;Entraînement aux armes naines;capacité (nain)
+Dwarven Plate;Harnois nain;
+Dwarven Resilience;Résistance naine;capacité (nain)
+Dwarven Thrower;Marteau de lancer nain;
+Dwarven Toughness;Ténacité naine;capacité (nain)
+Dwarvish;nain;langue
+Eagle;Aigle;
+Earth Elemental;Élémentaire de la terre;
+Earth Tremor;Secousse sismique (XGtE);
+Earthbind;Attraction terrestre (XGtE);
+Earthquake;Tremblement de terre;
+Efreeti;Éfrit;
+Efreeti Bottle;Bouteille de l'éfrit / Bouteille du mauvais génie;
+Efreeti Chain;Mailles éfrit / Cotte de mailles éfrit;
+Eldath;Eldath;divinité
+Elder Champion;Champion antique;capacité (paladin)
+Eldritch Adept;Adepte occulte;don (TCoE)
+Eldritch Blast;Décharge occulte;
+Eldritch Invocations;Manifestations occultes;capacité (occultiste)
+Eldritch Knight;Chevalier occulte;voie (guerrier)
+Eldritch Master;Maître de l'occulte;capacité (occultiste)
+Eldritch Mind;Esprit occulte;manifestation occulte (TCoE)
+Eldritch Sight;Vision occulte;manifestation occulte
+Eldritch Smite;Châtiment occulte / Attaque occulte;manifestation occulte (XGtE)
+Eldritch Spear;Lance occulte;manifestation occulte
+Eldritch Strike;Frappe occulte / Fragilisation occulte;capacité (guerrier)
+electrum piece (ep);pièce d'électrum (pe);pièce
+elemental;élémentaire;type de créature
+Elemental Adept;Adepte élémentaire;don
+Elemental Affinity;Affinité élémentaire;capacité (ensorceleur)
+Elemental Bane;Fléau élémentaire (XGtE);
+Elemental Chaos;Chaos élémentaire;plan
+Elemental Disciplines;Disciplines élémentaires;capacité (moine)
+Elemental Gem;Gemme élémentaire;
+Elemental Planes;plans élémentaires;plan
+Elemental Weapon;Arme élémentaire;
+Elemental Wild Shape;Forme sauvage élémentaire;capacité (druide)
+Elephant;Éléphant;
+elf;elfe;race
+Elf Weapon Training;Entraînement aux armes elfiques;capacité (elfe)
+Elixir of Health;Élixir de santé;
+Elk;Élan;
+Elusive;Insaisissable;capacité (roublard)
+Elven Accuracy;Précision elfique;don (XGtE)
+Elven Chain;Mailles elfiques / Chemise de mailles elfique;
+Elvish;elfe;langue
+Elysium;Élysée;plan
+Emerald Enclave;Enclave d'émeraude;faction
+Empowered Evocation;Évocation améliorée;capacité (magicien)
+Empowered Spell;sort renforcé;métamagie
+Empty Body;Désertion de l'âme;capacité (moine)
+Empyrean;Empyréen;
+enchantment;enchantement;école de magie
+Enchantment Savant;Enchanteur érudit;capacité (magicien)
+Enemies Abound;Ennemis à foison (XGtE);
+Enervation;Énervation (XGtE);
+Enhance Ability;Amélioration de caractéristique;
+Enlarge/Reduce;Agrandissement/rapetissement;
+Ensnaring Strike;Frappe piégeuse;
+Entangle;Enchevêtrement;
+entertainer;artiste;historique
+Enthrall;Discours captivant;
+Entropic Ward;Protection entropique;capacité (occultiste)
+Erinyes;Érinye;
+Erupting Earth;Éruption de terre (XGtE);
+Ethereal Plane;plan éthéré;plan
+Etherealness;Forme éthérée;
+Ettercap;Ettercap;
+Ettin;Ettin;
+Evard's Black Tentacles;Tentacules noirs d'Evard;
+Evasion;Esquive totale;capacité (moine, roublard)
+Evasive Footwork;Jeu de jambes défensif;manœuvre
+Eversmoking Bottle;Bouteille fumigène / Urne fumigène;
+evocation;évocation;école de magie
+Evocation Savant;Évocateur érudit;capacité (magicien)
+Exceptional Training;Entraînement exceptionnel / Coordination facilitée;capacité (rôdeur)
+exhaustion;épuisement;état
+Expeditious Retreat;Repli expéditif;
+Expert Divination;Divination experte;capacité (magicien)
+Expertise;Expertise;capacité
+Extended Spell;sort étendu;métamagie
+Extra Attack;Attaque supplémentaire;capacité
+Eye and Hand of Vecna;Oeil et Main de Vecna;
+Eyebite;Mauvais oeil;
+Eyes of Charming;Regard charmeur;
+Eyes of Minute Seeing;Yeux grossissants / Lentilles de netteté;
+Eyes of the Eagle;Yeux de lynx;
+Eyes of the Rune Keeper;Oeil du gardien des runes;manifestation occulte
+Fabricate;Fabrication;
+Fade away;Effacement;don (XGtE)
+Faerie Dragon;Dragon féerique;
+Faerie Fire;Lueurs féeriques;
+False Identity;Fausse identité;capacité (historique)
+False Life;Simulacre de vie;
+Far Realm;Royaume lointain;plan
+Far Scribe;Scribe des horizons;manifestation occulte (TCoE)
+Far Step;Foulée dimensionnelle (XGtE);
+Fast Hands;Mains lestes;capacité (roublard)
+Fast Movement;Déplacement rapide;capacité (barbare)
+Favored Enemy;Ennemi juré;capacité (rôdeur)
+Fear;Peur / Terreur;
+Feather Fall;Feuille morte;
+feats;don;
+features;capacité;
+Feeblemind;Esprit faible;
+Feign Death;Mort simulée / État cadavérique;
+Feinting Attack;Feinte;manœuvre
+Feral Instinct;Instinct sauvage;capacité (barbare)
+Feral Senses;Sens sauvages;capacité (rôdeur)
+fey;fée;type de créature
+Fey Ancestry;Ascendance féerique;capacité (elfe, demi-elfe)
+Fey Presence;Présence féerique;capacité (occultiste)
+Fey Teleportation;Téléportation féerique;don (XGtE)
+Fey Touched;Faveur des fées;don (TCoE)
+Feywild, the;Féerie, la;plan
+fiend;fiélon;type de créature
+Fiend, the;Le Fiélon;voie (occultiste)
+Fiendish Resilience;Résistance fiélonne;capacité (occultiste)
+Fiendish Vigor;Vigueur fiélonne;manifestation occulte
+fighter;guerrier;classe
+Fighting Initiate;Initié au combat / Combattant de talent;don (TCoE)
+Fighting Style;Style de combat;capacité
+Figurine of Wondrous Power;Figurine merveilleuse;
+Find Familiar;Appel de familier;
+Find Greater Steed;Appel de destrier supérieur (XGtE);
+Find Steed;Appel de destrier;
+Find the Path;Sens de l'orientation / Orientation;
+Find Traps;Sens des pièges / Détection des pièges;
+finesse;finesse;propriété
+Finger of Death;Doigt de mort;
+fire;feu;type de dégâts
+Fire Bolt;Trait de feu;
+Fire Elemental;Élémentaire du feu;
+Fire Giant;Géant du feu;
+Fire Shield;Bouclier de feu;
+Fire Snake;Serpent de feu;
+Fire Storm;Tempête de feu;
+Fireball;Boule de feu;
+flail;fléau d'armes / fléau;arme
+Flame Arrows;Flèches enflammées (XGtE);
+Flame Blade;Lame de feu;
+Flame Strike;Colonne de flamme;
+Flame Tongue;Épée ardente;
+Flames of Phlegethos;Flammes de Phlégéthos;don (XGtE)
+Flameskull;Crânefeu;
+Flaming Sphere;Sphère de feu;
+flaw;défaut;
+Fleet of Foot;Foulée légère;capacité (elfe)
+Flesh Golem;Golem de chair;
+Flesh to Stone;Pétrification;
+Flint Rock;Rocher à silex;
+Flumph;Flumph;
+Flurry of Blows;Déluge de coups;capacité (moine)
+Fly;Vol;
+Flying Snake;Serpent volant;
+Flying Sword;Épée volante;
+Focused Conjuration;Invocation consciencieuse;capacité (magicien)
+Foe Slayer;Tueur implacable;capacité (rôdeur)
+Fog Cloud;Nappe de brouillard;
+Folding Boat;Bateau pliable;
+folk hero;héros du peuple;historique
+Fomorian;Fomorien;
+Font of Inspiration;Source d'inspiration;capacité (barde)
+Font of Magic;Source de magie / Réserve arcanique;capacité (ensorceleur)
+Forbiddance;Interdiction;
+force;force;type de dégâts
+Forcecage;Cage de force;
+Foresight;Prémonition;
+forest gnome;gnome des forêts;sous-race (gnome)
+Forest of Wyrms;Forêt des dragons / Forêt des Vouivres;
+Freedom of Movement;Liberté de mouvement;
+Frenzy;Frénésie;capacité (barbare)
+Friends;Amis / Faux amis;
+frightened;effrayé;état
+Frog;Grenouille;
+Frost Brand;Fer gelé;
+Frost Giant;Géant du givre;
+Frostbite;Gelure (XGtE);
+Galeb Duhr;Galeb duhr;
+Gargantuan;Gigantesque (Gig);taille
+Gargoyle;Gargouille;
+Gas Spore;Spore gazeuse;
+Gaseous Form;Forme gazeuse;
+Gate;Portail;
+Gauntlets of Ogre Power;Gantelets de puissance d'ogre;
+Gaze of Two Minds;Perception transférée;manifestation occulte
+Geas;Quête;
+Gehenna;Géhenne;plan
+Gelatinous Cube;Cube gélatineux;
+Gem of Brightness;Gemme d'illumination;
+Gem of Seeing;Gemme de vision;
+Gentle Repose;Préservation des morts / Doux repos;
+Ghast;Blême;
+Ghost;Fantôme;
+Ghostly Gaze;Regard fantomatique;manifestation occulte (XGtE)
+Ghoul;Goule;
+Giant;géant;langue
+giant;géant;type de créature
+Giant Ape;Singe géant;
+Giant Badger;Blaireau géant;
+Giant Bat;Chauve-souris géante;
+Giant Boar;Sanglier géant;
+Giant Centipede;Mille-pattes géant;
+Giant Constrictor Snake;Serpent constricteur géant;
+Giant Crab;Crabe géant;
+Giant Crocodile;Crocodile géant;
+Giant Eagle;Aigle géant;
+Giant Elk;Élan géant;
+Giant Fire Beetle;Scarabée de feu géant;
+Giant Frog;Grenouille géante;
+Giant Goat;Chèvre géante;
+Giant Hyena;Hyène géante;
+Giant Insect;Insecte géant;
+Giant Lizard;Lézard géant;
+Giant Octopus;Pieuvre géante;
+Giant Owl;Chouette géante;
+Giant Poisonous Snake;Serpent venimeux géant;
+Giant Rat;Rat géant;
+Giant Scorpion;Scorpion géant;
+Giant Sea Horse;Hippocampe géant;
+Giant Shark;Requin géant;
+Giant Slayer;Tueuse de géants;
+Giant Spider;Araignée géante;
+Giant Toad;Crapaud géant;
+Giant Vulture;Vautour géant;
+Giant Wasp;Guêpe géante;
+Giant Weasel;Belette géante;
+Giant Wolf Spider;Araignée-loup géante;
+Giant's Plain;Plaine du géant / Plaine des Géants;
+Giant's Run Mountains;Montagnes du Pas de géant / Montagnes du Pas du géant;
+Gibbering Mouther;Babélien;
+Gift of the Depths;Don des profondeurs;manifestation occulte (XGtE)
+Gift of the Ever-living Ones;Don des immortels;manifestation occulte (XGtE)
+Gift of the Protectors;Don des protecteurs / Présent des sauveurs;manifestation occulte (TCoE)
+Githyanki Knight;Githyanki, chevalier;
+Githyanki Warrior;Githyanki, guerrier;
+Githzerai Monk;Githzerai, moine;
+Githzerai Zerth;Githzerai, zerth;
+Glabrezu;Glabrezu;
+Gladiator;Gladiateur;
+gladiator;gladiateur;historique
+glaive;coutille;arme
+Glamoured Studded Leather;Armure de cuir clouté enchantée;
+Glibness;Bagou;
+Globe of Invulnerability;Globe d'invulnérabilité;
+Gloves of Missile Snaring;Gants piégeurs de projectiles;
+Gloves of Swimming and Climbing;Gants de nage et d'escalade;
+Gloves of Thievery;Gants de chapardeur;
+Glyph of Warding;Glyphe de protection / Glyphe de garde;
+Gnoll;Gnoll;
+Gnoll Fang of Yeenoghu;Gnoll, croc de Yeenoghu;
+Gnoll Pack Lord;Gnoll, seigneur de meute / Chef de meute gnoll;
+gnome;gnome;race
+Gnome Cunning;Ruse gnome;capacité (gnome)
+Gnomish;gnome;langue
+Goading Attack;Provocation;manœuvre
+Goat;Chèvre;
+Goblin;Gobelin;
+Goblin;gobelin;langue
+Goblin Boss;Gobelin, chef;
+Goggles of Night;Lunettes de nuit / Lunettes du nyctalope;
+Gold Dragon;Dragon d'or;
+gold piece (gp);pièce d'or (po);pièce
+Gond;Gond;divinité
+Goodberry;Baies nourricières;
+Gorgon;Gorgone;
+Goristro;Goristro;
+grappled;agrippé;état
+Grappler;Lutteur / Empoigneur;don
+Grappling Strike;Frappe agrippante / Coup agrippant;manœuvre (TCoE)
+Grasp of Hadar;Étreinte de Hadar;manifestation occulte (XGtE)
+Grasping Vine;Liane avide;
+Gray Ooze;Vase grise;
+Gray Slaad;Slaad gris;
+Grease;Graisse;
+Great Old One, the;Le Grand Ancien;voie (occultiste)
+Great Weapon Fighting;Arme à deux mains;style de combat
+Great Weapon Master;Maître des armes à deux mains / Cogneur lourd;don
+greataxe;hache à deux mains;arme
+greatclub;massue;arme
+Greater Invisibility;Invisibilité supérieure / Invisibilité suprême;
+Greater Portent;Présage supérieur / Présage renforcé;capacité (magicien)
+Greater Restoration;Restauration supérieure / Restauration suprême;
+greatsword;épée à deux mains;arme
+Green Dragon;Dragon vert;
+Green Fields;Arpents verts / Champs verdoyants;
+Green Hag;Guenaude verte;
+Green Slaad;Slaad vert;
+Green-Flame Blade;Lame aux flammes vertes / Lame des flammes vertes (TCoE);
+Grell;Grell;
+Greycloak Hills;Collines de grismanteau / Collines de Cape-Grise;
+Greypeak Mountains;Pics gris / Montagnes de Grispic;
+Grick;Grick;
+Grick alpha;Grick dominant;
+Griffon;Griffon;
+Grim Harvest;Sinistre moisson;capacité (magicien)
+Grimlock;Torve;
+Guard;Garde;
+Guardian Naga;Naga gardien;
+Guardian of Faith;Gardien de la foi;
+Guardian of Nature;Gardien de la nature (XGtE);
+Guards and Wards;Protections et sceaux;
+Guidance;Assistance;
+Guided Strike;frappe guidée;capacité (clerc/conduit divin)
+Guiding Bolt;Éclair traçant / Rayon traçant;
+guild artisan;artisan de guilde;historique
+Guild Membership;Membre de guilde;capacité (historique)
+guild merchant;marchand de guilde / marchand de la guilde;historique
+Gunner;Amateur d'armes à feu / Artilleur;don (TCoE)
+Gust;Saute de vent (XGtE);
+Gust of Wind;Bourrasque;
+Gynosphinx;Gynosphinx;
+Hades;Hadès;plan
+Hail of Thorns;Grêle d'épines;
+halberd;hallebarde;arme
+half cover;abri partiel;
+half plate;demi-plate;armure
+half-elf;demi-elfe;race
+Half-Ogre;Demi-ogre;
+half-orc;demi-orc;race
+Half-Red Dragon Veteran;Demi-dragon rouge, vétéran;
+Halfling;halfelin;langue
+halfling;halfelin;race
+Halfling Nimbleness;Agilité halfeline;capacité (halfelin)
+Hallow;Sanctification;
+Hallucinatory Terrain;Terrain hallucinatoire;
+Hammer of Thunderbolts;Marteau de tonnerre;
+handaxe;hachette;arme
+Harm;Contamination;
+Harpers;Ménestrels;faction
+Harpy;Harpie;
+Haste;Hâte;
+Hat of Disguise;Chapeau de déguisement;
+Hawk;Faucon;
+Headband of Intellect;Bandeau d'intelligence;
+Heal;Guérison;
+Healer;Soigneur;don
+Healing Spirit;Esprit guérisseur (XGtE);
+Healing Word;Mot de guérison;
+Heat Metal;Métal brûlant;
+Heavily Armored;Protection lourde;don
+heavily obscured;visibilité nulle;
+heavy;lourde;propriété
+Heavy Armor Master;Maître des armures lourdes;don
+Heightened Spell;sort intensifié;métamagie
+Hell Hound;Chien de chasse infernal / Molosse infernal;
+Hellish Rebuke;Représailles infernales;
+Hellish Resistance;Résistance infernale;capacité (tieffelin)
+Helm;Heaume;divinité
+Helm of Brilliance;Heaume scintillant;
+Helm of Comprehending Languages;Heaume de compréhension des langues;
+Helm of Telepathy;Heaume de télépathie;
+Helm of Teleportation;Heaume de téléportation;
+Helmed Horror;Horreur casquée;
+Help action;Aider;action
+hermit;ermite;historique
+Heroes' Feast;Festin des héros;
+Heroism;Héroïsme;
+Heward's Handy Haversack;Havresac magique d'Hévard;
+Hex;Maléfice;
+Hezrou;Hezrou;
+hide;peaux;armure
+Hide action;Se cacher;action
+Hide in Plain Sight;Camouflage naturel;capacité (rôdeur)
+high elf;haut-elfe;sous-race (elfe)
+High Moor;Haute lande / Grand Marais;
+hill dwarf;nain des collines;sous-race (nain)
+Hill Giant;Géant des collines;
+Hippogriff;Hippogriffe;
+History;Histoire;compétence
+Hobgoblin;Hobgobelin;
+Hobgoblin Captain;Hobgobelin, capitaine;
+Hobgoblin Warlord;Hobgobelin, seigneur de guerre;
+Hold Monster;Immobilisation de monstre;
+Hold Person;Immobilisation de personne;
+Holy Aura;Aura sacrée;
+Holy Avenger;Vengeresse sacrée;
+Holy Nimbus;Nimbe sacré;capacité (paladin)
+Holy Weapon;Arme sacrée (XGtE);
+Homunculus;Homoncule;
+Hook Horror;Horreur crochue;
+Horn of Blasting;Cor de dévastation;
+Horn of Valhalla;Cor du Valhalla;
+Horned Devil;Diable cornu;
+Horseshoes of a Zephyr;Fers de zéphyr / Fers du zéphyr;
+Horseshoes of Speed;Fers de rapidité;
+Hotnow Mount;Mont Chaudenow;
+Huge;Très grande (TG);taille
+human;humain;race
+humanoid;humanoïde;type de créature
+Hunger of Hadar;Voracité de Hadar;
+Hunter;Chasseur;voie (rôdeur)
+Hunter Shark;Requin-chasseur;
+Hunter's Mark;Marque du chasseur;
+Hunter's Prey;Proie du chasseur;capacité (rôdeur)
+Hurl Through Hell;Traversée des enfers;capacité (occultiste)
+Hydra;Hydre;
+Hyena;Hyène;
+Hypnotic Gaze;Regard hypnotique;capacité (magicien)
+Hypnotic Pattern;Motif hypnotique;
+Ice Devil;Diable gelé;
+Ice Knife;Couteau de glace (XGtE);
+Ice Mephit;Méphite gelé;
+Ice Storm;Tempête de grêle;
+ideal;idéal;
+Identify;Identification;
+Ignan;igné;langue
+illusion;illusion;école de magie
+Illusion Savant;Illusionniste érudit;capacité (magicien)
+Illusory Dragon;Dragon illusoire (XGtE);
+Illusory Reality;Réalité illusoire / Réalité chimérique;capacité (magicien)
+Illusory Script;Texte illusoire;
+Illusory Self;Double illusoire;capacité (magicien)
+Ilmater;Ilmater;divinité
+Immolation;Immolation / Immolation ardente (XGtE);
+Immovable Rod;Sceptre inamovible;
+Imp;Diablotin;
+Impostor;Imposteur;capacité (roublard)
+Imprisonment;Emprisonnement;
+Improved Abjuration;Abjuration améliorée;capacité (magicien)
+Improved Combat Superiority;Supériorité martiale améliorée;capacité (guerrier)
+Improved Critical;Critique amélioré;capacité (guerrier)
+Improved Divine Smite;Châtiment divin amélioré;capacité (paladin)
+Improved Duplicity;Réplique améliorée;capacité (clerc)
+Improved Flare;Illumination améliorée;capacité (clerc)
+Improved Minor Illusion;Illusion mineure améliorée;capacité (magicien)
+Improved Pact Weapon;Arme de pacte améliorée;manifestation occulte (XGtE)
+Improved War Magic;Magie de guerre améliorée;capacité (guerrier)
+improvised weapons;armes improvisées;propriété
+incapacitated;incapable d'agir / neutralisé;état
+Incendiary Cloud;Nuage incendiaire;
+Indomitable;Inflexible;capacité (guerrier)
+Indomitable Might;Puissance indomptable;capacité (barbare)
+Infernal;infernal;langue
+Infernal Calling;Assignation infernale (XGtE);
+Infernal Constitution;Constitution infernale;don (XGtE)
+Infernal Legacy;Ascendance infernale;capacité (tieffelin)
+Infestation;Infestation (XGtE);
+Infiltration Expertise;Expert en infiltration;capacité (roublard)
+Inflict Wounds;Blessure;
+Inner Planes;plans intérieurs;plan
+Insect Plague;Fléau d'insectes;
+Insight;Intuition;compétence
+Inspiring Leader;Meneur exaltant / Figure de proue;don
+Instinctive Charm;Charme instinctif / Détournement d'hostilité;capacité (magicien)
+Instrument of the Bards;Instrument de barde;
+Intellect Devourer;Dévoreur d'intellect;
+Intellect Fortress;Forteresse d'intellect (TCoE);
+Intelligence;Intelligence;caractéristique
+Interception;Interception;style de combat (TCoE)
+Intimidating Presence;Présence intimidante;capacité (barbare)
+Intimidation;Intimidation;compétence
+Inured to Undeath;Insensibilité à la non-vie;capacité (magicien)
+Investigation;Investigation;compétence
+Investiture of Flame;Sacre des flammes (XGtE);
+Investiture of Ice;Sacre de la glace (XGtE);
+Investiture of Stone;Sacre de la pierre (XGtE);
+Investiture of Wind;Sacre du vent (XGtE);
+Investment of the Chain Master;Engagement du maître des Chaînes;manifestation occulte (TCoE)
+Invisibility;Invisibilité;
+invisible;invisible;état
+Invisible Stalker;Traqueur invisible;
+Invoke Duplicity;invocation de réplique;capacité (clerc/conduit divin)
+Invulnerability;Invulnérabilité (XGtE);
+Ioun Stone;Pierre de Ioun;
+Iron Bands of Bilarro;Liens de fer de Bilarro;
+Iron Flask;Flasque de fer;
+Iron Golem;Golem de fer;
+Iron Keep;Forteresse de fer / Donjon de fer;
+Jack of All Trades;Touche-à-tout;capacité (barde)
+Jackal;Chacal;
+Jackalwere;Garou-chacal;
+javelin;javeline;arme
+Javelin of Lightning;Javeline de foudre;
+Jump;Saut;
+Keen Mind;Esprit affûté;don
+Keen Senses;Sens aiguisés;capacité (elfe)
+Kelemvor;Kélemvor;divinité
+Kenku;Kenku;
+Keoghtom's Ointment;Baume de Keoghtom;
+Ki;Ki;capacité (moine)
+Ki-Empowered Strikes;Frappes de ki;capacité (moine)
+Killer Whale;Épaulard;
+Knight;Chevalier;
+knight;chevalier;historique
+Knock;Déblocage;
+Know Your Enemy;Observation de l'ennemi;capacité (guerrier)
+Knowledge domain;Domaine du Savoir;voie (clerc)
+Knowledge of the Ages;savoir ancestral;capacité (clerc/conduit divin)
+Kobold;Kobold;
+Kraken;Kraken;
+Kuo-toa;Kuo-toa;
+Kuo-toa Archpriest;Kuo-toa, archiprêtre;
+Kuo-toa Whip;kuo-toa, fouet;
+Lamia;Lamie;
+lance;lance d'arçon;arme
+Lance of Lethargy;Lance de léthargie;manifestation occulte (XGtE)
+Land's Stride;Foulée tellurique;capacité (druide, rôdeur)
+Lantern of Revealing;Lanterne de révélation;
+Large;Grande (G);taille
+Lathander;Lathandre;divinité
+Lay on Hands;Imposition des mains;capacité (paladin)
+leather;cuir;armure
+Legend Lore;Mythes et légendes;
+Leira;Leira;divinité
+Lemure;Lémure;
+Leomund's Secret Chest;Coffre secret de Léomund;
+Leomund's Tiny Hut;Petite hutte de Léomund;
+Lesser Restoration;Restauration partielle;
+Levitate;Lévitation;
+Lich;Liche;
+Life domaine;Domaine de la Vie;voie (clerc)
+Life Transference;Transfert de vie (XGtE);
+Lifedrinker;Buveuse de vie;manifestation occulte
+Light;Lumière;
+light;légère;propriété
+Light domain;Domaine de la Lumière;voie (clerc)
+light hammer;marteau léger;arme
+lightfoot;pied-léger;sous-race (halfelin)
+Lightly Armored;Protection légère;don
+lightly obscured;visibilité réduite;
+lightning;foudre;type de dégâts
+Lightning Arrow;Flèche de foudre;
+Lightning Bolt;Éclair;
+Lightning Lure;Ferrage foudroyant / Ferrage fulgurant (TCoE);
+Limbo;Limbo;plan
+Linguist;Linguiste;don
+Lion;Lion;
+Lizard;Lézard;
+Lizard King/Queen;Roi/Reine lézard;
+Lizardfolk;Homme-lézard / Saurial;
+Lizardfolk Shaman;Homme-lézard, chaman;
+Lliira;Lliira;divinité
+loading;chargement;propriété
+Locate Animals or Plants;Localisation d'animaux ou de plantes;
+Locate Creature;Localisation de créature;
+Locate Object;Localisation d'objet;
+long rest;repos long;
+longbow;arc long;arme
+Longstrider;Grande foulée;
+longsword;épée longue;arme
+Lord's Alliance;Alliance des seigneurs;faction
+Loviatar;Loviatar;divinité
+Luck Blade;Lame porte-bonheur;
+Lucky;Chanceux;capacité (halfelin)
+Lucky;Chanceux;don
+Lunging Attack;Fente;manœuvre
+Lurkwood;Bois Tapi / Rôdebois;
+Luskan;Luskan;
+mace;masse d'armes;arme
+Mace of Disruption;Masse d'anéantissement;
+Mace of Smiting;Masse destructrice;
+Mace of Terror;Masse terrifiante;
+Maddening Darkness;Ténèbres oppressantes (XGtE);
+Maddening Hex;Maléfice accablant;manifestation occulte (XGtE)
+Maelstrom;Maelström (XGtE);
+Mage;Mage;
+Mage Armor;Armure de mage / Armure du mage;
+Mage Hand;Main de mage / Main du mage;
+Mage Hand Legerdemain;Escamotage et main de mage / Passe-passe à distance;capacité (roublard)
+Mage Slayer;Tueur de mages;don
+Magic Circle;Cercle magique;
+Magic Initiate;Initié à la magie;don
+Magic Jar;Urne magique / Possession;
+Magic Missile;Projectile magique;
+Magic Mouth;Bouche magique;
+Magic Stone;Pierre magique (XGtE);
+Magic Weapon;Arme magique;
+Magical Ambush;Embuscade magique;capacité (roublard)
+Magical Secrets;Secrets magiques;capacité (barde)
+Magma Mephit;Méphite magmatique;
+Magmin;Magmatique;
+Major Image;Image majeure;
+Malar;Malar;divinité
+Malleable Illusions;Illusions malléables;capacité (magicien)
+Mammoth;Mammouth;
+Manes;Mâne;
+Maneuvering Attack;Manœuvre tactique;manœuvre
+Maneuvers;Manœuvres;capacité (guerrier)
+Manticore;Manticore;
+Mantle of Spell Resistance;Manteau de résistance aux sorts;
+Manual of Bodily Health;Manuel de vitalité;
+Manual of Gainful Exercise;Manuel d'exercices physiques;
+Manual of Golems;Manuel des golems;
+Manual of Quickness of Action;Manuel de vivacité;
+Marid;Maride;
+Marilith;Marilith;
+Mariner's Armor;Armure de matelot;
+Martial Adept;Adepte martial;don
+Martial archetype;Archétype martial;capacité (guerrier)
+Martial Arts;Arts martiaux;capacité (moine)
+martial weapons;armes de guerre;propriété
+Mask;Mask;divinité
+Mask of Many Faces;Mille visages;manifestation occulte
+Mask of the Wild;Cachette naturelle;capacité (elfe)
+Mass Cure Wounds;Soins de groupe;
+Mass Heal;Guérison de groupe;
+Mass Healing Word;Mot de guérison de groupe;
+Mass Polymorph;Métamorphose de groupe (XGtE);
+Mass Suggestion;Suggestion de groupe;
+Master of Myriad Forms;Maître des formes;manifestation occulte
+Master of Nature;Maître de la nature;capacité (clerc)
+Master Transmuter;Maître transmutateur;capacité (magicien)
+Mastiff;Molosse;
+material component (M);composante matérielle (M);
+Material Plane;plan matériel;plan
+maul;maillet / maillet d'armes;arme
+Maximilian's Earthen Grasp;Poigne terreuse de Maximilien (XGtE);
+Maze;Dédale;
+Mechanus;Méchanus;plan
+Medallion of Thoughts;Médaillon des pensées;
+Medicine;Médecine;compétence
+Medium Armor Master;Maître des armures intermédiaires;don
+Medusa;Méduse;
+Meilikki;Mailikki;divinité
+Meld into Stone;Fusion dans la pierre;
+melee weapon attack;attaque au corps à corps avec une arme / attaque d'arme au corps à corps;
+Melf's Acid Arrow;Flèche acide de Melf;
+Melf's Minute Meteors;Minuscules météores de Melf (XGtE);
+Menacing;Menaçant;capacité (demi-orc)
+Menacing Attack;Attaque menaçante;manœuvre
+Mending;Réparation;
+Mental Prison;Prison mentale (XGtE);
+Merfolk;Homme-poisstrigealasséen;
+Merrow;Merrow;
+Message;Message;
+Metamagic;Métamagie;capacité (ensorceleur, occultiste)
+Metamagic Adept;Adepte de métamagie;don (TCoE)
+Meteor Swarm;Nuée de météores;
+Mezzoloth;Mezzoloth;
+Mighty Fortress;Forteresse majestueuse (XGtE);
+Milil;Milil;divinité
+Military Rank;Grade militaire;capacité (historique)
+Mimic;Mimique;
+Mind Blank;Esprit impénétrable;
+Mind Flayer;Flagelleur mental;
+Mind Sliver;Piqûre mentale (TCoE);
+Mind Spike;Épine mentale (XGtE);
+Mindless Rage;Rage aveugle;capacité (barbare)
+Minion of Chaos;Sbires du chaos;manifestation occulte
+Minor Alchemy;Alchimie mineure;capacité (magicien)
+Minor Conjuration;Invocation mineure / Menue invocation;capacité (magicien)
+Minor Illusion;Illusion mineure;
+Minotaur;Minotaure;
+Minotaur Skeleton;Squelette de minotaure;
+Mirage Arcane;Mirage;
+Mire the Mind;Lenteur de l'esprit / Avachissement;manifestation occulte
+Mirror Image;Image miroir;
+Mirror of Life Trapping;Miroir d'emprisonnement;
+Mislead;Double illusoire;
+Misty Escape;Échappatoire brumeuse;capacité (occultiste)
+Misty Step;Foulée brumeuse;
+Misty Visions;Visions embrumées;manifestation occulte
+Mithral Armor;Armure de mithral;
+Mithral Hall;Castelmithral;
+Mobile;Mobile;don
+Moderately Armored;Protection intermédiaire;don
+Modify Memory;Modification de mémoire;
+Mold Earth;Façonnage de la terre (XGtE);
+Monastic Tradition;Tradition monastique;capacité (moine)
+monk;moine;classe
+Monodrone;Monodrone;
+monstrosity;monstruosité;type de créature
+Moonbeam;Rayon de lune;
+Moonblade;Lamelune;
+Mordenkainen's Faithful Hound;Chien de garde de Mordenkainen;
+Mordenkainen's Magnificent Mansion;Manoir somptueux de Mordenkainen;
+Mordenkainen's Private Sanctum;Sanctuaire privé de Mordenkainen;
+Mordenkainen's Sword;Épée de Mordenkainen;
+morningstar;morgenstern;arme
+Mount Celestia;Mont Céleste;plan
+Mount Hotenow;Mont Chaudenow;
+mountain dwarf;nain des montagnes;sous-race (nain)
+Mounted Combatant;Combattant monté;don
+Move Earth;Terraformage / Glissement de terrain;
+Mud Mephit;Méphite boueux;
+Mule;Mule;
+Multiattack;Attaques multiples;capacité (rôdeur)
+Mummy;Momie;
+Mummy Lord;Seigneur momie / Momie auguste;
+Myconid adult;Myconide, adulte;
+Myconid Sovereign;Myconide, souverain;
+Myconid sprout;Myconide, pousse / Pousse de myconide;
+Myrkul;Myrkul;divinité
+Mystic Arcanum;Arcanum mystique;capacité (occultiste)
+Mystra;Mystra;divinité
+Nalfeshnee;Nalfeshnie;
+Natural Explorer;Explorateur-né;capacité (rôdeur)
+Natural Illusionist;Illusionniste-né;capacité (gnome)
+Natural Recovery;Récupération naturelle / Ressourcement;capacité (druide)
+Naturally Stealthy;Discrétion naturelle;capacité (halfelin)
+Nature;Nature;compétence
+Nature domain;Domaine de la Nature;voie (clerc)
+Nature's Sanctuary;Sanctuaire de dame Nature;capacité (druide)
+Nature's Ward;Protégé de dame Nature;capacité (druide)
+Nature's Wrath;courroux de la nature;capacité (paladin/conduit divin)
+Necklace of Adaptation;Collier d'adaptation;
+Necklace of Fireballs;Collier de boules de feu;
+Necklace of Prayer Beads;Collier de perles de prière / Chapelet;
+necromancy;nécromancie;école de magie
+Necromancy Savant;Nécromancien érudit;capacité (magicien)
+necrotic;nécrotique;type de dégâts
+Needle Blight;Résinieux;
+Negative Energy Flood;Déluge d'énergie négative (XGtE);
+net;filet;arme
+Neverwinter;Padhiver;
+Night Hag;Guenaude nocturne;
+Nightmare;Destrier noir;
+Nine Hells;Neuf enfers;plan
+Nine Lives Stealer;Voleuse des neuf vies / Voleuse de vie;
+Noble;Noble;
+noble;noble;historique
+Nolzur's Marvelous Pigments;Pigments merveilleux de Nolzur;
+Nondetection;Antidétection;
+Nothic;Nothic;
+Nycaloth;Nycaloth;
+Nystul's Magic Aura;Aura magique de Nystul;
+Oath of Devotion;Serment de Dévotion;voie (paladin)
+Oath of the Ancients;Serment des Anciens;voie (paladin)
+Oath of Vengeance;Serment de Vengeance;voie (paladin)
+Oathbow;Arc du serment;
+Observant;Observateur;don
+Ochre Jelly;Gelée ocre;
+Octopus;Pieuvre;
+Oghma;Oghma;divinité
+Ogre;Ogre;
+Ogre Zombie;Zombi ogre;
+Oil of Etherealness;Huile éthérée;
+Oil of Sharpness;Huile d'affûtage;
+Oil of Slipperiness;Huile d'insaisissabilité;
+One with Shadows;Maître des ombres;manifestation occulte
+Oni;Oni;
+ooze;vase;type de créature
+Open Hand Technique;Technique de la paume;capacité (moine)
+Opportunist;Opportuniste;capacité (moine)
+Orb of Dragonkind;Orbe des dragons;
+Orc;Orc;
+Orc;orc;langue
+Orc Eye of Gruumsh;Orc, Œil de Gruumsh;
+Orc War Chief;Orc, chef de guerre;
+Orcish Fury;Fureur orc;don (XGtE)
+Order of the Gauntlet;ordre du Gantelet;faction
+Orog;Orog;
+Otherworldly Leap;Saut d'Outremonde;manifestation occulte
+Otherworldly patron;Patron d'Outremonde / Protecteur d'outre-monde;capacité (occultiste)
+Otiluke's Freezing Sphere;Sphère glaciale d'Otiluke / Sphère glacée d'Otiluke;
+Otiluke's Resilient Sphere;Sphère résiliente d'Otiluke;
+Otto's Irresistible Dance;Danse irrésistible d'Otto;
+Otyugh;Otyugh;
+Outer Planes;plans extérieurs;plan
+outlander;sauvageon;historique
+Overchannel;Surcharge magique;capacité (magicien)
+Owl;Chouette;
+Owlbear;Ours-hibou / Hibours;
+Pact Boon;Faveur de pacte / Pacte;capacité (occultiste)
+Pact Magic;Magie de pacte;capacité (occultiste)
+Pact of the Blade;Pacte de la lame;capacité (occultiste/pacte)
+Pact of the Chain;Pacte de la chaîne;capacité (occultiste/pacte)
+Pact of the Tome;Pacte du grimoire;capacité (occultiste/pacte)
+padded;matelassée;armure
+paladin;paladin;classe
+Pandemonium;Pandémonium;plan
+Panther;Panthère;
+Paralyzed;paralysé;état
+Parry;Parade;manœuvre
+Pass without Trace;Passage sans trace;
+Passwall;Passe-muraille;
+Path of Berserker;Voie du berserker;voie (barbare)
+Path of Totem Warrior;Voie du guerrier totem / Voie du guerrier totémique;voie (barbare)
+Patient Defense;Défense patiente;capacité (moine)
+Pearl of Power;Perle de pouvoir / Perle de thaumaturgie;
+Peerless Skill;Compétence hors-pair;capacité (barde)
+Pegasus;Pégase;
+Pentadrone;Pentadrone;
+Perception;Perception;compétence
+Perfect Self;Perfection de l'être / Perfection;capacité (moine)
+Performance;Représentation;compétence
+Periapt of Health;Amulette de santé;
+Periapt of Proof against Poison;Amulette antidote;
+Periapt of Wound Closure;Amulette de cicatrisation;
+Persistent Rage;Rage persistante;capacité (barbare)
+Persuasion;Persuasion;compétence
+Peryton;Péryton;
+Petrified;pétrifié;état
+Phantasmal Force;Force fantasmagorique;
+Phantasmal Killer;Assassin imaginaire;
+Phantom Steed;Monture fantôme;
+Phase Spider;Araignée de phase;
+Philter of Love;Philtre d'amour;
+Piercer;Perceur / Perforateur;
+Piercer;Empaleur / Perforateur;don (TCoE)
+piercing;perforant;type de dégâts
+pike;pique;arme
+Pipes of Haunting;Flûte terrifiante;
+Pipes of the Sewers;Flûte des égouts;
+pirate;pirate;historique
+Pit Fiend;Diantrefosse;
+Pixie;Pixie;
+Planar Ally;Allié planaire;
+Planar Binding;Contrat / Entrave planaire;
+Plane Shift;Changement de plan;
+Planetar;Planétar;
+plant;plante;type de créature
+Plant Growth;Croissance végétale;
+plate;harnois;armure
+Plate Armor of Etherealness;Harnois éthéré;
+platinum piece (pp);pièce de platine ( pp);pièce
+Plesiosaurus;Plésiosaure;
+poison;poison;type de dégâts
+Poison Spray;Bouffée de poison;
+Poisoned;empoisonné;état
+Poisoner;Empoisonneur;don (TCoE)
+Poisonous Snake;Serpent venimeux;
+Polar Bear;Ours polaire;
+Polearm Master;Maître d'hast;don
+Polymorph;Métamorphose;
+Pony;Poney;
+Portable Hole;Puits portatif;
+Portent;Présage;capacité (magicien)
+Position of Privilege;Apanage de la noblesse;capacité (historique)
+Potent Cantrip;Sort mineur puissant / Sort mineur appuyé;capacité (magicien)
+Potent Spellcasting;Incantation puissante;capacité (clerc)
+Potion of Animal Friendship;Potion d'amitié avec les animaux;
+Potion of Clairvoyance;Potion de clairvoyance;
+Potion of Climbing;Potion d'escalade;
+Potion of Diminution;Potion de diminution;
+Potion of Fire Breath;Potion de souffle enflammé;
+Potion of Flying;Potion de vol;
+Potion of Gaseous Form;Potion de forme gazeuse;
+Potion of Giant Strength;Potion de force de géant / Potion de force du géant;
+Potion of Growth;Potion d'agrandissement;
+Potion of Healing;Potion de guérison;
+Potion of Heroism;Potion d'héroïsme;
+Potion of Invisibility;Potion d'invisibilité;
+Potion of Invulnerability;Potion d'invulnérabilité;
+Potion of Longevity;Élixir du jouvence;
+Potion of Mind Reading;Potion de lecture des pensées;
+Potion of Poison;Potion de poison / Potion toxique;
+Potion of Resistance;Potion de résistance;
+Potion of Speed;Potion de vitesse;
+Potion of Vitality;Potion de vitalité;
+Potion of Water Breathing;Potion de respiration aquatique;
+Power Word Heal;Mot de pouvoir guérisseur;
+Power Word Kill;Mot de pouvoir mortel;
+Power Word Pain;Mot de pouvoir douloureux (XGtE);
+Power Word Stun;Mot de pouvoir étourdissant;
+Prayer of Healing;Prière de guérison;
+Precision Attack;Attaque précise;manœuvre
+prerequisites;prérequis;
+Preserve Life;préservation de la vie / survivance;capacité (clerc/conduit divin)
+Prestidigitation;Prestidigitation;
+Priest;Prêtre / Ecclésiastique;
+Primal Champion;Champion primitif;capacité (barbare)
+Primal Path;Voie primitive;capacité (barbare)
+Primal Savagery;Sauvagerie primitive (XGtE);
+Primal Strike;Frappe primitive / Attaques primivites;capacité (druide)
+Primeval Awareness;Vigilance primitive;capacité (rôdeur)
+Primordial;primordial;langue
+Primordial Ward;Protection primordiale (XGtE);
+Prismatic Spray;Rayons prismatiques / Embruns prismatiques;
+Prismatic Wall;Mur prismatique;
+Prodigy;Prodige;don (XGtE)
+Produce Flame;Flammes;
+proficiency;maîtrise;
+proficiency bonus;bonus de maîtrise;
+Programmed Illusion;Illusion programmée;
+Project Image;Projection d'image / Image projetée;
+Projected Ward;Protection projetée / Égide projetée;capacité (magicien)
+Prone;à terre;état
+Protection;Protection;style de combat
+Protection from Energy;Protection contre une énergie / Protection contre l'énergie;
+Protection from Evil and Good;Protection contre le mal et le bien;
+Protection from Poison;Protection contre le poison;
+Protection of the Talisman;Protection du Talisman;manifestation occulte (TCoE)
+Pseudodragon;Pseudodragon;
+psychic;psychique;type de dégâts
+Psychic Scream;Hurlement psychique (XGtE);
+Pteranodon;Ptéranodon;
+Purify Food and Drink;Purification de nourriture et d'eau / Purification de la nourriture et de l'eau;
+Purity of Body;Pureté physique;capacité (moine)
+Purity of Spirit;Pureté de l'esprit;capacité (paladin)
+Purple Worm;Ver pourpre;
+Pushing Attack;Repousser;manœuvre
+Pyrotechnics;Pyrotechnie (XGtE);
+Quaal's Feather Token;Plume de Quaal;
+Quadrone;Quadrone;
+Quaggoth;Quaggoth;
+Quaggoth spore servant;Quaggoth, serviteur des spores;
+quarterstaff;bâton;arme
+Quasit;Quasit;
+Quick Toss;Lancer preste;manœuvre (TCoE)
+Quickened Spell;sort accéléré;métamagie
+Quipper;Piranha;
+Quiver of Ehlonna;Carquois d'Ehlonna;
+Quivering Palm;Paume frémissante / Paume vibratoire;capacité (moine)
+Radiance of the Dawn;radiance de l'aube / aube radieuse;capacité (clerc/conduit divin)
+radiant;radiant;type de dégâts
+Rage;Rage;capacité (barbare)
+Raise Dead;Rappel à la vie;
+Rakshasa;Rakshasa;
+Rally;Regain;manœuvre
+range;portée;propriété
+ranged weapon attack;attaque à distance avec une arme / attaque d'arme à distance;
+ranger;rôdeur;classe
+Ranger Archetype;Archétype de rôdeur;capacité (rôdeur)
+Ranger's Companion;Compagnon du rôdeur;capacité (rôdeur)
+rapier;rapière;arme
+Rary's Telepathic Bond;Lien télépathique de Rary;
+Rat;Rat;
+Raven;Corbeau;
+Ray of Enfeeblement;Rayon affaiblissant;
+Ray of Frost;Rayon de givre;
+Ray of Sickness;Rayon empoisonné;
+reach;allonge;propriété
+Reaching Woods;Bois accessibles / Amplebois;
+Read Thoughts;lecture des pensées;capacité (clerc/conduit divin)
+Ready action;Se tenir prêt;action
+Rebuke of the Talisman;Représailles du Talisman / Réprimande du Talisman;manifestation occulte (TCoE)
+Reckless Attack;Attaque téméraire / Témérité;capacité (barbare)
+Red Dragon;Dragon rouge;
+Red Slaad;Slaad rouge;
+Reef Shark;Requin de récif;
+Regenerate;Régénération;
+Reincarnate;Réincarnation;
+Relentless;Implacable;capacité (guerrier)
+Relentless Avenger;Vengeur implacable / Infatigable vengeur;capacité (paladin)
+Relentless Endurance;Endurance implacable / Acharnement;capacité (demi-orc)
+Relentless Hex;Maléfice implacable;manifestation occulte (XGtE)
+Relentless Rage;Rage implacable;capacité (barbare)
+Reliable Talent;Savoir-faire;capacité (roublard)
+Religion;Religion;compétence
+Remarkable Athlete;Athlète accompli;capacité (guerrier)
+Remorhaz;Remorhaz;
+Remove Curse;Délivrance des malédictions;
+Repelling Blast;Décharge répulsive;manifestation occulte
+Researcher;Chercheur;capacité (historique)
+Resilient;Résilient;don
+Resistance;Résistance;
+Restrained;entravé;état
+Resurrection;Résurrection;
+Retainers;Domestiques;capacité (historique)
+Retaliation;Représailles;capacité (barbare)
+Revenant;Revenant;
+Reverse Gravity;Inversion de la gravité;
+Revivify;Retour à la vie;
+Rhinoceros;Rhinocéros;
+Riding Horse;Cheval de selle;
+ring mail;broigne;armure
+Ring of Animal Influence;Anneau d'influence sur les animaux / Anneau d'influence animale;
+Ring of Djinni Summoning;Anneau de convocation de djinn;
+Ring of Elemental Command;Anneau de contrôle des élémentaires;
+Ring of Evasion;Anneau d'esquive totale;
+Ring of Feather Falling;Anneau de feuille morte;
+Ring of Free Action;Anneau d'action libre;
+Ring of Invisibility;Anneau d'invisibilité;
+Ring of Jumping;Anneau de saut;
+Ring of Mind Shielding;Anneau de barrière mentale;
+Ring of Poison Resistance;Anneau de résistance au poison;
+Ring of Protection;Anneau de protection;
+Ring of Regeneration;Anneau de régénération;
+Ring of Resistance;Anneau de résistance;
+Ring of Shooting Stars;Anneau de feu d'étoiles;
+Ring of Spell Storing;Anneau de stockage de sort;
+Ring of Spell Turning;Anneau de renvoi des sorts;
+Ring of Swimming;Anneau de nage;
+Ring of Telekinesis;Anneau de télékinésie;
+Ring of the Ram;Anneau du bélier;
+Ring of Three Wishes;Anneau de triple souhait;
+Ring of Warmth;Anneau de chaleur constante;
+Ring of Water Walking;Anneau de marche sur l'eau / Anneau de marche sur l'onde;
+Ring of X-ray Vision;Anneau de rayons X;
+Riposte;Riposte;manœuvre
+Ritual Caster;Magie rituelle;don
+Robe of Eyes;Robe de vision totale;
+Robe of Scintillating Colors;Robe prismatique;
+Robe of Stars;Robe aux étoiles;
+Robe of the Archmagi;Robe de l'archimage;
+Robe of Useful Items;Robe de camelot;
+Roc;Roc / Ruhk;
+rock gnome;gnome des roches;sous-race (gnome)
+Rod of Absorption;Sceptre d'absorption;
+Rod of Alertness;Sceptre de vigilance;
+Rod of Lordly Might;Sceptre de puissance seigneuriale;
+Rod of resurrection;Sceptre de résurrection;
+Rod of Rulership;Sceptre de suzeraineté;
+Rod of Security;Sceptre de sécurité;
+Rod of the Pact Keeper;Sceptre du gardien des pactes;
+rogue;roublard;classe
+Roguish Archetype;Archétype de roublard;capacité (roublard)
+Rope of Climbing;Corde d'escalade;
+Rope of Entanglement;Corde d'enchevêtrement;
+Rope Trick;Corde enchantée;
+Roper;Enlaceur;
+Rug of Smothering;Tapis étouffant / Tapis étrangleur;
+Rust Monster;Oxydeur;
+Rustic Hospitality;Hospitalité rustique;capacité (historique)
+Saber-Toothed Tiger;Tigre à dents de sabe;
+Sacred Flame;Flamme sacrée;
+Sacred Oath;Serment sacré;capacité (paladin)
+Sacred Weapon;arme sacrée;capacité (paladin/conduit divin)
+Saddle of the Cavalier;Selle du cavalier / Selle du hussard;
+sage;sage;historique
+Sahuagin;Sahuagin;
+Sahuagin Baron;Sahuagin, baron;
+Sahuagin Priestess;Sahuagin, prêtresse;
+sailor;marin;historique
+Salamander;Salamandre;
+Sanctuary;Sanctuaire;
+Satyr;Satyre;
+Savage Attacker;Attaquant sauvage / Agresseur sauvage;don
+Savage Attacks;Attaques sauvages / Sauvagerie;capacité (demi-orc)
+saving throw;jet de sauvegarde;
+Savras;Savras;divinité
+scale mail;écailles;armure
+Scarab of Protection;Scarabée de protection;
+Scarecrow;Épouvantail;
+Scatter;Diversion (XGtE);
+School of Abjuration;École d'abjuration / École de l'abjuration;voie (magicien)
+School of Conjuration;École d'invocation / École de l'invocation;voie (magicien)
+School of Divination;École de divination / École de la divination;voie (magicien)
+School of Enchantment;École d'enchantement / École de l'enchantement;voie (magicien)
+School of Evocation;École d'évocation / École de l'évocation;voie (magicien)
+School of Illusion;École d'illusion / École de l'illusion;voie (magicien)
+School of Necromancy;École de nécromancie / École de la nécromancie;voie (magicien)
+School of Transmutation;École de transmutation / École de la transmutation;voie (magicien)
+scimitar;cimeterre;arme
+Scimitar of Speed;Cimeterre de rapidité / Cimeterre de célérité;
+Scorching Ray;Rayon ardent;
+Scorpion;Scorpion;
+Scout;Éclaireur;
+Scroll of Protection;Parchemin de protection;
+Scrying;Scrutation;
+Sculpt Spells;Façonneur de sorts;capacité (magicien)
+Sculptor of Flesh;Sculpteur de chair;manifestation occulte
+Sea Hag;Guenaude marine;
+Sea Horse;Hippocampe;
+Search action;Chercher;action
+Searing Smite;Châtiment calcinant;
+Second Chance;Deuxième chance;don (XGtE)
+Second Wind;Second souffle;capacité (guerrier)
+Second-Story Work;Monte-en-l'air;capacité (roublard)
+See Invisibility;Voir l'invisible / Détection de l'invisibilité;
+Seeming;Apparence trompeuse;
+Selûne;Séluné;divinité
+Sending;Communication à distance;
+Sending Stones;Pierres de communication à distance / Pierres messagères;
+Sentinel;Sentinelle;don
+Sentinel Shield;Bouclier sentinelle;
+Sequester;Dissimulation / Dissimulation suprême;
+Shadow;Ombre;
+Shadow Arts;Arts des ombres / Artiste des ombres;capacité (moine)
+Shadow Blade;Lame d'ombres (XGtE);
+Shadow Demon;Démon des ombres;
+Shadow of Moil;Ombre d'égarement (XGtE);
+Shadow Step;Foulée d'ombre;capacité (moine)
+Shadow Touched;Faveur des ombres;don (TCoE)
+Shadowfell, the;Gisombre, la;plan
+Shambling Mound;Tertre errant;
+Shape Water;Façonnage de l'eau (XGtE);
+Shapechange;Changement de forme;
+Shapechanger;Métamorphe;capacité (magicien)
+Shar;Shar;divinité
+Share Spells;Partage des sorts;capacité (rôdeur)
+Sharpshooter;Tireur d'élite;don
+Shatter;Fracassement;
+Shelter of the Faithful;Abri du fidèle / Abri des croyants;capacité (historique)
+Shield;Bouclier;
+shield;bouclier;armure
+Shield Guardian;Gardien animé / Garde animé;
+Shield Master;Maître des boucliers;don
+Shield of Faith;Bouclier de la foi;
+Shield of Missile Attraction;Bouclier d'attraction des projectiles;
+Shield, +1, +2, or +3;Bouclier +1, +2 ou +3;
+Shillelagh;Gourdin magique / Crosse des druides;
+Ship's Passage;Place à bord;capacité (historique)
+Shocking Grasp;Poigne électrique;
+short rest;repos court;
+shortbow;arc court;arme
+shortsword;épée courte;arme
+Shrieker;Criard;
+Shroud of Shadow;Voile d'ombres;manifestation occulte (XGtE)
+Sickening Radiance;Rayonnement écoeurant (XGtE);
+sickle;serpe;arme
+sidekick;comparse;
+Sign of Ill Omen;Sombre présage;manifestation occulte
+Signature Spells;Sorts de prédilection;capacité (magicien)
+Silence;Silence;
+Silent Image;Image silencieuse;
+Silvanus;Sylvanus / Silvanus;divinité
+Silver Dragon;Dragon d'argent;
+silver piece (sp);pièce d'argent (pa);pièce
+silvered weapon;armes en argent;propriété
+simple weapon;armes courantes;propriété
+Simulacrum;Simulacre;
+Skeleton;Squelette;
+skill;compétence;
+skill check;jet de compétence / test de compétence;
+Skill Empowerment;Amélioration de compétences (XGtE);
+Skill Expert;Expert;don (TCoE)
+Skill Versatility;Polyvalence;capacité (demi-elfe)
+Skilled;Doué;don
+Skulker;Discret;don
+Skywrite;Libellé aérien (XGtE);
+Slaad Tadpole;Slaad, têtard;
+Slasher;Pourfendeur / Trancheur;don (TCoE)
+slashing;tranchant;type de dégâts
+Sleep;Sommeil;
+Sleet Storm;Tempête de neige;
+Sleight of Hand;Escamotage;compétence
+sling;fronde;arme
+Slippers of Spider Climbing;Chaussons de pattes d'araignée / Chaussons de l'araignée;
+Slippery Mind;Esprit fuyant;capacité (roublard)
+Slow;Lenteur;
+Slow Fall;Chute ralentie;capacité (moine)
+Small;Petite (P);taille
+Small Teeth;Quenottes;
+Smoke Mephit;Méphite fumant;
+Snakewood;Bois du serpent / Bois aux Serpents;
+Snare;Collet (XGtE);
+Sneak Attack;Attaque sournoise;capacité (roublard)
+Snilloc's Snowball Swarm;Nuée de boules de neige de Snilloc (XGtE);
+Snowflake Mountains;Montagnes Floconeigeuses / Montagnes des Flocons;
+Solar;Solar;
+soldier;soldat;historique
+somatic component (S);composante somatique (S);
+Song of Rest;Chant reposant;capacité (barde)
+sorcerer;ensorceleur;classe
+Sorcerous Origin;Origine magique;capacité (ensorceleur)
+Sorcerous Restoration;Restauration ensorcelée;capacité (ensorceleur)
+Soul Cage;Cage des âmes (XGtE);
+Soul of Vengeance;Âme vengeresse;capacité (paladin)
+Sovereign Glue;Colle universelle;
+Spare the Dying;Stabilisation;
+Speak with Animals;Communication avec les animaux;
+Speak with Dead;Communication avec les morts;
+Speak with Plants;Communication avec les plantes;
+Speak with Small Beasts;Communication avec les petits animaux;capacité (gnome)
+spear;lance;arme
+special;spéciale;propriété
+Spectator;Spectateur;
+Specter;Spectre;
+spell attack;attaque avec un sort;
+Spell Bombardment;Bombardement de sorts / Torrent arcanique;capacité (ensorceleur)
+Spell Mastery;Maîtrise des sorts;capacité (magicien)
+Spell Resistance;Résistance aux sorts;capacité (magicien)
+Spell Scroll;Parchemin de sort;
+spell slots;emplacements de sorts;
+Spell Sniper;Mage offensif / Artillerie magique;don
+Spell Thief;Voleur de sort;capacité (roublard)
+spellcaster;lanceur de sorts;
+Spellcasting;Incantation;capacité
+spellcasting ability;caractéristique d'incantation;
+Spellguard Shield;Bouclier gardesort;
+Sphere of Annihilation;Sphère d'annihilation;
+Spider;Araignée;
+Spider Climb;Pattes d'araignée;
+Spike Growth;Croissance d'épines;
+Spine of the World;Épine dorsale du Monde / Échine du Monde;
+Spined Devil;Diable épineux;
+Spirit Guardians;Esprits gardiens;
+Spirit Naga;Naga corrupteur;
+Spirit Seeker;Quêteur spirituel;capacité (barbare)
+Spirit Shroud;Voile spirituel (TCoE);
+Spirit Walker;Marcheur spirituel;capacité (barbare)
+Spiritual Weapon;Arme spirituelle;
+splint;clibanion;armure
+Split Enchantment;Partage d'enchantement / Enchantement bifide;capacité (magicien)
+Sprite;Esprit follet;
+Spy;Espion;
+spy;espion;historique
+Squat Nimbleness;Agilité des courts-sur-pattes / Trapu mais agile;don (XGtE)
+Staff of Charming;Bâton d'envoûtement;
+Staff of Fire;Bâton de feu;
+Staff of Frost;Bâton de givre;
+Staff of Healing;Bâton de guérison;
+Staff of Power;Bâton de surpuissance;
+Staff of Striking;Bâton percussif;
+Staff of Swarming Insects;Bâton de grand essaim / Bâton du grand essaim;
+Staff of the Adder;Bâton de la vipère;
+Staff of the Magi;Bâton du thaumaturge;
+Staff of the Python;Bâton du python;
+Staff of the Woodlands;Bâton des forêts;
+Staff of Thunder and Lightning;Bâton de tonnerre et de foudre;
+Staff of Withering;Bâton de flétrissement;
+Staggering Smite;Châtiment débilitant;
+Stealth;Discrétion;compétence
+Steam Mephit;Méphite vaporeux;
+Steel Wind Strike;Frappe du vent d'acier (XGtE);
+Step of the Wind;Déplacement aérien;capacité (moine)
+Stillness of Mind;Serénité;capacité (moine)
+Stinking Cloud;Nuage nauséabond;
+Stirge;Strige;
+Stone Giant;Géant des pierres;
+Stone Golem;Golem de pierre;
+Stone of Controlling Earth Elementals;Pierre de contrôle des élémentaires de la terre;
+Stone of Good Luck (Luckstone);Pierre porte-bonheur;
+Stone Shape;Façonnage de la pierre;
+Stonecunning;Connaissance de la pierre;capacité (nain)
+Stoneskin;Peau de pierre;
+Storm Giant;Géant des tempêtes;
+Storm Horns;Cornes orageuses;
+Storm of Vengeance;Tempête vengeresse;
+Storm Sphere;Sphère de tempête (XGtE);
+Stormborn;Enfant de la tempête;capacité (clerc)
+stout;robuste;sous-race (halfelin)
+Stout Resilience;Résistance des robustes / Résilience des robustes;capacité (halfelin)
+Strength;Force;caractéristique
+Stroke of Luck;Coup de chance;capacité (roublard)
+studded leather;cuir clouté;armure
+Student of War;Disciple martial;capacité (guerrier)
+stunned;étourdi;état
+Stunning Strike;Frappe étourdissante;capacité (moine)
+Subrace;sous-race / variante raciale;race
+Subtle Spell;sort subtil;métamagie
+Succubus;Succube;
+Suggestion;Suggestion;
+Summon Aberration;Convocation d'aberration (TCoE);
+Summon Beast;Convocation de bête (TCoE);
+Summon Celestial;Convocation de céleste (TCoE);
+Summon Construct;Convocation d'artificiel (TCoE);
+Summon Elemental;Convocation d'élémentaire (TCoE);
+Summon Fey;Convocation de fée (TCoE);
+Summon Fiend;Convocation de fiélon (TCoE);
+Summon Greater Demon;Convocation de démon majeur (XGtE);
+Summon Lesser Demons;Convocation de démons mineurs (XGtE);
+Summon Shadospawn;Convocation de rejeton d'ombre (TCoE);
+Summon Undead;Convocation de mort-vivant (TCoE);
+Sun Blade;Épée radieuse;
+Sunbeam;Rayon de soleil;
+Sunburst;Éclat du soleil;
+Sune;Sunie;divinité
+Sunlight Sensitivity;Sensibilité au soleil;capacité (elfe)
+Sunset Mountains;Montagnes du Couchant / Monts du Crépuscule;
+Superior Critical;Critique supérieur;capacité (guerrier)
+Superior Darkvision;Vision dans le noir supérieure;capacité (elfe)
+Superior Hunter's Defense;Défense du chasseur supérieure / Défense de chasseur supérieure;capacité (rôdeur)
+Superior Inspiration;Inspiration supérieure;capacité (barde)
+Superior Technique;Technique supérieure;style de combat (TCoE)
+Supreme Healing;Guérison suprême;capacité (clerc)
+Supreme Sneak;Discrétion suprême / Furtivité suprême;capacité (roublard)
+Survival;Survie;compétence
+Survivor;Survivant;capacité (guerrier)
+Swarm of Bats;Nuée de chauves-souris;
+Swarm of Insects;Nuée d'insectes;
+Swarm of Poisonous Snakes;Nuée de serpents venimeux;
+Swarm of Quippers;Nuée de piranhas;
+Swarm of Rats;Nuée de rats;
+Swarm of Ravens;Nuée de corbeaux;
+Sweeping Attack;Balayage;manœuvre
+Swift Quiver;Carquois magique / Vif carquois;
+Sword Burst;Éruption de lames (TCoE);
+Sword Mountains;Montagnes des Épées / Monts de l'Épée Talona =Talona;divinité
+Sword of Answering;Épée de réponse;
+Sword of Kas;Épée de Kas;
+Sword of Life Stealing;Épée voleuse de vie;
+Sword of Sharpness;Épée acérée;
+Sword of Vengeance;Épée vengeresse;
+Sword of Wounding;Épée incisive;
+Sylvan;sylvestre;langue
+Symbol;Symbole;
+Synaptic Static;Perturbations synaptiques (XGtE);
+Tactical Assessment;Évaluation technique;manœuvre (TCoE)
+Talisman of Pure Good;Talisman du bien ultime;
+Talisman of the Sphere;Talisman de la sphère;
+Talisman of Ultimate Evil;Talisman du mal absolu;
+Talos;Talos;divinité
+Tarrasque;Tarasque;
+Tasha's Caustic Brew;Mixture caustique de Tasha (TCoE);
+Tasha's Hideous Laughter;Fou rire de Tasha;
+Tasha's Mind Whip;Fouet mental de Tasha (TCoE);
+Tasha's Otherworldly Guise;Costume d'Outremonde de Tasha (TCoE);
+Tavern Brawler;Bagarreur de tavernes;don
+Telekinesis;Télékinésie;
+Telekinetic;Télékinésiste;don (TCoE)
+Telepathic;Télépathe;don (TCoE)
+Telepathy;Télépathie;
+Teleport;Téléportation;
+Teleportation Circle;Cercle de téléportation;
+Tempest domain;Domaine de la Tempête;voie (clerc)
+Temple of the Gods;Temple des dieux (XGtE);
+Tempus;Tempus;divinité
+Tenser's Floating Disk;Disque flottant de Tenser;
+Tenser's Transformation;Transformation de Tenser (XGtE);
+Tentacle Rod;Sceptre tentacule / Sceptre-tentacule;
+Terran;terreux;langue
+Thaumaturgy;Thaumaturgie;
+The Third Eye;Troisième œil;capacité (magicien)
+Thief;Voleur;voie (roublard)
+Thief of Five Fates;Voleur des cinq destinées;manifestation occulte
+Thief's Reflexes;Réflexes de voleur;capacité (roublard)
+Thieves' cant;Jargon des voleurs / Argot des voleurs;capacité (roublard)
+thieves' cant;jargon des voleurs / argot des voleurs;langue
+thieves' tools;outils de voleur;
+Thirsting Blade;Lame assoiffée;manifestation occulte
+Thorn Whip;Fouet épineux;
+Thought Shield;Bouclier mental;capacité (occultiste)
+Thousand Forms;Mille formes / Mille visages;capacité (druide)
+three-quarters cover;abri important;
+Thri-kreen;Thri-kreen;
+thrown;lancer;propriété
+Thrown Weapon Fighting;Armes de lancer;style de combat (TCoE)
+Thug;Malfrat;
+thunder;tonnerre;type de dégâts
+Thunder Step;Foulée tonitruante (XGtE);
+Thunderbolt Strike;Frappe de l'éclair / Choc foudrayant;capacité (clerc)
+Thunderclap;Coup de tonnerre (XGtE);
+Thunderous Smite;Châtiment tonitruant;
+Thunderwave;Vague tonnante;
+Tidal Wave;Raz-de-marée (XGtE);
+Tides of Chaos;Marée du chaos;capacité (ensorceleur)
+tiefling;tieffelin;race
+Tigre;Tigre;
+Time Stop;Arrêt du temps;
+Timeless Body;Jeunesse éternelle;capacité (druide, moine)
+Tinker;Bricoleur;capacité (gnome)
+Tiny;Très petite (TP);taille
+Tiny Servant;Serviteur miniature (XGtE);
+Toll the Dead;Glas (XGtE);
+Tomb of Levistus;Tombe de Levistus;manifestation occulte (XGtE)
+Tome of Clear Thought;Traité de perspicacité;
+Tome of Leadership and Influence;Traité d'autorité et d'influence;
+Tome of the Stilled Tongue;Tome de la langue nouée;
+Tome of Understanding;Traité de compréhension;
+Tongue of the Sun and Moon;Langue du soleil et de la lune;capacité (moine)
+Tongues;Don des langues;
+Torm;Torm;divinité
+total cover;abri total;
+Totem Spirit;Esprit totem / Totem spirituel;capacité (barbare)
+Totemic Attunement;Lien totémique / Harmonisation totémique;capacité (barbare)
+Tough;Robuste;don
+Trance;Transe;capacité (elfe)
+Tranquility;Tranquillité / Ataraxie;capacité (moine)
+Transitive Planes;plans transitifs;plan
+transmutation;transmutation;école de magie
+Transmutation Savant;Transmutateur érudit;capacité (magicien)
+Transmute Rock;Transmutation de la pierre (XGtE);
+Transmuter's Stone;Pierre du transmutateur;capacité (magicien)
+Transport via Plants;Voie végétale;
+Treant;Sylvanien;
+Tree Stride;Passage par les arbres;
+Tremorsense;Perception des vibrations;
+Tribal Warrior;Guerrier tribal;
+Triboar;Troisanglier;
+Triceratops;Tricératops;
+Trickery domain;Domaine de la Duperie / Domaine de la Ruse;voie (clerc)
+Trickster's Escape;Fuite de l'escroc / Fuite de l'escamoteur;manifestation occulte (XGtE)
+trident;trident;arme
+Trident of Fish Command;Trident de domination aquatique;
+Tridrone;Tridrone;
+trinkets;babioles;
+Trip Attack;Croc-en-jambe;manœuvre
+Troglodyte;Troglodyte;
+Troll;Troll;
+Troll Mountains;Montagnes aux Trolls / Monts des Trolls;
+Trollbark Forest;Forêt du cri de troll / Forêt de Trollécorce;
+Trollclaws;Griffes de troll / Griffetroll;
+True Polymorph;Métamorphose suprême;
+True Resurrection;Résurrection suprême;
+True Seeing;Vision suprême;
+True Strike;Coup au but;
+truesight;vision véritable / vision parfaite;
+Tsunami;Tsunami;
+Turn the Faithless;renvoi des infidèles;capacité (paladin/conduit divin)
+Turn the Unholy;renvoi des impies;capacité (paladin/conduit divin)
+Turn Undead;renvoi des morts-vivants;capacité (clerc/conduit divin)
+Twig Blight;Nielleux;
+Twinned Spell;sort jumeau;métamagie
+two-handed;à deux mains;propriété
+Two-Weapon Fighting;Combat à deux armes;style de combat
+Tymora;Tymora;divinité
+Tyr;Tyr;divinité
+Tyrannosaurus Rex;Tyrannosaure;
+Ultroloth;Ultroloth;
+Umber Hulk;Mastodonte des ombres;
+Umberlee;Umberlie;divinité
+unaligned;sans alignement / non-aligné;
+Unarmed Fighting;Combat à mains nues;style de combat (TCoE)
+Unarmored Defense;Défense sans armure;capacité (barbare, moine)
+Unarmored Movement;Déplacement sans armure;capacité (moine)
+Uncanny Dodge;Esquive instinctive;capacité (roublard)
+Unconscious;inconscient;état
+undead;mort-vivant (pluriel: morts-vivants);type de créature
+Undead Thralls;Serviteurs morts-vivants;capacité (magicien)
+Undercommon;commun des profondeurs;langue
+Underdark;Outreterre;
+Undying Sentinel;Sentinelle immortelle;capacité (paladin)
+Undying Servitude;Servitude de la tombe;manifestation occulte (TCoE)
+Unicorn;Licorne;
+Universal Solvent;Solvant universel;
+Unseen Servant;Serviteur invisible;
+urchin;enfant des rues;historique
+Use an Object;Utiliser un objet;action
+Use Magic Device;Utilisation d'objets magiques;capacité (roublard)
+Vampire;Vampire;
+Vampire Spawn;Vampirien;
+Vampiric Touch;Toucher du vampire / Caresse du vampire;
+Vanish;Disparition;capacité (rôdeur)
+verbal component (V);composante verbale (V);
+versatile;polyvalente;propriété
+Versatile Trickster;Escroc polyvalent / Omniprésence;capacité (roublard)
+Veteran;Vétéran;
+Vicious Mockery;Moquerie cruelle;
+Vicious Weapon;Arme vicieuse;
+Vine Blight;Lierreux;
+Violet Fungus;Moisissure violette;
+Visions of Distant Realms;Royaumes lointains;manifestation occulte
+Visions of the Past;Visions du passé;capacité (clerc)
+Vitriolic Sphere;Sphère de vitriol (XGtE);
+Voice of the Chain Master;Voix du maître des Chaînes;manifestation occulte
+Vorpal Sword;Épée vorpale;
+Vow of Enmity;vœu d'hostilité;capacité (paladin/conduit divin)
+Vrock;Vrock;
+Vulture;Vautour;
+Wall of Fire;Mur de feu;
+Wall of Force;Mur de force;
+Wall of Ice;Mur de glace;
+Wall of Light;Mur de lumière (XGtE);
+Wall of Sand;Mur de sable (XGtE);
+Wall of Stone;Mur de pierre;
+Wall of Thorns;Mur d'épines;
+Wall of Water;Mur d'eau (XGtE);
+Wand of Binding;Baguette d'entraves;
+Wand of Enemy Detection;Baguette de détection de l'ennemi;
+Wand of Fear;Baguette de peur / Baguette de terreur;
+Wand of Fireballs;Baguette de boules de feu;
+Wand of Lightning Bolts;Baguette d'éclairs;
+Wand of Magic Detection;Baguette de détection de la magie;
+Wand of Magic Missiles;Baguette de projectiles magiques;
+Wand of Orcus;Baguette d'Orcus;
+Wand of Paralysis;Baguette de paralysie;
+Wand of Polymorph;Baguette de métamorphose;
+Wand of Secrets;Baguette des secrets;
+Wand of the War Mage +1, +2, or +3;Baguette du mage de guerre +1, +2 ou +3;
+Wand of Web;Baguette de toile d'araignée / Baguette des toiles;
+Wand of Wonder;Baguette des merveilles;
+Wanderer;Éternel vagabond;capacité (historique)
+War Caster;Mage de guerre;don
+War domain;Domaine de la Guerre;voie (clerc)
+War God's Blessing;bénédiction du dieu de la Guerre;capacité (clerc/conduit divin)
+War Magic;Magie de guerre;capacité (guerrier)
+war pick;pic de guerre;arme
+War Priest;Prêtre de guerre;capacité (clerc)
+Warding Bond;Lien de protection;
+Warding Flare;Illumination protectrice;capacité (clerc)
+Warding Wind;Vent protecteur (XGtE);
+warhammer;marteau de guerre;arme
+Warhorse;Cheval de guerre / Destrier;
+Warhorse Skeleton;Squelette de cheval de guerre / Squelette de destrier;
+warlock;occultiste;classe
+Water Breathing;Respiration aquatique;
+Water Elemental;Élémentaire de l'eau;
+Water Walk;Marche sur l'eau / Marche sur l'onde;
+Water Weird;Sentinelle d'eau / Sibylle de l'eau;
+Waterdeep;Eauprofonde;
+Watery Sphere;Sphère aqueuse (XGtE);
+Waukeen;Waukyne;divinité
+Wave;Vague;
+Way of Shadow;Voie de l'ombre;voie (moine)
+Way of the Four Elements;Voie des quatre éléments;voie (moine)
+Way of the Open Hand;Voie de la paume;voie (moine)
+Weapon +1, +2, or +3;Arme +1, +2 ou +3;
+Weapon Bond;Lien avec une arme / Arme occulte;capacité (guerrier)
+Weapon Master;Maître d'armes;don
+Weapon of Warning;Arme vigilante;
+Weasel;Belette;
+Web;Toile d'araignée;
+Weird;Ennemi subconscient;
+Well of Many Worlds;Puits des mondes;
+Werebear;Ours-garou;
+Wereboar;Sanglier-garou;
+Wererat;Rat-garou;
+Weretiger;Tigre-garou;
+Werewolf;Loup-garou;
+Whelm;Déluge;
+whip;fouet;arme
+Whirlwind;Tourbillon (XGtE);
+Whispers of the Grave;Murmures de la tombe;manifestation occulte
+White Dragon;Dragon blanc;
+Wholeness of Body;Plénitude physique;capacité (moine)
+Wight;Nécrophage;
+Wild Magic;Magie sauvage;voie (ensorceleur)
+Wild Magic Surge;Sursaut de magie sauvage / Pic de magie sauvage;capacité (ensorceleur)
+Wild Shape;Forme sauvage;capacité (druide)
+Will-o'-Wisp;Feu follet;
+Wind Fan;Éventail enchanté;
+Wind Walk;Marche sur le vent / Vent divin;
+Wind Wall;Mur de vent;
+Winged Boots;Bottes ailées;
+Winged Kobold;Kobold ailé;
+Wings of Flying;Cape de vol Univers D&D 5;
+Winter Wolf;Loup arctique;
+Wisdom;Sagesse;caractéristique
+Wish;Souhait;
+Witch Bolt;Trait ensorcelé;
+Witch Sight;Vision de sorcier / Vision sorcière;manifestation occulte
+wizard;magicien;classe
+Wolf;Loup;
+wood elf;elfe des bois / elfe sylvestre;sous-race (elfe)
+Wood Elf Magic;Magie des elfes des bois / Magie des elfes sylvestres;don (XGtE)
+Wood of Sharp Teeth;Bois des dents acérées / Forêt des Dents tranchantes;
+Word of Radiance;Mot de radiance (XGtE);
+Word of Recall;Mot de retour;
+Worg;Worg;
+Wraith;Âme en peine / Âme-en-peine;
+Wrath of Nature;Fureur de la nature (XGtE);
+Wrath of the Storm;Fureur de l'ouragan;capacité (clerc)
+Wrathful Smite;Châtiment courroucé;
+Wyvern;Wiverne / Vouivre;
+Xorn;Xorn;
+Yeti;Yéti / Yeti;
+Yochlol;Yochlol;
+Young Dragon;Dragon, jeune / Jeune dragon;
+Young Red Shadow Dragon;Dragon d'ombre rouge, jeune;
+Young Remorhaz;Remorhaz, jeune / Jeune remorhaz;
+Ysgard;Ysgard;plan Sorts D&D 5
+Yuan-ti Abomination;Yuan-ti abomination / abomination yuan-tie;
+Yuan-ti Malison;Yuan-ti malison;
+Yuan-ti Pureblood;Yuan-ti sang-pur;
+Zephyr Strike;Frappe du zéphyr (XGtE);
+Zhentarim;Zhentarim;faction
+Zombie;Zombi Objets magiques D&D 5;
+Zone of Truth;Zone de vérité Créatures D&D 5;

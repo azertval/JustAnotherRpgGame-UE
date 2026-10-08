@@ -1,0 +1,89 @@
+{
+  "id": "imperial-benenet",
+  "name": "Imperial Benênet",
+  "source": "tanares",
+  "government": "Province dominated by the Tanarean Empire, ruled by a governor appointed by Emperor Baleroth.",
+  "faction": "Tanarean Empire",
+  "population": {
+    "total": 445000,
+    "species": [
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 55
+      },
+      {
+        "species": "cirrus",
+        "label": "cirrus",
+        "percent": 34
+      },
+      {
+        "species": "winter-elf",
+        "label": "winter elves",
+        "percent": 5
+      },
+      {
+        "species": "dwarf",
+        "label": "dwarves",
+        "percent": 4
+      }
+    ],
+    "otherPercent": 2
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "low",
+        "scope": "south"
+      },
+      {
+        "grade": "high",
+        "scope": "north"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "low"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "high"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "normal"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "normal"
+      }
+    ]
+  },
+  "neighbors": [
+    "central-empire",
+    "kingdom-of-kolbjorn",
+    "magocracy-of-mage-tower"
+  ],
+  "locations": [
+    "imperial-benenet-begraense",
+    "imperial-benenet-crystal-mountain-herbs",
+    "imperial-benenet-crystal-mountains",
+    "imperial-benenet-mistvale",
+    "imperial-benenet-mists-of-mistvale",
+    "imperial-benenet-oz-stormwind",
+    "imperial-benenet-saezz-skyborn"
+  ]
+}

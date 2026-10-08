@@ -1,0 +1,59 @@
+{
+  "id": "swarm-of-poisonous-snakes",
+  "name": "Nuée de serpents venimeux",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "nuée de bêtes TP",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 8,
+    "dexterity": 18,
+    "constitution": 11,
+    "intelligence": 1,
+    "wisdom": 10,
+    "charisma": 3
+  },
+  "armorClass": 14,
+  "hitPoints": 36,
+  "hitDice": "8d8",
+  "speed": {
+    "walk": 9,
+    "swim": 9
+  },
+  "challengeRating": 2,
+  "senses": [
+    "vision aveugle 3 m",
+    "Perception passive 10"
+  ],
+  "damageResistances": [
+    "bludgeoning",
+    "piercing",
+    "slashing"
+  ],
+  "conditionImmunities": [
+    "prone",
+    "grappled",
+    "charmed",
+    "frightened",
+    "restrained",
+    "stunned",
+    "paralyzed",
+    "petrified"
+  ],
+  "traits": [
+    {
+      "name": "Nuée",
+      "text": "La nuée peut occuper l'espace d'une créature et vice versa, et peut passer par une ouverture suffisamment grande pour un serpent de taille TP. La nuée ne peut pas regagner de points de vie ou gagner des points de vie temporaires."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsures",
+      "text": "Attaque au corps à corps avec une arme : +6 au toucher, allonge 0 m, une créature dans l'espace de la nuée. Touché : 7 (2d6) dégâts perforants, ou 3 (1d6) dégâts perforants si la nuée ne possède plus que la moitié ou moins de ses points de vie. La cible doit réaliser un jet de sauvegarde de Constitution DD 10, subissant 14 (4d6) dégâts de poison en cas d'échec, ou la moitié de ces dégâts en cas de réussite.",
+      "attackBonus": 6,
+      "reach": 0,
+      "damage": "2d6",
+      "damageType": "piercing"
+    }
+  ]
+}

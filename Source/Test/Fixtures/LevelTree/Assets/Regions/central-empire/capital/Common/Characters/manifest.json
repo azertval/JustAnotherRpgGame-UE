@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "tile": [
+    68,
+    42
+  ],
+  "comment": "Ville : le citadin de la Capitale.",
+  "npcs": [
+    "citizen"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "id": "quasit",
+  "name": "Quasit",
+  "source": "srd",
+  "size": "tiny",
+  "creatureType": "fiélon (démon, métamorphe)",
+  "alignment": "chaotique",
+  "abilities": {
+    "strength": 5,
+    "dexterity": 17,
+    "constitution": 10,
+    "intelligence": 7,
+    "wisdom": 10,
+    "charisma": 10
+  },
+  "armorClass": 13,
+  "hitPoints": 7,
+  "hitDice": "3d4",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 1,
+  "senses": [
+    "vision dans le noir 36 m",
+    "Perception passive 10"
+  ],
+  "skills": {
+    "stealth": 5
+  },
+  "damageResistances": [
+    "cold",
+    "fire",
+    "lightning"
+  ],
+  "damageImmunities": [
+    "poison"
+  ],
+  "conditionImmunities": [
+    "poisoned"
+  ],
+  "languages": [
+    "abyssal",
+    "common"
+  ],
+  "traits": [
+    {
+      "name": "Résistances aux dégâts",
+      "text": "contondant, perforant et tranchant d'attaques non magiques"
+    },
+    {
+      "name": "Métamorphe",
+      "text": "Le quasit peut utiliser son action pour se métamorphoser en une bête qui ressemble à une chauve- souris (vitesse 3 m, vol 12 m), un mille-pattes (12 m, escalade 12 m) ou un crapaud (12 m, nage 12 m), ou pour reprendre sa forme véritable. Mise à part sa vitesse (comme indiqué précédemment), ses statistiques sont les mêmes quelle que soit sa forme. L'équipement qu'il porte ou transporte ne se transforme pas. Il retrouve sa forme véritable s'il meurt."
+    },
+    {
+      "name": "Résistance à la magie",
+      "text": "Le quasit a un avantage aux jets de sauvegarde contre les sorts et autres effets magiques."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Griffes (Morsure sous forme de bête)",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 5 (1d4 + 3) dégâts perforants, et la cible doit réussir un jet de sauvegarde de Constitution DD 10 ou subir 5 (2d4) dégâts de poison et être empoisonné pendant 1 minute. La cible peut retenter son jet de sauvegarde à la fin de chacun de ses tours, mettant fin à l'effet qui l'affecte en cas de réussite.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d4+3",
+      "damageType": "piercing"
+    },
+    {
+      "name": "Frayeur (1/jour)",
+      "text": "Une créature que le quasit choisit, se trouvant dans un rayon de 6 mètres, doit réussir un jet de sauvegarde de Sagesse DD 10 ou être effrayée pendant 1 minute. La cible peut retenter son jet de sauvegarde à la fin de chacun de ses tours, avec un désavantage si le quasit est dans sa ligne de mire, mettant fin à l'effet qui l'affecte en cas de réussite."
+    },
+    {
+      "name": "Invisibilité",
+      "text": "Le quasit devient invisible par magie jusqu'à ce qu'il attaque, utilise sa Frayeur, ou que sa concentration se termine (comme s'il se concentrait sur un sort). Tout l'équipement qu'il porte ou transporte est également invisible."
+    }
+  ],
+  "mecanismesRequis": [
+    "resistance-conditionnelle"
+  ]
+}

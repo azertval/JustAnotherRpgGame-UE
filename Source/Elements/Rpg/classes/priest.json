@@ -1,0 +1,225 @@
+{
+  "id": "priest",
+  "name": "Priest",
+  "source": "tanares",
+  "hitDie": 8,
+  "primaryAbility": [
+    "wisdom"
+  ],
+  "savingThrowProficiencies": [
+    "wisdom",
+    "charisma"
+  ],
+  "armorProficiencies": [
+    "light",
+    "medium",
+    "shields"
+  ],
+  "weaponProficiencies": [
+    "simple"
+  ],
+  "skillChoices": {
+    "count": 2,
+    "from": [
+      "history",
+      "insight",
+      "medicine",
+      "persuasion",
+      "religion"
+    ]
+  },
+  "spellcasting": {
+    "ability": "wisdom",
+    "castsPerDay": 2
+  },
+  "progression": [
+    {
+      "level": 1,
+      "proficiencyBonus": 2,
+      "features": [
+        "simplified-spellcasting",
+        "specific-cantrips"
+      ],
+      "cantrips": [
+        "light",
+        "sacred-flame"
+      ],
+      "spells": [
+        "bless",
+        "cure-wounds"
+      ]
+    },
+    {
+      "level": 2,
+      "proficiencyBonus": 2,
+      "features": [
+        "experience"
+      ]
+    },
+    {
+      "level": 3,
+      "proficiencyBonus": 2,
+      "features": [
+        "simplified-spellcasting",
+        "specific-cantrips"
+      ],
+      "cantrips": [
+        "spare-the-dying"
+      ],
+      "spells": [
+        "lesser-restoration",
+        "spiritual-weapon"
+      ]
+    },
+    {
+      "level": 4,
+      "proficiencyBonus": 2,
+      "features": [
+        "ability-score-improvement"
+      ]
+    },
+    {
+      "level": 5,
+      "proficiencyBonus": 3,
+      "features": [
+        "simplified-spellcasting"
+      ],
+      "spells": [
+        "daylight",
+        "revivify"
+      ]
+    },
+    {
+      "level": 6,
+      "proficiencyBonus": 3,
+      "features": [
+        "divine-cure"
+      ]
+    },
+    {
+      "level": 7,
+      "proficiencyBonus": 3,
+      "features": [
+        "simplified-spellcasting"
+      ],
+      "spells": [
+        "banishment",
+        "freedom-of-movement"
+      ]
+    },
+    {
+      "level": 8,
+      "proficiencyBonus": 3,
+      "features": [
+        "ability-score-improvement"
+      ]
+    },
+    {
+      "level": 9,
+      "proficiencyBonus": 4,
+      "features": [
+        "simplified-spellcasting"
+      ],
+      "spells": [
+        "greater-restoration",
+        "mass-cure-wounds"
+      ]
+    },
+    {
+      "level": 10,
+      "proficiencyBonus": 4,
+      "features": [
+        "experience",
+        "holy-shield"
+      ]
+    },
+    {
+      "level": 11,
+      "proficiencyBonus": 4,
+      "features": [
+        "simplified-spellcasting"
+      ],
+      "spells": [
+        "harm",
+        "heal"
+      ]
+    },
+    {
+      "level": 12,
+      "proficiencyBonus": 4,
+      "features": [
+        "ability-score-improvement"
+      ]
+    },
+    {
+      "level": 13,
+      "proficiencyBonus": 5,
+      "features": [
+        "simplified-spellcasting"
+      ],
+      "spells": [
+        "fire-storm"
+      ]
+    },
+    {
+      "level": 14,
+      "proficiencyBonus": 5,
+      "features": [
+        "divine-cure-improvement"
+      ]
+    },
+    {
+      "level": 15,
+      "proficiencyBonus": 5,
+      "features": [
+        "simplified-spellcasting"
+      ],
+      "spells": [
+        "sunburst"
+      ]
+    },
+    {
+      "level": 16,
+      "proficiencyBonus": 5,
+      "features": [
+        "ability-score-improvement"
+      ]
+    },
+    {
+      "level": 17,
+      "proficiencyBonus": 6,
+      "features": [
+        "simplified-spellcasting"
+      ],
+      "spells": [
+        "true-resurrection"
+      ]
+    },
+    {
+      "level": 18,
+      "proficiencyBonus": 6,
+      "features": [
+        "experience"
+      ]
+    },
+    {
+      "level": 19,
+      "proficiencyBonus": 6,
+      "features": [
+        "ability-score-improvement"
+      ]
+    },
+    {
+      "level": 20,
+      "proficiencyBonus": 6,
+      "features": [
+        "divine-intervention"
+      ]
+    }
+  ],
+  "status": {
+    "provisoire": true,
+    "raison": "socle provisoire du premier modele de combat : simple a jouer, suffisant pour faire tourner attaques, degats et tours avant le systeme complet de classes",
+    "retraitSi": "les seize classes completes sont livrees (LOT-47, LOT-51 a LOT-65) et aucune donnee definitive ne reference ces quatre classes"
+  }
+}

@@ -1,0 +1,43 @@
+MAQUETTE v2 — 2026-09-16 (tour 1 : grille tenue ; pas de pixel perdu, façades de face, portes trop grandes)
+
+Create ONE finished game scene, 1536 x 1024, landscape: a small fragment of a
+market street in the capital of a fantasy empire, seen in isometric view, with
+the two characters of reference image 1 standing in it.
+
+PIXEL SCALE (most important): 16-bit pixel art, 2 screen pixels per art pixel,
+crisp square pixels, no anti-aliasing, no gradients, no blur. The ground AND the
+characters share this same pixel size. Copy the characters of reference image 1
+exactly: same size (about 90 screen pixels tall), same outline, same shading.
+The scenery must be drawn with the SAME outline, shading and pixel density as
+these two characters, so that they look native to the place. The whole image is
+built from 2x2 blocks of identical colour: no smooth gradient, no soft glow, no
+painterly texture, a limited palette of about 64 colours.
+
+GRID: reference image 1 shows the floor grid as thin outlines. Each floor tile is
+an isometric diamond 136 screen pixels wide and 84 pixels tall (a flat diamond,
+flatter than a cube's top). Keep exactly this diamond shape and size for every
+floor tile, laid out on this grid. Tile edges may show as a thin mortar joint
+between paving slabs, drawn in the stone palette, never as blue lines.
+Walls rise about 116 screen pixels above the tile they stand on. Every wall,
+stall and building follows the diamond edges: its faces run along the two
+diagonal directions of the grid, never facing the viewer flat.
+
+SCALE OF OBJECTS: a character is about 90 screen pixels tall. A door is about
+110 pixels tall, a stall counter about 45, a lantern about 20, a barrel about
+40. Nothing on the street is taller than one wall height.
+
+PLACE: cobblestone street, lantern-lit market stalls with striped awnings and
+crates of goods, culturally blended architecture (Imperial stone and timber
+side by side), one building wall along the back-left edge with a door and a
+hanging lantern, a darker narrow alley opening on the right. Evening light.
+
+CAMERA AND LIGHT: fixed isometric camera, no perspective. One outline colour:
+deep navy, never pure black, one pixel wide. Three to four tones per material.
+Single light source top-left; warm lantern glow drawn as flat pixel tones, no
+bloom. No ground shadow under the characters.
+
+COMPOSITION: the scene fills the image edge to edge; the characters stand on
+two different floor tiles near the centre, facing the viewer.
+
+FORBIDDEN: any text, letters, numbers, labels, captions, user interface, panels,
+borders, frames, colour swatches, logo, watermark, grid lines.

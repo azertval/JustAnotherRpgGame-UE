@@ -1,0 +1,12 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "map": "coliseum",
+  "note": "LOT-EDITOR-06 : les trois chevauchements que --check signalait. La porte sud était deux pièces larges croisées (gate-left, gate-right) : une seule gate-right couvre les deux seuils. La loge empilait trois box-left de deux cases sur trois : deux loges par côté, aux lignes 5 et 7.",
+  "gestures": [
+    {"layer": "relief", "tool": "eraser", "path": [[19, 33], [20, 33]]},
+    {"piece": "gate-right", "tool": "paint", "at": [19, 33]},
+    {"tool": "eraser", "path": [[16, 6], [16, 7], [23, 6]]},
+    {"piece": "box-left", "tool": "paint", "at": [16, 7]}
+  ]
+}

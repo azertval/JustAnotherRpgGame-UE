@@ -1,0 +1,21 @@
+{
+  "id": "lesser-restoration",
+  "name": "Restauration inferieure",
+  "source": "phb-fr",
+  "level": 2,
+  "school": "abjuration",
+  "castingTime": "1 action",
+  "range": "contact",
+  "rangeMeters": 1.5,
+  "target": "ally",
+  "components": {
+    "verbal": true,
+    "somatic": true,
+    "material": false
+  },
+  "duration": "instantanee",
+  "mecanismesRequis": [
+    "etats-en-combat"
+  ],
+  "text": "Manuel des Joueurs, PDF p. 277 (lesser restoration). Met fin a une maladie ou a un etat : aveugle, assourdi, paralyse ou empoisonne. Le combat ne pose aucun de ces etats : les quatre classes jusqu'au niveau 5 n'en infligent pas, et le catalogue des etats vient avec les classes completes de la 0.3.0 (LOT-137)."
+}

@@ -1,0 +1,802 @@
+[
+ {
+  "slug": "a_laafia",
+  "nom": "A´Laafia, The one In Equilibrium",
+  "page": 4
+ },
+ {
+  "slug": "a_laafia_s_companion_dynamo",
+  "nom": "A´Laafia's Companion: Dynamo",
+  "page": 5
+ },
+ {
+  "slug": "abhorroth",
+  "nom": "Abhorroth, the Dark Titan",
+  "page": 6
+ },
+ {
+  "slug": "ahrarthra",
+  "nom": "Ahr’Arthra, The Desert Broodmother",
+  "page": 7
+ },
+ {
+  "slug": "aldo_cotton_hair",
+  "nom": "Aldo Cotton-Hair",
+  "page": 8
+ },
+ {
+  "slug": "ananab",
+  "nom": "Ananab, the Community Sage",
+  "page": 9
+ },
+ {
+  "slug": "anariel",
+  "nom": "Anariel, the Swordmage",
+  "page": 10
+ },
+ {
+  "slug": "ardilog",
+  "nom": "Ardilog, the Everspawning Chimera",
+  "page": 11
+ },
+ {
+  "slug": "ardnold_bak",
+  "nom": "Ardnold Bak, The Harvester",
+  "page": 12
+ },
+ {
+  "slug": "ascaran",
+  "nom": "Ascaran, the Archangel",
+  "page": 13
+ },
+ {
+  "slug": "auros_dragonborn",
+  "nom": "Auros (dragonborn)",
+  "page": 14
+ },
+ {
+  "slug": "avelum",
+  "nom": "Avelum, the Master Wizard",
+  "page": 15
+ },
+ {
+  "slug": "azriel",
+  "nom": "Azriel, the Water Elementalist",
+  "page": 16
+ },
+ {
+  "slug": "azymor",
+  "nom": "Azymor, the Red Avatar Dragon",
+  "page": 17
+ },
+ {
+  "slug": "baolmu",
+  "nom": "Baolmu, the Augur Madwalker",
+  "page": 18
+ },
+ {
+  "slug": "baraelmer",
+  "nom": "Baraelmer, the Battlemaster",
+  "page": 19
+ },
+ {
+  "slug": "bauis",
+  "nom": "Bauis, the Kemet Traitor",
+  "page": 20
+ },
+ {
+  "slug": "becca",
+  "nom": "Becca",
+  "page": 21
+ },
+ {
+  "slug": "bellara",
+  "nom": "Bellara, The Daughter of C’thraxis",
+  "page": 22
+ },
+ {
+  "slug": "black_soul",
+  "nom": "Black Soul",
+  "page": 23
+ },
+ {
+  "slug": "bonas_weyrdo",
+  "nom": "Bonas Weyrdo",
+  "page": 24
+ },
+ {
+  "slug": "bretrar_brakaan",
+  "nom": "Bretrar Brakaan",
+  "page": 25
+ },
+ {
+  "slug": "bridgit",
+  "nom": "Bridgit, the Penumbral Wanderer",
+  "page": 26
+ },
+ {
+  "slug": "bromeliad",
+  "nom": "Bromeliad, the Copycat",
+  "page": 27
+ },
+ {
+  "slug": "brook",
+  "nom": "Brook, The Ironhand Leader",
+  "page": 28
+ },
+ {
+  "slug": "bruld",
+  "nom": "Bruld",
+  "page": 29
+ },
+ {
+  "slug": "byot",
+  "nom": "Byot",
+  "page": 30
+ },
+ {
+  "slug": "catharina",
+  "nom": "Catharina, the Purple Witch Queen",
+  "page": 31
+ },
+ {
+  "slug": "cheiron",
+  "nom": "Cheiron, the  Doomspeaker Redeemer",
+  "page": 32
+ },
+ {
+  "slug": "cildroly",
+  "nom": "Cildroly",
+  "page": 33
+ },
+ {
+  "slug": "count_blake",
+  "nom": "Count Blake, the Vampire",
+  "page": 34
+ },
+ {
+  "slug": "dcraxis",
+  "nom": "D’craxis, the Regent of Doom",
+  "page": 35
+ },
+ {
+  "slug": "dernas",
+  "nom": "Dernas, Magic Researcher",
+  "page": 36
+ },
+ {
+  "slug": "dillsgar",
+  "nom": "Dillsgar",
+  "page": 37
+ },
+ {
+  "slug": "dorro",
+  "nom": "Dorro",
+  "page": 38
+ },
+ {
+  "slug": "elarine",
+  "nom": "Elarine, the Telepath",
+  "page": 39
+ },
+ {
+  "slug": "ellen_gideoni",
+  "nom": "Ellen Gideoni",
+  "page": 40
+ },
+ {
+  "slug": "emperor",
+  "nom": "Emperor, the Supreme",
+  "page": 41
+ },
+ {
+  "slug": "emperor_s_companion_imperial_tiger",
+  "nom": "Emperor's Companion: Imperial Tiger",
+  "page": 42
+ },
+ {
+  "slug": "erithad",
+  "nom": "Erithad, the Wise",
+  "page": 43
+ },
+ {
+  "slug": "first_queen",
+  "nom": "First Queen, The Supreme Hivemother Of The Kikokus",
+  "page": 44
+ },
+ {
+  "slug": "fordak",
+  "nom": "Fordak, the Master Awakened",
+  "page": 45
+ },
+ {
+  "slug": "fumetsu_tenshikin",
+  "nom": "Fumetsu Tenshikin, The Eternal One",
+  "page": 46
+ },
+ {
+  "slug": "gaknak",
+  "nom": "Gaknak, the Dragonblade",
+  "page": 47
+ },
+ {
+  "slug": "galender",
+  "nom": "Galender, the Weapon Master",
+  "page": 48
+ },
+ {
+  "slug": "ganona",
+  "nom": "Ganona",
+  "page": 49
+ },
+ {
+  "slug": "garion",
+  "nom": "Garion, the Rogue",
+  "page": 50
+ },
+ {
+  "slug": "gazini",
+  "nom": "Gazini, the Blood Drinker",
+  "page": 51
+ },
+ {
+  "slug": "gearot_michelline",
+  "nom": "Gearot Michelline",
+  "page": 52
+ },
+ {
+  "slug": "gideoni",
+  "nom": "Gideoni, the High Hand of Krynnethoth",
+  "page": 53
+ },
+ {
+  "slug": "golgoggoth",
+  "nom": "Golgöggoth, the Augur",
+  "page": 54
+ },
+ {
+  "slug": "grace_sung",
+  "nom": "Grace Sung, Counselor Abjurer",
+  "page": 55
+ },
+ {
+  "slug": "grizza",
+  "nom": "Grizza, the Red Mother",
+  "page": 56
+ },
+ {
+  "slug": "gullog",
+  "nom": "Gullog, the Deathbringer",
+  "page": 57
+ },
+ {
+  "slug": "gustigh_redfield",
+  "nom": "Gustigh Redfield, the Bloodbound Boss",
+  "page": 58
+ },
+ {
+  "slug": "halthidon",
+  "nom": "Halthidon",
+  "page": 59
+ },
+ {
+  "slug": "harun",
+  "nom": "Harun, the Doppleganger",
+  "page": 60
+ },
+ {
+  "slug": "hell_dragon",
+  "nom": "Hell Dragon",
+  "page": 61
+ },
+ {
+  "slug": "hoccugius",
+  "nom": "Hoccugius, Counselor Transmuter",
+  "page": 62
+ },
+ {
+  "slug": "huradrin",
+  "nom": "Huradrin, the Dragon Clan King",
+  "page": 63
+ },
+ {
+  "slug": "huradrin_s_companion_dungeon_eater",
+  "nom": "Huradrin's Companion: Dungeon Eater",
+  "page": 64
+ },
+ {
+  "slug": "illindan",
+  "nom": "Illindan, the Greenkeeper",
+  "page": 65
+ },
+ {
+  "slug": "isendden",
+  "nom": "Isendden, the Gold Avatar Dragon",
+  "page": 66
+ },
+ {
+  "slug": "isumi",
+  "nom": "Isumi",
+  "page": 67
+ },
+ {
+  "slug": "jade",
+  "nom": "Jade, the Bard",
+  "page": 68
+ },
+ {
+  "slug": "jessa",
+  "nom": "Jessa, the Sheppard Redeemer",
+  "page": 69
+ },
+ {
+  "slug": "jocasta",
+  "nom": "Jocasta, the Pure",
+  "page": 70
+ },
+ {
+  "slug": "jorana",
+  "nom": "Jorana, the Amazon",
+  "page": 71
+ },
+ {
+  "slug": "juliet",
+  "nom": "Juliet, the Ice Sorcerer",
+  "page": 72
+ },
+ {
+  "slug": "kalistessenamun",
+  "nom": "Kalistessenâmun, the Lich Pharaoh",
+  "page": 73
+ },
+ {
+  "slug": "katar",
+  "nom": "Katar, the Barbarian",
+  "page": 74
+ },
+ {
+  "slug": "kelanyah",
+  "nom": "Kelanyah, the Lost Magic Researcher",
+  "page": 75
+ },
+ {
+  "slug": "kelorth",
+  "nom": "Kelorth, the White Avatar Dragon",
+  "page": 76
+ },
+ {
+  "slug": "khloet",
+  "nom": "Khloet, the Summoner",
+  "page": 77
+ },
+ {
+  "slug": "khloet_s_companion_the_mummy",
+  "nom": "Khloet's Companion: The Mummy",
+  "page": 78
+ },
+ {
+  "slug": "kor_dal",
+  "nom": "Kor'dal, the Juggernaut",
+  "page": 79
+ },
+ {
+  "slug": "lana",
+  "nom": "Lana, the Valkyrie",
+  "page": 80
+ },
+ {
+  "slug": "lana_s_companion_sky_high",
+  "nom": "Lana's Companion: Sky High, The Pegasus",
+  "page": 81
+ },
+ {
+  "slug": "liana",
+  "nom": "Liana, the Pirate",
+  "page": 82
+ },
+ {
+  "slug": "lizz",
+  "nom": "Lizz, the Medusa",
+  "page": 83
+ },
+ {
+  "slug": "lypoec",
+  "nom": "Lypoec, the Penumbral Avatar Dragon",
+  "page": 84
+ },
+ {
+  "slug": "m_bollo",
+  "nom": "M'Bollo, the Warpriest",
+  "page": 85
+ },
+ {
+  "slug": "maryne",
+  "nom": "Maryne, the Iron Maiden of the Seas",
+  "page": 86
+ },
+ {
+  "slug": "mavras",
+  "nom": "Mavras, Captain of the Dragonheart Voyager",
+  "page": 87
+ },
+ {
+  "slug": "melantha",
+  "nom": "Melantha, the Dragon Seeker",
+  "page": 88
+ },
+ {
+  "slug": "merlara",
+  "nom": "Merlara, the Warden",
+  "page": 89
+ },
+ {
+  "slug": "morlogh",
+  "nom": "Morlogh, the Minotaur",
+  "page": 90
+ },
+ {
+  "slug": "myr",
+  "nom": "Myr, The Death Merchants’ Leader",
+  "page": 91
+ },
+ {
+  "slug": "nakral",
+  "nom": "Nakral, the Death Knight",
+  "page": 92
+ },
+ {
+  "slug": "niary",
+  "nom": "Niary, the Hunter",
+  "page": 93
+ },
+ {
+  "slug": "oguemir",
+  "nom": "Oguemir, the Beast Master",
+  "page": 94
+ },
+ {
+  "slug": "oguemir_s_companion_beast",
+  "nom": "Oguemir's Companion: Beast",
+  "page": 95
+ },
+ {
+  "slug": "ohris",
+  "nom": "Ohris, the Monk",
+  "page": 96
+ },
+ {
+  "slug": "oraelus",
+  "nom": "Oraelus",
+  "page": 97
+ },
+ {
+  "slug": "orthus",
+  "nom": "Orthus, the Warlock",
+  "page": 98
+ },
+ {
+  "slug": "orthus_companion_cerberus",
+  "nom": "Orthus' Companion: Cerberus",
+  "page": 99
+ },
+ {
+  "slug": "oz_stormwind",
+  "nom": "Oz Stormwind",
+  "page": 100
+ },
+ {
+  "slug": "paru_haka",
+  "nom": "Paru-Haka, the High Priest of Ba-Ka",
+  "page": 101
+ },
+ {
+  "slug": "penumbral_tarrasque_avatar_of_droggath",
+  "nom": "Penumbral Tarrasque (Avatar of Droggath)",
+  "page": 102
+ },
+ {
+  "slug": "pyraxis_stormcaller",
+  "nom": "Pyraxis Stormcaller, Lord of Elemental Chaos",
+  "page": 103
+ },
+ {
+  "slug": "quizzarian",
+  "nom": "Quizzarian, Prince of the Autumn Elves",
+  "page": 104
+ },
+ {
+  "slug": "ravel",
+  "nom": "Ravel, the Arachne Madwalker",
+  "page": 105
+ },
+ {
+  "slug": "renkyr",
+  "nom": "Renkyr, the Dragon Avenger",
+  "page": 106
+ },
+ {
+  "slug": "rigilia_choween",
+  "nom": "Rigilia Choween, Minister of Magic",
+  "page": 107
+ },
+ {
+  "slug": "rokaru",
+  "nom": "Rokaru, the Samurai",
+  "page": 108
+ },
+ {
+  "slug": "rurik",
+  "nom": "Rurik, the Lion Clan King",
+  "page": 109
+ },
+ {
+  "slug": "saezz_and_hizzas_skyborn",
+  "nom": "Saezz and Hizzas Skyborn",
+  "page": 110
+ },
+ {
+  "slug": "salevras",
+  "nom": "Salevras, the Dark Collector",
+  "page": 111
+ },
+ {
+  "slug": "sara",
+  "nom": "Sara, the Seer",
+  "page": 112
+ },
+ {
+  "slug": "se_namum",
+  "nom": "Se-Nâmum, the Vampiress High Priest",
+  "page": 113
+ },
+ {
+  "slug": "sedrik",
+  "nom": "Sedrik, the Werewolf",
+  "page": 114
+ },
+ {
+  "slug": "sedura",
+  "nom": "Sedura, the Blue Dragonblade",
+  "page": 115
+ },
+ {
+  "slug": "shield",
+  "nom": "Shield, the Steel Golem",
+  "page": 116
+ },
+ {
+  "slug": "simpson",
+  "nom": "Simpson, the Republic Major",
+  "page": 117
+ },
+ {
+  "slug": "sir_erick",
+  "nom": "Sir Erick, the Paladin",
+  "page": 118
+ },
+ {
+  "slug": "solnertha",
+  "nom": "Solnertha, the master of necromancy",
+  "page": 119
+ },
+ {
+  "slug": "sundaryll",
+  "nom": "Sundaryll, King of the Autumn Elves",
+  "page": 120
+ },
+ {
+  "slug": "sylithia_silverblade",
+  "nom": "Sylithia Silverblade",
+  "page": 121
+ },
+ {
+  "slug": "t_ssir",
+  "nom": "T´ssir, the Visionary",
+  "page": 122
+ },
+ {
+  "slug": "talessa",
+  "nom": "Talessa, the Dragon Queen",
+  "page": 123
+ },
+ {
+  "slug": "taram",
+  "nom": "Taram, the High Cardinal",
+  "page": 124
+ },
+ {
+  "slug": "tellatius",
+  "nom": "Tellatius, the Prime Minister",
+  "page": 125
+ },
+ {
+  "slug": "teraphas",
+  "nom": "Teraphas, the Tactical Specialist",
+  "page": 126
+ },
+ {
+  "slug": "thalia",
+  "nom": "Thalia, the Druid",
+  "page": 127
+ },
+ {
+  "slug": "thidexius_high_imperial_wizard",
+  "nom": "Thidexius High Imperial Wizard",
+  "page": 128
+ },
+ {
+  "slug": "thyra",
+  "nom": "Thyra, the Blue Avatar Dragon",
+  "page": 129
+ },
+ {
+  "slug": "tiwilade",
+  "nom": "Tiwilade, Hajal Financial Tycoon",
+  "page": 130
+ },
+ {
+  "slug": "tribin_ironsnout",
+  "nom": "Tribin & Ironsnout, the War Boar (Tribin’s companion)",
+  "page": 131
+ },
+ {
+  "slug": "trygve",
+  "nom": "Trygve, the Werebear King of Kolbjörn",
+  "page": 132
+ },
+ {
+  "slug": "tsuyoko",
+  "nom": "Tsuyoko, the Ninja",
+  "page": 133
+ },
+ {
+  "slug": "tuani",
+  "nom": "Tuani",
+  "page": 134
+ },
+ {
+  "slug": "twin_tigers",
+  "nom": "Twin Tigers, Asineus & Diamus",
+  "page": 135
+ },
+ {
+  "slug": "tyreen",
+  "nom": "Tyreen, the Last Queen of Mystical",
+  "page": 136
+ },
+ {
+  "slug": "u_tibam",
+  "nom": "U´Tibam, the Inventor",
+  "page": 137
+ },
+ {
+  "slug": "ukhumlim_stronghope",
+  "nom": "Ukhumlim Stronghope, the Goat Clan King",
+  "page": 138
+ },
+ {
+  "slug": "uster",
+  "nom": "Uster, the Necromancer",
+  "page": 139
+ },
+ {
+  "slug": "vaeraunt",
+  "nom": "Vaeraunt, the Mastermind",
+  "page": 140
+ },
+ {
+  "slug": "vaklav",
+  "nom": "Vaklav, the Judge",
+  "page": 141
+ },
+ {
+  "slug": "vanarus",
+  "nom": "Vanarus, the Demon",
+  "page": 142
+ },
+ {
+  "slug": "velord",
+  "nom": "Velord, the Barbarian Warchief",
+  "page": 143
+ },
+ {
+  "slug": "vilani",
+  "nom": "Vilani, the Air Elementalist",
+  "page": 144
+ },
+ {
+  "slug": "vradok",
+  "nom": "Vradok",
+  "page": 145
+ },
+ {
+  "slug": "wynna_jannis",
+  "nom": "Wynna Jannis, the Relic Hunters Guild Master",
+  "page": 146
+ },
+ {
+  "slug": "xateri",
+  "nom": "Xateri, the Black Mother",
+  "page": 147
+ },
+ {
+  "slug": "xorius",
+  "nom": "Xorius, the Archers’ General",
+  "page": 148
+ },
+ {
+  "slug": "yemi",
+  "nom": "Yemi, the Succubus of Envy",
+  "page": 149
+ },
+ {
+  "slug": "yokensha",
+  "nom": "Yokensha, the Bauronite Dragoness",
+  "page": 150
+ },
+ {
+  "slug": "yrizard",
+  "nom": "Yrizard, the Spy General",
+  "page": 151
+ },
+ {
+  "slug": "yviah",
+  "nom": "Yviah, the Frost Giant Queen",
+  "page": 152
+ },
+ {
+  "slug": "zafara",
+  "nom": "Zafara, the Fallen Angel",
+  "page": 153
+ },
+ {
+  "slug": "zaladrix",
+  "nom": "Zaladrix, the Silver Dragon",
+  "page": 154
+ },
+ {
+  "slug": "zaldrus",
+  "nom": "Zaldrus, the Black Avatar Dragon",
+  "page": 155
+ },
+ {
+  "slug": "zalir_draconis",
+  "nom": "Zalir Draconis",
+  "page": 156
+ },
+ {
+  "slug": "zanac",
+  "nom": "Zanac, the Fire Sorcerer",
+  "page": 157
+ },
+ {
+  "slug": "zarumag",
+  "nom": "Zarumag, the Fallen Avatar Dragon",
+  "page": 158
+ },
+ {
+  "slug": "zhaeral",
+  "nom": "Zhaeral, the High Priestess of Bás",
+  "page": 159
+ },
+ {
+  "slug": "zhelahra",
+  "nom": "Zhelahra, the Merfolk Queen",
+  "page": 160
+ },
+ {
+  "slug": "zimmess",
+  "nom": "Zimmess, The Dragon Executioner",
+  "page": 161
+ },
+ {
+  "slug": "zisenuh",
+  "nom": "Zisenuh, the Infantry Leader",
+  "page": 162
+ },
+ {
+  "slug": "zund",
+  "nom": "Zund, the Illusionist",
+  "page": 163
+ }
+]

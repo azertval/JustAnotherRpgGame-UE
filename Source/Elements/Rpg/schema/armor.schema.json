@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/armor.schema.json",
+  "title": "Armure",
+  "description": "Une ligne de la table des armures. La classe d'armure y est DECOMPOSEE -- base, contribution de Dexterite, plafond -- plutot que donnee en formule textuelle : une formule dans une donnee est du code deguise, que le moteur devrait interpreter.",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "category": {
+      "type": "string",
+      "enum": [
+        "light",
+        "medium",
+        "heavy",
+        "shield"
+      ]
+    },
+    "baseArmorClass": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 30
+    },
+    "dexterityBonus": {
+      "type": "boolean"
+    },
+    "dexterityBonusMax": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10
+    },
+    "strengthRequired": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 30
+    },
+    "stealthDisadvantage": {
+      "type": "boolean"
+    },
+    "price": {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/money"
+    },
+    "weightGrams": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source",
+    "category",
+    "baseArmorClass",
+    "price",
+    "weightGrams"
+  ],
+  "additionalProperties": false
+}

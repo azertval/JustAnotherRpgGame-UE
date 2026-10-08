@@ -1,0 +1,10 @@
+WALK, exactly 8 frames, walking on the spot, seen from the same front view as the other rows. The legs move, and it must be unmistakable at a glance: in the idle pose the feet stay planted apart; in the walk the LEG SILHOUETTE is different in every frame. Four leg silhouettes, each used twice (frames 1-4 on one leg, frames 5-8 mirrored on the other):
+ 1 STRIDE: a long step, left foot far forward (lower on screen, heel down), right foot far back (higher on screen, on its toes); legs wide apart; body at normal height.
+ 2 CROUCH: weight sinking onto the bent left leg, both knees bent, body at its LOWEST; the right foot has just left the ground behind.
+ 3 KNEE UP: feet close together under the body; the right knee raised high in front, the right foot clearly in the air, thigh horizontal; body at normal height.
+ 4 PUSH: standing tall on the toes of the left foot, body at its HIGHEST; the right foot swinging forward, still in the air.
+ 5 STRIDE: same as 1 with the legs swapped: right foot far forward, left foot far back.
+ 6 CROUCH: same as 2 with the legs swapped: weight on the bent right leg, left foot leaving the ground.
+ 7 KNEE UP: same as 3 with the legs swapped: left knee raised high, left foot in the air.
+ 8 PUSH: same as 4 with the legs swapped: tall on the right toes, left foot swinging forward; frame 8 leads back into frame 1.
+ The free arm swings opposite to the leg on its side, and the clothing and hair trail behind on every stride; the weapon arm stays in guard. Only the lifted foot leaves the baseline; the body rises and drops by a few pixels only. The character keeps exactly the height and proportions of the idle pose. Loops.

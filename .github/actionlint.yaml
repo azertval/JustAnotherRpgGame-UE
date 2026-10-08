@@ -1,0 +1,5 @@
+# Étiquettes des runners auto-hébergés, qu'actionlint ne peut pas deviner.
+# `unreal` : le poste de référence qui porte le moteur (unreal.yml).
+self-hosted-runner:
+  labels:
+    - unreal

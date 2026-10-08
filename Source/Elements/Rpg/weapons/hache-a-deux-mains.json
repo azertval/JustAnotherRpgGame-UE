@@ -1,0 +1,15 @@
+{
+  "id": "hache-a-deux-mains",
+  "name": "Hache à deux mains",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d12",
+  "damageType": "slashing",
+  "weightGrams": 3500,
+  "price": 3000,
+  "text": "Lourde, à deux mains",
+  "properties": [
+    "heavy",
+    "two-handed"
+  ]
+}

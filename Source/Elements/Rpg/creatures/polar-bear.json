@@ -1,0 +1,58 @@
+{
+  "id": "polar-bear",
+  "name": "Ours polaire",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 20,
+    "dexterity": 10,
+    "constitution": 16,
+    "intelligence": 2,
+    "wisdom": 13,
+    "charisma": 7
+  },
+  "armorClass": 12,
+  "hitPoints": 42,
+  "hitDice": "5d10+15",
+  "speed": {
+    "walk": 12,
+    "swim": 9
+  },
+  "challengeRating": 2,
+  "senses": [
+    "Perception passive 13"
+  ],
+  "skills": {
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Odorat aiguisé",
+      "text": "L'ours a un avantage aux jets de Sagesse (Perception) basés sur l'odorat."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Attaques multiples",
+      "text": "L'ours réalise deux attaques : une avec ses griffes et une de morsure."
+    },
+    {
+      "name": "Griffes",
+      "text": "Attaque au corps à corps avec une arme : +7 au toucher, allonge 1,50 m, une cible. Touché : 12 (2d6 + 5) dégâts tranchants.",
+      "attackBonus": 7,
+      "reach": 1.5,
+      "damage": "2d6+5",
+      "damageType": "slashing"
+    },
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +7 au toucher, allonge 1,50 m, une cible. Touché : 9 (1d8 + 5) dégâts perforants.",
+      "attackBonus": 7,
+      "reach": 1.5,
+      "damage": "1d8+5",
+      "damageType": "piercing"
+    }
+  ]
+}

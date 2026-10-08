@@ -1,0 +1,58 @@
+{
+  "id": "giant-wolf-spider",
+  "name": "Araignée-loup géante",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 12,
+    "dexterity": 16,
+    "constitution": 13,
+    "intelligence": 3,
+    "wisdom": 12,
+    "charisma": 4
+  },
+  "armorClass": 13,
+  "hitPoints": 11,
+  "hitDice": "2d8+2",
+  "speed": {
+    "walk": 12,
+    "climb": 12
+  },
+  "challengeRating": 0.25,
+  "senses": [
+    "vision aveugle 3 m",
+    "vision dans le noir 18 m",
+    "Perception passive 13"
+  ],
+  "skills": {
+    "stealth": 7,
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Déplacement sur la toile",
+      "text": "L'araignée ignore les restrictions de mouvement causées par une toile d'araignée."
+    },
+    {
+      "name": "Pattes d'araignée",
+      "text": "L'araignée peut escalader des surfaces difficiles et être au plafond la tête en bas sans avoir besoin d'effectuer un jet de caractéristique."
+    },
+    {
+      "name": "Sens de la toile",
+      "text": "Lorsqu'elle est en contact avec une toile, l'araignée connait l'emplacement exact de toutes les créatures qui sont en contact avec cette toile."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Morsure",
+      "text": "Attaque au corps à corps avec une arme : +3 au toucher, allonge 1,50 m, une créature. Touché : 4 (1d6 + 1) dégâts perforants, et la cible doit réaliser un jet de sauvegarde de Constitution DD 11, subissant 7 (2d6) dégâts de poison en cas d'échec, ou la moitié de ces dégâts en cas de réussite. Si le poison réduit les points de vie de la cible à 0, celle-ci est stable mais empoisonnée durant 1 heure, même si elle récupère des points de vie par la suite, et paralysée tant qu'elle est empoisonnée de cette manière.",
+      "attackBonus": 3,
+      "reach": 1.5,
+      "damage": "1d6+1",
+      "damageType": "piercing"
+    }
+  ],
+  "description": "Les araignées-loups géantes chassent en terrain découvert ou se cachent dans des terriers ou des crevasses pour attaquer en embuscade."
+}

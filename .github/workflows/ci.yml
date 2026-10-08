@@ -1,0 +1,263 @@
+name: CI
+
+# Vérifications exécutées sur chaque Pull Request vers main : ce sont les contrôles requis pour
+# merger (règle de branche). Refaite à neuf pour le nouveau moteur (D-58, LOT-1014).
+#
+# Ce que ce workflow construit, et ce qu'il ne construit pas : les runners hébergés n'ont pas
+# Unreal Engine (construit des sources, 5.8), et sa licence interdit de le leur livrer. Ils
+# vérifient donc tout ce qui ne dépend pas du moteur — et c'est exprès que la bibliothèque des
+# règles n'en dépend pas : `Core` se compile et se teste ici, seule, avec GoogleTest. La cible
+# d'éditeur et le commandlet `JadgContentCheck` tournent sur le poste de référence (unreal.yml),
+# et sur le poste de l'auteur avant la PR : `pwsh scripts/build.ps1 -Unreal`.
+#
+# Aucun filtre de chemins : un contrôle requis qui ne s'exécute pas laisse la PR en attente pour
+# toujours.
+on:
+  pull_request:
+    branches: [ main ]
+  # Relance manuelle (onglet Actions) sans pousser de commit vide.
+  workflow_dispatch:
+
+# Un nouveau push sur la branche d'une PR rend le run précédent sans objet.
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+# Aucun job de ce workflow n'écrit dans le dépôt.
+permissions:
+  contents: read
+
+env:
+  # Une version par outil, écrite ici et nulle part ailleurs : `scripts/check.py`,
+  # `scripts/ci/check_powershell.py` et `scripts/ci/check_tool_pins.py` lisent ce bloc.
+  # clang-format : la même que le hook (`mirrors-clang-format` dans .pre-commit-config.yaml).
+  LLVM_VERSION: 20.1.8
+  # Gestionnaire de l'environnement Python des scripts ; les dépendances sont dans uv.lock.
+  UV_VERSION: 0.12.15
+  PSSCRIPTANALYZER_VERSION: 1.25.0
+  PRE_COMMIT_VERSION: 4.6.2
+
+jobs:
+  core-tests:
+    # Les règles du jeu, hors du moteur : CMake + Ninja + GoogleTest sur
+    # Source/JustAnotherRpgGame/Core, par le script que le poste lance (`scripts/build.ps1` établit
+    # lui-même l'environnement MSVC x64). Debug et Release : une variable lue seulement par une
+    # assertion ne casse qu'en Release.
+    name: core-tests (${{ matrix.preset }})
+    # Épinglé : l'image `windows-latest` change de Visual Studio sans prévenir, et /WX fait d'un
+    # nouvel avertissement une erreur.
+    runs-on: windows-2022
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        preset: [ ninja, ninja-release ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Avertissements MSVC et assertions GoogleTest en annotations sur la ligne du diff.
+      - name: Annotations du compilateur et des tests
+        run: echo "::add-matcher::.github/problem-matchers/msvc.json"
+
+      - name: Construire Core et lancer ses tests
+        env:
+          PRESET: ${{ matrix.preset }}
+        run: ./scripts/build.ps1 -Preset $env:PRESET
+
+  format:
+    # Contrôle, jamais réécriture. Périmètre : Core et ses tests, les mêmes fichiers que le hook.
+    # Le code du pont (Bridge/, Commandlets/, le module) en est exclu exprès : clang-format trie
+    # les inclusions, et la règle « Core avant le moteur » (AGENTS.md) est un ordre qu'il déferait.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Installer clang-format ${{ env.LLVM_VERSION }}
+        run: pip install "clang-format==${LLVM_VERSION}"
+
+      - name: Annotations clang-format
+        run: echo "::add-matcher::.github/problem-matchers/clang-format.json"
+
+      - name: Verifier le formatage (Core et ses tests)
+        # Le shell par défaut est `bash -e`, SANS pipefail : l'échec de xargs serait avalé par tee.
+        run: |
+          set -o pipefail
+          clang-format --version
+          git ls-files 'Source/JustAnotherRpgGame/Core/*.cpp' 'Source/JustAnotherRpgGame/Core/*.h' \
+            'Source/Test/*.cpp' 'Source/Test/*.h' > checked-files.txt
+          xargs clang-format --dry-run --Werror --style=file < checked-files.txt 2>&1 | tee clang-format.log
+          printf '### clang-format\n\n%s fichier(s) vérifié(s), aucun écart.\n' "$(wc -l < checked-files.txt)" >> "$GITHUB_STEP_SUMMARY"
+
+  lint-exigences:
+    # Les contrôles du référentiel : chaque étape `run: python3 scripts/…` de ce job est relue par
+    # `scripts/check.py`, qui la rejoue sur le poste. Ajouter un contrôle ici suffit.
+    #
+    # Ne sont PAS repris de l'ancienne CI, parce qu'ils sont rouges tant que leur script n'est pas
+    # relu pour le nouveau moteur (PASSATION.md, « Ce qui reste à faire ») : lint_planning et
+    # lint_docs (liens vers le moteur maison), generate_cahier_test (étages de tests restés là-bas),
+    # check_assets_brief (jetons de Tokens.qml), check_orphans (ne connaît pas les .uasset
+    # régénérés). check_map_assets et check_hd_assets lisent les images des kits, publiées sur
+    # l'ancien dépôt, désormais privé : ils se rejouent sur un poste qui a les kits.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # Le dossier .venv/bin passe en tête du PATH : chaque `python3 scripts/…` ci-dessous s'exécute
+      # avec les dépendances de uv.lock, celles du poste.
+      - name: Installer uv ${{ env.UV_VERSION }}
+        uses: astral-sh/setup-uv@c18668ad3cf93ea998bef934396af7bb5c839dc7 # v10.2.0
+        with:
+          version: ${{ env.UV_VERSION }}
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+
+      - name: Environnement Python des scripts (uv.lock)
+        run: |
+          uv sync --locked
+          echo "$GITHUB_WORKSPACE/.venv/bin" >> "$GITHUB_PATH"
+
+      # Le premier contrôle, parce que c'est le seul dont l'échec ne se rattrape pas : un texte de
+      # livre poussé sur un dépôt public y reste, même retiré au commit suivant.
+      - name: Aucun livre source ni texte extrait (EX-CNT-023)
+        id: sourcebook
+        if: ${{ !cancelled() }}
+        run: python3 scripts/checks/check_no_sourcebook.py --all
+
+      - name: Lint des identifiants d'exigences
+        id: exigences
+        if: ${{ !cancelled() }}
+        run: python3 scripts/checks/lint_exigences.py
+
+      - name: Lexique de regles respecte par les catalogues de traduction
+        id: glossary
+        if: ${{ !cancelled() }}
+        run: python3 scripts/checks/check_glossary.py
+
+      # Les PDF ne sont pas sur le runner et ne le seront pas : ce contrôle vérifie ce qui EST
+      # versionné, le manifeste et la logique d'empreinte.
+      - name: Manifeste du corpus bien forme (EX-CNT-020)
+        id: corpus
+        if: ${{ !cancelled() }}
+        run: python3 scripts/checks/check_corpus_manifest.py
+
+      - name: Cles d'assets d'entite (EX-CNT-040, EX-CNT-041)
+        id: asset_keys
+        if: ${{ !cancelled() }}
+        run: python3 scripts/checks/check_asset_keys.py
+
+      # Les mêmes fichiers que lit le commandlet JadgContentCheck par les lecteurs de Core : ici
+      # leur forme (schémas), là-bas leur lecture par le moteur.
+      - name: Catalogues RPG valides contre leurs schemas (EX-CNT-010)
+        id: rpg_data
+        if: ${{ !cancelled() }}
+        run: python3 scripts/checks/check_rpg_data.py
+
+      - name: Traductions achevees et coherentes
+        id: translations
+        if: ${{ !cancelled() }}
+        run: python3 scripts/checks/check_translations.py
+
+      - name: Installer PSScriptAnalyzer ${{ env.PSSCRIPTANALYZER_VERSION }}
+        if: ${{ !cancelled() }}
+        shell: pwsh
+        run: Install-Module PSScriptAnalyzer -RequiredVersion $env:PSSCRIPTANALYZER_VERSION -Scope CurrentUser -Force
+
+      - name: Scripts PowerShell (PSScriptAnalyzer)
+        id: powershell
+        if: ${{ !cancelled() }}
+        run: python3 scripts/ci/check_powershell.py
+
+      - name: Versions d'outils coherentes CI / hooks
+        id: tool_pins
+        if: ${{ !cancelled() }}
+        run: python3 scripts/ci/check_tool_pins.py
+
+      # Mêmes scripts que les hooks du poste, mais sur TOUT le dépôt. Le garde-fou binaires tient
+      # la règle D-52 : un .uasset ou un .umap est un pointeur Git LFS, jamais ses octets.
+      - name: Garde-fou binaires (taille, familles declarees dans .gitattributes)
+        id: binaries
+        if: ${{ !cancelled() }}
+        run: python3 scripts/checks/check_binary_files.py --all
+
+      - name: JSON valides, sans cle en double ni BOM
+        id: json_files
+        if: ${{ !cancelled() }}
+        run: python3 scripts/checks/check_json_files.py --all
+
+      # `test_le_depot_est_conforme` lit les images des kits, absentes du runner (voir l'en-tête).
+      - name: Tests des scripts (pytest)
+        id: pytest
+        if: ${{ !cancelled() }}
+        run: python3 -m pytest --deselect scripts/tests/test_check_hd_assets.py::test_le_depot_est_conforme
+
+      # Chaque contrôle s'exécute même si un précédent a échoué : une PR voit d'un coup tout ce
+      # qu'elle casse.
+      - name: Resume du job
+        if: ${{ !cancelled() }}
+        env:
+          OUTCOMES: |
+            Aucun livre source=${{ steps.sourcebook.outcome }}
+            Identifiants d'exigences=${{ steps.exigences.outcome }}
+            Lexique de règles=${{ steps.glossary.outcome }}
+            Manifeste du corpus=${{ steps.corpus.outcome }}
+            Clés d'assets d'entité=${{ steps.asset_keys.outcome }}
+            Catalogues RPG=${{ steps.rpg_data.outcome }}
+            Traductions=${{ steps.translations.outcome }}
+            Scripts PowerShell=${{ steps.powershell.outcome }}
+            Versions d'outils CI / hooks=${{ steps.tool_pins.outcome }}
+            Garde-fou binaires=${{ steps.binaries.outcome }}
+            JSON valides=${{ steps.json_files.outcome }}
+            Tests des scripts (pytest)=${{ steps.pytest.outcome }}
+        run: |
+          {
+            echo '### Contrôles du référentiel'
+            echo
+            echo '| Contrôle | Verdict |'
+            echo '|---|---|'
+            while IFS='=' read -r label outcome; do
+              [ -z "$label" ] && continue
+              case "$outcome" in
+                success) verdict='✅ vert' ;;
+                failure) verdict='❌ **rouge**' ;;
+                *) verdict="⏭️ $outcome" ;;
+              esac
+              echo "| $label | $verdict |"
+            done <<< "$OUTCOMES"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  pre-commit:
+    # Les hooks du poste, rejoués sur tout le dépôt : un commit passé avec --no-verify est rattrapé
+    # ici. Sautés : `clang-format`, que le job `format` vérifie avec ses annotations ; `gitleaks`,
+    # qui ne lit que les fichiers indexés.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Installer pre-commit ${{ env.PRE_COMMIT_VERSION }}
+        run: pip install "pre-commit==${PRE_COMMIT_VERSION}"
+
+      - name: Cache des environnements de hooks
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/pre-commit
+          key: pre-commit-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
+
+      - name: Hooks sur tout le depot
+        env:
+          SKIP: clang-format,gitleaks
+        run: pre-commit run --all-files --show-diff-on-failure --color always

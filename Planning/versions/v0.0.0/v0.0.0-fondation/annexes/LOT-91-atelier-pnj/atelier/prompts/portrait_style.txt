@@ -1,0 +1,23 @@
+PORTRAIT v1 — 2026-09-16 (gelé à R4)
+
+Create ONE pixel-art character portrait for a tactical RPG, 1024x1024.
+
+STYLE (match reference image 1 exactly): 16-bit pixel
+art, a 128x128 art-pixel grid where every art pixel is drawn as a crisp 8x8 square, no
+anti-aliasing, no gradients, no blur. Dark navy outline (never pure black). Flat shading,
+three tones per colour, single light source top-left.
+
+REFERENCE IMAGE 1 is the portrait of ANOTHER character. Copy only its drawing style, pixel
+size, framing and background; never its face, hair, headgear, outfit, weapon or colours.
+
+FRAMING: head and shoulders bust, three-quarter view facing the viewer's right, eyes at about
+40% of the height, shoulders touching the bottom edge. The face, hair, headgear and outfit are
+those of the character in reference images 2 (painted portrait) and 3 (miniature).
+
+BACKGROUND: flat solid dark navy #0B141E filling the whole square. No gradient, no scenery,
+no frame, no vignette.
+
+FORBIDDEN: any text, letters, numbers, name, border, frame, circle, badge, colour swatch,
+logo, watermark.
+
+At most 32 distinct colours in the whole image, background included.

@@ -1,0 +1,12 @@
+{
+  "slug": "lion",
+  "nom": "Lion",
+  "creature": "lion",
+  "taille": "large",
+  "gabarit": "grand",
+  "corps": "bete",
+  "hauteur": 44,
+  "longueur": 84,
+  "cast": false,
+  "source": "Source/Elements/Rpg/creatures/lion.json (LOT-33, SRD) ; un des fauves de colisee-fauves.json"
+}

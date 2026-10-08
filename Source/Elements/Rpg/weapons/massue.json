@@ -1,0 +1,14 @@
+{
+  "id": "massue",
+  "name": "Massue",
+  "source": "srd",
+  "category": "simple",
+  "damage": "1d8",
+  "damageType": "bludgeoning",
+  "weightGrams": 5000,
+  "price": 20,
+  "text": "À deux mains",
+  "properties": [
+    "two-handed"
+  ]
+}

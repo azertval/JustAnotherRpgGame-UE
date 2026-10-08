@@ -1,0 +1,32 @@
+STYLE v1 — 2026-09-16 (tiré de ancres/maquette.png, tour 1 approuvé par l'auteur ; relu par l'auteur)
+# {PAS}, {LOSANGE_L}, {LOSANGE_H} : remplis depuis la disposition (pas de pixel de la planche). La maquette est au pas 2.
+
+STYLE (match reference image 1, the approved scene, exactly): detailed 16-bit
+pixel art for an isometric RPG, {PAS} screen pixels per art pixel, crisp square
+pixels, no anti-aliasing, no blur, no photographic texture. Dark outline one
+pixel wide in a deep warm brown or navy, never pure black. Three to five tones
+per material, hand-placed dithering allowed, no smooth gradients.
+
+VIEW: fixed isometric camera, no perspective. Floor tiles are flat diamonds
+{LOSANGE_L} screen pixels wide and {LOSANGE_H} tall. Walls and objects stand on the diamond
+edges: their faces run along the two diagonal directions of the grid.
+
+LIGHT: evening. Cool shadowed ambient, a single soft key light from the
+top-left, and warm pools of lantern light on the ground and walls around each
+lantern, drawn as flat stepped tones (no bloom, no lens glow).
+
+MATERIALS AND PALETTE (keep these families, measured on reference image 1):
+- paving: worn cobblestones and slabs in dusty mauve-grey (#38323e, #59474b,
+  #675253), warmed to ochre-brown (#7a5b53, #a26f4f) under lantern light, with
+  darker mortar joints;
+- stone: rough grey ashlar walls, cool in shadow (#17161d, #302329, #403238),
+  lighter on lit faces (#5e474e, #775755);
+- wood: dark oiled timber for beams, doors, crates and stalls (#201514,
+  #381f18, #4a281b, #5a2f1a, #724024);
+- cloth: striped awnings and heraldic banners in muted wine red (#5e272e),
+  sage green, slate blue and sand (#86655f, #a77858);
+- light: lantern flame and lit windows in amber (#b87237, #ebae55);
+- plants: deep green shrubs and ivy, dark roofs in night blue slate.
+
+FORBIDDEN: any text, letters, numbers, labels, captions, user interface, panels,
+borders, colour swatches, logo, watermark, grid lines.

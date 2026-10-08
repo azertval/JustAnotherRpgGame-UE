@@ -1,0 +1,9 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "note": "Le rectangle : une place pavée, puis un bloc de murs peint sur la collision, qui force ses cases.",
+  "gestures": [
+    {"piece": "square", "tool": "rectangle", "from": [2, 3], "to": [6, 5]},
+    {"layer": "collision", "type": "wall", "tool": "rectangle", "from": [10, 0], "to": [11, 1]}
+  ]
+}

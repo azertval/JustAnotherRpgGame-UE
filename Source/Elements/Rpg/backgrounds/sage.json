@@ -1,0 +1,15 @@
+{
+  "id": "sage",
+  "name": "Sage",
+  "source": "srd",
+  "skillProficiencies": [
+    "arcana",
+    "history"
+  ],
+  "languageCount": 2,
+  "feature": {
+    "name": "Chercheur",
+    "text": "Lorsque vous essayez d'apprendre quelque chose ou de vous rappeler d'un fait, si vous ne connaissez pas l'information vous savez souvent où et de qui vous pouvez l'obtenir. Habituellement, cette information se trouve dans une bibliothèque, un scriptorium, une université ou bien un sage, un érudit ou une créature la connaît. Votre MD peut décider que le savoir que vous recherchez est caché dans un lieu presque inaccessible, ou qu'il ne peut simplement pas être trouvé. Déterrer les secrets les plus profonds du multivers peut engendrer une aventure voire même toute une campagne."
+  },
+  "text": "Vous avez passé des années à étudier le multivers. Vous avez écumé les manuscrits, dévoré des parchemins et écouté les plus grands experts sur les sujets qui vous intéressent. Vos efforts ont fait de vous un maître dans vos domaines d'études."
+}

@@ -1,0 +1,46 @@
+{
+  "id": "eagle",
+  "name": "Aigle",
+  "source": "srd",
+  "size": "small",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 6,
+    "dexterity": 15,
+    "constitution": 10,
+    "intelligence": 2,
+    "wisdom": 14,
+    "charisma": 7
+  },
+  "armorClass": 12,
+  "hitPoints": 3,
+  "hitDice": "1d6",
+  "speed": {
+    "walk": 3,
+    "fly": 18
+  },
+  "challengeRating": 0,
+  "senses": [
+    "Perception passive 14"
+  ],
+  "skills": {
+    "perception": 4
+  },
+  "traits": [
+    {
+      "name": "Vue aiguisée",
+      "text": "L'aigle a un avantage aux jets de Sagesse (Perception) faisant appel à la vue."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Serres",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 4 (1d4 + 2) dégâts tranchants.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1d4+2",
+      "damageType": "slashing"
+    }
+  ]
+}

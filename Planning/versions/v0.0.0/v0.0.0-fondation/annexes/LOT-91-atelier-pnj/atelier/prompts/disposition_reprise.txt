@@ -1,0 +1,20 @@
+LAYOUT v1 — 2026-09-16 (passe par animation : une rangée fausse d'une planche retenue, sur le modèle de la marche)
+
+LAYOUT — ONE ANIMATION: create ONE pixel-art sprite strip, a single {TAILLE} landscape
+image with a transparent background, holding ONLY the {ANIM} animation of the character
+shown in reference image 1, organised as an invisible grid of {NRANGS} row(s) of cells, each
+{CELLULE} px wide and 256 px tall, one frame per cell, frames read left to right. Each row
+contains EXACTLY the number of separate figures given below, never more, never fewer, with
+clearly visible empty space (at least 16 px) between two neighbouring figures and their
+effects; nothing touches or crosses into a neighbouring cell. In every frame the feet rest on
+the same baseline, 40 px above the bottom of the cell.
+
+Reference image 1 is the finished sprite sheet of this very character: copy its character
+EXACTLY (same face, hair, headgear, clothing, weapon, effects, colours, pixel size and height as
+its first row), but do NOT copy its {ANIM} frames, which are wrong: draw the poses described
+below. The weapon never changes hand: in every frame it stays in the hand named in the WEAPON
+line, as in the idle pose of reference image 1. There is only ONE weapon in each frame: a weapon
+arc effect is the trail of that single weapon and starts at its blade, never a second copy of
+the weapon. The free hand keeps what it holds in the idle pose, and uses it for CAST.
+
+{RANGEES}

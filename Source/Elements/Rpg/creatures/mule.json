@@ -1,0 +1,46 @@
+{
+  "id": "mule",
+  "name": "Mule",
+  "source": "srd",
+  "size": "medium",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 14,
+    "dexterity": 10,
+    "constitution": 13,
+    "intelligence": 2,
+    "wisdom": 10,
+    "charisma": 5
+  },
+  "armorClass": 10,
+  "hitPoints": 11,
+  "hitDice": "2d8+2",
+  "speed": {
+    "walk": 12
+  },
+  "challengeRating": 0.125,
+  "senses": [
+    "Perception passive 10"
+  ],
+  "traits": [
+    {
+      "name": "Bête de somme",
+      "text": "La mule est considérée comme un animal de taille G pour déterminer sa capacité de charge."
+    },
+    {
+      "name": "Pied sûr",
+      "text": "La mule a un avantage aux jets de sauvegarde de Force et Dextérité effectués pour ne pas tomber à terre."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Sabots",
+      "text": "Attaque au corps à corps avec une arme : +2 au toucher, allonge 1,50 m, une cible. Touché : 4 (1d4 + 2) dégâts contondants.",
+      "attackBonus": 2,
+      "reach": 1.5,
+      "damage": "1d4+2",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

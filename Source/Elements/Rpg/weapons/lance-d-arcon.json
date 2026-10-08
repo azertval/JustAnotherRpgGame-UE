@@ -1,0 +1,15 @@
+{
+  "id": "lance-d-arcon",
+  "name": "Lance d'arçon",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d12",
+  "damageType": "piercing",
+  "weightGrams": 3000,
+  "price": 1000,
+  "text": "Allonge, spécial",
+  "properties": [
+    "reach",
+    "special"
+  ]
+}

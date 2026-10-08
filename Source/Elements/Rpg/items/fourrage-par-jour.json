@@ -1,0 +1,8 @@
+{
+  "id": "fourrage-par-jour",
+  "name": "Fourrage (par jour)",
+  "source": "srd",
+  "category": "mount",
+  "price": 5,
+  "weightGrams": 5000
+}

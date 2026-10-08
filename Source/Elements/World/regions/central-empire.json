@@ -1,0 +1,115 @@
+{
+  "id": "central-empire",
+  "name": "Central Empire",
+  "source": "tanares",
+  "government": "The center of power of the Tanarean Empire, the most powerful Empire under absolute control of Emperor Baleroth, the Faceless Emperor.",
+  "faction": "The Central Empire is the heart of the Tanarean Empire and from where the Emperor rules all other regions under the Tanarean Empire’s control.",
+  "population": {
+    "total": 2300000,
+    "species": [
+      {
+        "species": "human",
+        "label": "humans",
+        "percent": 84
+      },
+      {
+        "species": "gnome",
+        "label": "gnomes",
+        "percent": 5
+      },
+      {
+        "species": "summer-elf",
+        "label": "summer elves",
+        "percent": 3
+      },
+      {
+        "species": "tiefling",
+        "label": "tieflings",
+        "percent": 2
+      },
+      {
+        "species": "dwarf",
+        "label": "dwarves",
+        "percent": 2
+      },
+      {
+        "species": "soulborn",
+        "label": "soulborns",
+        "percent": 2
+      }
+    ],
+    "otherPercent": 2
+  },
+  "statistics": {
+    "citizenFreedom": [
+      {
+        "grade": "veryLow"
+      }
+    ],
+    "crimeAndViolence": [
+      {
+        "grade": "low"
+      }
+    ],
+    "economicProsperity": [
+      {
+        "grade": "veryHigh"
+      }
+    ],
+    "governmentCorruption": [
+      {
+        "grade": "high"
+      }
+    ],
+    "magicAccess": [
+      {
+        "grade": "low"
+      }
+    ],
+    "monsterPresence": [
+      {
+        "grade": "low"
+      }
+    ],
+    "politicalStability": [
+      {
+        "grade": "high"
+      }
+    ]
+  },
+  "neighbors": [
+    "imperial-benenet",
+    "seashores",
+    "sindile-forest",
+    "stravian-domains",
+    "theocracy-of-kepesh",
+    "tsvetan"
+  ],
+  "locations": [
+    "central-empire-skybell-city",
+    "central-empire-hajal-city",
+    "central-empire-the-great-forest-of-bak",
+    "central-empire-the-pilgrimage-to-skybell",
+    "central-empire-orders-of-tamera",
+    "central-empire-orders-of-bauron",
+    "central-empire-the-sacred-ponds",
+    "central-empire-ancient-heargs",
+    "central-empire-phantom-fortress",
+    "central-empire-cursed-ground",
+    "central-empire-odraz-monastery",
+    "central-empire-odraz-monastery-training",
+    "central-empire-the-capital-city",
+    "central-empire-the-capital-city-sloghood",
+    "central-empire-the-capital-city-uptown",
+    "central-empire-the-capital-city-artisansquare",
+    "central-empire-the-capital-city-scholarnest",
+    "central-empire-the-capital-city-dweomer",
+    "central-empire-the-capital-city-martpart",
+    "central-empire-the-capital-city-arenarea",
+    "central-empire-the-capital-city-oldtown",
+    "central-empire-the-capital-city-neckoffoods",
+    "central-empire-the-capital-city-bloomburgs",
+    "central-empire-the-capital-city-downtown",
+    "central-empire-the-capital-city-palacedomain"
+  ]
+}

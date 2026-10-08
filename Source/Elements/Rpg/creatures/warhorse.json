@@ -1,0 +1,42 @@
+{
+  "id": "warhorse",
+  "name": "Cheval de guerre",
+  "source": "srd",
+  "size": "large",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 18,
+    "dexterity": 12,
+    "constitution": 13,
+    "intelligence": 2,
+    "wisdom": 12,
+    "charisma": 7
+  },
+  "armorClass": 11,
+  "hitPoints": 19,
+  "hitDice": "3d10+3",
+  "speed": {
+    "walk": 18
+  },
+  "challengeRating": 0.5,
+  "senses": [
+    "Perception passive 11"
+  ],
+  "traits": [
+    {
+      "name": "Charge écrasante",
+      "text": "Si un cheval se déplace d'au moins 6 mètres en ligne droite vers une créature, puis la touche lors d'une attaque avec ses sabots dans le même tour, la cible doit réussir un jet de sauvegarde de Force DD 14 pour ne pas être jetée à terre. Si la cible est à terre, le cheval peut réaliser une autre attaque contre elle avec ses sabots en tant qu'action bonus."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Sabots",
+      "text": "Attaque au corps à corps avec une arme : +6 au toucher, allonge 1,50 m, une cible. Touché : 11 (2d6 + 4) dégâts contondants.",
+      "attackBonus": 6,
+      "reach": 1.5,
+      "damage": "2d6+4",
+      "damageType": "bludgeoning"
+    }
+  ]
+}

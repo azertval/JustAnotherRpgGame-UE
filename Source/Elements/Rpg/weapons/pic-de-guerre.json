@@ -1,0 +1,10 @@
+{
+  "id": "pic-de-guerre",
+  "name": "Pic de guerre",
+  "source": "srd",
+  "category": "martial",
+  "damage": "1d8",
+  "damageType": "piercing",
+  "weightGrams": 1000,
+  "price": 500
+}

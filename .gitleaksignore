@@ -1,0 +1,7 @@
+# Faux positifs de gitleaks, par empreinte (fichier:règle:ligne).
+# Deux clés d'assets (`ui/tab/segment/normal`, `ui/slot/rarity/legendary`) prises pour des clés d'API.
+Planning/versions/v0.0.0/v0.0.0-fondation/annexes/LOT-87-charte-v2/images-produites/inventory.json:generic-api-key:707
+Planning/versions/v0.0.0/v0.0.0-fondation/annexes/LOT-87-charte-v2/images-produites/inventory.json:generic-api-key:2105
+# Jeton du serveur de fichiers Android, écrit par le gabarit du moteur : il n'ouvre qu'une liaison
+# de développement vers un appareil Android, cible que le jeu n'a pas (bIncludeInShipping=False).
+Config/DefaultEngine.ini:generic-api-key:257

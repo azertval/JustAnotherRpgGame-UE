@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://justanotherrpggame.local/rpg/background.schema.json",
+  "title": "Historique",
+  "description": "Les 6 historiques des Basic Rules et les 7 du Player's Guide (LOT-36).",
+  "allOf": [
+    {
+      "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/entree"
+    }
+  ],
+  "type": "object",
+  "properties": {
+    "id": true,
+    "name": true,
+    "source": true,
+    "status": true,
+    "asset": true,
+    "mecanismesRequis": true,
+    "narratif": true,
+    "skillProficiencies": {
+      "type": "array",
+      "items": {
+        "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "toolProficiencies": {
+      "type": "array",
+      "items": {
+        "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "languageCount": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 4
+    },
+    "equipment": {
+      "type": "array",
+      "items": {
+        "$ref": "https://justanotherrpggame.local/rpg/common.schema.json#/$defs/id"
+      },
+      "uniqueItems": true
+    },
+    "feature": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "name",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "source"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,8 @@
+{
+  "id": "carquois",
+  "name": "Carquois",
+  "source": "srd",
+  "category": "gear",
+  "price": 100,
+  "weightGrams": 500
+}

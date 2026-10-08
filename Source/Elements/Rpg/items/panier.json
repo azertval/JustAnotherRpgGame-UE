@@ -1,0 +1,8 @@
+{
+  "id": "panier",
+  "name": "Panier",
+  "source": "srd",
+  "category": "gear",
+  "price": 40,
+  "weightGrams": 1000
+}

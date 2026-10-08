@@ -1,0 +1,34 @@
+MAQUETTE v1 — 2026-09-16
+
+Create ONE finished game scene, 1536 x 1024, landscape: a small fragment of a
+market street in the capital of a fantasy empire, seen in isometric view, with
+the two characters of reference image 1 standing in it.
+
+PIXEL SCALE (most important): 16-bit pixel art, 2 screen pixels per art pixel,
+crisp square pixels, no anti-aliasing, no gradients, no blur. The ground AND the
+characters share this same pixel size. Copy the characters of reference image 1
+exactly: same size (about 90 screen pixels tall), same outline, same shading.
+The scenery must be drawn with the SAME outline, shading and pixel density as
+these two characters, so that they look native to the place.
+
+GRID: reference image 1 shows the floor grid as thin outlines. Each floor tile is
+an isometric diamond 136 screen pixels wide and 84 pixels tall (a flat diamond,
+flatter than a cube's top). Keep exactly this diamond shape and size for every
+floor tile, laid out on this grid, but DO NOT draw the grid lines themselves.
+Walls rise about 116 screen pixels above the tile they stand on.
+
+PLACE: cobblestone street, lantern-lit market stalls with striped awnings and
+crates of goods, culturally blended architecture (Imperial stone and timber
+side by side), one building wall along the back-left edge with a door and a
+hanging lantern, a darker narrow alley opening on the right. Evening light.
+
+CAMERA AND LIGHT: fixed isometric camera, no perspective. One outline colour:
+deep navy, never pure black, one pixel wide. Three to four tones per material.
+Single light source top-left; warm lantern glow drawn as flat pixel tones, no
+bloom. No ground shadow under the characters.
+
+COMPOSITION: the scene fills the image edge to edge; the characters stand on
+two different floor tiles near the centre, facing the viewer.
+
+FORBIDDEN: any text, letters, numbers, labels, captions, user interface, panels,
+borders, frames, colour swatches, logo, watermark, grid lines.

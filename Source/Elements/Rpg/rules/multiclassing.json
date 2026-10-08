@@ -1,0 +1,461 @@
+{
+  "id": "multiclassing",
+  "name": "Multiclassage",
+  "source": "phb-fr",
+  "casterProgression": [
+    {
+      "class": "barbarian",
+      "progression": "none"
+    },
+    {
+      "class": "bard",
+      "progression": "full"
+    },
+    {
+      "class": "cleric",
+      "progression": "full"
+    },
+    {
+      "class": "druid",
+      "progression": "full"
+    },
+    {
+      "class": "fighter",
+      "progression": "third"
+    },
+    {
+      "class": "monk",
+      "progression": "none"
+    },
+    {
+      "class": "paladin",
+      "progression": "half"
+    },
+    {
+      "class": "ranger",
+      "progression": "half"
+    },
+    {
+      "class": "rogue",
+      "progression": "third"
+    },
+    {
+      "class": "sorcerer",
+      "progression": "full"
+    },
+    {
+      "class": "warlock",
+      "progression": "pact"
+    },
+    {
+      "class": "wizard",
+      "progression": "full"
+    }
+  ],
+  "prerequisites": [
+    {
+      "class": "barbarian",
+      "className": "barbare",
+      "requirement": "Force 13"
+    },
+    {
+      "class": "bard",
+      "className": "barde",
+      "requirement": "Charisme 13"
+    },
+    {
+      "class": "cleric",
+      "className": "clerc",
+      "requirement": "Sagesse 13"
+    },
+    {
+      "class": "druid",
+      "className": "druide",
+      "requirement": "Sagesse 13"
+    },
+    {
+      "class": "sorcerer",
+      "className": "ensorceleur",
+      "requirement": "Charisme 13"
+    },
+    {
+      "class": "fighter",
+      "className": "guerrier",
+      "requirement": "Force 13 ou Dextérité 13"
+    },
+    {
+      "class": "wizard",
+      "className": "magicien",
+      "requirement": "Intelligence 13"
+    },
+    {
+      "class": "monk",
+      "className": "moine",
+      "requirement": "Dextérité 13 et Sagesse 13"
+    },
+    {
+      "class": "paladin",
+      "className": "paladin",
+      "requirement": "Force 13 et Charisme 13"
+    },
+    {
+      "class": "ranger",
+      "className": "rôdeur",
+      "requirement": "Dextérité 13 et Sagesse 13"
+    },
+    {
+      "class": "rogue",
+      "className": "roublard",
+      "requirement": "Dextérité 13"
+    },
+    {
+      "class": "warlock",
+      "className": "occultiste",
+      "requirement": "Charisme 13"
+    }
+  ],
+  "proficienciesGained": [
+    {
+      "class": "barbarian",
+      "className": "barbare",
+      "proficiencies": "Armes courantes, armes de guerre, boucliers"
+    },
+    {
+      "class": "bard",
+      "className": "barde",
+      "proficiencies": "Armures légères, une compétence au choix, un instrument de musique au choix"
+    },
+    {
+      "class": "cleric",
+      "className": "clerc",
+      "proficiencies": "Armures intermédiaires, armures légères, boucliers"
+    },
+    {
+      "class": "druid",
+      "className": "druide",
+      "proficiencies": "Armures intermédiaires, armures légères, boucliers (les druides n'utilisent jamais d'armures ni de boucliers en métal)"
+    },
+    {
+      "class": "sorcerer",
+      "className": "ensorceleur",
+      "proficiencies": ""
+    },
+    {
+      "class": "fighter",
+      "className": "guerrier",
+      "proficiencies": "Armes courantes, armes de guerre, armures intermédiaires, armures légères, boucliers"
+    },
+    {
+      "class": "wizard",
+      "className": "magicien",
+      "proficiencies": ""
+    },
+    {
+      "class": "monk",
+      "className": "moine",
+      "proficiencies": "Armes courantes, épées courtes"
+    },
+    {
+      "class": "paladin",
+      "className": "paladin",
+      "proficiencies": "Armes courantes, armes de guerre, armures intermédiaires, armures légères, boucliers"
+    },
+    {
+      "class": "ranger",
+      "className": "rôdeur",
+      "proficiencies": "Armes courantes, armes de guerre, armures intermédiaires, armures légères, boucliers, une compétence au choix parmi celles proposées pour cette classe"
+    },
+    {
+      "class": "rogue",
+      "className": "roublard",
+      "proficiencies": "Armures légères, outils de voleur, une compétence au choix parmi celles proposées pour cette classe"
+    },
+    {
+      "class": "warlock",
+      "className": "occultiste",
+      "proficiencies": "Armes courantes, armures légères"
+    }
+  ],
+  "spellSlots": [
+    {
+      "casterLevel": 1,
+      "slots": [
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 2,
+      "slots": [
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 3,
+      "slots": [
+        4,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 4,
+      "slots": [
+        4,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 5,
+      "slots": [
+        4,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 6,
+      "slots": [
+        4,
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 7,
+      "slots": [
+        4,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 8,
+      "slots": [
+        4,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 9,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 10,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        2,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 11,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 12,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 13,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 14,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "casterLevel": 15,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "casterLevel": 16,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "casterLevel": 17,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "casterLevel": 18,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        3,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "casterLevel": 19,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "casterLevel": 20,
+      "slots": [
+        4,
+        3,
+        3,
+        3,
+        3,
+        2,
+        2,
+        1,
+        1
+      ]
+    }
+  ]
+}

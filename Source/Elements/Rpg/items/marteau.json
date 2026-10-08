@@ -1,0 +1,8 @@
+{
+  "id": "marteau",
+  "name": "Marteau",
+  "source": "srd",
+  "category": "gear",
+  "price": 100,
+  "weightGrams": 1500
+}

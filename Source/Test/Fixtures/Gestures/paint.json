@@ -1,0 +1,9 @@
+{
+  "format": "jadg-editor-gestures",
+  "version": 1,
+  "note": "Le pinceau : un trait de pavés, puis une pièce large glissée sur deux cases, qui ne se repose pas sur sa propre emprise.",
+  "gestures": [
+    {"piece": "street-2", "tool": "paint", "path": [[0, 2], [1, 2], [2, 2], [3, 2]]},
+    {"piece": "feature-2", "tool": "paint", "path": [[2, 4], [3, 4]]}
+  ]
+}

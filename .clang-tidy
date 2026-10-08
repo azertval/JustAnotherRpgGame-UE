@@ -1,0 +1,116 @@
+# Analyse statique — JustAnotherRpgGame (voir Documentation/conventions.md)
+# Les vérifications de nommage reflètent les conventions du projet.
+---
+Checks: >
+  bugprone-*,
+  cppcoreguidelines-*,
+  modernize-*,
+  performance-*,
+  readability-*,
+  -modernize-use-trailing-return-type,
+  -readability-magic-numbers,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  -readability-identifier-length,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-suspicious-include,
+  -bugprone-exception-escape,
+  -bugprone-invalid-enum-default-initialization,
+  -bugprone-unchecked-optional-access,
+  -cppcoreguidelines-pro-bounds-avoid-unchecked-container-access,
+  -cppcoreguidelines-pro-bounds-constant-array-index,
+  -cppcoreguidelines-owning-memory,
+  -cppcoreguidelines-avoid-do-while,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-type-vararg,
+  -cppcoreguidelines-avoid-const-or-ref-data-members
+
+# LOT-58 : seule bugprone-* est bloquante (voir --warnings-as-errors dans le job `clang-tidy` de
+# ci.yml) -- les autres familles (cppcoreguidelines-*, modernize-*, performance-*, readability-*)
+# restent en avertissement, consignees mais non bloquantes (triage complet hors budget de ce lot,
+# cf. Planning/vision/archives/feuille-de-route-jeu.md, rubrique LOT-58).
+#
+# Exclusions bugprone-* (triage LOT-58, passe complete sur Source/ hors Test) :
+#  - easily-swappable-parameters : 38 remontees, toutes sur des paires de parametres deliberees du
+#    domaine (colonne/ligne, x/y, largeur/hauteur...) ; aucune n'est un defaut, la regle est du
+#    style pur pour ce projet.
+#  - suspicious-include : 16 remontees, toutes sur `#include "moc_*.cpp"`, l'idiome Qt standard
+#    pour un Q_OBJECT defini dans un .cpp sans en-tete dedie -- pas une inclusion suspecte ici.
+#  - exception-escape : 5 remontees, toutes sur des fonctions marquees `noexcept` a dessein qui
+#    appellent des operations std::string/std::optional (allocation possible, jamais exercee en
+#    pratique) ; le check ne peut pas distinguer ce risque theorique d'un vrai defaut.
+#  - invalid-enum-default-initialization : 5 remontees dans SpriteBatch.cpp, sur l'idiome D3D11
+#    standard `D3D11_XXX_DESC desc{};` suivi de l'affectation des seuls champs pertinents -- les
+#    champs enum laisses a 0 ne sont jamais lus (fonctionnalite correspondante desactivee).
+#  - unchecked-optional-access : 2 remontees, toutes deux sur `Result{optional<T> value; bool ok()
+#    const { return value.has_value(); }}` : le garde est bien present (`result.ok()`), mais le
+#    check ne sait pas relier un accesseur bool nomme a l'etat de l'optional qu'il enveloppe.
+#
+# Exclusions hors bugprone-* (triage complet, passe sur Source/ hors Test -- ce triage est
+# consigne dans les archives de la feuille de route (rubrique LOT-58),
+# section « Etat du triage », meme si la correction elle-meme depasse le lot d'origine) :
+#  - pro-bounds-avoid-unchecked-container-access (155 remontees) et pro-bounds-constant-array-index
+#    (55) : quasi totalite sur `conteneur[i]`/`tableau[i]` avec `i` borne par une boucle
+#    `for (i = 0; i < conteneur.size(); ++i)` dans du code physique/gameplay au pas fixe -- le check
+#    n'a pas de comprehension du flot de controle et ne voit pas la garantie de la boucle. Passer a
+#    `.at()` ajouterait un cout d'exception dans une boucle temps reel pour zero gain reel de
+#    surete (l'acces est deja prouve en bornes par le `for`).
+#  - owning-memory (59 remontees) : 100% sur `new Widget(parent)`, l'idiome Qt standard ou l'arbre
+#    QObject parent/enfant gere la destruction -- pas RAII/smart pointers. Refactorer combattrait
+#    le framework et risquerait un double-free/use-after-free a la destruction du parent.
+#  - avoid-do-while (43 remontees) : 100% sur l'expansion des macros `*_LOG_*`/
+#    `JADG_ASSERT`, qui utilisent l'idiome standard `do { ... } while (0)` (protection
+#    syntaxique d'une macro multi-instructions) -- aucune n'est une boucle do-while ecrite par un
+#    developpeur.
+#  - pro-bounds-pointer-arithmetic (5 remontees) : toutes sur `donnees.data() + y * largeur` passe
+#    a `std::memcpy` pour une copie de ligne d'image (AssetThumbnailView.cpp, PalettePanel.cpp,
+#    PixelCanvas.cpp, TexturePanel.cpp, TextureLoader.cpp) -- idiome standard de copie memoire en
+#    masse, deja borne par la boucle englobante.
+#  - pro-type-vararg (2 remontees) : toutes deux sur `std::snprintf` avec taille de tampon explicite
+#    -- l'exception « vararg sur, taille bornee » que les Core Guidelines elles-memes reconnaissent
+#    (Type.1), pas un appel C vararg non protege.
+#  - avoid-const-or-ref-data-members (12 remontees) : toutes sur un seul struct local
+#    (TileParseState, LevelLoader.cpp), un "parameter object" de references vers les accumulateurs
+#    de LevelLoader::loadFromString, construit et consomme a un seul site d'appel, jamais copie ni
+#    stocke -- la regle vise les types generaux potentiellement copies/stockes (C.12), pas ce motif.
+
+WarningsAsErrors: 'bugprone-*'
+HeaderFilterRegex: 'Source/.*'
+FormatStyle: file
+
+CheckOptions:
+  # --- Conventions de nommage ---
+  - key: readability-identifier-naming.NamespaceCase
+    value: lower_case
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: camelBack
+  - key: readability-identifier-naming.MethodCase
+    value: camelBack
+  - key: readability-identifier-naming.VariableCase
+    value: camelBack
+  - key: readability-identifier-naming.ParameterCase
+    value: camelBack
+  # Membres privés/protégés : préfixe '_' + camelCase (ex. _position)
+  - key: readability-identifier-naming.PrivateMemberPrefix
+    value: '_'
+  - key: readability-identifier-naming.PrivateMemberCase
+    value: camelBack
+  - key: readability-identifier-naming.ProtectedMemberPrefix
+    value: '_'
+  - key: readability-identifier-naming.ProtectedMemberCase
+    value: camelBack
+  # Constantes et macros
+  - key: readability-identifier-naming.ConstexprVariableCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.GlobalConstantCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.EnumConstantCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.MacroDefinitionCase
+    value: UPPER_CASE

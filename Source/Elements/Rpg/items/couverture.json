@@ -1,0 +1,8 @@
+{
+  "id": "couverture",
+  "name": "Couverture",
+  "source": "srd",
+  "category": "gear",
+  "price": 50,
+  "weightGrams": 1500
+}

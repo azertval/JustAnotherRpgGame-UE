@@ -1,0 +1,46 @@
+{
+  "id": "raven",
+  "name": "Corbeau",
+  "source": "srd",
+  "size": "tiny",
+  "creatureType": "bête",
+  "alignment": "sans alignement",
+  "abilities": {
+    "strength": 2,
+    "dexterity": 14,
+    "constitution": 8,
+    "intelligence": 2,
+    "wisdom": 12,
+    "charisma": 6
+  },
+  "armorClass": 12,
+  "hitPoints": 1,
+  "hitDice": "1d4-1",
+  "speed": {
+    "walk": 3,
+    "fly": 15
+  },
+  "challengeRating": 0,
+  "senses": [
+    "Perception passive 13"
+  ],
+  "skills": {
+    "perception": 3
+  },
+  "traits": [
+    {
+      "name": "Imitation",
+      "text": "Le corbeau peut imiter des sons simples qu'il a entendus, comme le chuchotement d'une personne, un bébé qui pleure ou un petit cri animal. Une créature qui entend les sons peut se rendre compte qu'il s'agit d'imitations si elle réussit un jet de Sagesse (Intuition) DD 10."
+    }
+  ],
+  "actions": [
+    {
+      "name": "Bec",
+      "text": "Attaque au corps à corps avec une arme : +4 au toucher, allonge 1,50 m, une cible. Touché : 1 dégât perforant.",
+      "attackBonus": 4,
+      "reach": 1.5,
+      "damage": "1",
+      "damageType": "piercing"
+    }
+  ]
+}

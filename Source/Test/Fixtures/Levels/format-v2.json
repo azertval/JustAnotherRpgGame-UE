@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "name": "format-v2",
+  "width": 3,
+  "height": 2,
+  "tiles": [
+    { "x": 0, "y": 0, "type": "entry" },
+    { "x": 1, "y": 0, "type": "grass" },
+    { "x": 2, "y": 1, "type": "wall", "texture": "wall-left" }
+  ]
+}

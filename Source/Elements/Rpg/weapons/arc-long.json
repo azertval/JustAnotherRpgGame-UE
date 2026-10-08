@@ -1,0 +1,19 @@
+{
+  "id": "arc-long",
+  "name": "Arc long",
+  "source": "srd",
+  "category": "martial",
+  "ranged": true,
+  "damage": "1d8",
+  "damageType": "piercing",
+  "weightGrams": 1000,
+  "price": 5000,
+  "text": "Munitions (portée 45 m/180 m), lourde, à deux mains",
+  "properties": [
+    "ammunition",
+    "heavy",
+    "two-handed"
+  ],
+  "rangeNormal": 45,
+  "rangeLong": 180
+}

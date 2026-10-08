@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "assets-brief.schema.json",
+  "title": "Cahier des assets de la charte v2 (LOT-87, T2.4)",
+  "description": "Contrat de forme du cahier. Ce que JSON Schema ne sait pas dire -- une zone hors de sa maquette, un jeton absent de Tokens.qml, des marges qui se chevauchent, une cle en double -- est verifie par scripts/checks/check_assets_brief.py.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "lot", "designResolution", "installRoot", "references", "tokens", "materials", "prompt", "pieces", "excluded"],
+  "properties": {
+    "$schema": { "type": "string" },
+    "version": { "const": 1 },
+    "lot": { "const": "LOT-87" },
+    "designResolution": { "$ref": "#/$defs/size" },
+    "installRoot": { "type": "string", "description": "Dossier ou le T2.6 installe les images : la cle, prefixe `ui/` ote, en donne le chemin relatif." },
+    "references": { "type": "string", "description": "Dossier des maquettes, relatif a la racine du depot." },
+    "tokens": { "type": "string", "description": "Fichier des jetons dont les couleurs et familles sont imposees dans les prompts." },
+    "materials": {
+      "type": "object",
+      "description": "Une matiere impose sa palette : chaque {jeton} de son prompt est remplace par la valeur lue dans Tokens.qml au moment ou le prompt est assemble.",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["tokens", "prompt"],
+        "properties": {
+          "tokens": { "type": "array", "items": { "$ref": "#/$defs/token" }, "uniqueItems": true },
+          "prompt": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "prompt": {
+      "type": "object",
+      "description": "Les phrases communes a tous les prompts, assemblees par `check_assets_brief.py --prompt`.",
+      "additionalProperties": false,
+      "required": ["style", "noLettering", "lettering", "canvas", "three-slice", "nine-patch", "fixed", "tile", "cover"],
+      "properties": {
+        "style": { "type": "string", "minLength": 1 },
+        "noLettering": { "type": "string", "minLength": 1 },
+        "lettering": { "type": "string", "minLength": 1 },
+        "canvas": { "type": "string", "minLength": 1 },
+        "three-slice": { "type": "string", "minLength": 1, "description": "Le 9-patch dont les marges haute et basse sont nulles." },
+        "nine-patch": { "type": "string", "minLength": 1 },
+        "fixed": { "type": "string", "minLength": 1 },
+        "tile": { "type": "string", "minLength": 1 },
+        "cover": { "type": "string", "minLength": 1 }
+      }
+    },
+    "pieces": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/piece" } },
+    "excluded": {
+      "type": "array",
+      "description": "Ce que montrent les maquettes et que le cahier ne fait PAS produire, avec la raison.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["what", "mockups", "reason"],
+        "properties": {
+          "what": { "type": "string", "minLength": 1 },
+          "mockups": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/mockupFile" } },
+          "reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "size": {
+      "type": "array",
+      "prefixItems": [{ "type": "integer", "minimum": 1 }, { "type": "integer", "minimum": 1 }],
+      "items": false,
+      "minItems": 2
+    },
+    "zone": {
+      "description": "Rectangle (x0, y0, x1, y1) en pixels de la maquette elle-meme, x1 et y1 exclus.",
+      "type": "array",
+      "prefixItems": [
+        { "type": "integer", "minimum": 0 }, { "type": "integer", "minimum": 0 },
+        { "type": "integer", "minimum": 1 }, { "type": "integer", "minimum": 1 }
+      ],
+      "items": false,
+      "minItems": 4
+    },
+    "token": { "type": "string", "pattern": "^[a-z][A-Za-z0-9]*$" },
+    "mockupFile": { "type": "string", "pattern": "^[0-9]{2}_[A-Za-z_]+\\.png$" },
+    "segment": {
+      "description": "Un segment de cle d'asset, meme syntaxe que $defs/assetKey de common.schema.json (LOT-39).",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "screen": {
+      "description": "La tache qui transcrit l'ecran consommateur : T3.1 a T3.9 (phase 3), T4.1 (HUD).",
+      "type": "string",
+      "pattern": "^T(3\\.[1-9]|4\\.1)$"
+    },
+    "mockupRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file", "zone", "shows"],
+      "properties": {
+        "file": { "$ref": "#/$defs/mockupFile" },
+        "zone": { "$ref": "#/$defs/zone" },
+        "shows": { "type": "string", "minLength": 1 }
+      }
+    },
+    "variant": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "label", "prompt"],
+      "properties": {
+        "id": { "$ref": "#/$defs/segment" },
+        "label": { "type": "string", "minLength": 1 },
+        "prompt": { "type": "string", "minLength": 1 },
+        "mockup": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["file", "zone"],
+          "properties": {
+            "file": { "$ref": "#/$defs/mockupFile" },
+            "zone": { "$ref": "#/$defs/zone" }
+          }
+        }
+      }
+    },
+    "margins": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["left", "top", "right", "bottom"],
+      "properties": {
+        "left": { "type": "integer", "minimum": 0 },
+        "top": { "type": "integer", "minimum": 0 },
+        "right": { "type": "integer", "minimum": 0 },
+        "bottom": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "tileMode": {
+      "description": "Les modes de BorderImage : `stretch`, `repeat`, `round`.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["horizontal", "vertical"],
+      "properties": {
+        "horizontal": { "enum": ["stretch", "repeat", "round"] },
+        "vertical": { "enum": ["stretch", "repeat", "round"] }
+      }
+    },
+    "piece": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "name", "material", "size", "display", "transparent", "description", "prompt", "mockups", "screens", "fallback"],
+      "properties": {
+        "key": {
+          "description": "Cle d'asset `ui/<famille>/<piece>`. Une piece a etats ou a membres engendre une cle par variante : `<cle>/<id>`.",
+          "type": "string",
+          "pattern": "^ui/(background|frame|plate|tab|button|control|medallion|slot|gauge|ornament|icon)/[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "name": { "type": "string", "minLength": 1 },
+        "material": { "type": "string", "minLength": 1 },
+        "size": { "$ref": "#/$defs/size", "description": "Taille de PRODUCTION, en pixels." },
+        "display": {
+          "description": "nine-patch : s'etire hors de ses marges ; fixed : taille fixe multipliee par uiScale ; tile : se repete ; cover : couvre l'ecran.",
+          "enum": ["nine-patch", "fixed", "tile", "cover"]
+        },
+        "transparent": { "type": "boolean" },
+        "margins": { "$ref": "#/$defs/margins" },
+        "tileMode": { "$ref": "#/$defs/tileMode" },
+        "displaySizes": {
+          "description": "Tailles d'affichage a 1080p d'une piece fixe, quand l'ecran la reduit.",
+          "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/size" }
+        },
+        "states": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/variant" } },
+        "members": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/variant" } },
+        "lettering": { "const": true, "description": "La piece porte des lettres. Seul le logotype y a droit." },
+        "description": { "type": "string", "minLength": 1 },
+        "prompt": { "type": "string", "minLength": 1 },
+        "mockups": { "type": "array", "items": { "$ref": "#/$defs/mockupRef" } },
+        "derivedFrom": { "type": "string", "description": "La piece qu'aucune maquette ne montre prolonge celle-ci." },
+        "screens": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/screen" } },
+        "fallback": {
+          "description": "Les jetons de l'aplat qui remplace la piece absente (EX-IHM-075, EX-NFR-040).",
+          "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/token" }
+        }
+      },
+      "allOf": [
+        { "if": { "properties": { "display": { "const": "nine-patch" } } },
+          "then": { "required": ["margins", "tileMode"] },
+          "else": { "not": { "required": ["margins"] } } },
+        { "if": { "properties": { "display": { "const": "tile" } } }, "then": { "required": ["tileMode"] } },
+        { "not": { "required": ["states", "members"] } },
+        { "if": { "properties": { "mockups": { "maxItems": 0 } } }, "then": { "required": ["derivedFrom"] } }
+      ]
+    }
+  }
+}

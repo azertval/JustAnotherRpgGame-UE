@@ -1,0 +1,8 @@
+{
+  "id": "acide-fiole",
+  "name": "Acide (fiole)",
+  "source": "srd",
+  "category": "gear",
+  "price": 2500,
+  "weightGrams": 500
+}

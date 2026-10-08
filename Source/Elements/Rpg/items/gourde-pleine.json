@@ -1,0 +1,8 @@
+{
+  "id": "gourde-pleine",
+  "name": "Gourde (pleine)",
+  "source": "srd",
+  "category": "gear",
+  "price": 20,
+  "weightGrams": 2500
+}

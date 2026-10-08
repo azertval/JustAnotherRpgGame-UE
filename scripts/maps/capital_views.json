@@ -1,0 +1,19 @@
+[
+  {"parent":"imperial-benenet-begraense","name":"Nobles’ Ward","kind":"quartier","frame":[0.38,0.01,0.36,0.36],"sourceQuote":"culminating in the central Nobles’ Ward, where one can find Governor Bonas Weyrdo’s palace"},
+  {"parent":"imperial-benenet-begraense","name":"Governor Bonas Weyrdo’s Palace","kind":"lieu-majeur","frame":[0.42,0,0.32,0.32],"sourceQuote":"Governor Bonas Weyrdo’s palace"},
+  {"parent":"imperial-benenet-begraense","name":"Lower Tiers","kind":"zone","frame":[0.21,0.48,0.5,0.5],"sourceQuote":"The densest population resides in the lower tiers, marked by inns and stables."},
+  {"parent":"kingdom-of-kolbjorn-kolbjorn-capital","name":"Ygfall Fortress","kind":"lieu-majeur","frame":[0.36,0.16,0.32,0.32],"sourceQuote":"neighborhoods around the Ygfall Fortress, the King’s home"},
+  {"parent":"kingdom-of-kolbjorn-kolbjorn-capital","name":"Shipyards","kind":"zone","frame":[0.025,0.29,0.36,0.36],"sourceQuote":"the large shipyards"},
+  {"parent":"kingdom-of-kolbjorn-kolbjorn-capital","name":"Imperial District","kind":"quartier","frame":[0.65,0.48,0.35,0.35],"sourceQuote":"a unique separated stone walled section built for the servants of the Empire"},
+  {"parent":"magocracy-of-mage-tower-mesoriver","name":"Floating Islands","kind":"zone","frame":[0.48,0.06,0.42,0.42],"sourceQuote":"The city is composed of many towers, floating islands, and even castles levitating"},
+  {"parent":"seashores-bluhaven-the-capital","name":"Piers and Docks","kind":"zone","frame":[0.02,0.25,0.38,0.38],"sourceQuote":"many piers and docks full of poor taverns"},
+  {"parent":"seashores-bluhaven-the-capital","name":"Shipyards","kind":"zone","frame":[0.64,0.27,0.36,0.36],"sourceQuote":"Many shipyards are located here, usually heavily secured"},
+  {"parent":"seashores-bluhaven-the-capital","name":"Center Square","kind":"zone","frame":[0.38,0.12,0.34,0.34],"sourceQuote":"In the center square, people can throw stones and lances at the criminal"},
+  {"parent":"theocracy-of-kepesh-pakaitos-the-new-capital","name":"Pyramids and Temples of Ba-Ka","kind":"lieu-majeur","frame":[0.39,0.15,0.38,0.38],"sourceQuote":"the central pyramids and temples dedicated to Ba-Ka"},
+  {"parent":"theocracy-of-kepesh-pakaitos-the-new-capital","name":"Outer Rings","kind":"zone","frame":[0.32,0.47,0.4,0.4],"sourceQuote":"The bustling outer rings teem with markets offering exotic spices, magic items, and the unique handicrafts of Kepesh’s artisans"},
+  {"parent":"tsvetan-feargus-the-capital","name":"Vharzog’s Palace","kind":"lieu-majeur","frame":[0.52,0,0.44,0.44],"sourceQuote":"Vharzog’s palace stands out as the sole magnific and opulent structure in the city"},
+  {"parent":"tsvetan-feargus-the-capital","name":"City Arena","kind":"lieu-majeur","frame":[0.235,0.22,0.36,0.36],"sourceQuote":"The city Arena is constantly being used to settle disputes between families and groups"},
+  {"parent":"yama-yamanoma","name":"Tenshikin’s Palace","kind":"lieu-majeur","frame":[0.57,0,0.4,0.4],"sourceQuote":"with Tenshikin’s palace at the pinnacle"},
+  {"parent":"yama-yamanoma","name":"Silver Dragon Pagoda","kind":"lieu-majeur","frame":[0.195,0.095,0.36,0.36],"sourceQuote":"One interesting place in the city is the Silver Dragon Pagoda."},
+  {"parent":"sindile-forest-sweetsprings","name":"Lower Levels","kind":"zone","frame":[0.23,0.45,0.48,0.48],"sourceQuote":"Foreigners are typically confined to the city’s lower levels, under strong vigilance."}
+]
