@@ -69,6 +69,19 @@ def test_chaque_maillage_est_au_standard(name):
     assert max(values) < position['count']
 
 
+def test_le_repere_du_socle_se_lit_sur_ses_trois_axes():
+    """Le bloc du socle (LOT-1014) : aucune borne n'en vaut une autre, au signe près, à moins de
+    2 cm — l'écart sous lequel `build_scene_unreal.Frame` confond deux axes."""
+    document, _ = _document(M.files()[f'Assets/Scene/{M.MARKER_PLACE}/repere.glb'])
+    position = document['accessors'][0]
+    spans = [(position['min'][axis], position['max'][axis]) for axis in range(3)]
+    assert spans == [tuple(pytest.approx(bound) for bound in pair) for pair in M.MARKER_BOUNDS]
+    candidates = [(low, high) for low, high in spans] + [(-high, -low) for low, high in spans]
+    for index, (low, high) in enumerate(candidates):
+        for other_low, other_high in candidates[index + 1:]:
+            assert abs(low - other_low) > 0.02 or abs(high - other_high) > 0.02
+
+
 def test_le_mur_fait_la_hauteur_d_un_etage_sous_la_camera_du_jeu():
     """224 px d'art au losange de 256, soit 2,37 m : la valeur du standard (`style-3d.md`, §1)."""
     assert M.STOREY_ART / M.ART_TILE[0] == pytest.approx(224 / 256)

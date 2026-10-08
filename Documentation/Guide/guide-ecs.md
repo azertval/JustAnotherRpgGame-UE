@@ -315,7 +315,7 @@ auxiliaires l'accompagnent :
 
 `core::Sprite::layer` est un entier : une valeur plus grande se dessine **au-dessus**. La taille à
 l'écran ne figure pas ici — elle découle du `Transform` et de l'échelle du rendu
-([Rendu 2D : de la scène à l'écran](guide-rendu.md)).
+(Rendu 2D : de la scène à l'écran).
 
 ### `core::Animation`, `core::AnimationClip` et `core::ClipSet` — l'animation comme donnée
 

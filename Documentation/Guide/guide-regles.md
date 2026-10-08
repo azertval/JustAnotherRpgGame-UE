@@ -649,7 +649,7 @@ quelle que soit la faute d'extraction.
 
 `Core/Rpg/` ne dépend ni de Qt, ni de l'ECS, ni du rendu (`EX-NFR-010`) : il compile et se teste
 seul. Ce que le jeu en affiche passe par deux couches décrites avec
-[l'IHM Qt](guide-ihm-qt.md) :
+l'IHM Qt :
 
 - une fonction **pure** `identifiant → texte` par écran, sans Qt ni disque —
   `hmi::characterSheetValues` (`Source/HMI/Presentation/CharacterSheetValues.h`, `LOT-38`) et
@@ -671,7 +671,7 @@ seul. Ce que le jeu en affiche passe par deux couches décrites avec
 Les deux vues-modèles chargent le même personnage de démonstration par
 `hmi::loadDemonstrationState`, avec ses catalogues, en journalisant chaque manque. Les écrans
 eux-mêmes — leur table, leur navigation, leur place dans la pile — sont décrits avec
-[les écrans et la boucle de jeu](guide-ecrans.md).
+les écrans et la boucle de jeu.
 
 Trois autres écrans du jeu portent des mots de cette page sans encore en lire les briques. L'écran
 **Compétences** (`Skills.qml`) est celui des sorts : il pose les huit écoles de `core::MagicSchool`,
@@ -686,33 +686,33 @@ prix en cuivre des catalogues et la bourse de `core::Inventory`, modulés par la
 ## Voir aussi
 
 - `core::Dice`, `core::DiceRoll`, `core::parseDice`, `core::formatDice`, `core::rollDice` —
-  [`Dice.h`](../../Source/Core/Rpg/Dice.h).
+  [`Dice.h`](../../Source/JustAnotherRpgGame/Core/Rpg/Dice.h).
 - `core::RollStance`, `core::rollStance`, `core::Modifier`, `core::CheckResult`, `core::rollCheck`,
-  `core::DifficultyScale`, `core::loadDifficultyScale` — [`Check.h`](../../Source/Core/Rpg/Check.h).
+  `core::DifficultyScale`, `core::loadDifficultyScale` — [`Check.h`](../../Source/JustAnotherRpgGame/Core/Rpg/Check.h).
 - `core::Ability`, `core::abilityModifier`, `core::abilityName`, `core::parseAbility`,
-  `core::allAbilities` — [`Ability.h`](../../Source/Core/Rpg/Ability.h).
+  `core::allAbilities` — [`Ability.h`](../../Source/JustAnotherRpgGame/Core/Rpg/Ability.h).
 - `core::SkillDefinition`, `core::SkillCatalog`, `core::loadSkills` —
-  [`Skill.h`](../../Source/Core/Rpg/Skill.h) ; `core::METERS_PER_TILE`, `core::tilesFromMeters`,
-  `core::metersFromTiles` — [`Scale.h`](../../Source/Core/Rpg/Scale.h).
+  [`Skill.h`](../../Source/JustAnotherRpgGame/Core/Rpg/Skill.h) ; `core::METERS_PER_TILE`, `core::tilesFromMeters`,
+  `core::metersFromTiles` — [`Scale.h`](../../Source/JustAnotherRpgGame/Core/Rpg/Scale.h).
 - `core::DamageType`, `core::Condition`, `core::MagicSchool`, `core::CreatureSize` et leurs noms —
-  [`RpgEnums.h`](../../Source/Core/Rpg/RpgEnums.h), [`RpgEnumNames.h`](../../Source/Core/Rpg/RpgEnumNames.h).
+  [`RpgEnums.h`](../../Source/JustAnotherRpgGame/Core/Rpg/RpgEnums.h), [`RpgEnumNames.h`](../../Source/JustAnotherRpgGame/Core/Rpg/RpgEnumNames.h).
 - `core::Species`, `core::Background`, `core::PlayableClass`, `core::CharacterOptions`,
   `core::loadCharacterOptions`, `core::abilityScoreWith` —
-  [`CharacterOptions.h`](../../Source/Core/Rpg/CharacterOptions.h).
+  [`CharacterOptions.h`](../../Source/JustAnotherRpgGame/Core/Rpg/CharacterOptions.h).
 - `core::CharacterSheet`, `core::ExperienceTable`, `core::CharacterCreationRules`,
   `core::buildCharacterSheet`, `core::maximumHitPointsFor`, `core::gainExperience`,
   `core::proficiencyBonus`, `core::savingThrowModifier`, `core::skillModifier`,
-  `core::loadCharacterSheet` — [`CharacterSheet.h`](../../Source/Core/Rpg/CharacterSheet.h).
+  `core::loadCharacterSheet` — [`CharacterSheet.h`](../../Source/JustAnotherRpgGame/Core/Rpg/CharacterSheet.h).
 - `core::CasterProgression`, `core::multiclassCasterLevel` —
-  [`Multiclassing.h`](../../Source/Core/Rpg/Multiclassing.h).
+  [`Multiclassing.h`](../../Source/JustAnotherRpgGame/Core/Rpg/Multiclassing.h).
 - `core::Weapon`, `core::Armor`, `core::EquipmentCatalog`, `core::loadEquipment`,
-  `core::armorClassFor`, `core::totalWeightGrams` — [`Equipment.h`](../../Source/Core/Rpg/Equipment.h).
+  `core::armorClassFor`, `core::totalWeightGrams` — [`Equipment.h`](../../Source/JustAnotherRpgGame/Core/Rpg/Equipment.h).
 - `core::Item`, `core::EquipmentSlot`, `core::Inventory`, `core::equip`, `core::unequip`,
   `core::addToBackpack`, `core::removeFromBackpack`, `core::ItemLookup`, `core::EncumbranceRules`,
   `core::DerivedStats`, `core::weaponAttackAbility`, `core::derivedStatsFor` —
-  [`Inventory.h`](../../Source/Core/Rpg/Inventory.h).
+  [`Inventory.h`](../../Source/JustAnotherRpgGame/Core/Rpg/Inventory.h).
 - `core::Creature`, `core::CreatureAction`, `core::Bestiary`, `core::loadBestiary` —
-  [`Bestiary.h`](../../Source/Core/Rpg/Bestiary.h).
+  [`Bestiary.h`](../../Source/JustAnotherRpgGame/Core/Rpg/Bestiary.h).
 - [Mathématiques du moteur](guide-maths.md) — `core::DeterministicRandom`, le générateur que tout
   jet reçoit.
 - [Monde et exploration](guide-monde.md) — les dialogues, premier contenu à jeter un d20 hors
@@ -721,7 +721,7 @@ prix en cuivre des catalogues et la bourse de `core::Inventory`, modulés par la
   et d'une fiche.
 - [Données, corpus et ressources](guide-donnees.md) — les catalogues de `Source/Elements/Rpg/`,
   leurs schémas et la chaîne d'extraction qui les produit.
-- [IHM Qt](guide-ihm-qt.md) et [Écrans, navigation et boucle de jeu](guide-ecrans.md) — les
+- IHM Qt et Écrans, navigation et boucle de jeu — les
   vues-modèles et les écrans qui montrent la fiche et l'inventaire.
 - [`regles-d20.md`](../Specification/regles-d20.md), [`rpg.md`](../Specification/rpg.md),
   [`inventaire.md`](../Specification/inventaire.md), [`contenu.md`](../Specification/contenu.md) —

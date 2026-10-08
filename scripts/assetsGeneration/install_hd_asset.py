@@ -32,9 +32,8 @@ la main :
 Le contrôle de ce qui est installé (fichiers cités, dimensions, poids par zone) est celui de la CI,
 `scripts/checks/check_hd_assets.py`, qui n'a pas besoin des sources.
 
-Les **personnages** ne passent plus par ici (LOT-1008) : leur fiche s'écrit et s'installe par
-l'atelier des assets de l'éditeur, en fenêtre ou par `LevelEditor --apply <fiche d'atelier>`
-(`Source/Editor/Logic/CharacterWorkshop.h`). Un descripteur dont la cible est un dossier
+Les **personnages** ne passent pas par ici (LOT-1008) : leur chaîne — liaison au squelette, import
+au maître dans le moteur — est celle du LOT-1015. Un descripteur dont la cible est un dossier
 `Characters/` est refusé.
 
 Le descripteur (`install.json`) :

@@ -6,8 +6,8 @@ en-têtes de `Core` pur, sans Qt ni GPU (`EX-NFR-010`), que cette page parcourt 
 combat : le montage d'une rencontre, la grille, l'initiative, le tour et son économie, le
 déplacement, l'attaque et les dégâts, la géométrie (portée, ligne de vue, abri, zones, tenaille),
 la prévisualisation, l'IA, puis la session d'arène qui tient un combat — lequel se joue sur la
-carte d'exploration elle-même depuis le `LOT-118`. Ce que l'écran en montre est renvoyé à [Rendu 2D](guide-rendu.md) et
-[Écrans](guide-ecrans.md) ; les règles du d20 lui-même, à [Règles d20](guide-regles.md).
+carte d'exploration elle-même depuis le `LOT-118`. Ce que l'écran en montre est renvoyé à Rendu 2D et
+Écrans ; les règles du d20 lui-même, à [Règles d20](guide-regles.md).
 
 ## Définitions
 
@@ -116,7 +116,7 @@ constantes sont des décisions nommées, réglables : `TACTICAL_PARTY_SIZE` (4, 
 lequel le Guide calibre ses rencontres), `TACTICAL_AREA_RADIUS` (6 cases, ce qu'un combattant de
 taille M parcourt en un tour) et `TACTICAL_CELLS_PER_COMBATANT` (4 : se tenir, et manœuvrer).
 L'éditeur l'appelle dans son contrôle du contenu (`LOT-EDITOR-07`,
-[Éditeur de niveaux](guide-editeur.md)).
+Éditeur de niveaux).
 
 ### La grille (`BattleGrid.h`)
 
@@ -820,7 +820,7 @@ planche du Colisée, 86 px, à sa taille native au zoom 1) et H = 0,62 L sa haut
 l'angle des tuiles de la planche, pas le 2:1 classique). Le coin de grille (c, r) tombe sur le
 sommet haut du losange de la case ; une bande de `ARENA_WALL_RISE · L` est réservée en haut pour
 les murs du fond. Le cadrage — centrer, faire tenir dans la surface — n'est pas l'affaire de la
-projection mais de la caméra (`hmi::PlaceCamera`, [Rendu 2D](guide-rendu.md)).
+projection mais de la caméra (`hmi::PlaceCamera`, Rendu 2D).
 
 - `columns`, `rows`, `tileWidth`, `tileHeight`, `wallHeight`, `diagonals` (`columns + rows`, au
   moins 1 : une grille vide garde une scène non dégénérée), `sceneSize`, `origin`.
@@ -842,7 +842,7 @@ prévisualisation (`LOT-24`, clavier et souris), l'ordre d'initiative et le jour
 tours des combattants à profil par `core::playTurn`. La scène de combat seule et son renderer
 (`LOT-86`), écrits pour l'écran du Colisée, ont été retirés à la recette de la 0.0.1 avec cet écran
 (25 septembre 2026) : le combat se rend sur la carte, par `hmi::WorldSceneComposer` et
-`hmi::WorldSceneRenderer` ([Rendu 2D](guide-rendu.md)).
+`hmi::WorldSceneRenderer` (Rendu 2D).
 
 ![L'écran CombatHud tel qu'il existe aujourd'hui : un HUD dessiné sans données — portrait et jauges, barre d'actions numérotée de 1 à 8, panneau CA / Initiative / Vitesse / États, quêtes, boussole, et la bascule Exploration · Tactique](captures/jeu-combathud.jpg)
 
@@ -923,9 +923,9 @@ sous son voile ; c'est l'écran de mort qui quitte la rencontre et finit la part
 - [Monde et exploration](guide-monde.md) — la session d'exploration qui rencontre un déclencheur,
   et la zone de combat d'une carte.
 - [Niveaux](guide-niveaux.md) — la grille de collision dont la grille de combat est la copie.
-- [Rendu 2D](guide-rendu.md), [Écrans](guide-ecrans.md) — ce que `CombatHud.qml` et
+- Rendu 2D, Écrans — ce que `CombatHud.qml` et
   `hmi::EncounterModel` font de la session.
-- [Éditeur de niveaux](guide-editeur.md) — le contrôle du contenu qui appelle
+- Éditeur de niveaux — le contrôle du contenu qui appelle
   `core::analyzeEncounterTerrain`.
 - [`combat.md`](../Specification/combat.md), [`regles-d20.md`](../Specification/regles-d20.md) — les
   exigences que cette page cite.

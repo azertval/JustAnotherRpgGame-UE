@@ -22,8 +22,8 @@ Cartes du jeu, un fichier **JSON** par carte (`EX-LVL-001`, `EX-LVL-003`).
 
 > **L'éditeur fait foi, au `LOT-EDITOR-06`.** Ces cartes se modifient dans `LevelEditor` — à la
 > souris, ou par `LevelEditor --apply` —, qui ouvre ce dossier-ci et non la copie de la
-> construction. Aucun script n'y écrit. Faire une carte : guide d'usage
-> `Documentation/Guide/Manuel/utiliser-l-editeur.md`.
+> construction. Aucun script n'y écrit. `LevelEditor` est resté dans l'ancien dépôt (D-58) : le
+> format de carte du nouveau moteur est le `LOT-1018`.
 
 > **Ce `README.md` est le gardien du dossier (`LOT-123`).** Git ne garde pas un dossier vide : sans
 > lui, un `Levels/` sans aucune carte disparaîtrait du dépôt, et `hmi::resolveDataRoot` cesserait de

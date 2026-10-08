@@ -74,7 +74,7 @@ temps comme modification locale non commise d'un seul poste.
 
 `Source/Elements/` est la racine de tout ce qui n'est pas du code. Chaque sous-dossier est copié à
 côté de l'exécutable à chaque construction par la cible CMake `CopyGameData` (déclarée dans
-[`Source/HMI/CMakeLists.txt`](../../Source/HMI/CMakeLists.txt)), si bien que le jeu, l'éditeur et
+`Source/HMI/CMakeLists.txt`), si bien que le jeu, l'éditeur et
 les tests retrouvent la même forme d'arborescence quel que soit l'endroit d'où ils lisent.
 
 | Dossier | Contenu | Produit par |
@@ -413,7 +413,7 @@ usages** — le monde (`Common/`), la région (`Regions/<région>/Common/`), la 
 (`Regions/<région>/<ville>/Common/`), la zone (`Regions/<région>/<ville>/<zone>/`), la sous-zone
 (un donjon où l'on entre depuis sa zone). Un asset naît propre et **monte par promotion**, jamais
 par copie ; et le moteur, lui, cherche une pièce du plus propre au plus commun.
-[`ScenePlace.h`](../../Source/Core/Resources/ScenePlace.h) porte cette logique, pure : elle ne lit
+[`ScenePlace.h`](../../Source/JustAnotherRpgGame/Core/Resources/ScenePlace.h) porte cette logique, pure : elle ne lit
 le disque que pour `scenePlaces` et `resolveFigures`.
 
 ![L'arbre des lieux de Source/Elements/Assets, les niveaux candidats d'une sous-zone du plus propre au monde, et l'empilement des manifestes où une pièce propre masque une pièce commune du même nom](figures/donnees-arborescence-lieux.svg)
@@ -535,7 +535,7 @@ scripts, hors CI, tiennent la chaîne, et chacun dit dans son en-tête ce qu'il 
   clé ne change pas. Les **personnages** ne passent plus par lui (`LOT-1008`) : un descripteur
   dont la cible est un `Characters/` est refusé, leur fiche s'écrit et s'installe par l'atelier
   des assets de l'éditeur — la fenêtre *Asset workshop*, ou `LevelEditor --apply <fiche
-  d'atelier>` ([guide de l'éditeur](guide-editeur.md)). Un personnage **sans modèle** n'existe
+  d'atelier>` (guide de l'éditeur). Un personnage **sans modèle** n'existe
   plus : le portrait d'attente du `LOT-145` (la liste `portraits` du manifeste) part avec le
   `LOT-1011`, `check_hd_assets.py` refuse la clé et tout nom cité par `npcs` a sa fiche et son
   modèle.
@@ -611,7 +611,7 @@ Le cycle tient en six scripts et une garde :
 | installation | [`fetch_assets.py`](../../scripts/fetch_assets.py) | pour chaque kit du verrou : déjà en place, rien ; sinon l'archive vient du **cache du poste** (`%LOCALAPPDATA%\JadgAssets`, ou `JADG_ASSETS_CACHE`, partagé par les clones et les worktrees), téléchargée au besoin, vérifiée contre l'empreinte, extraite. `--check` vérifie sans télécharger, code non nul sur un écart ; le travail local n'est **jamais écrasé** — une image modifiée ou ajoutée à la main arrête l'installation, sauf `--force` |
 | témoin | `fetch_assets.py` | chaque kit installé laisse `Assets/.kits/<slug>.json` (non suivi) : l'identifiant, l'empreinte, les fichiers |
 | garde | [`CMakeLists.txt`](../../CMakeLists.txt) | à la configuration, compare le témoin de chaque kit du verrou à son empreinte et **refuse** de configurer sur un écart, avec la commande à lancer ; `-DSKIP_ASSET_KITS_CHECK=ON` outrepasse |
-| CI | [`fetch-assets`](../../.github/actions/fetch-assets/action.yml) | l'action composite qu'appellent les jobs qui lisent les assets : cache d'Actions indexé par l'empreinte du verrou, `fetch_assets.py` puis `fetch_assets.py --check` |
+| CI | `fetch-assets` | l'action composite qu'appellent les jobs qui lisent les assets : cache d'Actions indexé par l'empreinte du verrou, `fetch_assets.py` puis `fetch_assets.py --check` |
 
 [`asset_kits.py`](../../scripts/release/asset_kits.py) est la partie commune de la publication et
 de l'installation — ce qu'est le fichier d'un kit, l'archive déterministe, le verrou, les témoins,
@@ -798,7 +798,7 @@ que les taire reviendrait à choisir à la place du lecteur.
 
 La CI ne lit aucun PDF : elle valide les **données produites**, pas l'extraction. Chaque contrôle
 est un script Python sans dépendance ou presque, appelé par le job de lint (`uv run scripts/check.py`
-les rejoue tous en local, voir [Build, tests et intégration continue](guide-outils.md)). Plusieurs
+les rejoue tous en local, voir `CONTRIBUTING.md`). Plusieurs
 s'**auto-testent** avant de se prononcer : un contrôle sans entrée est vert par vacuité, et personne
 ne sait s'il fonctionne — c'est la panne du `LOT-78`, où une règle de lint contenait un caractère
 invisible qui l'empêchait de jamais correspondre.
@@ -811,7 +811,7 @@ invisible qui l'empêchait de jamais correspondre.
 | [`check_corpus_manifest.py`](../../scripts/checks/check_corpus_manifest.py) | `corpus.toml` est bien formé et son contrôle d'empreinte fonctionne, sur un corpus fictif écrit dans un dossier temporaire (collection comprise) | un champ manquant, une pagination inconnue, un type mal orthographié | — |
 | [`check_glossary.py`](../../scripts/checks/check_glossary.py) | le corpus est exclu du dépôt ; le lexique est bien formé (aucun doublon de couple, ensembles fermés au complet : 8, 15, 13) ; chaque **clé de règle** des `.lang` (`condition.`, `damage.`, `school.`, `weapon_property.`, `ability.`, `skill.`…) porte un terme du lexique traduit comme il le dit — casse ignorée, **accents significatifs** ; auto-test sur six catalogues fictifs | une divergence | — |
 | [`check_map_assets.py`](../../scripts/checks/check_map_assets.py) | `Assets/Maps/manifest.json` : provenance `author`, 1920 × 1080, empreinte et taille exactes, aucune image hors manifeste ; `world-maps.json` cite des images, régions et lieux qui existent | tout écart ; `--write` réécrit tailles et empreintes | — |
-| [`check_ui_assets.py`](../../scripts/checks/check_ui_assets.py) | `Assets/UI/illustrations.json` : provenance `produced` uniquement, empreinte, dimensions, aucune image orpheline, tout nom de fichier cité par le QML est déclaré, toute pièce du cahier est livrée ou déclarée `pending`, la table d'`Artwork.qml` suit le manifeste | tout écart, dont une image du corpus revenue dans le dépôt | — |
+| `check_ui_assets.py` | `Assets/UI/illustrations.json` : provenance `produced` uniquement, empreinte, dimensions, aucune image orpheline, tout nom de fichier cité par le QML est déclaré, toute pièce du cahier est livrée ou déclarée `pending`, la table d'`Artwork.qml` suit le manifeste | tout écart, dont une image du corpus revenue dans le dépôt | — |
 | [`check_translations.py`](../../scripts/checks/check_translations.py) | `jadg_en.ts` (voir la localisation) | une traduction inachevée, une entrée disparue, des marqueurs `%1` différents, un espace de bord perdu | — |
 | [`check_hd_assets.py`](../../scripts/checks/check_hd_assets.py) | sous `Common/` et `Regions/`, chaque `Scene/` et `Characters/` porte un manifeste qui cite exactement ses images ; chaque pièce est au standard (PNG 32 bits, taille déclarée, 4096 px au plus, dalle au losange du lieu, ancre dans l'image) ; le poids de chaque zone s'affiche (sans budget) | un fichier cité absent, une image que le manifeste ne cite pas, une pièce hors bornes | le poids par zone |
 | [`check_binary_files.py`](../../scripts/checks/check_binary_files.py) | aucun fichier de plus de 5 Mio ; tout binaire porte une extension déclarée `binary` dans `.gitattributes` ; aucune image suivie sous un kit verrouillé (`LOT-108`) ; aussi en hook pre-commit | l'un de ces défauts | — |
@@ -962,7 +962,7 @@ qu'il quitte et à celui qu'il rejoint :
 | descente des catacombes | (22-23, 4-6) | le niveau −1 et les catacombes |
 
 Les gestes se rejouent par l'éditeur ; une carte d'une autre taille se ramène d'abord à 34 × 24
-(`--resize`, avec `--crop` pour une réduction — voir le [manuel de l'éditeur](Manuel/utiliser-l-editeur.md)) :
+(`--resize`, avec `--crop` pour une réduction — voir le manuel de l'éditeur) :
 
 ```powershell
 py -3.13 scripts/maps/arena_fate_levels.py --preview
@@ -1009,9 +1009,9 @@ diverge du kit publié tant que `scripts/release/publish_asset_kit.py` n'a pas �
   porte sa propre garde de version.
 - [Règles d20 et personnages](guide-regles.md) et [Combat tactique](guide-combat.md) — ce que
   contiennent les catalogues et comment le moteur les joue.
-- [Rendu 2D : de la scène à l'écran](guide-rendu.md) — les textures, du côté qui les possède.
-- [Éditeur de niveaux](guide-editeur.md) — le seul outil qui écrit dans `Source/Elements/`.
-- [Build, tests et intégration continue](guide-outils.md) — le job de lint qui rejoue les contrôles.
+- Rendu 2D : de la scène à l'écran — les textures, du côté qui les possède.
+- Éditeur de niveaux — le seul outil qui écrit dans `Source/Elements/`.
+- `CONTRIBUTING.md`, à la racine du dépôt — le job de lint qui rejoue les contrôles.
 - [`arborescence-assets.md`](../../Planning/standards/arborescence-assets.md) — les cinq niveaux et
   les règles de rangement ; [`assets-hors-git-lot108.md`](../../Planning/standards/assets-hors-git-lot108.md)
   — la décision de sortir les images de Git.

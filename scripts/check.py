@@ -15,7 +15,7 @@ installé. Tous les contrôles s'exécutent même après un échec, comme en CI,
 donne le verdict de chacun.
 
 Ce que ce script ne rejoue pas : les builds, les tests, clang-tidy et la documentation — ils
-demandent MSVC, Qt, LLVM ou Doxygen, et passent par `scripts/build.ps1`.
+demandent MSVC ou Unreal Engine, et passent par `scripts/build.ps1`.
 
 L'interpréteur courant doit être celui de `.venv/` (phase 4) : `uv run scripts/check.py` le garantit,
 et installe au passage les versions de `uv.lock`, celles du runner.
@@ -37,10 +37,10 @@ CI = os.path.join('.github', 'workflows', 'ci.yml')
 JOB = 'lint-exigences'
 JOB_RE = re.compile(r'^  ([A-Za-z0-9_-]+):\s*$')
 NAME_RE = re.compile(r'^      - name:\s*(.+?)\s*$')
-# Un script du dépôt — de `scripts/` ou de l'outillage de `Planning/` —, ou pytest (les tests des
+# Un script du dépôt — de `scripts/`, de l'outillage de `Planning/` ou de `Documentation/` —, ou pytest (les tests des
 # scripts, phase 4).
 RUN_RE = re.compile(
-    r'^        run:\s*python3\s+((?:scripts|Planning/outils)/\S+\.py|-m\s+pytest)(.*?)\s*$')
+    r'^        run:\s*python3\s+((?:scripts|Planning/outils|Documentation/outils)/\S+\.py|-m\s+pytest)(.*?)\s*$')
 ENV_RE = re.compile(r'^  ([A-Z0-9_]+):\s*[\'"]?([^\'"\s#]+)')
 
 

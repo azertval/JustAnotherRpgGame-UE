@@ -33,7 +33,7 @@ runner, qui a tout ce qu'un poste peut avoir. Ce contrôle refait le trajet d'un
   navigateur de cartes.
 - **Refus** : une DLL manquante, une fenêtre noire, un réglage oublié entre deux lancements, un
   dossier créé ailleurs qu'à côté de l'exécutable
-  ([où vit la partie](../Guide/Manuel/jouer.md#votre-partie-et-où-elle-vit)).
+  (où vit la partie).
 
 ### RM-002 — Le journal de session dit ce qui s'est passé
 
@@ -47,7 +47,7 @@ runner, qui a tout ce qu'un poste peut avoir. Ce contrôle refait le trajet d'un
 
 ## 2. Le jeu, au clavier et à la manette
 
-Les commandes sont celles du [manuel](../Guide/Manuel/jouer.md) ; le clavier suffit à tout
+Les commandes sont celles du manuel ; le clavier suffit à tout
 (`EX-CTRL-001`), la manette pilote les menus, la carte et l'arène (`EX-CTRL-002`).
 
 ### RM-010 — Les menus se parcourent sans souris
@@ -168,7 +168,7 @@ l'auteur**. Les scénarios `--apply` rejouent la logique ; ce contrôle rejoue l
 
 ### RM-030 — Le parcours du manuel, du sol à la publication
 
-*Lot de la filière éditeur.* Suivre [Utiliser l'éditeur](../Guide/Manuel/utiliser-l-editeur.md),
+*Lot de la filière éditeur.* Suivre Utiliser l'éditeur,
 étape par étape, sans en sauter une. Le `LOT-127` en est le précédent : son
 [cahier de recette](../../Planning/versions/v0.1.0/v0.0.1-demo/annexes/LOT-127-recette-de-l-editeur-a-la-main/cahier-de-recette.md),
 une ligne par geste des lots de l'éditeur, tout OK le 24 septembre 2026, est la forme que prend le

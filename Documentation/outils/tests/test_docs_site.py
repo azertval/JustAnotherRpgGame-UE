@@ -159,6 +159,14 @@ def test_le_lint_refuse(depot, ajout, attendu):
     assert any(attendu in error for error in errors), errors
 
 
+def test_le_lint_ne_suit_pas_ce_qui_reste_sur_le_poste(depot):
+    page = depot / 'Documentation' / 'Guide' / 'guide-boucle.md'
+    liens = ''.join(f'Voir [hors Git](../{local}).\n' for local in lint_docs.LOCAL_ONLY)
+    page.write_text(page.read_text(encoding='utf-8') + '\n' + liens, encoding='utf-8')
+    errors, _ = lint_docs.lint(depot / 'Documentation')
+    assert errors == []
+
+
 def test_le_lint_refuse_une_page_orpheline(depot):
     (depot / 'Documentation' / 'Guide' / 'guide-perdu.md').write_text('# Perdu\n', encoding='utf-8')
     errors, _ = lint_docs.lint(depot / 'Documentation')

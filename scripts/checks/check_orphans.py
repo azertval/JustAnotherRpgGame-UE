@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Valentin Eloy
 # SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
-"""Garde-fou : pas d'asset mort, pas de script sans appelant (LOT-1001, décision D-32).
+"""Garde-fou : pas d'asset mort, pas de script sans appelant, pas de sortie du moteur sans script
+(LOT-1001, décision D-32 ; LOT-1014, décision D-52).
 
 Un lot qui remplace quelque chose le supprime dans sa propre PR. Ce contrôle est ce qui fait tenir
 la règle lot après lot : il échoue sur ce qu'un remplacement laisse derrière lui.
@@ -9,9 +10,14 @@ la règle lot après lot : il échoue sur ce qu'un remplacement laisse derrière
 **Les assets** — sous `Source/Elements/Assets/` :
 
 - tout fichier est **cité** : par un manifeste ou une fiche (un JSON de l'arbre qui le nomme, par
-  un chemin relatif à son propre dossier ; ou l'atlas `Maps/world-maps.json`, qui nomme l'image d'une
-  zone depuis la racine des assets), ou — pour un manifeste, une fiche ou une police, que rien
-  d'autre ne peut citer — par le code qui le charge ;
+  un chemin relatif à son propre dossier ou, comme le manifeste des maîtres, à la racine des
+  assets ; ou l'atlas `Maps/world-maps.json`, qui nomme l'image d'une zone depuis cette racine),
+  ou — pour un manifeste, une fiche ou une police, que rien d'autre ne peut citer — par le code
+  qui le charge ;
+- une pièce venue par passation dont le **lecteur n'est pas encore écrit** dans le nouveau moteur
+  (une police avant l'interface du LOT-1020) est citée par `awaiting.json`, à la racine des
+  assets, avec le lot qui l'attend : la liste dit ce qui est en attente, au lieu de le laisser
+  passer pour mort ou de le supprimer. Une entrée dont le lot est livré est une erreur ;
 - toute **entrée citée existe** : un chemin écrit sous une clé de fichier (`file`, `mesh`…) ou un
   dossier de personnage (`npcs`) désigne quelque chose sur le disque.
 
@@ -25,15 +31,26 @@ la lit), par un hook, par le build, par un document en vigueur, ou par un script
 Un test n'est pas un appelant : un script que seul son test nomme est mort, et son test avec lui.
 L'histoire (`CHANGELOG.md`, fiches de lots, archives) n'est pas un document en vigueur.
 
+**Les sorties du moteur** — sous `Content/` (LOT-1014, D-52) : un `.uasset` ou un `.umap` est la
+sortie d'un script du dépôt, jamais un fichier fait à la main dans l'éditeur. Chacun est donc
+**cité par le script qui le produit** : son chemin de contenu (`/Game/…`), ou un dossier qui le
+contient, est écrit dans un script appelé, ou dans une description de scène que
+`build_scene_unreal.py` lit (`Source/Elements/Scenes/*.json`, champ `map`). Un asset que rien ne
+cite ne se régénère pas : c'est une erreur, comme tout autre fichier trouvé sous `Content/`.
+
 Les images des kits ne sont pas suivies par Git : le contrôle lit le **disque**, après
-`scripts/fetch_assets.py`, comme `check_hd_assets.py`. Aucune dépendance.
+`scripts/fetch_assets.py`, comme `check_hd_assets.py`. `Content/` se lit sur le disque aussi : là
+où il n'existe pas (un runner sans moteur), il n'y a rien à vérifier. Aucune dépendance.
 
 Usage :
-    python scripts/checks/check_orphans.py            # code de sortie non nul si orphelin
+    python scripts/checks/check_orphans.py                # code de sortie non nul si orphelin
+    python scripts/checks/check_orphans.py --sans-kits    # sans les assets : un poste ou un
+                                                          # runner où les kits ne sont pas installés
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 import sys
@@ -46,14 +63,18 @@ FILE_KEYS = ("file", "mesh", "model", "texture", "portrait", "token")
 # Les clés dont les valeurs sont des dossiers de personnage : ils citent leur contenu.
 FOLDER_KEYS = ("npcs",)
 # Les provenances : des chemins de l'atelier local (`Tools/`), jamais des fichiers du dépôt.
-PROVENANCE_KEYS = ("source", "sources")
+# De même les doublons écartés d'une livraison (`duplicates`, manifeste des maîtres).
+PROVENANCE_KEYS = ("source", "sources", "duplicates")
+# Les pièces dont le lecteur arrive dans un lot nommé (voir l'en-tête).
+AWAITING = "awaiting.json"
+LOT_ID = re.compile(r"^LOT-\d+$")
 # Ce qui accompagne les assets sans en être.
 COMPANIONS = (".md", ".txt")
 # Ce que seul le code peut citer : un manifeste, une fiche, une police.
 CODE_CITED = (".json", ".ttf", ".otf")
 # Le code qui charge les assets, et l'outillage qui les installe.
-CODE_TREES = ("Source/App", "Source/Core", "Source/Editor", "Source/HMI", "Source/Ui", "scripts")
-CODE_SUFFIXES = (".h", ".cpp", ".qml", ".py", ".cmake", ".txt")
+CODE_TREES = ("Source/JustAnotherRpgGame", "scripts")
+CODE_SUFFIXES = (".h", ".cpp", ".cs", ".py", ".cmake", ".txt")
 IGNORED_DIRS = {"__pycache__", ".git", "build", "generated", "External"}
 
 SCRIPT_SUFFIXES = (".py", ".ps1")
@@ -66,7 +87,13 @@ CALLER_TREES = (".github", "cmake", "Documentation", "Planning/standards", "Plan
                 "Source", "Site")
 CALLER_SUFFIXES = (".yml", ".yaml", ".md", ".ps1", ".py", ".cmake", ".txt")
 # L'histoire n'appelle rien : un script cité là seulement a disparu de l'usage. Les données non plus.
-HISTORY_DIRS = ("Planning/standards/archives/", "Source/Elements/", "Source/Test/")
+HISTORY_DIRS = ("Planning/standards/archives/", "Documentation/Archives/", "Source/Elements/",
+                "Source/Test/")
+
+# Les sorties du moteur, et ce qui les cite : un chemin de contenu d'au moins un dossier.
+ENGINE_OUTPUTS = (".uasset", ".umap")
+CONTENT_PATH = re.compile(r"/Game(?:/[\w.\-]+)+")
+SCENE_DESCRIPTIONS = "Source/Elements/Scenes"
 
 
 def walk(base: Path):
@@ -108,10 +135,33 @@ def is_path(text: str) -> bool:
         and ":" not in text and ".." not in Path(text).parts
 
 
-def check_assets(assets: Path, code: str, atlas: Path | None = None) -> list[str]:
-    """Les orphelins de `assets` ; `code` est le texte du code qui charge les assets, `atlas` un
-    manifeste hors de l'arbre qui cite depuis sa racine."""
+def check_awaiting(assets: Path, planning: Path | None) -> list[str]:
+    """Les entrées fautives de la liste d'attente : sans lot, ou dont le lot est livré."""
+    listing = assets / AWAITING
+    if not listing.is_file():
+        return []
+    try:
+        entries = json.loads(read(listing)).get("awaiting", [])
+    except json.JSONDecodeError:
+        return []  # dit par `check_assets`, qui lit tous les JSON de l'arbre
     errors: list[str] = []
+    for entry in entries:
+        lot = entry.get("lot", "")
+        if not LOT_ID.match(lot):
+            errors.append(f"{AWAITING} : {entry.get('file', '?')} n'attend aucun lot (« lot »)")
+            continue
+        fiches = list(planning.glob(f"versions/**/lots/{lot}-*.md")) if planning is not None else []
+        if any(re.search(r'^statut\s*=\s*"livre"', read(fiche), re.M) for fiche in fiches):
+            errors.append(f"{AWAITING} : {entry['file']} attend le {lot}, qui est livré — son lecteur "
+                          "le cite, ou la pièce se supprime (D-32)")
+    return errors
+
+
+def check_assets(assets: Path, code: str, atlas: Path | None = None,
+                 planning: Path | None = None) -> list[str]:
+    """Les orphelins de `assets` ; `code` est le texte du code qui charge les assets, `atlas` un
+    manifeste hors de l'arbre qui cite depuis sa racine, `planning` le dossier des fiches de lot."""
+    errors: list[str] = check_awaiting(assets, planning)
     files = list(walk(assets))
     cited: set[Path] = set()
 
@@ -141,6 +191,8 @@ def check_assets(assets: Path, code: str, atlas: Path | None = None) -> list[str
                     errors.append(f"{label} : « {key} » cite le dossier absent {text}")
             elif target.is_file():
                 cited.add(target)
+            elif (assets / text).is_file():
+                cited.add(assets / text)  # cité depuis la racine des assets (les maîtres)
             elif key in FILE_KEYS:
                 errors.append(f"{label} : « {key} » cite le fichier absent {text}")
 
@@ -225,21 +277,60 @@ def check_scripts(scripts: Path, calling: str) -> list[str]:
             for path in candidates if path not in called]
 
 
-def check(root: Path = ROOT) -> list[str]:
+# ----------------------------------------------------------------------------------------------
+# Les sorties du moteur
+# ----------------------------------------------------------------------------------------------
+
+def content_citations(root: Path) -> set[str]:
+    """Les chemins de contenu (`/Game/…`) que nomment les scripts et les descriptions de scène."""
+    cited: set[str] = set()
+    for path in walk(root / "scripts"):
+        if path.suffix in SCRIPT_SUFFIXES and "tests" not in path.relative_to(root / "scripts").parts:
+            cited.update(CONTENT_PATH.findall(read(path)))
+    for path in walk(root / SCENE_DESCRIPTIONS):
+        if path.suffix == ".json":
+            cited.update(CONTENT_PATH.findall(read(path)))
+    return cited
+
+
+def check_content(content: Path, cited: set[str]) -> list[str]:
+    """Les fichiers de `content` qu'aucun script ne produit ; `cited` vient de `content_citations`."""
+    errors: list[str] = []
+    for path in walk(content):
+        relative = path.relative_to(content).as_posix()
+        if path.suffix not in ENGINE_OUTPUTS:
+            errors.append(f"Content/{relative} : ni .uasset ni .umap, rien à faire sous Content/")
+            continue
+        package = "/Game/" + relative[: -len(path.suffix)]
+        # Cité lui-même, ou par un dossier qui le contient (`/Game/Kit`, `/Game/Master/Statues`).
+        if not any(package == prefix or package.startswith(prefix + "/") for prefix in cited):
+            errors.append(f"Content/{relative} : aucun script du dépôt ne le produit "
+                          "(aucun ne cite son chemin /Game/… ni un dossier qui le contient)")
+    return errors
+
+
+def check(root: Path = ROOT, kits: bool = True) -> list[str]:
     assets = root / "Source" / "Elements" / "Assets"
     atlas = root / "Source" / "Elements" / "Maps" / "world-maps.json"
-    return check_assets(assets, asset_code(root), atlas) + check_scripts(root / "scripts", callers(root))
+    errors = check_assets(assets, asset_code(root), atlas, root / "Planning") if kits else []
+    return (errors + check_scripts(root / "scripts", callers(root))
+            + check_content(root / "Content", content_citations(root)))
 
 
 def main() -> int:
-    errors = check()
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--sans-kits", action="store_true",
+                        help="ne pas contrôler les assets : leurs images viennent des kits")
+    arguments = parser.parse_args()
+    errors = check(kits=not arguments.sans_kits)
     for error in errors:
         print(f"check_orphans : {error}", file=sys.stderr)
     if errors:
-        print(f"check_orphans : {len(errors)} orphelin(s) — un lot supprime ce qu'il remplace "
-              "(Planning/vision/decisions.md, D-32)", file=sys.stderr)
+        print(f"check_orphans : {len(errors)} orphelin(s) — un lot supprime ce qu'il remplace, et "
+              "une sortie du moteur se régénère par script (Planning/vision/decisions.md, D-32, D-52)",
+              file=sys.stderr)
         return 1
-    print("check_orphans : aucun asset ni script orphelin")
+    print("check_orphans : aucun asset ni script orphelin, aucune sortie du moteur sans script")
     return 0
 
 

@@ -69,7 +69,7 @@ initializers*), et regroupe :
 
 C'est l'objet que le chargeur produit et que le reste du moteur (exploration, combat, rendu)
 consomme en lecture seule : un `Level` n'a **aucun** mutateur. L'édition passe par un type
-distinct, `core::LevelDraft` ([Éditeur de niveaux](guide-editeur.md)).
+distinct, `core::LevelDraft` (Éditeur de niveaux).
 
 ### Couches : ce qu'on voit n'est pas ce qui bloque
 
@@ -88,7 +88,7 @@ carte déclare des couches visibles, `Legacy` sinon). Un consommateur boucle don
 sans cas particulier. `core::isVisualLayerTileType` dit ce qui se peint sur une couche visuelle :
 tout le terrain, mais pas l'`Entry`, qui porte une **règle** et n'a de sens que dans la grille de
 collision. `core::layerKindName` donne le nom JSON d'un rôle (`ground`, `decor`, `collision`,
-`legacy`) ; il est déclaré dans [`TileLayer.h`](../../Source/Core/Levels/TileLayer.h) et non dans le
+`legacy`) ; il est déclaré dans [`TileLayer.h`](../../Source/JustAnotherRpgGame/Core/Levels/TileLayer.h) et non dans le
 chargeur ou l'écrivain parce que les **deux** en ont besoin, et qu'un rôle nommé différemment de
 part et d'autre casserait l'aller-retour sans qu'aucun test ne le voie.
 
@@ -130,7 +130,7 @@ s'écrit `wall`, `obstacle` s'écrit `cliff`, tout le reste s'écrit vide — la
 pas encore de règle qui les joue depuis une pièce.
 
 L'**emprise** d'une pièce plus grande qu'une case est un `core::PieceFootprint` (`columns` × `rows`,
-au moins 1 × 1, [`PieceFootprint.h`](../../Source/Core/Levels/PieceFootprint.h)), déclaré par le
+au moins 1 × 1, [`PieceFootprint.h`](../../Source/JustAnotherRpgGame/Core/Levels/PieceFootprint.h)), déclaré par le
 manifeste du lieu et lu à **un seul** endroit. Une pièce est ancrée sur la case que la carte lui
 donne et s'étend vers les indices croissants ; `core::footprintCells` énumère ses cases, ligne par
 ligne, et `core::footprintFootCorner` donne le coin `(colonne + columns, ligne + rows)`, celui dont
@@ -191,7 +191,7 @@ ne lit que les couches visuelles à `floor == 0` — un étage de mur ou un toit
 rez, et c'est le rez qui dit si l'on passe. Un personnage ne monte pas encore à l'étage : les
 terrasses et remparts praticables relèvent de l'`elevation` par case, toujours réservée
 (`EX-LVL-024`). Ce que l'étage change au **rendu** — l'élévation, le rang de tri, l'effacement d'un
-toit qui masque le héros — est décrit dans [Rendu 2D : de la scène à l'écran](guide-rendu.md).
+toit qui masque le héros — est décrit dans Rendu 2D : de la scène à l'écran.
 
 ### Entités et propriétés libres
 
@@ -266,7 +266,7 @@ chemin) et `loadFromString` (depuis du texte déjà en mémoire, pratique pour l
   chacune par ses coordonnées `x`/`y` (colonne/ligne) et son `type`. Une case absente est
   implicitement `Empty`. C'est ce tableau que la déduction produit, et que le jeu lit tel quel. Le
   nom d'un type (`"wall"`, `"dirt"`…) est celui que rend `core::tileTypeName`, et `core::parseTileType`
-  en est l'inverse exact ([`TileTypeName.h`](../../Source/Core/Levels/TileTypeName.h)) : une seule
+  en est l'inverse exact ([`TileTypeName.h`](../../Source/JustAnotherRpgGame/Core/Levels/TileTypeName.h)) : une seule
   table pour l'écrivain, le chargeur et les messages, sans quoi un type ajouté d'un côté ne se
   relirait pas de l'autre ; un nom inconnu est une donnée invalide à signaler, jamais un type
   deviné ;
@@ -286,7 +286,7 @@ chemin) et `loadFromString` (depuis du texte déjà en mémoire, pratique pour l
 
 Le chargement **valide** le contenu (`EX-LVL-004`) avant de produire un `Level` utilisable :
 dimensions strictement positives et **bornées** par `core::MAX_LEVEL_SIDE` (1024 cases de côté,
-[`LevelLoader.h`](../../Source/Core/Levels/LevelLoader.h)), tuiles toutes dans les bornes de la
+[`LevelLoader.h`](../../Source/JustAnotherRpgGame/Core/Levels/LevelLoader.h)), tuiles toutes dans les bornes de la
 grille, aucune case dupliquée, type de tuile connu, couches aux dimensions de la carte, pas de
 couche `collision` déclarée, **exactement une** tuile `Entry` (une carte sans entrée, ou avec deux,
 est une erreur de contenu, pas une situation ambiguë à tolérer), aucun `id` d'entité en double, et,
@@ -315,7 +315,7 @@ de contrôle normal.
 Quatre ajouts de la v4 méritent d'être connus, ne serait-ce que pour ne pas s'étonner de les
 rencontrer :
 
-- **Variante** ([`LevelVariant.h`](../../Source/Core/Levels/LevelVariant.h), `EX-LVL-023`) — une
+- **Variante** ([`LevelVariant.h`](../../Source/JustAnotherRpgGame/Core/Levels/LevelVariant.h), `EX-LVL-023`) — une
   carte peut déclarer une `base` et n'écrire que ses **écarts** : sa planche (`scene`) et ses propres
   entités, **aucune case**. Une place de marché le jour et la nuit sont la même carte à deux
   habillages : les dupliquer, c'est prendre le risque d'en corriger une seule. Au chargement,
@@ -365,6 +365,6 @@ la déduction est un geste d'**édition**, la lecture reste un simple accès.
 - `core::LevelLoader`, `core::LevelLoadResult`, `core::LevelWriter`, `core::MAX_LEVEL_SIDE`,
   `core::applyVariant`, `core::findVariantBase`.
 - `core::ExplorationSession`, `core::WorldTravel`, `core::knownEntityKinds`.
-- [Éditeur de niveaux](guide-editeur.md) — le brouillon mutable, qui repasse par ce chargeur pour valider.
-- [Écrans, navigation et boucle de jeu](guide-ecrans.md) — les écrans du jeu qui mettent une carte à l'écran.
+- Éditeur de niveaux — le brouillon mutable, qui repasse par ce chargeur pour valider.
+- Écrans, navigation et boucle de jeu — les écrans du jeu qui mettent une carte à l'écran.
 - [`niveaux.md`](../Specification/niveaux.md) — le format de carte et ses exigences.

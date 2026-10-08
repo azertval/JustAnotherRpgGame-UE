@@ -19,7 +19,10 @@ ne change avant le LOT-1004. Ce script écrit ces données, sous `Source/Test/Fi
 - un **pantin** (LOT-1005) : un modèle de 1,80 m lié à un squelette de trois os, ses six clips, sa
   fiche (`character.json`) et la description de son squelette (`skeleton.json`). Chaque sommet
   suit un seul os et chaque clip tient en trois clés : ce qu'un test attend d'une pose se calcule
-  de tête.
+  de tête ;
+- le **repère** de la scène du socle (LOT-1014) : un bloc dissymétrique sur ses trois axes, sur
+  lequel `scripts/maps/build_scene_unreal.py` mesure ce que deviennent les axes d'un `.glb` dans
+  Unreal, sans kit d'assets.
 
 Rien ne s'y retouche à la main, et rien n'y dépend d'une bibliothèque : le `.glb` et le PNG sont
 écrits octet par octet, sans compression, pour que deux postes produisent les mêmes fichiers.
@@ -224,6 +227,34 @@ def roof_mesh() -> Mesh:
         left, right = corners[index], corners[(index + 1) % 4]
         mesh.face([left, right, apex], [(0.0, 2.0), (float(ROOF_FOOTPRINT), 2.0),
                                         (ROOF_FOOTPRINT / 2, 0.0)])
+    return mesh
+
+
+# Le repère de la scène du socle : ses bornes, en mètres. Aucune n'est l'opposée d'une autre, ni
+# égale à une autre : chaque axe du moteur se reconnaît à ses deux bornes, signe compris.
+MARKER_PLACE = "socle"
+MARKER_BOUNDS = ((-0.5, 1.5), (0.0, 3.0), (-1.0, 0.25))
+
+
+def marker_mesh() -> Mesh:
+    """Un bloc posé au sol, dissymétrique sur ses trois axes : quatre flancs et le dessus."""
+    (x0, x1), (_, top), (z0, z1) = MARKER_BOUNDS
+    mesh = Mesh()
+    flanks = [  # (coin gauche, coin droit), vus de l'extérieur
+        ((x0, z1), (x1, z1)),   # flanc +Z
+        ((x1, z1), (x1, z0)),   # flanc +X
+        ((x1, z0), (x0, z0)),   # flanc -Z
+        ((x0, z0), (x0, z1)),   # flanc -X
+    ]
+    rows = top / TILE_METRES
+    for (lx, lz), (rx, rz) in flanks:
+        columns = (abs(rx - lx) + abs(rz - lz)) / TILE_METRES
+        mesh.face([(lx, 0.0, lz), (rx, 0.0, rz), (rx, top, rz), (lx, top, lz)],
+                  [(0.0, rows), (columns, rows), (columns, 0.0), (0.0, 0.0)])
+    mesh.face([(x0, top, z0), (x0, top, z1), (x1, top, z1), (x1, top, z0)],
+              [(0.0, 0.0), (0.0, (z1 - z0) / TILE_METRES), ((x1 - x0) / TILE_METRES,
+                                                             (z1 - z0) / TILE_METRES),
+               ((x1 - x0) / TILE_METRES, 0.0)])
     return mesh
 
 
@@ -639,6 +670,8 @@ def files() -> dict[str, bytes]:
                                         encode_png(side, side, stone_texture())),
         f"{scene}/roof.glb": encode_glb("roof", roof_mesh(),
                                         encode_png(side, side, tile_texture())),
+        f"Assets/Scene/{MARKER_PLACE}/repere.glb": encode_glb(
+            "repere", marker_mesh(), encode_png(side, side, stone_texture())),
         f"{scene}/paving.png": paving_image(),
         f"{scene}/manifest.json": manifest().encode("utf-8"),
         f"Levels/{PLACE}.json": level().encode("utf-8"),

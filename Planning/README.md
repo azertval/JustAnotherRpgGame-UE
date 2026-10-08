@@ -26,7 +26,7 @@ reste de l'Empire central attend la `0.4.0`, après les systèmes (D-47).
 | [`standards/`](standards/README.md) | Les règles communes : le standard 3D, l'arborescence des assets, le gabarit d'un lot, ce que « livré » veut dire |
 | `outils/` | Le lint du dossier et le générateur du site (Python, bibliothèque standard seule) |
 
-L'habillage du site n'est plus ici : il est [commun aux trois parties](../Site/README.md) du site
+L'habillage du site n'est plus ici : il est commun aux trois parties du site
 publié, dans `Site/` à la racine du dépôt.
 
 ## Les gestes

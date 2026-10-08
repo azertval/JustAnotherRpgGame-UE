@@ -1,6 +1,6 @@
 # Cahier de test
 
-**1220 cas de test**, un par test automatisé du dépôt. Le cahier est **engendré** depuis les blocs `\castest{…}` écrits au-dessus de chaque test par `scripts/docs/generate_cahier_test.py` : il ne s'édite pas — on corrige le commentaire du test, puis on relance le script. La CI refuse un cahier périmé, et refuse un test sans bloc. Seule la [recette manuelle](recette-manuelle.md) s'écrit à la main.
+**647 cas de test**, un par test automatisé du dépôt. Le cahier est **engendré** depuis les blocs `\castest{…}` écrits au-dessus de chaque test par `scripts/docs/generate_cahier_test.py` : il ne s'édite pas — on corrige le commentaire du test, puis on relance le script. La CI refuse un cahier périmé, et refuse un test sans bloc. Seule la [recette manuelle](recette-manuelle.md) s'écrit à la main.
 
 ## Lire une fiche
 
@@ -19,7 +19,7 @@ Chaque cas porte l'**identifiant GoogleTest** (`Suite.Nom`, retrouvable tel quel
 |---|---|---|---|---|---|---|
 | [Core](core.md) | Tests unitaires | 1 | — | — | 1 | — |
 | [Core · Combat](core-combat.md) | Tests unitaires | 182 | 33 | 102 | 46 | 1 |
-| [Core · Data](core-data.md) | Tests unitaires | 12 | — | 5 | 5 | 2 |
+| [Core · Data](core-data.md) | Tests unitaires | 17 | 1 | 5 | 9 | 2 |
 | [Core · Diagnostics](core-diagnostics.md) | Tests unitaires | 22 | — | — | 19 | 3 |
 | [Core · Ecs](core-ecs.md) | Tests unitaires | 35 | — | 5 | 30 | — |
 | [Core · Gameplay](core-gameplay.md) | Tests unitaires | 21 | — | 12 | 8 | 1 |
@@ -29,31 +29,17 @@ Chaque cas porte l'**identifiant GoogleTest** (`Suite.Nom`, retrouvable tel quel
 | [Core · Rpg](core-rpg.md) | Tests unitaires | 106 | 3 | 62 | 39 | 2 |
 | [Core · Time](core-time.md) | Tests unitaires | 7 | — | 1 | 6 | — |
 | [Core · World](core-world.md) | Tests unitaires | 74 | 7 | 33 | 31 | 3 |
-| [Editor](editor.md) | Tests unitaires | 236 | 33 | 53 | 121 | 29 |
-| [HMI · Audio](hmi-audio.md) | Tests unitaires | 3 | — | 1 | 1 | 1 |
-| [HMI · Game](hmi-game.md) | Tests unitaires | 23 | — | 9 | 10 | 4 |
-| [HMI · Graphics](hmi-graphics.md) | Tests unitaires | 202 | 59 | 52 | 85 | 6 |
-| [HMI · Input](hmi-input.md) | Tests unitaires | 5 | 1 | — | 3 | 1 |
-| [HMI · Interface](hmi-interface.md) | Tests unitaires | 23 | 2 | 8 | 12 | 1 |
-| [HMI · Localization](hmi-localization.md) | Tests unitaires | 9 | — | — | 9 | — |
-| [HMI · Platform](hmi-platform.md) | Tests unitaires | 5 | — | 2 | 3 | — |
-| [HMI · Presentation](hmi-presentation.md) | Tests unitaires | 30 | — | 5 | 22 | 3 |
-| [HMI · Runtime](hmi-runtime.md) | Tests unitaires | 20 | 3 | 8 | 8 | 1 |
-| [Tests d'intégration](integration.md) | Tests d'intégration | 17 | 3 | 9 | 5 | — |
-| [Tests système](systeme.md) | Tests système | 5 | — | 5 | — | — |
-| **Total** | | **1220** | **162** | **402** | **576** | **80** |
+| **Total** | | **647** | **62** | **250** | **301** | **34** |
 
-## Trois étages de vérification
+## Ce que le cahier couvre
 
-Le dépôt vérifie à trois hauteurs, et le cahier range chaque cas à la sienne : la colonne *Type* de la synthèse vient du dossier du test (`Source/Test/Unit`, `Integration`, `Systeme`).
+La colonne *Type* de la synthèse vient du dossier du test sous `Source/Test/`. Ce dépôt n'en porte qu'un étage, les tests unitaires de `Core`.
 
 | Étage | Ce qu'il prouve | Ce qu'il ne prouve pas | Où |
 |---|---|---|---|
-| **Unitaire** | Une fonction ou une classe tient son contrat, seule, sans fenêtre ni GPU (`EX-NFR-010`) : un jet, une grille, un chargeur, une vue-modèle. | Que les pièces s'assemblent. | `Source/Test/Unit/<Core, HMI, Editor>/<domaine>/` |
-| **Intégration** | Plusieurs modules jouent ensemble sur des données réelles du dépôt : une carte livrée se charge, se compose et se parcourt. | Que l'exécutable démarre. | `Source/Test/Integration/` |
-| **Système** | Un parcours **de bout en bout**, tel qu'un utilisateur le ferait — l'auteur dessine une carte dans l'éditeur, puis le jeu la joue —, sans fenêtre. | Le ressenti : fluidité, lisibilité, plaisir. | `Source/Test/Systeme/` ; l'archive publiée a son test de fumée (`scripts/release/smoke_test_release.ps1`) et la [recette manuelle](recette-manuelle.md) le reste |
+| **Unitaire** | Une fonction ou une classe tient son contrat, seule, sans fenêtre ni GPU (`EX-NFR-010`) : un jet, une grille, un chargeur. | Que les pièces s'assemblent, ni que le moteur les lit. | `Source/Test/Unit/Core/<domaine>/` |
 
-Les écrans Qt Quick ont en plus leurs tests de référence (`Source/Test/Qml/`, images comparées pixel à pixel) et les scripts Python les leurs (`scripts/tests/`, pytest) ; ni les uns ni les autres ne sont des cas GoogleTest, et ils sont décrits dans [Build, tests et intégration continue](../Guide/guide-outils.md#les-suites-de-tests).
+Ce cahier ne décrit que les cas GoogleTest de `Core`, joués hors du moteur. Les tests d'automatisation du moteur (`Source/JustAnotherRpgGame/Tests/`, `Jadg.*`), la capture comparée à tolérance et les tests des scripts Python (`scripts/tests/`, pytest) n'en sont pas : `README.md` et `CONTRIBUTING.md`, à la racine du dépôt, disent comment ils se lancent.
 
 ## Ce que chaque exigence a pour garde
 

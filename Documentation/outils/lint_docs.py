@@ -9,7 +9,8 @@ Règles :
 1. aucune commande Doxygen ne reste dans une page (`@ref`, `@subpage`, `\\anchor`, `\\ref`) : les
    pages sont du Markdown nu, et Doxygen ne les lit plus ;
 2. tout lien relatif désigne un fichier qui existe, et, s'il porte une ancre vers une page Markdown,
-   une ancre que cette page déclare (titre, ou puce identifiée `- **EX-CBT-001** — …`) ;
+   une ancre que cette page déclare (titre, ou puce identifiée `- **EX-CBT-001** — …`) ; un lien
+   vers ce qui reste sur le poste (`LOCAL_ONLY`) n'est pas suivi : sa cible n'est pas dans Git ;
 3. toute image citée existe ;
 4. toute page d'une partie est atteignable depuis son sommaire (`README.md`) : une page que rien
    ne cite n'apparaît dans aucun parcours de lecture ;
@@ -32,6 +33,13 @@ import mini_markdown  # noqa: E402  (chemin ajouté par build_docs_site)
 DOXYGEN_RE = re.compile(r'(?<![\w`])(?:[@\\](?:ref|subpage|page|section|copydoc)\b|\\anchor\b)')
 LINK_RE = re.compile(r'!?\[[^\]]*\]\(([^)\s]+)\)')
 LOT_RE = re.compile(r'\bLOT-(?:EDITOR-\d{2}|\d{2,4})\b')
+# Ce que `.gitignore` garde sur le poste : le texte extrait des livres et l'atelier de l'étude des
+# métiers. Les pages engendrées les citent ; le runner, lui, ne les a pas.
+LOCAL_ONLY = (
+    'Metiers/Sources/Corpus',
+    'Metiers/Sources/lecture-corpus.html',
+    'Metiers/Reproduction/Etude',
+)
 
 
 def anchors_of(path, cache={}):  # noqa: B006 — cache de module voulu
@@ -71,6 +79,8 @@ def lint(root):
             resolved = (source.parent / path).resolve()
             if resolved.is_relative_to(root / 'reference'):
                 continue  # la référence de code : engendrée par Doxygen, posée là à la publication
+            if any(resolved.is_relative_to(root / local) for local in LOCAL_ONLY):
+                continue  # hors Git : présent sur le poste, absent du runner
             if not resolved.exists():
                 errors.append(f'{rel}: lien mort — {target}')
             elif anchor and resolved.suffix == '.md' and anchor not in anchors_of(resolved):

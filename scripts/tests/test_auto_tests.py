@@ -15,8 +15,7 @@ import importlib
 import pytest
 
 # Auto-tests qui renvoient la liste de leurs échecs.
-RETURNING = ['check_glossary', 'check_corpus_manifest', 'check_changelog', 'merge_sarif',
-             'clang_tidy_sarif']
+RETURNING = ['check_glossary', 'check_corpus_manifest', 'check_changelog']
 # Auto-tests qui lèvent AssertionError.
 ASSERTING = ['check_binary_files', 'check_json_files', 'check_commit_message',
              'check_no_sourcebook']

@@ -533,26 +533,18 @@ def render_readme(domains):
         lines.append(f'| [{title}]({slug}.md) | {CATEGORY_TITLES.get(category, category)} | {len(cases)} | '
                      + ' | '.join(str(count or '—') for count in counts) + ' |')
     lines.append(f'| **Total** | | **{total}** | ' + ' | '.join(f'**{totals[c]}**' for c in CRITICITES) + ' |')
-    lines += ['', '## Trois étages de vérification', '',
-              'Le dépôt vérifie à trois hauteurs, et le cahier range chaque cas à la sienne : la '
-              'colonne *Type* de la synthèse vient du dossier du test (`Source/Test/Unit`, '
-              '`Integration`, `Systeme`).', '',
+    lines += ['', '## Ce que le cahier couvre', '',
+              'La colonne *Type* de la synthèse vient du dossier du test sous `Source/Test/`. Ce dépôt '
+              'n\'en porte qu\'un étage, les tests unitaires de `Core`.', '',
               '| Étage | Ce qu\'il prouve | Ce qu\'il ne prouve pas | Où |', '|---|---|---|---|',
               '| **Unitaire** | Une fonction ou une classe tient son contrat, seule, sans fenêtre ni GPU '
-              '(`EX-NFR-010`) : un jet, une grille, un chargeur, une vue-modèle. | Que les pièces '
-              's\'assemblent. | `Source/Test/Unit/<Core, HMI, Editor>/<domaine>/` |',
-              '| **Intégration** | Plusieurs modules jouent ensemble sur des données réelles du dépôt : '
-              'une carte livrée se charge, se compose et se parcourt. | Que l\'exécutable démarre. | '
-              '`Source/Test/Integration/` |',
-              '| **Système** | Un parcours **de bout en bout**, tel qu\'un utilisateur le ferait — '
-              'l\'auteur dessine une carte dans l\'éditeur, puis le jeu la joue —, sans fenêtre. | '
-              'Le ressenti : fluidité, lisibilité, plaisir. | `Source/Test/Systeme/` ; l\'archive '
-              'publiée a son test de fumée (`scripts/release/smoke_test_release.ps1`) et la '
-              '[recette manuelle](recette-manuelle.md) le reste |', '',
-              'Les écrans Qt Quick ont en plus leurs tests de référence (`Source/Test/Qml/`, images '
-              'comparées pixel à pixel) et les scripts Python les leurs (`scripts/tests/`, pytest) ; '
-              'ni les uns ni les autres ne sont des cas GoogleTest, et ils sont décrits dans '
-              '[Build, tests et intégration continue](../Guide/guide-outils.md#les-suites-de-tests).',
+              '(`EX-NFR-010`) : un jet, une grille, un chargeur. | Que les pièces s\'assemblent, ni '
+              'que le moteur les lit. | `Source/Test/Unit/Core/<domaine>/` |', '',
+              'Ce cahier ne décrit que les cas GoogleTest de `Core`, joués hors du moteur. Les tests '
+              'd\'automatisation du moteur (`Source/JustAnotherRpgGame/Tests/`, `Jadg.*`), la capture '
+              'comparée à tolérance et les tests des scripts Python (`scripts/tests/`, pytest) n\'en '
+              'sont pas : `README.md` et `CONTRIBUTING.md`, à la racine du dépôt, disent comment ils '
+              'se lancent.',
               '', '## Ce que chaque exigence a pour garde', '',
               'La [matrice de traçabilité](couverture-exigences.md) donne, pour chaque exigence en '
               'vigueur des spécifications, les cas de test qui la citent — et laisse visibles celles '

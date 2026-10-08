@@ -12,8 +12,13 @@
 
 cmake_minimum_required(VERSION 3.21)
 
+# Le numéro de version a une seule source, `VERSION.txt` : le module du jeu
+# (`JustAnotherRpgGame.Build.cs`) et `scripts/build.ps1` lisent le même fichier.
+file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/VERSION.txt JADG_VERSION_TEXT LIMIT_COUNT 1)
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/VERSION.txt)
+
 project(JustAnotherRpgGameCore
-    VERSION 0.0.3
+    VERSION ${JADG_VERSION_TEXT}
     DESCRIPTION "Les règles d20, le monde, les quêtes : la bibliothèque Core du jeu, testée sans le moteur"
     LANGUAGES CXX)
 
@@ -96,6 +101,7 @@ target_compile_definitions(CoreTests PRIVATE
     JADG_TEST_DATA_DIR="${_fixtures}/GameData"
     JADG_MESH_FIXTURE_DIR="${_fixtures}/Meshes"
     JADG_CHARACTER_FIXTURE_DIR="${_fixtures}/Characters"
+    JADG_ELEMENTS_DIR="${_elements}"
     JADG_LEVELS_DIR="${_elements}/Levels"
     JADG_RPG_SCHEMA_DIR="${_elements}/Rpg/schema"
     JADG_RPG_RULES_DIR="${_elements}/Rpg/rules"

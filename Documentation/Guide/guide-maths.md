@@ -108,7 +108,7 @@ plupart des signes rencontrés dans le code de déplacement et de niveau :
   de `Core`. Une entité large de `1.0` occupe exactement une case de la grille de niveau. La
   conversion vers les pixels affichés à l'écran n'a lieu **qu'au moment du rendu**, côté `HMI` —
   c'est `hmi::PlaceCamera::PIXELS_PER_UNIT`, multiplié par le zoom, qui la fixe
-  ([Rendu 2D : de la scène à l'écran](guide-rendu.md)). `Core` n'a aucune idée de la résolution de
+  (Rendu 2D : de la scène à l'écran). `Core` n'a aucune idée de la résolution de
   la fenêtre ni du zoom de la caméra, ce qui le garde testable sans ouvrir de fenêtre.
 - **Origine en haut-gauche, `y` vers le bas** (`EX-ARCH-020`) — la convention standard de
   l'affichage écran (héritée du sens de balayage d'un moniteur, ligne du haut en premier), à
@@ -220,6 +220,6 @@ un test construit un `DeterministicRandom{42}`, joue, et compare à un résultat
 - `core::Vector2`, `core::Rect`, `core::approximatelyEqual`, `core::EPSILON`.
 - `core::DeterministicRandom`, `core::splitMix64`, `core::deriveSeed`.
 - [ECS : entités, composants, systèmes](guide-ecs.md) — `Transform`, le composant qui porte ces types.
-- [Rendu 2D : de la scène à l'écran](guide-rendu.md) — la conversion des unités monde en pixels.
+- Rendu 2D : de la scène à l'écran — la conversion des unités monde en pixels.
 - [Boucle de jeu et pas de temps fixe](guide-boucle.md) — l'autre condition du déterminisme : le pas fixe.
 - [`exigences-non-fonctionnelles.md`](../Specification/exigences-non-fonctionnelles.md) — `EX-NFR-002`, le déterminisme exigé.

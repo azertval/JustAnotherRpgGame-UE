@@ -9,8 +9,9 @@
 La CI hébergée n'a pas le moteur : ce qui suit ne se vérifie qu'ici.
 
 - [ ] `pwsh scripts/build.ps1` — tests de Core hors moteur
-- [ ] `pwsh scripts/build.ps1 -Unreal` — cible d'éditeur, puis commandlet `JadgContentCheck`
+- [ ] `pwsh scripts/build.ps1 -Unreal` — cible d'éditeur, commandlet `JadgContentCheck`, tests d'automatisation `Jadg.*`, carte du socle et captures comparées à leur référence
 - [ ] `uv run scripts/check.py` — contrôles du référentiel et hooks
+- [ ] `python scripts/checks/check_orphans.py` — avec les kits installés : la CI ne voit pas leurs images
 
 ## Règles de la version
 
