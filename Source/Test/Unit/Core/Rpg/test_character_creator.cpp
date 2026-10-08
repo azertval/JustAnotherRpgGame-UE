@@ -21,7 +21,15 @@ namespace {
 
 const std::filesystem::path ELEMENTS{std::filesystem::path{JADG_RPG_DIR}.parent_path()};
 
-TEST(CreateurDePersonnageTest, LaDescriptionLivreeSeLit) {
+/**
+ * \castest{<b>La description du createur humanoide se lit.</b><br/>
+ * \tcat Unitaire · Personnages (LOT-1015)<br/>
+ * \tcrit Majeure<br/>
+ * \tetapes 1. Lire Assets/Characters/humanoid.json.<br/>
+ * \tattendu Identifiant humanoid, composant Body, taille de reference positive, au moins deux
+ * corps, les six clips du jeu, les sockets main-hand et off-hand.}
+ */
+TEST(CreateurDePersonnageTest, LaDescriptionLivreeSeLit) {
     const core::CharacterCreatorReadResult lue =
         core::readCharacterCreator(ELEMENTS / "Assets" / "Characters" / "humanoid.json");
     ASSERT_TRUE(lue.ok()) << lue.message;
@@ -38,7 +46,16 @@ TEST(CreateurDePersonnageTest, LaDescriptionLivreeSeLit) {
     EXPECT_TRUE(creator.sockets.count("off-hand"));
 }
 
-TEST(CreateurDePersonnageTest, ChaqueFicheLivreeNommeUnCorpsDuCreateur) {
+/**
+ * \castest{<b>Chaque fiche livree nomme un corps du createur.</b><br/>
+ * \tcat Unitaire · Personnages (LOT-1015)<br/>
+ * \tcrit Majeure<br/>
+ * \tetapes 1. Charger la description et les fiches d'apparence.<br/>2. Croiser createur, corps,
+ * mains et pieces d'armes.<br/>
+ * \tattendu Chaque fiche cite le createur humanoid, un de ses corps, des mains qu'il connait et des
+ * pieces Weapons/.}
+ */
+TEST(CreateurDePersonnageTest, ChaqueFicheLivreeNommeUnCorpsDuCreateur) {
     const core::CharacterCreator creator =
         core::readCharacterCreator(ELEMENTS / "Assets" / "Characters" / "humanoid.json").creator;
     std::vector<std::string> erreurs;
@@ -54,7 +71,16 @@ TEST(CreateurDePersonnageTest, ChaqueFicheLivreeNommeUnCorpsDuCreateur) {
     }
 }
 
-TEST(CreateurDePersonnageTest, CeQuIlRefuse) {
+/**
+ * \castest{<b>Une description fautive est refusee en nommant son champ.</b><br/>
+ * \tcat Unitaire · Personnages (LOT-1015)<br/>
+ * \tcrit Majeure<br/>
+ * \tetapes 1. Lire une description a chemin d'asset hors /Game, a taille nulle, a corps sans chemin
+ * de contenu, sans clip walk.<br/>
+ * \tattendu MalformedStructure et le chemin du champ dans le message ; la description correcte
+ * passe.}
+ */
+TEST(CreateurDePersonnageTest, CeQuIlRefuse) {
     struct Cas {
         const char* json;
         const char* champ;

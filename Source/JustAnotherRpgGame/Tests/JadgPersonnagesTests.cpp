@@ -88,6 +88,20 @@ namespace
 	{
 		return core::readCharacterCreator(FJadgPaths::ToPath(FJadgPaths::ElementsDir()) / "Assets" / "Characters" / "humanoid.json").creator;
 	}
+
+	/// L'objet personnalisable du créateur, compilé (dans l'éditeur, la compilation se demande).
+	UCustomizableObject* LoadCreator(const core::CharacterCreator& Creator)
+	{
+		UCustomizableObject* Object = LoadObject<UCustomizableObject>(nullptr, *FJadgPaths::ToFString(Creator.asset));
+		if (Object != nullptr && !Object->IsCompiled())
+		{
+			FCompileParams Compile;
+			Compile.bAsync = false;
+			Compile.bSkipIfCompiled = true;
+			Object->Compile(Compile);
+		}
+		return Object;
+	}
 } // namespace
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FJadgPersonnagesCreateurTest, "Jadg.Personnages.Createur", PersonnagesFlags)
@@ -113,7 +127,7 @@ bool FJadgPersonnagesCreateurTest::RunTest(const FString& Parameters)
 	}
 	TestEqual(TEXT("six clips"), static_cast<int32>(Creator.clips.size()), 6);
 
-	UCustomizableObject* Object = LoadObject<UCustomizableObject>(nullptr, *FJadgPaths::ToFString(Creator.asset));
+	UCustomizableObject* Object = LoadCreator(Creator);
 	if (!TestNotNull(TEXT("l'objet personnalisable construit par le commandlet"), Object))
 	{
 		return false;
@@ -144,6 +158,8 @@ bool FJadgPersonnagesFicheTest::RunTest(const FString& Parameters)
 	AJadgWalker* Helga = World->SpawnActor<AJadgWalker>(FVector(300.0, 0.0, 100.0), FRotator::ZeroRotator);
 	Helga->Appearance = TEXT("heros-priest");
 	Game.Play();
+	// Debout au même point du sol qu'avant sa mise à l'échelle, avant que la gravité ne joue.
+	TestEqual(TEXT("Grom reste debout au sol"), Grom->Feet().Z, static_cast<double>(100.0f - Grom->GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight()), 1.0);
 	Game.Tick(2);
 
 	const core::CharacterCreator Creator = Humanoid();
@@ -168,7 +184,6 @@ bool FJadgPersonnagesFicheTest::RunTest(const FString& Parameters)
 	TestEqual(TEXT("l'échelle de Grom"), static_cast<float>(Grom->GetActorScale3D().Z), FicheGrom.height / Creator.referenceHeight, 0.001f);
 	TestEqual(TEXT("l'échelle de Helga"), static_cast<float>(Helga->GetActorScale3D().Z), FicheHelga.height / Creator.referenceHeight, 0.001f);
 	TestTrue(TEXT("Helga est plus petite"), Helga->GetActorScale3D().Z < Grom->GetActorScale3D().Z);
-	TestEqual(TEXT("Grom reste debout au sol"), Grom->Feet().Z, static_cast<double>(100.0f - Grom->GetCapsuleComponent()->GetUnscaledCapsuleHalfHeight()), 1.0);
 
 	// Les armes : une pour Grom (la hache), deux pour Helga (marteau et bouclier), aux sockets.
 	TestEqual(TEXT("Grom tient une arme"), Grom->Weapons.Num(), 1);
@@ -196,7 +211,7 @@ bool FJadgPersonnagesModificationTest::RunTest(const FString& Parameters)
 {
 	const core::Appearance Base = core::readAppearance(FJadgPaths::RpgRoot() / "appearances" / "heros-scoundrel.json").appearance;
 	const core::AppearanceReadResult Variante = core::parseAppearance(
-		R"({"id":"heros-scoundrel","name":"Nessa","source":"tanares","creator":"humanoid","body":"quinn","head":"quinn",
+		R"({"id":"heros-scoundrel","name":"Nessa","source":"tanares","creator":"humanoid","body":"manny","head":"manny",
 		    "height":1.95,"weapons":{"off-hand":"Weapons/dagger"}})",
 		"variante");
 	if (!TestTrue(TEXT("la variante se lit"), Variante.ok()))
@@ -207,7 +222,7 @@ bool FJadgPersonnagesModificationTest::RunTest(const FString& Parameters)
 	TestNotEqual(TEXT("une autre taille"), Variante.appearance.height, Base.height);
 	const core::CharacterCreator Creator = Humanoid();
 	TestTrue(TEXT("le corps de la variante est une option du créateur"), Creator.bodies.count(Variante.appearance.body) == 1);
-	UCustomizableObject* Object = LoadObject<UCustomizableObject>(nullptr, *FJadgPaths::ToFString(Creator.asset));
+	UCustomizableObject* Object = LoadCreator(Creator);
 	if (TestNotNull(TEXT("l'objet personnalisable"), Object))
 	{
 		bool bConnu = false;

@@ -104,7 +104,18 @@ bool JadgAppearance::Apply(AJadgWalker& Walker, const FString& Id, FString& OutE
 
 	// Le corps : par l'objet personnalisable s'il est construit, sinon le maillage tel quel.
 	UCustomizableObject* Creator_CO = LoadContent<UCustomizableObject>(Creator.asset);
-	if (Creator_CO != nullptr)
+#if WITH_EDITOR
+	// Dans l'éditeur, un objet personnalisable chargé n'est pas compilé tant que l'éditeur ne l'a
+	// pas fait (sa compilation vit dans le cache dérivé) : on la lui demande, comme l'éditeur.
+	if (Creator_CO != nullptr && !Creator_CO->IsCompiled())
+	{
+		FCompileParams Compile;
+		Compile.bAsync = false;
+		Compile.bSkipIfCompiled = true;
+		Creator_CO->Compile(Compile);
+	}
+#endif
+	if (Creator_CO != nullptr && Creator_CO->IsCompiled())
 	{
 		UCustomizableObjectInstance* Instance = NewObject<UCustomizableObjectInstance>(&Walker);
 		Instance->SetObject(Creator_CO);

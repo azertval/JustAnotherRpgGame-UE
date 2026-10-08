@@ -29,7 +29,16 @@ constexpr const char* FICHE = R"({
   "clips": {"attack": {"key": 0.4}, "idle": {}}
 })";
 
-TEST(ApparenceTest, UneFicheSeLitChampParChamp) {
+/**
+ * \castest{<b>Une fiche d'apparence se lit champ par champ.</b><br/>
+ * \tcat Unitaire · Personnages (LOT-1015)<br/>
+ * \tcrit Majeure<br/>
+ * \tetapes 1. Lire une fiche en texte : createur, corps, tete, taille, couleurs, pieces, armes,
+ * clips.<br/>
+ * \tattendu Chaque champ est retrouve ; une couleur a trois composantes recoit un alpha de 1 ; seul
+ * le clip qui porte un key est dans clipKeys.}
+ */
+TEST(ApparenceTest, UneFicheSeLitChampParChamp) {
     const core::AppearanceReadResult lue = core::parseAppearance(FICHE, "essai.json");
     ASSERT_TRUE(lue.ok()) << lue.message;
     const core::Appearance& fiche = lue.appearance;
@@ -47,7 +56,16 @@ TEST(ApparenceTest, UneFicheSeLitChampParChamp) {
     EXPECT_FLOAT_EQ(fiche.clipKeys.at("attack"), 0.4F);
 }
 
-TEST(ApparenceTest, CeQuEllRefuseEstNommeAvecSonChamp) {
+/**
+ * \castest{<b>Une fiche fautive est refusee en nommant son champ.</b><br/>
+ * \tcat Unitaire · Personnages (LOT-1015)<br/>
+ * \tcrit Majeure<br/>
+ * \tetapes 1. Lire une fiche sans createur, de taille nulle, a couleur hors de 0..1, a main
+ * inconnue, a key negatif ; puis un texte malforme.<br/>
+ * \tattendu MalformedStructure et le chemin du champ dans le message ; ParseError pour le texte
+ * malforme.}
+ */
+TEST(ApparenceTest, CeQuEllRefuseEstNommeAvecSonChamp) {
     struct Cas {
         const char* json;
         const char* champ;
@@ -76,7 +94,17 @@ TEST(ApparenceTest, CeQuEllRefuseEstNommeAvecSonChamp) {
     EXPECT_EQ(malforme.error, core::JsonReadError::ParseError);
 }
 
-TEST(ApparenceTest, LesFichesLivreesSeLisentEtPortentLeurNomDeFichier) {
+/**
+ * \castest{<b>Les fiches livrees se lisent et portent le nom de leur fichier.</b><br/>
+ * \tcat Unitaire · Personnages (LOT-1015)<br/>
+ * \tcrit Majeure<br/>
+ * \tetapes 1. Charger Rpg/appearances/.<br/>2. Verifier les quatre heros et le pantin, l'arme de
+ * main principale et le key d'attaque des heros, et qu'une fiche de regles de heros a sa fiche
+ * d'apparence.<br/>
+ * \tattendu Aucune erreur ; chaque identifiant attendu est present, taille positive, arme et key
+ * d'attaque a 0,4 s pour les heros.}
+ */
+TEST(ApparenceTest, LesFichesLivreesSeLisentEtPortentLeurNomDeFichier) {
     std::vector<std::string> erreurs;
     const auto fiches = core::loadAppearances(RPG / "appearances", erreurs);
     EXPECT_TRUE(erreurs.empty()) << erreurs.front();
@@ -97,7 +125,14 @@ TEST(ApparenceTest, LesFichesLivreesSeLisentEtPortentLeurNomDeFichier) {
     }
 }
 
-TEST(ApparenceTest, UnFichierAbsentEstUnEchecNomme) {
+/**
+ * \castest{<b>Une fiche absente est un echec nomme.</b><br/>
+ * \tcat Unitaire · Personnages (LOT-1015)<br/>
+ * \tcrit Majeure<br/>
+ * \tetapes 1. Lire un fichier qui n'existe pas.<br/>
+ * \tattendu FileNotFound.}
+ */
+TEST(ApparenceTest, UnFichierAbsentEstUnEchecNomme) {
     const core::AppearanceReadResult lue =
         core::readAppearance(RPG / "appearances" / "nulle-part.json");
     EXPECT_EQ(lue.error, core::JsonReadError::FileNotFound);
