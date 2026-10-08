@@ -14,6 +14,23 @@ garde — la bibliothèque des règles, les données de contenu, la planificatio
 est venu, ce qui est resté et pourquoi : [PASSATION.md](PASSATION.md). Le plan de la version :
 [`Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/`](Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/README.md).
 
+## Documentation
+
+Le site du projet est publié à chaque merge sur `main` : **<https://azertval.github.io/JustAnotherRpgGame-UE/>**
+
+| Partie | La question | En ligne | Dans le dépôt |
+|---|---|---|---|
+| Guide | **Comment** ça marche, et comment s'en servir ? | [Guide](https://azertval.github.io/JustAnotherRpgGame-UE/Guide/index.html) · [Manuel du joueur](https://azertval.github.io/JustAnotherRpgGame-UE/Guide/Manuel/index.html) | [`Documentation/Guide/`](Documentation/Guide/README.md) |
+| Spécifications | **Quoi**, et **pourquoi** ? Les exigences `EX-…` | [Spécifications](https://azertval.github.io/JustAnotherRpgGame-UE/Specification/index.html) | [`Documentation/Specification/`](Documentation/Specification/README.md) |
+| Cahier de test | Qu'est-ce qui est **vérifié** ? | [Cahier de test](https://azertval.github.io/JustAnotherRpgGame-UE/CahierTest/index.html) | [`Documentation/CahierTest/`](Documentation/CahierTest/README.md) |
+| Métiers de Tanares | Quels métiers, quelles populations, et pourquoi ces choix ? | [Étude](https://azertval.github.io/JustAnotherRpgGame-UE/Metiers/index.html) · [Explorateur interactif](https://azertval.github.io/JustAnotherRpgGame-UE/Metiers/explorateur.html) | [`Documentation/Metiers/`](Documentation/Metiers/README.md) |
+| Planification | **Quand**, et dans quel ordre ? Versions, lots, décisions | [Planification](https://azertval.github.io/JustAnotherRpgGame-UE/planning/index.html) | [`Planning/`](Planning/README.md) |
+
+Le guide, les spécifications et le cahier de test décrivent encore, pour partie, le moteur maison :
+leur relecture est au [LOT-1014](Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1014-socle-core-donnees-build.md)
+(voir [PASSATION.md](PASSATION.md)). La référence du code (Doxygen) et la page qualité ne sont pas
+encore republiées. Contribuer : [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Les règles de la version
 
 1. **Tout ce qui s'écrit est du texte** ([D-52](Planning/vision/decisions.md)) : C++, JSON de
