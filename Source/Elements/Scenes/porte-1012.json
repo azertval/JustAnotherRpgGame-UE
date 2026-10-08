@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "name": "Porte1012",
+  "comment": "La scène de la porte (LOT-1012) : le parvis d'Arenarea devant le Colisée. Construite dans Unreal par scripts/maps/build_scene_unreal.py ; aucun acteur n'est posé à la main. Repère : X est, Y haut, Z sud, en mètres ; yaw en degrés autour de +Y ; heading d'une caméra en degrés de boussole (0 = elle regarde le nord, 90 = l'est), pitch en degrés sous l'horizon. Un objet porte scale (pose brute) ou height (mis à cette hauteur, base posée sur position).",
+  "map": "/Game/Maps/Porte1012",
+  "daylight": "Common/Lighting/daylight.json",
+  "frameReference": "Built/colisee/col-cavea.glb",
+  "lighting": {
+    "comment": "Réglages provisoires de la porte, à juger sur les captures. lampCandelas, fireCandelas : intensité d'une lampe et d'un feu, pour une exposition fixe de 1. sunScale, ambientScale : ce par quoi le soleil et la lumière du ciel de la table du jour sont multipliés (la table est écrite pour un rendu sans lumière indirecte). skyLuminance : éclaircissement du ciel visible. fog : brume de hauteur. post : réglages de post-traitement du moteur, par leur nom.",
+    "lampCandelas": 60.0,
+    "fireCandelas": 30.0,
+    "sunScale": 1.8,
+    "ambientScale": 0.45,
+    "skyLuminance": 3.0,
+    "exposureBias": 0.0,
+    "fog": {"density": 0.004, "falloff": 0.05, "volumetric": true},
+    "post": {"bloom_intensity": 0.6, "vignette_intensity": 0.3}
+  },
+  "ground": {"comment": "Le sol lointain, sous le dallage : un plan uni. Couleur provisoire.", "colour": "#8f7d62", "size": 4000.0, "height": -0.02},
+  "groups": [
+    {"id": "colisee", "file": "porte-1012/colisee.json", "position": [0.0, 0.0, -60.5], "yaw": 0.0, "scale": 1.0, "comment": "Le Colisée en pièces modulaires, aux dimensions de celui de Rome (189 × 156 m, 48 m ; décision de l'auteur, 8 octobre 2026), construit par build_colosseum.py et posé par build_gate_scene.py. Son centre est à Z = -60,5 : sa façade sud à Z = 17,5, sa porte à 19."}
+  ],
+  "fills": [
+    {
+      "id": "dallage",
+      "comment": "Le dallage du parvis : les trois dalles du kit d'Arenarea, tirées par case, jusqu'au pied du Colisée (l'ellipse exclue est la sienne, plus 1 m).",
+      "meshes": [
+        "Regions/central-empire/capital/arenarea/Scene/ar-paving-1.glb",
+        "Regions/central-empire/capital/arenarea/Scene/ar-paving-2.glb",
+        "Regions/central-empire/capital/arenarea/Scene/ar-paving-3.glb"
+      ],
+      "cell": 1.5,
+      "areas": [[-78.0, -10.5, 78.0, 57.0], [-15.0, 57.0, 15.0, 78.0]],
+      "excludeEllipses": [[0.0, -60.5, 95.5, 79.0]]
+    }
+  ],
+  "objects": [
+    {"id": "facade-sud-1", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [-18.6, 0.0, 52.0], "yaw": 0.0, "height": 12.0, "provisional": "hauteur non mesurée : aucune cote de la commande ; quatre exemplaires d'une seule façade, les cinq façades de la fiche n'existent pas"},
+    {"id": "facade-sud-2", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [-7.6, 0.0, 52.0], "yaw": 0.0, "height": 12.0},
+    {"id": "facade-sud-3", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [7.6, 0.0, 52.0], "yaw": 0.0, "height": 12.0},
+    {"id": "facade-sud-4", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [18.6, 0.0, 52.0], "yaw": 0.0, "height": 12.0},
+    {"id": "facade-ruelle", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [-7.6, 0.0, 66.0], "yaw": 90.0, "height": 12.0},
+
+    {"id": "fontaine", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-fountain.glb", "position": [0.0, 0.0, 34.5], "yaw": 0.0, "scale": 1.0},
+    {"id": "champion", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-champion-anonyme.glb", "position": [-12.0, 0.0, 27.0], "yaw": 0.0, "scale": 1.0},
+    {"id": "char", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-char-de-course.glb", "position": [13.5, 0.0, 30.0], "yaw": 30.0, "scale": 1.0},
+    {"id": "enseigne", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-enseigne-brasseur.glb", "position": [2.6, 0.0, 58.5], "yaw": 90.0, "scale": 1.0},
+
+    {"id": "cypres-o-1", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-cypres.glb", "position": [-28.5, 0.0, 22.5], "yaw": 0.0, "scale": 1.0},
+    {"id": "cypres-o-2", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-cypres.glb", "position": [-28.5, 0.0, 31.5], "yaw": 70.0, "scale": 1.0},
+    {"id": "cypres-o-3", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-cypres.glb", "position": [-28.5, 0.0, 40.5], "yaw": 140.0, "scale": 1.0},
+    {"id": "cypres-e-1", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-cypres.glb", "position": [28.5, 0.0, 22.5], "yaw": 200.0, "scale": 1.0},
+    {"id": "cypres-e-2", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-cypres.glb", "position": [28.5, 0.0, 31.5], "yaw": 270.0, "scale": 1.0},
+    {"id": "cypres-e-3", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-cypres.glb", "position": [28.5, 0.0, 40.5], "yaw": 330.0, "scale": 1.0},
+    {"id": "arbre-o", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-arbre-ombrage.glb", "position": [-21.0, 0.0, 43.5], "yaw": 20.0, "scale": 1.0},
+    {"id": "arbre-e", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-arbre-ombrage.glb", "position": [21.0, 0.0, 43.5], "yaw": 110.0, "scale": 1.0},
+
+    {"id": "lampe-1", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-lamp.glb", "position": [-6.0, 0.0, 21.0], "yaw": 0.0, "scale": 1.0, "light": {"color": "#ffd69a", "range": 7.5, "height": 2.9}},
+    {"id": "lampe-2", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-lamp.glb", "position": [6.0, 0.0, 21.0], "yaw": 0.0, "scale": 1.0, "light": {"color": "#ffd69a", "range": 7.5, "height": 2.9}},
+    {"id": "lampe-3", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-lamp.glb", "position": [-18.0, 0.0, 30.0], "yaw": 90.0, "scale": 1.0, "light": {"color": "#ffd69a", "range": 7.5, "height": 2.9}},
+    {"id": "lampe-4", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-lamp.glb", "position": [18.0, 0.0, 30.0], "yaw": 90.0, "scale": 1.0, "light": {"color": "#ffd69a", "range": 7.5, "height": 2.9}},
+    {"id": "lampe-5", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-lamp.glb", "position": [-9.0, 0.0, 43.5], "yaw": 0.0, "scale": 1.0, "light": {"color": "#ffd69a", "range": 7.5, "height": 2.9}},
+    {"id": "lampe-6", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-lamp.glb", "position": [9.0, 0.0, 43.5], "yaw": 0.0, "scale": 1.0, "light": {"color": "#ffd69a", "range": 7.5, "height": 2.9}},
+    {"id": "lampe-ruelle-1", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-lamp.glb", "position": [-2.4, 0.0, 60.0], "yaw": 90.0, "scale": 1.0, "light": {"color": "#ffd69a", "range": 7.5, "height": 2.9}},
+    {"id": "lampe-ruelle-2", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-lamp.glb", "position": [2.4, 0.0, 70.5], "yaw": 90.0, "scale": 1.0, "light": {"color": "#ffd69a", "range": 7.5, "height": 2.9}}
+  ],
+  "characters": [
+    {"id": "brawler", "mesh": "Common/Characters/Heroes/brawler/brawler.glb", "position": [0.0, 0.0, 27.0], "heading": 180.0, "playable": true, "idle": "idle", "walk": "walk", "walkSpeed": 3.0},
+    {"id": "lion", "mesh": "Regions/central-empire/capital/arenarea/arena-of-fate/Characters/lion/lion.glb", "position": [7.5, 0.0, 39.0], "heading": 270.0, "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "patrol": [[7.5, 0.0, 39.0], [-7.5, 0.0, 39.0], [-7.5, 0.0, 24.0], [7.5, 0.0, 24.0]]}
+  ],
+  "navigation": {"area": [-78.0, -84.0, 78.0, 78.0], "height": 6.0},
+  "shots": [
+    {"id": "parvis", "target": [0.0, 14.0, 24.0], "heading": 0.0, "pitch": 9.0, "distance": 118.0, "comment": "Depuis le sud, au-dessus des toits du quartier : le parvis entier et la façade du Colisée d'un bord à l'autre, les maisons donnant l'échelle."},
+    {"id": "porte", "target": [0.0, 13.0, 19.0], "heading": 0.0, "pitch": 3.0, "distance": 34.0, "comment": "Depuis le parvis, à hauteur d'homme ou presque : la porte, ses lions, les dieux dans les arcs."},
+    {"id": "ruelle", "target": [0.0, 2.5, 62.0], "heading": 180.0, "pitch": 8.0, "distance": 11.0}
+  ],
+  "hours": ["12:00", "22:00"]
+}

@@ -39,4 +39,4 @@ addopts = ["-ra", "--strict-markers"]
 # Les dossiers des scripts sont ajoutés au chemin d'import : un test importe `check_json_files` comme
 # le fait un script voisin.
 pythonpath = ["scripts", "scripts/ci", "scripts/checks", "scripts/docs", "scripts/release",
-              "scripts/assetsGeneration", "scripts/i18n"]
+              "scripts/assetsGeneration", "scripts/i18n", "scripts/maps"]
