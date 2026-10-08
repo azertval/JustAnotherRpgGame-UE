@@ -1,5 +1,21 @@
 # Les personnages 3D
 
+> **Décision de l'auteur — 8 octobre 2026 ([D-63](../vision/decisions.md),
+> [D-64](../vision/decisions.md)) : cette page est périmée pour l'essentiel.** Un personnage n'est
+> plus un maillage qui lui est propre : c'est une **fiche texte** que l'objet personnalisable
+> **Mutable** assemble à partir de corps et de têtes **MetaHuman**, de corps ou de têtes Meshy ou
+> Fab pour les races que MetaHuman n'atteint pas, et de pièces Meshy ; le squelette est celui
+> d'Unreal, les animations viennent des bibliothèques du moteur, les armes s'accrochent par socket.
+> La chaîne maison (squelettes `humanoid` et `quadruped`, clips posés par cibles, retouche dans
+> Blender, contrôles et planches) est supprimée au
+> [LOT-1015](../versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1015-personnages-et-createur.md).
+> Sont **périmés**, et se réécrivent à ce lot sur les mesures du moteur : §1 (composition), §2
+> (chaîne), §4 (génération), §5 à §9 (squelettes, liaison, retouche, clips, armes, contrôles) et
+> §11 (constats de la preuve). **Restent vrais** : §3, l'image de référence, pour les pièces que
+> Meshy produit ; §10 pour le portrait et le jeton, qui restent peints (D-30 maintenue) — son
+> mannequin, maillage neutre lié à un squelette maison, tombe avec la chaîne. Le corps de la
+> page n'est pas réécrit d'ici là : il garde l'histoire de la chaîne de la `0.0.2.5`.
+
 > **Mise à jour de l'auteur — 1er octobre 2026, production LOT-1009.**
 > Les nouveaux humanoïdes, brawler compris, sont demandés en **T-pose via l'option
 > Meshy**, avec le **rig réalisé dans Meshy également**. Les armes peuvent être

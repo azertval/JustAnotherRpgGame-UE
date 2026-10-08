@@ -69,6 +69,19 @@ dans les données (une portée « 6 cases » vaut 9 m), sans grille à l'écran.
 d'opportunité et la tenaille suivent le *Manuel*, pas Larian. La hauteur donne l'avantage du
 *Manuel*, rien de plus.
 
+### Les combattants
+
+Le [LOT-1015](LOT-1015-personnages-et-createur.md) ne livre que les quatre héros, faits par le
+créateur de personnage (D-63). Les adversaires humanoïdes de l'arène reçoivent leurs fiches au
+[LOT-1024](LOT-1024-createur-especes-et-humanoides.md), le lion et le loup au
+[LOT-1025](LOT-1025-creatures-lion-et-loup.md). D'ici là, la série de l'arène se joue avec des
+fiches provisoires sur le corps des héros ; elles se remplacent quand ces lots livrent.
+
+Le [LOT-1016](LOT-1016-camera-et-exploration.md) laisse à ce lot une dette : **les personnages ne
+se bloquent pas**, ni entre membres du groupe ni contre un PNJ, et le meneur traverse un PNJ qui est
+sur son chemin. Le combat en distance en a besoin (allonge, attaques d'opportunité) : ce lot la
+retire.
+
 ## Risques et questions ouvertes
 
 - **Le déterminisme.** Un combat se rejoue à l'identique (graine explicite) : la navigation du
