@@ -6,6 +6,15 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **Un créateur de personnage remplace le maillage par personnage** (D-63, D-64, 8 octobre 2026,
+  planification seulement). Un personnage devient une **fiche texte** que l'objet personnalisable
+  **Mutable** du moteur assemble : corps et têtes humains par **MetaHuman Creator**, le reste par
+  Meshy ou Fab (D-55 étendue aux corps, à la garde-robe et aux animations), sur le squelette
+  standard d'Unreal, animations des bibliothèques du moteur, armes par socket (D-42 tranchée) ;
+  portraits et jetons restent peints. La chaîne maison des personnages (squelettes MPFB, clips posés
+  par cibles, retouche Blender) se supprime au LOT-1015 au lieu de se porter. Le LOT-1015 est
+  réécrit (fondation, créateur, les quatre héros), les LOT-1024 (22 espèces, humanoïdes de la démo)
+  et LOT-1025 (lion, loup) s'ajoutent ; le LOT-1016 est clos, ses restes écrits en dette.
 - **On explore une carte sur le nouveau moteur : la quête des pommes s'y joue hors combat**
   (LOT-1016, 8 octobre 2026). Le partage est écrit : **le moteur déplace, Core décide**. Le meneur
   marche sur le maillage de navigation d'Unreal, et Core **constate** sa case à chaque trame
