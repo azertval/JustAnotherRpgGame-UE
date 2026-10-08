@@ -3,7 +3,7 @@ id = "LOT-1015"
 titre = "Les personnages dans le moteur : squelette, animations, créateur Mutable, les quatre héros"
 version = "0.0.3"
 filiere = "pnj"
-statut = "en-cours"
+statut = "livre"
 taille = "L"
 resume = "Un personnage devient une fiche texte que le créateur Mutable du moteur assemble sur le squelette d'Unreal, animé par les bibliothèques du moteur ; les quatre héros en sont la preuve, et la chaîne maison des personnages est supprimée."
 prerequis = ["LOT-1014"]
@@ -177,8 +177,9 @@ Mesuré le 8 octobre 2026 sur le poste de référence (RTX 4060 Ti, Unreal Engin
 | Commande | Relevé |
 |---|---|
 | `powershell scripts/build.ps1` | 644 tests de Core : 643 passés, 1 ignoré (sept nouveaux) |
-| `powershell scripts/build.ps1 -Unreal -NoCapture` | la cible d'éditeur se construit (un avertissement du système de construction, pas du code), le mannequin se pose, le créateur se construit, `JadgContentCheck` passe, 13 tests du moteur : 10 passés dans ce passage, les 3 `Jadg.Personnages.*` passés au passage suivant (`-ExecCmds="Automation RunTests Jadg.Personnages"`) après que l'acteur demande la compilation du créateur chargé ; **un passage complet des 13 ensemble reste à rejouer** |
-| `powershell scripts/build.ps1 -Unreal` (captures du socle) | les deux captures se prennent (115,6 images par seconde à midi) et **passent** à leur référence (`compare_captures.py`, écart moyen 0,45 et 0,39) ; la première trame est venue 928 s après le lancement (compilation des shaders des plugins ajoutés), et le passage a été arrêté par le système, mémoire basse, juste après la mesure |
+| `powershell scripts/build.ps1 -Unreal` (rejoué seul, 8 octobre, 23 h 56) | code 0 : la cible d'éditeur se construit, le mannequin se pose, le créateur se construit, `JadgContentCheck` passe, **13 tests du moteur passés ensemble** (`Jadg.Exploration.*`, `Jadg.Personnages.*`, `Jadg.Socle.*`), les deux captures du socle **passent** à leur référence (`compare_captures.py`, écart moyen 0,37 et 0,38) ; 116,5 images par seconde à midi, 115,5 à 22 h (`mesure-socle.json`). Le seul avertissement du moteur est le plugin MetaHuman qui signale son contenu optionnel absent |
+| `powershell scripts/build.ps1 -Unreal -Parcours` (rejoué seul) | code 0 : trois cartes construites, les quinze commandes jugées, huit captures, la quête rendue **59,8 s** après le lancement (`parcours.json`), **avec les quatre héros** dans le groupe (`parcours-heros.png` : le HUD les nomme, Grom tient sa hache) |
+| `powershell scripts/build.ps1 -Unreal -Scene essai-1016-etals -Capture` (rejoué seul) | code 0 : les quatre héros et le pantin sur les étals, à midi et à 22 h (`etals-1200.png`, `etals-2200.png`) ; **102,3 images par seconde à midi, 100,6 à 22 h**, trame moyenne 9,8 ms, 1 % le plus lent 12,5 ms, processeur graphique 9,2 ms (`mesure-etals.json`) — contre 104 à 109 au LOT-1016 avec le pantin seul |
 | `pytest` | 209 passés (quatorze retirés avec la chaîne, un remplacé) |
 | `scripts/check.py` | 17 contrôles, tous verts après la régénération du cahier de test |
 | `ruff`, clang-format, `lint_planning`, `lint_docs` | passés |
@@ -198,28 +199,37 @@ Mesuré le 8 octobre 2026 sur le poste de référence (RTX 4060 Ti, Unreal Engin
   L'IK Retargeter servira quand un corps d'un autre squelette arrivera (MetaHuman, Fab).
 - **L'instant d'impact** est dans la fiche d'apparence (`clips.attack.key`), pas dans un fichier à
   part.
-- **Les captures de contrôle des héros et la cadence à quatre** ne sont pas prises : les passages
-  `-Parcours` et `-Scene essai-1016-etals -Capture` ont été arrêtés par le système (mémoire basse)
-  avant de commencer. **À rejouer** sur le poste, et à juger par l'auteur à la recette.
+- **Les trois passages n'ont pas tenu ensemble sur le poste** : lancés en parallèle, `-Parcours` et
+  `-Scene essai-1016-etals -Capture` ont été arrêtés par le système (mémoire basse, 16 Gio, 7 Gio
+  libres). Rejoués **un à la fois** le 8 octobre au soir, ils passent (tableau ci-dessus). Règle
+  pour la suite : une recette du moteur à la fois.
+- **Ce que les captures montrent, à juger par l'auteur à la recette** : les armes dans la main sont
+  posées au repère du socket, sans décalage par pièce — la hache de Grom et le bouclier paraissent
+  grands et de biais (`parcours-heros.png`, `etals-1200.png`) ; les tailles des héros (1,95, 1,80,
+  1,45, 1,70 m) ; l'attaque chargée du mannequin comme clip d'incantation.
 
 ### Les critères
 
 | Critère | État |
 |---|---|
-| Les quatre héros se tiennent au repos et marchent sur la carte des étals, suivent le meneur | **tenu sur les tests** (`Jadg.Personnages.Fiche` : corps, clips, échelle ; `Jadg.Exploration.*` : le groupe de quatre, désormais quatre héros, passe) ; **pas vu dans une image** : captures à rejouer |
+| Les quatre héros se tiennent au repos et marchent sur la carte des étals, suivent le meneur | **tenu** : `Jadg.Personnages.Fiche` (corps, clips, échelle), `Jadg.Exploration.*` (le groupe de quatre héros), le parcours joué de bout en bout avec eux, et les captures (`etals-1200.png`, `parcours-heros.png`) ; leur aspect est à juger par l'auteur à la recette |
 | Une fiche modifiée change le personnage sans geste dans l'éditeur | **tenu** pour le corps, la taille et les armes (`Jadg.Personnages.FicheModifiee` ; Grom et Helga diffèrent par leur fiche seule) |
 | Rejoué, le constructeur redonne les mêmes assets ; `check_orphans.py` passe | **tenu** : mannequin par empreintes, créateur gardé si la description n'a pas changé ; `check_orphans.py` vert |
 | La régénération du graphe Mutable depuis le texte est mesurée | **tenu** : faisable, par réflexion (voie 1) ; détail au standard §3 |
-| La cadence avec les quatre héros à l'écran, à midi et à 22 h | **non tenu** : passage arrêté avant la mesure, à rejouer |
-| Les tests de Core et `Jadg.Personnages.*` passent | **tenu** (voir le tableau ; un passage complet des 13 tests ensemble à rejouer) |
+| La cadence avec les quatre héros à l'écran, à midi et à 22 h | **tenu** : 102,3 et 100,6 images par seconde sur les étals (`mesure-etals.json`) |
+| Les tests de Core et `Jadg.Personnages.*` passent | **tenu** : 643 tests de Core, 13 tests du moteur ensemble |
 
 ### Ce qui reste au lot
 
-- Rejouer `scripts/build.ps1 -Unreal`, `-Unreal -Parcours` et `-Unreal -Scene essai-1016-etals
-  -Capture` sur le poste, verser les captures et les mesures dans `annexes/LOT-1015/captures/`.
+- Le jugement de l'auteur sur les captures de
+  [`annexes/LOT-1015/captures/`](../annexes/LOT-1015/captures/) : `etals-1200.png`,
+  `etals-2200.png`, `parcours-heros.png` ; les mesures `mesure-etals.json`, `mesure-socle.json`,
+  `parcours.json`.
 - Le contenu optionnel de MetaHuman, puis les héros en MetaHuman (fiches : `body: metahuman`, bloc
   `metahuman`) — ou l'auteur décide que le mannequin suffit à la 0.0.3.
 - L'orientation des armes dans la main (un décalage par pièce dans la description), à juger sur
   les captures.
 - Le retour au repos après un clip joué une fois (`PlayOnce`) : avec le tour de combat, LOT-1017.
 - Le poids en mémoire graphique de huit personnages : LOT-1024.
+
+Livré par la PR #7, le 9 octobre 2026.

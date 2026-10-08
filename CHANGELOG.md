@@ -28,7 +28,8 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
   `check_character_model.py`, leurs tests, les 21 maîtres PNJ et leurs entrées du manifeste ;
   `Planning/standards/personnages-3d.md` est réécrit sur les mesures du moteur. Sept tests de
   Core (`ApparenceTest`, `CreateurDePersonnageTest`) et trois tests du moteur
-  (`Jadg.Personnages.*`).
+  (`Jadg.Personnages.*`). Mesuré, une recette à la fois : 13 tests du moteur verts ensemble, la
+  quête rendue en 59,8 s avec les quatre héros, 102 images par seconde sur les étals à midi.
 - **Un créateur de personnage remplace le maillage par personnage** (D-63, D-64, 8 octobre 2026,
   planification seulement). Un personnage devient une **fiche texte** que l'objet personnalisable
   **Mutable** du moteur assemble : corps et têtes humains par **MetaHuman Creator**, le reste par

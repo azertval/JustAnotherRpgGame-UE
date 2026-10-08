@@ -1,0 +1,11 @@
+{
+  "map": "etals",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 15.12,
+  "captures": ["etals-1200.png", "lanterne-1200.png", "etals-2200.png", "lanterne-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.4, "frames": 1169, "fps": 102.3, "frameMs": 9.78, "p99FrameMs": 12.48, "worstFrameMs": 32.75, "gameMs": 2.91, "renderMs": 2.96, "gpuMs": 9.15},
+    {"hour": "22:00", "seconds": 11.4, "frames": 1147, "fps": 100.6, "frameMs": 9.94, "p99FrameMs": 12.47, "worstFrameMs": 18.86, "gameMs": 2.93, "renderMs": 9.94, "gpuMs": 9.35}
+  ]
+}
