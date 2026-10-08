@@ -1,6 +1,6 @@
 # Couverture des exigences
 
-**46 exigences en vigueur sur 322** sont citées par au moins un cas de test. Cette matrice est **engendrée** avec le reste du cahier : la colonne de gauche vient des déclarations des [spécifications](../Specification/README.md), celle de droite des identifiants `EX-…` que les tests citent dans leur commentaire ou leur corps. Une exigence sans cas est une exigence que **rien ne garde** : le cahier ne la cache pas, il la montre. Les exigences retirées ne sont pas comptées — aucun test ne doit les citer.
+**29 exigences en vigueur sur 322** sont citées par au moins un cas de test. Cette matrice est **engendrée** avec le reste du cahier : la colonne de gauche vient des déclarations des [spécifications](../Specification/README.md), celle de droite des identifiants `EX-…` que les tests citent dans leur commentaire ou leur corps. Une exigence sans cas est une exigence que **rien ne garde** : le cahier ne la cache pas, il la montre. Les exigences retirées ne sont pas comptées — aucun test ne doit les citer.
 
 ## Par famille
 
@@ -8,21 +8,21 @@
 |---|---|---|---|---|
 | `EX-ARCH` | [Architecture (décisions dimensionnantes)](../Specification/architecture.md) | 13 | 0 | 13 |
 | `EX-BUILD` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | 1 | 0 | 1 |
-| `EX-CBT` | [Combat tactique](../Specification/combat.md) | 22 | 6 | 16 |
-| `EX-CNT` | [Contenu et données](../Specification/contenu.md) | 22 | 4 | 18 |
+| `EX-CBT` | [Combat tactique](../Specification/combat.md) | 22 | 5 | 17 |
+| `EX-CNT` | [Contenu et données](../Specification/contenu.md) | 22 | 3 | 19 |
 | `EX-CTRL` | [Contrôles & entrées](../Specification/controles.md) | 5 | 0 | 5 |
-| `EX-EDIT` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | 82 | 13 | 69 |
-| `EX-EXP` | [Exploration](../Specification/exploration.md) | 15 | 3 | 12 |
+| `EX-EDIT` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | 82 | 7 | 75 |
+| `EX-EXP` | [Exploration](../Specification/exploration.md) | 15 | 2 | 13 |
 | `EX-GP` | [Gameplay](../Specification/gameplay.md) | 7 | 1 | 6 |
-| `EX-IHM` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | 34 | 4 | 30 |
+| `EX-IHM` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | 34 | 0 | 34 |
 | `EX-INV` | [Inventaire et économie](../Specification/inventaire.md) | 8 | 0 | 8 |
 | `EX-LVL` | [Cartes & format](../Specification/niveaux.md) | 20 | 7 | 13 |
 | `EX-NFR` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | 19 | 2 | 17 |
 | `EX-REG` | [Règles d20](../Specification/regles-d20.md) | 15 | 1 | 14 |
-| `EX-REN` | [Rendu & cible technique](../Specification/rendu-technique.md) | 31 | 4 | 27 |
+| `EX-REN` | [Rendu & cible technique](../Specification/rendu-technique.md) | 31 | 0 | 31 |
 | `EX-RPG` | [Personnage et progression](../Specification/rpg.md) | 19 | 1 | 18 |
 | `EX-VIS` | [Vision & périmètre](../Specification/vision.md) | 9 | 0 | 9 |
-| **Total** | | **322** | **46** | **276** |
+| **Total** | | **322** | **29** | **293** |
 
 ## Exigence par exigence
 
@@ -73,7 +73,7 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-CBT-051` | [Combat tactique](../Specification/combat.md) | — |
 | `EX-CBT-052` | [Combat tactique](../Specification/combat.md) | — |
 | `EX-CBT-060` | [Combat tactique](../Specification/combat.md) | — |
-| `EX-CBT-061` | [Combat tactique](../Specification/combat.md) | [`EncounterModelTest.LeRejeuAGraineFixeeDonneLeMemeCombat`](hmi-runtime.md#encountermodeltestlerejeuagrainefixeedonnelememecombat) |
+| `EX-CBT-061` | [Combat tactique](../Specification/combat.md) | — |
 | `EX-CBT-062` | [Combat tactique](../Specification/combat.md) | — |
 | `EX-CBT-063` | [Combat tactique](../Specification/combat.md) | — |
 | `EX-CBT-064` | [Combat tactique](../Specification/combat.md) | — |
@@ -97,7 +97,7 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-CNT-032` | [Contenu et données](../Specification/contenu.md) | [`CharacterOptionsTest.LesClassesProvisoiresNeSontReferenceesParRien`](core-rpg.md#characteroptionstestlesclassesprovisoiresnesontreferenceesparrien) |
 | `EX-CNT-040` | [Contenu et données](../Specification/contenu.md) | — |
 | `EX-CNT-041` | [Contenu et données](../Specification/contenu.md) | — |
-| `EX-CNT-042` | [Contenu et données](../Specification/contenu.md) | [`AssetGalleryTest.ToutAssetLivreEstDansLaGalerie`](hmi-graphics.md#assetgallerytesttoutassetlivreestdanslagalerie), [`AssetGalleryTest.UnHerosEnModeleRangeParClasse`](hmi-graphics.md#assetgallerytestunherosenmodelerangeparclasse), [`AssetGalleryTest.UnEffetSeJoueDansLaGalerie`](hmi-graphics.md#assetgallerytestuneffetsejouedanslagalerie) |
+| `EX-CNT-042` | [Contenu et données](../Specification/contenu.md) | — |
 | `EX-CNT-050` | [Contenu et données](../Specification/contenu.md) | — |
 | `EX-CNT-060` | [Contenu et données](../Specification/contenu.md) | — |
 | `EX-CNT-061` | [Contenu et données](../Specification/contenu.md) | — |
@@ -172,14 +172,14 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-EDIT-074` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-075` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-076` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
-| `EX-EDIT-077` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | [`ContentCheckTest.UneCarteNeuveASonNomDansChaqueCatalogue`](editor.md#contentchecktestunecarteneuveasonnomdanschaquecatalogue) |
+| `EX-EDIT-077` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-078` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-079` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-080` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-081` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-082` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
-| `EX-EDIT-083` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | [`LevelDraftPiecesTest.RemplacerUnePieceEnUnPasLaCollisionSuit`](core-levels.md#leveldraftpiecestestremplacerunepieceenunpaslacollisionsuit), [`Donnees.RemplacerUnePieceSurToutesLesCartes`](editor.md#donneesremplacerunepiecesurtouteslescartes) |
-| `EX-EDIT-084` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | [`LevelDraftPiecesTest.ChangerDePlancheTraduitLesPiecesEtRededuitLaCollision`](core-levels.md#leveldraftpiecestestchangerdeplanchetraduitlespiecesetrededuitlacollision), [`Donnees.UneCarteChangeDePlancheSansEtreRepeinte`](editor.md#donneesunecartechangedeplanchesansetrerepeinte) |
+| `EX-EDIT-083` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | [`LevelDraftPiecesTest.RemplacerUnePieceEnUnPasLaCollisionSuit`](core-levels.md#leveldraftpiecestestremplacerunepieceenunpaslacollisionsuit) |
+| `EX-EDIT-084` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | [`LevelDraftPiecesTest.ChangerDePlancheTraduitLesPiecesEtRededuitLaCollision`](core-levels.md#leveldraftpiecestestchangerdeplanchetraduitlespiecesetrededuitlacollision) |
 | `EX-EDIT-085` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-086` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-087` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
@@ -195,11 +195,11 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-EDIT-097` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-098` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-099` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
-| `EX-EDIT-100` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | [`ModeQuetes.LaQueteDeLaDemoSeReecritOctetPourOctet`](integration.md#modequeteslaquetedelademosereecritoctetpouroctet), [`ModeQuetes.JouerAccepteeFaitParaitreLeGardeEtLEnfant`](integration.md#modequetesjoueraccepteefaitparaitrelegardeetlenfant), [`ContenuLivre.RenommerCondamneLaisseLeControleVert`](integration.md#contenulivrerenommercondamnelaisselecontrolevert), [`QuestWriting.UneQueteSeReecritOctetPourOctet`](editor.md#questwritingunequetesereecritoctetpouroctet), [`QuestWriting.UnLieuDEtapeSEcritCarteDiezeEntite`](editor.md#questwritingunlieudetapesecritcartediezeentite), [`ModeQuetesProjet.EnregistrerEcritLaQueteEtSesTextes`](editor.md#modequetesprojetenregistrerecritlaqueteetsestextes), [`ModeQuetesProjet.CeQueLeJeuRefuseraitNeSEnregistrePas`](editor.md#modequetesprojetcequelejeurefuseraitnesenregistrepas), [`ModeQuetesProjet.QuiSeSertDUneValeurDeDrapeau`](editor.md#modequetesprojetquisesertdunevaleurdedrapeau), [`ModeQuetesProjet.RenommerUneValeurLaSuitPartoutEtSeulementElle`](editor.md#modequetesprojetrenommerunevaleurlasuitpartoutetseulementelle), [`ModeQuetesProjet.RenommerUnDrapeauDeclare`](editor.md#modequetesprojetrenommerundrapeaudeclare), [`ModeQuetesProjet.RenommerPuisRetirerUneQuete`](editor.md#modequetesprojetrenommerpuisretirerunequete), [`ModeQuetesProjet.LEtatDePartieQuiAtteintUneEtape`](editor.md#modequetesprojetletatdepartiequiatteintuneetape), [`ModeQuetesProjet.LeLieuDUneEtapeSuitLEntite`](editor.md#modequetesprojetlelieuduneetapesuitlentite), [`ModeQuetesProjet.LeModeQuetesSansFenetre`](editor.md#modequetesprojetlemodequetessansfenetre), [`CatalogEntry.UneCleChangeASaPlace`](editor.md#catalogentryuneclechangeasaplace) |
-| `EX-EDIT-101` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | [`ContentCheckTest.UnGroupeQuiNeSeDeploiePasFaitEchouerLaCi`](editor.md#contentchecktestungroupequinesedeploiepasfaitechouerlaci), [`GestureScriptTest.LeSableDeLArenaOfFatePorteLeGroupeEtRougitReduit`](editor.md#gesturescripttestlesabledelarenaoffateportelegroupeetrougitreduit) |
-| `EX-EDIT-102` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | [`CharacterPreviewRenderTest.LeRenduDuJeuDessineLePersonnage`](editor.md#characterpreviewrendertestlerendudujeudessinelepersonnage), [`CharacterDraftTest.UneFicheSeLitEtSeReecritALIdentique`](editor.md#characterdrafttestuneficheselitetsereecritalidentique), [`CharacterWorkshop.LaFicheInstalleLePersonnageEtRendLesFichiersAttendus`](editor.md#characterworkshoplaficheinstallelepersonnageetrendlesfichiersattendus), [`CharacterWorkshop.UneFicheRefuseeNEcritRien`](editor.md#characterworkshopuneficherefuseenecritrien), [`CharacterWorkshop.UnPersonnageInstalleSeRouvreSansDifference`](editor.md#characterworkshopunpersonnageinstalleserouvresansdifference), [`CharacterWorkshopDelivered.LesPersonnagesLivresSeReenregistrentSansDifference`](editor.md#characterworkshopdeliveredlespersonnageslivressereenregistrentsansdifference) |
-| `EX-EDIT-103` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | [`BlenderRetouch.LesDeuxCommandesPortentCeQueLeScriptAttend`](editor.md#blenderretouchlesdeuxcommandesportentcequelescriptattend) |
-| `EX-EDIT-104` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | [`CharacterWorkshop.LeControleNommeCeQuiManque`](editor.md#characterworkshoplecontrolenommecequimanque) |
+| `EX-EDIT-100` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
+| `EX-EDIT-101` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
+| `EX-EDIT-102` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
+| `EX-EDIT-103` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
+| `EX-EDIT-104` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-105` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 | `EX-EDIT-106` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | — |
 
@@ -211,7 +211,7 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-EXP-002` | [Exploration](../Specification/exploration.md) | — |
 | `EX-EXP-003` | [Exploration](../Specification/exploration.md) | — |
 | `EX-EXP-004` | [Exploration](../Specification/exploration.md) | — |
-| `EX-EXP-005` | [Exploration](../Specification/exploration.md) | [`OffscreenRenderTest.UneCarteSansAucuneImageSeVoit`](hmi-graphics.md#offscreenrendertestunecartesansaucuneimagesevoit) |
+| `EX-EXP-005` | [Exploration](../Specification/exploration.md) | — |
 | `EX-EXP-006` | [Exploration](../Specification/exploration.md) | — |
 | `EX-EXP-007` | [Exploration](../Specification/exploration.md) | — |
 | `EX-EXP-008` | [Exploration](../Specification/exploration.md) | — |
@@ -219,8 +219,8 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-EXP-010` | [Exploration](../Specification/exploration.md) | — |
 | `EX-EXP-011` | [Exploration](../Specification/exploration.md) | — |
 | `EX-EXP-012` | [Exploration](../Specification/exploration.md) | — |
-| `EX-EXP-013` | [Exploration](../Specification/exploration.md) | [`PartyTest.QuatreAuPlusJamaisVide`](core-rpg.md#partytestquatreauplusjamaisvide), [`PartyTest.LesQuatreFichesPreTireesFormentLeGroupeDeDepart`](core-rpg.md#partytestlesquatrefichespretireesformentlegroupededepart), [`ExplorationSessionTest.UnGroupeDeQuatrePasseLesAnglesSansResterCoince`](core-world.md#explorationsessiontestungroupedequatrepasselesanglessansrestercoince), [`ExplorationSessionTest.LesSuiveursSeRangentDansLeDosDuMeneur`](core-world.md#explorationsessiontestlessuiveursserangentdansledosdumeneur), [`PartyModelTest.LEcranDeGroupeCompose`](hmi-runtime.md#partymodeltestlecrandegroupecompose) |
-| `EX-EXP-014` | [Exploration](../Specification/exploration.md) | [`PartyTest.LeMeneurEstLePremierDeLOrdreDeMarche`](core-rpg.md#partytestlemeneurestlepremierdelordredemarche), [`PartyModelTest.ChangerDeMeneurChangeLaFigurineEtLePortrait`](hmi-runtime.md#partymodeltestchangerdemeneurchangelafigurineetleportrait), [`PartyModelTest.LeMeneurEstCeluiQuiCombat`](hmi-runtime.md#partymodeltestlemeneurestceluiquicombat) |
+| `EX-EXP-013` | [Exploration](../Specification/exploration.md) | [`PartyTest.QuatreAuPlusJamaisVide`](core-rpg.md#partytestquatreauplusjamaisvide), [`PartyTest.LesQuatreFichesPreTireesFormentLeGroupeDeDepart`](core-rpg.md#partytestlesquatrefichespretireesformentlegroupededepart), [`ExplorationSessionTest.UnGroupeDeQuatrePasseLesAnglesSansResterCoince`](core-world.md#explorationsessiontestungroupedequatrepasselesanglessansrestercoince), [`ExplorationSessionTest.LesSuiveursSeRangentDansLeDosDuMeneur`](core-world.md#explorationsessiontestlessuiveursserangentdansledosdumeneur) |
+| `EX-EXP-014` | [Exploration](../Specification/exploration.md) | [`PartyTest.LeMeneurEstLePremierDeLOrdreDeMarche`](core-rpg.md#partytestlemeneurestlepremierdelordredemarche) |
 | `EX-EXP-015` | [Exploration](../Specification/exploration.md) | — |
 
 ### `EX-GP`
@@ -261,8 +261,8 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-IHM-081` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
 | `EX-IHM-082` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
 | `EX-IHM-083` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
-| `EX-IHM-090` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | [`ScreenFlowTest.EcranDuRpgRevientVersSonEcranDOrigine`](hmi-interface.md#screenflowtestecrandurpgrevientverssonecrandorigine) |
-| `EX-IHM-091` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | [`ScreenFlowTest.LesEcransDeFinFermentLaPartie`](hmi-interface.md#screenflowtestlesecransdefinfermentlapartie), [`EncounterModelTest.DuDeclenchementAuRetourALExploration`](hmi-runtime.md#encountermodeltestdudeclenchementauretouralexploration) |
+| `EX-IHM-090` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
+| `EX-IHM-091` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
 | `EX-IHM-100` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
 | `EX-IHM-101` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
 | `EX-IHM-102` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
@@ -271,8 +271,8 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-IHM-105` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
 | `EX-IHM-106` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
 | `EX-IHM-107` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
-| `EX-IHM-108` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | [`EncounterModelTest.LInterfaceDeGroupeLitLaVueModele`](hmi-runtime.md#encountermodeltestlinterfacedegroupelitlavuemodele) |
-| `EX-IHM-109` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | [`CharacterSheetModelTest.LesQuatreFichesSontLeursPagesDuLivre`](hmi-runtime.md#charactersheetmodeltestlesquatrefichessontleurspagesdulivre) |
+| `EX-IHM-108` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
+| `EX-IHM-109` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | — |
 
 ### `EX-INV`
 
@@ -332,7 +332,7 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-NFR-030` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | — |
 | `EX-NFR-031` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | — |
 | `EX-NFR-032` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | — |
-| `EX-NFR-040` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | [`AnimationClipTest.ClipInexistantRepliDeterministe`](core-ecs.md#animationcliptestclipinexistantreplideterministe), [`InteractionTest.UnTypeInconnuProduitUneEntiteNonInteractive`](core-gameplay.md#interactiontestuntypeinconnuproduituneentitenoninteractive), [`LevelWriterTest.SaveToFileVersDossierInexistantEchoueProprement`](core-levels.md#levelwritertestsavetofileversdossierinexistantechoueproprement), [`CouchesDeCarteTest.CarteDUneVersionFutureRefuseeAvecUnMessageExplicite`](core-levels.md#couchesdecartetestcarteduneversionfuturerefuseeavecunmessageexplicite), [`CouchesDeCarteTest.RoleDeCoucheInconnuRetombeSurLeSol`](core-levels.md#couchesdecartetestroledecoucheinconnuretombesurlesol), [`LevelScan.DossierAbsentNeContientRien`](hmi-game.md#levelscandossierabsentnecontientrien), [`ProceduralAtlasTest.ChaqueTypeDeTuileAUneCouleurDeRepliDistincte`](hmi-graphics.md#proceduralatlastestchaquetypedetuileaunecouleurdereplidistincte) |
+| `EX-NFR-040` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | [`AnimationClipTest.ClipInexistantRepliDeterministe`](core-ecs.md#animationcliptestclipinexistantreplideterministe), [`InteractionTest.UnTypeInconnuProduitUneEntiteNonInteractive`](core-gameplay.md#interactiontestuntypeinconnuproduituneentitenoninteractive), [`LevelWriterTest.SaveToFileVersDossierInexistantEchoueProprement`](core-levels.md#levelwritertestsavetofileversdossierinexistantechoueproprement), [`CouchesDeCarteTest.CarteDUneVersionFutureRefuseeAvecUnMessageExplicite`](core-levels.md#couchesdecartetestcarteduneversionfuturerefuseeavecunmessageexplicite), [`CouchesDeCarteTest.RoleDeCoucheInconnuRetombeSurLeSol`](core-levels.md#couchesdecartetestroledecoucheinconnuretombesurlesol) |
 | `EX-NFR-041` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | — |
 | `EX-NFR-042` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | — |
 
@@ -363,13 +363,13 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-REN-001` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-002` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-003` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
-| `EX-REN-005` | [Rendu & cible technique](../Specification/rendu-technique.md) | [`WorldSceneComposerTest.LaCadenceEstCelleQueDitLaBande`](hmi-graphics.md#worldscenecomposertestlacadenceestcellequeditlabande) |
+| `EX-REN-005` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-007` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-010` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-011` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-013` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
-| `EX-REN-014` | [Rendu & cible technique](../Specification/rendu-technique.md) | [`TriParProfondeurTest.LaProfondeurNeDebordePasDeSaBande`](hmi-graphics.md#triparprofondeurtestlaprofondeurnedebordepasdesabande), [`QuadRecorderTest.OrdonnancementDeclare`](hmi-graphics.md#quadrecordertestordonnancementdeclare) |
-| `EX-REN-018` | [Rendu & cible technique](../Specification/rendu-technique.md) | [`TriParProfondeurTest.TroisPrimitivesSortentParPiedCroissant`](hmi-graphics.md#triparprofondeurtesttroisprimitivessortentparpiedcroissant), [`TriParProfondeurTest.PersonnageEntreDeuxObjets`](hmi-graphics.md#triparprofondeurtestpersonnageentredeuxobjets), [`TriParProfondeurTest.PiedEgalConserveLOrdreDeComposition`](hmi-graphics.md#triparprofondeurtestpiedegalconservelordredecomposition), [`TriParProfondeurTest.QuantificationAuPixel`](hmi-graphics.md#triparprofondeurtestquantificationaupixel) |
+| `EX-REN-014` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
+| `EX-REN-018` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-019` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-020` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-021` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
@@ -378,7 +378,7 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-REN-030` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-031` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-032` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
-| `EX-REN-033` | [Rendu & cible technique](../Specification/rendu-technique.md) | [`LocalizationTest.LesDeuxCataloguesDeclarentLesMemesCles`](hmi-localization.md#localizationtestlesdeuxcataloguesdeclarentlesmemescles) |
+| `EX-REN-033` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-041` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-042` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-043` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |

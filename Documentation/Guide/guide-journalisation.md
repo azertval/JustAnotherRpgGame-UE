@@ -167,7 +167,7 @@ faire échouer le démarrage — journaliser un `Warning` à ce sujet est préf�
 jeu pour une simple faute de frappe dans un paramètre de diagnostic.
 
 Le seuil peut aussi se **relever le temps d'une portée** : `core::ScopedLogLevel(logger, plancher)`
-([`ScopedLogLevel.h`](../../Source/Core/Diagnostics/ScopedLogLevel.h)) relève le niveau minimal à
+([`ScopedLogLevel.h`](../../Source/JustAnotherRpgGame/Core/Diagnostics/ScopedLogLevel.h)) relève le niveau minimal à
 au moins `plancher` pour la durée de vie de l'objet, et restaure le niveau précédent à sa
 destruction (RAII). Il n'**assouplit** jamais un niveau déjà plus strict : qui a demandé
 `--log-level=error` reste à `error` à l'intérieur d'une portée qui ne demande que `warning`. Son

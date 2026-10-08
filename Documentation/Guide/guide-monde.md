@@ -68,7 +68,7 @@ la scène (composeur, caméra qui suit le héros) dans Rendu 2D : de la scène �
 
 ## La session d'exploration : `core::ExplorationSession`
 
-Fichier : [`ExplorationSession.h`](../../Source/Core/World/ExplorationSession.h).
+Fichier : [`ExplorationSession.h`](../../Source/JustAnotherRpgGame/Core/World/ExplorationSession.h).
 
 ### Le repère : `core::CellPoint`
 
@@ -175,7 +175,7 @@ idée de ce qui est interactif.
 
 ### `core::ExplorationReach` : ce que le héros peut atteindre
 
-Fichier : [`ExplorationReach.h`](../../Source/Core/World/ExplorationReach.h). Le contrôle de
+Fichier : [`ExplorationReach.h`](../../Source/JustAnotherRpgGame/Core/World/ExplorationReach.h). Le contrôle de
 contenu de l'éditeur (`LOT-EDITOR-07`) doit dire si un PNJ, un portail ou un coffre est
 **atteignable** depuis l'entrée. La règle découle du gabarit : le héros passe sur toute case non
 solide et ne passe d'une case à l'autre que par un côté, jamais par un coin. `core::ExplorationReach`
@@ -188,8 +188,8 @@ coupe les diagonales libres et compte double le terrain difficile : deux questio
 
 ## Le groupe : `core::Party` et `core::FollowTrail`
 
-Fichiers : [`Party.h`](../../Source/Core/Rpg/Party.h),
-[`FollowTrail.h`](../../Source/Core/World/FollowTrail.h). Concrétisé en `LOT-138`
+Fichiers : [`Party.h`](../../Source/JustAnotherRpgGame/Core/Rpg/Party.h),
+[`FollowTrail.h`](../../Source/JustAnotherRpgGame/Core/World/FollowTrail.h). Concrétisé en `LOT-138`
 (`EX-EXP-013`, `EX-EXP-014`).
 
 ### Qui en est : `core::Party`
@@ -241,7 +241,7 @@ Le groupe d'une partie neuve est imposé : `hmi::WorldModel::STARTING_PARTY`, pa
 
 ## Les faits de la partie : `core::WorldFlags`
 
-Fichier : [`WorldFlags.h`](../../Source/Core/Gameplay/WorldFlags.h) (`LOT-10`).
+Fichier : [`WorldFlags.h`](../../Source/JustAnotherRpgGame/Core/Gameplay/WorldFlags.h) (`LOT-10`).
 
 Le piège fondateur : *ouvrir un coffre deux fois ne doit donner le butin qu'une fois, y compris
 après un aller-retour de carte*. Un booléen sur l'entité ne tient pas — l'entité est détruite et
@@ -287,7 +287,7 @@ lots ne puissent pas écrire le même drapeau différemment.
 
 ## Interagir : `Interaction.h`
 
-Fichier : [`Interaction.h`](../../Source/Core/Gameplay/Interaction.h) (`LOT-10`). Trois fonctions
+Fichier : [`Interaction.h`](../../Source/JustAnotherRpgGame/Core/Gameplay/Interaction.h) (`LOT-10`). Trois fonctions
 **pures** sur des listes, testables sans ECS ni fenêtre.
 
 **`core::aimedCell(from, facing)`** — la case que vise un personnage : la **voisine dans la
@@ -324,7 +324,7 @@ pas. Le résultat, `core::InteractionTarget`, porte la cible (ou rien : `found()
 (`happened`, `consumed`, `type`, `promptKey`). C'est ici que « deux fois ne donne qu'une fois » se
 joue : le drapeau est levé par `WorldFlags::set`, dont la valeur de retour remplit `consumed`.
 
-Le composant `core::Interactable` ([`Interactable.h`](../../Source/Core/Ecs/Components/Interactable.h))
+Le composant `core::Interactable` ([`Interactable.h`](../../Source/JustAnotherRpgGame/Core/Ecs/Components/Interactable.h))
 est une donnée pure : le `type` libre, la **case** (portée en plus du `Transform` parce que
 l'interaction raisonne en cases, et retrouver la case depuis une position flottante laisserait un
 arrondi décider aux frontières), `consumedFlag` (vide pour ce qu'on sollicite indéfiniment) et
@@ -333,7 +333,7 @@ le drapeau est renseigné.
 
 ## Peupler un monde ECS : `core::spawnMapEntities`
 
-Fichier : [`MapEntitySpawner.h`](../../Source/Core/Gameplay/MapEntitySpawner.h). La session
+Fichier : [`MapEntitySpawner.h`](../../Source/JustAnotherRpgGame/Core/Gameplay/MapEntitySpawner.h). La session
 d'exploration n'a pas d'ECS ; les tests d'interaction et les outils qui en ont un peuplent un
 `core::World` ([ECS : entités, composants, systèmes](guide-ecs.md)) d'**une entité par objet** de
 la carte : un `Transform` à sa case et, si son type est connu, un `Interactable`. Un type
@@ -356,7 +356,7 @@ pas un comportement — `Core` ne connaît toujours aucune sémantique de type.
 
 ## Les portails et le voyage : `core::WorldTravel`
 
-Fichier : [`WorldTravel.h`](../../Source/Core/World/WorldTravel.h) (`LOT-09`). Deux règles
+Fichier : [`WorldTravel.h`](../../Source/JustAnotherRpgGame/Core/World/WorldTravel.h) (`LOT-09`). Deux règles
 tiennent tout le fichier : **une carte chargée n'est pas rechargée** — revenir du sable doit
 rendre le lieu tel qu'on l'a laissé, pas un lieu neuf — et **un défaut est un code, pas un
 texte** (`EX-NFR-011`) : `Core` n'écrit aucun message, l'interface traduit.
@@ -435,7 +435,7 @@ et il compte, puisque `arrivalPointAt` prend le premier ; puis les zones de comb
 
 ## Le graphe statique : `core::WorldGraph`
 
-Fichier : [`WorldGraph.h`](../../Source/Core/World/WorldGraph.h) (`LOT-11`, étendu au `LOT-09`).
+Fichier : [`WorldGraph.h`](../../Source/JustAnotherRpgGame/Core/World/WorldGraph.h) (`LOT-11`, étendu au `LOT-09`).
 C'est la **lecture** du graphe — ce que la vue « graphe du monde » de l'éditeur montre
 (Éditeur de niveaux) — et son ordre est **déterministe** : cartes par
 identifiant, portails par carte source puis dans l'ordre des entités, pour que deux lectures du
@@ -472,7 +472,7 @@ même dossier donnent le même graphe et la même vue.
 
 ### `core::Atlas` : les régions et les lieux
 
-Fichier : [`Atlas.h`](../../Source/Core/World/Atlas.h) (`LOT-37`, `EX-CNT-010`). Le chapitre des
+Fichier : [`Atlas.h`](../../Source/JustAnotherRpgGame/Core/World/Atlas.h) (`LOT-37`, `EX-CNT-010`). Le chapitre des
 régions du corpus, extrait vers `Source/Elements/World/regions/` et `locations/` ([Données, corpus
 et ressources](guide-donnees.md)), donne au graphe de cartes de vrais nœuds : treize régions (la
 feuille de route en comptait dix de mémoire ; le livre en porte treize) et leurs lieux.
@@ -513,7 +513,7 @@ feuille de route en comptait dix de mémoire ; le livre en porte treize) et leur
 
 ### `core::CityPlan` : une ville et ses quartiers
 
-Fichier : [`CityPlan.h`](../../Source/Core/World/CityPlan.h) (`LOT-96`). Une ville jouable
+Fichier : [`CityPlan.h`](../../Source/JustAnotherRpgGame/Core/World/CityPlan.h) (`LOT-96`). Une ville jouable
 (`Source/Elements/World/cities/<ville>.json`) **relie** sans rien redécrire : ni le quartier (sa
 fiche d'atlas), ni sa position (le plan, `world-maps.json`), ni ses rues (sa carte).
 
@@ -545,7 +545,7 @@ départ, son point d'arrivée, puis `enter`. Le modèle en tire aussi le quartie
 
 ### `core::CityBlock` : l'îlot
 
-Fichier : [`CityBlock.h`](../../Source/Core/World/CityBlock.h) (`LOT-96`). Le plan descend de la
+Fichier : [`CityBlock.h`](../../Source/JustAnotherRpgGame/Core/World/CityBlock.h) (`LOT-96`). Le plan descend de la
 ville au quartier, puis à l'îlot — et l'îlot n'a **pas d'image à lui** (décision de l'auteur,
 18 septembre 2026) : l'écran « Carte » montre la carte du quartier telle que le jeu la dessine,
 cadrée sur ce rectangle. Il se déclare donc **sur la carte**, comme la zone de combat : une entité
@@ -571,7 +571,7 @@ de [`interface-ihm.md`](../Specification/interface-ihm.md).
 
 ## Les familles d'entités : `EntityKinds.h`
 
-Fichier : [`EntityKinds.h`](../../Source/Core/World/EntityKinds.h) (`LOT-11`). `Core/Levels` ne
+Fichier : [`EntityKinds.h`](../../Source/JustAnotherRpgGame/Core/World/EntityKinds.h) (`LOT-11`). `Core/Levels` ne
 connaît aucune sémantique de type d'entité (`EX-LVL-017`) ; ce fichier **rassemble** les familles
 que le jeu lit déjà, pour que l'éditeur sache les poser et les contrôler. Il ne les invente pas :
 les types et propriétés sont ceux de `knownInteractableKinds`, `dialogueTriggerFor`,
@@ -644,7 +644,7 @@ les types et propriétés sont ceux de `knownInteractableKinds`, `dialogueTrigge
 
 ## Les dialogues : `Dialogue.h`
 
-Fichier : [`Dialogue.h`](../../Source/Core/Rpg/Dialogue.h) (`LOT-15`, `EX-VIS-003`). Parler à un
+Fichier : [`Dialogue.h`](../../Source/JustAnotherRpgGame/Core/Rpg/Dialogue.h) (`LOT-15`, `EX-VIS-003`). Parler à un
 PNJ, c'est jouer un **graphe** : des répliques à choix, des conditions sur drapeaux, des actions
 sur le monde, des jets de compétence, des fins.
 
@@ -678,7 +678,7 @@ plat ; seuls les champs de sa nature sont renseignés. `core::DialogueNodeKind` 
 | `Check` | `skill`, `difficulty`, `onSuccess`, `onFailure` | un jet de compétence contre un degré **nommé** |
 | `End` | — | la conversation se termine |
 
-`core::FlagCondition` ([`FlagCondition.h`](../../Source/Core/Gameplay/FlagCondition.h),
+`core::FlagCondition` ([`FlagCondition.h`](../../Source/JustAnotherRpgGame/Core/Gameplay/FlagCondition.h),
 `LOT-116`) est commune aux dialogues, aux étapes de quête et à la présence des entités : un
 drapeau, un test (`IsSet`, `IsUnset`, `Equals`, `NotEquals`) et, pour les deux derniers, une liste
 de valeurs ; `holds(flags)` répond, l'initiale d'un drapeau déclaré comptant comme sa valeur.
@@ -824,10 +824,10 @@ de l'écran seul), un ensemble le temps du processus.
 
 ## Les quêtes : `Quest.h`
 
-Fichiers : [`Quest.h`](../../Source/Core/Gameplay/Quest.h),
-[`FlagCondition.h`](../../Source/Core/Gameplay/FlagCondition.h),
-[`EntityPresence.h`](../../Source/Core/World/EntityPresence.h) (`LOT-116`) et, pour ce que la quête
-demande aux cartes, [`EntityKinds.h`](../../Source/Core/World/EntityKinds.h) (`LOT-126`). Le
+Fichiers : [`Quest.h`](../../Source/JustAnotherRpgGame/Core/Gameplay/Quest.h),
+[`FlagCondition.h`](../../Source/JustAnotherRpgGame/Core/Gameplay/FlagCondition.h),
+[`EntityPresence.h`](../../Source/JustAnotherRpgGame/Core/World/EntityPresence.h) (`LOT-116`) et, pour ce que la quête
+demande aux cartes, [`EntityKinds.h`](../../Source/JustAnotherRpgGame/Core/World/EntityKinds.h) (`LOT-126`). Le
 mécanisme ; la quête de la démo est au `LOT-120`, la sauvegarde des drapeaux au `LOT-150`
 (`0.2.0`).
 
@@ -923,7 +923,7 @@ catalogues posent (`setFlag`, le drapeau d'une quête démarrée, les effets et 
 qu'ils lisent, en `core::FlagRead` : le drapeau et l'endroit qui le lit (`dialogue 'x' : noeud
 'y'`, `quete 'x' : etape 'y'`). C'est ce que `LevelEditor --check` compare aux cartes.
 
-Au démarrage, `hmi::loadGameQuests(root)` ([`GameQuests.h`](../../Source/HMI/Game/GameQuests.h))
+Au démarrage, `hmi::loadGameQuests(root)` (`GameQuests.h`)
 lit `World/quests` sous la racine des éléments déployés, confronte aux dialogues de
 `World/dialogues` et rend un `hmi::GameQuests` : le catalogue accepté et, dans `errors`, les quêtes
 refusées (`fichier:ligne : …`) puis les usages fautifs. `hmi::WorldModel` les journalise et donne
@@ -1023,7 +1023,7 @@ quête déclare (`FlagValues`, avec `writesFlag`).
 ### Le journal
 
 `hmi::questJournalValues(catalog, flags, selected, text)`
-([`QuestJournalScreen.h`](../../Source/HMI/Presentation/QuestJournalScreen.h)) tire l'écran des
+(`QuestJournalScreen.h`) tire l'écran des
 drapeaux, sans Qt, en `hmi::QuestJournalValues` : les quêtes commencées (`quests`, des
 `hmi::QuestJournalRow` — identifiant, libellé, valeur) et leur état traduit par
 `hmi::questStatusKey` (`journal.status.<active|succeeded|failed>`), la choisie (`selected`)
@@ -1035,7 +1035,7 @@ l'ouverture et à chaque `questAdvanced` de `hmi::WorldModel`. Au clavier :
 
 ## La bascule vers le combat : `core::CombatZone`
 
-Fichier : [`CombatZone.h`](../../Source/Core/World/CombatZone.h) (`LOT-09`, `EX-LVL-018`).
+Fichier : [`CombatZone.h`](../../Source/JustAnotherRpgGame/Core/World/CombatZone.h) (`LOT-09`, `EX-LVL-018`).
 L'Arena of Fate est un lieu : on marche dans le hall, les couloirs, les vestiaires et les tribunes, et
 l'on ne s'y bat pas — le livre ne fait combattre que sur le sable. Prendre la carte entière pour
 grille tactique donnerait un affrontement de mille cases dont la plupart seraient des gradins. La

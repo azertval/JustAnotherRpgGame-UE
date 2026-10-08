@@ -31,8 +31,10 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
   scripts que seul le moteur maison faisait tourner, dix guides, le Manuel du jeu Qt et
   vingt-cinq images sont supprimés, sans archive — l'ancien dépôt en est la mémoire. `Content/`
   n'est pas suivi par Git et se régénère par script (D-60) ; pas de runner auto-hébergé pour
-  l'instant (D-61) ; les kits se publient sur ce dépôt à la `0.0.3` (D-62). La fiche dit ce qui
-  reste.
+  l'instant (D-61) ; les kits se publient sur ce dépôt à la `0.0.3` (D-62). Les liens de la
+  documentation suivent Core à son nouveau chemin, le cahier de test est réengendré (647 cas, tous
+  de Core), et `lint_planning`, `lint_docs` et `generate_cahier_test --check` entrent dans la CI.
+  La fiche dit ce qui reste.
 - **Le Colisée de la porte est reconstruit en pièces modulaires, aux dimensions de celui de Rome**
   (LOT-1012, 8 octobre 2026). La coque d'un seul tenant de l'ancien kit, agrandie 2,7 fois, ne
   tenait pas le gros plan : `scripts/assetsGeneration/build_colosseum.py` (Blender sans fenêtre)

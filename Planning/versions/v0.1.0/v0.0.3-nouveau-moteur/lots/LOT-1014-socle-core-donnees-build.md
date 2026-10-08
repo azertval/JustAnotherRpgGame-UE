@@ -232,10 +232,14 @@ Ce qui cite encore Qt, hors `Planning/` (l'histoire) :
 - **les commentaires de Core** (« sans Qt ni GPU », une douzaine d'en-têtes) et
   `test_iso_projection.cpp`, qui compare une projection à l'ancienne scène QML : Core est venu
   sans une ligne modifiée. La projection disparaît avec la grille (LOT-1017) ;
-- **les cinq spécifications**, des pages de guide qui renvoient encore à `hmi::…`, et le **cahier
-  de tests** : `generate_cahier_test.py` décrit des étages de tests restés dans l'ancien dépôt, et
-  douze pages engendrées (`CahierTest/hmi-*.md`, `editor.md`, `systeme.md`, `integration.md`,
-  `recette-manuelle.md`) portent sur eux. Elles partent quand le générateur est refait.
+- **les cinq spécifications**, des pages de guide qui nomment encore `hmi::…`, et la **recette
+  manuelle** du cahier de tests, écrite pour l'ancien jeu : elle se réécrit à la recette
+  (LOT-1023).
+
+Le **cahier de tests** est réengendré : 647 cas, 14 pages, tous de `Core` ; les douze pages qui
+portaient sur des tests restés dans l'ancien dépôt ont disparu avec lui. 42 liens de la
+documentation suivent Core à son nouveau chemin, six vers ce qui n'est pas dans ce dépôt sont
+retirés. `lint_planning`, `lint_docs` et `generate_cahier_test --check` sont verts et **dans la CI**.
 
 ### Les décisions du 8 octobre
 
@@ -258,8 +262,8 @@ Ce qui cite encore Qt, hors `Planning/` (l'histoire) :
 
 ### Ce qui reste au lot
 
-- les cinq spécifications et le cahier de tests, à reprendre exigence par exigence ;
-- `lint_planning`, `lint_docs` et `generate_cahier_test` ne sont pas dans la CI ; `publish_asset_kit.py`
+- les cinq spécifications, à reprendre exigence par exigence ;
+- `publish_asset_kit.py`
   nomme encore `check_ui_assets.py`, resté dans l'ancien dépôt, pour le kit de l'interface ;
 - le commandlet et les tests du moteur n'ont pas été lancés sur un poste **sans** `Content/` : la
   carte de démarrage de l'éditeur (`Porte1012`) y manque, et ce que le moteur en dit n'est pas

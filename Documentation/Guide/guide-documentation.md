@@ -62,7 +62,7 @@ Toujours **relatifs**, vers le fichier source — le site les réécrit :
 [la boucle de jeu](guide-boucle.md)                          une page voisine
 [EX-CBT-020](../Specification/combat.md#EX-CBT-020)          une ancre d'une autre partie
 [LOT-128](../../Planning/versions/v0.1.0/v0.0.1-demo/lots/LOT-128-cartes-maquettes.md)
-[`Level.h`](../../Source/Core/Levels/Level.h)                un fichier du dépôt : ouvert sur la forge
+[`Level.h`](../../Source/JustAnotherRpgGame/Core/Levels/Level.h)                un fichier du dépôt : ouvert sur la forge
 ```
 
 Trois choses se relient **toutes seules** quand elles sont écrites en code :

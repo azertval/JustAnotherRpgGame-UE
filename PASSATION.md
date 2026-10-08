@@ -120,18 +120,16 @@ le commandlet montre que le moteur lit **les mêmes fichiers** et obtient **des 
   tests de Core hors moteur en Debug et en Release, clang-format sur Core et ses tests, douze
   contrôles du référentiel, les hooks, le CHANGELOG. La construction du moteur, ses tests et ses
   captures se vérifient sur le poste avant chaque PR (`scripts/build.ps1 -Unreal`) : `unreal.yml`
-  est écrit mais dormant, sans runner auto-hébergé pour l'instant (D-61). Ne sont pas repris tant
-  que leur script n'est pas relu : `lint_planning` (un lien vers `Site/README.md`), `lint_docs`
-  (des liens vers l'ancien chemin de Core et vers `Source/HMI`), `generate_cahier_test` ;
-  `check_map_assets` et `check_hd_assets` lisent les kits, qui se publient sur ce dépôt à la
+  est écrit mais dormant, sans runner auto-hébergé pour l'instant (D-61). `lint_planning`,
+  `lint_docs` et `generate_cahier_test` sont repris le 8 octobre, liens réparés et cahier
+  réengendré. Ne sont pas repris : `check_map_assets` et `check_hd_assets`, qui lisent les kits, qui se publient sur ce dépôt à la
   `0.0.3` (D-62). Restent à refaire : la publication d'une version, la référence Doxygen et la
   page qualité du site (republié sans elles par `docs.yml`).
 - **`Documentation/`** : ce qui ne décrivait que le moteur maison est **supprimé** (D-59, 8 octobre ;
   fiche du LOT-1014, « Rien d'hérité ») : dix guides, le Manuel, vingt-cinq images. Restent à
   reprendre, exigence par exigence : les spécifications `rendu-technique.md`, `interface-ihm.md`,
   `editeur-niveaux.md`, `controles.md` et `architecture.md`, qui déclarent des exigences que Core
-  cite encore, et le cahier de tests, dont le générateur décrit des étages restés dans l'ancien
-  dépôt.
+  cite encore, et la recette manuelle du cahier de tests, écrite pour l'ancien jeu (LOT-1023).
 - **`scripts/`**, relu le 8 octobre (fiche du LOT-1014, « Avancement ») : `check_orphans.py` ne
   connaît plus le `.qml` ni les arbres de l'ancien dépôt et lit `Content/` ; `check_tool_pins.py`
   épingle le moteur ; `check_binary_files.py` refuse une sortie du moteur hors de Git LFS ;

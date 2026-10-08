@@ -37,10 +37,10 @@ CI = os.path.join('.github', 'workflows', 'ci.yml')
 JOB = 'lint-exigences'
 JOB_RE = re.compile(r'^  ([A-Za-z0-9_-]+):\s*$')
 NAME_RE = re.compile(r'^      - name:\s*(.+?)\s*$')
-# Un script du dépôt — de `scripts/` ou de l'outillage de `Planning/` —, ou pytest (les tests des
+# Un script du dépôt — de `scripts/`, de l'outillage de `Planning/` ou de `Documentation/` —, ou pytest (les tests des
 # scripts, phase 4).
 RUN_RE = re.compile(
-    r'^        run:\s*python3\s+((?:scripts|Planning/outils)/\S+\.py|-m\s+pytest)(.*?)\s*$')
+    r'^        run:\s*python3\s+((?:scripts|Planning/outils|Documentation/outils)/\S+\.py|-m\s+pytest)(.*?)\s*$')
 ENV_RE = re.compile(r'^  ([A-Z0-9_]+):\s*[\'"]?([^\'"\s#]+)')
 
 

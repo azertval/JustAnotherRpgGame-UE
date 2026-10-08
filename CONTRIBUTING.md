@@ -98,7 +98,7 @@ contrôles requis d'une PR sont donc ceux qui ne dépendent pas du moteur :
 |---|---|
 | `core-tests (ninja)`, `core-tests (ninja-release)` | Construit `Core` seule et lance ses tests GoogleTest, en Debug et en Release |
 | `format` | clang-format sur `Core` et ses tests |
-| `lint-exigences` | Livres sources, exigences, lexique, manifeste du corpus, clés d'assets, catalogues RPG contre leurs schémas, traductions, scripts PowerShell, versions d'outils (moteur compris), binaires, JSON, scripts sans appelant et sorties du moteur sans script, tests des scripts |
+| `lint-exigences` | Livres sources, exigences, lexique, manifeste du corpus, clés d'assets, catalogues RPG contre leurs schémas, traductions, scripts PowerShell, versions d'outils (moteur compris), binaires, JSON, planification, liens de la documentation, cahier de test, scripts sans appelant et sorties du moteur sans script, tests des scripts |
 | `pre-commit` | Les hooks du poste, sur tout le dépôt |
 | `changelog` | La PR ajoute une ligne à `## [Non publié]`, ou porte le label `no-changelog` |
 
