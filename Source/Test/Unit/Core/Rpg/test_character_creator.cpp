@@ -29,7 +29,7 @@ const std::filesystem::path ELEMENTS{std::filesystem::path{JADG_RPG_DIR}.parent_
  * \tattendu Identifiant humanoid, composant Body, taille de reference positive, au moins deux
  * corps, les six clips du jeu, les sockets main-hand et off-hand.}
  */
-TEST(CreateurDePersonnageTest, LaDescriptionLivreeSeLit) {
+TEST(CreateurDePersonnageTest, LaDescriptionLivreeSeLit) {
     const core::CharacterCreatorReadResult lue =
         core::readCharacterCreator(ELEMENTS / "Assets" / "Characters" / "humanoid.json");
     ASSERT_TRUE(lue.ok()) << lue.message;
@@ -55,7 +55,7 @@ const std::filesystem::path ELEMENTS{std::filesystem::path{JADG_RPG_DIR}.parent_
  * \tattendu Chaque fiche cite le createur humanoid, un de ses corps, des mains qu'il connait et des
  * pieces Weapons/.}
  */
-TEST(CreateurDePersonnageTest, ChaqueFicheLivreeNommeUnCorpsDuCreateur) {
+TEST(CreateurDePersonnageTest, ChaqueFicheLivreeNommeUnCorpsDuCreateur) {
     const core::CharacterCreator creator =
         core::readCharacterCreator(ELEMENTS / "Assets" / "Characters" / "humanoid.json").creator;
     std::vector<std::string> erreurs;
@@ -80,7 +80,7 @@ const std::filesystem::path ELEMENTS{std::filesystem::path{JADG_RPG_DIR}.parent_
  * \tattendu MalformedStructure et le chemin du champ dans le message ; la description correcte
  * passe.}
  */
-TEST(CreateurDePersonnageTest, CeQuIlRefuse) {
+TEST(CreateurDePersonnageTest, CeQuIlRefuse) {
     struct Cas {
         const char* json;
         const char* champ;

@@ -38,7 +38,7 @@ constexpr const char* FICHE = R"({
  * \tattendu Chaque champ est retrouve ; une couleur a trois composantes recoit un alpha de 1 ; seul
  * le clip qui porte un key est dans clipKeys.}
  */
-TEST(ApparenceTest, UneFicheSeLitChampParChamp) {
+TEST(ApparenceTest, UneFicheSeLitChampParChamp) {
     const core::AppearanceReadResult lue = core::parseAppearance(FICHE, "essai.json");
     ASSERT_TRUE(lue.ok()) << lue.message;
     const core::Appearance& fiche = lue.appearance;
@@ -65,7 +65,7 @@ constexpr const char* FICHE = R"({
  * \tattendu MalformedStructure et le chemin du champ dans le message ; ParseError pour le texte
  * malforme.}
  */
-TEST(ApparenceTest, CeQuEllRefuseEstNommeAvecSonChamp) {
+TEST(ApparenceTest, CeQuEllRefuseEstNommeAvecSonChamp) {
     struct Cas {
         const char* json;
         const char* champ;
@@ -104,7 +104,7 @@ constexpr const char* FICHE = R"({
  * \tattendu Aucune erreur ; chaque identifiant attendu est present, taille positive, arme et key
  * d'attaque a 0,4 s pour les heros.}
  */
-TEST(ApparenceTest, LesFichesLivreesSeLisentEtPortentLeurNomDeFichier) {
+TEST(ApparenceTest, LesFichesLivreesSeLisentEtPortentLeurNomDeFichier) {
     std::vector<std::string> erreurs;
     const auto fiches = core::loadAppearances(RPG / "appearances", erreurs);
     EXPECT_TRUE(erreurs.empty()) << erreurs.front();
@@ -132,7 +132,7 @@ constexpr const char* FICHE = R"({
  * \tetapes 1. Lire un fichier qui n'existe pas.<br/>
  * \tattendu FileNotFound.}
  */
-TEST(ApparenceTest, UnFichierAbsentEstUnEchecNomme) {
+TEST(ApparenceTest, UnFichierAbsentEstUnEchecNomme) {
     const core::AppearanceReadResult lue =
         core::readAppearance(RPG / "appearances" / "nulle-part.json");
     EXPECT_EQ(lue.error, core::JsonReadError::FileNotFound);
