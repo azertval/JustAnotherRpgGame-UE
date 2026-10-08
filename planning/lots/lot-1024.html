@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOT-1024 — Le créateur : les 22 espèces et les humanoïdes de la démo — Planification</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Planification</a>
+  <nav><a href="../index.html">Trajectoire</a><a href="index.html" class="active">Lots</a><a href="../versions/index.html">Versions</a><a href="../vision/index.html">Vision</a><a href="../referentiels/index.html">Référentiels</a><a href="../standards/index.html">Standards</a></nav>
+  <div class="links"><a href="../../">Documentation</a><a class="active" href="../index.html">Planification</a><a href="../../qualite/">Qualité</a></div>
+</header>
+<div class="shell">
+
+<main>
+<p class="crumb"><a href="index.html">Lots</a> › <a href="../versions/v0-0-3.html">0.0.3 — Le nouveau moteur</a></p><h1><span class="vid">LOT-1024</span> Le créateur : les 22 espèces et les humanoïdes de la démo</h1><p class="lede">Le créateur de personnage sait faire chacune des 22 espèces jouables, et les humanoïdes de la démo — la mère, l'enfant, le garde, le maître d'arène et les adversaires de l'arène — y sont des fiches.</p><dl class="facts"><div><dt>État</dt><dd><span class="badge etat-en-attente">en attente</span></dd></div><div><dt>Filière</dt><dd><span class="filiere f-pnj">PNJ</span></dd></div><div><dt>Taille</dt><dd>L</dd></div><div><dt>Ordre calculé</dt><dd>8</dd></div><div><dt>Prérequis</dt><dd><a class="ref" href="lot-1015.html">LOT-1015</a></dd></div><div><dt>Débloque</dt><dd><a class="ref" href="lot-1023.html">LOT-1023</a></dd></div><div><dt>Reprend</dt><dd>—</dd></div></dl><section><h2>Livrables</h2><ul class=""><li>Les paramètres de race du créateur pour les 22 espèces de <code>Source/Elements/Rpg/species/</code> — corps, têtes, oreilles, défenses, cornes, queues, écailles, tailles —, mesurés espèce par espèce : ce que MetaHuman atteint par conformation, ce qui demande un corps ou une tête Meshy ou Fab, écrit dans la fiche.</li><li>La garde-robe commune du créateur.</li><li>Une fiche d'exemple par espèce, qui se construit.</li><li>Les fiches des humanoïdes de la démo : la mère, l'enfant, le garde (soldat Ironhand), le maître d'arène, et les adversaires de la série de l'arène — bandit, bandit archer, capitaine des bandits, berserker, brute, gladiateur, combattant de l'arène, vétéran, squelette, zombie.</li><li>Les captures de contrôle (repos, marche) de chaque humanoïde, à midi et à 22 h ; une planche des 22 espèces au repos.</li></ul></section><section><h2>Critères d'acceptation</h2><ul class="checks"><li>Chaque espèce a une fiche d'exemple qui se construit par le constructeur du créateur, sans geste dans l'éditeur.</li><li>Un PNJ se reconnaît à côté de son portrait peint (jugement de l'auteur, sur les captures de contrôle).</li><li>Huit personnages à l'écran : la cadence est mesurée et écrite dans la fiche.</li></ul></section><section class="prose"><h2 id="pourquoi">Pourquoi</h2>
+<p>Le <a href="lot-1015.html">LOT-1015</a> prouve le créateur sur quatre héros MetaHuman. Le jeu en demande plus : 22 espèces jouables, dont plusieurs que MetaHuman ne produit pas tel quel, et les humanoïdes de la quête et de l'arène, qui avaient chacun leur maillage Meshy jusqu'à D-63. Ce lot fait du créateur l'outil de tout humanoïde du jeu ; sans lui, le combat se joue avec des fiches provisoires sur le corps des héros.</p>
+<h2 id="périmètre">Périmètre</h2>
+<p>Dedans : les paramètres de race des 22 espèces, la garde-robe commune, les fiches des humanoïdes de la démo, les captures, la planche des espèces.</p>
+<p>Dehors, nommément :</p>
+<ul><li>les PNJ des trois lieux : aux lots de la <code>0.0.4</code> ;</li><li>le lion et le loup : au <a href="lot-1025.html">LOT-1025</a> ;</li><li>la silhouette volante ;</li><li>les portraits et les jetons : ils restent peints (D-30).</li></ul>
+<h2 id="conception">Conception</h2>
+<ul><li><strong>Les espèces</strong> (<code>Source/Elements/Rpg/species/</code>), toutes de taille moyenne ou petite : l'humain ; l'elfe et ses six variantes (haut-elfe, elfe des bois, elfes de printemps, d'été, d'automne et d'hiver) ; le demi-elfe ; le demi-orc ; le nain, le nain des collines et le nain des montagnes ; le halfelin, le halfelin pied-léger et le halfelin robuste ; le gnome ; le tieffelin ; le drakéide ; le cirrus ; le gloomfolk ; le taii'maku. Le gnome et les trois halfelins sont de petite taille.</li><li><strong>Ce que MetaHuman atteint</strong> se mesure, espèce par espèce, et s'écrit dans une table de la fiche. Le drakéide est hors de sa portée (D-63) ; les petites tailles, les nains et le demi-orc sont à mesurer, comme le cirrus, le gloomfolk et le taii'maku, sur leur description dans les données. Ce qui manque devient un corps ou une tête Meshy ou Fab, ou une pièce Meshy (cornes, défenses, queues, oreilles, écailles).</li><li><strong>Les humanoïdes de la démo</strong> reprennent les adversaires des rencontres de l'arène (<code>Source/Elements/Rpg/encounters/arene-*.json</code>). Le soldat Ironhand est le garde du parvis (<code>Source/Elements/World/dialogues/garde.json</code>) ; il n'est dans aucune rencontre.</li><li><strong>Les armes</strong> sont celles de <code>Master/Weapons</code>, accrochées par socket (D-63).</li></ul>
+<h2 id="risques-et-questions-ouvertes">Risques et questions ouvertes</h2>
+<ul><li><strong>Les races hors de MetaHuman.</strong> Un corps ou une tête Meshy doit tenir sur le squelette standard d'Unreal et dans le graphe Mutable comme un corps MetaHuman ; le coût par espèce est inconnu avant la mesure.</li><li><strong>Les morts-vivants.</strong> Le squelette et le zombie s'écartent le plus d'un corps humain : leur voie (conformation, corps Meshy ou Fab) se décide sur mesure.</li><li><strong>Les licences Fab</strong>, pack par pack, avant achat, par l'auteur.</li></ul></section><p class="source">Source : <code>Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1024-createur-especes-et-humanoides.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Planning/</code> le 2026-10-08 · <code>bcaacaa4c</code>. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>
