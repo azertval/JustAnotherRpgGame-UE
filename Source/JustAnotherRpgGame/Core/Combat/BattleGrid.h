@@ -17,6 +17,7 @@
 #include <string_view>
 #include <vector>
 
+#include "Core/Combat/CombatTypes.h"
 #include "Core/Combat/Damage.h"
 #include "Core/Levels/GridPosition.h"
 #include "Core/Levels/LevelProperties.h"
@@ -27,85 +28,8 @@ namespace core {
 
 class Level;
 
-/**
- * @brief Identifiant d'un combattant sur la grille.
- *
- * Un type **fort**, et non un `int` : la grille ne sait rien de ce qu'est un combattant — fiche,
- * créature, camp —, elle ne retient que sa place. C'est le combat (`core::CombatState`, `LOT-20`)
- * qui attribue les identifiants ; un entier nu se serait confondu avec un indice de case à la
- * première signature qui prend les deux.
- */
-enum class CombatantId : std::uint32_t {};
-
-/**
- * @brief Côté, en cases, de l'emprise d'une créature de taille @p size.
- *
- * Manuel des Joueurs, « Taille des créatures » : TP, P et M tiennent dans une case de 1,50 m, G
- * dans 2 × 2, TG dans 3 × 3, Gig dans 4 × 4. Une très petite créature occupe **une case entière**
- * ici, là où le livre en tolère quatre dans la même : c'est le critère du lot — « deux créatures
- * ne partagent jamais une case » —, et la règle du livre se rouvrira, si un contenu la réclame, par
- * une exception nommée et non par un partage silencieux.
- */
-[[nodiscard]] constexpr int footprintSide(CreatureSize size) noexcept {
-    switch (size) {
-        case CreatureSize::Tiny:
-        case CreatureSize::Small:
-        case CreatureSize::Medium:
-            return 1;
-        case CreatureSize::Large:
-            return 2;
-        case CreatureSize::Huge:
-            return 3;
-        case CreatureSize::Gargantuan:
-            return 4;
-    }
-    return 1;
-}
-
-/**
- * @brief Comment un combattant se déplace : au sol, ou en vol.
- *
- * ## L'altitude est un attribut, jamais une géométrie
- *
- * Le jeu est vu de dessus, et sa grille n'a pas de hauteur. Donner une altitude aux cases — une
- * grille par étage, ou une case « en l'air » au-dessus d'une autre — ferait de chaque requête de
- * portée, de chemin et d'occupation une requête en trois dimensions, pour un contenu qui n'en a
- * besoin qu'au passage d'un dragon. Le vol est donc une **manière de traverser** la même grille :
- *
- * - un volant franchit les obstacles **au sol** — l'eau profonde, la falaise — et ignore le terrain
- *   difficile, qui est une gêne de sol ;
- * - il ne traverse pas la **matière pleine** : un mur de donjon monte jusqu'à la voûte, et la
- *   grille de collision ne sait pas distinguer un muret d'un rempart ;
- * - il occupe sa case comme tout autre combattant : deux créatures ne s'y superposent pas, l'une
- *   en vol et l'autre au sol.
- *
- * Qu'un volant reste ciblable à portée découle de la même décision, et c'est le `LOT-22` qui la
- * lira : une portée se compte sur la grille, sans hauteur à ajouter.
- */
-enum class Locomotion {
-    Walk,
-    Fly,
-};
-
 /// @brief Nom de la propriété de zone qui rend une case difficile (`EX-LVL-018`).
 inline constexpr std::string_view DIFFICULT_TERRAIN_PROPERTY = "difficultTerrain";
-
-/**
- * @brief Les trois abris du Manuel des Joueurs (chapitre 9, « Abri »), et l'absence d'abri.
- *
- * Ordonnés du moins au plus protecteur : « si une cible se positionne derrière plusieurs types
- * d'abri, seul celui qui la protège le plus est pris en compte », et comparer deux abris est ce que
- * cette règle demande. Le calcul est au `LOT-22` (`core::coverBetween`).
- */
-enum class Cover : std::uint8_t {
-    None,
-    /// Au moins la moitié du corps : +2 à la CA et aux sauvegardes de Dextérité.
-    Half,
-    /// Au moins les trois quarts : +5.
-    ThreeQuarters,
-    /// Complètement dissimulée : ne peut pas être ciblée directement.
-    Total,
-};
 
 /**
  * @brief Un objet posé sur une case : une toile, une barricade, un tonneau.

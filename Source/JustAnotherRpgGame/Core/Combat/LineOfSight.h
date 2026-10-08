@@ -86,21 +86,6 @@ struct Footprint {
     int side = 1;
 };
 
-/// @brief Le bonus d'un abri à la CA et aux sauvegardes de Dextérité : 0, +2, +5 ; 0 pour l'abri
-/// total, qui n'est pas un bonus mais une interdiction.
-[[nodiscard]] constexpr int coverBonus(Cover cover) noexcept {
-    switch (cover) {
-        case Cover::Half:
-            return 2;
-        case Cover::ThreeQuarters:
-            return 5;
-        case Cover::None:
-        case Cover::Total:
-            return 0;
-    }
-    return 0;
-}
-
 /// @brief Le nom d'un abri tel que le journal l'écrit : « abri partiel », « abri important ».
 [[nodiscard]] std::string_view coverLabel(Cover cover) noexcept;
 

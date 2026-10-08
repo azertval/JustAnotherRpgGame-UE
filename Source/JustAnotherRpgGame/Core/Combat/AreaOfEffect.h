@@ -55,15 +55,6 @@ namespace core {
 
 class CombatState;
 
-/// @brief Les cinq formes du Manuel.
-enum class AreaShape : std::uint8_t {
-    Cone,
-    Cube,
-    Cylinder,
-    Line,
-    Sphere,
-};
-
 /**
  * @brief Une zone posée sur la grille.
  *

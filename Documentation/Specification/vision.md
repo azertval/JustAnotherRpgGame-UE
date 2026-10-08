@@ -59,7 +59,7 @@ joueur, et son échelle est celle de la fenêtre. La frontière entre les deux e
   clips. Chacune de leurs valeurs est **mesurée** sur une preuve ou **décidée et datée** par
   l'auteur ; ce qui n'est ni l'un ni l'autre y est écrit comme ouvert, avec le lot qui le tranche.
   Restent des **images**, et elles seules gardent le losange de **256 × 159 pixels d'art**
-  (rapport 0,62, celui d'`core::IsoProjection`), l'alpha continu prémultiplié et le filtrage
+  (rapport 0,62, celui de l'ancienne projection isométrique de Core (retirée au `LOT-1017`)), l'alpha continu prémultiplié et le filtrage
   bilinéaire avec mipmaps (`EX-ARCH-022`) : le mobilier et les pièces maîtresses **tolérés
   jusqu'à la `0.0.3`**, les effets, les portraits et les jetons. L'échelle de ces images reste
   une **donnée du lieu** — le champ `"tile"` de son manifeste. Une pièce **tient seule** : pas de

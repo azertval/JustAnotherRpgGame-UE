@@ -40,7 +40,8 @@ combat](../Specification/combat.md) en détaille chaque terme.
 | `LineOfSight.h`, `AreaOfEffect.h` | ligne de vue, abri, zones d'effet | `LOT-22` |
 | `EnemyAi.h`, `Flanking.h` | l'IA tactique et la prise en tenaille | `LOT-23` |
 | `CombatPreview.h` | ce que l'écran montre avant que le joueur ne s'engage | `LOT-24` |
-| `Arena.h`, `IsoProjection.h` | la session d'arène, rejouable, et la projection isométrique de sa grille | `LOT-50` |
+| `Arena.h` | la session d'arène, rejouable | `LOT-50` |
+| `CombatTypes.h`, `CombatSpace.h`, `SimulatedSpace.h` | les types partagés, l'espace de combat **en mètres** (volumes, allonge, zones, abri, tenaille, hauteur ; l'interface que le moteur implémente) et sa simulation pour les tests | `LOT-1017` |
 
 Chaque en-tête cite la page du Manuel des Joueurs ou du Guide du Maître qui fonde ses règles, et
 nomme ce qu'il **décide** au-delà du livre : cette page reprend ces décisions, sans recopier les
@@ -803,34 +804,28 @@ dix rounds avec 1 PV (`revives`) ; le soin ne vise pas un mort. La ligne d'une a
 après la déclaration et avant les dés, et se remplit une fois l'attaque résolue : la chute, l'issue
 et la Marque qu'elle déclenche s'écrivent après elle, dans l'ordre où c'est arrivé.
 
-### La projection isométrique (`IsoProjection.h`)
+### L'espace de combat en mètres (`CombatSpace.h`, `SimulatedSpace.h`)
 
-`core::IsoProjection` traduit une case de la grille de combat en sa place dans le **monde**
-(`EX-ARCH-020`, `EX-ARCH-021`), et retour — dans `Core`, sans Qt, pour se vérifier en test
-unitaire (`EX-ARCH-012`). Une case (c, r) occupe le carré [c, c + 1[ × [r, r + 1[ en coordonnées
-continues, et la projection est affine :
+Depuis le `LOT-1017` (D-50), les règles spatiales se disent **en mètres**, sans grille à l'écran :
+une créature est un cylindre posé au sol (`core::Volume` — rayon et hauteur tirés de son emprise
+du Manuel, 0,75 m et 1,50 m pour une créature M), l'allonge se mesure entre les bords
+(`core::inReach`, 1,50 m), une zone est une forme (`core::Effect`, `core::shapeHits` : sphère et
+cylindre exacts en trois dimensions ; cône, ligne et cube dans le plan), la tenaille est un angle
+au centre de la cible (`core::flanksByAngle`, 135° : la valeur où la ligne des centres du Guide
+bascule sur les huit cases adjacentes), et l'avantage de hauteur demande une case d'écart
+(`core::hasHighGround`). Les données du corpus restent écrites en cases : `core::metersFromTiles`.
 
-```
-monde.x = originX + L/2 + (gc − gr) · L/2
-monde.y = originY       + (gc + gr) · H/2
-```
+Ce qui dépend de la carte passe par l'interface `core::CombatSpace` — hauteur du sol, place libre,
+ligne de vue, chemin dans un budget, positions candidates — que le moteur implémente par son
+maillage de navigation et ses rayons, et que `core::SimulatedSpace` implémente sans moteur : un
+plan borné, des boîtes, des plateaux, du terrain difficile, de l'eau profonde ; le chemin est un
+Dijkstra sur un réseau de 0,5 m, déterministe, et `fromTileMap` lit une grille de collision de
+l'ancien format. L'abri (`core::coverFrom`) garde la méthode du Guide : des lignes vers quatre
+points du bord de la cible, étagés sur sa hauteur ; une ou deux coupées, abri partiel ; trois,
+important ; quatre, total ; un corps interposé, partiel.
 
-où L est la largeur du losange (`ARENA_TILE_WIDTH_UNITS` par défaut : une tuile de l'ancienne
-planche du Colisée, 86 px, à sa taille native au zoom 1) et H = 0,62 L sa hauteur (`ARENA_DIAMOND_RATIO`,
-l'angle des tuiles de la planche, pas le 2:1 classique). Le coin de grille (c, r) tombe sur le
-sommet haut du losange de la case ; une bande de `ARENA_WALL_RISE · L` est réservée en haut pour
-les murs du fond. Le cadrage — centrer, faire tenir dans la surface — n'est pas l'affaire de la
-projection mais de la caméra (`hmi::PlaceCamera`, Rendu 2D).
-
-- `columns`, `rows`, `tileWidth`, `tileHeight`, `wallHeight`, `diagonals` (`columns + rows`, au
-  moins 1 : une grille vide garde une scène non dégénérée), `sceneSize`, `origin`.
-- `gridToWorld(point)` et son inverse exact `worldToGrid` ; `tileToWorld(case)`, le centre du
-  losange — l'ancrage d'une pièce posée sur la case ; `tileBounds(case)`, la boîte L × H d'où ce que
-  la case porte déborde vers le haut ; `worldToTile(point)`, la case dont le losange contient un
-  point (un point sur une arête appartient à la case de plus grande colonne ou ligne : les losanges
-  pavent sans trou ni recouvrement) ; `contains` ; `depth(case)` = `column + row`, une pièce de
-  profondeur plus grande passant devant sans autre tri.
-
+La projection isométrique (`IsoProjection.h`) est retirée : la caméra est libre (D-49) et le
+moteur projette.
 ### À l'écran
 
 Ce que l'écran fait de la session est l'affaire d'autres pages ; en voici seulement les prises.
@@ -916,7 +911,9 @@ sous son voile ; c'est l'écran de mort qui quitte la rencontre et finit la part
 - `core::prepareMapEncounter`, `core::MapEncounterSetup`, `hmi::EncounterModel`,
   `hmi::CombatModel`, `hmi::CombatCueTrack`, `hmi::FigureResolver`.
 - `core::planTurn`, `core::playTurn`, `core::expectedDamage`, `core::ArenaSession`,
-  `core::IsoProjection`, `core::CombatZone`.
+  `core::CombatZone`.
+- `core::Volume`, `core::inReach`, `core::shapeHits`, `core::flanksByAngle`, `core::hasHighGround`,
+  `core::CombatSpace`, `core::SimulatedSpace`, `core::coverFrom` — l'espace en mètres (`LOT-1017`).
 - `hmi::CombatModel`, `hmi::EncounterModel` — la présentation du combat sur la carte.
 - [Règles d20 et personnages](guide-regles.md) — le jet, la fiche, l'inventaire que les profils
   d'attaque lisent.

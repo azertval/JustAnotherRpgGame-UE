@@ -1,6 +1,6 @@
 # Core · Combat
 
-Tests unitaires — **182 cas** (33 bloquants, 102 critiques, 46 majeurs, 1 mineur). [Retour à la synthèse](README.md).
+Tests unitaires — **201 cas** (28 bloquants, 102 critiques, 71 majeurs). [Retour à la synthèse](README.md).
 
 ## Ce que cette page couvre
 
@@ -18,17 +18,18 @@ Tests unitaires — **182 cas** (33 bloquants, 102 critiques, 46 majeurs, 1 mine
 | [`test_class_priest.cpp`](#test-class-priestcpp) | 6 | - | 6 | - | - |
 | [`test_class_scoundrel.cpp`](#test-class-scoundrelcpp) | 7 | - | 5 | 2 | - |
 | [`test_combat_preview.cpp`](#test-combat-previewcpp) | 3 | 1 | 2 | - | - |
+| [`test_combat_space.cpp`](#test-combat-spacecpp) | 13 | - | - | 13 | - |
 | [`test_combat_state.cpp`](#test-combat-statecpp) | 13 | 6 | 6 | 1 | - |
 | [`test_damage.cpp`](#test-damagecpp) | 7 | 3 | 3 | 1 | - |
 | [`test_death_and_dying.cpp`](#test-death-and-dyingcpp) | 13 | - | 9 | 4 | - |
 | [`test_encounter.cpp`](#test-encountercpp) | 12 | - | 7 | 5 | - |
 | [`test_encounter_difficulty.cpp`](#test-encounter-difficultycpp) | 3 | - | 3 | - | - |
 | [`test_enemy_ai.cpp`](#test-enemy-aicpp) | 12 | 5 | 7 | - | - |
-| [`test_iso_projection.cpp`](#test-iso-projectioncpp) | 9 | 5 | - | 3 | 1 |
 | [`test_line_of_sight.cpp`](#test-line-of-sightcpp) | 3 | 1 | 1 | 1 | - |
 | [`test_map_encounter.cpp`](#test-map-encountercpp) | 4 | - | 3 | 1 | - |
 | [`test_party_deployment.cpp`](#test-party-deploymentcpp) | 6 | - | 4 | 2 | - |
 | [`test_pathfinding.cpp`](#test-pathfindingcpp) | 13 | 4 | 6 | 3 | - |
+| [`test_simulated_space.cpp`](#test-simulated-spacecpp) | 15 | - | - | 15 | - |
 | [`test_tactical_terrain.cpp`](#test-tactical-terraincpp) | 10 | - | 4 | 6 | - |
 | [`test_turn_order.cpp`](#test-turn-ordercpp) | 3 | 1 | 1 | 1 | - |
 
@@ -1927,6 +1928,231 @@ Le bonus au jet d'une capacite s'ajoute au jet requis ; les des d'une capacite a
 - Vérifie que `apres->extraDamage.front().reason` vaut `"deja jouee ce tour"`.
 - Vérifie que `apres->extraDamage.front().applies` est vrai.
 
+## test_combat_space.cpp
+
+### EspaceDeCombatTest.UneCreatureEstUnCylindreALaTailleDuManuel
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:36`
+
+Une creature est un cylindre a la taille du Manuel.
+
+**Étapes**
+
+1. Lire le rayon et la hauteur des tailles M, G, TG, Gig.
+
+**Résultat attendu**
+
+- Vérifie que `core::creatureRadius(CreatureSize::Medium)` vaut `0.75f` (comparaison flottante).
+- Vérifie que `core::creatureHeight(CreatureSize::Medium)` vaut `1.5f` (comparaison flottante).
+- Vérifie que `core::creatureRadius(CreatureSize::Large)` vaut `1.5f` (comparaison flottante).
+- Vérifie que `core::creatureRadius(CreatureSize::Gargantuan)` vaut `3.0f` (comparaison flottante).
+- Vérifie que `core::creatureHeight(CreatureSize::Huge)` vaut `4.5f` (comparaison flottante).
+
+### EspaceDeCombatTest.LAllongeSeMesureEntreLesBords
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:52`
+
+L'allonge se mesure entre les bords des volumes.
+
+**Étapes**
+
+1. Deux creatures M a 2,9 m puis 3,1 m de centre a centre ; une allonge de 3 m a 4,5 m.
+
+**Résultat attendu**
+
+- Vérifie que `core::inReach(medium(0, 0), medium(2.9f, 0))` est vrai.
+- Vérifie que `core::inReach(medium(0, 0), medium(3.1f, 0))` est faux.
+- Vérifie que `core::inReach(medium(0, 0), medium(4.5f, 0), 3.0f)` est vrai.
+- Vérifie que `core::edgeDistance(medium(0, 0), medium(1.0f, 0))` vaut `0.0f` (comparaison flottante).
+
+### EspaceDeCombatTest.LAllongeCompteLaHauteur
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:71`
+
+L'allonge compte la hauteur.
+
+**Étapes**
+
+1. Une cible 2,9 m puis 3,1 m plus haut, au meme point du sol.
+
+**Résultat attendu**
+
+- Vérifie que `core::inReach(medium(0, 0), medium(0, 0, 3.1f))` est faux.
+- Vérifie que `core::inReach(medium(0, 0), medium(0, 0, 2.9f))` est vrai.
+
+### EspaceDeCombatTest.DeuxVolumesSeRecouvrentOuNon
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:85`
+
+Deux volumes se recouvrent ou non.
+
+**Étapes**
+
+1. Deux creatures M a 1 m, a 1,5 m, et l'une au-dessus de l'autre.
+
+**Résultat attendu**
+
+- Vérifie que `core::overlap(medium(0, 0), medium(1.0f, 0))` est vrai.
+- Vérifie que `core::overlap(medium(0, 0), medium(1.5f, 0))` est faux.
+- Vérifie que `core::overlap(medium(0, 0), medium(0, 0, 1.5f))` est faux.
+
+### EspaceDeCombatTest.LaTenailleParAngleRejoueLaLigneDesCentresDuGuide
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:99`
+
+La tenaille par angle rejoue la ligne des centres du Guide.
+
+**Étapes**
+
+1. Les huit cases adjacentes a une cible, deux a deux.
+
+**Résultat attendu**
+
+- Vérifie que `core::flanksByAngle(n, s, target)` est vrai.
+- Vérifie que `core::flanksByAngle(n, se, target)` est vrai.
+- Vérifie que `core::flanksByAngle(n, sw, target)` est vrai.
+- Vérifie que `core::flanksByAngle(ne, s, target)` est vrai.
+- Vérifie que `core::flanksByAngle(ne, sw, target)` est vrai.
+- Vérifie que `core::flanksByAngle(n, e, target)` est faux.
+- Vérifie que `core::flanksByAngle(n, ne, target)` est faux.
+- Vérifie que `core::flanksByAngle(ne, se, target)` est faux.
+- Vérifie que `core::flanksByAngle(target, s, target)` est faux.
+
+### EspaceDeCombatTest.LAvantageDeHauteurDemandeUneCase
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:131`
+
+L'avantage de hauteur demande une case d'ecart.
+
+**Étapes**
+
+1. Un attaquant 1,5 m, 1,2 m plus haut, puis plus bas que sa cible.
+
+**Résultat attendu**
+
+- Vérifie que `core::hasHighGround(medium(0, 0, 1.5f), medium(2, 0, 0))` est vrai.
+- Vérifie que `core::hasHighGround(medium(0, 0, 1.2f), medium(2, 0, 0))` est faux.
+- Vérifie que `core::hasHighGround(medium(0, 0, 0), medium(2, 0, 1.5f))` est faux.
+
+### EspaceDeCombatTest.UneSphereToucheCeQuElleCroise
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:144`
+
+Une sphere touche ce qu'elle croise.
+
+**Étapes**
+
+1. Une boule de feu de 6 m ; des creatures M a 6,5 m, 7 m, et en hauteur a 5 m et 6,5 m.
+
+**Résultat attendu**
+
+- Vérifie que `core::shapeHits(fireball, medium(6.5f, 0))` est vrai.
+- Vérifie que `core::shapeHits(fireball, medium(7.0f, 0))` est faux.
+- Vérifie que `core::shapeHits(fireball, medium(0, 0, 5.0f))` est vrai.
+- Vérifie que `core::shapeHits(fireball, medium(0, 0, 6.5f))` est faux.
+
+### EspaceDeCombatTest.UnConeSElargitAvecSaLongueur
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:164`
+
+Un cone s'elargit avec sa longueur.
+
+**Étapes**
+
+1. Un souffle de 4,5 m ; des creatures dans l'axe, sur le cote a 2,9 m et 2 m, derriere l'origine, au-dela du bout ; un cone sans direction.
+
+**Résultat attendu**
+
+- Vérifie que `core::shapeHits(breath, medium(3.0f, 0))` est vrai.
+- Vérifie que `core::shapeHits(breath, medium(3.0f, 2.9f))` est faux.
+- Vérifie que `core::shapeHits(breath, medium(3.0f, 2.0f))` est vrai.
+- Vérifie que `core::shapeHits(breath, medium(-1.5f, 0))` est faux.
+- Vérifie que `core::shapeHits(breath, medium(6.0f, 0))` est faux.
+- Vérifie que `core::shapeHits(none, medium(1.0f, 0))` est faux.
+
+### EspaceDeCombatTest.UneLigneEtUnCubeSontDesRectangles
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:190`
+
+Une ligne et un cube sont des rectangles.
+
+**Étapes**
+
+1. Un eclair de 30 m sur 1,5 m ; un cube de 4,5 m d'arete, l'origine au milieu d'une face.
+
+**Résultat attendu**
+
+- Vérifie que `core::shapeHits(bolt, medium(0, 20.0f))` est vrai.
+- Vérifie que `core::shapeHits(bolt, medium(1.4f, 20.0f))` est vrai.
+- Vérifie que `core::shapeHits(bolt, medium(1.6f, 20.0f))` est faux.
+- Vérifie que `core::shapeHits(cube, medium(4.0f, 2.0f))` est vrai.
+- Vérifie que `core::shapeHits(cube, medium(4.0f, 3.1f))` est faux.
+- Vérifie que `core::shapeHits(cube, medium(5.5f, 0))` est faux.
+
+### EspaceDeCombatTest.UnCylindreALaHauteurDeSaDonnee
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:216`
+
+Un cylindre a la hauteur de sa donnee.
+
+**Étapes**
+
+1. Un cylindre de 3 m de rayon et 6 m de haut ; des creatures a 3,5 m, 4 m, et a 5 m puis 6,5 m de haut.
+
+**Résultat attendu**
+
+- Vérifie que `core::shapeHits(column, medium(3.5f, 0))` est vrai.
+- Vérifie que `core::shapeHits(column, medium(4.0f, 0))` est faux.
+- Vérifie que `core::shapeHits(column, medium(0, 0, 5.0f))` est vrai.
+- Vérifie que `core::shapeHits(column, medium(0, 0, 6.5f))` est faux.
+
+### EspaceDeCombatTest.LesVolumesDansUneZoneSontRendusParIndice
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:234`
+
+Les volumes dans une zone sont rendus par indice croissant.
+
+**Étapes**
+
+1. Trois volumes, une sphere de 3 m.
+
+**Résultat attendu**
+
+- Vérifie que `core::volumesInEffect(fireball, volumes)` vaut `expected`.
+
+### EspaceDeCombatTest.UnSegmentTraverseUnCorpsMaisPasSesExtremites
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:248`
+
+Un segment traverse un corps mais pas ses extremites.
+
+**Étapes**
+
+1. Un segment a travers un corps, a cote, au-dessus de la tete, et un qui part du corps.
+
+**Résultat attendu**
+
+- Vérifie que `core::segmentCrosses(a, b, body)` est vrai.
+- Vérifie que `core::segmentCrosses(a, {6, 2.0f, 0.75f}, body)` est faux.
+- Vérifie que `core::segmentCrosses({0, 0, 2.0f}, {6, 0, 2.0f}, body)` est faux.
+- Vérifie que `core::segmentCrosses({3.0f, 0, 0.75f}, b, body)` est faux.
+
+### EspaceDeCombatTest.LesPorteesDuCorpusSeConvertissent
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_combat_space.cpp:269`
+
+Les portees du corpus se convertissent.
+
+**Étapes**
+
+1. 6 cases en metres, 9 m en cases, l'allonge.
+
+**Résultat attendu**
+
+- Vérifie que `core::metersFromTiles(6.0f)` vaut `9.0f` (comparaison flottante).
+- Vérifie que `core::tilesFromMeters(9.0f)` vaut `6.0f` (comparaison flottante).
+- Vérifie que `core::MELEE_REACH_METERS` vaut `1.5f` (comparaison flottante).
+
 ## test_combat_state.cpp
 
 ### CombatStateTest.LInitiativeEstJeteeUneFoisEtLOrdreTient
@@ -3381,169 +3607,6 @@ Sur des configurations generees -- salles, piliers, compositions, profils, tireu
 - Vérifie que `session.journal()` vaut `journal`.
 - Vérifie que `longest` est strictement supérieur à `0`.
 
-## test_iso_projection.cpp
-
-### IsoProjectionTest.DimensionsDeLaScene
-
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_iso_projection.cpp:85`
-
-Une grille 4 × 3 à losange de 10 unités : H = 6,2, murs 8,5, scène 35 × 30,2, origine (10 ; 8,5).
-
-**Étapes**
-
-1. Construire la projection d'une grille 4 × 3, losange de 10 unités.
-2. Lire les dimensions.
-
-**Résultat attendu**
-
-- Vérifie que `projection.tileWidth()` vaut `10.0f`, à `TOLERANCE` près.
-- Vérifie que `projection.tileHeight()` vaut `6.2f`, à `TOLERANCE` près.
-- Vérifie que `projection.wallHeight()` vaut `8.5f`, à `TOLERANCE` près.
-- Vérifie que `projection.diagonals()` vaut `7`.
-
-### IsoProjectionTest.LesCasesDAngleTouchentLesBords
-
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_iso_projection.cpp:108`
-
-Sur une grille 4 × 3, la case (0, 2) touche le bord gauche, (3, 0) le bord droit, (3, 2) le bord bas, et (0, 0) est posée sous la bande des murs.
-
-**Étapes**
-
-1. Lire la boîte du losange des quatre cases d'angle.
-
-**Résultat attendu**
-
-- Vérifie que `gauche.left()` vaut `0.0f`, à `TOLERANCE` près.
-- Vérifie que `gauche.top()` vaut `14.7f`, à `TOLERANCE` près.
-- Vérifie que `droite.left()` vaut `25.0f`, à `TOLERANCE` près.
-- Vérifie que `droite.top()` vaut `17.8f`, à `TOLERANCE` près.
-- Vérifie que `droite.right()` vaut `projection.sceneSize().x`, à `TOLERANCE` près.
-- Vérifie que `bas.left()` vaut `15.0f`, à `TOLERANCE` près.
-- Vérifie que `bas.top()` vaut `24.0f`, à `TOLERANCE` près.
-- Vérifie que `bas.bottom()` vaut `projection.sceneSize().y`, à `TOLERANCE` près.
-
-### IsoProjectionTest.LaCaseCentraleEstAuCentre
-
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_iso_projection.cpp:144`
-
-Sur une grille 5 × 5, le centre de la case (2, 2) est au milieu horizontal de la scène et au milieu vertical du plateau (sous la bande des murs).
-
-**Étapes**
-
-1. Construire la projection 5 × 5, losange de 10.
-2. Lire le centre de (2, 2).
-
-**Résultat attendu**
-
-- (25 ; 8,5 + 31 / 2 = 24).
-
-### IsoProjectionTest.LeSensDesAxes
-
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_iso_projection.cpp:161`
-
-Garde contre l'erreur de signe : un pas de colonne déplace le centre de (+L/2 ; +H/2), un pas de ligne de (−L/2 ; +H/2).
-
-**Étapes**
-
-1. Comparer les centres de (1, 1), (2, 1) et (1, 2) sur une grille 4 × 3.
-2. Lire les quatre sommets du losange de (1, 1) en coordonnées de grille continues.
-
-**Résultat attendu**
-
-- Colonne : (+5 ; +3,1) ; ligne : (−5 ; +3,1) ; sommets haut, droit, bas, gauche aux milieux et coins de la boîte du losange.
-
-### IsoProjectionTest.AllerRetourCaseMondeCase
-
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_iso_projection.cpp:191`
-
-Chaque case d'une grille 12 × 9, projetée à son centre puis relue, redonne la même case ; de même pour quatre points pris juste à l'intérieur de ses sommets.
-
-**Étapes**
-
-1. Pour chaque case : centre → `worldToTile`.
-2. Pour chaque case : les points de grille (c + 0,02 ; r + 0,02), (c + 0,98 ; r + 0,02), (c + 0,02 ; r + 0,98), (c + 0,98 ; r + 0,98) → monde → `worldToTile`.
-
-**Résultat attendu**
-
-- Toujours la case de départ.
-
-### IsoProjectionTest.AllerRetourContinu
-
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_iso_projection.cpp:220`
-
-`worldToGrid` est l'inverse de `gridToWorld`, y compris hors de la grille.
-
-**Étapes**
-
-1. Parcourir un quadrillage de points continus de −3 à 15 par pas de 0,37 sur une grille 12 × 9, losange de 7,3.
-2. Projeter, puis relire.
-
-**Résultat attendu**
-
-- Vérifie que `relu.x` vaut `gc`, à `1e-3f` près.
-- Vérifie que `relu.y` vaut `gr`, à `1e-3f` près.
-
-### IsoProjectionTest.LaRelectureSuitLeLosange
-
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_iso_projection.cpp:245`
-
-Un point dans un coin de la boîte d'une case, hors de son losange, appartient à la voisine ; les arêtes appartiennent à la case de plus grand indice ; hors grille, rien.
-
-**Étapes**
-
-1. Grille 5 × 5, losange 4, rapport 0,5, sans murs (valeurs exactes en binaire).
-2. Lire les quatre coins de la boîte de (2, 2), rentrés d'un centième.
-3. Lire les sommets exacts de (2, 2).
-4. Lire le centre projeté de (−1, 0), (5, 2), (2, 5) et un point au-dessus de la scène.
-
-**Résultat attendu**
-
-- Vérifie que `projection.worldToTile(projection.tileToWorld({-1, 0})).has_value()` est faux.
-- Vérifie que `projection.worldToTile(projection.tileToWorld({5, 2})).has_value()` est faux.
-- Vérifie que `projection.worldToTile(projection.tileToWorld({2, 5})).has_value()` est faux.
-- Vérifie que `projection.worldToTile({10.0f, -1.0f}).has_value()` est faux.
-- Vérifie que `projection.contains({0, 5})` est faux.
-- Vérifie que `projection.contains({4, 4})` est vrai.
-
-### IsoProjectionTest.ConformeALaSceneQml
-
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_iso_projection.cpp:283`
-
-Pour plusieurs tailles d'élément et de grille, la position QML de chaque brique `ArenaTile` vaut décalage + échelle × position monde, où l'échelle est le rapport des largeurs de losange et le décalage celui qui centre la scène.
-
-**Étapes**
-
-1. Transcrire littéralement les formules de l'écran QML du Colisée (LOT-50).
-2. Pour des éléments 1280 × 720, 800 × 900, 640 × 360 et des grilles 16 × 12, 9 × 14, 1 × 1 : comparer la position de chaque case.
-
-**Résultat attendu**
-
-- Vérifie que `scene.x` vaut `qml.sceneWidth()`, à `1e-2f` près.
-- Vérifie que `scene.y` vaut `qml.sceneHeight()`, à `1e-2f` près.
-- Vérifie que `pixel.x` vaut `qml.x(c, r)`, à `1e-2f` près.
-- Vérifie que `pixel.y` vaut `qml.y(c, r)`, à `1e-2f` près.
-
-### IsoProjectionTest.ValeursParDefautEtEntreesDegenerees
-
-*Mineur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_iso_projection.cpp:325`
-
-Le losange par défaut fait 86 / 16 unités (la tuile de la planche à sa taille native au zoom 1) ; la profondeur est colonne + ligne ; une taille négative devient nulle, une largeur nulle devient celle par défaut, une grille vide garde une diagonale.
-
-**Étapes**
-
-1. Construire une projection par défaut, puis des projections dégénérées.
-
-**Résultat attendu**
-
-- Vérifie que `defaut.tileWidth()` vaut `5.375f`, à `TOLERANCE` près.
-- Vérifie que `defaut.tileHeight()` vaut `3.3325f`, à `TOLERANCE` près.
-- Vérifie que `core::IsoProjection::depth({3, 4})` vaut `7`.
-- Vérifie que `vide.columns()` vaut `0`.
-- Vérifie que `vide.rows()` vaut `0`.
-- Vérifie que `vide.diagonals()` vaut `1`.
-- Vérifie que `vide.tileWidth()` vaut `core::ARENA_TILE_WIDTH_UNITS`, à `TOLERANCE` près.
-- Vérifie que `vide.worldToTile(vide.tileToWorld({0, 0})).has_value()` est faux.
-
 ## test_line_of_sight.cpp
 
 ### LineOfSightTest.LaVueEstSymetriqueSurDesGrillesGenerees
@@ -4132,6 +4195,262 @@ Sur deux cents cartes aleatoires a graine fixe, A* et l'aire s'accordent.
 - Vérifie que `parAire->steps` vaut `parAStar->steps`.
 - Vérifie que `parAire->cost` vaut `parAStar->cost`.
 - Vérifie que `comparaisons` est strictement supérieur à `2000`.
+
+## test_simulated_space.cpp
+
+### EspaceSimuleTest.UnCheminDroitSurUnPlanVideCouteSaLongueur
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:37`
+
+Un chemin droit sur un plan vide coute sa longueur.
+
+**Étapes**
+
+1. Un plan vide, 6 m a parcourir dans un budget de 9 m.
+
+**Résultat attendu**
+
+- Vérifie que `route.has_value()` est vrai.
+- Vérifie que `route->length` vaut `6.0f`, à `0.01f` près.
+- Vérifie que `route->points.empty()` est faux.
+- Vérifie que `route->points.back().x` vaut `9.0f`, à `0.01f` près.
+- Vérifie que `route->points.back().y` vaut `3.0f`, à `0.01f` près.
+
+### EspaceSimuleTest.LeBudgetArreteLeChemin
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:55`
+
+Le budget arrete le chemin.
+
+**Étapes**
+
+1. 9,5 m puis 9 m a parcourir avec 9 m de budget ; sans budget, le coin oppose du plan.
+
+**Résultat attendu**
+
+- Vérifie que `space.route({.mover = medium(3, 3), .destination = {12.5f, 3, 0}, .budget = 9.0f}) .has_value()` est faux.
+- Vérifie que `space.route({.mover = medium(3, 3), .destination = {12.0f, 3, 0}, .budget = 9.0f}) .has_value()` est vrai.
+- Vérifie que `space.route({.mover = medium(3, 3), .destination = {27, 27, 0}}).has_value()` est vrai.
+
+### EspaceSimuleTest.UnMurSeContourneEtNeSeTraversePas
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:74`
+
+Un mur se contourne et ne se traverse pas.
+
+**Étapes**
+
+1. Un mur de 20 m entre le depart et l'arrivee ; un budget de 11 m puis aucun.
+
+**Résultat attendu**
+
+- Vérifie que `space.route(direct).has_value()` est faux.
+- Vérifie que `route.has_value()` est vrai.
+- Vérifie que `route->length` est strictement supérieur à `30.0f`.
+- Vérifie que `point.x > 9.2f && point.x < 11.8f && point.y < 20.0f` est faux.
+
+### EspaceSimuleTest.OnNeFinitPasDansUnMurNiHorsDuPlan
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:100`
+
+On ne finit pas dans un mur ni hors du plan.
+
+**Étapes**
+
+1. Une destination dans une boite ; un volume au bord du plan.
+
+**Résultat attendu**
+
+- Vérifie que `space.route({.mover = medium(1, 1), .destination = {5, 5, 0}}).has_value()` est faux.
+- Vérifie que `space.isClear(medium(0.2f, 5), core::Locomotion::Walk)` est faux.
+- Vérifie que `space.isClear(medium(1, 5), core::Locomotion::Walk)` est vrai.
+
+### EspaceSimuleTest.LeTerrainDifficileCouteDouble
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:115`
+
+Le terrain difficile coute double au sol et rien en vol.
+
+**Étapes**
+
+1. Une bande de 3 m de terrain difficile sur 6 m de route.
+
+**Résultat attendu**
+
+- Vérifie que `walking.has_value()` est vrai.
+- Vérifie que `walking->length` vaut `9.0f`, à `0.6f` près.
+- Vérifie que `flying.has_value()` est vrai.
+- Vérifie que `flying->length` vaut `6.0f`, à `0.01f` près.
+
+### EspaceSimuleTest.LEauProfondeArreteLaMarcheEtPasLeVol
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:139`
+
+L'eau profonde arrete la marche et pas le vol.
+
+**Étapes**
+
+1. Une bande d'eau profonde en travers.
+
+**Résultat attendu**
+
+- Vérifie que `space.route({.mover = medium(5, 5), .destination = {5, 20, 0}}).has_value()` est faux.
+- Vérifie que `space .route({.mover = medium(5, 5), .destination = {5, 20, 0}, .locomotion = core::Locomotion::Fly}) .has_value()` est vrai.
+
+### EspaceSimuleTest.UnEnnemiBloqueEtUnAllieSeTraverseEnCoutantDouble
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:157`
+
+Un ennemi bloque, un allie se traverse en coutant double.
+
+**Étapes**
+
+1. Un couloir etroit tenu par un ennemi, puis par un allie ; une destination dans l'espace de l'allie.
+
+**Résultat attendu**
+
+- Vérifie que `space.route({.mover = medium(3, 10), .destination = {17, 10, 0}, .blocking = enemy}) .has_value()` est faux.
+- Vérifie que `through.has_value()` est vrai.
+- Vérifie que `through->length` est strictement supérieur à `16.0f`.
+- Vérifie que `space.route({.mover = medium(3, 10), .destination = {10, 10, 0}, .passable = ally}) .has_value()` est faux.
+
+### EspaceSimuleTest.LesCandidatsSontDansLeBudgetEtEnOrdreFixe
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:187`
+
+Les candidats sont dans le budget et en ordre fixe.
+
+**Étapes**
+
+1. Deux demandes identiques, budget de 4,5 m, une boite a cote.
+
+**Résultat attendu**
+
+- Vérifie que `first` vaut `second`.
+- Vérifie que `first.empty()` est faux.
+- Vérifie que `first.front()` vaut `query.mover.base`.
+- Vérifie que `core::groundDistance(point, query.mover.base)` est inférieur ou égal à `4.5f + 0.01f`.
+- Vérifie que `space.isClear(core::volumeOf(point, CreatureSize::Medium), core::Locomotion::Walk)` est vrai.
+- Vérifie que `far` est faux.
+- Vérifie que `near` est vrai.
+
+### EspaceSimuleTest.UnMurArreteLaVueEtUneToileNon
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:220`
+
+Un mur arrete la vue et une toile non.
+
+**Étapes**
+
+1. Un mur de 3 m ; un regard a 0,75 m puis a 3,5 m ; une toile sans abri.
+
+**Résultat attendu**
+
+- Vérifie que `space.lineOfSight({5, 5, 0.75f}, {15, 5, 0.75f})` est faux.
+- Vérifie que `space.lineOfSight({5, 5, 3.5f}, {15, 5, 3.5f})` est vrai.
+- Vérifie que `web.lineOfSight({5, 5, 0.75f}, {15, 5, 0.75f})` est vrai.
+
+### EspaceSimuleTest.LAbriSeCompteParLignesCoupees
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:238`
+
+L'abri se compte par lignes coupees.
+
+**Étapes**
+
+1. Rien, un mur plein, un muret d'un metre, un mur qui s'arrete a mi-cible.
+
+**Résultat attendu**
+
+- Vérifie que `core::coverFrom(open, medium(2, 5), medium(12, 5))` vaut `Cover::None`.
+- Vérifie que `core::coverFrom(wall, medium(2, 5), medium(12, 5))` vaut `Cover::Total`.
+- Vérifie que `core::hasLineOfSight(wall, medium(2, 5), medium(12, 5))` est faux.
+- Vérifie que `behindLow == Cover::Half || behindLow == Cover::ThreeQuarters` est vrai.
+- Vérifie que `behindLow` diffère de `Cover::Total`.
+- Vérifie que `partial` diffère de `Cover::None`.
+- Vérifie que `partial` diffère de `Cover::Total`.
+
+### EspaceSimuleTest.UnCorpsInterposeAbriteAMoitie
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:270`
+
+Un corps interpose abrite a moitie.
+
+**Étapes**
+
+1. Une creature sur la ligne, puis a cote.
+
+**Résultat attendu**
+
+- Vérifie que `core::coverFrom(open, medium(2, 5), medium(12, 5), between)` vaut `Cover::Half`.
+- Vérifie que `core::coverFrom(open, medium(2, 5), medium(12, 5), aside)` vaut `Cover::None`.
+
+### EspaceSimuleTest.LAbriEstSymetriqueSansCorps
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:286`
+
+La ligne de vue est symetrique.
+
+**Étapes**
+
+1. Deux volumes et deux boites ; la vue dans les deux sens.
+
+**Résultat attendu**
+
+- Vérifie que `core::hasLineOfSight(space, a, b)` vaut `core::hasLineOfSight(space, b, a)`.
+
+### EspaceSimuleTest.UnPlateauDonneSaHauteurAuSol
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:302`
+
+Un plateau donne sa hauteur au sol.
+
+**Étapes**
+
+1. Un plateau a 1,5 m ; un chemin qui y monte.
+
+**Résultat attendu**
+
+- Vérifie que `space.groundHeight(5, 5)` vaut `0.0f` (comparaison flottante).
+- Vérifie que `space.groundHeight(15, 5)` vaut `1.5f` (comparaison flottante).
+- Vérifie que `route.has_value()` est vrai.
+- Vérifie que `route->points.back().z` vaut `1.5f` (comparaison flottante).
+- Vérifie que `core::hasHighGround(up, medium(8, 5))` est vrai.
+
+### EspaceSimuleTest.UneGrilleDeCollisionDevientDesBoites
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:322`
+
+Une grille de collision devient des boites.
+
+**Étapes**
+
+1. Une grille 10 x 10 avec un mur d'une colonne perce en bas.
+
+**Résultat attendu**
+
+- Vérifie que `space.width()` vaut `15.0f` (comparaison flottante).
+- Vérifie que `space.boxes().size()` vaut `8u`.
+- Vérifie que `space.isClear(medium(8.25f, 2.0f), core::Locomotion::Walk)` est faux.
+- Vérifie que `route.has_value()` est vrai.
+- Vérifie que `route->length` est strictement supérieur à `20.0f`.
+
+### EspaceSimuleTest.LeMemeCheminDeuxFois
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:349`
+
+Le meme chemin deux fois.
+
+**Étapes**
+
+1. Une boite, du terrain difficile, la meme demande deux fois.
+
+**Résultat attendu**
+
+- Vérifie que `first.has_value()` est vrai.
+- Vérifie que `second.has_value()` est vrai.
+- Vérifie que `first->points` vaut `second->points`.
+- Vérifie que `first->length` vaut `second->length` (comparaison flottante).
 
 ## test_tactical_terrain.cpp
 
