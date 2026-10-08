@@ -249,7 +249,7 @@ brume et l'exposition n'ont pas changé depuis la première reprise.
 ## Clôture — 8 octobre 2026
 
 L'auteur clôt le lot le 8 octobre 2026 : « lot 1012 terminer ». La fiche passe à `livre` sur cette
-décision, PR_PLACEHOLDER. Il n'a pas écrit d'autre verdict que celui-là ; la version continue
+décision, PR #3. Il n'a pas écrit d'autre verdict que celui-là ; la version continue
 (le LOT-1014 est déjà ouvert sur ce dépôt).
 
 Le lot est clos **sans que tous ses critères soient tenus** ; ce qui manque est écrit ici, pour le
