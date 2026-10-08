@@ -1,0 +1,17 @@
+{
+  "id": "pantin",
+  "name": "Pantin",
+  "source": "original",
+  "status": {
+    "provisoire": true,
+    "raison": "LOT-1015 : le mannequin du moteur tient la place de tout personnage sans fiche (PNJ des cartes d'essai, groupe sans heros).",
+    "retraitSi": "chaque personnage cite par une scene a sa fiche d'apparence (LOT-1024)"
+  },
+  "creator": "humanoid",
+  "body": "mannequin",
+  "head": "mannequin",
+  "height": 1.8,
+  "colors": {},
+  "pieces": {},
+  "weapons": {}
+}
