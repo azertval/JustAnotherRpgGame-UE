@@ -1,0 +1,1583 @@
+{
+  "date": "2026-10-07",
+  "source_map": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg",
+  "map_size_px": [
+    9933,
+    7016
+  ],
+  "scale": {
+    "unit": "Miles",
+    "source_bar_miles": 500,
+    "bar_pixels": 1520,
+    "bar_raw_coordinates": {
+      "x_start": 8263,
+      "x_end_inclusive": 9782,
+      "row": 6820
+    },
+    "miles_per_pixel": 0.32894736842105265,
+    "km_per_pixel": 0.5293894736842106,
+    "projected_km2_per_pixel": 0.28025321484764554,
+    "bar_reading_uncertainty_percent": 1,
+    "projection": null,
+    "latitude": null,
+    "interpretation": "Use only primary VTT geographic reference; never convert game illustration coordinate frames to scene meters. Route/terrain/boundary error separate.",
+    "symbol_and_route_uncertainty": "Large city/port icons are schematic: their center may sit inland; exact berth not inferred from icon-center chord. Harbor-to-city local leg requires local survey/scenario."
+  },
+  "nodes": [
+    {
+      "name": "Imperial Capital",
+      "region": "central-empire",
+      "world_normalized_graph_position": [
+        0.6772222222222222,
+        0.47977528089887644
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Northcross",
+      "region": "central-empire",
+      "world_normalized_graph_position": [
+        0.6849999999999999,
+        0.39679775280898877
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Hajal",
+      "region": "central-empire",
+      "world_normalized_graph_position": [
+        0.7144444444444444,
+        0.3153932584269663
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Fox Crossing",
+      "region": "central-empire",
+      "world_normalized_graph_position": [
+        0.7277777777777777,
+        0.33269662921348314
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Tamera’s Blessing",
+      "region": "central-empire",
+      "world_normalized_graph_position": [
+        0.5938888888888889,
+        0.34724719101123597
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Deverell, the Split City",
+      "region": "central-empire",
+      "world_normalized_graph_position": [
+        0.5102777777777777,
+        0.47191011235955055
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Begraense",
+      "region": "imperial-benenet",
+      "world_normalized_graph_position": [
+        0.6566666666666666,
+        0.2439814814814815
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Northharbor",
+      "region": "kingdom-of-kolbjorn",
+      "world_normalized_graph_position": [
+        0.11427480916030533,
+        0.26919642857142856
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Kolbjörn",
+      "region": "kingdom-of-kolbjorn",
+      "world_normalized_graph_position": [
+        0.19350190839694656,
+        0.41771785714285714
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Mesoriver",
+      "region": "magocracy-of-mage-tower",
+      "world_normalized_graph_position": [
+        0.8235799522673032,
+        0.3763714285714286
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Fisherman’s Wharf",
+      "region": "republic-of-freelands",
+      "world_normalized_graph_position": [
+        0.20822222222222225,
+        0.5848774302620456
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Goldraft",
+      "region": "republic-of-freelands",
+      "world_normalized_graph_position": [
+        0.4257777777777778,
+        0.6486813186813187
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Stonelair",
+      "region": "stravian-domains",
+      "world_normalized_graph_position": [
+        0.5220390455531454,
+        0.3009142857142857
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Mirare",
+      "region": "stravian-domains",
+      "world_normalized_graph_position": [
+        0.47335140997830805,
+        0.4497142857142857
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Pakaitos Capital",
+      "region": "theocracy-of-kepesh",
+      "world_normalized_graph_position": [
+        0.24390555555555554,
+        0.837898140662894
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Feargus",
+      "region": "tsvetan",
+      "world_normalized_graph_position": [
+        0.6083333333333334,
+        0.790300214438885
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Cindergrove",
+      "region": "sindile-forest",
+      "world_normalized_graph_position": [
+        0.8587404355503238,
+        0.8962
+      ],
+      "coordinate_basis": "canonical_vtt_places point within visually verified VTT crop; not artistic game anchor",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Bluhaven",
+      "region": "seashores",
+      "world_normalized_graph_position": [
+        0.536,
+        0.631
+      ],
+      "coordinate_basis": "Visual re-read whole VTT pixels 7 October 2026; approximately positioned for graph only",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "name": "Kepesh western coastal landing",
+      "region": "theocracy-of-kepesh",
+      "world_normalized_graph_position": null,
+      "coordinate_basis": "Unnamed hypothetical logistics node on attested coast; not new canonical port",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "pages": [
+        182,
+        186
+      ]
+    },
+    {
+      "name": "Yama trade gateway",
+      "region": "yama",
+      "world_normalized_graph_position": null,
+      "coordinate_basis": "Gateway location and throughput require scenario; do not invent port",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "pages": [
+        198,
+        201
+      ]
+    }
+  ],
+  "regions": [
+    {
+      "name": "Central Empire",
+      "printed_pages": [
+        90,
+        93,
+        98,
+        99
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Temperate grasslands and fertile river valleys, wooded Bak, salt marsh O’Myre, mountainous north.",
+      "agricultural_area_qualitative": "High potential on plains/river farms; separate settlement/cultivation from protected Bak and sacred core; wetlands not automatic fields.",
+      "trade": "Wheat,barley,meat; export details bilateral mostly unspecified.",
+      "bottleneck": "Capital≥680k food basin must include Neckoffoods + hinterland + bay imports; bridges/gates/docks and storage needed.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Freelands",
+      "printed_pages": [
+        104,
+        108,
+        110,
+        113
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Cragplateaus divides western Storm Sea ports and eastern Central Sea; northern moors/wetlands and south forests.",
+      "agricultural_area_qualitative": "Valley/settled frontier patches medium-high; wetlands/mountains/Shortfall forest not wholesale cropland.",
+      "trade": "Iron,copper,tin,timber,monster parts; livestock/leather→Stravian attested; luxury imported.",
+      "bottleneck": "Fisherman Wharf western seafood; Goldraft principal merchant access east, plague threatens provisioning; pass transfer between seas.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Ben’net",
+      "printed_pages": [
+        120,
+        121,
+        123,
+        124
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Glaciers/high icy mountains; southern tundra/valleys, access Septentrional Passing.",
+      "agricultural_area_qualitative": "Very low arable; pastoral range seasonally usable; tubers pocket fields. Glacier area contributes no cultivated hectares.",
+      "trade": "Wool/textiles/distilled drinks exports; oil,salt,spices,tools,ceramics imports local villages.",
+      "bottleneck": "Large caravans stop Begraense; small caravans and aerial mounts onward; severe seasonal closures.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Kolbjörn",
+      "printed_pages": [
+        128,
+        130,
+        133,
+        135
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Northern tundra/fjords/pines; Maed separates south settlement from giant lands, extensive coast.",
+      "agricultural_area_qualitative": "Low-medium cropland in southern valleys; pasture/fishing/hunting large roles; giant territories and sacred islands not freely available.",
+      "trade": "Drakkars→Republic/Kepesh; leather/livestock→Stravian; furs/herbs; timber export transport challenge unresolved.",
+      "bottleneck": "Sea wars, icy seasons, Hammer Passing; heavy logs best route requires water validation not free continental carriage.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Mage Tower",
+      "printed_pages": [
+        15,
+        138,
+        142
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Northern ice, southern lakes/rivers connected toward Central Sea; navigable rivers explicitly stated regionally SB15.",
+      "agricultural_area_qualitative": "Valleys/pockets usable medium; wetlands and mountains excluded; water access not proof every colored river navigable.",
+      "trade": "Magic/potions/scrolls/teaching; fresh fish,paper; enchanted crystals→shipyards.",
+      "bottleneck": "Portage/locks/draft to define; elementals and air transport localized with unknown tonnes/day.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Seashores",
+      "printed_pages": [
+        146,
+        148,
+        150
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Archipelago Central Sea, mountainous wooded islands, waterfalls/reefs/coves.",
+      "agricultural_area_qualitative": "Limited island plots, marine food strong; no continental agricultural area from sea polygons.",
+      "trade": "Fish,pearls,ships,black market; ship material supply Sindile/MageTower/Imperial/dwarven mines explicit.",
+      "bottleneck": "Ship routes must follow water and landings; pirates/tribute/sea monsters and whirling hazards.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Sindile",
+      "printed_pages": [
+        152,
+        153,
+        157
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Forested southeast, outskirts/deep woods, lakes and faerie ecology.",
+      "agricultural_area_qualitative": "Cultivated woodland/gathering/gardens rather than fields by arbitrary clearing; no forced surplus staple export.",
+      "trade": "Self-sufficient; honey,herbs,magic bows,breithwood,Estelindea; metals and rare minerals needed.",
+      "bottleneck": "Forestry permissions and ecological constraints; Mystical barrier west/northwest means bypass or expensive special transit.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Stravian",
+      "printed_pages": [
+        14,
+        160,
+        162,
+        254
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Cold northern mountains; fertile southern valleys/rivers/farms, underground dwarf cities.",
+      "agricultural_area_qualitative": "Southern farmland high potential with halfling aid; northern mines not arable.",
+      "trade": "Food exported many regions; ores global; imports livestock/leather from Kolbjörn/Freelands.",
+      "bottleneck": "Mirare→Stonelair StoneDisks key; surface bandits, imperial sabotage; underground network not unlimited or continuous mapped.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Storm Islands",
+      "printed_pages": [
+        17,
+        168,
+        170
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Western islands frozen from former tropical terrain by Bás magic; coastal ice barriers.",
+      "agricultural_area_qualitative": "Limited ice-adapted tubers/cereals and fishing; undead labor not climate cancellation.",
+      "trade": "Near self-sufficient, resources Darkall, raids/tameranium.",
+      "bottleneck": "No ordinary hostile trade; sea ice manipulable to block ships, Kemet military priority.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Taii’maku",
+      "printed_pages": [
+        17,
+        174,
+        176,
+        253
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Ubel deserts, volcanoes/lava/firepits; moving Illus along southern arid terrain.",
+      "agricultural_area_qualitative": "Very low arable outside irrigated/project fields; constructs do not make lava fertile.",
+      "trade": "Compasses/clocks/precision/glass/engineering exported; bauronite and metals required.",
+      "bottleneck": "Reactor logistics/bauronite barrel cushioning; train capacity exists but routes/mobile hubs and throughput unspecified.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Kepesh",
+      "printed_pages": [
+        182,
+        185,
+        186
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Deserts/scrub; northern milder interface Freelands, west StormSea coast and NE CentralSea interface.",
+      "agricultural_area_qualitative": "Low naturally cultivable; irrigation/magic water needed; oasis moving every3 dawns cannot fixed unrestricted depot.",
+      "trade": "Spices,gold/iron/bauronite/gems,jewelry,horses/camels; fruit/legume imports explicit; coastal catch local.",
+      "bottleneck": "Water bottleneck, Kemet naval raids, desert nomads; Pakaitos inland road transfer, not seaport invented.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Tsvetan",
+      "printed_pages": [
+        190,
+        192,
+        194
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Volcanic rough terrain, few wood/metal resources, coastal western towns around hot terrain.",
+      "agricultural_area_qualitative": "Very low cropland in harsh core; select valleys/river pockets P, hunting/livestock not free calorie abundance.",
+      "trade": "Obsidian,sulfur,platinum/hides; demands wood/metal, sometimes raids when trade fails.",
+      "bottleneck": "Unstable clan relations, hot passes; route away from toxic Mystical.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Yama",
+      "printed_pages": [
+        198,
+        200,
+        201
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Humid forests/valleys in east, mountains, rivers/lakes and rice plains.",
+      "agricultural_area_qualitative": "High rice potential in cultivated valleys, woodland tea/silkworms noncaloric area separated; realm near self-sufficient.",
+      "trade": "Rice,silk,steel,tea exports; seeks tameranium elsewhere despite own deposits.",
+      "bottleneck": "North route to Empire, river shops do not prove all rivers navigable; export permits/military escort cultural.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Undertanares",
+      "printed_pages": [
+        206,
+        207,
+        254
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Underground chain halls,caves,magma,fish lakes,fungi.",
+      "agricultural_area_qualitative": "No sunlight arable area; fungi/aquatic production separate, not millions hectares surface crop by map.",
+      "trade": "Dwarven ores, underground produce/trade plausible local not measured.",
+      "bottleneck": "StoneDisk chain partial known, chasms and tribes block; no straight continent-wide underground highway.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Darkall",
+      "printed_pages": [
+        208,
+        209
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Separate unmapped continent to west, forests/hills/ruins/demonic wasteland.",
+      "agricultural_area_qualitative": "No VTT polygon/scale transfer; productive areas unspecified, wars constrain.",
+      "trade": "Limited resources→Storm Islands explicit.",
+      "bottleneck": "Intercontinental distance/shore unknown; exact shipping days cannot be measured this VTT.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    },
+    {
+      "name": "Mystical",
+      "printed_pages": [
+        210,
+        211
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "terrain": "Necrotic purple wasteland between Empire,Yama,Sindile,Tsvetan,Seashores.",
+      "agricultural_area_qualitative": "Ordinary staple field baseline0; no resident-living crop basin magically restored without scenario.",
+      "trade": "Ruins/artifacts and secret transport, not net cereal exporter.",
+      "bottleneck": "Toxic/necrotic land; bypass ordinary caravans, secretroads rumors not ordinary corridor.",
+      "agricultural_hectares": null,
+      "surface_policy": "no area from graphic frame; measured projected land mask still requires legal/ecological/soil/relief exclusions"
+    }
+  ],
+  "edges": [
+    {
+      "from": "Mirare",
+      "to": "Stonelair",
+      "mode": "stone_disks",
+      "goods": [
+        "food",
+        "workers",
+        "ore reverse flow"
+      ],
+      "printed_pages": [
+        14,
+        160,
+        254
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A",
+      "route_basis": "SB254 explicitly most-used StoneDisks connection; subterranean course unknown",
+      "risk": "Runes/qualified dwarven priest, no open continental tunnel map.",
+      "straight_line_map_miles_lower_bound": 378.5,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Stonelair",
+      "to": "Mirare",
+      "mode": "surface_road",
+      "goods": [
+        "ores",
+        "tools",
+        "food reverse flow"
+      ],
+      "printed_pages": [
+        14,
+        160,
+        162
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_trade_D_route",
+      "route_basis": "Orange VTT trunk through Orgoth Valley; road rather than invented direct tunnel",
+      "risk": "Bandits, imperial sabotage; secure settlements do not secure roads.",
+      "straight_line_map_miles_lower_bound": 378.5,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Kolbjörn",
+      "to": "Stonelair",
+      "mode": "road_via_Hammer_Passing_Tigers_Bridge",
+      "goods": [
+        "livestock",
+        "leather",
+        "drakkars only if navigable water separate"
+      ],
+      "printed_pages": [
+        128,
+        160
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_trade_D_route",
+      "route_basis": "Road via Hangedelf–Hammer Passing–Tiger’s Bridge–Mirare/Stonelair, observed VTT. No carriage carries full ship.",
+      "risk": "Mountain pass/weather, costs crossing Republic/Stravian territory, bandits.",
+      "straight_line_map_miles_lower_bound": 1106.8,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Fisherman’s Wharf",
+      "to": "Stonelair",
+      "mode": "road_via_Cragplateaus_Mirare",
+      "goods": [
+        "livestock",
+        "leather",
+        "ores reverse flow"
+      ],
+      "printed_pages": [
+        104,
+        160
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_trade_D_route",
+      "route_basis": "Map orange road through Cragplateaus approach, Heroes Rise area and Mirare road junction. Exact complete trace not metrically surveyed.",
+      "risk": "Passes, monster frontier, escort demand.",
+      "straight_line_map_miles_lower_bound": 1216.9,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Northharbor",
+      "to": "Fisherman’s Wharf",
+      "mode": "sea_Storm_Sea",
+      "goods": [
+        "ships",
+        "marine goods",
+        "furs",
+        "leather"
+      ],
+      "printed_pages": [
+        128,
+        133,
+        113
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A",
+      "route_basis": "Both ports and trade stated; coastal sea course west of Kolbjörn then south, NEVER a line through mainland.",
+      "risk": "Kemets/Storm Islands raids; temples Bás expand cold; armed shipping.",
+      "straight_line_map_miles_lower_bound": 790.6,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Northharbor",
+      "to": "Kepesh western coastal landing",
+      "mode": "sea_Storm_Sea_then_road",
+      "goods": [
+        "ships",
+        "furs",
+        "leather",
+        "horses_spices reverse flow"
+      ],
+      "printed_pages": [
+        128,
+        133,
+        182
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_trade_D_landing",
+      "route_basis": "Kolbjörn trade with Kepesh explicit; coast landing unnamed D, Pakaitos not a seaport.",
+      "risk": "Kemet fleet, escort, coast incursions, desert last mile.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Fisherman’s Wharf",
+      "to": "Goldraft",
+      "mode": "surface_road",
+      "goods": [
+        "grain",
+        "fish_preserved",
+        "goods_between_two_seas"
+      ],
+      "printed_pages": [
+        110,
+        111,
+        113
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "D",
+      "route_basis": "Map roads and passes cross peninsula; FW western Storm Sea and Goldraft eastern Central Sea. NO short sea edge across land.",
+      "risk": "Cragplateaus/Ruricans relief, road costs, Goldraft plague.",
+      "straight_line_map_miles_lower_bound": 725.9,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Goldraft",
+      "to": "Bluhaven",
+      "mode": "sea_Central_Sea",
+      "goods": [
+        "merchant_goods",
+        "preserved_food",
+        "fish",
+        "ship_services"
+      ],
+      "printed_pages": [
+        110,
+        113,
+        146,
+        150
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "D",
+      "route_basis": "Republic main commercial flows through Goldraft; Central Sea ports provide plausible marine corridor. No exact bilateral volume stated.",
+      "risk": "Pirate tribute, theft, Goldraft contagion; no unconditional tax-free friendship.",
+      "straight_line_map_miles_lower_bound": 362.4,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Imperial Capital",
+      "to": "Northcross",
+      "mode": "imperial_road",
+      "goods": [
+        "grain",
+        "barley",
+        "livestock",
+        "manufactured_goods"
+      ],
+      "printed_pages": [
+        90,
+        98,
+        99
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "D",
+      "route_basis": "VTT orange road Capital–Southcross–Northcross around forest settlements; book Capital farming supply.",
+      "risk": "Bak protected sacred core, taxes/inspection; not free forest conversion.",
+      "straight_line_map_miles_lower_bound": 193.2,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Northcross",
+      "to": "Hajal",
+      "mode": "imperial_road_via_Fox_Crossing",
+      "goods": [
+        "food",
+        "luxury",
+        "contracts"
+      ],
+      "printed_pages": [
+        93
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "D",
+      "route_basis": "VTT orange road via river crossings/Fox Crossing; Hajal not fixed as seaport.",
+      "risk": "Bridge capacity, northern climate, contract enforcement.",
+      "straight_line_map_miles_lower_bound": 211.1,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Hajal",
+      "to": "Begraense",
+      "mode": "imperial_road_via_Septentrional_Passing",
+      "goods": [
+        "textiles",
+        "distillates",
+        "tools_food reverse flow"
+      ],
+      "printed_pages": [
+        120,
+        121,
+        123
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_trade_D_route",
+      "route_basis": "Southern Ben’net imperial road meets lowland network via named VTT pass. Large caravans stop Begraense.",
+      "risk": "Cold/steep pass, tolls, Highlandtuber illicit; not same legal rate all alcohol.",
+      "straight_line_map_miles_lower_bound": 250.6,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Begraense",
+      "to": "Cirrus mountain communities",
+      "mode": "small_caravan_aerial_mixed",
+      "goods": [
+        "local_tubers",
+        "fish",
+        "rare_herbs",
+        "small_goods"
+      ],
+      "printed_pages": [
+        120,
+        124
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A",
+      "route_basis": "Small local exchange attested. Mountain community endpoints not fixed; mounts/aerial access, not open grain motorway.",
+      "risk": "Orders trust/access, cold, noncontinuous land access.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Northcross",
+      "to": "Mesoriver",
+      "mode": "imperial_road_via_Vault_Village",
+      "goods": [
+        "food",
+        "paper",
+        "magic_goods reverse flow"
+      ],
+      "printed_pages": [
+        15,
+        138,
+        142
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "D",
+      "route_basis": "VTT northern road through Vault Village toward Mesoriver, border river crossing.",
+      "risk": "Political frontier, magic certification; flux demand not volume.",
+      "straight_line_map_miles_lower_bound": 455.2,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Mesoriver",
+      "to": "Imperial Capital",
+      "mode": "road_or_sea_multimodal",
+      "goods": [
+        "magic_goods",
+        "food reverse flow"
+      ],
+      "printed_pages": [
+        138,
+        142,
+        98
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_trade_D_route",
+      "route_basis": "Books frequent international trade; visible eastern road via Dawn of Light toward Capital. Region navigable rivers SB15 but no specific cargo draft/depth.",
+      "risk": "Imperial magic restrictions; imports licensed, no invented universal embargo.",
+      "straight_line_map_miles_lower_bound": 534.5,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Sindile Forest",
+      "to": "Seashores shipyards",
+      "mode": "road_and_sea_or_specialist_delivery",
+      "goods": [
+        "breithwood"
+      ],
+      "printed_pages": [
+        152,
+        148
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_commodity_D_route",
+      "route_basis": "Shipcrafters explicitly need Sindile breithwood. Prefer forest→Yama eastern/northern bypass→Imperial coast then Central Sea, subject permissions; NOT direct road through Mystical.",
+      "risk": "Protected forest/ecology, elite masters connections; costly logistics, high-value cargo not cereal highway.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Stonelair",
+      "to": "Seashores shipyards",
+      "mode": "road_to_Central_Sea_then_sea",
+      "goods": [
+        "bauronite",
+        "tameranium"
+      ],
+      "printed_pages": [
+        148,
+        160
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_commodity_D_route",
+      "route_basis": "Dwarven mines source shipcrafters material. Route via Mirare/Deverell-Central Sea landing unspecified then ship.",
+      "risk": "Bauronite shock sensitive SB176; padded barrels lower useful payload.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Mesoriver",
+      "to": "Seashores shipyards",
+      "mode": "water_and_sea_multimodal",
+      "goods": [
+        "enchanted_crystals"
+      ],
+      "printed_pages": [
+        148,
+        15,
+        142
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_commodity_D_route",
+      "route_basis": "Material sourced Mage Tower; regional waterways lead toward Central Sea, specific river leg navigability to verify.",
+      "risk": "Certification and pirates, handling fragile material.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Central Empire",
+      "to": "Seashores shipyards",
+      "mode": "road_and_sea",
+      "goods": [
+        "high_quality_steel"
+      ],
+      "printed_pages": [
+        148
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_commodity_D_route",
+      "route_basis": "SB148 Imperial mines finest steel. Capital bay/docks VTT supplies plausible transshipment, no source exports tonnes.",
+      "risk": "Tolls, Parliament control, scarcity and cargo losses.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Freelands or Stravian food farms",
+      "to": "Kepesh",
+      "mode": "road_or_western_Central_Sea",
+      "goods": [
+        "fruits",
+        "legumes",
+        "staples_if_surplus"
+      ],
+      "printed_pages": [
+        182,
+        160
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_import_need_D_supplier",
+      "route_basis": "Kepesh imports fruits/legumes; supplying region not named. Northern land access from Freelands exists on VTT, desert road into Pakaitos.",
+      "risk": "Water/feed for caravan, seasonal fruit perishability, oasis moving HagSalar unsuitable fixed depot SB186.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Kepesh",
+      "to": "Taii’maku City States",
+      "mode": "surface_road_or_train_if_authorized",
+      "goods": [
+        "bauronite",
+        "metals",
+        "engineering reverse flow"
+      ],
+      "printed_pages": [
+        174,
+        176,
+        182
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "D",
+      "route_basis": "Nearby mineral rich region and explicit bauronite demand, southern road chain through Illus. No exact bilateral shipment claim.",
+      "risk": "Border disputes and reactor secrets; mobile Illus not permanent rails everywhere.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Yama trade gateway",
+      "to": "Central Empire",
+      "mode": "road_northern_bypass_of_Mystical",
+      "goods": [
+        "rice",
+        "silk",
+        "steel",
+        "tea",
+        "tameranium reverse flow"
+      ],
+      "printed_pages": [
+        198,
+        201
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_exports_D_route",
+      "route_basis": "Map orange eastern road connects Yama to northern temperate Empire, skirting Mystical. Open borders create trade, specific customer allocations P.",
+      "risk": "Rare goods escorts, clan permissions, monsters; protected deposits policy.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Tsvetan",
+      "to": "neighbors_via_coastal_or_southern_roads",
+      "mode": "road_or_Central_Sea_coast",
+      "goods": [
+        "obsidian",
+        "platinum",
+        "sulfur",
+        "wood_metal reverse flow"
+      ],
+      "printed_pages": [
+        190
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_need_D_route",
+      "route_basis": "VTT coast ports/roads west of Mystical and southern route by Ubelian Cauldron; destination unspecified.",
+      "risk": "Trade can fail and cause raids; volcanic routes and tribal instability.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Darkall",
+      "to": "Storm Islands",
+      "mode": "sea_unmapped",
+      "goods": [
+        "resources",
+        "military_supplies"
+      ],
+      "printed_pages": [
+        168,
+        208
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A",
+      "route_basis": "Darkall west unmapped; no mainland metric endpoint or distance assigned.",
+      "risk": "Kemet military network, no free trade to hostile Tanarean ports.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Yama",
+      "to": "Freelands",
+      "mode": "penumbral_secret_route",
+      "goods": [
+        "high_value_contraband"
+      ],
+      "printed_pages": [
+        254
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A",
+      "route_basis": "Third Eye two rifts route takes SIX HOURS source; endpoints/capacity not public.",
+      "risk": "Bulk caravans attract creatures; exclude from ordinary baseline grain supply.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    },
+    {
+      "from": "Capital_and_Heroes_Rise_portal_network",
+      "to": "unspecified_portal_destinations",
+      "mode": "portal",
+      "goods": [
+        "small_high_value",
+        "emergency_supplies_if_capacity_P"
+      ],
+      "printed_pages": [
+        254
+      ],
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "fact_status": "A_exists_D_edges",
+      "route_basis": "Portals in Capital and Resistance Heroes Rise expanded. Individual pair edges and tonnes/use unknown.",
+      "risk": "Each use consumes bauronite; 3 large tameranium stones construction; no free unlimited bulk freight.",
+      "straight_line_map_miles_lower_bound": null,
+      "route_distance_miles": null,
+      "route_time_days": null,
+      "throughput_tonnes_per_day": null,
+      "distance_warning": "Chord is geometric lower bound, never navigable route. Ports require coast-following path; surface roads follow actual VTT roads/cols.",
+      "map_source": "D:/JustAnotherDnDGame/Documentation/SourceBook/VTT/Map - World.jpg"
+    }
+  ],
+  "calendar": {
+    "days_per_year": 360,
+    "source": "SB255"
+  },
+  "transport_source": {
+    "source": "SB253",
+    "camel": {
+      "normal_mph": 5,
+      "fast_mph": 6.5,
+      "capacity_lb": 480
+    },
+    "simple_two_horse_carriage": {
+      "capacity_lb": 1000
+    },
+    "four_horse_carriage": {
+      "capacity_lb": 2000
+    },
+    "magical_carriage": {
+      "normal_mph": 6,
+      "fast_mph": 8,
+      "capacity_lb": 1200
+    },
+    "magic_train": {
+      "fast_mph": 13,
+      "capacity_lb_lower_bound": 10000
+    },
+    "source_caveat": "Speed and capacity source, trips/day, operating days, fleet, food payload, crew/animal feed and routes remain unknown."
+  },
+  "transport_scenario": {
+    "status": "P illustrative bounds, replace by parent validated economic model",
+    "ordinary_road_loaded_caravan_miles_per_day": [
+      15,
+      30
+    ],
+    "mountain_winter_caravan_miles_per_day": [
+      5,
+      15
+    ],
+    "coastal_ship_miles_per_day": [
+      40,
+      100
+    ],
+    "handling_days_per_terminal": [
+      0.5,
+      2
+    ],
+    "capacity_tonnes_per_barge_or_ship": null,
+    "road_loop_formula": "round_trip_days=2*route_miles/speed+handling+waits; arrivals/day=fleet/round_trip_days",
+    "annual_supply_formula": "net_annual_tonnes=payload*fleet*operating_days/round_trip_days*(1-loss_fraction); same vehicle not allocated twice across corridors",
+    "fresh_food_policy": "local unless preservation/fast route explicitly budgeted; long-distance staples dried grain/pulses/salted fish/cheese, luxury fruit perishable."
+  },
+  "surface": {
+    "projected_area_measurement_not_yet_done": true,
+    "required_steps": [
+      "trace actual VTT coast/regional contours, not FRAMES rectangles",
+      "remove ice/lava/rock/wetland/settlements and protected forests; explicit land-use P",
+      "subdivide valley irrigated/arable/pasture/woodland/sea fishing",
+      "terrain slope and water separate; no projection known prevents exact physical area",
+      "cultivated_area and pasture distinct; residents/workers/labor-days constrain feasible area",
+      "crop rotations/fallow/seeds losses and magic enhancements tracked separately"
+    ]
+  },
+  "route_metric_scenarios": [
+    {
+      "from": "Imperial Capital",
+      "to": "Northcross",
+      "mode": "surface_road",
+      "distance_miles_central_P": 251.2,
+      "distance_miles_range_P": [
+        222.2,
+        309.1
+      ],
+      "measurement_basis": "VTT scaled endpoint chord multiplied by explicit scenario curvature factor; route identity observed on VTT, full path not metrically surveyed",
+      "chord_miles_measured": 193.2,
+      "scenario_factor": 1.3,
+      "speed_miles_day_P": 20,
+      "road_distance_not_source_stat": true
+    },
+    {
+      "from": "Northcross",
+      "to": "Hajal",
+      "mode": "surface_road",
+      "distance_miles_central_P": 295.5,
+      "distance_miles_range_P": [
+        253.3,
+        380.0
+      ],
+      "measurement_basis": "VTT scaled endpoint chord multiplied by explicit scenario curvature factor; route identity observed on VTT, full path not metrically surveyed",
+      "chord_miles_measured": 211.1,
+      "scenario_factor": 1.4,
+      "speed_miles_day_P": 20,
+      "road_distance_not_source_stat": true
+    },
+    {
+      "from": "Hajal",
+      "to": "Begraense",
+      "mode": "surface_road",
+      "distance_miles_central_P": 375.9,
+      "distance_miles_range_P": [
+        300.7,
+        501.2
+      ],
+      "measurement_basis": "VTT scaled endpoint chord multiplied by explicit scenario curvature factor; route identity observed on VTT, full path not metrically surveyed",
+      "chord_miles_measured": 250.6,
+      "scenario_factor": 1.5,
+      "speed_miles_day_P": 10,
+      "road_distance_not_source_stat": true
+    },
+    {
+      "from": "Mirare",
+      "to": "Stonelair",
+      "mode": "surface_road",
+      "distance_miles_central_P": 529.9,
+      "distance_miles_range_P": [
+        454.2,
+        681.3
+      ],
+      "measurement_basis": "VTT scaled endpoint chord multiplied by explicit scenario curvature factor; route identity observed on VTT, full path not metrically surveyed",
+      "chord_miles_measured": 378.5,
+      "scenario_factor": 1.4,
+      "speed_miles_day_P": 20,
+      "road_distance_not_source_stat": true
+    },
+    {
+      "from": "Fisherman’s Wharf",
+      "to": "Goldraft",
+      "mode": "surface_road",
+      "distance_miles_central_P": 1088.8,
+      "distance_miles_range_P": [
+        871.1,
+        1379.2
+      ],
+      "measurement_basis": "VTT scaled endpoint chord multiplied by explicit scenario curvature factor; route identity observed on VTT, full path not metrically surveyed",
+      "chord_miles_measured": 725.9,
+      "scenario_factor": 1.5,
+      "speed_miles_day_P": 20,
+      "road_distance_not_source_stat": true
+    },
+    {
+      "from": "Northcross",
+      "to": "Mesoriver",
+      "mode": "surface_road",
+      "distance_miles_central_P": 637.3,
+      "distance_miles_range_P": [
+        546.2,
+        819.4
+      ],
+      "measurement_basis": "VTT scaled endpoint chord multiplied by explicit scenario curvature factor; route identity observed on VTT, full path not metrically surveyed",
+      "chord_miles_measured": 455.2,
+      "scenario_factor": 1.4,
+      "speed_miles_day_P": 20,
+      "road_distance_not_source_stat": true
+    },
+    {
+      "from": "Northharbor",
+      "to": "Fisherman’s Wharf",
+      "mode": "sea",
+      "waypoints_normalized_on_primary_vtt": [
+        [
+          0.11427480916030533,
+          0.26919642857142856
+        ],
+        [
+          0.1,
+          0.29
+        ],
+        [
+          0.08,
+          0.32
+        ],
+        [
+          0.07,
+          0.37
+        ],
+        [
+          0.07,
+          0.44
+        ],
+        [
+          0.1,
+          0.5
+        ],
+        [
+          0.15,
+          0.56
+        ],
+        [
+          0.2,
+          0.585
+        ],
+        [
+          0.20822222222222225,
+          0.5848774302620456
+        ]
+      ],
+      "distance_miles_central_P": 1027.6,
+      "distance_miles_range_P": [
+        924.8,
+        1233.1
+      ],
+      "measurement_basis": "Manual coastal polyline following open western water outside peninsula; archipelago channel/tide additional scenario uncertainty",
+      "speed_miles_day_P": 60,
+      "port_last_mile": "Symbols have schematic footprint, shore approach not exact berth location"
+    },
+    {
+      "from": "Goldraft",
+      "to": "Bluhaven west-coast landing",
+      "mode": "sea_then_local_road",
+      "waypoints_normalized_on_primary_vtt": [
+        [
+          0.4257777777777778,
+          0.6486813186813187
+        ],
+        [
+          0.442,
+          0.65
+        ],
+        [
+          0.46,
+          0.642
+        ],
+        [
+          0.48,
+          0.632
+        ],
+        [
+          0.505,
+          0.634
+        ],
+        [
+          0.521,
+          0.638
+        ]
+      ],
+      "distance_miles_central_P": 318.9,
+      "distance_miles_range_P": [
+        287.0,
+        452.7
+      ],
+      "measurement_basis": "Manual sea polyline through Central Sea south of Left Island, avoiding the Bluhaven peninsula interior. Landing name P, not extra canonical settlement. Last-mile city transfer P 30–70 miles.",
+      "speed_miles_day_P": 60
+    }
+  ],
+  "food_corridor_capacity_ledger": [
+    {
+      "destination": "Imperial Capital",
+      "corridor": "Neckoffoods/peripheral farms→Farmers Market and gates",
+      "mode": "road_near",
+      "status": "P capacity-ledger, not attested food-flow quantity",
+      "target_delivered_food_t_per_day": 250,
+      "gross_departure_food_t_per_day": 257.73,
+      "payload_food_t_per_trip_P": 0.75,
+      "route_distance_miles_P": 15,
+      "operating_speed_miles_day_P": 20,
+      "handling_per_rotation_days_P": 2,
+      "rotation_days_P": 3.5,
+      "loss_fraction_P": 0.03,
+      "fleet_allocated_P": 1203,
+      "operating_days_per_year_P": 360,
+      "net_delivered_t_per_operating_year_P": 90000,
+      "year_days_source": 360,
+      "annual_constant_demand_warning": "If q daily through all360 days, q*30 days reserve required when operations330days; add slots or stock to compensate annual shortfall.",
+      "steady_360_day_average_if_no_supplement_t_per_day": 250.0,
+      "peak_operating_day_target_to_cover_360_days_P": 250.0,
+      "fleet_for_full_annual_coverage_P": 1203,
+      "minimum_offseason_stock_t_P": 0
+    },
+    {
+      "destination": "Imperial Capital",
+      "corridor": "Wider permitted hinterland→Imperial roads/gates",
+      "mode": "road_hinterland",
+      "status": "P capacity-ledger, not attested food-flow quantity",
+      "target_delivered_food_t_per_day": 100,
+      "gross_departure_food_t_per_day": 105.26,
+      "payload_food_t_per_trip_P": 0.75,
+      "route_distance_miles_P": 50,
+      "operating_speed_miles_day_P": 20,
+      "handling_per_rotation_days_P": 2,
+      "rotation_days_P": 7.0,
+      "loss_fraction_P": 0.05,
+      "fleet_allocated_P": 983,
+      "operating_days_per_year_P": 330,
+      "net_delivered_t_per_operating_year_P": 33000,
+      "year_days_source": 360,
+      "annual_constant_demand_warning": "If q daily through all360 days, q*30 days reserve required when operations330days; add slots or stock to compensate annual shortfall.",
+      "steady_360_day_average_if_no_supplement_t_per_day": 91.667,
+      "peak_operating_day_target_to_cover_360_days_P": 109.091,
+      "fleet_for_full_annual_coverage_P": 1073,
+      "minimum_offseason_stock_t_P": 3000
+    },
+    {
+      "destination": "Imperial Capital",
+      "corridor": "Southern Imperial coastal production→Tourmaline Bay docks/warehouses",
+      "mode": "sea_coastal_P_actual_berths_not_surveyed",
+      "status": "P capacity-ledger, not attested food-flow quantity",
+      "target_delivered_food_t_per_day": 150,
+      "gross_departure_food_t_per_day": 161.29,
+      "payload_food_t_per_trip_P": 50,
+      "route_distance_miles_P": 100,
+      "operating_speed_miles_day_P": 60,
+      "handling_per_rotation_days_P": 2,
+      "rotation_days_P": 5.33,
+      "loss_fraction_P": 0.07,
+      "fleet_allocated_P": 18,
+      "operating_days_per_year_P": 330,
+      "net_delivered_t_per_operating_year_P": 49500,
+      "year_days_source": 360,
+      "annual_constant_demand_warning": "If q daily through all360 days, q*30 days reserve required when operations330days; add slots or stock to compensate annual shortfall.",
+      "steady_360_day_average_if_no_supplement_t_per_day": 137.5,
+      "peak_operating_day_target_to_cover_360_days_P": 163.636,
+      "fleet_for_full_annual_coverage_P": 20,
+      "minimum_offseason_stock_t_P": 4500
+    },
+    {
+      "destination": "Fisherman’s Wharf",
+      "corridor": "Settled local farms→Hope Square/open markets",
+      "mode": "road_near",
+      "status": "P capacity-ledger, not attested food-flow quantity",
+      "target_delivered_food_t_per_day": 300,
+      "gross_departure_food_t_per_day": 312.5,
+      "payload_food_t_per_trip_P": 0.75,
+      "route_distance_miles_P": 20,
+      "operating_speed_miles_day_P": 20,
+      "handling_per_rotation_days_P": 2,
+      "rotation_days_P": 4.0,
+      "loss_fraction_P": 0.04,
+      "fleet_allocated_P": 1667,
+      "operating_days_per_year_P": 360,
+      "net_delivered_t_per_operating_year_P": 108000,
+      "year_days_source": 360,
+      "annual_constant_demand_warning": "If q daily through all360 days, q*30 days reserve required when operations330days; add slots or stock to compensate annual shortfall.",
+      "steady_360_day_average_if_no_supplement_t_per_day": 300.0,
+      "peak_operating_day_target_to_cover_360_days_P": 300.0,
+      "fleet_for_full_annual_coverage_P": 1667,
+      "minimum_offseason_stock_t_P": 0
+    },
+    {
+      "destination": "Fisherman’s Wharf",
+      "corridor": "Local fishing/near coast→Fisherman port",
+      "mode": "coastal_fish_P_preservation",
+      "status": "P capacity-ledger, not attested food-flow quantity",
+      "target_delivered_food_t_per_day": 100,
+      "gross_departure_food_t_per_day": 105.26,
+      "payload_food_t_per_trip_P": 15,
+      "route_distance_miles_P": 30,
+      "operating_speed_miles_day_P": 40,
+      "handling_per_rotation_days_P": 2,
+      "rotation_days_P": 3.5,
+      "loss_fraction_P": 0.05,
+      "fleet_allocated_P": 25,
+      "operating_days_per_year_P": 330,
+      "net_delivered_t_per_operating_year_P": 33000,
+      "year_days_source": 360,
+      "annual_constant_demand_warning": "If q daily through all360 days, q*30 days reserve required when operations330days; add slots or stock to compensate annual shortfall.",
+      "steady_360_day_average_if_no_supplement_t_per_day": 91.667,
+      "peak_operating_day_target_to_cover_360_days_P": 109.091,
+      "fleet_for_full_annual_coverage_P": 28,
+      "minimum_offseason_stock_t_P": 3000
+    },
+    {
+      "destination": "Fisherman’s Wharf",
+      "corridor": "Kolbjörn Northharbor→western port preserved marine/food supplement",
+      "mode": "sea_Storm_Sea_P_armed",
+      "status": "P capacity-ledger, not attested food-flow quantity",
+      "target_delivered_food_t_per_day": 100,
+      "gross_departure_food_t_per_day": 111.11,
+      "payload_food_t_per_trip_P": 80,
+      "route_distance_miles_P": 1027.6,
+      "operating_speed_miles_day_P": 60,
+      "handling_per_rotation_days_P": 2,
+      "rotation_days_P": 36.25,
+      "loss_fraction_P": 0.1,
+      "fleet_allocated_P": 51,
+      "operating_days_per_year_P": 330,
+      "net_delivered_t_per_operating_year_P": 33000,
+      "year_days_source": 360,
+      "annual_constant_demand_warning": "If q daily through all360 days, q*30 days reserve required when operations330days; add slots or stock to compensate annual shortfall.",
+      "steady_360_day_average_if_no_supplement_t_per_day": 91.667,
+      "peak_operating_day_target_to_cover_360_days_P": 109.091,
+      "fleet_for_full_annual_coverage_P": 56,
+      "minimum_offseason_stock_t_P": 3000
+    },
+    {
+      "destination": "Kepesh",
+      "corridor": "Northern Freelands farming basin→northern land entry→Pakaitos market",
+      "mode": "road_desert_P_water_required",
+      "status": "P capacity-ledger, not attested food-flow quantity",
+      "target_delivered_food_t_per_day": 100,
+      "gross_departure_food_t_per_day": 111.11,
+      "payload_food_t_per_trip_P": 1.5,
+      "route_distance_miles_P": 180,
+      "operating_speed_miles_day_P": 15,
+      "handling_per_rotation_days_P": 2,
+      "rotation_days_P": 26.0,
+      "loss_fraction_P": 0.1,
+      "fleet_allocated_P": 1926,
+      "operating_days_per_year_P": 300,
+      "net_delivered_t_per_operating_year_P": 30000,
+      "year_days_source": 360,
+      "annual_constant_demand_warning": "If q daily through all360 days, q*30 days reserve required when operations330days; add slots or stock to compensate annual shortfall.",
+      "steady_360_day_average_if_no_supplement_t_per_day": 83.333,
+      "peak_operating_day_target_to_cover_360_days_P": 120.0,
+      "fleet_for_full_annual_coverage_P": 2312,
+      "minimum_offseason_stock_t_P": 6000
+    },
+    {
+      "destination": "Taii’maku Illus",
+      "corridor": "Neighboring food-producing northern fringe→Illus authorized depots",
+      "mode": "magic_train_P_authorized_route",
+      "status": "P capacity-ledger, not attested food-flow quantity",
+      "target_delivered_food_t_per_day": 80,
+      "gross_departure_food_t_per_day": 84.21,
+      "payload_food_t_per_trip_P": 80,
+      "route_distance_miles_P": 180,
+      "operating_speed_miles_day_P": 80,
+      "handling_per_rotation_days_P": 2,
+      "rotation_days_P": 6.5,
+      "loss_fraction_P": 0.05,
+      "fleet_allocated_P": 7,
+      "operating_days_per_year_P": 330,
+      "net_delivered_t_per_operating_year_P": 26400,
+      "year_days_source": 360,
+      "annual_constant_demand_warning": "If q daily through all360 days, q*30 days reserve required when operations330days; add slots or stock to compensate annual shortfall.",
+      "steady_360_day_average_if_no_supplement_t_per_day": 73.333,
+      "peak_operating_day_target_to_cover_360_days_P": 87.273,
+      "fleet_for_full_annual_coverage_P": 8,
+      "minimum_offseason_stock_t_P": 2400
+    },
+    {
+      "destination": "Kolbjörn Capital",
+      "corridor": "Permitted southern valley settlements→capital local markets",
+      "mode": "road_near",
+      "status": "P internal import into city, no claim national deficit",
+      "target_delivered_food_t_per_day": 25,
+      "payload_food_t_per_trip_P": 0.75,
+      "route_distance_miles_P": 25,
+      "operating_speed_miles_day_P": 15,
+      "rotation_days_P": 5.3333,
+      "loss_fraction_P": 0.05,
+      "fleet_for_full_annual_coverage_P": 225,
+      "operating_days_per_year_P": 300,
+      "peak_operating_day_target_to_cover_360_days_P": 30,
+      "minimum_offseason_stock_t_P": 1500,
+      "source_context": [
+        "SB128",
+        "SB133"
+      ],
+      "annual_supply_warning": "Imports by city are internal regional transfers; subtract exporter stocks, not additional production."
+    }
+  ],
+  "ledger_scope": "Explicit illustrative cargo capacity at500t/day city envelope; actual food masses vs dry-staple-equivalent require parent calorie model, production available and animal feed must be checked. No consumption claim canon.",
+  "cropland_requirement_envelopes_P": [
+    {
+      "destination": "Imperial Capital",
+      "delivered_dry_staple_equivalent_t_per_day_P": 500,
+      "source_calendar_days": 360,
+      "annual_net_staple_t": 180000,
+      "net_yield_t_per_ha_year_P_range": [
+        0.5,
+        1.5
+      ],
+      "minimum_cultivated_hectares_range_P": [
+        120000,
+        360000
+      ],
+      "cropland_fraction_of_serving_territory_P": 0.25,
+      "corresponding_basin_km2_range_P": [
+        4800,
+        14400
+      ],
+      "circular_radius_km_if_flat_contiguous_scenario_P": [
+        39.1,
+        67.7
+      ],
+      "interpretation": "Minimum area from demand/yield, not measured on map. Does not include livestock feed/pasture or vegetable water mass; sole-city crop supply scenario. Use actual mixed diet/yields from parent model."
+    },
+    {
+      "destination": "Fisherman’s Wharf",
+      "delivered_dry_staple_equivalent_t_per_day_P": 500,
+      "source_calendar_days": 360,
+      "annual_net_staple_t": 180000,
+      "net_yield_t_per_ha_year_P_range": [
+        0.5,
+        1.5
+      ],
+      "minimum_cultivated_hectares_range_P": [
+        120000,
+        360000
+      ],
+      "cropland_fraction_of_serving_territory_P": 0.25,
+      "corresponding_basin_km2_range_P": [
+        4800,
+        14400
+      ],
+      "circular_radius_km_if_flat_contiguous_scenario_P": [
+        39.1,
+        67.7
+      ],
+      "interpretation": "Minimum area from demand/yield, not measured on map. Does not include livestock feed/pasture or vegetable water mass; sole-city crop supply scenario. Use actual mixed diet/yields from parent model."
+    }
+  ]
+}

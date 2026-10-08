@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOT-1016 — Caméra, marche, groupe, portails, jour et nuit — Planification</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Planification</a>
+  <nav><a href="../index.html">Trajectoire</a><a href="index.html" class="active">Lots</a><a href="../versions/index.html">Versions</a><a href="../vision/index.html">Vision</a><a href="../referentiels/index.html">Référentiels</a><a href="../standards/index.html">Standards</a></nav>
+  <div class="links"><a href="../../">Documentation</a><a class="active" href="../index.html">Planification</a><a href="../../qualite/">Qualité</a></div>
+</header>
+<div class="shell">
+
+<main>
+<p class="crumb"><a href="index.html">Lots</a> › <a href="../versions/v0-0-3.html">0.0.3 — Le nouveau moteur</a></p><h1><span class="vid">LOT-1016</span> Caméra, marche, groupe, portails, jour et nuit</h1><p class="lede">On explore une carte sur le nouveau moteur : la caméra libre de D-49, le groupe de quatre qui suit le meneur au clic, les interactions, les portails entre cartes et le cycle jour / nuit.</p><dl class="facts"><div><dt>État</dt><dd><span class="badge etat-en-attente">en attente</span></dd></div><div><dt>Filière</dt><dd><span class="filiere f-moteur">Moteur</span></dd></div><div><dt>Taille</dt><dd>L</dd></div><div><dt>Ordre calculé</dt><dd>3</dd></div><div><dt>Prérequis</dt><dd><a class="ref" href="lot-1014.html">LOT-1014</a></dd></div><div><dt>Débloque</dt><dd><a class="ref" href="lot-1017.html">LOT-1017</a> <a class="ref" href="lot-1018.html">LOT-1018</a> <a class="ref" href="lot-1020.html">LOT-1020</a></dd></div><div><dt>Reprend</dt><dd>—</dd></div></dl><section><h2>Livrables</h2><ul class=""><li>La caméra de D-49 : rotation, zoom et inclinaison bornés, recentrage sur le meneur, réglages en fichier texte ; au clavier et à la souris, comme le jeu depuis le 2 octobre 2026.</li><li>La marche au clic sur le maillage de navigation ; le groupe de quatre qui suit le meneur en file (reprend <code>FollowTrail</code>, LOT-138) ; le changement de meneur (Tab).</li><li>L'interaction à 1,5 m (LOT-118, PR #138) : parler, ramasser, actionner ; le portrait du PNJ en dialogue.</li><li>Les portails et points d'arrivée entre cartes, lus depuis les données de Core ; les drapeaux de quête qui les scellent (LOT-116).</li><li>L'horloge du monde (une heure par minute réelle, D-45) et <code>daylight.json</code> pilotant le soleil, le ciel et la lune du moteur ; les lumières de nuit déclarées par les pièces ou posées comme entité <code>light</code>.</li><li>Les captures à midi et à 22 h sur la carte d'essai du socle, versées à la fiche.</li></ul></section><section><h2>Critères d'acceptation</h2><ul class="checks"><li>La quête « Des pommes pour l'arène » se parcourt hors combat sur une carte d'essai : dialogue, jet de Persuasion, portails ; les tests d'intégration de la quête passent sur le nouveau moteur.</li><li>Les quatre membres du groupe suivent le meneur sans se chevaucher ni rester bloqués ; un changement de meneur se fait en une touche.</li><li>À 22 h, une lanterne éclaire le mur devant elle et pas celui derrière : les lumières de nuit portent une ombre.</li><li>La caméra ne traverse ni le sol ni les murs ; ses bornes se règlent sans recompiler.</li></ul></section><section class="prose"><h2 id="pourquoi">Pourquoi</h2>
+<p>Le jeu doit se jouer à chaque instant : avant le combat, avant l'interface, il faut pouvoir marcher dans une carte, parler et passer une porte. C'est le lot qui rend le nouveau moteur <strong>jouable</strong> au sens de la trajectoire, et celui qui fait tomber la vue isométrique.</p>
+<h2 id="périmètre">Périmètre</h2>
+<p>Dedans : la caméra, la marche, le groupe, les interactions, les portails, le jour et la nuit.</p>
+<p>Dehors, nommément :</p>
+<ul><li>le combat (LOT-1017) ; la bascule vers le combat est posée mais mène à une arène vide ;</li><li>l'interface : ce lot utilise un HUD minimal (noms, points de vie), le vrai vient au LOT-1020 ;</li><li>les cartes : il joue sur la carte d'essai du socle et sur le parvis de la porte.</li></ul>
+<h2 id="conception">Conception</h2>
+<ul><li><strong>La caméra</strong> est un composant à ressort, cible le meneur, bornes en inclinaison (entre 25° et 70°), en distance et en hauteur sous le terrain ; la rotation est libre (D-56).</li><li><strong>Le déplacement</strong> passe par le maillage de navigation du moteur (Recast) ; le groupe reprend la file de <code>FollowTrail</code> avec des points d'arrêt à distance fixe. Les blocages aux portes se traitent par des zones de navigation étroites, pas par du code.</li><li><strong>Les interactions</strong> gardent leur portée en mètres (1,5 m) ; l'indice visuel est un contour, pas un jeton.</li><li><strong>L'heure</strong> reste une donnée de Core (<code>DayLight</code>) ; le moteur ne fait que la lire. Les lumières de nuit portent une ombre (ce que le moteur maison ne faisait pas) ; leur nombre à l'écran n'est plus borné à trente-deux, et se mesure.</li></ul>
+<h2 id="risques-et-questions-ouvertes">Risques et questions ouvertes</h2>
+<ul><li><strong>Le groupe dans les escaliers et les étages</strong> (D-51) : le maillage de navigation les couvre, la file doit suivre en hauteur ; à éprouver sur la carte d'essai à deux niveaux.</li><li><strong>La bascule vers le combat</strong> change de nature sans grille : les zones de combat de l'éditeur (LOT-143) deviennent des volumes ; le LOT-1017 en hérite.</li></ul></section><p class="source">Source : <code>Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1016-camera-et-exploration.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Planning/</code> le 2026-10-08 · <code>ab024803f</code>. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

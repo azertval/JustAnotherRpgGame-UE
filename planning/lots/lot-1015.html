@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOT-1015 — Les vingt personnages dans le moteur, au maître — Planification</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Planification</a>
+  <nav><a href="../index.html">Trajectoire</a><a href="index.html" class="active">Lots</a><a href="../versions/index.html">Versions</a><a href="../vision/index.html">Vision</a><a href="../referentiels/index.html">Référentiels</a><a href="../standards/index.html">Standards</a></nav>
+  <div class="links"><a href="../../">Documentation</a><a class="active" href="../index.html">Planification</a><a href="../../qualite/">Qualité</a></div>
+</header>
+<div class="shell">
+
+<main>
+<p class="crumb"><a href="index.html">Lots</a> › <a href="../versions/v0-0-3.html">0.0.3 — Le nouveau moteur</a></p><h1><span class="vid">LOT-1015</span> Les vingt personnages dans le moteur, au maître</h1><p class="lede">Les vingt modèles de la démo, leurs deux squelettes et leurs clips vivent dans le nouveau moteur, importés au maître sans décimation ; la chaîne Meshy, l'atelier Blender et les fiches de liaison restent ceux du standard.</p><dl class="facts"><div><dt>État</dt><dd><span class="badge etat-en-attente">en attente</span></dd></div><div><dt>Filière</dt><dd><span class="filiere f-pnj">PNJ</span></dd></div><div><dt>Taille</dt><dd>L</dd></div><div><dt>Ordre calculé</dt><dd>6</dd></div><div><dt>Prérequis</dt><dd><a class="ref" href="lot-1014.html">LOT-1014</a></dd></div><div><dt>Débloque</dt><dd><a class="ref" href="lot-1017.html">LOT-1017</a></dd></div><div><dt>Reprend</dt><dd>—</dd></div></dl><section><h2>Livrables</h2><ul class=""><li>Un script d'import (<code>scripts/assetsGeneration/import_character_unreal.py</code>, piloté par la fiche d'atelier) qui prend le <code>.glb</code> lié au maître, son squelette et ses clips, et produit le maillage squelettique, les animations et le portrait dans le projet ; rejouable, sans geste dans l'éditeur.</li><li>Les squelettes <code>humanoid</code> (53 os) et <code>quadruped</code> (29 os) comme squelettes du moteur, avec leurs clips (six et cinq) ; si l'importateur refuse les clips liés, le reciblage par l'IK Retargeter, décrit dans la fiche de liaison.</li><li>Les vingt personnages importés : les quatre héros, la mère, l'enfant, le garde, le maître d'arène, les adversaires de la série, le lion et le loup ; portraits et jetons repris tels quels.</li><li><code>reduce_model.py</code> retiré ; <code>personnages-3d.md</code> révisé : le modèle se livre au maître (D-53), le budget d'un modèle est un poids sur disque, mesuré ici sur les vingt.</li><li>L'atelier des assets (vue Character, aller-retour Blender, D-44) rebranché : une fiche de liaison ou de retouche modifiée rejoue l'import.</li><li>Les captures de contrôle de chaque personnage (repos, marche) sur le nouveau moteur, comme <code>render_character_review.py</code> les produisait.</li></ul></section><section><h2>Critères d'acceptation</h2><ul class="checks"><li>Les vingt personnages se tiennent au repos et marchent dans le moteur sans glissement ni pénétration du sol, aux seuils du standard (1,3 mm, 0,53 px à 1080p) ; <code>check_character_model.py</code> passe.</li><li>Un personnage se reconnaît à côté de son portrait (jugement de l'auteur, sur les captures de contrôle).</li><li>Aucun <code>.glb</code> ni clip n'a été retouché à la main : l'import relancé depuis les fiches redonne les mêmes fichiers (empreintes).</li><li>Le poids sur disque des vingt modèles au maître est écrit dans le standard, avec le poids en mémoire graphique mesuré sur huit personnages à l'écran.</li></ul></section><section class="prose"><h2 id="pourquoi">Pourquoi</h2>
+<p>La production de personnages est devenue le poste le plus prévisible du projet (bilan de la <code>0.0.2.5</code>) : dix-sept liaisons sur dix-huit sans intervention. Ce lot la garde telle quelle et ne change que la sortie : le moteur. Il profite de D-53 pour cesser de décimer.</p>
+<h2 id="périmètre">Périmètre</h2>
+<p>Dedans : l'import, les squelettes, les clips, les vingt modèles, l'atelier rebranché, la révision du standard des personnages.</p>
+<p>Dehors, nommément :</p>
+<ul><li>de nouveaux personnages : les PNJ des trois lieux restent aux lots de la <code>0.0.4</code> ;</li><li>les armes tenues (D-42 laisse la question ouverte) ;</li><li>la silhouette <code>flying</code>, qui attend sa première créature.</li></ul>
+<h2 id="à-supprimer">À supprimer</h2>
+<div class="table-wrap"><table><thead><tr><th>Quoi</th><th>Où</th><th>Pourquoi maintenant</th></tr></thead><tbody><tr><td><code>reduce_model.py</code> et ses tests</td><td><code>scripts/assetsGeneration/</code></td><td>le maître s'importe tel quel (D-53)</td></tr><tr><td>Les copies réduites à 100 000 triangles dans les kits</td><td><code>Common/Characters/**</code>, à la republication du kit</td><td>remplacées par les maîtres ; deux modèles pour un personnage serait un asset mort</td></tr></tbody></table></div>
+<p>Le kit <code>Common</code> est republié avec les maîtres depuis le nouveau dépôt ; l'ancien dépôt garde son verrou sur <code>Common@9</code> et ne bouge plus (D-58).</p>
+<h2 id="conception">Conception</h2>
+<ul><li><strong>Le maître est la source.</strong> Meshy produit entre 10 000 et 2,6 millions de triangles selon la pièce ; Nanite pour les maillages squelettiques les prend. Si une mesure montre qu'un personnage au maître coûte trop à l'écran, la fiche de liaison porte un plafond par personnage, pas le standard.</li><li><strong>Les clips</strong> viennent de <code>rig_character.py</code> et <code>rig_quadruped.py</code> ; ils ont été réglés une fois par silhouette et ne se refont pas. Le trot du quadrupède, encore à approuver (LOT-1011), se juge ici dans le moteur.</li><li><strong>Le portrait du PNJ en dialogue</strong> et le jeton restent peints (D-30) ; rien ne change pour eux.</li></ul>
+<h2 id="risques-et-questions-ouvertes">Risques et questions ouvertes</h2>
+<ul><li><strong>Le reciblage.</strong> Si les clips ne s'importent pas tels quels, l'IK Retargeter vers un squelette du moteur est la voie ; le coût est d'une journée par silhouette, pas par personnage.</li><li><strong>La texture plus pâle que la figurine</strong>, constat ouvert du standard §11 : sous Lumen et un espace linéaire, elle peut disparaître ou s'aggraver ; à juger sur les captures.</li></ul></section><p class="source">Source : <code>Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1015-personnages-au-maitre.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Planning/</code> le 2026-10-08 · <code>ab024803f</code>. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

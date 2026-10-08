@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HMI · Game — Documentation</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body data-root="..">
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Documentation</a>
+  <nav><a href="../index.html">Accueil</a><a href="../Guide/index.html">Guide</a><a href="../Specification/index.html">Spécifications</a><a href="index.html" class="active">Cahier de test</a><a href="../Metiers/index.html">Métiers de Tanares</a></nav>
+  <form class="search" role="search"><input type="search" placeholder="Chercher…" aria-label="Chercher dans la documentation"><div class="results" hidden></div></form>
+  <div class="links"><a class="active" href="../index.html">Documentation</a><a href="../planning/">Planification</a><a href="../qualite/">Qualité</a></div>
+</header>
+<div class="shell with-sidebar">
+<aside class="sidebar"><h4>Cahier de test</h4><a class="depth-0" href="index.html">Cahier de test</a><a class="depth-1" href="recette-manuelle.html">Recette manuelle</a><a class="depth-1" href="core.html">Core</a><a class="depth-1" href="core-combat.html">Core · Combat</a><a class="depth-1" href="couverture-exigences.html">Couverture des exigences</a><a class="depth-1" href="core-data.html">Core · Data</a><a class="depth-1" href="core-diagnostics.html">Core · Diagnostics</a><a class="depth-1" href="core-ecs.html">Core · Ecs</a><a class="depth-1" href="core-gameplay.html">Core · Gameplay</a><a class="depth-1" href="core-levels.html">Core · Levels</a><a class="depth-1" href="core-math.html">Core · Math</a><a class="depth-1" href="core-resources.html">Core · Resources</a><a class="depth-1" href="core-rpg.html">Core · Rpg</a><a class="depth-1" href="core-time.html">Core · Time</a><a class="depth-1" href="core-world.html">Core · World</a><a class="depth-1" href="editor.html">Editor</a><a class="depth-1" href="hmi-audio.html">HMI · Audio</a><a class="depth-1 active" href="hmi-game.html">HMI · Game</a><a class="toc depth-2" href="#ce-que-cette-page-couvre">Ce que cette page couvre</a><a class="toc depth-2" href="#exigences-vérifiées-par-cette-page">Exigences vérifiées par cette page</a><a class="toc depth-2" href="#test-combat-cuescpp">test_combat_cues.cpp</a><a class="toc depth-2" href="#test-debug-commandscpp">test_debug_commands.cpp</a><a class="toc depth-2" href="#test-figure-resolvercpp">test_figure_resolver.cpp</a><a class="toc depth-2" href="#test-launch-optionscpp">test_launch_options.cpp</a><a class="toc depth-2" href="#test-level-scancpp">test_level_scan.cpp</a><a class="depth-1" href="hmi-graphics.html">HMI · Graphics</a><a class="depth-1" href="hmi-input.html">HMI · Input</a><a class="depth-1" href="hmi-interface.html">HMI · Interface</a><a class="depth-1" href="hmi-localization.html">HMI · Localization</a><a class="depth-1" href="hmi-platform.html">HMI · Platform</a><a class="depth-1" href="hmi-presentation.html">HMI · Presentation</a><a class="depth-1" href="hmi-runtime.html">HMI · Runtime</a><a class="depth-1" href="integration.html">Tests d&#x27;intégration</a><a class="depth-1" href="systeme.html">Tests système</a></aside>
+<main>
+<article class="prose"><h1 id="hmi-game">HMI · Game</h1><div class="filters" data-filter-cases><input type="search" placeholder="Filtrer les cas…" aria-label="Filtrer les cas de test"><select><option value="">Toutes les criticités</option><option>Bloquant</option><option>Critique</option><option>Majeur</option><option>Mineur</option></select><span class="count">23 cas</span></div>
+<p>Tests unitaires — <strong>23 cas</strong> (9 critiques, 10 majeurs, 4 mineurs). <a href="index.html">Retour à la synthèse</a>.</p>
+<h2 id="ce-que-cette-page-couvre">Ce que cette page couvre</h2>
+<div class="table-wrap"><table><thead><tr><th>Fichier de test</th><th>Cas</th><th>Bloquant</th><th>Critique</th><th>Majeur</th><th>Mineur</th></tr></thead><tbody><tr><td><a href="#test-combat-cuescpp"><code>test_combat_cues.cpp</code></a></td><td>6</td><td>-</td><td>3</td><td>2</td><td>1</td></tr><tr><td><a href="#test-debug-commandscpp"><code>test_debug_commands.cpp</code></a></td><td>4</td><td>-</td><td>1</td><td>2</td><td>1</td></tr><tr><td><a href="#test-figure-resolvercpp"><code>test_figure_resolver.cpp</code></a></td><td>3</td><td>-</td><td>2</td><td>1</td><td>-</td></tr><tr><td><a href="#test-launch-optionscpp"><code>test_launch_options.cpp</code></a></td><td>6</td><td>-</td><td>1</td><td>3</td><td>2</td></tr><tr><td><a href="#test-level-scancpp"><code>test_level_scan.cpp</code></a></td><td>4</td><td>-</td><td>2</td><td>2</td><td>-</td></tr></tbody></table></div>
+<h2 id="exigences-vérifiées-par-cette-page">Exigences vérifiées par cette page</h2>
+<p>Chaque exigence citée par un cas de cette page, avec les cas qui la citent ; la <a href="couverture-exigences.html">matrice de traçabilité</a> les rassemble toutes.</p>
+<div class="table-wrap"><table><thead><tr><th>Exigence</th><th>Cas</th></tr></thead><tbody><tr><td><a class="ref" href="../Specification/exigences-non-fonctionnelles.html#EX-NFR-040"><code>EX-NFR-040</code></a></td><td><a href="#levelscandossierabsentnecontientrien"><code>LevelScan.DossierAbsentNeContientRien</code></a></td></tr></tbody></table></div>
+<h2 id="test-combat-cuescpp">test_combat_cues.cpp</h2>
+<section class="case" data-crit="Critique"><h3 id="combatcuestestunemarcheserejouecaseparcase">CombatCuesTest.UneMarcheSeRejoueCaseParCase</h3>
+<p><em>Critique · Unitaire · Combat sur la carte</em> — <code>Source/Test/Unit/HMI/Game/test_combat_cues.cpp:33</code></p>
+<p>Une marche se rejoue a deux cases par seconde, puis revient au repos.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Poser le heros en (0, 0) ; pousser une marche par (1, 0), (2, 0), (2, 1).</li><li>Avancer de 0,25 s, puis de 0,5 s, puis jusqu'au bout.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>file.busy()</code> est faux.</li><li>Vérifie que <code>file.busy()</code> est vrai.</li><li>Vérifie que <code>heros</code> diffère de <code>nullptr</code>.</li><li>Vérifie que <code>heros-&gt;clip</code> vaut <code>hmi::figure_clips::WALK</code>.</li><li>Vérifie que <code>heros-&gt;point.x</code> vaut <code>1.0F</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>heros-&gt;point.y</code> vaut <code>0.5F</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>heros-&gt;heading</code> vaut <code>SOUTH_EAST</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>heros-&gt;point.x</code> vaut <code>2.0F</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>heros-&gt;point.y</code> vaut <code>0.5F</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>file.busy()</code> est faux.</li><li>Vérifie que <code>heros-&gt;clip</code> vaut <code>hmi::figure_clips::IDLE</code>.</li><li>Vérifie que <code>heros-&gt;point.x</code> vaut <code>2.5F</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>heros-&gt;point.y</code> vaut <code>1.5F</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>heros-&gt;heading</code> vaut <code>SOUTH_WEST</code>, à <code>1e-4F</code> près.</li></ul>
+</section><section class="case" data-crit="Critique"><h3 id="combatcuestestlecoupporteamigesteetunmortresteaterre">CombatCuesTest.LeCoupPorteAMiGesteEtUnMortResteATerre</h3>
+<p><em>Critique · Unitaire · Combat sur la carte</em> — <code>Source/Test/Unit/HMI/Game/test_combat_cues.cpp:76</code></p>
+<p>Attaque, touche et mort s'enchainent a l'instant de l'impact.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Poser le heros en (0, 0) et le rat en (1, 0) ; pousser une attaque du heros sur le rat, un touche du rat, une mort du rat.</li><li>Avancer d'un quart de geste, puis jusqu'a la moitie et au-dela, puis d'une seconde de plus.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>heros</code> diffère de <code>nullptr</code>.</li><li>Vérifie que <code>rat</code> diffère de <code>nullptr</code>.</li><li>Vérifie que <code>heros-&gt;clip</code> vaut <code>hmi::figure_clips::ATTACK</code>.</li><li>Vérifie que <code>heros-&gt;heading</code> vaut <code>SOUTH_EAST</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>rat-&gt;clip</code> vaut <code>hmi::figure_clips::IDLE</code>.</li><li>Vérifie que <code>rat-&gt;clip</code> vaut <code>hmi::figure_clips::DEATH</code>.</li><li>Vérifie que <code>rat-&gt;dead</code> est vrai.</li><li>Vérifie que <code>file.busy()</code> est faux.</li><li>Vérifie que <code>heros-&gt;clip</code> vaut <code>hmi::figure_clips::IDLE</code>.</li><li>Vérifie que <code>rat-&gt;clip</code> vaut <code>hmi::figure_clips::DEATH</code>.</li><li>Vérifie que <code>rat-&gt;clipSeconds</code> est strictement supérieur à <code>CombatCueTrack::ACTION_SECONDS</code>.</li><li>Vérifie que <code>rat-&gt;clip</code> vaut <code>hmi::figure_clips::DEATH</code>.</li><li>Vérifie que <code>file.busy()</code> est faux.</li></ul>
+</section><section class="case" data-crit="Majeur"><h3 id="combatcuestestlinconnuestignoreettoutpeutfinirduncoup">CombatCuesTest.LInconnuEstIgnoreEtToutPeutFinirDUnCoup</h3>
+<p><em>Majeur · Unitaire · Combat sur la carte</em> — <code>Source/Test/Unit/HMI/Game/test_combat_cues.cpp:128</code></p>
+<p>La file ignore l'inconnu et sait tout finir d'un coup.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Pousser une marche pour un combattant jamais pose, et une marche vide pour le heros.</li><li>Pousser une vraie marche et une attaque, puis tout finir.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>file.busy()</code> est faux.</li><li>Vérifie que <code>file.pending()</code> vaut <code>0U</code>.</li><li>Vérifie que <code>file.pending()</code> vaut <code>2U</code>.</li><li>Vérifie que <code>file.busy()</code> est faux.</li><li>Vérifie que <code>heros</code> diffère de <code>nullptr</code>.</li><li>Vérifie que <code>heros-&gt;clip</code> vaut <code>hmi::figure_clips::IDLE</code>.</li><li>Vérifie que <code>heros-&gt;point.y</code> vaut <code>2.5F</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>file.motionOf(HEROS)</code> vaut <code>nullptr</code>.</li></ul>
+</section><section class="case" data-crit="Majeur"><h3 id="combatcuestestuntirjouesabandeetsaflechevole">CombatCuesTest.UnTirJoueSaBandeEtSaFlecheVole</h3>
+<p><em>Majeur · Unitaire · Combat sur la carte</em> — <code>Source/Test/Unit/HMI/Game/test_combat_cues.cpp:164</code></p>
+<p>Le tir, sa fleche et le rate s'enchainent sur le geste.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Poser le heros en (0, 0) et le rat en (3, 0) ; pousser un tir du heros sur le rat, la fleche en vol, un rate a la case du rat.</li><li>Avancer de 0,16 s, puis jusqu'a 0,4 s, puis d'une seconde et demie.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>heros</code> diffère de <code>nullptr</code>.</li><li>Vérifie que <code>heros-&gt;clip</code> vaut <code>hmi::figure_clips::RANGED</code>.</li><li>Vérifie que <code>effets.size()</code> vaut <code>1U</code>.</li><li>Vérifie que <code>effets[0].effect</code> vaut <code>&quot;arrow&quot;</code>.</li><li>Vérifie que <code>effets[0].point.x</code> vaut <code>2.0F</code>, à <code>1e-3F</code> près.</li><li>Vérifie que <code>effets[0].point.y</code> vaut <code>0.5F</code>, à <code>1e-3F</code> près.</li><li>Vérifie que <code>effets.size()</code> vaut <code>1U</code>.</li><li>Vérifie que <code>effets[0].effect</code> vaut <code>&quot;miss&quot;</code>.</li><li>Vérifie que <code>effets[0].point.x</code> vaut <code>3.5F</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>file.effects().empty()</code> est vrai.</li><li>Vérifie que <code>file.busy()</code> est faux.</li><li>Vérifie que <code>heros-&gt;clip</code> vaut <code>hmi::figure_clips::IDLE</code>.</li></ul>
+</section><section class="case" data-crit="Mineur"><h3 id="combatcuestestunprojectileverslagaucheestlemiroir">CombatCuesTest.UnProjectileVersLaGaucheEstLeMiroir</h3>
+<p><em>Mineur · Unitaire · Combat sur la carte</em> — <code>Source/Test/Unit/HMI/Game/test_combat_cues.cpp:225</code></p>
+<p>Un trait de feu vers la gauche de l'ecran joue <code>fire-bolt-left</code>.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Heros en (0, 0), rat en (0, 3) ; pousser un sort du heros sur le rat et son trait de feu en vol.</li><li>Avancer de 0,1 s, puis tout finir.</li><li>Pousser seul un impact sur le rat et avancer de 0,1 s.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>file.motionOf(HEROS)-&gt;clip</code> vaut <code>hmi::figure_clips::CAST</code>.</li><li>Vérifie que <code>file.effects().size()</code> vaut <code>1U</code>.</li><li>Vérifie que <code>file.effects()[0].effect</code> vaut <code>&quot;fire-bolt-left&quot;</code>.</li><li>Vérifie que <code>file.effects().size()</code> vaut <code>1U</code>.</li><li>Vérifie que <code>file.effects()[0].effect</code> vaut <code>&quot;impact&quot;</code>.</li><li>Vérifie que <code>file.effects()[0].point.y</code> vaut <code>3.5F</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>file.effects().empty()</code> est vrai.</li></ul>
+</section><section class="case" data-crit="Critique"><h3 id="combatcuestestlessignauxpartentalimagecleduclip">CombatCuesTest.LesSignauxPartentALImageCleDuClip</h3>
+<p><em>Critique · Unitaire · Combat sur la carte · Squelette</em> — <code>Source/Test/Unit/HMI/Game/test_combat_cues.cpp:273</code></p>
+<p>Les signaux du combat partent a l'image cle du clip.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Donner au heros les durees d'un squelette dont l'attaque dure 1,0 s et porte a 0,7 s, et au rat un touche de 0,3 s.</li><li>Pousser une attaque du heros sur le rat et le touche du rat.</li><li>Avancer a 0,6 s, a 0,75 s, a 0,95 s, puis a 1,05 s.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>durees.attack</code> vaut <code>(hmi::GestureTiming{.seconds = 1.0F, .impact = 0.7F})</code>.</li><li>Vérifie que <code>durees.ranged</code> vaut <code>durees.attack</code>.</li><li>Vérifie que <code>durees.cast</code> vaut <code>(hmi::GestureTiming{.seconds = 0.6F, .impact = 0.3F})</code>.</li><li>Vérifie que <code>durees.hit</code> vaut <code>0.3F</code> (comparaison flottante).</li><li>Vérifie que <code>durees.death</code> vaut <code>hmi::CombatCueTrack::ACTION_SECONDS</code> (comparaison flottante).</li><li>Vérifie que <code>hmi::CombatCueTrack::timingsOf(nullptr)</code> vaut <code>hmi::CombatCueTrack::defaultTimings()</code>.</li><li>Vérifie que <code>heros</code> diffère de <code>nullptr</code>.</li><li>Vérifie que <code>rat</code> diffère de <code>nullptr</code>.</li><li>Vérifie que <code>heros-&gt;clip</code> vaut <code>hmi::figure_clips::ATTACK</code>.</li><li>Vérifie que <code>heros-&gt;clipSeconds</code> vaut <code>0.6F</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>heros-&gt;heading</code> vaut <code>SOUTH_WEST</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>rat-&gt;clip</code> vaut <code>hmi::figure_clips::IDLE</code>.</li><li>Vérifie que <code>rat-&gt;clip</code> vaut <code>hmi::figure_clips::HIT</code>.</li><li>Vérifie que <code>rat-&gt;clipSeconds</code> vaut <code>0.05F</code>, à <code>1e-4F</code> près.</li><li>Vérifie que <code>rat-&gt;clip</code> vaut <code>hmi::figure_clips::HIT</code>.</li><li>Vérifie que <code>heros-&gt;clip</code> vaut <code>hmi::figure_clips::ATTACK</code>.</li><li>Vérifie que <code>rat-&gt;clip</code> vaut <code>hmi::figure_clips::IDLE</code>.</li><li>Vérifie que <code>heros-&gt;clip</code> vaut <code>hmi::figure_clips::IDLE</code>.</li><li>Vérifie que <code>file.busy()</code> est faux.</li></ul>
+</section><h2 id="test-debug-commandscpp">test_debug_commands.cpp</h2>
+<section class="case" data-crit="Critique"><h3 id="debugcommandslecataloguesuitlessourcesdujeu">DebugCommands.LeCatalogueSuitLesSourcesDuJeu</h3>
+<p><em>Critique · Unitaire · Console de debug</em> — <code>Source/Test/Unit/HMI/Game/test_debug_commands.cpp:25</code></p>
+<p>Le catalogue et les sources du jeu lisent les memes options.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Relever les noms d'options que Main.cpp, Bootstrap.cpp et WorldMap.qml lisent.</li><li>Comparer a ceux du catalogue.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>flux.is_open()</code> est vrai.</li><li>Vérifie que <code>sources.find(cite)</code> diffère de <code>std::string::npos</code>.</li><li>Vérifie que <code>fin</code> diffère de <code>std::string::npos</code>.</li><li>Vérifie que <code>hmi::findDebugOption(nom)</code> diffère de <code>nullptr</code>.</li></ul>
+</section><section class="case" data-crit="Majeur"><h3 id="debugcommandsseparenometvaleuraupremieregal">DebugCommands.SepareNomEtValeurAuPremierEgal</h3>
+<p><em>Majeur · Unitaire · Console de debug</em> — <code>Source/Test/Unit/HMI/Game/test_debug_commands.cpp:70</code></p>
+<p>Un mot se separe au premier = ; une option sans valeur garde son nom entier.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Separer <code>--map=capital/arenarea@martpart</code>, <code>--flags=a=1,b</code>, <code>--crash-test</code>, <code>aide</code>.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>hmi::splitDebugArgument(&quot;--map=capital/arenarea@martpart&quot;)</code> vaut <code>(hmi::DebugArgument{.name = &quot;--map=&quot;, .value = &quot;capital/arenarea@martpart&quot;})</code>.</li><li>Vérifie que <code>hmi::splitDebugArgument(&quot;--flags=a=1,b&quot;)</code> vaut <code>(hmi::DebugArgument{.name = &quot;--flags=&quot;, .value = &quot;a=1,b&quot;})</code>.</li><li>Vérifie que <code>hmi::splitDebugArgument(&quot;--crash-test&quot;)</code> vaut <code>(hmi::DebugArgument{.name = &quot;--crash-test&quot;, .value = &quot;&quot;})</code>.</li><li>Vérifie que <code>hmi::splitDebugArgument(&quot;aide&quot;)</code> vaut <code>(hmi::DebugArgument{.name = &quot;aide&quot;, .value = &quot;&quot;})</code>.</li><li>Vérifie que <code>hmi::findDebugOption(&quot;--map=&quot;)-&gt;takesValue()</code> est vrai.</li><li>Vérifie que <code>hmi::findDebugOption(&quot;--crash-test&quot;)-&gt;takesValue()</code> est faux.</li><li>Vérifie que <code>hmi::findDebugOption(&quot;--inconnue=&quot;)</code> vaut <code>nullptr</code>.</li></ul>
+</section><section class="case" data-crit="Majeur"><h3 id="debugcommandsdecoupelaligneenrespectantlesguillemets">DebugCommands.DecoupeLaLigneEnRespectantLesGuillemets</h3>
+<p><em>Majeur · Unitaire · Console de debug</em> — <code>Source/Test/Unit/HMI/Game/test_debug_commands.cpp:94</code></p>
+<p>Les guillemets gardent un chemin avec espaces en un seul mot.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Decouper une ligne a blancs multiples et un chemin entre guillemets.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>hmi::splitCommandLine(&quot; --map=donjon --screenshot=\&quot;C:\\Mes captures\\a.png\&quot; &quot; &quot;--at=1,2\t&quot;)</code> vaut <code>(std::vector&lt;std::string&gt;{&quot;--map=donjon&quot;, &quot;--screenshot=C:\\Mes captures\\a.png&quot;, &quot;--at=1,2&quot;})</code>.</li><li>Vérifie que <code>hmi::splitCommandLine(&quot; &quot;).empty()</code> est vrai.</li></ul>
+</section><section class="case" data-crit="Mineur"><h3 id="debugcommandslitlatailledefenetre">DebugCommands.LitLaTailleDeFenetre</h3>
+<p><em>Mineur · Unitaire · Console de debug</em> — <code>Source/Test/Unit/HMI/Game/test_debug_commands.cpp:111</code></p>
+<p>La taille de fenetre se lit en LxH, et rien d'autre.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Lire <code>1920x1080</code>, puis <code>1920</code>, <code>0x10</code>, <code>axb</code>.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>hmi::parseWindowSize(&quot;1920x1080&quot;).has_value()</code> est vrai.</li><li>Vérifie que <code>*hmi::parseWindowSize(&quot;1920x1080&quot;)</code> vaut <code>(std::pair{1920, 1080})</code>.</li><li>Vérifie que <code>hmi::parseWindowSize(&quot;1920&quot;).has_value()</code> est faux.</li><li>Vérifie que <code>hmi::parseWindowSize(&quot;0x10&quot;).has_value()</code> est faux.</li><li>Vérifie que <code>hmi::parseWindowSize(&quot;axb&quot;).has_value()</code> est faux.</li></ul>
+</section><h2 id="test-figure-resolvercpp">test_figure_resolver.cpp</h2>
+<section class="case" data-crit="Critique"><h3 id="figureresolvertestlaregledereplientroistemps">FigureResolverTest.LaRegleDeRepliEnTroisTemps</h3>
+<p><em>Critique · Unitaire · Mannequins</em> — <code>Source/Test/Unit/HMI/Game/test_figure_resolver.cpp:49</code></p>
+<p>Le resolveur applique la regle de repli en trois temps.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Resoudre le heros (installe, en modele).</li><li>Resoudre un loup absent, silhouette quadrupede.</li><li>Resoudre un garde absent, sans silhouette.</li><li>Resoudre un oiseau absent, silhouette volante (pas de mannequin volant).</li><li>Retirer l'humanoide et resoudre le garde a nouveau, resolveur vide.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>heros.directory</code> vaut <code>&quot;Common/Characters/Heroes/brawler&quot;</code>.</li><li>Vérifie que <code>heros.model</code> vaut <code>&quot;Common/Characters/Heroes/brawler/brawler.glb&quot;</code>.</li><li>Vérifie que <code>heros.placeholder</code> est faux.</li><li>Vérifie que <code>heros.named</code> vaut <code>heros.directory</code>.</li><li>Vérifie que <code>loup.directory</code> vaut <code>hmi::mannequinFigureDirectory(&quot;quadruped&quot;)</code>.</li><li>Vérifie que <code>loup.model</code> vaut <code>hmi::mannequinFigureDirectory(&quot;quadruped&quot;) + &quot;/modele.glb&quot;</code>.</li><li>Vérifie que <code>loup.placeholder</code> est vrai.</li><li>Vérifie que <code>loup.named</code> vaut <code>table.figureDirectory(&quot;wolf&quot;)</code>.</li><li>Vérifie que <code>garde.directory</code> vaut <code>hmi::mannequinFigureDirectory(hmi::DEFAULT_SILHOUETTE)</code>.</li><li>Vérifie que <code>garde.placeholder</code> est vrai.</li><li>Vérifie que <code>oiseau.directory</code> vaut <code>hmi::mannequinFigureDirectory(hmi::DEFAULT_SILHOUETTE)</code>.</li><li>Vérifie que <code>sansRien.directory</code> vaut <code>table.figureDirectory(&quot;guard&quot;)</code>.</li><li>Vérifie que <code>sansRien.placeholder</code> est faux.</li><li>Vérifie que <code>sansRien.model.empty()</code> est vrai.</li></ul>
+</section><section class="case" data-crit="Majeur"><h3 id="figureresolvertestlareponseseretientjusquaclear">FigureResolverTest.LaReponseSeRetientJusquAClear</h3>
+<p><em>Majeur · Unitaire · Mannequins</em> — <code>Source/Test/Unit/HMI/Game/test_figure_resolver.cpp:99</code></p>
+<p>Le resolveur retient ce qu'il a trouve jusqu'a ce qu'on l'oublie.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Resoudre un garde absent (humanoide).</li><li>Installer son modele sur le disque, resoudre a nouveau.</li><li>Oublier, resoudre a nouveau.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>resolveur.resolve(&quot;Npc/guard&quot;, {}, table).placeholder</code> est vrai.</li><li>Vérifie que <code>resolveur.resolve(&quot;Npc/guard&quot;, {}, table).placeholder</code> est vrai.</li><li>Vérifie que <code>propre.placeholder</code> est faux.</li><li>Vérifie que <code>propre.directory</code> vaut <code>&quot;Npc/guard&quot;</code>.</li><li>Vérifie que <code>propre.model</code> vaut <code>&quot;Npc/guard/guard.glb&quot;</code>.</li></ul>
+</section><section class="case" data-crit="Critique"><h3 id="figureresolvertestunefigurineestunmodele">FigureResolverTest.UneFigurineEstUnModele</h3>
+<p><em>Critique · Unitaire · Mannequins · Squelette</em> — <code>Source/Test/Unit/HMI/Game/test_figure_resolver.cpp:126</code></p>
+<p>Une figurine est un modele : une fiche, un fichier, un squelette.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Resoudre le pantin de la carte d'essai, qui a une fiche, un modele et un squelette decrit.</li><li>Dans un dossier d'essai, resoudre un personnage dont la fiche nomme un fichier absent, un personnage qui n'a que des images, et un personnage dont la fiche est illisible.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>pantin.directory</code> vaut <code>&quot;Npc/pantin&quot;</code>.</li><li>Vérifie que <code>pantin.model</code> vaut <code>&quot;Npc/pantin/pantin.glb&quot;</code>.</li><li>Vérifie que <code>pantin.placeholder</code> est faux.</li><li>Vérifie que <code>pantin.skeleton</code> diffère de <code>nullptr</code>.</li><li>Vérifie que <code>attaque</code> diffère de <code>nullptr</code>.</li><li>Vérifie que <code>attaque-&gt;key.has_value()</code> est vrai.</li><li>Vérifie que <code>*attaque-&gt;key</code> vaut <code>0.4F</code> (comparaison flottante).</li><li>Vérifie que <code>resolue.placeholder</code> est vrai.</li><li>Vérifie que <code>resolue.directory</code> vaut <code>mannequin</code>.</li><li>Vérifie que <code>resolue.model</code> vaut <code>mannequin + &quot;/modele.glb&quot;</code>.</li><li>Vérifie que <code>resolue.skeleton</code> vaut <code>nullptr</code>.</li></ul>
+</section><h2 id="test-launch-optionscpp">test_launch_options.cpp</h2>
+<section class="case" data-crit="Majeur"><h3 id="launchoptionscarteseuleneposepasdoptionvide">LaunchOptions.CarteSeuleNePosePasDOptionVide</h3>
+<p><em>Majeur · Unitaire · Essai complet</em> — <code>Source/Test/Unit/HMI/Game/test_launch_options.cpp:21</code></p>
+<p>Une carte seule ne pose aucune option vide.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Construire la ligne de commande d'un essai qui ne nomme qu'une carte.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>hmi::gameLaunchArguments(options)</code> vaut <code>(std::vector&lt;std::string&gt;{&quot;--map=capital/martpart&quot;})</code>.</li></ul>
+</section><section class="case" data-crit="Mineur"><h3 id="launchoptionspointdarriveesurloptiondecarte">LaunchOptions.PointDArriveeSurLOptionDeCarte</h3>
+<p><em>Mineur · Unitaire · Essai complet</em> — <code>Source/Test/Unit/HMI/Game/test_launch_options.cpp:36</code></p>
+<p>Le point d'arrivee s'ecrit sur l'option de carte.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Construire la ligne de commande d'une carte et d'un point d'arrivee.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>hmi::gameLaunchArguments(options).front()</code> vaut <code>&quot;--map=capital/arenarea@martpart&quot;</code>.</li></ul>
+</section><section class="case" data-crit="Critique"><h3 id="launchoptionsallerretourcompletparlanalyse">LaunchOptions.AllerRetourCompletParLAnalyse</h3>
+<p><em>Critique · Unitaire · Essai complet</em> — <code>Source/Test/Unit/HMI/Game/test_launch_options.cpp:50</code></p>
+<p>Ce que l'editeur ecrit, le jeu le relit a l'identique.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Construire la ligne de commande d'un essai complet (carte, case, drapeaux, dossiers).</li><li>Relire chaque option par les fonctions d'analyse du jeu.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>arguments.size()</code> vaut <code>4U</code>.</li><li>Vérifie que <code>arguments[1]</code> vaut <code>&quot;--at=12,39&quot;</code>.</li><li>Vérifie que <code>arguments[2]</code> vaut <code>&quot;--flags=quete-du-heraut,porte-est-ouverte&quot;</code>.</li><li>Vérifie que <code>relue.has_value()</code> est vrai.</li><li>Vérifie que <code>relue-&gt;column</code> vaut <code>12</code>.</li><li>Vérifie que <code>relue-&gt;row</code> vaut <code>39</code>.</li><li>Vérifie que <code>hmi::parseWorldFlags(&quot;quete-du-heraut,porte-est-ouverte&quot;)</code> vaut <code>options.flags</code>.</li><li>Vérifie que <code>hmi::parseLevelDirectories(arguments[3].substr(std::string_view{&quot;--levels=&quot;}.size()))</code> vaut <code>options.levelDirectories</code>.</li></ul>
+</section><section class="case" data-crit="Majeur"><h3 id="launchoptionslesdossiersseseparentaupointvirgule">LaunchOptions.LesDossiersSeSeparentAuPointVirgule</h3>
+<p><em>Majeur · Unitaire · Essai complet</em> — <code>Source/Test/Unit/HMI/Game/test_launch_options.cpp:81</code></p>
+<p>Les dossiers de cartes se separent au point-virgule.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Analyser <code>--levels=</code> sur deux chemins Windows portant chacun un deux-points.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>dossiers.size()</code> vaut <code>2U</code>.</li><li>Vérifie que <code>dossiers[0]</code> vaut <code>std::filesystem::path{&quot;C:/tmp/essai&quot;}</code>.</li><li>Vérifie que <code>dossiers[1]</code> vaut <code>std::filesystem::path{&quot;D:/depot/Levels&quot;}</code>.</li></ul>
+</section><section class="case" data-crit="Majeur"><h3 id="launchoptionscaseillisiblerefusee">LaunchOptions.CaseIllisibleRefusee</h3>
+<p><em>Majeur · Unitaire · Essai complet</em> — <code>Source/Test/Unit/HMI/Game/test_launch_options.cpp:98</code></p>
+<p>Une case illisible est refusee, jamais ramenee a zero.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Analyser des valeurs de <code>--at=</code> incompletes, non numeriques ou negatives.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>hmi::parseStartCell(&quot;&quot;).has_value()</code> est faux.</li><li>Vérifie que <code>hmi::parseStartCell(&quot;12&quot;).has_value()</code> est faux.</li><li>Vérifie que <code>hmi::parseStartCell(&quot;12,&quot;).has_value()</code> est faux.</li><li>Vérifie que <code>hmi::parseStartCell(&quot;12,39,4&quot;).has_value()</code> est faux.</li><li>Vérifie que <code>hmi::parseStartCell(&quot;douze,39&quot;).has_value()</code> est faux.</li><li>Vérifie que <code>hmi::parseStartCell(&quot;12,-3&quot;).has_value()</code> est faux.</li><li>Vérifie que <code>hmi::parseStartCell(&quot;12,39x&quot;).has_value()</code> est faux.</li></ul>
+</section><section class="case" data-crit="Mineur"><h3 id="launchoptionsdrapeauxsansdoublonnivide">LaunchOptions.DrapeauxSansDoublonNiVide</h3>
+<p><em>Mineur · Unitaire · Essai complet</em> — <code>Source/Test/Unit/HMI/Game/test_launch_options.cpp:117</code></p>
+<p>Les drapeaux se lisent sans doublon ni valeur vide.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Analyser <code>--flags=</code> avec un separateur en trop et un drapeau repete.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>hmi::parseWorldFlags(&quot;a,,b,a&quot;)</code> vaut <code>(std::vector&lt;std::string&gt;{&quot;a&quot;, &quot;b&quot;})</code>.</li><li>Vérifie que <code>hmi::parseWorldFlags(&quot;&quot;).empty()</code> est vrai.</li></ul>
+</section><h2 id="test-level-scancpp">test_level_scan.cpp</h2>
+<section class="case" data-crit="Critique"><h3 id="levelscanidentifiantestlecheminsouslevels">LevelScan.IdentifiantEstLeCheminSousLevels</h3>
+<p><em>Critique · Unitaire · Lanceur de cartes</em> — <code>Source/Test/Unit/HMI/Game/test_level_scan.cpp:62</code></p>
+<p>L'identifiant d'une carte est son chemin sous Levels/, sans .json.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Poser trois cartes, dont deux dans des sous-dossiers.</li><li>Lister le dossier.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>identifiants(cartes)</code> vaut <code>(std::vector&lt;std::string&gt;{&quot;bourg/place&quot;, &quot;central-empire/capital/arenarea&quot;, &quot;donjon&quot;})</code>.</li><li>Vérifie que <code>cartes.size()</code> vaut <code>3U</code>.</li><li>Vérifie que <code>cartes[2].file</code> vaut <code>levels.chemin(&quot;donjon.json&quot;)</code>.</li><li>Vérifie que <code>cartes[2].directory</code> vaut <code>levels.chemin()</code>.</li></ul>
+</section><section class="case" data-crit="Majeur"><h3 id="levelscanecartelesnotesdelediteuretlesautresfichiers">LevelScan.EcarteLesNotesDeLEditeurEtLesAutresFichiers</h3>
+<p><em>Majeur · Unitaire · Lanceur de cartes</em> — <code>Source/Test/Unit/HMI/Game/test_level_scan.cpp:89</code></p>
+<p>Les notes de l'editeur et les fichiers etrangers ne sont pas des cartes.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Poser une carte, ses notes <code>.editor.json</code>, un README et un PNG.</li><li>Lister.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>identifiants(hmi::scanLevelDirectories({levels.chemin()}))</code> vaut <code>(std::vector&lt;std::string&gt;{&quot;cave&quot;})</code>.</li></ul>
+</section><section class="case" data-crit="Critique"><h3 id="levelscanlepremierdossierlemportesurundoublon">LevelScan.LePremierDossierLEmporteSurUnDoublon</h3>
+<p><em>Critique · Unitaire · Lanceur de cartes</em> — <code>Source/Test/Unit/HMI/Game/test_level_scan.cpp:110</code></p>
+<p>Le premier dossier l'emporte sur une carte en double.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Poser <code>donjon.json</code> dans un dossier de brouillons et dans celui du binaire, et une carte propre a chacun.</li><li>Lister les deux, brouillons d'abord.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>identifiants(cartes)</code> vaut <code>(std::vector&lt;std::string&gt;{&quot;cave&quot;, &quot;donjon&quot;, &quot;essai&quot;})</code>.</li><li>Vérifie que <code>cartes[1].directory</code> vaut <code>brouillons.chemin()</code>.</li><li>Vérifie que <code>cartes[0].directory</code> vaut <code>binaire.chemin()</code>.</li></ul>
+</section><section class="case" data-crit="Majeur"><h3 id="levelscandossierabsentnecontientrien">LevelScan.DossierAbsentNeContientRien</h3>
+<p><em>Majeur · Unitaire · Lanceur de cartes</em> — <code>Source/Test/Unit/HMI/Game/test_level_scan.cpp:137</code></p>
+<p>Exigences : <a class="ref" href="../Specification/exigences-non-fonctionnelles.html#EX-NFR-040"><code>EX-NFR-040</code></a></p>
+<p>Un dossier absent ne contient rien et ne fait pas echouer le parcours.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Lister un dossier inexistant puis un dossier d'une carte.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>identifiants(hmi::scanLevelDirectories({levels.chemin(&quot;nulle-part&quot;), levels.chemin()}))</code> vaut <code>(std::vector&lt;std::string&gt;{&quot;cave&quot;})</code>.</li><li>Vérifie que <code>hmi::scanLevelDirectories({}).empty()</code> est vrai.</li></ul></section></article><nav class="pager"><a class="prev" href="hmi-audio.html"><span>Précédent</span>HMI · Audio</a><a class="next" href="hmi-graphics.html"><span>Suivant</span>HMI · Graphics</a></nav><p class="source">Source : <code>Documentation/CahierTest/hmi-game.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Documentation/</code> le 2026-10-08 · <code>ab024803f</code>. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

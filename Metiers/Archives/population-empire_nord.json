@@ -1,0 +1,1702 @@
+{
+  "scope": "Central Empire, Republic of Freelands, Imperial Ben’net, Kingdom of Kolbjörn",
+  "sources": {
+    "SB": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+    "PG": "D:/JustAnotherDnDGame/Documentation/SourceBook/Players_Guide_to_Tanares_Version_20231218.pdf"
+  },
+  "pagination": "Sourcebook scanned spreads: PDF index zero based i = printed pages 2i and 2i+1; sides verified with PDF coordinates.",
+  "status_rule": "Occupation shares, employment rates and unsupported city N are proposals, never canonical.",
+  "regions": [
+    {
+      "id": "central-empire",
+      "name": "Central Empire",
+      "population": 2300000,
+      "population_page": 90,
+      "species_percent": {
+        "humans": 84,
+        "gnomes": 5,
+        "summer elves": 3,
+        "tieflings": 2,
+        "dwarves": 2,
+        "soulborns": 2,
+        "others": 2
+      },
+      "common": [
+        {
+          "text": "Commerce international, services et agriculture ; céréales blé/orge et viandes. Présence et importance attestées, parts professionnelles non chiffrées.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            90
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Nombreux bureaucrates ; surplus de main-d’œuvre envoyé dans construction, routes et entretien des villes pour prévenir le chômage.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            90
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Champions d’arène rémunérés par nobles et marchands ; mercenaires et aventuriers recrutés ; juges cléricaux ou nobles.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            90,
+            91,
+            92
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Artisans exportateurs organisés en guildes, chercheurs et enseignants, marchands, production de bois, viande et métaux, fermiers explicitement présents dans la Capital.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            98,
+            99
+          ],
+          "status": "atteste"
+        }
+      ],
+      "specific": [
+        {
+          "text": "Ironhand : soldats sous psychosurgery et officiers libres ; cinq branches guerre, renseignement, médical, naval, diplomatique.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            91
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Imperial Wizards : contrôle de la magie, académie unique de l’Empire à Dweomer ; enseignement clandestin et biens magiques interdits à Bloomburgs.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            98,
+            99
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Garde des sépultures et gestion administrative des décès par Gravekeeper’s Guild à Oldtown.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            99
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Activités financières de Hajal : évaluation, change, prêts, investissement, assurance, identité magique, sécurité djinn sous contrat.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            93,
+            212,
+            213
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Skybell pèlerinage annuel, marché de pèlerins ; dons d’un huitième des gains annuels nécessaires à la bénédiction.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            92,
+            93
+          ],
+          "status": "atteste"
+        }
+      ],
+      "expertise": [
+        {
+          "text": "Agriculture de l’Empire dite domaine maîtrisé par comparaison économique avec Kolbjörn.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            128
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Artisansquare : artisanat de premier ordre ; pas un classement absolu de tout artisan tanaréen.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            98
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Hajal : principal centre et institution financière de Tanares ; Tiwilade réputé premier baron financier.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            93,
+            212,
+            213
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Odraz célèbre pour son art martial propre et ses instructeurs ; Bak cercle druidique exceptionnel, pouvoirs uniques.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            93,
+            94,
+            95
+          ],
+          "status": "atteste"
+        }
+      ],
+      "customs": [
+        {
+          "text": "Répression des personnes refusant de travailler, jusqu’à prison/exécution/conversion Ironhand ; ne prouve pas absence de chômage réel ou de mendicité.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            90
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Magie restreinte ; autorisations de vente magique à nobles à Downtown/Artisansquare ; propriété noble et résidence cléricale limitée aux temples à Downtown.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            98,
+            99
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Bloomburgs : réfugiés marginalisés, pauvreté, travail physique ou activités criminelles et marché noir ; communautés Ubelians, Kjörners et The Worst.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            99
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Bak forêt protégée par décret ; accès aux lieux sacrés interdit aux étrangers, exploitation forestière libre non déductible.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            93,
+            94
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Hajal hiérarchie et vêtements de métier/employeur, salaire même des moins riches supérieur à la moyenne, chômage stigmatisé.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            93
+          ],
+          "status": "atteste"
+        }
+      ],
+      "settlements": [
+        {
+          "name": "Capital City",
+          "kind": "city",
+          "printed_pages": [
+            98,
+            99
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": 680000,
+          "population_status": "attestee_approximative",
+          "profile": "Capital administrative, artisanat exportateur, commerce, université, arènes, armée, agriculture périphérique ; production et services diversifiés.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": "Majorité humaine attestée ; pas de pourcentages urbains publiés.",
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Skybell City",
+          "kind": "city",
+          "printed_pages": [
+            92,
+            93
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Clergé, gardes paladins, hébergement/restauration/vente pour pèlerins ; commerce et service religieux plus élevés que moyenne régionale.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Hajal City",
+          "kind": "city",
+          "printed_pages": [
+            93,
+            212,
+            213
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Finance, expertise/évaluation, employés administratifs et juridiques, sécurité, luxe et service domestique ; agriculture résidentielle faible.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": "Fondateurs soulborns, multiculturalisme ; pourcentages locaux inconnus.",
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Odraz Monastery",
+          "kind": "inhabited_institution",
+          "printed_pages": [
+            94,
+            95
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Centaines de moines et prêtres, instruction martiale, étude/prière ; effectif précis inconnu.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Phantom Fortress",
+          "kind": "inhabited_military_institution",
+          "printed_pages": [
+            94
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Garnison de centaines de soldats, prisonniers, clergé/étude/psychosurgery ; effectif résident non fourni.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Great Forest of Bak",
+          "kind": "inhabited_natural_area",
+          "printed_pages": [
+            93,
+            94
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Communautés druidiques et elfes de l’est ; populations non publiées ; sélectionner comme sous-territoire rural si modélisé.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Ancient Heargs / isolated Draconic Tower",
+          "kind": "sacred_site_and_lair",
+          "printed_pages": [
+            94
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Guardians et couple de dragons verts anciens ; pas une ville.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Cursed Ground",
+          "kind": "inhabited_natural_area",
+          "printed_pages": [
+            94
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Myconides, créatures fongiques, treants, factions religieuses ; pas une ville humaine.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        }
+      ],
+      "districts": [
+        {
+          "name": "Sloghood",
+          "kind": "district",
+          "printed_pages": [
+            98
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Services aux maisons nobles, officiers de bas rang, logement extérieur relativement prospère ; entretien et métiers de service renforcés.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Uptown",
+          "kind": "district",
+          "printed_pages": [
+            98
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Artistes, marchands aisés, nobles mineurs, galeries et Baleroth Library ; arts/luxe/services et savants renforcés ; Tsvetown enclave orque, composition non chiffrée.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Artisansquare",
+          "kind": "district",
+          "printed_pages": [
+            98
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Artisanat de haut niveau exporté, guildes, commerce, banque The Vault ; production manufacturière et finance renforcées.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Scholarnest",
+          "kind": "district",
+          "printed_pages": [
+            98
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Imperial University of Light, théâtres, étudiants de milieux variés ; enseignement/recherche/arts renforcés, taux étudiant plus haut.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Dweomer",
+          "kind": "district",
+          "printed_pages": [
+            98
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Torygg’s Magic Tower, seul établissement d’enseignement arcanique impérial, Imperial Wizards ; étude magique, sécurité et administration.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Martpart",
+          "kind": "district",
+          "printed_pages": [
+            98
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Marché, vie nocturne, arène Illu Die avec ingénierie taii’maku ; marchands, restauration, loisirs, gardes, contrebande.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Arenarea",
+          "kind": "district",
+          "printed_pages": [
+            99
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Arena of Fate, Hippodrome, casino Golden Chalice, Dusk of Justice, luxe ; champions, service/arbitrage d’arène, paris, commerce haut de gamme.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Oldtown",
+          "kind": "district",
+          "printed_pages": [
+            99
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Scierie, abattoir, forges ; Gravekeeper’s Guild et cimetière ; métiers bois/viande/métal/funéraire renforcés, résidents surtout âgés, dépendance à quelques familles.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Neckoffoods",
+          "kind": "district",
+          "printed_pages": [
+            99
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Production agricole alimentant Capital ; fermiers, anciens héros encore fermiers, Braves Arena ; agriculture haute et instruction martiale accessoire.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Bloomburgs",
+          "kind": "district",
+          "printed_pages": [
+            99
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Travail physique précaire, réfugiés et activités illégales, enseignement magique secret ; chômage disponible et mendicité plausiblement plus hauts, pas de chiffre canonique.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Downtown",
+          "kind": "district",
+          "printed_pages": [
+            99
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Municipal Palace et administration, cathedral Eight, Pious Sara Sonata Hospital ; clergé/santé/administration renforcés ; propriétaires nobles et résidents cléricaux sur terrains de temple.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Palacedomain",
+          "kind": "district",
+          "printed_pages": [
+            99
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Palais/cour, temples/orphelinat, patrouilles, demeures nobles ; militaires, domestiques, administration et clergé ; résidence et circulation restreintes.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Capital City",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Tsvetown",
+          "kind": "subdistrict",
+          "printed_pages": [
+            98
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Enclave d’architecture orque et impériale ; aucune profession exclusive indiquée.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Uptown",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Ubelians / Kjörners / The Worst",
+          "kind": "subdistrict_group",
+          "printed_pages": [
+            99
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Communautés de réfugiés respectivement du sud, de Kolbjörn et refuge de criminels ; statistiques absentes.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Bloomburgs",
+          "sum_rule": "included_in_parent"
+        }
+      ],
+      "military": {
+        "capital_soldiers": 34000,
+        "printed_page": 98,
+        "inhabitants_share_if_included": 5.0,
+        "caveat": "La source dit soldats dans la ville, pas résidence recensée ; vérifier inclusion du stock militaire dans les 680000 avant contrainte ferme."
+      },
+      "gaps": [
+        "Population et distribution d’espèces par ville/quartier non publiées sauf total Capital.",
+        "Shadow Citadel, Sanctuary of Defiance et Seraph’s Rest n’ont pas été trouvés dans le PDF SB via leurs noms ; leur reprise depuis un référentiel serait à vérifier dans un autre ouvrage."
+      ]
+    },
+    {
+      "id": "republic-of-freelands",
+      "name": "Republic of Freelands",
+      "population": 1700000,
+      "population_page": 104,
+      "species_percent": {
+        "humans": 70,
+        "autumn elves": 11,
+        "winter elves": 8,
+        "summer elves": 4,
+        "gnomes": 4,
+        "dwarves": 1,
+        "others": 2
+      },
+      "common": [
+        {
+          "text": "Production/minerais fer, cuivre, étain ; bois des forêts ; pièces de monstres ; mercenariat et aventure sont des bases de l’économie.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            104
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Fermiers isolés et nouvelles implantations proches des ressources ; produits sophistiqués et luxe souvent importés.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            104
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Pêche maritime (poissons/calmar/pieuvre/huîtres), métiers marchands et artisans, hébergement/restauration attestés aux ports.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            110,
+            111,
+            113
+          ],
+          "status": "atteste"
+        }
+      ],
+      "specific": [
+        {
+          "text": "Adventurer’s Guild : enregistrement, mise en relation, grades, formation, sécurité et rémunération des missions ; rangs ne constituent pas des métiers différents.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            105,
+            106
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Aurindunnum cité flottante : illusion rendue matérielle, abjuration, élémentaires, énergie récoltée chaque mois dans Penumbral Plane.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            107
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Winterhold : les morts-vivants font la plupart des travaux subalternes ; achat des droits post-mortem d’animation de cadavre contesté.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            108
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Yellow Creek eau pour alchimie ; Outunmoor herbes rares attirant savants et guérisseurs ; collecte rémunérée de plantes via guildes.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            108,
+            109,
+            113
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Relic Hunters HQ à Fisherman’s Wharf, collection muséale et récupération de textes/reliques ; Sara dirige une taverne prestigieuse à Heroes Rise.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            108,
+            111,
+            113
+          ],
+          "status": "atteste"
+        }
+      ],
+      "expertise": [
+        {
+          "text": "Freelanders reconnus pour courage, aventure, mercenaires, pionniers et chasseurs de monstres ; réputation attestée sans supériorité absolue universelle.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            104
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Avelum nommé plus puissant archimage de Tanares, Sara propriétaire de la taverne la plus prestigieuse ; prestige individuel/établissement à Heroes Rise, pas métier régional universel.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            108
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Musée ouvert de Relic Hunters le plus renommé à Fisherman’s Wharf.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            113
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Aurindunnum possède magie d’illusion structurale unique ; savoir-faire attesté, pas superlatif sur tous illusionnistes.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            107
+          ],
+          "status": "atteste"
+        }
+      ],
+      "customs": [
+        {
+          "text": "Démocratie, diversité des religions, méfiance envers étiquette trop formelle, tabou Theft of Valor et critique des morts honorables.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            104,
+            105
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Arenas n’ont plus fonction judiciaire ; combats magiques non létaux à Arena of Future.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            113
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Hope Square abrite manœuvres et familles agricoles pauvres, forte criminalité locale ; faible crime régional ne doit pas masquer le quartier.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            113
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Heroes Rise pauvreté/criminalité rares ; Goldraft peste et évitement du port menacent commerce et approvisionnement.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            108,
+            110
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Winter elves ne sont pas tous Kemets ni espions : distinction explicite au Wallside District.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            113
+          ],
+          "status": "atteste"
+        }
+      ],
+      "settlements": [
+        {
+          "name": "Fisherman’s Wharf",
+          "kind": "city",
+          "printed_pages": [
+            111,
+            112,
+            113
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": 570000,
+          "population_status": "attestee_approximative",
+          "profile": "Port pêche et garnison, capitale parlementaire, guildes aventure/reliques, commerce et services.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": "Majorité humaine implicite région ; winter elves concentrés Wallside sans % local.",
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Aurindunnum",
+          "kind": "city",
+          "printed_pages": [
+            107
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Cité-forteresse flottante des autumn elves ; production/maintenance illusions solides, abjuration, magie et montures Stormbirds.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": "Autumn elves, composition exacte inconnue.",
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Aeyefall",
+          "kind": "city",
+          "printed_pages": [
+            107,
+            108
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Bois, bûcheronnage et transformation, exploitation Shortfall ; exorcisme/recherche et gardes autour citadelle.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Heroes Rise (ancien Wharfugee)",
+          "kind": "city",
+          "printed_pages": [
+            104,
+            108
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Guildes/formation aventuriers, académie et Avelum, taverne Sara, recherche de reliques ; pauvreté rare.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Winterhold",
+          "kind": "city",
+          "printed_pages": [
+            108
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Winter elves, ville maritime, nobles/clans, nécromancie et serviteurs morts-vivants ; compter ces derniers comme force de travail distincte.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": "Winter elves, pas % précis ; morts-vivants explicitement présents.",
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Goldraft",
+          "kind": "city",
+          "printed_pages": [
+            110,
+            113
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Principal flux marchand de la Republic, commerce portuaire, marins/capitaines, auberges/tavernes, peste ; N non publié.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Anatar",
+          "kind": "city_historical_attachment_uncertain",
+          "printed_pages": [
+            79
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Lieu d’origine Glorious One situé en Outumn ; rattachement aux Freelands contemporains plausible, à valider. Profil économique non décrit.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Outunmoor / Lakilato Ruins / Ruins of Kölm",
+          "kind": "inhabited_natural_area_with_ruins",
+          "printed_pages": [
+            108,
+            109
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Tribus lizardfolk loin des ruines ; herbes savants/soigneurs ; ruines et circle planar ne sont pas villes contemporaines.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Yellow Creek / aboleth colony",
+          "kind": "natural_area_and_hidden_settlement",
+          "printed_pages": [
+            109
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Ressource alchimique et colonie cachée d’aboleths employant marsh goblins/kua-toas ; pas de N.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Shortfall Forest",
+          "kind": "inhabited_natural_area",
+          "printed_pages": [
+            108
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Dryads/treants/druids/rangers, bûcherons ; milieu et habitat, pas nouvelle ville à additionner.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        }
+      ],
+      "districts": [
+        {
+          "name": "Seabreeze District",
+          "kind": "district",
+          "printed_pages": [
+            113
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Marchands/artisans/propriétaires de bateaux, officiers et bureaucrates ; commerces seulement besoins courants.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Fisherman’s Wharf",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "The Six Quarters",
+          "kind": "district",
+          "printed_pages": [
+            113
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Résidence des parlementaires/nobles/marchands aisés ; pas de commerces ; Relic Hunters HQ seule exception non résidentielle.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Fisherman’s Wharf",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Wallside District",
+          "kind": "district",
+          "printed_pages": [
+            113
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Winter elves, défiance civique ; pauvreté % non connue ; ne pas appliquer automatiquement Winterhold undead à ce district.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Fisherman’s Wharf",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Uptown",
+          "kind": "district",
+          "printed_pages": [
+            113
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Marché et Adventurer’s Guild : commerce, escortes, chasse monstres, cueillette et services.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Fisherman’s Wharf",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Hope Square",
+          "kind": "district",
+          "printed_pages": [
+            113
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Familles agricoles, ouvriers pauvres, académie magie ; précarité/sans activité plus plausibles mais taux non canonique.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Fisherman’s Wharf",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "The Cerulean Plaza",
+          "kind": "district",
+          "printed_pages": [
+            113
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Marché biens locaux/importés, boutiques, auberges/tavernes et Cerulean Cross Hotel ; commerce et hôtellerie élevés.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Fisherman’s Wharf",
+          "sum_rule": "included_in_parent"
+        }
+      ],
+      "military": {
+        "capital_soldiers": 4100,
+        "printed_page": 111,
+        "inhabitants_share_if_included": 0.7192982456140351,
+        "caveat": "Garnison dans la ville ; résidence/inclusion dans N à fixer."
+      },
+      "gaps": [
+        "Aucun N publié pour Aurindunnum, Aeyefall, Heroes Rise, Winterhold, Goldraft et Anatar ; rattachement contemporain d’Anatar à valider.",
+        "Aucune part d’actifs ni métiers ni chômage ni mendicité publiée.",
+        "Soldats 4100 ne plafonnent pas sécurité : mercenaires, guildes et gardes privés existent."
+      ],
+      "institutions": [
+        {
+          "text": "Parliament, Arena of Future, Republic Military Fortress, Prime Minister’s Palace, Cathedral of Sun and Moon, Port : ce sont équipements, pas unités de population disjointes supplémentaires.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            112,
+            113
+          ],
+          "status": "atteste"
+        }
+      ]
+    },
+    {
+      "id": "imperial-benenet",
+      "name": "Imperial Ben’net",
+      "population": 445000,
+      "population_page": 120,
+      "species_percent": {
+        "humans": 55,
+        "cirrus": 34,
+        "winter elves": 5,
+        "dwarves": 4,
+        "others": 2
+      },
+      "common": [
+        {
+          "text": "La plupart habitants vivent comme éleveurs de moutons/yaks : lait, fromage, viande, peaux, laine ; agriculture tubercules ; textiles et distillation principaux exports.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            120
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Colporteurs/petites caravanes assurent majorité du transport, grands groupes marchands n’atteignent que Begraense ; villages échangent contre huile/épices/sel/outils métalliques/céramique.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            120,
+            121
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Cirrus communautés autosuffisantes, tubercules/poissons, montures volantes, entraînement magique et physique.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            120,
+            121
+          ],
+          "status": "atteste"
+        }
+      ],
+      "specific": [
+        {
+          "text": "Distillateurs Highlandtuber, herboristes/collecteurs et préparateurs de Frostcap Shimmerleaf, Skyward Blossom et Glaciermint.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            122,
+            124
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Éleveurs/dresseurs de montures aériennes, instructeurs et membres des Orders ; ne pas assimiler chaque cirrus à un combattant.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            120,
+            121,
+            124
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Exploitation clandestine de cristaux Frostshroud et recherche militaire par Imperial Wizards ; activité secrète, rare, non filière générale régionale.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            123
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Artisanat de coiffes fourrure et lin valorisé, produits textiles de froid.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            15,
+            120
+          ],
+          "status": "atteste"
+        }
+      ],
+      "expertise": [
+        {
+          "text": "Paysans/distillateurs réputés produire les meilleurs et les plus forts alcools distillés de Tanares.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            120
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Techniques traditionnelles des villages produisent boissons chères ; versions produites en masse au sud considérées inférieures.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            121
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Production textile bien connue, élevage et handicraft respectés ; pas de phrase les meilleurs tisserands du continent.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            15,
+            120
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Herbes Crystal Mountains uniques à Tanares ; rareté endémique ne démontre pas les meilleurs alchimistes.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            124
+          ],
+          "status": "atteste"
+        }
+      ],
+      "customs": [
+        {
+          "text": "Sud villes impériales, nord cirrus autonome, villages et nomades distinguer. Interdiction Highlandtuber + campagnes abstinence ; contrebande Bloodbound/Third Eye ; tous alcools pas encore interdits universellement.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            120,
+            121,
+            122,
+            123
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Windspeaker auparavant persécutée, maintenant autorisée ; Celestianist sud pénitence, abstinence, modestie, barbes masculines, dur labeur.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            120,
+            121,
+            122
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Nomades taxes jugées abusives, ouverts aux cirrus ; recrutement des Orders ouvert aux autres espèces sous rites/tests.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            121
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Pacte secret nomade Azilhada : enfants nés hiver cédés, tuer loups blancs grave péché ; conséquence chasse à nuancer selon groupes.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            123
+          ],
+          "status": "atteste"
+        }
+      ],
+      "settlements": [
+        {
+          "name": "Begraense (variante Bregaense)",
+          "kind": "city",
+          "printed_pages": [
+            120,
+            123
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Capitale impériale organisée, commerces/temples/garnisons, auberges et écuries aux bas plateaux, nobles au sommet ; marché noir.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": "Accès cirrus et émissaires autorisé sous surveillance ; % inconnu.",
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Crystal Mountains communities",
+          "kind": "settlement_group",
+          "printed_pages": [
+            124
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Sept plus grandes communautés perchées, autosuffisance cirrus, tubercules/poisson, montures aériennes, magie, herbes.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": "Majoritairement cirrus ; autres espèces admises après recrutement.",
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Ice Fortress",
+          "kind": "inhabited_military_institution",
+          "printed_pages": [
+            121
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Forteresse Crimson Judgment historique ; pas effectif ni ville civile publiée.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Plateaus of the Eternal Ice",
+          "kind": "inhabited_training_area",
+          "printed_pages": [
+            121,
+            125
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Camp/zone formation cirrus + volontaires Arcanum ; pas une ville chiffrée.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Temple of the Four Winds",
+          "kind": "inhabited_religious_institution",
+          "printed_pages": [
+            82
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Siège Windspeaker dans Ben’net ; localisation municipale inconnue.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Villages et groupes de nomades non nommés",
+          "kind": "rural_residual",
+          "printed_pages": [
+            120,
+            121
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Élevage nomade, tubercules, fromage, laine/fourrure, alcool traditionnel ; réserve territoriale distincte de villes.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Mistvale / Dark Glaciers",
+          "kind": "hazard_area",
+          "printed_pages": [
+            123,
+            125
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Zones maudites, sanctuaire Bás et mine clandestine ; pas agglomérations civiles à inventer.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Ruins of Maland",
+          "kind": "ruins",
+          "printed_pages": [
+            123
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Vestiges servant recherche artéfact météorologique ; pas ville contemporaine.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        }
+      ],
+      "districts": [],
+      "gaps": [
+        "Aucun effectif Begraense/villages/communautés cirrus.",
+        "Contradiction édition : six orders dans p. 15/120 et sept plus grandes communautés chacune gouvernée par un des sept Orders p. 124. Conserver les deux citations, ne fixer arbitrairement ni noms ni 7e ordre."
+      ]
+    },
+    {
+      "id": "kingdom-of-kolbjorn",
+      "name": "Kingdom of Kolbjörn",
+      "population": 720000,
+      "population_page": 128,
+      "species_percent": {
+        "humans": 71,
+        "dwarves": 10,
+        "giants": 10,
+        "winter elves": 6,
+        "others": 3
+      },
+      "common": [
+        {
+          "text": "Pêche hauturière, construction navale, fourrures, cuirs et herbes exportés ; mercenaires fortement recherchés.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            14,
+            128
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Chasse, pêche et combat considérés plus nobles devoirs ; shamans/éclaireurs/bandes guerrières patrouillent côtes.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            129,
+            131
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Capitale : chantiers navals, forgerons célèbres, ateliers d’experts cuir ; Irongauntlet mineurs et forgerons ; Northharbor commerce maritime.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            133
+          ],
+          "status": "atteste"
+        }
+      ],
+      "specific": [
+        {
+          "text": "Fabrication de drakkars choisissant arbres en forêt avec shaman et rite courage ; Twin Heads Forest bois recherchés mais dangereuse.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            130
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Shamans des esprits, traditions orales, bards/poètes des clans ; Jarls généalogie et bénédiction animale conditionnent pouvoir, pas métier imposé aux humains.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            129,
+            130,
+            132
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Valkyries Falun : fabrication d’armes enchantées, poésie épique, entraînement, patrouilles de pégases, guidance héros.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            130,
+            134
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Géants Great Valley : stone géomancie/divination/runes et constructions, hill chasse/cueillette nomades, cloud philosophie/recherche magique, frost militaires, storm gardes du Pacte.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            134,
+            135
+          ],
+          "status": "atteste"
+        }
+      ],
+      "expertise": [
+        {
+          "text": "Navigateurs et constructeurs navals renommés ; drakkars robustes convoités Republic/Kepesh ; pas expression meilleurs du continent.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            128,
+            130
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Mercenaires formidables et recherchés, notamment descendants bénis ; Northharbor décrits guerriers les plus endurants.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            128,
+            133
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Capitale forgerons célèbres et experts du cuir ; réputation locale explicite, rang continental absent.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            133
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Bois supérieur envisagé pour export ; obstacle transport rentable ; pas export massif établi.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            128
+          ],
+          "status": "atteste"
+        }
+      ],
+      "customs": [
+        {
+          "text": "Honneur clan et famille prime roi/jarl, serments/devoirs, dette remboursée en actes plutôt qu’en pièces, hospitalité, prélever nature seulement besoins.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            129,
+            130
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Résidence Capital intérieure réservée aux personnes dont père et grand-père nés Kolbjörn ; autres quartier extérieur ou Imperial District.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            133
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Hommes/humains surtout sud, géants nord ; dwarves historiquement souterrains ; % regional ne doit pas être copié ville par ville.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            14,
+            129
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Irongauntlet ancienne citadelle dwarven devenue ville humaine ; minerais en déclin et famine menaçante, fermeture mine ne peut créer prospérité manufacturière.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            133
+          ],
+          "status": "atteste"
+        },
+        {
+          "text": "Falun accès fermé sauf rares invités, géants vallée isolés ; guerre intérieure et temples Bás menacent pêche/agriculture.",
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "printed_pages": [
+            131,
+            134,
+            135
+          ],
+          "status": "atteste"
+        }
+      ],
+      "settlements": [
+        {
+          "name": "Kolbjörn Capital",
+          "kind": "city",
+          "printed_pages": [
+            133
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Chantiers navals, grands clans, forge/cuir, administration/shamans ; extérieur population d’arrivants et zone impériale.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": "Résidents intérieurs condition filiation locale ; % espèce inconnu.",
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Irongauntlet",
+          "kind": "city",
+          "printed_pages": [
+            133
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Village surface humain, ancienne citadelle naine souterraine refuge ; mine/forge et import denrées, minerais en déclin.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": "Ville humaine explicitement ; ne pas imposer majorité dwarven.",
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Northharbor (variante Northarbor)",
+          "kind": "city",
+          "printed_pages": [
+            133
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Port clan Walrus, commerce Republic/Kepesh, drakkars, marins/pêche, endurance martiale.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Falun Mountain / Falun",
+          "kind": "city",
+          "printed_pages": [
+            134
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Cité sacrée volante Valkyries, armurerie enchantée, poésie/archives épiques, patrouilles pégases et mentorat.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": "Valkyries, population totale et espèces biologiques non chiffrées.",
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Great Valley",
+          "kind": "settlement_territory_group",
+          "printed_pages": [
+            134,
+            135
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Communautés des 5 types giants et One Council ; politique divisée Giant Empire ; pas unique ville ; allouer comme sous-territoire régional.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": "Géants, 10 % régional ne répartit pas les 5 types.",
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Earth and Sky Temple",
+          "kind": "inhabited_institution",
+          "printed_pages": [
+            134
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Tour siège conseil géants au centre vallée ; garder incluse Great Valley.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Great Valley",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Twin Heads Forest",
+          "kind": "natural_resource_area",
+          "printed_pages": [
+            130
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Bois requis pour meilleurs arbres drakkars ; trolls/monstres/géants ; pas ville.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Floating Islands",
+          "kind": "settlement_group",
+          "printed_pages": [
+            130
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Habitats Valkyries avec faune ailée ; Falun incluse, ne compter séparément que les autres îles effectivement allouées.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": null,
+          "sum_rule": "disjoint_leaf_if_population_allocated"
+        },
+        {
+          "name": "Icy fortresses / floating spires / stone mountain cities / nomadic hill tribes",
+          "kind": "unnamed_settlement_groups",
+          "printed_pages": [
+            134,
+            135
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Habitats géants déjà inclus Great Valley ; pas N autonome publiés.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Great Valley",
+          "sum_rule": "included_in_parent"
+        }
+      ],
+      "districts": [
+        {
+          "name": "External district",
+          "kind": "district",
+          "printed_pages": [
+            133
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Nouveaux habitants hors condition filiation ; métiers ordinaires, statut migrant à modéliser.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Kolbjörn Capital",
+          "sum_rule": "included_in_parent"
+        },
+        {
+          "name": "Imperial District",
+          "kind": "district",
+          "printed_pages": [
+            133
+          ],
+          "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+          "population": null,
+          "population_status": "non_publiee",
+          "profile": "Enclave murée des serviteurs impériaux, taxes, espionnage/clandestinité.",
+          "profile_status": "proposition_a_partir_des_activites_attestees",
+          "species_local": null,
+          "parent": "Kolbjörn Capital",
+          "sum_rule": "included_in_parent"
+        }
+      ],
+      "gaps": [
+        "Aucune population précise pour ces villes et communautés.",
+        "Part géants 10 % région ne suffit pas à peupler précisément vallée ou clans ; Valkyries constituent ordre/culture, pas taxon séparé attesté."
+      ]
+    }
+  ],
+  "profession_additions_audit": [
+    {
+      "text": "Filière fromage/lait de Ben’net exige fromager, laitier (spécialisations transformation alimentaire) ; élevage et traite activités séparées si métier principal.",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "printed_pages": [
+        120
+      ],
+      "status": "atteste"
+    },
+    {
+      "text": "Peaux/laine → tondeur, apprêteur fourrure, fileur, tailleur/vêtements/chapeaux, tisserand, teinturier, tanneur ; rôle amont nécessaire inféré, liste professions non écrite.",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "printed_pages": [
+        15,
+        120
+      ],
+      "status": "deduit"
+    },
+    {
+      "text": "Construction navale → calfat, constructeur drakkars, charpentier naval, fabricants cordes/voiles, manutentionnaire/quai et pilote de port ; filières plausibles déduites sans intitulés explicites.",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "printed_pages": [
+        128,
+        130,
+        133
+      ],
+      "status": "deduit"
+    },
+    {
+      "text": "Production céréales Empire + watermills Ben’net → meunier nécessaire à envisager ; absent ancienne liste.",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "printed_pages": [
+        90,
+        121
+      ],
+      "status": "deduit"
+    },
+    {
+      "text": "Bank Hajal → changeur, assureur, expert, employé guichet, vérificateur identité (magie), responsable contrats extraplanaires, juriste/avocat, recouvrement ; métiers et spécialisations.",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "printed_pages": [
+        212,
+        213
+      ],
+      "status": "atteste"
+    },
+    {
+      "text": "Réseau d’Adventurer Guild → chargé missions/recruteur, instructeur, guide frontière, cartographe, chasseur monstres, collecteur matériaux ; mission/rang n’est pas profession nouvelle.",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "printed_pages": [
+        105,
+        106,
+        113
+      ],
+      "status": "deduit"
+    },
+    {
+      "text": "Capital casinos/hippodrome → croupier, bookmaker, palefrenier/éleveur chevaux, gestion événement ; rôles nécessaires mais intitulés professions déduits.",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "printed_pages": [
+        99
+      ],
+      "status": "deduit"
+    },
+    {
+      "text": "Undead servants Winterhold non vivants produisent l’essentiel tâches subalternes ; nécromancien/animateur/gardien de service possibles spécialisations arcaniques ; population vivante ≠ force travail totale.",
+      "source": "D:/JustAnotherDnDGame/Documentation/SourceBook/Tanares_Sourcebook.pdf",
+      "printed_pages": [
+        108
+      ],
+      "status": "deduit"
+    }
+  ],
+  "demographic_rules": [
+    "Dénominateur habitants H inclut enfants, personnes âgées, non-actifs, occupés, sans emploi disponibles. Dénominateur actifs A=occupés E+chômeurs disponibles U. Métiers principaux somme E ; ajouter sans métier principal U pour atteindre 100 % A.",
+    "Activité de mendicité axe indépendant, pouvant se superposer à chômage, incapacité, retraite, emploi précaire ou emploi régulier. Zéro métier/mendiant ne définit pas race ni criminalité.",
+    "Emploi principal donne une seule affectation pondérée/individu. Tâches secondaires, agriculture vivrière familiale, polyactivité saisonnière ne doublent pas individus. Les % métier actifs et habitants liés via A/H.",
+    "Forces magiques non habitantes (constructs, undead non-personnes, summon djinn) registre auxiliaire. Soulborn ou Ironhand sont personnes ; ne pas retrancher du recensement sans décision. Sous réserve du canon, soulborn peut chevaucher corps d’espèce mais la statistique source le compte distinctement.",
+    "Pauvreté ne signifie pas absence emploi : Bloomburgs main-d’œuvre/crime attestés, chômage/mendicité proposés. Ironhand mesures de plein emploi rendent taux régional chômage faible plausible mais ne forcent pas zéro.",
+    "Arbre régional = villes et sous-territoires alloués disjoints + campagne/communautés résiduelles. Districts sont inclus dans ville ; institutions/sites naturels inclus dans unité résidentielle de rattachement, pas villes ajoutées.",
+    "N Capital 680000 dans Empire 2300000 laisse 1620000 pour toutes autres villes/campagnes ; N Fisherman Wharf 570000 dans Republic 1700000 laisse 1130000. Autres régions aucune ville N canonique ; aucune somme canonique supérieure région.",
+    "Profil régional = moyenne pondérée populations/actifs locales, jamais moyenne arithmétique des pourcentages. Espèces : % source conserve total régional; allocations locales devront revenir aux marges régionales et tenir compte restrictions culturelles sans assignation racialement automatique.",
+    "Flux navetteurs/visiteurs/garnison non résidente à distinguer stocks résidents : résidents Downtown pas tous employés locaux, travailleurs domestiques peuvent habiter Sloghood/Bloomburgs."
+  ],
+  "evidence_excerpt": [
+    {
+      "region": "Central Empire",
+      "printed_page": 90,
+      "quote": "surplus labor directed at grand construction projects, road building, and city maintenance to prevent unemployment"
+    },
+    {
+      "region": "Ben’net",
+      "printed_page": 120,
+      "quote": "the best and strongest distilled beverages of Tanares"
+    },
+    {
+      "region": "Kolbjörn / Northharbor",
+      "printed_page": 133,
+      "quote": "renowned as the most enduring warriors"
+    }
+  ]
+}

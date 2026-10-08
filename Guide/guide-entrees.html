@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entrées et actions logiques — Documentation</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body data-root="..">
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Documentation</a>
+  <nav><a href="../index.html">Accueil</a><a href="index.html" class="active">Guide</a><a href="../Specification/index.html">Spécifications</a><a href="../CahierTest/index.html">Cahier de test</a><a href="../Metiers/index.html">Métiers de Tanares</a></nav>
+  <form class="search" role="search"><input type="search" placeholder="Chercher…" aria-label="Chercher dans la documentation"><div class="results" hidden></div></form>
+  <div class="links"><a class="active" href="../index.html">Documentation</a><a href="../planning/">Planification</a><a href="../qualite/">Qualité</a></div>
+</header>
+<div class="shell with-sidebar">
+<aside class="sidebar"><h4>Guide</h4><a class="depth-0" href="index.html">Guide du développeur</a><a class="depth-1" href="Manuel/index.html">Manuel utilisateur</a><a class="depth-2" href="Manuel/telecharger-et-lancer.html">Télécharger et lancer le jeu</a><a class="depth-2" href="Manuel/jouer.html">Jouer</a><a class="depth-2" href="Manuel/partager-un-niveau.html">Créer et partager une carte (sans ligne de commande)</a><a class="depth-2" href="Manuel/utiliser-l-editeur.html">Faire une carte dans l&#x27;éditeur</a><a class="depth-1" href="guide-editeur.html">Éditeur de niveaux</a><a class="depth-1" href="guide-niveaux.html">Niveaux : modèle, couches, entités, chargement</a><a class="depth-1" href="guide-maths.html">Mathématiques du moteur</a><a class="depth-1" href="guide-rendu.html">Rendu 2D : de la scène à l&#x27;écran</a><a class="depth-1" href="guide-boucle.html">Boucle de jeu et pas de temps fixe</a><a class="depth-1" href="guide-ihm-qt.html">IHM Qt — deux applications, deux technologies</a><a class="depth-1" href="guide-conception-qds.html">Concevoir les écrans dans Qt Design Studio</a><a class="depth-1" href="guide-design-ihm.html">Système de design et architecture de l&#x27;information</a><a class="depth-1" href="guide-ecrans.html">Écrans, navigation et boucle de jeu</a><a class="depth-1 active" href="guide-entrees.html">Entrées et actions logiques</a><a class="toc depth-2" href="#de-la-touche-à-lintention">De la touche à l&#x27;intention</a><a class="toc depth-2" href="#clavier-de-léditeur">Clavier de l&#x27;éditeur</a><a class="toc depth-2" href="#parcours-des-écrans">Parcours des écrans</a><a class="depth-1" href="guide-outils-developpement.html">Outils de développement du jeu</a><a class="depth-1" href="guide-donnees.html">Données, corpus et ressources</a><a class="depth-1" href="guide-regles.html">Règles d20 et personnages</a><a class="depth-1" href="guide-monde.html">Monde et exploration</a><a class="depth-1" href="guide-combat.html">Combat tactique</a><a class="depth-1" href="guide-ecs.html">ECS : entités, composants, systèmes</a><a class="depth-1" href="guide-journalisation.html">Journalisation et assertions</a><a class="depth-1" href="guide-outils.html">Build, tests et intégration continue</a><a class="depth-1" href="guide-documentation.html">Écrire la documentation</a><a class="depth-1" href="guide-audio.html">Audio</a></aside>
+<main>
+<article class="prose"><h1 id="entrées-et-actions-logiques">Entrées et actions logiques</h1>
+<p>Le jeu se pilote au clavier et à la souris. Les écrans Qt Quick lisent directement leurs événements de touches, de pointeur et de molette. L'éditeur garde une table de traduction distincte pour ses raccourcis reconfigurables.</p>
+<h2 id="de-la-touche-à-lintention">De la touche à l'intention</h2>
+<p>Le gameplay ne dépend pas d'une touche physique (<a class="ref" href="../Specification/controles.html#EX-CTRL-010"><code>EX-CTRL-010</code></a>). Dans l'exploration, les flèches, ZQSD et WASD sont traduits en une direction normalisée. <code>E</code> et <code>Espace</code> produisent la même demande d'interaction (<a class="ref" href="../Specification/controles.html#EX-CTRL-022"><code>EX-CTRL-022</code></a>). <code>core::ExplorationSession</code> ne reçoit que cette intention :</p>
+<ul><li><code>move</code> : un <code>core::Vector2</code> de longueur au plus 1 ; deux directions opposées se neutralisent ;</li><li><code>interact</code> : vrai pendant le pas où le joueur demande l'interaction, puis remis à zéro.</li></ul>
+<p><code>Source/App/Game/Qml/Screens/GameView.qml</code> retient les touches enfoncées et transmet la direction à <code>hmi::WorldModel::setMove</code>. La vue d'essai de l'éditeur construit la même intention. La demande d'interaction est consommée au pas suivant (<a class="ref" href="../Specification/controles.html#EX-CTRL-020"><code>EX-CTRL-020</code></a>).</p>
+<p>La perte de focus libère les directions maintenues : un retour depuis une autre fenêtre ne doit pas faire avancer le personnage tout seul.</p>
+<h2 id="clavier-de-léditeur">Clavier de l'éditeur</h2>
+<p><code>HMI/Input/Key.h</code> nomme les touches utiles par leur code virtuel Win32. Le jeu Qt Quick ne passe pas par cette énumération. <code>HMI/Input/QtKeyMap.h</code> traduit entre <code>Qt::Key</code> et <code>hmi::Key</code> pour les raccourcis de l'éditeur. Les lettres et chiffres partagent leur code ; les touches spéciales (flèches, Échap, Tab, Maj, Ctrl, F1, F2, F10) ont une correspondance explicite.</p>
+<p><code>hmi::EditorKeyBindings</code> charge <code>Settings/keybindings.json</code>. Un fichier absent ou incomplet retombe sur les raccourcis par défaut (<a class="ref" href="../Specification/controles.html#EX-CTRL-012"><code>EX-CTRL-012</code></a>). Les remappages restent hors de <code>Core</code>.</p>
+<h2 id="parcours-des-écrans">Parcours des écrans</h2>
+<p>Les contrôles QML exposent leurs actions par des signaux que les jumeaux de <code>Jadg.App</code> relient au routeur ou aux vues modèles. Les marques de focus restent visibles au clavier (<a class="ref" href="../Specification/interface-ihm.html#EX-IHM-071"><code>EX-IHM-071</code></a>). La carte se parcourt aussi à la souris : clic sur un repère, glisser pour déplacer, molette pour agrandir. Les touches et gestes de chaque écran sont détaillés dans le <a href="Manuel/jouer.html">manuel de jeu</a>.</p>
+<p>Le trajet reste : <strong>événement Qt → intention ou commande nommée → modèle de jeu → Core</strong>. Cette frontière permet de tester la logique sans fenêtre ni entrée physique (<a class="ref" href="../Specification/exigences-non-fonctionnelles.html#EX-NFR-010"><code>EX-NFR-010</code></a>).</p></article><nav class="pager"><a class="prev" href="guide-ecrans.html"><span>Précédent</span>Écrans, navigation et boucle de jeu</a><a class="next" href="guide-outils-developpement.html"><span>Suivant</span>Outils de développement du jeu</a></nav><p class="source">Source : <code>Documentation/Guide/guide-entrees.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Documentation/</code> le 2026-10-08 · <code>ab024803f</code>. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>

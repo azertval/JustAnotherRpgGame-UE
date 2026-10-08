@@ -1,0 +1,58 @@
+[
+  {
+    "book": "Tanares Sourcebook",
+    "file": "sb.json",
+    "pdf_pages": 179,
+    "raw_text_origin_sha256": "c9ba21d483e5bb38f655ec5a4d2812cae7cd44d87b62de540f986d1da11e8e22",
+    "documentary_copy_sha256": "31f9b7a7a82b81fb5ec35aa20feeb06c61f8be2004f1f63c7a024c122213db1f",
+    "transformation": "Retrait du filigrane nominatif de commande dans la copie textuelle ; texte extrait conservé."
+  },
+  {
+    "book": "Player’s Guide to Tanares",
+    "file": "pg.json",
+    "pdf_pages": 165,
+    "raw_text_origin_sha256": "945c6bdf1d297a267b37f7f63cbc0f42f4f787ac79fbc640018f00f0fbe26e03",
+    "documentary_copy_sha256": "644f9beec4bae1812cdbecace68f65d01ebe7223c0338f5101a801907efad5e2",
+    "transformation": "Retrait du filigrane nominatif de commande dans la copie textuelle ; texte extrait conservé."
+  },
+  {
+    "book": "Manuel des Joueurs",
+    "file": "mj.json",
+    "pdf_pages": 320,
+    "raw_text_origin_sha256": "3a5bc34198a3ee8ab40292a805d6ec525ad2200b47c520e474902fa889094cdc",
+    "documentary_copy_sha256": "897d3b332dd45ed299d4ee0c0f3ddad00227a252fbbc0de61cadff0b700cdb93",
+    "transformation": "Retrait du filigrane nominatif de commande dans la copie textuelle ; texte extrait conservé."
+  },
+  {
+    "book": "Basic Rules",
+    "file": "br.json",
+    "pdf_pages": 137,
+    "raw_text_origin_sha256": "d95b0764db0466dc39aaca9a14a877d39ec71bca433e449e9c370da478d2b03d",
+    "documentary_copy_sha256": "ec0ded97452913eb470de98245761d3198d10bc7ccf5bb38bff3287cb047a9e0",
+    "transformation": "Retrait du filigrane nominatif de commande dans la copie textuelle ; texte extrait conservé."
+  },
+  {
+    "book": "Character Compendium",
+    "file": "cc.json",
+    "pdf_pages": 169,
+    "raw_text_origin_sha256": "2b2d8377da8201c602308c621ab48365c9f250ac61bcf53d619dd5330a5dc26d",
+    "documentary_copy_sha256": "030a8118c44df22d074050c573e2803364f8fa9cc77d06ca3b2572848a02ef5b",
+    "transformation": "Retrait du filigrane nominatif de commande dans la copie textuelle ; texte extrait conservé."
+  },
+  {
+    "book": "Guide du Maître",
+    "file": "gm.json",
+    "pdf_pages": 321,
+    "raw_text_origin_sha256": "3fb9958bfe08fbf92f8c9cd727c93bbf768ba16ebb7cf86f8c71a9b77794a358",
+    "documentary_copy_sha256": "3fb9958bfe08fbf92f8c9cd727c93bbf768ba16ebb7cf86f8c71a9b77794a358",
+    "transformation": "Retrait du filigrane nominatif de commande dans la copie textuelle ; texte extrait conservé."
+  },
+  {
+    "book": "Manuel des Monstres",
+    "file": "mm.json",
+    "pdf_pages": 354,
+    "raw_text_origin_sha256": "b2e50fcc9be182a0a9bca42764db1d4efc893f3a9f538dc6b8fd3ee2f1b5a4da",
+    "documentary_copy_sha256": "967b33ebdf0ea16ba2a7a8830f989a0495a15816eb8200d085498aaa08477421",
+    "transformation": "Retrait du filigrane nominatif de commande dans la copie textuelle ; texte extrait conservé."
+  }
+]

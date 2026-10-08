@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOT-1023 — Recette, retrait de l&#x27;ancien moteur et version 0.0.3 — Planification</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Planification</a>
+  <nav><a href="../index.html">Trajectoire</a><a href="index.html" class="active">Lots</a><a href="../versions/index.html">Versions</a><a href="../vision/index.html">Vision</a><a href="../referentiels/index.html">Référentiels</a><a href="../standards/index.html">Standards</a></nav>
+  <div class="links"><a href="../../">Documentation</a><a class="active" href="../index.html">Planification</a><a href="../../qualite/">Qualité</a></div>
+</header>
+<div class="shell">
+
+<main>
+<p class="crumb"><a href="index.html">Lots</a> › <a href="../versions/v0-0-3.html">0.0.3 — Le nouveau moteur</a></p><h1><span class="vid">LOT-1023</span> Recette, retrait de l&#x27;ancien moteur et version 0.0.3</h1><p class="lede">La démo se rejoue de bout en bout sur le nouveau moteur, l'ancien dépôt est gelé, le bilan est écrit, les fiches de la 0.0.4 sont réécrites, le tag v0.0.3 est posé dans le nouveau dépôt.</p><dl class="facts"><div><dt>État</dt><dd><span class="badge etat-en-attente">en attente</span></dd></div><div><dt>Filière</dt><dd><span class="filiere f-version">Recette et version</span></dd></div><div><dt>Taille</dt><dd>M</dd></div><div><dt>Ordre calculé</dt><dd>11</dd></div><div><dt>Prérequis</dt><dd><a class="ref" href="lot-1017.html">LOT-1017</a> <a class="ref" href="lot-1020.html">LOT-1020</a> <a class="ref" href="lot-1021.html">LOT-1021</a> <a class="ref" href="lot-1022.html">LOT-1022</a></dd></div><div><dt>Débloque</dt><dd><a class="ref" href="lot-107.html">LOT-107</a> <a class="ref" href="lot-151.html">LOT-151</a></dd></div><div><dt>Reprend</dt><dd>—</dd></div></dl><section><h2>Livrables</h2><ul class=""><li>La quête « Des pommes pour l'arène » par ses trois issues et la série de l'arène, jouées par l'auteur sur le nouveau moteur, de jour et de nuit ; les suites d'intégration et système vertes sur <code>main</code>.</li><li>Le <strong>gel de l'ancien dépôt</strong> (D-58) : un dernier commit qui marque la fin du moteur maison, le README de tête qui renvoie au nouveau dépôt et au tag <code>v0.0.2.5</code>, l'archivage GitHub ; le balayage du nouveau dépôt — rien de <code>Qt</code>, <code>QRhi</code>, <code>QML</code>, <code>LevelEditor</code>, format v4 n'y est entré, et ce que la passation avait laissé passer par erreur est retiré dans la PR de la recette (D-32).</li><li>Les mesures de cadence et d'ouverture des trois cartes sur le poste de référence, et le poids des kits et du dépôt, dans le bilan.</li><li><code>bilan.md</code> : ce qui a coûté plus que prévu, le coût d'Arenarea, ce que la <code>0.0.4</code> doit en retenir ; <code>README.md</code>, <code>AGENTS.md</code>, le guide du développeur et les spécifications de rendu mis à jour.</li><li>Les fiches de la <code>0.0.4</code> réécrites pour le nouveau moteur (comme D-35 l'a fait pour la 3D) : LOT-106, 107, 110, 111, 113, 114, 115, 147, 151, 157 ; les fiches de l'éditeur de la <code>0.2.0</code> (LOT-158, 159, 166, 167, 168, 169) relues.</li><li>L'installeur et les notes de version ; le tag <code>v0.0.3</code>.</li></ul></section><section><h2>Critères d'acceptation</h2><ul class="checks"><li>Plus une ligne de Qt, de QML ni de QRhi dans le nouveau dépôt ; sa CI est verte ; l'ancien dépôt est archivé et privé.</li><li><code>check_orphans.py</code>, <code>check_binary_files.py</code>, <code>lint_planning.py</code> et <code>lint_docs.py</code> passent ; aucun fichier LFS sans script producteur.</li><li>Les trois cartes tiennent 60 images par seconde à 1080p sur le poste de référence, de jour comme de nuit, et s'ouvrent en moins de 10 secondes.</li><li>L'auteur a joué la démo par ses trois issues sur le nouveau moteur et l'écrit dans la fiche.</li><li>Le tag <code>v0.0.3</code> est posé ; l'archive se lance sur un poste vierge (test de fumée de <code>release.yml</code>).</li></ul></section><section class="prose"><h2 id="pourquoi">Pourquoi</h2>
+<p>Une version se clôt par un bilan qui recale les suivantes (règle 5 de la trajectoire), et celle-ci change de dépôt (D-58) : l'ancien se gèle à la fin, parce que le jeu devait rester jouable jusque-là. Le bilan donne le premier coût d'un lieu produit pour de bon ; les fiches de la <code>0.0.4</code> s'écrivent dessus.</p>
+<h2 id="périmètre">Périmètre</h2>
+<p>Dedans : le rejeu, le retrait, les mesures, le bilan, les fiches réécrites, la version.</p>
+<p>Dehors, nommément :</p>
+<ul><li>un joueur extérieur : il reste un livrable du LOT-198 ;</li><li>toute correction qui dépasse la journée : elle devient un lot de la <code>0.0.4</code>.</li></ul>
+<h2 id="conception">Conception</h2>
+<ul><li><strong>Le balayage final</strong>, comme au LOT-1010, sur le nouveau dépôt : <code>grep</code> de <code>Qt</code>, <code>QRhi</code>, <code>QML</code>, <code>ScenePainter</code>, <code>MeshBatch</code>, <code>LevelEditor</code>, <code>jadg-editor-gestures</code>, <code>level v4</code> ; aucun résultat attendu dans <code>Source/</code> et <code>scripts/</code> ; les fiches livrées de <code>Planning/</code> les gardent comme histoire.</li><li><strong>Les kits</strong> : le verrou du nouveau dépôt ne porte que les kits republiés ; les anciennes archives restent dans les releases de l'ancien dépôt.</li><li><strong>Le bilan</strong> chiffre : lignes retirées et ajoutées, poids du dépôt et des kits, coût d'Arenarea par quartier, crédits Meshy, cadence des trois cartes, durée réelle de la version contre les six à dix semaines annoncées.</li></ul>
+<h2 id="risques-et-questions-ouvertes">Risques et questions ouvertes</h2>
+<ul><li><strong>Un lot de la version non livré</strong> (Arenarea partiel, interface redécoupée) : la recette se fait sur ce qui est livré, la dette s'écrit avec le lot qui la retire, et le tag se pose quand même si la démo se joue ; sinon la version attend.</li></ul></section><p class="source">Source : <code>Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1023-recette-et-version-0-0-3.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Planning/</code> le 2026-10-08 · <code>ab024803f</code>. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

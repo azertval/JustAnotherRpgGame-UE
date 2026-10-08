@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOT-1020 — Les écrans et le HUD en UMG — Planification</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Planification</a>
+  <nav><a href="../index.html">Trajectoire</a><a href="index.html" class="active">Lots</a><a href="../versions/index.html">Versions</a><a href="../vision/index.html">Vision</a><a href="../referentiels/index.html">Référentiels</a><a href="../standards/index.html">Standards</a></nav>
+  <div class="links"><a href="../../">Documentation</a><a class="active" href="../index.html">Planification</a><a href="../../qualite/">Qualité</a></div>
+</header>
+<div class="shell">
+
+<main>
+<p class="crumb"><a href="index.html">Lots</a> › <a href="../versions/v0-0-3.html">0.0.3 — Le nouveau moteur</a></p><h1><span class="vid">LOT-1020</span> Les écrans et le HUD en UMG</h1><p class="lede">Tous les écrans du jeu à la charte v2 — HUD, Personnage, Équipement, Journal, Groupe, Carte, Options, menus, dialogues, combat, écrans de fin — existent sur le nouveau moteur, construits en C++, avec les mêmes images et les mêmes textes.</p><dl class="facts"><div><dt>État</dt><dd><span class="badge etat-en-attente">en attente</span></dd></div><div><dt>Filière</dt><dd><span class="filiere f-interface">Interface</span></dd></div><div><dt>Taille</dt><dd>L</dd></div><div><dt>Ordre calculé</dt><dd>8</dd></div><div><dt>Prérequis</dt><dd><a class="ref" href="lot-1016.html">LOT-1016</a></dd></div><div><dt>Débloque</dt><dd><a class="ref" href="lot-1023.html">LOT-1023</a></dd></div><div><dt>Reprend</dt><dd>—</dd></div></dl><section><h2>Livrables</h2><ul class=""><li>Les écrans en UMG construits par C++ (pas de Widget Blueprint) : HUD d'exploration, menu du mercenaire, Personnage, Équipement, Journal, Groupe à quatre, Carte (l'atlas illustré et ses zones cliquables, LOT du 7 octobre), Options, Nouvelle partie et choix du meneur (D-37), dialogues avec choix du locuteur (D-28) et jet en dialogue, interface de combat de groupe (LOT-140) en distance, écrans de fin (LOT-119), menu de débug F9.</li><li>La charte v2 reprise telle quelle : parchemins, ornements, polices, portraits, jetons du kit <code>UI</code> ; les tailles aux quatre niveaux de l'échelle d'identité (23/14/10/8).</li><li>La localisation : les textes du jeu extraits et chargés par le système de texte du moteur, depuis les mêmes fichiers de traduction ; <code>check_translations.py</code> rebranché.</li><li>Les captures de référence des écrans (vingt aujourd'hui) refaites sur le nouveau moteur et comparées à tolérance en CI.</li><li>Le manuel du joueur (<code>Documentation/Guide/Manuel/</code>) et ses captures régénérés.</li></ul></section><section><h2>Critères d'acceptation</h2><ul class="checks"><li>Chaque écran du cahier de test s'ouvre, se ferme et se parcourt au clavier et à la souris ; les tests d'interface passent.</li><li>Un écran se compare à sa capture du moteur maison : même disposition, mêmes textes, mêmes images (jugement de l'auteur sur les vingt captures côte à côte).</li><li>Aucun Widget Blueprint dans le projet ; <code>check_orphans.py</code> passe.</li><li>Les textes en français et en anglais s'affichent depuis les fichiers de traduction existants.</li></ul></section><section class="prose"><h2 id="pourquoi">Pourquoi</h2>
+<p>L'interface Qt Quick tombe avec Qt. Les écrans eux-mêmes sont faits, validés et testés : ce lot les refait sur le nouveau moteur sans en changer le dessin, pour que la recette compare écran à écran.</p>
+<h2 id="périmètre">Périmètre</h2>
+<p>Dedans : tous les écrans, la charte, la localisation, les captures, le manuel.</p>
+<p>Dehors, nommément :</p>
+<ul><li>la refonte d'un écran : aucun écran ne change de dessin ici ; une demande passe par un lot ;</li><li>l'aperçu de combat (LOT-1017), que ce lot habille sans le réécrire ;</li><li>la manette, retirée le 2 octobre 2026.</li></ul>
+<h2 id="conception">Conception</h2>
+<ul><li><strong>UMG par C++</strong> : chaque écran est une classe qui construit son arbre de widgets ; les styles (images, polices, couleurs) viennent d'un fichier texte, pas d'un <code>.uasset</code> de style. Les images du kit <code>UI</code> s'importent par script, comme les maillages.</li><li><strong>L'écran Carte</strong> reprend l'atlas illustré et <code>map-interactions.json</code> : zones cliquables, voisins, bannières, recherche, favoris ; c'est le dernier écran livré sur l'ancien moteur, et le plus riche.</li><li><strong>Les captures de référence</strong> se comparent à tolérance par blocs ; le seuil de 24 par canal du moteur maison se remesure sous l'anticrénelage temporel.</li></ul>
+<h2 id="risques-et-questions-ouvertes">Risques et questions ouvertes</h2>
+<ul><li><strong>Le texte riche</strong> (journal, dialogues) : le système de texte du moteur ne couvre pas tout ce que QML faisait ; les balises utilisées s'inventorient en ouvrant le lot.</li><li><strong>Le volume</strong> : quinze écrans, 149 fichiers QML derrière. Si le lot dépasse la semaine, il se redécoupe en exploration, fiche et groupe, combat et fins.</li></ul></section><p class="source">Source : <code>Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1020-interface-umg.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Planning/</code> le 2026-10-08 · <code>ab024803f</code>. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>
