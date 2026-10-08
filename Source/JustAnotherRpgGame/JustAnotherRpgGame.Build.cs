@@ -46,8 +46,16 @@ public class JustAnotherRpgGame : ModuleRules
 		// le reprenne (il venait de `project(... VERSION ...)` dans la construction CMake).
 		PublicDefinitions.Add("JADG_VERSION=\"0.0.3\"");
 
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
+		// AIModule et NavigationSystem : la marche au clic sur le maillage de navigation (LOT-1012) ;
+		// RenderCore et RHI : les temps de trame que la mesure de cadence relève.
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "AIModule", "NavigationSystem", "RenderCore", "RHI" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] { });
+
+		// La brosse d'un volume ne se dessine que par l'éditeur (Scene/JadgSceneBuild).
+		if (Target.bBuildEditor)
+		{
+			PrivateDependencyModuleNames.Add("UnrealEd");
+		}
 	}
 }

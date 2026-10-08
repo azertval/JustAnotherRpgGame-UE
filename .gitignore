@@ -48,6 +48,8 @@ compile_commands.json
 /Source/Elements/Assets/UI/**/*.jpeg
 # Les maillages au maître (2,7 Go) : le manifeste est suivi, les .glb viennent du kit.
 /Source/Elements/Assets/Master/**/*.glb
+# Les pièces construites par script (build_colosseum.py) : régénérées, le manifeste seul est suivi.
+/Source/Elements/Assets/Built/**/*.glb
 
 # --- Python ---
 __pycache__/
@@ -79,3 +81,6 @@ Documentation/SourceBook/
 /.claude/worktrees/
 /.claude/jobs/
 /.tmp/
+
+# --- L'atelier local (textures de l'atelier de l'Arena of Fate, retours Meshy) : hors Git ---
+/Tools/

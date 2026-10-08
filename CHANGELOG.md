@@ -6,6 +6,29 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **Le Colisée de la porte est reconstruit en pièces modulaires, aux dimensions de celui de Rome**
+  (LOT-1012, 8 octobre 2026). La coque d'un seul tenant de l'ancien kit, agrandie 2,7 fois, ne
+  tenait pas le gros plan : `scripts/assetsGeneration/build_colosseum.py` (Blender sans fenêtre)
+  produit neuf pièces texturées au mètre — travées des trois ordres, attique, porte axiale et son
+  tunnel, quart de gradins, loge impériale, sable, socle — sous `Source/Elements/Assets/Built/colisee/`,
+  avec leurs cartes de matière et un manifeste suivi ; `build_gate_scene.py` les pose en anneau
+  (189 × 156 m, 48 m, 80 travées à longueur d'arc égale) avec les quatorze dieux et les deux
+  lions au maître, les bannières et les feux. Le dallage s'arrête au pied du monument
+  (`fills[].excludeEllipses`), une pièce régénérée se réimporte, et les cadrages de capture
+  montrent la façade entière depuis le sud et la porte vue d'en bas.
+- **La porte du nouveau moteur tourne : le parvis d'Arenarea dans Unreal** (LOT-1012, clos par l'auteur le
+  8 octobre 2026). Une description de scène en JSON (`Source/Elements/Scenes/porte-1012.json`)
+  devient une carte par un script Python d'éditeur, sans fenêtre (`build_scene_unreal.py`) : le
+  Colisée, ses statues et ses lions **au maître**, reliés à leur pièce du kit par leur nom Meshy et
+  posés par mesure (`build_gate_scene.py`), ses bannières, le dallage, une façade, deux personnages
+  liés. Le jeu reçoit la caméra libre de D-49, la marche au clic sur le maillage de navigation, le
+  cycle jour / nuit lu dans `daylight.json` par Core, et un directeur de capture.
+  `scripts/build.ps1 -Unreal -Scene porte-1012 -Capture` enchaîne construction, contrôle, carte,
+  six captures (parvis, porte, ruelle ; midi et 22 h) et mesure : 119 images par seconde à 1080p
+  sur la RTX 4060 Ti, Lumen et Nanite actifs. Les critères non tenus à la clôture (ouverture en 5 s, marche mesurée,
+  empreintes d'une reconstruction, cinq façades) et le suivi de `Content/` restent ouverts ; la
+  fiche les nomme.
+
 - **Le site est republié depuis ce dépôt** (8 octobre 2026), sur sa branche `gh-pages`, à chaque
   merge sur `main` (`docs.yml`) : les pages de documentation, l'étude des métiers avec son
   explorateur et ses données, le site de planification. La référence du code (Doxygen) et la page
