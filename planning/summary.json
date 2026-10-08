@@ -2389,7 +2389,7 @@
       "id": "LOT-1014",
       "titre": "Le socle : Core en module, données, build, tests, CI",
       "version": "0.0.3",
-      "etat": "prochain",
+      "etat": "en-cours",
       "rang": 1,
       "debloque": 86,
       "prerequis": [
