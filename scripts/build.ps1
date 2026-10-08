@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Construit et vérifie JustAnotherRpgGame sans ouvrir une fenêtre (LOT-1014).
 
