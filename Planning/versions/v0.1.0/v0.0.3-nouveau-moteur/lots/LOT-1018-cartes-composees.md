@@ -68,3 +68,7 @@ joue jusqu'à la recette (D-58). Dans le nouveau dépôt, ils ne sont jamais ent
   liste de ce que `read_level.py` relit est la frontière, écrite dans la spécification.
 - **La taille.** Arenarea v0 compte 1 663 placements ; une carte reconstruite en comptera dix fois
   plus. La construction par script doit tenir en minutes, pas en heures ; mesurée sur la migration.
+- **La dette du LOT-1016** (clos le 8 octobre 2026), que ce lot retire : **deux étages l'un
+  au-dessus de l'autre** — la trace de la file du groupe est en deux dimensions, éprouvée sur une
+  terrasse et sa rampe seulement — et **la carte de Core de la porte** : la grille d'Arenarea de
+  l'ancien jeu ne décrit pas le parvis construit dans Unreal, le format de carte les met d'accord.

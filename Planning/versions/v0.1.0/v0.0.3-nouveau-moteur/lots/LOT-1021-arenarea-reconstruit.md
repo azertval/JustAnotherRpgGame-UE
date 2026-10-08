@@ -74,3 +74,6 @@ Dehors, nommément :
 - **Le coût Meshy** : une centaine de pièces à trente crédits ; le relevé le dit.
 - **La cadence** : des milliers d'objets, Nanite et Lumen ; les niveaux de chargement par quartier
   (D-51) sont la parade si la mesure ne tient pas.
+- **La dette du LOT-1016** (clos le 8 octobre 2026), que ce lot retire : **la porte** du LOT-1012
+  ne joue aucune carte de Core (ni portail ni PNJ) ; elle reçoit la sienne avec Arenarea
+  reconstruit, sur le format du LOT-1018.

@@ -43,16 +43,23 @@ décimation ni budget de triangles. Les retours Meshy vont dans `Source/Elements
 à la main dans l'éditeur.
 
 Avant de produire ou retoucher un lot d'assets, lire `Planning/standards/style-3d.md` — notamment
-« Critères de qualité validés par l'auteur » et « Ce qui reste ouvert » — et, pour un personnage,
-`Planning/standards/personnages-3d.md`. Ses valeurs de géométrie (§1), de poids (§3) et d'images
-tolérées (§7) sont périmées par D-49 et D-53 et se réécrivent au `LOT-1019`.
+« Critères de qualité validés par l'auteur » et « Ce qui reste ouvert ». Ses valeurs de géométrie
+(§1), de poids (§3) et d'images tolérées (§7) sont périmées par D-49 et D-53 et se réécrivent au
+`LOT-1019`. `Planning/standards/personnages-3d.md` est **périmé** par D-63 et D-64 jusqu'au
+`LOT-1015`, qui le réécrit sur les mesures du moteur : seuls son §3 (l'image de référence, pour les
+pièces Meshy) et son §10 (portrait et jeton peints) valent encore.
 
-Un personnage est un maillage qui lui est propre, généré par Meshy depuis une vue de face en pose
-neutre (de trois quarts pour un quadrupède), puis lié au squelette commun de sa silhouette par
-script ; il s'importe **au maître**, sans décimation (D-53). Aucune retouche à la main d'un
-maillage ni d'une texture : la chaîne se rejoue, ou la pièce se recommande. Les articulations et les
-clips se règlent dans Blender par l'atelier des assets (D-44) : ce qui en revient est une donnée que
-la chaîne rejoue, jamais un maillage exporté par Blender.
+Un personnage est une **fiche texte** (JSON) qui donne les valeurs des paramètres d'un **objet
+personnalisable Mutable** ; le créateur assemble corps, tête, pièces, garde-robe et matières (D-63).
+Les corps et têtes humains et proches de l'humain viennent de **MetaHuman** ; ce que MetaHuman
+n'atteint pas, et les pièces propres au monde (cornes, défenses, queues, oreilles, armures
+signatures, armes), viennent de **Meshy**, ou de **Fab** pour les corps de base, la garde-robe et
+les animations. Tout est sur le squelette standard d'Unreal, les animations viennent des
+bibliothèques du moteur reciblées par l'IK Retargeter, les armes s'accrochent par socket. Le
+créateur se régénère par script depuis sa description texte ; aucun asset construit à la main dans
+l'éditeur ne reste, et aucune retouche à la main d'un maillage ni d'une texture : la pièce se
+recommande. La chaîne maison (squelettes MPFB et `quadruped`, clips posés par cibles, retouche dans
+Blender) ne se porte pas : elle se supprime (D-64). Portraits et jetons restent peints (D-30).
 
 Le standard n'écrit que des valeurs mesurées ou des décisions datées de l'auteur. Ne pas combler une
 question ouverte par une valeur devinée : la poser à l'auteur, ou la laisser au lot que le standard

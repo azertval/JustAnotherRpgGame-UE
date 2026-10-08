@@ -3,7 +3,7 @@ id = "LOT-1016"
 titre = "Caméra, marche, groupe, portails, jour et nuit"
 version = "0.0.3"
 filiere = "moteur"
-statut = "en-cours"
+statut = "livre"
 resume = "On explore une carte sur le nouveau moteur : la caméra libre de D-49, le groupe de quatre qui suit le meneur au clic, les interactions, les portails entre cartes et le cycle jour / nuit."
 taille = "L"
 prerequis = ["LOT-1014"]
@@ -266,12 +266,23 @@ Cadence des cartes d'essai : 104 à 109 images par seconde, à midi comme à 22 
 | À 22 h, une lanterne éclaire le mur devant elle et pas celui derrière | **tenu sur capture** (`lanterne-2200.png`) ; le jugement de l'image est à l'auteur |
 | La caméra ne traverse ni le sol ni les murs ; ses bornes se règlent sans recompiler | **tenu** : un mur, un talus (`Jadg.Exploration.Camera`) ; les bornes dans `Config/DefaultGame.ini` |
 
-### Ce qui reste au lot
+## Décisions de réalisation
 
-- **La main sur la souris** : jouer dans une fenêtre, et juger les distances de la caméra (4 m à
-  120 m, celles de la porte), que personne n'a réglées.
-- **Deux étages superposés**, avec le format de carte (LOT-1018).
-- **Les personnages ne se bloquent pas** : le meneur traverse un PNJ qui est sur son chemin.
-- **La porte** attend sa carte de Core (LOT-1018, LOT-1021).
-- **La cadence de la porte** (88 images par seconde au lieu de 119, avant ce lot comme après) :
-  cause non cherchée.
+### Clôture — 8 octobre 2026
+
+L'auteur clôt le lot : « Clore, dette notée ». Ce qui restait au lot ne le retient pas ; chaque
+point devient une **dette**, écrite ici et dans la fiche du lot qui la retire.
+
+| Dette | Ce qu'il en est | Retirée par |
+|---|---|---|
+| **La main sur la souris** | jouer dans une fenêtre, juger la sensation des commandes (vitesse de rotation, pas de la molette, précision du clic) et les distances de la caméra, 4 m à 120 m, reprises de la porte sans que personne les ait réglées | [LOT-1023](LOT-1023-recette-et-version-0-0-3.md) (recette) |
+| **Deux étages superposés** | la trace de la file est en deux dimensions ; seuls une terrasse et sa rampe sont éprouvés (`Jadg.Exploration.Etage`) | [LOT-1018](LOT-1018-cartes-composees.md) |
+| **Les personnages ne se bloquent pas** | ni entre membres du groupe ni contre un PNJ ; le meneur traverse un PNJ qui est sur son chemin | [LOT-1017](LOT-1017-combat-en-distance.md) |
+| **La carte de Core de la porte** | la grille d'Arenarea de l'ancien jeu ne décrit pas le parvis construit dans Unreal ; le format de carte les met d'accord | [LOT-1018](LOT-1018-cartes-composees.md) |
+| **La porte joue une carte de Core** | elle ne reçoit ni portail ni PNJ ; elle les reçoit avec Arenarea reconstruit | [LOT-1021](LOT-1021-arenarea-reconstruit.md) |
+| **La cadence de la porte** | 88 images par seconde au lieu des 119 de sa clôture, avant ce lot comme après ; cause non cherchée | [LOT-1023](LOT-1023-recette-et-version-0-0-3.md) (recette) |
+
+`controles.md`, qui décrit encore les commandes de l'ancien jeu, se reprend avec les
+spécifications (LOT-1023), comme l'écrit l'avancement.
+
+Livré par la PR #5, fusionnée le 8 octobre 2026.
