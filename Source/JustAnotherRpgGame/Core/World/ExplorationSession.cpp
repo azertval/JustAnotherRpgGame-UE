@@ -185,6 +185,15 @@ void ExplorationSession::walk(Vector2 move, float seconds) {
     }
 }
 
+void ExplorationSession::carry(CellPoint point) {
+    const Vector2 pas{point.column - _hero.column, point.row - _hero.row};
+    // En deca du pas qui pose un point de trace, le heros pietine : il garde son orientation.
+    if (pas.length() >= FollowTrail::MIN_STEP_CELLS) {
+        _facing = pas;
+    }
+    _hero = point;
+}
+
 void ExplorationSession::crossPortal(std::vector<ExplorationEvent>& events) {
     const GridPosition ici = heroCell();
     if (ici == _lastCell) {
@@ -337,10 +346,10 @@ void ExplorationSession::enterZones(std::vector<ExplorationEvent>& events) {
     }
 }
 
-void ExplorationSession::resolveInteraction(std::vector<ExplorationEvent>& events) {
+InteractionTarget ExplorationSession::designate() const {
     const Level* carte = map();
     if (carte == nullptr) {
-        return;
+        return {};
     }
     std::vector<InteractionCandidate> candidats;
     candidats.reserve(_interactables.size());
@@ -348,8 +357,24 @@ void ExplorationSession::resolveInteraction(std::vector<ExplorationEvent>& event
         candidats.push_back(
             InteractionCandidate{.interactable = &_interactables[rang], .index = rang});
     }
-    const InteractionTarget cible = findInteractionTarget({_hero.column, _hero.row}, _facing,
-                                                          carte->tileMap(), candidats, _flags);
+    return findInteractionTarget({_hero.column, _hero.row}, _facing, carte->tileMap(), candidats,
+                                 _flags);
+}
+
+std::optional<Interactable> ExplorationSession::interactionTarget() const {
+    if (_frozen) {
+        return std::nullopt;
+    }
+    const InteractionTarget cible = designate();
+    return cible.found() ? std::optional<Interactable>{*cible.interactable} : std::nullopt;
+}
+
+void ExplorationSession::resolveInteraction(std::vector<ExplorationEvent>& events) {
+    const Level* carte = map();
+    if (carte == nullptr) {
+        return;
+    }
+    const InteractionTarget cible = designate();
     if (!cible.found()) {
         return;
     }
@@ -427,7 +452,11 @@ std::vector<ExplorationEvent> ExplorationSession::update(const ExplorationIntent
     // L'heure du monde passe avec la marche (LOT-1007) : gelee comme elle pendant un dialogue ou
     // un combat.
     _clock.advance(seconds);
-    walk(intent.move, seconds);
+    if (intent.carried.has_value()) {
+        carry(*intent.carried);
+    } else {
+        walk(intent.move, seconds);
+    }
     // Les suiveurs mettent leurs pas dans ceux du heros : la trace s'allonge de ce qu'il vient de
     // faire, avant qu'un portail ne la remette a zero sur la carte d'arrivee.
     _trail.record(TrailPoint{_hero.column, _hero.row});

@@ -217,10 +217,10 @@ TEST(FamillesDEntitesTest, NomDePointDArriveeUnique) {
  * \castest{<b>Aucune famille lue par le jeu n'echappe a l'editeur.</b><br/>
  * \tcat Unitaire · Familles d'entites<br/>
  * \tcrit Bloquant<br/>
- * \tetapes 1. Relever dans les sources du jeu (Core, HMI, App) chaque constante
- * <code>*_ENTITY_TYPE</code>.<br/>2. Y ajouter les familles interactives
- * (<code>core::knownInteractableKinds</code>) et chaque type des cartes livrees.<br/>3. Chercher
- * chacune dans la table.<br/>
+ * \tetapes 1. Relever dans les sources du jeu (Core et le code qui le relie au moteur) chaque
+ * constante <code>*_ENTITY_TYPE</code>.<br/>2. Y ajouter les familles interactives
+ * (<code>core::knownInteractableKinds</code>) et chaque type des cartes livrees et des cartes
+ * d'essai de l'exploration.<br/>3. Chercher chacune dans la table.<br/>
  * \tattendu Toutes y sont ; le releve trouve au moins les onze familles d'aujourd'hui.
  * }
  */
@@ -230,33 +230,36 @@ TEST(FamillesDEntitesTest, ToutFamilleLueParLeJeuEstDansLaTable) {
     const std::regex constant(
         "inline\\s+constexpr\\s+std::string_view\\s+\\w+_ENTITY_TYPE\\s*=\\s*\"([^\"]+)\"");
     std::map<std::string, std::string, std::less<>> read;  // type -> ou il est lu
-    for (const char* const part : {"Core", "HMI", "App"}) {
-        for (const auto& file : std::filesystem::recursive_directory_iterator(source / part)) {
-            if (file.path().extension() != ".h" && file.path().extension() != ".cpp") {
-                continue;
-            }
-            std::ifstream stream(file.path());
-            const std::string text((std::istreambuf_iterator<char>(stream)),
-                                   std::istreambuf_iterator<char>());
-            for (auto match = std::sregex_iterator(text.begin(), text.end(), constant);
-                 match != std::sregex_iterator(); ++match) {
-                read.emplace((*match)[1].str(), file.path().filename().string());
-            }
+    // Le module du jeu entier : Core, et le code qui le relie au moteur (`LOT-1016`).
+    for (const auto& file : std::filesystem::recursive_directory_iterator(source)) {
+        if (file.path().extension() != ".h" && file.path().extension() != ".cpp") {
+            continue;
+        }
+        std::ifstream stream(file.path());
+        const std::string text((std::istreambuf_iterator<char>(stream)),
+                               std::istreambuf_iterator<char>());
+        for (auto match = std::sregex_iterator(text.begin(), text.end(), constant);
+             match != std::sregex_iterator(); ++match) {
+            read.emplace((*match)[1].str(), file.path().filename().string());
         }
     }
     for (const core::InteractableKind& kind : core::knownInteractableKinds()) {
         read.emplace(std::string{kind.type}, "MapEntitySpawner.cpp");
     }
-    for (const auto& file :
-         std::filesystem::recursive_directory_iterator(source / "Elements" / "Levels")) {
-        if (file.path().extension() != ".json" ||
-            file.path().filename().string().ends_with(".editor.json")) {
-            continue;
-        }
-        const core::LevelLoadResult loaded = core::LevelLoader::loadFromFile(file.path());
-        ASSERT_TRUE(loaded.ok()) << file.path() << " : " << loaded.error;
-        for (const core::MapEntity& entity : loaded.level->entities()) {
-            read.emplace(entity.type, file.path().filename().string());
+    // Les cartes livrees, et celles que le moteur joue a l'essai (`build_essai_maps.py`).
+    const std::filesystem::path trials =
+        std::filesystem::path(JADG_TEST_FIXTURES_DIR) / "Exploration" / "Levels";
+    for (const std::filesystem::path& levels : {std::filesystem::path(JADG_LEVELS_DIR), trials}) {
+        for (const auto& file : std::filesystem::recursive_directory_iterator(levels)) {
+            if (file.path().extension() != ".json" ||
+                file.path().filename().string().ends_with(".editor.json")) {
+                continue;
+            }
+            const core::LevelLoadResult loaded = core::LevelLoader::loadFromFile(file.path());
+            ASSERT_TRUE(loaded.ok()) << file.path() << " : " << loaded.error;
+            for (const core::MapEntity& entity : loaded.level->entities()) {
+                read.emplace(entity.type, file.path().filename().string());
+            }
         }
     }
     EXPECT_GE(read.size(), 11U);

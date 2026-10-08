@@ -3,11 +3,13 @@
 
 #pragma once
 
+#include <optional>
 #include <string>
 #include <string_view>
 #include <vector>
 
 #include "Core/Ecs/Components/Interactable.h"
+#include "Core/Gameplay/Interaction.h"
 #include "Core/Gameplay/Quest.h"
 #include "Core/Gameplay/WorldFlags.h"
 #include "Core/Levels/GridPosition.h"
@@ -63,6 +65,18 @@ struct ExplorationIntent {
     Vector2 move{};
     /// Vrai le pas où le joueur presse la touche d'interaction (`E` ou Espace).
     bool interact = false;
+    /**
+     * @brief Où le héros **a été mené** ce pas, en cases, quand ce n'est pas la session qui le fait
+     *        marcher (`LOT-1016`).
+     *
+     * Le nouveau moteur déplace le meneur sur son maillage de navigation : le chemin, la pente et
+     * l'escalier sont les siens. La session ne refait pas ce pas et ne le confronte pas à la
+     * grille — elle le **constate**, puis en tire ce qu'elle tire d'un pas marché : l'orientation,
+     * la trace des suiveurs, le portail de la case atteinte, les zones, l'interaction. `move` est
+     * alors ignoré. Ce n'est pas `placeHero`, qui pose le héros sans qu'il soit arrivé nulle part :
+     * un portail se franchit en y **arrivant**.
+     */
+    std::optional<CellPoint> carried{};
 };
 
 /// @brief Ce qu'un pas d'exploration a produit et que l'appelant doit jouer.
@@ -245,6 +259,14 @@ public:
         return _frozen;
     }
 
+    /**
+     * @brief Ce que le héros solliciterait s'il interagissait maintenant (`LOT-1016`), sans rien
+     *        solliciter : l'entité que l'écran désigne au joueur avant qu'il n'appuie.
+     * @return L'interactif à portée (`core::findInteractionTarget`), ou rien — aucune cible, carte
+     *         gelée, pas de carte.
+     */
+    [[nodiscard]] std::optional<Interactable> interactionTarget() const;
+
     /// @return Les entités interactives de la carte courante, dans l'ordre des entités.
     [[nodiscard]] const std::vector<Interactable>& interactables() const noexcept {
         return _interactables;
@@ -272,6 +294,10 @@ private:
     [[nodiscard]] bool fits(CellPoint point) const;
     /// Marche d'un pas, axe par axe : un mur pris en biais fait glisser le long, il n'arrête pas.
     void walk(Vector2 move, float seconds);
+    /// Constate que le héros a été mené en @p point (`ExplorationIntent::carried`).
+    void carry(CellPoint point);
+    /// @return La cible d'interaction du héros, désignée sur `_interactables`.
+    [[nodiscard]] InteractionTarget designate() const;
     /// Range les suiveurs derrière le héros, dans le dos de son orientation, tant que la place
     /// est libre ; ceux qui n'ont plus de place attendent sur le dernier point libre.
     void lineUpFollowers();

@@ -65,7 +65,10 @@
     {"id": "lampe-ruelle-2", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-lamp.glb", "position": [2.4, 0.0, 70.5], "yaw": 90.0, "scale": 1.0, "light": {"color": "#ffd69a", "range": 7.5, "height": 2.9}}
   ],
   "characters": [
-    {"id": "brawler", "mesh": "Common/Characters/Heroes/brawler/brawler.glb", "position": [0.0, 0.0, 27.0], "heading": 180.0, "playable": true, "idle": "idle", "walk": "walk", "walkSpeed": 3.0},
+    {"id": "brawler", "mesh": "Common/Characters/Heroes/brawler/brawler.glb", "position": [0.0, 0.0, 27.0], "heading": 180.0, "party": 0, "idle": "idle", "walk": "walk", "walkSpeed": 3.0},
+    {"id": "priest", "mesh": "Common/Characters/Heroes/priest/priest.glb", "position": [0.0, 0.0, 25.5], "heading": 180.0, "party": 1, "idle": "idle", "walk": "walk", "walkSpeed": 3.0},
+    {"id": "scoundrel", "mesh": "Common/Characters/Heroes/scoundrel/scoundrel.glb", "position": [0.0, 0.0, 24.0], "heading": 180.0, "party": 2, "idle": "idle", "walk": "walk", "walkSpeed": 3.0},
+    {"id": "mage", "mesh": "Common/Characters/Heroes/mage/mage.glb", "position": [0.0, 0.0, 22.5], "heading": 180.0, "party": 3, "idle": "idle", "walk": "walk", "walkSpeed": 3.0},
     {"id": "lion", "mesh": "Regions/central-empire/capital/arenarea/arena-of-fate/Characters/lion/lion.glb", "position": [7.5, 0.0, 39.0], "heading": 270.0, "idle": "idle", "walk": "walk", "walkSpeed": 3.0, "patrol": [[7.5, 0.0, 39.0], [-7.5, 0.0, 39.0], [-7.5, 0.0, 24.0], [7.5, 0.0, 24.0]]}
   ],
   "navigation": {"area": [-78.0, -84.0, 78.0, 78.0], "height": 6.0},

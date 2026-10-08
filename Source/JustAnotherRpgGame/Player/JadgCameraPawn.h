@@ -13,16 +13,20 @@ class USpringArmComponent;
 
 /**
  * @brief La caméra de D-49 et D-56 : en perspective, libre en rotation, bornée en inclinaison,
- *        avec un zoom (LOT-1012).
+ *        avec un zoom (LOT-1012, LOT-1016).
  *
- * Le pion est le **point visé**, au sol ; la caméra le regarde au bout d'un bras. Tourner change
- * le lacet du bras, incliner son tangage entre `MinPitch` (vue rasante) et `MaxPitch` (vue
- * plongeante), zoomer sa longueur. Le pion suit un acteur (`Follow`) ou se déplace librement
- * (`Pan`), ce qui le détache.
+ * Le pion est le **point visé**, au sol ; la caméra le regarde au bout d'un bras à ressort. Tourner
+ * change le lacet du bras, incliner son tangage entre `MinPitch` (vue rasante) et `MaxPitch` (vue
+ * plongeante), zoomer sa longueur. Le pion suit un acteur (`Follow`, le meneur) ou se déplace
+ * librement (`Pan`), ce qui le détache.
  *
- * Les bornes se règlent en texte, dans `Config/DefaultGame.ini`
- * (`[/Script/JustAnotherRpgGame.JadgCameraPawn]`). Celles livrées sont celles de la porte, à
- * juger ; le LOT-1016 les arrête.
+ * **Elle ne traverse ni le sol ni les murs** : le bras sonde le décor entre le point visé et la
+ * caméra (`USpringArmComponent`, canal `ECC_Camera`, une sphère de `ProbeSize`), et la rapproche
+ * de ce qu'il rencontre. Un cadrage de capture (`SetView`) pose la vue sans cette sonde : il vise
+ * où la description le dit, à travers les toits s'il le faut.
+ *
+ * Les bornes se règlent en texte, sans recompiler, dans `Config/DefaultGame.ini`
+ * (`[/Script/JustAnotherRpgGame.JadgCameraPawn]`).
  */
 UCLASS(config = Game)
 class AJadgCameraPawn : public APawn
@@ -34,7 +38,7 @@ public:
 
 	/// Inclinaison la plus rasante, en degrés sous l'horizon.
 	UPROPERTY(config, EditAnywhere, Category = "Jadg")
-	float MinPitch = 15.0f;
+	float MinPitch = 25.0f;
 
 	/// Inclinaison la plus plongeante, en degrés sous l'horizon.
 	UPROPERTY(config, EditAnywhere, Category = "Jadg")
@@ -58,6 +62,14 @@ public:
 	UPROPERTY(config, EditAnywhere, Category = "Jadg")
 	float FollowHeight = 100.0f;
 
+	/// Le rayon de la sphère qui sonde le décor entre le point visé et la caméra, en centimètres.
+	UPROPERTY(config, EditAnywhere, Category = "Jadg")
+	float ProbeSize = 12.0f;
+
+	/// La vivacité du suivi : plus grand, le point visé rejoint plus vite l'acteur suivi.
+	UPROPERTY(config, EditAnywhere, Category = "Jadg")
+	float FollowSpeed = 6.0f;
+
 	void AddYaw(float Degrees);
 	void AddPitch(float Degrees);
 	/// Multiplie la distance : moins de 1 rapproche.
@@ -72,6 +84,14 @@ public:
 	void SetView(const FVector& Target, float Yaw, float PitchBelowHorizon, float Distance);
 
 	float GetViewYaw() const { return Yaw; }
+	float GetViewPitch() const { return Pitch; }
+	float GetViewDistance() const { return Distance; }
+
+	/// L'acteur suivi, ou rien si la vue est détachée.
+	AActor* GetFollowed() const { return Followed; }
+
+	/// Où la caméra se tient, sonde du décor comprise.
+	FVector GetCameraLocation() const;
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;

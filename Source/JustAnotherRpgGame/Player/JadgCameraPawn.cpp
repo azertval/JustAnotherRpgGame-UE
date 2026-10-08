@@ -14,8 +14,9 @@ AJadgCameraPawn::AJadgCameraPawn()
 
 	Arm = CreateDefaultSubobject<USpringArmComponent>(TEXT("Arm"));
 	Arm->SetupAttachment(RootComponent);
-	// Le décor ne rapproche pas la caméra : une façade entre elle et le héros se traite au LOT-1016.
-	Arm->bDoCollisionTest = false;
+	// Le décor rapproche la caméra : elle ne traverse ni le sol ni une façade (LOT-1016).
+	Arm->bDoCollisionTest = true;
+	Arm->ProbeChannel = ECC_Camera;
 	Arm->bUsePawnControlRotation = false;
 	Arm->bEnableCameraLag = false;
 
@@ -30,6 +31,7 @@ void AJadgCameraPawn::BeginPlay()
 	Distance = FMath::Clamp(StartDistance, MinDistance, MaxDistance);
 	Yaw = GetActorRotation().Yaw;
 	SetActorRotation(FRotator::ZeroRotator);
+	Arm->ProbeSize = ProbeSize;
 	ApplyArm();
 }
 
@@ -43,7 +45,7 @@ void AJadgCameraPawn::Tick(float DeltaSeconds)
 		FVector Extent;
 		Followed->GetActorBounds(true, Origin, Extent);
 		const FVector Goal(Origin.X, Origin.Y, Origin.Z - Extent.Z + FollowHeight);
-		SetActorLocation(FMath::VInterpTo(GetActorLocation(), Goal, DeltaSeconds, 6.0f));
+		SetActorLocation(FMath::VInterpTo(GetActorLocation(), Goal, DeltaSeconds, FollowSpeed));
 	}
 }
 
@@ -81,11 +83,23 @@ void AJadgCameraPawn::Pan(const FVector2D& ForwardRight)
 void AJadgCameraPawn::Follow(AActor* Actor)
 {
 	Followed = Actor;
+	// De retour auprès du joueur : la vue reprend ses bornes et sa sonde.
+	Arm->bDoCollisionTest = true;
+	Pitch = FMath::Clamp(Pitch, MinPitch, MaxPitch);
+	Distance = FMath::Clamp(Distance, MinDistance, MaxDistance);
+	ApplyArm();
+}
+
+FVector AJadgCameraPawn::GetCameraLocation() const
+{
+	return Camera->GetComponentLocation();
 }
 
 void AJadgCameraPawn::SetView(const FVector& Target, float InYaw, float PitchBelowHorizon, float InDistance)
 {
 	Followed = nullptr;
+	// Un cadrage vise où la description le dit, à travers les toits s'il le faut.
+	Arm->bDoCollisionTest = false;
 	SetActorLocation(Target);
 	Yaw = InYaw;
 	Pitch = PitchBelowHorizon;

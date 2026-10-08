@@ -30,7 +30,8 @@ Règles de la version :
 Construire et vérifier sans fenêtre : `pwsh scripts/build.ps1` (tests de Core) et
 `pwsh scripts/build.ps1 -Unreal` (cible d'éditeur, commandlet `JadgContentCheck`, tests
 d'automatisation `Jadg.*`, puis carte du socle et captures comparées à leur référence ;
-`-NoCapture` sans processeur graphique). Un test du moteur s'écrit sous
+`-NoCapture` sans processeur graphique) ; `-Unreal -Parcours` joue la quête des pommes dans le jeu
+lancé, sur les deux cartes d'essai de l'exploration (LOT-1016). Un test du moteur s'écrit sous
 `Source/JustAnotherRpgGame/Tests/`, son nom commence par `Jadg.` ; une règle se teste d'abord hors
 du moteur (`Source/Test/Unit/Core`).
 

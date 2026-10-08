@@ -25,8 +25,15 @@ mètres. Elle porte :
   `build_gate_scene.py`) ;
 - `fills` : un dallage, tiré case par case entre plusieurs dalles, hors des ellipses qu'il exclut ;
 - `objects` : un maillage, sa position, son lacet, son échelle (ou sa hauteur) ; une source de
-  lumière, déclarée comme dans les manifestes de scène de l'ancien moteur (`light`) ;
-- `characters` : un personnage lié, ses clips de repos et de marche, sa ronde ;
+  lumière, déclarée comme dans les manifestes de scène de l'ancien moteur (`light`) ; l'entité de
+  la carte de Core qu'il montre (`entity`), présent et désignable avec elle ;
+- `characters` : un personnage lié, ses clips de repos et de marche, sa ronde ; son rang dans le
+  groupe du joueur (`party`, 0 : le meneur), ou l'entité de la carte de Core qu'il montre
+  (`entity`, un PNJ) ;
+- `level` (facultatif, LOT-1016) : la carte de Core que la scène joue (`id`), le dossier où elle
+  se lit avant ceux du jeu (`root`), où tombe le coin de sa case (0, 0) (`origin`, X et Z) et le
+  côté d'une case (`cell`, en mètres). La carte du moteur se nomme alors d'après la carte de Core,
+  `/Game/Maps/Levels/<id>` : c'est ce qu'un portail ouvre ;
 - `navigation`, `shots`, `daylight` : le volume de navigation, les cadrages de capture, la table
   du jour ;
 - `frameReference` : la pièce sur laquelle le changement de repère se mesure ;
@@ -75,8 +82,13 @@ FIXTURE_ROOT = "/Game/Fixtures"
 AMBIENT_CUBE = "/Game/Scenes/Common/T_AmbientWhite"
 CHARACTER_MATERIAL = "/Game/Scenes/Common/M_Character"
 GROUND_MATERIAL = "/Game/Scenes/Common/M_Ground"
+OUTLINE_MATERIAL = "/Game/Scenes/Common/M_Outline"
+OUTLINE_COLOUR = (1.0, 0.78, 0.36)  # l'or du HUD (`JadgHud.cpp`)
+OUTLINE_PIXELS = 3.0
 GAME_CLASSES = "/Script/JustAnotherRpgGame"
 LAMP_TAG = "JadgLamp"
+ENTITY_TAG = "JadgEntity:"
+LEVEL_MAPS = "/Game/Maps/Levels"
 
 
 def log(message: str) -> None:
@@ -408,6 +420,81 @@ def ground_material(colour: unreal.LinearColor) -> unreal.Material:
     return material
 
 
+def outline_material() -> unreal.Material:
+    """Le contour de ce que le meneur peut solliciter (LOT-1016) : une matière de post-traitement.
+
+    Le jeu marque l'acteur désigné dans le tampon de gabarit (profondeur personnalisée, valeur 1 :
+    `AJadgWalker::SetOutlined`, `AJadgParty`). Un pixel hors de la silhouette dont un voisin, à
+    `OUTLINE_PIXELS` pixels, est dedans prend la couleur du contour ; tous les autres gardent
+    l'image. Le tampon de gabarit demande `r.CustomDepth=3` (`Config/DefaultEngine.ini`)."""
+    library = unreal.MaterialEditingLibrary
+    material = (unreal.EditorAssetLibrary.load_asset(OUTLINE_MATERIAL)
+                if unreal.EditorAssetLibrary.does_asset_exist(OUTLINE_MATERIAL) else new_material(OUTLINE_MATERIAL))
+    library.delete_all_material_expressions(material)
+    material.set_editor_property("material_domain", unreal.MaterialDomain.MD_POST_PROCESS)
+
+    def node(kind, x: int, y: int):
+        return library.create_material_expression(material, kind, x, y)
+
+    def scene_texture(identifier, x: int, y: int):
+        sampled = node(unreal.MaterialExpressionSceneTexture, x, y)
+        sampled.set_editor_property("scene_texture_id", identifier)
+        return sampled
+
+    image = scene_texture(unreal.SceneTextureId.PPI_POST_PROCESS_INPUT0, -400, -300)
+    centre = scene_texture(unreal.SceneTextureId.PPI_CUSTOM_STENCIL, -1200, 0)
+    here = node(unreal.MaterialExpressionScreenPosition, -1600, 300)
+    around = None
+    for index, (dx, dy) in enumerate(((1.0, 0.0), (-1.0, 0.0), (0.0, 1.0), (0.0, -1.0))):
+        row = 300 + index * 250
+        step = node(unreal.MaterialExpressionConstant2Vector, -1600, row + 100)
+        step.set_editor_property("r", dx * OUTLINE_PIXELS)
+        step.set_editor_property("g", dy * OUTLINE_PIXELS)
+        scaled = node(unreal.MaterialExpressionMultiply, -1400, row + 100)
+        library.connect_material_expressions(step, "", scaled, "A")
+        library.connect_material_expressions(centre, "InvSize", scaled, "B")
+        moved = node(unreal.MaterialExpressionAdd, -1200, row)
+        library.connect_material_expressions(here, "ViewportUV", moved, "A")
+        library.connect_material_expressions(scaled, "", moved, "B")
+        neighbour = scene_texture(unreal.SceneTextureId.PPI_CUSTOM_STENCIL, -1000, row)
+        library.connect_material_expressions(moved, "", neighbour, "UVs")
+        red = node(unreal.MaterialExpressionComponentMask, -800, row)
+        for channel, kept in (("r", True), ("g", False), ("b", False), ("a", False)):
+            red.set_editor_property(channel, kept)
+        library.connect_material_expressions(neighbour, "Color", red, "")
+        if around is None:
+            around = red
+        else:
+            widest = node(unreal.MaterialExpressionMax, -600, row)
+            library.connect_material_expressions(around, "", widest, "A")
+            library.connect_material_expressions(red, "", widest, "B")
+            around = widest
+    inside = node(unreal.MaterialExpressionComponentMask, -800, 0)
+    for channel, kept in (("r", True), ("g", False), ("b", False), ("a", False)):
+        inside.set_editor_property(channel, kept)
+    library.connect_material_expressions(centre, "Color", inside, "")
+    edge = node(unreal.MaterialExpressionSubtract, -400, 300)
+    library.connect_material_expressions(around, "", edge, "A")
+    library.connect_material_expressions(inside, "", edge, "B")
+    mask = node(unreal.MaterialExpressionSaturate, -250, 300)
+    library.connect_material_expressions(edge, "", mask, "")
+    tint = node(unreal.MaterialExpressionConstant3Vector, -400, 100)
+    tint.set_editor_property("constant", unreal.LinearColor(*OUTLINE_COLOUR, 1.0))
+    blend = node(unreal.MaterialExpressionLinearInterpolate, -100, 0)
+    # L'image vient avec son alpha : le contour n'en mélange que la couleur.
+    colour_only = node(unreal.MaterialExpressionComponentMask, -250, -300)
+    for channel, kept in (("r", True), ("g", True), ("b", True), ("a", False)):
+        colour_only.set_editor_property(channel, kept)
+    library.connect_material_expressions(image, "Color", colour_only, "")
+    library.connect_material_expressions(colour_only, "", blend, "A")
+    library.connect_material_expressions(tint, "", blend, "B")
+    library.connect_material_expressions(mask, "", blend, "Alpha")
+    library.connect_material_property(blend, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR)
+    library.recompile_material(material)
+    unreal.EditorAssetLibrary.save_asset(OUTLINE_MATERIAL)
+    return material
+
+
 def clip_named(clips: dict[str, unreal.AnimSequence], name: str, owner: str) -> unreal.AnimSequence:
     """Le clip `name` : Interchange le nomme tel quel, ou le fait précéder du nom du fichier
     (`brawleridle`)."""
@@ -505,9 +592,12 @@ def place_objects(level: Level, scene: dict, library: Library, frame: Frame) -> 
             box = mesh.get_bounding_box()
             scale = item["height"] * 100.0 / (box.max.z - box.min.z)
             location.z -= box.min.z * scale
-        level.spawn(mesh, location, unreal.Rotator(0.0, 0.0, frame.yaw(item.get("yaw", 0.0))),
+        placed = level.spawn(mesh, location, unreal.Rotator(0.0, 0.0, frame.yaw(item.get("yaw", 0.0))),
                     label, item["folder"],
                     frame.mirror_scale(scale) if item.get("mirrored") else unreal.Vector(scale, scale, scale))
+        if "entity" in item:
+            # L'objet montre une entité de la carte de Core : le jeu le trouve à cette étiquette.
+            placed.tags = [f"{ENTITY_TAG}{item['entity']}"]
         emission = item.get("light")
         if emission is None:
             continue
@@ -586,6 +676,10 @@ def place_sky(level: Level, scene: dict, frame: Frame) -> None:
         # Un réglage de post-traitement du moteur, par son nom (`bloom_intensity`, `vignette_intensity`…).
         settings.set_editor_property(f"override_{name}", True)
         settings.set_editor_property(name, value)
+    if "level" in scene:
+        # Une carte de Core a de quoi solliciter : le contour de ce que le meneur désigne.
+        settings.set_editor_property("weighted_blendables", unreal.WeightedBlendables(
+            array=[unreal.WeightedBlendable(weight=1.0, object=outline_material())]))
     exposure.set_editor_property("settings", settings)
 
     day = level.spawn(game_class("JadgDayLight"), origin, flat, "Jour", "ciel")
@@ -594,6 +688,9 @@ def place_sky(level: Level, scene: dict, frame: Frame) -> None:
     day.set_editor_property("sky", sky)
     day.set_editor_property("sun_scale", lighting.get("sunScale", 1.0))
     day.set_editor_property("ambient_scale", lighting.get("ambientScale", 1.0))
+    # Les lumières que la carte de Core pose comme entité `light` prennent les mêmes intensités.
+    day.set_editor_property("lamp_candelas", lighting.get("lampCandelas", 20.0))
+    day.set_editor_property("fire_candelas", lighting.get("fireCandelas", 20.0))
     day.set_editor_property("east", frame.direction([1.0, 0.0, 0.0]))
     day.set_editor_property("up", frame.direction([0.0, 1.0, 0.0]))
     day.set_editor_property("south", frame.direction([0.0, 0.0, 1.0]))
@@ -634,15 +731,34 @@ def place_characters(level: Level, scene: dict, library: Library, frame: Frame) 
         actor.set_editor_property("idle_clip", clip_named(clips, item["idle"], item["id"]))
         actor.set_editor_property("walk_clip", clip_named(clips, item["walk"], item["id"]))
         actor.set_editor_property("walk_speed", item["walkSpeed"] * 100.0)
-        actor.set_editor_property("playable", item.get("playable", False))
+        actor.set_editor_property("party_rank", item.get("party", -1))
+        actor.set_editor_property("entity_id", item.get("entity", ""))
         patrol = []
         for point in item.get("patrol", ()):
             stop = frame.point(point)
             stop.z += half
             patrol.append(stop)
         actor.set_editor_property("patrol", patrol)
-        if item.get("playable"):
+        if item.get("party") == 0:
             level.spawn(unreal.PlayerStart, location, frame.look(0.0), "Depart", "personnages")
+
+
+def place_frame(level: Level, scene: dict, frame: Frame) -> None:
+    """Ce qui relie la carte du moteur à sa carte de Core (`AJadgMapFrame`, LOT-1016)."""
+    binding = scene.get("level")
+    if binding is None:
+        return  # une scène sans carte de Core (la porte, le socle)
+    expected = f"{LEVEL_MAPS}/{binding['id']}"
+    if scene["map"] != expected:
+        fail(f"la scène joue la carte de Core « {binding['id']} » : sa carte du moteur doit être {expected}, "
+             f"pas {scene['map']} (c'est le chemin qu'un portail ouvre)")
+    x, z = binding.get("origin", [0.0, 0.0])
+    actor = level.spawn(game_class("JadgMapFrame"), frame.point([x, 0.0, z]), unreal.Rotator(0, 0, 0), "Carte", "carte")
+    actor.set_editor_property("level_id", binding["id"])
+    actor.set_editor_property("levels_root", binding.get("root", ""))
+    actor.set_editor_property("cell_size", binding.get("cell", 1.5) * 100.0)
+    actor.set_editor_property("east", frame.direction([1.0, 0.0, 0.0]))
+    actor.set_editor_property("south", frame.direction([0.0, 0.0, 1.0]))
 
 
 def place_shots(level: Level, scene: dict, frame: Frame) -> None:
@@ -673,6 +789,7 @@ def main() -> None:
     place_sky(level, scene, frame)
     place_navigation(level, scene, frame)
     place_characters(level, scene, library, frame)
+    place_frame(level, scene, frame)
     place_shots(level, scene, frame)
     world.get_world_settings().set_editor_property("default_game_mode", game_class("JadgGameMode"))
 

@@ -21,7 +21,12 @@ class UAnimSequence;
  * pour que le pied posé ne glisse pas pendant l'accélération.
  *
  * `Patrol` fait tourner le personnage entre des points, en boucle : c'est ce qui montre le lion
- * marcher sans joueur. Un personnage `bPlayable` attend l'ordre du joueur (`WalkTo`).
+ * marcher sans joueur. Un membre du groupe (`PartyRank`) attend l'ordre du joueur ou suit le
+ * meneur (`AJadgParty`, LOT-1016). Un personnage qui est une entité de la carte de Core
+ * (`EntityId`, un PNJ) se pose sur la case de son entité et ne paraît que si elle est présente.
+ *
+ * Les personnages ne se bloquent pas entre eux : la file du groupe les tient à distance, et un
+ * meneur qui fait demi-tour ne reste pas coincé derrière ses suiveurs.
  */
 UCLASS()
 class AJadgWalker : public ACharacter
@@ -41,16 +46,36 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Jadg")
 	float WalkSpeed = 300.0f;
 
-	/// Celui que le joueur mène.
+	/// Le rang du personnage dans le groupe au lancement (0 : le meneur) ; négatif : il n'en est pas.
 	UPROPERTY(EditAnywhere, Category = "Jadg")
-	bool bPlayable = false;
+	int32 PartyRank = -1;
+
+	/// L'entité de la carte de Core que ce personnage montre (`e5`) ; vide : aucune.
+	UPROPERTY(EditAnywhere, Category = "Jadg")
+	FString EntityId;
 
 	/// Les points d'une ronde, en repère du monde ; vide : le personnage attend.
 	UPROPERTY(EditAnywhere, Category = "Jadg")
 	TArray<FVector> Patrol;
 
-	/// Envoie le personnage vers un point du maillage de navigation.
-	void WalkTo(const FVector& Destination);
+	/// Envoie le personnage vers un point du maillage de navigation ; il s'arrête à
+	/// @p AcceptanceRadius centimètres du but.
+	void WalkTo(const FVector& Destination, float AcceptanceRadius = 5.0f);
+
+	/// Arrête la marche en cours.
+	void StopWalking();
+
+	/// Vrai tant qu'un ordre de marche est en cours.
+	bool IsWalking() const;
+
+	/// Pose le personnage debout sur @p Ground, un point du sol, tourné vers @p Yaw.
+	void StandOn(const FVector& Ground, float Yaw);
+
+	/// Le point du sol sous le personnage.
+	FVector Feet() const;
+
+	/// Dessine ou efface le contour qui désigne le personnage au joueur (profondeur personnalisée).
+	void SetOutlined(bool bOutlined);
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaSeconds) override;

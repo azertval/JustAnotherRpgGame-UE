@@ -5,6 +5,7 @@
 
 #include "AIController.h"
 #include "Animation/AnimSequence.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Navigation/PathFollowingComponent.h"
@@ -25,12 +26,23 @@ AJadgWalker::AJadgWalker()
 	Movement->bRequestedMoveUseAcceleration = true;
 
 	GetMesh()->SetAnimationMode(EAnimationMode::AnimationSingleNode);
+	// Un personnage entre le point visé et la caméra ne la rapproche pas : ni son maillage, ni sa
+	// capsule, que le profil « Pawn » du moteur oppose à la sonde de la caméra.
+	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 }
 
 void AJadgWalker::BeginPlay()
 {
 	Super::BeginPlay();
 	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
+	// Les personnages ne se bloquent pas entre eux ; un PNJ se désigne au clic.
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	if (!EntityId.IsEmpty())
+	{
+		GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+	}
 	Play(IdleClip);
 }
 
@@ -61,12 +73,44 @@ void AJadgWalker::Tick(float DeltaSeconds)
 	}
 }
 
-void AJadgWalker::WalkTo(const FVector& Destination)
+void AJadgWalker::WalkTo(const FVector& Destination, float AcceptanceRadius)
 {
 	if (AAIController* AI = Cast<AAIController>(GetController()))
 	{
-		AI->MoveToLocation(Destination, 5.0f, false);
+		AI->MoveToLocation(Destination, AcceptanceRadius, false);
 	}
+}
+
+void AJadgWalker::StopWalking()
+{
+	if (AAIController* AI = Cast<AAIController>(GetController()))
+	{
+		AI->StopMovement();
+	}
+}
+
+bool AJadgWalker::IsWalking() const
+{
+	const AAIController* AI = Cast<AAIController>(GetController());
+	return AI != nullptr && AI->GetMoveStatus() != EPathFollowingStatus::Idle;
+}
+
+void AJadgWalker::StandOn(const FVector& Ground, float Yaw)
+{
+	StopWalking();
+	const FVector Centre = Ground + FVector(0.0, 0.0, GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
+	SetActorLocationAndRotation(Centre, FRotator(0.0f, Yaw, 0.0f), false, nullptr, ETeleportType::TeleportPhysics);
+}
+
+FVector AJadgWalker::Feet() const
+{
+	return GetActorLocation() - FVector(0.0, 0.0, GetCapsuleComponent()->GetScaledCapsuleHalfHeight());
+}
+
+void AJadgWalker::SetOutlined(bool bOutlined)
+{
+	GetMesh()->SetRenderCustomDepth(bOutlined);
+	GetMesh()->SetCustomDepthStencilValue(bOutlined ? 1 : 0);
 }
 
 void AJadgWalker::Play(UAnimSequence* Clip)

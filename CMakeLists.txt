@@ -113,9 +113,6 @@ target_compile_definitions(CoreTests PRIVATE
     JADG_FR_LANG_PATH="${_elements}/Localization/fr.lang"
     JADG_EN_LANG_PATH="${_elements}/Localization/en.lang")
 
-# `ToutFamilleLueParLeJeuEstDansLaTable` balaie `Source/HMI` et `Source/App`, restés dans l'ancien
-# dépôt : il se réécrit sur le nouveau projet quand le moteur lira des entités (LOT-1016, LOT-1018).
 gtest_discover_tests(CoreTests
-    TEST_FILTER "-FamillesDEntitesTest.ToutFamilleLueParLeJeuEstDansLaTable"
     PROPERTIES LABELS unitaire
     DISCOVERY_TIMEOUT 60)

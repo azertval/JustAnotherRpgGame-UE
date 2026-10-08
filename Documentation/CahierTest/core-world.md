@@ -1,6 +1,6 @@
 # Core · World
 
-Tests unitaires — **74 cas** (7 bloquants, 33 critiques, 31 majeurs, 3 mineurs). [Retour à la synthèse](README.md).
+Tests unitaires — **76 cas** (7 bloquants, 34 critiques, 32 majeurs, 3 mineurs). [Retour à la synthèse](README.md).
 
 ## Ce que cette page couvre
 
@@ -13,7 +13,7 @@ Tests unitaires — **74 cas** (7 bloquants, 33 critiques, 31 majeurs, 3 mineurs
 | [`test_entity_kinds.cpp`](#test-entity-kindscpp) | 9 | 1 | - | 7 | 1 |
 | [`test_entity_presence.cpp`](#test-entity-presencecpp) | 3 | - | 2 | 1 | - |
 | [`test_exploration_reach.cpp`](#test-exploration-reachcpp) | 3 | - | 2 | 1 | - |
-| [`test_exploration_session.cpp`](#test-exploration-sessioncpp) | 7 | - | 4 | 3 | - |
+| [`test_exploration_session.cpp`](#test-exploration-sessioncpp) | 9 | - | 5 | 4 | - |
 | [`test_quest_map_features.cpp`](#test-quest-map-featurescpp) | 7 | - | 4 | 3 | - |
 | [`test_world_graph.cpp`](#test-world-graphcpp) | 10 | - | 5 | 4 | 1 |
 | [`test_world_light.cpp`](#test-world-lightcpp) | 7 | 6 | - | 1 | - |
@@ -562,8 +562,8 @@ Aucune famille lue par le jeu n'echappe a l'editeur.
 
 **Étapes**
 
-1. Relever dans les sources du jeu (Core, HMI, App) chaque constante <code>*_ENTITY_TYPE</code>.
-2. Y ajouter les familles interactives (<code>core::knownInteractableKinds</code>) et chaque type des cartes livrees.
+1. Relever dans les sources du jeu (Core et le code qui le relie au moteur) chaque constante <code>*_ENTITY_TYPE</code>.
+2. Y ajouter les familles interactives (<code>core::knownInteractableKinds</code>) et chaque type des cartes livrees et des cartes d'essai de l'exploration.
 3. Chercher chacune dans la table.
 
 **Résultat attendu**
@@ -574,7 +574,7 @@ Aucune famille lue par le jeu n'echappe a l'editeur.
 
 ### FamillesDEntitesTest.LaTableEstCoherenteAvecSesFormes
 
-*Majeur · Unitaire · Familles d'entites* — `Source/Test/Unit/Core/World/test_entity_kinds.cpp:274`
+*Majeur · Unitaire · Familles d'entites* — `Source/Test/Unit/Core/World/test_entity_kinds.cpp:277`
 
 La table des familles est coherente avec ses formes.
 
@@ -593,7 +593,7 @@ La table des familles est coherente avec ses formes.
 
 ### FamillesDEntitesTest.BornesEtCataloguesControles
 
-*Majeur · Unitaire · Familles d'entites* — `Source/Test/Unit/Core/World/test_entity_kinds.cpp:305`
+*Majeur · Unitaire · Familles d'entites* — `Source/Test/Unit/Core/World/test_entity_kinds.cpp:308`
 
 Le schema type controle bornes et catalogues.
 
@@ -891,6 +891,55 @@ Un point a une distance donnee derriere le meneur se lit le long du chemin, angl
 - Vérifie que `trace.length()` est supérieur ou égal à `1.5F`.
 - Vérifie que `trace.length()` est strictement inférieur à `1.7F`.
 - Vérifie que `trace.points().size()` vaut `avant`.
+
+### ExplorationSessionTest.UnHerosMeneFranchitLePortailOuIlArrive
+
+*Critique · Unitaire · Exploration* — `Source/Test/Unit/Core/World/test_exploration_session.cpp:392`
+
+Mene de l'exterieur, le heros franchit le portail ou il arrive et tire sa trace.
+
+**Étapes**
+
+1. Entrer sur une carte muree avec deux suiveurs.
+2. Mener le heros (`carried`) de case en case vers un portail, une direction de marche contraire donnee en meme temps.
+3. Le mener sur la case du portail, puis l'y laisser.
+
+**Résultat attendu**
+
+- Vérifie que `session.start("place", "")` est vrai.
+- Vérifie que `session .update( core::ExplorationIntent{ .move = {-1.0F, 0.0F}, .interact = false, .carried = ou}, 1.0F / 60.0F) .empty()` est vrai.
+- Vérifie que `session.heroPoint().column` vaut `5.5F`, à `0.001F` près.
+- Vérifie que `session.facing().x` est strictement supérieur à `0.0F`.
+- Vérifie que `session.followerPoint(0).column` vaut `4.5F`, à `0.02F` près.
+- Vérifie que `session.followerPoint(1).column` vaut `3.5F`, à `0.02F` près.
+- Vérifie que `session.facing().x` est strictement supérieur à `0.0F`.
+- Vérifie que `vus.size()` vaut `1U`.
+- Vérifie que `vus.front().kind` vaut `ExplorationEventKind::MapEntered`.
+- Vérifie que `session.mapId()` vaut `"cave"`.
+- Vérifie que `session.heroPoint()` vaut `(core::CellPoint{6.5F, 7.5F})`.
+- Vérifie que `session .update( core::ExplorationIntent{ .move = {}, .interact = false, .carried = session.heroPoint()}, 1.0F / 60.0F) .empty()` est vrai.
+
+### ExplorationSessionTest.LaCibleDInteractionSeLitSansInteragir
+
+*Majeur · Unitaire · Exploration* — `Source/Test/Unit/Core/World/test_exploration_session.cpp:452`
+
+La session dit ce que le heros solliciterait, sans le solliciter.
+
+**Étapes**
+
+1. Poser un PNJ a deux cases du heros : lire la cible.
+2. Mener le heros a une case du PNJ : lire la cible, deux fois.
+3. Geler la session : lire la cible.
+
+**Résultat attendu**
+
+- Vérifie que `session.start("place", "")` est vrai.
+- Vérifie que `session.interactionTarget().has_value()` est faux.
+- Vérifie que `session .update( core::ExplorationIntent{ .move = {}, .interact = false, .carried = core::cellCenter({5, 4})}, 1.0F / 60.0F) .empty()` est vrai.
+- Vérifie que `cible.has_value()` est vrai.
+- Vérifie que `cible->type` vaut `core::NPC_ENTITY_TYPE`.
+- Vérifie que `cible->position` vaut `(core::GridPosition{6, 4})`.
+- Vérifie que `session.interactionTarget().has_value()` est faux.
 
 ## test_quest_map_features.cpp
 

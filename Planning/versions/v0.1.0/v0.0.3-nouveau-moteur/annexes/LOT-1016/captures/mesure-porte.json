@@ -1,0 +1,11 @@
+{
+  "map": "Porte1012",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 16.49,
+  "captures": ["parvis-1200.png", "porte-1200.png", "ruelle-1200.png", "parvis-2200.png", "porte-2200.png", "ruelle-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.4, "frames": 1001, "fps": 87.9, "frameMs": 11.37, "p99FrameMs": 27.47, "worstFrameMs": 31.11, "gameMs": 3.10, "renderMs": 11.37, "gpuMs": 10.30},
+    {"hour": "22:00", "seconds": 11.4, "frames": 1002, "fps": 88.2, "frameMs": 11.34, "p99FrameMs": 22.05, "worstFrameMs": 48.41, "gameMs": 3.22, "renderMs": 11.34, "gpuMs": 10.55}
+  ]
+}

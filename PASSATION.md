@@ -141,7 +141,7 @@ le commandlet montre que le moteur lit **les mêmes fichiers** et obtient **des 
 - **Le numéro de version** : fait, `VERSION.txt` à la racine, lu par le `Build.cs` et par le CMake
   des tests.
 - **Les options du jeu** : fait, `Source/Elements/Options/options.json`, lues au lancement.
-- **Deux tests de Core à ramener** : `test_dialogue.cpp` (localisation) et le balayage des familles d'entités, écartés parce qu'ils lisent `Source/HMI` ; le reste des tests passe **sans modification de leur code** (critère du LOT-1014). Ils reviennent avec le lecteur de localisation (LOT-1020) et la lecture des entités par le moteur (LOT-1016).
+- **Deux tests de Core à ramener** : `test_dialogue.cpp` (localisation) et le balayage des familles d'entités, écartés parce qu'ils lisent `Source/HMI` ; le reste des tests passe **sans modification de leur code** (critère du LOT-1014). Le balayage des familles est revenu au LOT-1016, réécrit sur le module du jeu et sur les cartes que le moteur joue ; `test_dialogue.cpp` revient avec le lecteur de localisation (LOT-1020).
 - **Les tests d'automatisation du moteur** : faits, trois tests `Jadg.Socle.*` et une capture
   comparée à tolérance sur une scène sans kit ; `scripts/build.ps1 -Unreal` les enchaîne, sur le
   poste : pas de runner auto-hébergé pour l'instant (D-61).

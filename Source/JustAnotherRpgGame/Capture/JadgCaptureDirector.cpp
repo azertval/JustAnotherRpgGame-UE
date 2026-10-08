@@ -7,6 +7,7 @@
 #include "Engine/Engine.h"
 #include "Engine/GameViewportClient.h"
 #include "EngineUtils.h"
+#include "GameFramework/HUD.h"
 #include "GameFramework/PlayerController.h"
 #include "HAL/FileManager.h"
 #include "JustAnotherRpgGame.h"
@@ -59,6 +60,12 @@ void AJadgCaptureDirector::BeginPlay()
 	if (const APlayerController* Player = GetWorld()->GetFirstPlayerController())
 	{
 		View = Cast<AJadgCameraPawn>(Player->GetPawn());
+		// Une capture se compare à sa référence : l'heure et le groupe écrits par le HUD la
+		// feraient changer d'une minute à l'autre. `-JadgHud` les y laisse.
+		if (AHUD* Hud = Player->GetHUD(); Hud != nullptr && !FParse::Param(CommandLine, TEXT("JadgHud")))
+		{
+			Hud->bShowHUD = false;
+		}
 	}
 	for (TActorIterator<AJadgDayLight> It(GetWorld()); It; ++It)
 	{
