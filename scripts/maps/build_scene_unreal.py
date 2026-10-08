@@ -27,7 +27,9 @@ mètres. Elle porte :
 - `objects` : un maillage, sa position, son lacet, son échelle (ou sa hauteur) ; une source de
   lumière, déclarée comme dans les manifestes de scène de l'ancien moteur (`light`) ; l'entité de
   la carte de Core qu'il montre (`entity`), présent et désignable avec elle ;
-- `characters` : un personnage lié, ses clips de repos et de marche, sa ronde ; son rang dans le
+- `characters` : un personnage, par sa fiche d'apparence (`appearance`, LOT-1015 : le créateur
+  pose corps, clips, taille et armes au lancement) ou, pour un maillage lié d'un kit (le lion,
+  jusqu'au LOT-1025), par `mesh` et ses clips de repos et de marche ; sa ronde ; son rang dans le
   groupe du joueur (`party`, 0 : le meneur), ou l'entité de la carte de Core qu'il montre
   (`entity`, un PNJ) ;
 - `level` (facultatif, LOT-1016) : la carte de Core que la scène joue (`id`), le dossier où elle
@@ -713,6 +715,9 @@ def place_characters(level: Level, scene: dict, library: Library, frame: Frame) 
     front = frame.direction([0.0, 0.0, 1.0])
     mesh_yaw = -math.degrees(math.atan2(front.y, front.x))
     for item in scene.get("characters", ()):
+        if "appearance" in item:
+            place_appearance(level, item, frame, walker)
+            continue
         skeletal, skins, clips = library.character(item["mesh"])
         bounds = skeletal.get_bounds()
         half = bounds.box_extent.z
@@ -741,6 +746,41 @@ def place_characters(level: Level, scene: dict, library: Library, frame: Frame) 
         actor.set_editor_property("patrol", patrol)
         if item.get("party") == 0:
             level.spawn(unreal.PlayerStart, location, frame.look(0.0), "Depart", "personnages")
+
+
+def place_appearance(level: Level, item: dict, frame: Frame, walker) -> None:
+    """Un personnage décrit par sa fiche d'apparence (LOT-1015, D-63) : l'acteur reçoit l'identifiant
+    de la fiche et se pose lui-même au lancement (`AJadgWalker::Appearance`, corps par le créateur,
+    clips, taille, armes). La scène ne lui donne que sa capsule, prise sur le corps de la fiche."""
+    appearance = json.loads((ELEMENTS / "Rpg" / "appearances" / f"{item['appearance']}.json").read_text(encoding="utf-8"))
+    creator = json.loads((ELEMENTS / "Assets" / "Characters" / f"{appearance['creator']}.json").read_text(encoding="utf-8"))
+    body_path = creator["bodies"].get(appearance["body"])
+    if body_path is None:
+        fail(f"{item['id']} : corps « {appearance['body']} » inconnu du créateur {appearance['creator']}")
+    body = unreal.EditorAssetLibrary.load_asset(body_path)
+    if body is None:
+        fail(f"{item['id']} : corps absent du poste : {body_path} (scripts/assetsGeneration/import_mannequin_unreal.py)")
+    bounds = body.get_bounds()
+    scale = appearance["height"] / creator["referenceHeight"]
+    half = bounds.box_extent.z * scale
+    radius = max(20.0, min(bounds.box_extent.x, bounds.box_extent.y, half))
+    location = frame.point(item["position"])
+    location.z += half
+    actor = level.spawn(walker, location, frame.look(item.get("heading", 0.0)), item["id"], "personnages")
+    actor.capsule_component.set_editor_property("capsule_half_height", bounds.box_extent.z)
+    actor.capsule_component.set_editor_property("capsule_radius", radius / scale)
+    actor.set_editor_property("appearance", item["appearance"])
+    actor.set_editor_property("walk_speed", item.get("walkSpeed", 3.0) * 100.0)
+    actor.set_editor_property("party_rank", item.get("party", -1))
+    actor.set_editor_property("entity_id", item.get("entity", ""))
+    patrol = []
+    for point in item.get("patrol", ()):
+        stop = frame.point(point)
+        stop.z += half
+        patrol.append(stop)
+    actor.set_editor_property("patrol", patrol)
+    if item.get("party") == 0:
+        level.spawn(unreal.PlayerStart, location, frame.look(0.0), "Depart", "personnages")
 
 
 def place_frame(level: Level, scene: dict, frame: Frame) -> None:

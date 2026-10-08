@@ -9,6 +9,7 @@
 #include "JadgWalker.generated.h"
 
 class UAnimSequence;
+class UStaticMeshComponent;
 
 /**
  * @brief Un personnage lié qui marche sur le maillage de navigation et se tient au repos
@@ -57,6 +58,30 @@ public:
 	/// Les points d'une ronde, en repère du monde ; vide : le personnage attend.
 	UPROPERTY(EditAnywhere, Category = "Jadg")
 	TArray<FVector> Patrol;
+
+	/// La fiche d'apparence (`Rpg/appearances/<id>.json`, LOT-1015) qui pose le personnage au
+	/// lancement : corps par le créateur, clips, taille, armes. Vide : le maillage et les deux
+	/// clips ci-dessus sont ceux que la scène a posés.
+	UPROPERTY(EditAnywhere, Category = "Jadg")
+	FString Appearance;
+
+	/// Les clips du créateur, par nom (repos, marche, attaque, incantation, coup reçu, mort).
+	UPROPERTY(VisibleAnywhere, Category = "Jadg")
+	TMap<FName, TObjectPtr<UAnimSequence>> Clips;
+
+	/// L'instant d'impact d'un clip, en secondes (`attack`, `cast`), lu dans la fiche.
+	UPROPERTY(VisibleAnywhere, Category = "Jadg")
+	TMap<FName, float> ClipKeys;
+
+	/// Les armes tenues, une par main, accrochées à leur socket.
+	UPROPERTY(VisibleAnywhere, Category = "Jadg")
+	TArray<TObjectPtr<UStaticMeshComponent>> Weapons;
+
+	/// Vrai si le corps vient de l'objet personnalisable Mutable (sinon, du maillage posé tel quel).
+	bool bFromCreator = false;
+
+	/// Joue une fois un clip du créateur (`attack`, `hit`…), puis revient au repos. Faux s'il n'existe pas.
+	bool PlayOnce(FName Clip);
 
 	/// Envoie le personnage vers un point du maillage de navigation ; il s'arrête à
 	/// @p AcceptanceRadius centimètres du but.

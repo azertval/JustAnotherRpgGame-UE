@@ -52,7 +52,10 @@ WALL = "#"
 
 FLOOR_MESH = "Scene/ilot/floor.glb"
 WALL_MESH = "Scene/ilot/wall.glb"
-PUPPET = "Npc/pantin/pantin.glb"
+# Les fiches d'apparence (Rpg/appearances/, LOT-1015) : les quatre héros dans l'ordre de D-28, et le
+# pantin qui tient la place d'un PNJ sans fiche.
+HEROES = ("heros-brawler", "heros-mage", "heros-priest", "heros-scoundrel")
+PUPPET = "pantin"
 
 # Le plan d'une carte : `#` un mur, tout autre signe une case libre. Les lettres repèrent les
 # entités, nommées dans `marks` ; une case libre sans entité est un point.
@@ -278,12 +281,14 @@ def scene_text(identifier: str | None, spec: dict) -> str:
                   "position": centre(entity["x"], entity["y"]), "yaw": 0.0, "height": entity["block"],
                   "entity": entity["id"]}
                  for entity in entities if entity["block"] is not None]
-    puppet = {"mesh": PUPPET, "idle": "idle", "walk": "walk", "walkSpeed": 3.0}
     # Le groupe : sa place est celle que Core donne au lancement (l'entrée, ou le point d'arrivée
-    # du portail) ; la scène le pose à l'entrée pour qu'il existe.
-    characters = [{"id": f"groupe-{rank + 1}", **puppet, "position": centre(*entry), "heading": 90.0, "party": rank}
+    # du portail) ; la scène le pose à l'entrée pour qu'il existe. Les quatre héros de D-28 par
+    # leur fiche d'apparence (LOT-1015) ; un PNJ, le pantin, en attendant sa fiche (LOT-1024).
+    characters = [{"id": f"groupe-{rank + 1}", "appearance": HEROES[rank], "walkSpeed": 3.0,
+                   "position": centre(*entry), "heading": 90.0, "party": rank}
                   for rank in range(4)]
-    characters += [{"id": f"pnj-{entity['id']}", **puppet, "position": centre(entity["x"], entity["y"]),
+    characters += [{"id": f"pnj-{entity['id']}", "appearance": PUPPET, "walkSpeed": 3.0,
+                    "position": centre(entity["x"], entity["y"]),
                     "heading": entity["heading"], "entity": entity["id"]}
                    for entity in entities if entity["type"] == "npc"]
     scene = {
