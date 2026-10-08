@@ -127,3 +127,99 @@ liaison suivent le même sort à la republication du kit (D-62).
   s'écrit ici.
 - **Les licences Fab** : à vérifier pack par pack, avant achat, par l'auteur.
 - **Le poids** d'un personnage sur disque et en mémoire graphique : à mesurer ici, pas à deviner.
+
+## Avancement — 8 octobre 2026
+
+Réalisé en autonomie par l'assistant (consigne de l'auteur : pas de validation visuelle en cours de
+lot ; les captures se jugent à la recette). Deux consignes de plus, le même jour : sur Fab,
+seulement des assets gratuits sous licence standard, aucun achat ; le contenu livré avec le moteur
+reste la première source. Ce lot n'a rien pris sur Fab : tout vient du moteur.
+
+### Ce qui est fait
+
+- **La fiche d'apparence** : `Source/Elements/Rpg/appearances/<id>.json`, schéma
+  `appearance.schema.json`, famille `appearances` de `check_rpg_data.py` ; lecteur
+  `core::readAppearance` (`Core/Rpg/Appearance`), quatre tests de Core. Deux fiches liées plutôt
+  qu'une : la fiche de règles est jouée par les règles, celle d'apparence par le moteur, et un PNJ
+  sans règles (le pantin) a quand même une apparence.
+- **La description du créateur** : `Source/Elements/Assets/Characters/humanoid.json` (corps,
+  clips, sockets, dossier des armes, taille de référence), lecteur `core::readCharacterCreator`,
+  trois tests de Core ; `check_orphans.py` y lit les chemins de contenu qu'elle produit.
+- **Le créateur Mutable par réflexion** : commandlet `JadgBuildCharacterCreator`
+  (`Characters/JadgCreatorGraph`). **Mesuré : la première voie tient.** Les classes de nœuds
+  privées se retrouvent par leur chemin, les propriétés s'écrivent par `ImportText` (chemins
+  d'objets complets), les broches se relient par le schéma ; compilation synchrone (43
+  opérations, 0,1 s), paquet enregistré (150 Kio). Deux pièges relevés : la fonction de
+  bibliothèque du plugin synchronise l'explorateur de contenu et casse sans fenêtre (on passe par
+  la fabrique) ; le commutateur de composants n'a de catégorie de broches qu'au chargement d'un
+  asset (on la lui donne à la création). Rejoué, le commandlet garde l'asset (empreinte de la
+  description dans les métadonnées du paquet) ; `-JadgForce` reconstruit par-dessus.
+- **Le mannequin du moteur** : `import_mannequin_unreal.py` copie 32 assets (87 Mio) depuis les
+  gabarits d'Unreal, au même chemin de contenu, avec empreintes ; six clips (repos, marche,
+  attaque, attaque chargée pour l'incantation, coup reçu, mort).
+- **L'acteur** : `AJadgWalker::Appearance` ; `JadgAppearance::Apply` pose corps (instance Mutable,
+  paramètre `Body` ; le maillage de référence est visible dès le lancement, l'instance le remplace
+  quand elle est prête), clips et `ClipKeys`, échelle à la taille, armes aux sockets `hand_r` et
+  `hand_l` depuis `Master/Weapons` (26 maîtres importés sur le poste). `PlayOnce` joue un clip de
+  combat une fois.
+- **Les scènes** : un `characters` de `build_scene_unreal.py` prend `"appearance"` ; les cartes
+  d'essai jouent les quatre héros (fiches `heros-*`) et le pantin pour les PNJ.
+- **Les suppressions** de D-64 : six scripts, quatre tests, les 21 maîtres PNJ (fichiers, manifeste,
+  références, famille `npc`, `Content/Master/Npc`), le contrôle du `.glb` de `check_hd_assets.py` ;
+  les lecteurs `.glb` de `reduce_model.py` vivent dans `material_maps.py`, qui en a besoin.
+- **Le standard** `personnages-3d.md` est réécrit sur les mesures.
+- **Les tests du moteur** `Jadg.Personnages.Createur`, `.Fiche`, `.FicheModifiee`.
+
+### Ce qui se vérifie
+
+Mesuré le 8 octobre 2026 sur le poste de référence (RTX 4060 Ti, Unreal Engine 5.8.3).
+
+| Commande | Relevé |
+|---|---|
+| `powershell scripts/build.ps1` | 644 tests de Core : 643 passés, 1 ignoré (sept nouveaux) |
+| `powershell scripts/build.ps1 -Unreal -NoCapture` | la cible d'éditeur se construit (un avertissement du système de construction, pas du code), le mannequin se pose, le créateur se construit, `JadgContentCheck` passe, 13 tests du moteur : 10 passés dans ce passage, les 3 `Jadg.Personnages.*` passés au passage suivant (`-ExecCmds="Automation RunTests Jadg.Personnages"`) après que l'acteur demande la compilation du créateur chargé ; **un passage complet des 13 ensemble reste à rejouer** |
+| `powershell scripts/build.ps1 -Unreal` (captures du socle) | les deux captures se prennent (115,6 images par seconde à midi) et **passent** à leur référence (`compare_captures.py`, écart moyen 0,45 et 0,39) ; la première trame est venue 928 s après le lancement (compilation des shaders des plugins ajoutés), et le passage a été arrêté par le système, mémoire basse, juste après la mesure |
+| `pytest` | 209 passés (quatorze retirés avec la chaîne, un remplacé) |
+| `scripts/check.py` | 17 contrôles, tous verts après la régénération du cahier de test |
+| `ruff`, clang-format, `lint_planning`, `lint_docs` | passés |
+
+### Ce qui s'écarte de la fiche
+
+- **MetaHuman n'habille pas les héros.** Mesuré sans fenêtre, avec et sans processeur graphique :
+  l'asset se crée, le corps paramétrique se règle (30 contraintes, taille engagée), mais la peau et
+  l'assemblage s'arrêtent sur l'assertion `BodyTexture` : le **contenu optionnel** du plugin
+  (`MetaHumanCharacter/Content/Optional/`) n'est pas installé sur le poste. Son installation passe
+  par le lanceur Epic : **un geste de l'auteur**. Les quatre héros sont donc des corps du mannequin
+  (Manny pour Grom et Faelar, Quinn pour Helga et Nessa), et le bloc `metahuman` des fiches attend.
+- **Les têtes, les couleurs, la garde-robe** sont lues et pas jouées : le contenu du moteur n'a ni
+  tête à part, ni matière de peau paramétrée, ni vêtement. Ce sont des paramètres à ajouter au
+  créateur au LOT-1024, avec les corps de race.
+- **Le reciblage** n'a pas été nécessaire : corps et clips partagent le squelette du mannequin.
+  L'IK Retargeter servira quand un corps d'un autre squelette arrivera (MetaHuman, Fab).
+- **L'instant d'impact** est dans la fiche d'apparence (`clips.attack.key`), pas dans un fichier à
+  part.
+- **Les captures de contrôle des héros et la cadence à quatre** ne sont pas prises : les passages
+  `-Parcours` et `-Scene essai-1016-etals -Capture` ont été arrêtés par le système (mémoire basse)
+  avant de commencer. **À rejouer** sur le poste, et à juger par l'auteur à la recette.
+
+### Les critères
+
+| Critère | État |
+|---|---|
+| Les quatre héros se tiennent au repos et marchent sur la carte des étals, suivent le meneur | **tenu sur les tests** (`Jadg.Personnages.Fiche` : corps, clips, échelle ; `Jadg.Exploration.*` : le groupe de quatre, désormais quatre héros, passe) ; **pas vu dans une image** : captures à rejouer |
+| Une fiche modifiée change le personnage sans geste dans l'éditeur | **tenu** pour le corps, la taille et les armes (`Jadg.Personnages.FicheModifiee` ; Grom et Helga diffèrent par leur fiche seule) |
+| Rejoué, le constructeur redonne les mêmes assets ; `check_orphans.py` passe | **tenu** : mannequin par empreintes, créateur gardé si la description n'a pas changé ; `check_orphans.py` vert |
+| La régénération du graphe Mutable depuis le texte est mesurée | **tenu** : faisable, par réflexion (voie 1) ; détail au standard §3 |
+| La cadence avec les quatre héros à l'écran, à midi et à 22 h | **non tenu** : passage arrêté avant la mesure, à rejouer |
+| Les tests de Core et `Jadg.Personnages.*` passent | **tenu** (voir le tableau ; un passage complet des 13 tests ensemble à rejouer) |
+
+### Ce qui reste au lot
+
+- Rejouer `scripts/build.ps1 -Unreal`, `-Unreal -Parcours` et `-Unreal -Scene essai-1016-etals
+  -Capture` sur le poste, verser les captures et les mesures dans `annexes/LOT-1015/captures/`.
+- Le contenu optionnel de MetaHuman, puis les héros en MetaHuman (fiches : `body: metahuman`, bloc
+  `metahuman`) — ou l'auteur décide que le mannequin suffit à la 0.0.3.
+- L'orientation des armes dans la main (un décalage par pièce dans la description), à juger sur
+  les captures.
+- Le retour au repos après un clip joué une fois (`PlayOnce`) : avec le tour de combat, LOT-1017.
+- Le poids en mémoire graphique de huit personnages : LOT-1024.

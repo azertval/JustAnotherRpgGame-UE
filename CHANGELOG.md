@@ -6,6 +6,29 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **Les personnages entrent dans le moteur par un créateur** (LOT-1015, 8 octobre 2026). Un
+  personnage est une **fiche d'apparence** (`Source/Elements/Rpg/appearances/<id>.json`, schéma
+  `appearance.schema.json`, lue par `core::readAppearance`) : créateur, corps, tête, taille,
+  couleurs, pièces, arme de chaque main, instant d'impact des clips. Le **créateur** est un objet
+  personnalisable **Mutable** que le commandlet `JadgBuildCharacterCreator` construit sans fenêtre
+  depuis sa description texte (`Source/Elements/Assets/Characters/humanoid.json`) — par
+  **réflexion** sur les nœuds du plugin, qui sont privés : classes par leur chemin, propriétés par
+  `ImportText`, broches par le schéma, compilation synchrone, paquet enregistré ; rejoué, il garde
+  l'asset si la description n'a pas changé. Les corps et les six clips viennent du **mannequin du
+  moteur** (`import_mannequin_unreal.py` les copie depuis les gabarits d'Unreal, première source
+  avant Fab) ; les armes sont les maîtres Meshy accrochés par **socket** (D-42 tranchée). Un
+  `AJadgWalker` qui nomme sa fiche se pose seul au lancement (`JadgAppearance::Apply`) : corps
+  par le paramètre `Body` de l'instance Mutable, échelle à la taille de la fiche, clips, armes.
+  Les **quatre héros** de D-28 ont leur fiche et jouent sur les cartes d'essai de l'exploration ;
+  le pantin tient la place des PNJ jusqu'au LOT-1024. **MetaHuman** est mesuré : il se pilote
+  sans fenêtre (corps paramétrique, trente contraintes), mais la peau et l'assemblage demandent le
+  contenu optionnel du plugin, absent du poste — un geste de l'auteur par le lanceur Epic. La
+  **chaîne maison** des personnages est supprimée (D-64) : `rig_character.py`,
+  `rig_quadruped.py`, `retouch_character.py`, `reduce_model.py`, `render_character_review.py`,
+  `check_character_model.py`, leurs tests, les 21 maîtres PNJ et leurs entrées du manifeste ;
+  `Planning/standards/personnages-3d.md` est réécrit sur les mesures du moteur. Sept tests de
+  Core (`ApparenceTest`, `CreateurDePersonnageTest`) et trois tests du moteur
+  (`Jadg.Personnages.*`).
 - **Un créateur de personnage remplace le maillage par personnage** (D-63, D-64, 8 octobre 2026,
   planification seulement). Un personnage devient une **fiche texte** que l'objet personnalisable
   **Mutable** du moteur assemble : corps et têtes humains par **MetaHuman Creator**, le reste par
