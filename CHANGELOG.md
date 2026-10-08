@@ -6,6 +6,23 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **Le combat en distance commence : l'espace de combat en mètres** (LOT-1017, D-50, 9 octobre
+  2026, lot ouvert, non livré). `core::CombatSpace` dit les règles spatiales du Manuel sans
+  grille : une créature est un cylindre à la taille de son emprise, l'allonge se mesure entre les
+  bords (1,50 m), une zone est une forme (sphère et cylindre en trois dimensions ; cône, ligne et
+  cube dans le plan), la tenaille un angle de 135° au centre de la cible — la valeur où la ligne
+  des centres du Guide bascule sur les huit cases adjacentes —, l'avantage de hauteur une case, et
+  l'abri garde la méthode du Guide sur des lignes étagées en hauteur. Ce qui dépend de la carte —
+  sol, place, vue, chemin dans un budget, candidats — passe par une interface que deux
+  implémentations tiennent : `core::SimulatedSpace` (plan, boîtes, plateaux, terrain difficile,
+  eau ; Dijkstra déterministe sur un réseau de 0,5 m ; lecture d'une grille de collision) pour les
+  tests et la simulation, `FJadgCombatSpace` dans le moteur (maillage de navigation, rayons,
+  balayages). Les types partagés quittent `BattleGrid.h` pour `CombatTypes.h`. `IsoProjection`
+  est retirée (D-49). 28 tests de Core, un test du moteur (`Jadg.Combat.Espace`). **La grille
+  reste en place** : `CombatState` et ses consommateurs ne sont pas encore passés en mètres, et
+  les sous-lots de l'IA et du combat dans le moteur ne sont pas ouverts ; la fiche du lot dit
+  l'ordre.
+
 - **Les personnages entrent dans le moteur par un créateur** (LOT-1015, 8 octobre 2026). Un
   personnage est une **fiche d'apparence** (`Source/Elements/Rpg/appearances/<id>.json`, schéma
   `appearance.schema.json`, lue par `core::readAppearance`) : créateur, corps, tête, taille,

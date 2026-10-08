@@ -91,3 +91,87 @@ retire.
   marqueur devient un volume. Le LOT-1018 doit le porter dans la description de carte.
 - **L'équilibre.** Le déplacement libre favorise les tireurs et les lanceurs ; la simulation le
   dira, et le Brawler gradué (D-36) se recale si l'écart dépasse 20 points.
+
+## Avancement — 9 octobre 2026
+
+Ouvert le 8 octobre au soir par l'assistant, en autonomie (consignes de l'auteur : pas de
+validation visuelle en cours de lot, rien d'acheté). **Le lot n'est pas livré** : la première
+part du sous-lot 1 l'est, et ce qui manque est écrit plus bas, nommément.
+
+### Ce qui est fait
+
+- **L'espace de combat en mètres** (`Core/Combat/CombatSpace.h`, `.cpp`), sans grille : une
+  créature est un **cylindre** posé au sol (`core::Volume`, rayon et hauteur tirés de son emprise
+  du Manuel : 0,75 m et 1,50 m pour une M, 1,50 m et 3 m pour une G) ; l'**allonge** se mesure
+  entre les bords, en trois dimensions (`core::inReach`, 1,50 m) ; une **zone** est une forme
+  (`core::Effect`, `core::shapeHits` : sphère et cylindre exacts en trois dimensions, cône, ligne
+  et cube dans le plan, une créature est dedans si son volume la croise) ; la **tenaille** est un
+  angle au centre de la cible (`core::flanksByAngle`) ; l'**avantage de hauteur** demande une
+  case d'écart (`core::hasHighGround`) ; l'**abri** garde la méthode du Guide (`core::coverFrom` :
+  des lignes du meilleur point de l'attaquant vers quatre points du bord de la cible étagés sur sa
+  hauteur ; une ou deux coupées, partiel ; trois, important ; quatre, total ; un corps interposé,
+  partiel). Les portées du corpus restent en cases : `core::metersFromTiles`.
+- **L'interface `core::CombatSpace`** — hauteur du sol, place libre, ligne de vue, chemin dans un
+  budget, positions candidates — et ses **deux implémentations** : `core::SimulatedSpace` (un plan
+  borné, des boîtes, des plateaux, du terrain difficile, de l'eau profonde ; Dijkstra sur un réseau
+  de 0,5 m, huit voisins, sans coin coupé, déterministe ; `fromTileMap` lit une grille de
+  collision de l'ancien format), et `FJadgCombatSpace` dans le moteur
+  (`Source/JustAnotherRpgGame/Combat/`) : maillage de navigation pour le chemin et le budget,
+  rayons pour la vue et le sol, balayage de capsule pour la place, échantillonnage à la demi-case
+  pour les candidats. Les règles ne voient que l'interface.
+- **Les types partagés** quittent `BattleGrid.h` pour `CombatTypes.h` (`CombatantId`,
+  `Locomotion`, `Cover`, `coverBonus`, `AreaShape`, `footprintSide`) : consommables depuis le
+  moteur, ce que `BattleGrid.h` ne permet pas (sa méthode `check`).
+- **`IsoProjection` est retirée** (D-32, D-49) : la caméra est libre, le moteur projette ; plus
+  rien ne la consommait. Les guides et spécifications qui la citaient sont repris.
+- **28 tests de Core** (`test_combat_space.cpp`, `test_simulated_space.cpp`) et un test du moteur
+  (`Jadg.Combat.Espace`).
+
+### Les décisions de réalisation
+
+| Décision | Ce qui est retenu | Pourquoi |
+|---|---|---|
+| Le déterminisme | **La simulation de Core suffit aux tests** ; le moteur n'a pas à être déterministe. Les tests de règles, la série de l'arène et la simulation à cent graines jouent sur `SimulatedSpace` ; le moteur ne joue que ce que le joueur voit | un maillage de navigation ne promet pas le même chemin d'une version à l'autre, et aucun test de règle n'a besoin de lui |
+| La tenaille | un angle d'au moins **135°** au centre de la cible | c'est la valeur exacte où la règle de la ligne des centres du Guide bascule sur les huit cases adjacentes : deux cases adjacentes font 135° ou plus quand la ligne traverse deux côtés opposés, 90° au plus sinon (`LaTenailleParAngleRejoueLaLigneDesCentresDuGuide`) |
+| La hauteur d'une créature | le côté de son emprise | le Manuel donne à une créature un espace **cubique** |
+| L'avantage de hauteur | la base de l'attaquant au moins **1,50 m** au-dessus de celle de la cible, et rien d'autre | une case ; le Manuel ne donne ni bonus de dégâts ni de portée |
+| Les zones en hauteur | sphère et cylindre exacts ; cône, ligne et cube dans le plan, à moins de leur taille en hauteur de leur origine | le jeu n'a qu'une terrasse ; le reste viendra avec une carte qui le demande |
+| Le réseau de la simulation | un pas de 0,5 m | un détail de la simulation, pas une règle ; assez fin pour qu'une créature M passe une porte de 1,50 m |
+
+### Ce qui se vérifie
+
+Mesuré le 9 octobre 2026 sur le poste de référence (Unreal Engine 5.8.3).
+
+| Commande | Relevé |
+|---|---|
+| `powershell scripts/build.ps1` | **663 tests de Core, 100 % passés** (28 nouveaux, 9 retirés avec `IsoProjection`) |
+| `powershell scripts/build.ps1 -Unreal -NoCapture` | code 0 : la cible d'éditeur se construit sans avertissement du code, mannequin, créateur et `JadgContentCheck` passent, **14 tests du moteur passés** (`Jadg.Combat.Espace` en plus des 13 du LOT-1015) ; les captures du socle ne sont pas rejouées, aucune scène n'a changé |
+| `scripts/check.py`, lints, cahier de test | `scripts/check.py` 17 contrôles verts ; `lint_planning`, `lint_docs` (549 pages), cahier de test régénéré (675 cas) ; clang-format et ruff passés |
+
+### Ce qui s'écarte de la fiche, et ce qui manque
+
+- **La grille est toujours là.** `CombatState`, `Attack`, `AreaOfEffect`, `LineOfSight`,
+  `Flanking`, `Pathfinding`, `TacticalTerrain`, `PartyDeployment`, `MapEncounter`, `EnemyAi` et
+  `Arena` jouent encore sur `BattleGrid` et `GridPosition` ; leurs tests aussi (quinze fichiers,
+  environ 300 cas). Le modèle en mètres existe à côté, testé, et rien ne le consomme encore. La
+  fiche demandait qu'ils soient **remplacés** : c'est la seconde part du sous-lot 1, qui n'est pas
+  faite. Son ordre, mesuré sur ce que chaque module touche : `CombatState` (positions en
+  `Meters3`, `CombatSpace` à la place de `BattleGrid`, `move` et `reachable` par `route` et
+  `candidates`), puis `Attack` (`inReach`, `coverFrom`), `AreaOfEffect` (`shapeHits`), `Flanking`
+  (`flanksByAngle` + allonge + vue), `CombatPreview`, `MapEncounter` et `PartyDeployment` (les
+  volumes de combat et le déploiement), `TacticalTerrain` (le verdict de l'éditeur sur un
+  `SimulatedSpace::fromTileMap`), `EnemyAi` (les candidats de l'espace), `Arena` ; `BattleGrid`,
+  `Pathfinding`, `LineOfSight` et leurs tests partent en dernier.
+- **Les sous-lots 2 et 3 ne sont pas ouverts** : l'IA sur des candidats (elle dépend de
+  `CombatState` en mètres), le combat qui se joue dans le moteur (l'arène vide du LOT-1016 le reste),
+  les zones de combat en volumes, le déploiement, l'aperçu, le parcours du combat, les captures.
+- **Le moteur n'exclut pas un combattant du maillage** le temps d'une requête : les volumes
+  `blocking` d'un chemin ne comptent qu'à l'arrivée, pas sur le trajet. Un modificateur de
+  navigation par combattant est la voie, au sous-lot 3.
+- **La dette du LOT-1016** (les personnages ne se bloquent pas) n'est pas retirée.
+
+### Ce qui reste au lot
+
+Tout ce que le paragraphe précédent nomme, dans l'ordre qu'il donne. La première part du sous-lot
+1 — le modèle, l'interface, ses deux implémentations, leurs tests — est ce sur quoi le reste se
+pose, et elle est livrée verte.
