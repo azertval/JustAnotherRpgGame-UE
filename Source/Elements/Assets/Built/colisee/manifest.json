@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "note": "Pièces du Colisée construites par scripts/assetsGeneration/build_colosseum.py (LOT-1012) : ne pas modifier à la main. Repère de Blender : X est, Y nord, Z haut ; la façade d'une travée regarde -Y. Exporté en .glb Y vers le haut.",
+  "note": "Pièces du Colisée construites par scripts/assetsGeneration/build_colosseum.py (LOT-1012, LOT-1019) : ne pas modifier à la main. Repère de Blender : X est, Y nord, Z haut ; la façade d'une travée regarde -Y. Exporté en .glb Y vers le haut.",
   "spec": {
     "a": 94.5,
     "b": 78.0,
@@ -33,8 +33,8 @@
       "id": "col-arcade-1",
       "file": "col-arcade-1.glb",
       "triangles": 2380,
-      "bytes": 2634460,
-      "sha256": "c6a0a428e4661b4461b4e1544090ffaab2be05a245b15307bea5d9896daf4570",
+      "bytes": 4509304,
+      "sha256": "c47ee6b3d2ef2e80771e6f12e095aea948261e404efc6ce04c96ec8e38a89cb5",
       "materials": [
         "limestone",
         "marble"
@@ -56,8 +56,8 @@
       "id": "col-arcade-2",
       "file": "col-arcade-2.glb",
       "triangles": 5756,
-      "bytes": 2790652,
-      "sha256": "7c3dfdce0849bfb4023880c1940d3a32b6bcc3be787ecc81e2410e99de9a3080",
+      "bytes": 4665496,
+      "sha256": "6a74af0c6669cf6219aba9bac3424ec409f69a6fc0a22aa29964ed97549e645d",
       "materials": [
         "limestone",
         "marble"
@@ -79,8 +79,8 @@
       "id": "col-arcade-3",
       "file": "col-arcade-3.glb",
       "triangles": 6716,
-      "bytes": 2829180,
-      "sha256": "3868104034b98b153f754c1862c648e22c97ca82e42d77b1b1e46c967fad4937",
+      "bytes": 4704024,
+      "sha256": "dd14fe73d115f23b57c8f865d56cba8e23f857161f369caaaaf2effc2755e767",
       "materials": [
         "limestone",
         "marble"
@@ -102,8 +102,8 @@
       "id": "col-attic",
       "file": "col-attic.glb",
       "triangles": 526,
-      "bytes": 6224600,
-      "sha256": "1965a09647217bc7b9a930eeec5ae5bd0c585a7a0516481a286e7b36b64b0d5c",
+      "bytes": 10552600,
+      "sha256": "43a13950e64266d2d7fec1b2a167f45725a841ec599dc9076386ab186452ba6a",
       "materials": [
         "limestone",
         "marble",
@@ -127,8 +127,8 @@
       "id": "col-cavea",
       "file": "col-cavea.glb",
       "triangles": 47960,
-      "bytes": 5866924,
-      "sha256": "eb701d4b73a56d6eb6ea9628d139a2c1853090f8ffb5337f178236704018e3ae",
+      "bytes": 7741760,
+      "sha256": "be8a2d79578458146a9cbc2a61a8a9a6685a6863becb84ace1c1b1736aa44333",
       "materials": [
         "limestone",
         "marble"
@@ -150,8 +150,8 @@
       "id": "col-gate",
       "file": "col-gate.glb",
       "triangles": 19876,
-      "bytes": 7263364,
-      "sha256": "43efeb765af57c1d7e5f0c5f4089b2eacb05024dbd64352a3f4757ab4fc49d51",
+      "bytes": 11591344,
+      "sha256": "52fcc3a0c52b8256c5b642d6c8051aabb585c4db00c49689c837382a6ad9a862",
       "materials": [
         "limestone",
         "marble",
@@ -175,8 +175,8 @@
       "id": "col-loge",
       "file": "col-loge.glb",
       "triangles": 22790,
-      "bytes": 7266776,
-      "sha256": "f6ea87220a1887186f876279424cd1fbb1c5613b30512613ff31010c621de0fd",
+      "bytes": 11594752,
+      "sha256": "d47332dc921e065fbf2b4552e3c56fff5fea7b1df34975d00f589ef597ce17bf",
       "materials": [
         "limestone",
         "marble",
@@ -200,8 +200,8 @@
       "id": "col-plinth",
       "file": "col-plinth.glb",
       "triangles": 36,
-      "bytes": 704316,
-      "sha256": "adcd6f94cf7c16642a29c108630e9471a8cd2db834fbbe45dd486853b49282ad",
+      "bytes": 1689980,
+      "sha256": "09fd48012f1359ae18107c18d30e070d85dfe9023ae62bb694cb06994c963d4c",
       "materials": [
         "marble"
       ],
@@ -222,8 +222,8 @@
       "id": "col-sand",
       "file": "col-sand.glb",
       "triangles": 94,
-      "bytes": 1915000,
-      "sha256": "d7401a2f47aa65ef158b4cd5ebde39b3da06228a098197c1e32571eb99d03cc6",
+      "bytes": 3202956,
+      "sha256": "30a665242ebd8993b6e908379fb6d297041606de5f4111142ab9d96f5691e5ed",
       "materials": [
         "sand"
       ],

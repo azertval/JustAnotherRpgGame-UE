@@ -29,23 +29,25 @@ nord, Z vers le haut ; la façade d'une travée regarde −Y, sa face extérieur
 l'ellipse, à longueur d'arc égale : c'est le seul endroit où l'anneau se calcule.
 
 Les textures viennent de l'atelier de l'Arena of Fate (les cinq couleurs de base de D-46,
-`Tools/…/V2/Textures/`, hors Git) ; chaque matière reçoit ses cartes de relief et
-d'occlusion-rugosité-métal, dérivées par `material_maps.py`. Les pièces s'écrivent sous
-`Source/Elements/Assets/Built/colisee/` avec leur manifeste (empreintes, triangles, dimensions),
-hors des kits verrouillés par `kits.lock.json`.
+`Tools/…/V2/Textures/`, hors Git). Chaque matière porte sa **couleur de base** et sa rugosité et son
+métal en **facteurs** glTF, les valeurs jugées sur captures au 4 octobre 2026 (D-46) ; elle ne porte
+**plus de carte dérivée de sa couleur** : `material_maps.py` est retiré au LOT-1019 (« une pièce
+livre ses vraies cartes, ou se recommande »), et le relief du Colisée est dans son maillage. Le
+Colisée reste une pièce **construite** (famille 10, D-55 « composé ») jusqu'à sa reprise au
+LOT-1021. Les pièces s'écrivent sous `Source/Elements/Assets/Built/colisee/` avec leur manifeste
+(empreintes, triangles, dimensions), hors des kits verrouillés par `kits.lock.json`.
 
 Usage (Python du poste ; Blender est lancé par le script) :
     python scripts/assetsGeneration/build_colosseum.py [--only col-gate,col-attic] [--blender CHEMIN]
         [--textures DOSSIER] [--output DOSSIER]
 
-Dépendances : Blender 5.2, numpy, Pillow (outil de production, pas de CI).
+Dépendances : Blender 5.2, numpy (outil de production, pas de CI).
 """
 
 from __future__ import annotations
 
 import argparse
 import hashlib
-import io
 import json
 import math
 import os
@@ -64,7 +66,6 @@ except ImportError:  # hors de Blender : seuls le pilote et `ring_bays` servent
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT = ROOT / "Source" / "Elements" / "Assets" / "Built" / "colisee"
 TEXTURES = ROOT / "Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production/V2/Textures"
-MATTERS = Path(__file__).with_name("arena_fate_matters.json")
 BLENDER_DEFAULT = Path(r"D:\Blender Foundation\Blender 5.2\blender.exe")
 
 # Le Colisée de Rome, en mètres (décision de l'auteur, 8 octobre 2026).
@@ -85,8 +86,10 @@ SPEC = {
     "tread": 0.8, "rise": 0.5,       # un gradin
     "podium": 5.0,                   # la hauteur du podium au-dessus du sable
 }
-# Les matières : l'indice d'une face, le nom de sa texture, la longueur d'une répétition en mètres.
-MATTERS_LIST = [("limestone", 3.0), ("marble", 2.0), ("sand", 3.0), ("velvet", 1.5), ("bronze", 1.0)]
+# Les matières : l'indice d'une face, le nom de sa texture, la longueur d'une répétition en mètres,
+# sa rugosité et son métal (D-46, jugés sur captures le 4 octobre 2026).
+MATTERS_LIST = [("limestone", 3.0, 0.88, 0.0), ("marble", 2.0, 0.36, 0.0), ("sand", 3.0, 0.96, 0.0),
+                ("velvet", 1.5, 0.92, 0.0), ("bronze", 1.0, 0.42, 1.0)]
 LIME, MARBLE, SAND, VELVET, BRONZE = range(5)
 
 
@@ -544,14 +547,14 @@ PIECES = {
 
 def blender_materials(textures: Path) -> list:
     materials = []
-    for name, _ in MATTERS_LIST:
+    for name, _, roughness, metallic in MATTERS_LIST:
         image = bpy.data.images.load(str(textures / f"{name}-albedo.png"), check_existing=True)
         image.pack()
         material = bpy.data.materials.new(name)
         material.use_nodes = True
         bsdf = material.node_tree.nodes.get("Principled BSDF")
-        bsdf.inputs["Roughness"].default_value = 0.8
-        bsdf.inputs["Metallic"].default_value = 0.0
+        bsdf.inputs["Roughness"].default_value = roughness
+        bsdf.inputs["Metallic"].default_value = metallic
         node = material.node_tree.nodes.new("ShaderNodeTexImage")
         node.image = image
         material.node_tree.links.new(node.outputs["Color"], bsdf.inputs["Base Color"])
@@ -614,90 +617,17 @@ def blender_main(argv: list[str]) -> None:
         export_piece(name, build, args.output, materials)
 
 
-# --- Le pilote : Blender, puis les cartes de matière et le manifeste --------------------------
+# --- Le pilote : Blender, puis le manifeste ---------------------------------------------------
 
-def read_glb(data: bytes) -> tuple[dict, bytes]:
+def measure_glb(path: Path) -> dict:
+    """Triangles, poids, empreinte et matières d'une pièce exportée."""
+    data = path.read_bytes()
     length = struct.unpack_from("<I", data, 12)[0]
     document = json.loads(data[20:20 + length])
-    offset = 20 + length
-    binary = b""
-    if offset < len(data):
-        size = struct.unpack_from("<I", data, offset)[0]
-        binary = data[offset + 8:offset + 8 + size]
-    return document, binary
-
-
-def write_glb(document: dict, binary: bytes) -> bytes:
-    text = json.dumps(document, separators=(",", ":")).encode("utf-8")
-    text += b" " * ((4 - len(text) % 4) % 4)
-    binary += b"\x00" * ((4 - len(binary) % 4) % 4)
-    total = 12 + 8 + len(text) + 8 + len(binary)
-    return (struct.pack("<4sII", b"glTF", 2, total) + struct.pack("<II", len(text), 0x4E4F534A) + text
-            + struct.pack("<II", len(binary), 0x004E4942) + binary)
-
-
-def attach_maps(path: Path, matters: dict, cache: dict) -> dict:
-    """Donne à chaque matière du modèle sa couleur compacte et ses deux cartes dérivées (D-46)."""
-    sys.path.insert(0, str(Path(__file__).resolve().parent))
-    import material_maps  # noqa: E402  (numpy, Pillow)
-    from PIL import Image  # noqa: E402
-
-    document, binary = read_glb(path.read_bytes())
-    views = document["bufferViews"]
-    image_views = {image["bufferView"] for image in document.get("images", ()) if "bufferView" in image}
-    kept = [i for i in range(len(views)) if i not in image_views]
-    renumbered = {old: new for new, old in enumerate(kept)}
-    rebuilt = bytearray()
-    new_views = []
-
-    def append(content: bytes, source: dict | None) -> int:
-        nonlocal rebuilt
-        rebuilt += b"\x00" * ((4 - len(rebuilt) % 4) % 4)
-        view = {k: v for k, v in (source or {}).items() if k not in ("byteOffset", "byteLength")}
-        view.update({"buffer": 0, "byteOffset": len(rebuilt), "byteLength": len(content)})
-        rebuilt += content
-        new_views.append(view)
-        return len(new_views) - 1
-
-    for index in kept:
-        view = views[index]
-        append(binary[view.get("byteOffset", 0):view.get("byteOffset", 0) + view["byteLength"]], view)
-    for accessor in document.get("accessors", ()):
-        if "bufferView" in accessor:
-            accessor["bufferView"] = renumbered[accessor["bufferView"]]
-    images, textures, used = [], [], []
-    for material in document["materials"]:
-        name = material["name"]
-        pbr = material.setdefault("pbrMetallicRoughness", {})
-        source = document["images"][document["textures"][pbr["baseColorTexture"]["index"]]["source"]]
-        view = views[source["bufferView"]]
-        pixels = binary[view.get("byteOffset", 0):view.get("byteOffset", 0) + view["byteLength"]]
-        if name not in cache:
-            colour, mime = material_maps.compact_color(pixels, cache)
-            normal, orm = material_maps.derive_maps(Image.open(io.BytesIO(colour)), [[matters[name]]])
-            cache[name] = (colour, mime, material_maps.encode(normal), material_maps.encode(orm))
-        colour, mime, normal, orm = cache[name]
-        first = len(images)
-        for content, kind in ((colour, mime), (normal, "image/jpeg"), (orm, "image/jpeg")):
-            images.append({"bufferView": append(content, None), "mimeType": kind})
-            textures.append({"source": len(images) - 1, "sampler": 0})
-        pbr["baseColorTexture"] = {"index": first}
-        pbr["metallicRoughnessTexture"] = {"index": first + 2}
-        pbr["metallicFactor"] = 1.0
-        pbr["roughnessFactor"] = 1.0
-        material["normalTexture"] = {"index": first + 1}
-        material["occlusionTexture"] = {"index": first + 2}
-        used.append(name)
-    document["samplers"] = [{"magFilter": 9729, "minFilter": 9987, "wrapS": 10497, "wrapT": 10497}]
-    document["images"] = images
-    document["textures"] = textures
-    document["bufferViews"] = new_views
-    document["buffers"] = [{"byteLength": len(rebuilt) + ((4 - len(rebuilt) % 4) % 4)}]
-    data = write_glb(document, bytes(rebuilt))
-    path.write_bytes(data)
     primitives = document["meshes"][0]["primitives"]
     triangles = sum(document["accessors"][p["indices"]]["count"] // 3 for p in primitives)
-    return {"triangles": triangles, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest(), "materials": used}
+    return {"triangles": triangles, "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest(),
+            "materials": [m["name"] for m in document.get("materials", [])]}
 
 
 def find_blender(option: str | None) -> Path:
@@ -714,7 +644,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--textures", type=Path, default=TEXTURES)
     parser.add_argument("--output", type=Path, default=OUTPUT)
     args = parser.parse_args(argv)
-    for name, _ in MATTERS_LIST:
+    for name, *_ in MATTERS_LIST:
         if not (args.textures / f"{name}-albedo.png").is_file():
             print(f"build_colosseum : texture absente {args.textures / (name + '-albedo.png')}", file=sys.stderr)
             return 1
@@ -729,22 +659,20 @@ def main(argv: list[str] | None = None) -> int:
         print(result.stderr[-4000:], file=sys.stderr)
         print(f"build_colosseum : Blender a échoué (code {result.returncode})", file=sys.stderr)
         return 1
-    matters = json.loads(MATTERS.read_text(encoding="utf-8"))["matters"]
     manifest_path = args.output / "manifest.json"
     pieces = {}
     if manifest_path.exists():
         pieces = {p["id"]: p for p in json.loads(manifest_path.read_text(encoding="utf-8"))["pieces"]}
-    cache: dict = {}
     bays = ring_bays()
     for measure in produced:
         name = measure["id"]
-        enriched = attach_maps(args.output / f"{name}.glb", matters, cache)
+        enriched = measure_glb(args.output / f"{name}.glb")
         pieces[name] = {"id": name, "file": f"{name}.glb", **enriched, "boundsBlender": measure["boundsBlender"]}
         print(f"{name} : {enriched['triangles']} triangles, {enriched['bytes'] // 1024} Kio, "
               f"{', '.join(enriched['materials'])}")
     manifest = {
         "version": 1,
-        "note": "Pièces du Colisée construites par scripts/assetsGeneration/build_colosseum.py (LOT-1012) : "
+        "note": "Pièces du Colisée construites par scripts/assetsGeneration/build_colosseum.py (LOT-1012, LOT-1019) : "
                 "ne pas modifier à la main. Repère de Blender : X est, Y nord, Z haut ; la façade d'une "
                 "travée regarde -Y. Exporté en .glb Y vers le haut.",
         "spec": SPEC,

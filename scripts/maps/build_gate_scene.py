@@ -20,11 +20,12 @@ Deux sorties, au format de carte v5 (`jadg_map.py`) :
 
 - le **préfabriqué** du Colisée, `Source/Elements/Editor/Prefabs/central-empire/capital/arenarea/colisee.json`
   (format `jadg-prefab`), origine au centre de l'arène, au niveau du sable ;
-- la **carte** de la porte, `Source/Elements/Levels/porte-1012.json` : le parvis, ses façades, sa
-  fontaine, ses arbres, ses lampes, son dallage, le Colisée posé, le lion qui fait sa ronde, les
-  cadrages — et **la grille que Core joue** (la dette du LOT-1016) : tirée de la même géométrie,
-  l'ellipse du Colisée et l'emprise des façades sont des murs, la ruelle hors du dallage aussi ;
-  le groupe entre au milieu du parvis. `build_level.py` construit le niveau.
+- la **carte** de la porte, `Source/Elements/Levels/porte-1012.json` : le parvis, ses six façades
+  (la famille témoin du LOT-1019 : six exemplaires de la façade au maître, quatre au sud et deux qui
+  bordent la ruelle), sa fontaine, ses arbres, ses lampes, son dallage, le Colisée posé, le lion
+  qui fait sa ronde, les cadrages — et **la grille que Core joue** (la dette du LOT-1016) : tirée
+  de la même géométrie, l'ellipse du Colisée et l'emprise des façades sont des murs, la ruelle hors
+  du dallage aussi ; le groupe entre au milieu du parvis. `build_level.py` construit le niveau.
 
 Repère de la carte : x vers l'est, y vers le sud, z vers le haut, en mètres ; `yaw` tourne le sud
 vers l'est. Le repère de Blender des pièces (x est, y nord, z haut) s'y ramène par y = −y_blender.
@@ -220,11 +221,12 @@ def build(assets: Path = ASSETS) -> dict:
 # Le parvis, tel que le LOT-1012 l'a composé (repère de la carte). Les façades sont mises à leur
 # hauteur ; leur emprise au sol, mesurée sur le maillage, devient des murs de la grille de Core.
 PARVIS_OBJECTS = [
-    {"id": "facade-sud-1", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [-18.6, 52.0, 0.0], "yaw": 0.0, "height": 12.0, "provisional": "hauteur non mesurée : aucune cote de la commande ; quatre exemplaires d'une seule façade, les cinq façades de la fiche n'existent pas"},
+    {"id": "facade-sud-1", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [-18.6, 52.0, 0.0], "yaw": 0.0, "height": 12.0, "provisional": "hauteur non mesurée : aucune cote de la commande ; la famille témoin du LOT-1019, six exemplaires de la seule façade au maître, en attendant les six variantes commandées"},
     {"id": "facade-sud-2", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [-7.6, 52.0, 0.0], "yaw": 0.0, "height": 12.0},
     {"id": "facade-sud-3", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [7.6, 52.0, 0.0], "yaw": 0.0, "height": 12.0},
     {"id": "facade-sud-4", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [18.6, 52.0, 0.0], "yaw": 0.0, "height": 12.0},
     {"id": "facade-ruelle", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [-7.6, 66.0, 0.0], "yaw": 90.0, "height": 12.0},
+    {"id": "facade-ruelle-est", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [7.6, 66.0, 0.0], "yaw": 270.0, "height": 12.0},
     {"id": "fontaine", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-fountain.glb", "position": [0.0, 34.5, 0.0], "yaw": 0.0, "scale": 1.0},
     {"id": "champion", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-champion-anonyme.glb", "position": [-12.0, 27.0, 0.0], "yaw": 0.0, "scale": 1.0},
     {"id": "char", "mesh": "Regions/central-empire/capital/arenarea/Scene/ar-meshy-char-de-course.glb", "position": [13.5, 30.0, 0.0], "yaw": 30.0, "scale": 1.0},
@@ -252,6 +254,7 @@ SHOTS = [
     {"id": "parvis", "target": [0.0, 24.0, 14.0], "heading": 0.0, "pitch": 9.0, "distance": 118.0, "comment": "Depuis le sud, au-dessus des toits du quartier : le parvis entier et la façade du Colisée d'un bord à l'autre, les maisons donnant l'échelle."},
     {"id": "porte", "target": [0.0, 19.0, 13.0], "heading": 0.0, "pitch": 3.0, "distance": 34.0, "comment": "Depuis le parvis, à hauteur d'homme ou presque : la porte, ses lions, les dieux dans les arcs."},
     {"id": "ruelle", "target": [0.0, 62.0, 2.5], "heading": 180.0, "pitch": 8.0, "distance": 11.0},
+    {"id": "facades", "target": [0.0, 50.0, 3.0], "heading": 180.0, "pitch": 35.0, "distance": 30.0, "comment": "La famille témoin (LOT-1019) au cadrage du joueur : depuis le parvis, dans les bornes de la caméra (inclinaison de 25 à 70°, 4 à 120 m), les façades du sud vues du côté du parvis."},
 ]
 LIGHTING = {"comment": "Réglages provisoires de la porte, à juger sur les captures. lampCandelas, fireCandelas : intensité d'une lampe et d'un feu, pour une exposition fixe de 1. sunScale, ambientScale : ce par quoi le soleil et la lumière du ciel de la table du jour sont multipliés (la table est écrite pour un rendu sans lumière indirecte). skyLuminance : éclaircissement du ciel visible. fog : brume de hauteur. post : réglages de post-traitement du moteur, par leur nom.", "lampCandelas": 60.0, "fireCandelas": 30.0, "sunScale": 1.8, "ambientScale": 0.45, "skyLuminance": 3.0, "exposureBias": 0.0, "fog": {"density": 0.004, "falloff": 0.05, "volumetric": True}, "post": {"bloom_intensity": 0.6, "vignette_intensity": 0.3}}
 GROUND = {"comment": "Le sol lointain, sous le dallage : un plan uni. Couleur provisoire.", "colour": "#8f7d62", "size": 4000.0, "height": -0.02}
