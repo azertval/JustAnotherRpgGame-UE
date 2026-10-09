@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Core · Ui — Documentation</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body data-root="..">
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Documentation</a>
+  <nav><a href="../index.html">Accueil</a><a href="../Guide/index.html">Guide</a><a href="../Specification/index.html">Spécifications</a><a href="index.html" class="active">Cahier de test</a><a href="../Metiers/index.html">Métiers de Tanares</a></nav>
+  <form class="search" role="search"><input type="search" placeholder="Chercher…" aria-label="Chercher dans la documentation"><div class="results" hidden></div></form>
+  <div class="links"><a class="active" href="../index.html">Documentation</a><a href="../planning/">Planification</a><a href="../qualite/">Qualité</a></div>
+</header>
+<div class="shell with-sidebar">
+<aside class="sidebar"><h4>Cahier de test</h4><a class="depth-0" href="index.html">Cahier de test</a><a class="depth-1" href="recette-manuelle.html">Recette manuelle</a><a class="depth-1" href="core.html">Core</a><a class="depth-1" href="core-combat.html">Core · Combat</a><a class="depth-1" href="couverture-exigences.html">Couverture des exigences</a><a class="depth-1" href="core-data.html">Core · Data</a><a class="depth-1" href="core-diagnostics.html">Core · Diagnostics</a><a class="depth-1" href="core-ecs.html">Core · Ecs</a><a class="depth-1" href="core-gameplay.html">Core · Gameplay</a><a class="depth-1" href="core-levels.html">Core · Levels</a><a class="depth-1" href="core-math.html">Core · Math</a><a class="depth-1" href="core-resources.html">Core · Resources</a><a class="depth-1" href="core-rpg.html">Core · Rpg</a><a class="depth-1" href="core-time.html">Core · Time</a><a class="depth-1 active" href="core-ui.html">Core · Ui</a><a class="toc depth-2" href="#ce-que-cette-page-couvre">Ce que cette page couvre</a><a class="toc depth-2" href="#test-map-interactionscpp">test_map_interactions.cpp</a><a class="toc depth-2" href="#test-text-catalogcpp">test_text_catalog.cpp</a><a class="toc depth-2" href="#test-ui-stylecpp">test_ui_style.cpp</a><a class="depth-1" href="core-world.html">Core · World</a></aside>
+<main>
+<article class="prose"><h1 id="core-ui">Core · Ui</h1><div class="filters" data-filter-cases><input type="search" placeholder="Filtrer les cas…" aria-label="Filtrer les cas de test"><select><option value="">Toutes les criticités</option><option>Bloquant</option><option>Critique</option><option>Majeur</option><option>Mineur</option></select><span class="count">7 cas</span></div>
+<p>Tests unitaires — <strong>7 cas</strong> (5 bloquants, 2 majeurs). <a href="index.html">Retour à la synthèse</a>.</p>
+<h2 id="ce-que-cette-page-couvre">Ce que cette page couvre</h2>
+<div class="table-wrap"><table><thead><tr><th>Fichier de test</th><th>Cas</th><th>Bloquant</th><th>Critique</th><th>Majeur</th><th>Mineur</th></tr></thead><tbody><tr><td><a href="#test-map-interactionscpp"><code>test_map_interactions.cpp</code></a></td><td>2</td><td>1</td><td>-</td><td>1</td><td>-</td></tr><tr><td><a href="#test-text-catalogcpp"><code>test_text_catalog.cpp</code></a></td><td>3</td><td>3</td><td>-</td><td>-</td><td>-</td></tr><tr><td><a href="#test-ui-stylecpp"><code>test_ui_style.cpp</code></a></td><td>2</td><td>1</td><td>-</td><td>1</td><td>-</td></tr></tbody></table></div>
+<h2 id="test-map-interactionscpp">test_map_interactions.cpp</h2>
+<section class="case" data-crit="Bloquant"><h3 id="mapinteractionstestleslieuxselisentdumondeauxbatiments">MapInteractionsTest.LesLieuxSeLisentDuMondeAuxBatiments</h3>
+<p><em>Bloquant · Unitaire · Interface · Carte</em> — <code>Source/Test/Unit/Core/Ui/test_map_interactions.cpp:18</code></p>
+<p>Les lieux de la carte se lisent du monde aux bâtiments.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Lire Source/Elements/Maps/map-interactions.json.</li><li>Descendre du monde à l'Empire central, à la Capitale, à Arenarea.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>read.errors.empty()</code> est vrai.</li><li>Vérifie que <code>read.imageOf(&quot;world&quot;)</code> vaut <code>&quot;Maps/world.png&quot;</code>.</li><li>Vérifie que <code>empire</code> est vrai.</li><li>Vérifie que <code>read.imageOf(&quot;central-empire-the-capital-city-arenarea&quot;)</code> vaut <code>&quot;Maps/capital/images/arenarea.png&quot;</code>.</li><li>Vérifie que <code>read.parentOf(&quot;arena-of-fate&quot;)</code> vaut <code>&quot;central-empire-the-capital-city-arenarea&quot;</code>.</li><li>Vérifie que <code>read.imageOf(&quot;hippodrome&quot;).empty() || !read.childrenOf(&quot;hippodrome&quot;).empty()</code> est vrai.</li><li>Vérifie que <code>neighbour</code> est vrai.</li></ul>
+</section><section class="case" data-crit="Majeur"><h3 id="mapinteractionstestunlieufautifestnomme">MapInteractionsTest.UnLieuFautifEstNomme</h3>
+<p><em>Majeur · Unitaire · Interface · Carte</em> — <code>Source/Test/Unit/Core/Ui/test_map_interactions.cpp:51</code></p>
+<p>Un lieu fautif de la carte est nommé, les autres se lisent.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Lire trois entrées : une juste, une sans parent, une à la bannière de trois nombres.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>read.errors.size()</code> vaut <code>2U</code>.</li><li>Vérifie que <code>read.zones.size()</code> vaut <code>1U</code>.</li><li>Vérifie que <code>read.zones[0].label[2]</code> vaut <code>0.3F</code> (comparaison flottante).</li></ul>
+</section><h2 id="test-text-catalogcpp">test_text_catalog.cpp</h2>
+<section class="case" data-crit="Bloquant"><h3 id="textcatalogtestuncatalogueselitcleparcle">TextCatalogTest.UnCatalogueSeLitCleParCle</h3>
+<p><em>Bloquant · Unitaire · Interface · Textes</em> — <code>Source/Test/Unit/Core/Ui/test_text_catalog.cpp:20</code></p>
+<p>Un catalogue de textes se lit clé par clé.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Lire un contenu avec une marque d'ordre des octets, un commentaire, une ligne vide, une valeur qui contient « = », des fins de ligne Windows.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>table.size()</code> vaut <code>2U</code>.</li><li>Vérifie que <code>table.at(&quot;menu.quit&quot;)</code> vaut <code>&quot;Quitter&quot;</code>.</li><li>Vérifie que <code>table.at(&quot;math.eq&quot;)</code> vaut <code>&quot;a = b&quot;</code>.</li></ul>
+</section><section class="case" data-crit="Bloquant"><h3 id="textcatalogtestlestrousseremplissentetsetraduisent">TextCatalogTest.LesTrousSeRemplissentEtSeTraduisent</h3>
+<p><em>Bloquant · Unitaire · Interface · Textes</em> — <code>Source/Test/Unit/Core/Ui/test_text_catalog.cpp:38</code></p>
+<p>Les trous d'un texte se remplissent et s'écrivent pour le moteur.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Remplir « %1 · DD %2 » avec deux arguments, puis avec un seul.</li><li>Traduire un texte à trous et à accolades dans l'écriture du moteur.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>core::formatText(&quot;%1 · DD %2&quot;, {&quot;Persuasion&quot;, &quot;12&quot;})</code> vaut <code>&quot;Persuasion · DD 12&quot;</code>.</li><li>Vérifie que <code>core::formatText(&quot;%1 · DD %2&quot;, {&quot;Persuasion&quot;})</code> vaut <code>&quot;Persuasion · DD %2&quot;</code>.</li><li>Vérifie que <code>core::toEngineFormat(&quot;%1 · {x}&quot;)</code> vaut <code>&quot;{0} · </code>{x<code>}&quot;</code>.</li><li>Vérifie que <code>core::textPlaceholders(&quot;%2 puis %1 puis %2&quot;)</code> vaut <code>(std::vector&lt;int&gt;{1, 2})</code>.</li></ul>
+</section><section class="case" data-crit="Bloquant"><h3 id="textcatalogtestlesdeuxcataloguesdudepotserepondent">TextCatalogTest.LesDeuxCataloguesDuDepotSeRepondent</h3>
+<p><em>Bloquant · Unitaire · Interface · Textes</em> — <code>Source/Test/Unit/Core/Ui/test_text_catalog.cpp:55</code></p>
+<p>Le français et l'anglais ont les mêmes clés et les mêmes trous.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Lire Source/Elements/Localization/fr.lang et en.lang.</li><li>Comparer leurs clés, puis les trous de chaque valeur.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>french.empty()</code> est faux.</li><li>Vérifie que <code>english.contains(key)</code> est vrai.</li><li>Vérifie que <code>value.empty()</code> est faux.</li><li>Vérifie que <code>core::textPlaceholders(value)</code> vaut <code>core::textPlaceholders(english.at(key))</code>.</li><li>Vérifie que <code>french.contains(key)</code> est vrai.</li></ul>
+</section><h2 id="test-ui-stylecpp">test_ui_style.cpp</h2>
+<section class="case" data-crit="Bloquant"><h3 id="uistyletestlestyledudepotselit">UiStyleTest.LeStyleDuDepotSeLit</h3>
+<p><em>Bloquant · Unitaire · Interface · Style</em> — <code>Source/Test/Unit/Core/Ui/test_ui_style.cpp:24</code></p>
+<p>Le style des écrans du dépôt se lit sans erreur.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Lire Source/Elements/Assets/UI/style.json.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>read.ok()</code> est vrai.</li><li>Vérifie que <code>style.designWidth</code> vaut <code>1920</code>.</li><li>Vérifie que <code>style.designHeight</code> vaut <code>1080</code>.</li><li>Vérifie que <code>style.colours.at(&quot;panelEdge&quot;)</code> vaut <code>*core::parseUiColour(&quot;#e4a43c&quot;)</code>.</li><li>Vérifie que <code>panel.margins.has_value()</code> est vrai.</li><li>Vérifie que <code>*panel.margins</code> vaut <code>(core::UiMargins{112, 112, 112, 112})</code>.</li><li>Vérifie que <code>panel.file()</code> vaut <code>&quot;frame/panel-dark.png&quot;</code>.</li><li>Vérifie que <code>button.states.size()</code> vaut <code>4U</code>.</li><li>Vérifie que <code>button.file(&quot;hover&quot;)</code> vaut <code>&quot;button/default/hover.png&quot;</code>.</li><li>Vérifie que <code>style.fonts.at(&quot;title&quot;)</code> vaut <code>&quot;Fonts/Cinzel-SemiBold.ttf&quot;</code>.</li><li>Vérifie que <code>style.fonts.at(&quot;body&quot;)</code> vaut <code>&quot;Fonts/IMFellEnglish-Regular.ttf&quot;</code>.</li><li>Vérifie que <code>std::filesystem::exists(std::filesystem::path(JADG_ASSETS_DIR) / file)</code> est vrai.</li><li>Vérifie que <code>style.sizes.at(&quot;screenTitle&quot;)</code> vaut <code>36</code>.</li></ul>
+</section><section class="case" data-crit="Majeur"><h3 id="uistyletestunevaleurfausseestnommee">UiStyleTest.UneValeurFausseEstNommee</h3>
+<p><em>Majeur · Unitaire · Interface · Style</em> — <code>Source/Test/Unit/Core/Ui/test_ui_style.cpp:57</code></p>
+<p>Une valeur fausse du style est nommée, le reste se lit.</p>
+<p><strong>Étapes</strong></p>
+<ol><li>Lire un style à une couleur fausse, une pièce aux marges plus larges qu'elle, une taille négative et une section inconnue, à côté de valeurs justes.</li></ol>
+<p><strong>Résultat attendu</strong></p>
+<ul><li>Vérifie que <code>read.errors.size()</code> vaut <code>4U</code>.</li><li>Vérifie que <code>read.errors[0].find(&quot;colours.faux&quot;)</code> diffère de <code>std::string::npos</code>.</li><li>Vérifie que <code>read.style.colours.contains(&quot;ink&quot;)</code> est vrai.</li><li>Vérifie que <code>read.style.pieces.contains(&quot;plate/ok&quot;)</code> est vrai.</li><li>Vérifie que <code>read.style.pieces.contains(&quot;plate/faux&quot;)</code> est faux.</li><li>Vérifie que <code>core::parseUiColour(&quot;#12345&quot;).has_value()</code> est faux.</li><li>Vérifie que <code>core::parseUiColour(&quot;#000000a0&quot;)-&gt;alpha</code> vaut <code>160.0F / 255.0F</code> (comparaison flottante).</li></ul></section></article><nav class="pager"><a class="prev" href="core-time.html"><span>Précédent</span>Core · Time</a><a class="next" href="core-world.html"><span>Suivant</span>Core · World</a></nav><p class="source">Source : <code>Documentation/CahierTest/core-ui.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Documentation/</code> le 2026-10-09 · <code>34bdcc2ad</code>. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+<script src="../assets/docs.js"></script>
+</body>
+</html>
