@@ -115,13 +115,32 @@ est de la salle, une rampe, un portail du rez sous le plancher qui mène au pali
 sa verticale un panneau et une lanterne de l'étage. `Jadg.Exploration.DeuxEtages` y joue la montée,
 le passage au-dessus du portail, la redescente et le portail.
 
+### Les sous-sols et les niveaux de chargement (`LOT-1022`)
+
+Le rez est le premier étage déclaré, à 0 m ; les autres ont chacun leur hauteur, **au-dessus** pour
+un étage, **en dessous** pour un sous-sol — jamais deux à la même. L'étage d'un point est le plus
+haut dont le sol est sous lui (`AJadgMapFrame::StoreyAt`), dans l'ordre des hauteurs, pas des rangs.
+Une couche de pièces (`layers`) et un objet nomment leur étage (`storey`) et se posent au-dessus de
+son sol (`z`). La grille de collision de Core reste celle du rez ; un sous-sol n'a que le maillage
+de navigation du moteur. Un portail peut viser la carte où il est : le groupe se pose au point
+d'arrivée, à son étage, sans que la carte se rouvre.
+
+Une carte qui le déclare (`"storeyLevels": true`) se construit en **un niveau de chargement par
+étage** (`<niveau de la carte>-etage-<nom>`, `LevelStreamingAlwaysLoaded`) : le décor d'un étage
+(ses couches, ses objets et leurs lumières) y va, le ciel, la navigation, les personnages, les
+repères et les cadrages restent dans le niveau de la carte ; `AJadgMapFrame::StoreyLevels` les
+nomme, et `ShowStorey` en cache un (il quitte le monde, reste chargé). Un cadrage qui regarde un
+étage (`storey`) cache, le temps de sa capture, les étages au-dessus de lui ;
+`build.ps1 -Unreal -Map <carte> -Capture -Etages <rangs>` ne montre que ces étages, et mesure leur
+cadence. L'Arena of Fate est la première (voir le [guide des données](guide-donnees.md)).
+
 ## Contrôler le contenu
 
 | Quoi | Où | Commande |
 |---|---|---|
 | le schéma, les identifiants, les bornes, les étages ; les portails appariés, les arrivées citées, les zones nommées, les cases inatteignables au rez ; la forme canonique | le texte, en CI | `python scripts/maps/jadg_map.py --check` |
 | chaque carte se lit par Core ; le graphe des portails, les zones de combat | `JadgContentCheck` | `powershell scripts/build.ps1 -Unreal` |
-| chaque point d'arrivée atteint sur le maillage de navigation | le niveau construit | `build_level.py -JadgCheck` |
+| chaque point d'arrivée atteint sur le maillage de navigation, ou par un portail de la même carte | le niveau construit | `build_level.py -JadgCheck` |
 | les drapeaux qu'une carte lit sans qu'aucune quête ne les déclare | le texte, en CI | `python scripts/maps/quest_mode.py --check` |
 
 ## Préfabriqués et mode Quêtes

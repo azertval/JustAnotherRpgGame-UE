@@ -28,7 +28,8 @@ namespace
 	{
 		const TCHAR* Line = FCommandLine::Get();
 		FString Ignored;
-		for (const TCHAR* Flag : {TEXT("JadgCapture="), TEXT("JadgParcours="), TEXT("JadgParcoursCombat="), TEXT("JadgEcrans=")})
+		for (const TCHAR* Flag : {TEXT("JadgCapture="), TEXT("JadgParcours="), TEXT("JadgParcoursCombat="), TEXT("JadgParcoursDemo="),
+				 TEXT("JadgEcrans=")})
 		{
 			if (FParse::Value(Line, Flag, Ignored))
 			{

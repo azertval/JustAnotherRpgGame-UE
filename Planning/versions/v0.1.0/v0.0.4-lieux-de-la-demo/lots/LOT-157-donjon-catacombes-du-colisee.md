@@ -113,7 +113,7 @@ qu'il rejoint :
 | descente des catacombes (fond de la prison) | (22-23, 4-6) | le niveau −1 et les catacombes |
 
 La chaîne — scripts, commandes, contrôles — est écrite au
-[guide des données](../../../../../Documentation/Guide/guide-donnees.md#larena-of-fate--la-chaîne-de-ses-trois-niveaux).
+[guide des données](../../../../../Documentation/Guide/guide-donnees.md#larena-of-fate--une-carte-à-trois-étages).
 
 **Le donjon.** Quatre chapelles en croix autour du sanctuaire du Culte, sous le centre du sable :
 C'thraxis au nord, Z'ulvath au sud, Droggath à l'ouest, Krynnethoth à l'est — chacun enchaîné sur
@@ -145,3 +145,18 @@ trois cartes ([bilan](../../v0.0.2.5-passage-3d/bilan.md)).
 La question de **sa version** — posée plus haut, « à déplacer si l'auteur préfère le rattacher à la
 quête qui l'ouvrira » — est tranchée par la même décision : le donjon est de la `0.1.0`, avec l'arène.
 Ses rencontres et sa récompense restent à décider.
+
+## Le portage au nouveau moteur (LOT-1022, 9 octobre 2026)
+
+L'Arena of Fate est désormais **une seule carte à trois étages** ([LOT-1022](../../v0.0.3-nouveau-moteur/lots/LOT-1022-portage-arena-of-fate-et-martpart.md), D-51) : le
+sable, les vestiaires et la prison (niveau −1, à −5,5 m), les catacombes (niveau −2, à −12,1 m),
+leurs pièces et leurs entités telles que les trois cartes de la v4 les posaient, un niveau de
+chargement par étage. Les escaliers sont aux mêmes cases ; ils relient les étages par les portails
+de la v4, qui visent désormais la carte elle-même. Rendu du moteur, **à juger par l'auteur à la
+recette** :
+
+- les catacombes, l'ensemble : [midi](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-catacombes-ensemble-1200.png), [22 h](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-catacombes-ensemble-2200.png) ;
+- le pied de leur escalier, au cadrage du joueur : [midi](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-catacombes-1200.png), [22 h](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-catacombes-2200.png).
+
+Le donjon cultiste lui-même (ses rencontres, sa récompense) reste à ce lot ; la carte se parcourt
+déjà, et la démo y descend ([LOT-1022](../../v0.0.3-nouveau-moteur/lots/LOT-1022-portage-arena-of-fate-et-martpart.md)).

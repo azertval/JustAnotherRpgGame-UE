@@ -13571,7 +13571,8 @@
     "height": 12.0
   },
   "shots": [
-    {"id": "ensemble", "target": [84.0, 66.0, 1.0], "heading": 0.0, "pitch": 50.0, "distance": 151.2, "comment": "La carte entière depuis le sud : un cadrage de relecture, pas encore celui du joueur."}
+    {"id": "ensemble", "target": [84.0, 66.0, 1.0], "heading": 0.0, "pitch": 50.0, "distance": 151.2, "comment": "La carte entière depuis le sud : un cadrage de relecture, pas encore celui du joueur."},
+    {"id": "etals", "target": [44.25, 54.75, 1.0], "heading": 0.0, "pitch": 40.0, "distance": 16.0, "comment": "La mère à son étal, au cadrage de départ du joueur (DefaultGame.ini : 40°, 16 m)."}
   ],
   "hours": ["12:00", "22:00"],
   "notes": [

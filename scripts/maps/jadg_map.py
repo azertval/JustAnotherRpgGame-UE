@@ -66,7 +66,7 @@ LEVEL_ROOTS = (TRIAL_LEVELS, GAME_LEVELS)
 MAP_PACKAGES = "/Game/Maps/Levels"
 
 # L'ordre des clés racine d'une carte écrite ; une clé inconnue suit, dans l'ordre alphabétique.
-ROOT_ORDER = ("format", "version", "name", "comment", "place", "width", "height", "origin", "storeys",
+ROOT_ORDER = ("format", "version", "name", "comment", "place", "width", "height", "origin", "storeys", "storeyLevels",
               "nextEntityId", "tiles", "forced", "layers", "entities", "terrain", "routes", "outlines",
               "objects", "fills", "prefabs", "characters", "party", "assetsRoot", "lighting", "daylight", "ground",
               "navigation", "shots", "hours", "notes")
@@ -75,7 +75,7 @@ ITEM_ORDER = ("id", "type", "x", "y", "storey", "name", "kind", "scene", "z", "p
               "position", "target", "heading", "yaw", "pitch", "roll", "distance", "scale", "height", "entity",
               "volume", "cells", "points", "tiles")
 # Celui d'un élément sans identifiant : une case, une couche, une note.
-CELL_ORDER = ("x", "y", "type", "piece", "name", "kind", "scene", "z", "text", "tiles")
+CELL_ORDER = ("x", "y", "type", "piece", "name", "kind", "scene", "storey", "z", "text", "tiles")
 
 # Les types de case que la collision arrête (`core::isSolid`).
 SOLID = {"solid", "wall", "cliff", "deepWater", "tree", "rock", "fence", "stall", "crate", "column", "roof",
@@ -231,6 +231,7 @@ PREFABS = ROOT / "Source" / "Elements" / "Editor" / "Prefabs"
 PREFAB_FORMAT = "jadg-prefab"
 _PIECES: dict[tuple[str, str], tuple[str, tuple[int, int]] | None] = {}
 _FOOTPRINTS: dict[str, dict[str, tuple[int, int]]] = {}
+_MESHES: dict[str, dict[str, str]] = {}
 _INDEX: dict[str, list[Path]] = {}
 
 
@@ -246,13 +247,29 @@ def _footprints(scene: Path) -> dict[str, tuple[int, int]]:
     key = scene.as_posix()
     if key not in _FOOTPRINTS:
         found: dict[str, tuple[int, int]] = {}
+        meshes: dict[str, str] = {}
         manifest = scene / "manifest.json"
         if manifest.is_file():
             for name, entry in json.loads(manifest.read_text(encoding="utf-8")).get("textures", {}).items():
                 footprint = entry.get("footprint") or [1, 1]
                 found[name.rsplit("/", 1)[-1]] = (int(footprint[0]), int(footprint[1]))
+                if entry.get("mesh"):
+                    meshes[name.rsplit("/", 1)[-1]] = entry["mesh"]
         _FOOTPRINTS[key] = found
+        _MESHES[key] = meshes
     return _FOOTPRINTS[key]
+
+
+def _manifest_mesh(scene: Path, piece: str) -> Path | None:
+    """Le maillage que le manifeste d'un kit donne à une pièce (`mesh`, relatif au kit), s'il existe :
+    une pièce partagée qui ne porte pas son nom (`mp-cypress` → `../../arenarea/Scene/ar-meshy-cypres.glb`,
+    `reused-af-bench` → `../arena-of-fate/Scene/af-bench.glb`, LOT-1022)."""
+    _footprints(scene)
+    mesh = _MESHES[scene.as_posix()].get(piece)
+    if not mesh:
+        return None
+    path = (scene / mesh).resolve()
+    return path if path.is_file() else None
 
 
 def resolve_piece(place: str, piece: str, assets: Path = ASSETS) -> tuple[str, tuple[int, int]] | None:
@@ -284,7 +301,18 @@ def resolve_piece(place: str, piece: str, assets: Path = ASSETS) -> tuple[str, t
         if len(matches) == 1:
             scene = matches[0].parent if matches[0].parent.name == "Scene" else matches[0].parent.parent
             found = (matches[0], _footprints(scene).get(piece, (1, 1)))
-    result = None if found is None else (found[0].relative_to(Path(assets)).as_posix(), found[1])
+    if found is None:
+        # Le dernier recours : le maillage que le manifeste du kit donne à la pièce, sous un autre nom.
+        for level in place_levels(place):
+            base = regions / level if level else regions
+            for scene in (base / "Scene", base / "Common" / "Scene"):
+                mesh = _manifest_mesh(scene, piece)
+                if mesh is not None:
+                    found = (mesh, _footprints(scene).get(piece, (1, 1)))
+                    break
+            if found:
+                break
+    result = None if found is None else (Path(found[0]).resolve().relative_to(Path(assets).resolve()).as_posix(), found[1])
     _PIECES[key] = result
     return result
 
@@ -432,8 +460,8 @@ def validate(doc: dict) -> list[str]:
     if numbers and doc.get("nextEntityId", 1) <= max(numbers):
         errors.append(f"nextEntityId {doc.get('nextEntityId')} déjà donné (e{max(numbers)})")
     zs = [s["z"] for s in storeys]
-    if zs[0] != 0.0 or any(b <= a for a, b in zip(zs, zs[1:])):
-        errors.append("étages : le rez à 0 m, puis des hauteurs croissantes")
+    if zs[0] != 0.0 or len(set(zs)) != len(zs):
+        errors.append("étages : le rez en tête à 0 m, puis chaque étage ou sous-sol à sa hauteur, jamais deux à la même")
     for item in doc.get("objects", ()):
         if not item.get("id"):
             errors.append(f"objet sans identifiant : {item.get('mesh')}")
@@ -627,7 +655,7 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         doc = read(path)
         print(json.dumps({"id": arguments.info, "path": path.relative_to(ROOT).as_posix(), "package": package(arguments.info),
-                          "shots": [{"id": shot["id"]} for shot in doc.get("shots", ())],
+                          "shots": [{"id": shot["id"], "storey": shot.get("storey", 0)} for shot in doc.get("shots", ())],
                           "hours": doc.get("hours", [])}, ensure_ascii=False))
         return 0
 

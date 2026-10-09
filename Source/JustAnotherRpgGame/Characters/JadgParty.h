@@ -41,6 +41,11 @@ class UJadgExploration;
  * Core que nomme le repère. À l'issue, le combat l'écrit et rouvre la carte quittée, le groupe là
  * où il était (`ReturnFromArena`). `-JadgRencontre=<id>` engage une rencontre au lancement de
  * l'arène elle-même : une capture de l'arène en combat.
+ *
+ * La carte d'arène du jeu est l'Arena of Fate, qui s'explore aussi (LOT-1022) : elle n'est l'arène
+ * que tant qu'une rencontre est engagée — on y entre par ses portails et on la parcourt, on y
+ * combat sur le sable. `-JadgArene=<paquet>` en choisit une autre pour le passage (l'arène
+ * d'essai du tour des écrans).
  */
 UCLASS(config = Game)
 class AJadgParty : public AInfo
@@ -50,12 +55,17 @@ class AJadgParty : public AInfo
 public:
 	AJadgParty();
 
-	/// La carte du moteur où se joue une rencontre engagée (LOT-1017).
+	/// La carte du moteur où se joue une rencontre engagée (LOT-1017) ; `-JadgArene` la remplace.
 	UPROPERTY(config)
 	FString ArenaMap;
 
-	/// Vrai si la carte en cours est la carte d'arène.
+	/// Vrai si la carte en cours est la carte d'arène et qu'une rencontre y est engagée (ou
+	/// demandée au lancement par `-JadgRencontre`).
 	bool InArena() const;
+
+	/// Le point du monde de la position continue @p Cell, en cases, au sol de l'étage @p Storey
+	/// (D-51) : un ordre de marche vers un autre étage, que le maillage de navigation relie.
+	FVector PointOn(const FVector2D& Cell, int32 Storey) const;
 
 	/// Rouvre la carte que la rencontre a fait quitter ; le groupe y est là où il était.
 	void ReturnFromArena();
@@ -69,7 +79,12 @@ public:
 	/// Les membres, le meneur en tête.
 	const TArray<TObjectPtr<AJadgWalker>>& GetMembers() const { return Members; }
 
-	/// Envoie le meneur vers @p Destination, ramené sur le maillage de navigation.
+	/**
+	 * Envoie le meneur vers @p Destination, ramené sur le maillage de navigation. Un portail posé
+	 * dans le plein (une porte dans un mur, le haut d'un escalier), que le maillage n'atteint pas,
+	 * se franchit quand le meneur envoyé vers lui s'arrête à son contact (LOT-1022) : c'est ce que le
+	 * contrôle des cartes admet (une case voisine atteinte suffit).
+	 */
 	void OrderWalk(const FVector& Destination);
 
 	/// Envoie le meneur vers @p Target et le fait interagir dès qu'il l'a à portée.
@@ -121,6 +136,10 @@ private:
 	TSharedPtr<FState> State;
 
 	bool bInteractAsked = false;
+	/// Le portail vers lequel le meneur a été envoyé, hors du maillage : sa case et son étage.
+	bool bPortalAimed = false;
+	FIntPoint AimedPortal = FIntPoint::ZeroValue;
+	int32 AimedPortalStorey = 0;
 	bool bPending = false;
 	FIntPoint PendingCell = FIntPoint::ZeroValue;
 	FString OutlinedId;

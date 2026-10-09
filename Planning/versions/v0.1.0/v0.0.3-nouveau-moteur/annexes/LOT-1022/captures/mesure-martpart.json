@@ -1,0 +1,15 @@
+{
+  "map": "martpart",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 16.24,
+  "post": "",
+  "gpuMemoryMiB": {"used": 3496.6, "texturesStreaming": 155.5, "texturesNonStreaming": 1771.4},
+  "meshTextures": {"count": 43, "residentMiB": 62.1, "allMipsMiB": 149.6},
+  "meshes": {"count": 35, "triangles": 1934090, "resourceMiB": 33.9, "largest": "/Game/Master/Weapons/priest-warhammer/StaticMeshes/SM_Weapon_Priest_Warhammer.SM_Weapon_Priest_Warhammer", "largestTriangles": 560344},
+  "captures": ["ensemble-1200.png", "etals-1200.png", "ensemble-2200.png", "etals-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.5, "frames": 1274, "fps": 111.0, "frameMs": 9.01, "p99FrameMs": 12.16, "worstFrameMs": 28.61, "gameMs": 3.76, "renderMs": 2.80, "gpuMs": 8.28},
+    {"hour": "22:00", "seconds": 11.5, "frames": 1282, "fps": 111.8, "frameMs": 8.95, "p99FrameMs": 11.55, "worstFrameMs": 23.68, "gameMs": 3.56, "renderMs": 8.95, "gpuMs": 8.28}
+  ]
+}

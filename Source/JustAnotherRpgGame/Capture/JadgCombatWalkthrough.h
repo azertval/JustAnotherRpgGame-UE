@@ -74,6 +74,9 @@ private:
 	int32 TurnOf = 0;
 	int32 TurnRound = 0;
 	int32 TurnStep = 0;
+	/// Les fois que le point visé a été amené sur ce que le décor cachait, sous un autre angle à
+	/// chaque fois (LOT-1022) ; zéro dès qu'un clic désigne ce qu'il vise.
+	int32 Recenters = 0;
 	bool bShooting = false;
 	bool bAsked = false;
 

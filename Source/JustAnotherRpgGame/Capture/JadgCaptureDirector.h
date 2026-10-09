@@ -10,6 +10,7 @@
 
 class AJadgCameraPawn;
 class AJadgDayLight;
+class AJadgMapFrame;
 class AJadgShot;
 
 /**
@@ -42,6 +43,13 @@ class AJadgShot;
  * retire ; `sans-ao` coupe l'occlusion ambiante d'écran de Lumen ; `sans-halo` le halo
  * (`bloom`) ; `sans-ombres-lampes` les ombres portées des lampes (`JadgLamp`). Les options
  * appliquées sont écrites dans `mesure.json`.
+ *
+ * Une carte à étages découpée en niveaux de chargement (`AJadgMapFrame::StoreyLevels`, D-51,
+ * LOT-1022) : un cadrage qui regarde un étage (`AJadgShot::Storey`) cache, le temps de sa capture,
+ * les étages au-dessus de lui ; `-JadgEtages=<i,j…>` ne montre que ces étages-là pendant tout le
+ * passage — les cadrages des autres étages sont sautés, la mesure tourne autour du premier cadrage
+ * gardé : c'est la cadence **étage par étage**. Un personnage dont l'étage est caché est caché
+ * avec lui, et ne tombe pas. Les étages montrés sont écrits dans `mesure.json`.
  *
  * Il quitte ensuite le jeu : code 0, ou 1 si un cadrage, une heure ou un fichier manque.
  */
@@ -82,6 +90,14 @@ private:
 	UPROPERTY()
 	TArray<TObjectPtr<AJadgShot>> Shots;
 
+	UPROPERTY()
+	TObjectPtr<AJadgMapFrame> MapFrame;
+
+	/// Les seuls étages montrés pendant le passage (`-JadgEtages`) ; vide : tous.
+	TArray<int32> OnlyStoreys;
+	/// Les étages montrés à la dernière mesure.
+	TArray<int32> Shown;
+
 	FString OutputDir;
 	TArray<FString> Hours;
 	int32 SettleFrames = 120;
@@ -99,6 +115,8 @@ private:
 	TArray<FString> PostApplied;
 
 	bool ApplyPostOptions(const FString& Options);
+	/// Montre les étages que le cadrage regarde (@p LookedAt, -1 : tous) ou que `-JadgEtages` garde.
+	void ShowStoreys(int32 LookedAt);
 	void Frame(const AJadgShot& Shot, float ExtraYaw = 0.0f);
 	bool SetHour(const FString& Hour);
 	void BeginShot();

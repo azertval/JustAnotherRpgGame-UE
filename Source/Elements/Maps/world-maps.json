@@ -10672,7 +10672,7 @@
       "faction": "central-empire",
       "factionBasis": "regional",
       "footprint": "arena-of-fate-grid-34x24",
-      "playerMap": "central-empire/capital/arenarea/arena-of-fate/undercroft"
+      "playerMap": "central-empire/capital/arenarea/arena-of-fate"
     },
     "catacombs": {
       "name": "Catacombes cultistes · niveau −2",
@@ -10695,7 +10695,7 @@
       "faction": "cultists",
       "factionBasis": "local",
       "footprint": "arena-of-fate-grid-34x24",
-      "playerMap": "central-empire/capital/arenarea/arena-of-fate/catacombs",
+      "playerMap": "central-empire/capital/arenarea/arena-of-fate",
       "at": [
         0.59,
         0.1

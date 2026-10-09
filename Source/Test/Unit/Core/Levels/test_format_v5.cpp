@@ -32,6 +32,8 @@ namespace {
 using core::GridPosition;
 
 const std::filesystem::path FIXTURES = std::filesystem::path{JADG_TEST_FIXTURES_DIR} / "Levels";
+const std::filesystem::path ELEMENTS{JADG_ELEMENTS_DIR};
+constexpr std::string_view ARENA_OF_FATE = "central-empire/capital/arenarea/arena-of-fate";
 
 [[nodiscard]] std::string lire(const std::filesystem::path& path) {
     std::ifstream file(path, std::ios::binary);
@@ -198,6 +200,47 @@ TEST(FormatV5Test, UneV5FautiveEstRefuseeAvecSaRaison) {
 }
 
 /**
+ * @brief Un lieu à sous-sols est une carte : le rez en tête à 0 m, puis ses sous-sols, chacun à sa
+ *        hauteur négative ; un point d'arrivée du sous-sol y pose le héros (`EX-LVL-032`,
+ * LOT-1022).
+ * \castest{<b>Une carte v5 à sous-sols se lit.</b><br/>
+ * \tcat Unitaire · Format v5<br/>
+ * \tcrit Majeur<br/>
+ * \tetapes 1. Charger une carte dont le rez est à 0 m, un sous-sol à -5,5 m et un second à
+ * -11,5 m, un point d'arrivée au second.<br/>
+ * 2. Charger la même carte, le rez à -5,5 m en tête.<br/>
+ * 3. Charger la même carte, deux sous-sols à -5,5 m.<br/>
+ * \tattendu 1. Trois étages, dans l'ordre écrit ; le point d'arrivée est à l'étage 2, et y pose
+ * le héros. 2. et 3. Refusées, le message nomme `storeys`.
+ * }
+ */
+TEST(FormatV5Test, UneCarteASousSolsSeLit) {
+    const std::string sousSols =
+        R"("storeys": [{"name": "sable", "z": 0.0}, {"name": "vestiaires", "z": -5.5},
+                       {"name": "catacombes", "z": -11.5}], )";
+    const std::string arrivee =
+        R"({"id": "e1", "type": "spawnPoint", "x": 2, "y": 2, "storey": 2, "name": "bas"})";
+    const core::LevelLoadResult loaded =
+        core::LevelLoader::loadFromString(carteV5(sousSols, arrivee));
+    ASSERT_TRUE(loaded.ok()) << loaded.error;
+    const core::Level& level = *loaded.level;
+    ASSERT_EQ(level.storeys().size(), 3U);
+    EXPECT_EQ(level.storeys()[1], (core::Storey{.name = "vestiaires", .z = -5.5F}));
+    EXPECT_EQ(level.storeys()[2], (core::Storey{.name = "catacombes", .z = -11.5F}));
+    EXPECT_EQ(core::arrivalStoreyAt(level, "bas"), 2);
+
+    for (const std::string& fautive :
+         {std::string{R"("storeys": [{"name": "a", "z": -5.5}, {"name": "b", "z": 0.0}], )"},
+          std::string{R"("storeys": [{"name": "a", "z": 0.0}, {"name": "b", "z": -5.5},
+                                     {"name": "c", "z": -5.5}], )"}}) {
+        SCOPED_TRACE(fautive);
+        const core::LevelLoadResult refusee = core::LevelLoader::loadFromString(carteV5(fautive));
+        ASSERT_FALSE(refusee.ok());
+        EXPECT_NE(refusee.error.find("storeys"), std::string::npos) << refusee.error;
+    }
+}
+
+/**
  * @brief Les cases d'un volume sont celles dont le centre tombe dans son emprise au sol ; un volume
  *        plus étroit qu'une case garde la case de son centre.
  * \castest{<b>Un volume se ramène aux cases de son emprise.</b><br/>
@@ -281,6 +324,41 @@ TEST(FormatV5Test, UnPanneauDeLEtageNeSeDesigneQueDeLEtage) {
     const std::optional<core::Interactable> cible = session.interactionTarget();
     ASSERT_TRUE(cible.has_value());
     EXPECT_EQ(cible->type, "sign");
+}
+
+/**
+ * @brief L'Arena of Fate livrée est une carte à trois étages (LOT-1022) : on y entre d'Arenarea au
+ *        vestibule des vestiaires (niveau −1), et un portail de la v4 entre deux niveaux mène
+ *        désormais à un autre étage de la même carte.
+ * \castest{<b>L'Arena of Fate est une carte à trois étages.</b><br/>
+ * \tcat Unitaire · Format v5<br/>
+ * \tcrit Majeur<br/>
+ * \tetapes 1. Charger l'Arena of Fate du contenu livré.<br/>2. Y entrer par « from-arenarea ».<br/>
+ * 3. Mener le héros, à l'étage 1, sur le portail de la porte du triomphe (4, 12).<br/>
+ * \tattendu Trois étages, le sable à 0 m et deux sous-sols en dessous ; le héros arrive au
+ * vestibule (16, 19), à l'étage 1 ; le portail le pose au sable (6, 12), à l'étage 0, sur la même
+ * carte.
+ * }
+ */
+TEST(FormatV5Test, LArenaOfFateEstUneCarteATroisEtages) {
+    const core::WorldTravel::MapLoader charge =
+        core::WorldTravel::directoriesLoader({ELEMENTS / "Levels"});
+    const core::LevelLoadResult loaded = charge(ARENA_OF_FATE);
+    ASSERT_TRUE(loaded.ok()) << loaded.error;
+    const std::vector<core::Storey>& etages = loaded.level->storeys();
+    ASSERT_EQ(etages.size(), 3U);
+    EXPECT_EQ(etages[0].z, 0.0F);
+    EXPECT_LT(etages[1].z, 0.0F);
+    EXPECT_LT(etages[2].z, etages[1].z);
+
+    core::ExplorationSession session{charge};
+    ASSERT_TRUE(session.start(std::string{ARENA_OF_FATE}, "from-arenarea"));
+    EXPECT_EQ(session.heroCell(), (GridPosition{16, 19}));
+    EXPECT_EQ(session.heroStorey(), 1);
+    static_cast<void>(mene(session, 5.5F, 12.5F, 1));
+    EXPECT_TRUE(aEntre(mene(session, 4.5F, 12.5F, 1), ARENA_OF_FATE));
+    EXPECT_EQ(session.heroCell(), (GridPosition{6, 12}));
+    EXPECT_EQ(session.heroStorey(), 0);
 }
 
 /**

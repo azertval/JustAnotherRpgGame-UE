@@ -1,0 +1,17 @@
+{
+  "map": "arena-of-fate",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 16.23,
+  "post": "",
+  "storeys": [1],
+  "storeyCount": 3,
+  "gpuMemoryMiB": {"used": 3679.2, "texturesStreaming": 151.4, "texturesNonStreaming": 1763.4},
+  "meshTextures": {"count": 25, "residentMiB": 9.3, "allMipsMiB": 97.9},
+  "meshes": {"count": 39, "triangles": 1669692, "resourceMiB": 17.5, "largest": "/Game/Master/Weapons/priest-warhammer/StaticMeshes/SM_Weapon_Priest_Warhammer.SM_Weapon_Priest_Warhammer", "largestTriangles": 560344},
+  "captures": ["vestiaires-ensemble-1200.png", "vestiaires-1200.png", "vestiaires-ensemble-2200.png", "vestiaires-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.6, "frames": 1432, "fps": 123.6, "frameMs": 8.09, "p99FrameMs": 28.64, "worstFrameMs": 78.16, "gameMs": 2.77, "renderMs": 1.85, "gpuMs": 7.40},
+    {"hour": "22:00", "seconds": 11.4, "frames": 1406, "fps": 123.0, "frameMs": 8.13, "p99FrameMs": 32.18, "worstFrameMs": 129.90, "gameMs": 2.57, "renderMs": 8.13, "gpuMs": 7.39}
+  ]
+}

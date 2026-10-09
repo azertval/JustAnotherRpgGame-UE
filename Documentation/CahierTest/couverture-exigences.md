@@ -311,7 +311,7 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-LVL-029` | [Cartes & format](../Specification/niveaux.md) | — |
 | `EX-LVL-030` | [Cartes & format](../Specification/niveaux.md) | — |
 | `EX-LVL-031` | [Cartes & format](../Specification/niveaux.md) | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](core-levels.md#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.CorePasseLesSectionsDeConstruction`](core-levels.md#formatv5testcorepasselessectionsdeconstruction) |
-| `EX-LVL-032` | [Cartes & format](../Specification/niveaux.md) | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](core-levels.md#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.UnPortailDuRezNeSeFranchitPasDepuisLEtage`](core-levels.md#formatv5testunportaildureznesefranchitpasdepuisletage) |
+| `EX-LVL-032` | [Cartes & format](../Specification/niveaux.md) | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](core-levels.md#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.UneCarteASousSolsSeLit`](core-levels.md#formatv5testunecarteasoussolsselit), [`FormatV5Test.UnPortailDuRezNeSeFranchitPasDepuisLEtage`](core-levels.md#formatv5testunportaildureznesefranchitpasdepuisletage) |
 | `EX-LVL-033` | [Cartes & format](../Specification/niveaux.md) | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](core-levels.md#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.UneZoneDeCombatV5SeLitDeSonVolume`](core-levels.md#formatv5testunezonedecombatv5selitdesonvolume) |
 | `EX-LVL-034` | [Cartes & format](../Specification/niveaux.md) | — |
 | `EX-LVL-035` | [Cartes & format](../Specification/niveaux.md) | — |

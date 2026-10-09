@@ -5,6 +5,8 @@
 
 #include "AssetCompilingManager.h"
 #include "Capture/JadgShot.h"
+#include "Characters/JadgWalker.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Components/PointLightComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/Engine.h"
@@ -30,6 +32,7 @@
 #include "ShaderCompiler.h"
 #include "UnrealClient.h"
 #include "World/JadgDayLight.h"
+#include "World/JadgMapFrame.h"
 
 namespace
 {
@@ -110,6 +113,26 @@ void AJadgCaptureDirector::BeginPlay()
 	// L'ordre des acteurs d'une carte n'est pas celui de la description : leur rang l'est.
 	Shots.Sort([](const AJadgShot& A, const AJadgShot& B) { return A.Order < B.Order; });
 
+	// Les étages d'une carte découpée en niveaux de chargement (LOT-1022) : `-JadgEtages` n'en
+	// garde que certains, et seulement les cadrages qui les regardent.
+	for (TActorIterator<AJadgMapFrame> It(GetWorld()); It; ++It)
+	{
+		MapFrame = *It;
+		break;
+	}
+	FString StoreyList;
+	if (FParse::Value(CommandLine, TEXT("JadgEtages="), StoreyList, false))
+	{
+		TArray<FString> Parts;
+		StoreyList.ParseIntoArray(Parts, TEXT(","));
+		for (const FString& Part : Parts)
+		{
+			OnlyStoreys.Add(FCString::Atoi(*Part));
+		}
+		Shots.RemoveAll([this](const TObjectPtr<AJadgShot>& Shot) { return !OnlyStoreys.Contains(FMath::Max(Shot->Storey, 0)); });
+	}
+	ShowStoreys(-1);
+
 	// La cadence se mesure sans plafond.
 	GEngine->Exec(GetWorld(), TEXT("t.MaxFPS 0"));
 	GEngine->Exec(GetWorld(), TEXT("r.VSync 0"));
@@ -186,6 +209,50 @@ bool AJadgCaptureDirector::ApplyPostOptions(const FString& Options)
 		PostApplied.Add(Name);
 	}
 	return true;
+}
+
+void AJadgCaptureDirector::ShowStoreys(int32 LookedAt)
+{
+	if (MapFrame == nullptr || MapFrame->StoreyLevels.IsEmpty())
+	{
+		return;
+	}
+	const TArray<float>& Heights = MapFrame->StoreyHeights;
+	TArray<bool> Visible;
+	Shown.Reset();
+	for (int32 Storey = 0; Storey < MapFrame->StoreyLevels.Num(); ++Storey)
+	{
+		const bool bShow = !OnlyStoreys.IsEmpty() ? OnlyStoreys.Contains(Storey)
+			: (!Heights.IsValidIndex(LookedAt) || (Heights.IsValidIndex(Storey) && Heights[Storey] <= Heights[LookedAt]));
+		if (!MapFrame->ShowStorey(Storey, bShow))
+		{
+			UE_LOG(LogJadg, Warning, TEXT("[Capture] l'étage %d n'a pas de niveau de chargement dans la carte"), Storey);
+		}
+		Visible.Add(bShow);
+		if (bShow)
+		{
+			Shown.Add(Storey);
+		}
+	}
+	// Un personnage d'un étage caché est caché avec lui ; son sol parti, il ne tombe pas.
+	for (TActorIterator<AJadgWalker> It(GetWorld()); It; ++It)
+	{
+		const int32 Storey = MapFrame->StoreyAt(It->Feet().Z);
+		const bool bShow = !Visible.IsValidIndex(Storey) || Visible[Storey];
+		It->SetActorHiddenInGame(!bShow);
+		if (UCharacterMovementComponent* Movement = It->GetCharacterMovement())
+		{
+			if (!bShow)
+			{
+				Movement->DisableMovement();
+			}
+			else if (Movement->MovementMode == MOVE_None)
+			{
+				Movement->SetMovementMode(MOVE_Walking);
+			}
+		}
+	}
+	UE_LOG(LogJadg, Display, TEXT("[Capture] étages montrés : %d sur %d"), Shown.Num(), MapFrame->StoreyLevels.Num());
 }
 
 void AJadgCaptureDirector::Tick(float DeltaSeconds)
@@ -301,6 +368,7 @@ void AJadgCaptureDirector::BeginShot()
 		return;
 	}
 	const AJadgShot& Shot = *Shots[ShotIndex];
+	ShowStoreys(Shot.Storey);
 	Frame(Shot);
 	PendingFile = FPaths::Combine(OutputDir, FString::Printf(TEXT("%s-%s.png"), *Shot.ShotId, *HourSlug(Hours[HourIndex])));
 	IFileManager::Get().Delete(*PendingFile, false, true, true);
@@ -314,6 +382,7 @@ void AJadgCaptureDirector::BeginMeasure()
 	{
 		return;
 	}
+	ShowStoreys(Shots[0]->Storey);
 	FMeasure& Measure = Measures.AddDefaulted_GetRef();
 	Measure.Hour = Hours[HourIndex];
 	Phase = EPhase::Measuring;
@@ -349,6 +418,16 @@ void AJadgCaptureDirector::WriteReport() const
 	Json += FString::Printf(TEXT("  \"gpu\": \"%s\",\n"), *GRHIAdapterName.ReplaceCharWithEscapedChar());
 	Json += FString::Printf(TEXT("  \"openSeconds\": %.2f,\n"), OpenSeconds);
 	Json += FString::Printf(TEXT("  \"post\": \"%s\",\n"), *FString::Join(PostApplied, TEXT(",")));
+	// Les étages montrés à la mesure (LOT-1022) : tous, ou ceux de `-JadgEtages`.
+	if (MapFrame != nullptr && !MapFrame->StoreyLevels.IsEmpty())
+	{
+		TArray<FString> Names;
+		for (const int32 Storey : Shown)
+		{
+			Names.Add(FString::FromInt(Storey));
+		}
+		Json += FString::Printf(TEXT("  \"storeys\": [%s],\n  \"storeyCount\": %d,\n"), *FString::Join(Names, TEXT(", ")), MapFrame->StoreyLevels.Num());
+	}
 
 	// La mémoire graphique à la fin du passage : celle du processus (budget du pilote), celle des
 	// textures, en flux (mipmaps chargées selon la vue) ou non.

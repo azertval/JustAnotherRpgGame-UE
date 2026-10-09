@@ -1,0 +1,17 @@
+{
+  "map": "arena-of-fate",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 16.06,
+  "post": "",
+  "storeys": [2],
+  "storeyCount": 3,
+  "gpuMemoryMiB": {"used": 3678.1, "texturesStreaming": 163.9, "texturesNonStreaming": 1763.4},
+  "meshTextures": {"count": 40, "residentMiB": 23.4, "allMipsMiB": 115.9},
+  "meshes": {"count": 39, "triangles": 1680721, "resourceMiB": 25.5, "largest": "/Game/Master/Weapons/priest-warhammer/StaticMeshes/SM_Weapon_Priest_Warhammer.SM_Weapon_Priest_Warhammer", "largestTriangles": 560344},
+  "captures": ["catacombes-ensemble-1200.png", "catacombes-1200.png", "catacombes-ensemble-2200.png", "catacombes-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.5, "frames": 1444, "fps": 126.0, "frameMs": 7.94, "p99FrameMs": 31.40, "worstFrameMs": 98.40, "gameMs": 2.76, "renderMs": 1.90, "gpuMs": 7.27},
+    {"hour": "22:00", "seconds": 11.4, "frames": 1405, "fps": 122.8, "frameMs": 8.15, "p99FrameMs": 51.83, "worstFrameMs": 124.09, "gameMs": 2.49, "renderMs": 8.10, "gpuMs": 7.25}
+  ]
+}

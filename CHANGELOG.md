@@ -6,6 +6,27 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **L'Arena of Fate et Martpart portés** (LOT-1022, 9 octobre 2026, lot ouvert, non livré).
+  L'Arena of Fate est **une carte à trois étages** (D-51) — le sable, les vestiaires et la prison
+  (niveau −1), les catacombes (niveau −2) —, ses trois cartes fusionnées sous le même identifiant,
+  pièces et entités telles quelles : le format v5 admet les **sous-sols** (un étage sous le rez,
+  à sa hauteur négative ; Core, le schéma, `jadg_map.py`, `AJadgMapFrame::StoreyAt`), la hauteur
+  d'un sous-sol est celle, mesurée, de ce qu'il porte sous le sol du dessus (5,5 m et 6,6 m), et
+  une couche de pièces nomme son étage. La carte se construit en **un niveau de chargement par
+  étage** (`storeyLevels`, `build_level.py`), toujours chargé : mesurée étage par étage
+  (`build.ps1 -Map … -Capture -Etages`), elle tient 102 images/s à 1080p les trois étages chargés,
+  108 le sable seul. Les portails de la v4 entre deux niveaux visent la carte elle-même ; un portail
+  dans le plein se franchit au contact (`AJadgParty::OrderWalk`), et le contrôle du maillage de
+  navigation suit les portails d'une carte. La série de l'arène se joue sur le sable : l'Arena of
+  Fate est la carte d'arène du jeu (`ArenaMap`), l'arène tant qu'une rencontre y est engagée, sa
+  zone de combat et ses marqueurs en volumes, ses quatre points d'entrée ; `-ParcoursCombat` y
+  joue. `-ParcoursDemo` marche la démo de Martpart à l'Arena of Fate, de ses vestiaires à ses
+  catacombes, et retour. Les pièces partagées d'un kit se résolvent par leur manifeste : les
+  cyprès et les arbres de Martpart, le mobilier repris de l'Arena of Fate à Arenarea se posent.
+  Retirés : les cartes `arena-of-fate/undercroft.json` et `catacombs.json`, les contrôles des trois
+  cartes (`check_arena_fate.py`, `check_arena_fate_levels.py`) et les gestes de l'ancien éditeur
+  pour le sable (`arena_fate_arena_v2.py` et ses données).
+
 - **La chaîne de décor au niveau du moteur, et le standard 3D réécrit** (LOT-1019, 9 octobre 2026,
   lot ouvert, non livré). Une pièce de décor s'installe par script depuis sa **fiche** —
   `import_scenery_unreal.py` remplace `import_master_unreal.py` et sert `build_level.py` — : Nanite,

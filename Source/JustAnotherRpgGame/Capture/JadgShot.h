@@ -34,4 +34,9 @@ public:
 	/// Distance de la caméra au point visé, en centimètres.
 	UPROPERTY(EditAnywhere, Category = "Jadg")
 	float Distance = 2000.0f;
+
+	/// L'étage que le cadrage regarde (`storey` du cadrage, LOT-1022) : les étages au-dessus de lui
+	/// sont cachés le temps de sa capture ; -1 : tous restent montrés.
+	UPROPERTY(EditAnywhere, Category = "Jadg")
+	int32 Storey = -1;
 };

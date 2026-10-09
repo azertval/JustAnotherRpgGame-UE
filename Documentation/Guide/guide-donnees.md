@@ -856,66 +856,63 @@ du lexique (`rpg.glossary.csv`), traduit comme il le dit. Les noms et les textes
 (objets, armes, lieux de l'atlas) restent dans leur fichier, en français ou en anglais selon la
 source : ils ne passent pas par les catalogues.
 
-## L'Arena of Fate : la chaîne de ses trois niveaux
+## L'Arena of Fate : une carte à trois étages
 
-Le Colisée compte trois cartes — le sable, le niveau −1 (vestiaires et prison), les catacombes —
-qui tiennent dans la **même emprise** de 34 × 24 cases et dont les escaliers se superposent
-(LOT-106, LOT-107, LOT-157 ; décision de l'auteur du 4 octobre 2026). Leur kit se rejoue par
-scripts, depuis l'atelier local `Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/`
-(jamais livré) ; leurs cartes ne s'écrivent que par `LevelEditor --apply`.
+Le Colisée est **une seule carte** (D-51, `LOT-1022`),
+`Levels/central-empire/capital/arenarea/arena-of-fate.json`, à trois étages praticables qui
+tiennent dans la **même emprise** de 34 × 24 cases (LOT-106, LOT-107, LOT-157 ; décision de
+l'auteur du 4 octobre 2026) : le **sable** (le rez, à 0 m), les **vestiaires et la prison**
+(niveau −1) et les **catacombes** (niveau −2). Un sous-sol est à la hauteur **mesurée** de ce
+qu'il porte sous le sol du dessus : 5,5 m sous le sable (l'enceinte des vestiaires s'élève à
+5,40 m), 6,6 m sous les vestiaires (le puits des catacombes descend de 3,12 m au-dessus d'un
+escalier haut de 3,45 m). La carte se construit en un **niveau de chargement par étage**
+(`storeyLevels`, voir le [guide des cartes](guide-cartes-moteur.md)).
 
 ### Les pièces
 
 Le kit de l'Arena of Fate est **publié** (`kits.lock.json`) et ne se régénère plus dans ce dépôt :
 les scripts Blender qui l'ont produit — les boîtes de son architecture, ses enceintes, ses
 bannières, la mise à l'échelle des sculptures, son installeur et ses cartes dérivées — sont retirés
-au `LOT-1019` ; l'ancien dépôt les garde jusqu'à la recette (`LOT-1023`, D-58). Ses pièces entrent
-dans le moteur par la chaîne de décor (ci-dessus) avec les cartes qu'elles portent, et se
-reprennent au maître au `LOT-1022`.
+au `LOT-1019` ; l'ancien dépôt les garde jusqu'à la recette (`LOT-1023`, D-58). Ses 105 pièces
+entrent dans le moteur par la chaîne de décor (ci-dessus), au maître, avec les cartes qu'elles
+portent, leurs textures partagées.
 
 | Script | Ce qu'il produit |
 |---|---|
 | [`build_colosseum.py`](../../scripts/assetsGeneration/build_colosseum.py) | le Colisée en **pièces modulaires** à l'échelle de celui de Rome (189 × 156 m, 48 m, 80 travées) : une travée de chaque ordre, l'attique, la porte axiale et son tunnel, un quart des gradins, la loge impériale, le sable, le socle d'une statue ; textures au mètre, rugosité et métal en facteurs (plus de carte dérivée) ; écrit `Source/Elements/Assets/Built/colisee/` et son manifeste. [`build_gate_scene.py`](../../scripts/maps/build_gate_scene.py) les pose en anneau (le préfabriqué `colisee`), avec les dieux et les lions au maître, les bannières et les feux |
 
-### Les cartes
+### La carte
 
-[`arena_fate_arena_v2.py`](../../scripts/maps/arena_fate_arena_v2.py) prépare les gestes du sable :
-treize délégations par alliance, quatorze statues, la foule, les lions du portail.
-[`arena_fate_levels.py`](../../scripts/maps/arena_fate_levels.py) écrit le plan des deux sous-sols
-et les feux du pourtour de l'arène ; `--preview` imprime chaque plan en caractères, et le script
-refuse un meuble posé sur un mur ou une salle injoignable. Un escalier a les mêmes cases à l'étage
-qu'il quitte et à celui qu'il rejoint :
+Les couches de chaque étage portent leur étage (`storey`) et se posent au-dessus de son sol ; ses
+entités aussi. Les escaliers sont aux cases de la v4 : un escalier a les mêmes cases à l'étage qu'il
+quitte et à celui qu'il rejoint.
 
-| Escalier | Cases | Relie |
-|---|---|---|
-| porte du triomphe (ouest) | (2-4, 11-12) | le sable et le niveau −1 |
-| porte des morts (est) | (29-31, 11-12) | le sable et le niveau −1 |
-| parvis (sud, sous le portail) | (16-17, 20-22) | Arenarea et le niveau −1 |
-| descente des catacombes | (22-23, 4-6) | le niveau −1 et les catacombes |
+| Escalier | Cases | Relie | Par |
+|---|---|---|---|
+| porte du triomphe (ouest) | (2-4, 11-12) | le sable et le niveau −1 | les portails `e2` et `e20` |
+| porte des morts (est) | (29-31, 11-12) | le sable et le niveau −1 | les portails `e3` et `e27` |
+| parvis (sud, sous le portail) | (16-17, 20-22) | Arenarea et le niveau −1 | le portail `e23` |
+| descente des catacombes | (22-23, 4-6) | le niveau −1 et les catacombes | les portails `e25` et `e33` |
 
-Les gestes se rejouent par l'éditeur ; une carte d'une autre taille se ramène d'abord à 34 × 24
-(`--resize`, avec `--crop` pour une réduction — voir le manuel de l'éditeur) :
+Les escaliers du kit ne se praticent pas d'un étage à l'autre : l'enceinte des vestiaires a un sol
+plein, et les escaliers des deux portes arrivent sous l'enceinte de l'arène. Les portails de la v4
+entre deux niveaux visent donc la **même carte** : le meneur passe d'un étage à l'autre sans
+changer de carte ; un portail dans le plein se franchit au contact (`AJadgParty::OrderWalk`). La
+zone de combat du sable, ses six marqueurs de rencontre et les quatre points d'entrée du groupe
+sont des volumes et des points posés sur le sable : la série de l'arène s'y joue
+(`ArenaMap`, `Config/DefaultGame.ini`).
 
-```powershell
-py -3.13 scripts/maps/arena_fate_levels.py --preview
-build/ninja/bin/LevelEditor.exe --resize central-empire/capital/arenarea/arena-of-fate/catacombs --width 34 --height 24 --crop
-build/ninja/bin/LevelEditor.exe --apply "$production/V4/Gestures/undercroft.json"
-build/ninja/bin/LevelEditor.exe --apply "$production/V4/Gestures/catacombs.json"
-build/ninja/bin/LevelEditor.exe --apply "$production/V4/Gestures/arena-of-fate.json"
-```
+[`arena_fate_levels.py`](../../scripts/maps/arena_fate_levels.py) garde le plan des deux sous-sols
+que dessine l'audit de l'atlas (`apply_atlas_audit.py`) ; `--preview` imprime chaque plan en
+caractères.
 
 ### Les contrôles
 
-`LevelEditor --check` contrôle le praticable, les portails et les références. Deux scripts le
-complètent : [`check_arena_fate.py`](../../scripts/maps/check_arena_fate.py) `--require-meshy
---underground-v3` pour l'iconographie (treize délégations, quatre alliances, quatorze dieux, deux
-lions, rien d'impérial sous le sable, quatre Ungods aux catacombes), et
-[`check_arena_fate_levels.py`](../../scripts/maps/check_arena_fate_levels.py) pour la cohérence des
-niveaux : même emprise, escaliers superposés, enceinte posée.
-
-Les sous-sols se jugent éclairés : `LevelEditor --render <carte> --hour 22:00`. Le kit local
-diverge du kit publié tant que `scripts/release/publish_asset_kit.py` n'a pas été rejoué :
-`fetch_assets.py` refuse alors de le remplacer, et c'est voulu.
+`jadg_map.py --check` contrôle la carte comme les autres (étages, portails appariés, arrivées
+citées) ; `build_level.py -JadgCheck` vérifie sur le maillage de navigation que chaque point
+d'arrivée de chaque étage est atteint depuis l'entrée, par le maillage ou par un portail de la
+carte. Chaque étage se capture seul, les étages du dessus cachés (le champ `storey` d'un cadrage),
+et sa cadence se mesure seule (`build.ps1 -Unreal -Map … -Capture -Etages <rang>`).
 
 ## Voir aussi
 

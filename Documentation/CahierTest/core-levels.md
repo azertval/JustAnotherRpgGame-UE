@@ -1,13 +1,13 @@
 # Core · Levels
 
-Tests unitaires — **132 cas** (1 bloquant, 26 critiques, 88 majeurs, 17 mineurs). [Retour à la synthèse](README.md).
+Tests unitaires — **134 cas** (1 bloquant, 26 critiques, 90 majeurs, 17 mineurs). [Retour à la synthèse](README.md).
 
 ## Ce que cette page couvre
 
 | Fichier de test | Cas | Bloquant | Critique | Majeur | Mineur |
 |---|---|---|---|---|---|
 | [`test_format_v4.cpp`](#test-format-v4cpp) | 19 | - | 8 | 7 | 4 |
-| [`test_format_v5.cpp`](#test-format-v5cpp) | 10 | - | 2 | 8 | - |
+| [`test_format_v5.cpp`](#test-format-v5cpp) | 12 | - | 2 | 10 | - |
 | [`test_layer_pieces.cpp`](#test-layer-piecescpp) | 9 | - | 3 | 6 | - |
 | [`test_level.cpp`](#test-levelcpp) | 6 | - | - | 6 | - |
 | [`test_level_draft.cpp`](#test-level-draftcpp) | 25 | - | 1 | 21 | 3 |
@@ -39,7 +39,7 @@ Chaque exigence citée par un cas de cette page, avec les cas qui la citent ; la
 | `EX-LVL-018` | [`CouchesDeCarteTest.ChampsInconnusDUneCouchePreservesALaReecriture`](#couchesdecartetestchampsinconnusdunecouchepreservesalareecriture), [`CouchesDeCarteTest.ChampsInconnusDUneEntitePreservesALaReecriture`](#couchesdecartetestchampsinconnusduneentitepreservesalareecriture) |
 | `EX-LVL-025` | [`LevelDraftPiecesTest.UnEtageNeBloqueAucuneCase`](#leveldraftpiecestestunetagenebloqueaucunecase) |
 | `EX-LVL-031` | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.CorePasseLesSectionsDeConstruction`](#formatv5testcorepasselessectionsdeconstruction) |
-| `EX-LVL-032` | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.UnPortailDuRezNeSeFranchitPasDepuisLEtage`](#formatv5testunportaildureznesefranchitpasdepuisletage) |
+| `EX-LVL-032` | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.UneCarteASousSolsSeLit`](#formatv5testunecarteasoussolsselit), [`FormatV5Test.UnPortailDuRezNeSeFranchitPasDepuisLEtage`](#formatv5testunportaildureznesefranchitpasdepuisletage) |
 | `EX-LVL-033` | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.UneZoneDeCombatV5SeLitDeSonVolume`](#formatv5testunezonedecombatv5selitdesonvolume) |
 | `EX-LVL-039` | [`FormatV5Test.UneV4SeLitSansEtageNiVolume`](#formatv5testunev4selitsansetagenivolume) |
 | `EX-NFR-040` | [`LevelWriterTest.SaveToFileVersDossierInexistantEchoueProprement`](#levelwritertestsavetofileversdossierinexistantechoueproprement), [`CouchesDeCarteTest.CarteDUneVersionFutureRefuseeAvecUnMessageExplicite`](#couchesdecartetestcarteduneversionfuturerefuseeavecunmessageexplicite), [`CouchesDeCarteTest.RoleDeCoucheInconnuRetombeSurLeSol`](#couchesdecartetestroledecoucheinconnuretombesurlesol) |
@@ -373,7 +373,7 @@ L'entrée s'accorde avec une case vide.
 
 ### FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris
 
-*Critique · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:99`
+*Critique · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:101`
 
 Exigences : `EX-LVL-031`, `EX-LVL-032`, `EX-LVL-033`
 
@@ -402,7 +402,7 @@ Une carte v5 se lit, étages et volumes compris.
 
 ### FormatV5Test.CorePasseLesSectionsDeConstruction
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:130`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:132`
 
 Exigences : `EX-LVL-031`
 
@@ -423,7 +423,7 @@ Core passe les sections de construction d'une v5.
 
 ### FormatV5Test.UneV5FautiveEstRefuseeAvecSaRaison
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:160`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:162`
 
 Une v5 fautive est refusée avec sa raison.
 
@@ -437,9 +437,33 @@ Une v5 fautive est refusée avec sa raison.
 - Vérifie que `loaded.errorCode` vaut `un.code`.
 - Vérifie que `loaded.error.find(un.mot)` diffère de `std::string::npos`.
 
+### FormatV5Test.UneCarteASousSolsSeLit
+
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:206`
+
+Exigences : `EX-LVL-032`
+
+Une carte v5 à sous-sols se lit.
+
+**Étapes**
+
+1. Charger une carte dont le rez est à 0 m, un sous-sol à -5,5 m et un second à -11,5 m, un point d'arrivée au second.
+2. Charger la même carte, le rez à -5,5 m en tête.
+3. Charger la même carte, deux sous-sols à -5,5 m.
+
+**Résultat attendu**
+
+- Vérifie que `loaded.ok()` est vrai.
+- Vérifie que `level.storeys().size()` vaut `3U`.
+- Vérifie que `level.storeys()[1]` vaut `(core::Storey{.name = "vestiaires", .z = -5.5F})`.
+- Vérifie que `level.storeys()[2]` vaut `(core::Storey{.name = "catacombes", .z = -11.5F})`.
+- Vérifie que `core::arrivalStoreyAt(level, "bas")` vaut `2`.
+- Vérifie que `refusee.ok()` est faux.
+- Vérifie que `refusee.error.find("storeys")` diffère de `std::string::npos`.
+
 ### FormatV5Test.UnVolumeSeRameneAuxCasesDeSonEmprise
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:203`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:246`
 
 Un volume se ramène aux cases de son emprise.
 
@@ -458,7 +482,7 @@ Un volume se ramène aux cases de son emprise.
 
 ### FormatV5Test.UneZoneDeCombatV5SeLitDeSonVolume
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:226`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:269`
 
 Exigences : `EX-LVL-033`
 
@@ -479,7 +503,7 @@ Une zone de combat v5 se lit de son volume.
 
 ### FormatV5Test.UnPortailDuRezNeSeFranchitPasDepuisLEtage
 
-*Critique · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:246`
+*Critique · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:289`
 
 Exigences : `EX-LVL-032`
 
@@ -501,7 +525,7 @@ Un portail du rez ne se franchit pas depuis l'étage.
 
 ### FormatV5Test.UnPanneauDeLEtageNeSeDesigneQueDeLEtage
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:266`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:309`
 
 Un panneau de l'étage ne se désigne que de l'étage.
 
@@ -517,9 +541,35 @@ Un panneau de l'étage ne se désigne que de l'étage.
 - Vérifie que `cible.has_value()` est vrai.
 - Vérifie que `cible->type` vaut `"sign"`.
 
+### FormatV5Test.LArenaOfFateEstUneCarteATroisEtages
+
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:333`
+
+L'Arena of Fate est une carte à trois étages.
+
+**Étapes**
+
+1. Charger l'Arena of Fate du contenu livré.
+2. Y entrer par « from-arenarea ».
+3. Mener le héros, à l'étage 1, sur le portail de la porte du triomphe (4, 12).
+
+**Résultat attendu**
+
+- Vérifie que `loaded.ok()` est vrai.
+- Vérifie que `etages.size()` vaut `3U`.
+- Vérifie que `etages[0].z` vaut `0.0F`.
+- Vérifie que `etages[1].z` est strictement inférieur à `0.0F`.
+- Vérifie que `etages[2].z` est strictement inférieur à `etages[1].z`.
+- Vérifie que `session.start(std::string{ARENA_OF_FATE}, "from-arenarea")` est vrai.
+- Vérifie que `session.heroCell()` vaut `(GridPosition{16, 19})`.
+- Vérifie que `session.heroStorey()` vaut `1`.
+- Vérifie que `aEntre(mene(session, 4.5F, 12.5F, 1), ARENA_OF_FATE)` est vrai.
+- Vérifie que `session.heroCell()` vaut `(GridPosition{6, 12})`.
+- Vérifie que `session.heroStorey()` vaut `0`.
+
 ### FormatV5Test.OnArriveALEtageDeSonPointDArrivee
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:288`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:366`
 
 On arrive à l'étage de son point d'arrivée.
 
@@ -535,7 +585,7 @@ On arrive à l'étage de son point d'arrivée.
 
 ### FormatV5Test.LaTraceDuGroupeSuitEnHauteur
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:305`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:383`
 
 La trace du groupe suit en hauteur.
 
@@ -553,7 +603,7 @@ La trace du groupe suit en hauteur.
 
 ### FormatV5Test.UneV4SeLitSansEtageNiVolume
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:331`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:409`
 
 Exigences : `EX-LVL-005`, `EX-LVL-039`
 

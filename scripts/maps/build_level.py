@@ -846,14 +846,24 @@ def place_fills(level: Level, frame: Frame, doc: dict, library: Library) -> int:
     return count
 
 
-def place_layers(level: Level, frame: Frame, doc: dict, library: Library) -> tuple[int, dict[str, int]]:
+def on_storey(item: dict, storey: int | None) -> bool:
+    """Vrai si `item` (une couche, un objet, un préfabriqué) se pose dans le niveau de l'étage
+    `storey` ; `None` : la carte n'a qu'un niveau, tout s'y pose."""
+    return storey is None or item.get("storey", 0) == storey
+
+
+def place_layers(level: Level, frame: Frame, doc: dict, library: Library,
+                 storey: int | None = None) -> tuple[int, dict[str, int]]:
     """Les couches de pièces de la v4 migrée : chaque pièce du kit du lieu sur sa case, posée au
-    centre de son emprise, à la hauteur de sa couche ; une couche et une pièce par acteur."""
+    centre de son emprise, à la hauteur de sa couche au-dessus du sol de son étage ; une couche et
+    une pièce par acteur."""
     placed = 0
     missing: dict[str, int] = {}
     place = doc.get("place", "")
     for layer in doc.get("layers", ()):
-        z = layer.get("z", 0.0)
+        if not on_storey(layer, storey):
+            continue
+        z = storey_z(doc, layer.get("storey", 0)) + layer.get("z", 0.0)
         by_piece: dict[str, list[unreal.Transform]] = {}
         for tile in layer.get("tiles", ()):
             piece = tile.get("piece")
@@ -875,11 +885,13 @@ def place_layers(level: Level, frame: Frame, doc: dict, library: Library) -> tup
     return placed, missing
 
 
-def place_prefabs(level: Level, frame: Frame, doc: dict, library: Library) -> int:
+def place_prefabs(level: Level, frame: Frame, doc: dict, library: Library, storey: int | None = None) -> int:
     """Les préfabriqués : un acteur composé, ses objets attachés à lui."""
     count = 0
     prefab_class = game_class("JadgPrefab")
     for item in doc.get("prefabs", ()):
+        if not on_storey(item, storey):
+            continue
         prefab = jadg_map.read_prefab(item["prefab"])
         grown = item.get("scale", 1.0)
         origin = list(item["position"])
@@ -1256,7 +1268,8 @@ def place_entities(level: Level, doc: dict, frame: Frame) -> None:
         box.tags = [f"{VOLUME_TAG}{entity['id']}"]
 
 
-def place_frame(level: Level, doc: dict, frame: Frame, map_id: str, path: Path) -> None:
+def place_frame(level: Level, doc: dict, frame: Frame, map_id: str, path: Path,
+                storey_packages: list[str] | None = None) -> None:
     """Ce qui relie le niveau à sa carte de Core (`AJadgMapFrame`, LOT-1016) : sa grille, ses étages."""
     x, y = doc.get("origin", [0.0, 0.0])
     actor = level.spawn(game_class("JadgMapFrame"), frame.map_point([x, y, 0.0]), unreal.Rotator(0, 0, 0), "Carte", "carte")
@@ -1267,6 +1280,8 @@ def place_frame(level: Level, doc: dict, frame: Frame, map_id: str, path: Path) 
     actor.set_editor_property("south", frame.map_direction([0.0, 1.0, 0.0]))
     if doc.get("storeys"):
         actor.set_editor_property("storey_heights", [s["z"] * 100.0 for s in doc["storeys"]])
+    if storey_packages:
+        actor.set_editor_property("storey_levels", storey_packages)
 
 
 def place_shots(level: Level, doc: dict, frame: Frame) -> None:
@@ -1277,6 +1292,7 @@ def place_shots(level: Level, doc: dict, frame: Frame) -> None:
         actor.set_editor_property("shot_id", item["id"])
         actor.set_editor_property("order", order)
         actor.set_editor_property("distance", item["distance"] * 100.0)
+        actor.set_editor_property("storey", item.get("storey", -1))
 
 
 # --- L'empreinte ------------------------------------------------------------------------------
@@ -1314,7 +1330,7 @@ def actor_print(actor: unreal.Actor) -> dict:
             digest.update(json.dumps(rounded([placed.translation.x, placed.translation.y, placed.translation.z], 0.1)).encode())
         entry["instances"] = instances.get_instance_count()
         entry["instancesDigest"] = digest.hexdigest()[:16]
-    for name in ("level_id", "levels_root", "storey_heights", "appearance", "entity_id", "party_rank", "shot_id",
+    for name in ("level_id", "levels_root", "storey_heights", "storey_levels", "appearance", "entity_id", "party_rank", "shot_id",
                  "distance", "prefab_id", "instance_id"):
         try:
             value = actor.get_editor_property(name)
@@ -1357,38 +1373,104 @@ def write_footprint(map_id: str, digest: str, actors: list[dict], measures: dict
 
 def check_navigation(world: unreal.World, doc: dict, frame: Frame, map_id: str) -> list[str]:
     """Chaque entité où l'on se tient, chaque point d'arrivée, atteint depuis l'entrée par le
-    maillage de navigation du niveau construit."""
+    maillage de navigation du niveau construit — ou par un portail qui ramène sur la même carte (un
+    étage relié par portail, LOT-1022), franchi dès qu'une case voisine est atteinte (un portail
+    dans le plein se franchit à son contact, `AJadgParty::OrderWalk`)."""
     entry = jadg_map.entry_of(doc)
     if entry is None or "navigation" not in doc:
         return []
-    start = frame.map_point(jadg_map.cell_centre(*entry, doc.get("origin")))
-    start.z += 50.0
-    targets = []
-    for entity in doc.get("entities", ()):
-        if entity["type"] in jadg_map.AREAS:
+    origin = doc.get("origin")
+
+    def point(column: int, row: int, storey: int):
+        foot = jadg_map.cell_centre(column, row, origin)
+        foot[2] = storey_z(doc, storey) + 0.5
+        return frame.map_point(foot)
+
+    targets = [e for e in doc.get("entities", ()) if e["type"] not in jadg_map.AREAS]
+    arrivals = {e.get("name"): e for e in targets if e["type"] == "spawnPoint"}
+    portals = [e for e in targets if e["type"] == "portal" and not e.get("sealed")]
+    around = [(dx, dy) for dx in (-1, 0, 1) for dy in (-1, 0, 1) if dx or dy]
+    points = [point(e["x"], e["y"], e.get("storey", 0)) for e in targets]
+    for portal in portals:
+        points += [point(portal["x"] + dx, portal["y"] + dy, portal.get("storey", 0)) for dx, dy in around]
+    reached: set[str] = set()
+    near: set[str] = set()
+    queue = [("entrée", point(*entry, 0))]
+    started = {"entrée"}
+    while queue:
+        name, start = queue.pop()
+        unreachable = set(unreal.JadgSceneBuild.unreachable_points(world, start, points))
+        if unreachable == {-1}:
+            if name == "entrée":
+                return [f"{map_id} : l'entrée n'est pas sur le maillage de navigation"]
             continue
-        foot = jadg_map.cell_centre(entity["x"], entity["y"], doc.get("origin"))
-        foot[2] = storey_z(doc, entity.get("storey", 0)) + 0.5
-        targets.append((entity, frame.map_point(foot)))
-    unreachable = unreal.JadgSceneBuild.unreachable_points(world, start, [t[1] for t in targets])
-    if list(unreachable) == [-1]:
-        return [f"{map_id} : l'entrée n'est pas sur le maillage de navigation"]
+        for index, entity in enumerate(targets):
+            if index not in unreachable:
+                reached.add(entity["id"])
+        for k, portal in enumerate(portals):
+            first = len(targets) + k * len(around)
+            if any(i not in unreachable for i in range(first, first + len(around))):
+                near.add(portal["id"])
+            if (portal["id"] in reached or portal["id"] in near) and portal.get("targetMap") == map_id:
+                arrival = arrivals.get(portal.get("arrival"))
+                if arrival is not None and arrival["id"] not in started:
+                    started.add(arrival["id"])
+                    reached.add(arrival["id"])
+                    queue.append((arrival["id"], point(arrival["x"], arrival["y"], arrival.get("storey", 0))))
     errors = []
-    for index in unreachable:
-        entity = targets[index][0]
+    for entity in targets:
+        if entity["id"] in reached:
+            continue
+        where = f"{map_id}#{entity['id']} ({entity['type']})"
         # Ce qu'on sollicite peut se tenir dans le plein (un portail dans un mur, un PNJ derrière son
         # étal) : seuls le point d'arrivée et l'entrée d'arène doivent être sur le maillage.
         if entity["type"] in ("spawnPoint", "arenaEntry"):
-            errors.append(f"{map_id}#{entity['id']} ({entity['type']}) : inatteignable sur le maillage de navigation")
+            errors.append(f"{where} : inatteignable sur le maillage de navigation")
+        elif entity["id"] in near:
+            log(f"{where} : hors du maillage de navigation, une case voisine atteinte (franchi à son contact)")
         else:
-            log(f"{map_id}#{entity['id']} ({entity['type']}) : hors du maillage de navigation (sollicité à portée)")
+            log(f"{where} : hors du maillage de navigation (sollicité à portée)")
     return errors
 
 
 # --- La construction --------------------------------------------------------------------------
 
+def storey_package(package: str, storey: dict) -> str:
+    """Le niveau de chargement d'un étage (D-51, LOT-1022) : `<niveau de la carte>-etage-<nom>`."""
+    return f"{package}-etage-{storey['name']}"
+
+
+def place_decor(level: Level, frame: Frame, doc: dict, map_id: str, library: Library,
+                storey: int | None = None) -> dict:
+    """Ce qui se pose dans le niveau d'un étage (`storey`), ou dans le seul niveau de la carte
+    (`None`) : le terrain (au rez), les couches, les objets et leurs lumières, les dallages (au
+    rez) et les préfabriqués. Rend les comptes ; un objet perdu arrête le script."""
+    ground = storey is None or storey == 0
+    vertices = place_terrain(level, frame, doc, map_id) if ground else 0
+    layered, missing = place_layers(level, frame, doc, library, storey)
+    objects = 0
+    for item in doc.get("objects", ()):
+        if on_storey(item, storey):
+            place_object(level, frame, doc, library, item, item.get("folder", "objets"))
+            objects += 1
+    filled = place_fills(level, frame, doc, library) if ground else 0
+    prefabbed = place_prefabs(level, frame, doc, library, storey)
+    # Le niveau doit porter tout ce que la description pose : un objet perdu arrête le script.
+    meshes = len([a for a in unreal.GameplayStatics.get_all_actors_of_class(level.world, unreal.StaticMeshActor)
+                  if any(str(t).startswith(OBJECT_TAG) for t in a.tags) or a.get_attach_parent_actor() is not None])
+    if meshes != objects + prefabbed:
+        fail(f"{meshes} objets dans le niveau, {objects + prefabbed} attendus")
+    return {"vertices": vertices, "layered": layered, "missing": missing, "objects": objects, "filled": filled,
+            "prefabbed": prefabbed}
+
+
 def build(map_id: str, doc: dict, path: Path, package: str | None = None, check: bool = False) -> dict:
-    """Construit le niveau de `doc` sous `package` (défaut : celui de la carte) ; rend les mesures."""
+    """Construit le niveau de `doc` sous `package` (défaut : celui de la carte) ; rend les mesures.
+
+    Une carte qui le déclare (`storeyLevels`) se découpe en un **niveau de chargement par étage**
+    (D-51, LOT-1022), construit et sauvé d'abord, puis ajouté au niveau de la carte, toujours
+    chargé : le décor d'un étage (couches, objets, lumières) y va ; le ciel, la navigation, les
+    personnages, les repères, le cadre et les cadrages restent dans le niveau de la carte."""
     started = time.perf_counter()
     package = package or jadg_map.package(map_id)
     errors = jadg_map.validate(doc)
@@ -1398,33 +1480,56 @@ def build(map_id: str, doc: dict, path: Path, package: str | None = None, check:
     fixtures = Library(FIXTURE_ASSETS.relative_to(PROJECT_DIR).as_posix())
     frame = Frame(FIXTURE_ASSETS / FRAME_REFERENCE, fixtures.static_mesh(FRAME_REFERENCE))
 
+    storeys = doc.get("storeys") or []
+    split = bool(doc.get("storeyLevels")) and len(storeys) > 1
+    placed_seconds = 0.0
+    totals = {"vertices": 0, "layered": 0, "missing": {}, "objects": 0, "filled": 0, "prefabbed": 0}
+    storey_packages: list[str] = []
+
+    def add(counts: dict) -> None:
+        for key, value in counts.items():
+            if key == "missing":
+                for name, count in value.items():
+                    totals["missing"][name] = totals["missing"].get(name, 0) + count
+            else:
+                totals[key] += value
+
+    if split:
+        for index, storey in enumerate(storeys):
+            world = unreal.EditorLoadingAndSavingUtils.new_blank_map(False)
+            if world is None:
+                fail("le niveau vide n'a pas pu être créé")
+            placing = time.perf_counter()
+            counts = place_decor(Level(world), frame, doc, map_id, library, index)
+            placed_seconds += time.perf_counter() - placing
+            add(counts)
+            sub = storey_package(package, storey)
+            if not unreal.EditorLoadingAndSavingUtils.save_map(world, sub):
+                fail(f"{sub} : le niveau de l'étage n'a pas pu être sauvé")
+            storey_packages.append(sub)
+            log(f"étage « {storey['name']} » ({storey['z']} m) : {counts['layered']} pièces de couche, "
+                f"{counts['objects']} objets ; {sub}")
+
     world = unreal.EditorLoadingAndSavingUtils.new_blank_map(False)
     if world is None:
         fail("le niveau vide n'a pas pu être créé")
     level = Level(world)
     placing = time.perf_counter()
-    vertices = place_terrain(level, frame, doc, map_id)
-    layered, missing = place_layers(level, frame, doc, library)
-    objects = 0
-    for item in doc.get("objects", ()):
-        place_object(level, frame, doc, library, item, item.get("folder", "objets"))
-        objects += 1
-    filled = place_fills(level, frame, doc, library)
-    prefabbed = place_prefabs(level, frame, doc, library)
+    if not split:
+        add(place_decor(level, frame, doc, map_id, library))
     place_sky(level, doc, frame)
     place_navigation(level, doc, frame)
     characters = place_characters(level, doc, frame, library)
     place_entities(level, doc, frame)
-    place_frame(level, doc, frame, map_id, path)
+    place_frame(level, doc, frame, map_id, path, storey_packages)
     place_shots(level, doc, frame)
     world.get_world_settings().set_editor_property("default_game_mode", game_class("JadgGameMode"))
-    placed_seconds = time.perf_counter() - placing
-
-    # Le niveau doit porter tout ce que la description pose : un objet perdu arrête le script.
-    meshes = len([a for a in unreal.GameplayStatics.get_all_actors_of_class(world, unreal.StaticMeshActor)
-                  if any(str(t).startswith(OBJECT_TAG) for t in a.tags) or a.get_attach_parent_actor() is not None])
-    if meshes != objects + prefabbed:
-        fail(f"{meshes} objets dans le niveau, {objects + prefabbed} attendus")
+    for sub in storey_packages:
+        streaming = unreal.EditorLevelUtils.add_level_to_world(world, sub, unreal.LevelStreamingAlwaysLoaded)
+        if streaming is None:
+            fail(f"{sub} : le niveau de l'étage ne s'ajoute pas à la carte")
+    placed_seconds += time.perf_counter() - placing
+    missing = totals["missing"]
     if missing:
         log(f"{sum(missing.values())} pièce(s) sans maillage dans les kits, non posées : "
             + ", ".join(f"{name} ({count})" for name, count in sorted(missing.items())))
@@ -1434,6 +1539,7 @@ def build(map_id: str, doc: dict, path: Path, package: str | None = None, check:
     if not unreal.EditorLoadingAndSavingUtils.save_map(world, package):
         fail(f"{package} : le niveau n'a pas pu être sauvé")
     digest, actors = footprint(world)
+    layered, objects, filled, prefabbed = totals["layered"], totals["objects"], totals["filled"], totals["prefabbed"]
     measures = {
         "seconds": round(time.perf_counter() - started, 1),
         "placingSeconds": round(placed_seconds, 1),
@@ -1444,9 +1550,11 @@ def build(map_id: str, doc: dict, path: Path, package: str | None = None, check:
         "fillTiles": filled,
         "prefabObjects": prefabbed,
         "characters": characters,
-        "terrainVertices": vertices,
+        "terrainVertices": totals["vertices"],
         "missingPieces": sum(missing.values()),
     }
+    if storey_packages:
+        measures["storeyLevels"] = storey_packages
     written = write_footprint(map_id if package == jadg_map.package(map_id) else package.rsplit("/", 1)[1],
                               digest, actors, measures)
     log(f"terminé : {package}, {len(actors)} acteurs, empreinte {digest[:16]}, {measures['seconds']} s "
