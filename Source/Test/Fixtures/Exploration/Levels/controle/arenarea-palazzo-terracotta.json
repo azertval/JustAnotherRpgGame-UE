@@ -1,0 +1,49 @@
+{
+  "format": "jadg-map",
+  "version": 5,
+  "name": "Controle-arenarea-palazzo-terracotta",
+  "comment": "La carte de contrôle de Scenery/arenarea-palazzo-terracotta (LOT-1019) : la pièce seule, vue de ses quatre côtés à midi et à 22 h, avant d'entrer dans une carte. Sortie de scripts/maps/build_piece_check.py, jamais à la main ; le ciel et la lumière sont ceux de la porte.",
+  "width": 24,
+  "height": 24,
+  "origin": [-18.0, -18.0],
+  "nextEntityId": 1,
+  "tiles": [
+    {"x": 0, "y": 23, "type": "entry"}
+  ],
+  "entities": [],
+  "objects": [
+    {"id": "arenarea-palazzo-terracotta", "mesh": "Master/Scenery/arenarea-palazzo-terracotta.glb", "position": [0.0, 0.0, 0.0], "yaw": 0.0, "height": 12.0}
+  ],
+  "lighting": {
+    "comment": "Réglages provisoires de la porte, à juger sur les captures. lampCandelas, fireCandelas : intensité d'une lampe et d'un feu, pour une exposition fixe de 1. sunScale, ambientScale : ce par quoi le soleil et la lumière du ciel de la table du jour sont multipliés (la table est écrite pour un rendu sans lumière indirecte). skyLuminance : éclaircissement du ciel visible. fog : brume de hauteur. post : réglages de post-traitement du moteur, par leur nom.",
+    "lampCandelas": 60.0,
+    "fireCandelas": 30.0,
+    "sunScale": 1.8,
+    "ambientScale": 0.45,
+    "skyLuminance": 3.0,
+    "exposureBias": 0.0,
+    "fog": {
+      "density": 0.004,
+      "falloff": 0.05,
+      "volumetric": true
+    },
+    "post": {
+      "bloom_intensity": 0.6,
+      "vignette_intensity": 0.3
+    }
+  },
+  "daylight": "Common/Lighting/daylight.json",
+  "ground": {
+    "comment": "Le sol de la porte.",
+    "colour": "#8f7d62",
+    "size": 4000.0,
+    "height": -0.02
+  },
+  "shots": [
+    {"id": "face", "target": [0.0, 0.0, 5.4], "heading": 0.0, "pitch": 8.0, "distance": 25.6},
+    {"id": "droite", "target": [0.0, 0.0, 5.4], "heading": 90.0, "pitch": 8.0, "distance": 25.6},
+    {"id": "dos", "target": [0.0, 0.0, 5.4], "heading": 180.0, "pitch": 8.0, "distance": 25.6},
+    {"id": "gauche", "target": [0.0, 0.0, 5.4], "heading": 270.0, "pitch": 8.0, "distance": 25.6}
+  ],
+  "hours": ["12:00", "22:00"]
+}

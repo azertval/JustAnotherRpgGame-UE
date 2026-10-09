@@ -1,0 +1,15 @@
+{
+  "map": "arena-of-fate",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 17.31,
+  "post": "",
+  "gpuMemoryMiB": {"used": 3556.4, "texturesStreaming": 151.9, "texturesNonStreaming": 1763.4},
+  "meshTextures": {"count": 93, "residentMiB": 58.5, "allMipsMiB": 202.5},
+  "meshes": {"count": 48, "triangles": 2851349, "resourceMiB": 65.0, "largest": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-arena-shell/StaticMeshes/SM_af-arena-shell.SM_af-arena-shell", "largestTriangles": 865214},
+  "captures": ["ensemble-1200.png", "ensemble-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.4, "frames": 1229, "fps": 107.4, "frameMs": 9.31, "p99FrameMs": 11.76, "worstFrameMs": 18.73, "gameMs": 3.31, "renderMs": 0.00, "gpuMs": 8.68},
+    {"hour": "22:00", "seconds": 11.4, "frames": 1223, "fps": 107.1, "frameMs": 9.34, "p99FrameMs": 12.06, "worstFrameMs": 25.39, "gameMs": 3.20, "renderMs": 9.34, "gpuMs": 8.68}
+  ]
+}

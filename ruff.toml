@@ -32,16 +32,10 @@ ignore = [
 # (`if x: y`, `a; b`) : un style, pas un défaut. À lever quand T1-T5 les reprendront.
 "Planning/versions/v0.0.0/v0.0.0-fondation/annexes/LOT-91-atelier-pnj/atelier/scripts/*.py" = ["E701", "E702"]
 "Planning/versions/v0.0.0/v0.0.0-fondation/annexes/LOT-93-atelier-monstres/atelier/scripts/*.py" = ["E701", "E702"]
-# Les scripts de l'atelier de l'Arena of Fate hérités de sa première production (LOT-106, 3 oct.
-# 2026), écrits dans le même style compact. À lever si l'un d'eux est repris en profondeur ; ceux
-# écrits depuis (`arena_fate_enclosures.py`, `arena_fate_levels.py`, `material_maps.py`…) n'en
-# relèvent pas.
-"scripts/assetsGeneration/arena_fate_architecture.py" = ["E701", "E702"]
-"scripts/assetsGeneration/arena_fate_architecture_v2.py" = ["E701", "E702"]
-"scripts/assetsGeneration/arena_fate_iconography.py" = ["E701", "E702"]
-"scripts/assetsGeneration/arena_fate_underground_v3.py" = ["E701", "E702"]
-"scripts/assetsGeneration/import_arena_fate_meshy.py" = ["E701", "E702"]
-"scripts/assetsGeneration/import_arena_fate_subsoil_meshy.py" = ["E701", "E702"]
+# Les scripts de cartes de l'Arena of Fate hérités de sa première production (LOT-106, 3 oct.
+# 2026), écrits en style compact. À lever si l'un d'eux est repris en profondeur ; ceux écrits
+# depuis (`arena_fate_levels.py`…) n'en relèvent pas. Les scripts Blender de son kit sont retirés
+# au LOT-1019.
 "scripts/maps/arena_fate_arena_v2.py" = ["E701", "E702"]
 "scripts/maps/check_arena_fate.py" = ["E701", "E702"]
 # Scripts de l'étude des métiers (8 octobre 2026) : livrés compacts par leur atelier, pas encore

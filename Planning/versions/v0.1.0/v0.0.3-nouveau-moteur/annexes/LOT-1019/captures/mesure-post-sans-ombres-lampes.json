@@ -1,0 +1,15 @@
+{
+  "map": "porte-1012",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 18.09,
+  "post": "sans-ombres-lampes",
+  "gpuMemoryMiB": {"used": 3688.7, "texturesStreaming": 215.4, "texturesNonStreaming": 1771.4},
+  "meshTextures": {"count": 113, "residentMiB": 123.1, "allMipsMiB": 461.2},
+  "meshes": {"count": 60, "triangles": 33464185, "resourceMiB": 94.0, "largest": "/Game/Master/Statues/statue-dorsi/StaticMeshes/SM_Statue_Dorsi.SM_Statue_Dorsi", "largestTriangles": 2900460},
+  "captures": ["parvis-1200.png", "porte-1200.png", "ruelle-1200.png", "parvis-2200.png", "porte-2200.png", "ruelle-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.3, "frames": 1042, "fps": 92.0, "frameMs": 10.87, "p99FrameMs": 25.63, "worstFrameMs": 40.97, "gameMs": 3.58, "renderMs": 6.57, "gpuMs": 9.79},
+    {"hour": "22:00", "seconds": 11.4, "frames": 1042, "fps": 91.6, "frameMs": 10.92, "p99FrameMs": 25.34, "worstFrameMs": 28.21, "gameMs": 3.53, "renderMs": 10.92, "gpuMs": 9.76}
+  ]
+}

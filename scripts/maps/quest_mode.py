@@ -196,10 +196,10 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def editor_main() -> None:
-    import import_master_unreal as master_import  # noqa: PLC0415
+    import import_scenery_unreal as scenery  # noqa: PLC0415
 
-    map_id = master_import.command_line_option("JadgMap")
-    step = master_import.command_line_option("JadgStep")
+    map_id = scenery.command_line_option("JadgMap")
+    step = scenery.command_line_option("JadgStep")
     hide_in_editor(map_id, step_flags(step) if step else {})
 
 

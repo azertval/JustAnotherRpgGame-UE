@@ -49,7 +49,7 @@ encore republiées. Contribuer : [CONTRIBUTING.md](CONTRIBUTING.md).
 | `Source/JustAnotherRpgGame/Bridge/`, `Commandlets/` | Ce que le moteur impose : chemins, journal, le commandlet de contrôle du contenu |
 | `Source/ThirdParty/nlohmann/` | nlohmann/json 3.11.3, en-tête unique |
 | `Source/Elements/` | Les données de contenu en JSON : `Rpg/`, `World/`, `Levels/`, `Maps/`, `Localization/`. Les kits d'assets s'installent par `scripts/fetch_assets.py` |
-| `Source/Elements/Assets/Master/` | Les maillages Meshy **au maître** (D-53) : `manifest.json` est suivi, les `.glb` (2,7 Go) non. `import_master_unreal.py` les importe en Nanite sous `Content/Master/` |
+| `Source/Elements/Assets/Master/` | Les maillages Meshy **au maître** (D-53) : `manifest.json` est suivi, avec la fiche de chaque pièce, les `.glb` (2,7 Go) non. `import_scenery_unreal.py` les installe en Nanite sous `Content/Master/`, avec leur matière complète (LOT-1019) |
 | `Source/Test/Unit/Core/` | Les tests GoogleTest de Core, hors moteur (`CMakeLists.txt` à la racine) |
 | `Planning/` | Vision, décisions, versions, lots, standards |
 | `Documentation/` | Spécifications, guides, cahier de test (à relire : voir la passation) |
@@ -102,13 +102,18 @@ Meshy se livrent donc **au maître**, sans décimation (D-53). Elles vivent sous
 # Ranger un dossier de retours Meshy dans le kit et écrire le manifeste
 python scripts/assetsGeneration/build_master_manifest.py D:\Telechargement\Assets
 
-# Importer les pièces du manifeste dans le projet, en Nanite, sans fenêtre
+# Refaire les fiches des pièces déjà rangées (famille, classe, emprise, matière lue dans le .glb)
+python scripts/assetsGeneration/build_master_manifest.py --refresh
+
+# Installer les pièces du manifeste dans le projet — Nanite, matière, textures compressées —, sans fenêtre
 & "<moteur>\Engine\Binaries\Win64\UnrealEditor-Cmd.exe" JustAnotherRpgGame.uproject `
-    -run=pythonscript -script="scripts/assetsGeneration/import_master_unreal.py" -unattended -nosplash -nullrhi
+    -run=pythonscript -script="scripts/assetsGeneration/import_scenery_unreal.py" -unattended -nosplash -nullrhi
 ```
 
-L'import est rejouable : une pièce déjà présente est laissée telle quelle (`-JadgForce` pour la
-refaire), une pièce dont l'empreinte ne correspond plus au manifeste arrête le script.
+L'installation est rejouable (LOT-1019) : une pièce déjà présente n'est pas réimportée
+(`-JadgForce` pour la refaire), une pièce dont l'empreinte ne correspond plus au manifeste arrête le
+script ; `-JadgKit=Regions/…/arena-of-fate/Scene` installe les pièces d'un kit, et un rapport de
+poids s'écrit sous `Saved/Jadg/scenery/`.
 `-JadgFamily=Weapons`, `-JadgOnly=Statues/Harvest_Fairy`, `-JadgLimit=3` bornent l'import.
 
 Ouvrir `JustAnotherRpgGame.uproject` dans l'éditeur ou générer la solution Visual Studio depuis

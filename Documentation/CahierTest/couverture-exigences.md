@@ -1,6 +1,6 @@
 # Couverture des exigences
 
-**33 exigences en vigueur sur 330** sont citées par au moins un cas de test. Cette matrice est **engendrée** avec le reste du cahier : la colonne de gauche vient des déclarations des [spécifications](../Specification/README.md), celle de droite des identifiants `EX-…` que les tests citent dans leur commentaire ou leur corps. Une exigence sans cas est une exigence que **rien ne garde** : le cahier ne la cache pas, il la montre. Les exigences retirées ne sont pas comptées — aucun test ne doit les citer.
+**33 exigences en vigueur sur 333** sont citées par au moins un cas de test. Cette matrice est **engendrée** avec le reste du cahier : la colonne de gauche vient des déclarations des [spécifications](../Specification/README.md), celle de droite des identifiants `EX-…` que les tests citent dans leur commentaire ou leur corps. Une exigence sans cas est une exigence que **rien ne garde** : le cahier ne la cache pas, il la montre. Les exigences retirées ne sont pas comptées — aucun test ne doit les citer.
 
 ## Par famille
 
@@ -19,10 +19,10 @@
 | `EX-LVL` | [Cartes & format](../Specification/niveaux.md) | 29 | 11 | 18 |
 | `EX-NFR` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | 19 | 2 | 17 |
 | `EX-REG` | [Règles d20](../Specification/regles-d20.md) | 15 | 1 | 14 |
-| `EX-REN` | [Rendu & cible technique](../Specification/rendu-technique.md) | 31 | 0 | 31 |
+| `EX-REN` | [Rendu & cible technique](../Specification/rendu-technique.md) | 34 | 0 | 34 |
 | `EX-RPG` | [Personnage et progression](../Specification/rpg.md) | 19 | 1 | 18 |
 | `EX-VIS` | [Vision & périmètre](../Specification/vision.md) | 9 | 0 | 9 |
-| **Total** | | **330** | **33** | **297** |
+| **Total** | | **333** | **33** | **300** |
 
 ## Exigence par exigence
 
@@ -399,6 +399,9 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-REN-054` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-055` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 | `EX-REN-056` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
+| `EX-REN-057` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
+| `EX-REN-058` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
+| `EX-REN-059` | [Rendu & cible technique](../Specification/rendu-technique.md) | — |
 
 ### `EX-RPG`
 

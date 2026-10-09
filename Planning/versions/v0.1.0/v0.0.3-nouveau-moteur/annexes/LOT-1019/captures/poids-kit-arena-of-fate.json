@@ -1,0 +1,1376 @@
+{
+ "set": "Regions-central-empire-capital-arenarea-arena-of-fate-Scene",
+ "pieces": 105,
+ "glbBytes": 311128552,
+ "meshBytes": 85548423,
+ "textures": 102,
+ "textureBytes": 61758026,
+ "largest": "scene/arena-of-fate/af-arena-shell",
+ "detail": [
+  {
+   "id": "scene/arena-of-fate/af-altar",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-altar/StaticMeshes/SM_af-altar",
+   "triangles": 2640,
+   "glbBytes": 1893172,
+   "meshBytes": 150871,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-arch-catacomb-x",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-arch-catacomb-x/StaticMeshes/SM_af-arch-catacomb-x",
+   "triangles": 6696,
+   "glbBytes": 2255204,
+   "meshBytes": 287930,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-arch-catacomb-y",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-arch-catacomb-y/StaticMeshes/SM_af-arch-catacomb-y",
+   "triangles": 6696,
+   "glbBytes": 2251684,
+   "meshBytes": 289039,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-arch-stone-x",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-arch-stone-x/StaticMeshes/SM_af-arch-stone-x",
+   "triangles": 6696,
+   "glbBytes": 2255196,
+   "meshBytes": 288467,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-arch-stone-y",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-arch-stone-y/StaticMeshes/SM_af-arch-stone-y",
+   "triangles": 6696,
+   "glbBytes": 2251676,
+   "meshBytes": 289556,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-arena-crowd",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-arena-crowd/StaticMeshes/SM_af-arena-crowd",
+   "triangles": 1196,
+   "glbBytes": 3473512,
+   "meshBytes": 116372,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_f5386f59c23633e9",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 3084015
+  },
+  {
+   "id": "scene/arena-of-fate/af-arena-shell",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-arena-shell/StaticMeshes/SM_af-arena-shell",
+   "triangles": 865214,
+   "glbBytes": 89608676,
+   "meshBytes": 27855102,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_4ebdbfe4827e1923",
+    "/Game/Scenery/Textures/T_N_31d801a4de41fc2a",
+    "/Game/Scenery/Textures/T_ORM_bcfbb86c91de5a68"
+   ],
+   "textureBytes": 4874783
+  },
+  {
+   "id": "scene/arena-of-fate/af-barrel",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-barrel/StaticMeshes/SM_af-barrel",
+   "triangles": 2516,
+   "glbBytes": 1861288,
+   "meshBytes": 153444,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-bench",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-bench/StaticMeshes/SM_af-bench",
+   "triangles": 1812,
+   "glbBytes": 1848800,
+   "meshBytes": 137077,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-brazier",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-brazier/StaticMeshes/SM_af-brazier",
+   "triangles": 1544,
+   "glbBytes": 1799596,
+   "meshBytes": 131942,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-bucket",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-bucket/StaticMeshes/SM_af-bucket",
+   "triangles": 3324,
+   "glbBytes": 1919264,
+   "meshBytes": 182806,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-cat-floor-a",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-cat-floor-a/StaticMeshes/SM_af-cat-floor-a",
+   "triangles": 1080,
+   "glbBytes": 1768788,
+   "meshBytes": 111119,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-cat-floor-b",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-cat-floor-b/StaticMeshes/SM_af-cat-floor-b",
+   "triangles": 1080,
+   "glbBytes": 1768788,
+   "meshBytes": 111347,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-cat-floor-c",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-cat-floor-c/StaticMeshes/SM_af-cat-floor-c",
+   "triangles": 1080,
+   "glbBytes": 1768788,
+   "meshBytes": 111354,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-catacomb-shell",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-catacomb-shell/StaticMeshes/SM_af-catacomb-shell",
+   "triangles": 10940,
+   "glbBytes": 2449464,
+   "meshBytes": 389195,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-chains",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-chains/StaticMeshes/SM_af-chains",
+   "triangles": 12588,
+   "glbBytes": 2712716,
+   "meshBytes": 461217,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-chapel-frame",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-chapel-frame/StaticMeshes/SM_af-chapel-frame",
+   "triangles": 11124,
+   "glbBytes": 2660548,
+   "meshBytes": 412625,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-chest",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-chest/StaticMeshes/SM_af-chest",
+   "triangles": 2516,
+   "glbBytes": 1881860,
+   "meshBytes": 153891,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-column",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-column/StaticMeshes/SM_af-column",
+   "triangles": 2008,
+   "glbBytes": 1825940,
+   "meshBytes": 144141,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-effigy-chains-cthraxis",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-effigy-chains-cthraxis/StaticMeshes/SM_af-effigy-chains-cthraxis",
+   "triangles": 7416,
+   "glbBytes": 2360940,
+   "meshBytes": 366413,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-effigy-chains-droggath",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-effigy-chains-droggath/StaticMeshes/SM_af-effigy-chains-droggath",
+   "triangles": 7944,
+   "glbBytes": 2405388,
+   "meshBytes": 389217,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-effigy-chains-krynnethoth",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-effigy-chains-krynnethoth/StaticMeshes/SM_af-effigy-chains-krynnethoth",
+   "triangles": 6456,
+   "glbBytes": 2273652,
+   "meshBytes": 335589,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-effigy-chains-zulvath",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-effigy-chains-zulvath/StaticMeshes/SM_af-effigy-chains-zulvath",
+   "triangles": 9480,
+   "glbBytes": 2545996,
+   "meshBytes": 513141,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-effigy-plinth",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-effigy-plinth/StaticMeshes/SM_af-effigy-plinth",
+   "triangles": 756,
+   "glbBytes": 1742784,
+   "meshBytes": 105571,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-fountain-body",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-fountain-body/StaticMeshes/SM_af-fountain-body",
+   "triangles": 6930,
+   "glbBytes": 2267704,
+   "meshBytes": 270510,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-guard-table",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-guard-table/StaticMeshes/SM_af-guard-table",
+   "triangles": 1528,
+   "glbBytes": 1803836,
+   "meshBytes": 126558,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-ossuary-frame",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-ossuary-frame/StaticMeshes/SM_af-ossuary-frame",
+   "triangles": 1188,
+   "glbBytes": 1778392,
+   "meshBytes": 111437,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-pallet",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-pallet/StaticMeshes/SM_af-pallet",
+   "triangles": 3624,
+   "glbBytes": 1943116,
+   "meshBytes": 219815,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-paving-a",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-paving-a/StaticMeshes/SM_af-paving-a",
+   "triangles": 120,
+   "glbBytes": 22608,
+   "meshBytes": 87205,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_c618233531f47ffa",
+    "/Game/Scenery/Textures/T_N_882b5f47c9f9f623",
+    "/Game/Scenery/Textures/T_ORM_82511e14eaadf125"
+   ],
+   "textureBytes": 45374
+  },
+  {
+   "id": "scene/arena-of-fate/af-paving-b",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-paving-b/StaticMeshes/SM_af-paving-b",
+   "triangles": 120,
+   "glbBytes": 22608,
+   "meshBytes": 87201,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_c618233531f47ffa",
+    "/Game/Scenery/Textures/T_N_882b5f47c9f9f623",
+    "/Game/Scenery/Textures/T_ORM_82511e14eaadf125"
+   ],
+   "textureBytes": 45374
+  },
+  {
+   "id": "scene/arena-of-fate/af-paving-c",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-paving-c/StaticMeshes/SM_af-paving-c",
+   "triangles": 120,
+   "glbBytes": 22608,
+   "meshBytes": 87219,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_c618233531f47ffa",
+    "/Game/Scenery/Textures/T_N_882b5f47c9f9f623",
+    "/Game/Scenery/Textures/T_ORM_82511e14eaadf125"
+   ],
+   "textureBytes": 45374
+  },
+  {
+   "id": "scene/arena-of-fate/af-prison-bars",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-prison-bars/StaticMeshes/SM_af-prison-bars",
+   "triangles": 6348,
+   "glbBytes": 2209636,
+   "meshBytes": 228924,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-prison-door",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-prison-door/StaticMeshes/SM_af-prison-door",
+   "triangles": 10270,
+   "glbBytes": 2571756,
+   "meshBytes": 389599,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-pyre",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-pyre/StaticMeshes/SM_af-pyre",
+   "triangles": 2564,
+   "glbBytes": 1882376,
+   "meshBytes": 158376,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-rack",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-rack/StaticMeshes/SM_af-rack",
+   "triangles": 942,
+   "glbBytes": 1753576,
+   "meshBytes": 108311,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-sand-a",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-sand-a/StaticMeshes/SM_af-sand-a",
+   "triangles": 200,
+   "glbBytes": 1101800,
+   "meshBytes": 91809,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_dbf343026b259dfd",
+    "/Game/Scenery/Textures/T_N_cf42c7c7f6d9e4ec",
+    "/Game/Scenery/Textures/T_ORM_d9f55549a401a5eb"
+   ],
+   "textureBytes": 1112603
+  },
+  {
+   "id": "scene/arena-of-fate/af-sand-b",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-sand-b/StaticMeshes/SM_af-sand-b",
+   "triangles": 200,
+   "glbBytes": 1101864,
+   "meshBytes": 91976,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_dbf343026b259dfd",
+    "/Game/Scenery/Textures/T_N_cf42c7c7f6d9e4ec",
+    "/Game/Scenery/Textures/T_ORM_d9f55549a401a5eb"
+   ],
+   "textureBytes": 1112603
+  },
+  {
+   "id": "scene/arena-of-fate/af-sand-c",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-sand-c/StaticMeshes/SM_af-sand-c",
+   "triangles": 200,
+   "glbBytes": 1101800,
+   "meshBytes": 91757,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_dbf343026b259dfd",
+    "/Game/Scenery/Textures/T_N_cf42c7c7f6d9e4ec",
+    "/Game/Scenery/Textures/T_ORM_d9f55549a401a5eb"
+   ],
+   "textureBytes": 1112603
+  },
+  {
+   "id": "scene/arena-of-fate/af-stair",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-stair/StaticMeshes/SM_af-stair",
+   "triangles": 2588,
+   "glbBytes": 1895988,
+   "meshBytes": 151653,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-stair-e",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-stair-e/StaticMeshes/SM_af-stair-e",
+   "triangles": 2588,
+   "glbBytes": 1895000,
+   "meshBytes": 151531,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-stair-s",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-stair-s/StaticMeshes/SM_af-stair-s",
+   "triangles": 2588,
+   "glbBytes": 1895992,
+   "meshBytes": 152014,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-stair-w",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-stair-w/StaticMeshes/SM_af-stair-w",
+   "triangles": 2588,
+   "glbBytes": 1895000,
+   "meshBytes": 151959,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-stairwell",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-stairwell/StaticMeshes/SM_af-stairwell",
+   "triangles": 2588,
+   "glbBytes": 1907448,
+   "meshBytes": 153489,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-statue-niche-catacomb",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-statue-niche-catacomb/StaticMeshes/SM_af-statue-niche-catacomb",
+   "triangles": 4536,
+   "glbBytes": 2074128,
+   "meshBytes": 220102,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-statue-niche-stone",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-statue-niche-stone/StaticMeshes/SM_af-statue-niche-stone",
+   "triangles": 4536,
+   "glbBytes": 2074120,
+   "meshBytes": 220446,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-undercroft-shell",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-undercroft-shell/StaticMeshes/SM_af-undercroft-shell",
+   "triangles": 119362,
+   "glbBytes": 13311160,
+   "meshBytes": 4211159,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-v3-paving-a",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-v3-paving-a/StaticMeshes/SM_af-v3-paving-a",
+   "triangles": 1080,
+   "glbBytes": 1768788,
+   "meshBytes": 111335,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-v3-paving-b",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-v3-paving-b/StaticMeshes/SM_af-v3-paving-b",
+   "triangles": 1080,
+   "glbBytes": 1768788,
+   "meshBytes": 111718,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-v3-paving-c",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-v3-paving-c/StaticMeshes/SM_af-v3-paving-c",
+   "triangles": 1080,
+   "glbBytes": 1768788,
+   "meshBytes": 111611,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-vault",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-vault/StaticMeshes/SM_af-vault",
+   "triangles": 9524,
+   "glbBytes": 2504692,
+   "meshBytes": 372048,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-vault-catacomb",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-vault-catacomb/StaticMeshes/SM_af-vault-catacomb",
+   "triangles": 9524,
+   "glbBytes": 2504712,
+   "meshBytes": 367063,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-catacomb-corner-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-catacomb-corner-low/StaticMeshes/SM_af-wall-catacomb-corner-low",
+   "triangles": 260,
+   "glbBytes": 1696076,
+   "meshBytes": 93295,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-catacomb-corner-nw-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-catacomb-corner-nw-low/StaticMeshes/SM_af-wall-catacomb-corner-nw-low",
+   "triangles": 260,
+   "glbBytes": 1696084,
+   "meshBytes": 93551,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-catacomb-corner-se-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-catacomb-corner-se-low/StaticMeshes/SM_af-wall-catacomb-corner-se-low",
+   "triangles": 260,
+   "glbBytes": 1696084,
+   "meshBytes": 93547,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-catacomb-corner-sw-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-catacomb-corner-sw-low/StaticMeshes/SM_af-wall-catacomb-corner-sw-low",
+   "triangles": 260,
+   "glbBytes": 1696084,
+   "meshBytes": 93583,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-catacomb-x-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-catacomb-x-low/StaticMeshes/SM_af-wall-catacomb-x-low",
+   "triangles": 1080,
+   "glbBytes": 1768836,
+   "meshBytes": 112308,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-catacomb-y-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-catacomb-y-low/StaticMeshes/SM_af-wall-catacomb-y-low",
+   "triangles": 1080,
+   "glbBytes": 1768836,
+   "meshBytes": 112597,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-stone-corner-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-stone-corner-low/StaticMeshes/SM_af-wall-stone-corner-low",
+   "triangles": 260,
+   "glbBytes": 1696072,
+   "meshBytes": 93003,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-stone-corner-nw-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-stone-corner-nw-low/StaticMeshes/SM_af-wall-stone-corner-nw-low",
+   "triangles": 260,
+   "glbBytes": 1696076,
+   "meshBytes": 93271,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-stone-corner-se-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-stone-corner-se-low/StaticMeshes/SM_af-wall-stone-corner-se-low",
+   "triangles": 260,
+   "glbBytes": 1696076,
+   "meshBytes": 93270,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-stone-corner-sw-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-stone-corner-sw-low/StaticMeshes/SM_af-wall-stone-corner-sw-low",
+   "triangles": 260,
+   "glbBytes": 1696076,
+   "meshBytes": 93303,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-stone-x-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-stone-x-low/StaticMeshes/SM_af-wall-stone-x-low",
+   "triangles": 1080,
+   "glbBytes": 1768828,
+   "meshBytes": 112097,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/af-wall-stone-y-low",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-wall-stone-y-low/StaticMeshes/SM_af-wall-stone-y-low",
+   "triangles": 1080,
+   "glbBytes": 1768828,
+   "meshBytes": 112296,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_48d15bc021933e9e",
+    "/Game/Scenery/Textures/T_N_508a0e0019520ee2",
+    "/Game/Scenery/Textures/T_ORM_19cd3f554906d72e"
+   ],
+   "textureBytes": 1709342
+  },
+  {
+   "id": "scene/arena-of-fate/banner-allied-forces",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-allied-forces/StaticMeshes/SM_banner-allied-forces",
+   "triangles": 5864,
+   "glbBytes": 1248964,
+   "meshBytes": 218445,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_0b071c415ee24320",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 929527
+  },
+  {
+   "id": "scene/arena-of-fate/banner-arcanum",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-arcanum/StaticMeshes/SM_banner-arcanum",
+   "triangles": 5864,
+   "glbBytes": 1265668,
+   "meshBytes": 217820,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_33c0353f6d817094",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 946236
+  },
+  {
+   "id": "scene/arena-of-fate/banner-bennet",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-bennet/StaticMeshes/SM_banner-bennet",
+   "triangles": 5864,
+   "glbBytes": 1327664,
+   "meshBytes": 218051,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_93483fe6c0f26d05",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 1008488
+  },
+  {
+   "id": "scene/arena-of-fate/banner-cult",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-cult/StaticMeshes/SM_banner-cult",
+   "triangles": 5864,
+   "glbBytes": 788024,
+   "meshBytes": 219568,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_877400002f8ae889",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 468466
+  },
+  {
+   "id": "scene/arena-of-fate/banner-darkall",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-darkall/StaticMeshes/SM_banner-darkall",
+   "triangles": 5864,
+   "glbBytes": 1248212,
+   "meshBytes": 218105,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_d4bde1ac229ef0ec",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 928782
+  },
+  {
+   "id": "scene/arena-of-fate/banner-empire",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-empire/StaticMeshes/SM_banner-empire",
+   "triangles": 5864,
+   "glbBytes": 1184116,
+   "meshBytes": 217458,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_95047c75de2ba0c4",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 864884
+  },
+  {
+   "id": "scene/arena-of-fate/banner-freelands",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-freelands/StaticMeshes/SM_banner-freelands",
+   "triangles": 5864,
+   "glbBytes": 1071988,
+   "meshBytes": 218462,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_d5e8fe6bacc2a6cb",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 752811
+  },
+  {
+   "id": "scene/arena-of-fate/banner-kepesh",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-kepesh/StaticMeshes/SM_banner-kepesh",
+   "triangles": 5864,
+   "glbBytes": 1244788,
+   "meshBytes": 218170,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_b05ab3143a0e60b7",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 925613
+  },
+  {
+   "id": "scene/arena-of-fate/banner-kolbjorn",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-kolbjorn/StaticMeshes/SM_banner-kolbjorn",
+   "triangles": 5864,
+   "glbBytes": 967204,
+   "meshBytes": 218272,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_838f5676fb6540a2",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 648030
+  },
+  {
+   "id": "scene/arena-of-fate/banner-mage-tower",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-mage-tower/StaticMeshes/SM_banner-mage-tower",
+   "triangles": 5864,
+   "glbBytes": 1268816,
+   "meshBytes": 218735,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_6fec046fcc078ce8",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 949637
+  },
+  {
+   "id": "scene/arena-of-fate/banner-seashores",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-seashores/StaticMeshes/SM_banner-seashores",
+   "triangles": 5864,
+   "glbBytes": 1260576,
+   "meshBytes": 218415,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_4c081a76bebf58ba",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 941399
+  },
+  {
+   "id": "scene/arena-of-fate/banner-sindile",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-sindile/StaticMeshes/SM_banner-sindile",
+   "triangles": 5864,
+   "glbBytes": 1160320,
+   "meshBytes": 218231,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_9e223978d2836fab",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 841145
+  },
+  {
+   "id": "scene/arena-of-fate/banner-storm-islands",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-storm-islands/StaticMeshes/SM_banner-storm-islands",
+   "triangles": 5864,
+   "glbBytes": 1158100,
+   "meshBytes": 218740,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_6ae441cb9988380d",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 838919
+  },
+  {
+   "id": "scene/arena-of-fate/banner-stravian",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-stravian/StaticMeshes/SM_banner-stravian",
+   "triangles": 5864,
+   "glbBytes": 1123244,
+   "meshBytes": 218375,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_c8be74aceaa74401",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 804066
+  },
+  {
+   "id": "scene/arena-of-fate/banner-taii-maku",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-taii-maku/StaticMeshes/SM_banner-taii-maku",
+   "triangles": 5864,
+   "glbBytes": 1020940,
+   "meshBytes": 218769,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_c15a2f0761e20ed9",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 701760
+  },
+  {
+   "id": "scene/arena-of-fate/banner-tanarean-empire",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-tanarean-empire/StaticMeshes/SM_banner-tanarean-empire",
+   "triangles": 5864,
+   "glbBytes": 1186208,
+   "meshBytes": 218665,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_ae4437bf027520e7",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 866768
+  },
+  {
+   "id": "scene/arena-of-fate/banner-tsvetan",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-tsvetan/StaticMeshes/SM_banner-tsvetan",
+   "triangles": 5864,
+   "glbBytes": 1021412,
+   "meshBytes": 218277,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_7279ecfd4e6c34d5",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 702238
+  },
+  {
+   "id": "scene/arena-of-fate/banner-yama",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-yama/StaticMeshes/SM_banner-yama",
+   "triangles": 5864,
+   "glbBytes": 1229964,
+   "meshBytes": 217961,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_112f5e68e88aaf8d",
+    "/Game/Scenery/Textures/T_N_fd1678b1a269db34",
+    "/Game/Scenery/Textures/T_ORM_fdf3f73b3491a581"
+   ],
+   "textureBytes": 910791
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-effigy-cthraxis",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-effigy-cthraxis/StaticMeshes/SM_meshy-effigy-cthraxis",
+   "triangles": 31067,
+   "glbBytes": 3451520,
+   "meshBytes": 1669375,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_bf16f0cc5f727df9",
+    "/Game/Scenery/Textures/T_N_0d7beda80ec80555",
+    "/Game/Scenery/Textures/T_ORM_bc96969311de508d"
+   ],
+   "textureBytes": 1798790
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-effigy-droggath",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-effigy-droggath/StaticMeshes/SM_meshy-effigy-droggath",
+   "triangles": 31276,
+   "glbBytes": 3227392,
+   "meshBytes": 1704479,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_ef99b21da46d62da",
+    "/Game/Scenery/Textures/T_N_14f7981fa51d2c63",
+    "/Game/Scenery/Textures/T_ORM_b63ee7942efdc99a"
+   ],
+   "textureBytes": 1612485
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-effigy-krynnethoth",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-effigy-krynnethoth/StaticMeshes/SM_meshy-effigy-krynnethoth",
+   "triangles": 30787,
+   "glbBytes": 2937540,
+   "meshBytes": 1540368,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_149cc3d10c2c24f7",
+    "/Game/Scenery/Textures/T_N_4c11dd8c5b980976",
+    "/Game/Scenery/Textures/T_ORM_e1bae23d2ae7b758"
+   ],
+   "textureBytes": 1535765
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-effigy-zulvath",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-effigy-zulvath/StaticMeshes/SM_meshy-effigy-zulvath",
+   "triangles": 31151,
+   "glbBytes": 2830304,
+   "meshBytes": 1578145,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_f208e9aa2b2e43f9",
+    "/Game/Scenery/Textures/T_N_8b9f5b09d3be278b",
+    "/Game/Scenery/Textures/T_ORM_4458f3050027463f"
+   ],
+   "textureBytes": 1383350
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-fountain-mask",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-fountain-mask/StaticMeshes/SM_meshy-fountain-mask",
+   "triangles": 31110,
+   "glbBytes": 2362328,
+   "meshBytes": 1423506,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_6760ed8c357d5b15",
+    "/Game/Scenery/Textures/T_N_e07ee8e0f7eff4b6",
+    "/Game/Scenery/Textures/T_ORM_c2de7c123d561b82"
+   ],
+   "textureBytes": 1222660
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-funerary-statue",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-funerary-statue/StaticMeshes/SM_meshy-funerary-statue",
+   "triangles": 30446,
+   "glbBytes": 2522580,
+   "meshBytes": 1435639,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_c2ea1199bfe7eaf9",
+    "/Game/Scenery/Textures/T_N_8931f776f43dab59",
+    "/Game/Scenery/Textures/T_ORM_211de25b9e811d9f"
+   ],
+   "textureBytes": 1345356
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-neutral-athlete",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-neutral-athlete/StaticMeshes/SM_meshy-neutral-athlete",
+   "triangles": 30704,
+   "glbBytes": 2037836,
+   "meshBytes": 1318161,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_42b35148657140ef",
+    "/Game/Scenery/Textures/T_N_6137cd6ff2857e3d",
+    "/Game/Scenery/Textures/T_ORM_9bbcd63d07466e97"
+   ],
+   "textureBytes": 961481
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-ossuary-insert",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-ossuary-insert/StaticMeshes/SM_meshy-ossuary-insert",
+   "triangles": 31316,
+   "glbBytes": 3053004,
+   "meshBytes": 1628791,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_a136783a8d22337e",
+    "/Game/Scenery/Textures/T_N_49d538573b9bf025",
+    "/Game/Scenery/Textures/T_ORM_153ceecac4403d5f"
+   ],
+   "textureBytes": 1482600
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-portal-guardian-lion-left",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-portal-guardian-lion-left/StaticMeshes/SM_meshy-portal-guardian-lion-left",
+   "triangles": 31191,
+   "glbBytes": 2926936,
+   "meshBytes": 1496523,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_b9f7774640c2f16a",
+    "/Game/Scenery/Textures/T_N_53825f29edc253b2",
+    "/Game/Scenery/Textures/T_ORM_17c9d243164d02a8"
+   ],
+   "textureBytes": 1602499
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-portal-guardian-lion-right",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-portal-guardian-lion-right/StaticMeshes/SM_meshy-portal-guardian-lion-right",
+   "triangles": 31191,
+   "glbBytes": 2926912,
+   "meshBytes": 1495784,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_b9f7774640c2f16a",
+    "/Game/Scenery/Textures/T_N_53825f29edc253b2",
+    "/Game/Scenery/Textures/T_ORM_17c9d243164d02a8"
+   ],
+   "textureBytes": 1602499
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-aibidh",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-aibidh/StaticMeshes/SM_meshy-statue-aibidh",
+   "triangles": 30479,
+   "glbBytes": 2981216,
+   "meshBytes": 1612933,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_e6330272a3c2fd27",
+    "/Game/Scenery/Textures/T_N_27adf27482c8c986",
+    "/Game/Scenery/Textures/T_ORM_3413fda3e071d2a7"
+   ],
+   "textureBytes": 1430493
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-ba-ka",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-ba-ka/StaticMeshes/SM_meshy-statue-ba-ka",
+   "triangles": 30642,
+   "glbBytes": 3438556,
+   "meshBytes": 1672406,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_b7187c4138e3623d",
+    "/Game/Scenery/Textures/T_N_2b6f4868a6f2bedf",
+    "/Game/Scenery/Textures/T_ORM_f307535c17d7a76a"
+   ],
+   "textureBytes": 1759088
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-bas",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-bas/StaticMeshes/SM_meshy-statue-bas",
+   "triangles": 30366,
+   "glbBytes": 3002976,
+   "meshBytes": 1631533,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_91839644f52bea20",
+    "/Game/Scenery/Textures/T_N_0baaa7a8c58a0e54",
+    "/Game/Scenery/Textures/T_ORM_56d4ca007e0990ef"
+   ],
+   "textureBytes": 1536979
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-bauron",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-bauron/StaticMeshes/SM_meshy-statue-bauron",
+   "triangles": 31038,
+   "glbBytes": 3605548,
+   "meshBytes": 1681693,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_ace92044fa9eff32",
+    "/Game/Scenery/Textures/T_N_978027202799eca9",
+    "/Game/Scenery/Textures/T_ORM_5932e078fe794c6e"
+   ],
+   "textureBytes": 1950997
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-breith",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-breith/StaticMeshes/SM_meshy-statue-breith",
+   "triangles": 30691,
+   "glbBytes": 2788956,
+   "meshBytes": 1562982,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_ff5266cc554f4bd0",
+    "/Game/Scenery/Textures/T_N_efa2e907e22dd104",
+    "/Game/Scenery/Textures/T_ORM_005a82031e678b06"
+   ],
+   "textureBytes": 1411809
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-dorsi",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-dorsi/StaticMeshes/SM_meshy-statue-dorsi",
+   "triangles": 31035,
+   "glbBytes": 3498096,
+   "meshBytes": 1683057,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_fcb4840bf7c0c424",
+    "/Game/Scenery/Textures/T_N_1091f10b2e2b2a73",
+    "/Game/Scenery/Textures/T_ORM_fd941ac6ec987d1f"
+   ],
+   "textureBytes": 1866250
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-duality",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-duality/StaticMeshes/SM_meshy-statue-duality",
+   "triangles": 31126,
+   "glbBytes": 3490288,
+   "meshBytes": 1734813,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_1f31b11e48769c0f",
+    "/Game/Scenery/Textures/T_N_f6792b5b8758c386",
+    "/Game/Scenery/Textures/T_ORM_ef826a5f8d7aff7a"
+   ],
+   "textureBytes": 1815233
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-fruitful",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-fruitful/StaticMeshes/SM_meshy-statue-fruitful",
+   "triangles": 30946,
+   "glbBytes": 3643784,
+   "meshBytes": 1752107,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_dd4e7dbbec020e8a",
+    "/Game/Scenery/Textures/T_N_64aca14abd2f43d9",
+    "/Game/Scenery/Textures/T_ORM_5bdea3f942bd8389"
+   ],
+   "textureBytes": 1894221
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-fumetsu",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-fumetsu/StaticMeshes/SM_meshy-statue-fumetsu",
+   "triangles": 30108,
+   "glbBytes": 2773432,
+   "meshBytes": 1479358,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_4fd358176666b38f",
+    "/Game/Scenery/Textures/T_N_55d0bd247739b579",
+    "/Game/Scenery/Textures/T_ORM_35dc7960207bc149"
+   ],
+   "textureBytes": 1481673
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-glorious-one",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-glorious-one/StaticMeshes/SM_meshy-statue-glorious-one",
+   "triangles": 30784,
+   "glbBytes": 3556784,
+   "meshBytes": 1719371,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_d05a138ac18c29d8",
+    "/Game/Scenery/Textures/T_N_5c340431a1d9f60b",
+    "/Game/Scenery/Textures/T_ORM_b5de8c7196e0b253"
+   ],
+   "textureBytes": 1920182
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-lumina",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-lumina/StaticMeshes/SM_meshy-statue-lumina",
+   "triangles": 30861,
+   "glbBytes": 3085628,
+   "meshBytes": 1539681,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_7ef1f8c54b85f168",
+    "/Game/Scenery/Textures/T_N_ca07a1c6105d2843",
+    "/Game/Scenery/Textures/T_ORM_3aabe515eb33b762"
+   ],
+   "textureBytes": 1620391
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-nature-spirits",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-nature-spirits/StaticMeshes/SM_meshy-statue-nature-spirits",
+   "triangles": 31208,
+   "glbBytes": 3093816,
+   "meshBytes": 1655744,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_ac212a00c5340f00",
+    "/Game/Scenery/Textures/T_N_04d3ea22b8072c8b",
+    "/Game/Scenery/Textures/T_ORM_53e3b30aa3adbb38"
+   ],
+   "textureBytes": 1541353
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-oigridh",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-oigridh/StaticMeshes/SM_meshy-statue-oigridh",
+   "triangles": 31099,
+   "glbBytes": 3167700,
+   "meshBytes": 1690090,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_327131e959faabf4",
+    "/Game/Scenery/Textures/T_N_9ab249c83caea010",
+    "/Game/Scenery/Textures/T_ORM_2191f24218073194"
+   ],
+   "textureBytes": 1652070
+  },
+  {
+   "id": "scene/arena-of-fate/meshy-statue-tamera",
+   "asset": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-tamera/StaticMeshes/SM_meshy-statue-tamera",
+   "triangles": 30640,
+   "glbBytes": 2873252,
+   "meshBytes": 1590993,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_907c6b85fb74f44a",
+    "/Game/Scenery/Textures/T_N_124ab395aed9b8dd",
+    "/Game/Scenery/Textures/T_ORM_8f4a42d79e9a90c0"
+   ],
+   "textureBytes": 1498940
+  }
+ ]
+}

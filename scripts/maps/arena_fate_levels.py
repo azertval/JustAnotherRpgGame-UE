@@ -5,8 +5,8 @@
 
 Les trois niveaux du Colisée tiennent dans la **même emprise** de 34 × 24 cases (décision de
 l'auteur du 4 octobre 2026) : l'ovale de la coque de l'arène, repris par l'enceinte de chaque
-sous-sol (`scripts/assetsGeneration/arena_fate_enclosures.py`). Un escalier occupe les mêmes cases
-à l'étage qu'il quitte et à celui qu'il rejoint :
+sous-sol (celle du kit publié ; le script Blender qui la produisait est retiré au LOT-1019). Un
+escalier occupe les mêmes cases à l'étage qu'il quitte et à celui qu'il rejoint :
 
 | Escalier | Cases | En haut | En bas |
 |---|---|---|---|
@@ -41,7 +41,7 @@ ROOT = Path(__file__).resolve().parents[2]
 PLACE = "central-empire/capital/arenarea/arena-of-fate"
 OUTPUT = ROOT / "Tools/Assets3D/Regions" / PLACE / "Production/V4/Gestures"
 WIDTH, HEIGHT = 34, 24
-# Le nu intérieur de l'enceinte et son épaisseur, en mètres (`arena_fate_enclosures.py`).
+# Le nu intérieur de l'enceinte et son épaisseur, en mètres (mesurés sur l'enceinte du kit publié).
 INNER_X, INNER_Y, THICK = 23.4, 15.9, 1.45
 NORTH, SOUTH, EAST, WEST = (0, -1), (0, 1), (1, 0), (-1, 0)
 # La case du marqueur de chaque rencontre de la série de l'arène, sur la carte du sable.

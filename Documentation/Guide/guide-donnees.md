@@ -518,8 +518,9 @@ installé entre.
 
 ### La chaîne de production HD : `scripts/assetsGeneration/`
 
-Entre la sortie du générateur d'images et l'asset installé, rien ne se fait à la main : cinq
-scripts, hors CI, tiennent la chaîne, et chacun dit dans son en-tête ce qu'il fabrique et pourquoi.
+Entre la sortie du générateur (d'images, ou de Meshy) et l'asset installé, rien ne se fait à la
+main : des scripts, hors CI, tiennent la chaîne, et chacun dit dans son en-tête ce qu'il fabrique et
+pourquoi.
 
 - [`install_hd_asset.py`](../../scripts/assetsGeneration/install_hd_asset.py) (`LOT-104`) installe
   un lot de sources. À côté des sorties du générateur, un **descripteur** `install.json` dit, pour
@@ -557,10 +558,22 @@ scripts, hors CI, tiennent la chaîne, et chacun dit dans son en-tête ce qu'il 
   dans le projet le mannequin du moteur et ses six clips, première source de corps et
   d'animations. `rig_character.py`, `rig_quadruped.py`, `retouch_character.py`,
   `reduce_model.py`, `render_character_review.py` et `check_character_model.py` sont retirés.
-- [`build_hd_mockup.py`](../../scripts/assetsGeneration/build_hd_mockup.py) (`LOT-101`) monte la
-  maquette de validation du standard 2D HD, huit cases sur huit à 1080p et 2160p, et écrit sous
-  `Source/Test/Fixtures/HdMockup/` la même scène en données d'essai du moteur ; `--check` vérifie
-  que tout est à jour.
+- **La chaîne de décor** (`LOT-1019`, [standard 3D](../../Planning/standards/style-3d.md)) : une
+  pièce de décor entre dans le projet du moteur par
+  [`import_scenery_unreal.py`](../../scripts/assetsGeneration/import_scenery_unreal.py), depuis sa
+  **fiche** — l'entrée du manifeste des maîtres (`Master/manifest.json`, objet `sheet`), d'un kit
+  (`<kit>/Scene/manifest.json`) ou des bibliothèques (`Library/manifest.json`, licence et
+  identifiant) — : import au maître par Interchange, Nanite, collision sur le maillage, et sa
+  **matière complète** — une instance de `M_Scenery` par matière du `.glb`, des textures
+  compressées par le moteur (BC7, BC5 pour le relief) et partagées par contenu. `build_level.py`
+  l'appelle pour chaque maillage qu'une carte pose ; seul, il installe les maîtres (ou un kit,
+  `-JadgKit`) et écrit leur poids sous `Saved/Jadg/scenery/`.
+  [`scenery_sheets.py`](../../scripts/assetsGeneration/scenery_sheets.py) lit la fiche et la
+  matière d'un `.glb` sans moteur ; `build_master_manifest.py --refresh` refait les fiches des
+  maîtres ; [`build_piece_check.py`](../../scripts/maps/build_piece_check.py) écrit la **carte de
+  contrôle** d'une pièce (ses quatre côtés, à midi et à 22 h). `import_master_unreal.py`,
+  `material_maps.py` (des cartes dérivées d'une couleur) et la maquette du standard 2D
+  (`build_hd_mockup.py`) sont retirés.
 
 Ce que ces scripts installent est gardé en CI par
 [`check_hd_assets.py`](../../scripts/checks/check_hd_assets.py), qui n'a pas besoin des sources
@@ -853,50 +866,16 @@ scripts, depuis l'atelier local `Tools/Assets3D/Regions/central-empire/capital/a
 
 ### Les pièces
 
+Le kit de l'Arena of Fate est **publié** (`kits.lock.json`) et ne se régénère plus dans ce dépôt :
+les scripts Blender qui l'ont produit — les boîtes de son architecture, ses enceintes, ses
+bannières, la mise à l'échelle des sculptures, son installeur et ses cartes dérivées — sont retirés
+au `LOT-1019` ; l'ancien dépôt les garde jusqu'à la recette (`LOT-1023`, D-58). Ses pièces entrent
+dans le moteur par la chaîne de décor (ci-dessus) avec les cartes qu'elles portent, et se
+reprennent au maître au `LOT-1022`.
+
 | Script | Ce qu'il produit |
 |---|---|
-| [`arena_fate_architecture.py`](../../scripts/assetsGeneration/arena_fate_architecture.py) | la bibliothèque de primitives (blocs, arcs, bandes elliptiques) que les suivants importent |
-| [`arena_fate_architecture_v2.py`](../../scripts/assetsGeneration/arena_fate_architecture_v2.py) | la coque du Colisée (`af-arena-shell` : podium, gradins, trois ordres d'arcades, **attique** et mâts de velum, treize loges, portail), le sable, la foule — la coque est remplacée dans le nouveau moteur par les pièces ci-dessous |
-| [`build_colosseum.py`](../../scripts/assetsGeneration/build_colosseum.py) | le Colisée en **pièces modulaires** à l'échelle de celui de Rome (189 × 156 m, 48 m, 80 travées) : une travée de chaque ordre, l'attique, la porte axiale et son tunnel, un quart des gradins, la loge impériale, le sable, le socle d'une statue ; textures au mètre, cartes de matière dérivées ; écrit `Source/Elements/Assets/Built/colisee/` et son manifeste. [`build_gate_scene.py`](../../scripts/maps/build_gate_scene.py) les pose en anneau (`Scenes/porte-1012/colisee.json`), avec les dieux et les lions au maître, les bannières et les feux |
-| [`arena_fate_underground_v3.py`](../../scripts/assetsGeneration/arena_fate_underground_v3.py) | l'architecture et le mobilier des sous-sols : murs, arcs, voûtes, niches, cachots, autels |
-| [`arena_fate_enclosures.py`](../../scripts/assetsGeneration/arena_fate_enclosures.py) | ce qui tient les trois niveaux ensemble : les **enceintes ovales** des deux sous-sols, les escaliers tournés vers l'est, l'ouest et le sud, la trémie des catacombes, les feux du pourtour |
-| [`arena_fate_iconography.py`](../../scripts/assetsGeneration/arena_fate_iconography.py) | les bannières des treize délégations, des quatre alliances et du Culte |
-| [`import_arena_fate_meshy.py`](../../scripts/assetsGeneration/import_arena_fate_meshy.py), [`import_arena_fate_subsoil_meshy.py`](../../scripts/assetsGeneration/import_arena_fate_subsoil_meshy.py) | les sculptures reçues de l'auteur (quatorze dieux, les lions du portail, quatre Ungods, athlète, figure funéraire, mascaron, ossuaire), posées et mises à l'échelle sans décimation ; les originaux restent intacts |
-
-Tous se lancent par Blender sans fenêtre et écrivent dans `Production/` de l'atelier, avec un
-fragment de manifeste ; aucun n'installe :
-
-```powershell
-blender --background --factory-startup --python scripts/assetsGeneration/arena_fate_enclosures.py
-blender --background --python scripts/assetsGeneration/arena_fate_architecture_v2.py -- --only af-arena-shell
-```
-
-[`install_arena_fate.py`](../../scripts/assetsGeneration/install_arena_fate.py) contrôle chaque
-`.glb` (un maillage, une primitive, une matière, des triangles indexés, des images incorporées),
-le copie dans `Scene/` et fusionne son entrée au manifeste du lieu. `--preserve-existing` garde ce
-qui est déjà installé, `--only id,id` ne prend d'un fragment que les pièces nommées,
-`--remove-piece scene/arena-of-fate/<id>` retire une pièce remplacée :
-
-```powershell
-$production = 'Tools/Assets3D/Regions/central-empire/capital/arenarea/arena-of-fate/Production'
-py -3.13 scripts/assetsGeneration/install_arena_fate.py --preserve-existing --fragments "$production/V4/Architecture/architecture-manifest.json"
-```
-
-### Les cartes de matière
-
-Une pièce installée reçoit ses **cartes de matière** (`D-46`, [standard 3D](../../Planning/standards/style-3d.md), §4) :
-l'installeur appelle [`material_maps.py`](../../scripts/assetsGeneration/material_maps.py) sur tout
-le dossier. Une sculpture de l'auteur reprend le relief et la rugosité-métal de son **original**
-Meshy, ramenés à 1024 px ; une pièce construite par script les **dérive de sa couleur de base** —
-le relief suit la clarté, l'occlusion assombrit les creux — et prend sa rugosité et son métal dans
-la table [`arena_fate_matters.json`](../../scripts/assetsGeneration/arena_fate_matters.json), une
-matière par case de l'atlas (calcaire, marbre, chêne, bronze, fer, velours, eau). Une couleur de
-base opaque livrée en PNG est remise en JPEG ; la foule et les bannières, à transparence, restent
-telles quelles. Le script se rejoue à l'identique et se lance aussi seul :
-
-```powershell
-py -3.13 scripts/assetsGeneration/material_maps.py Source/Elements/Assets/Regions/central-empire/capital/arenarea/arena-of-fate/Scene --originals "$production/V2/Sculptures/sculptures-measurements.json" "$production/V3/Sculptures/sculptures-measurements.json"
-```
+| [`build_colosseum.py`](../../scripts/assetsGeneration/build_colosseum.py) | le Colisée en **pièces modulaires** à l'échelle de celui de Rome (189 × 156 m, 48 m, 80 travées) : une travée de chaque ordre, l'attique, la porte axiale et son tunnel, un quart des gradins, la loge impériale, le sable, le socle d'une statue ; textures au mètre, rugosité et métal en facteurs (plus de carte dérivée) ; écrit `Source/Elements/Assets/Built/colisee/` et son manifeste. [`build_gate_scene.py`](../../scripts/maps/build_gate_scene.py) les pose en anneau (le préfabriqué `colisee`), avec les dieux et les lions au maître, les bannières et les feux |
 
 ### Les cartes
 

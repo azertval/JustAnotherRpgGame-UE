@@ -170,6 +170,38 @@ avoir un mode où **rien** ne vient d'un fichier : ni sol, ni mur, ni figurine.
   > ne le modèle pas, il le teinte et lui fait jeter l'ombre de sa boîte ; le soleil sur
   > l'architecture vient avec le kit repris en maillages, à la `0.0.3` (`LOT-151`).
 
+### Le décor dans le nouveau moteur (`LOT-1019`)
+
+Dans Unreal Engine 5 (`0.0.3`), ce qui précède sur le losange, le tri par le pied et les images
+dressées ne vaut plus que pour l'ancien dépôt (D-49, D-58). Le décor est fait de maillages au
+maître, en Nanite, éclairés par Lumen ; ce qu'une pièce doit être est dans le
+[standard 3D](../../Planning/standards/style-3d.md).
+
+- **EX-REN-057** — Une pièce de décor entre dans le projet du moteur **par script, depuis sa
+  fiche** — l'entrée du manifeste des maîtres, d'un kit ou des bibliothèques du moteur (licence et
+  identifiant) —, sans geste dans l'éditeur (`scripts/assetsGeneration/import_scenery_unreal.py`,
+  que `build_level.py` appelle pour chaque maillage qu'une carte pose) : importée au maître si elle
+  manque ou a changé, en **Nanite**, la collision prise sur son maillage. Chaque sortie est citée
+  par le script ou la fiche qui la produit (`check_orphans.py`). Une pièce dont l'empreinte diffère
+  de sa fiche n'entre pas.
+- **EX-REN-058** — Une pièce se rend avec sa **matière complète** : chaque matière du `.glb`
+  devient une instance d'une matière parente du décor (`M_Scenery`, ou `M_SceneryMasked` pour un
+  alpha), à deux faces, **utilisable en instances et en Nanite** — sans quoi le jeu lancé lui
+  substitue la matière par défaut —, avec ses facteurs glTF ; sa couleur de base (sRGB) et son
+  occlusion-rugosité-métal (linéaire) sont compressées en **BC7**, son relief en **BC5** (vert
+  retourné). Une image que plusieurs pièces portent n'est importée **qu'une fois**. Une carte
+  absente se rend avec la valeur neutre de son rôle et se dit dans la fiche (`material.missing`).
+- **EX-REN-059** — Le **post-traitement** se juge avec et sans, sans reconstruire la carte : le
+  passage de captures (`AJadgCaptureDirector`, `-JadgPost`) ajoute ou retire le **contour sombre**
+  (une passe écrite par script, `M_Contour`, qu'une carte pose d'office par `lighting.contour`),
+  coupe l'occlusion ambiante d'écran, le halo, les ombres des lampes, et écrit dans `mesure.json`
+  ce qu'il a appliqué, avec la mémoire graphique et les maillages de la carte. Il attend que les
+  shaders **et** les assets (textures, maillages) aient fini de se construire avant chaque capture.
+  > **Mise en œuvre (`LOT-1019`).** Les tests `Jadg.Decor.Matiere` et
+  > `Jadg.Decor.TexturesPartagees` contrôlent une pièce installée de chaque origine (un maître, une
+  > pièce de kit, une pièce construite par script) ; la lecture des fiches et des matières d'un
+  > `.glb` est testée hors du moteur (`scripts/tests/test_scenery_sheets.py`).
+
 ## 3. Boucle & temps
 - **EX-REN-020** — Le jeu doit tourner à **60 images/seconde** cible.
 - **EX-REN-021** — La logique doit être mise à jour à **pas de temps fixe**

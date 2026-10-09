@@ -23,10 +23,11 @@ carte, `/Game/Maps/Levels/<carte>` : c'est ce qu'un portail ouvre (`AJadgMapFram
 
 Ce que le script pose, dans l'ordre :
 
-  1. chaque maillage cité est importé par Interchange s'il ne l'est pas déjà — un maître par son
-     manifeste, empreinte vérifiée (`import_master_unreal.py`), une pièce de kit sous `/Game/Kit/…`,
-     une donnée d'essai sous `/Game/Fixtures/…` —, Nanite actif, la collision prise sur le
-     maillage lui-même ;
+  1. chaque maillage cité passe par la chaîne de décor (`import_scenery_unreal.py`, LOT-1019) :
+     importé par Interchange s'il ne l'est pas déjà — un maître par son manifeste, empreinte
+     vérifiée, une pièce de kit sous `/Game/Kit/…`, une donnée d'essai sous `/Game/Fixtures/…` —,
+     Nanite actif, la collision prise sur le maillage lui-même, sa matière complète (instance de
+     `M_Scenery`, textures compressées et partagées) ;
   2. **le changement de repère est mesuré, pas supposé**, sur le bloc repère des données d'essai
      (`Scene/socle/repere.glb`, dissymétrique sur ses trois axes) ;
   3. un niveau vide, puis :
@@ -76,7 +77,7 @@ FRAME_REFERENCE = "Scene/socle/repere.glb"
 
 sys.path.insert(0, str(PROJECT_DIR / "scripts" / "assetsGeneration"))
 sys.path.insert(0, str(PROJECT_DIR / "scripts" / "maps"))
-import import_master_unreal as master_import  # noqa: E402
+import import_scenery_unreal as scenery  # noqa: E402
 import jadg_map  # noqa: E402
 
 KIT_ROOT = "/Game/Kit"
@@ -86,6 +87,12 @@ AMBIENT_CUBE = "/Game/Scenes/Common/T_AmbientWhite"
 CHARACTER_MATERIAL = "/Game/Scenes/Common/M_Character"
 GROUND_MATERIAL = "/Game/Scenes/Common/M_Ground"
 OUTLINE_MATERIAL = "/Game/Scenes/Common/M_Outline"
+# Le contour sombre (LOT-1019, standard 3D §8) : une passe de post-traitement, jugée avec et sans.
+# Le bronze foncé est celui du contour du standard 2D (archives) ; l'écart de profondeur relatif
+# entre deux pixels voisins au-delà duquel un bord se trace, et sa force, sont des réglages d'essai
+# à juger sur captures (`-JadgPost=contour`), pas des valeurs du standard.
+CONTOUR_MATERIAL = "/Game/Scenes/Common/M_Contour"
+CONTOUR = {"colour": (0.36, 0.29, 0.165), "pixels": 1.0, "threshold": 0.02, "gain": 25.0, "strength": 0.85}
 WATER_MATERIAL = "/Game/Scenes/Common/M_Water"
 OUTLINE_COLOUR = (1.0, 0.78, 0.36)  # l'or du HUD (`JadgHud.cpp`)
 OUTLINE_PIXELS = 3.0
@@ -299,7 +306,7 @@ class Library:
         # Les maillages de la carte : les kits, ou le dossier que la description nomme.
         self.assets = PROJECT_DIR / assets_root if assets_root else ASSETS
         self.content_root = FIXTURE_ROOT if assets_root else KIT_ROOT
-        manifest = json.loads(master_import.MANIFEST.read_text(encoding="utf-8"))
+        manifest = json.loads(scenery.MANIFEST.read_text(encoding="utf-8"))
         self.master = {piece["file"]: piece for piece in manifest["pieces"]}
         self.static: dict[str, unreal.StaticMesh] = {}
         self.imported = 0
@@ -327,34 +334,24 @@ class Library:
         stale = False
         asset_path = self.asset_path(mesh)
         if piece is not None:
-            if master_import.sha256_of(glb) != piece["sha256"]:
+            if scenery.sha256_of(glb) != piece["sha256"]:
                 fail(f"{mesh} : empreinte différente du manifeste du maître")
         elif mesh.startswith("Master/") and not scripted:
             fail(f"{mesh} : absent du manifeste du maître")
         elif scripted:
-            digest = master_import.sha256_of(glb)
+            digest = scenery.sha256_of(glb)
             stale = self.imports.get(asset_path) != digest
             self.imports[asset_path] = digest
-        piece_folder = asset_path.rsplit("/", 2)[0]
-        if unreal.EditorAssetLibrary.does_asset_exist(asset_path) and not stale:
-            asset = unreal.EditorAssetLibrary.load_asset(asset_path)
-        else:
-            started = time.perf_counter()
+        # La chaîne de décor (LOT-1019) : import au maître si la pièce manque ou a changé, Nanite,
+        # collision sur le maillage, matière complète aux textures partagées.
+        started = time.perf_counter()
+        asset, imported = scenery.install(glb, asset_path, reimport=stale)
+        if imported:
             log(f"import de {mesh} -> {asset_path}" + (" (pièce régénérée)" if stale else ""))
-            if unreal.EditorAssetLibrary.does_directory_exist(piece_folder):
-                unreal.EditorAssetLibrary.delete_directory(piece_folder)
-            asset = master_import.import_glb(glb, piece_folder.rsplit("/", 1)[0], piece_folder, asset_path)
             self.imported += 1
             self.import_seconds += time.perf_counter() - started
             self.imports_file.parent.mkdir(parents=True, exist_ok=True)
             self.imports_file.write_text(json.dumps(self.imports, indent=1), encoding="utf-8")
-        master_import.enable_nanite(asset)
-        # La marche et le clic se font sur le maillage lui-même : pas de collision simplifiée à
-        # dessiner à la main.
-        body = asset.get_editor_property("body_setup")
-        if body.get_editor_property("collision_trace_flag") != unreal.CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE:
-            body.set_editor_property("collision_trace_flag", unreal.CollisionTraceFlag.CTF_USE_COMPLEX_AS_SIMPLE)
-            unreal.EditorAssetLibrary.save_directory(piece_folder, only_if_is_dirty=False, recursive=True)
         self.static[mesh] = asset
         return asset
 
@@ -571,6 +568,99 @@ def outline_material() -> unreal.Material:
     library.connect_material_property(blend, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR)
     library.recompile_material(material)
     unreal.EditorAssetLibrary.save_asset(OUTLINE_MATERIAL)
+    return material
+
+
+def contour_material() -> unreal.Material:
+    """La passe du contour sombre : un bord où la profondeur saute d'un pixel à son voisin (le
+    tour d'une pièce sur le sol, le bord d'un toit sur le ciel), teinté de bronze foncé.
+
+    Une matière de post-traitement écrite nœud par nœud ; une carte la pose si sa description le
+    dit (`lighting.contour`), le passage de captures l'ajoute ou la retire (`-JadgPost=contour`,
+    `AJadgCaptureDirector`) pour juger le rendu avec et sans."""
+    library = unreal.MaterialEditingLibrary
+    material = (unreal.EditorAssetLibrary.load_asset(CONTOUR_MATERIAL)
+                if unreal.EditorAssetLibrary.does_asset_exist(CONTOUR_MATERIAL) else new_material(CONTOUR_MATERIAL))
+    library.delete_all_material_expressions(material)
+    material.set_editor_property("material_domain", unreal.MaterialDomain.MD_POST_PROCESS)
+
+    def node(kind, x: int, y: int):
+        return library.create_material_expression(material, kind, x, y)
+
+    def scene_texture(identifier, x: int, y: int):
+        sampled = node(unreal.MaterialExpressionSceneTexture, x, y)
+        sampled.set_editor_property("scene_texture_id", identifier)
+        return sampled
+
+    def red_of(source, x: int, y: int):
+        red = node(unreal.MaterialExpressionComponentMask, x, y)
+        for channel, kept in (("r", True), ("g", False), ("b", False), ("a", False)):
+            red.set_editor_property(channel, kept)
+        library.connect_material_expressions(source, "Color", red, "")
+        return red
+
+    def constant(value: float, x: int, y: int):
+        made = node(unreal.MaterialExpressionConstant, x, y)
+        made.set_editor_property("r", value)
+        return made
+
+    image = scene_texture(unreal.SceneTextureId.PPI_POST_PROCESS_INPUT0, -400, -300)
+    centre = scene_texture(unreal.SceneTextureId.PPI_SCENE_DEPTH, -1200, 0)
+    depth = red_of(centre, -1000, 0)
+    here = node(unreal.MaterialExpressionScreenPosition, -1600, 300)
+    widest = None
+    for index, (dx, dy) in enumerate(((1.0, 0.0), (-1.0, 0.0), (0.0, 1.0), (0.0, -1.0))):
+        row = 300 + index * 250
+        step = node(unreal.MaterialExpressionConstant2Vector, -1600, row + 100)
+        step.set_editor_property("r", dx * CONTOUR["pixels"])
+        step.set_editor_property("g", dy * CONTOUR["pixels"])
+        scaled = node(unreal.MaterialExpressionMultiply, -1400, row + 100)
+        library.connect_material_expressions(step, "", scaled, "A")
+        library.connect_material_expressions(centre, "InvSize", scaled, "B")
+        moved = node(unreal.MaterialExpressionAdd, -1200, row)
+        library.connect_material_expressions(here, "ViewportUV", moved, "A")
+        library.connect_material_expressions(scaled, "", moved, "B")
+        neighbour = scene_texture(unreal.SceneTextureId.PPI_SCENE_DEPTH, -1000, row)
+        library.connect_material_expressions(moved, "", neighbour, "UVs")
+        # Le saut relatif : |voisin - ici| / ici.
+        gap = node(unreal.MaterialExpressionSubtract, -800, row)
+        library.connect_material_expressions(red_of(neighbour, -900, row + 50), "", gap, "A")
+        library.connect_material_expressions(depth, "", gap, "B")
+        size = node(unreal.MaterialExpressionAbs, -700, row)
+        library.connect_material_expressions(gap, "", size, "")
+        relative = node(unreal.MaterialExpressionDivide, -600, row)
+        library.connect_material_expressions(size, "", relative, "A")
+        library.connect_material_expressions(depth, "", relative, "B")
+        if widest is None:
+            widest = relative
+        else:
+            larger = node(unreal.MaterialExpressionMax, -500, row)
+            library.connect_material_expressions(widest, "", larger, "A")
+            library.connect_material_expressions(relative, "", larger, "B")
+            widest = larger
+    above = node(unreal.MaterialExpressionSubtract, -400, 1300)
+    library.connect_material_expressions(widest, "", above, "A")
+    library.connect_material_expressions(constant(CONTOUR["threshold"], -500, 1400), "", above, "B")
+    raised = node(unreal.MaterialExpressionMultiply, -300, 1300)
+    library.connect_material_expressions(above, "", raised, "A")
+    library.connect_material_expressions(constant(CONTOUR["gain"], -400, 1450), "", raised, "B")
+    mask = node(unreal.MaterialExpressionClamp, -200, 1300)
+    library.connect_material_expressions(raised, "", mask, "")
+    library.connect_material_expressions(constant(0.0, -300, 1450), "", mask, "Min")
+    library.connect_material_expressions(constant(CONTOUR["strength"], -300, 1500), "", mask, "Max")
+    tint = node(unreal.MaterialExpressionConstant3Vector, -400, 100)
+    tint.set_editor_property("constant", unreal.LinearColor(*CONTOUR["colour"], 1.0))
+    colour_only = node(unreal.MaterialExpressionComponentMask, -250, -300)
+    for channel, kept in (("r", True), ("g", True), ("b", True), ("a", False)):
+        colour_only.set_editor_property(channel, kept)
+    library.connect_material_expressions(image, "Color", colour_only, "")
+    blend = node(unreal.MaterialExpressionLinearInterpolate, -100, 0)
+    library.connect_material_expressions(colour_only, "", blend, "A")
+    library.connect_material_expressions(tint, "", blend, "B")
+    library.connect_material_expressions(mask, "", blend, "Alpha")
+    library.connect_material_property(blend, "", unreal.MaterialProperty.MP_EMISSIVE_COLOR)
+    library.recompile_material(material)
+    unreal.EditorAssetLibrary.save_asset(CONTOUR_MATERIAL)
     return material
 
 
@@ -1010,10 +1100,17 @@ def place_sky(level: Level, doc: dict, frame: Frame) -> None:
         # Un réglage de post-traitement du moteur, par son nom (`bloom_intensity`, `vignette_intensity`…).
         settings.set_editor_property(f"override_{name}", True)
         settings.set_editor_property(name, value)
+    blendables = []
     if doc.get("entities"):
         # Une carte qui a des entités a de quoi solliciter : le contour de ce que le meneur désigne.
-        settings.set_editor_property("weighted_blendables", unreal.WeightedBlendables(
-            array=[unreal.WeightedBlendable(weight=1.0, object=outline_material())]))
+        blendables.append(unreal.WeightedBlendable(weight=1.0, object=outline_material()))
+    # Le contour sombre existe toujours, pour que les captures le jugent avec et sans ; une carte le
+    # pose si sa description le demande (`lighting.contour`).
+    contour = contour_material()
+    if lighting.get("contour"):
+        blendables.append(unreal.WeightedBlendable(weight=1.0, object=contour))
+    if blendables:
+        settings.set_editor_property("weighted_blendables", unreal.WeightedBlendables(array=blendables))
     exposure.set_editor_property("settings", settings)
 
     day = level.spawn(game_class("JadgDayLight"), origin, flat, "Jour", "ciel")
@@ -1364,13 +1461,13 @@ def build(map_id: str, doc: dict, path: Path, package: str | None = None, check:
 
 
 def main() -> None:
-    map_id = master_import.command_line_option("JadgMap")
+    map_id = scenery.command_line_option("JadgMap")
     if not map_id:
         fail("-JadgMap=<carte> attendu")
     path = jadg_map.find(map_id)
     if path is None:
         fail(f"carte « {map_id} » introuvable sous {', '.join(str(r) for r in jadg_map.LEVEL_ROOTS)}")
-    build(map_id, jadg_map.read(path), path, check=master_import.command_line_option("JadgCheck") is not None)
+    build(map_id, jadg_map.read(path), path, check=scenery.command_line_option("JadgCheck") is not None)
 
 
 if __name__ == "__main__":

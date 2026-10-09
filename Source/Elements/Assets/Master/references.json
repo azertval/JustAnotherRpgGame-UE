@@ -250,7 +250,14 @@
     "NPC/Terracotta_Palazzo": {
       "id": "Scenery/arenarea-palazzo-terracotta",
       "name": "Façade d'Arenarea : palazzo aux tuiles de terre cuite",
-      "basis": "vignette Blender du 8 octobre : un immeuble à deux étages, pas un personnage ; rangé par erreur sous NPC. Aucune référence nommée dans l'ancien dépôt : nom descriptif, à remplacer par celui de la commande"
+      "basis": "vignette Blender du 8 octobre : un immeuble à deux étages, pas un personnage ; rangé par erreur sous NPC. Aucune référence nommée dans l'ancien dépôt : nom descriptif, à remplacer par celui de la commande",
+      "sheet": {
+        "family": "02",
+        "class": "tall",
+        "tactical": "solid",
+        "height": 12.0,
+        "comment": "Famille témoin du LOT-1019 : la façade d'Arenarea. `height` : la hauteur posée sur le parvis de la porte, 12 m, provisoire (aucune cote de la commande, LOT-1012). Emprise ouverte : elle suit de la hauteur que l'auteur cotera."
+      }
     }
   }
 }

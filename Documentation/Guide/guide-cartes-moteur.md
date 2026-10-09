@@ -36,9 +36,11 @@ powershell scripts/build.ps1 -Unreal -Map essai/etages -Capture   # puis ses cap
 `build.ps1` lance `scripts/maps/build_level.py` dans l'éditeur sans fenêtre (`-run=pythonscript
 -JadgMap=<carte> -JadgCheck`). Le script :
 
-1. importe chaque maillage cité qui ne l'est pas encore (Interchange, Nanite, collision prise sur
-   le maillage) — un maître par son manifeste, une pièce de kit sous `/Game/Kit/…`, une donnée
-   d'essai sous `/Game/Fixtures/…` ;
+1. installe chaque maillage cité par la **chaîne de décor** (`import_scenery_unreal.py`,
+   `LOT-1019`) : importé s'il ne l'est pas encore (Interchange, Nanite, collision prise sur le
+   maillage) — un maître par son manifeste, une pièce de kit sous `/Game/Kit/…`, une donnée
+   d'essai sous `/Game/Fixtures/…` —, et habillé de sa matière complète : une instance de
+   `M_Scenery` par matière, des textures compressées (BC7, BC5 pour le relief) et partagées ;
 2. **mesure** ce que deviennent les axes d'un `.glb` dans le moteur, sur le bloc repère des données
    d'essai (`Scene/socle/repere.glb`) ;
 3. pose le niveau : le **terrain** (un `Landscape` dont les hauteurs et les couches sont régénérées
@@ -57,6 +59,21 @@ powershell scripts/build.ps1 -Unreal -Map essai/etages -Capture   # puis ses cap
 
 Une pièce d'une couche que le kit n'a pas (`mp-cypress` à Martpart) reste dans le texte, n'est pas
 posée, et se compte dans le journal.
+
+Les **captures** (`-Capture`) passent par la caméra du joueur, aux cadrages et aux heures de la
+description, et `mesure.json` écrit la cadence, la mémoire graphique (celle du processus, celle des
+textures des maillages de la carte) et les maillages (nombre, triangles Nanite, la plus grosse
+pièce). Pour juger un réglage de rendu **avec et sans** sans reconstruire la carte (`LOT-1019`), le
+jeu lancé à la main prend `-JadgPost=<a,b…>` : `contour` ajoute le contour sombre (`M_Contour`, que
+`build_level.py` écrit ; une carte le pose d'office si `lighting.contour` est vrai), `sans-contour`
+le retire, `sans-ao` coupe l'occlusion ambiante d'écran de Lumen, `sans-halo` le halo, et
+`sans-ombres-lampes` les ombres des lampes.
+
+Une pièce de décor se contrôle **seule, de ses quatre côtés** avant d'entrer dans une carte :
+`python scripts/maps/build_piece_check.py` écrit sa carte de contrôle
+(`controle/<pièce>`, pour chaque pièce dont la fiche donne une famille), et
+`powershell scripts/build.ps1 -Unreal -Map controle/<pièce> -Capture` en prend la face, la droite,
+le dos et la gauche, à midi et à 22 h (le [gabarit de commande](../../Planning/standards/gabarit-commande-zone.md)).
 
 ## Retoucher dans l'éditeur, relire
 
