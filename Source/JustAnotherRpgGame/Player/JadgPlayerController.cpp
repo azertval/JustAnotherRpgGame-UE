@@ -5,6 +5,7 @@
 
 #include "Characters/JadgParty.h"
 #include "Characters/JadgWalker.h"
+#include "Combat/JadgCombat.h"
 #include "Engine/GameInstance.h"
 #include "Engine/LocalPlayer.h"
 #include "EnhancedInputComponent.h"
@@ -31,6 +32,9 @@ namespace
 	const FName ZoomCommand(TEXT("Zoom"));
 	const FName PanForwardCommand(TEXT("PanForward"));
 	const FName PanRightCommand(TEXT("PanRight"));
+	const FName AttackCommand(TEXT("Attack"));
+	const FName CapacityCommand(TEXT("Capacity"));
+	const FName EndTurnCommand(TEXT("EndTurn"));
 	const FString ChoicePrefix(TEXT("Choice"));
 }
 
@@ -46,7 +50,7 @@ bool UJadgControls::IsKnown(FName Command)
 	const bool bChoice = Name.StartsWith(ChoicePrefix) && Name.Len() == ChoicePrefix.Len() + 1 && Name[ChoicePrefix.Len()] >= TEXT('1')
 		&& Name[ChoicePrefix.Len()] <= TEXT('9');
 	return bChoice || IsAxis(Command) || Command == WalkCommand || Command == InteractCommand || Command == NextLeaderCommand
-		|| Command == RecenterCommand;
+		|| Command == RecenterCommand || Command == AttackCommand || Command == CapacityCommand || Command == EndTurnCommand;
 }
 
 FKey UJadgControls::KeyOf(FName Command)
@@ -198,6 +202,45 @@ void AJadgPlayerController::Press(FName Command)
 	const bool bTalking = Exploration != nullptr && Exploration->InDialogue();
 
 	const FString Name = Command.ToString();
+	AJadgCombat* Combat = AJadgCombat::Find(GetWorld());
+	if (Combat != nullptr && Combat->IsMounted())
+	{
+		// En combat, les gestes vont au combat (LOT-1017) ; la caméra reste au joueur.
+		if (Name.StartsWith(ChoicePrefix))
+		{
+			Combat->SelectCapacity(FCString::Atoi(*Name.RightChop(ChoicePrefix.Len())));
+		}
+		else if (Command == WalkCommand)
+		{
+			FHitResult Hit;
+			if (PointerHit(Hit))
+			{
+				Combat->Click(Hit);
+			}
+		}
+		else if (Command == AttackCommand)
+		{
+			Combat->Attack();
+		}
+		else if (Command == CapacityCommand)
+		{
+			Combat->Cast();
+		}
+		else if (Command == EndTurnCommand)
+		{
+			Combat->EndTurn();
+		}
+		else if (Command == RecenterCommand)
+		{
+			AJadgCameraPawn* View = Cast<AJadgCameraPawn>(GetPawn());
+			AJadgWalker* Active = Combat->WalkerOf(Combat->ActiveId());
+			if (View != nullptr && Active != nullptr)
+			{
+				View->Follow(Active);
+			}
+		}
+		return;
+	}
 	if (Name.StartsWith(ChoicePrefix))
 	{
 		if (bTalking)

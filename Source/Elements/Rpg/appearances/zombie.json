@@ -1,0 +1,56 @@
+{
+  "id": "zombie",
+  "name": "Zombi",
+  "source": "original",
+  "status": {
+    "provisoire": true,
+    "raison": "LOT-1017 : fiche provisoire pour jouer la serie de l'arene dans le moteur, copiee de heros-priest (corps quinn), l'arme de la creature prise aux maitres de Weapons ; ecrite par l'assistant, sans que l'auteur l'ait vue.",
+    "retraitSi": "LOT-1024 : le createur d'especes et d'humanoides livre la fiche de cette creature"
+  },
+  "creator": "humanoid",
+  "clips": {
+    "attack": {
+      "key": 0.4
+    },
+    "cast": {
+      "key": 0.5
+    }
+  },
+  "body": "quinn",
+  "head": "quinn",
+  "height": 1.45,
+  "colors": {
+    "skin": [
+      0.75,
+      0.6,
+      0.5
+    ],
+    "hair": [
+      0.55,
+      0.3,
+      0.1
+    ],
+    "eyes": [
+      0.3,
+      0.3,
+      0.5
+    ]
+  },
+  "pieces": {
+    "torso": "none",
+    "legs": "none",
+    "feet": "none",
+    "hair": "none"
+  },
+  "weapons": {},
+  "metahuman": {
+    "bodyConstraints": {
+      "height": 145.0
+    },
+    "skin": {
+      "u": 0.3,
+      "v": 0.4,
+      "roughness": 0.75
+    }
+  }
+}

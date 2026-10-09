@@ -43,16 +43,29 @@
 
 .PARAMETER Parcours
     Avec -Unreal, à la place de -Scene : construire les cartes d'essai de l'exploration
-    (essai-1016-etals, essai-1016-parvis et l'arène vide essai-1016-arene, LOT-1016), puis lancer
-    le jeu hors écran sur la première et y jouer la quête « Des pommes pour l'arène » sans
-    personne, par les touches et les clics du joueur, injectés dans son contrôleur : l'essai de
-    chaque commande de caméra, la mère, le coffre, le portail, le garde (jet de Persuasion, graine
-    -Seed), le maître d'arène et l'arène vide, le retour. Chaque réplique est capturée, HUD
-    compris. Sorties dans Saved/Captures/parcours-1016/. Demande un processeur graphique.
+    (essai-1016-etals, essai-1016-parvis, LOT-1016) et l'arène du combat (essai-1017-arene,
+    LOT-1017), puis lancer le jeu hors écran sur la première et y jouer la quête « Des pommes pour
+    l'arène » sans personne, par les touches et les clics du joueur, injectés dans son contrôleur :
+    l'essai de chaque commande de caméra, la mère, le coffre, le portail, le garde (jet de
+    Persuasion, graine -Seed), le maître d'arène (« attendre » : le combat a son parcours), le
+    retour. Chaque réplique est capturée, HUD compris. Sorties dans Saved/Captures/parcours-1016/.
+    Demande un processeur graphique.
+
+.PARAMETER ParcoursCombat
+    Avec -Unreal, à la place de -Scene : construire le parvis et l'arène d'essai, puis lancer le
+    jeu hors écran sur le parvis et y jouer, par les touches et les clics du joueur, le début de la
+    série de l'arène (LOT-1017) : le maître d'arène, « combattre », la rencontre arene-bandits dans
+    l'arène jusqu'à son issue — chaque tour d'un héros traduit en clics et en touches, ceux des
+    bandits joués par l'IA —, le retour au parvis. Code 0 sur la victoire du groupe revenu là où
+    il était. Graine du combat : -Seed. Sorties dans Saved/Captures/parcours-1017/.
 
 .PARAMETER Seed
     Avec -Parcours : la graine du jet de Persuasion (défaut : 1, qui le réussit — relevé par le
-    test Jadg.Exploration.QueteDesPommes).
+    test Jadg.Exploration.QueteDesPommes). Avec -ParcoursCombat : la graine du combat.
+
+.PARAMETER Encounter
+    Avec -Scene et -Capture, sur la carte d'arène : la rencontre engagée au lancement, montée et
+    figée sur son déploiement pendant les captures et la mesure (LOT-1017).
 
 .PARAMETER UpdateReference
     Avec des captures : réécrire leur référence (les images de blocs de
@@ -100,7 +113,9 @@ param(
     [switch]$Capture,
     [switch]$NoCapture,
     [switch]$Parcours,
+    [switch]$ParcoursCombat,
     [int]$Seed = 1,
+    [string]$Encounter,
     [switch]$UpdateReference,
     [int]$MeasureSeconds = 10,
     [string]$EnginePath,
@@ -188,8 +203,9 @@ if ($Unreal) {
     }
     Write-Host "Unreal Engine $found.$($installed.PatchVersion) : $EnginePath" -ForegroundColor DarkGray
 
-    if ($Parcours -and $Scene) { Fail '-Parcours construit ses deux cartes : il ne se combine pas avec -Scene.' }
-    if (-not $Scene -and -not $NoCapture -and -not $Parcours) {
+    if (($Parcours -or $ParcoursCombat) -and $Scene) { Fail '-Parcours et -ParcoursCombat construisent leurs cartes : ils ne se combinent pas avec -Scene.' }
+    if ($Parcours -and $ParcoursCombat) { Fail '-Parcours et -ParcoursCombat se lancent l''un après l''autre.' }
+    if (-not $Scene -and -not $NoCapture -and -not $Parcours -and -not $ParcoursCombat) {
         $Scene = $SocleScene
         $Capture = $true
     }
@@ -236,7 +252,7 @@ if ($Unreal) {
         & (Get-Python) (Join-Path $root 'scripts\maps\build_essai_maps.py') --check
         if ($LASTEXITCODE -ne 0) { Fail "Les cartes d'essai de l'exploration sont périmées : python scripts/maps/build_essai_maps.py" }
         $builder = (Join-Path $root 'scripts\maps\build_scene_unreal.py') -replace '\\', '/'
-        foreach ($trial in @('essai-1016-etals', 'essai-1016-parvis', 'essai-1016-arene')) {
+        foreach ($trial in @('essai-1016-etals', 'essai-1016-parvis', 'essai-1017-arene')) {
             Write-Host "== Scène « $trial » : construction de la carte par script (sans fenêtre) ==" -ForegroundColor Cyan
             & $editorCmd "$uproject" -run=pythonscript "-script=$builder" "-JadgScene=$trial" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
             if ($LASTEXITCODE -ne 0) { Fail "La construction de la scène $trial a échoué (code $LASTEXITCODE)." }
@@ -257,6 +273,31 @@ if ($Unreal) {
         exit 0
     }
 
+    if ($ParcoursCombat) {
+        # Le parvis et l'arène d'essai sont écrits par script, carte de Core et scène du même plan.
+        & (Get-Python) (Join-Path $root 'scripts\maps\build_essai_maps.py') --check
+        if ($LASTEXITCODE -ne 0) { Fail "Les cartes d'essai sont périmées : python scripts/maps/build_essai_maps.py" }
+        $builder = (Join-Path $root 'scripts\maps\build_scene_unreal.py') -replace '\\', '/'
+        foreach ($trial in @('essai-1016-parvis', 'essai-1017-arene')) {
+            Write-Host "== Scène « $trial » : construction de la carte par script (sans fenêtre) ==" -ForegroundColor Cyan
+            & $editorCmd "$uproject" -run=pythonscript "-script=$builder" "-JadgScene=$trial" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
+            if ($LASTEXITCODE -ne 0) { Fail "La construction de la scène $trial a échoué (code $LASTEXITCODE)." }
+        }
+
+        $start = (Get-Content (Join-Path $root 'Source\Elements\Scenes\essai-1016-parvis.json') -Raw -Encoding UTF8 | ConvertFrom-Json).map
+        $output = Join-Path $root 'Saved\Captures\parcours-1017'
+        $journal = Join-Path $output 'parcours.json'
+        if (Test-Path $journal) { Remove-Item $journal }
+        Write-Host "== Parcours du combat : arene-bandits depuis le parvis (rendu hors écran, graine $Seed) ==" -ForegroundColor Cyan
+        & $editorCmd "$uproject" $start -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
+            "-JadgParcoursCombat=$output" "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
+        $walked = $LASTEXITCODE
+        if ($walked -ne 0) { Fail "Le parcours du combat ne s'est pas terminé (code $walked) : $journal" }
+        if (-not (Test-Path $journal)) { Fail "Le parcours du combat n'a pas écrit $journal." }
+        Write-Host "Parcours du combat terminé : $output" -ForegroundColor Green
+        exit 0
+    }
+
     if ($Scene) {
         $description = Join-Path $root "Source\Elements\Scenes\$Scene.json"
         if (-not (Test-Path $description)) { Fail "Description de scène absente : $description" }
@@ -266,7 +307,7 @@ if ($Unreal) {
             & (Get-Python) (Join-Path $root 'scripts\maps\build_gate_scene.py') --check
             if ($LASTEXITCODE -ne 0) { Fail 'Le groupe du Colisée (colisee.json) est périmé : python scripts/maps/build_gate_scene.py' }
         }
-        if ($Scene -like 'essai-1016-*') {
+        if ($Scene -like 'essai-101*') {
             # Les cartes d'essai de l'exploration sont écrites par script, carte de Core et scène du même plan.
             & (Get-Python) (Join-Path $root 'scripts\maps\build_essai_maps.py') --check
             if ($LASTEXITCODE -ne 0) { Fail "Les cartes d'essai de l'exploration sont périmées : python scripts/maps/build_essai_maps.py" }
@@ -290,8 +331,10 @@ if ($Unreal) {
             if (Test-Path $measureFile) { Remove-Item $measureFile }
 
             Write-Host "== Scène « $Scene » : captures et mesure de cadence (rendu hors écran, 1920 × 1080) ==" -ForegroundColor Cyan
+            # Une rencontre engagée au lancement de l'arène : le combat monté, figé sur son déploiement.
+            $engaged = if ($Encounter) { "-JadgRencontre=$Encounter" } else { '-JadgSansRencontre' }
             & $editorCmd "$uproject" $sceneData.map -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
-                "-JadgCapture=$output" "-JadgHours=$($sceneData.hours -join ',')" "-JadgMeasure=$MeasureSeconds" -stdout -FullStdOutLogOutput
+                "-JadgCapture=$output" "-JadgHours=$($sceneData.hours -join ',')" "-JadgMeasure=$MeasureSeconds" $engaged "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
             if ($LASTEXITCODE -ne 0) { Fail "La capture a échoué (code $LASTEXITCODE)." }
             if (-not (Test-Path $measureFile)) { Fail "La capture n'a pas écrit $measureFile." }
             foreach ($shot in $sceneData.shots) {

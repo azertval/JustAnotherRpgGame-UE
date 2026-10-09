@@ -60,6 +60,14 @@ struct FJadgChoice
 	int32 Dc = 0;
 };
 
+/// L'issue d'une rencontre, telle que le combat la rend (`core::CombatOutcome`).
+enum class EJadgOutcome : uint8
+{
+	Victory,
+	Flight,
+	Defeat,
+};
+
 /// Un membre du groupe, pour le HUD.
 struct FJadgMember
 {
@@ -188,13 +196,25 @@ public:
 	 * @brief La rencontre qu'un dialogue ou une interaction vient d'engager ; vide s'il n'y en a pas.
 	 *
 	 * C'est la **bascule vers le combat** : tant qu'elle tient, la carte est gelée et l'heure ne
-	 * passe pas. Le combat lui-même est le LOT-1017 ; d'ici là le groupe attend dans l'arène vide,
-	 * et `LeaveEncounter` le ramène, sans victoire ni défaite.
+	 * passe pas. Le combat se joue dans l'arène (`AJadgCombat`, LOT-1017), puis `ResolveEncounter`
+	 * écrit son issue.
 	 */
 	FString Encounter() const { return EncounterId; }
 
-	/// Quitte la rencontre engagée, sans issue : la carte se dégèle.
+	/// Engage la rencontre @p Id sans dialogue : une capture de l'arène en combat, un test.
+	void EngageEncounter(const FString& Id) { Engage(Id); }
+
+	/// Quitte la rencontre engagée, sans issue : la carte se dégèle (les tests de l'exploration).
 	void LeaveEncounter();
+
+	/**
+	 * @brief Écrit l'issue de la rencontre engagée (`core::endEncounter`) : une victoire acquiert
+	 *        `encounter/<id>/won`, que les dialogues et les quêtes lisent ; la carte se dégèle.
+	 *
+	 * Les points de vie et les lancers que le combat a laissés sont écrits sur les fiches par le
+	 * combat lui-même, avant (`AJadgCombat`).
+	 */
+	void ResolveEncounter(EJadgOutcome Outcome);
 
 	// --- Le groupe ----------------------------------------------------------------------------
 
@@ -211,9 +231,12 @@ public:
 	/// Ce que le HUD annonce : un portail clos, une étape de quête. Vide passé son délai.
 	FString Notice() const;
 
-private:
+	/// L'état de Core (`Game/JadgExplorationState.h`, qui l'inclut avant le moteur) : hors de cet
+	/// en-tête, qui ne doit pas montrer Core après le moteur.
 	struct FState;
-	/// L'état de Core : hors de l'en-tête, qui ne doit pas montrer Core après le moteur.
+	FState& CoreState() const { return *State; }
+
+private:
 	TSharedPtr<FState> State;
 
 	TArray<FString> Errors;

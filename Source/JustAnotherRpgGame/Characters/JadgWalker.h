@@ -26,8 +26,13 @@ class UStaticMeshComponent;
  * meneur (`AJadgParty`, LOT-1016). Un personnage qui est une entité de la carte de Core
  * (`EntityId`, un PNJ) se pose sur la case de son entité et ne paraît que si elle est présente.
  *
- * Les personnages ne se bloquent pas entre eux : la file du groupe les tient à distance, et un
- * meneur qui fait demi-tour ne reste pas coincé derrière ses suiveurs.
+ * **Les personnages se bloquent** (LOT-1017, dette du LOT-1016) : la capsule de chacun bloque
+ * celle des autres, membres du groupe et PNJ ; l'évitement réciproque du mouvement (RVO du
+ * `CharacterMovementComponent`) les fait s'écarter l'un de l'autre au lieu de se pousser, et un
+ * meneur qui fait demi-tour contourne ses suiveurs. **En combat** (`SetInCombat`), c'est Core qui
+ * tient l'espace — les volumes, l'allonge, les places où l'on finit — : la capsule ne bloque plus
+ * les autres personnages et l'évitement se coupe, pour que la figurine suive exactement le chemin
+ * que la règle a payé.
  */
 UCLASS()
 class AJadgWalker : public ACharacter
@@ -80,8 +85,34 @@ public:
 	/// Vrai si le corps vient de l'objet personnalisable Mutable (sinon, du maillage posé tel quel).
 	bool bFromCreator = false;
 
-	/// Joue une fois un clip du créateur (`attack`, `hit`…), puis revient au repos. Faux s'il n'existe pas.
+	/// Joue une fois un clip du créateur (`attack`, `hit`…), puis revient au repos à sa fin. Faux
+	/// s'il n'existe pas.
 	bool PlayOnce(FName Clip);
+
+	/// Joue une fois un clip et reste sur sa dernière pose (`death`) jusqu'à `ReturnToRest`.
+	bool PlayAndHold(FName Clip);
+
+	/// Revient au repos, quelle que soit la pose tenue.
+	void ReturnToRest();
+
+	/// Vrai tant qu'un clip joué une fois n'est pas fini, ou qu'une pose est tenue.
+	bool IsPlayingOnce() const { return bHolding || OnceUntil > 0.0; }
+
+	/// Vrai si une pose est tenue (`PlayAndHold`).
+	bool IsHolding() const { return bHolding; }
+
+	/// La durée d'un clip du créateur, en secondes ; 0 s'il n'existe pas.
+	float ClipSeconds(FName Clip) const;
+
+	/// L'instant d'impact d'un clip (`ClipKeys`), ou la moitié de sa durée s'il n'en a pas.
+	float ImpactSeconds(FName Clip) const;
+
+	/// Passe le personnage en combat, ou l'en sort (voir la description de la classe).
+	void SetInCombat(bool bInCombat);
+
+	/// La capsule bloque-t-elle les autres personnages ? Faux le temps qu'une file posée sur un
+	/// seul point (le maillage de navigation pas encore prêt) se range : sinon ils se repoussent.
+	void SetBlocksCharacters(bool bBlocks);
 
 	/// Envoie le personnage vers un point du maillage de navigation ; il s'arrête à
 	/// @p AcceptanceRadius centimètres du but.
@@ -108,6 +139,9 @@ public:
 private:
 	bool bWalking = false;
 	int32 PatrolIndex = 0;
+	/// L'instant (temps du monde) où le clip joué une fois s'achève ; 0 : aucun.
+	double OnceUntil = 0.0;
+	bool bHolding = false;
 
 	void Play(UAnimSequence* Clip);
 };

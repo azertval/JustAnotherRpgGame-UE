@@ -22,9 +22,12 @@ class UTexture2D;
  * | en haut au centre | l'annonce du moment : un passage fermé, une étape de quête |
  * | en bas au centre | l'invite de ce que le meneur peut solliciter |
  * | en bas | le dialogue : le portrait de qui parle et son nom, le jet qui vient d'être joué, la réplique, les réponses numérotées |
- * | au centre | la rencontre engagée, dans l'arène vide, et la touche qui en ramène |
+ * | en combat, à gauche | les combattants des deux camps, points de vie, le combattant actif marqué |
+ * | en combat, en bas | le tour : qui joue, les mètres qui restent, la cible et ses circonstances, les capacités et leurs lancers, les touches, le refus du moment, le journal |
+ * | en combat, au centre | l'issue, le temps qu'elle reste à l'écran |
  *
- * Il ne tient aucun état : tout est lu, à chaque trame, dans `UJadgExploration`. Seuls les
+ * Il ne tient aucun état : tout est lu, à chaque trame, dans `UJadgExploration` et, en combat, dans
+ * `AJadgCombat` (LOT-1017) — c'est l'interface de travail du combat, pas celle du LOT-1020. Seuls les
  * portraits sont gardés : un portrait est une image du kit de son personnage (`portrait.png`), lue
  * une fois dans son fichier — rien n'en est importé dans le projet.
  */
@@ -50,4 +53,7 @@ private:
 	float WriteWrapped(const FString& Text, float X, float Y, float Width, const FLinearColor& Colour, float Scale) const;
 
 	float Measure(const FString& Text, float Scale) const;
+
+	/// Le panneau du combat ; faux s'il n'y a pas de combat monté.
+	bool DrawCombat(float Unit);
 };

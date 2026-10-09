@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # SPDX-FileCopyrightText: 2026 Valentin Eloy
 # SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
-"""Écrit les cartes d'essai de l'exploration (LOT-1016) : deux cartes de Core sous leurs deux
-formes, et une arène vide.
+"""Écrit les cartes d'essai de l'exploration (LOT-1016) et l'arène du combat (LOT-1017) : trois
+cartes de Core sous leurs deux formes.
 
 Le LOT-1016 fait jouer une carte de Core — ses portails, ses PNJ, ses lumières, posés sur des
 cases — dans une carte du moteur. Tant que le format de carte du LOT-1018 n'existe pas, les deux
@@ -20,8 +20,12 @@ dialogues et sa quête livrés (`Source/Elements/World`) :
   déclenche le garde, un passage condamné, un passage que la libération de l'enfant ouvre, et le
   maître d'arène, dont le dialogue engage une rencontre.
 
-La troisième scène, `essai-1016-arene`, ne joue aucune carte de Core : c'est l'**arène vide** où
-mène la bascule vers le combat tant que le combat n'existe pas (LOT-1017).
+La troisième, `essai/arene` (scène `essai-1017-arene`), est le **sable** où la bascule vers le
+combat mène (LOT-1017) : la carte de Core y porte ce que le combat lit — la zone de combat
+(`combatZone`, la carte entière), les quatre points d'entrée du groupe (`arenaEntry`, camp allié,
+rangs 0 à 3) et le marqueur de rencontre (`encounter`) autour duquel chaque rencontre de la série
+se dresse —, et quatre piliers de deux cases sur deux, qui coupent la vue et se contournent.
+L'exploration ne la joue pas : le groupe y entre par la rencontre, et en sort par son issue.
 
 Un PNJ nomme sa figurine par son dossier depuis `Assets/` : le jeu y lit son portrait quand les
 kits sont sur le poste. Son maillage, lui, reste le pantin des données d'essai.
@@ -74,14 +78,23 @@ ETALS_PLAN = """
 ################
 """
 
+# Le sable : 20 × 14 cases (30 × 21 m). `1` à `4`, le groupe par rang ; `X`, le marqueur de
+# rencontre : les bandits s'y dressent à une case à l'ouest (contact) et à l'est (archers).
 ARENE_PLAN = """
-############
-#..........#
-#..........#
-#....E.....#
-#..........#
-#..........#
-############
+####################
+#..................#
+#..................#
+#........##........#
+#........##........#
+#..1...............#
+#..2...............#
+#..3...........X...#
+#..4...............#
+#........##........#
+#........##........#
+#..................#
+#..................#
+####################
 """
 
 PARVIS_PLAN = """
@@ -164,20 +177,31 @@ MAPS = {
              "comment": "La carte entière depuis le sud : le point d'arrivée à l'ouest, le passage condamné au nord, celui que la quête ouvre à l'est."},
         ],
     },
-}
-
-# L'arène vide : une scène sans carte de Core.
-ARENA = {
-    "scene": "essai-1016-arene",
-    "name": "Essai1016Arene",
-    "map": "/Game/Maps/Essai1016Arene",
-    "plan": ARENE_PLAN,
-    "marks": {"E": {"entry": True}},
-    "zones": [],
-    "shots": [
-        {"id": "arene", "target": [9.0, 1.0, 5.25], "heading": 0.0, "pitch": 42.0, "distance": 18.0,
-         "comment": "L'arène vide, depuis le sud : le groupe y attend le combat du LOT-1017."},
-    ],
+    "essai/arene": {
+        "scene": "essai-1017-arene",
+        "name": "Essai1017Arene",
+        "plan": ARENE_PLAN,
+        "marks": {
+            # Le groupe entre par ses points d'entrée, le meneur en tête (core::partyDeploymentOn).
+            "1": {"type": "arenaEntry", "side": "allies", "rank": 0, "entry": True},
+            "2": {"type": "arenaEntry", "side": "allies", "rank": 1},
+            "3": {"type": "arenaEntry", "side": "allies", "rank": 2},
+            "4": {"type": "arenaEntry", "side": "allies", "rank": 3},
+            # Le marqueur de la première rencontre de la série ; les suivantes s'y dressent aussi
+            # (core::encounterTriggerOn : le premier marqueur de la carte).
+            "X": {"type": "encounter", "encounterId": "arene-bandits", "respawns": True},
+        },
+        # La zone de combat : la carte entière, le sable et son enceinte (core::cropLevelToZone).
+        "zones": [
+            {"type": "combatZone", "x": 0, "y": 0, "width": 20, "height": 14, "name": "sable"},
+        ],
+        "shots": [
+            {"id": "arene", "target": [15.0, 1.0, 10.5], "heading": 0.0, "pitch": 48.0, "distance": 30.0,
+             "comment": "Le sable entier depuis le sud, au cadrage du joueur : le groupe à l'ouest, les bandits autour de leur marqueur à l'est, les piliers entre eux."},
+            {"id": "arene-melee", "target": [12.0, 1.0, 10.5], "heading": 20.0, "pitch": 38.0, "distance": 16.0,
+             "comment": "Le centre du sable, plus près : les piliers et l'aperçu de travail (chemin, portée, cibles)."},
+        ],
+    },
 }
 
 LIGHTING = {
@@ -267,9 +291,9 @@ def level_text(identifier: str, spec: dict) -> str:
 """
 
 
-def scene_text(identifier: str | None, spec: dict) -> str:
+def scene_text(identifier: str, spec: dict) -> str:
     """La description de scène : le sol, les murs, le mobilier, les quatre du groupe, les PNJ, les
-    cadrages. Sans `identifier`, la scène ne joue aucune carte de Core (l'arène vide)."""
+    cadrages."""
     rows = rows_of(spec["plan"])
     entities, entry = entities_of(spec)
     width, height = len(rows[0]) * CELL, len(rows) * CELL
@@ -287,6 +311,8 @@ def scene_text(identifier: str | None, spec: dict) -> str:
     characters = [{"id": f"groupe-{rank + 1}", "appearance": HEROES[rank], "walkSpeed": 3.0,
                    "position": centre(*entry), "heading": 90.0, "party": rank}
                   for rank in range(4)]
+    # Les adversaires d'une arène ne sont pas dans la scène : le combat les pose depuis la
+    # rencontre (LOT-1017).
     characters += [{"id": f"pnj-{entity['id']}", "appearance": PUPPET, "walkSpeed": 3.0,
                     "position": centre(entity["x"], entity["y"]),
                     "heading": entity["heading"], "entity": entity["id"]}
@@ -294,14 +320,11 @@ def scene_text(identifier: str | None, spec: dict) -> str:
     scene = {
         "version": 1,
         "name": spec["name"],
-        "comment": (f"Carte d'essai de l'exploration (LOT-1016), écrite par scripts/maps/build_essai_maps.py, jamais à "
-                    f"la main : la carte de Core « {identifier} » ({LEVELS_ROOT}) et cette scène viennent du même plan. "
-                    f"Elle ne lit aucun kit d'assets. Même repère et mêmes champs que porte-1012.json."
-                    if identifier else
-                    "L'arène vide de l'exploration (LOT-1016), écrite par scripts/maps/build_essai_maps.py, jamais à la "
-                    "main : où mène la bascule vers le combat tant que le combat n'existe pas (LOT-1017). Elle ne joue "
-                    "aucune carte de Core et ne lit aucun kit d'assets."),
-        "map": f"/Game/Maps/Levels/{identifier}" if identifier else spec["map"],
+        "comment": (f"Carte d'essai de l'exploration (LOT-1016) ou du combat (LOT-1017), écrite par "
+                    f"scripts/maps/build_essai_maps.py, jamais à la main : la carte de Core « {identifier} » "
+                    f"({LEVELS_ROOT}) et cette scène viennent du même plan. Elle ne lit aucun kit d'assets. Même "
+                    f"repère et mêmes champs que porte-1012.json."),
+        "map": f"/Game/Maps/Levels/{identifier}",
         "assetsRoot": "Source/Test/Fixtures/Meshes/Assets",
         "level": {"id": identifier, "root": LEVELS_ROOT, "origin": [0.0, 0.0], "cell": CELL},
         "daylight": "Common/Lighting/daylight.json",
@@ -315,8 +338,6 @@ def scene_text(identifier: str | None, spec: dict) -> str:
         "shots": spec["shots"],
         "hours": ["12:00", "22:00"],
     }
-    if identifier is None:
-        del scene["level"]
     head = json.dumps({key: value for key, value in scene.items() if key not in ("objects", "characters", "shots")},
                       indent=2, ensure_ascii=False)
     # Une ligne par objet, par personnage, par cadrage : le fichier se relit et se compare.
@@ -331,7 +352,6 @@ def files() -> dict[Path, str]:
     for identifier, spec in MAPS.items():
         written[LEVELS / f"{identifier}.json"] = level_text(identifier, spec)
         written[SCENES / f"{spec['scene']}.json"] = scene_text(identifier, spec)
-    written[SCENES / f"{ARENA['scene']}.json"] = scene_text(None, ARENA)
     return written
 
 

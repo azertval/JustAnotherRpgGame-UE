@@ -34,10 +34,13 @@ class UJadgExploration;
  * drapeaux, les lumières posées comme entité `light`, le contour de ce que le meneur peut
  * solliciter.
  *
- * **La bascule vers le combat** : une rencontre engagée (`UJadgExploration::Encounter`) ouvre
- * l'arène vide (`EmptyArenaMap`, `Config/DefaultGame.ini`). Le combat est le LOT-1017 : dans
- * l'arène, la touche d'interaction quitte la rencontre sans issue et rouvre la carte quittée, le
- * groupe là où il était.
+ * **La bascule vers le combat** : une rencontre engagée (`UJadgExploration::Encounter`) ouvre la
+ * carte d'arène (`ArenaMap`, `Config/DefaultGame.ini`). Dans l'arène, le groupe ne joue pas la
+ * carte de Core de l'arène en exploration — la session d'exploration garde la carte quittée,
+ * gelée — : il crée le combat (`AJadgCombat`, LOT-1017), qui monte la rencontre sur la carte de
+ * Core que nomme le repère. À l'issue, le combat l'écrit et rouvre la carte quittée, le groupe là
+ * où il était (`ReturnFromArena`). `-JadgRencontre=<id>` engage une rencontre au lancement de
+ * l'arène elle-même : une capture de l'arène en combat.
  */
 UCLASS(config = Game)
 class AJadgParty : public AInfo
@@ -47,12 +50,15 @@ class AJadgParty : public AInfo
 public:
 	AJadgParty();
 
-	/// La carte du moteur où mène une rencontre engagée, tant que le combat n'existe pas.
+	/// La carte du moteur où se joue une rencontre engagée (LOT-1017).
 	UPROPERTY(config)
-	FString EmptyArenaMap;
+	FString ArenaMap;
 
-	/// Vrai si la carte en cours est l'arène vide d'une rencontre engagée.
+	/// Vrai si la carte en cours est la carte d'arène.
 	bool InArena() const;
+
+	/// Rouvre la carte que la rencontre a fait quitter ; le groupe y est là où il était.
+	void ReturnFromArena();
 
 	/// Le groupe de la carte, ou rien avant que le mode de jeu ne l'ait créé.
 	static AJadgParty* Find(const UWorld* World);
@@ -132,4 +138,12 @@ private:
 	void RefreshEntities();
 	void SetOutlined(const FString& EntityId, bool bOutlined);
 	void FollowWithCamera() const;
+	/// Monte le combat de la rencontre engagée ; faux tant que le maillage de navigation de l'arène
+	/// n'est pas prêt (il se construit après le lancement de la carte), et le groupe réessaie.
+	bool BeginCombat();
+	bool bCombatPending = false;
+	/// Vrai tant que des membres posés sur un même point ne se bloquent pas encore.
+	bool bStackedNow = false;
+	void SetStacked(bool bStacked);
+	int32 CombatTries = 0;
 };

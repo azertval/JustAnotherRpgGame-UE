@@ -1,0 +1,59 @@
+{
+  "id": "combattant-de-l-arene",
+  "name": "Combattant de l'arène",
+  "source": "original",
+  "status": {
+    "provisoire": true,
+    "raison": "LOT-1017 : fiche provisoire pour jouer la serie de l'arene dans le moteur, copiee de heros-mage (corps manny), l'arme de la creature prise aux maitres de Weapons ; ecrite par l'assistant, sans que l'auteur l'ait vue.",
+    "retraitSi": "LOT-1024 : le createur d'especes et d'humanoides livre la fiche de cette creature"
+  },
+  "creator": "humanoid",
+  "clips": {
+    "attack": {
+      "key": 0.4
+    },
+    "cast": {
+      "key": 0.5
+    }
+  },
+  "body": "manny",
+  "head": "manny",
+  "height": 1.8,
+  "colors": {
+    "skin": [
+      0.8,
+      0.65,
+      0.55
+    ],
+    "hair": [
+      0.6,
+      0.25,
+      0.08
+    ],
+    "eyes": [
+      0.2,
+      0.5,
+      0.3
+    ]
+  },
+  "pieces": {
+    "torso": "none",
+    "legs": "none",
+    "feet": "none",
+    "hair": "none"
+  },
+  "weapons": {
+    "main-hand": "Weapons/gladiator-spear",
+    "off-hand": "Weapons/arena-shield"
+  },
+  "metahuman": {
+    "bodyConstraints": {
+      "height": 180.0
+    },
+    "skin": {
+      "u": 0.25,
+      "v": 0.35,
+      "roughness": 0.7
+    }
+  }
+}

@@ -9,6 +9,8 @@
 #include "Characters/JadgParty.h"
 
 #include "Characters/JadgWalker.h"
+#include "Combat/JadgCombat.h"
+#include "Components/CapsuleComponent.h"
 #include "Components/PrimitiveComponent.h"
 #include "Engine/GameInstance.h"
 #include "Engine/World.h"
@@ -17,6 +19,7 @@
 #include "GameFramework/PlayerController.h"
 #include "JustAnotherRpgGame.h"
 #include "Kismet/GameplayStatics.h"
+#include "Misc/CommandLine.h"
 #include "Misc/PackageName.h"
 #include "NavigationSystem.h"
 #include "Player/JadgCameraPawn.h"
@@ -41,6 +44,9 @@ namespace
 	/// La distance à laquelle le meneur s'arrête de ce qu'il va solliciter, en cases : dans la
 	/// portée de Core (`core::INTERACTION_REACH_CELLS`, 1,5 case), hors de la case de la cible.
 	constexpr double ApproachCells = 1.0;
+
+	/// Les trames où le combat de l'arène se remonte, le temps que son maillage de navigation soit prêt.
+	constexpr int32 MountTries = 600;
 }
 
 struct AJadgParty::FState
@@ -115,6 +121,16 @@ void AJadgParty::BeginPlay()
 	}
 	Members.Sort([](const AJadgWalker& A, const AJadgWalker& B) { return A.PartyRank < B.PartyRank; });
 
+	if (Frame != nullptr && Exploration != nullptr && InArena())
+	{
+		// L'arène : sa carte de Core est celle du combat, pas de l'exploration, qui garde la carte
+		// quittée. Le combat pose chacun.
+		bLinedUp = true;
+		bCombatPending = !BeginCombat();
+		FollowWithCamera();
+		UE_LOG(LogJadg, Display, TEXT("[Groupe] %d membre(s) dans l'arène « %s »"), Members.Num(), *Frame->LevelId);
+		return;
+	}
 	if (Frame != nullptr && Exploration != nullptr)
 	{
 		if (Exploration->EnterMap(Frame->LevelId, Frame->LevelsRoot))
@@ -138,6 +154,44 @@ void AJadgParty::BeginPlay()
 	FollowWithCamera();
 	UE_LOG(LogJadg, Display, TEXT("[Groupe] %d membre(s), %d entité(s) montrée(s), carte de Core « %s »"), Members.Num(),
 		EntityActors.Num(), Frame != nullptr ? *Frame->LevelId : TEXT(""));
+}
+
+bool AJadgParty::BeginCombat()
+{
+	FString Wanted;
+	if (Exploration->Encounter().IsEmpty() && FParse::Value(FCommandLine::Get(), TEXT("JadgRencontre="), Wanted))
+	{
+		Exploration->EngageEncounter(Wanted);
+	}
+	if (Exploration->Encounter().IsEmpty())
+	{
+		UE_LOG(LogJadg, Warning, TEXT("[Groupe] l'arène s'ouvre sans rencontre engagée : rien ne s'y joue"));
+		return true;
+	}
+	uint64 Seed = 1;
+	FParse::Value(FCommandLine::Get(), TEXT("JadgSeed="), Seed);
+	AJadgCombat* Combat = AJadgCombat::Find(GetWorld());
+	if (Combat == nullptr)
+	{
+		Combat = GetWorld()->SpawnActor<AJadgCombat>();
+	}
+	FString Error;
+	if (Combat == nullptr || !Combat->Mount(Exploration->Encounter(), Seed, true, false, Error))
+	{
+		// Le maillage de navigation de l'arène se construit après son lancement : on réessaie.
+		if (++CombatTries < MountTries)
+		{
+			return false;
+		}
+		UE_LOG(LogJadg, Error, TEXT("[Groupe] le combat « %s » ne se monte pas : %s ; la rencontre est quittée"), *Exploration->Encounter(), *Error);
+		Exploration->LeaveEncounter();
+		return true;
+	}
+	UE_LOG(LogJadg, Display, TEXT("[Groupe] combat monté à la tentative %d"), CombatTries + 1);
+	// Une capture de l'arène fige le combat sur son déploiement.
+	FString Ignored;
+	Combat->SetPaused(FParse::Value(FCommandLine::Get(), TEXT("JadgCapture="), Ignored));
+	return true;
 }
 
 void AJadgParty::GatherEntities()
@@ -226,6 +280,7 @@ void AJadgParty::PlaceParty(const FVector2D& LeaderCell)
 	const FVector Back = -FRotator(0.0f, Yaw, 0.0f).Vector();
 	const double Spacing = core::FollowTrail::SPACING_CELLS * (Frame != nullptr ? Frame->CellSize : DefaultCell);
 	FVector Last = Ground;
+	bool bStacked = !bLinedUp;
 	for (int32 Rank = 1; Rank < Members.Num(); ++Rank)
 	{
 		FVector Spot;
@@ -233,7 +288,20 @@ void AJadgParty::PlaceParty(const FVector2D& LeaderCell)
 		{
 			Last = Spot;
 		}
+		bStacked = bStacked || FVector::Dist2D(Last, Ground) < 1.0;
 		Members[Rank]->StandOn(Last, Yaw);
+	}
+	// Des personnages posés sur un même point ne se repoussent pas : la dérive déplacerait le meneur
+	// de la case que Core lui donne. Leurs capsules se bloquent de nouveau une fois écartés (`Tick`).
+	SetStacked(bStacked);
+}
+
+void AJadgParty::SetStacked(bool bStacked)
+{
+	bStackedNow = bStacked;
+	for (const TObjectPtr<AJadgWalker>& Member : Members)
+	{
+		Member->SetBlocksCharacters(!bStacked);
 	}
 }
 
@@ -257,6 +325,16 @@ void AJadgParty::Tick(float DeltaSeconds)
 	AJadgWalker* Head = Leader();
 	if (Exploration == nullptr || bTravelling)
 	{
+		return;
+	}
+	if (InArena())
+	{
+		if (bCombatPending)
+		{
+			bCombatPending = !BeginCombat();
+		}
+		// Le combat mène ; la carte quittée reste gelée tant que la rencontre tient.
+		Exploration->Step(nullptr, false, DeltaSeconds);
 		return;
 	}
 
@@ -290,24 +368,18 @@ void AJadgParty::Tick(float DeltaSeconds)
 
 	if (!Exploration->Encounter().IsEmpty() && !Exploration->InDialogue())
 	{
-		if (!InArena())
+		// La bascule vers le combat : la carte d'arène (LOT-1017).
+		if (FPackageName::DoesPackageExist(ArenaMap))
 		{
-			// La bascule vers le combat : l'arène vide, tant que le combat n'existe pas (LOT-1017).
-			if (FPackageName::DoesPackageExist(EmptyArenaMap))
+			if (Head != nullptr)
 			{
-				Open(EmptyArenaMap);
-				return;
+				Head->StopWalking();
 			}
-			UE_LOG(LogJadg, Error, TEXT("[Groupe] l'arène vide « %s » n'existe pas : la rencontre est quittée"), *EmptyArenaMap);
-			Exploration->LeaveEncounter();
-		}
-		else if (bInteract)
-		{
-			// Dans l'arène, la touche d'interaction ramène sur la carte quittée.
-			Exploration->LeaveEncounter();
-			Open(AJadgMapFrame::MapPackage(Exploration->MapId()));
+			Open(ArenaMap);
 			return;
 		}
+		UE_LOG(LogJadg, Error, TEXT("[Groupe] la carte d'arène « %s » n'existe pas : la rencontre est quittée"), *ArenaMap);
+		Exploration->LeaveEncounter();
 	}
 
 	const bool bOnCoreMap = Frame != nullptr && Head != nullptr;
@@ -332,6 +404,22 @@ void AJadgParty::Tick(float DeltaSeconds)
 
 	State->Trail.record(core::TrailPoint{static_cast<float>(Cell.X), static_cast<float>(Cell.Y)});
 	FollowLeader();
+	if (bStackedNow)
+	{
+		bool bApart = true;
+		for (int32 A = 0; A < Members.Num(); ++A)
+		{
+			for (int32 B = A + 1; B < Members.Num(); ++B)
+			{
+				const float Gap = Members[A]->GetCapsuleComponent()->GetScaledCapsuleRadius() + Members[B]->GetCapsuleComponent()->GetScaledCapsuleRadius();
+				bApart = bApart && FVector::Dist2D(Members[A]->Feet(), Members[B]->Feet()) > Gap + 5.0;
+			}
+		}
+		if (bApart)
+		{
+			SetStacked(false);
+		}
+	}
 	if (Frame != nullptr)
 	{
 		RefreshEntities();
@@ -470,7 +558,19 @@ void AJadgParty::Open(const FString& Package)
 
 bool AJadgParty::InArena() const
 {
-	return !EmptyArenaMap.IsEmpty() && GetWorld()->GetOutermost()->GetName() == EmptyArenaMap;
+	return !ArenaMap.IsEmpty() && GetWorld()->GetOutermost()->GetName() == ArenaMap;
+}
+
+void AJadgParty::ReturnFromArena()
+{
+	const FString MapId = Exploration != nullptr ? Exploration->MapId() : FString();
+	const FString Package = AJadgMapFrame::MapPackage(MapId);
+	if (MapId.IsEmpty() || !FPackageName::DoesPackageExist(Package))
+	{
+		UE_LOG(LogJadg, Warning, TEXT("[Groupe] pas de carte quittée où revenir (« %s ») : le groupe reste dans l'arène"), *MapId);
+		return;
+	}
+	Open(Package);
 }
 
 void AJadgParty::RefreshEntities()
