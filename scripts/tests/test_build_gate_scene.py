@@ -129,6 +129,8 @@ def test_la_carte_de_la_porte_joue_la_grille_de_ce_qu_elle_construit(tmp_path):
     assert not [w for w in warnings if "inatteignable" in w]
 
 
+@pytest.mark.skipif(not (gate.ASSETS / gate.PALAZZO).exists(),
+                    reason="les maîtres Meshy ne sont pas suivis par Git : ce contrôle se rejoue sur un poste qui les a")
 def test_les_fichiers_du_depot_sont_a_jour():
     assert gate.main(["--check"]) == 0
 
