@@ -1,6 +1,6 @@
 # Couverture des exigences
 
-**29 exigences en vigueur sur 322** sont citées par au moins un cas de test. Cette matrice est **engendrée** avec le reste du cahier : la colonne de gauche vient des déclarations des [spécifications](../Specification/README.md), celle de droite des identifiants `EX-…` que les tests citent dans leur commentaire ou leur corps. Une exigence sans cas est une exigence que **rien ne garde** : le cahier ne la cache pas, il la montre. Les exigences retirées ne sont pas comptées — aucun test ne doit les citer.
+**33 exigences en vigueur sur 331** sont citées par au moins un cas de test. Cette matrice est **engendrée** avec le reste du cahier : la colonne de gauche vient des déclarations des [spécifications](../Specification/README.md), celle de droite des identifiants `EX-…` que les tests citent dans leur commentaire ou leur corps. Une exigence sans cas est une exigence que **rien ne garde** : le cahier ne la cache pas, il la montre. Les exigences retirées ne sont pas comptées — aucun test ne doit les citer.
 
 ## Par famille
 
@@ -16,13 +16,13 @@
 | `EX-GP` | [Gameplay](../Specification/gameplay.md) | 7 | 1 | 6 |
 | `EX-IHM` | [Interface utilisateur (IHM)](../Specification/interface-ihm.md) | 34 | 0 | 34 |
 | `EX-INV` | [Inventaire et économie](../Specification/inventaire.md) | 8 | 0 | 8 |
-| `EX-LVL` | [Cartes & format](../Specification/niveaux.md) | 20 | 7 | 13 |
+| `EX-LVL` | [Cartes & format](../Specification/niveaux.md) | 29 | 11 | 18 |
 | `EX-NFR` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | 19 | 2 | 17 |
 | `EX-REG` | [Règles d20](../Specification/regles-d20.md) | 15 | 1 | 14 |
 | `EX-REN` | [Rendu & cible technique](../Specification/rendu-technique.md) | 31 | 0 | 31 |
 | `EX-RPG` | [Personnage et progression](../Specification/rpg.md) | 19 | 1 | 18 |
 | `EX-VIS` | [Vision & périmètre](../Specification/vision.md) | 9 | 0 | 9 |
-| **Total** | | **322** | **29** | **293** |
+| **Total** | | **331** | **33** | **298** |
 
 ## Exigence par exigence
 
@@ -311,6 +311,15 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 | `EX-LVL-028` | [Cartes & format](../Specification/niveaux.md) | — |
 | `EX-LVL-029` | [Cartes & format](../Specification/niveaux.md) | — |
 | `EX-LVL-030` | [Cartes & format](../Specification/niveaux.md) | — |
+| `EX-LVL-031` | [Cartes & format](../Specification/niveaux.md) | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](core-levels.md#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.CorePasseLesSectionsDeConstruction`](core-levels.md#formatv5testcorepasselessectionsdeconstruction) |
+| `EX-LVL-032` | [Cartes & format](../Specification/niveaux.md) | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](core-levels.md#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.UnPortailDuRezNeSeFranchitPasDepuisLEtage`](core-levels.md#formatv5testunportaildureznesefranchitpasdepuisletage) |
+| `EX-LVL-033` | [Cartes & format](../Specification/niveaux.md) | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](core-levels.md#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.UneZoneDeCombatV5SeLitDeSonVolume`](core-levels.md#formatv5testunezonedecombatv5selitdesonvolume) |
+| `EX-LVL-034` | [Cartes & format](../Specification/niveaux.md) | — |
+| `EX-LVL-035` | [Cartes & format](../Specification/niveaux.md) | — |
+| `EX-LVL-036` | [Cartes & format](../Specification/niveaux.md) | — |
+| `EX-LVL-037` | [Cartes & format](../Specification/niveaux.md) | — |
+| `EX-LVL-038` | [Cartes & format](../Specification/niveaux.md) | — |
+| `EX-LVL-039` | [Cartes & format](../Specification/niveaux.md) | [`FormatV5Test.UneV4SeLitSansEtageNiVolume`](core-levels.md#formatv5testunev4selitsansetagenivolume) |
 
 ### `EX-NFR`
 

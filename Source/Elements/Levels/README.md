@@ -1,55 +1,31 @@
 # Elements/Levels/
 
-Cartes du jeu, un fichier **JSON** par carte (`EX-LVL-001`, `EX-LVL-003`).
+Cartes du jeu, une **description texte** par carte (`EX-LVL-001`), au format `jadg-map`, version 5
+(`LOT-1018`, D-51, D-52) : ce que Core joue — la grille de collision, les couches de pièces, les
+entités sur leurs cases et à leur étage — et ce que le moteur construit — le terrain, les objets en
+mètres, les préfabriqués, le groupe, le ciel, la navigation, les cadrages. Spécification :
+`Documentation/Specification/niveaux.md` (§2) ; schéma :
+`Documentation/Specification/level.schema.json` ; guide :
+`Documentation/Guide/guide-cartes-moteur.md`.
 
-> **Vidé au `LOT-102`, repeuplé au `LOT-146`.** Le jeu quitte le pixel art : `coliseum.json` (`LOT-09`) et les quartiers
-> de `capital/` (`LOT-96`) sont partis avec l'art qu'ils posaient. Les cartes se dessinent à
-> l'éditeur, sous le **même découpage que les assets** — `<région>/<ville>/<zone>.json`, la
-> sous-zone sous son dossier de zone :
-> `central-empire/capital/arenarea.json`, `martpart.json`, `arenarea/arena-of-fate.json` et
-> `arenarea/arena-of-fate/undercroft.json`. Les cartes de principe de la démo (`LOT-146`) ont cédé
-> la place : le Colisée au `LOT-107`, Arenarea et Martpart à la **v0** de leur carte en maillages
-> le 5 octobre 2026 (`LOT-147`, `LOT-111`, encore à faire). Une carte a pour
-> identifiant son **chemin relatif** :
-> un portail vise `central-empire/capital/martpart`, et le graphe du monde comme le navigateur de
-> l'éditeur lisent les sous-dossiers.
+Les cartes suivent **le même découpage que les assets** — `<région>/<ville>/<zone>.json`, la
+sous-zone sous son dossier de zone : `central-empire/capital/arenarea.json`, `martpart.json`,
+`arenarea/arena-of-fate.json`, `arenarea/arena-of-fate/undercroft.json` et `catacombs.json`, les
+cinq cartes de la démo, **migrées de la v4 telles quelles** (`jadg_map.py --migrate`) ;
+`porte-1012.json`, la carte de la porte (`LOT-1012`), écrite par `scripts/maps/build_gate_scene.py`.
+Une carte a pour identifiant son **chemin relatif** : un portail vise
+`central-empire/capital/martpart`, et son niveau du moteur est `/Game/Maps/Levels/<identifiant>`.
 
-> **Format v4, au `LOT-EDITOR-12`.** Toute carte écrite ici est gardée en CI par
-> `LevelEditor --data Source/Elements --check`, et une carte d'un format antérieur se migre par
-> `LevelEditor --migrate`.
-> Schéma : `Documentation/Specification/level.schema.json` ; spécification :
-> `Documentation/Specification/niveaux.md`.
-
-> **L'éditeur fait foi, au `LOT-EDITOR-06`.** Ces cartes se modifient dans `LevelEditor` — à la
-> souris, ou par `LevelEditor --apply` —, qui ouvre ce dossier-ci et non la copie de la
-> construction. Aucun script n'y écrit. `LevelEditor` est resté dans l'ancien dépôt (D-58) : le
-> format de carte du nouveau moteur est le `LOT-1018`.
+- **Le texte est la source, le niveau une sortie.** `scripts/maps/build_level.py` construit le
+  niveau ; l'éditeur d'Unreal le retouche à la souris, et `scripts/maps/read_level.py` ramène dans
+  le texte ce qui est dans sa frontière. Ce qui ne se relit pas ne se fait pas dans l'éditeur.
+- Le **`name`** d'une carte est une clé de traduction, `map.<identifiant>.name`
+  (`map.central-empire.capital.martpart.name`), que chaque catalogue de `Localization/` porte.
+- La **forme canonique** (une case, un objet, une entité par ligne : un geste, une ligne de diff)
+  et le **contrôle de contenu** — portails appariés, arrivées citées, zones nommées, cases
+  inatteignables — sont ceux de `python scripts/maps/jadg_map.py --check`, en CI.
+- Les entités gardent leurs identifiants (`"id"`, jamais réemployés, `"nextEntityId"`) : quêtes,
+  drapeaux et sauvegardes citent une entité par `carte#id`.
 
 > **Ce `README.md` est le gardien du dossier (`LOT-123`).** Git ne garde pas un dossier vide : sans
-> lui, un `Levels/` sans aucune carte disparaîtrait du dépôt, et `hmi::resolveDataRoot` cesserait de
-> reconnaître l arbre des sources — la fenêtre se rabattrait en silence sur la copie que la
-> construction refait à côté de l exécutable. Un dossier **sans aucune carte** est un état légitime :
-> `LevelEditor --check` le dit (« 0 map ») et rend 0.
-
-- Le **`name`** d'une carte est une clé de traduction, `map.<identifiant>.name`
-  (`map.central-empire.capital.martpart.name`), que le bandeau du jeu traduit et que chaque catalogue de
-  `Localization/` doit porter : `LevelEditor --check` le vérifie (`LOT-EDITOR-07`).
-- Une carte est un objet JSON : `version`, `name`, `width`, `height`, et une liste **`tiles`**
-  d'objets `{ "x", "y", "type" }` — la grille de **collision**, entrée comprise, **déduite** des
-  pièces posées (`EX-LVL-020`). Les cases **vides** ne sont pas listées (absence = vide). Là où
-  l'auteur veut s'écarter de la déduction, la case figure dans **`forced`**.
-- Types de tuiles : `empty`, `solid`, `entry`, et le terrain du RPG (`LOT-08`) : `grass`, `dirt`,
-  `sand`, `water`, `deepWater`, `wall`, `cliff`, `bridge`, `stairs` ; et le vocabulaire de la
-  maquette : `pavement`, `alley`, `planks`, `flagstone`, `snow`, `mud`, `rubble`, `door`, `bush`,
-  `tree`, `rock`, `fence`, `lowWall`, `stall`, `crate`, `column`, `roof`, `tiers`, `pit`, `lava`
-  (leur règle de pas : `Documentation/Specification/niveaux.md`). Une carte porte **exactement
-  une** case `entry`, le point d'arrivée par défaut du héros.
-- `"layers"` : couches visibles `{ "name", "kind", …, "tiles" }` (`kind` : `ground`, `decor`), dont
-  chaque case `{ "x", "y", "type", "piece" }` nomme la **pièce** de la planche du lieu qu'on y voit
-  (`EX-LVL-019`) ; la propriété de couche `scene` nomme le lieu.
-- `"entities"` : entités `{ "id", "type", "x", "y", … }` — PNJ, portails, zones —, un `id` unique
-  jamais réemployé (`"nextEntityId"`, `EX-LVL-021`), leurs autres champs étant des propriétés libres
-  (`EX-LVL-017`, `EX-LVL-018`).
-- Le format est **versionné** (`"version"`, cf. `core::LEVEL_FORMAT_VERSION`) : toute version
-  passée se lit, le chargeur refuse proprement une version qu'il ne connaît pas, et l'écriture est
-  canonique — une case par ligne, un geste = une ligne de diff.
+> lui, un `Levels/` sans aucune carte disparaîtrait du dépôt.

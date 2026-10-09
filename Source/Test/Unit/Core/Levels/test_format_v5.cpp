@@ -95,7 +95,7 @@ const std::filesystem::path FIXTURES = std::filesystem::path{JADG_TEST_FIXTURES_
 
 /**
  * @brief Une description de carte v5 se lit : ses étages, l'étage et le volume de ses entités,
- *        ramenés au repère de la grille par son origine.
+ *        ramenés au repère de la grille par son origine (`EX-LVL-031`, `EX-LVL-032`, `EX-LVL-033`).
  * \castest{<b>Une carte v5 se lit, étages et volumes compris.</b><br/>
  * \tcat Unitaire · Format v5<br/>
  * \tcrit Critique<br/>
@@ -126,7 +126,7 @@ TEST(FormatV5Test, UneCarteV5SeLitEtagesEtVolumesCompris) {
 /**
  * @brief Les sections de construction (terrain, objets, lumières, notes) ne sont pas des
  *        propriétés de carte : Core les passe ; une couche garde sa hauteur en mètres et une entité
- *        ce que la scène lit d'elle (apparence, cap).
+ *        ce que la scène lit d'elle (apparence, cap) (`EX-LVL-031`).
  * \castest{<b>Core passe les sections de construction d'une v5.</b><br/>
  * \tcat Unitaire · Format v5<br/>
  * \tcrit Majeur<br/>
@@ -221,8 +221,8 @@ TEST(FormatV5Test, UnVolumeSeRameneAuxCasesDeSonEmprise) {
 }
 
 /**
- * @brief Une zone de combat v5 est un volume (`LOT-1017`, `LOT-1018`) : le montage d'une rencontre
- *        en tire sa grille tactique.
+ * @brief Une zone de combat v5 est un volume (`LOT-1017`, `LOT-1018`, `EX-LVL-033`) : le montage
+ *        d'une rencontre en tire sa grille tactique.
  * \castest{<b>Une zone de combat v5 se lit de son volume.</b><br/>
  * \tcat Unitaire · Format v5<br/>
  * \tcrit Majeur<br/>
@@ -241,8 +241,8 @@ TEST(FormatV5Test, UneZoneDeCombatV5SeLitDeSonVolume) {
 }
 
 /**
- * @brief Deux étages superposés (D-51) : à la verticale du portail du rez, le héros de l'étage ne
- *        le franchit pas ; redescendu sur la même case, il le franchit.
+ * @brief Deux étages superposés (D-51, `EX-LVL-032`) : à la verticale du portail du rez, le héros
+ *        de l'étage ne le franchit pas ; redescendu sur la même case, il le franchit.
  * \castest{<b>Un portail du rez ne se franchit pas depuis l'étage.</b><br/>
  * \tcat Unitaire · Format v5<br/>
  * \tcrit Critique<br/>
@@ -326,7 +326,8 @@ TEST(FormatV5Test, LaTraceDuGroupeSuitEnHauteur) {
 }
 
 /**
- * @brief Une v4 se lit toujours sous la v5 (`EX-LVL-005`) : elle n'a ni étage ni volume.
+ * @brief Une v4 se lit toujours sous la v5 (`EX-LVL-005`, `EX-LVL-039`) : elle n'a ni étage ni
+ *        volume.
  * \castest{<b>Une v4 se lit sans étage ni volume.</b><br/>
  * \tcat Unitaire · Format v5<br/>
  * \tcrit Majeur<br/>

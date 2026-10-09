@@ -19,9 +19,9 @@
 namespace core {
 
 /**
- * @brief Un **volume** de la carte, en mètres (format v5, `LOT-1018`) : une boîte alignée sur les
- *        axes, dans le repère de la grille — x vers les colonnes croissantes (l'est), y vers les
- *        lignes croissantes (le sud), z vers le haut, le coin de la case (0, 0) à l'origine.
+ * @brief Un **volume** de la carte, en mètres (format v5, `LOT-1018`, `EX-LVL-033`) : une boîte
+ * alignée sur les axes, dans le repère de la grille — x vers les colonnes croissantes (l'est), y
+ * vers les lignes croissantes (le sud), z vers le haut, le coin de la case (0, 0) à l'origine.
  *
  * Une zone de combat, un marqueur de rencontre, une zone de déploiement se décrivent ainsi dans une
  * carte du moteur, où le combat se joue en distance (`LOT-1017`) : la case n'en est plus que

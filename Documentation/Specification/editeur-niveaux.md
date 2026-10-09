@@ -1,6 +1,16 @@
 # Éditeur de cartes
 
-> Statut : **livré**. `LevelEditor` peint les couches d'une carte et ses étages, pose et renseigne
+> **Dans le nouveau moteur, cette page décrit l'ancien éditeur** (`LOT-1018`, D-52, D-58). Le
+> `LevelEditor` est resté dans l'ancien dépôt, qui se joue jusqu'à la recette (`LOT-1023`) ; il
+> n'est jamais entré dans celui-ci. Une carte s'y écrit en texte (format v5,
+> [`niveaux.md`](niveaux.md) §2), se construit en niveau par `scripts/maps/build_level.py` et se
+> retouche dans l'éditeur d'Unreal, dont `scripts/maps/read_level.py` relit la frontière
+> (`EX-LVL-034`, `EX-LVL-035`) ; le contrôle de contenu, les préfabriqués et le mode Quêtes y sont
+> repris (`EX-LVL-036` à `EX-LVL-038`). Les exigences ci-dessous gardent leurs identifiants : le
+> brouillon de carte de Core (`core::LevelDraft`) et ses tests les citent encore. Leur relecture
+> pour le nouvel éditeur se fait à la recette.
+
+> Statut (ancien dépôt) : **livré**. `LevelEditor` peint les couches d'une carte et ses étages, pose et renseigne
 > ses entités — jusqu'à ce qu'une quête y change (§21) —, puise ses pièces dans l'arborescence des
 > lieux (§22), écrit les quêtes à côté des cartes qu'elles traversent (§23), montre le graphe du
 > monde, avertit d'un terrain tactique invalide, et joue la carte en cours avec le moteur du jeu,

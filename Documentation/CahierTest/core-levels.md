@@ -38,6 +38,10 @@ Chaque exigence citée par un cas de cette page, avec les cas qui la citent ; la
 | `EX-LVL-017` | [`CouchesDeCarteTest.AllerRetourSurTroisCouchesEtDeuxEntites`](#couchesdecartetestallerretoursurtroiscouchesetdeuxentites), [`CouchesDeCarteTest.EntiteHorsBornesRefusee`](#couchesdecartetestentitehorsbornesrefusee), [`CouchesDeCarteTest.RedimensionnementEmporteCouchesEtEntites`](#couchesdecartetestredimensionnementemportecouchesetentites) |
 | `EX-LVL-018` | [`CouchesDeCarteTest.ChampsInconnusDUneCouchePreservesALaReecriture`](#couchesdecartetestchampsinconnusdunecouchepreservesalareecriture), [`CouchesDeCarteTest.ChampsInconnusDUneEntitePreservesALaReecriture`](#couchesdecartetestchampsinconnusduneentitepreservesalareecriture) |
 | `EX-LVL-025` | [`LevelDraftPiecesTest.UnEtageNeBloqueAucuneCase`](#leveldraftpiecestestunetagenebloqueaucunecase) |
+| `EX-LVL-031` | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.CorePasseLesSectionsDeConstruction`](#formatv5testcorepasselessectionsdeconstruction) |
+| `EX-LVL-032` | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.UnPortailDuRezNeSeFranchitPasDepuisLEtage`](#formatv5testunportaildureznesefranchitpasdepuisletage) |
+| `EX-LVL-033` | [`FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris`](#formatv5testunecartev5selitetagesetvolumescompris), [`FormatV5Test.UneZoneDeCombatV5SeLitDeSonVolume`](#formatv5testunezonedecombatv5selitdesonvolume) |
+| `EX-LVL-039` | [`FormatV5Test.UneV4SeLitSansEtageNiVolume`](#formatv5testunev4selitsansetagenivolume) |
 | `EX-NFR-040` | [`LevelWriterTest.SaveToFileVersDossierInexistantEchoueProprement`](#levelwritertestsavetofileversdossierinexistantechoueproprement), [`CouchesDeCarteTest.CarteDUneVersionFutureRefuseeAvecUnMessageExplicite`](#couchesdecartetestcarteduneversionfuturerefuseeavecunmessageexplicite), [`CouchesDeCarteTest.RoleDeCoucheInconnuRetombeSurLeSol`](#couchesdecartetestroledecoucheinconnuretombesurlesol) |
 
 ## test_format_v4.cpp
@@ -371,6 +375,8 @@ L'entrée s'accorde avec une case vide.
 
 *Critique · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:99`
 
+Exigences : `EX-LVL-031`, `EX-LVL-032`, `EX-LVL-033`
+
 Une carte v5 se lit, étages et volumes compris.
 
 **Étapes**
@@ -397,6 +403,8 @@ Une carte v5 se lit, étages et volumes compris.
 ### FormatV5Test.CorePasseLesSectionsDeConstruction
 
 *Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:130`
+
+Exigences : `EX-LVL-031`
 
 Core passe les sections de construction d'une v5.
 
@@ -452,6 +460,8 @@ Un volume se ramène aux cases de son emprise.
 
 *Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:226`
 
+Exigences : `EX-LVL-033`
+
 Une zone de combat v5 se lit de son volume.
 
 **Étapes**
@@ -470,6 +480,8 @@ Une zone de combat v5 se lit de son volume.
 ### FormatV5Test.UnPortailDuRezNeSeFranchitPasDepuisLEtage
 
 *Critique · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:246`
+
+Exigences : `EX-LVL-032`
 
 Un portail du rez ne se franchit pas depuis l'étage.
 
@@ -541,9 +553,9 @@ La trace du groupe suit en hauteur.
 
 ### FormatV5Test.UneV4SeLitSansEtageNiVolume
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:330`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:331`
 
-Exigences : `EX-LVL-005`
+Exigences : `EX-LVL-005`, `EX-LVL-039`
 
 Une v4 se lit sans étage ni volume.
 

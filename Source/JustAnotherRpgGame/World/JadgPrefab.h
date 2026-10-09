@@ -9,7 +9,7 @@
 #include "JadgPrefab.generated.h"
 
 /**
- * @brief Un **préfabriqué** posé sur une carte (LOT-1018, LOT-130) : un acteur composé, dont les
+ * @brief Un **préfabriqué** posé sur une carte (LOT-1018, LOT-130, `EX-LVL-037`) : un acteur composé, dont les
  *        objets sont déclarés en texte (`Source/Elements/Editor/Prefabs/<lieu>/<nom>.json`).
  *
  * `scripts/maps/build_level.py` pose cet acteur à la place que la description de la carte lui donne

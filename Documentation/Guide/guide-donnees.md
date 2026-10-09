@@ -83,12 +83,12 @@ les tests retrouvent la même forme d'arborescence quel que soit l'endroit d'où
 | `Rpg/schema/*.schema.json` | 29 schémas, dont `common.schema.json` que tous réutilisent | à la main (`LOT-32`, puis chaque lot qui ajoute une famille) |
 | `World/regions`, `World/locations` | l'atlas : 13 régions, 107 lieux | `sourcebook atlas` (`LOT-37`) |
 | `World/cities`, `World/dialogues`, `World/quests` | les plans de ville, les graphes de dialogue et les quêtes (`LOT-116`) | à la main et par l'éditeur |
-| `Levels/<région>/<ville>/<zone>.json` | les cartes (format v4) | l'éditeur, et lui seul ([Niveaux](guide-niveaux.md)) |
+| `Levels/<région>/<ville>/<zone>.json` | les cartes, une description par carte (format v5, `jadg-map`) : ce que Core joue et ce que le moteur construit | `jadg_map.py`, `read_level.py` après une retouche dans l'éditeur, et la main ([Les cartes dans le moteur](guide-cartes-moteur.md)) |
 | `Assets/` | images et polices : `Common/`, `Regions/`, `Entities/`, `Maps/`, `UI/`, `Fonts/`, chacun avec son manifeste. Git ne suit que les manifestes, les polices et `Entities/` : les **images** de `Common/`, `Regions/`, `Maps/` et `UI/` viennent des kits d'assets publiés en archives, installés par `scripts/fetch_assets.py` d'après `kits.lock.json` (voir plus bas) | les ateliers, jamais à la main |
 | `Maps/world-maps.json` | les positions relevées sur les cartes peintes : ancre d'une région, cadre, lieux, quartiers | relevé par Ctrl+clic dans l'écran « Carte » (`LOT-94`) |
 | `Localization/` | `fr.lang`, `en.lang`, `jadg_en.ts`, `rpg.glossary.csv` | à la main, Qt Linguist, `sourcebook glossaire` |
 | `Editor/Templates/` | quatre modèles de carte vide (`arena`, `blockout`, `interior`, `street`) | `LOT-EDITOR-08` |
-| `Editor/Prefabs/<niveau>/<nom>.json` | les préfabriqués de l'éditeur, rangés par niveau de l'arbre des lieux (`central-empire/capital/`, `central-empire/capital/arenarea/`…) : un préfabriqué sert à tout lieu qui descend du niveau qui le range (`LOT-124`) | l'éditeur, `--save-prefab` |
+| `Editor/Prefabs/<niveau>/<nom>.json` | les préfabriqués (format `jadg-prefab`, `LOT-1018`), rangés par niveau de l'arbre des lieux (`central-empire/capital/`, `central-empire/capital/arenarea/`…) : des objets autour d'une origine, qu'une carte pose d'un bloc | à la main, `build_gate_scene.py` (le Colisée) |
 | `Credits/credits.json` | l'écran des crédits | à la main |
 
 Deux conventions traversent tous les catalogues. Les **identifiants** sont en anglais, en
