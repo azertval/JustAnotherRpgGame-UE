@@ -176,7 +176,7 @@ qu'il rejoint :
 | descente des catacombes (fond de la prison) | (22-23, 4-6) | le niveau −1 et les catacombes |
 
 La chaîne — scripts, commandes, contrôles — est écrite au
-[guide des données](../../../../../Documentation/Guide/guide-donnees.md#larena-of-fate--la-chaîne-de-ses-trois-niveaux).
+[guide des données](../../../../../Documentation/Guide/guide-donnees.md#larena-of-fate--une-carte-à-trois-étages).
 
 **Le niveau −1** suit la conception ci-dessus : les **vestiaires** des gladiateurs à l'ouest, la
 **prison** à l'est, séparés par un mur plein. Ils ne communiquent que par la **galerie axiale**,
@@ -209,3 +209,22 @@ est l'un d'eux : ce lot reste à la `0.0.3`, et doit y atteindre sa **qualité f
 l'ouvre encore est écrit ci-dessus ; la clôture se fait sur la validation de l'auteur, sur le rendu
 du moteur, de jour comme de nuit. La recette de la `0.0.2.5` a rejoué la quête et la série sur ces
 trois cartes ([bilan](../../v0.0.2.5-passage-3d/bilan.md)).
+
+## Le portage au nouveau moteur (LOT-1022, 9 octobre 2026)
+
+L'Arena of Fate est désormais **une seule carte à trois étages** ([LOT-1022](../../v0.0.3-nouveau-moteur/lots/LOT-1022-portage-arena-of-fate-et-martpart.md), D-51) : le
+sable, les vestiaires et la prison (niveau −1, à −5,5 m), les catacombes (niveau −2, à −12,1 m),
+leurs pièces et leurs entités telles que les trois cartes de la v4 les posaient, un niveau de
+chargement par étage. Les escaliers sont aux mêmes cases ; ils relient les étages par les portails
+de la v4, qui visent désormais la carte elle-même. Rendu du moteur, **à juger par l'auteur à la
+recette** :
+
+- le sable, l'ensemble : [midi](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-ensemble-1200.png), [22 h](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-ensemble-2200.png) ;
+- le sable, au cadrage du joueur : [midi](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-sable-1200.png), [22 h](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-sable-2200.png) ;
+- le niveau −1, l'ensemble : [midi](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-vestiaires-ensemble-1200.png), [22 h](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-vestiaires-ensemble-2200.png) ;
+- le vestibule des vestiaires, au cadrage du joueur : [midi](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-vestiaires-1200.png), [22 h](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/arena-of-fate-vestiaires-2200.png).
+
+« Deux cartes, pas deux étages » (ci-dessus, D-21) est remplacé par D-51 : le sable et le niveau −1
+sont deux étages d'une carte. La série de l'arène se joue sur le sable (la carte d'arène du jeu) :
+`arene-bandits`, graine 2, y est gagnée au round 7, au clavier et à la souris
+([le déploiement](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/sable-combat-02.png), [l'issue](../../v0.0.3-nouveau-moteur/annexes/LOT-1022/captures/sable-combat-04.png)).

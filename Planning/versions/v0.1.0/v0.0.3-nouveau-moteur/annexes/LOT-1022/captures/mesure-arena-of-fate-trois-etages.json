@@ -1,0 +1,17 @@
+{
+  "map": "arena-of-fate",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 16.79,
+  "post": "",
+  "storeys": [0, 1, 2],
+  "storeyCount": 3,
+  "gpuMemoryMiB": {"used": 3663.9, "texturesStreaming": 175.9, "texturesNonStreaming": 1787.4},
+  "meshTextures": {"count": 118, "residentMiB": 82.5, "allMipsMiB": 237.0},
+  "meshes": {"count": 111, "triangles": 3419050, "resourceMiB": 97.2, "largest": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-arena-shell/StaticMeshes/SM_af-arena-shell.SM_af-arena-shell", "largestTriangles": 865214},
+  "captures": ["ensemble-1200.png", "sable-1200.png", "vestiaires-ensemble-1200.png", "vestiaires-1200.png", "catacombes-ensemble-1200.png", "catacombes-1200.png", "ensemble-2200.png", "sable-2200.png", "vestiaires-ensemble-2200.png", "vestiaires-2200.png", "catacombes-ensemble-2200.png", "catacombes-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.4, "frames": 1179, "fps": 103.5, "frameMs": 9.66, "p99FrameMs": 18.16, "worstFrameMs": 25.70, "gameMs": 3.18, "renderMs": 9.66, "gpuMs": 8.92},
+    {"hour": "22:00", "seconds": 11.4, "frames": 1184, "fps": 103.7, "frameMs": 9.64, "p99FrameMs": 17.95, "worstFrameMs": 25.34, "gameMs": 3.17, "renderMs": 9.64, "gpuMs": 8.93}
+  ]
+}
