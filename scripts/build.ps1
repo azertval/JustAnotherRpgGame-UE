@@ -119,6 +119,11 @@
     Construit, vérifie, reconstruit le niveau de la porte, puis en prend les captures et la mesure.
 
 .EXAMPLE
+    pwsh scripts/build.ps1 -Unreal -Map controle/arenarea-palazzo-terracotta -Capture
+    Construit la carte de contrôle d'une pièce de décor (scripts/maps/build_piece_check.py,
+    LOT-1019) et en prend les quatre côtés, à midi et à 22 h.
+
+.EXAMPLE
     pwsh scripts/build.ps1 -Unreal -Ecrans
     Construit, vérifie, puis fait le tour des écrans dans le jeu lancé hors écran et compare leurs
     captures à leur référence.
@@ -382,6 +387,11 @@ if ($Unreal) {
             # La porte et son Colisée sont des sorties de script : le niveau ne se construit pas sur un fichier périmé.
             & (Get-Python) (Join-Path $root 'scripts\maps\build_gate_scene.py') --check
             if ($LASTEXITCODE -ne 0) { Fail 'La porte ou le Colisée sont périmés : python scripts/maps/build_gate_scene.py' }
+        }
+        if ($Map -like 'controle/*') {
+            # La carte de contrôle d'une pièce de décor est une sortie de script (LOT-1019).
+            & (Get-Python) (Join-Path $root 'scripts\maps\build_piece_check.py') --check
+            if ($LASTEXITCODE -ne 0) { Fail 'Une carte de contrôle de pièce est périmée : python scripts/maps/build_piece_check.py' }
         }
         if ($Map -eq $SocleMap) {
             # Le repère du socle est une donnée d'essai écrite par script : pas de niveau sur un fichier périmé.

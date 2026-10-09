@@ -3,10 +3,20 @@
 
 #include "Capture/JadgCaptureDirector.h"
 
+#include "AssetCompilingManager.h"
 #include "Capture/JadgShot.h"
+#include "Components/PointLightComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "Engine/Engine.h"
 #include "Engine/GameViewportClient.h"
+#include "Engine/PointLight.h"
+#include "Engine/PostProcessVolume.h"
+#include "Engine/StaticMesh.h"
 #include "EngineUtils.h"
+#include "Engine/Texture.h"
+#include "Materials/MaterialInterface.h"
+#include "RHIStats.h"
+#include "UObject/UObjectIterator.h"
 #include "GameFramework/HUD.h"
 #include "GameFramework/PlayerController.h"
 #include "HAL/FileManager.h"
@@ -28,9 +38,30 @@ namespace
 	// Trames laissées de côté au début d'une mesure, le temps que le changement d'heure se pose.
 	constexpr int32 MeasureWarmupFrames = 60;
 
+	// La passe du contour sombre, écrite par `build_level.py` (LOT-1019) ; l'étiquette des lampes.
+	const TCHAR* ContourMaterial = TEXT("/Game/Scenes/Common/M_Contour.M_Contour");
+	const FName LampTag(TEXT("JadgLamp"));
+
 	bool ShadersCompiling()
 	{
 		return GShaderCompilingManager != nullptr && GShaderCompilingManager->IsCompiling();
+	}
+
+	// Une texture importée par la chaîne de décor se compresse pour le jeu à son premier
+	// chargement : tant qu'elle se construit, le moteur dessine une texture par défaut (LOT-1019,
+	// la première capture de l'Arena of Fate texturée sortait avec un sable noir).
+	bool AssetsCompiling()
+	{
+#if WITH_EDITOR
+		return FAssetCompilingManager::Get().GetNumRemainingAssets() > 0;
+#else
+		return false;
+#endif
+	}
+
+	double MiB(uint64 Bytes)
+	{
+		return static_cast<double>(Bytes) / (1024.0 * 1024.0);
 	}
 
 	FString HourSlug(const FString& Hour)
@@ -82,6 +113,79 @@ void AJadgCaptureDirector::BeginPlay()
 	// La cadence se mesure sans plafond.
 	GEngine->Exec(GetWorld(), TEXT("t.MaxFPS 0"));
 	GEngine->Exec(GetWorld(), TEXT("r.VSync 0"));
+
+	FString PostOptions;
+	if (FParse::Value(CommandLine, TEXT("JadgPost="), PostOptions, false) && !ApplyPostOptions(PostOptions))
+	{
+		// L'erreur est dite ; la première trame arrête le passage.
+		OutputDir.Empty();
+	}
+}
+
+bool AJadgCaptureDirector::ApplyPostOptions(const FString& Options)
+{
+	APostProcessVolume* Volume = nullptr;
+	for (TActorIterator<APostProcessVolume> It(GetWorld()); It; ++It)
+	{
+		if (It->bUnbound)
+		{
+			Volume = *It;
+			break;
+		}
+	}
+	TArray<FString> Names;
+	Options.ParseIntoArray(Names, TEXT(","));
+	for (const FString& Name : Names)
+	{
+		if (Name == TEXT("contour") || Name == TEXT("sans-contour"))
+		{
+			UMaterialInterface* Contour = LoadObject<UMaterialInterface>(nullptr, ContourMaterial);
+			if (Volume == nullptr || Contour == nullptr)
+			{
+				UE_LOG(LogJadg, Error, TEXT("[Capture] %s : il faut le volume de post-traitement de la carte et %s (build_level.py)"), *Name, ContourMaterial);
+				return false;
+			}
+			Volume->Settings.WeightedBlendables.Array.RemoveAll([Contour](const FWeightedBlendable& Blendable) { return Blendable.Object == Contour; });
+			if (Name == TEXT("contour"))
+			{
+				Volume->Settings.WeightedBlendables.Array.Add(FWeightedBlendable(1.0f, Contour));
+			}
+		}
+		else if (Name == TEXT("sans-ao"))
+		{
+			// Sous Lumen, l'occlusion d'écran est celle de sa collecte de lumière (ShortRangeAO) ;
+			// l'occlusion d'écran classique est coupée aussi, au cas où Lumen serait éteint.
+			GEngine->Exec(GetWorld(), TEXT("r.Lumen.ScreenProbeGather.ShortRangeAO 0"));
+			GEngine->Exec(GetWorld(), TEXT("r.AmbientOcclusionLevels 0"));
+		}
+		else if (Name == TEXT("sans-halo"))
+		{
+			if (Volume == nullptr)
+			{
+				UE_LOG(LogJadg, Error, TEXT("[Capture] sans-halo : la carte n'a pas de volume de post-traitement"));
+				return false;
+			}
+			Volume->Settings.bOverride_BloomIntensity = true;
+			Volume->Settings.BloomIntensity = 0.0f;
+		}
+		else if (Name == TEXT("sans-ombres-lampes"))
+		{
+			for (TActorIterator<APointLight> It(GetWorld()); It; ++It)
+			{
+				if (It->Tags.Contains(LampTag))
+				{
+					It->PointLightComponent->SetCastShadows(false);
+				}
+			}
+		}
+		else
+		{
+			UE_LOG(LogJadg, Error, TEXT("[Capture] -JadgPost : « %s » inconnu (contour, sans-contour, sans-ao, sans-halo, sans-ombres-lampes)"), *Name);
+			return false;
+		}
+		PostApplied.Add(Name);
+	}
+	return true;
 }
 
 void AJadgCaptureDirector::Tick(float DeltaSeconds)
@@ -105,7 +209,7 @@ void AJadgCaptureDirector::Tick(float DeltaSeconds)
 		break;
 
 	case EPhase::Settling:
-		if (FramesInStep >= SettleFrames && !ShadersCompiling())
+		if (FramesInStep >= SettleFrames && !ShadersCompiling() && !AssetsCompiling())
 		{
 			FScreenshotRequest::RequestScreenshot(PendingFile, false, false);
 			Phase = EPhase::Writing;
@@ -244,6 +348,68 @@ void AJadgCaptureDirector::WriteReport() const
 	Json += FString::Printf(TEXT("  \"resolution\": [%d, %d],\n"), FMath::RoundToInt32(Size.X), FMath::RoundToInt32(Size.Y));
 	Json += FString::Printf(TEXT("  \"gpu\": \"%s\",\n"), *GRHIAdapterName.ReplaceCharWithEscapedChar());
 	Json += FString::Printf(TEXT("  \"openSeconds\": %.2f,\n"), OpenSeconds);
+	Json += FString::Printf(TEXT("  \"post\": \"%s\",\n"), *FString::Join(PostApplied, TEXT(",")));
+
+	// La mémoire graphique à la fin du passage : celle du processus (budget du pilote), celle des
+	// textures, en flux (mipmaps chargées selon la vue) ou non.
+	FRHIMemoryStats Memory;
+	RHIGetMemoryStats(Memory);
+	FTextureMemoryStats Textures;
+	RHIGetTextureMemoryStats(Textures);
+	Json += FString::Printf(TEXT("  \"gpuMemoryMiB\": {\"used\": %.1f, \"texturesStreaming\": %.1f, \"texturesNonStreaming\": %.1f},\n"),
+		MiB(Memory.UsedLocal), MiB(Textures.StreamingMemorySize), MiB(Textures.NonStreamingMemorySize));
+
+	// Les maillages de la carte : chacun une fois, ses triangles Nanite, la taille de ses
+	// ressources (l'estimation du moteur, `GetResourceSizeBytes`).
+	TSet<UStaticMesh*> Meshes;
+	for (TObjectIterator<UStaticMeshComponent> It; It; ++It)
+	{
+		if (It->GetWorld() == GetWorld() && It->GetStaticMesh() != nullptr)
+		{
+			Meshes.Add(It->GetStaticMesh());
+		}
+	}
+	uint64 MeshBytes = 0;
+	int64 Triangles = 0;
+	const UStaticMesh* Largest = nullptr;
+	int64 LargestTriangles = 0;
+	for (UStaticMesh* Mesh : Meshes)
+	{
+		MeshBytes += Mesh->GetResourceSizeBytes(EResourceSizeMode::EstimatedTotal);
+		const int64 Count = Mesh->GetNumNaniteTriangles() > 0 ? Mesh->GetNumNaniteTriangles() : Mesh->GetNumTriangles(0);
+		Triangles += Count;
+		if (Count > LargestTriangles)
+		{
+			LargestTriangles = Count;
+			Largest = Mesh;
+		}
+	}
+	// Les textures de ces maillages, chacune une fois : ce qu'elles tiennent en mémoire graphique à la
+	// fin du passage (mipmaps chargées), et ce qu'elles tiendraient entières.
+	TSet<const UTexture*> Used;
+	for (const UStaticMesh* Mesh : Meshes)
+	{
+		for (const FStaticMaterial& Slot : Mesh->GetStaticMaterials())
+		{
+			if (Slot.MaterialInterface != nullptr)
+			{
+				TArray<UTexture*> SlotTextures;
+				Slot.MaterialInterface->GetUsedTextures(SlotTextures);
+				Used.Append(SlotTextures);
+			}
+		}
+	}
+	uint64 Resident = 0;
+	uint64 Whole = 0;
+	for (const UTexture* Texture : Used)
+	{
+		Resident += Texture->CalcTextureMemorySizeEnum(TMC_ResidentMips);
+		Whole += Texture->CalcTextureMemorySizeEnum(TMC_AllMips);
+	}
+	Json += FString::Printf(TEXT("  \"meshTextures\": {\"count\": %d, \"residentMiB\": %.1f, \"allMipsMiB\": %.1f},\n"),
+		Used.Num(), MiB(Resident), MiB(Whole));
+	Json += FString::Printf(TEXT("  \"meshes\": {\"count\": %d, \"triangles\": %lld, \"resourceMiB\": %.1f, \"largest\": \"%s\", \"largestTriangles\": %lld},\n"),
+		Meshes.Num(), Triangles, MiB(MeshBytes), Largest != nullptr ? *Largest->GetPathName() : TEXT(""), LargestTriangles);
 	Json += TEXT("  \"captures\": [");
 	for (int32 Index = 0; Index < Written.Num(); ++Index)
 	{

@@ -7,7 +7,10 @@ Un maillage se livre au maître, sans décimation (D-53) : Nanite prend la coque
 script prend un dossier de retours Meshy (`<Famille>/Meshy_AI_<Nom>_<id>_texture.glb`), copie
 chaque pièce sous un identifiant lisible, et écrit `manifest.json` — le texte que Git relit : pour
 chaque pièce, sa famille, son fichier source, son empreinte SHA-256, ses triangles, ses sommets,
-le nombre de ses images, et l'asset Unreal que `import_master_unreal.py` en produit.
+le nombre de ses images, l'asset Unreal que `import_scenery_unreal.py` en produit, et sa **fiche**
+(`sheet`, LOT-1019) : la famille du standard 3D, la classe, l'emprise, le type tactique et la lumière
+que `references.json` lui donne, et la matière lue dans le `.glb` (`scenery_sheets.material_report` :
+les cartes présentes, leurs formats et tailles, ce qui manque au standard).
 
 Le nom d'une pièce est celui de sa **référence**, pas celui que Meshy a inventé : le dieu de Tanares
 pour une statue, la fiche de personnage pour un PNJ, la pièce d'équipement pour une arme. La table
@@ -18,9 +21,14 @@ et d'où vient l'attribution. Un retour absent de la table arrête le script : r
 Deux retours de même empreinte sont un seul maillage : le second est ignoré et nommé dans le
 manifeste (`duplicates`).
 
+`--refresh` réécrit le manifeste sans dossier de retours : il relit les pièces déjà rangées sous
+`Master/`, refait leur fiche depuis `references.json` et leur `.glb` (dont l'empreinte doit être
+inchangée), et garde le reste.
+
 Usage :
   python scripts/assetsGeneration/build_master_manifest.py D:\\Telechargement\\Assets
   python scripts/assetsGeneration/build_master_manifest.py <source> --dest Source/Elements/Assets/Master
+  python scripts/assetsGeneration/build_master_manifest.py --refresh
 """
 
 from __future__ import annotations
@@ -36,6 +44,9 @@ import unicodedata
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import scenery_sheets  # noqa: E402
+
 DEFAULT_DEST = ROOT / "Source" / "Elements" / "Assets" / "Master"
 
 # Famille du dossier Meshy -> dossier du kit, dossier de contenu Unreal, préfixe d'asset.
@@ -102,9 +113,51 @@ def glb_stats(path: Path) -> dict:
     }
 
 
+def sheet(reference: dict, glb: Path) -> dict:
+    """La fiche d'une pièce : ce que sa référence déclare (`sheet` de `references.json`), et sa
+    matière, lue dans le `.glb`."""
+    declared = dict(reference.get("sheet", {}))
+    declared["material"] = scenery_sheets.material_report(glb)
+    return declared
+
+
+NOTE = ("Maillages Meshy au maître (D-53), nommés d'après references.json et installés par "
+        "scripts/assetsGeneration/import_scenery_unreal.py (LOT-1019) ; aucun .glb n'est retouché, l'empreinte "
+        "le vérifie. `sheet` est la fiche de la pièce : famille du standard 3D, classe, emprise, type tactique, "
+        "lumière, et la matière lue dans le .glb. Les 21 PNJ au maître sont retirés au LOT-1015 (D-63, D-64) : un "
+        "personnage est une fiche d'apparence que le créateur assemble.")
+
+
+def refresh(dest: Path, references: dict) -> int:
+    """Le manifeste refait depuis les pièces déjà rangées : fiches et notes à jour."""
+    manifest_path = dest / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    by_id = {ref["id"]: ref for ref in references.values()}
+    for piece in manifest["pieces"]:
+        glb = dest / piece["file"].removeprefix("Master/")
+        if sha256_of(glb) != piece["sha256"]:
+            print(f"{piece['id']} : empreinte changée, le .glb a été retouché", file=sys.stderr)
+            return 1
+        reference = by_id.get(piece["id"])
+        if reference is None:
+            print(f"{piece['id']} : absent de references.json", file=sys.stderr)
+            return 1
+        piece["sheet"] = sheet(reference, glb)
+        errors = scenery_sheets.validate(scenery_sheets.sheet_of(piece))
+        if errors:
+            print(" ; ".join(errors), file=sys.stderr)
+            return 1
+    manifest["note"] = NOTE
+    manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    print(f"{len(manifest['pieces'])} fiches refaites -> {manifest_path}")
+    return 0
+
+
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("source", type=Path, help="Dossier des retours Meshy, un sous-dossier par famille")
+    parser.add_argument("source", type=Path, nargs="?", help="Dossier des retours Meshy, un sous-dossier par famille")
+    parser.add_argument("--refresh", action="store_true",
+                        help="refaire les fiches des pièces déjà rangées, sans dossier de retours")
     parser.add_argument("--dest", type=Path, default=DEFAULT_DEST, help="Dossier du kit Master (défaut : Source/Elements/Assets/Master)")
     parser.add_argument("--no-copy", action="store_true", help="N'écrire que le manifeste, sans copier les fichiers")
     parser.add_argument("--references", type=Path, default=None,
@@ -116,6 +169,10 @@ def main(argv: list[str]) -> int:
         print(f"table des références absente : {references_path}", file=sys.stderr)
         return 1
     references = json.loads(references_path.read_text(encoding="utf-8"))["references"]
+    if args.refresh:
+        return refresh(args.dest, references)
+    if args.source is None:
+        parser.error("le dossier des retours Meshy est attendu (ou --refresh)")
     unreferenced: list[str] = []
 
     pieces: list[dict] = []
@@ -177,6 +234,7 @@ def main(argv: list[str]) -> int:
                 # Interchange range chaque pièce dans un dossier à son nom : StaticMeshes/, Materials/,
                 # Textures/. Le manifeste nomme le maillage là où l'import le pose.
                 "asset": f"{content_path}/{slug}/StaticMeshes/{asset_name(prefix, piece_id)}",
+                "sheet": sheet(reference, source),
             })
             print(f"{piece_id:48} {stats['triangles']:>9} tris")
 
@@ -196,14 +254,13 @@ def main(argv: list[str]) -> int:
 
     manifest = {
         "version": 1,
-        "note": "Maillages Meshy au maître (D-53), nommés d'après references.json et importés par "
-                "scripts/assetsGeneration/import_master_unreal.py ; aucun .glb n'est retouché, l'empreinte le vérifie.",
+        "note": NOTE,
         "pieces": pieces,
         "duplicates": duplicates,
     }
     args.dest.mkdir(parents=True, exist_ok=True)
     manifest_path = args.dest / "manifest.json"
-    manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    manifest_path.write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     total = sum(p["triangles"] for p in pieces)
     print(f"{len(pieces)} pièces, {total} triangles, {len(duplicates)} doublon(s) -> {manifest_path}")
     return 0

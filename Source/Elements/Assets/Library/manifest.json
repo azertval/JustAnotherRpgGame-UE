@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "note": "Les pièces prises aux bibliothèques du moteur (D-55 : Megascans, Fab ; la nature, les sols, les roches, les matières de base), une fiche par pièce : `file` (le .glb exporté au maître, relatif à la racine des assets), `family`, `class`, `footprint`, `tactical`, `light`, et `library` — `provider` (Fab, Megascans), `identifier` (celui de la bibliothèque), `licence` (licence standard de Fab), `url`. Installées par scripts/assetsGeneration/import_scenery_unreal.py sous /Game/Library/<id>, contrôlées par check_orphans.py comme une pièce Meshy. Aucune au LOT-1019 : sur Fab, seul l'auteur se connecte, et rien ne s'achète (décision du 8 octobre 2026).",
+  "pieces": []
+}

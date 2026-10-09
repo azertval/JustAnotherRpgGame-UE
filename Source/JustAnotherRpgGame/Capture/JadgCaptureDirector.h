@@ -32,6 +32,17 @@ class AJadgShot;
  * processeur graphique. `mesure.json` en donne la moyenne, la pire trame et le 1 % le plus lent,
  * avec le temps écoulé entre le lancement du processus et la première trame de la carte.
  *
+ * `mesure.json` porte aussi la **mémoire graphique** à la fin du passage (celle du processus et
+ * celle des textures, en flux ou non) et les **maillages** de la carte : leur nombre, leurs
+ * triangles Nanite, la taille de leurs ressources et la plus grosse pièce (LOT-1019).
+ *
+ * `-JadgPost=<a,b…>` règle le post-traitement avant la première capture, pour comparer un rendu
+ * avec et sans (LOT-1019, questions du standard 3D §8) : `contour` ajoute la passe du contour
+ * sombre (`/Game/Scenes/Common/M_Contour`, écrite par `build_level.py`), `sans-contour` la
+ * retire ; `sans-ao` coupe l'occlusion ambiante d'écran de Lumen ; `sans-halo` le halo
+ * (`bloom`) ; `sans-ombres-lampes` les ombres portées des lampes (`JadgLamp`). Les options
+ * appliquées sont écrites dans `mesure.json`.
+ *
  * Il quitte ensuite le jeu : code 0, ou 1 si un cadrage, une heure ou un fichier manque.
  */
 UCLASS()
@@ -85,7 +96,9 @@ private:
 	FString PendingFile;
 	TArray<FString> Written;
 	TArray<FMeasure> Measures;
+	TArray<FString> PostApplied;
 
+	bool ApplyPostOptions(const FString& Options);
 	void Frame(const AJadgShot& Shot, float ExtraYaw = 0.0f);
 	bool SetHour(const FString& Hour);
 	void BeginShot();

@@ -51,6 +51,8 @@ compile_commands.json
 /Source/Elements/Assets/Master/**/*.glb
 # Les pièces construites par script (build_colosseum.py) : régénérées, le manifeste seul est suivi.
 /Source/Elements/Assets/Built/**/*.glb
+# Les pièces des bibliothèques du moteur (LOT-1019, D-55) : le manifeste est suivi, les .glb non.
+/Source/Elements/Assets/Library/**/*.glb
 
 # --- Python ---
 __pycache__/

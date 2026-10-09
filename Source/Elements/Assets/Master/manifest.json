@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "note": "Maillages Meshy au maître (D-53), nommés d'après references.json et importés par scripts/assetsGeneration/import_master_unreal.py ; aucun .glb n'est retouché, l'empreinte le vérifie. Les 21 PNJ au maître sont retirés au LOT-1015 (D-63, D-64) : un personnage est une fiche d'apparence que le créateur assemble.",
+  "note": "Maillages Meshy au maître (D-53), nommés d'après references.json et installés par scripts/assetsGeneration/import_scenery_unreal.py (LOT-1019) ; aucun .glb n'est retouché, l'empreinte le vérifie. `sheet` est la fiche de la pièce : famille du standard 3D, classe, emprise, type tactique, lumière, et la matière lue dans le .glb. Les 21 PNJ au maître sont retirés au LOT-1015 (D-63, D-64) : un personnage est une fiche d'apparence que le créateur assemble.",
   "pieces": [
     {
       "id": "Statues/statue-bauron",
@@ -19,7 +19,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-bauron/StaticMeshes/SM_Statue_Bauron"
+      "asset": "/Game/Master/Statues/statue-bauron/StaticMeshes/SM_Statue_Bauron",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/effigy-zulvath",
@@ -38,7 +74,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/effigy-zulvath/StaticMeshes/SM_Statue_Effigy_Zulvath"
+      "asset": "/Game/Master/Statues/effigy-zulvath/StaticMeshes/SM_Statue_Effigy_Zulvath",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/portal-guardian-lion",
@@ -57,7 +129,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/portal-guardian-lion/StaticMeshes/SM_Statue_Portal_Guardian_Lion"
+      "asset": "/Game/Master/Statues/portal-guardian-lion/StaticMeshes/SM_Statue_Portal_Guardian_Lion",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-duality",
@@ -76,7 +184,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-duality/StaticMeshes/SM_Statue_Duality"
+      "asset": "/Game/Master/Statues/statue-duality/StaticMeshes/SM_Statue_Duality",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-lumina",
@@ -95,7 +239,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-lumina/StaticMeshes/SM_Statue_Lumina"
+      "asset": "/Game/Master/Statues/statue-lumina/StaticMeshes/SM_Statue_Lumina",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-bas",
@@ -114,7 +294,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-bas/StaticMeshes/SM_Statue_Bas"
+      "asset": "/Game/Master/Statues/statue-bas/StaticMeshes/SM_Statue_Bas",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-oigridh",
@@ -133,7 +349,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-oigridh/StaticMeshes/SM_Statue_Oigridh"
+      "asset": "/Game/Master/Statues/statue-oigridh/StaticMeshes/SM_Statue_Oigridh",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-glorious-one",
@@ -152,7 +404,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-glorious-one/StaticMeshes/SM_Statue_Glorious_One"
+      "asset": "/Game/Master/Statues/statue-glorious-one/StaticMeshes/SM_Statue_Glorious_One",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-tamera",
@@ -171,7 +459,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-tamera/StaticMeshes/SM_Statue_Tamera"
+      "asset": "/Game/Master/Statues/statue-tamera/StaticMeshes/SM_Statue_Tamera",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-fruitful",
@@ -190,7 +514,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-fruitful/StaticMeshes/SM_Statue_Fruitful"
+      "asset": "/Game/Master/Statues/statue-fruitful/StaticMeshes/SM_Statue_Fruitful",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-fumetsu",
@@ -209,7 +569,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-fumetsu/StaticMeshes/SM_Statue_Fumetsu"
+      "asset": "/Game/Master/Statues/statue-fumetsu/StaticMeshes/SM_Statue_Fumetsu",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-nature-spirits",
@@ -228,7 +624,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-nature-spirits/StaticMeshes/SM_Statue_Nature_Spirits"
+      "asset": "/Game/Master/Statues/statue-nature-spirits/StaticMeshes/SM_Statue_Nature_Spirits",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-aibidh",
@@ -247,7 +679,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-aibidh/StaticMeshes/SM_Statue_Aibidh"
+      "asset": "/Game/Master/Statues/statue-aibidh/StaticMeshes/SM_Statue_Aibidh",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/ossuary-insert",
@@ -266,7 +734,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/ossuary-insert/StaticMeshes/SM_Statue_Ossuary_Insert"
+      "asset": "/Game/Master/Statues/ossuary-insert/StaticMeshes/SM_Statue_Ossuary_Insert",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-ba-ka",
@@ -285,7 +789,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-ba-ka/StaticMeshes/SM_Statue_Ba_Ka"
+      "asset": "/Game/Master/Statues/statue-ba-ka/StaticMeshes/SM_Statue_Ba_Ka",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/funerary-statue",
@@ -304,7 +844,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/funerary-statue/StaticMeshes/SM_Statue_Funerary_Statue"
+      "asset": "/Game/Master/Statues/funerary-statue/StaticMeshes/SM_Statue_Funerary_Statue",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/effigy-droggath",
@@ -323,7 +899,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/effigy-droggath/StaticMeshes/SM_Statue_Effigy_Droggath"
+      "asset": "/Game/Master/Statues/effigy-droggath/StaticMeshes/SM_Statue_Effigy_Droggath",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-dorsi",
@@ -342,7 +954,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-dorsi/StaticMeshes/SM_Statue_Dorsi"
+      "asset": "/Game/Master/Statues/statue-dorsi/StaticMeshes/SM_Statue_Dorsi",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/neutral-athlete",
@@ -361,7 +1009,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/neutral-athlete/StaticMeshes/SM_Statue_Neutral_Athlete"
+      "asset": "/Game/Master/Statues/neutral-athlete/StaticMeshes/SM_Statue_Neutral_Athlete",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/effigy-krynnethoth",
@@ -380,7 +1064,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/effigy-krynnethoth/StaticMeshes/SM_Statue_Effigy_Krynnethoth"
+      "asset": "/Game/Master/Statues/effigy-krynnethoth/StaticMeshes/SM_Statue_Effigy_Krynnethoth",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/effigy-cthraxis",
@@ -399,7 +1119,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/effigy-cthraxis/StaticMeshes/SM_Statue_Effigy_Cthraxis"
+      "asset": "/Game/Master/Statues/effigy-cthraxis/StaticMeshes/SM_Statue_Effigy_Cthraxis",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Statues/statue-breith",
@@ -418,7 +1174,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-breith/StaticMeshes/SM_Statue_Breith"
+      "asset": "/Game/Master/Statues/statue-breith/StaticMeshes/SM_Statue_Breith",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Scenery/arenarea-palazzo-terracotta",
@@ -437,7 +1229,48 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Scenery/arenarea-palazzo-terracotta/StaticMeshes/SM_Scenery_Arenarea_Palazzo_Terracotta"
+      "asset": "/Game/Master/Scenery/arenarea-palazzo-terracotta/StaticMeshes/SM_Scenery_Arenarea_Palazzo_Terracotta",
+      "sheet": {
+        "family": "02",
+        "class": "tall",
+        "tactical": "solid",
+        "height": 12.0,
+        "comment": "Famille témoin du LOT-1019 : la façade d'Arenarea. `height` : la hauteur posée sur le parvis de la porte, 12 m, provisoire (aucune cote de la commande, LOT-1012). Emprise ouverte : elle suit de la hauteur que l'auteur cotera.",
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/gladiator-shield",
@@ -456,7 +1289,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/gladiator-shield/StaticMeshes/SM_Weapon_Gladiator_Shield"
+      "asset": "/Game/Master/Weapons/gladiator-shield/StaticMeshes/SM_Weapon_Gladiator_Shield",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/ironhand-longsword",
@@ -475,7 +1344,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/ironhand-longsword/StaticMeshes/SM_Weapon_Ironhand_Longsword"
+      "asset": "/Game/Master/Weapons/ironhand-longsword/StaticMeshes/SM_Weapon_Ironhand_Longsword",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/longbow",
@@ -494,7 +1399,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/longbow/StaticMeshes/SM_Weapon_Longbow"
+      "asset": "/Game/Master/Weapons/longbow/StaticMeshes/SM_Weapon_Longbow",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/mage-staff",
@@ -513,7 +1454,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/mage-staff/StaticMeshes/SM_Weapon_Mage_Staff"
+      "asset": "/Game/Master/Weapons/mage-staff/StaticMeshes/SM_Weapon_Mage_Staff",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/captain-scimitar",
@@ -532,7 +1509,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/captain-scimitar/StaticMeshes/SM_Weapon_Captain_Scimitar"
+      "asset": "/Game/Master/Weapons/captain-scimitar/StaticMeshes/SM_Weapon_Captain_Scimitar",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/brawler-axe",
@@ -551,7 +1564,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/brawler-axe/StaticMeshes/SM_Weapon_Brawler_Axe"
+      "asset": "/Game/Master/Weapons/brawler-axe/StaticMeshes/SM_Weapon_Brawler_Axe",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/thug-mace",
@@ -570,7 +1619,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/thug-mace/StaticMeshes/SM_Weapon_Thug_Mace"
+      "asset": "/Game/Master/Weapons/thug-mace/StaticMeshes/SM_Weapon_Thug_Mace",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/berserker-axe",
@@ -589,7 +1674,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/berserker-axe/StaticMeshes/SM_Weapon_Berserker_Axe"
+      "asset": "/Game/Master/Weapons/berserker-axe/StaticMeshes/SM_Weapon_Berserker_Axe",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/dagger",
@@ -608,7 +1729,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/dagger/StaticMeshes/SM_Weapon_Dagger"
+      "asset": "/Game/Master/Weapons/dagger/StaticMeshes/SM_Weapon_Dagger",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/bolt",
@@ -627,7 +1784,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/bolt/StaticMeshes/SM_Weapon_Bolt"
+      "asset": "/Game/Master/Weapons/bolt/StaticMeshes/SM_Weapon_Bolt",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/heavy-crossbow",
@@ -646,7 +1839,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/heavy-crossbow/StaticMeshes/SM_Weapon_Heavy_Crossbow"
+      "asset": "/Game/Master/Weapons/heavy-crossbow/StaticMeshes/SM_Weapon_Heavy_Crossbow",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/arena-shield",
@@ -665,7 +1894,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/arena-shield/StaticMeshes/SM_Weapon_Arena_Shield"
+      "asset": "/Game/Master/Weapons/arena-shield/StaticMeshes/SM_Weapon_Arena_Shield",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/handaxe",
@@ -684,7 +1949,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/handaxe/StaticMeshes/SM_Weapon_Handaxe"
+      "asset": "/Game/Master/Weapons/handaxe/StaticMeshes/SM_Weapon_Handaxe",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/handaxe-variant",
@@ -703,7 +2004,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/handaxe-variant/StaticMeshes/SM_Weapon_Handaxe_Variant"
+      "asset": "/Game/Master/Weapons/handaxe-variant/StaticMeshes/SM_Weapon_Handaxe_Variant",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/arrow",
@@ -722,7 +2059,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/arrow/StaticMeshes/SM_Weapon_Arrow"
+      "asset": "/Game/Master/Weapons/arrow/StaticMeshes/SM_Weapon_Arrow",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/gladiator-spear",
@@ -741,7 +2114,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/gladiator-spear/StaticMeshes/SM_Weapon_Gladiator_Spear"
+      "asset": "/Game/Master/Weapons/gladiator-spear/StaticMeshes/SM_Weapon_Gladiator_Spear",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/javelin",
@@ -760,7 +2169,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/javelin/StaticMeshes/SM_Weapon_Javelin"
+      "asset": "/Game/Master/Weapons/javelin/StaticMeshes/SM_Weapon_Javelin",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/quiver",
@@ -779,7 +2224,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/quiver/StaticMeshes/SM_Weapon_Quiver"
+      "asset": "/Game/Master/Weapons/quiver/StaticMeshes/SM_Weapon_Quiver",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/priest-warhammer",
@@ -798,7 +2279,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/priest-warhammer/StaticMeshes/SM_Weapon_Priest_Warhammer"
+      "asset": "/Game/Master/Weapons/priest-warhammer/StaticMeshes/SM_Weapon_Priest_Warhammer",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/skeleton-shortsword",
@@ -817,7 +2334,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/skeleton-shortsword/StaticMeshes/SM_Weapon_Skeleton_Shortsword"
+      "asset": "/Game/Master/Weapons/skeleton-shortsword/StaticMeshes/SM_Weapon_Skeleton_Shortsword",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/scoundrel-rapier",
@@ -836,7 +2389,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/scoundrel-rapier/StaticMeshes/SM_Weapon_Scoundrel_Rapier"
+      "asset": "/Game/Master/Weapons/scoundrel-rapier/StaticMeshes/SM_Weapon_Scoundrel_Rapier",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/ironhand-shield",
@@ -855,7 +2444,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/ironhand-shield/StaticMeshes/SM_Weapon_Ironhand_Shield"
+      "asset": "/Game/Master/Weapons/ironhand-shield/StaticMeshes/SM_Weapon_Ironhand_Shield",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/skeleton-shortbow",
@@ -874,7 +2499,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/skeleton-shortbow/StaticMeshes/SM_Weapon_Skeleton_Shortbow"
+      "asset": "/Game/Master/Weapons/skeleton-shortbow/StaticMeshes/SM_Weapon_Skeleton_Shortbow",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/light-crossbow",
@@ -893,7 +2554,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/light-crossbow/StaticMeshes/SM_Weapon_Light_Crossbow"
+      "asset": "/Game/Master/Weapons/light-crossbow/StaticMeshes/SM_Weapon_Light_Crossbow",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/staff",
@@ -912,7 +2609,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/staff/StaticMeshes/SM_Weapon_Staff"
+      "asset": "/Game/Master/Weapons/staff/StaticMeshes/SM_Weapon_Staff",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     },
     {
       "id": "Weapons/bandit-scimitar",
@@ -931,7 +2664,43 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/bandit-scimitar/StaticMeshes/SM_Weapon_Bandit_Scimitar"
+      "asset": "/Game/Master/Weapons/bandit-scimitar/StaticMeshes/SM_Weapon_Bandit_Scimitar",
+      "sheet": {
+        "material": {
+          "slots": [
+            {
+              "name": "",
+              "maps": {
+                "baseColor": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "normal": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                },
+                "orm": {
+                  "mime": "image/jpeg",
+                  "size": [
+                    2048,
+                    2048
+                  ]
+                }
+              },
+              "alpha": "opaque",
+              "occlusion": false
+            }
+          ],
+          "complete": true,
+          "missing": []
+        }
+      }
     }
   ],
   "duplicates": [

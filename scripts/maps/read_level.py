@@ -42,7 +42,7 @@ PROJECT_DIR = Path(unreal.Paths.project_dir()).resolve()
 sys.path.insert(0, str(PROJECT_DIR / "scripts" / "maps"))
 sys.path.insert(0, str(PROJECT_DIR / "scripts" / "assetsGeneration"))
 import build_level  # noqa: E402
-import import_master_unreal as master_import  # noqa: E402
+import import_scenery_unreal as scenery  # noqa: E402
 import jadg_map  # noqa: E402
 
 POSITION_STEP = 1e-4   # en mètres
@@ -207,7 +207,7 @@ def read(world: unreal.World, doc: dict) -> tuple[dict, list[str]]:
 
 
 def main() -> None:
-    map_id = master_import.command_line_option("JadgMap")
+    map_id = scenery.command_line_option("JadgMap")
     if not map_id:
         build_level.fail("-JadgMap=<carte> attendu")
     path = jadg_map.find(map_id)
@@ -217,7 +217,7 @@ def main() -> None:
     if world is None:
         build_level.fail(f"{jadg_map.package(map_id)} : le niveau ne s'ouvre pas (build_level.py d'abord)")
     doc, changes = read(world, jadg_map.read(path))
-    out = master_import.command_line_option("JadgOut")
+    out = scenery.command_line_option("JadgOut")
     target = Path(out) if out else path
     jadg_map.write(target, doc)
     log(f"{map_id} : {len(changes)} changement(s) relu(s) -> {target}" + ("".join(f"\n  {c}" for c in changes)))

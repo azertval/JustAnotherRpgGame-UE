@@ -221,6 +221,20 @@ def test_un_fichier_qui_n_est_pas_une_sortie_du_moteur_n_a_rien_a_faire_sous_con
     assert error.startswith('Content/Kit/notes.txt')
 
 
+def test_une_piece_de_decor_est_citee_par_sa_fiche(tmp_path):
+    # LOT-1019 : la fiche d'une pièce (manifeste des maîtres, des bibliothèques) nomme son asset ;
+    # le dossier de la pièce est cité, pas ses voisins.
+    content = projet(tmp_path)
+    ecrire(tmp_path / 'Source/Elements/Assets/Library/manifest.json', json.dumps({'pieces': [
+        {'id': 'rocher', 'asset': '/Game/Library/rocher/StaticMeshes/SM_rocher'}]}))
+    ecrire(content / 'Library/rocher/StaticMeshes/SM_rocher.uasset')
+    ecrire(content / 'Library/caillou/StaticMeshes/SM_caillou.uasset')
+    cited = O.content_citations(tmp_path)
+    assert '/Game/Library/rocher' in cited
+    (error,) = O.check_content(content, cited)
+    assert error.startswith('Content/Library/caillou/')
+
+
 def test_sans_dossier_content_il_n_y_a_rien_a_verifier(tmp_path):
     assert O.check_content(tmp_path / 'Content', set()) == []
 

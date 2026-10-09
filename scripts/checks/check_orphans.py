@@ -36,8 +36,10 @@ sortie d'un script du dépôt, jamais un fichier fait à la main dans l'éditeur
 **cité par le script qui le produit** : son chemin de contenu (`/Game/…`), ou un dossier qui le
 contient, est écrit dans un script appelé, dans une description de scène que
 `build_level.py` construit, sous `/Game/Maps/Levels/<carte>`, que `jadg_map.py` nomme (LOT-1018), ou
-dans une description du créateur de personnage (`Source/Elements/Assets/Characters/*.json`, LOT-1015). Un asset que rien ne
-cite ne se régénère pas : c'est une erreur, comme tout autre fichier trouvé sous `Content/`.
+dans une description du créateur de personnage (`Source/Elements/Assets/Characters/*.json`, LOT-1015), ou
+dans la fiche d'une pièce de décor (le champ `asset` des manifestes des maîtres et des pièces de
+bibliothèque, que `import_scenery_unreal.py` installe, LOT-1019). Un asset que rien ne cite ne se
+régénère pas : c'est une erreur, comme tout autre fichier trouvé sous `Content/`.
 
 Les images des kits ne sont pas suivies par Git : le contrôle lit le **disque**, après
 `scripts/fetch_assets.py`, comme `check_hd_assets.py`. `Content/` se lit sur le disque aussi : là
@@ -97,6 +99,8 @@ CONTENT_PATH = re.compile(r"/Game(?:/[\w.\-]+)+")
 # Les descriptions du créateur de personnage (LOT-1015) : elles nomment l'objet personnalisable
 # que `JadgBuildCharacterCreator` construit, et les corps et clips qu'il assemble.
 CREATOR_DESCRIPTIONS = "Source/Elements/Assets/Characters"
+# Les fiches des pièces de décor (LOT-1019) : chacune nomme l'asset que la chaîne de décor installe.
+SCENERY_SHEETS = ("Source/Elements/Assets/Master/manifest.json", "Source/Elements/Assets/Library/manifest.json")
 
 
 def walk(base: Path):
@@ -294,6 +298,15 @@ def content_citations(root: Path) -> set[str]:
         for path in walk(root / tree):
             if path.suffix == ".json":
                 cited.update(CONTENT_PATH.findall(read(path)))
+    for sheet in SCENERY_SHEETS:
+        path = root / sheet
+        if path.is_file():
+            try:
+                pieces = json.loads(read(path)).get("pieces", [])
+            except json.JSONDecodeError:
+                continue  # dit par `check_assets`
+            # Le dossier d'une pièce (`…/<pièce>/StaticMeshes/SM_…` → `…/<pièce>`) : son maillage.
+            cited.update(piece["asset"].rsplit("/", 2)[0] for piece in pieces if str(piece.get("asset", "")).startswith("/Game/"))
     return cited
 
 
