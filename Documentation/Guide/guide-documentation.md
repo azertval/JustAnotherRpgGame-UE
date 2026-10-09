@@ -71,7 +71,7 @@ Trois choses se relient **toutes seules** quand elles sont écrites en code :
 |---|---|
 | `` `EX-CBT-020` `` | la déclaration de l'exigence, dans sa spécification |
 | `` `LOT-128` ``, `` `LOT-19` ``, `` `LOT-EDITOR-03` `` | la fiche du lot, dans la planification |
-| `` `core::BattleGrid` ``, `` `hmi::PlaceCamera::zoom` `` | le symbole, dans la référence du code |
+| `` `core::CombatState` ``, `` `hmi::PlaceCamera::zoom` `` | le symbole, dans la référence du code |
 
 ### Exigences
 
@@ -133,10 +133,10 @@ La référence se tire des commentaires Doxygen de `Source/`. Chaque symbole pub
 
 ```cpp
 /**
- * @brief Cases atteignables depuis @p origine avec @p budget cases de déplacement.
- * @param origine Case de départ, dans la grille.
- * @param budget Déplacement restant, en cases.
- * @return L'aire atteignable ; vide si @p origine est hors grille.
+ * @brief Les places où @p combattant peut finir un déplacement de @p budget mètres.
+ * @param combattant Le combattant, posé dans l'espace.
+ * @param budget Déplacement restant, en mètres ; négatif : sans limite.
+ * @return Les places, la sienne en tête ; vide s'il n'est pas posé.
  */
 ```
 

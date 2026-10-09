@@ -39,7 +39,7 @@ def test_la_projection_est_celle_du_moteur():
     # Une colonne va vers la droite et vers le bas, une rangée vers la gauche et vers le bas.
     assert M.tile_center(1, 0) == (M.TILE_W / 2, M.TILE_H / 2)
     assert M.tile_center(0, 1) == (-M.TILE_W / 2, M.TILE_H / 2)
-    # Le rapport du losange est celui d'IsoProjection, à un demi-pixel près.
+    # Le rapport du losange est celui de l'ancienne projection isométrique, à un demi-pixel près.
     assert M.TILE_H / M.TILE_W == pytest.approx(0.62, abs=0.005)
 
 

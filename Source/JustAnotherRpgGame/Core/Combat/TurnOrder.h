@@ -14,7 +14,7 @@
 #include <string>
 #include <vector>
 
-#include "Core/Combat/BattleGrid.h"
+#include "Core/Combat/CombatTypes.h"
 
 namespace core {
 

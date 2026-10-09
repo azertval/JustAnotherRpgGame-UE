@@ -9,8 +9,8 @@
 
 **RPG 2D en vue isométrique**, à monde de cartes connectées. Le joueur dirige un personnage qui
 explore en **temps réel** (déplacement libre 8 directions, interaction avec les PNJ, les coffres
-et les portails) et affronte les rencontres en **combat tactique au tour par tour** sur la grille
-de la carte, régi par un système **d20**.
+et les portails) et affronte les rencontres en **combat tactique au tour par tour** sur la carte
+elle-même, régi par un système **d20**.
 
 - **Genre** : action-RPG d'exploration + combat tactique.
 - **Perspective** : 2D **isométrique**, décor en tuiles multi-couches (sol / décor / collision).
@@ -59,7 +59,7 @@ joueur, et son échelle est celle de la fenêtre. La frontière entre les deux e
   clips. Chacune de leurs valeurs est **mesurée** sur une preuve ou **décidée et datée** par
   l'auteur ; ce qui n'est ni l'un ni l'autre y est écrit comme ouvert, avec le lot qui le tranche.
   Restent des **images**, et elles seules gardent le losange de **256 × 159 pixels d'art**
-  (rapport 0,62, celui d'`core::IsoProjection`), l'alpha continu prémultiplié et le filtrage
+  (rapport 0,62, celui de l'ancienne projection isométrique de Core (retirée au `LOT-1017`)), l'alpha continu prémultiplié et le filtrage
   bilinéaire avec mipmaps (`EX-ARCH-022`) : le mobilier et les pièces maîtresses **tolérés
   jusqu'à la `0.0.3`**, les effets, les portraits et les jetons. L'échelle de ces images reste
   une **donnée du lieu** — le champ `"tile"` de son manifeste. Une pièce **tient seule** : pas de
@@ -84,8 +84,8 @@ joueur, et son échelle est celle de la fenêtre. La frontière entre les deux e
 
 1. Le joueur explore une carte : déplacement libre, interaction avec le décor et les PNJ.
 2. Il progresse dans le monde par des portails entre cartes, guidé par les dialogues et les quêtes.
-3. Une rencontre se déclenche (contact, zone, dialogue) : le monde se fige, la grille tactique se
-   monte sur la carte courante.
+3. Une rencontre se déclenche (contact, zone, dialogue) : le monde se fige, le combat se monte sur
+   la carte courante.
 4. Le combat se joue au tour par tour, dans l'ordre d'initiative, chaque action résolue au d20.
 5. Victoire : retour à l'exploration, l'ennemi retiré de la carte durablement, butin et expérience
    acquis. Défaite : reprise à la dernière sauvegarde.

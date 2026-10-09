@@ -9,7 +9,8 @@
  *        le groupe de « Nouvelle partie » monté à un niveau, une rencontre du contenu livré, les
  *        deux camps joués par l'IA, à une graine.
  *
- * C'est le montage de `hmi::EncounterModel::begin`, sans fenêtre : la zone de combat qui contient
+ * C'est le montage que faisait l'écran de rencontre de l'ancien moteur, sans fenêtre (le
+ * `LOT-1017` le reprend sans rien de Qt, D-58) : la zone de combat qui contient
  * le déclencheur, le groupe en file devant le maître d'arène, un combat létal dont on ne
  * s'échappe pas, la prise en tenaille en jeu. Chaque héros est joué par l'IA, sorts et soins
  * compris (`core::playTurn`), avec le profil de son rôle (`profileOfClass`).
@@ -34,11 +35,76 @@
 #include "Core/Rpg/Bestiary.h"
 #include "Core/Rpg/CharacterOptions.h"
 #include "Core/Rpg/CharacterSheet.h"
+#include "Core/Rpg/Equipment.h"
 #include "Core/Rpg/Inventory.h"
 #include "Core/Rpg/Skill.h"
-#include "HMI/Game/CombatContestants.h"
 
 namespace test_support {
+
+/// @brief Ce qu'il faut d'un héros pour le monter en combattant : sa fiche, sa maîtrise, sa CA,
+/// son arme et ses sorts.
+struct HeroContestantSource {
+    core::CharacterSheet sheet;
+    /// Bonus de maîtrise, d'après son expérience.
+    int proficiency = 2;
+    /// Classe d'armure recalculée depuis l'équipement porté.
+    int armorClass = 10;
+    /// L'arme en main directrice, ou rien : il frappe alors à mains nues.
+    std::optional<core::Weapon> weapon;
+    /// Les sorts qu'il sait lancer en combat, lancers du jour compris (`core::arenaSpellsFor`).
+    std::vector<core::ArenaSpell> spells;
+};
+
+/// @brief Le héros comme combattant du camp @p side : son arme, son arme lancée, ses mains nues.
+inline core::ArenaContestant heroContestant(const HeroContestantSource& hero,
+                                            core::CombatSide side) {
+    // Le profil lit la fiche : vitesse et resistances des capacites comprises (LOT-131) ; la CA
+    // vient de l'equipement porte (EX-CBT-030) ; les sauvegardes maitrisees prennent la maitrise.
+    core::CombatantProfile profile = core::profileFor(hero.sheet, side, hero.proficiency);
+    profile.armorClass = hero.armorClass;
+    std::vector<core::AttackProfile> attacks;
+    if (hero.weapon.has_value()) {
+        const bool proficient = core::isProficientWith(hero.sheet, *hero.weapon);
+        attacks.push_back(
+            core::weaponAttackFor(hero.sheet, &*hero.weapon, hero.proficiency, proficient));
+        if (std::optional<core::AttackProfile> thrown =
+                core::thrownAttackFor(hero.sheet, *hero.weapon, hero.proficiency, proficient)) {
+            attacks.push_back(std::move(*thrown));
+        }
+    }
+    attacks.push_back(core::weaponAttackFor(hero.sheet, nullptr, hero.proficiency));
+    return core::ArenaContestant{.profile = std::move(profile),
+                                 .attacks = std::move(attacks),
+                                 .position = std::nullopt,
+                                 .markId = {},
+                                 .behavior = {},
+                                 .capacities = hero.sheet.capacities,
+                                 .spells = hero.spells};
+}
+
+/// @brief Une créature du bestiaire comme combattant du camp @p side, avec le profil de
+/// comportement que ses règles lui donnent (`LOT-23`).
+inline core::ArenaContestant creatureContestant(const core::Creature& creature,
+                                                core::CombatSide side,
+                                                const core::BehaviorCatalog* behaviors) {
+    // Les attaques multiples du bloc (LOT-142) : le meme mecanisme que l'Extra Attack d'un heros.
+    std::vector<core::Capacity> capacites;
+    if (creature.multiattack > 1) {
+        core::Capacity attaques{.id = "multiattack", .name = "Attaques multiples"};
+        attaques.effects.push_back(
+            {.kind = core::CapacityEffectKind::ExtraAttack, .value = creature.multiattack - 1});
+        capacites.push_back(std::move(attaques));
+    }
+    return core::ArenaContestant{.profile = core::profileFor(creature, side),
+                                 .attacks = core::attacksFor(creature).attacks,
+                                 .position = std::nullopt,
+                                 .markId = {},
+                                 .behavior = behaviors != nullptr && !behaviors->profiles.empty()
+                                                 ? core::behaviorFor(creature, *behaviors)
+                                                 : std::string{},
+                                 .capacities = std::move(capacites),
+                                 .spells = {}};
+}
 
 /// La carte du sable, telle que le jeu la nomme.
 inline constexpr std::string_view SABLE = "central-empire/capital/arenarea/arena-of-fate";
@@ -66,7 +132,7 @@ inline constexpr core::GridPosition DEVANT_LE_MAITRE{9, 10};
     return "aggressive";
 }
 
-/// Le groupe de « Nouvelle partie », dans l'ordre de marche (`hmi::WorldModel::STARTING_PARTY`).
+/// Le groupe de « Nouvelle partie », dans l'ordre de marche (celui de l'ancien écran du monde).
 inline const std::vector<std::string>& startingParty() {
     static const std::vector<std::string> groupe{"heros-brawler", "heros-priest", "heros-scoundrel",
                                                  "heros-mage"};
@@ -91,10 +157,9 @@ struct Heros {
     }
 
     /// La source de combattant de @p member : sa fiche, son arme, ses sorts.
-    [[nodiscard]] hmi::HeroContestantSource sourceOf(
-        const core::LoadedCharacterSheet& member) const {
+    [[nodiscard]] HeroContestantSource sourceOf(const core::LoadedCharacterSheet& member) const {
         const core::ItemLookup lookup{.items = &items, .equipment = &equipment};
-        hmi::HeroContestantSource hero{
+        HeroContestantSource hero{
             .sheet = member.sheet,
             .proficiency = core::proficiencyBonus(member.sheet, experience),
             .armorClass =
@@ -115,8 +180,8 @@ struct Heros {
     }
 
     /// Les sources de tous, dans l'ordre de marche.
-    [[nodiscard]] std::vector<hmi::HeroContestantSource> sources() const {
-        std::vector<hmi::HeroContestantSource> result;
+    [[nodiscard]] std::vector<HeroContestantSource> sources() const {
+        std::vector<HeroContestantSource> result;
         for (const core::LoadedCharacterSheet& member : members) {
             result.push_back(sourceOf(member));
         }
@@ -168,7 +233,7 @@ struct ArenaContent {
 
 /**
  * @brief Le déclencheur de @p encounterId sur @p map : son marqueur `encounter`, sinon le maître
- *        d'arène — c'est ce que fait `hmi::EncounterModel::begin`.
+ *        d'arène — c'est ce que faisait l'écran de rencontre.
  */
 [[nodiscard]] inline core::GridPosition triggerOf(const core::Level& map,
                                                   std::string_view encounterId) {
@@ -193,7 +258,7 @@ struct ArenaContent {
  */
 [[nodiscard]] inline std::optional<core::CombatOutcome> playEncounter(
     const core::Level& map, const ArenaContent& arena, std::string_view encounterId,
-    const std::vector<hmi::HeroContestantSource>& party, std::uint64_t seed,
+    const std::vector<HeroContestantSource>& party, std::uint64_t seed,
     core::EncounterRun* engaged = nullptr) {
     const core::Encounter* const rencontre = arena.encounters.find(encounterId);
     if (rencontre == nullptr) {
@@ -226,7 +291,7 @@ struct ArenaContent {
                          .flanking = true,
                          .escapable = setup.run.escapable};
     for (std::size_t rang = 0; rang < party.size() && rang < setup.partyCells.size(); ++rang) {
-        core::ArenaContestant membre = hmi::heroContestant(party[rang], core::CombatSide::Allies);
+        core::ArenaContestant membre = heroContestant(party[rang], core::CombatSide::Allies);
         membre.position = setup.partyCells[rang];
         // Le joueur ne joue pas : l'IA tient la place de chacun, sorts et soins compris.
         membre.behavior = profileOfClass(party[rang].sheet.classId);
@@ -239,7 +304,7 @@ struct ArenaContent {
             return std::nullopt;
         }
         core::ArenaContestant enemy =
-            hmi::creatureContestant(*creature, core::CombatSide::Enemies, &arena.behaviors);
+            creatureContestant(*creature, core::CombatSide::Enemies, &arena.behaviors);
         enemy.position = placement.position;
         bout.contestants.push_back(std::move(enemy));
     }

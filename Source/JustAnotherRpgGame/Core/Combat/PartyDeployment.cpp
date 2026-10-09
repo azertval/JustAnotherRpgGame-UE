@@ -12,9 +12,9 @@
 #include <variant>
 
 #include "Core/Combat/Arena.h"
-#include "Core/Combat/BattleGrid.h"
+#include "Core/Combat/CombatSpace.h"
 #include "Core/Combat/CombatTransition.h"
-#include "Core/Combat/Pathfinding.h"
+#include "Core/Combat/SimulatedSpace.h"
 #include "Core/Combat/TacticalTerrain.h"
 #include "Core/Rpg/Bestiary.h"
 #include "Core/World/CombatZone.h"
@@ -22,9 +22,6 @@
 namespace core {
 
 namespace {
-
-// Le marcheur fictif qui arpente la zone : seul sur sa grille, son identifiant importe peu.
-constexpr CombatantId ARPENTEUR{1};
 
 [[nodiscard]] CreatureSize tailleDe(const std::string& creatureId, const Bestiary* bestiary) {
     if (bestiary == nullptr) {
@@ -113,20 +110,36 @@ constexpr CombatantId ARPENTEUR{1};
     return cases;
 }
 
-// Les cases libres de la zone ou l'on marche depuis @p depart, depart compris, en cases de la
-// zone, triees. Vide si le depart ne se tient pas.
-[[nodiscard]] std::vector<GridPosition> atteignables(const TileMap& grille, GridPosition depart) {
-    BattleGrid arpentee(grille);
-    if (arpentee.place(ARPENTEUR, depart) != PlacementResult::Placed) {
+// Les cases de la zone dont le centre se rejoint a pied depuis celui de @p depart, depart compris,
+// en cases de la zone, triees. Vide si le depart ne se tient pas.
+[[nodiscard]] std::vector<GridPosition> atteignables(const TileMap& grille,
+                                                     const SimulatedSpace& espace,
+                                                     GridPosition depart) {
+    const Volume arpenteur = volumeOf(tileCenter(depart), CreatureSize::Medium);
+    if (!espace.isClear(arpenteur, Locomotion::Walk)) {
         return {};
     }
-    // Un budget qui couvre toute la zone : on cherche ce qui est relie, pas ce qu'un tour parcourt.
-    const ReachableArea aire(arpentee, Mover{.combatant = ARPENTEUR, .canPassThrough = {}},
-                             2 * (grille.width() + 1) * (grille.height() + 1));
-    std::vector<GridPosition> cases = aire.destinations();
-    cases.push_back(depart);
+    // Sans budget : on cherche ce qui est relie, pas ce qu'un tour parcourt.
+    const RouteQuery requete{.mover = arpenteur, .destination = {}, .budget = -1.0f};
+    std::vector<GridPosition> cases;
+    for (const Destination& place : espace.candidates(requete)) {
+        const GridPosition cell = tileOf(place.point);
+        if (cell.column < 0 || cell.row < 0 || cell.column >= grille.width() ||
+            cell.row >= grille.height() || groundDistance(tileCenter(cell), place.point) > 1e-3f) {
+            continue;
+        }
+        cases.push_back(cell);
+    }
     std::ranges::sort(cases, avant);
     return cases;
+}
+
+// Vrai si un des volumes poses couvre le centre de la case.
+[[nodiscard]] bool occupee(const std::vector<Volume>& poses, GridPosition cell) {
+    const Meters3 centre = tileCenter(cell);
+    return std::ranges::any_of(poses, [&](const Volume& volume) {
+        return groundDistance(centre, volume.base) < volume.radius - 1e-3f;
+    });
 }
 
 // La case libre de la zone la plus proche du marqueur : d'ou l'on arpente quand le marqueur est
@@ -163,16 +176,24 @@ void deployer(const TileMap& collision, const std::vector<MapEntity>& entities,
 
     // La formation posee sur la zone seule, comme le montage la pose sur la carte reduite : ce
     // qui en sort est hors du combat. Un mur ou un chevauchement est dit par le terrain.
-    BattleGrid posee(grille);
-    std::uint32_t suivant = 1;
+    const SimulatedSpace espace = SimulatedSpace::fromTileMap(grille);
+    std::vector<Volume> posee;
     for (const CombatantPlacement& adversaire : verdict.formation) {
-        const PlacementResult pose =
-            posee.place(CombatantId{suivant++}, versZone(adversaire.position),
-                        footprintSide(tailleDe(adversaire.creatureId, bestiary)));
-        if (pose == PlacementResult::OutOfBounds) {
+        const CreatureSize taille = tailleDe(adversaire.creatureId, bestiary);
+        const GridPosition ancre = versZone(adversaire.position);
+        const int cote = footprintSide(taille);
+        if (ancre.column < 0 || ancre.row < 0 || ancre.column + cote > grille.width() ||
+            ancre.row + cote > grille.height()) {
             verdict.issues.push_back({.code = DeploymentIssueCode::CombatantOutsideZone,
                                       .creatureId = adversaire.creatureId,
                                       .cell = adversaire.position});
+            continue;
+        }
+        const Volume volume = volumeOf(tileCenter(ancre, taille), taille);
+        if (espace.isClear(volume, Locomotion::Walk) &&
+            std::ranges::none_of(posee,
+                                 [&](const Volume& autre) { return overlap(volume, autre); })) {
+            posee.push_back(volume);
         }
     }
 
@@ -182,13 +203,13 @@ void deployer(const TileMap& collision, const std::vector<MapEntity>& entities,
             ? std::make_optional(verdict.trigger)
             : departDe(zone, verdict.trigger);
     const std::vector<GridPosition> reliees =
-        depart ? atteignables(grille, versZone(*depart)) : std::vector<GridPosition>{};
+        depart ? atteignables(grille, espace, versZone(*depart)) : std::vector<GridPosition>{};
     verdict.reachableCells = static_cast<int>(reliees.size());
 
     // Les places du groupe : reliees a la formation, et que la formation n'occupe pas.
     std::vector<GridPosition> candidates;
     for (const GridPosition cell : reliees) {
-        if (!posee.occupantAt(cell).has_value()) {
+        if (!occupee(posee, cell)) {
             candidates.push_back(versCarte(cell));
         }
     }

@@ -124,12 +124,12 @@ TEST(CombatZoneTest, LaCarteReduiteNEstQueLaZone) {
 
 /**
  * @brief Une session d'arene montee sur la zone ignore les cases du dehors.
- * \castest{<b>La grille de combat de la carte reduite ne connait que la zone.</b><br/>
+ * \castest{<b>L'espace de combat de la carte reduite ne connait que la zone.</b><br/>
  * \tcat Unitaire · Zone de combat<br/>
  * \tcrit Critique<br/>
  * \tetapes 1. Monter une `core::ArenaSession` sur la carte reduite a la zone.<br/>
- * \tattendu La grille a la taille de la zone : une case de tribune est hors grille, et la session
- * ne peut donc pas y poser un combattant.
+ * \tattendu L'espace a la taille de la zone (6 m sur 4,5 m) : une case de tribune est hors de
+ * l'espace, et la session ne peut donc pas y poser un combattant.
  * }
  */
 TEST(CombatZoneTest, LaSessionIgnoreLesCasesHorsZone) {
@@ -138,10 +138,17 @@ TEST(CombatZoneTest, LaSessionIgnoreLesCasesHorsZone) {
     ASSERT_EQ(zones.size(), 1U);
 
     const core::ArenaSession session{core::cropLevelToZone(complete, zones.front())};
-    EXPECT_EQ(session.combat().grid().width(), 4);
-    EXPECT_EQ(session.combat().grid().height(), 3);
-    EXPECT_FALSE(session.combat().grid().inBounds({4, 0}))
-        << "la premiere case hors zone doit etre inconnue de la grille";
+    const core::CombatSpace& espace = session.combat().space();
+    EXPECT_TRUE(espace.isClear(core::volumeOf(core::tileCenter({3, 2}), core::CreatureSize::Medium),
+                               core::Locomotion::Walk))
+        << "la derniere case de la zone se tient";
+    EXPECT_FALSE(
+        espace.isClear(core::volumeOf(core::tileCenter({4, 0}), core::CreatureSize::Medium),
+                       core::Locomotion::Walk))
+        << "la premiere case hors zone doit etre inconnue de l'espace";
+    EXPECT_FALSE(
+        espace.isClear(core::volumeOf(core::tileCenter({0, 3}), core::CreatureSize::Medium),
+                       core::Locomotion::Walk));
 }
 
 /**

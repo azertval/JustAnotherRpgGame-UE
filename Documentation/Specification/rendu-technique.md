@@ -43,7 +43,7 @@ la façon dont une figurine se pose sur sa case, et le facteur d'affichage dédu
   asset sans description d'animation est affiché comme une **image fixe**.
 - **EX-REN-013** — La **caméra** du lieu doit être **orthographique et fixe** : tournée de
   **45°**, inclinée de **asin 0,62 ≈ 38,3°**, sans fuyante ni rotation libre — c'est ce qui redonne
-  le losange de rapport 0,62 d'`core::IsoProjection`, et la projection reste **affine** : le
+  le losange de rapport 0,62 de l'ancienne projection isométrique de Core (retirée au `LOT-1017`), et la projection reste **affine** : le
   pointage d'une case au sol ne change pas. Elle suit le héros, bornée à la scène (un axe plus
   étroit que la vue est centré), à un facteur d'affichage **libre** (`EX-ARCH-022`) et **déduit de
   la définition de la fenêtre** : la largeur d'une case à l'écran vaut la hauteur de la fenêtre

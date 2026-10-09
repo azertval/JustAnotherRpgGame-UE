@@ -10,12 +10,14 @@
  * qui le franchit.
  */
 
+#include <algorithm>
 #include <cstddef>
 #include <string>
 #include <vector>
 
 #include <gtest/gtest.h>
 
+#include "Core/Combat/CombatSpace.h"
 #include "Core/Combat/Encounter.h"
 #include "Core/Combat/TacticalTerrain.h"
 #include "Core/Levels/GridPosition.h"
@@ -63,8 +65,9 @@ namespace {
  * \tcrit Critique<br/>
  * \tetapes 1. Poser une rencontre de deux rats au centre d'une carte vide de 20 x 20.<br/>
  * 2. Analyser le terrain.<br/>
- * \tattendu Un verdict valide ; la zone est le carre de 13 x 13 autour du declencheur, triee, et
- * en exige 24.
+ * \tattendu Un verdict valide qui exige 24 cases ; la zone est triee, et ce sont les cases dont le
+ * centre s'atteint en 9 m depuis celui du declencheur : six cases en ligne droite, quatre en
+ * diagonale (8,49 m), pas cinq (10,6 m).
  * }
  */
 TEST(TacticalTerrainTest, UneRencontreEnChampOuvertEstValide) {
@@ -79,10 +82,28 @@ TEST(TacticalTerrainTest, UneRencontreEnChampOuvertEstValide) {
     EXPECT_EQ(verdict.encounterId, "rats");
     EXPECT_EQ(verdict.placements.size(), 2U);
     EXPECT_EQ(verdict.requiredCells, (2 + core::TACTICAL_PARTY_SIZE) * 4);
-    // Diagonales à 1 : six cases de rayon font un carré de 13 de côté.
-    EXPECT_EQ(verdict.area.size(), 13U * 13U);
-    EXPECT_EQ(verdict.area.front(), (core::GridPosition{.column = 4, .row = 4}));
-    EXPECT_EQ(verdict.area.back(), (core::GridPosition{.column = 16, .row = 16}));
+    // En distance : 9 m depuis le centre du déclencheur, mesurés en mètres et non plus en cases
+    // dont la diagonale vaut 1.
+    const auto contient = [&verdict](core::GridPosition cell) {
+        return std::ranges::find(verdict.area, cell) != verdict.area.end();
+    };
+    EXPECT_TRUE(contient({.column = 10, .row = 10}));
+    EXPECT_TRUE(contient({.column = 16, .row = 10}));
+    EXPECT_TRUE(contient({.column = 4, .row = 10}));
+    EXPECT_TRUE(contient({.column = 10, .row = 4}));
+    EXPECT_TRUE(contient({.column = 14, .row = 14}));
+    EXPECT_FALSE(contient({.column = 15, .row = 15}));
+    EXPECT_FALSE(contient({.column = 17, .row = 10}));
+    EXPECT_EQ(verdict.area.front(), (core::GridPosition{.column = 10, .row = 4}));
+    EXPECT_EQ(verdict.area.back(), (core::GridPosition{.column = 10, .row = 16}));
+    const core::Meters3 centre = core::tileCenter({.column = 10, .row = 10});
+    for (const core::GridPosition cell : verdict.area) {
+        EXPECT_LE(core::groundDistance(core::tileCenter(cell), centre), 9.0F + 0.01F);
+    }
+    EXPECT_TRUE(
+        std::ranges::is_sorted(verdict.area, [](core::GridPosition a, core::GridPosition b) {
+            return a.row != b.row ? a.row < b.row : a.column < b.column;
+        }));
 }
 
 /**

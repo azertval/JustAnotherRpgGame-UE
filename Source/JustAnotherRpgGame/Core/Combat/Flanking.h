@@ -21,52 +21,45 @@
  * **neutralisé** ; et une créature de Grande taille ou plus prend en tenaille « tant que l'une des
  * cases qu'elle occupe remplit les conditions ».
  *
- * ## Comment la grille le mesure
+ * ## Comment l'espace le mesure (`LOT-1017`)
  *
- * Le doute est tranché **toujours** par la ligne des centres : c'est la seule des deux formulations
- * qui se calcule sans interprétation. Les centres sont des points de grille en demi-cases
- * (`core::centerOf`), les bords de l'emplacement des coordonnées paires ; la ligne « passe par deux
- * côtés opposés » si elle touche le bord gauche **et** le bord droit, ou le haut **et** le bas,
- * coins compris — ce qui couvre les angles opposés. Tout est entier et exact.
+ * Sans grille, la ligne des centres devient un **angle** : les deux attaquants prennent la cible
+ * en tenaille si l'angle qu'ils forment au centre de la cible atteint 135° (`core::flanksByAngle`).
+ * C'est la valeur exacte où la ligne des centres du Guide bascule sur les huit cases adjacentes
+ * (`test_combat_space.cpp`, `LaTenailleParAngleRejoueLaLigneDesCentresDuGuide`). « Adjacent »
+ * devient « à l'allonge de 1,50 m » : l'écart entre les bords des volumes
+ * (`core::adjacentGap`).
  *
  * La règle est **optionnelle** : c'est la donnée de l'arène qui l'active
  * (`core::ArenaBout::flanking`), pas le moteur.
  */
 
+#include "Core/Combat/Attack.h"
 #include "Core/Combat/CombatState.h"
-#include "Core/Combat/LineOfSight.h"
 
 namespace core {
 
 /**
- * @brief Vrai si la ligne entre les centres des cases @p a et @p b passe par deux côtés opposés de
- *        l'emplacement @p target.
- *
- * La géométrie seule : ni l'adjacence, ni la vue, ni l'état des créatures.
- */
-[[nodiscard]] bool crossesOppositeSides(GridPosition a, GridPosition b, Footprint target) noexcept;
-
-/**
- * @brief Vrai si @p attacker, ancré en @p attackerAnchor, prend @p target en tenaille avec au moins
+ * @brief Vrai si @p attacker, posé en @p attackerBase, prend @p target en tenaille avec au moins
  *        un allié debout.
  *
- * Chacun des deux doit être debout, adjacent à la cible (distance 1, emprises comprises) et la voir
- * (`core::hasLineOfSight`) ; une case de l'emprise de l'un et une case de l'emprise de l'autre
- * doivent être alignées par leurs centres sur deux côtés opposés de la cible. L'ancre supposée sert
- * l'IA (`LOT-23`), qui juge une case avant d'y aller.
+ * Chacun des deux doit être debout, à une case de la cible (`core::adjacentGap`) et la voir
+ * (`core::hasLineOfSight`) ; leurs deux positions doivent former au centre de la cible un angle
+ * d'au moins 135° (`core::flanksByAngle`). La position supposée sert l'IA (`LOT-23`), qui juge une
+ * place avant d'y aller.
  */
 [[nodiscard]] bool isFlankedFrom(const CombatState& combat, CombatantId attacker,
-                                 GridPosition attackerAnchor, CombatantId target);
+                                 Meters3 attackerBase, CombatantId target);
 
-/// @brief La même règle, l'attaquant à sa place sur la grille. Faux s'il n'y est pas.
+/// @brief La même règle, l'attaquant à sa place. Faux s'il n'est pas posé.
 [[nodiscard]] bool isFlanked(const CombatState& combat, CombatantId attacker, CombatantId target);
 
 /**
- * @brief Vrai si @p target est adjacente (distance 1, emprises comprises) à un allié **debout** de
+ * @brief Vrai si @p target est à une case (`core::adjacentGap`) d'un allié **debout** de
  *        @p attacker, autre que lui (`LOT-135`).
  *
- * La moitié de la tenaille — l'allié au contact —, sans la géométrie des côtés opposés ni la vue :
- * ce que *Sneak Attack Simplified* demande (*Player's Guide*, p. 204).
+ * La moitié de la tenaille — l'allié au contact —, sans l'angle ni la vue : ce que *Sneak Attack
+ * Simplified* demande (*Player's Guide*, p. 204).
  */
 [[nodiscard]] bool isAdjacentToAllyOf(const CombatState& combat, CombatantId attacker,
                                       CombatantId target);

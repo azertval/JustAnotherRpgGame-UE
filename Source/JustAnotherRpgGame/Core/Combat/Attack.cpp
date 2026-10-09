@@ -7,7 +7,6 @@
 #include <cmath>
 #include <utility>
 
-#include "Core/Combat/BattleGrid.h"
 #include "Core/Rpg/Ability.h"
 #include "Core/Rpg/Bestiary.h"
 #include "Core/Rpg/CharacterSheet.h"
@@ -40,15 +39,6 @@ namespace {
 
 [[nodiscard]] std::string signe(int valeur) {
     return (valeur >= 0 ? " + " : " - ") + std::to_string(valeur >= 0 ? valeur : -valeur);
-}
-
-// Distance entre deux emprises carrees : l'ecart sur chaque axe, puis le plus grand des deux.
-[[nodiscard]] int ecartEntreEmprises(GridPosition a, int coteA, GridPosition b,
-                                     int coteB) noexcept {
-    const int dx =
-        std::max({0, b.column - (a.column + coteA - 1), a.column - (b.column + coteB - 1)});
-    const int dy = std::max({0, b.row - (a.row + coteA - 1), a.row - (b.row + coteB - 1)});
-    return std::max(dx, dy);
 }
 
 // Une portee du corpus en cases, arrondie vers le bas : 24 m font 16 cases, 7,50 m en font 5. La
@@ -214,43 +204,66 @@ std::optional<AttackProfile> thrownAttackFor(const CharacterSheet& sheet, const 
 
 // --- Geometrie --------------------------------------------------------------------------------
 
-std::optional<int> gridDistanceFrom(const CombatState& combat, CombatantId mover,
-                                    GridPosition moverAnchor, CombatantId other) {
-    const Combatant* a = combat.find(mover);
-    const Combatant* b = combat.find(other);
-    const std::optional<GridPosition> ancreB = combat.grid().positionOf(other);
-    if (a == nullptr || b == nullptr || !ancreB.has_value()) {
+std::optional<float> gapFrom(const CombatState& combat, CombatantId mover, Meters3 moverBase,
+                             CombatantId other) {
+    const std::optional<Volume> a = combat.volumeAt(mover, moverBase);
+    const std::optional<Volume> b = combat.volumeOf(other);
+    if (!a.has_value() || !b.has_value()) {
         return std::nullopt;
     }
-    return ecartEntreEmprises(moverAnchor, footprintSide(a->profile.size), *ancreB,
-                              footprintSide(b->profile.size));
+    return edgeDistance(*a, *b);
 }
 
-std::optional<int> gridDistance(const CombatState& combat, CombatantId from, CombatantId to) {
-    const std::optional<GridPosition> ancre = combat.grid().positionOf(from);
-    if (!ancre.has_value()) {
+std::optional<float> gapBetween(const CombatState& combat, CombatantId from, CombatantId to) {
+    const std::optional<Volume> a = combat.volumeOf(from);
+    const std::optional<Volume> b = combat.volumeOf(to);
+    if (!a.has_value() || !b.has_value()) {
         return std::nullopt;
     }
-    return gridDistanceFrom(combat, from, *ancre, to);
+    return edgeDistance(*a, *b);
+}
+
+bool profileReaches(const AttackProfile& profile, float gap) noexcept {
+    if (profile.kind == AttackKind::Melee) {
+        return withinTiles(gap, profile.reach);
+    }
+    return withinTiles(gap, profile.range.has_value() ? profile.range->maximum : 1);
 }
 
 bool inReach(const CombatState& combat, CombatantId attacker, CombatantId target,
              const AttackProfile& profile) {
-    const std::optional<int> distance = gridDistance(combat, attacker, target);
-    if (!distance.has_value() || attacker == target) {
-        return false;
+    const std::optional<float> gap = gapBetween(combat, attacker, target);
+    return gap.has_value() && attacker != target && profileReaches(profile, *gap);
+}
+
+bool hasLineOfSight(const CombatState& combat, CombatantId a, CombatantId b) {
+    const std::optional<Volume> va = combat.volumeOf(a);
+    const std::optional<Volume> vb = combat.volumeOf(b);
+    return va.has_value() && vb.has_value() && hasLineOfSight(combat.space(), *va, *vb);
+}
+
+bool hasLineOfSightFrom(const CombatState& combat, CombatantId viewer, Meters3 viewerBase,
+                        CombatantId other) {
+    const std::optional<Volume> va = combat.volumeAt(viewer, viewerBase);
+    const std::optional<Volume> vb = combat.volumeOf(other);
+    return va.has_value() && vb.has_value() && hasLineOfSight(combat.space(), *va, *vb);
+}
+
+Cover coverBetween(const CombatState& combat, CombatantId attacker, CombatantId target) {
+    const std::optional<Volume> tireur = combat.volumeOf(attacker);
+    const std::optional<Volume> cible = combat.volumeOf(target);
+    if (!tireur.has_value() || !cible.has_value()) {
+        return Cover::Total;
     }
-    if (profile.kind == AttackKind::Melee) {
-        return *distance <= profile.reach;
-    }
-    return profile.range.has_value() ? *distance <= profile.range->maximum : *distance <= 1;
+    const std::vector<Volume> interposes = combat.bodiesExcept(attacker, target);
+    return coverFrom(combat.space(), *tireur, *cible, interposes);
 }
 
 TargetCheck checkTarget(const CombatState& combat, CombatantId attacker, CombatantId target,
                         const AttackProfile& profile) {
-    if (attacker == target || !combat.grid().positionOf(attacker).has_value() ||
-        !combat.grid().positionOf(target).has_value()) {
-        return TargetCheck::NotOnGrid;
+    if (attacker == target || !combat.positionOf(attacker).has_value() ||
+        !combat.positionOf(target).has_value()) {
+        return TargetCheck::NotPlaced;
     }
     if (!inReach(combat, attacker, target, profile)) {
         return TargetCheck::OutOfReach;
@@ -261,6 +274,12 @@ TargetCheck checkTarget(const CombatState& combat, CombatantId attacker, Combata
 AttackCircumstances attackCircumstances(const CombatState& combat, CombatantId attacker,
                                         CombatantId target, const AttackProfile& profile) {
     AttackCircumstances circonstances;
+    // La hauteur (LOT-1017) : une case au-dessus de la cible, au contact comme a distance.
+    const std::optional<Volume> haut = combat.volumeOf(attacker);
+    const std::optional<Volume> bas = combat.volumeOf(target);
+    if (haut.has_value() && bas.has_value() && hasHighGround(*haut, *bas)) {
+        circonstances.advantages.emplace_back("hauteur");
+    }
     if (profile.kind != AttackKind::Ranged) {
         return circonstances;
     }
@@ -276,13 +295,15 @@ AttackCircumstances attackCircumstances(const CombatState& combat, CombatantId a
         }
         // « Une creature hostile qui vous voit » : un gobelin de l'autre cote d'un mur, a une case,
         // ne gene pas le tir.
-        if (gridDistance(combat, attacker, autre) == 1 && hasLineOfSight(combat, autre, attacker)) {
+        const std::optional<float> ecart = gapBetween(combat, attacker, autre);
+        if (ecart.has_value() && adjacentGap(*ecart) && hasLineOfSight(combat, autre, attacker)) {
             circonstances.disadvantages.emplace_back("tir au contact d'un ennemi");
             break;
         }
     }
-    const std::optional<int> distance = gridDistance(combat, attacker, target);
-    if (profile.range.has_value() && distance.has_value() && *distance > profile.range->normal) {
+    const std::optional<float> distance = gapBetween(combat, attacker, target);
+    if (profile.range.has_value() && distance.has_value() &&
+        !withinTiles(*distance, profile.range->normal)) {
         circonstances.disadvantages.emplace_back("longue portee");
     }
     return circonstances;
@@ -419,7 +440,7 @@ std::optional<AttackOutcome> resolveAttack(CombatState& combat, CombatantId atta
         demande.disadvantages.insert(demande.disadvantages.end(), source->disadvantages.begin(),
                                      source->disadvantages.end());
     }
-    // L'abri que la grille dit, avant tout greffon : un greffon qui en pose un autre passe par
+    // L'abri que l'espace dit, avant tout greffon : un greffon qui en pose un autre passe par
     // applyCover, et le meilleur seul compte.
     demande.applyCover(coverBetween(combat, attacker, target));
 

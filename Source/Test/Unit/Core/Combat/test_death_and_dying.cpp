@@ -25,13 +25,12 @@
 
 #include "Core/Combat/ActionEconomy.h"
 #include "Core/Combat/Arena.h"
-#include "Core/Combat/BattleGrid.h"
 #include "Core/Combat/CombatState.h"
 #include "Core/Combat/EnemyAi.h"
 #include "Core/Levels/GridPosition.h"
-#include "Core/Levels/TileMap.h"
 #include "Core/Math/DeterministicRandom.h"
 #include "Test/Support/ClassArena.h"
+#include "Test/Support/CombatSpaceSupport.h"
 
 namespace {
 
@@ -59,10 +58,11 @@ constexpr int DERNIER = -100;
             .movement = 6};
 }
 
-/// Deux alliés de 10 PV, Aldric puis Brune — et Cédric, sur demande —, et deux gobelins de 10 PV ;
-/// le combat a commencé et c'est le tour d'Aldric.
+/// Deux alliés de 10 PV, Aldric puis Brune — et Cédric, sur demande —, et deux gobelins de 10 PV,
+/// chacun au centre de sa case d'une salle de 12 × 8 ; le combat a commencé et c'est le tour
+/// d'Aldric.
 struct Escarmouche {
-    core::CombatState combat{core::BattleGrid(core::TileMap(12, 8))};
+    core::CombatState combat{test_support::openSpace(12, 8)};
     core::DeterministicRandom des{1};
     CombatantId aldric{};
     CombatantId brune{};
@@ -70,23 +70,20 @@ struct Escarmouche {
 
     explicit Escarmouche(core::AtZeroHitPoints monstres = core::AtZeroHitPoints::Dies,
                          bool cedric = false) {
-        aldric = *combat
-                      .enlist(profil("Aldric", CombatSide::Allies, 10, PREMIER),
-                              core::GridPosition{1, 1})
-                      .combatant;
+        using test_support::tile;
+        aldric =
+            *combat.enlist(profil("Aldric", CombatSide::Allies, 10, PREMIER), tile(1, 1)).combatant;
         brune =
-            *combat
-                 .enlist(profil("Brune", CombatSide::Allies, 10, SECOND), core::GridPosition{1, 3})
-                 .combatant;
+            *combat.enlist(profil("Brune", CombatSide::Allies, 10, SECOND), tile(1, 3)).combatant;
         if (cedric) {
-            static_cast<void>(combat.enlist(profil("Cedric", CombatSide::Allies, 10, 0),
-                                            core::GridPosition{1, 5}));
+            static_cast<void>(
+                combat.enlist(profil("Cedric", CombatSide::Allies, 10, 0), tile(1, 5)));
         }
         core::CombatantProfile monstre = profil("Gobelin", CombatSide::Enemies, 10, DERNIER);
         monstre.atZero = monstres;
-        gobelin = *combat.enlist(monstre, core::GridPosition{8, 1}).combatant;
+        gobelin = *combat.enlist(monstre, tile(8, 1)).combatant;
         monstre.name = "Second gobelin";
-        static_cast<void>(combat.enlist(monstre, core::GridPosition{8, 3}));
+        static_cast<void>(combat.enlist(monstre, tile(8, 3)));
         EXPECT_TRUE(combat.start(des));
         EXPECT_EQ(combat.activeCombatant(), aldric);
     }
@@ -570,7 +567,8 @@ TEST(DeathAndDyingTest, DesDegatsRompentLaConcentration) {
  * @brief L'IA acheve ou epargne selon son profil (LOT-23, EX-CBT-050) -- et ne s'acharne pas sur
  *        un personnage a terre quand un autre la menace (LOT-139).
  * \castest{<b>Critere du LOT-137 et du LOT-139 : un gobelin au contact de Bran, a terre. Aldric,
- * debout, est a trois cases : un profil qui n'acheve pas va frapper Aldric ; un profil qui
+ * debout, est a trois cases (3 m entre les bords) : un profil qui n'acheve pas va frapper Aldric ;
+ * un profil qui
  * acheve frappe Bran. Aldric revenu au contact, meme le profil qui acheve frappe Aldric. Les
  * profils livres disent qui acheve.</b><br/>
  * \tcat Unitaire · Combat<br/>

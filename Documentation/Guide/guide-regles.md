@@ -199,13 +199,15 @@ la fiche plus bas.
 ## L'échelle du monde : `core::METERS_PER_TILE` {#echelle}
 
 Toutes les portées et vitesses du corpus sont en **mètres** — « allonge 1,50 m », « vitesse 9 m »,
-« portée 6 m/18 m » — et la grille tactique compte en **cases**. La conversion existe forcément
-quelque part, et le seul choix ouvert était *à un endroit, ou à trente*. À trente, il suffit qu'un
+« portée 6 m/18 m » — et les données du jeu les comptent en **cases** : la grille tactique du
+`LOT-19` les y a mises, et le combat en distance (`LOT-1017`) les garde dans cette unité. La
+conversion existe forcément quelque part, et le seul choix ouvert était *à un endroit, ou à
+trente*. À trente, il suffit qu'un
 seul emploie 1,52 (les cinq pieds d'origine) pour qu'une portée de six cases en devienne cinq
 ailleurs. `Source/Core/Rpg/Scale.h` fige donc **une case = 1,5 m** (`EX-REG-051`), avec
 `core::tilesFromMeters` et `core::metersFromTiles` en `constexpr`. C'est ce que la fiche emploie
-dans `CharacterSheet::speedInTiles()`, et ce que le déplacement (`LOT-19`) et la portée (`LOT-22`)
-consomment.
+dans `CharacterSheet::speedInTiles()`, ce que le déplacement (`LOT-19`) et la portée (`LOT-22`)
+consomment, et ce par quoi l'espace de combat en mètres relit une donnée en cases (`LOT-1017`).
 
 ## Les énumérations fermées : `core::DamageType`, `core::Condition`, `core::MagicSchool`, `core::CreatureSize` {#enumerations}
 
@@ -217,7 +219,7 @@ corpus (`EX-CNT-011`) :
 | `core::DamageType` | 13 : contondant, perforant, tranchant (les trois physiques), puis acide, froid, feu, force, foudre, nécrotique, poison, psychique, radiant, tonnerre | les dégâts typés du combat (`EX-CBT-032`), les résistances du bestiaire |
 | `core::Condition` | 15, dont `Exhaustion`, la seule non binaire (six niveaux) | les états du combat (`EX-REG-040`) ; l'**effet** d'une condition est dans `conditions/`, jamais dans l'énumération |
 | `core::MagicSchool` | 8 : abjuration, invocation (*conjuration* — le faux ami que le lexique fige), divination, enchantement, évocation, illusion, nécromancie, transmutation | l'écran des sorts |
-| `core::CreatureSize` | 6 : `Tiny` à `Gargantuan` | l'emprise sur la grille (`LOT-19`), ce qu'une créature peut agripper |
+| `core::CreatureSize` | 6 : `Tiny` à `Gargantuan` | l'emprise en cases (`LOT-19`) dont le combat tire le rayon et la hauteur de son volume (`LOT-1017`), ce qu'une créature peut agripper |
 
 `Source/Core/Rpg/RpgEnumNames.h` est le **point unique** de correspondance valeur ↔ nom, partagé
 par les catalogues, leurs schémas et le moteur. Deux tables distinctes divergeraient au premier type

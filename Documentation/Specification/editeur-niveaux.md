@@ -174,7 +174,7 @@ depuis le jeu, se réduit à ses outils de développement.
 - **EX-EDIT-054** — Le combat se jouant sur la carte d'exploration, l'éditeur
   doit **avertir** quand une rencontre posée n'est pas un **terrain tactique valide** : un
   combattant de sa formation hors de la carte, sur un obstacle ou sur un autre — selon la règle même
-  du montage d'une rencontre (`core::BattleGrid::place`) —, ou une zone atteignable en un
+  du montage d'une rencontre (`core::CombatState::placementAt`) —, ou une zone atteignable en un
   déplacement depuis le déclencheur trop petite pour la rencontre et un groupe de quatre
   (`core::analyzeEncounterTerrain`, seuils nommés). Avec l'outil « Entité », la zone et la formation
   de la rencontre sélectionnée se voient sur la carte. Concrétisé au `LOT-11`.

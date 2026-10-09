@@ -90,7 +90,7 @@ La seule révision de format du module éditeur, faite tant qu'il n'y avait que 
   identifiant sont refusées au chargement.
 - **EX-LVL-022** — Une zone (`"type": "zone"`) est un **rectangle** (`width` ×
   `height` depuis sa case) **ou** un ensemble de cases **peint** (`"cells"`) ; ses propriétés
-  s'appliquent à chaque case couverte, et `core::BattleGrid::zonesAt` lit les deux formes.
+  s'appliquent à chaque case couverte, et `core::zoneCells` lit les deux formes.
 - **EX-LVL-023** — Une carte peut être la **variante** d'une autre (`"base"`) :
   elle ne porte aucune case, reprend celles de sa base, change de planche (`"scene"`) et porte ses
   propres entités. Sa base se cherche du dossier de la variante vers la racine ; une base elle-même
@@ -252,11 +252,11 @@ rassemblés dans `core::knownEntityKinds` (`Source/Core/World/EntityKinds.h`) :
 | `encounter` | `encounterId` (requis), `respawns` (booléen) | `core::encounterTriggerFor` (`LOT-18`) |
 | `portal` | `targetMap`, `arrival` — requis, sauf portail **condamné** ; `requiresFlag` ; `sealed` (booléen : posé, jamais franchi, `EX-LVL-027`) | graphe du monde (`LOT-09`, `LOT-126`) |
 | `spawnPoint` | `name` (requis, unique dans la carte) | graphe du monde (`LOT-09`) |
-| `combatZone` | `name`, `width`, `height` — requis | découpe de la grille de combat (`LOT-09`) |
+| `combatZone` | `name`, `width`, `height` — requis | découpe de la carte où le combat se joue (`LOT-09`) |
 | `cityBlock` | `name`, `width`, `height` — requis | plan de ville (`LOT-96`) |
 | `arenaEntry` | `side` (`allies` ou `enemies`), `rank` (entier, au moins 1) | `core::arenaEntryPoints` (`LOT-50`) |
 | *toute famille* | `presenceFlag`, `presenceTest` (`set`, `unset`, `equals`, `notEquals`), `presenceValue` (`a\|b`, des valeurs qu'une quête déclare) — la **condition de présence** | `core::isEntityPresent` (`LOT-116`, `EX-EXP-009`) ; déclarée au contrat (`core::commonEntityProperties`) au `LOT-126` |
-| `zone` | `width`, `height` (rectangle) ou `cells` (peinte) ; `name`, `difficultTerrain` ; ses **déclencheurs** (`EX-LVL-028`) : `triggerDialogue`, `triggerFlag` + `triggerValue`, `triggerMap` + `triggerArrival`, `triggerOnce` | `core::BattleGrid::zonesAt` (`LOT-EDITOR-12`), `core::ExplorationSession` (`LOT-126`) |
+| `zone` | `width`, `height` (rectangle) ou `cells` (peinte) ; `name`, `difficultTerrain` ; ses **déclencheurs** (`EX-LVL-028`) : `triggerDialogue`, `triggerFlag` + `triggerValue`, `triggerMap` + `triggerArrival`, `triggerOnce` | `core::SimulatedSpace::fromLevel` (`LOT-1017`), `core::ExplorationSession` (`LOT-126`) |
 | `prop` | `piece` (requis, une pièce du lieu), `blocks` (booléen, vrai par défaut), `width`, `height` — l'emprise de la pièce (`EX-LVL-026`) | `core::ExplorationSession`, `hmi::snapshotWorldScene` (`LOT-126`) |
 | `route` | `name` (requis), `loop` (booléen, une ronde) ; ses points dans `cells`, **dans l'ordre** | personne encore : le `LOT-70` et le `LOT-82` (`LOT-EDITOR-05`) |
 

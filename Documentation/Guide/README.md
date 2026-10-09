@@ -48,7 +48,7 @@ affiche. Cette frontière est ce qui rend le moteur analysable domaine par domai
 - [Niveaux : modèle, couches, entités, chargement](guide-niveaux.md) — les **cartes** : modèle, couches, entités, format JSON.
 - [Monde et exploration](guide-monde.md) — la session d'exploration, les portails, le graphe du monde, les dialogues et les faits de la partie.
 - [Règles d20 et personnages](guide-regles.md) — dés, jets, caractéristiques, fiche, inventaire, équipement.
-- [Combat tactique](guide-combat.md) — grille, initiative, économie d'actions, attaques, portée et ligne de vue, zones, IA, la rencontre sur la carte.
+- [Combat tactique](guide-combat.md) — l'espace en mètres, initiative, économie d'actions, attaques, portée et ligne de vue, zones, IA, la rencontre sur la carte.
 - [Données, corpus et ressources](guide-donnees.md) — catalogues JSON, schémas, clés d'assets, chaîne d'extraction, localisation.
 - [Journalisation et assertions](guide-journalisation.md) — niveaux, sinks, macros, rapport de plantage.
 

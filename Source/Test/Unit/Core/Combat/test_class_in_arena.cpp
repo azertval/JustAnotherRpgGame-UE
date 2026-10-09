@@ -296,10 +296,10 @@ TEST(ClassInArenaTest, LeDeplacementNeProvoquePasDAttaqueDOpportunite) {
         ASSERT_EQ(session.combat().activeCombatant(), CombatantId{1});
         EXPECT_EQ(session.combat().find(CombatantId{1})->profile.movement, 8) << "9 m + 3 m";
 
-        EXPECT_TRUE(session.previewOpportunities({3, 7}).empty());
-        const core::MoveOutcome parcours = session.move({3, 7});
+        EXPECT_TRUE(session.previewOpportunities(core::tileCenter({3, 7})).empty());
+        const core::MoveOutcome parcours = session.move(core::tileCenter({3, 7}));
         EXPECT_EQ(parcours.result, core::MoveResult::Moved);
-        EXPECT_EQ(session.combat().grid().positionOf(CombatantId{1}), (core::GridPosition{3, 7}));
+        EXPECT_EQ(session.combat().positionOf(CombatantId{1}), core::tileCenter({3, 7}));
         EXPECT_FALSE(contient(session.journal(), "opportunite : "));
         EXPECT_TRUE(
             contient(session.journal(), "sans attaque d'opportunite Lutteuse (Pas de danseur)"));
@@ -313,8 +313,9 @@ TEST(ClassInArenaTest, LeDeplacementNeProvoquePasDAttaqueDOpportunite) {
         ASSERT_TRUE(session.mount(bout).refusals.empty());
         ASSERT_TRUE(session.start());
         EXPECT_EQ(session.combat().find(CombatantId{1})->profile.movement, 6);
-        EXPECT_EQ(session.previewOpportunities({3, 7}), (std::vector<CombatantId>{CombatantId{2}}));
-        static_cast<void>(session.move({3, 7}));
+        EXPECT_EQ(session.previewOpportunities(core::tileCenter({3, 7})),
+                  (std::vector<CombatantId>{CombatantId{2}}));
+        static_cast<void>(session.move(core::tileCenter({3, 7})));
         EXPECT_TRUE(contient(session.journal(), "opportunite : attaque Gobelin -> Lutteuse"));
         EXPECT_FALSE(contient(session.journal(), "sans attaque d'opportunite"));
     }

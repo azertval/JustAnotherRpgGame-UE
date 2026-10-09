@@ -11,8 +11,8 @@
 #include <variant>
 
 #include "Core/Combat/Arena.h"
-#include "Core/Combat/BattleGrid.h"
 #include "Core/Combat/CombatTransition.h"
+#include "Core/Levels/MapEntity.h"
 #include "Core/Rpg/Dialogue.h"
 #include "Core/World/CityBlock.h"
 #include "Core/World/CombatZone.h"
@@ -184,7 +184,8 @@ const std::vector<EntityKind>& knownEntityKinds() {
                                   atLeast(CITY_BLOCK_HEIGHT_PROPERTY, 1)},
                    .shape = EntityShape::Rectangle,
                    .labelProperty = CITY_BLOCK_NAME_PROPERTY},
-        // Zone de regles (D13, lue par BattleGrid) : un rectangle ou des cases peintes. Sa taille
+        // Zone de regles (D13, lue par l'espace de combat) : un rectangle ou des cases peintes. Sa
+        // taille
         // n'est pas requise -- une zone peinte n'en a pas. Le nom n'est lu par personne : il sert a
         // la reconnaitre dans la liste.
         // Ses declencheurs (LOT-126) : ce qu'elle fait quand le heros y entre -- un dialogue, un

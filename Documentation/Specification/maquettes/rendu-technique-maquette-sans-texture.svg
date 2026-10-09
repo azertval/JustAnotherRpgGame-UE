@@ -13,7 +13,7 @@
       <text x="0" y="122">case Grass sans pièce : losange plat</text>
       <text x="0" y="138"><tspan font-family="Consolas, monospace">hmi::PolyQuad</tspan> : 4 sommets libres, 1 teinte</text>
       <text x="0" y="154">texture liée : le blanc 1 × 1 (textures.solid)</text>
-      <text x="0" y="170">calque Tile ; ordre = IsoProjection::depth</text>
+      <text x="0" y="170">calque Tile ; ordre = profondeur isométrique</text>
     </g>
   </g>
   <g transform="translate(30,300)">

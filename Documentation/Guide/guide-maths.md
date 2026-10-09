@@ -88,7 +88,8 @@ le constructeur `Rect(topLeft, dimensions)` les prend dans cet ordre, et `core::
 ![Le repère de Core, origine haut-gauche et y vers le bas, avec la case (2, 1) et son centre ; à droite, un Rect dont les bords haut et gauche sont inclus, bas et droit exclus, et deux rectangles en contact qui ne s'intersectent pas](figures/maths-repere-rect.svg)
 
 Deux tests suffisent aux usages du moteur — la zone visible de la caméra
-(`hmi::PlaceCamera::visibleBounds`), l'emprise d'une tuile projetée (`core::IsoProjection`) :
+(`hmi::PlaceCamera::visibleBounds`), l'emprise d'une tuile projetée (l'ancienne projection
+isométrique, retirée au `LOT-1017`) :
 
 - `core::Rect::contains(point)` est **inclusif** en haut/à gauche et **exclusif** en bas/à droite,
   pour qu'une grille de rectangles jointifs pave le plan sans recouvrement ni trou : un point posé

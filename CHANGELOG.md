@@ -6,6 +6,33 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **Le combat en distance commence : l'espace de combat en mètres** (LOT-1017, D-50, 9 octobre
+  2026, lot ouvert, non livré). `core::CombatSpace` dit les règles spatiales du Manuel sans
+  grille : une créature est un cylindre à la taille de son emprise, l'allonge se mesure entre les
+  bords (1,50 m), une zone est une forme (sphère et cylindre en trois dimensions ; cône, ligne et
+  cube dans le plan), la tenaille un angle de 135° au centre de la cible — la valeur où la ligne
+  des centres du Guide bascule sur les huit cases adjacentes —, l'avantage de hauteur une case, et
+  l'abri garde la méthode du Guide sur des lignes étagées en hauteur. Ce qui dépend de la carte —
+  sol, place, vue, chemin dans un budget, candidats — passe par une interface que deux
+  implémentations tiennent : `core::SimulatedSpace` (plan, boîtes, plateaux, terrain difficile,
+  eau ; Dijkstra déterministe sur un réseau de 0,5 m ; lecture d'une grille de collision) pour les
+  tests et la simulation, `FJadgCombatSpace` dans le moteur (maillage de navigation, rayons,
+  balayages). Les types partagés quittent `BattleGrid.h` pour `CombatTypes.h`. `IsoProjection`
+  est retirée (D-49). 28 tests de Core, un test du moteur (`Jadg.Combat.Espace`). **Puis la
+  grille est retirée** : `BattleGrid`, `Pathfinding` et `LineOfSight` disparaissent, et
+  `CombatState` (positions en mètres, un `CombatSpace` partagé, chemins et places dans un budget
+  en mètres, vitesse toujours comptée en cases et payée en cases entamées), l'attaque (allonge et
+  portée entre les bords, abri et vue sur l'espace, avantage de hauteur), les structures
+  (`core::Structure`), les zones, la tenaille, le terrain tactique, le déploiement, l'aperçu,
+  l'IA (mêmes poids, places candidates de l'espace, approche en centimètres ; profils JSON
+  inchangés) et l'arène jouent sur l'espace. `SimulatedSpace` lit une carte à la demi-case, avec
+  l'eau, la falaise et le terrain difficile de ses zones (`fromLevel`) ; `candidates` rend chaque
+  place avec son chemin. La série de l'arène et la simulation à cent graines entrent dans les
+  tests de Core, sans Qt : **écart entre trios 19,2 points** (15,8 en `0.0.2`, critère 20).
+  663 tests de Core avant comme après (23 tests de la grille retirés, leurs règles portées),
+  14 tests du moteur. Restent les zones et le marqueur de rencontre en volumes (LOT-1018), l'IA
+  sur EQS et le combat dans le moteur (sous-lots 2 et 3) ; la fiche du lot le dit.
+
 - **Les personnages entrent dans le moteur par un créateur** (LOT-1015, 8 octobre 2026). Un
   personnage est une **fiche d'apparence** (`Source/Elements/Rpg/appearances/<id>.json`, schéma
   `appearance.schema.json`, lue par `core::readAppearance`) : créateur, corps, tête, taille,

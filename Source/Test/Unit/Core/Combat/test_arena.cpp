@@ -5,10 +5,13 @@
  * @file test_arena.cpp
  * @brief Tests unitaires de la session d'arène (`LOT-50`) : points d'entrée, montage, attaques et
  *        attaque d'opportunité (`LOT-21`), rejeu et non-létalité.
+ *
+ * L'arène se joue dans l'espace en mètres que sa carte donne (`core::SimulatedSpace::fromLevel`) :
+ * les combattants y sont posés au centre de leurs cases, et s'y déplacent vers des points
+ * (`test_support::tile`).
  */
 
 #include <algorithm>
-#include <cstdlib>
 #include <filesystem>
 #include <optional>
 #include <string>
@@ -17,16 +20,25 @@
 #include <gtest/gtest.h>
 
 #include "Core/Combat/Arena.h"
-#include "Core/Combat/BattleGrid.h"
+#include "Core/Combat/Attack.h"
+#include "Core/Combat/CombatSpace.h"
+#include "Core/Combat/SimulatedSpace.h"
 #include "Core/Levels/Level.h"
 #include "Core/Levels/LevelLoader.h"
 #include "Core/Levels/TileMap.h"
 #include "Core/Rpg/Ability.h"
+#include "Test/Support/CombatSpaceSupport.h"
 
 namespace {
 
 using core::CombatantId;
 using core::CombatSide;
+using test_support::tile;
+
+/// Vrai si @p point est la place @p attendue, au centimètre près.
+[[nodiscard]] bool memePlace(std::optional<core::Meters3> point, core::Meters3 attendue) {
+    return point.has_value() && core::groundDistance(*point, attendue) < 0.01F;
+}
 
 /// Une piste 12x8 ceinte de murs, trois entrées par camp, un pilier au centre.
 core::Level piste() {
@@ -105,38 +117,34 @@ core::ArenaBout escarmouche(std::uint64_t graine, bool letale) {
     return bout;
 }
 
-int chebyshev(core::GridPosition a, core::GridPosition b) {
-    return std::max(std::abs(a.column - b.column), std::abs(a.row - b.row));
-}
-
 /// Joue un affrontement par la tactique élémentaire du `LOT-20` : marcher vers l'ennemi debout le
-/// plus proche, attaquer au contact, terminer son tour. @return Le journal de la session.
+/// plus proche, attaquer au contact, terminer son tour. Les écarts se mesurent entre les bords des
+/// volumes (`core::gapBetween`). @return Le journal de la session.
 std::vector<std::string> jouer(core::ArenaSession& session) {
     core::CombatState& combat = session.combat();
     for (int garde = 0; garde < 500 && combat.phase() != core::CombatPhase::Ended; ++garde) {
         const CombatantId actif = *combat.activeCombatant();
         const CombatSide camp = combat.find(actif)->profile.side;
-        const core::GridPosition depart = *combat.grid().positionOf(actif);
         std::optional<CombatantId> cible;
-        int distance = 0;
+        float ecart = 0.0F;
         for (const CombatantId autre : combat.combatants()) {
             const core::Combatant* c = combat.find(autre);
             if (c->profile.side == camp || c->status != core::CombatantStatus::Standing) {
                 continue;
             }
-            const int d = chebyshev(depart, *combat.grid().positionOf(autre));
-            if (!cible.has_value() || d < distance) {
+            const float e = *core::gapBetween(combat, actif, autre);
+            if (!cible.has_value() || e < ecart) {
                 cible = autre;
-                distance = d;
+                ecart = e;
             }
         }
-        const core::GridPosition visee = *combat.grid().positionOf(*cible);
-        if (distance > 1) {
-            std::optional<core::GridPosition> meilleure;
-            for (const core::GridPosition destination : combat.reachableArea()->destinations()) {
-                if (chebyshev(destination, visee) < distance) {
-                    distance = chebyshev(destination, visee);
-                    meilleure = destination;
+        if (!core::adjacentGap(ecart)) {
+            std::optional<core::Meters3> meilleure;
+            for (const core::Destination& destination : combat.destinations()) {
+                const float e = *core::gapFrom(combat, actif, destination.point, *cible);
+                if (e < ecart) {
+                    ecart = e;
+                    meilleure = destination.point;
                 }
             }
             if (meilleure.has_value()) {
@@ -147,7 +155,7 @@ std::vector<std::string> jouer(core::ArenaSession& session) {
         if (combat.phase() == core::CombatPhase::Ended || combat.activeCombatant() != actif) {
             continue;
         }
-        if (distance == 1) {
+        if (core::adjacentGap(ecart)) {
             EXPECT_EQ(session.attack(*cible).result, core::ArenaActionResult::Done);
         }
         if (combat.phase() != core::CombatPhase::Ended) {
@@ -187,7 +195,8 @@ TEST(ArenaTest, LesPointsDEntreeSeLisentDeLaCarte) {
  * \tcat Unitaire · Combat<br/>
  * \tcrit Bloquant<br/>
  * \tetapes 1. Charger la carte d'essai `Levels/donjon.json`.<br/>2. Lire ses points d'entree et
- * verifier qu'aucun n'est dans un mur.<br/>
+ * verifier qu'une creature de taille M tient au centre de chacun, dans l'espace que la carte
+ * donne.<br/>
  * \tattendu La carte se charge ; au moins quatre entrees libres par camp.
  * }
  */
@@ -195,11 +204,15 @@ TEST(ArenaTest, LaCarteDEssaiAccueilleLesDeuxCamps) {
     const core::LevelLoadResult carte = core::LevelLoader::loadFromFile(
         std::filesystem::path(JADG_TEST_DATA_DIR) / "Levels" / "donjon.json");
     ASSERT_TRUE(carte.ok()) << carte.error;
-    const core::BattleGrid grille(*carte.level);
+    const core::SimulatedSpace espace =
+        core::SimulatedSpace::fromLevel(*carte.level, carte.level->tileMap());
     int allies = 0;
     int ennemis = 0;
     for (const core::ArenaEntryPoint& entree : core::arenaEntryPoints(*carte.level)) {
-        EXPECT_FALSE(grille.isObstructed(entree.position, core::Locomotion::Walk));
+        EXPECT_TRUE(espace.isClear(
+            core::volumeOf(core::tileCenter(entree.position), core::CreatureSize::Medium),
+            core::Locomotion::Walk))
+            << entree.position.column << "," << entree.position.row;
         (entree.side == CombatSide::Allies ? allies : ennemis) += 1;
     }
     EXPECT_GE(allies, 4);
@@ -208,8 +221,8 @@ TEST(ArenaTest, LaCarteDEssaiAccueilleLesDeuxCamps) {
 
 /**
  * @brief Le montage pose chacun a son entree, et refuse en le disant.
- * \castest{<b>Le montage place chaque combattant au prochain point d'entree libre de son camp, ou
- * a la case demandee, et nomme chaque refus.</b><br/>
+ * \castest{<b>Le montage pose chaque combattant au centre du prochain point d'entree libre de son
+ * camp, ou de la case demandee, et nomme chaque refus.</b><br/>
  * \tcat Unitaire · Combat<br/>
  * \tcrit Critique<br/>
  * \tetapes 1. Quatre allies sur trois entrees, un ennemi a une case demandee dans le pilier, un
@@ -240,9 +253,9 @@ TEST(ArenaTest, LeMontagePlaceAuxEntreesEtRefuseEnLeDisant) {
     EXPECT_EQ(montage.refusals[0].placement, core::PlacementResult::OutOfBounds);
     EXPECT_EQ(montage.refusals[1].who, "Golem");
     EXPECT_EQ(montage.refusals[1].placement, core::PlacementResult::Obstructed);
-    EXPECT_EQ(session.combat().grid().positionOf(CombatantId{1}), (core::GridPosition{2, 3}));
-    EXPECT_EQ(session.combat().grid().positionOf(CombatantId{2}), (core::GridPosition{2, 2}));
-    EXPECT_EQ(session.combat().grid().positionOf(CombatantId{4}), (core::GridPosition{9, 3}));
+    EXPECT_TRUE(memePlace(session.combat().positionOf(CombatantId{1}), tile(2, 3)));
+    EXPECT_TRUE(memePlace(session.combat().positionOf(CombatantId{2}), tile(2, 2)));
+    EXPECT_TRUE(memePlace(session.combat().positionOf(CombatantId{4}), tile(9, 3)));
     EXPECT_TRUE(session.combat().economy(CombatantId{1})->has(core::HEROIC_ACTION_RESOURCE));
     EXPECT_NE(session.attacks(CombatantId{4}), nullptr);
     EXPECT_EQ(session.attacks(CombatantId{9}), nullptr);
@@ -313,9 +326,10 @@ TEST(ArenaTest, LAttaqueSeRefuseEtSeResout) {
  * que le pilier abrite partiellement, il est jete contre sa CA + 2, et le journal le dit.</b><br/>
  * \tcat Unitaire · Combat<br/>
  * \tcrit Critique<br/>
- * \tetapes 1. Une archere (portee 16/64) en (5,3), un gobelin a la CA 12 en (7,3) derriere le
- * pilier (6,3), un second en (7,5).<br/>2. L'archere tire sur le premier.<br/>3. Elle se place en
- * (5,2), d'ou le pilier ne cache plus que le bas de la case du gobelin, et tire encore.<br/>
+ * \tetapes 1. Une archere (portee 16/64) au centre de la case (5,3), un gobelin a la CA 12 en (7,3)
+ * derriere le pilier (6,3), un second en (7,5).<br/>2. L'archere tire sur le premier.<br/>3. Elle
+ * se place au centre de la case (5,2), d'ou le pilier coupe une ou deux des lignes vers le
+ * gobelin, et tire encore.<br/>
  * \tattendu TotalCover sans depenser l'action ; puis Done, CA 14, « abri partiel : CA 12 -> 14 » au
  * journal.
  * }
@@ -340,7 +354,7 @@ TEST(ArenaTest, LePilierCacheEtAbrite) {
     EXPECT_EQ(session.attack(CombatantId{2}).result, core::ArenaActionResult::TotalCover);
     EXPECT_EQ(session.combat().find(CombatantId{1})->economy.remaining(core::ACTION_RESOURCE), 1);
 
-    ASSERT_EQ(session.move(core::GridPosition{5, 2}).result, core::MoveResult::Moved);
+    ASSERT_EQ(session.move(tile(5, 2)).result, core::MoveResult::Moved);
     const core::ArenaAttack tir = session.attack(CombatantId{2});
     ASSERT_EQ(tir.result, core::ArenaActionResult::Done);
     ASSERT_TRUE(tir.outcome.has_value());
@@ -356,12 +370,15 @@ TEST(ArenaTest, LePilierCacheEtAbrite) {
  * reaction ; se desengager l'evite ; esquiver impose le desavantage a qui attaque.</b><br/>
  * \tcat Unitaire · Combat<br/>
  * \tcrit Critique<br/>
- * \tetapes 1. Heroine en (2,3) au contact d'un ogre en (3,3) (CA 1, bonus 0, 1 degat).<br/>2.
- * L'heroine s'eloigne en (2,5).<br/>3. Remonter, se desengager, puis s'eloigner.<br/>4. Remonter,
- * esquiver, finir le tour ; l'ogre attaque l'heroine.<br/>
- * \tattendu Une ligne « opportunite » au journal et la reaction de l'ogre depensee, l'heroine
- * arrive en (2,5) ; aucune attaque d'opportunite apres le desengagement ; l'attaque de l'ogre est
- * jetee avec desavantage, « esquive de la cible ».
+ * \tetapes 1. Heroine au centre de la case (2,3), au contact d'un ogre en (3,3) (CA 1, bonus 0, 1
+ * degat).<br/>2. L'apercu du deplacement vers le centre de (2,5), puis le deplacement.<br/>3.
+ * Remonter, se desengager, puis s'eloigner.<br/>4. Remonter, esquiver, finir le tour ; l'ogre
+ * attaque l'heroine.<br/>
+ * \tattendu L'apercu nomme l'ogre ; une ligne « opportunite » au journal, l'heroine encore dans
+ * l'allonge de l'ogre quand il frappe (1,50 m entre les bords au plus), la reaction de l'ogre
+ * depensee, l'heroine arrive au centre de (2,5) et le journal note son dernier pas en metres ;
+ * aucune attaque d'opportunite apres le desengagement ; l'attaque de l'ogre est jetee avec
+ * desavantage, « esquive de la cible ».
  * }
  */
 TEST(ArenaTest, LOpportuniteLeDesengagementEtLEsquive) {
@@ -387,10 +404,26 @@ TEST(ArenaTest, LOpportuniteLeDesengagementEtLEsquive) {
     session.mount(monter());
     ASSERT_TRUE(session.start());
     ASSERT_EQ(session.combat().activeCombatant(), CombatantId{1});
-    const core::MoveOutcome fuite = session.move(core::GridPosition{2, 5});
+    EXPECT_EQ(session.previewOpportunities(tile(2, 5)), (std::vector<CombatantId>{CombatantId{2}}));
+    // L'ecart entre les bords au moment ou l'ogre declare son attaque : avant la sortie.
+    std::optional<float> ecartAuCoup;
+    session.combat().subscribe(core::CombatHook::AttackDeclared,
+                               [&ecartAuCoup](core::CombatState& combat, const core::CombatEvent&) {
+                                   ecartAuCoup =
+                                       core::gapBetween(combat, CombatantId{1}, CombatantId{2});
+                               });
+    const core::MoveOutcome fuite = session.move(tile(2, 5));
     EXPECT_EQ(fuite.result, core::MoveResult::Moved);
-    EXPECT_EQ(session.combat().grid().positionOf(CombatantId{1}), (core::GridPosition{2, 5}));
+    EXPECT_TRUE(memePlace(session.combat().positionOf(CombatantId{1}), tile(2, 5)));
     EXPECT_EQ(opportunites(session), 1);
+    ASSERT_TRUE(ecartAuCoup.has_value());
+    EXPECT_TRUE(core::withinTiles(*ecartAuCoup, 1)) << *ecartAuCoup;
+    const auto dernierPas =
+        std::ranges::find_if(session.journal().rbegin(), session.journal().rend(),
+                             [](const std::string& l) { return l.starts_with("pas Heroine"); });
+    ASSERT_NE(dernierPas, session.journal().rend());
+    EXPECT_TRUE(dernierPas->starts_with("pas Heroine 3.75,8.25 (")) << *dernierPas;
+    EXPECT_TRUE(dernierPas->ends_with(" m)")) << *dernierPas;
     EXPECT_EQ(session.combat().find(CombatantId{2})->economy.remaining(core::REACTION_RESOURCE), 0);
 
     core::ArenaSession prudente(piste());
@@ -398,7 +431,8 @@ TEST(ArenaTest, LOpportuniteLeDesengagementEtLEsquive) {
     ASSERT_TRUE(prudente.start());
     EXPECT_TRUE(prudente.disengage());
     EXPECT_FALSE(prudente.dodge());
-    EXPECT_EQ(prudente.move(core::GridPosition{2, 5}).result, core::MoveResult::Moved);
+    EXPECT_TRUE(prudente.previewOpportunities(tile(2, 5)).empty());
+    EXPECT_EQ(prudente.move(tile(2, 5)).result, core::MoveResult::Moved);
     EXPECT_EQ(opportunites(prudente), 0);
     EXPECT_EQ(prudente.combat().find(CombatantId{2})->economy.remaining(core::REACTION_RESOURCE),
               1);
@@ -413,6 +447,51 @@ TEST(ArenaTest, LOpportuniteLeDesengagementEtLEsquive) {
     ASSERT_TRUE(riposte.outcome.has_value());
     EXPECT_EQ(riposte.outcome->roll.check.stance, core::RollStance::Disadvantage);
     EXPECT_NE(riposte.outcome->describe().find("esquive de la cible"), std::string::npos);
+}
+
+/**
+ * @brief Se precipiter double le deplacement du tour, en metres.
+ * \castest{<b>L'action se precipiter donne un deplacement supplementaire egal a la vitesse :
+ * une destination a 12 m, hors des 9 m d'une vitesse de 6 cases, devient atteignable, et ce qui
+ * reste se lit en metres.</b><br/>
+ * \tcat Unitaire · Combat<br/>
+ * \tcrit Majeur<br/>
+ * \tetapes 1. Une heroine de vitesse 6 au centre de la case (1,1), un gobelin loin d'elle.<br/>2.
+ * Aller au centre de la case (9,1), a 12 m.<br/>3. Se precipiter, puis y aller.<br/>4. Se
+ * precipiter encore.<br/>
+ * \tattendu 9 m de deplacement, la destination refusee sans rien depenser ; « precipitation » au
+ * journal et 18 m ; l'heroine arrive, il lui reste 6 m ; la seconde precipitation est refusee,
+ * l'action est depensee.
+ * }
+ */
+TEST(ArenaTest, SePrecipiterDoubleLeDeplacement) {
+    core::ArenaBout bout{.seed = 4, .lethal = false, .heroicMark = false};
+    core::ArenaContestant heroine = concurrent("Heroine", CombatSide::Allies, 20, 12, 5, "1d8", 14);
+    heroine.profile.initiativeModifier = 100;
+    heroine.position = core::GridPosition{1, 1};
+    core::ArenaContestant gobelin = concurrent("Gobelin", CombatSide::Enemies, 7, 10, 4, "1d6", 12);
+    gobelin.profile.initiativeModifier = -100;
+    gobelin.position = core::GridPosition{9, 5};
+    bout.contestants = {heroine, gobelin};
+
+    core::ArenaSession session(piste());
+    session.mount(bout);
+    ASSERT_TRUE(session.start());
+    ASSERT_EQ(session.combat().activeCombatant(), CombatantId{1});
+    EXPECT_NEAR(session.combat().movementLeft(), 9.0F, 0.001F);
+    EXPECT_EQ(session.move(tile(9, 1)).result, core::MoveResult::Unreachable);
+    EXPECT_TRUE(memePlace(session.combat().positionOf(CombatantId{1}), tile(1, 1)));
+    EXPECT_NEAR(session.combat().movementLeft(), 9.0F, 0.001F);
+
+    EXPECT_TRUE(session.dash());
+    EXPECT_EQ(session.journal().back(), "precipitation Heroine");
+    EXPECT_NEAR(session.combat().movementLeft(), 18.0F, 0.001F);
+    const core::MoveOutcome course = session.move(tile(9, 1));
+    EXPECT_EQ(course.result, core::MoveResult::Moved);
+    EXPECT_NEAR(course.path.length, 12.0F, 0.01F);
+    EXPECT_TRUE(memePlace(session.combat().positionOf(CombatantId{1}), tile(9, 1)));
+    EXPECT_NEAR(session.combat().movementLeft(), 6.0F, 0.01F);
+    EXPECT_FALSE(session.dash());
 }
 
 /**
