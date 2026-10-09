@@ -3,290 +3,293 @@
 
 #include "UI/JadgHud.h"
 
-#include "CanvasItem.h"
+#include "Blueprint/UserWidget.h"
 #include "Combat/JadgCombat.h"
-#include "Engine/Canvas.h"
-#include "Engine/Engine.h"
-#include "Engine/Font.h"
 #include "Engine/GameInstance.h"
-#include "Engine/Texture2D.h"
+#include "Engine/World.h"
 #include "Game/JadgExploration.h"
-#include "ImageUtils.h"
-#include "TextureResource.h"
-#include "Player/JadgControls.h"
+#include "Game/JadgGameInstance.h"
+#include "GameFramework/PlayerController.h"
+#include "JustAnotherRpgGame.h"
+#include "Kismet/GameplayStatics.h"
+#include "Misc/CommandLine.h"
+#include "Misc/Parse.h"
+#include "UI/JadgScreens.h"
 
 namespace
 {
-	const FLinearColor Ink(0.93f, 0.90f, 0.82f);
-	const FLinearColor Gold(1.0f, 0.78f, 0.36f);
-	const FLinearColor Dim(0.70f, 0.68f, 0.62f);
-	const FLinearColor Panel(0.02f, 0.02f, 0.03f, 0.78f);
+	/// Les couches d'UMG : le jeu, la conversation, puis les pages.
+	constexpr int32 GroundLayer = 0;
+	constexpr int32 TalkLayer = 10;
+	constexpr int32 PageLayer = 20;
 
-	/// L'invite d'une famille d'entités, par sa clé (`core::knownInteractableKinds`). Le catalogue
-	/// des textes ne porte pas encore ces clés : elles y entrent avec l'interface (LOT-1020).
-	FString PromptFor(const FString& Key)
+	/// Vrai si le jeu est lancé par un automate : ni menu du titre, ni pause d'une page qu'il n'ouvre pas.
+	bool LaunchedByAutomaton()
 	{
-		if (Key == TEXT("interaction.npc")) { return TEXT("Parler"); }
-		if (Key == TEXT("interaction.chest")) { return TEXT("Ouvrir"); }
-		if (Key == TEXT("interaction.sign")) { return TEXT("Lire"); }
-		return TEXT("Interagir");
+		const TCHAR* Line = FCommandLine::Get();
+		FString Ignored;
+		for (const TCHAR* Flag : {TEXT("JadgCapture="), TEXT("JadgParcours="), TEXT("JadgParcoursCombat="), TEXT("JadgEcrans=")})
+		{
+			if (FParse::Value(Line, Flag, Ignored))
+			{
+				return true;
+			}
+		}
+		return FParse::Param(Line, TEXT("JadgSansTitre"));
 	}
 }
 
-UTexture2D* AJadgHud::PortraitOf(const FString& File)
+AJadgHud::AJadgHud()
 {
-	if (File.IsEmpty())
+	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bTickEvenWhenPaused = true;
+	SetTickableWhenPaused(true);
+}
+
+AJadgHud* AJadgHud::Of(const UWorld* World)
+{
+	const APlayerController* Player = World != nullptr ? World->GetFirstPlayerController() : nullptr;
+	return Player != nullptr ? Cast<AJadgHud>(Player->GetHUD()) : nullptr;
+}
+
+void AJadgHud::BeginPlay()
+{
+	Super::BeginPlay();
+	Ground = Create(EJadgScreen::Hud, FString(), GroundLayer);
+
+	UJadgGameInstance* Instance = Cast<UJadgGameInstance>(GetGameInstance());
+	if (Instance != nullptr && !Instance->bTitleShown && !LaunchedByAutomaton() && !GIsAutomationTesting)
+	{
+		Instance->bTitleShown = true;
+		Open(EJadgScreen::Title);
+	}
+}
+
+void AJadgHud::EndPlay(const EEndPlayReason::Type Reason)
+{
+	for (UJadgScreen* Screen : Stack)
+	{
+		Remove(Screen);
+	}
+	Stack.Reset();
+	Remove(Talk);
+	Remove(Ground);
+	Talk = nullptr;
+	Ground = nullptr;
+	Super::EndPlay(Reason);
+}
+
+UJadgScreen* AJadgHud::Create(EJadgScreen Kind, const FString& Argument, int32 Layer)
+{
+	APlayerController* Player = GetOwningPlayerController();
+	UClass* Class = JadgScreenClass(Kind);
+	if (Player == nullptr || Class == nullptr)
 	{
 		return nullptr;
 	}
-	if (const TObjectPtr<UTexture2D>* Known = Portraits.Find(File))
+	UJadgScreen* Screen = CreateWidget<UJadgScreen>(Player, Class);
+	Screen->Kind = Kind;
+	Screen->Argument = Argument;
+	if (!Screen->IsModal())
 	{
-		return Known->Get();
+		Screen->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 	}
-	UTexture2D* Read = FImageUtils::ImportFileAsTexture2D(File);
-	Portraits.Add(File, Read);
-	return Read;
+	Screen->AddToViewport(Layer);
+	return Screen;
 }
 
-float AJadgHud::Measure(const FString& Text, float Scale) const
+void AJadgHud::Remove(UJadgScreen* Screen)
 {
-	float Width = 0.0f;
-	float Height = 0.0f;
-	Canvas->TextSize(GEngine->GetMediumFont(), Text, Width, Height, Scale, Scale);
-	return Width;
-}
-
-float AJadgHud::Write(const FString& Text, float X, float Y, const FLinearColor& Colour, float Scale) const
-{
-	const UFont* Font = GEngine->GetMediumFont();
-	FCanvasTextItem Item(FVector2D(X, Y), FText::FromString(Text), Font, Colour);
-	Item.Scale = FVector2D(Scale, Scale);
-	Item.EnableShadow(FLinearColor::Black);
-	Canvas->DrawItem(Item);
-	return Font->GetMaxCharHeight() * Scale * 1.25f;
-}
-
-float AJadgHud::WriteWrapped(const FString& Text, float X, float Y, float Width, const FLinearColor& Colour, float Scale) const
-{
-	TArray<FString> Words;
-	Text.ParseIntoArray(Words, TEXT(" "));
-	FString Line;
-	float Used = 0.0f;
-	for (const FString& Word : Words)
+	if (Screen != nullptr)
 	{
-		const FString Longer = Line.IsEmpty() ? Word : Line + TEXT(" ") + Word;
-		if (!Line.IsEmpty() && Measure(Longer, Scale) > Width)
+		Screen->RemoveFromParent();
+	}
+}
+
+UJadgScreen* AJadgHud::Open(EJadgScreen Kind, const FString& Argument)
+{
+	for (int32 Index = 0; Index < Stack.Num(); ++Index)
+	{
+		if (Stack[Index] != nullptr && Stack[Index]->Kind == Kind)
 		{
-			Used += Write(Line, X, Y + Used, Colour, Scale);
-			Line = Word;
-		}
-		else
-		{
-			Line = Longer;
+			// Déjà ouverte : elle repasse en haut, avec son argument du moment.
+			UJadgScreen* Known = Stack[Index];
+			Stack.RemoveAt(Index);
+			Remove(Known);
+			break;
 		}
 	}
-	if (!Line.IsEmpty())
+	UJadgScreen* Screen = Create(Kind, Argument, PageLayer + Stack.Num());
+	if (Screen != nullptr)
 	{
-		Used += Write(Line, X, Y + Used, Colour, Scale);
+		Stack.Add(Screen);
+		UE_LOG(LogJadg, Display, TEXT("[Écrans] ouvert : %s"), *UEnum::GetValueAsString(Kind));
 	}
-	return Used;
+	ApplyInputMode();
+	return Screen;
 }
 
-void AJadgHud::DrawHUD()
+void AJadgHud::Toggle(EJadgScreen Kind)
 {
-	Super::DrawHUD();
+	if (Top() != nullptr && Top()->Kind == Kind)
+	{
+		Close(Top());
+	}
+	else
+	{
+		Open(Kind);
+	}
+}
 
-	const UGameInstance* Instance = GetGameInstance();
-	const UJadgExploration* Exploration = Instance != nullptr ? Instance->GetSubsystem<UJadgExploration>() : nullptr;
-	if (Canvas == nullptr || Exploration == nullptr || GEngine->GetMediumFont() == nullptr)
+void AJadgHud::Close(UJadgScreen* Screen)
+{
+	const int32 Index = Stack.Find(Screen);
+	if (Index == INDEX_NONE)
 	{
 		return;
 	}
-	const FString InteractKey = TEXT("[") + UJadgControls::KeyLabel(TEXT("Interact")) + TEXT("]  ");
-	const float Width = Canvas->SizeX;
-	const float Height = Canvas->SizeY;
-	// Les tailles sont écrites pour 1080 lignes et suivent la définition.
-	const float Unit = Height / 1080.0f;
-	const float Scale = 1.5f * Unit;
-	const float Margin = 24.0f * Unit;
-
-	if (DrawCombat(Unit))
+	while (Stack.Num() > Index)
 	{
-		return;
+		UJadgScreen* Leaving = Stack.Pop();
+		UE_LOG(LogJadg, Display, TEXT("[Écrans] fermé : %s"), *UEnum::GetValueAsString(Leaving->Kind));
+		Remove(Leaving);
 	}
+	ApplyInputMode();
+}
 
-	// Le groupe, le meneur en tête.
-	float Y = Margin;
-	const TArray<FJadgMember> Members = Exploration->Members();
-	for (int32 Index = 0; Index < Members.Num(); ++Index)
+void AJadgHud::CloseAll()
+{
+	if (!Stack.IsEmpty())
 	{
-		const FJadgMember& Member = Members[Index];
-		const FString Line = FString::Printf(TEXT("%s%s   %d / %d"), Index == 0 ? TEXT("> ") : TEXT("   "), *Member.Name,
-			Member.HitPoints, Member.MaxHitPoints);
-		Y += Write(Line, Margin, Y, Index == 0 ? Gold : Ink, Scale);
-	}
-
-	// L'heure du monde.
-	const int32 Minutes = FMath::FloorToInt32(Exploration->Minutes());
-	const FString Clock = FString::Printf(TEXT("%02d:%02d"), Minutes / 60, Minutes % 60);
-	Write(Clock, Width - Margin - Measure(Clock, Scale), Margin, Ink, Scale);
-
-	// L'annonce du moment.
-	const FString Notice = Exploration->Notice();
-	if (!Notice.IsEmpty())
-	{
-		const float Wide = FMath::Min(Measure(Notice, Scale), Width * 0.6f);
-		WriteWrapped(Notice, (Width - Wide) / 2.0f, Margin, Width * 0.6f, Gold, Scale);
-	}
-
-	if (!Exploration->InDialogue())
-	{
-		FIntPoint Cell;
-		FString Key;
-		if (!Exploration->Encounter().IsEmpty())
-		{
-			// La bascule vers le combat, le temps que l'arène s'ouvre.
-			const FString Title = TEXT("Rencontre : ") + Exploration->Encounter();
-			Write(Title, (Width - Measure(Title, Scale * 1.3f)) / 2.0f, Height * 0.40f, Gold, Scale * 1.3f);
-		}
-		else if (Exploration->Target(Cell, Key))
-		{
-			const FString Prompt = InteractKey + PromptFor(Key);
-			Write(Prompt, (Width - Measure(Prompt, Scale)) / 2.0f, Height * 0.82f, Ink, Scale);
-		}
-		return;
-	}
-
-	// Le dialogue : un bandeau en bas de l'écran.
-	const float Top = Height * 0.72f;
-	const float Edge = Width * 0.14f;
-	const float Whole = Width * 0.72f;
-	FCanvasTileItem Back(FVector2D(Edge - Margin, Top - Margin), FVector2D(Whole + 2.0f * Margin, Height - Top), Panel);
-	Back.BlendMode = SE_BLEND_Translucent;
-	Canvas->DrawItem(Back);
-
-	// Le portrait de qui parle, à gauche du texte, s'il en a un.
-	float Left = Edge;
-	if (const UTexture2D* Face = PortraitOf(Exploration->SpeakerPortrait()))
-	{
-		const float Side = Height - Top - Margin;
-		FCanvasTileItem Picture(FVector2D(Edge, Top), Face->GetResource(), FVector2D(Side, Side), FLinearColor::White);
-		Picture.BlendMode = SE_BLEND_Translucent;
-		Canvas->DrawItem(Picture);
-		Left += Side + Margin;
-	}
-	const float Inner = Whole - (Left - Edge);
-
-	Y = Top;
-	Y += Write(Exploration->Speaker(), Left, Y, Gold, Scale * 1.15f);
-	const FString Check = Exploration->LastCheck();
-	if (!Check.IsEmpty())
-	{
-		Y += Write(Check, Left, Y, Dim, Scale);
-	}
-	Y += WriteWrapped(Exploration->Line(), Left, Y, Inner, Ink, Scale) + Margin * 0.5f;
-
-	const TArray<FJadgChoice> Choices = Exploration->Choices();
-	for (int32 Index = 0; Index < Choices.Num(); ++Index)
-	{
-		const FJadgChoice& Choice = Choices[Index];
-		FString Line = FString::Printf(TEXT("%d.  %s"), Index + 1, *Choice.Text);
-		if (!Choice.Skill.IsEmpty())
-		{
-			Line += FString::Printf(TEXT("   (%s · DD %d)"), *Choice.Skill, Choice.Dc);
-		}
-		Y += WriteWrapped(Line, Left + Margin, Y, Inner - Margin, Ink, Scale);
+		Close(Stack[0]);
 	}
 }
 
-bool AJadgHud::DrawCombat(float Unit)
+UJadgScreen* AJadgHud::Top() const
 {
-	AJadgCombat* Combat = AJadgCombat::Find(GetWorld());
-	if (Combat == nullptr || !Combat->IsMounted())
-	{
-		return false;
-	}
-	const float Width = Canvas->SizeX;
-	const float Height = Canvas->SizeY;
-	const float Scale = 1.3f * Unit;
-	const float Margin = 24.0f * Unit;
-	const FLinearColor Foe(1.0f, 0.55f, 0.45f);
-	const int32 Active = Combat->ActiveId();
+	return Stack.IsEmpty() ? nullptr : Stack.Last().Get();
+}
 
-	// Les deux camps, le combattant actif marqué.
-	float Y = Margin;
-	Y += Write(FString::Printf(TEXT("Round %d"), Combat->Round()), Margin, Y, Gold, Scale);
-	for (const FJadgFighter& Fighter : Combat->Fighters())
+UJadgScreen* AJadgHud::Find(EJadgScreen Kind) const
+{
+	for (UJadgScreen* Screen : Stack)
 	{
-		const FString State = Fighter.bDead ? TEXT("  mort") : !Fighter.bStanding ? TEXT("  à terre") : TEXT("");
-		const FString Line = FString::Printf(TEXT("%s%s   %d / %d%s"), Fighter.Id == Active ? TEXT("> ") : TEXT("   "), *Fighter.Name,
-			Fighter.HitPoints, Fighter.MaxHitPoints, *State);
-		Y += Write(Line, Margin, Y, Fighter.Id == Active ? Gold : Fighter.bAlly ? Ink : Foe, Scale);
-	}
-
-	// L'issue, au centre.
-	const FString Outcome = Combat->Outcome();
-	if (!Outcome.IsEmpty())
-	{
-		Write(Outcome, (Width - Measure(Outcome, Scale * 2.0f)) / 2.0f, Height * 0.38f, Gold, Scale * 2.0f);
-	}
-
-	// Le tour, en bas : un bandeau.
-	const float Top = Height * 0.74f;
-	FCanvasTileItem Back(FVector2D(0.0f, Top - Margin * 0.5f), FVector2D(Width, Height - Top + Margin * 0.5f), Panel);
-	Back.BlendMode = SE_BLEND_Translucent;
-	Canvas->DrawItem(Back);
-	const float Left = Margin;
-	const float Right = Width * 0.55f;
-	Y = Top;
-	FString Who;
-	for (const FJadgFighter& Fighter : Combat->Fighters())
-	{
-		if (Fighter.Id == Active)
+		if (Screen != nullptr && Screen->Kind == Kind)
 		{
-			Who = Fighter.Name;
+			return Screen;
 		}
 	}
-	if (Combat->IsPlayerTurn())
+	if (Talk != nullptr && Talk->Kind == Kind)
 	{
-		Y += Write(FString::Printf(TEXT("À vous : %s — %.1f m de déplacement"), *Who, Combat->MovementLeft()), Left, Y, Gold, Scale * 1.1f);
-		FString TargetLine = TEXT("Cible : aucune (clic sur un adversaire)");
-		for (const FJadgFighter& Fighter : Combat->Fighters())
+		return Talk;
+	}
+	return Ground != nullptr && Ground->Kind == Kind ? Ground.Get() : nullptr;
+}
+
+void AJadgHud::RebuildScreens()
+{
+	TArray<TPair<EJadgScreen, FString>> Pages;
+	for (UJadgScreen* Screen : Stack)
+	{
+		Pages.Emplace(Screen->Kind, Screen->Argument);
+		Remove(Screen);
+	}
+	Stack.Reset();
+	if (Ground != nullptr)
+	{
+		const EJadgScreen Kind = Ground->Kind;
+		Remove(Ground);
+		Ground = Create(Kind, FString(), GroundLayer);
+	}
+	if (Talk != nullptr)
+	{
+		Remove(Talk);
+		Talk = Create(EJadgScreen::Dialogue, FString(), TalkLayer);
+	}
+	for (const TPair<EJadgScreen, FString>& Page : Pages)
+	{
+		if (UJadgScreen* Screen = Create(Page.Key, Page.Value, PageLayer + Stack.Num()))
 		{
-			if (Fighter.Id == Combat->TargetId())
-			{
-				TargetLine = FString::Printf(TEXT("Cible : %s, %d / %d — %s"), *Fighter.Name, Fighter.HitPoints, Fighter.MaxHitPoints,
-					*Combat->TargetCircumstances());
-			}
-		}
-		Y += Write(TargetLine, Left, Y, Ink, Scale);
-		const TArray<FString> Capacities = Combat->Capacities();
-		for (int32 Index = 0; Index < Capacities.Num(); ++Index)
-		{
-			const bool bChosen = Combat->CapacityRank() == Index + 1;
-			Y += Write(FString::Printf(TEXT("%s%d. %s"), bChosen ? TEXT("> ") : TEXT("   "), Index + 1, *Capacities[Index]), Left, Y,
-				bChosen ? Gold : Dim, Scale);
-		}
-		const FString CapacityKeys = Capacities.IsEmpty() ? FString()
-			: FString::Printf(TEXT("[1-%d] capacité, [%s] la lancer   "), Capacities.Num(), *UJadgControls::KeyLabel(TEXT("Capacity")));
-		const FString Keys = FString::Printf(TEXT("[clic] cible ou destination   [%s] attaquer   %s[%s] fin du tour"),
-			*UJadgControls::KeyLabel(TEXT("Attack")), *CapacityKeys, *UJadgControls::KeyLabel(TEXT("EndTurn")));
-		Y += Write(Keys, Left, Y, Dim, Scale * 0.9f);
-		if (!Combat->Refusal().IsEmpty())
-		{
-			Y += Write(Combat->Refusal(), Left, Y, Foe, Scale);
+			Stack.Add(Screen);
 		}
 	}
-	else if (Outcome.IsEmpty())
+	ApplyInputMode();
+}
+
+void AJadgHud::ApplyInputMode()
+{
+	APlayerController* Player = GetOwningPlayerController();
+	if (Player == nullptr)
 	{
-		Y += Write(FString::Printf(TEXT("Tour de %s"), *Who), Left, Y, Ink, Scale * 1.1f);
+		return;
+	}
+	if (UJadgScreen* Page = Top())
+	{
+		FInputModeUIOnly Mode;
+		Mode.SetWidgetToFocus(Page->FirstFocus()->TakeWidget());
+		Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+		Player->SetInputMode(Mode);
+		UGameplayStatics::SetGamePaused(this, true);
+	}
+	else
+	{
+		FInputModeGameAndUI Mode;
+		Mode.SetHideCursorDuringCapture(false);
+		Player->SetInputMode(Mode);
+		UGameplayStatics::SetGamePaused(this, false);
+	}
+}
+
+void AJadgHud::StartNewGame(const FString& LeaderId)
+{
+	UJadgExploration* Exploration = GetGameInstance()->GetSubsystem<UJadgExploration>();
+	Exploration->Restart();
+	Exploration->SetLeader(LeaderId);
+	CloseAll();
+	// La carte du moteur se rouvre : la partie neuve y entre par l'entrée de la carte.
+	UGameplayStatics::OpenLevel(this, FName(*UGameplayStatics::GetCurrentLevelName(this, false)));
+}
+
+void AJadgHud::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	UJadgExploration* Exploration = GetGameInstance() != nullptr ? GetGameInstance()->GetSubsystem<UJadgExploration>() : nullptr;
+	if (Exploration == nullptr)
+	{
+		return;
 	}
 
-	// Le journal, à droite du bandeau.
-	float J = Top;
-	for (const FString& Line : Combat->Journal(8))
+	// Le jeu : le combat dès qu'il est monté, le HUD d'exploration sinon.
+	AJadgCombat* Fight = AJadgCombat::Find(GetWorld());
+	const EJadgScreen Wanted = Fight != nullptr && Fight->IsMounted() ? EJadgScreen::Combat : EJadgScreen::Hud;
+	if (Ground == nullptr || Ground->Kind != Wanted)
 	{
-		J += Write(Line, Right, J, Dim, Scale * 0.85f);
+		Remove(Ground);
+		Ground = Create(Wanted, FString(), GroundLayer);
 	}
-	return true;
+
+	// La conversation, tant qu'elle est ouverte.
+	if (Exploration->InDialogue() && Talk == nullptr)
+	{
+		Talk = Create(EJadgScreen::Dialogue, FString(), TalkLayer);
+	}
+	else if (!Exploration->InDialogue() && Talk != nullptr)
+	{
+		Remove(Talk);
+		Talk = nullptr;
+	}
+
+	// Ce que le jeu demande : la fin qu'un dialogue a écrite, la mort du groupe.
+	// Sous un automate (le parcours de la quête), la fin ne s'ouvre pas : sa page mettrait le jeu en
+	// pause sous lui ; le tour des écrans l'ouvre lui-même.
+	const FString Ending = Exploration->TakeEnding();
+	if (!Ending.IsEmpty() && !LaunchedByAutomaton())
+	{
+		Open(EJadgScreen::Ending, Ending);
+	}
+	if (Fight != nullptr && Fight->IsMounted() && Fight->OutcomeCode() == 2 && !Fight->IsBusy() && !bDeathShown && !LaunchedByAutomaton())
+	{
+		bDeathShown = true;
+		Open(EJadgScreen::Death);
+	}
 }

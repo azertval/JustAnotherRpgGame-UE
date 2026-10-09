@@ -86,9 +86,6 @@ include(GoogleTest)
 
 file(GLOB_RECURSE CORE_TESTS CONFIGURE_DEPENDS
     ${PROJECT_SOURCE_DIR}/Source/Test/Unit/Core/*.cpp)
-# test_dialogue.cpp lit la localisation par `HMI/Localization`, restée dans l'ancien dépôt : il
-# revient quand la localisation aura son lecteur côté moteur (LOT-1020).
-list(FILTER CORE_TESTS EXCLUDE REGEX "Rpg/test_dialogue\\.cpp$")
 
 add_executable(CoreTests ${CORE_TESTS})
 # Les tests incluent leur support en "Test/Support/<Fichier>.h" : la racine est Source/.

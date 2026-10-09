@@ -46,4 +46,11 @@ struct FJadgOptions
 
 	/// Applique les options au moteur (voir la table).
 	static void Apply(const core::GameOptions& Options);
+
+	/**
+	 * @brief Enregistre @p Options dans le fichier du poste (`core::writeGameOptions`) : ce que
+	 *        l'écran Options fait d'« Appliquer » (LOT-1020).
+	 * @return Faux si le fichier ne s'écrit pas.
+	 */
+	static bool Save(const core::GameOptions& Options);
 };

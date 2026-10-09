@@ -189,3 +189,34 @@ TEST(GameOptionsTest, UnFichierAbsentRendLaBase) {
     EXPECT_EQ(recent.errors.size(), 1U);
     EXPECT_EQ(recent.options, base);
 }
+
+/**
+ * @brief La langue se lit, se refuse si elle n'est pas un code, et l'écriture se relit à
+ * l'identique.
+ * \castest{<b>Les options écrites par l'écran Options se relisent à l'identique.</b><br/>
+ * \tcat Unitaire · Données · Options<br/>
+ * \tcrit Majeure<br/>
+ * \tetapes 1. Lire `interface.language` à « en », puis à « English ».<br/>2. Écrire des options
+ *          réglées (2560 × 1440, fenêtré, anglais) puis les relire sur la base par défaut.<br/>
+ * \tattendu « en » est lu ; « English » est une erreur qui garde « fr » ; les options relues sont
+ *           celles écrites, sans erreur.
+ * }
+ */
+TEST(GameOptionsTest, LaLangueSeLitEtLEcritureSeRelit) {
+    EXPECT_EQ(core::readGameOptions(R"({"version": 1, "interface": {"language": "en"}})")
+                  .options.language,
+              "en");
+    const core::GameOptionsResult refused =
+        core::readGameOptions(R"({"version": 1, "interface": {"language": "English"}})");
+    EXPECT_EQ(refused.errors.size(), 1U);
+    EXPECT_EQ(refused.options.language, "fr");
+
+    core::GameOptions written;
+    written.width = 2560;
+    written.height = 1440;
+    written.fullscreen = false;
+    written.language = "en";
+    const core::GameOptionsResult read = core::readGameOptions(core::writeGameOptions(written));
+    EXPECT_TRUE(read.ok());
+    EXPECT_EQ(read.options, written);
+}

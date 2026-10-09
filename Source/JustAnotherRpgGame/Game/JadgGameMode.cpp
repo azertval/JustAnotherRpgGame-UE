@@ -5,6 +5,7 @@
 
 #include "Capture/JadgCaptureDirector.h"
 #include "Capture/JadgCombatWalkthrough.h"
+#include "Capture/JadgScreensTour.h"
 #include "Capture/JadgWalkthrough.h"
 #include "Characters/JadgParty.h"
 #include "Engine/World.h"
@@ -31,6 +32,10 @@ void AJadgGameMode::StartPlay()
 	if (FParse::Value(FCommandLine::Get(), TEXT("JadgCapture="), CaptureDir))
 	{
 		GetWorld()->SpawnActor<AJadgCaptureDirector>();
+	}
+	else if (FParse::Value(FCommandLine::Get(), TEXT("JadgEcrans="), CaptureDir))
+	{
+		GetWorld()->SpawnActor<AJadgScreensTour>();
 	}
 	else if (FParse::Value(FCommandLine::Get(), TEXT("JadgParcoursCombat="), CaptureDir))
 	{

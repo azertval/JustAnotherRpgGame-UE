@@ -81,6 +81,77 @@ struct FJadgMember
 	int32 MaxHitPoints = 0;
 };
 
+/// Une caractéristique de la fiche, pour l'écran Personnage (LOT-1020).
+struct FJadgAbilityView
+{
+	/// L'identifiant de la caractéristique : `strength`, `dexterity`…
+	FString Id;
+	int32 Score = 0;
+	int32 Modifier = 0;
+};
+
+/// Une compétence de la fiche : son bonus au jet, et si la fiche la maîtrise.
+struct FJadgSkillView
+{
+	FString Id;
+	int32 Bonus = 0;
+	bool bProficient = false;
+};
+
+/// La fiche d'un membre du groupe, telle que les écrans la montrent (LOT-1020).
+struct FJadgSheetView
+{
+	FString Id;
+	FString Name;
+	FString ClassId;
+	FString SpeciesId;
+	FString BackgroundId;
+	int32 Level = 1;
+	int32 Experience = 0;
+	int32 HitPoints = 0;
+	int32 MaxHitPoints = 0;
+	int32 ArmorClass = 0;
+	int32 Initiative = 0;
+	int32 Proficiency = 0;
+	int32 PassivePerception = 10;
+	float SpeedMetres = 0.0f;
+	TArray<FJadgAbilityView> Abilities;
+	TArray<FJadgSkillView> Skills;
+};
+
+/// Un objet porté : sur soi (son emplacement) ou dans le sac.
+struct FJadgItemView
+{
+	/// L'emplacement (`main-hand`…) ; vide dans le sac.
+	FString Slot;
+	FString Id;
+	/// Le nom du catalogue ; l'identifiant si aucun catalogue ne le porte.
+	FString Name;
+	int32 Quantity = 1;
+	int32 WeightGrams = 0;
+};
+
+/// Ce qu'un membre porte, pour l'écran Équipement (LOT-1020).
+struct FJadgInventoryView
+{
+	TArray<FJadgItemView> Equipped;
+	TArray<FJadgItemView> Backpack;
+	int32 PurseCopper = 0;
+	int32 CarriedGrams = 0;
+	int32 CapacityGrams = 0;
+};
+
+/// Une quête commencée, pour le journal (LOT-1020).
+struct FJadgQuestView
+{
+	FString Id;
+	FString Title;
+	/// `active`, `succeeded` ou `failed`.
+	FString Status;
+	/// Les textes des étapes atteintes, dans l'ordre du récit : la dernière est l'objectif.
+	TArray<FString> Steps;
+};
+
 /**
  * @brief L'exploration du jeu dans le moteur : la session de Core, gardée d'une carte à l'autre
  *        (LOT-1016).
@@ -194,14 +265,30 @@ public:
 	/// Le jet joué par le dernier geste, écrit pour le joueur ; vide s'il n'y en a pas eu.
 	FString LastCheck() const;
 	TArray<FJadgChoice> Choices() const;
+	/// Le membre du groupe qui parle pour lui : le meneur à l'ouverture (D-28, D-37) ; vide hors dialogue.
+	FString DialogueSpeaker() const;
+	/// Fait parler @p MemberId pour le groupe : ses langues et ses modificateurs jouent (D-28).
+	bool SetDialogueSpeaker(const FString& MemberId);
+	/// Passe la parole au membre suivant (@p Direction 1) ou précédent (-1), dans l'ordre de marche.
+	void NextDialogueSpeaker(int32 Direction);
 	/// Donne la réponse de rang @p Index ; referme la conversation si elle se termine.
 	void Choose(int32 Index);
 	/// Donne la réponse d'identifiant @p ChoiceId (les tests) ; faux si elle n'est pas proposée.
 	bool ChooseById(const FString& ChoiceId);
+	/// Ouvre le dialogue @p DialogueId sans aller trouver son PNJ : une capture, un test (LOT-1020).
+	void TalkTo(const FString& DialogueId) { OpenDialogue(DialogueId); }
 	/// La graine du prochain jet de dialogue ; 0 : un compteur de la partie.
 	void SetSeed(uint64 Seed);
 	/// Ce que le dernier dialogue a demandé au jeu : `encounter:<id>`, `ending:<voie>`.
 	const TArray<FString>& Requests() const { return Asked; }
+	/// La fin de partie qu'un dialogue vient de demander (`ending:<voie>`), une fois : l'écran de
+	/// fin la prend (LOT-1020) ; vide sinon.
+	FString TakeEnding()
+	{
+		FString Taken = MoveTemp(Ending);
+		Ending.Reset();
+		return Taken;
+	}
 
 	// --- La rencontre -------------------------------------------------------------------------
 
@@ -235,6 +322,30 @@ public:
 	TArray<FJadgMember> Members() const;
 	/// Passe la main au suivant : le meneur va en queue (`core::Party::rotateLeader`).
 	void RotateLeader();
+	/// Fait de @p MemberId le meneur ; les autres gardent leur ordre (`core::Party::setLeader`, D-37).
+	bool SetLeader(const FString& MemberId);
+	/// Avance (@p Delta -1) ou recule (+1) @p MemberId dans l'ordre de marche.
+	bool MoveMember(const FString& MemberId, int32 Delta);
+	/// La fiche du membre @p MemberId ; faux s'il n'est pas du groupe.
+	bool Sheet(const FString& MemberId, FJadgSheetView& Out) const;
+	/// Ce que porte le membre @p MemberId ; faux s'il n'est pas du groupe.
+	bool Inventory(const FString& MemberId, FJadgInventoryView& Out) const;
+
+	// --- Le journal ---------------------------------------------------------------------------
+
+	/// Les quêtes commencées, lues dans les drapeaux (`core::questProgress`).
+	TArray<FJadgQuestView> Journal() const;
+
+	// --- La partie ----------------------------------------------------------------------------
+
+	/**
+	 * @brief Une partie neuve : drapeaux, heure, groupe et fiches relus comme au lancement
+	 *        (« Nouvelle partie », LOT-1020). La carte du moteur, elle, se rouvre par l'appelant.
+	 */
+	void Restart();
+
+	/// Le nom de la carte courante, pour le HUD : `map.<identifiant>.name`, ou l'identifiant.
+	FString MapName() const;
 
 	// --- Les textes ---------------------------------------------------------------------------
 
@@ -254,14 +365,15 @@ private:
 
 	TArray<FString> Errors;
 	TArray<FString> Asked;
-	TMap<FString, FString> Texts;
 	FString Portrait;
 	FString EncounterId;
+	FString Ending;
 	FString NoticeText;
 	double NoticeUntil = 0.0;
 	/// L'étage où le moteur a mené le meneur ; -1 : il ne l'a pas dit.
 	int32 CarriedStorey = -1;
 
+	void Load();
 	void Announce(const FString& Message);
 	void OpenDialogue(const FString& DialogueId);
 	void Engage(const FString& Id);

@@ -65,6 +65,16 @@
     bandits joués par l'IA —, le retour au parvis. Code 0 sur la victoire du groupe revenu là où
     il était. Graine du combat : -Seed. Sorties dans Saved/Captures/parcours-1017/.
 
+.PARAMETER Ecrans
+    Avec -Unreal, à la place de -Map : construire la carte d'essai des étals et l'arène d'essai,
+    puis lancer le jeu hors écran et y faire le tour des écrans (LOT-1020) : chaque écran ouvert
+    par sa touche, parcouru au clavier et à la souris par des touches et des clics injectés,
+    capturé interface comprise, refermé ; le jeu passé en anglais par l'écran Options ; puis
+    l'interface du combat sur l'arène, la rencontre arene-bandits montée et figée au tour du
+    joueur. Captures comparées à tolérance à Source/Test/Fixtures/Captures/ecrans-1020/
+    (-UpdateReference pour la réécrire). Sorties dans Saved/Captures/ecrans-1020/. Demande un
+    processeur graphique.
+
 .PARAMETER Seed
     Avec -Parcours : la graine du jet de Persuasion (défaut : 1, qui le réussit — relevé par le
     test Jadg.Exploration.QueteDesPommes). Avec -ParcoursCombat : la graine du combat.
@@ -109,6 +119,11 @@
     Construit, vérifie, reconstruit le niveau de la porte, puis en prend les captures et la mesure.
 
 .EXAMPLE
+    pwsh scripts/build.ps1 -Unreal -Ecrans
+    Construit, vérifie, puis fait le tour des écrans dans le jeu lancé hors écran et compare leurs
+    captures à leur référence.
+
+.EXAMPLE
     pwsh scripts/build.ps1 -Unreal -Parcours
     Construit, vérifie, reconstruit les cartes d'essai de l'exploration, puis y joue la quête des
     pommes dans le jeu lancé hors écran.
@@ -122,6 +137,7 @@ param(
     [switch]$NoCapture,
     [switch]$Parcours,
     [switch]$ParcoursCombat,
+    [switch]$Ecrans,
     [int]$Seed = 1,
     [string]$Encounter,
     [switch]$UpdateReference,
@@ -229,8 +245,9 @@ if ($Unreal) {
 
     if (($Parcours -or $ParcoursCombat) -and $Map) { Fail '-Parcours et -ParcoursCombat construisent leurs cartes : ils ne se combinent pas avec -Map.' }
     if ($Parcours -and $ParcoursCombat) { Fail '-Parcours et -ParcoursCombat se lancent l''un après l''autre.' }
-    $roundTrip = -not $Map -and -not $Parcours -and -not $ParcoursCombat
-    if (-not $Map -and -not $NoCapture -and -not $Parcours -and -not $ParcoursCombat) {
+    if ($Ecrans -and ($Map -or $Parcours -or $ParcoursCombat)) { Fail '-Ecrans construit ses cartes et se lance seul.' }
+    $roundTrip = -not $Map -and -not $Parcours -and -not $ParcoursCombat -and -not $Ecrans
+    if (-not $Map -and -not $NoCapture -and -not $Parcours -and -not $ParcoursCombat -and -not $Ecrans) {
         $Map = $SocleMap
         $Capture = $true
     }
@@ -245,6 +262,13 @@ if ($Unreal) {
     if ($LASTEXITCODE -ne 0) { Fail "Le mannequin du moteur ne s'est pas posé (code $LASTEXITCODE)." }
     & $editorCmd "$uproject" -run=JadgBuildCharacterCreator -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
     if ($LASTEXITCODE -ne 0) { Fail "Le créateur de personnage ne s'est pas construit (code $LASTEXITCODE)." }
+
+    Write-Host "== L'interface : images du kit UI et polices (LOT-1020) ==" -ForegroundColor Cyan
+    $uiImporter = (Join-Path $root 'scripts\assetsGeneration\import_ui_unreal.py') -replace '\\', '/'
+    & $editorCmd "$uproject" -run=pythonscript "-script=$uiImporter" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
+    if ($LASTEXITCODE -ne 0) { Fail "L'import de l'interface a échoué (code $LASTEXITCODE)." }
+    & $editorCmd "$uproject" -run=JadgImportFonts -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
+    if ($LASTEXITCODE -ne 0) { Fail "L'import des polices a échoué (code $LASTEXITCODE)." }
 
     Write-Host '== Commandlet JadgContentCheck (sans fenêtre) ==' -ForegroundColor Cyan
     & $editorCmd "$uproject" -run=JadgContentCheck -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
@@ -301,6 +325,36 @@ if ($Unreal) {
         if ($walked -ne 0) { Fail "Le parcours ne s'est pas terminé (code $walked) : $journal" }
         if (-not (Test-Path $journal)) { Fail "Le parcours n'a pas écrit $journal." }
         Write-Host "Parcours terminé : $output" -ForegroundColor Green
+        exit 0
+    }
+
+    if ($Ecrans) {
+        # La carte des étals et l'arène d'essai : une description v5 par carte, écrite par script.
+        foreach ($trial in @('essai/etals', 'essai/arene')) { Invoke-LevelBuild $editorCmd $trial }
+
+        $output = Join-Path $root 'Saved\Captures\ecrans-1020'
+        if (Test-Path $output) { Remove-Item -Recurse -Force $output }
+        Write-Host '== Les écrans : le tour, au clavier et à la souris, sur les étals (rendu hors écran) ==' -ForegroundColor Cyan
+        & $editorCmd "$uproject" (Get-MapInfo 'essai/etals').package -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
+            "-JadgEcrans=$output" -JadgSansRencontre "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
+        if ($LASTEXITCODE -ne 0) { Fail "Le tour des écrans ne s'est pas terminé (code $LASTEXITCODE) : $output\ecrans.json" }
+        Write-Host "== Les écrans : l'interface du combat, sur l'arène (rendu hors écran) ==" -ForegroundColor Cyan
+        & $editorCmd "$uproject" (Get-MapInfo 'essai/arene').package -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
+            "-JadgEcrans=$output" -JadgRencontre=arene-bandits "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
+        if ($LASTEXITCODE -ne 0) { Fail "Le tour de l'interface du combat ne s'est pas terminé (code $LASTEXITCODE) : $output\ecrans-combat.json" }
+
+        $reference = Join-Path $root 'Source\Test\Fixtures\Captures\ecrans-1020'
+        $compare = Join-Path $root 'scripts\checks\compare_captures.py'
+        if ($UpdateReference) {
+            Write-Host '== Les écrans : la référence des captures est réécrite ==' -ForegroundColor Yellow
+            & (Get-Python) $compare --reference $reference --captures $output --update
+            if ($LASTEXITCODE -ne 0) { Fail "La référence des captures des écrans n'a pas pu être écrite (code $LASTEXITCODE)." }
+        } else {
+            Write-Host '== Les écrans : captures comparées à leur référence ==' -ForegroundColor Cyan
+            & (Get-Python) $compare --reference $reference --captures $output
+            if ($LASTEXITCODE -ne 0) { Fail "Une capture d'écran s'écarte de sa référence : $reference" }
+        }
+        Write-Host "Tour des écrans terminé : $output" -ForegroundColor Green
         exit 0
     }
 

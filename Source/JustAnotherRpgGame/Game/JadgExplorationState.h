@@ -20,6 +20,8 @@
 #include "Core/Rpg/CharacterOptions.h"
 #include "Core/Rpg/CharacterSheet.h"
 #include "Core/Rpg/Dialogue.h"
+#include "Core/Rpg/Equipment.h"
+#include "Core/Rpg/Inventory.h"
 #include "Core/Rpg/Party.h"
 #include "Core/Rpg/Skill.h"
 #include "Core/World/ExplorationSession.h"
@@ -48,6 +50,10 @@ struct UJadgExploration::FState
 	core::CharacterCreationRules Rules;
 	core::ExperienceTable Experience;
 	core::SkillCatalog Skills;
+	/// Les objets, armes et armures : leurs noms et leurs poids, pour l'écran Équipement (LOT-1020).
+	core::ItemCatalog Items;
+	core::EquipmentCatalog Equipment;
+	core::EncumbranceRules Encumbrance;
 
 	core::Party Party;
 	/// Les fiches et les sacs du groupe, par identifiant de fiche.

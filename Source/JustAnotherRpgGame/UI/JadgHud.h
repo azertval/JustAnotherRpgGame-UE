@@ -5,31 +5,29 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/HUD.h"
+#include "UI/JadgScreen.h"
 
 #include "JadgHud.generated.h"
 
-class UFont;
-class UTexture2D;
-
 /**
- * @brief Le HUD minimal de l'exploration (LOT-1016) : ce qu'il faut lire pour jouer, dessiné sur
- *        le canevas du moteur. Le vrai HUD et les écrans sont le LOT-1020 (UMG).
+ * @brief Le gestionnaire des écrans (LOT-1020) : il remplace le HUD de canevas du LOT-1016.
  *
- * | Où | Quoi |
- * |---|---|
- * | en haut à gauche | le groupe, le meneur en tête : nom, points de vie |
- * | en haut à droite | l'heure du monde |
- * | en haut au centre | l'annonce du moment : un passage fermé, une étape de quête |
- * | en bas au centre | l'invite de ce que le meneur peut solliciter |
- * | en bas | le dialogue : le portrait de qui parle et son nom, le jet qui vient d'être joué, la réplique, les réponses numérotées |
- * | en combat, à gauche | les combattants des deux camps, points de vie, le combattant actif marqué |
- * | en combat, en bas | le tour : qui joue, les mètres qui restent, la cible et ses circonstances, les capacités et leurs lancers, les touches, le refus du moment, le journal |
- * | en combat, au centre | l'issue, le temps qu'elle reste à l'écran |
+ * Trois couches, de bas en haut :
  *
- * Il ne tient aucun état : tout est lu, à chaque trame, dans `UJadgExploration` et, en combat, dans
- * `AJadgCombat` (LOT-1017) — c'est l'interface de travail du combat, pas celle du LOT-1020. Seuls les
- * portraits sont gardés : un portrait est une image du kit de son personnage (`portrait.png`), lue
- * une fois dans son fichier — rien n'en est importé dans le projet.
+ * | Couche | Écran | Quand |
+ * |---|---|---|
+ * | le jeu | le HUD d'exploration, ou l'interface du combat | toujours ; le combat dès qu'il est monté |
+ * | la conversation | le dialogue | tant qu'une conversation est ouverte (`UJadgExploration::InDialogue`) |
+ * | les pages | une **pile** : menu, options, fiche, groupe, carte, fins… | ouvertes par une commande, un bouton ou le jeu |
+ *
+ * Une page ouverte met le jeu en pause et prend le clavier (`FInputModeUIOnly`, le premier bouton
+ * focalisé) ; la dernière refermée le rend à la scène (`FInputModeGameAndUI`, comme au LOT-1016).
+ * Le jeu ouvre lui-même ce qu'il demande : le dialogue, le combat, la fin qu'un dialogue écrit
+ * (`UJadgExploration::TakeEnding`), la mort du groupe (une défaite).
+ *
+ * Au lancement d'une partie jouée par un joueur, le menu du titre s'ouvre ; jamais quand le jeu est
+ * lancé par un parcours, une capture ou le tour des écrans (`-JadgParcours`, `-JadgCapture`,
+ * `-JadgEcrans`…), ni quand la ligne de commande porte `-JadgSansTitre`.
  */
 UCLASS()
 class AJadgHud : public AHUD
@@ -37,23 +35,55 @@ class AJadgHud : public AHUD
 	GENERATED_BODY()
 
 public:
-	virtual void DrawHUD() override;
+	AJadgHud();
+
+	virtual void BeginPlay() override;
+	virtual void EndPlay(const EEndPlayReason::Type Reason) override;
+	virtual void Tick(float DeltaSeconds) override;
+
+	/// Le gestionnaire du joueur de @p World, ou rien.
+	static AJadgHud* Of(const UWorld* World);
+
+	/// Ouvre la page @p Kind sur la pile (une seule fois : déjà ouverte, elle passe en haut).
+	UJadgScreen* Open(EJadgScreen Kind, const FString& Argument = FString());
+
+	/// Ouvre la page @p Kind, ou la ferme si elle est en haut de la pile.
+	void Toggle(EJadgScreen Kind);
+
+	/// Ferme @p Screen (une page de la pile) et tout ce qui est au-dessus.
+	void Close(UJadgScreen* Screen);
+
+	/// Ferme toutes les pages.
+	void CloseAll();
+
+	/// La page en haut de la pile, ou rien.
+	UJadgScreen* Top() const;
+
+	/// L'écran @p Kind s'il est à l'écran : une page, le dialogue, le HUD ou le combat.
+	UJadgScreen* Find(EJadgScreen Kind) const;
+
+	/// Le nombre de pages ouvertes.
+	int32 Depth() const { return Stack.Num(); }
+
+	/// Reconstruit chaque écran : après un changement de langue.
+	void RebuildScreens();
+
+	/// Lance une partie neuve avec le meneur @p LeaderId (D-37) : la partie se relit, la carte se rouvre.
+	void StartNewGame(const FString& LeaderId);
 
 private:
-	/// Les portraits déjà lus, par fichier ; un fichier illisible y garde une entrée vide.
 	UPROPERTY()
-	TMap<FString, TObjectPtr<UTexture2D>> Portraits;
+	TArray<TObjectPtr<UJadgScreen>> Stack;
 
-	UTexture2D* PortraitOf(const FString& File);
+	UPROPERTY()
+	TObjectPtr<UJadgScreen> Ground;
 
-	/// Écrit @p Text en (X, Y) ; rend la hauteur de la ligne.
-	float Write(const FString& Text, float X, float Y, const FLinearColor& Colour, float Scale) const;
+	UPROPERTY()
+	TObjectPtr<UJadgScreen> Talk;
 
-	/// Écrit @p Text à partir de (X, Y), replié à @p Width ; rend la hauteur occupée.
-	float WriteWrapped(const FString& Text, float X, float Y, float Width, const FLinearColor& Colour, float Scale) const;
+	bool bDeathShown = false;
 
-	float Measure(const FString& Text, float Scale) const;
-
-	/// Le panneau du combat ; faux s'il n'y a pas de combat monté.
-	bool DrawCombat(float Unit);
+	UJadgScreen* Create(EJadgScreen Kind, const FString& Argument, int32 Layer);
+	void Remove(UJadgScreen* Screen);
+	void ApplyInputMode();
 };

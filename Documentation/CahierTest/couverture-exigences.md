@@ -1,6 +1,6 @@
 # Couverture des exigences
 
-**33 exigences en vigueur sur 331** sont citées par au moins un cas de test. Cette matrice est **engendrée** avec le reste du cahier : la colonne de gauche vient des déclarations des [spécifications](../Specification/README.md), celle de droite des identifiants `EX-…` que les tests citent dans leur commentaire ou leur corps. Une exigence sans cas est une exigence que **rien ne garde** : le cahier ne la cache pas, il la montre. Les exigences retirées ne sont pas comptées — aucun test ne doit les citer.
+**33 exigences en vigueur sur 330** sont citées par au moins un cas de test. Cette matrice est **engendrée** avec le reste du cahier : la colonne de gauche vient des déclarations des [spécifications](../Specification/README.md), celle de droite des identifiants `EX-…` que les tests citent dans leur commentaire ou leur corps. Une exigence sans cas est une exigence que **rien ne garde** : le cahier ne la cache pas, il la montre. Les exigences retirées ne sont pas comptées — aucun test ne doit les citer.
 
 ## Par famille
 
@@ -10,7 +10,7 @@
 | `EX-BUILD` | [Exigences non fonctionnelles](../Specification/exigences-non-fonctionnelles.md) | 1 | 0 | 1 |
 | `EX-CBT` | [Combat tactique](../Specification/combat.md) | 22 | 5 | 17 |
 | `EX-CNT` | [Contenu et données](../Specification/contenu.md) | 22 | 3 | 19 |
-| `EX-CTRL` | [Contrôles & entrées](../Specification/controles.md) | 5 | 0 | 5 |
+| `EX-CTRL` | [Contrôles & entrées](../Specification/controles.md) | 4 | 0 | 4 |
 | `EX-EDIT` | [Éditeur de cartes](../Specification/editeur-niveaux.md) | 82 | 7 | 75 |
 | `EX-EXP` | [Exploration](../Specification/exploration.md) | 15 | 2 | 13 |
 | `EX-GP` | [Gameplay](../Specification/gameplay.md) | 7 | 1 | 6 |
@@ -22,7 +22,7 @@
 | `EX-REN` | [Rendu & cible technique](../Specification/rendu-technique.md) | 31 | 0 | 31 |
 | `EX-RPG` | [Personnage et progression](../Specification/rpg.md) | 19 | 1 | 18 |
 | `EX-VIS` | [Vision & périmètre](../Specification/vision.md) | 9 | 0 | 9 |
-| **Total** | | **331** | **33** | **298** |
+| **Total** | | **330** | **33** | **297** |
 
 ## Exigence par exigence
 
@@ -112,7 +112,6 @@ Un cas se lit dans la page de son domaine ; le lien y mène. « — » : aucun c
 |---|---|---|
 | `EX-CTRL-001` | [Contrôles & entrées](../Specification/controles.md) | — |
 | `EX-CTRL-010` | [Contrôles & entrées](../Specification/controles.md) | — |
-| `EX-CTRL-012` | [Contrôles & entrées](../Specification/controles.md) | — |
 | `EX-CTRL-020` | [Contrôles & entrées](../Specification/controles.md) | — |
 | `EX-CTRL-022` | [Contrôles & entrées](../Specification/controles.md) | — |
 

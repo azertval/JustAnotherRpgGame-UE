@@ -1,7 +1,25 @@
 # Interface utilisateur (IHM)
 
-> Statut : **livré**. Écrans du jeu en Qt Quick, éditeur de cartes en Qt Widgets, charte v2 des
-> écrans du jeu.
+> Statut : **en cours de reprise** sur le nouveau moteur (`LOT-1020`). Écrans du jeu en UMG
+> construits par C++, charte v2 des écrans du jeu.
+>
+> **Révisée au `LOT-1020`** (D-48, D-58, D-59). Les écrans du jeu sont refaits dans Unreal Engine,
+> en UMG construit par C++ — aucun Widget Blueprint (`AGENTS.md`) — sans changer de dessin.
+> **Ce qui vaut encore**, transposé au nouveau moteur : l'affichage tête haute (`EX-IHM-003`), la
+> pause (`EX-IHM-004`), le menu et les Options au clavier (`EX-IHM-040`), un style maîtrisé et
+> externalisé (`EX-IHM-050` à `053` : le style est le fichier texte
+> `Source/Elements/Assets/UI/style.json`, lu par `core::loadUiStyle`, les polices sont embarquées et
+> importées par script), l'unicité des commandes (`EX-IHM-062`), la charte v2 et ses images
+> produites (`EX-IHM-070` à `076`), la taille et le facteur réel (`EX-IHM-080` à `083` : l'échelle
+> d'UMG à 1 pour 1080 lignes tient le facteur de la charte), le châssis commun (`EX-IHM-090`, `091`
+> : `UJadgScreen`, le gestionnaire `AJadgHud`), le jeu de couleurs et de tailles unique
+> (`EX-IHM-105`), l'écran Carte (`EX-IHM-106`, `107`), le combat de groupe et la fiche de chaque
+> membre (`EX-IHM-108`, `109`). Les textes passent par les tables de chaînes du moteur, chargées
+> depuis les `.lang` (`EX-REN-033`, [guide des données](../Guide/guide-donnees.md#la-localisation)).
+> **Ce qui est retiré** — Qt, QML, QRhi et l'éditeur de cartes Qt ne sont plus dans ce dépôt
+> (D-58, D-59) : voir [Exigences retirées](#ihm-retirees). Le texte qui suit garde la rédaction
+> de l'ancien jeu là où il n'est pas encore réécrit ; il se réécrit section par section au
+> `LOT-1023`.
 >
 > **Révisée au `LOT-EDITOR-01`** (décision D7 de la [feuille de route de l'éditeur](../../Planning/vision/archives/feuille-de-route-editeur.md)). L'éditeur est un **outil interne** : style Fusion de Qt, textes anglais écrits
 > dans le code, widgets construits en code, sans charte ni thème. Les exigences qui ne visaient que
@@ -550,8 +568,29 @@ de la Capitale impériale et de Fisherman's Wharf —, en 1 920 × 1 080 et **sa
   avant selon l'outil actif.
 - **EX-IHM-074** *(retirée au `LOT-EDITOR-01`)* — hiérarchie des surfaces de
   commande de l'éditeur.
+- `EX-IHM-001` *(retirée au `LOT-1020`, déclarée plus haut)* — interface sur Qt : le jeu est dans Unreal Engine,
+  ses écrans en UMG construits par C++ (D-48, D-58).
+- `EX-IHM-002` *(retirée au `LOT-1020`, déclarée plus haut)* — scène embarquée dans un élément Qt : le moteur
+  dessine la scène et l'interface dans la même fenêtre.
+- `EX-IHM-011` *(retirée au `LOT-1020`, déclarée plus haut)* — disposition persistée des panneaux de l'éditeur Qt :
+  l'éditeur de cartes Qt n'est pas dans ce dépôt (D-59) ; les cartes s'éditent dans l'éditeur du
+  moteur et en texte (`LOT-1018`).
+- `EX-IHM-021` *(retirée au `LOT-1020`, déclarée plus haut)* — gestion des cartes dans l'éditeur Qt : même raison ;
+  les cartes sont des descriptions texte (`jadg_map.py`, `LOT-1018`).
+- `EX-IHM-041` *(retirée au `LOT-1020`, déclarée plus haut)* — une seule technologie d'interface par exécutable Qt :
+  il n'y a plus qu'un exécutable, celui du moteur.
+- `EX-IHM-100` à `EX-IHM-104` *(retirées au `LOT-1020`, déclarées plus haut)* — la conception séparée du code en
+  formulaires QML (Qt Design Studio, couche de présentation, jumeaux de câblage, imports connus) :
+  sans QML, un écran est une classe C++ qui construit son arbre (`UJadgScreen`), et ses grandeurs
+  viennent du style texte ; la séparation qui reste est celle du style et des textes, en fichiers.
 
 ## Traçabilité
+Depuis le `LOT-1020` : `Source/JustAnotherRpgGame/UI/` (les écrans, le gestionnaire, le style et
+les textes dans le moteur), `Source/JustAnotherRpgGame/Core/Ui/` (le style, les textes et les lieux
+de la carte, lus sans le moteur), `Source/Elements/Assets/UI/style.json`,
+`Source/Elements/Localization/`, et les tests `Jadg.Interface.*` et le tour des écrans
+(`build.ps1 -Unreal -Ecrans`). Ce qui suit est la traçabilité de l'ancien jeu.
+
 Tout ceci relève de `Source/HMI` — les types que voient les écrans du jeu (`Runtime/`) — de
 `Source/Editor` pour l'éditeur (`LevelEditor`, Qt Widgets, `LOT-EDITOR-01`), et de `Source/Ui`,
 `Source/App` pour les formulaires et le câblage QML du jeu ; les assets Qt déclaratifs vivent dans `Source/Elements`. La logique testable (édition,

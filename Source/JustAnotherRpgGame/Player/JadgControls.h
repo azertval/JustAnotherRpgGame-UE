@@ -37,12 +37,15 @@ struct FJadgBinding
  * |---|---|---|---|
  * | `Walk` | geste | le meneur marche vers le point cliqué ; sur un PNJ, il va lui parler ; en combat, un combattant devient la cible, un point du sol la destination | clic gauche |
  * | `Interact` | geste | le meneur sollicite ce qu'il a à portée ; en dialogue, « continuer » | F |
- * | `NextLeader` | geste | passe la main au suivant du groupe (`EX-EXP-014`) ; sans effet en combat | Tab |
+ * | `NextLeader` | geste | passe la main au suivant du groupe (`EX-EXP-014`) ; en dialogue, la parole au suivant (D-28) ; sans effet en combat | Tab |
  * | `Recenter` | geste | ramène la caméra sur le meneur ; en combat, sur le combattant actif | Début |
  * | `Choice1` … `Choice6` | geste | donne la réponse de ce rang, en dialogue ; en combat, choisit la capacité de ce rang | 1 … 6 |
  * | `Attack` | geste | en combat, attaque la cible choisie (LOT-1017) | X |
  * | `Capacity` | geste | en combat, lance la capacité choisie sur la cible | W |
  * | `EndTurn` | geste | en combat, finit le tour | Espace |
+ * | `Menu` | geste | ouvre ou ferme le menu du mercenaire (LOT-1020) | Échap |
+ * | `Party`, `Sheet`, `Inventory`, `Journal`, `Map` | geste | ouvre ou ferme le groupe, la fiche, l'équipement, le journal, la carte | G, P, I, J, M |
+ * | `Debug` | geste | ouvre ou ferme le menu de débogage | F9 |
  * | `Turn`, `Tilt` | axe, degrés par seconde | tourne, incline la caméra | A / E, R / V |
  * | `Look` | tenue | tant qu'elle est tenue, la souris tourne et incline la caméra | C, clic droit |
  * | `LookTurn`, `LookTilt` | axe, degrés par unité de souris | la souris, sous `Look` | souris |

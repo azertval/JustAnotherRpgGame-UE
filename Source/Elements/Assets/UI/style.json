@@ -1,0 +1,798 @@
+{
+  "version": 1,
+  "comment": "Le style des écrans du jeu (LOT-1020), lu au lancement par core::loadUiStyle (Core/Ui/UiStyle.h) : la charte v2 du LOT-87 telle que Tokens.qml et le cahier des assets la tenaient. Couleurs relevées sur le corpus (LOT-66, LOT-76) et sur les maquettes (LOT-87, LOT-140), sauf « error » (non attestée, LOT-66) et « scrim » (le voile posé sur la scène derrière une page, noir à 63 %, repris de l'ancien châssis). Tailles en pixels à 1920 × 1080 : 58, 36, 24, 18 et 14 (LOT-87, T2.1). Polices : chemins relatifs à Source/Elements/Assets, importées par scripts/assetsGeneration/import_ui_unreal.py ; « signature » est l'anglaise des signatures de la fiche (Tokens.qml, signatureFamily). Pièces : marges 9-patch et états du cahier des assets (LOT-87, assets-brief.json) ; une pièce sans marges a une taille fixe.",
+  "design": [
+    1920,
+    1080
+  ],
+  "colours": {
+    "background": "#d0c0a0",
+    "surface": "#e0d0b0",
+    "surfaceAlt": "#f0e0d0",
+    "border": "#907030",
+    "text": "#302000",
+    "textMuted": "#705020",
+    "accent": "#c0a060",
+    "error": "#8a2f20",
+    "frameEdge": "#302000",
+    "gem": "#701010",
+    "gemShadow": "#400000",
+    "panel": "#0c0c0c",
+    "panelRaised": "#141414",
+    "panelEdge": "#e4a43c",
+    "goldLight": "#fcd444",
+    "gemLight": "#8c0404",
+    "textOnPanel": "#fcfcfc",
+    "textOnPanelMuted": "#74747c",
+    "textAlly": "#74e4fc",
+    "textEnemy": "#ac443c",
+    "success": "#0c2c0c",
+    "danger": "#540c0c",
+    "info": "#0c141c",
+    "scrim": "#000000a0"
+  },
+  "fonts": {
+    "display": "Fonts/Cinzel-Bold.ttf",
+    "title": "Fonts/Cinzel-SemiBold.ttf",
+    "label": "Fonts/Cinzel-Regular.ttf",
+    "body": "Fonts/IMFellEnglish-Regular.ttf",
+    "lore": "Fonts/IMFellEnglish-Italic.ttf",
+    "signature": "Fonts/PinyonScript-Regular.ttf"
+  },
+  "sizes": {
+    "display": 58,
+    "screenTitle": 36,
+    "section": 24,
+    "reading": 24,
+    "body": 18,
+    "caption": 14
+  },
+  "spacing": {
+    "small": 8,
+    "medium": 16,
+    "large": 32
+  },
+  "pieces": {
+    "background/menu-scene": {
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "background/options-backdrop": {
+      "size": [
+        1920,
+        1080
+      ]
+    },
+    "background/parchment-tile": {
+      "size": [
+        512,
+        512
+      ]
+    },
+    "background/leather-tile": {
+      "size": [
+        512,
+        512
+      ]
+    },
+    "frame/panel-dark": {
+      "size": [
+        512,
+        512
+      ],
+      "margins": [
+        112,
+        112,
+        112,
+        112
+      ]
+    },
+    "frame/panel-parchment": {
+      "size": [
+        768,
+        768
+      ],
+      "margins": [
+        128,
+        128,
+        128,
+        128
+      ],
+      "states": [
+        "plain",
+        "bound"
+      ]
+    },
+    "frame/subpanel-dark": {
+      "size": [
+        256,
+        256
+      ],
+      "margins": [
+        48,
+        48,
+        48,
+        48
+      ]
+    },
+    "frame/subpanel-parchment": {
+      "size": [
+        256,
+        256
+      ],
+      "margins": [
+        40,
+        40,
+        40,
+        40
+      ],
+      "states": [
+        "normal",
+        "empty"
+      ]
+    },
+    "frame/item-card": {
+      "size": [
+        512,
+        768
+      ],
+      "margins": [
+        96,
+        160,
+        96,
+        96
+      ]
+    },
+    "frame/school-row": {
+      "size": [
+        512,
+        96
+      ],
+      "margins": [
+        96,
+        24,
+        48,
+        24
+      ],
+      "states": [
+        "abjuration",
+        "conjuration",
+        "divination",
+        "enchantment",
+        "evocation",
+        "illusion",
+        "necromancy",
+        "transmutation",
+        "thaumaturgy"
+      ]
+    },
+    "plate/title-garnet": {
+      "size": [
+        768,
+        120
+      ],
+      "margins": [
+        160,
+        0,
+        160,
+        0
+      ]
+    },
+    "plate/title-black": {
+      "size": [
+        640,
+        96
+      ],
+      "margins": [
+        120,
+        0,
+        120,
+        0
+      ]
+    },
+    "plate/section-banner": {
+      "size": [
+        512,
+        56
+      ],
+      "margins": [
+        64,
+        0,
+        64,
+        0
+      ]
+    },
+    "plate/section-bar": {
+      "size": [
+        1024,
+        56
+      ],
+      "margins": [
+        48,
+        0,
+        96,
+        0
+      ]
+    },
+    "plate/field-tag": {
+      "size": [
+        192,
+        40
+      ],
+      "margins": [
+        16,
+        0,
+        40,
+        0
+      ]
+    },
+    "plate/logo": {
+      "size": [
+        1024,
+        640
+      ]
+    },
+    "plate/quote": {
+      "size": [
+        512,
+        56
+      ],
+      "margins": [
+        64,
+        0,
+        64,
+        0
+      ]
+    },
+    "plate/compass-bar": {
+      "size": [
+        768,
+        48
+      ],
+      "margins": [
+        96,
+        0,
+        96,
+        0
+      ]
+    },
+    "plate/status-bar": {
+      "size": [
+        512,
+        48
+      ],
+      "margins": [
+        24,
+        0,
+        64,
+        0
+      ]
+    },
+    "plate/parchment-ribbon": {
+      "size": [
+        512,
+        48
+      ],
+      "margins": [
+        64,
+        0,
+        64,
+        0
+      ]
+    },
+    "tab/ribbon": {
+      "size": [
+        256,
+        56
+      ],
+      "margins": [
+        48,
+        0,
+        48,
+        0
+      ],
+      "states": [
+        "active",
+        "normal",
+        "disabled"
+      ]
+    },
+    "tab/segment": {
+      "size": [
+        320,
+        56
+      ],
+      "margins": [
+        32,
+        0,
+        32,
+        0
+      ],
+      "states": [
+        "active",
+        "normal"
+      ]
+    },
+    "button/menu": {
+      "size": [
+        480,
+        72
+      ],
+      "margins": [
+        96,
+        0,
+        48,
+        0
+      ],
+      "states": [
+        "normal",
+        "hover",
+        "active",
+        "disabled"
+      ]
+    },
+    "button/primary": {
+      "size": [
+        280,
+        56
+      ],
+      "margins": [
+        48,
+        0,
+        48,
+        0
+      ],
+      "states": [
+        "normal",
+        "hover",
+        "pressed",
+        "disabled"
+      ]
+    },
+    "button/secondary": {
+      "size": [
+        280,
+        56
+      ],
+      "margins": [
+        48,
+        0,
+        48,
+        0
+      ],
+      "states": [
+        "normal",
+        "hover",
+        "pressed",
+        "disabled"
+      ]
+    },
+    "button/apply": {
+      "size": [
+        280,
+        56
+      ],
+      "margins": [
+        48,
+        0,
+        48,
+        0
+      ],
+      "states": [
+        "normal",
+        "hover",
+        "pressed",
+        "disabled"
+      ]
+    },
+    "button/cancel": {
+      "size": [
+        280,
+        56
+      ],
+      "margins": [
+        48,
+        0,
+        48,
+        0
+      ],
+      "states": [
+        "normal",
+        "hover",
+        "pressed",
+        "disabled"
+      ]
+    },
+    "button/default": {
+      "size": [
+        280,
+        56
+      ],
+      "margins": [
+        48,
+        0,
+        48,
+        0
+      ],
+      "states": [
+        "normal",
+        "hover",
+        "pressed",
+        "disabled"
+      ]
+    },
+    "button/back": {
+      "size": [
+        320,
+        72
+      ],
+      "margins": [
+        96,
+        0,
+        48,
+        0
+      ],
+      "states": [
+        "normal",
+        "hover",
+        "pressed",
+        "disabled"
+      ]
+    },
+    "button/round": {
+      "size": [
+        64,
+        64
+      ],
+      "states": [
+        "normal",
+        "hover",
+        "pressed",
+        "disabled"
+      ]
+    },
+    "button/chip": {
+      "size": [
+        192,
+        40
+      ],
+      "margins": [
+        24,
+        0,
+        24,
+        0
+      ],
+      "states": [
+        "normal",
+        "selected",
+        "disabled"
+      ]
+    },
+    "control/checkbox": {
+      "size": [
+        48,
+        48
+      ],
+      "states": [
+        "checked",
+        "unchecked",
+        "disabled"
+      ]
+    },
+    "control/slider-track": {
+      "size": [
+        256,
+        24
+      ],
+      "margins": [
+        24,
+        0,
+        24,
+        0
+      ]
+    },
+    "control/slider-handle": {
+      "size": [
+        40,
+        40
+      ],
+      "states": [
+        "normal",
+        "hover"
+      ]
+    },
+    "control/combo": {
+      "size": [
+        320,
+        48
+      ],
+      "margins": [
+        24,
+        0,
+        56,
+        0
+      ],
+      "states": [
+        "normal",
+        "hover",
+        "open",
+        "disabled"
+      ]
+    },
+    "control/combo-popup": {
+      "size": [
+        320,
+        256
+      ],
+      "margins": [
+        24,
+        16,
+        24,
+        24
+      ]
+    },
+    "control/divider-gold": {
+      "size": [
+        512,
+        16
+      ],
+      "margins": [
+        48,
+        0,
+        48,
+        0
+      ]
+    },
+    "control/focus-fleuron": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "control/pip": {
+      "size": [
+        32,
+        32
+      ],
+      "states": [
+        "empty",
+        "filled"
+      ]
+    },
+    "control/ruled-line": {
+      "size": [
+        512,
+        32
+      ],
+      "margins": [
+        16,
+        0,
+        48,
+        0
+      ]
+    },
+    "control/value-box": {
+      "size": [
+        64,
+        40
+      ],
+      "margins": [
+        8,
+        8,
+        8,
+        8
+      ]
+    },
+    "medallion/ability": {
+      "size": [
+        160,
+        160
+      ]
+    },
+    "medallion/derived-stat": {
+      "size": [
+        120,
+        120
+      ]
+    },
+    "medallion/icon-ring": {
+      "size": [
+        96,
+        96
+      ]
+    },
+    "medallion/portrait-round": {
+      "size": [
+        260,
+        260
+      ],
+      "states": [
+        "filled",
+        "empty"
+      ]
+    },
+    "medallion/portrait-square": {
+      "size": [
+        220,
+        220
+      ],
+      "states": [
+        "normal",
+        "active"
+      ]
+    },
+    "medallion/portrait-hud": {
+      "size": [
+        220,
+        220
+      ]
+    },
+    "medallion/level-pip": {
+      "size": [
+        48,
+        48
+      ]
+    },
+    "medallion/minimap-ring": {
+      "size": [
+        260,
+        260
+      ]
+    },
+    "medallion/action-wheel": {
+      "size": [
+        160,
+        160
+      ]
+    },
+    "slot/item": {
+      "size": [
+        96,
+        96
+      ],
+      "states": [
+        "empty",
+        "hover",
+        "selected",
+        "equipped"
+      ]
+    },
+    "slot/rarity": {
+      "size": [
+        96,
+        96
+      ],
+      "states": [
+        "common",
+        "uncommon",
+        "rare",
+        "very-rare",
+        "legendary"
+      ]
+    },
+    "slot/quantity-pip": {
+      "size": [
+        40,
+        28
+      ],
+      "margins": [
+        8,
+        0,
+        8,
+        0
+      ]
+    },
+    "slot/action": {
+      "size": [
+        80,
+        80
+      ],
+      "states": [
+        "normal",
+        "active",
+        "disabled"
+      ]
+    },
+    "gauge/track": {
+      "size": [
+        512,
+        28
+      ],
+      "margins": [
+        40,
+        0,
+        40,
+        0
+      ]
+    },
+    "gauge/fill-sheen": {
+      "size": [
+        256,
+        20
+      ],
+      "margins": [
+        4,
+        0,
+        4,
+        0
+      ]
+    },
+    "ornament/wax-seal": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "ornament/crossed-crest": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "ornament/signature-flourish": {
+      "size": [
+        256,
+        64
+      ]
+    },
+    "ornament/compass-watermark": {
+      "size": [
+        512,
+        512
+      ],
+      "states": [
+        "parchment",
+        "dark"
+      ]
+    },
+    "ornament/compass-rose": {
+      "size": [
+        192,
+        192
+      ]
+    },
+    "ornament/corner": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "ornament/divider-star": {
+      "size": [
+        64,
+        32
+      ]
+    },
+    "ornament/crest-shield": {
+      "size": [
+        128,
+        128
+      ]
+    },
+    "ornament/crest-pennant": {
+      "size": [
+        128,
+        160
+      ]
+    },
+    "ornament/hourglass": {
+      "size": [
+        64,
+        64
+      ]
+    },
+    "ornament/day-dial": {
+      "size": [
+        64,
+        64
+      ],
+      "states": [
+        "day",
+        "dusk",
+        "night"
+      ]
+    }
+  }
+}
