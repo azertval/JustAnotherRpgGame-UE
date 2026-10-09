@@ -39,15 +39,15 @@ du moteur (`Source/Test/Unit/Core`).
 
 Les maillages se livrent **au maître** : Unreal ne borne pas le nombre de triangles (Nanite), ni
 décimation ni budget de triangles. Les retours Meshy vont dans `Source/Elements/Assets/Master/` par
-`build_master_manifest.py`, et dans le projet par `import_master_unreal.py` ; jamais par un import
-à la main dans l'éditeur.
+`build_master_manifest.py`, et dans le projet par `import_scenery_unreal.py` (LOT-1019 : une pièce
+entre depuis sa fiche, avec sa matière complète et ses textures compressées par le moteur) ; jamais
+par un import à la main dans l'éditeur.
 
-Avant de produire ou retoucher un lot d'assets, lire `Planning/standards/style-3d.md` — notamment
-« Critères de qualité validés par l'auteur » et « Ce qui reste ouvert ». Ses valeurs de géométrie
-(§1), de poids (§3) et d'images tolérées (§7) sont périmées par D-49 et D-53 et se réécrivent au
-`LOT-1019`. `Planning/standards/personnages-3d.md` est **périmé** par D-63 et D-64 jusqu'au
-`LOT-1015`, qui le réécrit sur les mesures du moteur : seuls son §3 (l'image de référence, pour les
-pièces Meshy) et son §10 (portrait et jeton peints) valent encore.
+Avant de produire ou retoucher un lot d'assets, lire `Planning/standards/style-3d.md` — réécrit au
+`LOT-1019` sur les mesures du moteur —, notamment « Critères de qualité validés par l'auteur » et
+« Ce qui reste ouvert » ; le gabarit de commande d'une zone (`gabarit-commande-zone.md`) demande
+des pièces au maître, toutes faces finies. `Planning/standards/personnages-3d.md` a été réécrit au
+`LOT-1015` sur les mesures du moteur (D-63, D-64) : c'est lui qui vaut pour un personnage.
 
 Un personnage est une **fiche texte** (JSON) qui donne les valeurs des paramètres d'un **objet
 personnalisable Mutable** ; le créateur assemble corps, tête, pièces, garde-robe et matières (D-63).
