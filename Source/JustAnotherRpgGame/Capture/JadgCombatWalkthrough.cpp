@@ -17,6 +17,7 @@
 #include "Misc/CommandLine.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
+#include "Player/JadgCameraPawn.h"
 #include "Player/JadgControls.h"
 #include "Player/JadgPlayerController.h"
 #include "ShaderCompiler.h"
@@ -175,11 +176,22 @@ bool AJadgCombatWalkthrough::ClickPoint(const FVector& World, const TCHAR* What)
 			}
 		}
 	}
+	AJadgCameraPawn* View = Cast<AJadgCameraPawn>(Player->GetPawn());
+	if (!bFound && !bRecentered && View != nullptr)
+	{
+		// Le décor cache le point (une bannière, une tribune de l'Arena of Fate, LOT-1022) : le joueur
+		// amène le point visé sur lui, de plus haut, et clique à la trame suivante.
+		bRecentered = true;
+		View->SetView(World, View->GetViewYaw(), FMath::Max(View->GetViewPitch(), 60.0f), View->GetViewDistance());
+		Note(FString::Printf(TEXT("le décor cache %s : le point visé est amené sur elle"), What));
+		return false;
+	}
 	if (!bFound)
 	{
 		Finish(1, FString::Printf(TEXT("le pointeur en (%.0f ; %.0f) ne désigne pas %s"), Screen.X, Screen.Y, What));
 		return false;
 	}
+	bRecentered = false;
 	Note(FString::Printf(TEXT("clic au sol en (%.0f ; %.0f) : %s"), Screen.X, Screen.Y, What));
 	Press(UJadgControls::KeyOf(TEXT("Walk")));
 	return true;
@@ -202,11 +214,22 @@ bool AJadgCombatWalkthrough::ClickActor(const AActor* Target, const TCHAR* What)
 		return false;
 	}
 	Player->PointAt(Screen);
-	if (!Player->PointerHit(Hit) || Hit.GetActor() != Target)
+	AJadgCameraPawn* View = Cast<AJadgCameraPawn>(Player->GetPawn());
+	const bool bHit = Player->PointerHit(Hit) && Hit.GetActor() == Target;
+	if (!bHit && !bRecentered && View != nullptr)
+	{
+		// Le décor cache la figurine : le joueur amène le point visé sur elle, de plus haut (LOT-1022).
+		bRecentered = true;
+		View->SetView(Origin, View->GetViewYaw(), FMath::Max(View->GetViewPitch(), 60.0f), View->GetViewDistance());
+		Note(FString::Printf(TEXT("le décor cache %s : le point visé est amené sur elle"), What));
+		return false;
+	}
+	if (!bHit)
 	{
 		Finish(1, FString::Printf(TEXT("le pointeur en (%.0f ; %.0f) ne désigne pas %s"), Screen.X, Screen.Y, What));
 		return false;
 	}
+	bRecentered = false;
 	Note(FString::Printf(TEXT("clic en (%.0f ; %.0f) sur %s"), Screen.X, Screen.Y, What));
 	Press(UJadgControls::KeyOf(TEXT("Walk")));
 	return true;
@@ -434,7 +457,11 @@ void AJadgCombatWalkthrough::PlayHeroTurn(AJadgCombat& Combat)
 	case 1:
 		if (GMoveTo.IsSet())
 		{
-			ClickPoint(GMoveTo.GetValue(), TEXT("la destination du tour"));
+			if (!ClickPoint(GMoveTo.GetValue(), TEXT("la destination du tour")) && bRecentered && !bDone)
+			{
+				// La caméra a bougé : le même clic, quand la vue est posée.
+				--TurnStep;
+			}
 			ResumeAt = Frames + 6;
 		}
 		break;
@@ -448,7 +475,11 @@ void AJadgCombatWalkthrough::PlayHeroTurn(AJadgCombat& Combat)
 				Combat.Select(GTarget);
 				break;
 			}
-			ClickActor(Victim, TEXT("la cible"));
+			if (!ClickActor(Victim, TEXT("la cible")) && bRecentered && !bDone)
+			{
+				// La caméra a bougé : le même clic, quand la vue est posée.
+				--TurnStep;
+			}
 			ResumeAt = Frames + 6;
 		}
 		break;

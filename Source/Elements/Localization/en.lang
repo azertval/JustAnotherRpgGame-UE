@@ -158,8 +158,6 @@ map.capital.arena-of-brave-camp-b.name = Arena of Brave — Changing room B
 map.central-empire.capital.arenarea.name = Arenarea
 map.central-empire.capital.martpart.name = Martpart
 map.central-empire.capital.arenarea.arena-of-fate.name = Arena of Fate
-map.central-empire.capital.arenarea.arena-of-fate.undercroft.name = Arena of Fate — Undercroft
-map.central-empire.capital.arenarea.arena-of-fate.catacombs.name = Arena of Fate Catacombs
 
 # --- Les écrans du nouveau moteur (LOT-1020) -----------------------------------------------
 # The screens name their texts by key; the labels come from the old game (jadg_en.ts).

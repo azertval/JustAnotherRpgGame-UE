@@ -15,7 +15,7 @@
     "height": { "type": "integer", "minimum": 1, "maximum": 1024 },
     "origin": { "$ref": "#/$defs/point2", "description": "Où tombe le coin de la case (0, 0), en mètres." },
     "storeys": {
-      "description": "Les étages praticables (D-51), le rez en tête à z = 0, puis des hauteurs croissantes.",
+      "description": "Les étages praticables (D-51), le rez en tête à z = 0, puis chaque étage (au-dessus) ou sous-sol (en dessous) à sa hauteur, jamais deux à la même.",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -25,6 +25,7 @@
         "additionalProperties": false
       }
     },
+    "storeyLevels": { "type": "boolean", "description": "Vrai : le niveau construit se découpe en un niveau de chargement par étage, toujours chargé (D-51, LOT-1022) ; ses objets, ses couches et ses lumières y vont, le reste dans le niveau de la carte." },
     "nextEntityId": { "type": "integer", "minimum": 1 },
     "tiles": {
       "description": "La grille de collision du rez, entrée comprise : ce que Core joue. Absence = vide.",
@@ -154,7 +155,8 @@
           "target": { "$ref": "#/$defs/point3" },
           "heading": { "type": "number" },
           "pitch": { "type": "number" },
-          "distance": { "type": "number", "exclusiveMinimum": 0 }
+          "distance": { "type": "number", "exclusiveMinimum": 0 },
+          "storey": { "type": "integer", "minimum": 0, "description": "L'étage que le cadrage regarde : les étages au-dessus de lui sont cachés pour sa capture." }
         }
       }
     },
@@ -168,6 +170,7 @@
           "text": { "type": "string" },
           "x": { "type": "integer" },
           "y": { "type": "integer" },
+          "storey": { "type": "integer", "minimum": 0 },
           "position": { "$ref": "#/$defs/point3" }
         }
       }
@@ -205,7 +208,8 @@
         "name": { "type": "string" },
         "kind": { "enum": ["ground", "decor"] },
         "scene": { "type": "string" },
-        "z": { "type": "number", "description": "La hauteur où se posent les pièces de la couche, en mètres (l'étage de décor de la v4 migré)." },
+        "storey": { "type": "integer", "minimum": 0, "description": "L'étage praticable de la couche : ses pièces se posent dans son niveau de chargement, à sa hauteur plus z (LOT-1022)." },
+        "z": { "type": "number", "description": "La hauteur où se posent les pièces de la couche, en mètres au-dessus du sol de son étage (l'étage de décor de la v4 migré)." },
         "tiles": {
           "type": "array",
           "items": {

@@ -47,6 +47,10 @@ namespace
 
 	/// Les trames où le combat de l'arène se remonte, le temps que son maillage de navigation soit prêt.
 	constexpr int32 MountTries = 600;
+
+	/// Un portail hors du maillage se franchit quand le meneur s'arrête à moins de cette distance de
+	/// son centre, en cases : il touche sa case (une case et demie, la portée de Core).
+	constexpr double PortalContactCells = 1.5;
 }
 
 struct AJadgParty::FState
@@ -123,6 +127,8 @@ void AJadgParty::BeginPlay()
 
 	State = MakeShared<FState>();
 	Exploration = GetGameInstance() != nullptr ? GetGameInstance()->GetSubsystem<UJadgExploration>() : nullptr;
+	// Une autre arène pour ce passage (LOT-1022) : celle d'essai, pour le tour des écrans.
+	FParse::Value(FCommandLine::Get(), TEXT("JadgArene="), ArenaMap);
 	for (TActorIterator<AJadgMapFrame> It(GetWorld()); It; ++It)
 	{
 		Frame = *It;
@@ -413,6 +419,16 @@ void AJadgParty::Tick(float DeltaSeconds)
 		// L'étage des pieds du meneur : Core ne sollicite que ce qui est à cet étage (D-51).
 		Exploration->SetStorey(Frame->StoreyAt(Head->Feet().Z));
 	}
+	if (bPortalAimed && bOnCoreMap && !Head->IsWalking())
+	{
+		// Le meneur envoyé vers un portail dans le plein s'est arrêté : à son contact, il y entre.
+		const FVector2D Centre(AimedPortal.X + 0.5, AimedPortal.Y + 0.5);
+		if (FVector2D::Distance(Cell, Centre) <= PortalContactCells && Exploration->HeroStorey() == AimedPortalStorey)
+		{
+			Cell = Centre;
+		}
+		bPortalAimed = false;
+	}
 	const TArray<FJadgEvent> Events = Exploration->Step(bOnCoreMap ? &Cell : nullptr, bInteract, DeltaSeconds);
 	for (const FJadgEvent& Event : Events)
 	{
@@ -496,6 +512,23 @@ void AJadgParty::OrderWalk(const FVector& Destination)
 	{
 		bPending = false;
 		Head->WalkTo(Ground);
+		// Un portail sur la case visée, à l'étage visé : le meneur y entrera à son contact.
+		bPortalAimed = false;
+		if (Frame != nullptr && Exploration != nullptr)
+		{
+			const FVector2D Aimed = CellOf(Destination);
+			const FIntPoint Target(FMath::FloorToInt32(Aimed.X), FMath::FloorToInt32(Aimed.Y));
+			const int32 Storey = Frame->StoreyAt(Destination.Z);
+			for (const FJadgEntity& Entity : Exploration->Entities())
+			{
+				if (Entity.Type == TEXT("portal") && Entity.bPresent && Entity.Cell == Target && Entity.Storey == Storey)
+				{
+					bPortalAimed = true;
+					AimedPortal = Target;
+					AimedPortalStorey = Storey;
+				}
+			}
+		}
 	}
 }
 
@@ -594,7 +627,18 @@ void AJadgParty::Open(const FString& Package)
 
 bool AJadgParty::InArena() const
 {
-	return !ArenaMap.IsEmpty() && GetWorld()->GetOutermost()->GetName() == ArenaMap;
+	if (ArenaMap.IsEmpty() || GetWorld()->GetOutermost()->GetName() != ArenaMap)
+	{
+		return false;
+	}
+	// L'arène s'explore aussi (LOT-1022) : elle n'est l'arène que pour une rencontre engagée.
+	FString Wanted;
+	return (Exploration != nullptr && !Exploration->Encounter().IsEmpty()) || FParse::Value(FCommandLine::Get(), TEXT("JadgRencontre="), Wanted);
+}
+
+FVector AJadgParty::PointOn(const FVector2D& Cell, int32 Storey) const
+{
+	return WorldOf(Cell, Frame != nullptr ? Frame->StoreyZ(Storey) + 50.0 : 0.0);
 }
 
 void AJadgParty::ReturnFromArena()

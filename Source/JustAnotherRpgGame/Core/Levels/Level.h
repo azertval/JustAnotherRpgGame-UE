@@ -23,7 +23,7 @@ namespace core {
 
 /**
  * @brief Un **étage praticable** d'une carte (format v5, D-51, `LOT-1018`) : son nom et la hauteur
- *        de son sol, en mètres au-dessus du rez.
+ *        de son sol, en mètres par rapport au rez — négative pour un sous-sol (`LOT-1022`).
  *
  * Un lieu à plusieurs étages est **une seule carte** : l'escalier, l'étage et la redescente se
  * jouent sans changer de carte. La grille de collision de Core ne dit que le rez ; chaque entité

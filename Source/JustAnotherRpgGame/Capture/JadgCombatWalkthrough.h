@@ -74,6 +74,8 @@ private:
 	int32 TurnOf = 0;
 	int32 TurnRound = 0;
 	int32 TurnStep = 0;
+	/// Le point visé a été amené sur la destination d'un clic que le décor cachait (LOT-1022).
+	bool bRecentered = false;
 	bool bShooting = false;
 	bool bAsked = false;
 

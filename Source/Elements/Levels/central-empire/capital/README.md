@@ -17,8 +17,12 @@ colorés :
 | `martpart.json` | 24 × 11 | Market Gate (l'entrée), la place des étals et la mère, Stravian Avenue → Arenarea |
 | `arenarea.json` | 24 × 13 | Herofate Avenue ← Martpart, le parvis (garde, enfant, zone déclencheuse), l'escalier → le niveau −1 de l'arène, la façade du casino (portail condamné) |
 | `arenarea/arena-of-fate.json` | 34 × 24 | l'ovale de sable et sa zone de combat (22 × 14), le maître d'arène et le combattant sous `condamne`, podium, coursive et gradins posés en pièces |
-| `arenarea/arena-of-fate/undercroft.json` | 15 × 6 | en maquette : le vestiaire A où arrive le condamné, le couloir et sa porte close sous `condamne` (`prop`), l'escalier de la porte du triomphe |
 
 La carte d'Arenarea du `LOT-109` (le quartier entier, 128 × 88) a cédé son identifiant à la carte
 de principe ; elle reste dans l'historique et revient, reprise, au `LOT-147`. Les cartes
 définitives sont à la `0.0.3` (`LOT-107`, `LOT-111`, `LOT-147`).
+
+Depuis le `LOT-1022`, l'Arena of Fate est **une carte à trois étages** (D-51) : le sable, le
+niveau −1 (les vestiaires, où arrive le condamné, et la prison) et les catacombes tiennent dans
+`arenarea/arena-of-fate.json`, sous la même emprise de 34 × 24 cases ; leurs anciennes cartes
+(`arena-of-fate/undercroft.json`, `arena-of-fate/catacombs.json`) sont retirées.

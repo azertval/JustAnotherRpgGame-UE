@@ -305,8 +305,11 @@ ajoute ce que le moteur construit. Le texte est la **source**, le niveau du mote
   puis la réécrire intacte rend le même fichier. Schéma :
   [`level.schema.json`](level.schema.json).
 - **EX-LVL-032** — Un lieu à plusieurs étages est **une seule carte** (D-51). La carte déclare ses
-  **étages praticables** (`storeys` : le rez à 0 m, puis des hauteurs croissantes) ; chaque entité
-  nomme le sien (`storey`, 0 par défaut). Le moteur dit à Core l'étage où il a mené le héros, lu à
+  **étages praticables** (`storeys` : le rez en tête, à 0 m, puis chaque étage au-dessus ou sous-sol
+  en dessous, à sa hauteur, jamais deux à la même — `LOT-1022`) ; chaque entité nomme le sien
+  (`storey`, 0 par défaut), une couche de pièces aussi, posée au-dessus du sol de son étage (`z`).
+  L'étage d'un point est le plus haut dont le sol est sous lui, dans l'ordre des hauteurs. Un
+  portail peut viser la carte où il est : il mène à un autre étage, sans rouvrir la carte. Le moteur dit à Core l'étage où il a mené le héros, lu à
   la hauteur de ses pieds (`core::ExplorationIntent::storey`, `AJadgMapFrame::StoreyAt`) : un
   portail, une zone, un coffre ne se franchissent, ne se déclenchent, ne se sollicitent que de leur
   étage — à la verticale du portail du rez, le héros de l'étage passe. Un point d'arrivée pose le
@@ -331,7 +334,10 @@ ajoute ce que le moteur construit. Le texte est la **source**, le niveau du mote
   (`JadgObject:<id>`) ; chaque entité a son **repère** (`JadgMarker:<id>`). Rejouée sur la même
   description, la construction rend le même niveau : son **empreinte**
   (`Saved/Jadg/levels/<carte>.json` — chaque acteur par son étiquette, sa classe, sa transformation
-  arrondie, son maillage, ses réglages) est la même.
+  arrondie, son maillage, ses réglages) est la même. Une carte qui le déclare (`storeyLevels`) se
+  construit en **un niveau de chargement par étage**, toujours chargé avec elle
+  (`/Game/Maps/Levels/<carte>-etage-<nom>`, `LOT-1022`) : le décor de l'étage y va, le reste dans
+  le niveau de la carte.
 - **EX-LVL-035** — L'éditeur du moteur sert à placer à la souris ce qu'un script place mal ;
   `scripts/maps/read_level.py` ramène **ce geste-là** dans le texte, et rien d'autre. Ce qu'il relit
   est la **frontière** de l'éditeur (tableau ci-dessous) ; **ce qui ne se relit pas ne se fait pas
@@ -348,7 +354,8 @@ ajoute ce que le moteur construit. Le texte est la **source**, le niveau du mote
   (`JadgContentCheck`) — chaque carte se lit par `core::LevelLoader`, le graphe des portails se
   valide (`core::validateWorldGraph`) ; le niveau construit (`build_level.py -JadgCheck`) — chaque
   point d'arrivée et chaque entrée d'arène est **atteint depuis l'entrée sur le maillage de
-  navigation** ; une case inatteignable y est une zone inatteignable.
+  navigation**, ou par un portail de la même carte dont une case voisine est atteinte ; une case
+  inatteignable y est une zone inatteignable.
 - **EX-LVL-037** — Un **préfabriqué** est un acteur composé déclaré en texte
   (`Source/Elements/Editor/Prefabs/<niveau>/<nom>.json`, format `jadg-prefab`, version 1) : des
   objets autour d'une origine, par maillage (`mesh`) ou par pièce du kit de son lieu (`piece`). Une

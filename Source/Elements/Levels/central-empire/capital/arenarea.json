@@ -22124,7 +22124,7 @@
     {"id": "e1", "type": "spawnPoint", "x": 116, "y": 85, "name": "from-martpart"},
     {"id": "e2", "type": "portal", "x": 116, "y": 86, "arrival": "from-arenarea", "requiresFlag": "", "sealed": false, "targetMap": "central-empire/capital/martpart"},
     {"id": "e3", "type": "spawnPoint", "x": 65, "y": 34, "name": "from-arena-of-fate"},
-    {"id": "e4", "type": "portal", "x": 65, "y": 33, "arrival": "from-arenarea", "requiresFlag": "", "sealed": false, "targetMap": "central-empire/capital/arenarea/arena-of-fate/undercroft"},
+    {"id": "e4", "type": "portal", "x": 65, "y": 33, "arrival": "from-arenarea", "requiresFlag": "", "sealed": false, "targetMap": "central-empire/capital/arenarea/arena-of-fate"},
     {"id": "e5", "type": "npc", "x": 64, "y": 37, "appearance": "pantin", "dialogue": "garde", "figure": "ironhand-soldier", "guards": "", "presenceFlag": "quete.pommes", "presenceTest": "equals", "presenceValue": "acceptee|persuasion-echouee"},
     {"id": "e6", "type": "npc", "x": 65, "y": 37, "appearance": "pantin", "dialogue": "enfant", "figure": "child", "guards": "", "presenceFlag": "quete.pommes", "presenceTest": "equals", "presenceValue": "acceptee|persuasion-echouee"},
     {"id": "e7", "type": "zone", "x": 60, "y": 35, "name": "parvis", "height": 5, "difficultTerrain": false, "presenceFlag": "quete.pommes", "presenceTest": "equals", "presenceValue": "acceptee", "triggerArrival": "", "triggerDialogue": "garde", "triggerFlag": "", "triggerMap": "", "triggerOnce": false, "triggerValue": "", "width": 13},

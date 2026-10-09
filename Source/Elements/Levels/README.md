@@ -9,9 +9,10 @@ mètres, les préfabriqués, le groupe, le ciel, la navigation, les cadrages. Sp
 `Documentation/Guide/guide-cartes-moteur.md`.
 
 Les cartes suivent **le même découpage que les assets** — `<région>/<ville>/<zone>.json`, la
-sous-zone sous son dossier de zone : `central-empire/capital/arenarea.json`, `martpart.json`,
-`arenarea/arena-of-fate.json`, `arenarea/arena-of-fate/undercroft.json` et `catacombs.json`, les
-cinq cartes de la démo, **migrées de la v4 telles quelles** (`jadg_map.py --migrate`) ;
+sous-zone sous son dossier de zone : `central-empire/capital/arenarea.json` et `martpart.json`,
+**migrées de la v4 telles quelles** (`jadg_map.py --migrate`), et `arenarea/arena-of-fate.json`,
+l'Arena of Fate en **une carte à trois étages** — le sable, les vestiaires et la prison, les
+catacombes — (`LOT-1022`, D-51), les trois cartes de la démo ;
 `porte-1012.json`, la carte de la porte (`LOT-1012`), écrite par `scripts/maps/build_gate_scene.py`.
 Une carte a pour identifiant son **chemin relatif** : un portail vise
 `central-empire/capital/martpart`, et son niveau du moteur est `/Game/Maps/Levels/<identifiant>`.

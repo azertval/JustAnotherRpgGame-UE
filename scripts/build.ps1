@@ -58,20 +58,28 @@
     Demande un processeur graphique.
 
 .PARAMETER ParcoursCombat
-    Avec -Unreal, à la place de -Map : construire le parvis et l'arène d'essai, puis lancer le
-    jeu hors écran sur le parvis et y jouer, par les touches et les clics du joueur, le début de la
-    série de l'arène (LOT-1017) : le maître d'arène, « combattre », la rencontre arene-bandits dans
-    l'arène jusqu'à son issue — chaque tour d'un héros traduit en clics et en touches, ceux des
-    bandits joués par l'IA —, le retour au parvis. Code 0 sur la victoire du groupe revenu là où
-    il était. Graine du combat : -Seed. Sorties dans Saved/Captures/parcours-1017/.
+    Avec -Unreal, à la place de -Map : construire le parvis d'essai et l'Arena of Fate, puis lancer
+    le jeu hors écran sur le parvis et y jouer, par les touches et les clics du joueur, le début de
+    la série de l'arène (LOT-1017) : le maître d'arène, « combattre », la rencontre arene-bandits
+    sur le sable de l'Arena of Fate (la carte d'arène du jeu, LOT-1022) jusqu'à son issue — chaque
+    tour d'un héros traduit en clics et en touches, ceux des bandits joués par l'IA —, le retour au
+    parvis. Code 0 sur la victoire du groupe revenu là où il était. Graine du combat : -Seed.
+    Sorties dans Saved/Captures/parcours-1017/.
+
+.PARAMETER ParcoursDemo
+    Avec -Unreal, à la place de -Map : construire Martpart, Arenarea et l'Arena of Fate, puis lancer
+    le jeu hors écran sur Martpart et y marcher la démo de carte en carte par les ordres du joueur
+    (LOT-1022) : Martpart, Arenarea, l'Arena of Fate — le vestibule des vestiaires, le sable, les
+    catacombes —, Arenarea, retour à Martpart. Code 0 de retour à Martpart. Sorties dans
+    Saved/Captures/parcours-demo-1022/.
 
 .PARAMETER Ecrans
     Avec -Unreal, à la place de -Map : construire la carte d'essai des étals et l'arène d'essai,
     puis lancer le jeu hors écran et y faire le tour des écrans (LOT-1020) : chaque écran ouvert
     par sa touche, parcouru au clavier et à la souris par des touches et des clics injectés,
     capturé interface comprise, refermé ; le jeu passé en anglais par l'écran Options ; puis
-    l'interface du combat sur l'arène, la rencontre arene-bandits montée et figée au tour du
-    joueur. Captures comparées à tolérance à Source/Test/Fixtures/Captures/ecrans-1020/
+    l'interface du combat sur l'arène d'essai (-JadgArene, LOT-1022), la rencontre arene-bandits
+    montée et figée au tour du joueur. Captures comparées à tolérance à Source/Test/Fixtures/Captures/ecrans-1020/
     (-UpdateReference pour la réécrire). Sorties dans Saved/Captures/ecrans-1020/. Demande un
     processeur graphique.
 
@@ -80,8 +88,15 @@
     test Jadg.Exploration.QueteDesPommes). Avec -ParcoursCombat : la graine du combat.
 
 .PARAMETER Encounter
-    Avec -Map et -Capture, sur la carte d'arène : la rencontre engagée au lancement, montée et
-    figée sur son déploiement pendant les captures et la mesure (LOT-1017).
+    Avec -Map et -Capture, sur une carte d'arène : la rencontre engagée au lancement, montée et
+    figée sur son déploiement pendant les captures et la mesure (LOT-1017) ; la carte est l'arène
+    du passage (-JadgArene).
+
+.PARAMETER Etages
+    Avec -Map et -Capture, sur une carte découpée en niveaux de chargement par étage (LOT-1022) :
+    les seuls étages montrés pendant le passage, par leur rang (« 1 », « 0,1,2 ») ; seuls les
+    cadrages qui les regardent sont pris, et la cadence est celle de ces étages. Sorties dans
+    Saved/Captures/<carte>-etages-<rangs>/.
 
 .PARAMETER UpdateReference
     Avec des captures : réécrire leur référence (les images de blocs de
@@ -129,6 +144,15 @@
     captures à leur référence.
 
 .EXAMPLE
+    pwsh scripts/build.ps1 -Unreal -Map central-empire/capital/arenarea/arena-of-fate -Capture -Etages 1
+    Construit l'Arena of Fate, puis en prend les cadrages des vestiaires et la cadence, les seuls
+    vestiaires montrés (LOT-1022).
+
+.EXAMPLE
+    pwsh scripts/build.ps1 -Unreal -ParcoursDemo
+    Construit les trois lieux de la démo, puis la marche de Martpart à l'Arena of Fate et retour.
+
+.EXAMPLE
     pwsh scripts/build.ps1 -Unreal -Parcours
     Construit, vérifie, reconstruit les cartes d'essai de l'exploration, puis y joue la quête des
     pommes dans le jeu lancé hors écran.
@@ -142,9 +166,11 @@ param(
     [switch]$NoCapture,
     [switch]$Parcours,
     [switch]$ParcoursCombat,
+    [switch]$ParcoursDemo,
     [switch]$Ecrans,
     [int]$Seed = 1,
     [string]$Encounter,
+    [string]$Etages,
     [switch]$UpdateReference,
     [int]$MeasureSeconds = 10,
     [string]$EnginePath,
@@ -188,6 +214,13 @@ function Invoke-LevelBuild([string]$editorCmd, [string]$mapId) {
     Write-Host "== Carte « $mapId » : construction du niveau par script (sans fenêtre) ==" -ForegroundColor Cyan
     & $editorCmd "$uproject" -run=pythonscript "-script=$builder" "-JadgMap=$mapId" -JadgCheck -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
     if ($LASTEXITCODE -ne 0) { Fail "La construction du niveau de $mapId a échoué (code $LASTEXITCODE)." }
+}
+
+function Assert-Completed([string]$journal, [string]$what) {
+    # Le moteur lancé en jeu depuis l'éditeur ne rend pas toujours le code de sortie que le parcours
+    # demande (LOT-1022 : un parcours arrêté sortait en 0) ; le journal dit s'il est allé au bout.
+    $done = (Get-Content $journal -Raw -Encoding UTF8 | ConvertFrom-Json).completed
+    if (-not $done) { Fail "$what ne s'est pas terminé : $journal" }
 }
 
 function Get-PinnedEngineVersion {
@@ -248,11 +281,13 @@ if ($Unreal) {
     }
     Write-Host "Unreal Engine $found.$($installed.PatchVersion) : $EnginePath" -ForegroundColor DarkGray
 
-    if (($Parcours -or $ParcoursCombat) -and $Map) { Fail '-Parcours et -ParcoursCombat construisent leurs cartes : ils ne se combinent pas avec -Map.' }
-    if ($Parcours -and $ParcoursCombat) { Fail '-Parcours et -ParcoursCombat se lancent l''un après l''autre.' }
-    if ($Ecrans -and ($Map -or $Parcours -or $ParcoursCombat)) { Fail '-Ecrans construit ses cartes et se lance seul.' }
-    $roundTrip = -not $Map -and -not $Parcours -and -not $ParcoursCombat -and -not $Ecrans
-    if (-not $Map -and -not $NoCapture -and -not $Parcours -and -not $ParcoursCombat -and -not $Ecrans) {
+    $walks = @($Parcours, $ParcoursCombat, $ParcoursDemo) | Where-Object { $_ }
+    if ($walks.Count -gt 0 -and $Map) { Fail '-Parcours, -ParcoursCombat et -ParcoursDemo construisent leurs cartes : ils ne se combinent pas avec -Map.' }
+    if ($walks.Count -gt 1) { Fail '-Parcours, -ParcoursCombat et -ParcoursDemo se lancent l''un après l''autre.' }
+    if ($Ecrans -and ($Map -or $walks.Count -gt 0)) { Fail '-Ecrans construit ses cartes et se lance seul.' }
+    $walking = $walks.Count -gt 0
+    $roundTrip = -not $Map -and -not $walking -and -not $Ecrans
+    if (-not $Map -and -not $NoCapture -and -not $walking -and -not $Ecrans) {
         $Map = $SocleMap
         $Capture = $true
     }
@@ -329,23 +364,47 @@ if ($Unreal) {
         if (Test-Path $journal) { Get-Content $journal -Encoding UTF8 }
         if ($walked -ne 0) { Fail "Le parcours ne s'est pas terminé (code $walked) : $journal" }
         if (-not (Test-Path $journal)) { Fail "Le parcours n'a pas écrit $journal." }
+        Assert-Completed $journal 'Le parcours'
         Write-Host "Parcours terminé : $output" -ForegroundColor Green
+        exit 0
+    }
+
+    if ($ParcoursDemo) {
+        # Les trois lieux de la démo, chacun depuis sa description v5 (LOT-1022).
+        $demoMaps = @('central-empire/capital/martpart', 'central-empire/capital/arenarea', 'central-empire/capital/arenarea/arena-of-fate')
+        foreach ($demoMap in $demoMaps) { Invoke-LevelBuild $editorCmd $demoMap }
+
+        $start = (Get-MapInfo $demoMaps[0]).package
+        $output = Join-Path $root 'Saved\Captures\parcours-demo-1022'
+        $journal = Join-Path $output 'parcours.json'
+        if (Test-Path $journal) { Remove-Item $journal }
+        Write-Host "== Parcours de la démo : de Martpart à l'Arena of Fate et retour (rendu hors écran) ==" -ForegroundColor Cyan
+        & $editorCmd "$uproject" $start -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
+            "-JadgParcoursDemo=$output" -stdout -FullStdOutLogOutput
+        $walked = $LASTEXITCODE
+        if (Test-Path $journal) { Get-Content $journal -Encoding UTF8 }
+        if ($walked -ne 0) { Fail "Le parcours de la démo ne s'est pas terminé (code $walked) : $journal" }
+        if (-not (Test-Path $journal)) { Fail "Le parcours de la démo n'a pas écrit $journal." }
+        Assert-Completed $journal 'Le parcours de la démo'
+        Write-Host "Parcours de la démo terminé : $output" -ForegroundColor Green
         exit 0
     }
 
     if ($Ecrans) {
         # La carte des étals et l'arène d'essai : une description v5 par carte, écrite par script.
         foreach ($trial in @('essai/etals', 'essai/arene')) { Invoke-LevelBuild $editorCmd $trial }
+        # L'arène du tour des écrans est celle d'essai : ses captures ont leur référence (LOT-1020).
+        $trialArena = "-JadgArene=$((Get-MapInfo 'essai/arene').package)"
 
         $output = Join-Path $root 'Saved\Captures\ecrans-1020'
         if (Test-Path $output) { Remove-Item -Recurse -Force $output }
         Write-Host '== Les écrans : le tour, au clavier et à la souris, sur les étals (rendu hors écran) ==' -ForegroundColor Cyan
         & $editorCmd "$uproject" (Get-MapInfo 'essai/etals').package -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
-            "-JadgEcrans=$output" -JadgSansRencontre "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
+            "-JadgEcrans=$output" -JadgSansRencontre $trialArena "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
         if ($LASTEXITCODE -ne 0) { Fail "Le tour des écrans ne s'est pas terminé (code $LASTEXITCODE) : $output\ecrans.json" }
         Write-Host "== Les écrans : l'interface du combat, sur l'arène (rendu hors écran) ==" -ForegroundColor Cyan
         & $editorCmd "$uproject" (Get-MapInfo 'essai/arene').package -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
-            "-JadgEcrans=$output" -JadgRencontre=arene-bandits "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
+            "-JadgEcrans=$output" -JadgRencontre=arene-bandits $trialArena "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
         if ($LASTEXITCODE -ne 0) { Fail "Le tour de l'interface du combat ne s'est pas terminé (code $LASTEXITCODE) : $output\ecrans-combat.json" }
 
         $reference = Join-Path $root 'Source\Test\Fixtures\Captures\ecrans-1020'
@@ -364,19 +423,20 @@ if ($Unreal) {
     }
 
     if ($ParcoursCombat) {
-        # Le parvis et l'arène d'essai : une description v5 par carte, écrite par script.
-        foreach ($trial in @('essai/parvis', 'essai/arene')) { Invoke-LevelBuild $editorCmd $trial }
+        # Le parvis d'essai et l'Arena of Fate, la carte d'arène du jeu (LOT-1022).
+        foreach ($trial in @('essai/parvis', 'central-empire/capital/arenarea/arena-of-fate')) { Invoke-LevelBuild $editorCmd $trial }
 
         $start = (Get-MapInfo 'essai/parvis').package
         $output = Join-Path $root 'Saved\Captures\parcours-1017'
         $journal = Join-Path $output 'parcours.json'
         if (Test-Path $journal) { Remove-Item $journal }
-        Write-Host "== Parcours du combat : arene-bandits depuis le parvis (rendu hors écran, graine $Seed) ==" -ForegroundColor Cyan
+        Write-Host "== Parcours du combat : arene-bandits depuis le parvis, sur le sable de l'Arena of Fate (rendu hors écran, graine $Seed) ==" -ForegroundColor Cyan
         & $editorCmd "$uproject" $start -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
             "-JadgParcoursCombat=$output" "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
         $walked = $LASTEXITCODE
         if ($walked -ne 0) { Fail "Le parcours du combat ne s'est pas terminé (code $walked) : $journal" }
         if (-not (Test-Path $journal)) { Fail "Le parcours du combat n'a pas écrit $journal." }
+        Assert-Completed $journal 'Le parcours du combat'
         Write-Host "Parcours du combat terminé : $output" -ForegroundColor Green
         exit 0
     }
@@ -402,18 +462,29 @@ if ($Unreal) {
 
         if ($Capture) {
             $name = $Map -replace '/', '-'
+            # Les étages montrés pendant le passage (LOT-1022) : leurs cadrages seuls, leur cadence.
+            $shown = @()
+            $storeyOption = '-JadgNoop'
+            if ($Etages) {
+                $shown = @($Etages -split ',' | ForEach-Object { [int]$_.Trim() })
+                $storeyOption = "-JadgEtages=$($shown -join ',')"
+                $name = "$name-etages-$($shown -join '-')"
+            }
             $output = Join-Path $root "Saved\Captures\$name"
             $measureFile = Join-Path $output 'mesure.json'
             if (Test-Path $measureFile) { Remove-Item $measureFile }
 
             Write-Host "== Carte « $Map » : captures et mesure de cadence (rendu hors écran, 1920 × 1080) ==" -ForegroundColor Cyan
-            # Une rencontre engagée au lancement de l'arène : le combat monté, figé sur son déploiement.
+            # Une rencontre engagée au lancement de l'arène : le combat monté, figé sur son déploiement ;
+            # la carte capturée est l'arène du passage.
             $engaged = if ($Encounter) { "-JadgRencontre=$Encounter" } else { '-JadgSansRencontre' }
+            $arena = if ($Encounter) { "-JadgArene=$($mapData.package)" } else { '-JadgNoop' }
             & $editorCmd "$uproject" $mapData.package -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
-                "-JadgCapture=$output" "-JadgHours=$($mapData.hours -join ',')" "-JadgMeasure=$MeasureSeconds" $engaged "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
+                "-JadgCapture=$output" "-JadgHours=$($mapData.hours -join ',')" "-JadgMeasure=$MeasureSeconds" $engaged $arena $storeyOption "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
             if ($LASTEXITCODE -ne 0) { Fail "La capture a échoué (code $LASTEXITCODE)." }
             if (-not (Test-Path $measureFile)) { Fail "La capture n'a pas écrit $measureFile." }
             foreach ($shot in $mapData.shots) {
+                if ($shown.Count -gt 0 -and $shown -notcontains [int]$shot.storey) { continue }
                 foreach ($hour in $mapData.hours) {
                     $image = Join-Path $output "$($shot.id)-$($hour -replace ':', '').png"
                     if (-not (Test-Path $image)) { Fail "Capture absente : $image" }

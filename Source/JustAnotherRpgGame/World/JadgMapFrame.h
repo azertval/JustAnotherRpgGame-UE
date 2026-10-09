@@ -50,15 +50,30 @@ public:
 	FVector South = FVector(0.0, 1.0, 0.0);
 
 	/**
-	 * La hauteur du sol de chaque étage praticable au-dessus de l'acteur, en centimètres, le rez en
-	 * tête (format de carte v5, D-51, LOT-1018) ; vide pour une carte d'un seul niveau. Posée par
-	 * `scripts/maps/build_level.py` depuis les étages de la description (`storeys`).
+	 * La hauteur du sol de chaque étage praticable par rapport à l'acteur, en centimètres, le rez en
+	 * tête à 0, un sous-sol en dessous (format de carte v5, D-51, LOT-1018, LOT-1022) ; vide pour une
+	 * carte d'un seul niveau. Posée par `scripts/maps/build_level.py` depuis les étages de la
+	 * description (`storeys`).
 	 */
 	UPROPERTY(EditAnywhere, Category = "Jadg")
 	TArray<float> StoreyHeights;
 
+	/**
+	 * Le niveau de chargement de chaque étage, dans l'ordre de `StoreyHeights` : le paquet du niveau
+	 * que `build_level.py` construit pour lui (`<carte>-etage-<nom>`), toujours chargé avec la carte
+	 * (D-51, LOT-1022) ; vide pour une carte d'un seul niveau.
+	 */
+	UPROPERTY(EditAnywhere, Category = "Jadg")
+	TArray<FString> StoreyLevels;
+
 	/// L'étage d'un point du monde : le plus haut dont le sol est sous lui, à un demi-mètre près.
 	int32 StoreyAt(double WorldZ) const;
+
+	/**
+	 * Montre ou cache le niveau de chargement d'un étage (`StoreyLevels`) : caché, il quitte le monde
+	 * — ni rendu, ni collision —, mais reste chargé. Rend faux si l'étage n'a pas de niveau.
+	 */
+	bool ShowStorey(int32 Storey, bool bVisible) const;
 
 	/// La hauteur, dans le monde, du sol de l'étage @p Storey ; celle de l'acteur hors des étages.
 	double StoreyZ(int32 Storey) const;

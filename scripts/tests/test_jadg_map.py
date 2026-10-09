@@ -64,7 +64,7 @@ def test_l_ecriture_canonique_ne_bouge_pas_une_carte_relue(tmp_path):
                     "volume": {"min": [3, 3, 0], "max": [2, 4, 1]}}]}, "volume"),
     ({"entities": [{"id": "e1", "type": "npc", "x": 2, "y": 2}, {"id": "e1", "type": "npc", "x": 3, "y": 2}]}, "deux"),
     ({"entities": [{"id": "e3", "type": "npc", "x": 2, "y": 2}], "nextEntityId": 2}, "nextEntityId"),
-    ({"storeys": [{"name": "a", "z": 0.0}, {"name": "b", "z": -1.0}]}, "étages"),
+    ({"storeys": [{"name": "a", "z": 0.0}, {"name": "b", "z": 0.0}]}, "étages"),
     ({"entities": [{"id": "e1", "type": "npc", "x": 2, "y": 2, "elevation": 1}]}, "schéma"),
 ])
 def test_une_carte_fautive_est_refusee(faute, mot):
@@ -189,6 +189,36 @@ def test_une_piece_se_cherche_du_lieu_vers_le_monde(tmp_path):
     # Hors de la lignée du lieu : le seul maillage de ce nom sous Regions/.
     assert jadg_map.resolve_piece(place, "mp-only", tmp_path)[0].endswith("martpart/Scene/mp-only.glb")
     assert jadg_map.resolve_piece(place, "absente", tmp_path) is None
+
+
+def test_une_piece_partagee_prend_le_maillage_de_son_manifeste(tmp_path):
+    # Le cyprès de Martpart est celui d'Arenarea, sous un autre nom (LOT-1022).
+    regions = tmp_path / "Regions"
+    shared = regions / "central-empire/capital/arenarea/Scene/ar-cypres-partage.glb"
+    shared.parent.mkdir(parents=True)
+    shared.write_bytes(b"glTF")
+    scene = regions / "central-empire/capital/martpart/Scene"
+    scene.mkdir(parents=True)
+    manifest = {"textures": {"scene/martpart/mp-cypres-partage": {
+        "mesh": "../../arenarea/Scene/ar-cypres-partage.glb", "footprint": [1, 1]},
+        "scene/martpart/mp-sans-fichier": {"mesh": "../../arenarea/Scene/absent.glb"}}}
+    (scene / "manifest.json").write_text(json.dumps(manifest), encoding="utf-8")
+    place = "central-empire/capital/martpart"
+    assert jadg_map.resolve_piece(place, "mp-cypres-partage", tmp_path) == (
+        "Regions/central-empire/capital/arenarea/Scene/ar-cypres-partage.glb", (1, 1))
+    assert jadg_map.resolve_piece(place, "mp-sans-fichier", tmp_path) is None
+
+
+def test_une_carte_a_sous_sols_se_controle():
+    doc = {"format": "jadg-map", "version": 5, "name": "x", "width": 3, "height": 3, "nextEntityId": 2,
+           "storeys": [{"name": "sable", "z": 0.0}, {"name": "vestiaires", "z": -5.5}],
+           "tiles": [{"x": 0, "y": 0, "type": "entry"}],
+           "entities": [{"id": "e1", "type": "spawnPoint", "x": 1, "y": 1, "storey": 1, "name": "bas"}]}
+    assert jadg_map.validate(doc) == []
+    doc["storeys"] = [{"name": "sable", "z": 0.0}, {"name": "a", "z": -5.5}, {"name": "b", "z": -5.5}]
+    assert any("étages" in error for error in jadg_map.validate(doc))
+    doc["storeys"] = [{"name": "a", "z": -5.5}, {"name": "sable", "z": 0.0}]
+    assert any("étages" in error for error in jadg_map.validate(doc))
 
 
 def test_un_tampon_de_l_ancien_editeur_devient_un_prefabrique():

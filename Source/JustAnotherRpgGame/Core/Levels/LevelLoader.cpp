@@ -111,9 +111,10 @@ void collectProperties(const nlohmann::json& object, const std::set<std::string>
 // de `scripts/maps/jadg_map.py`, qui les garde.
 [[nodiscard]] const std::set<std::string>& sceneRootKeys() {
     static const std::set<std::string> known{
-        "format",     "origin",  "storeys", "place",    "comment",  "terrain",    "objects",
-        "fills",      "prefabs", "routes",  "outlines", "lighting", "daylight",   "ground",
-        "navigation", "party",   "shots",   "hours",    "notes",    "assetsRoot", "characters"};
+        "format",   "origin",     "storeys",    "place",       "comment",  "terrain",
+        "objects",  "fills",      "prefabs",    "routes",      "outlines", "lighting",
+        "daylight", "ground",     "navigation", "party",       "shots",    "hours",
+        "notes",    "assetsRoot", "characters", "storeyLevels"};
     return known;
 }
 
@@ -152,8 +153,9 @@ struct SceneOrigin {
     return SceneOrigin{.x = numberOf(origin[0], "origin"), .y = numberOf(origin[1], "origin")};
 }
 
-// Les etages d'une carte v5 (D-51) : au moins le rez, a la hauteur 0, puis des hauteurs
-// strictement croissantes.
+// Les etages d'une carte v5 (D-51) : le rez en tete, a la hauteur 0, puis les autres, chacun a sa
+// hauteur -- au-dessus pour un etage, en dessous pour un sous-sol (les catacombes de l'Arena of
+// Fate, LOT-1022) --, jamais deux a la meme.
 [[nodiscard]] std::vector<Storey> parseStoreys(const nlohmann::json& root) {
     std::vector<Storey> storeys;
     if (!root.contains("storeys")) {
@@ -165,9 +167,12 @@ struct SceneOrigin {
     for (const nlohmann::json& storey : root.at("storeys")) {
         Storey parsed{.name = storey.value("name", std::string{}),
                       .z = numberOf(storey.at("z"), "storeys.z")};
-        if (storeys.empty() ? parsed.z != 0.0F : parsed.z <= storeys.back().z) {
+        const bool deja = std::ranges::any_of(
+            storeys, [&parsed](const Storey& autre) { return autre.z == parsed.z; });
+        if (storeys.empty() ? parsed.z != 0.0F : deja) {
             throw std::invalid_argument(
-                "'storeys' : le rez a la hauteur 0, puis des hauteurs croissantes");
+                "'storeys' : le rez en tete a la hauteur 0, puis chaque etage ou sous-sol a "
+                "la sienne, jamais deux a la meme");
         }
         storeys.push_back(std::move(parsed));
     }

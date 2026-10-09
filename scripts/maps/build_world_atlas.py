@@ -539,8 +539,8 @@ def install():
             plate['at'] = CAPITAL_POINTS[s['id']]
         if s['id'] in ('arena-of-fate','undercroft','catacombs'):
             plate['footprint'] = 'arena-of-fate-grid-34x24'
-            plate['playerMap'] = 'central-empire/capital/arenarea/arena-of-fate' + (
-                '' if s['id']=='arena-of-fate' else '/' + s['id'])
+            # Les trois niveaux du Colisée sont une carte à trois étages (D-51, LOT-1022).
+            plate['playerMap'] = 'central-empire/capital/arenarea/arena-of-fate'
         plates[sid] = plate
     for s in capital['maps']:
         raw_links = s.get('links', [])

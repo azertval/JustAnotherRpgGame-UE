@@ -42,7 +42,8 @@ namespace
 	const TCHAR* const TrialLevels = TEXT("Source/Test/Fixtures/Exploration/Levels");
 	const TCHAR* const Martpart = TEXT("central-empire/capital/martpart");
 	const TCHAR* const Arenarea = TEXT("central-empire/capital/arenarea");
-	const TCHAR* const Undercroft = TEXT("central-empire/capital/arenarea/arena-of-fate/undercroft");
+	/// L'Arena of Fate, une carte à trois étages (LOT-1022) : le sable, les vestiaires (1), les catacombes (2).
+	const TCHAR* const ArenaOfFate = TEXT("central-empire/capital/arenarea/arena-of-fate");
 
 	/// Une partie neuve sous l'instance du jeu, comme au lancement, et son monde vide.
 	struct FGame
@@ -339,9 +340,10 @@ bool FJadgExplorationAppleQuestTest::RunTest(const FString& Parameters)
 			TestFalse(TEXT("le jet s'annonce au joueur"), Exploration.LastCheck().IsEmpty());
 			TestTrue(TEXT("endosser le crime"), Converse(Exploration, {TEXT("endosser")}));
 			TestEqual(TEXT("condamné"), Exploration.Flag(TEXT("quete.pommes")), FString(TEXT("condamne")));
-			TestTrue(TEXT("l'escalier de l'arène mène au vestiaire"),
-				WalkUntil(Exploration, Centre(65, 34), FVector2D(0.0, -1.0), EJadgEventKind::MapEntered, Undercroft));
+			TestTrue(TEXT("l'escalier de l'arène mène à l'Arena of Fate"),
+				WalkUntil(Exploration, Centre(65, 34), FVector2D(0.0, -1.0), EJadgEventKind::MapEntered, ArenaOfFate));
 			TestEqual(TEXT("on arrive au vestibule"), Exploration.HeroCell(), Centre(16, 19));
+			TestEqual(TEXT("le vestibule est à l'étage des vestiaires"), Exploration.HeroStorey(), 1);
 		}
 	}
 	TestTrue(TEXT("une graine au moins réussit le jet de Persuasion"), bSpoken);
