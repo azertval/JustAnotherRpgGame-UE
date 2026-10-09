@@ -18,7 +18,8 @@
  *     { "version": 1,
  *       "display":   { "width": 1920, "height": 1080, "fullscreen": true },
  *       "rendering": { "renderScalePercent": 100, "shadowQuality": 3 },
- *       "audio":     { "volumePercent": 100 } }
+ *       "audio":     { "volumePercent": 100 },
+ *       "interface": { "language": "fr" } }
  *
  * | Champ | Ce qu'il règle | Bornes |
  * |---|---|---|
@@ -28,6 +29,8 @@
  * | `rendering.renderScalePercent` | la définition du rendu, en % de la fenêtre | 50 à 200 |
  * | `rendering.shadowQuality` | le palier de qualité des ombres du moteur | 0 à 4 |
  * | `audio.volumePercent` | le volume général | 0 à 100 |
+ * | `interface.language` | la langue des textes, par son catalogue `<langue>.lang` (LOT-1020) |
+ * deux lettres minuscules |
  *
  * ## Deux fichiers, lus l'un sur l'autre
  *
@@ -69,6 +72,8 @@ struct GameOptions {
     int shadowQuality = 3;
     /// Le volume général, de 0 à 100.
     int volumePercent = 100;
+    /// La langue des textes : le catalogue `Source/Elements/Localization/<langue>.lang` (LOT-1020).
+    std::string language = "fr";
 
     [[nodiscard]] bool operator==(const GameOptions&) const = default;
 };
@@ -105,5 +110,12 @@ struct GameOptionsResult {
  */
 [[nodiscard]] GameOptionsResult loadGameOptions(const std::filesystem::path& file,
                                                 const GameOptions& base = {});
+
+/**
+ * @brief Écrit les options dans le format du fichier, toutes les sections présentes : ce que
+ *        l'écran Options enregistre dans le fichier du poste (LOT-1020). Relu par
+ *        `readGameOptions`, il rend les mêmes options.
+ */
+[[nodiscard]] std::string writeGameOptions(const GameOptions& options);
 
 }  // namespace core

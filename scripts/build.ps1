@@ -246,6 +246,13 @@ if ($Unreal) {
     & $editorCmd "$uproject" -run=JadgBuildCharacterCreator -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
     if ($LASTEXITCODE -ne 0) { Fail "Le créateur de personnage ne s'est pas construit (code $LASTEXITCODE)." }
 
+    Write-Host "== L'interface : images du kit UI et polices (LOT-1020) ==" -ForegroundColor Cyan
+    $uiImporter = (Join-Path $root 'scripts\assetsGeneration\import_ui_unreal.py') -replace '\\', '/'
+    & $editorCmd "$uproject" -run=pythonscript "-script=$uiImporter" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
+    if ($LASTEXITCODE -ne 0) { Fail "L'import de l'interface a échoué (code $LASTEXITCODE)." }
+    & $editorCmd "$uproject" -run=JadgImportFonts -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
+    if ($LASTEXITCODE -ne 0) { Fail "L'import des polices a échoué (code $LASTEXITCODE)." }
+
     Write-Host '== Commandlet JadgContentCheck (sans fenêtre) ==' -ForegroundColor Cyan
     & $editorCmd "$uproject" -run=JadgContentCheck -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
     if ($LASTEXITCODE -ne 0) { Fail "Le contrôle du contenu a échoué (code $LASTEXITCODE)." }

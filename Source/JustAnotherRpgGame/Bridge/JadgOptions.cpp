@@ -13,6 +13,7 @@
 #include "JustAnotherRpgGame.h"
 #include "Misc/App.h"
 #include "Misc/CommandLine.h"
+#include "Misc/FileHelper.h"
 #include "Misc/Parse.h"
 #include "Misc/CoreMisc.h"
 #include "Misc/Paths.h"
@@ -93,4 +94,12 @@ void FJadgOptions::Apply(const core::GameOptions& Options)
 		Options.width, Options.height, Options.fullscreen ? TEXT(" plein écran") : TEXT(" fenêtré"),
 		Options.renderScalePercent, Options.shadowQuality, Options.volumePercent,
 		bOwnWindow ? TEXT("") : TEXT(" (définition non appliquée : pas de fenêtre de jeu, ou donnée sur la ligne de commande)"));
+}
+
+bool FJadgOptions::Save(const core::GameOptions& Options)
+{
+	const FString Text = FJadgPaths::ToFString(core::writeGameOptions(Options));
+	const bool bWritten = FFileHelper::SaveStringToFile(Text, *PlayerFile(), FFileHelper::EEncodingOptions::ForceUTF8WithoutBOM);
+	UE_LOG(LogJadg, Display, TEXT("[Options] %s : %s"), bWritten ? TEXT("enregistrées") : TEXT("non enregistrées"), *PlayerFile());
+	return bWritten;
 }

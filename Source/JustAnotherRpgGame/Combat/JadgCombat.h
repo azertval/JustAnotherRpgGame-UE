@@ -124,6 +124,8 @@ public:
 	int32 ActiveId() const;
 	int32 Round() const;
 	FString Outcome() const;
+	/// L'issue pour l'interface (LOT-1020) : -1 tant qu'elle n'est pas connue, 0 victoire, 1 fuite, 2 défaite.
+	int32 OutcomeCode() const;
 	TArray<FJadgFighter> Fighters() const;
 	float MovementLeft() const;
 	int32 TargetId() const { return Target; }

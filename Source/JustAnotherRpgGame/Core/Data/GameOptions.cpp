@@ -36,7 +36,7 @@ struct FlagField {
 };
 
 // La table du format : une seule écriture de chaque nom et de chaque borne.
-constexpr std::array<std::string_view, 3> SECTIONS{"display", "rendering", "audio"};
+constexpr std::array<std::string_view, 4> SECTIONS{"display", "rendering", "audio", "interface"};
 constexpr std::array<IntegerField, 5> INTEGERS{{
     {"display", "width", &GameOptions::width, 640, 7680},
     {"display", "height", &GameOptions::height, 360, 4320},
@@ -47,6 +47,13 @@ constexpr std::array<IntegerField, 5> INTEGERS{{
 constexpr std::array<FlagField, 1> FLAGS{{
     {"display", "fullscreen", &GameOptions::fullscreen},
 }};
+
+// Un code de langue : deux lettres minuscules (« fr », « en »).
+[[nodiscard]] bool isLanguageCode(const std::string& code) {
+    return code.size() == 2 && std::all_of(code.begin(), code.end(), [](char letter) {
+               return letter >= 'a' && letter <= 'z';
+           });
+}
 
 [[nodiscard]] std::string prefixed(std::string_view origin, const std::string& message) {
     return origin.empty() ? message : std::string(origin) + " : " + message;
@@ -85,6 +92,14 @@ void readSection(std::string_view section, const Json& object, std::string_view 
                 result.errors.push_back(prefixed(origin, where + " is not a boolean"));
             } else {
                 result.options.*field.member = value.get<bool>();
+            }
+        }
+        if (section == "interface" && key == "language") {
+            known = true;
+            if (!value.is_string() || !isLanguageCode(value.get<std::string>())) {
+                result.errors.push_back(prefixed(origin, where + " is not a language code"));
+            } else {
+                result.options.language = value.get<std::string>();
             }
         }
         if (!known) {
@@ -129,6 +144,19 @@ GameOptionsResult loadGameOptions(const std::filesystem::path& file, const GameO
     }
     return optionsFrom(readJsonObjectFromFile(file, GAME_OPTIONS_FORMAT_VERSION), base,
                        file.filename().string());
+}
+
+std::string writeGameOptions(const GameOptions& options) {
+    Json document = Json::object();
+    document["version"] = GAME_OPTIONS_FORMAT_VERSION;
+    for (const IntegerField& field : INTEGERS) {
+        document[std::string(field.section)][std::string(field.name)] = options.*field.member;
+    }
+    for (const FlagField& field : FLAGS) {
+        document[std::string(field.section)][std::string(field.name)] = options.*field.member;
+    }
+    document["interface"]["language"] = options.language;
+    return document.dump(2) + "\n";
 }
 
 }  // namespace core

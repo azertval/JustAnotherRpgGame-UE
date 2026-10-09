@@ -2,53 +2,62 @@
 # SPDX-FileCopyrightText: 2026 Valentin Eloy
 # SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
 
-"""Contrôle des catalogues de traduction Qt (`.ts`) du jeu (refonte de la CI, phase 4).
+"""Contrôle des catalogues de textes du jeu (`Source/Elements/Localization/<langue>.lang`, LOT-1020).
 
-Les écrans écrivent leurs textes en français dans le QML (`qsTr("Nouvelle partie")`) et
-`jadg_en.ts` en porte la traduction. Rien ne vérifiait qu'une chaîne ajoutée à un écran était
-traduite : `lupdate` l'ajoute en `unfinished`, `lrelease` la compile quand même, et le jeu en
-anglais affiche du français sans que personne ne le voie. Ce contrôle refuse :
+Les écrans du nouveau moteur nomment leurs textes par **clé** (`FJadgTexts::Get(TEXT("hud.map"))`)
+et le moteur charge chaque catalogue dans une table de chaînes (`UI/JadgTexts.cpp`). Le français est
+la langue de référence ; chaque autre langue doit dire la même chose aux mêmes endroits. Ce contrôle
+refuse :
 
-- une traduction **inachevée** (`type="unfinished"`, ou vide) ;
-- une entrée **disparue** (`type="vanished"` ou `obsolete`) : sa source n'existe plus dans le code,
-  elle ne sert qu'à faire croire le catalogue plus complet qu'il n'est ;
-- des **marqueurs** différents entre source et traduction (`%1`, `%L2`, `%n`) : `arg()` remplirait
-  le mauvais trou, ou aucun ;
+- une clé **d'un seul côté** : présente en français et absente d'une autre langue (le jeu y
+  afficherait le français), ou l'inverse (un texte que rien n'affiche) ;
+- une valeur **vide** ;
+- des **trous** différents entre les langues (`%1` à `%9`) : le texte remplirait le mauvais trou,
+  ou aucun ;
 - un **espace de bord** ajouté ou perdu : il sert presque toujours à coller deux textes à l'écran
-  (sauf l'espace français avant « : ; ! ? » en tête de source, que l'anglais n'écrit pas) ;
-- un catalogue sans attribut `language`, ou mal formé.
-
-Deux usages, un même script :
-
-- sur le catalogue **versionné** (job `lint-exigences`, sans Qt) ;
-- après `cmake --build … --target update_translations` (job `build-ninja`) : `lupdate` a relu le
-  code, donc une chaîne nouvelle y apparaît inachevée. C'est ce second passage qui prouve que le
-  catalogue est **à jour du code**. (La cible passe `-no-obsolete` : une chaîne retirée du code
-  disparaît du catalogue au lieu d'y rester en `vanished`.)
+  (sauf l'espace français avant « : ; ! ? », que l'anglais n'écrit pas) ;
+- une clé **nommée en dur dans le code du jeu** (`TEXT("domaine.nom")` dans un appel de texte) et
+  absente du français : l'écran afficherait la clé elle-même ;
+- une clé **répétée** dans un même fichier : la seconde valeur écrase la première sans rien dire.
 
 Usage :
-  python scripts/checks/check_translations.py              tous les .ts suivis par git
-  python scripts/checks/check_translations.py FICHIER.ts...
+  python scripts/checks/check_translations.py          les catalogues du dépôt et le code du jeu
 """
-import argparse
-import os
+import pathlib
 import re
-import subprocess
 import sys
-import xml.etree.ElementTree as ElementTree
 
-# %1 à %99, éventuellement localisés (%L1), et %n des formes plurielles.
-PLACEHOLDER_RE = re.compile(r'%L?(?:[1-9][0-9]?)|%n')
-DEAD_TYPES = {'vanished', 'obsolete'}
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+CATALOGUES = ROOT / 'Source' / 'Elements' / 'Localization'
+CODE = ROOT / 'Source' / 'JustAnotherRpgGame'
+REFERENCE = 'fr'
+
+PLACEHOLDER_RE = re.compile(r'%[1-9]')
+# Typographie française : espace avant « : ; ! ? ». Une valeur qui commence par « : » le porte,
+# que l'anglais n'écrit pas — ce n'est pas un espace perdu.
+FRENCH_SPACE_BEFORE_PUNCTUATION_RE = re.compile(r'^\s+(?=[:;!?])')
+# Une clé écrite en dur dans un appel de texte du jeu.
+CODE_KEY_RE = re.compile(r'(?:Key|Get|Format|JadgText|In)\(\s*TEXT\("([a-z_]+(?:\.[a-z0-9_-]+)+)"\)')
+
+
+def parse(text, name):
+    """La table clé → valeur d'un `.lang`, et les clés répétées."""
+    table, problems = {}, []
+    for number, line in enumerate(text.lstrip('﻿').splitlines(), 1):
+        stripped = line.strip()
+        if not stripped or stripped.startswith('#') or '=' not in stripped:
+            continue
+        key, value = (part.strip() for part in stripped.split('=', 1))
+        if not key:
+            continue
+        if key in table:
+            problems.append('%s:%d : clé « %s » répétée' % (name, number, key))
+        table[key] = value
+    return table, problems
 
 
 def placeholders(text):
-    return sorted(PLACEHOLDER_RE.findall(text or ''))
-
-
-# Typographie française : espace avant « : ; ! ? ». Une source qui commence par « : » la porte,
-# que l'anglais n'écrit pas — ce n'est pas un espace perdu.
-FRENCH_SPACE_BEFORE_PUNCTUATION_RE = re.compile(r'^\s+(?=[:;!?])')
+    return sorted(set(PLACEHOLDER_RE.findall(text or '')))
 
 
 def edges(text):
@@ -57,89 +66,60 @@ def edges(text):
     return (text[:len(text) - len(text.lstrip())], text[len(text.rstrip()):])
 
 
-def problems(raw, name='catalogue'):
-    """Défauts du catalogue @p raw (texte XML) ; liste vide s'il est admis."""
-    try:
-        root = ElementTree.fromstring(raw)
-    except ElementTree.ParseError as error:
-        return ['%s : XML mal formé (%s)' % (name, error)]
-    if root.tag != 'TS':
-        return ['%s : racine <%s>, <TS> attendue' % (name, root.tag)]
+def problems(catalogues, code_keys=()):
+    """Défauts des catalogues @p catalogues (langue → (table, défauts de lecture))."""
     found = []
-    if not root.get('language'):
-        found.append('%s : attribut language absent de <TS>' % name)
-
-    messages = 0
-    for context in root.iter('context'):
-        context_name = context.findtext('name') or '?'
-        for message in context.iter('message'):
-            messages += 1
-            source = message.findtext('source') or ''
-            where = '%s : [%s] « %s »' % (name, context_name, source)
-            translation = message.find('translation')
-            if translation is None:
-                found.append('%s : pas de <translation>' % where)
-                continue
-            kind = translation.get('type')
-            if kind in DEAD_TYPES:
-                found.append('%s : entrée %s (sa source n\'existe plus dans le code ; '
-                             'lupdate -no-obsolete la retire)' % (where, kind))
-                continue
-            if message.get('numerus') == 'yes':
-                forms = [f.text or '' for f in translation.iter('numerusform')]
-            else:
-                forms = [translation.text or '']
-            if kind == 'unfinished' or not forms or any(not f.strip() for f in forms):
-                found.append('%s : traduction inachevée' % where)
-                continue
-            for form in forms:
-                expected = placeholders(source)
-                # Une forme plurielle peut écrire le nombre en toutes lettres (« one item ») : %n y
-                # est facultatif, les autres marqueurs non.
-                got = placeholders(form)
-                if message.get('numerus') == 'yes':
-                    expected = [p for p in expected if p != '%n']
-                    got = [p for p in got if p != '%n']
-                if got != expected:
-                    found.append('%s : marqueurs %s dans la source, %s dans « %s »'
-                                 % (where, expected or 'aucun', got or 'aucun', form))
-                if edges(form) != edges(source):
-                    found.append('%s : espaces de bord différents dans « %s »' % (where, form))
-    if messages == 0:
-        found.append('%s : aucun message ; le catalogue est vide ou sa lecture est cassée' % name)
+    if REFERENCE not in catalogues:
+        return ['catalogue de référence %s.lang absent' % REFERENCE]
+    reference, _ = catalogues[REFERENCE]
+    if not reference:
+        return ['%s.lang : aucune clé ; le catalogue est vide ou sa lecture est cassée' % REFERENCE]
+    for language, (table, read) in sorted(catalogues.items()):
+        found.extend(read)
+        for key, value in sorted(table.items()):
+            if not value:
+                found.append('%s.lang : « %s » est vide' % (language, key))
+        if language == REFERENCE:
+            continue
+        for key in sorted(set(reference) - set(table)):
+            found.append('%s.lang : « %s » manque (le jeu afficherait le français)' % (language, key))
+        for key in sorted(set(table) - set(reference)):
+            found.append('%s.lang : « %s » n\'existe pas en français' % (language, key))
+        for key in sorted(set(table) & set(reference)):
+            if placeholders(table[key]) != placeholders(reference[key]):
+                found.append('%s.lang : « %s » : trous %s, %s en français' % (
+                    language, key, placeholders(table[key]) or 'aucun', placeholders(reference[key]) or 'aucun'))
+            if edges(table[key]) != edges(reference[key]):
+                found.append('%s.lang : « %s » : espaces de bord différents du français' % (language, key))
+    for key in sorted(set(code_keys) - set(reference)):
+        found.append('code du jeu : la clé « %s » n\'est pas dans %s.lang' % (key, REFERENCE))
     return found
 
 
-def tracked_catalogues():
-    listing = subprocess.run(['git', 'ls-files', '-z', '*.ts'], capture_output=True, check=True)
-    return [p for p in listing.stdout.decode('utf-8').split('\0') if p]
+def code_keys(root=CODE):
+    keys = set()
+    for path in root.rglob('*.cpp'):
+        keys.update(CODE_KEY_RE.findall(path.read_text(encoding='utf-8')))
+    return keys
+
+
+def load(directory=CATALOGUES):
+    catalogues = {}
+    for path in sorted(directory.glob('*.lang')):
+        catalogues[path.stem] = parse(path.read_text(encoding='utf-8'), path.name)
+    return catalogues
 
 
 def main():
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument('files', nargs='*', help='catalogues .ts (défaut : tous ceux suivis)')
-    arguments = parser.parse_args()
-
-    if arguments.files:
-        paths = arguments.files
-    else:
-        os.chdir(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
-        paths = tracked_catalogues()
-    if not paths:
-        print('ERREUR : aucun catalogue .ts trouvé ; la recherche est cassée.')
-        return 1
-
-    errors = []
-    for path in paths:
-        with open(path, encoding='utf-8') as handle:
-            errors.extend(problems(handle.read(), path.replace('\\', '/')))
+    catalogues = load()
+    errors = problems(catalogues, code_keys())
     for message in errors:
         print('ERREUR : ' + message)
     if errors:
-        print('\n%d défaut(s). Mettre le catalogue à jour du code : cmake --build --preset ninja '
-              '--target update_translations, puis traduire dans Qt Linguist.' % len(errors))
+        print('\n%d défaut(s) dans les catalogues de textes.' % len(errors))
         return 1
-    print('OK : %d catalogue(s), toutes les traductions achevées et cohérentes.' % len(paths))
+    print('OK : %d catalogue(s), %d clé(s), toutes traduites et cohérentes.'
+          % (len(catalogues), len(catalogues[REFERENCE][0])))
     return 0
 
 

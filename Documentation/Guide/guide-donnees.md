@@ -86,7 +86,7 @@ les tests retrouvent la même forme d'arborescence quel que soit l'endroit d'où
 | `Levels/<région>/<ville>/<zone>.json` | les cartes, une description par carte (format v5, `jadg-map`) : ce que Core joue et ce que le moteur construit | `jadg_map.py`, `read_level.py` après une retouche dans l'éditeur, et la main ([Les cartes dans le moteur](guide-cartes-moteur.md)) |
 | `Assets/` | images et polices : `Common/`, `Regions/`, `Entities/`, `Maps/`, `UI/`, `Fonts/`, chacun avec son manifeste. Git ne suit que les manifestes, les polices et `Entities/` : les **images** de `Common/`, `Regions/`, `Maps/` et `UI/` viennent des kits d'assets publiés en archives, installés par `scripts/fetch_assets.py` d'après `kits.lock.json` (voir plus bas) | les ateliers, jamais à la main |
 | `Maps/world-maps.json` | les positions relevées sur les cartes peintes : ancre d'une région, cadre, lieux, quartiers | relevé par Ctrl+clic dans l'écran « Carte » (`LOT-94`) |
-| `Localization/` | `fr.lang`, `en.lang`, `jadg_en.ts`, `rpg.glossary.csv` | à la main, Qt Linguist, `sourcebook glossaire` |
+| `Localization/` | `fr.lang`, `en.lang` (les textes du jeu, par clé), `rpg.glossary.csv` | à la main, `sourcebook glossaire` |
 | `Editor/Templates/` | quatre modèles de carte vide (`arena`, `blockout`, `interior`, `street`) | `LOT-EDITOR-08` |
 | `Editor/Prefabs/<niveau>/<nom>.json` | les préfabriqués (format `jadg-prefab`, `LOT-1018`), rangés par niveau de l'arbre des lieux (`central-empire/capital/`, `central-empire/capital/arenarea/`…) : des objets autour d'une origine, qu'une carte pose d'un bloc | à la main, `build_gate_scene.py` (le Colisée) |
 | `Credits/credits.json` | l'écran des crédits | à la main |
@@ -805,7 +805,7 @@ invisible qui l'empêchait de jamais correspondre.
 | [`check_glossary.py`](../../scripts/checks/check_glossary.py) | le corpus est exclu du dépôt ; le lexique est bien formé (aucun doublon de couple, ensembles fermés au complet : 8, 15, 13) ; chaque **clé de règle** des `.lang` (`condition.`, `damage.`, `school.`, `weapon_property.`, `ability.`, `skill.`…) porte un terme du lexique traduit comme il le dit — casse ignorée, **accents significatifs** ; auto-test sur six catalogues fictifs | une divergence | — |
 | [`check_map_assets.py`](../../scripts/checks/check_map_assets.py) | `Assets/Maps/manifest.json` : provenance `author`, 1920 × 1080, empreinte et taille exactes, aucune image hors manifeste ; `world-maps.json` cite des images, régions et lieux qui existent | tout écart ; `--write` réécrit tailles et empreintes | — |
 | `check_ui_assets.py` | `Assets/UI/illustrations.json` : provenance `produced` uniquement, empreinte, dimensions, aucune image orpheline, tout nom de fichier cité par le QML est déclaré, toute pièce du cahier est livrée ou déclarée `pending`, la table d'`Artwork.qml` suit le manifeste | tout écart, dont une image du corpus revenue dans le dépôt | — |
-| [`check_translations.py`](../../scripts/checks/check_translations.py) | `jadg_en.ts` (voir la localisation) | une traduction inachevée, une entrée disparue, des marqueurs `%1` différents, un espace de bord perdu | — |
+| [`check_translations.py`](../../scripts/checks/check_translations.py) | `fr.lang` et `en.lang`, et les clés écrites dans le code du jeu (voir la localisation) | une clé d'un seul côté ou répétée, une valeur vide, des trous `%1` différents, un espace de bord perdu, une clé du code absente | — |
 | [`check_hd_assets.py`](../../scripts/checks/check_hd_assets.py) | sous `Common/` et `Regions/`, chaque `Scene/` et `Characters/` porte un manifeste qui cite exactement ses images ; chaque pièce est au standard (PNG 32 bits, taille déclarée, 4096 px au plus, dalle au losange du lieu, ancre dans l'image) ; le poids de chaque zone s'affiche (sans budget) | un fichier cité absent, une image que le manifeste ne cite pas, une pièce hors bornes | le poids par zone |
 | [`check_binary_files.py`](../../scripts/checks/check_binary_files.py) | aucun fichier de plus de 5 Mio ; tout binaire porte une extension déclarée `binary` dans `.gitattributes` ; aucune image suivie sous un kit verrouillé (`LOT-108`) ; aussi en hook pre-commit | l'un de ces défauts | — |
 
@@ -815,73 +815,33 @@ fixture, dont une copie cesse de prouver quoi que ce soit le jour où la génér
 
 ## La localisation
 
-Le jeu a deux circuits de traduction, et il faut savoir lequel sert un texte donné pour trouver où
-le corriger.
+Depuis le LOT-1020, le jeu n'a plus qu'**un** circuit de traduction : chaque texte affiché a une
+**clé**, et chaque langue un catalogue `<langue>.lang` (`Source/Elements/Localization/`). Le
+catalogue Qt Linguist de l'ancien jeu (`jadg_en.ts`, des phrases françaises traduites dans le QML)
+est retiré avec le QML (D-58, D-32) : ses libellés ont été repris par clé dans les deux `.lang`.
 
-![Le circuit d'une chaîne de traduction : la chrome des écrans par qsTr, lupdate, .ts et .qm ; le vocabulaire des règles par clé dans les catalogues .lang](figures/donnees-circuit-traduction.svg)
+**Le format.** Une paire `clé = valeur` par ligne, UTF-8, lignes vides et lignes en `#` ignorées,
+seul le **premier** `=` séparant la clé de la valeur (`EX-REN-033`). Les clés sont des identifiants
+anglais (`domaine.nom` : `hud.map`, `dialogue.check.summary`, `map.<identifiant>.name`) ; un **trou**
+s'écrit `%1` à `%9`, dans l'ordre des arguments. Ajouter une langue, c'est ajouter un fichier et son
+code dans `FJadgTexts` (`UI/JadgTexts.cpp`). Core lit le format (`core::parseTextCatalog`,
+`Core/Ui/TextCatalog.h`), sans le moteur.
 
-### La chrome des écrans : `qsTr`, `lupdate`, `.ts`, `.qm`
+**Dans le moteur.** Au premier texte demandé, chaque catalogue devient une **table de chaînes**
+(`FStringTable`, `Jadg.fr`, `Jadg.en`) ; un écran prend son texte en `FText` dans la table de la
+langue choisie (`FJadgTexts::Get`, `FText::FromStringTable`), et ses trous se remplissent par
+`FText::Format` (`FJadgTexts::Format`) : `core::toEngineFormat` a réécrit `%1` en `{0}`. Une clé
+absente de la langue choisie se prend en français ; absente des deux, l'écran affiche la clé —
+jamais une chaîne vide (`EX-NFR-040`). La langue est une option (`interface.language`,
+`Source/Elements/Options/options.json`), réglée dans l'écran Options : les écrans se reconstruisent.
 
-Les écrans du jeu (Qt Quick) écrivent leurs textes **en français dans le fichier QML** —
-`qsTr("Nouvelle partie")` — plutôt que par une clé : c'est ce qui permet à la conception de juger
-une mise en page dans Qt Design Studio, où une clé technique ne se lit pas. Le français est donc
-la **langue source** et n'a pas de catalogue ; sans traducteur installé, `qsTr` rend sa source.
-
-La cible CMake `update_translations`, lancée **à la main** (et non à chaque construction, parce que
-voir le fichier bouger sous soi rend toute relecture pénible), fait relire par `lupdate` les trois
-cibles qui portent du texte — les formulaires, les jumeaux de câblage et les vues-modèles — et met à
-jour [`jadg_en.ts`](../../Source/Elements/Localization/jadg_en.ts), le catalogue anglais versionné
-(248 messages), avec `-no-obsolete` : une chaîne retirée du code quitte le catalogue au lieu d'y
-rester en `vanished`, où elle ferait croire le catalogue plus complet qu'il n'est. `lrelease`
-compile ce `.ts` en `.qm`, embarqué dans la ressource `/i18n` à chaque construction, et le jeu
-installe le `QTranslator`. `LinguistTools` est **optionnel** : absent, le jeu se construit et parle
-français, et le message de configuration dit pourquoi.
-
-`check_translations.py` garde ce catalogue à deux moments : sur le fichier versionné dans le job de
-lint, et après `lupdate` dans le job de construction — ce second passage prouve que le catalogue est
-**à jour du code**, puisqu'une chaîne nouvelle y apparaîtrait inachevée. `seed_translations.py` a
-servi une fois, au `LOT-86`, à amorcer `jadg_en.ts` depuis `en.lang` : pour chaque source
-française, il cherchait la clé dont `fr.lang` portait exactement ce texte et prenait la traduction
-d'`en.lang` ; il ne devinait rien, une source sans correspondance restant `unfinished`. Depuis, les
-traductions se maintiennent dans Qt Linguist, un outil de traducteur.
-
-Les boîtes de dialogue standard de Qt ont leur propre catalogue : `app::installQtTranslations`
-charge `qtbase_<langue>.qm` depuis le dossier `Translations` déposé à côté de l'exécutable, sinon
-depuis l'installation Qt, et journalise s'il n'en trouve pas.
-
-### Le vocabulaire des règles : `hmi::Localization` et les `.lang`
-
-Certains libellés ne peuvent pas passer par `qsTr` : leur clé est **calculée** (`"rpg.ability."` +
-l'identifiant que le modèle rend), et `qsTr` exige une chaîne littérale pour que `lupdate` l'extraie
-sans exécuter le programme. Ce n'est pas qu'une contrainte technique : ces termes sont un
-**lexique**, et `rpg.glossary.csv` garantit une seule traduction par terme de règle dans tout le
-jeu — les disperser en littéraux dans les écrans casserait cette garantie. Ils passent par
-`hmi::ruleLabel(clé, langue)` (`Source/HMI/Runtime/RuleLabels.h`), qui rend le libellé traduit ou
-**la clé elle-même** si le catalogue ne la porte pas — jamais une chaîne vide, qui donnerait un
-écran troué sans dire pourquoi ; `hmi::activeLanguage()` rend la langue des réglages (« fr » par
-défaut). Les dialogues et le nom des cartes (`map.<identifiant>.name`, une clé que chaque catalogue
-doit porter, `EX-EDIT-081`) suivent le même chemin.
-
-Ces clés vivent dans `fr.lang` et `en.lang` (`Source/Elements/Localization/`, copiés à côté de
-l'exécutable) : une paire `clé = valeur` par ligne, UTF-8, lignes vides et lignes en `#` ignorées,
-seul le **premier** `=` séparant la clé de la valeur (`EX-REN-033`). Ajouter une langue, c'est
-ajouter un fichier. `hmi::Localization` (`Source/HMI/Localization/Localization.h`) les sert :
-
-- `parseCatalog(contenu)` analyse un texte `clé = valeur` en table, sans toucher au disque — c'est
-  ce qui rend la classe testable avec des tables injectées ;
-- `setDefaultCatalog(langue, table)` fixe la langue **par défaut** (la source de repli) et l'active
-  dessus ; `setActiveCatalog(langue, table)` fixe la langue **active** ;
-- `loadDefaultLanguage(langue)` et `loadLanguage(langue)` font de même depuis
-  `<dossier>/<langue>.lang`, et rendent `false` — récupérable — si le fichier est absent ou
-  illisible ; la langue active précédente est alors conservée ;
-- `text(clé)` résout dans un ordre **déterministe** : la langue active, puis la langue par défaut,
-  puis la clé elle-même. Une clé oubliée dans une traduction réapparaît dans la langue par défaut ;
-  une clé inconnue s'affiche telle quelle, ce qui la fait repérer sans planter (`EX-NFR-040`) ;
-- `activeLanguage()` rend l'identifiant de la langue active.
-
-`check_glossary.py` ferme la boucle : toute clé de règle de ces catalogues doit porter un terme du
-lexique, traduit comme le lexique le dit. L'éditeur, outil interne, ne lit rien de tout cela : il
-écrit ses textes en anglais dans le code (`LOT-EDITOR-01`).
+**Le contrôle.** `check_translations.py` refuse une clé d'un seul côté, une valeur vide, des trous
+différents entre les langues, un espace de bord perdu, une clé répétée, et toute clé écrite en dur
+dans un appel de texte du jeu (`TEXT("hud.map")`) qui manquerait au français. `check_glossary.py`
+garde le vocabulaire des règles (`rpg.ability.`, `rpg.skill.`…) : chaque clé de règle porte un terme
+du lexique (`rpg.glossary.csv`), traduit comme il le dit. Les noms et les textes des **données**
+(objets, armes, lieux de l'atlas) restent dans leur fichier, en français ou en anglais selon la
+source : ils ne passent pas par les catalogues.
 
 ## L'Arena of Fate : la chaîne de ses trois niveaux
 

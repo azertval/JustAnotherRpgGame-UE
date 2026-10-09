@@ -30,7 +30,7 @@
 #include "Core/Rpg/Dialogue.h"
 #include "Core/Rpg/Inventory.h"
 #include "Core/Rpg/Skill.h"
-#include "HMI/Localization/Localization.h"
+#include "Core/Ui/TextCatalog.h"
 
 namespace {
 
@@ -150,7 +150,7 @@ private:
     std::ifstream flux{std::filesystem::path(chemin), std::ios::binary};
     std::stringstream contenu;
     contenu << flux.rdbuf();
-    return hmi::Localization::parseCatalog(contenu.str());
+    return core::parseTextCatalog(contenu.str());
 }
 
 }  // namespace

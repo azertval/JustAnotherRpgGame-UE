@@ -2,12 +2,6 @@
   "version": 1,
   "comment": "Les pièces venues par passation (LOT-1014) dont le lecteur n'est pas encore écrit dans le nouveau moteur. Chacune nomme le lot qui l'attend ; check_orphans.py les tient pour citées jusque-là, et refuse une entrée dont le lot est livré. Chemins relatifs à ce dossier.",
   "awaiting": [
-    {"file": "Fonts/Cinzel-Bold.ttf", "lot": "LOT-1020", "reason": "police des écrans à la charte v2 ; l'ancien moteur la chargeait par Tokens.qml, l'interface UMG la reprend"},
-    {"file": "Fonts/Cinzel-SemiBold.ttf", "lot": "LOT-1020", "reason": "police des écrans à la charte v2 ; l'ancien moteur la chargeait par Tokens.qml, l'interface UMG la reprend"},
-    {"file": "Fonts/IMFellEnglish-Italic.ttf", "lot": "LOT-1020", "reason": "police des écrans à la charte v2 ; l'ancien moteur la chargeait par Tokens.qml, l'interface UMG la reprend"},
-    {"file": "Fonts/IMFellEnglish-Regular.ttf", "lot": "LOT-1020", "reason": "police des écrans à la charte v2 ; l'ancien moteur la chargeait par Tokens.qml, l'interface UMG la reprend"},
-    {"file": "Fonts/PinyonScript-Regular.ttf", "lot": "LOT-1020", "reason": "police des écrans à la charte v2 ; l'ancien moteur la chargeait par Tokens.qml, l'interface UMG la reprend"},
-    {"file": "UI/illustrations.json", "lot": "LOT-1020", "reason": "le manifeste des illustrations de l'interface (charte v2) ; l'ancien moteur le lisait par ses écrans, l'interface UMG le reprend"},
     {"file": "Regions/central-empire/capital/arenarea/Scene/appearance.json", "lot": "LOT-1018", "reason": "l'apparence du lieu (variantes de sol) que lisait le rendu de l'ancien moteur ; le format de carte du LOT-1018 dit s'il la reprend ou la supprime"}
   ]
 }

@@ -12,6 +12,7 @@
 #include "Core/Rpg/CharacterSheet.h"
 #include "Core/Rpg/Check.h"
 #include "Core/Rpg/Dialogue.h"
+#include "Core/Rpg/Equipment.h"
 #include "Core/Rpg/Inventory.h"
 #include "Core/Rpg/Party.h"
 #include "Core/Resources/ScenePlace.h"
@@ -21,6 +22,7 @@
 #include "Core/World/WorldClock.h"
 #include "Core/World/WorldTravel.h"
 
+#include <algorithm>
 #include <cstdint>
 #include <filesystem>
 #include <map>
@@ -32,6 +34,7 @@
 #include "Game/JadgExplorationState.h"
 
 #include "Bridge/JadgPaths.h"
+#include "UI/JadgTexts.h"
 #include "JustAnotherRpgGame.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
@@ -58,18 +61,28 @@ namespace
 class FJadgPartyListener final : public core::DialogueListener
 {
 public:
-	FJadgPartyListener(const core::CharacterSheet& Sheet, core::Inventory& Inventory, const core::ExperienceTable& Experience,
-		const core::SkillCatalog& Skills, TArray<FString>& InAsked)
-		: Speaker(Sheet, Inventory, Experience, Skills), Asked(InAsked)
+	FJadgPartyListener(const std::string& Id, core::LoadedCharacterSheet& Loaded, const core::ExperienceTable& InExperience,
+		const core::SkillCatalog& InSkills, TArray<FString>& InAsked)
+		: Experience(InExperience), Skills(InSkills), Asked(InAsked)
 	{
+		SetSpeaker(Id, Loaded);
 	}
 
-	[[nodiscard]] bool speaks(std::string_view LanguageId) const override { return Speaker.speaks(LanguageId); }
+	/// Celui qui parle désormais pour le groupe (D-28) : ses langues, ses modificateurs, son sac.
+	void SetSpeaker(const std::string& Id, core::LoadedCharacterSheet& Loaded)
+	{
+		SpeakerId = Id;
+		Speaker = std::make_unique<core::CharacterListener>(Loaded.sheet, Loaded.inventory, Experience, Skills);
+	}
+
+	[[nodiscard]] const std::string& Who() const { return SpeakerId; }
+
+	[[nodiscard]] bool speaks(std::string_view LanguageId) const override { return Speaker->speaks(LanguageId); }
 	[[nodiscard]] std::vector<core::Modifier> skillModifiers(std::string_view SkillId) const override
 	{
-		return Speaker.skillModifiers(SkillId);
+		return Speaker->skillModifiers(SkillId);
 	}
-	void receiveItem(std::string_view ItemId, int Quantity) override { Speaker.receiveItem(ItemId, Quantity); }
+	void receiveItem(std::string_view ItemId, int Quantity) override { Speaker->receiveItem(ItemId, Quantity); }
 	void startEncounter(std::string_view EncounterId) override
 	{
 		Asked.Add(TEXT("encounter:") + FJadgPaths::ToFString(std::string(EncounterId)));
@@ -80,7 +93,10 @@ public:
 	}
 
 private:
-	core::CharacterListener Speaker;
+	const core::ExperienceTable& Experience;
+	const core::SkillCatalog& Skills;
+	std::string SpeakerId;
+	std::unique_ptr<core::CharacterListener> Speaker;
 	TArray<FString>& Asked;
 };
 
@@ -89,8 +105,26 @@ UJadgExploration::FState::~FState() = default;
 void UJadgExploration::Initialize(FSubsystemCollectionBase& Collection)
 {
 	Super::Initialize(Collection);
+	Load();
+}
 
+void UJadgExploration::Restart()
+{
+	UE_LOG(LogJadg, Display, TEXT("[Exploration] nouvelle partie"));
+	Load();
+}
+
+void UJadgExploration::Load()
+{
 	State = MakeShared<FState>();
+	Errors.Reset();
+	Asked.Reset();
+	Portrait.Reset();
+	EncounterId.Reset();
+	Ending.Reset();
+	NoticeText.Reset();
+	NoticeUntil = 0.0;
+	CarriedStorey = -1;
 	const std::filesystem::path Elements = FJadgPaths::ToPath(FJadgPaths::ElementsDir());
 	const std::filesystem::path Rpg = FJadgPaths::RpgRoot();
 	const auto Report = [this](const std::vector<std::string>& Found, const TCHAR* What)
@@ -127,6 +161,10 @@ void UJadgExploration::Initialize(FSubsystemCollectionBase& Collection)
 	Report(State->Experience.errors, TEXT("table d'expérience"));
 	State->Skills = core::loadSkills(Rpg / "skills");
 	Report(State->Skills.errors, TEXT("compétences"));
+	State->Items = core::loadItems(Rpg / "items");
+	State->Equipment = core::loadEquipment(Rpg / "weapons", Rpg / "armors");
+	Report(State->Equipment.errors, TEXT("équipement"));
+	State->Encumbrance = core::loadEncumbranceRules(Rpg / "rules" / "encumbrance.json");
 
 	const core::PartyCandidates Candidates = core::loadPartyCandidates(Rpg / "characters");
 	Report(Candidates.errors, TEXT("fiches du groupe"));
@@ -143,33 +181,13 @@ void UJadgExploration::Initialize(FSubsystemCollectionBase& Collection)
 		State->Sheets.emplace(Candidate.id, MoveTemp(Loaded));
 	}
 
-	// Le catalogue des textes : « clé = valeur », une par ligne ; son lecteur se décide au LOT-1020.
-	TArray<FString> Lines;
-	const FString Catalogue = FPaths::Combine(FJadgPaths::ElementsDir(), TEXT("Localization"), TEXT("fr.lang"));
-	if (FFileHelper::LoadFileToStringArray(Lines, *Catalogue))
-	{
-		for (const FString& Line : Lines)
-		{
-			FString Key;
-			FString Value;
-			if (!Line.TrimStart().StartsWith(TEXT("#")) && Line.Split(TEXT("="), &Key, &Value))
-			{
-				Texts.Add(Key.TrimStartAndEnd(), Value.TrimStartAndEnd());
-			}
-		}
-	}
-	else
-	{
-		Errors.Add(FString::Printf(TEXT("textes : %s ne se lit pas"), *Catalogue));
-	}
-
 	for (const FString& Error : Errors)
 	{
 		UE_LOG(LogJadg, Error, TEXT("[Exploration] %s"), *Error);
 	}
 	UE_LOG(LogJadg, Display, TEXT("[Exploration] %d dialogue(s), %d quête(s), groupe de %d, %d texte(s)"),
 		static_cast<int32>(State->Dialogues.dialogues.size()), static_cast<int32>(State->Session->quests().quests.size()),
-		static_cast<int32>(State->Party.size()), Texts.Num());
+		static_cast<int32>(State->Party.size()), FJadgTexts::Count(FJadgTexts::Language()));
 }
 
 void UJadgExploration::Deinitialize()
@@ -501,8 +519,8 @@ void UJadgExploration::OpenDialogue(const FString& DialogueId)
 	const std::uint64_t Seed = State->NextSeed != 0 ? State->NextSeed : State->Conversations;
 	State->NextSeed = 0;
 	State->Random = std::make_unique<core::DeterministicRandom>(Seed);
-	State->Listener =
-		std::make_unique<FJadgPartyListener>(Leader->sheet, Leader->inventory, State->Experience, State->Skills, Asked);
+	State->Listener = std::make_unique<FJadgPartyListener>(
+		std::string(State->Party.leader()), *Leader, State->Experience, State->Skills, Asked);
 	State->Runner = std::make_unique<core::DialogueRunner>(
 		*Graph, State->Session->flags(), *State->Listener, State->Difficulty, *State->Random);
 	State->Session->freeze(true);
@@ -531,6 +549,10 @@ void UJadgExploration::CloseDialogueIfEnded()
 			{
 				Engage(Id);
 			}
+			else if (Request.Split(TEXT("ending:"), nullptr, &Id))
+			{
+				Ending = Id;
+			}
 		}
 	}
 }
@@ -558,13 +580,17 @@ FString UJadgExploration::LastCheck() const
 	}
 	const core::DialogueCheck& Check = *State->Runner->lastCheck();
 	const FString Skill = Text(TEXT("rpg.skill.") + FJadgPaths::ToFString(Check.skill));
+	const FText Dc = FText::AsNumber(Check.result.target);
 	if (Check.alreadyFailed)
 	{
-		return FString::Printf(TEXT("%s : déjà tenté, sans succès"), *Skill);
+		return FJadgTexts::Format(TEXT("dialogue.check.repeat"), {FText::FromString(Skill), Dc, JadgText(TEXT("dialogue.check.failure"))})
+			.ToString();
 	}
 	const bool bSuccess = Check.result.total >= Check.result.target;
-	return FString::Printf(TEXT("%s : %d (dé %d) contre DD %d — %s"), *Skill, Check.result.total, Check.result.keptDie,
-		Check.result.target, bSuccess ? TEXT("réussi") : TEXT("raté"));
+	return FJadgTexts::Format(TEXT("dialogue.check.summary"),
+		{FText::FromString(Skill), Dc, FText::AsNumber(Check.result.keptDie), FText::AsNumber(Check.result.total),
+			JadgText(bSuccess ? TEXT("dialogue.check.success") : TEXT("dialogue.check.failure"))})
+		.ToString();
 }
 
 TArray<FJadgChoice> UJadgExploration::Choices() const
@@ -641,8 +667,7 @@ void UJadgExploration::RotateLeader()
 
 FString UJadgExploration::Text(const FString& Key) const
 {
-	const FString* Found = Texts.Find(Key);
-	return Found != nullptr ? *Found : Key;
+	return FJadgTexts::Get(Key).ToString();
 }
 
 void UJadgExploration::Announce(const FString& Message)
@@ -655,4 +680,185 @@ void UJadgExploration::Announce(const FString& Message)
 FString UJadgExploration::Notice() const
 {
 	return FPlatformTime::Seconds() < NoticeUntil ? NoticeText : FString();
+}
+
+// --- Les vues des écrans (LOT-1020) -------------------------------------------------------------
+
+FString UJadgExploration::DialogueSpeaker() const
+{
+	return InDialogue() && State->Listener != nullptr ? FJadgPaths::ToFString(State->Listener->Who()) : FString();
+}
+
+bool UJadgExploration::SetDialogueSpeaker(const FString& MemberId)
+{
+	const auto Found = State->Sheets.find(ToUtf8(MemberId));
+	if (!InDialogue() || Found == State->Sheets.end() || !State->Party.contains(Found->first))
+	{
+		return false;
+	}
+	State->Listener->SetSpeaker(Found->first, Found->second);
+	return true;
+}
+
+void UJadgExploration::NextDialogueSpeaker(int32 Direction)
+{
+	const std::vector<std::string>& Order = State->Party.members();
+	if (!InDialogue() || Order.empty())
+	{
+		return;
+	}
+	const auto Here = std::find(Order.begin(), Order.end(), State->Listener->Who());
+	const int32 Count = static_cast<int32>(Order.size());
+	const int32 Index = Here == Order.end() ? 0 : static_cast<int32>(Here - Order.begin());
+	SetDialogueSpeaker(FJadgPaths::ToFString(Order[static_cast<size_t>(((Index + Direction) % Count + Count) % Count)]));
+}
+
+bool UJadgExploration::SetLeader(const FString& MemberId)
+{
+	return State->Party.setLeader(ToUtf8(MemberId)) == core::PartyChange::Done;
+}
+
+bool UJadgExploration::MoveMember(const FString& MemberId, int32 Delta)
+{
+	const std::vector<std::string>& Order = State->Party.members();
+	const auto Here = std::find(Order.begin(), Order.end(), ToUtf8(MemberId));
+	if (Here == Order.end())
+	{
+		return false;
+	}
+	const int64 From = Here - Order.begin();
+	const int64 To = From + Delta;
+	if (To < 0 || To >= static_cast<int64>(Order.size()))
+	{
+		return false;
+	}
+	return State->Party.swap(static_cast<size_t>(From), static_cast<size_t>(To)) == core::PartyChange::Done;
+}
+
+bool UJadgExploration::Sheet(const FString& MemberId, FJadgSheetView& Out) const
+{
+	const auto Found = State->Sheets.find(ToUtf8(MemberId));
+	if (Found == State->Sheets.end())
+	{
+		return false;
+	}
+	const core::CharacterSheet& Read = Found->second.sheet;
+	Out = FJadgSheetView();
+	Out.Id = MemberId;
+	Out.Name = FJadgPaths::ToFString(Read.name);
+	Out.ClassId = FJadgPaths::ToFString(Read.classId);
+	Out.SpeciesId = FJadgPaths::ToFString(Read.speciesId);
+	Out.BackgroundId = FJadgPaths::ToFString(Read.backgroundId);
+	Out.Level = Read.level;
+	Out.Experience = Read.experiencePoints;
+	Out.HitPoints = Read.currentHitPoints;
+	Out.MaxHitPoints = Read.maximumHitPoints;
+	Out.Proficiency = core::proficiencyBonus(Read, State->Experience);
+	Out.Initiative = Read.modifier(core::Ability::Dexterity);
+	const core::ItemLookup Lookup{&State->Items, &State->Equipment};
+	const core::DerivedStats Derived = core::derivedStatsFor(Read, Found->second.inventory, Lookup, State->Rules, State->Encumbrance);
+	Out.ArmorClass = Derived.armorClass;
+	Out.SpeedMetres = Derived.speedMeters;
+	for (const core::Ability Which : core::allAbilities())
+	{
+		Out.Abilities.Add({FJadgPaths::ToFString(std::string(core::abilityName(Which))), Read.ability(Which), Read.modifier(Which)});
+	}
+	for (const core::SkillDefinition& Skill : State->Skills.skills)
+	{
+		const core::SkillCheckModifier Modifier = core::skillModifier(Read, State->Experience, State->Skills, Skill.id);
+		Out.Skills.Add({FJadgPaths::ToFString(Skill.id), Modifier.value, Modifier.proficient});
+		if (Skill.id == "perception")
+		{
+			Out.PassivePerception = 10 + Modifier.value;
+		}
+	}
+	return true;
+}
+
+bool UJadgExploration::Inventory(const FString& MemberId, FJadgInventoryView& Out) const
+{
+	const auto Found = State->Sheets.find(ToUtf8(MemberId));
+	if (Found == State->Sheets.end())
+	{
+		return false;
+	}
+	const core::Inventory& Carried = Found->second.inventory;
+	const core::ItemLookup Lookup{&State->Items, &State->Equipment};
+	const auto Describe = [this, &Lookup](const std::string& Id, int32 Quantity, const std::string& Slot)
+	{
+		FJadgItemView Item;
+		Item.Id = FJadgPaths::ToFString(Id);
+		Item.Slot = FJadgPaths::ToFString(Slot);
+		Item.Quantity = Quantity;
+		Item.WeightGrams = Lookup.weightGramsOf(Id);
+		std::string Name = Id;
+		if (const core::Item* Found = State->Items.find(Id))
+		{
+			Name = Found->name;
+		}
+		else if (const core::Weapon* Weapon = State->Equipment.findWeapon(Id))
+		{
+			Name = Weapon->name;
+		}
+		else if (const core::Armor* Armor = State->Equipment.findArmor(Id))
+		{
+			Name = Armor->name;
+		}
+		Item.Name = FJadgPaths::ToFString(Name);
+		return Item;
+	};
+	Out = FJadgInventoryView();
+	for (size_t Slot = 0; Slot < core::EQUIPMENT_SLOT_COUNT; ++Slot)
+	{
+		const std::string& Id = Carried.equipped[Slot];
+		if (!Id.empty())
+		{
+			Out.Equipped.Add(Describe(Id, 1, std::string(core::equipmentSlotName(static_cast<core::EquipmentSlot>(Slot)))));
+		}
+	}
+	for (const core::InventoryStack& Stack : Carried.backpack)
+	{
+		Out.Backpack.Add(Describe(Stack.itemId, Stack.quantity, std::string()));
+	}
+	Out.PurseCopper = Carried.purseCopper;
+	const core::DerivedStats Derived =
+		core::derivedStatsFor(Found->second.sheet, Carried, Lookup, State->Rules, State->Encumbrance);
+	Out.CarriedGrams = Derived.carriedWeightGrams;
+	Out.CapacityGrams = Derived.carryingCapacityGrams;
+	return true;
+}
+
+TArray<FJadgQuestView> UJadgExploration::Journal() const
+{
+	TArray<FJadgQuestView> Out;
+	for (const core::Quest& Quest : State->Session->quests().quests)
+	{
+		const core::QuestProgress Progress = core::questProgress(Quest, State->Session->flags());
+		if (Progress.status == core::QuestStatus::NotStarted)
+		{
+			continue;
+		}
+		FJadgQuestView& Added = Out.AddDefaulted_GetRef();
+		Added.Id = FJadgPaths::ToFString(Quest.id);
+		Added.Title = Text(FJadgPaths::ToFString(core::questTitleKey(Quest.id)));
+		Added.Status = Progress.status == core::QuestStatus::Succeeded ? TEXT("succeeded")
+			: Progress.status == core::QuestStatus::Failed										? TEXT("failed")
+																								: TEXT("active");
+		for (const std::string& Step : Progress.reachedSteps)
+		{
+			Added.Steps.Add(Text(FJadgPaths::ToFString(core::questStepKey(Quest.id, Step))));
+		}
+	}
+	return Out;
+}
+
+FString UJadgExploration::MapName() const
+{
+	const FString Id = MapId();
+	if (Id.IsEmpty())
+	{
+		return FString();
+	}
+	const FString Key = TEXT("map.") + Id.Replace(TEXT("/"), TEXT(".")) + TEXT(".name");
+	return FJadgTexts::Has(FJadgTexts::Language(), Key) || FJadgTexts::Has(TEXT("fr"), Key) ? Text(Key) : Id;
 }

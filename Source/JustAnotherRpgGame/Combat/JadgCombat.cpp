@@ -464,6 +464,16 @@ FString AJadgCombat::Outcome() const
 	return *Issue == core::CombatOutcome::Victory ? TEXT("Victoire") : *Issue == core::CombatOutcome::Flight ? TEXT("Fuite") : TEXT("Défaite");
 }
 
+int32 AJadgCombat::OutcomeCode() const
+{
+	const std::optional<core::CombatOutcome> Issue = IsMounted() ? State->Session->outcome() : std::nullopt;
+	if (!Issue.has_value())
+	{
+		return -1;
+	}
+	return *Issue == core::CombatOutcome::Victory ? 0 : *Issue == core::CombatOutcome::Flight ? 1 : 2;
+}
+
 TArray<FJadgFighter> AJadgCombat::Fighters() const
 {
 	TArray<FJadgFighter> Out;

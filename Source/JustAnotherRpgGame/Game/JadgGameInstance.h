@@ -22,4 +22,7 @@ class UJadgGameInstance : public UGameInstance
 
 public:
 	virtual void Init() override;
+
+	/// Vrai une fois le menu du titre montré : il ne s'ouvre qu'au lancement (LOT-1020).
+	bool bTitleShown = false;
 };

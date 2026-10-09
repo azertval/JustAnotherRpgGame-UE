@@ -7,6 +7,8 @@
 #include "Game/JadgGameInstance.h"
 
 #include "Bridge/JadgOptions.h"
+#include "Bridge/JadgPaths.h"
+#include "UI/JadgTexts.h"
 
 void UJadgGameInstance::Init()
 {
@@ -16,4 +18,5 @@ void UJadgGameInstance::Init()
 	core::GameOptions Options;
 	FJadgOptions::Read(Options);
 	FJadgOptions::Apply(Options);
+	FJadgTexts::SetLanguage(FJadgPaths::ToFString(Options.language));
 }

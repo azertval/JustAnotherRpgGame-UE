@@ -137,7 +137,8 @@ le commandlet montre que le moteur lit **les mêmes fichiers** et obtient **des 
   faisait tourner sont supprimés (D-59 : `receive_ui_assets.py`, `check_assets_brief.py`,
   `seed_translations.py`, `package_release.ps1`, `smoke_test_release.ps1`,
   `write_sha256sums.ps1`, `clang_tidy_sarif.py`, `merge_sarif.py`, `ci_summary.py`).
-  `check_translations.py` et `jadg_en.ts` restent : le format du catalogue se décide au LOT-1020.
+  Le format du catalogue s'est décidé au LOT-1020 : les `.lang` par clé, chargés en tables de
+  chaînes du moteur ; `jadg_en.ts` est retiré, `check_translations.py` contrôle les `.lang`.
 - **Le numéro de version** : fait, `VERSION.txt` à la racine, lu par le `Build.cs` et par le CMake
   des tests.
 - **Les options du jeu** : fait, `Source/Elements/Options/options.json`, lues au lancement.

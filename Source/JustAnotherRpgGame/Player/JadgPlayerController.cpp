@@ -17,6 +17,7 @@
 #include "JustAnotherRpgGame.h"
 #include "Player/JadgCameraPawn.h"
 #include "Player/JadgControls.h"
+#include "UI/JadgHud.h"
 
 namespace
 {
@@ -36,6 +37,21 @@ namespace
 	const FName CapacityCommand(TEXT("Capacity"));
 	const FName EndTurnCommand(TEXT("EndTurn"));
 	const FString ChoicePrefix(TEXT("Choice"));
+
+	/// Les commandes qui ouvrent un écran (LOT-1020), et l'écran de chacune.
+	const TMap<FName, EJadgScreen>& ScreenCommands()
+	{
+		static const TMap<FName, EJadgScreen> Table = {
+			{TEXT("Menu"), EJadgScreen::Pause},
+			{TEXT("Party"), EJadgScreen::Party},
+			{TEXT("Sheet"), EJadgScreen::Character},
+			{TEXT("Inventory"), EJadgScreen::Equipment},
+			{TEXT("Journal"), EJadgScreen::Journal},
+			{TEXT("Map"), EJadgScreen::Map},
+			{TEXT("Debug"), EJadgScreen::Debug},
+		};
+		return Table;
+	}
 }
 
 bool UJadgControls::IsAxis(FName Command)
@@ -50,7 +66,8 @@ bool UJadgControls::IsKnown(FName Command)
 	const bool bChoice = Name.StartsWith(ChoicePrefix) && Name.Len() == ChoicePrefix.Len() + 1 && Name[ChoicePrefix.Len()] >= TEXT('1')
 		&& Name[ChoicePrefix.Len()] <= TEXT('9');
 	return bChoice || IsAxis(Command) || Command == WalkCommand || Command == InteractCommand || Command == NextLeaderCommand
-		|| Command == RecenterCommand || Command == AttackCommand || Command == CapacityCommand || Command == EndTurnCommand;
+		|| Command == RecenterCommand || Command == AttackCommand || Command == CapacityCommand || Command == EndTurnCommand
+		|| ScreenCommands().Contains(Command);
 }
 
 FKey UJadgControls::KeyOf(FName Command)
@@ -202,6 +219,15 @@ void AJadgPlayerController::Press(FName Command)
 	const bool bTalking = Exploration != nullptr && Exploration->InDialogue();
 
 	const FString Name = Command.ToString();
+	if (const EJadgScreen* Screen = ScreenCommands().Find(Command))
+	{
+		// Un écran s'ouvre de l'exploration comme du combat ; la même touche le referme.
+		if (AJadgHud* Screens = Cast<AJadgHud>(GetHUD()))
+		{
+			Screens->Toggle(*Screen);
+		}
+		return;
+	}
 	AJadgCombat* Combat = AJadgCombat::Find(GetWorld());
 	if (Combat != nullptr && Combat->IsMounted())
 	{
@@ -272,7 +298,12 @@ void AJadgPlayerController::Press(FName Command)
 	}
 	else if (Command == NextLeaderCommand)
 	{
-		if (Party != nullptr)
+		if (bTalking)
+		{
+			// En dialogue, la parole passe au suivant du groupe (D-28).
+			Exploration->NextDialogueSpeaker(1);
+		}
+		else if (Party != nullptr)
 		{
 			Party->RotateLeader();
 		}
