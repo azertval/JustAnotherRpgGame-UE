@@ -1,0 +1,43 @@
+{
+  "format": "jadg-map",
+  "version": 5,
+  "name": "Format v5",
+  "comment": "Fixture du format v5 (LOT-1018) : deux étages, une origine décalée, des volumes, et les sections de construction que Core passe.",
+  "place": "essai",
+  "width": 6,
+  "height": 4,
+  "origin": [3.0, -1.5],
+  "storeys": [
+    {"name": "rez", "z": 0.0},
+    {"name": "etage", "z": 3.0}
+  ],
+  "nextEntityId": 7,
+  "tiles": [
+    {"x": 0, "y": 0, "type": "entry"},
+    {"x": 5, "y": 3, "type": "wall"}
+  ],
+  "layers": [
+    {"name": "sol", "kind": "ground", "scene": "essai", "tiles": [
+      {"x": 0, "y": 0, "type": "pavement", "piece": "dalle"}
+    ]},
+    {"name": "toit", "kind": "decor", "z": 3.0, "tiles": [
+      {"x": 1, "y": 0, "type": "roof", "piece": "tuile"}
+    ]}
+  ],
+  "entities": [
+    {"id": "e1", "type": "portal", "x": 2, "y": 1, "targetMap": "ailleurs", "arrival": "porte"},
+    {"id": "e2", "type": "sign", "x": 2, "y": 1, "storey": 1},
+    {"id": "e3", "type": "spawnPoint", "x": 3, "y": 1, "storey": 1, "name": "palier"},
+    {"id": "e4", "type": "combatZone", "x": 0, "y": 0, "name": "cour", "volume": {"min": [3.0, -1.5, -0.5], "max": [9.0, 4.5, 3.0]}},
+    {"id": "e5", "type": "encounter", "x": 3, "y": 2, "encounterId": "essai", "volume": {"min": [7.5, 1.5, 0.0], "max": [9.0, 3.0, 2.0]}},
+    {"id": "e6", "type": "npc", "x": 4, "y": 2, "dialogue": "bonjour", "appearance": "pantin", "heading": 90.0}
+  ],
+  "terrain": {"area": [3.0, -1.5, 12.0, 4.5], "resolution": 1.0, "layers": [{"name": "herbe", "colour": "#4d7a35"}]},
+  "objects": [
+    {"id": "banc", "mesh": "Scene/ilot/wall.glb", "position": [5.0, 1.0, 0.0], "yaw": 30.0, "scale": 1.0}
+  ],
+  "lighting": {"lampCandelas": 60.0},
+  "notes": [
+    {"position": [4.0, 0.0, 0.0], "text": "Une note d'auteur."}
+  ]
+}

@@ -1,8 +1,11 @@
 {
-  "version": 4,
-  "name": "essai/etals",
+  "format": "jadg-map",
+  "version": 5,
+  "name": "Essai1016Etals",
+  "comment": "Carte d'essai de l'exploration (LOT-1016), du combat (LOT-1017) ou des étages (LOT-1018), écrite par scripts/maps/build_essai_maps.py, jamais à la main : la grille que Core joue et ce que build_level.py construit viennent du même plan « essai/etals ». Elle ne lit aucun kit d'assets.",
   "width": 16,
   "height": 12,
+  "origin": [0.0, 0.0],
   "nextEntityId": 8,
   "tiles": [
     {"x": 0, "y": 0, "type": "wall"},
@@ -37,6 +40,7 @@
     {"x": 0, "y": 7, "type": "wall"},
     {"x": 15, "y": 7, "type": "wall"},
     {"x": 0, "y": 8, "type": "wall"},
+    {"x": 3, "y": 8, "type": "entry"},
     {"x": 15, "y": 8, "type": "wall"},
     {"x": 0, "y": 9, "type": "wall"},
     {"x": 15, "y": 9, "type": "wall"},
@@ -57,69 +61,113 @@
     {"x": 12, "y": 11, "type": "wall"},
     {"x": 13, "y": 11, "type": "wall"},
     {"x": 14, "y": 11, "type": "wall"},
-    {"x": 15, "y": 11, "type": "wall"},
-    {"x": 3, "y": 8, "type": "entry"}
+    {"x": 15, "y": 11, "type": "wall"}
   ],
   "entities": [
-    {
-      "id": "e1",
-      "type": "npc",
-      "x": 3,
-      "y": 2,
-      "dialogue": "mere",
-      "figure": "Regions/central-empire/capital/martpart/Characters/mother"
+    {"id": "e1", "type": "npc", "x": 3, "y": 2, "heading": 180.0, "appearance": "pantin", "dialogue": "mere", "figure": "Regions/central-empire/capital/martpart/Characters/mother"},
+    {"id": "e2", "type": "npc", "x": 3, "y": 3, "heading": 180.0, "appearance": "pantin", "dialogue": "enfant", "figure": "Regions/central-empire/capital/Common/Characters/child", "presenceFlag": "quete.pommes", "presenceTest": "equals", "presenceValue": "enfant-libere"},
+    {"id": "e3", "type": "light", "x": 9, "y": 3, "height": 22, "always": false, "color": "#ffbe7a", "flicker": false, "intensity": 100, "radius": 4},
+    {"id": "e4", "type": "spawnPoint", "x": 13, "y": 5, "name": "from-parvis"},
+    {"id": "e5", "type": "portal", "x": 15, "y": 5, "arrival": "from-etals", "requiresFlag": "", "sealed": false, "targetMap": "essai/parvis"},
+    {"id": "e6", "type": "chest", "x": 7, "y": 6},
+    {"id": "e7", "type": "sign", "x": 4, "y": 9}
+  ],
+  "objects": [
+    {"id": "mur/0,0", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/1,0", "mesh": "Scene/ilot/wall.glb", "position": [2.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/2,0", "mesh": "Scene/ilot/wall.glb", "position": [3.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/3,0", "mesh": "Scene/ilot/wall.glb", "position": [5.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/4,0", "mesh": "Scene/ilot/wall.glb", "position": [6.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/5,0", "mesh": "Scene/ilot/wall.glb", "position": [8.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/6,0", "mesh": "Scene/ilot/wall.glb", "position": [9.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/7,0", "mesh": "Scene/ilot/wall.glb", "position": [11.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/8,0", "mesh": "Scene/ilot/wall.glb", "position": [12.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/9,0", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/10,0", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/11,0", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/12,0", "mesh": "Scene/ilot/wall.glb", "position": [18.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/13,0", "mesh": "Scene/ilot/wall.glb", "position": [20.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/14,0", "mesh": "Scene/ilot/wall.glb", "position": [21.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/15,0", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,1", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 2.25, 0.0], "folder": "murs"},
+    {"id": "mur/15,1", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 2.25, 0.0], "folder": "murs"},
+    {"id": "mur/0,2", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 3.75, 0.0], "folder": "murs"},
+    {"id": "mur/15,2", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 3.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,3", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 5.25, 0.0], "folder": "murs"},
+    {"id": "mur/15,3", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 5.25, 0.0], "folder": "murs"},
+    {"id": "mur/0,4", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 6.75, 0.0], "folder": "murs"},
+    {"id": "mur/9,4", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 6.75, 0.0], "folder": "murs"},
+    {"id": "mur/10,4", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 6.75, 0.0], "folder": "murs"},
+    {"id": "mur/15,4", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 6.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,5", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 8.25, 0.0], "folder": "murs"},
+    {"id": "mur/0,6", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 9.75, 0.0], "folder": "murs"},
+    {"id": "mur/15,6", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 9.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,7", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 11.25, 0.0], "folder": "murs"},
+    {"id": "mur/15,7", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 11.25, 0.0], "folder": "murs"},
+    {"id": "mur/0,8", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 12.75, 0.0], "folder": "murs"},
+    {"id": "mur/15,8", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 12.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,9", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 14.25, 0.0], "folder": "murs"},
+    {"id": "mur/15,9", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 14.25, 0.0], "folder": "murs"},
+    {"id": "mur/0,10", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 15.75, 0.0], "folder": "murs"},
+    {"id": "mur/15,10", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 15.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,11", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/1,11", "mesh": "Scene/ilot/wall.glb", "position": [2.25, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/2,11", "mesh": "Scene/ilot/wall.glb", "position": [3.75, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/3,11", "mesh": "Scene/ilot/wall.glb", "position": [5.25, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/4,11", "mesh": "Scene/ilot/wall.glb", "position": [6.75, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/5,11", "mesh": "Scene/ilot/wall.glb", "position": [8.25, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/6,11", "mesh": "Scene/ilot/wall.glb", "position": [9.75, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/7,11", "mesh": "Scene/ilot/wall.glb", "position": [11.25, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/8,11", "mesh": "Scene/ilot/wall.glb", "position": [12.75, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/9,11", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/10,11", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/11,11", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/12,11", "mesh": "Scene/ilot/wall.glb", "position": [18.75, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/13,11", "mesh": "Scene/ilot/wall.glb", "position": [20.25, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/14,11", "mesh": "Scene/ilot/wall.glb", "position": [21.75, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/15,11", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 17.25, 0.0], "folder": "murs"},
+    {"id": "chest-e6", "mesh": "Scene/ilot/wall.glb", "position": [11.25, 9.75, 0.0], "height": 0.7, "entity": "e6", "folder": "mobilier"},
+    {"id": "sign-e7", "mesh": "Scene/ilot/wall.glb", "position": [6.75, 14.25, 0.0], "height": 1.4, "entity": "e7", "folder": "mobilier"}
+  ],
+  "fills": [
+    {"id": "sol", "areas": [[0.0, 0.0, 24.0, 18.0]], "cell": 1.5, "meshes": ["Scene/ilot/floor.glb"]}
+  ],
+  "party": {
+    "appearances": ["heros-brawler", "heros-mage", "heros-priest", "heros-scoundrel"],
+    "walkSpeed": 3.0
+  },
+  "assetsRoot": "Source/Test/Fixtures/Meshes/Assets",
+  "lighting": {
+    "comment": "Les réglages de la porte (LOT-1012), repris tels quels.",
+    "lampCandelas": 60.0,
+    "fireCandelas": 30.0,
+    "sunScale": 1.8,
+    "ambientScale": 0.45,
+    "skyLuminance": 3.0,
+    "exposureBias": 0.0,
+    "fog": {
+      "density": 0.004,
+      "falloff": 0.05,
+      "volumetric": true
     },
-    {
-      "id": "e2",
-      "type": "npc",
-      "x": 3,
-      "y": 3,
-      "dialogue": "enfant",
-      "figure": "Regions/central-empire/capital/Common/Characters/child",
-      "presenceFlag": "quete.pommes",
-      "presenceTest": "equals",
-      "presenceValue": "enfant-libere"
-    },
-    {
-      "id": "e3",
-      "type": "light",
-      "x": 9,
-      "y": 3,
-      "always": false,
-      "color": "#ffbe7a",
-      "flicker": false,
-      "height": 22,
-      "intensity": 100,
-      "radius": 4
-    },
-    {
-      "id": "e4",
-      "type": "spawnPoint",
-      "x": 13,
-      "y": 5,
-      "name": "from-parvis"
-    },
-    {
-      "id": "e5",
-      "type": "portal",
-      "x": 15,
-      "y": 5,
-      "arrival": "from-etals",
-      "requiresFlag": "",
-      "sealed": false,
-      "targetMap": "essai/parvis"
-    },
-    {
-      "id": "e6",
-      "type": "chest",
-      "x": 7,
-      "y": 6
-    },
-    {
-      "id": "e7",
-      "type": "sign",
-      "x": 4,
-      "y": 9
+    "post": {
+      "bloom_intensity": 0.6,
+      "vignette_intensity": 0.3
     }
-  ]
+  },
+  "daylight": "Common/Lighting/daylight.json",
+  "ground": {
+    "colour": "#8f7d62",
+    "size": 4000.0,
+    "height": -0.02
+  },
+  "navigation": {
+    "area": [0.0, 0.0, 24.0, 18.0],
+    "height": 4.0
+  },
+  "shots": [
+    {"id": "etals", "target": [12.0, 9.0, 1.0], "heading": 0.0, "pitch": 42.0, "distance": 24.0, "comment": "La carte entière depuis le sud, au cadrage du joueur : le groupe à l'entrée, la mère à son étal, le pan de mur et sa lanterne, le portail à l'est."},
+    {"id": "lanterne", "target": [14.25, 6.0, 1.0], "heading": 205.0, "pitch": 28.0, "distance": 10.0, "comment": "La lanterne et le pan de mur, depuis le nord-est : à 22 h, la face du mur tournée vers elle est éclairée, le sol derrière lui est dans son ombre."}
+  ],
+  "hours": ["12:00", "22:00"]
 }

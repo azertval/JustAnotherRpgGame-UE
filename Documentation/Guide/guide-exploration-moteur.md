@@ -42,25 +42,18 @@ continue (colonne, ligne), le centre de la case (4, 2) en (4,5 ; 2,5).
 
 ## Une carte du moteur, une carte de Core
 
-Une carte de Core garde ses entités sur des cases de 1,5 m. La description de scène
-(`Source/Elements/Scenes/<scène>.json`) dit laquelle elle joue :
-
-```
-"map": "/Game/Maps/Levels/essai/etals",
-"level": {"id": "essai/etals", "root": "Source/Test/Fixtures/Exploration/Levels",
-          "origin": [0.0, 0.0], "cell": 1.5}
-```
-
-`build_scene_unreal.py` pose alors un `AJadgMapFrame` au coin de la case (0, 0), avec les axes
-**mesurés** à l'import. La carte du moteur se nomme d'après la carte de Core
-(`/Game/Maps/Levels/<id>`, `AJadgMapFrame::MapPackage`) : c'est le chemin qu'un portail ouvre, et le
-script refuse une description qui s'en écarte. Une scène sans `level` — la porte du `LOT-1012`, le
-socle — ne joue aucune carte de Core : il lui reste la marche, la caméra et l'heure.
+Une carte de Core garde ses entités sur des cases de 1,5 m. Depuis le `LOT-1018`, la carte du
+moteur et la carte de Core sont **une seule description** (format v5,
+[Les cartes dans le moteur](guide-cartes-moteur.md)) : `build_level.py` en construit le niveau,
+`/Game/Maps/Levels/<id>` (`AJadgMapFrame::MapPackage`) — le chemin qu'un portail ouvre —, et y pose
+un `AJadgMapFrame` au coin de la case (0, 0), avec les axes **mesurés** à l'import et la hauteur de
+chaque étage. Toute carte du moteur joue sa carte de Core : la porte du `LOT-1012` aussi, dont la
+grille est tirée de la géométrie construite (`build_gate_scene.py`).
 
 Ce que la carte de Core fait paraître :
 
-- un **PNJ** est un personnage de la scène qui nomme son entité (`"entity": "e2"`) : au lancement il
-  se pose sur la case que Core lui donne, et ne paraît que si l'entité est présente sous les
+- un **PNJ** est une entité `npc` qui nomme sa fiche d'apparence (`"appearance"`) : le niveau pose
+  son personnage, et au lancement il se pose sur la case et à l'étage que Core lui donne, et ne paraît que si l'entité est présente sous les
   drapeaux — l'enfant ne rentre auprès de sa mère qu'une fois libéré, sans que la carte se recharge ;
 - une **lumière** posée comme entité `light` devient une lumière ponctuelle du moteur
   (`AJadgDayLight::AddLamp`) : une lumière de nuit porte une ombre et suit `lamps` de la table du
@@ -77,8 +70,8 @@ portail **condamné**, ou **fermé** par un drapeau de quête, ne s'ouvre pas : 
 
 ## Le groupe
 
-Les personnages de la scène qui portent un rang (`"party": 0` à `3`) forment le groupe, le meneur
-en tête. Le clic envoie le meneur ; les autres mettent leurs pas dans les siens. La trace est
+Les personnages que la carte pose pour le groupe (`party`, par leur fiche d'apparence, au rang 0 à
+3) forment le groupe, le meneur en tête. Le clic envoie le meneur ; les autres mettent leurs pas dans les siens. La trace est
 celle de Core (`core::FollowTrail`) : le suiveur de rang `r` vise le point situé à
 `r × SPACING_CELLS` cases derrière le meneur **le long de son chemin**, et y va par le maillage de
 navigation. Un suiveur ne coupe donc pas un angle que le meneur a contourné.
@@ -108,7 +101,7 @@ solliciter** : l'écran la montre avant qu'on appuie.
 
 - Le **contour** : l'acteur désigné est marqué dans le tampon de gabarit (profondeur
   personnalisée), et une matière de post-traitement dessine son contour (`M_Outline`, écrite par
-  `build_scene_unreal.py` ; `r.CustomDepth=3`).
+  `build_level.py` ; `r.CustomDepth=3`).
 - La **touche** d'interaction (`F`) sollicite la cible du moment.
 - Le **clic** sur un PNJ, un coffre ou un panneau envoie le meneur à une case de lui, puis le fait
   interagir dès qu'il l'a à portée.
@@ -203,13 +196,13 @@ qui déclare une heure fixe (`hour`) se montre à cette heure. `Jadg.Time 22:00`
 | Quoi | Commande |
 |---|---|
 | les tests du moteur (`Jadg.Exploration.*`), sans fenêtre | `pwsh scripts/build.ps1 -Unreal -NoCapture` |
-| une carte d'essai et ses captures | `pwsh scripts/build.ps1 -Unreal -Scene essai-1016-etals -Capture` |
+| une carte d'essai et ses captures | `pwsh scripts/build.ps1 -Unreal -Map essai/etals -Capture` |
 | la quête des pommes jouée dans le jeu lancé | `pwsh scripts/build.ps1 -Unreal -Parcours` |
 | la rencontre `arene-bandits` jouée dans le jeu lancé | `pwsh scripts/build.ps1 -Unreal -ParcoursCombat -Seed 2` |
 
-Les cartes d'essai sont écrites par `scripts/maps/build_essai_maps.py` : trois cartes de Core, chacune
-avec sa description de scène tirée du même plan — les étals, le parvis, et l'arène du combat
-(`essai/arene`, scène `essai-1017-arene`).
+Les cartes d'essai sont écrites par `scripts/maps/build_essai_maps.py`, une description v5 chacune,
+la grille et ce qui se construit tirés du même plan — les étals, le parvis, l'arène du combat
+(`essai/arene`) et la carte à deux étages (`essai/etages`, `LOT-1018`).
 
 Le **parcours** joue par les entrées du joueur : il presse les touches que le fichier donne aux
 commandes, injectées dans le contrôleur (`APlayerController::InputKey`), qui passent donc par

@@ -1,0 +1,11 @@
+{
+  "map": "etages",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 19.39,
+  "captures": ["etages-1200.png", "palier-1200.png", "etages-2200.png", "palier-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.4, "frames": 1222, "fps": 106.8, "frameMs": 9.37, "p99FrameMs": 10.68, "worstFrameMs": 31.11, "gameMs": 2.59, "renderMs": 5.53, "gpuMs": 8.81},
+    {"hour": "22:00", "seconds": 11.4, "frames": 1187, "fps": 104.0, "frameMs": 9.62, "p99FrameMs": 11.58, "worstFrameMs": 13.35, "gameMs": 2.54, "renderMs": 9.62, "gpuMs": 9.06}
+  ]
+}

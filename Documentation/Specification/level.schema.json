@@ -1,21 +1,185 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://justanotherrpggame.local/schemas/level.v4.json",
-  "title": "Carte de JustAnotherRpgGame, format v4",
-  "description": "Format de carte v4 (LOT-EDITOR-12). Écrit par core::LevelWriter, lu par core::LevelLoader, contrôlé par LevelEditor --check. Une carte ordinaire porte ses cases ; une variante (base) ne porte que ses entités. Toute clé inconnue d'une couche ou d'une entité est une propriété libre, gardée et réécrite.",
-  "oneOf": [
-    { "$ref": "#/$defs/map" },
-    { "$ref": "#/$defs/variant" }
-  ],
+  "$id": "https://justanotherrpggame.local/schemas/level.v5.json",
+  "title": "Carte de JustAnotherRpgGame, format jadg-map version 5",
+  "description": "Format de carte v5 (LOT-1018, D-51, D-52) : une seule description par carte, qui dit ce que Core joue (la grille de collision, les couches de pièces, les entités sur leurs cases, les étages) et ce que le moteur construit (terrain, objets en mètres, préfabriqués, lumières, ciel, navigation, groupe, cadrages). Écrite par scripts/maps/jadg_map.py sous sa forme canonique, lue par core::LevelLoader et par scripts/maps/build_level.py, relue d'un niveau retouché par scripts/maps/read_level.py, contrôlée par jadg_map.py --check. Repère : x vers l'est (les colonnes), y vers le sud (les lignes), z vers le haut, en mètres ; une case fait 1,5 m ; le coin de la case (0, 0) tombe en origin. Toute clé inconnue d'une couche ou d'une entité est une propriété libre.",
+  "type": "object",
+  "required": ["format", "version", "name", "width", "height", "tiles"],
+  "properties": {
+    "format": { "const": "jadg-map" },
+    "version": { "const": 5 },
+    "name": { "type": "string", "description": "Clé de traduction du nom de la carte (map.<identifiant>.name), ou un nom d'essai." },
+    "comment": { "type": "string" },
+    "place": { "type": "string", "description": "Le lieu, chemin dans l'arborescence des lieux (central-empire/capital/arenarea) : ses kits fournissent les pièces." },
+    "width": { "type": "integer", "minimum": 1, "maximum": 1024 },
+    "height": { "type": "integer", "minimum": 1, "maximum": 1024 },
+    "origin": { "$ref": "#/$defs/point2", "description": "Où tombe le coin de la case (0, 0), en mètres." },
+    "storeys": {
+      "description": "Les étages praticables (D-51), le rez en tête à z = 0, puis des hauteurs croissantes.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "z"],
+        "properties": { "name": { "type": "string" }, "z": { "type": "number" } },
+        "additionalProperties": false
+      }
+    },
+    "nextEntityId": { "type": "integer", "minimum": 1 },
+    "tiles": {
+      "description": "La grille de collision du rez, entrée comprise : ce que Core joue. Absence = vide.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/collisionTile" }
+    },
+    "forced": { "type": "array", "items": { "$ref": "#/$defs/cell" } },
+    "layers": {
+      "description": "Les couches de pièces posées sur les cases (la v4 migrée) : une pièce du kit du lieu par case.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/layer" }
+    },
+    "entities": { "type": "array", "items": { "$ref": "#/$defs/entity" } },
+    "terrain": { "$ref": "#/$defs/terrain" },
+    "routes": {
+      "description": "Les routes : une ligne brisée d'une largeur, peinte dans une couche de matière du terrain.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "points", "width", "layer"],
+        "properties": {
+          "name": { "type": "string" },
+          "points": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/point2" } },
+          "width": { "type": "number", "exclusiveMinimum": 0 },
+          "layer": { "type": "string" }
+        }
+      }
+    },
+    "outlines": {
+      "description": "Les contours : un polygone fermé, qui peint une couche de matière (layer), met le terrain à une hauteur (height) ou pose une eau (water, son niveau).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "points"],
+        "properties": {
+          "name": { "type": "string" },
+          "points": { "type": "array", "minItems": 3, "items": { "$ref": "#/$defs/point2" } },
+          "layer": { "type": "string" },
+          "height": { "type": "number" },
+          "water": { "type": "number" }
+        }
+      }
+    },
+    "objects": { "type": "array", "items": { "$ref": "#/$defs/object" } },
+    "fills": {
+      "description": "Un dallage, tiré case par case entre plusieurs maillages, hors des ellipses qu'il exclut.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "meshes", "cell", "areas"],
+        "properties": {
+          "id": { "type": "string" },
+          "meshes": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+          "cell": { "type": "number", "exclusiveMinimum": 0 },
+          "areas": { "type": "array", "items": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number" } } },
+          "excludeEllipses": { "type": "array", "items": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number" } } }
+        }
+      }
+    },
+    "prefabs": {
+      "description": "Les préfabriqués posés : un acteur composé, déclaré dans un fichier de Source/Elements/Editor/Prefabs/.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "prefab", "position"],
+        "properties": {
+          "id": { "type": "string" },
+          "prefab": { "type": "string" },
+          "position": { "$ref": "#/$defs/point3" },
+          "yaw": { "type": "number" },
+          "scale": { "type": "number", "exclusiveMinimum": 0 }
+        }
+      }
+    },
+    "party": {
+      "type": "object",
+      "required": ["appearances"],
+      "properties": {
+        "appearances": { "type": "array", "items": { "type": "string" } },
+        "walkSpeed": { "type": "number", "exclusiveMinimum": 0 },
+        "heading": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "characters": {
+      "description": "Les personnages qui ne sont ni du groupe ni une entité de Core, par leur maillage lié d'un kit : le lion de la porte, jusqu'au LOT-1025 (dette du LOT-1015).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "mesh", "position", "idle", "walk"],
+        "properties": {
+          "id": { "type": "string" },
+          "mesh": { "type": "string" },
+          "position": { "$ref": "#/$defs/point3" },
+          "heading": { "type": "number" },
+          "idle": { "type": "string" },
+          "walk": { "type": "string" },
+          "walkSpeed": { "type": "number" },
+          "patrol": { "type": "array", "items": { "$ref": "#/$defs/point3" } }
+        }
+      }
+    },
+    "assetsRoot": { "type": "string", "description": "Le dossier, relatif au dépôt, où se lisent les maillages à la place des kits (les données d'essai)." },
+    "lighting": { "type": "object" },
+    "daylight": { "type": "string" },
+    "ground": {
+      "type": "object",
+      "required": ["colour", "size"],
+      "properties": { "colour": { "type": "string" }, "size": { "type": "number" }, "height": { "type": "number" } }
+    },
+    "navigation": {
+      "type": "object",
+      "required": ["area", "height"],
+      "properties": {
+        "area": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number" } },
+        "height": { "type": "number", "exclusiveMinimum": 0 },
+        "floor": { "type": "number" }
+      }
+    },
+    "shots": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "target", "heading", "pitch", "distance"],
+        "properties": {
+          "id": { "type": "string" },
+          "target": { "$ref": "#/$defs/point3" },
+          "heading": { "type": "number" },
+          "pitch": { "type": "number" },
+          "distance": { "type": "number", "exclusiveMinimum": 0 }
+        }
+      }
+    },
+    "hours": { "type": "array", "items": { "type": "string", "pattern": "^[0-2][0-9]:[0-5][0-9]$" } },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["text"],
+        "properties": {
+          "text": { "type": "string" },
+          "x": { "type": "integer" },
+          "y": { "type": "integer" },
+          "position": { "$ref": "#/$defs/point3" }
+        }
+      }
+    }
+  },
   "$defs": {
+    "point2": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } },
+    "point3": { "type": "array", "minItems": 3, "maxItems": 3, "items": { "type": "number" } },
     "cell": {
-      "description": "Une case : colonne x, ligne y, origine en haut à gauche.",
       "type": "object",
       "required": ["x", "y"],
-      "properties": {
-        "x": { "type": "integer", "minimum": 0 },
-        "y": { "type": "integer", "minimum": 0 }
-      },
+      "properties": { "x": { "type": "integer", "minimum": 0 }, "y": { "type": "integer", "minimum": 0 } },
       "additionalProperties": false
     },
     "tileType": {
@@ -25,7 +189,6 @@
                "crate", "column", "roof", "tiers", "pit", "lava"]
     },
     "collisionTile": {
-      "description": "Une case de la grille de collision. Pas de pièce ici : la pièce se nomme sur sa couche.",
       "type": "object",
       "required": ["x", "y", "type"],
       "properties": {
@@ -35,78 +198,110 @@
       },
       "additionalProperties": false
     },
-    "layerTile": {
-      "description": "Une case de couche : son type (le sens des règles), sa pièce (ce qu'on voit), sa hauteur réservée.",
-      "type": "object",
-      "required": ["x", "y", "type"],
-      "properties": {
-        "x": { "type": "integer", "minimum": 0 },
-        "y": { "type": "integer", "minimum": 0 },
-        "type": { "$ref": "#/$defs/tileType" },
-        "piece": { "type": "string", "minLength": 1 },
-        "elevation": { "type": "integer", "not": { "const": 0 } }
-      },
-      "additionalProperties": false
-    },
-    "property": {
-      "description": "Propriété libre : booléen, entier, réel ou chaîne. Une valeur composite n'est pas gardée.",
-      "type": ["boolean", "integer", "number", "string"]
-    },
     "layer": {
       "type": "object",
-      "required": ["kind", "tiles"],
+      "required": ["name", "kind"],
       "properties": {
-        "name": { "type": "string", "minLength": 1 },
+        "name": { "type": "string" },
         "kind": { "enum": ["ground", "decor"] },
-        "floor": { "type": "integer", "not": { "const": 0 } },
-        "scene": { "type": "string", "description": "Le lieu dont la carte porte les planches : Assets/Scene/<scene>/." },
-        "tiles": { "type": "array", "items": { "$ref": "#/$defs/layerTile" } }
+        "scene": { "type": "string" },
+        "z": { "type": "number", "description": "La hauteur où se posent les pièces de la couche, en mètres (l'étage de décor de la v4 migré)." },
+        "tiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["x", "y", "type"],
+            "properties": {
+              "x": { "type": "integer", "minimum": 0 },
+              "y": { "type": "integer", "minimum": 0 },
+              "type": { "$ref": "#/$defs/tileType" },
+              "piece": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        }
       },
-      "additionalProperties": { "$ref": "#/$defs/property" }
+      "not": { "anyOf": [ { "required": ["floor"] } ] }
+    },
+    "volume": {
+      "description": "Une boîte alignée sur les axes, en mètres dans le repère de la carte.",
+      "type": "object",
+      "required": ["min", "max"],
+      "properties": { "min": { "$ref": "#/$defs/point3" }, "max": { "$ref": "#/$defs/point3" } },
+      "additionalProperties": false
     },
     "entity": {
+      "description": "Une entité : ce que Core joue, sur une case et à un étage. Ses propriétés libres sont celles de la famille (niveaux.md) ; appearance et heading sont lus par la construction (le personnage d'un PNJ, son cap).",
       "type": "object",
       "required": ["id", "type", "x", "y"],
       "properties": {
-        "id": { "type": "string", "pattern": "^\\S+$", "description": "Unique dans la carte, jamais réemployé ; cité par carte#id." },
-        "type": { "type": "string" },
+        "id": { "type": "string", "minLength": 1 },
+        "type": { "type": "string", "minLength": 1 },
         "x": { "type": "integer", "minimum": 0 },
         "y": { "type": "integer", "minimum": 0 },
-        "elevation": { "type": "integer", "not": { "const": 0 } },
-        "cells": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/cell" }, "description": "Forme peinte d'une zone (triée, sans doublon), ou points d'un trajet (dans l'ordre)." }
+        "storey": { "type": "integer", "minimum": 0 },
+        "volume": { "$ref": "#/$defs/volume" },
+        "cells": { "type": "array", "items": { "$ref": "#/$defs/cell" } }
       },
-      "additionalProperties": { "$ref": "#/$defs/property" }
+      "not": { "anyOf": [ { "required": ["elevation"] } ] }
     },
-    "entities": { "type": "array", "items": { "$ref": "#/$defs/entity" } },
-    "nextEntityId": { "type": "integer", "minimum": 2, "description": "Prochain identifiant e<n> à donner ; omis quand il vaut 1." },
-    "map": {
+    "object": {
+      "description": "Un objet posé : un maillage (un .glb des kits ou des maîtres, relatif à Assets/ ou à assetsRoot), sa position, sa rotation, son échelle ; une lumière (light) ; l'entité qu'il montre (entity).",
       "type": "object",
-      "required": ["version", "name", "width", "height", "tiles"],
+      "required": ["id", "mesh", "position"],
       "properties": {
-        "version": { "const": 4 },
-        "name": { "type": "string" },
-        "width": { "type": "integer", "minimum": 1 },
-        "height": { "type": "integer", "minimum": 1 },
-        "nextEntityId": { "$ref": "#/$defs/nextEntityId" },
-        "tiles": { "type": "array", "items": { "$ref": "#/$defs/collisionTile" }, "description": "La grille de collision, entrée comprise, déduite des couches hors cases forcées." },
-        "forced": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/cell" }, "description": "Cases où la collision s'écarte à dessein de la déduction." },
-        "layers": { "type": "array", "items": { "$ref": "#/$defs/layer" } },
-        "entities": { "$ref": "#/$defs/entities" }
-      },
-      "additionalProperties": false
+        "id": { "type": "string", "minLength": 1 },
+        "mesh": { "type": "string" },
+        "position": { "$ref": "#/$defs/point3" },
+        "yaw": { "type": "number" },
+        "pitch": { "type": "number" },
+        "roll": { "type": "number" },
+        "scale": { "oneOf": [ { "type": "number", "exclusiveMinimum": 0 }, { "$ref": "#/$defs/point3" } ] },
+        "height": { "type": "number", "exclusiveMinimum": 0 },
+        "storey": { "type": "integer", "minimum": 0 },
+        "entity": { "type": "string" },
+        "mirrored": { "type": "boolean" },
+        "folder": { "type": "string" },
+        "light": { "type": "object" }
+      }
     },
-    "variant": {
+    "terrain": {
+      "description": "Le terrain : un Landscape dont les hauteurs et les couches de matière sont des images régénérées par build_level.py depuis cette description.",
       "type": "object",
-      "required": ["version", "name", "base"],
+      "required": ["area", "resolution", "layers"],
       "properties": {
-        "version": { "const": 4 },
-        "name": { "type": "string" },
-        "base": { "type": "string", "minLength": 1, "description": "Identifiant de la carte de base (coliseum, capital/martpart)." },
-        "scene": { "type": "string", "minLength": 1, "description": "Planche substituée à celle de la base." },
-        "nextEntityId": { "$ref": "#/$defs/nextEntityId" },
-        "entities": { "$ref": "#/$defs/entities" }
-      },
-      "additionalProperties": false
+        "area": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number" } },
+        "resolution": { "type": "number", "exclusiveMinimum": 0 },
+        "base": { "type": "number" },
+        "shapes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["shape"],
+            "properties": {
+              "shape": { "enum": ["disc", "rect", "ramp"] },
+              "centre": { "$ref": "#/$defs/point2" },
+              "radius": { "type": "number" },
+              "area": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "number" } },
+              "from": { "$ref": "#/$defs/point2" },
+              "to": { "$ref": "#/$defs/point2" },
+              "width": { "type": "number" },
+              "height": { "type": "number" },
+              "heights": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } },
+              "falloff": { "type": "number", "minimum": 0 }
+            }
+          }
+        },
+        "layers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "colour"],
+            "properties": { "name": { "type": "string" }, "colour": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" } }
+          }
+        }
+      }
     }
   }
 }

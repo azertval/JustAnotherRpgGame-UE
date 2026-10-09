@@ -285,7 +285,7 @@ bool LevelWriter::saveToFile(const Level& level, const std::filesystem::path& pa
 
 std::string LevelWriter::buildJson(const LevelData& data) {
     Json root;
-    root["version"] = LEVEL_FORMAT_VERSION;
+    root["version"] = LEVEL_WRITER_VERSION;
     root["name"] = data.name;
 
     // Une variante (decision D12) ne s'ecrit que par ce qu'elle declare : ses cases sont celles de

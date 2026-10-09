@@ -9,13 +9,27 @@ namespace core {
 
 void FollowTrail::reset(const std::vector<TrailPoint>& points) {
     _points.assign(points.begin(), points.end());
+    _heights.assign(points.size(), 0.0F);
+}
+
+void FollowTrail::reset(const std::vector<TrailPoint>& points, const std::vector<float>& heights) {
+    _points.assign(points.begin(), points.end());
+    _heights.assign(points.size(), 0.0F);
+    for (std::size_t rang = 0; rang < heights.size() && rang < _heights.size(); ++rang) {
+        _heights[rang] = heights[rang];
+    }
 }
 
 void FollowTrail::record(TrailPoint leader) {
+    record(leader, 0.0F);
+}
+
+void FollowTrail::record(TrailPoint leader, float height) {
     if (!_points.empty() && (leader - _points.front()).length() < MIN_STEP_CELLS) {
         return;
     }
     _points.push_front(leader);
+    _heights.push_front(height);
     if (_kept <= 0.0F) {
         return;
     }
@@ -26,6 +40,7 @@ void FollowTrail::record(TrailPoint leader) {
         parcouru += (_points[rang] - _points[rang - 1]).length();
         if (parcouru >= _kept) {
             _points.resize(rang + 1);
+            _heights.resize(rang + 1);
             return;
         }
     }
@@ -58,6 +73,22 @@ TrailPoint FollowTrail::pointBehind(float distance) const {
         reste -= longueur;
     }
     return _points.back();
+}
+
+float FollowTrail::heightBehind(float distance) const {
+    if (_points.empty() || _heights.size() != _points.size()) {
+        return 0.0F;
+    }
+    float reste = distance;
+    for (std::size_t rang = 1; rang < _points.size(); ++rang) {
+        const float longueur = (_points[rang] - _points[rang - 1]).length();
+        if (reste <= longueur) {
+            const float part = longueur > 0.0F ? reste / longueur : 0.0F;
+            return _heights[rang - 1] + ((_heights[rang] - _heights[rang - 1]) * part);
+        }
+        reste -= longueur;
+    }
+    return _heights.back();
 }
 
 Vector2 FollowTrail::directionAt(float distance) const {

@@ -11,8 +11,8 @@
 - `Rpg/` — catalogues du jeu de rôle (espèces, classes, historiques, compétences, créatures,
   équipement, règles et leurs schémas).
 - `World/` — atlas du monde (régions, villes, lieux), plans de ville, dialogues et quêtes.
-- `Scenes/` — descriptions de scène, d'où `scripts/maps/build_scene_unreal.py` construit une carte
-  du moteur (`LOT-1012` ; embryon du format du `LOT-1018`).
+- `Levels/` — les cartes, une description au format v5 (`jadg-map`, `LOT-1018`) par carte : ce que
+  Core joue et ce que `scripts/maps/build_level.py` construit en niveau du moteur.
 - `Options/` — `options.json`, les options d'usine du jeu, lues au lancement (`LOT-1014`).
 - `Editor/` — ce que l'éditeur de niveaux produit et réutilise : les préfabriqués d'un lieu
   (`Prefabs/`) et les modèles de carte (`Templates/`).

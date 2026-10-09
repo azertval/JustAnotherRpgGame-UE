@@ -35,6 +35,8 @@ struct FJadgEntity
 	FString Id;
 	FString Type;
 	FIntPoint Cell = FIntPoint::ZeroValue;
+	/// L'étage de l'entité (format v5, D-51) ; 0, le rez.
+	int32 Storey = 0;
 	bool bPresent = true;
 };
 
@@ -48,6 +50,8 @@ struct FJadgLamp
 	float HeightMetres = 2.2f;
 	float Intensity = 1.0f;
 	bool bAlways = false;
+	/// L'étage de la lumière (format v5, D-51) ; 0, le rez.
+	int32 Storey = 0;
 };
 
 /// Une réponse proposée au joueur, texte résolu.
@@ -131,6 +135,15 @@ public:
 
 	/// Pose le meneur sans qu'il soit arrivé nulle part (`core::ExplorationSession::placeHero`).
 	void PlaceHero(const FVector2D& Cell);
+
+	/// L'étage où se tient le meneur, que Core connaît (D-51) : 0, le rez.
+	int32 HeroStorey() const;
+
+	/**
+	 * @brief L'étage où le moteur a mené le meneur, pour les pas suivants (`Step`) : ce qui n'est
+	 *        pas à cet étage ne se sollicite, ne se franchit ni ne se déclenche (D-51, LOT-1018).
+	 */
+	void SetStorey(int32 Storey) { CarriedStorey = Storey; }
 
 	/**
 	 * @brief Un pas : le meneur est en @p LeaderCell (rien : il n'y a pas de carte de Core), et
@@ -246,6 +259,8 @@ private:
 	FString EncounterId;
 	FString NoticeText;
 	double NoticeUntil = 0.0;
+	/// L'étage où le moteur a mené le meneur ; -1 : il ne l'a pas dit.
+	int32 CarriedStorey = -1;
 
 	void Announce(const FString& Message);
 	void OpenDialogue(const FString& DialogueId);

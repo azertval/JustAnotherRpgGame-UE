@@ -57,9 +57,19 @@ struct PortalTarget {
 /// @return Le portail posé sur @p position, s'il y en a un.
 [[nodiscard]] std::optional<PortalTarget> portalAt(const Level& level, GridPosition position);
 
+/**
+ * @brief Le portail de @p level en @p position **à l'étage** @p storey (format v5, D-51) : un
+ *        héros à l'étage ne franchit pas le portail du rez qui est sous ses pieds.
+ */
+[[nodiscard]] std::optional<PortalTarget> portalAt(const Level& level, GridPosition position,
+                                                   int storey);
+
 /// @return La case du point d'arrivée nommé @p name, s'il existe. Deux points de même nom sont un
 ///         défaut du graphe : le **premier** dans l'ordre des entités l'emporte ici.
 [[nodiscard]] std::optional<GridPosition> arrivalPointAt(const Level& level, std::string_view name);
+
+/// @return L'étage du point d'arrivée @p name de @p level (format v5) ; 0 s'il n'existe pas.
+[[nodiscard]] int arrivalStoreyAt(const Level& level, std::string_view name);
 
 /// @brief Ce qui empêche une carte d'être jouée. `Core` n'écrit pas de texte : l'IHM traduit.
 enum class WorldIssueCode {
@@ -182,6 +192,9 @@ public:
      */
     TravelResult cross(GridPosition from, const WorldFlags& flags);
 
+    /// @brief `cross` à l'étage @p storey : seul le portail de cet étage se franchit (D-51).
+    TravelResult cross(GridPosition from, const WorldFlags& flags, int storey);
+
     /// @return L'identifiant de la carte courante, vide avant la première entrée.
     [[nodiscard]] const std::string& currentMapId() const noexcept {
         return _currentMapId;
@@ -193,6 +206,12 @@ public:
     /// @return La case du personnage sur la carte courante.
     [[nodiscard]] GridPosition position() const noexcept {
         return _position;
+    }
+
+    /// @return L'étage où la dernière entrée a posé le personnage : celui de son point d'arrivée,
+    ///         0 à l'entrée de la carte (format v5, D-51).
+    [[nodiscard]] int storey() const noexcept {
+        return _storey;
     }
 
     /// @return Le défaut de la dernière traversée refusée, s'il y en a un.
@@ -214,6 +233,7 @@ private:
     std::map<std::string, std::shared_ptr<Level>, std::less<>> _maps;
     std::string _currentMapId;
     GridPosition _position{};
+    int _storey = 0;
     std::optional<WorldIssue> _lastIssue;
 };
 

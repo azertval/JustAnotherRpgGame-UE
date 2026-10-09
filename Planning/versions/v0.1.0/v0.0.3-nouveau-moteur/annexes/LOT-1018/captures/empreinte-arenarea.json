@@ -1,0 +1,3891 @@
+{
+ "map": "central-empire/capital/arenarea",
+ "digest": "08a573e47cda9418bec4966c7ff7f72d489f0ccbfb51fc112f4312e75b0a95c7",
+ "actors": 163,
+ "seconds": 165.1,
+ "placingSeconds": 161.4,
+ "imports": 68,
+ "importSeconds": 110.8,
+ "layerPieces": 12913,
+ "objects": 0,
+ "fillTiles": 0,
+ "prefabObjects": 0,
+ "characters": 6,
+ "terrainVertices": 0,
+ "missingPieces": 14,
+ "detail": [
+  {
+   "label": "BuoyancyManager0",
+   "class": "BuoyancyManager",
+   "folder": "None",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Cadrage_ensemble",
+   "class": "JadgShot",
+   "folder": "cadrages",
+   "location": [
+    9600.0,
+    6600.0,
+    100.0
+   ],
+   "rotation": [
+    -50.0,
+    -90.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "shot_id": "ensemble",
+   "distance": 17280.0
+  },
+  {
+   "label": "Carte",
+   "class": "JadgMapFrame",
+   "folder": "carte",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "level_id": "central-empire/capital/arenarea",
+   "levels_root": "",
+   "storey_heights": []
+  },
+  {
+   "label": "Atmosphere",
+   "class": "SkyAtmosphere",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Brume",
+   "class": "ExponentialHeightFog",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Exposition",
+   "class": "PostProcessVolume",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Jour",
+   "class": "JadgDayLight",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "LumiereDuCiel",
+   "class": "SkyLight",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    3000.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Soleil",
+   "class": "DirectionalLight",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    3000.0
+   ],
+   "rotation": [
+    -86.0,
+    180.0,
+    180.0
+   ],
+   "scale": [
+    2.5,
+    2.5,
+    2.5
+   ],
+   "tags": []
+  },
+  {
+   "label": "couche_arbres-0_ar-meshy-arbre-ombrage",
+   "class": "Actor",
+   "folder": "couches/arbres-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-meshy-arbre-ombrage/StaticMeshes/SM_ar-meshy-arbre-ombrage.SM_ar-meshy-arbre-ombrage",
+   "instances": 12,
+   "instancesDigest": "9eaec8bc95fe884c"
+  },
+  {
+   "label": "couche_balcons-1_ar-balcony",
+   "class": "Actor",
+   "folder": "couches/balcons-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-balcony/StaticMeshes/SM_ar-balcony.SM_ar-balcony",
+   "instances": 6,
+   "instancesDigest": "4570758b0ced9cae"
+  },
+  {
+   "label": "couche_bassin-0_ar-natural-pool",
+   "class": "Actor",
+   "folder": "couches/bassin-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-natural-pool/StaticMeshes/SM_ar-natural-pool.SM_ar-natural-pool",
+   "instances": 1,
+   "instancesDigest": "04797c7302978316"
+  },
+  {
+   "label": "couche_batiments-0_ar-corner-ne",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-corner-ne/StaticMeshes/SM_ar-corner-ne.SM_ar-corner-ne",
+   "instances": 58,
+   "instancesDigest": "86e66312826e0ea9"
+  },
+  {
+   "label": "couche_batiments-0_ar-corner-nw",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-corner-nw/StaticMeshes/SM_ar-corner-nw.SM_ar-corner-nw",
+   "instances": 58,
+   "instancesDigest": "9081482526463b8b"
+  },
+  {
+   "label": "couche_batiments-0_ar-corner-se",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-corner-se/StaticMeshes/SM_ar-corner-se.SM_ar-corner-se",
+   "instances": 58,
+   "instancesDigest": "6da4010fb39a2195"
+  },
+  {
+   "label": "couche_batiments-0_ar-corner-sw",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-corner-sw/StaticMeshes/SM_ar-corner-sw.SM_ar-corner-sw",
+   "instances": 58,
+   "instancesDigest": "4edf2be4f5919fed"
+  },
+  {
+   "label": "couche_batiments-0_ar-noble-corner-0",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-corner-0/StaticMeshes/SM_ar-noble-corner-0.SM_ar-noble-corner-0",
+   "instances": 4,
+   "instancesDigest": "663ad5dd00aef2ea"
+  },
+  {
+   "label": "couche_batiments-0_ar-noble-corner-1",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-corner-1/StaticMeshes/SM_ar-noble-corner-1.SM_ar-noble-corner-1",
+   "instances": 4,
+   "instancesDigest": "afc99f3e61aafed0"
+  },
+  {
+   "label": "couche_batiments-0_ar-noble-corner-2",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-corner-2/StaticMeshes/SM_ar-noble-corner-2.SM_ar-noble-corner-2",
+   "instances": 4,
+   "instancesDigest": "fd3740eb00330eb2"
+  },
+  {
+   "label": "couche_batiments-0_ar-noble-corner-3",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-corner-3/StaticMeshes/SM_ar-noble-corner-3.SM_ar-noble-corner-3",
+   "instances": 4,
+   "instancesDigest": "0ce693d859a68ee6"
+  },
+  {
+   "label": "couche_batiments-0_ar-noble-wall-x",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-wall-x/StaticMeshes/SM_ar-noble-wall-x.SM_ar-noble-wall-x",
+   "instances": 26,
+   "instancesDigest": "ea53c33b05e189b3"
+  },
+  {
+   "label": "couche_batiments-0_ar-noble-wall-y",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-wall-y/StaticMeshes/SM_ar-noble-wall-y.SM_ar-noble-wall-y",
+   "instances": 8,
+   "instancesDigest": "2c7b45c33c37bdf8"
+  },
+  {
+   "label": "couche_batiments-0_ar-wall-arcade-x",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-wall-arcade-x/StaticMeshes/SM_ar-wall-arcade-x.SM_ar-wall-arcade-x",
+   "instances": 43,
+   "instancesDigest": "2fe42a984f4dab10"
+  },
+  {
+   "label": "couche_batiments-0_ar-wall-window-x",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-wall-window-x/StaticMeshes/SM_ar-wall-window-x.SM_ar-wall-window-x",
+   "instances": 281,
+   "instancesDigest": "23e453c8f141d2e3"
+  },
+  {
+   "label": "couche_batiments-0_ar-wall-window-y",
+   "class": "Actor",
+   "folder": "couches/batiments-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-wall-window-y/StaticMeshes/SM_ar-wall-window-y.SM_ar-wall-window-y",
+   "instances": 74,
+   "instancesDigest": "f2f82a271da621f4"
+  },
+  {
+   "label": "couche_batiments-1_ar-corner-ne",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-corner-ne/StaticMeshes/SM_ar-corner-ne.SM_ar-corner-ne",
+   "instances": 14,
+   "instancesDigest": "7dbc146791761421"
+  },
+  {
+   "label": "couche_batiments-1_ar-corner-nw",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-corner-nw/StaticMeshes/SM_ar-corner-nw.SM_ar-corner-nw",
+   "instances": 14,
+   "instancesDigest": "5c2908e71543a81e"
+  },
+  {
+   "label": "couche_batiments-1_ar-corner-se",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-corner-se/StaticMeshes/SM_ar-corner-se.SM_ar-corner-se",
+   "instances": 14,
+   "instancesDigest": "387ad4b53e950b82"
+  },
+  {
+   "label": "couche_batiments-1_ar-corner-sw",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-corner-sw/StaticMeshes/SM_ar-corner-sw.SM_ar-corner-sw",
+   "instances": 14,
+   "instancesDigest": "303e5a9ff436f377"
+  },
+  {
+   "label": "couche_batiments-1_ar-noble-corner-0",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-corner-0/StaticMeshes/SM_ar-noble-corner-0.SM_ar-noble-corner-0",
+   "instances": 4,
+   "instancesDigest": "e3cb009564c74fc8"
+  },
+  {
+   "label": "couche_batiments-1_ar-noble-corner-1",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-corner-1/StaticMeshes/SM_ar-noble-corner-1.SM_ar-noble-corner-1",
+   "instances": 4,
+   "instancesDigest": "d027f5e76469c72c"
+  },
+  {
+   "label": "couche_batiments-1_ar-noble-corner-2",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-corner-2/StaticMeshes/SM_ar-noble-corner-2.SM_ar-noble-corner-2",
+   "instances": 4,
+   "instancesDigest": "94083c3a869a25a6"
+  },
+  {
+   "label": "couche_batiments-1_ar-noble-corner-3",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-corner-3/StaticMeshes/SM_ar-noble-corner-3.SM_ar-noble-corner-3",
+   "instances": 4,
+   "instancesDigest": "cb2f26b6f3e2b7ef"
+  },
+  {
+   "label": "couche_batiments-1_ar-noble-wall-x",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-wall-x/StaticMeshes/SM_ar-noble-wall-x.SM_ar-noble-wall-x",
+   "instances": 44,
+   "instancesDigest": "8149afeafa693def"
+  },
+  {
+   "label": "couche_batiments-1_ar-noble-wall-y",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-noble-wall-y/StaticMeshes/SM_ar-noble-wall-y.SM_ar-noble-wall-y",
+   "instances": 8,
+   "instancesDigest": "4941045c94f251f8"
+  },
+  {
+   "label": "couche_batiments-1_ar-wall-window-x",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-wall-window-x/StaticMeshes/SM_ar-wall-window-x.SM_ar-wall-window-x",
+   "instances": 76,
+   "instancesDigest": "16116de88e1c7fbf"
+  },
+  {
+   "label": "couche_batiments-1_ar-wall-window-y",
+   "class": "Actor",
+   "folder": "couches/batiments-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-wall-window-y/StaticMeshes/SM_ar-wall-window-y.SM_ar-wall-window-y",
+   "instances": 26,
+   "instancesDigest": "ae7d6a12b396d647"
+  },
+  {
+   "label": "couche_cheminees-1_ar-chimney",
+   "class": "Actor",
+   "folder": "couches/cheminees-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-chimney/StaticMeshes/SM_ar-chimney.SM_ar-chimney",
+   "instances": 2,
+   "instancesDigest": "6ff878b0fecff2c1"
+  },
+  {
+   "label": "couche_cheminees-2_ar-chimney",
+   "class": "Actor",
+   "folder": "couches/cheminees-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-chimney/StaticMeshes/SM_ar-chimney.SM_ar-chimney",
+   "instances": 7,
+   "instancesDigest": "69a556423b8cd55b"
+  },
+  {
+   "label": "couche_colisee-alliances-3_banner-allied-forces",
+   "class": "Actor",
+   "folder": "couches/colisee-alliances-3",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-allied-forces/StaticMeshes/SM_banner-allied-forces.SM_banner-allied-forces",
+   "instances": 1,
+   "instancesDigest": "dc06ca029d228321"
+  },
+  {
+   "label": "couche_colisee-alliances-3_banner-tanarean-empire",
+   "class": "Actor",
+   "folder": "couches/colisee-alliances-3",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-tanarean-empire/StaticMeshes/SM_banner-tanarean-empire.SM_banner-tanarean-empire",
+   "instances": 1,
+   "instancesDigest": "ea808980f7c56838"
+  },
+  {
+   "label": "couche_colisee-alliances-front-3_banner-arcanum",
+   "class": "Actor",
+   "folder": "couches/colisee-alliances-front-3",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-arcanum/StaticMeshes/SM_banner-arcanum.SM_banner-arcanum",
+   "instances": 1,
+   "instancesDigest": "e5f69eebfbbbca3b"
+  },
+  {
+   "label": "couche_colisee-alliances-front-3_banner-darkall",
+   "class": "Actor",
+   "folder": "couches/colisee-alliances-front-3",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-darkall/StaticMeshes/SM_banner-darkall.SM_banner-darkall",
+   "instances": 1,
+   "instancesDigest": "6d1a4780f078fa6d"
+  },
+  {
+   "label": "couche_colisee-delegations-2_banner-bennet",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-bennet/StaticMeshes/SM_banner-bennet.SM_banner-bennet",
+   "instances": 1,
+   "instancesDigest": "4e50a1525e736a76"
+  },
+  {
+   "label": "couche_colisee-delegations-2_banner-empire",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-empire/StaticMeshes/SM_banner-empire.SM_banner-empire",
+   "instances": 1,
+   "instancesDigest": "f7b1eb398b397df5"
+  },
+  {
+   "label": "couche_colisee-delegations-2_banner-freelands",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-freelands/StaticMeshes/SM_banner-freelands.SM_banner-freelands",
+   "instances": 1,
+   "instancesDigest": "2aa2a7afe491a610"
+  },
+  {
+   "label": "couche_colisee-delegations-2_banner-kolbjorn",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-kolbjorn/StaticMeshes/SM_banner-kolbjorn.SM_banner-kolbjorn",
+   "instances": 1,
+   "instancesDigest": "94f85c979afe19b2"
+  },
+  {
+   "label": "couche_colisee-delegations-2_banner-seashores",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-seashores/StaticMeshes/SM_banner-seashores.SM_banner-seashores",
+   "instances": 1,
+   "instancesDigest": "99952c6b1a7ff016"
+  },
+  {
+   "label": "couche_colisee-delegations-2_banner-sindile",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-sindile/StaticMeshes/SM_banner-sindile.SM_banner-sindile",
+   "instances": 1,
+   "instancesDigest": "f913e9cab2f0ebc8"
+  },
+  {
+   "label": "couche_colisee-delegations-2_banner-stravian",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-stravian/StaticMeshes/SM_banner-stravian.SM_banner-stravian",
+   "instances": 1,
+   "instancesDigest": "9aab759560b93e77"
+  },
+  {
+   "label": "couche_colisee-delegations-2_banner-yama",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-yama/StaticMeshes/SM_banner-yama.SM_banner-yama",
+   "instances": 1,
+   "instancesDigest": "7c5dd3f1b481d234"
+  },
+  {
+   "label": "couche_colisee-delegations-front-2_banner-kepesh",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-front-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-kepesh/StaticMeshes/SM_banner-kepesh.SM_banner-kepesh",
+   "instances": 1,
+   "instancesDigest": "cd925c1d71b6fea7"
+  },
+  {
+   "label": "couche_colisee-delegations-front-2_banner-mage-tower",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-front-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-mage-tower/StaticMeshes/SM_banner-mage-tower.SM_banner-mage-tower",
+   "instances": 1,
+   "instancesDigest": "d65580051ccef6bc"
+  },
+  {
+   "label": "couche_colisee-delegations-front-2_banner-storm-islands",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-front-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-storm-islands/StaticMeshes/SM_banner-storm-islands.SM_banner-storm-islands",
+   "instances": 1,
+   "instancesDigest": "5a711248d832b540"
+  },
+  {
+   "label": "couche_colisee-delegations-front-2_banner-taii-maku",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-front-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-taii-maku/StaticMeshes/SM_banner-taii-maku.SM_banner-taii-maku",
+   "instances": 1,
+   "instancesDigest": "0c32ff5847557b63"
+  },
+  {
+   "label": "couche_colisee-delegations-front-2_banner-tsvetan",
+   "class": "Actor",
+   "folder": "couches/colisee-delegations-front-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/banner-tsvetan/StaticMeshes/SM_banner-tsvetan.SM_banner-tsvetan",
+   "instances": 1,
+   "instancesDigest": "3d9df2a9263815fa"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-aibidh",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-aibidh/StaticMeshes/SM_meshy-statue-aibidh.SM_meshy-statue-aibidh",
+   "instances": 1,
+   "instancesDigest": "67726c24106f4b75"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-ba-ka",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-ba-ka/StaticMeshes/SM_meshy-statue-ba-ka.SM_meshy-statue-ba-ka",
+   "instances": 1,
+   "instancesDigest": "fe41fa7c9bb5b5aa"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-bas",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-bas/StaticMeshes/SM_meshy-statue-bas.SM_meshy-statue-bas",
+   "instances": 1,
+   "instancesDigest": "bbe1fe02add90a84"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-bauron",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-bauron/StaticMeshes/SM_meshy-statue-bauron.SM_meshy-statue-bauron",
+   "instances": 1,
+   "instancesDigest": "a2917be7b62a89bc"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-breith",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-breith/StaticMeshes/SM_meshy-statue-breith.SM_meshy-statue-breith",
+   "instances": 1,
+   "instancesDigest": "b3eb6a78b619e4bf"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-dorsi",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-dorsi/StaticMeshes/SM_meshy-statue-dorsi.SM_meshy-statue-dorsi",
+   "instances": 1,
+   "instancesDigest": "1ab73721a428ab37"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-duality",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-duality/StaticMeshes/SM_meshy-statue-duality.SM_meshy-statue-duality",
+   "instances": 1,
+   "instancesDigest": "dc7652881fedd73a"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-fruitful",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-fruitful/StaticMeshes/SM_meshy-statue-fruitful.SM_meshy-statue-fruitful",
+   "instances": 1,
+   "instancesDigest": "eabf42467eca7998"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-fumetsu",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-fumetsu/StaticMeshes/SM_meshy-statue-fumetsu.SM_meshy-statue-fumetsu",
+   "instances": 1,
+   "instancesDigest": "e1be798dc3ba96bb"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-glorious-one",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-glorious-one/StaticMeshes/SM_meshy-statue-glorious-one.SM_meshy-statue-glorious-one",
+   "instances": 1,
+   "instancesDigest": "f179918b1835e240"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-lumina",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-lumina/StaticMeshes/SM_meshy-statue-lumina.SM_meshy-statue-lumina",
+   "instances": 1,
+   "instancesDigest": "be980f7ecacf298f"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-nature-spirits",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-nature-spirits/StaticMeshes/SM_meshy-statue-nature-spirits.SM_meshy-statue-nature-spirits",
+   "instances": 1,
+   "instancesDigest": "55bf16c6ae1e92b4"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-oigridh",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-oigridh/StaticMeshes/SM_meshy-statue-oigridh.SM_meshy-statue-oigridh",
+   "instances": 1,
+   "instancesDigest": "f52125b4f54a4298"
+  },
+  {
+   "label": "couche_colisee-divinites-1_meshy-statue-tamera",
+   "class": "Actor",
+   "folder": "couches/colisee-divinites-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-statue-tamera/StaticMeshes/SM_meshy-statue-tamera.SM_meshy-statue-tamera",
+   "instances": 1,
+   "instancesDigest": "5c905c1fb05372b8"
+  },
+  {
+   "label": "couche_colisee-feux-1_af-pyre",
+   "class": "Actor",
+   "folder": "couches/colisee-feux-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-pyre/StaticMeshes/SM_af-pyre.SM_af-pyre",
+   "instances": 11,
+   "instancesDigest": "d42bf5899b51c478"
+  },
+  {
+   "label": "couche_colisee-gardiens-2_meshy-portal-guardian-lion-left",
+   "class": "Actor",
+   "folder": "couches/colisee-gardiens-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-portal-guardian-lion-left/StaticMeshes/SM_meshy-portal-guardian-lion-left.SM_meshy-portal-guardian-lion-left",
+   "instances": 1,
+   "instancesDigest": "f3cfd183cd4a70d6"
+  },
+  {
+   "label": "couche_colisee-gardiens-2_meshy-portal-guardian-lion-right",
+   "class": "Actor",
+   "folder": "couches/colisee-gardiens-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/meshy-portal-guardian-lion-right/StaticMeshes/SM_meshy-portal-guardian-lion-right.SM_meshy-portal-guardian-lion-right",
+   "instances": 1,
+   "instancesDigest": "926fb64fb91a1e32"
+  },
+  {
+   "label": "couche_colisee-relief-0_af-arena-shell",
+   "class": "Actor",
+   "folder": "couches/colisee-relief-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-arena-shell/StaticMeshes/SM_af-arena-shell.SM_af-arena-shell",
+   "instances": 1,
+   "instancesDigest": "b8fa5694c40d8b7f"
+  },
+  {
+   "label": "couche_colisee-spectateurs-1_af-arena-crowd",
+   "class": "Actor",
+   "folder": "couches/colisee-spectateurs-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-arena-crowd/StaticMeshes/SM_af-arena-crowd.SM_af-arena-crowd",
+   "instances": 1,
+   "instancesDigest": "0c605595b6ad9244"
+  },
+  {
+   "label": "couche_colonnades-0_ar-column",
+   "class": "Actor",
+   "folder": "couches/colonnades-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-column/StaticMeshes/SM_ar-column.SM_ar-column",
+   "instances": 5,
+   "instancesDigest": "9794f94a19e8cf41"
+  },
+  {
+   "label": "couche_enceinte-0_ar-rampart-x",
+   "class": "Actor",
+   "folder": "couches/enceinte-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-rampart-x/StaticMeshes/SM_ar-rampart-x.SM_ar-rampart-x",
+   "instances": 54,
+   "instancesDigest": "39d59c4f0efcea55"
+  },
+  {
+   "label": "couche_enceinte-0_ar-rampart-y",
+   "class": "Actor",
+   "folder": "couches/enceinte-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-rampart-y/StaticMeshes/SM_ar-rampart-y.SM_ar-rampart-y",
+   "instances": 74,
+   "instancesDigest": "8c1fabe7203b208e"
+  },
+  {
+   "label": "couche_enseignes-1_ar-chalice",
+   "class": "Actor",
+   "folder": "couches/enseignes-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-chalice/StaticMeshes/SM_ar-chalice.SM_ar-chalice",
+   "instances": 1,
+   "instancesDigest": "8c8435cd85b42ad7"
+  },
+  {
+   "label": "couche_fontaines-0_ar-fountain",
+   "class": "Actor",
+   "folder": "couches/fontaines-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-fountain/StaticMeshes/SM_ar-fountain.SM_ar-fountain",
+   "instances": 4,
+   "instancesDigest": "d030295cd22af7e5"
+  },
+  {
+   "label": "couche_frontons-2_ar-pediment",
+   "class": "Actor",
+   "folder": "couches/frontons-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-pediment/StaticMeshes/SM_ar-pediment.SM_ar-pediment",
+   "instances": 3,
+   "instancesDigest": "2d63a37df692b22f"
+  },
+  {
+   "label": "couche_hippodrome-0_ar-race-stands-ring",
+   "class": "Actor",
+   "folder": "couches/hippodrome-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-race-stands-ring/StaticMeshes/SM_ar-race-stands-ring.SM_ar-race-stands-ring",
+   "instances": 1,
+   "instancesDigest": "a0f1509a4d98649b"
+  },
+  {
+   "label": "couche_jardins-0_ar-hedge-x",
+   "class": "Actor",
+   "folder": "couches/jardins-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-hedge-x/StaticMeshes/SM_ar-hedge-x.SM_ar-hedge-x",
+   "instances": 20,
+   "instancesDigest": "b8be79dc1d8ab933"
+  },
+  {
+   "label": "couche_jardins-0_ar-hedge-y",
+   "class": "Actor",
+   "folder": "couches/jardins-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-hedge-y/StaticMeshes/SM_ar-hedge-y.SM_ar-hedge-y",
+   "instances": 6,
+   "instancesDigest": "ea139c124b879820"
+  },
+  {
+   "label": "couche_lumieres-0_ar-lamp",
+   "class": "Actor",
+   "folder": "couches/lumieres-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-lamp/StaticMeshes/SM_ar-lamp.SM_ar-lamp",
+   "instances": 28,
+   "instancesDigest": "2c47051c75485296"
+  },
+  {
+   "label": "couche_marche-0_ar-market-art-x",
+   "class": "Actor",
+   "folder": "couches/marche-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-market-art-x/StaticMeshes/SM_ar-market-art-x.SM_ar-market-art-x",
+   "instances": 1,
+   "instancesDigest": "f53daee2506ea454"
+  },
+  {
+   "label": "couche_marche-0_ar-market-cloth-x",
+   "class": "Actor",
+   "folder": "couches/marche-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-market-cloth-x/StaticMeshes/SM_ar-market-cloth-x.SM_ar-market-cloth-x",
+   "instances": 2,
+   "instancesDigest": "d14add6ef8a0691a"
+  },
+  {
+   "label": "couche_marche-0_ar-market-jewels-x",
+   "class": "Actor",
+   "folder": "couches/marche-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-market-jewels-x/StaticMeshes/SM_ar-market-jewels-x.SM_ar-market-jewels-x",
+   "instances": 2,
+   "instancesDigest": "8835f233b1a850cf"
+  },
+  {
+   "label": "couche_marche-0_ar-market-perfume-x",
+   "class": "Actor",
+   "folder": "couches/marche-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-market-perfume-x/StaticMeshes/SM_ar-market-perfume-x.SM_ar-market-perfume-x",
+   "instances": 2,
+   "instancesDigest": "ba207d7f35503d31"
+  },
+  {
+   "label": "couche_marche-0_ar-market-pottery-x",
+   "class": "Actor",
+   "folder": "couches/marche-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-market-pottery-x/StaticMeshes/SM_ar-market-pottery-x.SM_ar-market-pottery-x",
+   "instances": 1,
+   "instancesDigest": "d66e8d572692bd17"
+  },
+  {
+   "label": "couche_mobilier-ar-betting-sign-0_ar-betting-sign",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-betting-sign-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-betting-sign/StaticMeshes/SM_ar-betting-sign.SM_ar-betting-sign",
+   "instances": 1,
+   "instancesDigest": "0f41f625a38e7879"
+  },
+  {
+   "label": "couche_mobilier-ar-board-x-0_ar-board-x",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-board-x-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-board-x/StaticMeshes/SM_ar-board-x.SM_ar-board-x",
+   "instances": 2,
+   "instancesDigest": "ca6b3ab212b50e07"
+  },
+  {
+   "label": "couche_mobilier-ar-bollard-0_ar-bollard",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-bollard-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-bollard/StaticMeshes/SM_ar-bollard.SM_ar-bollard",
+   "instances": 4,
+   "instancesDigest": "54229b243b269e56"
+  },
+  {
+   "label": "couche_mobilier-ar-chair-0_ar-chair",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-chair-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-chair/StaticMeshes/SM_ar-chair.SM_ar-chair",
+   "instances": 2,
+   "instancesDigest": "9e6175ff03580ee9"
+  },
+  {
+   "label": "couche_mobilier-ar-crate-0_ar-crate",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-crate-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-crate/StaticMeshes/SM_ar-crate.SM_ar-crate",
+   "instances": 5,
+   "instancesDigest": "fbed0f834bbb0dea"
+  },
+  {
+   "label": "couche_mobilier-ar-curb-x-0_ar-curb-x",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-curb-x-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-curb-x/StaticMeshes/SM_ar-curb-x.SM_ar-curb-x",
+   "instances": 8,
+   "instancesDigest": "b94d44970b4c5808"
+  },
+  {
+   "label": "couche_mobilier-ar-direction-x-0_ar-direction-x",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-direction-x-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-direction-x/StaticMeshes/SM_ar-direction-x.SM_ar-direction-x",
+   "instances": 5,
+   "instancesDigest": "9f1011ba9d460cde"
+  },
+  {
+   "label": "couche_mobilier-ar-fence-x-0_ar-fence-x",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-fence-x-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-fence-x/StaticMeshes/SM_ar-fence-x.SM_ar-fence-x",
+   "instances": 4,
+   "instancesDigest": "ebd63ccd942cdbc0"
+  },
+  {
+   "label": "couche_mobilier-ar-flowerbed-x-0_ar-flowerbed-x",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-flowerbed-x-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-flowerbed-x/StaticMeshes/SM_ar-flowerbed-x.SM_ar-flowerbed-x",
+   "instances": 4,
+   "instancesDigest": "404abc78560e11b3"
+  },
+  {
+   "label": "couche_mobilier-ar-hayrack-x-0_ar-hayrack-x",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-hayrack-x-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-hayrack-x/StaticMeshes/SM_ar-hayrack-x.SM_ar-hayrack-x",
+   "instances": 3,
+   "instancesDigest": "34a9e4dcee9c6937"
+  },
+  {
+   "label": "couche_mobilier-ar-pergola-x-0_ar-pergola-x",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-pergola-x-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-pergola-x/StaticMeshes/SM_ar-pergola-x.SM_ar-pergola-x",
+   "instances": 4,
+   "instancesDigest": "0dd45eae597736fa"
+  },
+  {
+   "label": "couche_mobilier-ar-planter-0_ar-planter",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-planter-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-planter/StaticMeshes/SM_ar-planter.SM_ar-planter",
+   "instances": 8,
+   "instancesDigest": "f8ab430595e971c7"
+  },
+  {
+   "label": "couche_mobilier-ar-starting-stall-open-x-0_ar-starting-stall-open-x",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-starting-stall-open-x-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-starting-stall-open-x/StaticMeshes/SM_ar-starting-stall-open-x.SM_ar-starting-stall-open-x",
+   "instances": 8,
+   "instancesDigest": "38fc6220451c95eb"
+  },
+  {
+   "label": "couche_mobilier-ar-table-round-0_ar-table-round",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-table-round-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-table-round/StaticMeshes/SM_ar-table-round.SM_ar-table-round",
+   "instances": 3,
+   "instancesDigest": "0c1811514db0aa86"
+  },
+  {
+   "label": "couche_mobilier-ar-topiary-ball-0_ar-topiary-ball",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-topiary-ball-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-topiary-ball/StaticMeshes/SM_ar-topiary-ball.SM_ar-topiary-ball",
+   "instances": 6,
+   "instancesDigest": "3cd942daaeb8cb13"
+  },
+  {
+   "label": "couche_mobilier-ar-topiary-spiral-0_ar-topiary-spiral",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-topiary-spiral-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-topiary-spiral/StaticMeshes/SM_ar-topiary-spiral.SM_ar-topiary-spiral",
+   "instances": 4,
+   "instancesDigest": "8ef57d39fca4ab16"
+  },
+  {
+   "label": "couche_mobilier-ar-trough-x-0_ar-trough-x",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-trough-x-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-trough-x/StaticMeshes/SM_ar-trough-x.SM_ar-trough-x",
+   "instances": 3,
+   "instancesDigest": "e6bcdba2eac3bcf3"
+  },
+  {
+   "label": "couche_mobilier-ar-urn-flowers-0_ar-urn-flowers",
+   "class": "Actor",
+   "folder": "couches/mobilier-ar-urn-flowers-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-urn-flowers/StaticMeshes/SM_ar-urn-flowers.SM_ar-urn-flowers",
+   "instances": 11,
+   "instancesDigest": "27a3d065254f080d"
+  },
+  {
+   "label": "couche_piste-0_ar-race-oval",
+   "class": "Actor",
+   "folder": "couches/piste-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-race-oval/StaticMeshes/SM_ar-race-oval.SM_ar-race-oval",
+   "instances": 1,
+   "instancesDigest": "a0f1509a4d98649b"
+  },
+  {
+   "label": "couche_pont-0_ar-bridge",
+   "class": "Actor",
+   "folder": "couches/pont-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-bridge/StaticMeshes/SM_ar-bridge.SM_ar-bridge",
+   "instances": 1,
+   "instancesDigest": "436faf6177731b4f"
+  },
+  {
+   "label": "couche_portes-0_ar-gate",
+   "class": "Actor",
+   "folder": "couches/portes-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-gate/StaticMeshes/SM_ar-gate.SM_ar-gate",
+   "instances": 2,
+   "instancesDigest": "c71feea067ab4734"
+  },
+  {
+   "label": "couche_portiques-0_ar-portico",
+   "class": "Actor",
+   "folder": "couches/portiques-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-portico/StaticMeshes/SM_ar-portico.SM_ar-portico",
+   "instances": 5,
+   "instancesDigest": "8a5a48da9ee181f1"
+  },
+  {
+   "label": "couche_quais-0_ar-quay-y",
+   "class": "Actor",
+   "folder": "couches/quais-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-quay-y/StaticMeshes/SM_ar-quay-y.SM_ar-quay-y",
+   "instances": 40,
+   "instancesDigest": "099f7af1f7cdea47"
+  },
+  {
+   "label": "couche_reservations-0_ar-pedestal",
+   "class": "Actor",
+   "folder": "couches/reservations-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-pedestal/StaticMeshes/SM_ar-pedestal.SM_ar-pedestal",
+   "instances": 1,
+   "instancesDigest": "fd6bec8c96bba42a"
+  },
+  {
+   "label": "couche_sculptures-0_ar-meshy-champion-anonyme",
+   "class": "Actor",
+   "folder": "couches/sculptures-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-meshy-champion-anonyme/StaticMeshes/SM_ar-meshy-champion-anonyme.SM_ar-meshy-champion-anonyme",
+   "instances": 1,
+   "instancesDigest": "fd6bec8c96bba42a"
+  },
+  {
+   "label": "couche_sculptures-0_ar-meshy-char-de-course",
+   "class": "Actor",
+   "folder": "couches/sculptures-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-meshy-char-de-course/StaticMeshes/SM_ar-meshy-char-de-course.SM_ar-meshy-char-de-course",
+   "instances": 1,
+   "instancesDigest": "edf5d76e115b205e"
+  },
+  {
+   "label": "couche_sculptures-0_ar-meshy-enseigne-brasseur",
+   "class": "Actor",
+   "folder": "couches/sculptures-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-meshy-enseigne-brasseur/StaticMeshes/SM_ar-meshy-enseigne-brasseur.SM_ar-meshy-enseigne-brasseur",
+   "instances": 1,
+   "instancesDigest": "d0b15bb6e82996ce"
+  },
+  {
+   "label": "couche_sol_af-paving-a",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-paving-a/StaticMeshes/SM_af-paving-a.SM_af-paving-a",
+   "instances": 5,
+   "instancesDigest": "bd45cd7bc626a53a"
+  },
+  {
+   "label": "couche_sol_af-paving-b",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-paving-b/StaticMeshes/SM_af-paving-b.SM_af-paving-b",
+   "instances": 6,
+   "instancesDigest": "7db807b5fff469b2"
+  },
+  {
+   "label": "couche_sol_af-paving-c",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-paving-c/StaticMeshes/SM_af-paving-c.SM_af-paving-c",
+   "instances": 5,
+   "instancesDigest": "b61b1c0698f366f9"
+  },
+  {
+   "label": "couche_sol_af-sand-a",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-sand-a/StaticMeshes/SM_af-sand-a.SM_af-sand-a",
+   "instances": 106,
+   "instancesDigest": "695ea7244bc32152"
+  },
+  {
+   "label": "couche_sol_af-sand-b",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-sand-b/StaticMeshes/SM_af-sand-b.SM_af-sand-b",
+   "instances": 106,
+   "instancesDigest": "91f626f6463ce4c8"
+  },
+  {
+   "label": "couche_sol_af-sand-c",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-sand-c/StaticMeshes/SM_af-sand-c.SM_af-sand-c",
+   "instances": 100,
+   "instancesDigest": "462f164af756e56c"
+  },
+  {
+   "label": "couche_sol_ar-drain-x",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-drain-x/StaticMeshes/SM_ar-drain-x.SM_ar-drain-x",
+   "instances": 10,
+   "instancesDigest": "d267a5b69216ef07"
+  },
+  {
+   "label": "couche_sol_ar-grass",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-grass/StaticMeshes/SM_ar-grass.SM_ar-grass",
+   "instances": 1714,
+   "instancesDigest": "e6e139ca27013080"
+  },
+  {
+   "label": "couche_sol_ar-inlay-band",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-inlay-band/StaticMeshes/SM_ar-inlay-band.SM_ar-inlay-band",
+   "instances": 22,
+   "instancesDigest": "95dc172350207711"
+  },
+  {
+   "label": "couche_sol_ar-inlay-medallion",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-inlay-medallion/StaticMeshes/SM_ar-inlay-medallion.SM_ar-inlay-medallion",
+   "instances": 4,
+   "instancesDigest": "ad131f6259fa5326"
+  },
+  {
+   "label": "couche_sol_ar-marble-1",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-marble-1/StaticMeshes/SM_ar-marble-1.SM_ar-marble-1",
+   "instances": 1871,
+   "instancesDigest": "082f5bba3071f9c6"
+  },
+  {
+   "label": "couche_sol_ar-marble-2",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-marble-2/StaticMeshes/SM_ar-marble-2.SM_ar-marble-2",
+   "instances": 1829,
+   "instancesDigest": "8b09a9fe359c0bf4"
+  },
+  {
+   "label": "couche_sol_ar-marble-3",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-marble-3/StaticMeshes/SM_ar-marble-3.SM_ar-marble-3",
+   "instances": 1798,
+   "instancesDigest": "cb5c55ddc3e6dd63"
+  },
+  {
+   "label": "couche_sol_ar-paving-1",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-paving-1/StaticMeshes/SM_ar-paving-1.SM_ar-paving-1",
+   "instances": 615,
+   "instancesDigest": "880651c6e81098ef"
+  },
+  {
+   "label": "couche_sol_ar-paving-2",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-paving-2/StaticMeshes/SM_ar-paving-2.SM_ar-paving-2",
+   "instances": 676,
+   "instancesDigest": "f0ec4d5dac60b2cd"
+  },
+  {
+   "label": "couche_sol_ar-paving-3",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-paving-3/StaticMeshes/SM_ar-paving-3.SM_ar-paving-3",
+   "instances": 661,
+   "instancesDigest": "0c54a5daa1d791a4"
+  },
+  {
+   "label": "couche_sol_ar-sand",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-sand/StaticMeshes/SM_ar-sand.SM_ar-sand",
+   "instances": 48,
+   "instancesDigest": "d649267f697bac6f"
+  },
+  {
+   "label": "couche_sol_ar-water",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-water/StaticMeshes/SM_ar-water.SM_ar-water",
+   "instances": 1688,
+   "instancesDigest": "5e86a705bd4d8b3f"
+  },
+  {
+   "label": "couche_spina-0_ar-lowwall-y",
+   "class": "Actor",
+   "folder": "couches/spina-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-lowwall-y/StaticMeshes/SM_ar-lowwall-y.SM_ar-lowwall-y",
+   "instances": 9,
+   "instancesDigest": "407de29bdd3584b1"
+  },
+  {
+   "label": "couche_toits-1_ar-roof-2-x",
+   "class": "Actor",
+   "folder": "couches/toits-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-roof-2-x/StaticMeshes/SM_ar-roof-2-x.SM_ar-roof-2-x",
+   "instances": 66,
+   "instancesDigest": "fcc6b51f40927422"
+  },
+  {
+   "label": "couche_toits-1_ar-roof-4-x",
+   "class": "Actor",
+   "folder": "couches/toits-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-roof-4-x/StaticMeshes/SM_ar-roof-4-x.SM_ar-roof-4-x",
+   "instances": 93,
+   "instancesDigest": "2ba9518a720e52d5"
+  },
+  {
+   "label": "couche_toits-2_ar-roof-2-x",
+   "class": "Actor",
+   "folder": "couches/toits-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-roof-2-x/StaticMeshes/SM_ar-roof-2-x.SM_ar-roof-2-x",
+   "instances": 4,
+   "instancesDigest": "e3d18056ad79029b"
+  },
+  {
+   "label": "couche_toits-2_ar-roof-4-x",
+   "class": "Actor",
+   "folder": "couches/toits-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-roof-4-x/StaticMeshes/SM_ar-roof-4-x.SM_ar-roof-4-x",
+   "instances": 74,
+   "instancesDigest": "3e868b3e8f97c8e2"
+  },
+  {
+   "label": "couche_tours-base-0_ar-tower-base",
+   "class": "Actor",
+   "folder": "couches/tours-base-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-tower-base/StaticMeshes/SM_ar-tower-base.SM_ar-tower-base",
+   "instances": 4,
+   "instancesDigest": "b491ef3d361e750f"
+  },
+  {
+   "label": "couche_tours-couronne-2_ar-tower-crown",
+   "class": "Actor",
+   "folder": "couches/tours-couronne-2",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-tower-crown/StaticMeshes/SM_ar-tower-crown.SM_ar-tower-crown",
+   "instances": 4,
+   "instancesDigest": "017bb50fe641f4c6"
+  },
+  {
+   "label": "couche_tours-etage-1_ar-tower-storey",
+   "class": "Actor",
+   "folder": "couches/tours-etage-1",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-tower-storey/StaticMeshes/SM_ar-tower-storey.SM_ar-tower-storey",
+   "instances": 4,
+   "instancesDigest": "3ecd733f75a39bd0"
+  },
+  {
+   "label": "couche_vegetation-0_ar-meshy-cypres",
+   "class": "Actor",
+   "folder": "couches/vegetation-0",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/arenarea/ar-meshy-cypres/StaticMeshes/SM_ar-meshy-cypres.SM_ar-meshy-cypres",
+   "instances": 69,
+   "instancesDigest": "a7828b91f6a10d14"
+  },
+  {
+   "label": "entite_e10_spawnPoint",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    15675.0,
+    4725.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e10"
+   ]
+  },
+  {
+   "label": "entite_e11_spawnPoint",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    15675.0,
+    10575.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e11"
+   ]
+  },
+  {
+   "label": "entite_e1_spawnPoint",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    17475.0,
+    12825.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e1"
+   ]
+  },
+  {
+   "label": "entite_e2_portal",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    17475.0,
+    12975.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e2"
+   ]
+  },
+  {
+   "label": "entite_e3_spawnPoint",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    9825.0,
+    5175.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e3"
+   ]
+  },
+  {
+   "label": "entite_e4_portal",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    9825.0,
+    5025.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e4"
+   ]
+  },
+  {
+   "label": "entite_e5_npc",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    9675.0,
+    5625.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e5"
+   ]
+  },
+  {
+   "label": "entite_e6_npc",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    9825.0,
+    5625.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e6"
+   ]
+  },
+  {
+   "label": "entite_e7_zone",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    9075.0,
+    5325.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e7"
+   ]
+  },
+  {
+   "label": "entite_e8_portal",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    17775.0,
+    2625.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e8"
+   ]
+  },
+  {
+   "label": "entite_e9_portal",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    1275.0,
+    4275.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e9"
+   ]
+  },
+  {
+   "label": "Navigation",
+   "class": "NavMeshBoundsVolume",
+   "folder": "navigation",
+   "location": [
+    9600.0,
+    6600.0,
+    550.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Depart",
+   "class": "PlayerStart",
+   "folder": "personnages",
+   "location": [
+    17475.0,
+    12825.0,
+    97.80000000000001
+   ],
+   "rotation": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "groupe-1",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    17475.0,
+    12825.0,
+    97.80000000000001
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "heros-brawler",
+   "entity_id": "",
+   "party_rank": 0
+  },
+  {
+   "label": "groupe-2",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    17475.0,
+    12825.0,
+    90.30000000000001
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "heros-mage",
+   "entity_id": "",
+   "party_rank": 1
+  },
+  {
+   "label": "groupe-3",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    17475.0,
+    12825.0,
+    72.60000000000001
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "heros-priest",
+   "entity_id": "",
+   "party_rank": 2
+  },
+  {
+   "label": "groupe-4",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    17475.0,
+    12825.0,
+    85.10000000000001
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "heros-scoundrel",
+   "entity_id": "",
+   "party_rank": 3
+  },
+  {
+   "label": "pnj-e5",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    9675.0,
+    5625.0,
+    90.30000000000001
+   ],
+   "rotation": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "pantin",
+   "entity_id": "e5",
+   "party_rank": -1
+  },
+  {
+   "label": "pnj-e6",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    9825.0,
+    5625.0,
+    90.30000000000001
+   ],
+   "rotation": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "pantin",
+   "entity_id": "e6",
+   "party_rank": -1
+  }
+ ]
+}

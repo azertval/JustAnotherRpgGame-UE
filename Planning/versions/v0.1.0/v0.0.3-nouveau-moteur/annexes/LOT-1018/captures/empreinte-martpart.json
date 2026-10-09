@@ -1,0 +1,1277 @@
+{
+ "map": "central-empire/capital/martpart",
+ "digest": "2d9f94ed45d4207e7be6f7338653940c5bbd9316f72992b660e7e8f5f9af948b",
+ "actors": 54,
+ "seconds": 108.8,
+ "placingSeconds": 108.2,
+ "imports": 27,
+ "importSeconds": 94.1,
+ "layerPieces": 10104,
+ "objects": 0,
+ "fillTiles": 0,
+ "prefabObjects": 0,
+ "characters": 6,
+ "terrainVertices": 0,
+ "missingPieces": 113,
+ "detail": [
+  {
+   "label": "BuoyancyManager0",
+   "class": "BuoyancyManager",
+   "folder": "None",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Cadrage_ensemble",
+   "class": "JadgShot",
+   "folder": "cadrages",
+   "location": [
+    8400.0,
+    6600.0,
+    100.0
+   ],
+   "rotation": [
+    -50.0,
+    -90.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "shot_id": "ensemble",
+   "distance": 15120.0
+  },
+  {
+   "label": "Carte",
+   "class": "JadgMapFrame",
+   "folder": "carte",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "level_id": "central-empire/capital/martpart",
+   "levels_root": "",
+   "storey_heights": []
+  },
+  {
+   "label": "Atmosphere",
+   "class": "SkyAtmosphere",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Brume",
+   "class": "ExponentialHeightFog",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Exposition",
+   "class": "PostProcessVolume",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Jour",
+   "class": "JadgDayLight",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "LumiereDuCiel",
+   "class": "SkyLight",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    3000.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Soleil",
+   "class": "DirectionalLight",
+   "folder": "ciel",
+   "location": [
+    0.0,
+    0.0,
+    3000.0
+   ],
+   "rotation": [
+    -86.0,
+    180.0,
+    180.0
+   ],
+   "scale": [
+    2.5,
+    2.5,
+    2.5
+   ],
+   "tags": []
+  },
+  {
+   "label": "couche_bancs_mp-bench",
+   "class": "Actor",
+   "folder": "couches/bancs",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-bench/StaticMeshes/SM_mp-bench.SM_mp-bench",
+   "instances": 4,
+   "instancesDigest": "b1516b19f47ed893"
+  },
+  {
+   "label": "couche_batiments_mp-meshy-merchant-house-imperial",
+   "class": "Actor",
+   "folder": "couches/batiments",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-meshy-merchant-house-imperial/StaticMeshes/SM_mp-meshy-merchant-house-imperial.SM_mp-meshy-merchant-house-imperial",
+   "instances": 26,
+   "instancesDigest": "6389778a0c01fa88"
+  },
+  {
+   "label": "couche_batiments_mp-meshy-merchant-house-taiimaku",
+   "class": "Actor",
+   "folder": "couches/batiments",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-meshy-merchant-house-taiimaku/StaticMeshes/SM_mp-meshy-merchant-house-taiimaku.SM_mp-meshy-merchant-house-taiimaku",
+   "instances": 28,
+   "instancesDigest": "b86146c60ef3e043"
+  },
+  {
+   "label": "couche_batiments_mp-meshy-merchant-house-timber",
+   "class": "Actor",
+   "folder": "couches/batiments",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-meshy-merchant-house-timber/StaticMeshes/SM_mp-meshy-merchant-house-timber.SM_mp-meshy-merchant-house-timber",
+   "instances": 28,
+   "instancesDigest": "6d98a4cc082b3c68"
+  },
+  {
+   "label": "couche_enceinte_mp-rampart-y",
+   "class": "Actor",
+   "folder": "couches/enceinte",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-rampart-y/StaticMeshes/SM_mp-rampart-y.SM_mp-rampart-y",
+   "instances": 40,
+   "instancesDigest": "0505fd9ac086016d"
+  },
+  {
+   "label": "couche_etals_mp-stall-fabric",
+   "class": "Actor",
+   "folder": "couches/etals",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-stall-fabric/StaticMeshes/SM_mp-stall-fabric.SM_mp-stall-fabric",
+   "instances": 5,
+   "instancesDigest": "24f4ba99ed0e65f9"
+  },
+  {
+   "label": "couche_etals_mp-stall-fruit",
+   "class": "Actor",
+   "folder": "couches/etals",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-stall-fruit/StaticMeshes/SM_mp-stall-fruit.SM_mp-stall-fruit",
+   "instances": 5,
+   "instancesDigest": "4e21a8594686893b"
+  },
+  {
+   "label": "couche_etals_mp-stall-pottery",
+   "class": "Actor",
+   "folder": "couches/etals",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-stall-pottery/StaticMeshes/SM_mp-stall-pottery.SM_mp-stall-pottery",
+   "instances": 6,
+   "instancesDigest": "5e17afe52a574c17"
+  },
+  {
+   "label": "couche_etals_mp-stall-spices",
+   "class": "Actor",
+   "folder": "couches/etals",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-stall-spices/StaticMeshes/SM_mp-stall-spices.SM_mp-stall-spices",
+   "instances": 5,
+   "instancesDigest": "07cc59d54701873b"
+  },
+  {
+   "label": "couche_fontaines_mp-fountain",
+   "class": "Actor",
+   "folder": "couches/fontaines",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-fountain/StaticMeshes/SM_mp-fountain.SM_mp-fountain",
+   "instances": 1,
+   "instancesDigest": "9bc92100dd4ce316"
+  },
+  {
+   "label": "couche_frontons_mp-meshy-market-end-fronton",
+   "class": "Actor",
+   "folder": "couches/frontons",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-meshy-market-end-fronton/StaticMeshes/SM_mp-meshy-market-end-fronton.SM_mp-meshy-market-end-fronton",
+   "instances": 2,
+   "instancesDigest": "7518e52a9aca5c69"
+  },
+  {
+   "label": "couche_lanternes_mp-lamp",
+   "class": "Actor",
+   "folder": "couches/lanternes",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-lamp/StaticMeshes/SM_mp-lamp.SM_mp-lamp",
+   "instances": 19,
+   "instancesDigest": "e3303de08dbfebdd"
+  },
+  {
+   "label": "couche_linge_mp-laundry",
+   "class": "Actor",
+   "folder": "couches/linge",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-laundry/StaticMeshes/SM_mp-laundry.SM_mp-laundry",
+   "instances": 3,
+   "instancesDigest": "9051a5e74d8aa277"
+  },
+  {
+   "label": "couche_lumieres_mp-lamp",
+   "class": "Actor",
+   "folder": "couches/lumieres",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-lamp/StaticMeshes/SM_mp-lamp.SM_mp-lamp",
+   "instances": 12,
+   "instancesDigest": "cfa78d3331589c32"
+  },
+  {
+   "label": "couche_magie_mp-meshy-illu-die-light-standard",
+   "class": "Actor",
+   "folder": "couches/magie",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-meshy-illu-die-light-standard/StaticMeshes/SM_mp-meshy-illu-die-light-standard.SM_mp-meshy-illu-die-light-standard",
+   "instances": 8,
+   "instancesDigest": "4b465a40c9a37a77"
+  },
+  {
+   "label": "couche_monuments_mp-hall",
+   "class": "Actor",
+   "folder": "couches/monuments",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-hall/StaticMeshes/SM_mp-hall.SM_mp-hall",
+   "instances": 1,
+   "instancesDigest": "17af472dc04a9d1e"
+  },
+  {
+   "label": "couche_monuments_mp-illu-die",
+   "class": "Actor",
+   "folder": "couches/monuments",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-illu-die/StaticMeshes/SM_mp-illu-die.SM_mp-illu-die",
+   "instances": 1,
+   "instancesDigest": "893c496784cea099"
+  },
+  {
+   "label": "couche_monuments_mp-meshy-shaft-capstan",
+   "class": "Actor",
+   "folder": "couches/monuments",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-meshy-shaft-capstan/StaticMeshes/SM_mp-meshy-shaft-capstan.SM_mp-meshy-shaft-capstan",
+   "instances": 1,
+   "instancesDigest": "0399661ed1f56801"
+  },
+  {
+   "label": "couche_quais_mp-quay-y",
+   "class": "Actor",
+   "folder": "couches/quais",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-quay-y/StaticMeshes/SM_mp-quay-y.SM_mp-quay-y",
+   "instances": 40,
+   "instancesDigest": "352a0e6eeda70648"
+  },
+  {
+   "label": "couche_service_mp-crate",
+   "class": "Actor",
+   "folder": "couches/service",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-crate/StaticMeshes/SM_mp-crate.SM_mp-crate",
+   "instances": 7,
+   "instancesDigest": "085a39c5a0764968"
+  },
+  {
+   "label": "couche_seuils_mp-bridge",
+   "class": "Actor",
+   "folder": "couches/seuils",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-bridge/StaticMeshes/SM_mp-bridge.SM_mp-bridge",
+   "instances": 1,
+   "instancesDigest": "7035184e0515a024"
+  },
+  {
+   "label": "couche_seuils_mp-gate",
+   "class": "Actor",
+   "folder": "couches/seuils",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-gate/StaticMeshes/SM_mp-gate.SM_mp-gate",
+   "instances": 1,
+   "instancesDigest": "748b89e79fbced32"
+  },
+  {
+   "label": "couche_sol_mp-marble",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-marble/StaticMeshes/SM_mp-marble.SM_mp-marble",
+   "instances": 2119,
+   "instancesDigest": "eb921b2d18571883"
+  },
+  {
+   "label": "couche_sol_mp-paving-1",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-paving-1/StaticMeshes/SM_mp-paving-1.SM_mp-paving-1",
+   "instances": 2456,
+   "instancesDigest": "c4cc3460cae19d6b"
+  },
+  {
+   "label": "couche_sol_mp-paving-2",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-paving-2/StaticMeshes/SM_mp-paving-2.SM_mp-paving-2",
+   "instances": 2389,
+   "instancesDigest": "5fb82a3797a5feda"
+  },
+  {
+   "label": "couche_sol_mp-paving-3",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-paving-3/StaticMeshes/SM_mp-paving-3.SM_mp-paving-3",
+   "instances": 2382,
+   "instancesDigest": "b068e1df5a088e35"
+  },
+  {
+   "label": "couche_sol_mp-water",
+   "class": "Actor",
+   "folder": "couches/sol",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-water/StaticMeshes/SM_mp-water.SM_mp-water",
+   "instances": 510,
+   "instancesDigest": "a29ab64f0b59b4e8"
+  },
+  {
+   "label": "couche_tonneaux_mp-barrel",
+   "class": "Actor",
+   "folder": "couches/tonneaux",
+   "location": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "mesh": "/Game/Kit/Regions/central-empire/capital/martpart/mp-barrel/StaticMeshes/SM_mp-barrel.SM_mp-barrel",
+   "instances": 4,
+   "instancesDigest": "e3eb1b6c0129eb88"
+  },
+  {
+   "label": "entite_e1_npc",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    4425.0,
+    5475.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e1"
+   ]
+  },
+  {
+   "label": "entite_e2_npc",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    4425.0,
+    5625.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e2"
+   ]
+  },
+  {
+   "label": "entite_e3_spawnPoint",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    1275.0,
+    375.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e3"
+   ]
+  },
+  {
+   "label": "entite_e4_portal",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    1275.0,
+    75.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e4"
+   ]
+  },
+  {
+   "label": "entite_e5_spawnPoint",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    14325.0,
+    1575.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e5"
+   ]
+  },
+  {
+   "label": "entite_e6_portal",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    16575.0,
+    1575.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e6"
+   ]
+  },
+  {
+   "label": "entite_e7_portal",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    75.0,
+    6975.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e7"
+   ]
+  },
+  {
+   "label": "entite_e8_portal",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    7275.0,
+    13125.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e8"
+   ]
+  },
+  {
+   "label": "entite_e9_portal",
+   "class": "TargetPoint",
+   "folder": "entites",
+   "location": [
+    15075.0,
+    13125.0,
+    0.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [
+    "JadgMarker:e9"
+   ]
+  },
+  {
+   "label": "Navigation",
+   "class": "NavMeshBoundsVolume",
+   "folder": "navigation",
+   "location": [
+    8400.0,
+    6600.0,
+    550.0
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "Depart",
+   "class": "PlayerStart",
+   "folder": "personnages",
+   "location": [
+    14325.0,
+    1575.0,
+    97.80000000000001
+   ],
+   "rotation": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": []
+  },
+  {
+   "label": "groupe-1",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    14325.0,
+    1575.0,
+    97.80000000000001
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "heros-brawler",
+   "entity_id": "",
+   "party_rank": 0
+  },
+  {
+   "label": "groupe-2",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    14325.0,
+    1575.0,
+    90.30000000000001
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "heros-mage",
+   "entity_id": "",
+   "party_rank": 1
+  },
+  {
+   "label": "groupe-3",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    14325.0,
+    1575.0,
+    72.60000000000001
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "heros-priest",
+   "entity_id": "",
+   "party_rank": 2
+  },
+  {
+   "label": "groupe-4",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    14325.0,
+    1575.0,
+    85.10000000000001
+   ],
+   "rotation": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "heros-scoundrel",
+   "entity_id": "",
+   "party_rank": 3
+  },
+  {
+   "label": "pnj-e1",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    4425.0,
+    5475.0,
+    90.30000000000001
+   ],
+   "rotation": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "pantin",
+   "entity_id": "e1",
+   "party_rank": -1
+  },
+  {
+   "label": "pnj-e2",
+   "class": "JadgWalker",
+   "folder": "personnages",
+   "location": [
+    4425.0,
+    5625.0,
+    90.30000000000001
+   ],
+   "rotation": [
+    0.0,
+    -90.0,
+    0.0
+   ],
+   "scale": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "tags": [],
+   "appearance": "pantin",
+   "entity_id": "e2",
+   "party_rank": -1
+  }
+ ]
+}

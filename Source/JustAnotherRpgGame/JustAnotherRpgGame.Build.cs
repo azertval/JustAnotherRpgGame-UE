@@ -63,6 +63,8 @@ public class JustAnotherRpgGame : ModuleRules
 			PrivateDependencyModuleNames.Add("UnrealEd");
 			// Le graphe du créateur se construit par réflexion sur les nœuds du plugin (JadgCreatorGraph).
 			PrivateDependencyModuleNames.Add("CustomizableObjectEditor");
+			// Le terrain d'une carte se crée depuis ses hauteurs et ses couches (Scene/JadgSceneBuild, LOT-1018).
+			PrivateDependencyModuleNames.Add("Landscape");
 		}
 	}
 }

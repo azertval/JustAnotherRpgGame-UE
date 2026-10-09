@@ -55,6 +55,23 @@ public:
     /// @brief Le meneur est en @p leader : un nouveau point si l'écart au dernier le mérite.
     void record(TrailPoint leader);
 
+    /**
+     * @brief Le meneur est en @p leader, ses pieds à la hauteur @p height (D-51, `LOT-1018`) :
+     *        un nouveau point si l'écart au dernier le mérite, avec sa hauteur.
+     *
+     * La trace se mesure au sol, en cases ; la hauteur est portée par chaque point, pour qu'un
+     * suiveur qui monte l'escalier derrière le meneur le suive à l'étage au lieu de chercher sa
+     * place au rez, sous ses pieds. L'unité de la hauteur est celle de l'appelant.
+     */
+    void record(TrailPoint leader, float height);
+
+    /// @brief `reset` avec la hauteur de chaque point (même longueur que @p points).
+    void reset(const std::vector<TrailPoint>& points, const std::vector<float>& heights);
+
+    /// @return La hauteur de la trace à @p distance cases derrière le meneur, interpolée comme
+    ///         `pointBehind` ; 0 sur une trace sans hauteur.
+    [[nodiscard]] float heightBehind(float distance) const;
+
     /// @brief Ne garde que @p length cases de trace : au-delà, aucun suiveur ne se tient.
     void keep(float length);
 
@@ -80,6 +97,8 @@ public:
 
 private:
     std::deque<TrailPoint> _points;
+    /// La hauteur de chaque point, dans le même ordre (D-51).
+    std::deque<float> _heights;
     /// Longueur gardée ; 0 : tout.
     float _kept = 0.0F;
 };

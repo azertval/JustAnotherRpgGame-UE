@@ -21,7 +21,7 @@ ne change avant le LOT-1004. Ce script écrit ces données, sous `Source/Test/Fi
   suit un seul os et chaque clip tient en trois clés : ce qu'un test attend d'une pose se calcule
   de tête ;
 - le **repère** de la scène du socle (LOT-1014) : un bloc dissymétrique sur ses trois axes, sur
-  lequel `scripts/maps/build_scene_unreal.py` mesure ce que deviennent les axes d'un `.glb` dans
+  lequel `scripts/maps/build_level.py` mesure ce que deviennent les axes d'un `.glb` dans
   Unreal, sans kit d'assets.
 
 Rien ne s'y retouche à la main, et rien n'y dépend d'une bibliothèque : le `.glb` et le PNG sont

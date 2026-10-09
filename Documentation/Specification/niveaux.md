@@ -1,10 +1,11 @@
 # Cartes & format
 
-> Statut : **livré**. Format JSON versionné (version 4 depuis le `LOT-EDITOR-12`), chargement,
-> validation, couches à pièces nommées, collision déduite et cases forcées, entités à identifiant,
-> zones peintes, variantes ; les quatre cartes de la démo (`central-empire/capital/`) sont livrées
-> dans ce format.
-> Dépend de [`gameplay.md`](gameplay.md). Schéma publié :
+> Statut : **format v5 livré au `LOT-1018`** (`jadg-map` : une description par carte, ce que Core
+> joue et ce que le moteur construit, étages praticables, volumes ; construite en niveau par
+> `scripts/maps/build_level.py`, relue par `scripts/maps/read_level.py` ; §2). Les quatre cartes de
+> la démo (`central-empire/capital/`) sont **migrées** de la v4 telles quelles. La §1 décrit la
+> grille et les entités, communes aux deux versions, et la v4, que Core lit toujours.
+> Dépend de [`gameplay.md`](gameplay.md). Schéma publié (v5) :
 > `Documentation/Specification/level.schema.json`.
 
 ## 1. Représentation des cartes
@@ -98,13 +99,14 @@ La seule révision de format du module éditeur, faite tant qu'il n'y avait que 
 - **EX-LVL-024** — La **hauteur par case** est réservée : `"elevation"` par case de couche et par
   entité, lue, gardée et réécrite ; ni le jeu ni l'éditeur ne s'en servent, et le contrôle signale
   toute valeur non nulle. `"floor"` par couche, réservé jusqu'au `LOT-129`, est joué par
-  `EX-LVL-025`.
+  `EX-LVL-025`. Une carte **v5** refuse l'une et l'autre (D-51, `EX-LVL-032`).
 - **EX-LVL-025** — Une couche de **décor** à l'étage `"floor"` n (1 à 4) est un **étage** : ses
   pièces se dessinent élevées de n hauteurs d'étage, que déclare le manifeste de leur lieu
   (`"storey"`, en pixels d'art), triées au-dessus du rez de leur case ; un étage qui masque le héros
   se dessine translucide. Un étage ne compte pas dans la collision, qui ne dit que le rez. Un étage
   sur une couche de sol, ou hors de 0 à 4, est gardé mais ignoré, et le contrôle le signale
-  (`LOT-129`).
+  (`LOT-129`). La migration en v5 fait de cet étage de décor une hauteur en mètres (`z`, 3 m par
+  étage, provisoire) ; l'étage **praticable** est celui de la v5 (`EX-LVL-032`).
 
 ![Maquette des étages d'une carte : vue de côté, les couches de décor à l'étage 1 et 2 élevées d'une et de deux hauteurs d'étage au-dessus du rez de leur case, triées par-dessus ; vue isométrique, la façade à deux étages dont l'étage qui masque le héros se dessine translucide, et la grille de collision qui ne connaît que le rez](maquettes/niveaux-etages-toits.svg)
 
@@ -278,7 +280,144 @@ redimensionnement de la carte cible (`EX-EDIT-052`) :
 Coordonnées `x` = colonne, `y` = ligne, origine **haut-gauche** ; toute tuile hors des bornes
 `width × height` est invalide.
 
-## 2. Conception (lignes directrices)
+## 2. Le format v5, `jadg-map`, et sa chaîne (`LOT-1018`)
+
+Le format v4 est une grille de cases : sans rotation ni terrain, il ne porte pas la ville de
+l'atlas (D-51). La v5 garde ce que la v4 avait de juste — une carte est un **fichier texte**, la
+grille de collision et les entités que Core joue, les identifiants qui ne changent jamais — et y
+ajoute ce que le moteur construit. Le texte est la **source**, le niveau du moteur une **sortie**
+(D-52) : la description est ce que Git relit, ce que les contrôles lisent, ce que l'assistant écrit.
+
+- **EX-LVL-031** — Une carte du jeu est **une seule description** au format `jadg-map`, version 5,
+  qui se **déclare** (`"format": "jadg-map"`, `"version": 5`) et dit à la fois ce que Core joue — la
+  grille de collision du rez (`tiles`, `forced`), les couches de pièces posées sur les cases
+  (`layers`), les entités sur leurs cases (`entities`) — et ce que le moteur construit : le
+  **terrain** (`terrain`, `routes`, `outlines`), les **objets** à transformation libre (`objects` :
+  un maillage, sa position en mètres, son lacet, son tangage, son roulis, son échelle, son étage),
+  les dallages (`fills`), les **préfabriqués** (`prefabs`), les personnages (`party`, l'apparence
+  d'un PNJ, `characters`), les lumières (celles des objets, l'entité `light`), le ciel
+  (`lighting`, `daylight`, `ground`), la navigation (`navigation`), les cadrages (`shots`,
+  `hours`) et les notes de l'auteur (`notes`). Son **repère** : x vers l'est (les colonnes), y vers
+  le sud (les lignes), z vers le haut, en mètres ; une case fait 1,5 m ; le coin de la case (0, 0)
+  tombe en `origin`. Un lacet tourne le sud vers l'est, un tangage lève l'est, un roulis lève le
+  sud, appliqués dans cet ordre : roulis, tangage, lacet. La description s'écrit sous une **forme
+  canonique** (`scripts/maps/jadg_map.py`) : une case, un objet, une entité par ligne ; la relire
+  puis la réécrire intacte rend le même fichier. Schéma :
+  [`level.schema.json`](level.schema.json).
+- **EX-LVL-032** — Un lieu à plusieurs étages est **une seule carte** (D-51). La carte déclare ses
+  **étages praticables** (`storeys` : le rez à 0 m, puis des hauteurs croissantes) ; chaque entité
+  nomme le sien (`storey`, 0 par défaut). Le moteur dit à Core l'étage où il a mené le héros, lu à
+  la hauteur de ses pieds (`core::ExplorationIntent::storey`, `AJadgMapFrame::StoreyAt`) : un
+  portail, une zone, un coffre ne se franchissent, ne se déclenchent, ne se sollicitent que de leur
+  étage — à la verticale du portail du rez, le héros de l'étage passe. Un point d'arrivée pose le
+  héros à son étage. La file du groupe suit **en hauteur** : la trace porte la hauteur de chaque pas
+  (`core::FollowTrail::heightBehind`). Les réserves de la v4 tombent : `elevation` (par case, par
+  entité) et `floor` (par couche) sont **refusés** dans une v5 ; une couche de pièces se pose à sa
+  hauteur en mètres (`z`).
+- **EX-LVL-033** — Une entité peut porter un **volume** (`volume` : `min` et `max`, en mètres dans le
+  repère de la carte) : la zone de combat, le marqueur de rencontre. Le chargeur de Core le ramène
+  au repère de la grille (`core::MapVolume`) ; la grille tactique d'une zone de combat est faite
+  des cases dont le **centre** tombe dans l'emprise au sol du volume (`core::volumeCells`,
+  `core::combatZoneOf`). Le niveau construit montre chaque volume par une boîte (`JadgVolume:<id>`).
+- **EX-LVL-034** — Le **niveau** d'une carte se construit par script, sans fenêtre
+  (`scripts/maps/build_level.py`, commandlet `pythonscript`), sous `/Game/Maps/Levels/<carte>` —
+  le chemin qu'un portail ouvre. Le terrain est un `Landscape` dont les **hauteurs et les poids
+  des couches de matière sont régénérés** depuis la description (formes de relief, contours qui
+  mettent à une hauteur ou peignent une couche, routes) et écrits en images sous
+  `Saved/Jadg/levels/<carte>/`, jamais peints ; l'eau d'un contour est un plan à son niveau. Les
+  couches de pièces se posent par instances (une couche et une pièce par acteur), chaque pièce du
+  **kit du lieu** au centre de son emprise (`jadg_map.resolve_piece`, du lieu vers le monde) ; une
+  pièce introuvable reste dans le texte et se compte. Chaque objet est un acteur
+  (`JadgObject:<id>`) ; chaque entité a son **repère** (`JadgMarker:<id>`). Rejouée sur la même
+  description, la construction rend le même niveau : son **empreinte**
+  (`Saved/Jadg/levels/<carte>.json` — chaque acteur par son étiquette, sa classe, sa transformation
+  arrondie, son maillage, ses réglages) est la même.
+- **EX-LVL-035** — L'éditeur du moteur sert à placer à la souris ce qu'un script place mal ;
+  `scripts/maps/read_level.py` ramène **ce geste-là** dans le texte, et rien d'autre. Ce qu'il relit
+  est la **frontière** de l'éditeur (tableau ci-dessous) ; **ce qui ne se relit pas ne se fait pas
+  dans l'éditeur** : `build_level.py` le referait tel que le texte le dit. Une valeur relue qui ne
+  diffère de l'écrite que par l'arrondi (0,1 mm, un millième de degré) garde l'écrite. L'aller-retour
+  — construire, retoucher par l'API de l'éditeur comme à la souris, relire, reconstruire : la même
+  empreinte que le niveau retouché — est un contrôle du build
+  (`scripts/maps/check_level_roundtrip.py`).
+- **EX-LVL-036** — Le **contrôle de contenu** des cartes se fait à trois niveaux : le texte
+  (`scripts/maps/jadg_map.py --check`, en CI) — le schéma, les identifiants, les bornes, les étages,
+  **les portails appariés** (la carte et le point d'arrivée visés existent ; la carte visée a un
+  passage qui revient), **les arrivées citées**, **les zones nommées** et sans doublon, **les cases
+  inatteignables** au rez depuis l'entrée et les points d'arrivée, la forme canonique ; Core
+  (`JadgContentCheck`) — chaque carte se lit par `core::LevelLoader`, le graphe des portails se
+  valide (`core::validateWorldGraph`) ; le niveau construit (`build_level.py -JadgCheck`) — chaque
+  point d'arrivée et chaque entrée d'arène est **atteint depuis l'entrée sur le maillage de
+  navigation** ; une case inatteignable y est une zone inatteignable.
+- **EX-LVL-037** — Un **préfabriqué** est un acteur composé déclaré en texte
+  (`Source/Elements/Editor/Prefabs/<niveau>/<nom>.json`, format `jadg-prefab`, version 1) : des
+  objets autour d'une origine, par maillage (`mesh`) ou par pièce du kit de son lieu (`piece`). Une
+  carte le pose (`prefabs` : sa place, son lacet, son échelle) ; le niveau en fait un `AJadgPrefab`
+  et ses objets attachés. Le préfabriqué se retouche dans son fichier ; l'éditeur ne relit que sa
+  place.
+- **EX-LVL-038** — Le **mode Quêtes** montre une carte telle qu'elle est à une étape de quête
+  (`scripts/maps/quest_mode.py`), sur les mêmes JSON que le jeu : ce qui est présent sous des
+  drapeaux, par la règle de Core (`EX-EXP-009`), et les drapeaux que la carte lit sans qu'aucune
+  quête ni aucun dialogue ne les déclare (contrôlé en CI) ; dans l'éditeur, il cache les acteurs
+  des entités absentes, sans rien changer au niveau ni au texte.
+- **EX-LVL-039** — Une carte v4 de l'ancien dépôt se **migre** en v5 par un acte explicite
+  (`jadg_map.py --migrate`) : la grille, les couches et les entités ne changent pas — les
+  identifiants non plus, si bien que les quêtes et leurs tests ne changent pas —, l'étage de décor
+  d'une couche devient sa hauteur, les notes de l'éditeur (`<carte>.editor.json`) entrent dans la
+  description, le groupe, le ciel, la navigation et un cadrage s'ajoutent. Core lit toujours la v4
+  (`EX-LVL-005`) ; il ne l'écrit plus que pour ses tests (`core::LevelWriter`).
+
+### La frontière de l'éditeur
+
+| Ce qu'on fait dans l'éditeur | Relu | Comment |
+|---|---|---|
+| Déplacer, tourner (lacet, tangage, roulis), mettre à l'échelle un objet | **oui** | `objects[]` : `position`, `yaw`, `pitch`, `roll`, `scale` ; un objet mis à une hauteur (`height`) ne relit que sa position et son lacet |
+| Supprimer un objet | **oui** | il quitte `objects` |
+| Déplacer, tourner, mettre à l'échelle un préfabriqué posé | **oui** | `prefabs[]` : `position`, `yaw`, `scale` |
+| Déplacer le repère d'une entité | **oui** | sa case (`x`, `y`) et son étage (`storey`) |
+| Redimensionner la boîte d'un volume | **oui** | `volume` |
+| Régler un cadrage | **oui** | `shots[]` : `target`, `heading`, `pitch`, `distance` |
+| Ajouter un acteur, changer un maillage, retoucher un objet d'un préfabriqué | non | dans le texte |
+| Sculpter ou peindre le terrain, toucher une couche de pièces, un dallage | non | `terrain`, `routes`, `outlines`, `layers`, `fills` |
+| Régler une lumière, le ciel, un réglage de rendu, la navigation | non | `lighting`, l'objet ou l'entité `light`, `navigation` |
+| Changer les propriétés d'une entité (dialogue, condition, portail) | non | `entities[]` |
+
+### Exemple
+
+```json
+{
+  "format": "jadg-map",
+  "version": 5,
+  "name": "Essai1018Etages",
+  "width": 16,
+  "height": 12,
+  "origin": [0.0, 0.0],
+  "storeys": [
+    {"name": "rez", "z": 0.0},
+    {"name": "etage", "z": 3.0}
+  ],
+  "nextEntityId": 6,
+  "tiles": [
+    {"x": 2, "y": 6, "type": "entry"}
+  ],
+  "entities": [
+    {"id": "e1", "type": "portal", "x": 11, "y": 7, "arrival": "palier", "targetMap": "essai/etages"},
+    {"id": "e3", "type": "spawnPoint", "x": 9, "y": 2, "storey": 1, "name": "palier"},
+    {"id": "e4", "type": "sign", "x": 11, "y": 7, "storey": 1}
+  ],
+  "objects": [
+    {"id": "rampe", "mesh": "Scene/ilot/wall.glb", "position": [9.134164, 3.0, 1.231672], "pitch": 26.565051, "scale": [4.472136, 2, 0.126811]}
+  ],
+  "party": {"appearances": ["heros-brawler", "heros-mage", "heros-priest", "heros-scoundrel"], "walkSpeed": 3.0},
+  "navigation": {"area": [0.0, 0.0, 24.0, 18.0], "height": 7.0},
+  "shots": [
+    {"id": "etages", "target": [12.0, 9.0, 1.5], "heading": 30.0, "pitch": 38.0, "distance": 26.0}
+  ],
+  "hours": ["12:00", "22:00"]
+}
+```
+
+## 3. Conception (lignes directrices)
 - Chaque carte doit être **franchissable** : aucune zone jouable ne doit être inatteignable.
 - Aucune situation sans issue : un portail mène toujours quelque part, et l'on peut revenir.
 - Toute carte doit être un **terrain tactique valide** (`EX-EDIT-054`) : le combat se joue dessus.
@@ -307,6 +446,12 @@ Coordonnées `x` = colonne, `y` = ligne, origine **haut-gauche** ; toute tuile h
   parallaxe.
 
 ## Traçabilité
+La v5 (`LOT-1018`) : son écriture, son contrôle et sa migration relèvent de
+`scripts/maps/jadg_map.py`, sa construction de `scripts/maps/build_level.py` (et de
+`UJadgSceneBuild`, `AJadgPrefab`, `AJadgMapFrame`), sa relecture de `scripts/maps/read_level.py`,
+l'aller-retour de `scripts/maps/check_level_roundtrip.py`, le mode Quêtes de
+`scripts/maps/quest_mode.py` ; Core la lit (`core::LevelLoader`, `core::Storey`,
+`core::MapVolume`, `core::ExplorationIntent::storey`). Ce qui suit est la v4.
 Le chargement et la validation relèvent de `Source/Core` (`core::LevelLoader`,
 `core::LevelWriter`, `core::deriveCollision`) ; la résolution des lieux, de
 `core::sceneLevelCandidates` et `core::ScenePieceManifest::resolve` (`EX-LVL-029`) ; la migration et le contrôle de toutes les cartes,

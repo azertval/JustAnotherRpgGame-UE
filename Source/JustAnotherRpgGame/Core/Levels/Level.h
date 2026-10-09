@@ -22,6 +22,22 @@
 namespace core {
 
 /**
+ * @brief Un **étage praticable** d'une carte (format v5, D-51, `LOT-1018`) : son nom et la hauteur
+ *        de son sol, en mètres au-dessus du rez.
+ *
+ * Un lieu à plusieurs étages est **une seule carte** : l'escalier, l'étage et la redescente se
+ * jouent sans changer de carte. La grille de collision de Core ne dit que le rez ; chaque entité
+ * nomme son étage (`MapEntity::storey`), et l'exploration ne sollicite que celles de l'étage où
+ * le héros se tient (`core::ExplorationIntent::storey`).
+ */
+struct Storey {
+    std::string name;
+    float z = 0.0F;
+
+    [[nodiscard]] bool operator==(const Storey&) const = default;
+};
+
+/**
  * @brief Composantes d'une carte, nommées — agrégat de construction de `core::Level` (`LOT-03`).
  *
  * S'écrit avec les *designated initializers* de C++20, qui rendent chaque site de construction
@@ -78,6 +94,9 @@ struct LevelData {
     /// toute clé racine que le chargeur ne connaît pas — gardée telle quelle et réémise, comme
     /// pour une couche ou une entité (`core::PropertyMap`).
     PropertyMap properties{};
+    /// Les étages praticables (format v5), le rez en tête ; vide pour une carte d'un seul niveau,
+    /// et pour toute carte v4.
+    std::vector<Storey> storeys{};
 };
 
 /// Clé de la **région** du monde où se trouve la carte, telle que `world-maps.json` la nomme
@@ -110,7 +129,8 @@ public:
           _nextEntityId(data.nextEntityId),
           _base(std::move(data.base)),
           _scene(std::move(data.scene)),
-          _properties(std::move(data.properties)) {}
+          _properties(std::move(data.properties)),
+          _storeys(std::move(data.storeys)) {}
 
     /// @return Le nom de la carte.
     [[nodiscard]] const std::string& name() const noexcept {
@@ -163,6 +183,12 @@ public:
         return _properties;
     }
 
+    /// @return Les étages praticables de la carte, le rez en tête ; vide pour une carte d'un seul
+    ///         niveau (`LevelData::storeys`).
+    [[nodiscard]] const std::vector<Storey>& storeys() const noexcept {
+        return _storeys;
+    }
+
     /// @return Toutes les composantes de la carte, recopiées — ce que l'écrivain et le brouillon
     ///         reprennent sans en oublier une.
     [[nodiscard]] LevelData data() const {
@@ -175,7 +201,8 @@ public:
                          .nextEntityId = _nextEntityId,
                          .base = _base,
                          .scene = _scene,
-                         .properties = _properties};
+                         .properties = _properties,
+                         .storeys = _storeys};
     }
 
 private:
@@ -189,6 +216,7 @@ private:
     std::string _base;
     std::string _scene;
     PropertyMap _properties;
+    std::vector<Storey> _storeys;
 };
 
 }  // namespace core

@@ -6,6 +6,23 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **Les cartes sont des descriptions texte, construites en niveau par script** (LOT-1018, D-51,
+  D-52, 9 octobre 2026, lot ouvert, non livré). Le format `jadg-map`, version 5 : une description
+  par carte dit ce que Core joue (grille, couches de pièces, entités sur leurs cases et à leur
+  étage, volumes en mètres) et ce que le moteur construit (terrain, objets à transformation libre,
+  dallages, préfabriqués, groupe, ciel, navigation, cadrages, notes) ; Core la lit, avec ses
+  **étages praticables** — on ne sollicite que ce qui est à son étage, la file du groupe suit en
+  hauteur — et ses zones de combat en volumes. `scripts/maps/build_level.py` remplace
+  `build_scene_unreal.py` et `Source/Elements/Scenes/` : terrain par `Landscape` régénéré, couches
+  par instances, préfabriqués (`AJadgPrefab`), empreinte du niveau, contrôle du maillage de
+  navigation ; `read_level.py` relit ce que l'éditeur retouche dans sa frontière, et l'aller-retour
+  se rejoue à chaque `build.ps1 -Unreal`. `jadg_map.py --check` (portails appariés, arrivées
+  citées, zones nommées, cases inatteignables) et `quest_mode.py --check` entrent en CI. Arenarea,
+  Martpart et les trois niveaux de l'Arena of Fate migrés de la v4 tels quels (Arenarea : 12 913
+  pièces, construit en 165 s dont 111 s d'import) ; la porte joue sa carte de Core, tirée de sa
+  géométrie ; la carte d'essai à deux étages (`essai/etages`, `Jadg.Exploration.DeuxEtages`).
+  `build.ps1 -Scene` devient `-Map`.
+
 - **Le combat se joue dans le moteur** (LOT-1017, sous-lots 2 et 3, 9 octobre 2026, lot non
   livré, à recetter). « Combattre » au maître d'arène ouvre la carte d'arène d'essai
   (`essai/arene`, scène `essai-1017-arene`, qui remplace l'arène vide du LOT-1016) ; `AJadgCombat`

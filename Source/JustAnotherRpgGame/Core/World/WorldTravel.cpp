@@ -3,6 +3,7 @@
 
 #include "Core/World/WorldTravel.h"
 
+#include <algorithm>
 #include <iterator>
 #include <set>
 #include <utility>
@@ -70,6 +71,20 @@ namespace {
 
 }  // namespace
 
+std::optional<PortalTarget> portalAt(const Level& level, GridPosition position, int storey) {
+    for (const MapEntity& entite : level.entities()) {
+        if (entite.type != PORTAL_ENTITY_TYPE || entite.position != position ||
+            entite.storey != storey) {
+            continue;
+        }
+        return PortalTarget{.map = texteDe(entite, PORTAL_TARGET_MAP_PROPERTY),
+                            .arrival = texteDe(entite, PORTAL_ARRIVAL_PROPERTY),
+                            .requiredFlag = texteDe(entite, PORTAL_REQUIRED_FLAG_PROPERTY),
+                            .sealed = isSealedPortal(entite)};
+    }
+    return std::nullopt;
+}
+
 std::optional<PortalTarget> portalAt(const Level& level, GridPosition position) {
     for (const MapEntity& entite : level.entities()) {
         if (entite.type != PORTAL_ENTITY_TYPE || entite.position != position) {
@@ -94,6 +109,16 @@ std::optional<GridPosition> arrivalPointAt(const Level& level, std::string_view 
         }
     }
     return std::nullopt;
+}
+
+int arrivalStoreyAt(const Level& level, std::string_view name) {
+    for (const MapEntity& entite : level.entities()) {
+        if (!name.empty() && entite.type == SPAWN_POINT_ENTITY_TYPE &&
+            texteDe(entite, SPAWN_POINT_NAME_PROPERTY) == name) {
+            return entite.storey;
+        }
+    }
+    return 0;
 }
 
 std::vector<WorldIssue> validateWorldGraph(const WorldGraph& graph) {
@@ -222,16 +247,32 @@ TravelResult WorldTravel::enter(std::string_view mapId, std::string_view arrival
     }
     _currentMapId = std::string{mapId};
     _position = ou;
+    _storey = arrivalStoreyAt(*carte, arrival);
     return TravelResult::Moved;
 }
 
 TravelResult WorldTravel::cross(GridPosition from, const WorldFlags& flags) {
+    const Level* carte = currentMap();
+    // Sans etage dit, celui du portail de la case : une carte d'un seul niveau n'en a qu'un.
+    int etage = 0;
+    if (carte != nullptr) {
+        const auto portail = std::ranges::find_if(carte->entities(), [from](const MapEntity& e) {
+            return e.type == PORTAL_ENTITY_TYPE && e.position == from;
+        });
+        if (portail != carte->entities().end()) {
+            etage = portail->storey;
+        }
+    }
+    return cross(from, flags, etage);
+}
+
+TravelResult WorldTravel::cross(GridPosition from, const WorldFlags& flags, int storey) {
     _lastIssue.reset();
     const Level* carte = currentMap();
     if (carte == nullptr) {
         return TravelResult::NoPortal;
     }
-    const std::optional<PortalTarget> portail = portalAt(*carte, from);
+    const std::optional<PortalTarget> portail = portalAt(*carte, from, storey);
     if (!portail.has_value()) {
         return TravelResult::NoPortal;
     }

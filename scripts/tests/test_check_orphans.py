@@ -182,11 +182,11 @@ def test_l_histoire_n_appelle_rien(tmp_path):
 
 
 def projet(tmp_path):
-    """Un dépôt dont deux scripts et une description de scène produisent des sorties du moteur."""
+    """Un dépôt dont trois scripts produisent des sorties du moteur."""
     ecrire(tmp_path / 'scripts/maps/build_scene.py', 'KIT_ROOT = "/Game/Kit"\nCUBE = "/Game/Scenes/Common/T_White"\n')
     ecrire(tmp_path / 'scripts/assets/build_manifest.py', 'FAMILIES = {"npc": "/Game/Master/Npc"}\n')
     ecrire(tmp_path / 'scripts/tests/test_build_scene.py', 'assert "/Game/Essai/SM_Test"\n')
-    ecrire(tmp_path / 'Source/Elements/Scenes/porte.json', {'map': '/Game/Maps/Porte'})
+    ecrire(tmp_path / 'scripts/maps/build_level.py', 'PORTE = "/Game/Maps/Porte"\n')
     content = tmp_path / 'Content'
     ecrire(content / 'Kit/Regions/arena/af-pyre/StaticMeshes/SM_af-pyre.uasset')
     ecrire(content / 'Master/Npc/guard/StaticMeshes/SM_Npc_Guard.uasset')

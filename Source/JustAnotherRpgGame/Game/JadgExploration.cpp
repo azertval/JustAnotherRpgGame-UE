@@ -229,6 +229,11 @@ void UJadgExploration::PlaceHero(const FVector2D& Cell)
 	State->Session->placeHero(core::CellPoint{static_cast<float>(Cell.X), static_cast<float>(Cell.Y)});
 }
 
+int32 UJadgExploration::HeroStorey() const
+{
+	return State->Session->heroStorey();
+}
+
 TArray<FJadgEvent> UJadgExploration::Step(const FVector2D* LeaderCell, bool bInteract, float Seconds)
 {
 	TArray<FJadgEvent> Out;
@@ -245,6 +250,10 @@ TArray<FJadgEvent> UJadgExploration::Step(const FVector2D* LeaderCell, bool bInt
 	if (LeaderCell != nullptr)
 	{
 		Intent.carried = core::CellPoint{static_cast<float>(LeaderCell->X), static_cast<float>(LeaderCell->Y)};
+		if (CarriedStorey >= 0)
+		{
+			Intent.storey = CarriedStorey;
+		}
 	}
 	for (const core::ExplorationEvent& Event : Session.update(Intent, Seconds))
 	{
@@ -318,6 +327,7 @@ TArray<FJadgEntity> UJadgExploration::Entities() const
 			Added.Id = FJadgPaths::ToFString(Entity.id);
 			Added.Type = FJadgPaths::ToFString(Entity.type);
 			Added.Cell = FIntPoint(Entity.position.column, Entity.position.row);
+			Added.Storey = Entity.storey;
 			Added.bPresent = State->Session->isPresent(Entity);
 		}
 	}
@@ -350,6 +360,7 @@ TArray<FJadgLamp> UJadgExploration::Lamps() const
 			Added.HeightMetres = Source->emission.height;
 			Added.Intensity = Source->emission.intensity;
 			Added.bAlways = Source->emission.always;
+			Added.Storey = Entity.storey;
 		}
 	}
 	return Out;
