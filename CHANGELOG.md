@@ -6,6 +6,26 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **La chaîne de décor au niveau du moteur, et le standard 3D réécrit** (LOT-1019, 9 octobre 2026,
+  lot ouvert, non livré). Une pièce de décor s'installe par script depuis sa **fiche** —
+  `import_scenery_unreal.py` remplace `import_master_unreal.py` et sert `build_level.py` — : Nanite,
+  collision sur le maillage, et sa **matière complète**, une instance de la matière parente du décor
+  (`M_Scenery`, écrite par script, utilisable en instances : l'Arena of Fate, grise au LOT-1018,
+  sort texturée), textures compressées par le moteur (BC7, BC5 pour le relief) et partagées par
+  contenu (le kit de l'Arena of Fate passe de 857 Mo à 112 Mo dans le projet, plus 59 Mio de
+  textures). Le manifeste des maîtres porte la fiche de chaque pièce (`sheet`, et la matière lue
+  dans le `.glb` ; `build_master_manifest.py --refresh`) ; un manifeste des pièces de bibliothèque
+  (D-55) est prêt, vide. Le passage de captures règle le post-traitement (`-JadgPost` : contour
+  sombre, occlusion ambiante, halo, ombres des lampes), attend la construction des textures, et
+  mesure la mémoire graphique et les maillages ; `build_piece_check.py` écrit la carte de contrôle
+  d'une pièce (ses quatre côtés). La porte pose la **famille témoin** — la façade au maître, six
+  fois — et un cadrage du joueur sur elle. Le standard 3D est réécrit sur ces mesures (§7, les
+  images tolérées, retiré), le gabarit de commande d'une zone révisé pour des pièces au maître ;
+  tests `Jadg.Decor.*`. Retirés : `material_maps.py` (cartes dérivées d'une couleur ; le Colisée
+  porte désormais ses facteurs), les scripts Blender de l'Arena of Fate (architecture, enceintes,
+  iconographie, sous-sols, sculptures, installeur), la maquette du standard 2D
+  (`build_hd_mockup.py` et ses données d'essai).
+
 - **Les écrans et le HUD en UMG, construits par C++** (LOT-1020, 9 octobre 2026, lot ouvert, non
   livré). `UJadgScreen` et son gestionnaire (`AJadgHud`, qui remplace le HUD de canevas du
   LOT-1016) : HUD d'exploration, dialogue avec choix de qui parle (D-28) et jet affiché, interface

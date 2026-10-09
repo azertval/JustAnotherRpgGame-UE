@@ -20,7 +20,7 @@ valeurs **mesurées** ou des **décisions datées** de l'auteur ; ce qui n'est n
 | La **fiche de règles** (classe, espèce, inventaire) | `Source/Elements/Rpg/characters/<id>.json` | propre ; un PNJ de scène peut n'avoir qu'une fiche d'apparence |
 | Le **créateur** : un objet personnalisable Mutable, ses corps, ses clips, ses sockets | décrit par `Source/Elements/Assets/Characters/<creator>.json` ; construit sous `Content/Characters/Creator/` par le commandlet `JadgBuildCharacterCreator` | partagé par tous les personnages de sa famille (`humanoid`) |
 | Le **squelette** et les **clips** | ceux du moteur : le mannequin d'Unreal (`SK_Mannequin`) et ses animations, posés sous `Content/Characters/Mannequins/` par `import_mannequin_unreal.py` | partagés |
-| Les **armes** | les maîtres Meshy de `Source/Elements/Assets/Master/Weapons/`, importés par `import_master_unreal.py`, accrochés par socket (D-63, qui tranche D-42) | partagées |
+| Les **armes** | les maîtres Meshy de `Source/Elements/Assets/Master/Weapons/`, installés par `import_scenery_unreal.py` (LOT-1019), accrochés par socket (D-63, qui tranche D-42) | partagées |
 | Le **portrait** (512 × 512) et le **jeton** (128 × 128), **peints** | avec le personnage, comme avant (D-30) | propres |
 
 Ce qui a changé par rapport à D-38 : plus de maillage par personnage, plus de fiche de liaison,
@@ -124,7 +124,7 @@ se retouche pas.
 ## 8. Portrait et jeton
 
 **Portrait et jeton restent peints** ([D-30](../vision/decisions.md), maintenue le 8 octobre
-2026), aux tailles du [standard](style-3d.md#7-les-images-tolérées) : 512 × 512 et 128 × 128. Le
+2026), aux tailles du [standard 2D archivé](archives/style-2d-hd.md#5-les-figurines) : 512 × 512 et 128 × 128. Le
 portrait se peint avant toute pièce de référence : c'est lui qui fixe le visage.
 
 ## 9. Ce qui reste ouvert
