@@ -13,6 +13,7 @@
 #include <cstdint>
 #include <deque>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <span>
 #include <string>
@@ -20,11 +21,11 @@
 #include <vector>
 
 #include "Core/Combat/ActionEconomy.h"
-#include "Core/Combat/BattleGrid.h"
 #include "Core/Combat/CombatCounters.h"
+#include "Core/Combat/CombatSpace.h"
 #include "Core/Combat/CombatTransition.h"
+#include "Core/Combat/CombatTypes.h"
 #include "Core/Combat/Damage.h"
-#include "Core/Combat/Pathfinding.h"
 #include "Core/Combat/TurnOrder.h"
 #include "Core/Levels/GridPosition.h"
 #include "Core/Math/DeterministicRandom.h"
@@ -133,6 +134,26 @@ struct CombatEvent {
            static_cast<long long>(event.hitPointsAfter) * denominator < seuil;
 }
 
+/**
+ * @brief Le budget de déplacement d'une vitesse de @p speedMeters, en cases entières.
+ *
+ * Une case vaut 1,5 m (`EX-REG-051`, `core::METERS_PER_TILE`) : 9 m font 6 cases. Une vitesse qui
+ * ne tombe pas juste — 10 m après un malus d'encombrement de 3 m sur 13 m — est **arrondie à la
+ * case inférieure** : le livre dépense la vitesse « par segments de 1,50 mètre », et un segment
+ * entamé n'en est pas un. Arrondir au plus proche ferait gagner une case à qui porte trop.
+ * Une vitesse négative ou nulle donne 0.
+ */
+[[nodiscard]] int movementBudget(float speedMeters) noexcept;
+
+/// @brief Le budget d'une fiche, sur sa vitesse de base (`core::CharacterSheet::speedMeters`).
+[[nodiscard]] int movementBudget(const CharacterSheet& sheet) noexcept;
+
+/**
+ * @brief Le budget d'une créature du bestiaire pour @p locomotion : sa vitesse de marche, ou de
+ *        vol — 0 pour une créature qui ne vole pas.
+ */
+[[nodiscard]] int movementBudget(const Creature& creature, Locomotion locomotion) noexcept;
+
 class CombatState;
 
 /**
@@ -155,10 +176,9 @@ enum class CombatantStatus : std::uint8_t {
     /// (`CombatHook::DeathSaveDue`, `LOT-137`).
     Down,
     /// Mort (`LOT-137`) : trois échecs, des dégâts massifs, ou un monstre à 0 point de vie. Il
-    /// reste
-    /// sur la grille — son corps —, et seul *revigorer* le ramène (`CombatState::revive`).
+    /// reste à sa place — son corps —, et seul *revigorer* le ramène (`CombatState::revive`).
     Dead,
-    /// Sorti du combat : il a quitté la grille et l'ordre.
+    /// Sorti du combat : il a quitté l'espace et l'ordre.
     Withdrawn,
 };
 
@@ -217,7 +237,8 @@ struct CombatantProfile {
     /// Modificateur du test d'initiative — la Dextérité, et ce qui s'y ajoute.
     int initiativeModifier = 0;
     RollStance initiativeStance = RollStance::Normal;
-    /// Budget de déplacement, en cases (`core::movementBudget`).
+    /// Budget de déplacement, en cases de 1,50 m (`core::movementBudget`) : l'unité des données ;
+    /// le chemin se mesure en mètres (`CombatState::movementLeft`).
     int movement = 0;
     Locomotion locomotion = Locomotion::Walk;
     CreatureSize size = CreatureSize::Medium;
@@ -294,12 +315,22 @@ struct Combatant {
     bool prone = false;
     /// Le round de sa mort : *revigorer* ne ramène qu'un mort « depuis moins d'une minute ».
     std::optional<int> diedAtRound;
+    /// Le centre de sa base, en mètres, s'il est posé dans l'espace ; le sol est celui de l'espace.
+    std::optional<Meters3> position;
+    /**
+     * @brief Ce qui reste, en mètres, de la dernière case de déplacement entamée ce tour-ci.
+     *
+     * Le déplacement se compte en cases de 1,50 m (`MOVEMENT_RESOURCE`) et se marche en mètres :
+     * une case entamée se paie entière, et ce qui en reste sert au pas suivant du même tour. Deux
+     * pas de 0,75 m coûtent une case, pas deux.
+     */
+    float movementSlack = 0.0f;
 };
 
 /// @brief Ce qu'un enrôlement a donné : l'identifiant, ou la raison du refus.
 struct EnlistResult {
     std::optional<CombatantId> combatant;
-    /// `Placed` si le combattant a été enrôlé — y compris sans case, avant le combat.
+    /// `Placed` si le combattant a été enrôlé — y compris sans place, avant le combat.
     PlacementResult placement = PlacementResult::Placed;
 };
 
@@ -317,16 +348,16 @@ enum class MoveResult : std::uint8_t {
     Moved,
     /// Aucun tour n'est en cours.
     NoActiveTurn,
-    /// Le combattant actif n'est pas sur la grille.
+    /// Le combattant actif n'est pas posé dans l'espace.
     NotPlaced,
     /// La destination n'est pas une fin de déplacement permise dans ce qui reste du budget.
     Unreachable,
 };
 
-/// @brief Un déplacement : son issue, et le chemin suivi.
+/// @brief Un déplacement : son issue, et le chemin suivi, en mètres.
 struct MoveOutcome {
     MoveResult result = MoveResult::NoActiveTurn;
-    Path path;
+    Route path;
 };
 
 /// @brief Une variation de points de vie, pour en appliquer plusieurs d'un seul coup.
@@ -392,13 +423,21 @@ struct HitPointChange {
  * Rien ici ne suppose un personnage seul : les alliés sont un camp, en nombre quelconque, et un
  * test en monte quatre (`LOT-29`).
  *
- * L'état n'est ni copiable ni déplaçable : les `core::Mover` qu'il construit et les abonnés qui le
- * reçoivent le désignent par son adresse.
+ * ## L'espace (`LOT-1017`)
+ *
+ * Un combattant posé est un cylindre (`core::Volume`) dont la base est en mètres ; la carte est
+ * l'espace de la rencontre (`core::CombatSpace`), que le combat partage avec qui le construit —
+ * la simulation de Core pour les tests, le moteur en jeu. Le combat ne sait pas laquelle répond.
+ * Se tenir quelque part, c'est tenir dans l'espace sans recouvrir un autre combattant ; un corps
+ * à terre ou mort garde sa place.
+ *
+ * L'état n'est ni copiable ni déplaçable : les abonnés qui le reçoivent le désignent par son
+ * adresse.
  */
 class CombatState {
 public:
-    /// @param grid La grille de la rencontre (`LOT-19`), que le combat possède désormais.
-    explicit CombatState(BattleGrid grid);
+    /// @param space L'espace de la rencontre, partagé : le combat le lit, ne le change pas.
+    explicit CombatState(std::shared_ptr<const CombatSpace> space);
 
     CombatState(const CombatState&) = delete;
     CombatState& operator=(const CombatState&) = delete;
@@ -409,14 +448,14 @@ public:
     // --- Montage -------------------------------------------------------------------------------
 
     /**
-     * @brief Enrôle un combattant avant le début du combat, et le place si @p anchor est donné.
+     * @brief Enrôle un combattant avant le début du combat, et le pose en @p base si elle est
+     *        donnée — au sol de l'espace, la hauteur donnée ignorée.
      *
      * Les identifiants sont attribués **dans l'ordre des enrôlements**, à partir de 1 : c'est
      * l'ordre de la donnée, et le dernier critère de départage de l'initiative. Un placement
      * refusé n'enrôle personne et ne consomme aucun identifiant.
      */
-    EnlistResult enlist(CombatantProfile profile,
-                        std::optional<GridPosition> anchor = std::nullopt);
+    EnlistResult enlist(CombatantProfile profile, std::optional<Meters3> base = std::nullopt);
 
     /// @brief Pose un repère d'initiative fixe (actions de repaire à 20, renforts à 0).
     bool addInitiativeMarker(InitiativeMarker marker);
@@ -483,14 +522,27 @@ public:
     /// @brief Tous les combattants enrôlés, sortis compris, par identifiant croissant.
     [[nodiscard]] std::vector<CombatantId> combatants() const;
 
-    /// @brief La grille tactique du combat, en lecture seule.
-    [[nodiscard]] const BattleGrid& grid() const noexcept {
-        return _grid;
+    /// @brief L'espace de la rencontre.
+    [[nodiscard]] const CombatSpace& space() const noexcept {
+        return *_space;
     }
-    /// @brief La grille, pour ce qui la change en combat : terrain difficile créé, objet détruit.
-    [[nodiscard]] BattleGrid& grid() noexcept {
-        return _grid;
-    }
+    /// @brief Où se tient @p combatant, s'il est posé.
+    [[nodiscard]] std::optional<Meters3> positionOf(CombatantId combatant) const;
+    /// @brief Le volume de @p combatant à sa place, s'il est posé.
+    [[nodiscard]] std::optional<Volume> volumeOf(CombatantId combatant) const;
+    /// @brief Le volume qu'aurait @p combatant posé en @p base, au sol de l'espace.
+    [[nodiscard]] std::optional<Volume> volumeAt(CombatantId combatant, Meters3 base) const;
+    /// @brief Les volumes des combattants posés, sauf @p a et @p b : les corps qui s'interposent.
+    [[nodiscard]] std::vector<Volume> bodiesExcept(
+        std::optional<CombatantId> a, std::optional<CombatantId> b = std::nullopt) const;
+    /// @brief Le combattant posé dont le volume couvre le point au sol @p point, s'il y en a un.
+    [[nodiscard]] std::optional<CombatantId> occupantAt(Meters3 point) const;
+    /**
+     * @brief Ce que dirait un placement de @p profile en @p base : tenir dans l'espace, sans
+     *        recouvrir un autre combattant que @p self.
+     */
+    [[nodiscard]] PlacementResult placementAt(const CombatantProfile& profile, Meters3 base,
+                                              std::optional<CombatantId> self = std::nullopt) const;
 
     /**
      * @brief Les compteurs à portée du combat.
@@ -518,18 +570,48 @@ public:
     bool spend(std::string_view resource, int amount = 1);
 
     /**
-     * @brief Où le combattant actif peut aller, avec **ce qui reste** de son déplacement.
-     * @return Vide s'il n'y a pas de tour ou si le combattant n'est pas placé.
+     * @brief Les mètres que le combattant actif peut encore marcher ce tour-ci : ses cases
+     *        restantes, et ce qui reste de la dernière entamée.
+     * @return 0 s'il n'y a pas de tour.
      */
-    [[nodiscard]] std::optional<ReachableArea> reachableArea() const;
+    [[nodiscard]] float movementLeft() const;
+
+    /**
+     * @brief Le chemin de @p combatant jusqu'à @p destination dans @p budget mètres (négatif :
+     *        sans limite), droit de passage compris.
+     *
+     * Manuel des Joueurs, « Se déplacer au milieu d'autres créatures » (PDF p. 193) : on traverse
+     * l'espace d'une créature **non hostile** — ici, d'un allié — en terrain difficile, et celui
+     * d'une créature hostile seulement si elle a **deux catégories de taille** de plus ou de moins
+     * ; on ne finit dans l'espace de personne.
+     */
+    [[nodiscard]] std::optional<Route> routeFor(CombatantId combatant, Meters3 destination,
+                                                float budget) const;
+
+    /// @brief Le chemin du combattant actif jusqu'à @p destination, dans ce qui lui reste.
+    [[nodiscard]] std::optional<Route> routeTo(Meters3 destination) const;
+
+    /**
+     * @brief Les places où @p combatant peut finir un déplacement de @p budget mètres, la sienne en
+     *        tête, chacune avec son chemin (`core::CombatSpace::candidates`).
+     */
+    [[nodiscard]] std::vector<Destination> destinationsFor(CombatantId combatant,
+                                                           float budget) const;
+
+    /// @brief Les places où le combattant actif peut finir, dans ce qui lui reste ; vide sans tour.
+    [[nodiscard]] std::vector<Destination> destinations() const;
+
+    /// @brief Vrai si @p combatant peut se tenir en @p base : dans l'espace, sans recouvrir
+    /// personne d'autre.
+    [[nodiscard]] bool canStandAt(CombatantId combatant, Meters3 base) const;
 
     /**
      * @brief Déplace le combattant actif jusqu'à @p destination, et paie le chemin.
      *
-     * Le chemin est celui de `core::ReachableArea::pathTo`, calculé sur ce qui reste du budget :
-     * le déplacement se fractionne, et chaque fraction se paie (`core::ActionEconomy`).
+     * Le chemin est celui de `routeTo`, calculé sur ce qui reste du déplacement : il se fractionne,
+     * et chaque fraction se paie en cases entamées (`Combatant::movementSlack`).
      */
-    MoveOutcome move(GridPosition destination);
+    MoveOutcome move(Meters3 destination);
 
     /**
      * @brief Termine **explicitement** le tour en cours (`EX-CBT-012`).
@@ -570,13 +652,13 @@ public:
      * Il jette son initiative et prend sa place : rangée après la place en cours, il joue ce
      * round-ci ; avant, au round suivant — ce que dit le Manuel, sans cas particulier.
      */
-    EnlistResult join(CombatantProfile profile, GridPosition anchor, DeterministicRandom& random);
+    EnlistResult join(CombatantProfile profile, Meters3 base, DeterministicRandom& random);
 
     /// @brief Fait entrer un combattant à une initiative **imposée** — un renfort « au rang 0 ».
-    EnlistResult joinAtInitiative(CombatantProfile profile, GridPosition anchor, int initiative);
+    EnlistResult joinAtInitiative(CombatantProfile profile, Meters3 base, int initiative);
 
     /**
-     * @brief Fait sortir un combattant : il quitte la grille et l'ordre, et ne revient pas.
+     * @brief Fait sortir un combattant : il quitte l'espace et l'ordre, et ne revient pas.
      *
      * S'il était en train de jouer, son tour se termine — le crochet de fin de tour est annoncé,
      * parce que les actions légendaires ne distinguent pas un tour fini d'un tour interrompu.
@@ -650,16 +732,6 @@ public:
     [[nodiscard]] std::vector<HitPointReserve>* reserves(CombatantId combatant);
 
     /**
-     * @brief Le `core::Mover` d'un combattant, droit de passage compris.
-     *
-     * Manuel des Joueurs, « Se déplacer au milieu d'autres créatures » (PDF p. 193) : on traverse
-     * la case d'une créature **non hostile** — ici, d'un allié —, et celle d'une créature hostile
-     * seulement si elle a **deux catégories de taille** de plus ou de moins. Il désigne l'état par
-     * son adresse, et ne vit pas plus longtemps que lui.
-     */
-    [[nodiscard]] Mover moverFor(CombatantId combatant) const;
-
-    /**
      * @brief Change la manière dont @p combatant se déplace et son budget par tour — le *vol*
      *        d'un sort (`LOT-133`), et sa fin.
      *
@@ -683,7 +755,13 @@ private:
         return _phase != CombatPhase::Setup && _phase != CombatPhase::Ended;
     }
 
-    EnlistResult admit(CombatantProfile profile, std::optional<GridPosition> anchor);
+    EnlistResult admit(CombatantProfile profile, std::optional<Meters3> base);
+    /// Le mobile posé à sa place : ce que l'espace lui oppose, ce qu'il traverse.
+    [[nodiscard]] RouteQuery queryFor(CombatantId mover, float budget,
+                                      std::vector<Volume>& blocking,
+                                      std::vector<Volume>& passable) const;
+    /// Les mètres que @p combatant peut marcher sur ce qui reste de son économie.
+    [[nodiscard]] float movementLeftOf(const Combatant& combatant) const;
     void rollInitiative(Combatant& combatant, DeterministicRandom& random);
     void takeFixedInitiative(Combatant& combatant, int initiative);
     void damage(const HitPointChange& change);
@@ -702,7 +780,7 @@ private:
     void finishTurn();
     [[nodiscard]] bool canPassThrough(CombatantId mover, CombatantId other) const;
 
-    BattleGrid _grid;
+    std::shared_ptr<const CombatSpace> _space;
     /// Par identifiant croissant : l'identifiant vaut sa position plus un.
     std::vector<Combatant> _combatants;
     TurnOrder _order;
@@ -728,7 +806,7 @@ private:
     int _depth = 0;
 };
 
-/// @brief Un membre du groupe à engager, et sa case.
+/// @brief Un membre du groupe à engager, et sa case sur la carte (en tuiles, `core::tileCenter`).
 struct PartyMember {
     CombatantProfile profile;
     GridPosition position;
@@ -739,7 +817,7 @@ struct MountRefusal {
     /// L'identifiant de créature, ou le nom du membre du groupe.
     std::string who;
     GridPosition position;
-    /// La raison du refus de la grille ; vide si la créature est **inconnue** du bestiaire.
+    /// La raison du refus de l'espace ; vide si la créature est **inconnue** du bestiaire.
     std::optional<PlacementResult> placement;
 };
 
@@ -753,10 +831,11 @@ struct EncounterMount {
 /**
  * @brief Monte la rencontre @p run sur @p combat : le groupe, puis les créatures, dans cet ordre.
  *
- * Les placements viennent de `core::beginEncounter` (`LOT-18`), qui ne les a pas vérifiés : c'est
- * ici qu'une case voulue tombe dans un mur, et le montage **le dit** plutôt que de déplacer la
- * créature d'office — une formation mal écrite est une information pour l'auteur. Un combattant
- * refusé n'est pas enrôlé : un combattant sans case ne peut pas combattre sur la grille.
+ * Les placements viennent de `core::beginEncounter` (`LOT-18`), en cases de la carte, qui ne les a
+ * pas vérifiés : chacun se pose au centre de son emprise (`core::tileCenter`). C'est ici qu'une
+ * place voulue tombe dans un mur, et le montage **le dit** plutôt que de déplacer la créature
+ * d'office — une formation mal écrite est une information pour l'auteur. Un combattant refusé
+ * n'est pas enrôlé : sans place, on ne combat pas.
  *
  * @param combat   Un combat encore en montage.
  * @param run      La rencontre engagée : ses placements, et si l'on peut la fuir.

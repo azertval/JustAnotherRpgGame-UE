@@ -35,7 +35,8 @@ inline constexpr int TACTICAL_PARTY_SIZE = 4;
  * @brief Rayon de la zone de combat autour du déclencheur, en cases : un déplacement de 30 pieds.
  *
  * 9 m, la vitesse d'un combattant de taille M, font 6 cases (`core::movementBudget`) : la zone est
- * ce qu'un combattant ordinaire parcourt en **un tour** depuis le déclencheur. Plus large, une
+ * ce qu'un combattant ordinaire parcourt en **un tour** depuis le déclencheur, chemin mesuré en
+ * mètres sur l'espace de la carte (`LOT-1017`). Plus large, une
  * clairière à trois tours de marche ferait passer un couloir pour un champ de bataille ; plus
  * étroite, le premier tour sortirait déjà de la zone vérifiée. Décision nommée, l'auteur peut la
  * régler.
@@ -82,8 +83,8 @@ struct EncounterTerrain {
     GridPosition trigger;
     /// Les cases voulues par la formation (`core::placeCombatants`).
     std::vector<CombatantPlacement> placements;
-    /// Cases libres atteignables depuis le déclencheur, déclencheur compris, triées (ligne,
-    /// colonne).
+    /// Cases dont le centre s'atteint depuis celui du déclencheur en un tour de 9 m, déclencheur
+    /// compris, triées (ligne, colonne).
     std::vector<GridPosition> area;
     /// `(combattants + TACTICAL_PARTY_SIZE) × TACTICAL_CELLS_PER_COMBATANT`.
     int requiredCells = 0;
@@ -105,11 +106,11 @@ struct EncounterTerrain {
  *
  * ## Une seule règle pour « se tenir ici »
  *
- * Les combattants sont posés sur une `core::BattleGrid` construite depuis @p collision, par
- * `core::BattleGrid::place`, dans l'ordre de la formation — ce que fait le montage
- * (`core::mountEncounter`). Un avertissement de l'éditeur et un refus au montage ne peuvent donc
- * pas diverger. La zone est une `core::ReachableArea` : diagonales, coins de mur et terrain
- * difficile y suivent la règle du `LOT-19`, sans seconde implémentation.
+ * Les combattants sont posés au centre de leur emprise (`core::tileCenter`) dans l'espace simulé
+ * de @p collision (`core::SimulatedSpace::fromTileMap`), dans l'ordre de la formation, avec la
+ * règle du montage (`core::CombatState::placementAt`) : tenir dans l'espace, ne recouvrir
+ * personne. La zone se compte sur les candidats de ce même espace
+ * (`core::CombatSpace::candidates`), le chemin en mètres, sans seconde implémentation.
  *
  * ## Ce qu'elle ne vérifie pas
  *

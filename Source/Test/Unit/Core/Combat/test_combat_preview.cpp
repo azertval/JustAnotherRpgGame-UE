@@ -174,17 +174,17 @@ TEST(CombatPreviewTest, LeDeplacementSePrevisualiseEtLOpportuniteSeDecline) {
     ASSERT_TRUE(session.start());
     ASSERT_EQ(session.combat().activeCombatant(), CombatantId{1});
 
-    const core::MovePreview pas = core::previewMove(session, {2, 5});
+    const core::MovePreview pas = core::previewMove(session, core::tileCenter({2, 5}));
     ASSERT_TRUE(pas.path.has_value());
-    EXPECT_EQ(pas.path->cost, 2);
-    EXPECT_EQ(pas.movementLeft, 4);
+    EXPECT_NEAR(pas.path->length, 3.0F, 0.01F) << "deux cases, 3 m";
+    EXPECT_NEAR(pas.movementLeft, 6.0F, 0.01F) << "9 m moins 3 m";
     EXPECT_EQ(pas.opportunities, (std::vector<CombatantId>{CombatantId{2}}));
-    EXPECT_FALSE(core::previewMove(session, {9, 9}).path.has_value());
+    EXPECT_FALSE(core::previewMove(session, core::tileCenter({9, 9})).path.has_value());
 
     EXPECT_TRUE(session.takesOpportunities(CombatantId{2}));
     session.setTakesOpportunities(CombatantId{2}, false);
-    EXPECT_TRUE(core::previewMove(session, {2, 5}).opportunities.empty());
-    ASSERT_EQ(session.move({2, 5}).result, core::MoveResult::Moved);
+    EXPECT_TRUE(core::previewMove(session, core::tileCenter({2, 5})).opportunities.empty());
+    ASSERT_EQ(session.move(core::tileCenter({2, 5})).result, core::MoveResult::Moved);
     EXPECT_TRUE(std::ranges::none_of(
         session.journal(), [](const std::string& l) { return l.starts_with("opportunite : "); }));
     EXPECT_EQ(session.combat().find(CombatantId{2})->economy.remaining(core::REACTION_RESOURCE), 1);

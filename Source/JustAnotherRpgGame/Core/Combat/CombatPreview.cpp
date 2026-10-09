@@ -9,7 +9,6 @@
 #include "Core/Combat/CombatCounters.h"
 #include "Core/Combat/EnemyAi.h"
 #include "Core/Combat/Flanking.h"
-#include "Core/Combat/LineOfSight.h"
 #include "Core/Rpg/ClassCapacities.h"
 
 namespace core {
@@ -116,14 +115,15 @@ std::optional<std::size_t> firstValidAttack(const ArenaSession& session, Combata
     return std::nullopt;
 }
 
-MovePreview previewMove(const ArenaSession& session, GridPosition destination) {
+MovePreview previewMove(const ArenaSession& session, Meters3 destination) {
     MovePreview apercu;
-    const std::optional<ReachableArea> zone = session.combat().reachableArea();
-    if (!zone.has_value()) {
+    const CombatState& combat = session.combat();
+    if (!combat.activeCombatant().has_value()) {
         return apercu;
     }
-    apercu.path = zone->pathTo(destination);
-    apercu.movementLeft = zone->budget() - (apercu.path.has_value() ? apercu.path->cost : 0);
+    apercu.path = combat.routeTo(destination);
+    apercu.movementLeft =
+        combat.movementLeft() - (apercu.path.has_value() ? apercu.path->length : 0.0f);
     if (apercu.path.has_value()) {
         apercu.opportunities = session.previewOpportunities(destination);
     }

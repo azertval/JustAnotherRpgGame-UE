@@ -17,7 +17,8 @@
 
 #include <gtest/gtest.h>
 
-#include "Core/Combat/BattleGrid.h"
+#include "Core/Combat/CombatSpace.h"
+#include "Core/Combat/SimulatedSpace.h"
 #include "Core/Levels/CollisionDerivation.h"
 #include "Core/Levels/Level.h"
 #include "Core/Levels/LevelDraft.h"
@@ -348,30 +349,36 @@ TEST(FormatV4Test, UneVarianteQuiPorteDesCasesEstRefusee) {
 // --- Zones (D13) ---------------------------------------------------------------------------------
 
 /**
- * @brief Une zone **peinte** couvre ses cases et elles seules ; `BattleGrid::zonesAt` la lit et
- *        applique son terrain difficile.
- * \castest{<b>Une zone peinte est lue par la grille tactique.</b><br/>
+ * @brief Une zone **peinte** couvre ses cases et elles seules ; l'espace de combat de la carte
+ *        (`SimulatedSpace::fromLevel`) applique son terrain difficile.
+ * \castest{<b>Une zone peinte est lue par l'espace de combat.</b><br/>
  * \tcat Unitaire · Format v4<br/>
  * \tcrit Critique<br/>
- * \tetapes 1. Charger `format-v4.json` (zone peinte en (1, 1) et (2, 2)).<br/>2. Construire sa
- * `BattleGrid`.<br/>
- * \tattendu Zone et difficulté en (1, 1) et (2, 2), rien en (2, 1).
+ * \tetapes 1. Charger `format-v4.json` (zone peinte en (1, 1) et (2, 2)).<br/>2. Lire ses cases ;
+ * construire l'espace de combat de la carte.<br/>
+ * \tattendu Zone en (1, 1) et (2, 2), rien en (2, 1) ; le centre de (2, 2) est difficile, celui de
+ * (2, 1) non.
  * }
  */
-TEST(FormatV4Test, UneZonePeinteEstLueParLaGrilleTactique) {
+TEST(FormatV4Test, UneZonePeinteEstLueParLEspaceDeCombat) {
     const core::Level level = chargerFichier(FIXTURES / "format-v4.json");
-    const core::BattleGrid grid(level);
-    const auto porteLaZone = [&grid](GridPosition cell) {
-        const std::vector<const core::PropertyMap*> zones = grid.zonesAt(cell);
-        return std::ranges::any_of(
-            zones, [](const core::PropertyMap* zone) { return zone->contains("ratio"); });
+    const auto zone = std::ranges::find_if(level.entities(), [](const core::MapEntity& entity) {
+        return entity.type == core::ZONE_ENTITY_TYPE && entity.properties.contains("ratio");
+    });
+    ASSERT_NE(zone, level.entities().end());
+    const std::vector<GridPosition> cases = core::zoneCells(*zone);
+    const auto porteLaZone = [&cases](GridPosition cell) {
+        return std::ranges::find(cases, cell) != cases.end();
     };
 
     EXPECT_TRUE(porteLaZone({1, 1}));
     EXPECT_TRUE(porteLaZone({2, 2}));
     EXPECT_FALSE(porteLaZone({2, 1}));
-    EXPECT_TRUE(grid.isDifficult({2, 2}));
-    EXPECT_FALSE(grid.isDifficult({2, 1}));
+    const core::SimulatedSpace espace = core::SimulatedSpace::fromLevel(level, level.tileMap());
+    const core::Meters3 difficile = core::tileCenter({2, 2});
+    const core::Meters3 normale = core::tileCenter({2, 1});
+    EXPECT_TRUE(espace.isDifficult(difficile.x, difficile.y));
+    EXPECT_FALSE(espace.isDifficult(normale.x, normale.y));
 }
 
 /**

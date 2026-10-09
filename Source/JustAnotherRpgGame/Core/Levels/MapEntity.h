@@ -67,9 +67,14 @@ struct MapEntity {
 /**
  * @brief Type d'entité d'une **zone** de règles : un rectangle (`width` × `height` depuis sa case)
  *        ou un ensemble de cases peint (`MapEntity::cells`), dont les propriétés s'appliquent à
- *        chaque case couverte (décision D13, `EX-LVL-022`, lue par `core::BattleGrid::zonesAt`).
+ *        chaque case couverte (décision D13, `EX-LVL-022`, lue par
+ *        `core::SimulatedSpace::fromLevel`).
  */
 inline constexpr std::string_view ZONE_ENTITY_TYPE = "zone";
+
+/// @brief Propriété de zone — couche ou entité — qui rend ses cases difficiles (`EX-LVL-018`) :
+/// y entrer coûte double au sol.
+inline constexpr std::string_view DIFFICULT_TERRAIN_PROPERTY = "difficultTerrain";
 
 /// @brief Propriété d'une zone rectangle : sa largeur, en cases.
 inline constexpr std::string_view ZONE_WIDTH_PROPERTY = "width";

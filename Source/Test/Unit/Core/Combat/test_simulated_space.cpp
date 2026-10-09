@@ -188,29 +188,38 @@ TEST(EspaceSimuleTest, UnEnnemiBloqueEtUnAllieSeTraverseEnCoutantDouble) {
  * \tcat Unitaire · Combat en distance (LOT-1017)<br/>
  * \tcrit Majeure<br/>
  * \tetapes 1. Deux demandes identiques, budget de 4,5 m, une boite a cote.<br/>
- * \tattendu Les memes points dans le meme ordre, le depart en tete, tous libres et dans le budget ;
- * 9 m est absent, 4 m present.}
+ * \tattendu Les memes points dans le meme ordre, le depart en tete, tous libres et dans le budget,
+ * chacun avec un chemin qui y finit et tient dans le budget ; 9 m est absent, 4 m present.}
  */
 TEST(EspaceSimuleTest, LesCandidatsSontDansLeBudgetEtEnOrdreFixe) {
     SimulatedSpace space(20.0f, 20.0f);
     space.addBox({.rect = {8, 8, 12, 12}});
     const RouteQuery query{.mover = medium(5, 5), .destination = {}, .budget = 4.5f};
-    const std::vector<Meters3> first = space.candidates(query);
-    const std::vector<Meters3> second = space.candidates(query);
-    EXPECT_EQ(first, second);
+    const std::vector<core::Destination> first = space.candidates(query);
+    const std::vector<core::Destination> second = space.candidates(query);
+    ASSERT_EQ(first.size(), second.size());
+    for (std::size_t i = 0; i < first.size(); ++i) {
+        EXPECT_EQ(first[i].point, second[i].point);
+        EXPECT_EQ(first[i].route.points, second[i].route.points);
+    }
     ASSERT_FALSE(first.empty());
-    EXPECT_EQ(first.front(), query.mover.base);
-    for (const Meters3& point : first) {
-        EXPECT_LE(core::groundDistance(point, query.mover.base), 4.5f + 0.01f);
-        EXPECT_TRUE(
-            space.isClear(core::volumeOf(point, CreatureSize::Medium), core::Locomotion::Walk));
+    EXPECT_EQ(first.front().point, query.mover.base);
+    EXPECT_TRUE(first.front().route.points.empty());
+    for (std::size_t i = 1; i < first.size(); ++i) {
+        const core::Destination& candidate = first[i];
+        EXPECT_LE(core::groundDistance(candidate.point, query.mover.base), 4.5f + 0.01f);
+        EXPECT_LE(candidate.route.length, 4.5f + 0.01f);
+        ASSERT_FALSE(candidate.route.points.empty());
+        EXPECT_EQ(candidate.route.points.back(), candidate.point);
+        EXPECT_TRUE(space.isClear(core::volumeOf(candidate.point, CreatureSize::Medium),
+                                  core::Locomotion::Walk));
     }
     // Un point à 9 m n'y est pas ; un point à 4 m y est.
-    const bool far = std::any_of(first.begin(), first.end(), [](const Meters3& p) {
-        return std::fabs(p.x - 14.0f) < 0.01f && std::fabs(p.y - 5.0f) < 0.01f;
+    const bool far = std::any_of(first.begin(), first.end(), [](const core::Destination& d) {
+        return std::fabs(d.point.x - 14.0f) < 0.01f && std::fabs(d.point.y - 5.0f) < 0.01f;
     });
-    const bool near = std::any_of(first.begin(), first.end(), [](const Meters3& p) {
-        return std::fabs(p.x - 9.0f) < 0.01f && std::fabs(p.y - 5.0f) < 0.01f;
+    const bool near = std::any_of(first.begin(), first.end(), [](const core::Destination& d) {
+        return std::fabs(d.point.x - 9.0f) < 0.01f && std::fabs(d.point.y - 5.0f) < 0.01f;
     });
     EXPECT_FALSE(far);
     EXPECT_TRUE(near);

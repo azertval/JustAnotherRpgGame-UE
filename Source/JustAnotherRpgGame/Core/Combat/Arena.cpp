@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <array>
 #include <cstdint>
+#include <cstdio>
 #include <cstdlib>
 #include <optional>
 #include <span>
@@ -15,10 +16,9 @@
 #include <variant>
 
 #include "Core/Combat/AreaOfEffect.h"
-#include "Core/Combat/BattleGrid.h"
 #include "Core/Combat/CombatCounters.h"
 #include "Core/Combat/Flanking.h"
-#include "Core/Combat/Pathfinding.h"
+#include "Core/Combat/SimulatedSpace.h"
 #include "Core/Rpg/Ability.h"
 #include "Core/Rpg/CharacterSheet.h"
 #include "Core/Rpg/Spell.h"
@@ -102,16 +102,31 @@ namespace {
     return "?";
 }
 
-// La derniere case ou l'on peut se tenir, au plus tard @p sortie : on ne s'arrete pas sur la case
-// d'un allie qu'on traverse. Zero si aucune avant.
-[[nodiscard]] std::size_t derniereCaseTenable(const ReachableArea& zone,
-                                              const std::vector<GridPosition>& cases,
+// Le dernier point ou l'on peut se tenir, au plus tard @p sortie : on ne s'arrete pas dans
+// l'espace d'un allie qu'on traverse. Zero si aucun avant.
+[[nodiscard]] std::size_t dernierPointTenable(const CombatState& combat, CombatantId mobile,
+                                              const std::vector<Meters3>& points,
                                               std::size_t sortie) {
     std::size_t arret = sortie;
-    while (arret > 0 && !zone.canEndAt(cases[arret])) {
+    while (arret > 0 && !combat.canStandAt(mobile, points[arret])) {
         --arret;
     }
     return arret;
+}
+
+// « 5.25,6.75 » : un point au sol, au centimetre, comme le journal l'ecrit.
+[[nodiscard]] std::string pointTexte(Meters3 point) {
+    std::array<char, 48> texte{};
+    std::snprintf(texte.data(), texte.size(), "%.2f,%.2f", static_cast<double>(point.x),
+                  static_cast<double>(point.y));
+    return texte.data();
+}
+
+// « 4.50 m » : une longueur, au centimetre.
+[[nodiscard]] std::string longueurTexte(float metres) {
+    std::array<char, 32> texte{};
+    std::snprintf(texte.data(), texte.size(), "%.2f m", static_cast<double>(metres));
+    return texte.data();
 }
 
 // « 2 succes, 1 echec » : le compteur d'un mourant.
@@ -219,7 +234,7 @@ void decompterLesRounds(std::vector<ArenaEffect>& effets) {
     switch (verification) {
         case TargetCheck::Valid:
             return std::nullopt;
-        case TargetCheck::NotOnGrid:
+        case TargetCheck::NotPlaced:
             return ArenaActionResult::InvalidTarget;
         case TargetCheck::OutOfReach:
             return ArenaActionResult::OutOfReach;
@@ -342,15 +357,15 @@ struct LigneDeCible {
         return cibles;
     }
     const Combatant* lanceur = combat.find(caster);
-    std::vector<std::pair<int, CombatantId>> proches;
+    std::vector<std::pair<float, CombatantId>> proches;
     for (const CombatantId autre : combat.combatants()) {
         const Combatant* c = combat.find(autre);
         if (autre == target || c == nullptr || c->status != CombatantStatus::Standing ||
             c->profile.side != lanceur->profile.side) {
             continue;
         }
-        const std::optional<int> distance =
-            autre == caster ? std::optional<int>(0) : gridDistance(combat, caster, autre);
+        const std::optional<float> distance =
+            autre == caster ? std::optional<float>(0.0f) : gapBetween(combat, caster, autre);
         if (distance.has_value() &&
             (autre == caster ||
              checkTarget(combat, caster, autre, spell.attack) == TargetCheck::Valid)) {
@@ -365,12 +380,6 @@ struct LigneDeCible {
         cibles.push_back(autre);
     }
     return cibles;
-}
-
-// Le chemin vers la destination dans la zone atteignable, s'il y en a une.
-[[nodiscard]] std::optional<Path> cheminVers(const std::optional<ReachableArea>& zone,
-                                             GridPosition destination) {
-    return zone.has_value() ? zone->pathTo(destination) : std::optional<Path>{};
 }
 
 // Le parcours deja fait s'il a abouti, sinon le dernier pas tente.
@@ -426,8 +435,12 @@ std::vector<ArenaEntryPoint> arenaEntryPoints(const Level& level) {
 
 // --- Session ----------------------------------------------------------------------------------
 
-ArenaSession::ArenaSession(Level level)
-    : _level(std::move(level)), _combat(std::make_unique<CombatState>(BattleGrid(_level))) {}
+ArenaSession::ArenaSession(Level level, std::shared_ptr<const CombatSpace> space)
+    : _level(std::move(level)),
+      _space(space != nullptr ? std::move(space)
+                              : std::make_shared<SimulatedSpace>(
+                                    SimulatedSpace::fromLevel(_level, _level.tileMap()))),
+      _combat(std::make_unique<CombatState>(_space)) {}
 
 void ArenaSession::record(std::string line) {
     _journal.push_back(std::move(line));
@@ -639,7 +652,7 @@ void ArenaSession::restoreAll() {
 ArenaMount ArenaSession::mount(const ArenaBout& bout) {
     _bout = bout;
     _random = DeterministicRandom(bout.seed);
-    _combat = std::make_unique<CombatState>(BattleGrid(_level));
+    _combat = std::make_unique<CombatState>(_space);
     _attacks.clear();
     _capacities.clear();
     _spells.clear();
@@ -667,7 +680,8 @@ ArenaMount ArenaSession::mount(const ArenaBout& bout) {
                                         .placement = PlacementResult::OutOfBounds});
             continue;
         }
-        const EnlistResult enrolement = _combat->enlist(concurrent.profile, *place);
+        const EnlistResult enrolement =
+            _combat->enlist(concurrent.profile, tileCenter(*place, concurrent.profile.size));
         if (!enrolement.combatant.has_value()) {
             montage.refusals.push_back({.who = concurrent.profile.name,
                                         .position = *place,
@@ -854,8 +868,8 @@ std::optional<AttackOutcome> ArenaSession::resolveAndRecord(CombatantId attacker
     crochets.insert(AttackRollStage::Hit, [this](AttackRoll& jet, DeterministicRandom&) {
         const Combatant* cible = _combat->find(jet.target);
         if (cible != nullptr && cible->status == CombatantStatus::Down &&
-            gridDistance(*_combat, jet.attacker, jet.target) == std::optional<int>(1) &&
-            !jet.critical) {
+            gapBetween(*_combat, jet.attacker, jet.target).has_value() &&
+            adjacentGap(*gapBetween(*_combat, jet.attacker, jet.target)) && !jet.critical) {
             jet.critical = true;
             jet.criticalSource = "cible inconsciente au contact";
         }
@@ -895,7 +909,8 @@ AttackContext ArenaSession::contextAgainst(CombatantId attacker, CombatantId tar
         contexte.circumstances.advantages.emplace_back("cible inconsciente");
     }
     if (cible != nullptr && (cible->prone || cible->status == CombatantStatus::Down)) {
-        if (gridDistance(*_combat, attacker, target) == std::optional<int>(1)) {
+        const std::optional<float> ecart = gapBetween(*_combat, attacker, target);
+        if (ecart.has_value() && adjacentGap(*ecart)) {
             contexte.circumstances.advantages.emplace_back("cible a terre au contact");
         } else {
             contexte.circumstances.disadvantages.emplace_back("cible a terre a distance");
@@ -1163,18 +1178,16 @@ ArenaAttack ArenaSession::castAutoHit(CombatantId caster, CombatantId target,
 ArenaAttack ArenaSession::castSavingThrow(CombatantId caster, CombatantId target,
                                           const ArenaSpell& spell, const std::string& prefix) {
     std::vector<CombatantId> cibles{target};
-    if (spell.areaRadius > 0) {
+    if (spell.areaRadiusMeters > 0.0f) {
         // La sphere se centre sur la cible (LOT-133) : le moteur ne vise pas encore un point
         // vide. Elle prend tout ce qu'elle touche, allies et lanceur compris.
-        const std::optional<GridPosition> ancre = _combat->grid().positionOf(target);
-        if (ancre.has_value()) {
-            const int cote = _combat->grid().sideOf(target);
-            const GridPoint centre{.x = (2 * ancre->column) + cote, .y = (2 * ancre->row) + cote};
+        if (const std::optional<Volume> volume = _combat->volumeOf(target)) {
+            const Meters3 centre = centerOf(*volume);
             cibles = combatantsInArea(*_combat, {.shape = AreaShape::Sphere,
                                                  .origin = centre,
                                                  .toward = centre,
-                                                 .size = spell.areaRadius,
-                                                 .width = 1});
+                                                 .size = spell.areaRadiusMeters,
+                                                 .width = METERS_PER_TILE});
         }
     }
     const Combatant* lanceur = _combat->find(caster);
@@ -1357,8 +1370,8 @@ bool ArenaSession::disengage() {
     return true;
 }
 
-bool ArenaSession::provokes(CombatantId mover, CombatantId reactor, GridPosition from,
-                            GridPosition to) const {
+bool ArenaSession::provokes(CombatantId mover, CombatantId reactor, Meters3 from,
+                            Meters3 to) const {
     const Combatant* mobile = _combat->find(mover);
     const Combatant* c = _combat->find(reactor);
     const AttackProfile* coup = meleeAttack(reactor);
@@ -1372,35 +1385,31 @@ bool ArenaSession::provokes(CombatantId mover, CombatantId reactor, GridPosition
     if (hasEffect(mover, SpellEffectKind::Invisible)) {
         return false;
     }
-    const std::optional<int> avant = gridDistanceFrom(*_combat, mover, from, reactor);
-    const std::optional<int> apres = gridDistanceFrom(*_combat, mover, to, reactor);
-    if (!avant.has_value() || !apres.has_value() || *avant > coup->reach || *apres <= coup->reach) {
+    const std::optional<float> avant = gapFrom(*_combat, mover, from, reactor);
+    const std::optional<float> apres = gapFrom(*_combat, mover, to, reactor);
+    if (!avant.has_value() || !apres.has_value() || !withinTiles(*avant, coup->reach) ||
+        withinTiles(*apres, coup->reach)) {
         return false;
     }
-    // « Une creature hostile, situee dans votre champ de vision » : vue depuis la case qu'elle
+    // « Une creature hostile, situee dans votre champ de vision » : vue depuis le point qu'elle
     // quitte.
-    const std::optional<GridPosition> ancre = _combat->grid().positionOf(reactor);
-    const bool voit =
-        ancre.has_value() &&
-        hasLineOfSight(_combat->grid(), {.anchor = from, .side = _combat->grid().sideOf(mover)},
-                       {.anchor = *ancre, .side = _combat->grid().sideOf(reactor)});
+    const bool voit = hasLineOfSightFrom(*_combat, mover, from, reactor);
     return voit && (!_opportunityPolicy || _opportunityPolicy(*this, reactor, mover));
 }
 
-std::vector<CombatantId> ArenaSession::previewOpportunities(GridPosition destination) const {
+std::vector<CombatantId> ArenaSession::previewOpportunities(Meters3 destination) const {
     std::vector<CombatantId> opportunistes;
     const std::optional<CombatantId> actif = _combat->activeCombatant();
-    const std::optional<ReachableArea> zone = _combat->reachableArea();
-    if (!actif.has_value() || !zone.has_value() || _disengaged.contains(*actif) ||
-        opportunityImmunityFrom(capacitiesOf(*actif)).has_value()) {
+    if (!actif.has_value() || !_combat->positionOf(*actif).has_value() ||
+        _disengaged.contains(*actif) || opportunityImmunityFrom(capacitiesOf(*actif)).has_value()) {
         return opportunistes;
     }
-    const std::optional<Path> chemin = zone->pathTo(destination);
+    const std::optional<Route> chemin = _combat->routeTo(destination);
     if (!chemin.has_value()) {
         return opportunistes;
     }
-    std::vector<GridPosition> cases{zone->origin()};
-    cases.insert(cases.end(), chemin->steps.begin(), chemin->steps.end());
+    std::vector<Meters3> cases{*_combat->positionOf(*actif)};
+    cases.insert(cases.end(), chemin->points.begin(), chemin->points.end());
     // Chacun ne frappe qu'une fois : sa reaction est depensee au premier coup.
     for (std::size_t i = 0; i + 1 < cases.size(); ++i) {
         for (const CombatantId autre : _combat->combatants()) {
@@ -1439,27 +1448,28 @@ bool ArenaSession::dash() {
     return true;
 }
 
-MoveOutcome ArenaSession::move(GridPosition destination) {
+MoveOutcome ArenaSession::move(Meters3 destination) {
     const std::optional<CombatantId> actif = _combat->activeCombatant();
     if (!actif.has_value()) {
         return _combat->move(destination);
     }
     MoveOutcome parcours{.result = MoveResult::NoActiveTurn, .path = {}};
     // Un pas vers `vers` : s'il aboutit, il est noté, signalé à l'observateur et cumulé.
-    const auto avancer = [&](GridPosition vers) {
+    const auto avancer = [&](Meters3 vers) {
         const MoveOutcome pas = _combat->move(vers);
         if (pas.result != MoveResult::Moved) {
             return pas;
         }
-        record("pas " + _combat->find(*actif)->profile.name + " " + std::to_string(vers.column) +
-               "," + std::to_string(vers.row) + " (" + std::to_string(pas.path.cost) + ")");
+        record("pas " + _combat->find(*actif)->profile.name + " " +
+               pointTexte(*_combat->positionOf(*actif)) + " (" + longueurTexte(pas.path.length) +
+               ")");
         if (_moveObserver) {
             _moveObserver(*actif, pas.path);
         }
         parcours.result = MoveResult::Moved;
-        parcours.path.steps.insert(parcours.path.steps.end(), pas.path.steps.begin(),
-                                   pas.path.steps.end());
-        parcours.path.cost += pas.path.cost;
+        parcours.path.points.insert(parcours.path.points.end(), pas.path.points.begin(),
+                                    pas.path.points.end());
+        parcours.path.length += pas.path.length;
         return pas;
     };
 
@@ -1471,15 +1481,15 @@ MoveOutcome ArenaSession::move(GridPosition destination) {
         if (!toujoursLui) {
             return parcours;
         }
-        const std::optional<ReachableArea> zone = _combat->reachableArea();
-        const std::optional<Path> chemin = cheminVers(zone, destination);
-        if (!chemin.has_value()) {
+        const std::optional<Route> chemin = _combat->routeTo(destination);
+        const std::optional<Meters3> depart = _combat->positionOf(*actif);
+        if (!chemin.has_value() || !depart.has_value()) {
             return parcours.result == MoveResult::Moved ? parcours : _combat->move(destination);
         }
 
-        // Les cases successives de l'ancre, depart compris, et la premiere sortie d'allonge.
-        std::vector<GridPosition> cases{zone->origin()};
-        cases.insert(cases.end(), chemin->steps.begin(), chemin->steps.end());
+        // Les points successifs du chemin, depart compris, et la premiere sortie d'allonge.
+        std::vector<Meters3> cases{*depart};
+        cases.insert(cases.end(), chemin->points.begin(), chemin->points.end());
         std::vector<CombatantId> opportunistes;
         const std::optional<std::size_t> sortie = firstProvokingStep(*actif, cases, opportunistes);
         if (!sortie.has_value()) {
@@ -1497,9 +1507,9 @@ MoveOutcome ArenaSession::move(GridPosition destination) {
             return parcoursOuPas(parcours, pas);
         }
 
-        // On ne s'arrete pas sur la case d'un allie qu'on traverse : l'attaque tombe a la derniere
-        // case ou l'on peut se tenir avant la sortie.
-        const std::size_t arret = derniereCaseTenable(*zone, cases, *sortie);
+        // On ne s'arrete pas dans l'espace d'un allie qu'on traverse : l'attaque tombe au dernier
+        // point ou l'on peut se tenir avant la sortie.
+        const std::size_t arret = dernierPointTenable(*_combat, *actif, cases, *sortie);
         if (arret > 0) {
             avancer(cases[arret]);
         }
@@ -1509,7 +1519,7 @@ MoveOutcome ArenaSession::move(GridPosition destination) {
 }
 
 std::optional<std::size_t> ArenaSession::firstProvokingStep(
-    CombatantId mover, const std::vector<GridPosition>& cases,
+    CombatantId mover, const std::vector<Meters3>& cases,
     std::vector<CombatantId>& reactors) const {
     // Desengage, ou soustrait aux attaques d'opportunite par une capacite (LOT-131) : rien ne
     // provoque. La session ne sait pas laquelle ; elle lit un effet nomme.
@@ -1520,7 +1530,7 @@ std::optional<std::size_t> ArenaSession::firstProvokingStep(
 }
 
 std::optional<std::size_t> ArenaSession::firstExitFromReach(
-    CombatantId mover, const std::vector<GridPosition>& cases,
+    CombatantId mover, const std::vector<Meters3>& cases,
     std::vector<CombatantId>& reactors) const {
     std::optional<std::size_t> sortie;
     for (std::size_t i = 0; i + 1 < cases.size() && !sortie.has_value(); ++i) {
@@ -1614,9 +1624,7 @@ std::vector<ArenaSpell> arenaSpellsFor(const CharacterSheet& sheet,
              // Player's Guide, p. 197 et 201 : DD = 8 + maitrise + modificateur d'incantation.
              .saveDc = 8 + proficiencyBonus + sheet.modifier(incantation),
              .saveEffect = sort->saveEffect,
-             .areaRadius = sort->areaRadiusMeters > 0.0F
-                               ? areaTilesFromMeters(sort->areaRadiusMeters).value_or(0)
-                               : 0,
+             .areaRadiusMeters = std::max(sort->areaRadiusMeters, 0.0F),
              .effect = sort->effect,
              .concentration = sort->concentration,
              .bonusAction = sort->bonusAction,

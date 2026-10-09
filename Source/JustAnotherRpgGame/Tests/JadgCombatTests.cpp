@@ -135,12 +135,13 @@ bool FJadgCombatSpaceTest::RunTest(const FString& Parameters)
 
 	// Les candidats.
 	const core::RouteQuery Query{.mover = Medium(5.0f, 15.0f), .destination = {}, .budget = 4.5f};
-	const std::vector<core::Meters3> Candidates = Space.candidates(Query);
+	const std::vector<core::Destination> Candidates = Space.candidates(Query);
 	TestTrue(*FString::Printf(TEXT("des candidats dans 4,5 m (%d)"), static_cast<int32>(Candidates.size())), Candidates.size() > 10);
 	bool bAllReachable = true;
-	for (const core::Meters3& Point : Candidates)
+	for (const core::Destination& Candidate : Candidates)
 	{
-		bAllReachable = bAllReachable && core::groundDistance(Point, Query.mover.base) <= 4.5f + 0.01f;
+		bAllReachable = bAllReachable && core::groundDistance(Candidate.point, Query.mover.base) <= 4.5f + 0.01f
+			&& Candidate.route.length <= 4.5f + 0.01f;
 	}
 	TestTrue(TEXT("tous les candidats sont dans le budget"), bAllReachable);
 

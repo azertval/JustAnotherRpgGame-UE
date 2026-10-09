@@ -33,14 +33,12 @@
 #include <utility>
 #include <vector>
 
-#include "Core/Levels/GridPosition.h"
 #include "Core/Math/DeterministicRandom.h"
 #include "Core/Rpg/Dice.h"
 #include "Core/Rpg/RpgEnums.h"
 
 namespace core {
 
-class BattleGrid;
 class CombatState;
 struct Creature;
 enum class CombatantId : std::uint32_t;
@@ -115,6 +113,26 @@ struct DamageTraits {
     /// @brief La première affinité de ce genre qui s'applique, ou `nullptr`.
     [[nodiscard]] const DamageAffinity* matching(DamageAffinityKind kind, DamageType type,
                                                  DamageFlags flags) const;
+};
+
+/**
+ * @brief Une structure qu'on peut détruire : une toile, une barricade, une porte.
+ *
+ * Elle a des **points de vie** parce que le corpus en donne (les toiles du Sourcebook : CA 10,
+ * 10 PV) ; elle n'est pas une créature, et n'entre ni dans l'ordre du tour ni dans l'espace des
+ * combattants. Sa place et l'abri qu'elle donne sont à l'espace de combat (`core::Box`).
+ */
+struct Structure {
+    /// Nature de la structure, libre (`"web"`, `"porte"`) — le combat ne l'interprète pas.
+    std::string kind;
+    int hitPoints = 1;
+    /// Les structures résistent comme les créatures : une porte de fer ne craint pas le poison.
+    DamageTraits damageTraits;
+
+    /// @brief Vrai si elle n'a plus de points de vie.
+    [[nodiscard]] bool destroyed() const noexcept {
+        return hitPoints <= 0;
+    }
 };
 
 /**
@@ -232,8 +250,8 @@ struct DamagePortion {
 struct DamageWork {
     /// Le combattant visé, ou vide pour une structure.
     std::optional<CombatantId> target;
-    /// La case de la structure visée.
-    std::optional<GridPosition> structure;
+    /// La nature de la structure visée (`core::Structure::kind`), ou vide pour un combattant.
+    std::optional<std::string> structure;
     std::vector<DamagePortion> portions;
     /// Absorbé par les réserves.
     int absorbed = 0;
@@ -296,14 +314,14 @@ public:
                                     std::span<const DamageRequest> volley) const;
 
     /**
-     * @brief Fait traverser des dégâts à une **structure** de la grille : les structures ont des
-     *        PV, et les mêmes résistances — une porte de fer ne craint pas le poison.
+     * @brief Fait traverser des dégâts à une **structure** : les structures ont des PV, et les
+     *        mêmes résistances — une porte de fer ne craint pas le poison.
      *
-     * Pas de réserves : une structure n'en a pas. L'objet détruit quitte la grille
-     * (`core::BattleGrid::damageObject`).
+     * Pas de réserves : une structure n'en a pas. Les points de vie de @p structure baissent ;
+     * à 0, elle est détruite (`Structure::destroyed`), et c'est à qui tient l'espace de la retirer
+     * (`core::SimulatedSpace::removeBox`, le moteur au sous-lot 3).
      */
-    DamageReport applyToStructure(BattleGrid& grid, GridPosition cell,
-                                  std::span<const RolledDamage> damage) const;
+    DamageReport applyToStructure(Structure& structure, std::span<const RolledDamage> damage) const;
 
 private:
     void runStage(DamageStage stage, DamageWork& work, CombatState* combat) const;

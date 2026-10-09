@@ -25,18 +25,20 @@
  * - **Le champ de vision et l'abri** se mesurent par la méthode du Guide, déjà celle du `LOT-22` :
  *   l'IA vise par `core::hasLineOfSight` et compte l'abri par `core::coverFrom`, comme le jet réel.
  * - **La prise en tenaille**, règle optionnelle, donne l'avantage au corps à corps
- *   (`core::isFlankedFrom`) : une IA dans une arène qui la joue cherche la case d'en face.
+ *   (`core::isFlankedFrom`) : une IA dans une arène qui la joue cherche la place d'en face.
  * - **Le temps de réaction** : l'attaque d'opportunité interrompt son déclencheur ; la décision de
  *   la prendre est ici (`core::shouldTakeOpportunity`).
  *
  * ## Ce que ce fichier décide, et que le Guide ne dit pas
  *
- * Les **poids** : combien pèse une cible ensanglantée, une menace subie, une case à parcourir. Ce
- * sont des données (`Source/Elements/Rpg/rules/behaviors.json`, `EX-VIS-007`), pas des constantes.
+ * Les **poids** : combien pèse une cible ensanglantée, une menace subie, une case de 1,50 m à
+ * parcourir. Ce sont des données (`Source/Elements/Rpg/rules/behaviors.json`, `EX-VIS-007`), pas
+ * des constantes ; le combat en distance (`LOT-1017`) les garde tels quels, et compte le chemin en
+ * centimètres au taux d'une case.
  * Et deux garde-fous, qui sont des règles de l'IA et non des poids :
  *
  * - **Le suicide.** Une IA ne finit pas son tour au contact de plus d'ennemis que son profil n'en
- *   tolère (`toleratedThreats`) quand une case qui en tolère moins existait : la comparaison est
+ *   tolère (`toleratedThreats`) quand une place qui en tolère moins existait : la comparaison est
  *   **lexicographique**, l'excès d'abord, le score ensuite. Seules les attaques **de contact**
  *   comptent : un tireur couvre toute l'arène, et le compter interdirait d'approcher.
  * - **Le blocage.** Une IA qui peut attaquer attaque ; une IA qui ne le peut pas **avance** vers sa
@@ -48,7 +50,7 @@
  * ## Les sorts (`LOT-142`)
  *
  * Un combattant qui sait des sorts les pèse dans la **même monnaie** que ses attaques — les points
- * de dégâts attendus —, depuis chaque case où finir son déplacement :
+ * de dégâts attendus —, depuis chaque place où finir son déplacement :
  *
  * - un sort à **jet d'attaque** vaut l'espérance de chacun de ses projectiles, comme une arme ; un
  *   sort qui **touche sans jet** vaut ses dés ; un sort à **sauvegarde** vaut, par créature prise,
@@ -69,11 +71,12 @@
  *
  * ## Déterministe, en entiers
  *
- * Aucun flottant : une chance de toucher est un nombre de quatre-centièmes (le carré d'un
- * vingtième, pour l'avantage), des dégâts moyens un nombre de demi-points, un poids un pourcentage.
- * Les cases se parcourent par indice croissant, les cibles par identifiant croissant, et une
- * égalité garde le premier candidat. Deux exécutions, deux compilateurs, deux modes de construction
- * donnent le même tour.
+ * Aucun flottant dans le score : une chance de toucher est un nombre de quatre-centièmes (le carré
+ * d'un vingtième, pour l'avantage), des dégâts moyens un nombre de demi-points, un poids un
+ * pourcentage, une longueur de chemin un nombre de centimètres. Les places candidates viennent de
+ * l'espace (`core::CombatSpace::candidates` : la simulation de Core en donne, le moteur les
+ * demandera à EQS) dans un ordre fixe, les cibles par identifiant croissant, et une égalité garde
+ * le premier candidat. Deux exécutions sur la simulation donnent le même tour.
  */
 
 #include <cstddef>
@@ -144,8 +147,8 @@ inline constexpr int CHANCE_SCALE = 400;
  * @brief Un profil de comportement : des poids, en pour cent, et deux règles.
  *
  * Tous les termes du score sont en points de dégâts attendus : ce qu'on inflige, ce qu'on subit, et
- * les cases à parcourir converties au taux `approachPerTile`. Un poids de 100 compte un point pour
- * un point.
+ * le chemin à parcourir converti au taux `approachPerTile` par case de 1,50 m. Un poids de 100
+ * compte un point pour un point.
  */
 struct BehaviorProfile {
     std::string id;
@@ -164,15 +167,15 @@ struct BehaviorProfile {
     int threatWhenBloodied = 100;
     /// Les attaques d'opportunité qu'un chemin provoque.
     int opportunityTaken = 100;
-    /// Le prix d'une case entre soi et la cible, en pour cent d'un point de dégât.
+    /// Le prix d'une case de 1,50 m entre soi et la cible, en pour cent d'un point de dégât.
     int approachPerTile = 100;
-    /// Combien d'ennemis peuvent frapper la case de fin de tour au contact, sans bouger, au plus.
+    /// Combien d'ennemis peuvent frapper la place de fin de tour au contact, sans bouger, au plus.
     int toleratedThreats = 2;
     /// Le jet requis au-delà duquel on ne prend pas l'attaque d'opportunité (21 : toujours).
     int opportunityMaximumRoll = 21;
     /// Vrai si, faute de pouvoir attaquer et menacé, on esquive plutôt que de se précipiter.
     bool dodgeWhenThreatened = false;
-    /// Vrai si, après avoir attaqué, on s'éloigne vers une case moins menacée.
+    /// Vrai si, après avoir attaqué, on s'éloigne vers une place moins menacée.
     bool retreatAfterAttack = false;
     /**
      * @brief Ce que pèse un ennemi **à terre** dans un combat où l'on meurt : l'achever
@@ -230,19 +233,19 @@ enum class TurnAction : std::uint8_t {
 /// @brief Un tour décidé : où aller, puis quoi faire.
 struct TurnPlan {
     CombatantId actor{};
-    /// L'ancre de fin de déplacement **avant** l'action, ou vide pour rester.
-    std::optional<GridPosition> moveTo;
+    /// La place de fin de déplacement **avant** l'action, ou vide pour rester.
+    std::optional<Meters3> moveTo;
     TurnAction action = TurnAction::Wait;
     std::optional<CombatantId> target;
     std::size_t attackIndex = 0;
     /// Pour `Cast` : l'indice du sort dans ceux du combattant (`ArenaSession::spells`).
     std::size_t spellIndex = 0;
     /// Pour une approche : où aller **après** s'être précipité, le long du chemin.
-    std::optional<GridPosition> dashTo;
+    std::optional<Meters3> dashTo;
     /// Le jet requis de l'attaque, et sa posture.
     int requiredRoll = 0;
     RollStance stance = RollStance::Normal;
-    /// Les ennemis qui peuvent frapper la case de fin sans bouger.
+    /// Les ennemis qui peuvent frapper la place de fin sans bouger.
     int immediateThreats = 0;
     long long score = 0;
     /// La ligne de journal qui dit la décision.
@@ -252,10 +255,10 @@ struct TurnPlan {
 /**
  * @brief Décide le tour de @p actor, qui doit être le combattant actif de la session.
  *
- * Toutes les cases où finir le déplacement (`core::ReachableArea`), et la case de départ, sont
- * examinées avec chaque attaque et chaque ennemi debout — et chaque ennemi à terre, si le profil
- * l'achève (`BehaviorProfile::finishDowned`) ; si aucune attaque n'est possible, les
- * cases le long du chemin vers l'ennemi le plus proche (`core::findPath`). Rien n'est joué.
+ * Toutes les places où finir le déplacement (`core::CombatState::destinations`), la place de
+ * départ comprise, sont examinées avec chaque attaque et chaque ennemi debout — et chaque ennemi à
+ * terre, si le profil l'achève (`BehaviorProfile::finishDowned`) ; si aucune attaque n'est
+ * possible, l'approche suit le plus court chemin jusqu'au contact d'un ennemi. Rien n'est joué.
  */
 [[nodiscard]] TurnPlan planTurn(const ArenaSession& session, CombatantId actor,
                                 const BehaviorProfile& profile);

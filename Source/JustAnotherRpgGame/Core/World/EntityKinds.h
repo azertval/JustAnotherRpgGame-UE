@@ -205,7 +205,8 @@ struct EntityKind {
  * Coffre, panneau, PNJ, rencontre, portail, point d'arrivée, zone de combat, îlot, zone de règles,
  * décor, trajet, entrée d'arène. Les types et leurs propriétés sont ceux que le jeu lit déjà
  * (`core::knownInteractableKinds`, `core::dialogueTriggerFor`, `core::encounterTriggerFor`,
- * `core::arenaEntryPoints`, `core::BattleGrid`) : la table ne les invente pas, elle les rassemble.
+ * `core::arenaEntryPoints`, `core::SimulatedSpace::fromLevel`) : la table ne les invente pas, elle
+ * les rassemble.
  * Une seule exception, le **trajet**, que la feuille de route de l'éditeur demande avant que le jeu
  * ne le lise (`LOT-70`, `LOT-82`) : le format lui garde sa place, comme à la hauteur.
  *

@@ -414,7 +414,7 @@ La carte reduite a la zone ne porte que la zone, entites translatees.
 
 *Critique · Unitaire · Zone de combat* — `Source/Test/Unit/Core/World/test_combat_zone.cpp:127`
 
-La grille de combat de la carte reduite ne connait que la zone.
+L'espace de combat de la carte reduite ne connait que la zone.
 
 **Étapes**
 
@@ -423,13 +423,13 @@ La grille de combat de la carte reduite ne connait que la zone.
 **Résultat attendu**
 
 - Vérifie que `zones.size()` vaut `1U`.
-- Vérifie que `session.combat().grid().width()` vaut `4`.
-- Vérifie que `session.combat().grid().height()` vaut `3`.
-- Vérifie que `session.combat().grid().inBounds({4, 0})` est faux.
+- Vérifie que `espace.isClear(core::volumeOf(core::tileCenter({3, 2}), core::CreatureSize::Medium), core::Locomotion::Walk)` est vrai.
+- Vérifie que `espace.isClear(core::volumeOf(core::tileCenter({4, 0}), core::CreatureSize::Medium), core::Locomotion::Walk)` est faux.
+- Vérifie que `espace.isClear(core::volumeOf(core::tileCenter({0, 3}), core::CreatureSize::Medium), core::Locomotion::Walk)` est faux.
 
 ### CombatZoneTest.ChaqueDefautDeZoneEstReleveAuChargement
 
-*Critique · Unitaire · Zone de combat* — `Source/Test/Unit/Core/World/test_combat_zone.cpp:149`
+*Critique · Unitaire · Zone de combat* — `Source/Test/Unit/Core/World/test_combat_zone.cpp:156`
 
 Une zone degeneree, debordante ou entierement pleine est refusee, avec son code.
 

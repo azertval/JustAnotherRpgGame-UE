@@ -122,10 +122,10 @@ std::optional<core::Route> FJadgCombatSpace::route(const core::RouteQuery& Query
 	return Result;
 }
 
-std::vector<core::Meters3> FJadgCombatSpace::candidates(const core::RouteQuery& Query) const
+std::vector<core::Destination> FJadgCombatSpace::candidates(const core::RouteQuery& Query) const
 {
-	std::vector<core::Meters3> Result;
-	Result.push_back(Query.mover.base);
+	std::vector<core::Destination> Result;
+	Result.push_back({Query.mover.base, {}});
 	UNavigationSystemV1* Navigation = FNavigationSystem::GetCurrent<UNavigationSystemV1>(World);
 	if (Navigation == nullptr || Query.budget < 0.0f)
 	{
@@ -161,9 +161,9 @@ std::vector<core::Meters3> FJadgCombatSpace::candidates(const core::RouteQuery& 
 			}
 			core::RouteQuery Reach = Query;
 			Reach.destination = Point;
-			if (route(Reach).has_value())
+			if (std::optional<core::Route> Path = route(Reach))
 			{
-				Result.push_back(Point);
+				Result.push_back({Point, std::move(*Path)});
 			}
 		}
 	}

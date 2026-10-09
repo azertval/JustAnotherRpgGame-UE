@@ -18,7 +18,7 @@ Chaque cas porte l'**identifiant GoogleTest** (`Suite.Nom`, retrouvable tel quel
 | Domaine | Type | Cas | Bloquant | Critique | Majeur | Mineur |
 |---|---|---|---|---|---|---|
 | [Core](core.md) | Tests unitaires | 1 | — | — | 1 | — |
-| [Core · Combat](core-combat.md) | Tests unitaires | 201 | 28 | 102 | 71 | — |
+| [Core · Combat](core-combat.md) | Tests unitaires | 201 | 28 | 103 | 70 | — |
 | [Core · Data](core-data.md) | Tests unitaires | 17 | 1 | 5 | 9 | 2 |
 | [Core · Diagnostics](core-diagnostics.md) | Tests unitaires | 22 | — | — | 19 | 3 |
 | [Core · Ecs](core-ecs.md) | Tests unitaires | 35 | — | 5 | 30 | — |
@@ -29,7 +29,7 @@ Chaque cas porte l'**identifiant GoogleTest** (`Suite.Nom`, retrouvable tel quel
 | [Core · Rpg](core-rpg.md) | Tests unitaires | 113 | 3 | 62 | 46 | 2 |
 | [Core · Time](core-time.md) | Tests unitaires | 7 | — | 1 | 6 | — |
 | [Core · World](core-world.md) | Tests unitaires | 76 | 7 | 34 | 32 | 3 |
-| **Total** | | **675** | **57** | **251** | **334** | **33** |
+| **Total** | | **675** | **57** | **252** | **333** | **33** |
 
 ## Ce que le cahier couvre
 

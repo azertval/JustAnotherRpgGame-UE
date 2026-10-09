@@ -36,7 +36,9 @@
  *
  * Tout ce qui est ici est du `Core` pur : une carte (`core::Level`), une composition
  * (`core::ArenaBout`), et une session (`core::ArenaSession`) qui tient la machine à états du
- * combat (`core::CombatState`, `LOT-20`) sur la grille de la carte (`core::BattleGrid`, `LOT-19`).
+ * combat (`core::CombatState`, `LOT-20`) dans l'espace de la carte (`core::CombatSpace`,
+ * `LOT-1017`) : la simulation de Core lue de sa grille de collision, ou l'espace que le moteur
+ * donne.
  * Rien ne dépend d'une fenêtre : le modèle de présentation du combat (`hmi::CombatModel`) ne fait
  * que présenter et commander.
  *
@@ -80,7 +82,7 @@ inline constexpr std::string_view HEROIC_ACTION_RESOURCE = "heroicAction";
 /// attaquer — ni sort, ni esquive, ni précipitation.
 inline constexpr std::string_view EXTRA_ATTACK_RESOURCE = "extraAttack";
 
-/// @brief Un point d'entrée de l'arène : une case, un camp, un rang d'appel.
+/// @brief Un point d'entrée de l'arène : une case de la carte, un camp, un rang d'appel.
 struct ArenaEntryPoint {
     CombatSide side = CombatSide::Allies;
     int rank = 0;
@@ -129,8 +131,8 @@ struct ArenaSpell {
     /// p. 197).
     int saveDc = 0;
     SaveEffect saveEffect = SaveEffect::Negates;
-    /// Le rayon de sa sphère, en cases ; 0 : une seule cible.
-    int areaRadius = 0;
+    /// Le rayon de sa sphère, en mètres, tel que le corpus l'écrit ; 0 : une seule cible.
+    float areaRadiusMeters = 0.0f;
     /// L'effet qui dure qu'il pose.
     std::optional<SpellEffect> effect;
     /// Sous concentration : un second sort de concentration met fin au premier.
@@ -207,7 +209,8 @@ struct ArenaContestant {
     CombatantProfile profile;
     /// Ce qu'il sait frapper, la première attaque étant celle qu'on joue par défaut.
     std::vector<AttackProfile> attacks;
-    /// Case demandée, ou absente : le prochain point d'entrée libre de son camp.
+    /// Case demandée sur la carte — posé au centre de son emprise (`core::tileCenter`) —, ou
+    /// absente : le prochain point d'entrée libre de son camp.
     std::optional<GridPosition> position;
     /// Rôle de Marque Héroïque revendiqué (un identifiant de `Rpg/rules/heroic-marks.json`), ou
     /// vide.
@@ -255,10 +258,10 @@ using OpportunityPolicy =
  * @brief Ce que l'écran veut savoir d'un pas : qui a marché, par où (`LOT-118`).
  *
  * Le journal note déjà chaque pas en clair ; l'écran, lui, veut le **chemin** pour faire marcher
- * la figurine case par case — un tour de l'IA se joue d'un bloc, et sans ce crochet il ne resterait
- * que des positions d'arrivée, ce qui se lit comme une téléportation.
+ * la figurine le long de ses points — un tour de l'IA se joue d'un bloc, et sans ce crochet il ne
+ * resterait que des positions d'arrivée, ce qui se lit comme une téléportation.
  */
-using MoveObserver = std::function<void(CombatantId mover, const Path& path)>;
+using MoveObserver = std::function<void(CombatantId mover, const Route& path)>;
 
 /// @brief Le moment d'une action que l'écran suit : son départ, puis son issue.
 enum class ArenaActionPhase : std::uint8_t {
@@ -342,8 +345,12 @@ struct ArenaAttack {
  */
 class ArenaSession {
 public:
-    /// @param level La carte de l'arène, conservée pour chaque rejeu.
-    explicit ArenaSession(Level level);
+    /**
+     * @param level La carte de l'arène, conservée pour chaque rejeu.
+     * @param space L'espace où le combat se joue ; vide, la simulation de Core lue de la carte
+     *        (`core::SimulatedSpace::fromLevel`).
+     */
+    explicit ArenaSession(Level level, std::shared_ptr<const CombatSpace> space = nullptr);
 
     /**
      * @brief Monte l'affrontement : enrôle chaque combattant à sa case ou au prochain point
@@ -503,11 +510,11 @@ public:
      *        chacune une fois, dans l'ordre où elles frapperaient — la prévisualisation du
      *        déplacement. Même règle que `move`, politique et choix du joueur compris.
      */
-    [[nodiscard]] std::vector<CombatantId> previewOpportunities(GridPosition destination) const;
+    [[nodiscard]] std::vector<CombatantId> previewOpportunities(Meters3 destination) const;
 
     /**
      * @brief Les circonstances qu'ajoute la session à une attaque : l'esquive de la cible, la prise
-     *        en tenaille. Celles de la grille sont dans `core::attackCircumstances`.
+     *        en tenaille. Celles de l'espace sont dans `core::attackCircumstances`.
      */
     [[nodiscard]] AttackCircumstances circumstancesAgainst(CombatantId attacker, CombatantId target,
                                                            const AttackProfile& profile) const;
@@ -539,14 +546,15 @@ public:
      * **Attaque d'opportunité** (Manuel, chapitre 9) : quand le chemin sort de l'allonge d'une
      * créature hostile debout qui a encore sa réaction et voit le fuyard (« située dans votre
      * champ de vision », `core::hasLineOfSight`), elle frappe « juste avant que la créature
-     * ne sorte de sa zone d'allonge », avec sa première attaque au corps à corps, et dépense sa
-     * réaction. Le déplacement s'arrête à la dernière case où l'on peut se tenir avant la sortie,
+     * ne sorte de sa zone d'allonge » — l'écart entre les bords des volumes passe au-delà de son
+     * allonge —, avec sa première attaque au corps à corps, et dépense sa réaction. Le
+     * déplacement s'arrête au dernier point du chemin où l'on peut se tenir avant la sortie,
      * les attaques se jouent par identifiant croissant, et le déplacement reprend si le combattant
      * tient encore debout. Chaque créature éligible frappe si la politique d'opportunité
      * (`setOpportunityPolicy`) l'accepte — toutes, sans politique : l'écran qui laisse le joueur
      * décliner est au `LOT-24`, le comportement qui choisit au `LOT-23`.
      */
-    MoveOutcome move(GridPosition destination);
+    MoveOutcome move(Meters3 destination);
 
     /// @brief Termine le tour actif.
     bool endTurn();
@@ -580,20 +588,20 @@ private:
     /// Vrai si @p reactor frappe @p mover quand il passe de @p from à @p to : hostile, debout, la
     /// réaction disponible, l'allonge quittée, le fuyard vu, et ni le joueur ni la politique ne
     /// la déclinent.
-    [[nodiscard]] bool provokes(CombatantId mover, CombatantId reactor, GridPosition from,
-                                GridPosition to) const;
+    [[nodiscard]] bool provokes(CombatantId mover, CombatantId reactor, Meters3 from,
+                                Meters3 to) const;
     /// La première attaque au corps à corps d'un combattant, ou `nullptr`.
     [[nodiscard]] const AttackProfile* meleeAttack(CombatantId combatant) const;
-    /// Le premier pas de @p cases qui sort de l'allonge d'un ennemi, et ceux qu'il provoque,
+    /// Le premier pas de @p points qui sort de l'allonge d'un ennemi, et ceux qu'il provoque,
     /// ajoutés à @p reactors ; vide pour un combattant désengagé ou qu'une capacité soustrait
     /// aux attaques d'opportunité (`LOT-131`).
     [[nodiscard]] std::optional<std::size_t> firstProvokingStep(
-        CombatantId mover, const std::vector<GridPosition>& cases,
+        CombatantId mover, const std::vector<Meters3>& points,
         std::vector<CombatantId>& reactors) const;
     /// Le même calcul, **sans** tenir compte du désengagement ni des capacités : ce que le pas
     /// aurait provoqué.
     [[nodiscard]] std::optional<std::size_t> firstExitFromReach(
-        CombatantId mover, const std::vector<GridPosition>& cases,
+        CombatantId mover, const std::vector<Meters3>& points,
         std::vector<CombatantId>& reactors) const;
     /// Branche sur @p hooks les effets des capacités de @p attacker : bonus au jet, dés en plus.
     void hookCapacities(AttackHooks& hooks, CombatantId attacker);
@@ -637,6 +645,7 @@ private:
     void takeOpportunities(CombatantId mover, const std::vector<CombatantId>& reactors);
 
     Level _level;
+    std::shared_ptr<const CombatSpace> _space;
     ArenaBout _bout;
     DeterministicRandom _random{0};
     std::unique_ptr<CombatState> _combat;

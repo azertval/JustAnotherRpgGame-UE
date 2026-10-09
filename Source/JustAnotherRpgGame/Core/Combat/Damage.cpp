@@ -6,7 +6,6 @@
 #include <algorithm>
 #include <map>
 
-#include "Core/Combat/BattleGrid.h"
 #include "Core/Combat/CombatState.h"
 #include "Core/Rpg/Bestiary.h"
 
@@ -267,26 +266,25 @@ std::vector<DamageReport> DamagePipeline::apply(CombatState& combat,
     return rapports;
 }
 
-DamageReport DamagePipeline::applyToStructure(BattleGrid& grid, GridPosition cell,
+DamageReport DamagePipeline::applyToStructure(Structure& structure,
                                               std::span<const RolledDamage> damage) const {
     DamageReport rapport;
     rapport.work = travailDepuis(damage);
-    rapport.work.structure = cell;
-    const GridObject* objet = grid.objectAt(cell);
-    if (objet == nullptr) {
+    rapport.work.structure = structure.kind;
+    if (structure.destroyed()) {
         return rapport;
     }
-    const DamageTraits traits = objet->damageTraits;
-    rapport.hitPointsBefore = objet->hitPoints;
+    const DamageTraits traits = structure.damageTraits;
+    rapport.hitPointsBefore = structure.hitPoints;
     runStage(DamageStage::Source, rapport.work, nullptr);
     runStage(DamageStage::Conversion, rapport.work, nullptr);
     runStage(DamageStage::Resistances, rapport.work, nullptr);
-    applyAffinities(rapport.work, traits, objet->hitPoints, objet->hitPoints);
+    applyAffinities(rapport.work, traits, structure.hitPoints, structure.hitPoints);
     rapport.work.hitPointLoss = rapport.work.total();
     runStage(DamageStage::HitPoints, rapport.work, nullptr);
     rapport.hitPointsAfter = std::max(0, rapport.hitPointsBefore - rapport.work.hitPointLoss);
     rapport.overflow = std::max(0, rapport.work.hitPointLoss - rapport.hitPointsBefore);
-    grid.damageObject(cell, rapport.work.hitPointLoss);
+    structure.hitPoints = rapport.hitPointsAfter;
     return rapport;
 }
 

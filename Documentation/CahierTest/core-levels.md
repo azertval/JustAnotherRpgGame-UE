@@ -43,7 +43,7 @@ Chaque exigence citée par un cas de cette page, avec les cas qui la citent ; la
 
 ### FormatV4Test.UneCarteDeChaqueVersionSeCharge
 
-*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:107`
+*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:108`
 
 Une carte de chaque version se charge.
 
@@ -57,7 +57,7 @@ Une carte de chaque version se charge.
 
 ### FormatV4Test.UneV4CanoniqueRessortOctetPourOctet
 
-*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:125`
+*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:126`
 
 Une v4 canonique ressort octet pour octet.
 
@@ -72,7 +72,7 @@ Une v4 canonique ressort octet pour octet.
 
 ### FormatV4Test.UneV3RessortEnV4EtSeStabilise
 
-*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:140`
+*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:141`
 
 Une v3 ressort en v4, et se stabilise.
 
@@ -90,7 +90,7 @@ Une v3 ressort en v4, et se stabilise.
 
 ### FormatV4Test.LaReserveDeHauteurSurvitALAllerRetour
 
-*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:161`
+*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:162`
 
 La réserve de hauteur survit à l'aller-retour.
 
@@ -106,7 +106,7 @@ La réserve de hauteur survit à l'aller-retour.
 
 ### FormatV4Test.DeuxEntitesDuMemeIdSontRefusees
 
-*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:180`
+*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:181`
 
 Deux entités du même id sont refusées.
 
@@ -120,7 +120,7 @@ Deux entités du même id sont refusées.
 
 ### FormatV4Test.UnIdentifiantDonneNEstJamaisRedonne
 
-*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:200`
+*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:201`
 
 Un identifiant donné n'est jamais redonné.
 
@@ -140,7 +140,7 @@ Un identifiant donné n'est jamais redonné.
 
 ### FormatV4Test.UnIdENSeLitEtSEcrit
 
-*Mineur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:226`
+*Mineur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:227`
 
 Un id e&lt;n&gt; se lit et s'écrit.
 
@@ -158,7 +158,7 @@ Un id e&lt;n&gt; se lit et s'écrit.
 
 ### FormatV4Test.LesCasesForceesSeRangentSansDoublon
 
-*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:243`
+*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:244`
 
 Les cases forcées se rangent sans doublon.
 
@@ -172,7 +172,7 @@ Les cases forcées se rangent sans doublon.
 
 ### FormatV4Test.UneCaseForceeHorsCarteEstRefusee
 
-*Mineur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:261`
+*Mineur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:262`
 
 Une case forcée hors carte est refusée.
 
@@ -186,7 +186,7 @@ Une case forcée hors carte est refusée.
 
 ### FormatV4Test.UneVarianteReprendLesCasesDeSaBase
 
-*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:282`
+*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:283`
 
 Une variante reprend les cases de sa base.
 
@@ -210,7 +210,7 @@ Une variante reprend les cases de sa base.
 
 ### FormatV4Test.UneVarianteSansBaseEstRefusee
 
-*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:311`
+*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:312`
 
 Une variante sans base est refusée.
 
@@ -226,7 +226,7 @@ Une variante sans base est refusée.
 
 ### FormatV4Test.UneVarianteQuiPorteDesCasesEstRefusee
 
-*Mineur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:332`
+*Mineur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:333`
 
 Une variante qui porte des cases est refusée.
 
@@ -238,28 +238,29 @@ Une variante qui porte des cases est refusée.
 
 - Vérifie que `loaded.errorCode` vaut `core::LevelValidationError::ParseError`.
 
-### FormatV4Test.UneZonePeinteEstLueParLaGrilleTactique
+### FormatV4Test.UneZonePeinteEstLueParLEspaceDeCombat
 
-*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:353`
+*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:354`
 
-Une zone peinte est lue par la grille tactique.
+Une zone peinte est lue par l'espace de combat.
 
 **Étapes**
 
 1. Charger `format-v4.json` (zone peinte en (1, 1) et (2, 2)).
-2. Construire sa `BattleGrid`.
+2. Lire ses cases ; construire l'espace de combat de la carte.
 
 **Résultat attendu**
 
+- Vérifie que `zone` diffère de `level.entities().end()`.
 - Vérifie que `porteLaZone({1, 1})` est vrai.
 - Vérifie que `porteLaZone({2, 2})` est vrai.
 - Vérifie que `porteLaZone({2, 1})` est faux.
-- Vérifie que `grid.isDifficult({2, 2})` est vrai.
-- Vérifie que `grid.isDifficult({2, 1})` est faux.
+- Vérifie que `espace.isDifficult(difficile.x, difficile.y)` est vrai.
+- Vérifie que `espace.isDifficult(normale.x, normale.y)` est faux.
 
 ### FormatV4Test.UneZoneRectangleCouvreSonRectangle
 
-*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:379`
+*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:386`
 
 Une zone rectangle couvre son rectangle.
 
@@ -273,7 +274,7 @@ Une zone rectangle couvre son rectangle.
 
 ### FormatV4Test.UneEmpriseSEtendDepuisSonAncre
 
-*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:400`
+*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:407`
 
 Une emprise s'étend depuis son ancre.
 
@@ -289,7 +290,7 @@ Une emprise s'étend depuis son ancre.
 
 ### FormatV4Test.LeManifesteDitCeQuUnePieceOppose
 
-*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:419`
+*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:426`
 
 Le manifeste dit ce qu'une pièce oppose.
 
@@ -309,7 +310,7 @@ Le manifeste dit ce qu'une pièce oppose.
 
 ### FormatV4Test.LaCollisionSeDeduitDesPieces
 
-*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:442`
+*Critique · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:449`
 
 La collision se déduit des pièces.
 
@@ -330,7 +331,7 @@ La collision se déduit des pièces.
 
 ### FormatV4Test.TypesPiecesInconnuesGeneEtAbri
 
-*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:475`
+*Majeur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:482`
 
 Types, pièces inconnues, gêne et abri.
 
@@ -350,7 +351,7 @@ Types, pièces inconnues, gêne et abri.
 
 ### FormatV4Test.LEntreeSAccordeAvecUneCaseVide
 
-*Mineur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:505`
+*Mineur · Unitaire · Format v4* — `Source/Test/Unit/Core/Levels/test_format_v4.cpp:512`
 
 L'entrée s'accorde avec une case vide.
 

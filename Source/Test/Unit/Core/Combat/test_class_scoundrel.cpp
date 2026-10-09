@@ -209,8 +209,8 @@ TEST(ClassScoundrelTest, ScoundrelsAgilityEviteLesAttaquesDOpportunite) {
     core::ArenaSession session(test_support::room());
     ASSERT_TRUE(session.mount(combatDe(charge, std::nullopt)).refusals.empty());
     ASSERT_TRUE(session.start());
-    EXPECT_TRUE(session.previewOpportunities({0, 3}).empty());
-    ASSERT_EQ(session.move({0, 3}).result, core::MoveResult::Moved);
+    EXPECT_TRUE(session.previewOpportunities(core::tileCenter({0, 3})).empty());
+    ASSERT_EQ(session.move(core::tileCenter({0, 3})).result, core::MoveResult::Moved);
     EXPECT_FALSE(journalHas(session.journal(), "opportunite :"));
     EXPECT_TRUE(journalHas(session.journal(),
                            "sans attaque d'opportunite " + SCOUNDREL + " (Scoundrel's Agility)"));

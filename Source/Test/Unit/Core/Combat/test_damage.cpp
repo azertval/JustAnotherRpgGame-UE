@@ -18,13 +18,13 @@
 
 #include <gtest/gtest.h>
 
-#include "Core/Combat/BattleGrid.h"
 #include "Core/Combat/CombatState.h"
 #include "Core/Combat/Damage.h"
 #include "Core/Levels/TileMap.h"
 #include "Core/Math/DeterministicRandom.h"
 #include "Core/Rpg/Bestiary.h"
 #include "Core/Rpg/Dice.h"
+#include "Test/Support/CombatSpaceSupport.h"
 
 namespace {
 
@@ -122,10 +122,10 @@ TEST(DamageTest, LeCritiqueDoubleLesDesPasLeModificateur) {
 TEST(DamageTest, LesResistancesSAppliquentDansLOrdreDuManuel) {
     const auto encaisser = [](core::DamageTraits traits, core::DamageFlags drapeaux,
                               bool aura) -> core::DamageReport {
-        core::CombatState combat(core::BattleGrid(core::TileMap(6, 6)));
+        core::CombatState combat(test_support::openSpace(6, 6));
         core::CombatantProfile cible = profil("Cible", CombatSide::Enemies, 100);
         cible.damageTraits = std::move(traits);
-        combat.enlist(cible, core::GridPosition{1, 1});
+        combat.enlist(cible, test_support::tile(1, 1));
         core::DamagePipeline pipeline;
         if (aura) {
             pipeline.insert(DamageStage::Resistances, [](core::DamageWork& w, core::CombatState*) {
@@ -174,10 +174,10 @@ TEST(DamageTest, LesResistancesSAppliquentDansLOrdreDuManuel) {
  * }
  */
 TEST(DamageTest, LesEtapesSEnchainentEtLaConversionPrecedeLaResistance) {
-    core::CombatState combat(core::BattleGrid(core::TileMap(6, 6)));
+    core::CombatState combat(test_support::openSpace(6, 6));
     core::CombatantProfile cible = profil("Elementaire", CombatSide::Enemies, 50);
     cible.damageTraits.affinities.push_back({DamageType::Cold, DamageAffinityKind::Resistance, 0});
-    combat.enlist(cible, core::GridPosition{1, 1});
+    combat.enlist(cible, test_support::tile(1, 1));
 
     std::vector<std::string> passages;
     core::DamagePipeline pipeline;
@@ -215,8 +215,8 @@ TEST(DamageTest, LesEtapesSEnchainentEtLaConversionPrecedeLaResistance) {
  * }
  */
 TEST(DamageTest, LesPointsDeVieTemporairesAbsorbentDAbordEtNeSeCumulentPas) {
-    core::CombatState combat(core::BattleGrid(core::TileMap(6, 6)));
-    combat.enlist(profil("Guerrier", CombatSide::Allies, 20), core::GridPosition{1, 1});
+    core::CombatState combat(test_support::openSpace(6, 6));
+    combat.enlist(profil("Guerrier", CombatSide::Allies, 20), test_support::tile(1, 1));
     const CombatantId id{1};
     const core::DamagePipeline pipeline;
     const std::string temporaires(core::TEMPORARY_HIT_POINTS);
@@ -272,11 +272,11 @@ TEST(DamageTest, LesPointsDeVieTemporairesAbsorbentDAbordEtNeSeCumulentPas) {
  * }
  */
 TEST(DamageTest, LesPointsDeVieSontBornesAZeroEtLExcedentEstRapporte) {
-    core::CombatState combat(core::BattleGrid(core::TileMap(6, 6)));
-    combat.enlist(profil("Cible", CombatSide::Enemies, 10), core::GridPosition{1, 1});
+    core::CombatState combat(test_support::openSpace(6, 6));
+    combat.enlist(profil("Cible", CombatSide::Enemies, 10), test_support::tile(1, 1));
     core::CombatantProfile clerc = profil("Clerc", CombatSide::Allies, 12);
     clerc.currentHitPoints = 6;
-    combat.enlist(clerc, core::GridPosition{3, 3});
+    combat.enlist(clerc, test_support::tile(3, 3));
 
     std::vector<core::CombatEvent> degats;
     std::vector<core::CombatEvent> chutes;
@@ -334,9 +334,9 @@ TEST(DamageTest, LesPointsDeVieSontBornesAZeroEtLExcedentEstRapporte) {
  * }
  */
 TEST(DamageTest, UneSalveSeLanceUneFoisEtSAppliqueDUnCoup) {
-    core::CombatState combat(core::BattleGrid(core::TileMap(8, 8)));
-    combat.enlist(profil("Heros", CombatSide::Allies, 5, 100), core::GridPosition{1, 1});
-    combat.enlist(profil("Ogre", CombatSide::Enemies, 5, -100), core::GridPosition{5, 5});
+    core::CombatState combat(test_support::openSpace(8, 8));
+    combat.enlist(profil("Heros", CombatSide::Allies, 5, 100), test_support::tile(1, 1));
+    combat.enlist(profil("Ogre", CombatSide::Enemies, 5, -100), test_support::tile(5, 5));
     core::DeterministicRandom hasard(11);
     ASSERT_TRUE(combat.start(hasard));
 
@@ -355,34 +355,42 @@ TEST(DamageTest, UneSalveSeLanceUneFoisEtSAppliqueDUnCoup) {
 /**
  * @brief Les structures ont des points de vie et des resistances ; le bestiaire donne ses
  * affinites.
- * \castest{<b>Une structure de la grille traverse le pipeline avec ses resistances et quitte la
- * grille detruite ; les affinites d'une creature se lisent de son bloc.</b><br/>
+ * \castest{<b>Une structure traverse le pipeline avec ses resistances et se dit detruite a 0 PV,
+ * et l'espace la retire ; les affinites d'une creature se lisent de son bloc.</b><br/>
  * \tcat Unitaire · Combat<br/>
  * \tcrit Majeur<br/>
  * \tetapes 1. Une porte de 10 PV immunisee au poison et resistante au perforant.<br/>2. 30 degats
  * de poison, puis 14 perforants, puis 6 perforants.<br/>3. Une creature resistante au froid,
  * immunisee au poison, vulnerable au feu.<br/>
- * \tattendu Porte intacte, puis 3 PV, puis detruite ; trois affinites dans l'ordre immunite,
- * resistance, vulnerabilite.
+ * \tattendu Porte intacte, puis 3 PV, puis detruite et retiree de l'espace, qui laisse alors
+ * passer ; trois affinites dans l'ordre immunite, resistance, vulnerabilite.
  * }
  */
 TEST(DamageTest, LesStructuresOntDesPointsDeVieEtLeBestiaireSesAffinites) {
-    core::BattleGrid grille(core::TileMap(6, 6));
-    core::GridObject porte{
-        .kind = "porte", .hitPoints = 10, .blocksMovement = true, .damageTraits = {}};
+    core::SimulatedSpace espace(9.0F, 9.0F);
+    espace.addBox({.rect = {4.5F, 3.0F, 6.0F, 4.5F}, .height = 3.0F, .blocksMovement = true});
+    core::Structure porte{.kind = "porte", .hitPoints = 10, .damageTraits = {}};
     porte.damageTraits.affinities = {{DamageType::Poison, DamageAffinityKind::Immunity, 0},
                                      {DamageType::Piercing, DamageAffinityKind::Resistance, 0}};
-    const core::GridPosition ou{2, 2};
-    ASSERT_EQ(grille.placeObject(ou, porte), core::PlacementResult::Placed);
     const core::DamagePipeline pipeline;
     const std::vector<core::RolledDamage> poison{fixe(30, DamageType::Poison)};
-    EXPECT_EQ(pipeline.applyToStructure(grille, ou, poison).hitPointsAfter, 10);
+    EXPECT_EQ(pipeline.applyToStructure(porte, poison).hitPointsAfter, 10);
     const std::vector<core::RolledDamage> fleches{fixe(14, DamageType::Piercing)};
-    EXPECT_EQ(pipeline.applyToStructure(grille, ou, fleches).hitPointsAfter, 3);
-    ASSERT_NE(grille.objectAt(ou), nullptr);
+    const core::DamageReport perce = pipeline.applyToStructure(porte, fleches);
+    EXPECT_EQ(perce.hitPointsAfter, 3);
+    EXPECT_EQ(perce.work.structure, std::optional<std::string>("porte"));
+    EXPECT_FALSE(porte.destroyed());
     const std::vector<core::RolledDamage> fin{fixe(6, DamageType::Piercing)};
-    EXPECT_EQ(pipeline.applyToStructure(grille, ou, fin).overflow, 0);
-    EXPECT_EQ(grille.objectAt(ou), nullptr);
+    EXPECT_EQ(pipeline.applyToStructure(porte, fin).overflow, 0);
+    EXPECT_TRUE(porte.destroyed());
+    const core::Volume devant =
+        core::volumeOf(test_support::tile(1, 2), core::CreatureSize::Medium);
+    const core::Volume derriere =
+        core::volumeOf(test_support::tile(3, 2), core::CreatureSize::Medium);
+    EXPECT_FALSE(espace.isClear(derriere, core::Locomotion::Walk)) << "la porte tient la case";
+    ASSERT_TRUE(espace.removeBox(0));
+    EXPECT_TRUE(espace.isClear(derriere, core::Locomotion::Walk)) << "detruite, elle laisse passer";
+    EXPECT_TRUE(espace.isClear(devant, core::Locomotion::Walk));
 
     core::Creature elementaire;
     elementaire.damageResistances = {DamageType::Cold};

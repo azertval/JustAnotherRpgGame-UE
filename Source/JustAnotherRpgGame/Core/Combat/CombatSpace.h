@@ -54,6 +54,7 @@
 #include <vector>
 
 #include "Core/Combat/CombatTypes.h"
+#include "Core/Levels/GridPosition.h"
 #include "Core/Rpg/RpgEnums.h"
 #include "Core/Rpg/Scale.h"
 
@@ -111,6 +112,26 @@ struct Volume {
 /// @brief Le volume d'une créature de taille @p size posée en @p base.
 [[nodiscard]] constexpr Volume volumeOf(Meters3 base, CreatureSize size) noexcept {
     return {.base = base, .radius = creatureRadius(size), .height = creatureHeight(size)};
+}
+
+/**
+ * @brief Le centre, au sol, de l'emprise d'une créature de taille @p size dont la case
+ *        haut-gauche est @p anchor : là où une carte en tuiles (`core::TileMap`) la pose.
+ *
+ * Les cartes et leurs entités restent en cases jusqu'à la description de carte du `LOT-1018` ;
+ * le combat, lui, ne connaît que des mètres. La hauteur est 0 : l'espace y pose le sol.
+ */
+[[nodiscard]] constexpr Meters3 tileCenter(GridPosition anchor,
+                                           CreatureSize size = CreatureSize::Medium) noexcept {
+    const float half = static_cast<float>(footprintSide(size)) / 2.0f;
+    return {(static_cast<float>(anchor.column) + half) * METERS_PER_TILE,
+            (static_cast<float>(anchor.row) + half) * METERS_PER_TILE, 0.0f};
+}
+
+/// @brief La case d'une carte en tuiles qui contient le point @p point, au sol.
+[[nodiscard]] inline GridPosition tileOf(Meters3 point) noexcept {
+    return {static_cast<int>(std::floor(point.x / METERS_PER_TILE)),
+            static_cast<int>(std::floor(point.y / METERS_PER_TILE))};
 }
 
 /// @brief Le centre du volume, à mi-hauteur : d'où l'on regarde, et ce que l'on vise.
@@ -180,6 +201,12 @@ struct Route {
     float length = 0.0f;
 };
 
+/// @brief Une place où finir un déplacement, et le chemin qui y mène (vide pour le départ).
+struct Destination {
+    Meters3 point;
+    Route route;
+};
+
 /**
  * @brief Ce que l'espace doit savoir pour tracer un chemin.
  */
@@ -230,11 +257,12 @@ public:
 
     /**
      * @brief Des positions où le mobile peut **finir** son déplacement dans le budget, départ
-     *        compris, par ordre fixe : ce que l'IA examine (`LOT-23`) et ce que l'aperçu dessine.
+     *        compris et en tête, par ordre fixe, chacune avec son chemin : ce que l'IA examine
+     *        (`LOT-23`) et ce que l'aperçu dessine.
      *
-     * La simulation les échantillonne sur son pas ; le moteur les demande à EQS.
+     * La simulation les échantillonne sur son réseau ; le moteur les demande à EQS.
      */
-    [[nodiscard]] virtual std::vector<Meters3> candidates(const RouteQuery& query) const = 0;
+    [[nodiscard]] virtual std::vector<Destination> candidates(const RouteQuery& query) const = 0;
 };
 
 /**

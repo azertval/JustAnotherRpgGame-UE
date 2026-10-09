@@ -12,9 +12,10 @@
  *
  * Manuel des Joueurs, chapitre 9, « Effectuer une attaque » :
  *
- * - **choisir une cible** à distance d'attaque — l'allonge au corps à corps (`core::inReach`) ;
+ * - **choisir une cible** à distance d'attaque — l'allonge au corps à corps (`core::inReach`),
+ *   mesurée entre les bords des volumes (`LOT-1017`) ;
  * - **déterminer les modificateurs** — avantage, désavantage, bonus : `core::AttackRoll`, et les
- *   circonstances que la grille sait déjà dire (`core::attackCircumstances`) ;
+ *   circonstances que l'espace sait déjà dire (`core::attackCircumstances`) ;
  * - **résoudre** — le d20, puis les dés de dégâts si l'attaque touche (`core::resolveAttack`).
  *
  * « Faire 1 ou 20 » : un 20 au d20 **touche automatiquement**, quels que soient les modificateurs
@@ -31,9 +32,10 @@
  *
  * ## Hors de ce fichier, nommément
  *
- * La ligne de vue et l'abri se calculent dans `Core/Combat/LineOfSight.h` (`LOT-22`) et se lisent
- * ici : `core::checkTarget` refuse une cible sous abri total, `core::resolveAttack` pose l'abri sur
- * le jet. L'inconscience, les jets contre la mort et la mort instantanée sont dans
+ * La ligne de vue et l'abri se calculent sur l'espace (`core::coverFrom`, `LOT-22`, `LOT-1017`) et
+ * se lisent ici entre deux combattants (`core::hasLineOfSight`, `core::coverBetween`) :
+ * `core::checkTarget` refuse une cible sous abri total, `core::resolveAttack` pose l'abri sur le
+ * jet. L'inconscience, les jets contre la mort et la mort instantanée sont dans
  * `core::CombatState` (`LOT-137`), qui lit l'excédent et le critique que le `LOT-21` rapporte ; le
  * critique au contact d'une cible inconsciente se pose à l'étape `Hit`
  * (`AttackRoll::criticalSource`). Le coup qui assomme n'est pas joué.
@@ -46,9 +48,9 @@
 #include <string>
 #include <vector>
 
+#include "Core/Combat/CombatSpace.h"
 #include "Core/Combat/CombatState.h"
 #include "Core/Combat/Damage.h"
-#include "Core/Combat/LineOfSight.h"
 #include "Core/Math/DeterministicRandom.h"
 #include "Core/Rpg/Ability.h"
 #include "Core/Rpg/Check.h"
@@ -212,20 +214,36 @@ struct Spell;
                                                            bool proficient = true);
 
 /**
- * @brief La distance en cases entre deux combattants, **emprises comprises** : zéro contact
- *        impossible, 1 pour deux emprises adjacentes, diagonale comprise.
+ * @brief L'écart entre deux combattants, en mètres, **entre les bords** de leurs volumes, en trois
+ *        dimensions (`core::edgeDistance`) : 0 au contact.
  *
- * Manuel, « Jouer sur un quadrillage » : on compte les cases en partant d'une case adjacente à la
- * première créature et en finissant sur la case de la seconde. Un ogre de taille G sur 2 × 2 cases
- * touche donc à 1 tout ce qui borde son emprise, et non ce qui borde son ancre.
- * @return Vide si l'un des deux n'est pas sur la grille.
+ * C'est ce que mesurent l'allonge et la portée : une créature de taille G touche ce qui borde son
+ * volume, et non ce qui borde son centre (`LOT-1017`).
+ * @return Vide si l'un des deux n'est pas posé.
  */
-[[nodiscard]] std::optional<int> gridDistance(const CombatState& combat, CombatantId from,
+[[nodiscard]] std::optional<float> gapBetween(const CombatState& combat, CombatantId from,
                                               CombatantId to);
 
-/// @brief La même distance, @p mover supposé ancré en @p moverAnchor.
-[[nodiscard]] std::optional<int> gridDistanceFrom(const CombatState& combat, CombatantId mover,
-                                                  GridPosition moverAnchor, CombatantId other);
+/// @brief Le même écart, @p mover supposé posé en @p moverBase.
+[[nodiscard]] std::optional<float> gapFrom(const CombatState& combat, CombatantId mover,
+                                           Meters3 moverBase, CombatantId other);
+
+/// @brief Vrai si un écart de @p gap mètres tient dans @p tiles cases de 1,50 m.
+[[nodiscard]] constexpr bool withinTiles(float gap, int tiles) noexcept {
+    return gap <= metersFromTiles(static_cast<float>(tiles)) + 1e-3f;
+}
+
+/// @brief Vrai si @p gap — l'écart entre les bords — est « à une case » : au contact, ou à moins
+/// d'une case. C'est le voisinage que lisent le tir au contact et l'attaque sournoise.
+[[nodiscard]] constexpr bool adjacentGap(float gap) noexcept {
+    return withinTiles(gap, 1);
+}
+
+/**
+ * @brief Vrai si une cible à @p gap mètres est à portée du profil : son allonge au corps à corps ;
+ *        sa portée maximale à distance, ou une case sans portée connue.
+ */
+[[nodiscard]] bool profileReaches(const AttackProfile& profile, float gap) noexcept;
 
 /**
  * @brief Vrai si @p target est à portée de l'attaque : allonge au corps à corps ; au contact, ou
@@ -236,11 +254,29 @@ struct Spell;
 [[nodiscard]] bool inReach(const CombatState& combat, CombatantId attacker, CombatantId target,
                            const AttackProfile& profile);
 
+/**
+ * @brief Vrai si les deux combattants se voient (`core::hasLineOfSight` sur l'espace) ; faux si
+ *        l'un des deux n'est pas posé. Les corps n'arrêtent pas la vue.
+ */
+[[nodiscard]] bool hasLineOfSight(const CombatState& combat, CombatantId a, CombatantId b);
+
+/// @brief La même vue, @p viewer supposé posé en @p viewerBase.
+[[nodiscard]] bool hasLineOfSightFrom(const CombatState& combat, CombatantId viewer,
+                                      Meters3 viewerBase, CombatantId other);
+
+/**
+ * @brief L'abri de @p target contre @p attacker, les autres combattants posés faisant corps
+ *        (`core::coverFrom`). Un combattant à terre garde sa place et abrite encore.
+ *        `Cover::Total` si l'un des deux n'est pas posé : ce qui n'y est pas ne se vise pas.
+ */
+[[nodiscard]] Cover coverBetween(const CombatState& combat, CombatantId attacker,
+                                 CombatantId target);
+
 /// @brief Ce qui rend une cible attaquable, ou ce qui l'en empêche.
 enum class TargetCheck : std::uint8_t {
     Valid,
-    /// L'attaquant et la cible sont le même, ou l'un des deux n'est pas sur la grille.
-    NotOnGrid,
+    /// L'attaquant et la cible sont le même, ou l'un des deux n'est pas posé.
+    NotPlaced,
     /// Hors d'allonge, ou au-delà de la longue portée (`core::inReach`).
     OutOfReach,
     /// Sous abri total : aucun segment dégagé entre les deux emprises (`core::hasLineOfSight`).
@@ -265,11 +301,14 @@ struct AttackCircumstances {
 };
 
 /**
- * @brief Ce que la grille sait dire des circonstances d'une attaque (Manuel, chapitre 9).
+ * @brief Ce que l'espace sait dire des circonstances d'une attaque (Manuel, chapitre 9).
  *
  * - **Attaque à distance dans un combat au corps à corps** : désavantage si une créature hostile
- *   debout « qui vous voit » (`core::hasLineOfSight`) se trouve à une case de l'attaquant ;
- * - **au-delà de la portée normale** : désavantage.
+ *   debout « qui vous voit » (`core::hasLineOfSight`) se trouve à une case de l'attaquant — à
+ *   1,50 m de son bord (`core::adjacentGap`) ;
+ * - **au-delà de la portée normale** : désavantage ;
+ * - **la hauteur** : avantage si la base de l'attaquant est au moins une case au-dessus de celle
+ *   de la cible (`core::hasHighGround`, décision du `LOT-1017`).
  *
  * L'abri n'est pas une circonstance mais un changement de CA (`core::AttackRoll::applyCover`).
  * Voir sans être vu suppose la lumière et les sens ; l'état de la cible est au `LOT-72`.
@@ -397,15 +436,15 @@ struct AttackOutcome {
 struct AttackContext {
     const AttackHooks* hooks = nullptr;
     const DamagePipeline* pipeline = nullptr;
-    /// Sources supplémentaires, que l'appelant connaît et la grille non (une esquive, une aide).
+    /// Sources supplémentaires, que l'appelant connaît et l'espace non (une esquive, une aide).
     AttackCircumstances circumstances;
 };
 
 /**
  * @brief Résout une attaque dans le combat : déclaration, jet, dégâts, points de vie.
  *
- * Annonce `CombatHook::AttackDeclared` **avant** le jet (`LOT-20`), ajoute les circonstances que la
- * grille dit, pose l'abri de la cible (`core::coverBetween`) **avant le premier greffon**
+ * Annonce `CombatHook::AttackDeclared` **avant** le jet (`LOT-20`), ajoute les circonstances que
+ * l'espace dit, pose l'abri de la cible (`core::coverBetween`) **avant le premier greffon**
  * `BeforeRoll` — qui peut le relever, jamais le cumuler —, jette, et si l'attaque touche, fait
  * traverser les dégâts au pipeline — qui se termine dans `core::CombatState::applyDamage`. Ne
  * dépense **aucune** ressource : une attaque de l'action *attaquer* dépense l'action, une attaque

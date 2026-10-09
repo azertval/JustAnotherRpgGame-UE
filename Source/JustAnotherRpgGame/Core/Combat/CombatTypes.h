@@ -6,14 +6,14 @@
 /**
  * @file Core/Combat/CombatTypes.h
  * @brief Les types que tout le combat partage — l'identifiant d'un combattant, sa locomotion,
- *        l'abri, les formes de zone — sans la grille (`LOT-1017`, D-50).
+ *        l'abri, le refus d'un placement, les formes de zone — sans grille (`LOT-1017`, D-50).
  *
- * Ils vivaient dans `BattleGrid.h`. Ce fichier-ci ne déclare rien qui porte le nom d'une macro du
- * moteur : il se consomme depuis le module du jeu, ce que `BattleGrid.h` ne peut pas (sa méthode
- * `check`).
+ * Ce fichier ne déclare rien qui porte le nom d'une macro du moteur : il se consomme depuis le
+ * module du jeu.
  */
 
 #include <cstdint>
+#include <string_view>
 
 #include "Core/Rpg/RpgEnums.h"
 
@@ -93,6 +93,34 @@ enum class Cover : std::uint8_t {
     }
     return 0;
 }
+
+/// @brief Le nom d'un abri tel que le journal l'écrit : « abri partiel », « abri important ».
+[[nodiscard]] constexpr std::string_view coverLabel(Cover cover) noexcept {
+    switch (cover) {
+        case Cover::None:
+            return "sans abri";
+        case Cover::Half:
+            return "abri partiel";
+        case Cover::ThreeQuarters:
+            return "abri important";
+        case Cover::Total:
+            return "abri total";
+    }
+    return "?";
+}
+
+/// @brief Pourquoi un placement a été refusé — ou qu'il a réussi.
+enum class PlacementResult : std::uint8_t {
+    Placed,
+    /// Hors de l'espace, ou plus aucune place où le poser (un point d'entrée manque).
+    OutOfBounds,
+    /// Le volume touche la carte : un mur, une boîte qui arrête, l'eau profonde au sol.
+    Obstructed,
+    /// Le volume recouvre celui d'un **autre** combattant.
+    Occupied,
+    /// Le combattant est déjà placé, ou n'est pas enrôlable maintenant.
+    InvalidCombatant,
+};
 
 /// @brief Les cinq formes de zone d'effet du Manuel (chapitre 10, « Zones d'effet »).
 enum class AreaShape : std::uint8_t {

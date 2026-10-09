@@ -27,7 +27,7 @@
  *
  * ## Le déplacement
  *
- * Le chemin est celui de `core::ReachableArea::pathTo`, que `move` suivra ; les attaques
+ * Le chemin est celui de `core::CombatState::routeTo`, que `move` suivra ; les attaques
  * d'opportunité sont celles que `move` déclenchera (`core::ArenaSession::previewOpportunities`),
  * choix du joueur et politique de l'IA compris.
  */
@@ -59,7 +59,7 @@ struct ExtraDamagePreview {
 /// @brief Une attaque telle qu'elle serait jetée.
 struct AttackPreview {
     /// `Valid`, ou pourquoi on ne peut pas viser.
-    TargetCheck check = TargetCheck::NotOnGrid;
+    TargetCheck check = TargetCheck::NotPlaced;
     std::size_t attackIndex = 0;
     std::string label;
     /// La CA visée, abri compris.
@@ -110,15 +110,16 @@ struct AttackPreview {
 
 /// @brief Un déplacement tel qu'il serait joué.
 struct MovePreview {
-    /// Le chemin, départ exclu ; vide si la case n'est pas une fin de déplacement permise.
-    std::optional<Path> path;
-    /// Les cases de déplacement qui resteraient.
-    int movementLeft = 0;
+    /// Le chemin, départ exclu ; vide si la place n'est pas une fin de déplacement permise.
+    std::optional<Route> path;
+    /// Les mètres de déplacement qui resteraient (`core::CombatState::movementLeft`) : les cases
+    /// restantes et le reste de la case entamée, moins la longueur du chemin.
+    float movementLeft = 0.0f;
     /// Qui frapperait en chemin, dans l'ordre.
     std::vector<CombatantId> opportunities;
 };
 
 /// @brief Le déplacement du combattant actif jusqu'à @p destination.
-[[nodiscard]] MovePreview previewMove(const ArenaSession& session, GridPosition destination);
+[[nodiscard]] MovePreview previewMove(const ArenaSession& session, Meters3 destination);
 
 }  // namespace core

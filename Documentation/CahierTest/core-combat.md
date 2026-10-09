@@ -1,6 +1,6 @@
 # Core · Combat
 
-Tests unitaires — **201 cas** (28 bloquants, 102 critiques, 71 majeurs). [Retour à la synthèse](README.md).
+Tests unitaires — **201 cas** (28 bloquants, 103 critiques, 70 majeurs). [Retour à la synthèse](README.md).
 
 ## Ce que cette page couvre
 
@@ -9,9 +9,8 @@ Tests unitaires — **201 cas** (28 bloquants, 102 critiques, 71 majeurs). [Reto
 | [`test_action_economy.cpp`](#test-action-economycpp) | 3 | - | 1 | 2 | - |
 | [`test_ai_spells.cpp`](#test-ai-spellscpp) | 6 | - | 4 | 2 | - |
 | [`test_area_of_effect.cpp`](#test-area-of-effectcpp) | 3 | 1 | 1 | 1 | - |
-| [`test_arena.cpp`](#test-arenacpp) | 7 | 2 | 5 | - | - |
-| [`test_attack.cpp`](#test-attackcpp) | 9 | 3 | 4 | 2 | - |
-| [`test_battle_grid.cpp`](#test-battle-gridcpp) | 7 | 1 | 2 | 4 | - |
+| [`test_arena.cpp`](#test-arenacpp) | 8 | 2 | 5 | 1 | - |
+| [`test_attack.cpp`](#test-attackcpp) | 12 | 4 | 5 | 3 | - |
 | [`test_class_brawler.cpp`](#test-class-brawlercpp) | 8 | - | 5 | 3 | - |
 | [`test_class_in_arena.cpp`](#test-class-in-arenacpp) | 4 | - | 4 | - | - |
 | [`test_class_mage.cpp`](#test-class-magecpp) | 11 | - | 9 | 2 | - |
@@ -19,16 +18,15 @@ Tests unitaires — **201 cas** (28 bloquants, 102 critiques, 71 majeurs). [Reto
 | [`test_class_scoundrel.cpp`](#test-class-scoundrelcpp) | 7 | - | 5 | 2 | - |
 | [`test_combat_preview.cpp`](#test-combat-previewcpp) | 3 | 1 | 2 | - | - |
 | [`test_combat_space.cpp`](#test-combat-spacecpp) | 13 | - | - | 13 | - |
-| [`test_combat_state.cpp`](#test-combat-statecpp) | 13 | 6 | 6 | 1 | - |
+| [`test_combat_state.cpp`](#test-combat-statecpp) | 29 | 11 | 12 | 6 | - |
 | [`test_damage.cpp`](#test-damagecpp) | 7 | 3 | 3 | 1 | - |
 | [`test_death_and_dying.cpp`](#test-death-and-dyingcpp) | 13 | - | 9 | 4 | - |
 | [`test_encounter.cpp`](#test-encountercpp) | 12 | - | 7 | 5 | - |
 | [`test_encounter_difficulty.cpp`](#test-encounter-difficultycpp) | 3 | - | 3 | - | - |
 | [`test_enemy_ai.cpp`](#test-enemy-aicpp) | 12 | 5 | 7 | - | - |
-| [`test_line_of_sight.cpp`](#test-line-of-sightcpp) | 3 | 1 | 1 | 1 | - |
 | [`test_map_encounter.cpp`](#test-map-encountercpp) | 4 | - | 3 | 1 | - |
 | [`test_party_deployment.cpp`](#test-party-deploymentcpp) | 6 | - | 4 | 2 | - |
-| [`test_pathfinding.cpp`](#test-pathfindingcpp) | 13 | 4 | 6 | 3 | - |
+| [`test_serie_de_l_arene.cpp`](#test-serie-de-l-arenecpp) | 3 | - | 3 | - | - |
 | [`test_simulated_space.cpp`](#test-simulated-spacecpp) | 15 | - | - | 15 | - |
 | [`test_tactical_terrain.cpp`](#test-tactical-terraincpp) | 10 | - | 4 | 6 | - |
 | [`test_turn_order.cpp`](#test-turn-ordercpp) | 3 | 1 | 1 | 1 | - |
@@ -254,75 +252,75 @@ L'IA du Priest frappe de l'arme spirituelle par l'action bonus.
 
 ## test_area_of_effect.cpp
 
-### AreaOfEffectTest.LesGabaritsCouvrentLesCasesDeReference
+### AreaOfEffectTest.ChaqueFormePrendLesVolumesQuiLaCroisent
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_area_of_effect.cpp:69`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_area_of_effect.cpp:85`
 
-Sphère, cylindre, cône, ligne et cube couvrent chacun les cases de leur dessin de référence : une case est dans la zone si la forme en couvre au moins la moitié.
+Sphere, cylindre, cone, ligne et cube prennent chacun, parmi des combattants poses, exactement ceux dont le volume croise la forme : un bord suffit, le centre peut etre dehors ; la distance est euclidienne, en metres.
 
 **Étapes**
 
-1. Sphère de rayon 2 sur une intersection ; cylindre identique.
-2. Cône de 3 vers l'est depuis le milieu du bord d'une case.
-3. Ligne de 4 sur 1 vers l'est depuis le milieu d'un bord ; la même en diagonale depuis un coin.
-4. Cube d'arête 2 vers le nord depuis une intersection.
+1. Une sphere de 3 m en (9, 9) : un combattant a l'origine, un a 3,75 m (son bord a 3 m), un en diagonale a 3,54 m, un a 4 m, un sur un plateau de 4 m.
+2. Un cylindre de 3 m de rayon et 6 m de haut au meme point.
+3. Un cone de 4,50 m vers l'est : un dans l'axe, un dont le centre est hors du cone et le bord dedans, un au-dela de la pointe, un derriere l'origine.
+4. Une ligne de 6 m sur 1,50 m vers l'est : dans l'axe, a 0,65 m du bord, a 1,25 m du bord, au-dela du bout.
+5. Un cube de 3 m vers le nord : dedans, derriere la face d'origine, a 0,60 m du cote, au-dela.
 
 **Résultat attendu**
 
-- Vérifie que `gabarit(sphere, 8)` vaut `boule`.
-- Vérifie que `gabarit(cylindre, 8)` vaut `boule`.
-- Vérifie que `gabarit(cone, 7)` vaut `souffle`.
-- Vérifie que `gabarit(ligne, 5)` vaut `(std::vector<std::string>{".....", "XXXX.", ".....", ".....", "....."})`.
-- Vérifie que `gabarit(diagonale, 5)` vaut `(std::vector<std::string>{"X....", ".X...", "..X..", ".....", "....."})`.
-- Vérifie que `gabarit(cube, 5)` vaut `(std::vector<std::string>{".....", ".....", ".XX..", ".XX..", "....."})`.
+- Vérifie que `boule->positionOf(CombatantId{5})->z` vaut `4.0F`, à `0.001F` près.
+- Vérifie que `core::combatantsInArea(*boule, sphere)` vaut `ids({1, 2, 3})`.
+- Vérifie que `core::combatantsInArea(*boule, cylindre)` vaut `ids({1, 2, 3, 5})`.
+- Vérifie que `core::combatantsInArea(*souffle, cone)` vaut `ids({1, 2})`.
+- Vérifie que `core::combatantsInArea(*eclair, ligne)` vaut `ids({1, 2})`.
+- Vérifie que `core::combatantsInArea(*bloc, cube)` vaut `ids({1, 3})`.
 
 ### AreaOfEffectTest.LOrigineEtLesTailles
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_area_of_effect.cpp:139`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_area_of_effect.cpp:149`
 
-Une sphère posée au centre d'une case la contient ; un cône qui part du même centre n'en couvre qu'un huitième et ne la contient pas ; un cône sans direction ne couvre rien.
+Une sphere posee au centre d'un combattant le prend ; un cone qui part du meme centre prend ce qui est devant, pas ce qui est derriere ni sur le cote ; un cone sans direction ne prend rien ; une taille de 1 m, qu'aucun nombre de cases n'ecrit, se joue telle quelle.
 
 **Étapes**
 
-1. Sphère de rayon 1 au centre de la case (2, 2).
-2. Cône de 2 vers l'est depuis le même centre.
-3. Un cône dont la direction est son origine.
-4. Convertir 6 m, 4,50 m, 7,50 m et 1 m en cases.
+1. Un combattant en (5, 5), un deuxieme a 1,60 m a l'est (son bord a 0,85 m), un troisieme a 1,90 m au sud (son bord a 1,15 m), un quatrieme a 1,80 m a l'ouest.
+2. Une sphere de 1 m au centre du premier.
+3. Un cone de 3 m vers l'est depuis le meme centre.
+4. Un cone dont la direction est son origine.
 
 **Résultat attendu**
 
-- Vérifie que `contient(core::areaTemplate(sphere, 5, 5), GridPosition{2, 2})` est vrai.
-- Vérifie que `contient(souffle, GridPosition{2, 2})` est faux.
-- Vérifie que `contient(souffle, GridPosition{3, 2})` est vrai.
-- Vérifie que `core::areaTemplate(sansDirection, 5, 5).empty()` est vrai.
-- Vérifie que `core::areaTilesFromMeters(6.0F)` vaut `4`.
-- Vérifie que `core::areaTilesFromMeters(4.5F)` vaut `3`.
-- Vérifie que `core::areaTilesFromMeters(7.5F)` vaut `5`.
-- Vérifie que `core::areaTilesFromMeters(1.0F).has_value()` est faux.
+- Vérifie que `core::combatantsInArea(*combat, sphere)` vaut `ids({1, 2})`.
+- Vérifie que `contient(souffle, 2)` est vrai.
+- Vérifie que `contient(souffle, 3)` est faux.
+- Vérifie que `contient(souffle, 4)` est faux.
+- Vérifie que `core::combatantsInArea(*combat, sansDirection).empty()` est vrai.
 
 ### AreaOfEffectTest.UnMurArreteLEffet
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_area_of_effect.cpp:179`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_area_of_effect.cpp:184`
 
-Une sphère posée derrière un mur n'atteint pas les cases qu'aucune ligne droite ne relie à son origine, ni le mur lui-même ; une créature de grande taille à moitié dans la zone y est, une fois.
+Une sphere posee devant un mur ne prend pas le combattant qu'aucune ligne droite ne relie a son origine ; un corps interpose ne protege pas ; une creature de grande taille dont le bord seul est dans la zone y est, une fois ; un corps a terre est pris.
 
 **Étapes**
 
-1. Une grille 7 × 7 barrée d'un mur vertical sur cinq cases, en colonne 4.
-2. Une sphère de rayon 3 au centre de la case (3, 3), dont le gabarit déborde derrière le mur.
-3. Un gobelin derrière le mur, un ogre de taille G à cheval sur le bord de la zone, un allié dans la zone.
+1. Une salle 7 × 7 barree d'un mur vertical sur cinq cases, en colonne 4.
+2. Une sphere de 4,50 m au centre de la case (3, 3), qui deborde derriere le mur.
+3. Un allie en (2, 3), un gobelin derriere le mur en (5, 3), un ogre de taille G sur les cases (0, 5) a (1, 6), un pretre a terre en (1, 3) derriere l'allie, un rat hors de portee en (0, 0).
 
 **Résultat attendu**
 
-- Vérifie que `dessin(gabarit, 7, 7)` vaut `(std::vector<std::string>{".......", ".XXXXX.", ".XXXXX.", ".XXXXX.", ".XXXXX.", ".XXXXX.", "......."})`.
-- Vérifie que `dessin(atteintes, 7, 7, &grille)` vaut `(std::vector<std::string>{".......", ".XXX#..", ".XXX#..", ".XXX#..", ".XXX#..", ".XXX#..", "......."})`.
-- Vérifie que `core::combatantsInArea(combat, boule)` vaut `(std::vector<core::CombatantId>{core::CombatantId{1}, core::CombatantId{3}})`.
+- Vérifie que `combat.combatants().size()` vaut `5U`.
+- Vérifie que `combat.positionOf(id).has_value()` est vrai.
+- Vérifie que `combat.find(CombatantId{4})->status` vaut `core::CombatantStatus::Down`.
+- Vérifie que `core::shapeHits(boule, *combat.volumeOf(CombatantId{2}))` est vrai.
+- Vérifie que `core::combatantsInArea(combat, boule)` vaut `ids({1, 3, 4})`.
 
 ## test_arena.cpp
 
 ### ArenaTest.LesPointsDEntreeSeLisentDeLaCarte
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:164`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:172`
 
 Les points d'entree de l'arene se lisent de la carte, ranges par camp puis par rang.
 
@@ -338,27 +336,27 @@ Les points d'entree de l'arene se lisent de la carte, ranges par camp puis par r
 
 ### ArenaTest.LaCarteDEssaiAccueilleLesDeuxCamps
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:185`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:193`
 
 La carte d'essai du donjon se charge et ses points d'entree accueillent les deux camps.
 
 **Étapes**
 
 1. Charger la carte d'essai `Levels/donjon.json`.
-2. Lire ses points d'entree et verifier qu'aucun n'est dans un mur.
+2. Lire ses points d'entree et verifier qu'une creature de taille M tient au centre de chacun, dans l'espace que la carte donne.
 
 **Résultat attendu**
 
 - Vérifie que `carte.ok()` est vrai.
-- Vérifie que `grille.isObstructed(entree.position, core::Locomotion::Walk)` est faux.
+- Vérifie que `espace.isClear( core::volumeOf(core::tileCenter(entree.position), core::CreatureSize::Medium), core::Locomotion::Walk)` est vrai.
 - Vérifie que `allies` est supérieur ou égal à `4`.
 - Vérifie que `ennemis` est supérieur ou égal à `4`.
 
 ### ArenaTest.LeMontagePlaceAuxEntreesEtRefuseEnLeDisant
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:211`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:224`
 
-Le montage place chaque combattant au prochain point d'entree libre de son camp, ou a la case demandee, et nomme chaque refus.
+Le montage pose chaque combattant au centre du prochain point d'entree libre de son camp, ou de la case demandee, et nomme chaque refus.
 
 **Étapes**
 
@@ -374,9 +372,9 @@ Le montage place chaque combattant au prochain point d'entree libre de son camp,
 - Vérifie que `montage.refusals[0].placement` vaut `core::PlacementResult::OutOfBounds`.
 - Vérifie que `montage.refusals[1].who` vaut `"Golem"`.
 - Vérifie que `montage.refusals[1].placement` vaut `core::PlacementResult::Obstructed`.
-- Vérifie que `session.combat().grid().positionOf(CombatantId{1})` vaut `(core::GridPosition{2, 3})`.
-- Vérifie que `session.combat().grid().positionOf(CombatantId{2})` vaut `(core::GridPosition{2, 2})`.
-- Vérifie que `session.combat().grid().positionOf(CombatantId{4})` vaut `(core::GridPosition{9, 3})`.
+- Vérifie que `memePlace(session.combat().positionOf(CombatantId{1}), tile(2, 3))` est vrai.
+- Vérifie que `memePlace(session.combat().positionOf(CombatantId{2}), tile(2, 2))` est vrai.
+- Vérifie que `memePlace(session.combat().positionOf(CombatantId{4}), tile(9, 3))` est vrai.
 - Vérifie que `session.combat().economy(CombatantId{1})->has(core::HEROIC_ACTION_RESOURCE)` est vrai.
 - Vérifie que `session.attacks(CombatantId{4})` diffère de `nullptr`.
 - Vérifie que `session.attacks(CombatantId{9})` vaut `nullptr`.
@@ -385,7 +383,7 @@ Le montage place chaque combattant au prochain point d'entree libre de son camp,
 
 ### ArenaTest.LAttaqueSeRefuseEtSeResout
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:258`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:271`
 
 L'action attaquer de l'arene refuse hors tour actif, contre un allie ou un inconnu, hors allonge, sans attaque ou sans action ; a portee elle jette le d20 contre la classe d'armure du profil et l'ecrit au journal.
 
@@ -415,15 +413,15 @@ L'action attaquer de l'arene refuse hors tour actif, contre un allie ou un incon
 
 ### ArenaTest.LePilierCacheEtAbrite
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:312`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:325`
 
 Dans l'arene, un tir vers une cible cachee par le pilier est refuse ; vers une cible que le pilier abrite partiellement, il est jete contre sa CA + 2, et le journal le dit.
 
 **Étapes**
 
-1. Une archere (portee 16/64) en (5,3), un gobelin a la CA 12 en (7,3) derriere le pilier (6,3), un second en (7,5).
+1. Une archere (portee 16/64) au centre de la case (5,3), un gobelin a la CA 12 en (7,3) derriere le pilier (6,3), un second en (7,5).
 2. L'archere tire sur le premier.
-3. Elle se place en (5,2), d'ou le pilier ne cache plus que le bas de la case du gobelin, et tire encore.
+3. Elle se place au centre de la case (5,2), d'ou le pilier coupe une ou deux des lignes vers le gobelin, et tire encore.
 
 **Résultat attendu**
 
@@ -431,7 +429,7 @@ Dans l'arene, un tir vers une cible cachee par le pilier est refuse ; vers une c
 - Vérifie que `session.combat().activeCombatant()` vaut `CombatantId{1}`.
 - Vérifie que `session.attack(CombatantId{2}).result` vaut `core::ArenaActionResult::TotalCover`.
 - Vérifie que `session.combat().find(CombatantId{1})->economy.remaining(core::ACTION_RESOURCE)` vaut `1`.
-- Vérifie que `session.move(core::GridPosition{5, 2}).result` vaut `core::MoveResult::Moved`.
+- Vérifie que `session.move(tile(5, 2)).result` vaut `core::MoveResult::Moved`.
 - Vérifie que `tir.result` vaut `core::ArenaActionResult::Done`.
 - Vérifie que `tir.outcome.has_value()` est vrai.
 - Vérifie que `tir.outcome->roll.armorClass` vaut `14`.
@@ -439,14 +437,14 @@ Dans l'arene, un tir vers une cible cachee par le pilier est refuse ; vers une c
 
 ### ArenaTest.LOpportuniteLeDesengagementEtLEsquive
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:355`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:369`
 
 Quitter l'allonge d'un ennemi provoque son attaque d'opportunite, qui depense sa reaction ; se desengager l'evite ; esquiver impose le desavantage a qui attaque.
 
 **Étapes**
 
-1. Heroine en (2,3) au contact d'un ogre en (3,3) (CA 1, bonus 0, 1 degat).
-2. L'heroine s'eloigne en (2,5).
+1. Heroine au centre de la case (2,3), au contact d'un ogre en (3,3) (CA 1, bonus 0, 1 degat).
+2. L'apercu du deplacement vers le centre de (2,5), puis le deplacement.
 3. Remonter, se desengager, puis s'eloigner.
 4. Remonter, esquiver, finir le tour ; l'ogre attaque l'heroine.
 
@@ -454,14 +452,21 @@ Quitter l'allonge d'un ennemi provoque son attaque d'opportunite, qui depense sa
 
 - Vérifie que `session.start()` est vrai.
 - Vérifie que `session.combat().activeCombatant()` vaut `CombatantId{1}`.
+- Vérifie que `session.previewOpportunities(tile(2, 5))` vaut `(std::vector<CombatantId>{CombatantId{2}})`.
 - Vérifie que `fuite.result` vaut `core::MoveResult::Moved`.
-- Vérifie que `session.combat().grid().positionOf(CombatantId{1})` vaut `(core::GridPosition{2, 5})`.
+- Vérifie que `memePlace(session.combat().positionOf(CombatantId{1}), tile(2, 5))` est vrai.
 - Vérifie que `opportunites(session)` vaut `1`.
+- Vérifie que `ecartAuCoup.has_value()` est vrai.
+- Vérifie que `core::withinTiles(*ecartAuCoup, 1)` est vrai.
+- Vérifie que `dernierPas` diffère de `session.journal().rend()`.
+- Vérifie que `dernierPas->starts_with("pas Heroine 3.75,8.25 (")` est vrai.
+- Vérifie que `dernierPas->ends_with(" m)")` est vrai.
 - Vérifie que `session.combat().find(CombatantId{2})->economy.remaining(core::REACTION_RESOURCE)` vaut `0`.
 - Vérifie que `prudente.start()` est vrai.
 - Vérifie que `prudente.disengage()` est vrai.
 - Vérifie que `prudente.dodge()` est faux.
-- Vérifie que `prudente.move(core::GridPosition{2, 5}).result` vaut `core::MoveResult::Moved`.
+- Vérifie que `prudente.previewOpportunities(tile(2, 5)).empty()` est vrai.
+- Vérifie que `prudente.move(tile(2, 5)).result` vaut `core::MoveResult::Moved`.
 - Vérifie que `opportunites(prudente)` vaut `0`.
 - Vérifie que `prudente.combat().find(CombatantId{2})->economy.remaining(core::REACTION_RESOURCE)` vaut `1`.
 - Vérifie que `esquive.start()` est vrai.
@@ -472,9 +477,39 @@ Quitter l'allonge d'un ennemi provoque son attaque d'opportunite, qui depense sa
 - Vérifie que `riposte.outcome->roll.check.stance` vaut `core::RollStance::Disadvantage`.
 - Vérifie que `riposte.outcome->describe().find("esquive de la cible")` diffère de `std::string::npos`.
 
+### ArenaTest.SePrecipiterDoubleLeDeplacement
+
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:454`
+
+L'action se precipiter donne un deplacement supplementaire egal a la vitesse : une destination a 12 m, hors des 9 m d'une vitesse de 6 cases, devient atteignable, et ce qui reste se lit en metres.
+
+**Étapes**
+
+1. Une heroine de vitesse 6 au centre de la case (1,1), un gobelin loin d'elle.
+2. Aller au centre de la case (9,1), a 12 m.
+3. Se precipiter, puis y aller.
+4. Se precipiter encore.
+
+**Résultat attendu**
+
+- Vérifie que `session.start()` est vrai.
+- Vérifie que `session.combat().activeCombatant()` vaut `CombatantId{1}`.
+- Vérifie que `session.combat().movementLeft()` vaut `9.0F`, à `0.001F` près.
+- Vérifie que `session.move(tile(9, 1)).result` vaut `core::MoveResult::Unreachable`.
+- Vérifie que `memePlace(session.combat().positionOf(CombatantId{1}), tile(1, 1))` est vrai.
+- Vérifie que `session.combat().movementLeft()` vaut `9.0F`, à `0.001F` près.
+- Vérifie que `session.dash()` est vrai.
+- Vérifie que `session.journal().back()` vaut `"precipitation Heroine"`.
+- Vérifie que `session.combat().movementLeft()` vaut `18.0F`, à `0.001F` près.
+- Vérifie que `course.result` vaut `core::MoveResult::Moved`.
+- Vérifie que `course.path.length` vaut `12.0F`, à `0.01F` près.
+- Vérifie que `memePlace(session.combat().positionOf(CombatantId{1}), tile(9, 1))` est vrai.
+- Vérifie que `session.combat().movementLeft()` vaut `6.0F`, à `0.01F` près.
+- Vérifie que `session.dash()` est faux.
+
 ### ArenaTest.UnAffrontementSeJoueSeRejoueEtPersonneNYMeurt
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:420`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_arena.cpp:499`
 
 Un affrontement se joue jusqu'a son issue ; le rejeu a la meme graine donne le meme journal ; a la fin, la Marque Heroique releve tout le monde, sauf dans une arene letale.
 
@@ -509,7 +544,7 @@ Un affrontement se joue jusqu'a son issue ; le rejeu a la meme graine donne le m
 
 ### AttackTest.UnVingtNaturelToucheEtDoubleLesDes
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:88`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:130`
 
 Un 20 naturel touche une CA hors d'atteinte, est un critique, et double les des de degats sans doubler le modificateur.
 
@@ -533,7 +568,7 @@ Un 20 naturel touche une CA hors d'atteinte, est un critique, et double les des 
 
 ### AttackTest.UnUnNaturelRateMemeAuDessusDeLaCA
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:120`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:162`
 
 Un 1 naturel rate toujours, meme quand le total depasse la classe d'armure.
 
@@ -553,7 +588,7 @@ Un 1 naturel rate toujours, meme quand le total depasse la classe d'armure.
 
 ### AttackTest.ChaqueJetProduitUneEntreeDeJournalComplete
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:147`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:189`
 
 Exigences : `EX-REG-003`
 
@@ -573,7 +608,7 @@ Une attaque touchee et une attaque ratee s'ecrivent au journal avec le de, chaqu
 
 ### AttackTest.LeJetSAmendeAvantQueLIssueNeSoitFigee
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:180`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:222`
 
 Un greffon ajoute une source de desavantage avant le jet, relance un de apres le jet, ajoute un modificateur apres avoir vu le total ; l'issue tient compte des trois.
 
@@ -599,25 +634,27 @@ Un greffon ajoute une source de desavantage avant le jet, relance un de apres le
 - Vérifie que `jet.check.dice.size()` vaut `1U`.
 - Vérifie que `jet.check.target` vaut `10`.
 
-### AttackTest.LaGrilleDitLaPorteeEtLesCirconstances
+### AttackTest.LEspaceDitLaPorteeEtLesCirconstances
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:242`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:284`
 
-L'allonge se mesure entre emprises, et un tir est desavantage au contact d'un ennemi ou au-dela de sa portee normale.
+L'allonge et la portee se mesurent entre les bords des volumes : une creature de taille G touche ce qui borde son volume ; un tir est desavantage au contact d'un ennemi ou au-dela de sa portee normale.
 
 **Étapes**
 
-1. Un ogre de taille G ancre en (5,5), un archer en (7,5), un guerrier en (2,2).
-2. Mesurer les distances ; l'allonge d'une attaque de 1 et de 2 cases.
-3. L'archer tire au contact de l'ogre ; puis a 5 cases avec une portee 4/12.
+1. Un ogre de taille G pose sur les cases (5,5) a (6,6), un archer au centre de la case (7,5), un guerrier en (2,5), un rat en (7,11).
+2. Mesurer les ecarts ; l'allonge d'une attaque de 1, 2 et 3 cases.
+3. L'archer tire au contact de l'ogre ; puis sur le rat, avec une portee 4/12.
 4. Une cible a terre.
 
 **Résultat attendu**
 
 - Vérifie que `combat.start(hasard)` est vrai.
-- Vérifie que `core::gridDistance(combat, CombatantId{1}, CombatantId{2})` vaut `1`.
-- Vérifie que `core::gridDistance(combat, CombatantId{3}, CombatantId{2})` vaut `3`.
+- Vérifie que `*core::gapBetween(combat, CombatantId{1}, CombatantId{2})` vaut `0.12F`, à `0.01F` près.
+- Vérifie que `*core::gapBetween(combat, CombatantId{3}, CombatantId{2})` vaut `3.05F`, à `0.01F` près.
+- Vérifie que `*core::gapBetween(combat, CombatantId{1}, CombatantId{4})` vaut `7.5F`, à `0.01F` près.
 - Vérifie que `core::inReach(combat, CombatantId{2}, CombatantId{1}, massue)` est vrai.
+- Vérifie que `core::inReach(combat, CombatantId{3}, CombatantId{2}, massue)` est faux.
 - Vérifie que `core::inReach(combat, CombatantId{3}, CombatantId{2}, massue)` est faux.
 - Vérifie que `core::inReach(combat, CombatantId{3}, CombatantId{2}, massue)` est vrai.
 - Vérifie que `core::attackCircumstances(combat, CombatantId{1}, CombatantId{2}, arc).disadvantages` vaut `(std::vector<std::string>{"tir au contact d'un ennemi"})`.
@@ -628,7 +665,7 @@ L'allonge se mesure entre emprises, et un tir est desavantage au contact d'un en
 
 ### AttackTest.LesProfilsSeTirentDuBestiaireEtDeLaFiche
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:289`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:340`
 
 Les attaques d'une creature se lisent de son bloc ; celles d'un personnage de son arme, de sa Force ou de sa Dexterite et de sa maitrise ; le coup a mains nues vaut 1 + Force ; aucune creature livree n'a de degats sans type.
 
@@ -663,20 +700,19 @@ Les attaques d'une creature se lisent de son bloc ; celles d'un personnage de so
 
 ### AttackTest.LAbriChangeLaCAUneFois
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:374`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:425`
 
 Une cible derriere un muret gagne +2 a sa CA ; un greffon qui pose le meme abri ne l'ajoute pas une seconde fois ; un abri important par-dessus porte le bonus a +5, pas a +7 ; un abri total n'est pas un bonus.
 
 **Étapes**
 
-1. Un archer en (0,1), un gobelin a la CA 15 en (3,1), un muret en (2,1).
+1. Un archer au centre de la case (0,1), un gobelin a la CA 15 en (3,1), un muret de 0,75 m — la moitie d'une creature de taille M — sur la case (2,1).
 2. Tirer, d20 force a 12.
 3. Tirer avec un greffon qui pose l'abri partiel, puis l'abri total.
 4. Tirer avec un greffon qui pose l'abri important.
 
 **Résultat attendu**
 
-- Vérifie que `combat.grid().placeObject({2, 1}, {.kind = "muret", .hitPoints = 10, .blocksMovement = true, .cover = core::Cover::Half, .damageTraits = {}})` vaut `core::PlacementResult::Placed`.
 - Vérifie que `combat.start(hasard)` est vrai.
 - Vérifie que `core::coverBetween(combat, CombatantId{1}, CombatantId{2})` vaut `core::Cover::Half`.
 - Vérifie que `simple.has_value()` est vrai.
@@ -695,30 +731,32 @@ Une cible derriere un muret gagne +2 a sa CA ; un greffon qui pose le meme abri 
 
 ### AttackTest.ViserDemandeLaPorteeEtLaVue
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:442`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:490`
 
 Une cible derriere un mur ne se vise pas, ni a distance ni au contact par le coin de deux murs ; au-dela de la longue portee non plus ; un ennemi adjacent qui ne voit pas le tireur ne lui impose pas le desavantage du tir au contact.
 
 **Étapes**
 
-1. Un archer en (1,1), un gobelin en (2,2) derriere deux murs en (2,1) et (1,2), un loup en (0,3), un rat en (5,5).
+1. Un archer au centre de la case (1,1), un gobelin en (2,2) derriere deux murs en (2,1) et (1,2), un loup en (0,3), un rat en (5,5).
 2. Verifier chaque cible, a distance (portee 2/3) et au contact.
 3. Les circonstances du tir vers le loup.
 
 **Résultat attendu**
 
 - Vérifie que `combat.start(hasard)` est vrai.
-- Vérifie que `core::gridDistance(combat, CombatantId{1}, CombatantId{2})` vaut `1`.
+- Vérifie que `ecart.has_value()` est vrai.
+- Vérifie que `*ecart` vaut `0.62F`, à `0.01F` près.
+- Vérifie que `core::adjacentGap(*ecart)` est vrai.
 - Vérifie que `core::checkTarget(combat, CombatantId{1}, CombatantId{2}, arc)` vaut `core::TargetCheck::TotalCover`.
 - Vérifie que `core::checkTarget(combat, CombatantId{1}, CombatantId{2}, epee())` vaut `core::TargetCheck::TotalCover`.
 - Vérifie que `core::checkTarget(combat, CombatantId{1}, CombatantId{3}, arc)` vaut `core::TargetCheck::Valid`.
 - Vérifie que `core::checkTarget(combat, CombatantId{1}, CombatantId{4}, arc)` vaut `core::TargetCheck::OutOfReach`.
-- Vérifie que `core::checkTarget(combat, CombatantId{1}, CombatantId{1}, arc)` vaut `core::TargetCheck::NotOnGrid`.
+- Vérifie que `core::checkTarget(combat, CombatantId{1}, CombatantId{1}, arc)` vaut `core::TargetCheck::NotPlaced`.
 - Vérifie que `core::attackCircumstances(combat, CombatantId{1}, CombatantId{3}, arc) .disadvantages.empty()` est vrai.
 
 ### AttackTest.LesPorteesSeLisentDansLaDonnee
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:486`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:538`
 
 Chaque arme qui se tire ou se lance porte ses portees ; l'arc long tire a 30/120 cases, la hallebarde frappe a 2, la dague se lance a 4/12 ; le squelette tire a 16/64.
 
@@ -754,172 +792,85 @@ Chaque arme qui se tire ou se lance porte ses portees ; l'arc long tire a 30/120
 - Vérifie que `attaques.attacks[1].range->normal` vaut `16`.
 - Vérifie que `attaques.attacks[1].range->maximum` vaut `64`.
 
-## test_battle_grid.cpp
+### AttackTest.LaVueEstSymetriqueSurDesCartesGenerees
 
-### BattleGridTest.LesObstaclesSontCeuxDeLaCollision
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:602`
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_battle_grid.cpp:74`
-
-Les obstacles de la grille de combat sont ceux de la couche collision.
+A voit B si et seulement si B voit A — verifie exhaustivement sur des cartes generees, pour chaque paire de combattants de taille M poses au centre des cases libres, et pour chaque creature de taille G contre chacun d'eux ; l'abri total equivaut a l'absence de vue.
 
 **Étapes**
 
-1. Construire une grille sur une collision portant un mur, de l'eau peu profonde et de l'eau profonde.
-2. Interroger chaque case, au sol puis en vol.
+1. Generer 20 cartes 5 × 5 a des densites de 10 a 55 % de murs, d'eau profonde, de portes fermees, de parapets et de murets.
+2. Poser un combattant au centre de chaque case libre ; pour chaque paire ordonnee, comparer les deux sens de la vue (`core::hasLineOfSight`).
+3. Pour chaque bloc libre de 2 × 2 cases, y poser une creature de taille G parmi les autres, et comparer de meme.
+4. Pour chacune : l'abri total (`core::coverBetween`) equivaut a l'absence de vue.
 
 **Résultat attendu**
 
-- Vérifie que `grille.isObstructed({0, 0})` est vrai.
-- Vérifie que `grille.isObstructed({0, 0}, core::Locomotion::Fly)` est vrai.
-- Vérifie que `grille.isObstructed({1, 0})` est faux.
-- Vérifie que `grille.isObstructed({2, 0})` est vrai.
-- Vérifie que `grille.isObstructed({2, 0}, core::Locomotion::Fly)` est faux.
-- Vérifie que `grille.isObstructed({3, 0})` est faux.
-- Vérifie que `grille.isObstructed({4, 0})` est vrai.
-- Vérifie que `grille.isObstructed({-1, 0})` est vrai.
+- Vérifie que `enrole.combatant.has_value()` est vrai.
+- Vérifie que `verifier(foule, a, b)` est vrai.
+- Vérifie que `grand.combatant.has_value()` est vrai.
+- Vérifie que `petit.combatant.has_value()` est vrai.
+- Vérifie que `verifier(combat, *grand.combatant, *petit.combatant)` est vrai.
+- Vérifie que `vues` est strictement supérieur à `3000U`.
+- Vérifie que `cachees` est strictement supérieur à `500U`.
 
-### BattleGridTest.DeuxCreaturesNePartagentJamaisUneCase
+### AttackTest.CeQuiArreteLaVue
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_battle_grid.cpp:104`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:733`
 
-Deux creatures ne partagent jamais une case.
+Un mur cache, un gouffre d'eau profonde non ; le coin commun de deux murs ne laisse pas passer le regard ; une porte fermee cache comme un mur, ouverte elle ne cache plus.
 
 **Étapes**
 
-1. Placer un combattant.
-2. Tenter d'en placer un second sur sa case, puis d'y deplacer un troisieme.
-3. Tenter de poser une creature 2x2 dont l'emprise mord sur la case.
+1. Deux combattants alignes, un mur d'une case entre eux ; deux autres sur la rangee voisine.
+2. Les memes, separes par une riviere d'eau profonde.
+3. Deux combattants en diagonale, deux murs sur les deux autres cases du carre ; puis un seul mur.
+4. Une porte fermee dans un couloir, puis ouverte.
 
 **Résultat attendu**
 
-- Vérifie que `grille.place(HEROS, {3, 3})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.place(RAT, {3, 3})` vaut `core::PlacementResult::Occupied`.
-- Vérifie que `grille.place(RAT, {5, 5})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.moveTo(RAT, {3, 3})` vaut `core::PlacementResult::Occupied`.
-- Vérifie que `grille.place(OURS, {2, 2}, 2)` vaut `core::PlacementResult::Occupied`.
-- Vérifie que `grille.occupantAt({3, 3})` vaut `HEROS`.
-- Vérifie que `grille.positionOf(RAT)` vaut `(core::GridPosition{5, 5})`.
-- Vérifie que `grille.positionOf(OURS).has_value()` est faux.
+- Vérifie que `core::hasLineOfSight(*derriere, CombatantId{1}, CombatantId{2})` est faux.
+- Vérifie que `core::coverBetween(*derriere, CombatantId{1}, CombatantId{2})` vaut `Cover::Total`.
+- Vérifie que `core::checkTarget(*derriere, CombatantId{1}, CombatantId{2}, arc)` vaut `core::TargetCheck::TotalCover`.
+- Vérifie que `core::hasLineOfSight(*derriere, CombatantId{3}, CombatantId{4})` est vrai.
+- Vérifie que `core::hasLineOfSight(*rives, CombatantId{1}, CombatantId{2})` est vrai.
+- Vérifie que `core::coverBetween(*rives, CombatantId{1}, CombatantId{2})` vaut `Cover::None`.
+- Vérifie que `core::hasLineOfSight(*enCoin, CombatantId{1}, CombatantId{2})` est faux.
+- Vérifie que `core::hasLineOfSight(*enCoin, CombatantId{2}, CombatantId{1})` est faux.
+- Vérifie que `core::hasLineOfSight(*enDemiCoin, CombatantId{1}, CombatantId{2})` est vrai.
+- Vérifie que `core::hasLineOfSight(*deParEtDAutre, CombatantId{1}, CombatantId{2})` est faux.
+- Vérifie que `porte->removeBox(battant)` est vrai.
+- Vérifie que `core::hasLineOfSight(*deParEtDAutre, CombatantId{1}, CombatantId{2})` est vrai.
 
-### BattleGridTest.UneGrandeCreatureOccupeToutSonEmprise
+### AttackTest.LesAbrisEtCeQuiLesDonne
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_battle_grid.cpp:131`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_attack.cpp:796`
 
-Une creature 2x2 occupe quatre cases et avance sur sa propre emprise.
+Un muret et une creature interposee abritent partiellement, un parapet de facon importante ; un angle de mur donne l'abri selon les lignes qu'il coupe, depuis la place du tireur ; les abris ne s'additionnent pas.
 
 **Étapes**
 
-1. Placer une creature de taille G (2x2).
-2. La deplacer d'une case vers la droite.
+1. Un tireur au centre de la case (0,1), une cible en (3,1), rien entre eux.
+2. Un muret de 0,75 m, puis un parapet de 1,20 m, sur la case (2,1) devant la cible.
+3. Une creature en (1,1), seule, avec le muret, avec le parapet.
+4. Un mur de 3 m en (2,1), et des tireurs en (0,1), (0,0) et (1,0).
 
 **Résultat attendu**
 
-- Vérifie que `core::footprintSide(core::CreatureSize::Tiny)` vaut `1`.
-- Vérifie que `core::footprintSide(core::CreatureSize::Large)` vaut `2`.
-- Vérifie que `core::footprintSide(core::CreatureSize::Gargantuan)` vaut `4`.
-- Vérifie que `grille.place(OURS, {1, 1}, core::footprintSide(core::CreatureSize::Large))` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.occupantAt(case_)` vaut `OURS`.
-- Vérifie que `grille.sideOf(OURS)` vaut `2`.
-- Vérifie que `grille.moveTo(OURS, {2, 1})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.occupantAt({1, 1}).has_value()` est faux.
-- Vérifie que `grille.occupantAt({3, 2})` vaut `OURS`.
-
-### BattleGridTest.UnPlacementImpossibleEstRefuseAvecSaRaison
-
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_battle_grid.cpp:163`
-
-Un placement impossible est refuse avec sa raison.
-
-**Étapes**
-
-1. Placer hors de la carte, dans un mur, a cheval sur le bord.
-2. Placer deux fois le meme combattant, deplacer un combattant absent.
-3. Retirer un combattant et reprendre sa case.
-
-**Résultat attendu**
-
-- Vérifie que `grille.place(HEROS, {4, 0})` vaut `core::PlacementResult::OutOfBounds`.
-- Vérifie que `grille.place(HEROS, {1, 1})` vaut `core::PlacementResult::Obstructed`.
-- Vérifie que `grille.place(OURS, {3, 3}, 2)` vaut `core::PlacementResult::OutOfBounds`.
-- Vérifie que `grille.place(HEROS, {0, 0})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.place(HEROS, {2, 2})` vaut `core::PlacementResult::InvalidCombatant`.
-- Vérifie que `grille.moveTo(RAT, {2, 2})` vaut `core::PlacementResult::InvalidCombatant`.
-- Vérifie que `grille.place(RAT, {2, 2}, 0)` vaut `core::PlacementResult::InvalidCombatant`.
-- Vérifie que `grille.remove(HEROS)` est vrai.
-- Vérifie que `grille.remove(HEROS)` est faux.
-- Vérifie que `grille.place(RAT, {0, 0})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.combatants()` vaut `(std::vector<core::CombatantId>{RAT})`.
-
-### BattleGridTest.LesProprietesDeZoneSontRelevees
-
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_battle_grid.cpp:194`
-
-Les proprietes de zone de la carte sont relevees par la grille.
-
-**Étapes**
-
-1. Construire la grille d'une carte dont une couche porte difficultTerrain, une autre une regle inconnue, une troisieme une coquille (difficultTerrain: 1).
-2. Interroger les cases.
-
-**Résultat attendu**
-
-- Vérifie que `grille.isObstructed({5, 0})` est vrai.
-- Vérifie que `grille.isDifficult({1, 1})` est vrai.
-- Vérifie que `grille.isDifficult({2, 1})` est vrai.
-- Vérifie que `grille.isDifficult({3, 1})` est faux.
-- Vérifie que `grille.isDifficult({0, 3})` est faux.
-- Vérifie que `zones.size()` vaut `2U`.
-- Vérifie que `zones[0]->contains("difficultTerrain")` est vrai.
-- Vérifie que `std::get<bool>(zones[1]->at("noHealing"))` est vrai.
-- Vérifie que `grille.zonesAt({4, 3}).empty()` est vrai.
-- Vérifie que `grille.zonesAt({-1, 0}).empty()` est vrai.
-
-### BattleGridTest.LeTerrainDifficileSeCreeEnCombat
-
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_battle_grid.cpp:224`
-
-Le terrain difficile se cree et s'efface en combat.
-
-**Étapes**
-
-1. Rendre une case difficile (un seisme).
-2. L'effacer.
-3. Viser une case hors de la carte.
-
-**Résultat attendu**
-
-- Vérifie que `grille.isDifficult({1, 1})` est vrai.
-- Vérifie que `grille.isDifficult({1, 1})` est faux.
-- Vérifie que `grille.isDifficult({9, 9})` est faux.
-
-### BattleGridTest.UnObjetDeGrilleBloqueEtSeDetruit
-
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_battle_grid.cpp:246`
-
-Un objet de grille bloque tant qu'il tient, puis se detruit.
-
-**Étapes**
-
-1. Poser une barricade de 10 PV et une toile non bloquante.
-2. Infliger 4 puis 6 degats a la barricade.
-3. Placer un combattant sur la toile, puis tenter une barricade sur lui.
-
-**Résultat attendu**
-
-- Vérifie que `grille.placeObject({1, 1}, {.kind = "barricade", .hitPoints = 10})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.placeObject({2, 2}, {.kind = "web", .hitPoints = 10, .blocksMovement = false})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.placeObject({1, 1}, {.kind = "tonneau"})` vaut `core::PlacementResult::Occupied`.
-- Vérifie que `grille.isObstructed({1, 1})` est vrai.
-- Vérifie que `grille.place(HEROS, {1, 1})` vaut `core::PlacementResult::Obstructed`.
-- Vérifie que `grille.damageObject({1, 1}, 4)` est faux.
-- Vérifie que `grille.objectAt({1, 1})` diffère de `nullptr`.
-- Vérifie que `grille.objectAt({1, 1})->hitPoints` vaut `6`.
-- Vérifie que `grille.damageObject({1, 1}, 6)` est vrai.
-- Vérifie que `grille.objectAt({1, 1})` vaut `nullptr`.
-- Vérifie que `grille.isObstructed({1, 1})` est faux.
-- Vérifie que `grille.isObstructed({2, 2})` est faux.
-- Vérifie que `grille.place(HEROS, {3, 3})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.placeObject({3, 3}, {.kind = "barricade"})` vaut `core::PlacementResult::Occupied`.
+- Vérifie que `core::coverBetween(*rien, CombatantId{1}, CombatantId{2})` vaut `Cover::None`.
+- Vérifie que `core::coverBetween(*derriere(MURET, Cover::Half, false), CombatantId{1}, CombatantId{2})` vaut `Cover::Half`.
+- Vérifie que `core::coverBetween(*derriere(PARAPET, Cover::ThreeQuarters, false), CombatantId{1}, CombatantId{2})` vaut `Cover::ThreeQuarters`.
+- Vérifie que `core::coverBetween(*garde, CombatantId{1}, CombatantId{2})` vaut `Cover::Half`.
+- Vérifie que `core::coverBetween(*derriere(MURET, Cover::Half, true), CombatantId{1}, CombatantId{2})` vaut `Cover::Half`.
+- Vérifie que `core::coverBetween(*derriere(PARAPET, Cover::ThreeQuarters, true), CombatantId{1}, CombatantId{2})` vaut `Cover::ThreeQuarters`.
+- Vérifie que `core::coverBetween(*tireurs, CombatantId{2}, CombatantId{1})` vaut `Cover::Total`.
+- Vérifie que `core::coverBetween(*tireurs, CombatantId{3}, CombatantId{1})` vaut `Cover::ThreeQuarters`.
+- Vérifie que `core::coverBetween(*tireurs, CombatantId{4}, CombatantId{1})` vaut `Cover::Half`.
+- Vérifie que `core::coverBonus(Cover::None)` vaut `0`.
+- Vérifie que `core::coverBonus(Cover::Half)` vaut `2`.
+- Vérifie que `core::coverBonus(Cover::ThreeQuarters)` vaut `5`.
+- Vérifie que `core::coverBonus(Cover::Total)` vaut `0`.
 
 ## test_class_brawler.cpp
 
@@ -1191,21 +1142,21 @@ La lutteuse (N2, Pas de danseur) quitte l'allonge du gobelin sans etre frappee, 
 - Vérifie que `session.start()` est vrai.
 - Vérifie que `session.combat().activeCombatant()` vaut `CombatantId{1}`.
 - Vérifie que `session.combat().find(CombatantId{1})->profile.movement` vaut `8`.
-- Vérifie que `session.previewOpportunities({3, 7}).empty()` est vrai.
+- Vérifie que `session.previewOpportunities(core::tileCenter({3, 7})).empty()` est vrai.
 - Vérifie que `parcours.result` vaut `core::MoveResult::Moved`.
-- Vérifie que `session.combat().grid().positionOf(CombatantId{1})` vaut `(core::GridPosition{3, 7})`.
+- Vérifie que `session.combat().positionOf(CombatantId{1})` vaut `core::tileCenter({3, 7})`.
 - Vérifie que `contient(session.journal(), "opportunite : ")` est faux.
 - Vérifie que `contient(session.journal(), "sans attaque d'opportunite Lutteuse (Pas de danseur)")` est vrai.
 - Vérifie que `session.mount(bout).refusals.empty()` est vrai.
 - Vérifie que `session.start()` est vrai.
 - Vérifie que `session.combat().find(CombatantId{1})->profile.movement` vaut `6`.
-- Vérifie que `session.previewOpportunities({3, 7})` vaut `(std::vector<CombatantId>{CombatantId{2}})`.
+- Vérifie que `session.previewOpportunities(core::tileCenter({3, 7}))` vaut `(std::vector<CombatantId>{CombatantId{2}})`.
 - Vérifie que `contient(session.journal(), "opportunite : attaque Gobelin -> Lutteuse")` est vrai.
 - Vérifie que `contient(session.journal(), "sans attaque d'opportunite")` est faux.
 
 ### ClassInArenaTest.UnSortEpuiseNeSeProposePlusEtUnReposLongLeRend
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_class_in_arena.cpp:325`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_class_in_arena.cpp:326`
 
 La lutteuse lance son trait deux fois, la troisieme est refusee « Exhausted » sans rien depenser ; le sort mineur se lance encore ; le repos long de la fiche rend les deux lancers au montage suivant.
 
@@ -1761,8 +1712,8 @@ La Scoundrel quitte l'allonge du mannequin sans etre frappee, et le journal nomm
 
 - Vérifie que `session.mount(combatDe(charge, std::nullopt)).refusals.empty()` est vrai.
 - Vérifie que `session.start()` est vrai.
-- Vérifie que `session.previewOpportunities({0, 3}).empty()` est vrai.
-- Vérifie que `session.move({0, 3}).result` vaut `core::MoveResult::Moved`.
+- Vérifie que `session.previewOpportunities(core::tileCenter({0, 3})).empty()` est vrai.
+- Vérifie que `session.move(core::tileCenter({0, 3})).result` vaut `core::MoveResult::Moved`.
 - Vérifie que `journalHas(session.journal(), "opportunite :")` est faux.
 - Vérifie que `journalHas(session.journal(), "sans attaque d'opportunite " + SCOUNDREL + " (Scoundrel's Agility)")` est vrai.
 - Vérifie que `test_support::armorClassOf(niveau5.sheet, niveau5.inventory)` vaut `16`.
@@ -1879,13 +1830,13 @@ La previsualisation d'un deplacement donne le chemin, le deplacement restant et 
 - Vérifie que `session.start()` est vrai.
 - Vérifie que `session.combat().activeCombatant()` vaut `CombatantId{1}`.
 - Vérifie que `pas.path.has_value()` est vrai.
-- Vérifie que `pas.path->cost` vaut `2`.
-- Vérifie que `pas.movementLeft` vaut `4`.
+- Vérifie que `pas.path->length` vaut `3.0F`, à `0.01F` près.
+- Vérifie que `pas.movementLeft` vaut `6.0F`, à `0.01F` près.
 - Vérifie que `pas.opportunities` vaut `(std::vector<CombatantId>{CombatantId{2}})`.
-- Vérifie que `core::previewMove(session, {9, 9}).path.has_value()` est faux.
+- Vérifie que `core::previewMove(session, core::tileCenter({9, 9})).path.has_value()` est faux.
 - Vérifie que `session.takesOpportunities(CombatantId{2})` est vrai.
-- Vérifie que `core::previewMove(session, {2, 5}).opportunities.empty()` est vrai.
-- Vérifie que `session.move({2, 5}).result` vaut `core::MoveResult::Moved`.
+- Vérifie que `core::previewMove(session, core::tileCenter({2, 5})).opportunities.empty()` est vrai.
+- Vérifie que `session.move(core::tileCenter({2, 5})).result` vaut `core::MoveResult::Moved`.
 - Vérifie que `std::ranges::none_of( session.journal(), [](const std::string& l) { return l.starts_with("opportunite : "); })` est vrai.
 - Vérifie que `session.combat().find(CombatantId{2})->economy.remaining(core::REACTION_RESOURCE)` vaut `1`.
 - Vérifie que `session.takesOpportunities(CombatantId{2})` est faux.
@@ -2157,7 +2108,7 @@ Les portees du corpus se convertissent.
 
 ### CombatStateTest.LInitiativeEstJeteeUneFoisEtLOrdreTient
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:225`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:276`
 
 L'ordre d'initiative est jete au debut et reste stable de round en round.
 
@@ -2186,7 +2137,7 @@ L'ordre d'initiative est jete au debut et reste stable de round en round.
 
 ### CombatStateTest.LeTourNeFinitQueSurDemande
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:276`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:327`
 
 La fin d'un tour est explicite : epuiser ses ressources ne la declenche pas.
 
@@ -2222,7 +2173,7 @@ La fin d'un tour est explicite : epuiser ses ressources ne la declenche pas.
 
 ### CombatStateTest.LaReactionRevientAuDebutDuTourDeSonPorteur
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:322`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:373`
 
 Une reaction depensee hors de son tour ne revient qu'au debut du tour de son porteur.
 
@@ -2245,7 +2196,7 @@ Une reaction depensee hors de son tour ne revient qu'au debut du tour de son por
 
 ### CombatStateTest.UneVictoireQuandPlusAucunEnnemiNEstDebout
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:352`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:403`
 
 Un combat se termine par une victoire quand plus aucun ennemi n'est debout.
 
@@ -2269,7 +2220,7 @@ Un combat se termine par une victoire quand plus aucun ennemi n'est debout.
 
 ### CombatStateTest.UneDefaiteQuandTousLesAlliesSontATerre
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:388`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:439`
 
 Un combat se termine par une defaite quand tous les allies sont a terre ; si les deux camps tombent ensemble, c'est une defaite.
 
@@ -2288,7 +2239,7 @@ Un combat se termine par une defaite quand tous les allies sont a terre ; si les
 
 ### CombatStateTest.UneFuiteQuandLesAlliesQuittentLaZone
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:430`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:481`
 
 Un combat se termine par une fuite quand plus aucun allie n'est debout et que l'un d'eux est parti.
 
@@ -2306,7 +2257,7 @@ Un combat se termine par une fuite quand plus aucun allie n'est debout et que l'
 - Vérifie que `combat.withdraw(heroine)` vaut `core::WithdrawResult::NotEscapable`.
 - Vérifie que `combat.withdraw(heroine)` vaut `core::WithdrawResult::Withdrawn`.
 - Vérifie que `journal` vaut `(std::vector<std::string>{"sortie 1", "fin 1", "debut 2"})`.
-- Vérifie que `combat.grid().positionOf(heroine).has_value()` est faux.
+- Vérifie que `combat.positionOf(heroine).has_value()` est faux.
 - Vérifie que `combat.turnOrder().contains(heroine)` est faux.
 - Vérifie que `combat.withdraw(heroine)` vaut `core::WithdrawResult::NotInCombat`.
 - Vérifie que `combat.withdraw(gobelin)` vaut `core::WithdrawResult::Withdrawn`.
@@ -2316,7 +2267,7 @@ Un combat se termine par une fuite quand plus aucun allie n'est debout et que l'
 
 ### CombatStateTest.QuatreAlliesSansHerosUnique
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:479`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:529`
 
 Un combat a quatre allies se deroule sans qu'aucun ne soit traite a part.
 
@@ -2340,14 +2291,14 @@ Un combat a quatre allies se deroule sans qu'aucun ne soit traite a part.
 
 ### CombatStateTest.UnCombatACinqSeDerouleSansFenetreEtSeRejoue
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:530`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:580`
 
 Une escarmouche a cinq combattants va du premier round a une fin, et le rejeu a graine fixe est exact.
 
 **Étapes**
 
-1. Deux allies contre trois gobelins, sur une carte a pilier.
-2. Chaque combattant marche vers l'ennemi le plus proche, frappe au contact, termine son tour.
+1. Deux allies contre trois gobelins, sur une carte a pilier, dans l'espace en metres.
+2. Chaque combattant marche vers la place qui le rapproche le plus de l'ennemi le plus proche, frappe a l'allonge (1,5 m entre les bords), termine son tour.
 3. Rejouer a la meme graine, puis a une autre.
 
 **Résultat attendu**
@@ -2363,7 +2314,7 @@ Une escarmouche a cinq combattants va du premier round a une fin, et le rejeu a 
 
 ### CombatStateTest.UnRenfortEntreEnCoursDeCombat
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:565`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:616`
 
 Un renfort appele au rang 0 joue au round suivant ; un combattant qui entre apres la place en cours joue ce round-ci.
 
@@ -2371,7 +2322,7 @@ Un renfort appele au rang 0 joue au round suivant ; un combattant qui entre apre
 
 1. Heroine (tres haute initiative), repere « renforts » au rang 0, chef (tres basse).
 2. Au repere du round 1, faire entrer un gobelin a l'initiative 0.
-3. Au round 2, pendant le tour de l'heroine, faire entrer un loup d'initiative plus basse que tout, puis un combattant sur une case prise.
+3. Au round 2, pendant le tour de l'heroine, faire entrer un loup d'initiative plus basse que tout, puis un combattant a la place du loup.
 
 **Résultat attendu**
 
@@ -2389,7 +2340,7 @@ Un renfort appele au rang 0 joue au round suivant ; un combattant qui entre apre
 
 ### CombatStateTest.LesCrochetsSAnnoncentDansLOrdre
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:621`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:672`
 
 Les crochets du combat s'annoncent dans un ordre fixe, repere fixe et acteur flottant compris.
 
@@ -2415,7 +2366,7 @@ Les crochets du combat s'annoncent dans un ordre fixe, repere fixe et acteur flo
 
 ### CombatStateTest.UnCombattantATerrePasseSonTour
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:671`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:722`
 
 Les tours d'un combattant a terre sont passes ; tomber pendant son tour le termine.
 
@@ -2442,37 +2393,49 @@ Les tours d'un combattant a terre sont passes ; tomber pendant son tour le termi
 
 ### CombatStateTest.LeDeplacementPaieLeCheminEtLesCampsDisentQuiSeTraverse
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:714`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:765`
 
-Le deplacement se paie sur le budget restant ; on traverse un allie, un ennemi tres petit, jamais un ennemi de taille voisine.
+Le deplacement se paie sur le budget restant ; on traverse un allie, un ennemi a deux tailles d'ecart, en terrain difficile, sans finir dans leur espace ; jamais un ennemi de taille voisine.
 
 **Étapes**
 
-1. Couloir 7x1 : heroine (6 cases) en 0, compagnon en 1, rat tres petit ennemi en 3.
-2. Aller en 2, puis en 4.
+1. Couloir de 7 cases sur 1 (10,5 m sur 1,5 m) : heroine (8 cases, 12 m) au centre de la case 0, compagnon en 1, rat tres petit ennemi en 3.
+2. Aller en 1, en 5, en 2, puis en 4.
 3. Meme couloir avec un gobelin de taille M a la place du rat.
 
 **Résultat attendu**
 
-- Vérifie que `combat->move({2, 0}).result` vaut `core::MoveResult::NoActiveTurn`.
+- Vérifie que `combat->move(tile(2, 0)).result` vaut `core::MoveResult::NoActiveTurn`.
 - Vérifie que `combat->start(des)` est vrai.
-- Vérifie que `combat->reachableArea()->destinations()` vaut `(std::vector<core::GridPosition>{{2, 0}, {4, 0}})`.
-- Vérifie que `combat->move({5, 0}).result` vaut `core::MoveResult::Unreachable`.
+- Vérifie que `combat->movementLeft()` vaut `12.0f`, à `CM` près.
+- Vérifie que `places.empty()` est faux.
+- Vérifie que `proche(places.front().point, tile(0, 0))` est vrai.
+- Vérifie que `finales.size()` vaut `2U`.
+- Vérifie que `proche(finales[0], tile(2, 0))` est vrai.
+- Vérifie que `proche(finales[1], tile(4, 0))` est vrai.
+- Vérifie que `combat->routeTo(tile(1, 0)).has_value()` est faux.
+- Vérifie que `combat->move(tile(1, 0)).result` vaut `core::MoveResult::Unreachable`.
+- Vérifie que `combat->move(tile(5, 0)).result` vaut `core::MoveResult::Unreachable`.
 - Vérifie que `premier.result` vaut `core::MoveResult::Moved`.
-- Vérifie que `premier.path.cost` vaut `3`.
-- Vérifie que `premier.path.steps` vaut `(std::vector<core::GridPosition>{{1, 0}, {2, 0}})`.
-- Vérifie que `combat->economy(CombatantId{1})->remaining(core::MOVEMENT_RESOURCE)` vaut `3`.
+- Vérifie que `premier.path.length` vaut `6.0f`, à `CM` près.
+- Vérifie que `premier.path.points.empty()` est faux.
+- Vérifie que `proche(premier.path.points.back(), tile(2, 0))` est vrai.
+- Vérifie que `combat->economy(CombatantId{1})->remaining(core::MOVEMENT_RESOURCE)` vaut `4`.
+- Vérifie que `combat->movementLeft()` vaut `6.0f`, à `CM` près.
 - Vérifie que `second.result` vaut `core::MoveResult::Moved`.
-- Vérifie que `second.path.cost` vaut `3`.
-- Vérifie que `combat->grid().positionOf(CombatantId{1})` vaut `(core::GridPosition{4, 0})`.
+- Vérifie que `second.path.length` vaut `6.0f`, à `CM` près.
+- Vérifie que `proche(*combat->positionOf(CombatantId{1}), tile(4, 0))` est vrai.
 - Vérifie que `combat->economy(CombatantId{1})->remaining(core::MOVEMENT_RESOURCE)` vaut `0`.
-- Vérifie que `combat->reachableArea()->destinations().empty()` est vrai.
+- Vérifie que `combat->movementLeft()` vaut `0.0f`, à `CM` près.
+- Vérifie que `fins(combat->destinations()).empty()` est vrai.
 - Vérifie que `combat->start(des)` est vrai.
-- Vérifie que `combat->reachableArea()->destinations()` vaut `(std::vector<core::GridPosition>{{2, 0}})`.
+- Vérifie que `finales.size()` vaut `1U`.
+- Vérifie que `proche(finales[0], tile(2, 0))` est vrai.
+- Vérifie que `combat->routeFor(CombatantId{1}, tile(4, 0), -1.0f).has_value()` est faux.
 
 ### CombatStateTest.LeMontageDUneRencontrePlaceEtRefuseEnLeDisant
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:771`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:840`
 
 Le montage pose le groupe puis les creatures de la rencontre, et nomme chaque refus avec sa raison.
 
@@ -2495,7 +2458,8 @@ Le montage pose le groupe puis les creatures de la rencontre, et nomme chaque re
 - Vérifie que `montage.refusals[2].placement` vaut `core::PlacementResult::Occupied`.
 - Vérifie que `combat.find(CombatantId{1})->profile.initiativeModifier` vaut `3`.
 - Vérifie que `combat.find(CombatantId{1})->profile.movement` vaut `6`.
-- Vérifie que `combat.grid().positionOf(CombatantId{2})` vaut `(core::GridPosition{5, 3})`.
+- Vérifie que `combat.positionOf(CombatantId{2}).has_value()` est vrai.
+- Vérifie que `proche(*combat.positionOf(CombatantId{2}), tile(5, 3))` est vrai.
 - Vérifie que `combat.find(CombatantId{3})->profile.locomotion` vaut `core::Locomotion::Fly`.
 - Vérifie que `combat.find(CombatantId{3})->profile.movement` vaut `6`.
 - Vérifie que `combat.escapable()` est faux.
@@ -2503,6 +2467,402 @@ Le montage pose le groupe puis les creatures de la rencontre, et nomme chaque re
 - Vérifie que `combat.withdraw(CombatantId{1})` vaut `core::WithdrawResult::NotEscapable`.
 - Vérifie que `combat.outcome()` vaut `core::CombatOutcome::Victory`.
 - Vérifie que `drapeaux.isSet("carte/embuscade/3/3")` est vrai.
+
+### CombatStateTest.LeBudgetSeDeduitDeLaVitesse
+
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1002`
+
+Le budget de deplacement vaut la vitesse divisee par 1,5, arrondie en dessous.
+
+**Étapes**
+
+1. Convertir 9 m, 7,5 m, 10 m, 0 m et -3 m.
+2. Lire le budget d'une fiche a 9 m.
+3. Lire le budget de marche et de vol d'une creature qui ne vole pas, puis d'une qui vole.
+
+**Résultat attendu**
+
+- Vérifie que `core::movementBudget(9.0F)` vaut `6`.
+- Vérifie que `core::movementBudget(7.5F)` vaut `5`.
+- Vérifie que `core::movementBudget(10.0F)` vaut `6`.
+- Vérifie que `core::movementBudget(13.5F - 4.5F)` vaut `6`.
+- Vérifie que `core::movementBudget(0.0F)` vaut `0`.
+- Vérifie que `core::movementBudget(-3.0F)` vaut `0`.
+- Vérifie que `core::movementBudget(fiche)` vaut `6`.
+- Vérifie que `core::movementBudget(loup, core::Locomotion::Walk)` vaut `8`.
+- Vérifie que `core::movementBudget(loup, core::Locomotion::Fly)` vaut `0`.
+- Vérifie que `core::movementBudget(chouette, core::Locomotion::Fly)` vaut `12`.
+
+### CombatStateTest.LesPlacesAtteignablesSontCellesDuBudget
+
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1036`
+
+Sur un sol libre, une place est atteignable si et seulement si sa distance tient dans le budget, diagonale comprise : la diagonale n'est plus une case.
+
+**Étapes**
+
+1. Salle ouverte de 11 x 11 cases, heros au centre de la case (5,5).
+2. Pour un budget de 0 a 4 cases (0 a 6 m), lire les places de fin et les chemins vers les centres des cases sur la ligne et sur la diagonale.
+
+**Résultat attendu**
+
+- Vérifie que `places.empty()` est faux.
+- Vérifie que `proche(places.front().point, centre)` est vrai.
+- Vérifie que `places[i].route.length` est inférieur ou égal à `metres + CM`.
+- Vérifie que `core::groundDistance(centre, places[i].point)` est inférieur ou égal à `metres + CM`.
+- Vérifie que `combat.canStandAt(heros, places[i].point)` est vrai.
+- Vérifie que `parmi(finales, ligne)` vaut `k <= budget`.
+- Vérifie que `droit.has_value()` vaut `k <= budget`.
+- Vérifie que `droit->length` vaut `1.5f * static_cast<float>(k)`, à `CM` près.
+- Vérifie que `diagonale.has_value()` vaut `longueur <= metres`.
+- Vérifie que `diagonale->length` vaut `longueur`, à `CM` près.
+
+### CombatStateTest.UnMurCouteLeDetour
+
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1088`
+
+Un mur entre deux places voisines coute le detour.
+
+**Étapes**
+
+1. Carte de 7 x 5 cases, mur en colonne 3 des lignes 0 a 2.
+2. Heros au centre de (2,1), cible au centre de (4,1), a 3 m de l'autre cote du mur.
+
+**Résultat attendu**
+
+- Vérifie que `core::groundDistance(tile(2, 1), tile(4, 1))` vaut `3.0f`, à `CM` près.
+- Vérifie que `combat.routeFor(heros, tile(4, 1), 7.5f).has_value()` est faux.
+- Vérifie que `chemin.has_value()` est vrai.
+- Vérifie que `chemin->length` vaut `9.0f`, à `CM` près.
+- Vérifie que `chemin->points.empty()` est faux.
+- Vérifie que `proche(chemin->points.back(), tile(4, 1))` est vrai.
+- Vérifie que `combat.canStandAt(heros, pas)` est vrai.
+
+### CombatStateTest.LeTerrainDifficileDoubleLeCoutEtReduitLaPortee
+
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1120`
+
+Le terrain difficile double le cout des metres qu'on y marche, et reduit la portee.
+
+**Étapes**
+
+1. Salle ouverte de 11 x 11 cases, heros au centre de (5,5).
+2. Rendre difficile la case voisine (6,5) ; chemins vers son centre et vers (7,5), au-dela.
+3. Rendre toute la salle difficile, budget de 4 cases (6 m).
+
+**Résultat attendu**
+
+- Vérifie que `boue.has_value()` est vrai.
+- Vérifie que `boue->length` vaut `2.25f`, à `CM` près.
+- Vérifie que `combat.routeFor(heros, tile(6, 5), 1.5f).has_value()` est faux.
+- Vérifie que `auDela.has_value()` est vrai.
+- Vérifie que `auDela->length` vaut `3.0f * std::sqrt(2.0f)`, à `CM` près.
+- Vérifie que `deux.has_value()` est vrai.
+- Vérifie que `deux->length` vaut `6.0f`, à `CM` près.
+- Vérifie que `combat.routeFor(heros, tile(8, 5), 6.0f).has_value()` est faux.
+- Vérifie que `places.size()` est strictement supérieur à `1U`.
+- Vérifie que `core::groundDistance(tile(5, 5), places[i].point)` est inférieur ou égal à `3.0f + CM`.
+
+### CombatStateTest.LeDeplacementSePaieEnCasesEntamees
+
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1164`
+
+Un pas se paie en cases de 1,5 m entamees, et le reste de la case entamee sert au pas suivant du meme tour : deux pas de 0,75 m coutent une case, pas deux.
+
+**Étapes**
+
+1. Heros (6 cases) au centre de (2,2), un ennemi au loin.
+2. Faire un pas de 0,75 m, puis un second de 0,75 m, puis un de 2,25 m.
+3. Finir le tour, et celui de l'ennemi.
+
+**Résultat attendu**
+
+- Vérifie que `combat.start(des)` est vrai.
+- Vérifie que `combat.activeCombatant()` vaut `heros`.
+- Vérifie que `combat.movementLeft()` vaut `9.0f`, à `CM` près.
+- Vérifie que `issue.result` vaut `core::MoveResult::Moved`.
+- Vérifie que `issue.path.length` vaut `longueur`, à `CM` près.
+- Vérifie que `combat.economy(heros)->remaining(core::MOVEMENT_RESOURCE)` vaut `cases`.
+- Vérifie que `combat.find(heros)->movementSlack` vaut `reste`, à `CM` près.
+- Vérifie que `combat.movementLeft()` vaut `1.5f * static_cast<float>(cases) + reste`, à `CM` près.
+- Vérifie que `combat.endTurn()` est vrai.
+- Vérifie que `combat.endTurn()` est vrai.
+- Vérifie que `combat.activeCombatant()` vaut `heros`.
+- Vérifie que `combat.economy(heros)->remaining(core::MOVEMENT_RESOURCE)` vaut `6`.
+- Vérifie que `combat.find(heros)->movementSlack` vaut `0.0f`, à `CM` près.
+- Vérifie que `combat.movementLeft()` vaut `9.0f`, à `CM` près.
+
+### CombatStateTest.LeTerrainDifficileSeCreeEnCombat
+
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1208`
+
+Du terrain difficile pose en cours de combat (un seisme) compte des la question suivante.
+
+**Étapes**
+
+1. Heros au centre de (2,2), combat commence.
+2. Rendre la case (3,2) difficile.
+3. Y aller.
+
+**Résultat attendu**
+
+- Vérifie que `combat.start(des)` est vrai.
+- Vérifie que `combat.activeCombatant()` vaut `heros`.
+- Vérifie que `combat.routeTo(tile(3, 2)).has_value()` est vrai.
+- Vérifie que `combat.routeTo(tile(3, 2))->length` vaut `1.5f`, à `CM` près.
+- Vérifie que `combat.routeTo(tile(3, 2)).has_value()` est vrai.
+- Vérifie que `combat.routeTo(tile(3, 2))->length` vaut `2.25f`, à `CM` près.
+- Vérifie que `combat.move(tile(3, 2)).result` vaut `core::MoveResult::Moved`.
+- Vérifie que `combat.economy(heros)->remaining(core::MOVEMENT_RESOURCE)` vaut `4`.
+- Vérifie que `combat.movementLeft()` vaut `6.75f`, à `CM` près.
+
+### CombatStateTest.LeTerrainDifficileVientDesZonesDeLaCarte
+
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1243`
+
+Les proprietes de zone de la carte font le terrain difficile de l'espace.
+
+**Étapes**
+
+1. Construire l'espace d'une carte dont une couche porte difficultTerrain, une autre une regle inconnue, une troisieme une coquille (difficultTerrain: 1).
+2. Interroger les cases ; marcher vers chacune depuis sa voisine.
+
+**Résultat attendu**
+
+- Vérifie que `espace->isDifficult(centre.x, centre.y)` vaut `attendu.difficile`.
+- Vérifie que `boue.has_value()` est vrai.
+- Vérifie que `cercle.has_value()` est vrai.
+- Vérifie que `coquille.has_value()` est vrai.
+- Vérifie que `boue->length` vaut `2.25f`, à `CM` près.
+- Vérifie que `cercle->length` vaut `1.5f`, à `CM` près.
+- Vérifie que `coquille->length` vaut `1.5f`, à `CM` près.
+- Vérifie que `combat.placementAt(profil("Rat", CombatSide::Enemies, 2), tile(5, 0))` vaut `core::PlacementResult::Obstructed`.
+
+### CombatStateTest.UnAllieSeTraverseUnEnnemiNon
+
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1292`
+
+Un allie se traverse en terrain difficile, un ennemi de meme taille non, et aucun n'est une place de fin.
+
+**Étapes**
+
+1. Couloir de 5 cases sur 1 : heros en 0, allie en 1, ennemi en 3.
+2. Chemins vers les centres des cases 1, 2 et 4.
+3. Meme couloir, l'ennemi a la place de l'allie.
+
+**Résultat attendu**
+
+- Vérifie que `derriere.has_value()` est vrai.
+- Vérifie que `derriere->length` vaut `6.0f`, à `CM` près.
+- Vérifie que `passage->routeFor(HEROS, tile(1, 0), 9.0f).has_value()` est faux.
+- Vérifie que `passage->routeFor(HEROS, tile(4, 0), -1.0f).has_value()` est faux.
+- Vérifie que `finales.size()` vaut `1U`.
+- Vérifie que `proche(finales[0], tile(2, 0))` est vrai.
+- Vérifie que `fins(bloque->destinationsFor(HEROS, 9.0f)).empty()` est vrai.
+- Vérifie que `bloque->routeFor(HEROS, tile(2, 0), -1.0f).has_value()` est faux.
+
+### CombatStateTest.UnCheminImpossibleEstRefuse
+
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1327`
+
+Un chemin impossible est refuse.
+
+**Étapes**
+
+1. Carte de 5 x 5 cases coupee en deux par un mur plein.
+2. Demander un chemin de l'autre cote, un chemin dans le mur, un chemin pour un combattant inconnu, un chemin pour un combattant sans place.
+
+**Résultat attendu**
+
+- Vérifie que `combat.routeFor(heros, tile(4, 2), -1.0f).has_value()` est faux.
+- Vérifie que `combat.routeFor(heros, tile(2, 2), -1.0f).has_value()` est faux.
+- Vérifie que `combat.routeFor(CombatantId{9}, tile(1, 2), -1.0f).has_value()` est faux.
+- Vérifie que `combat.routeFor(absent, tile(1, 2), -1.0f).has_value()` est faux.
+- Vérifie que `places.size()` est strictement supérieur à `1U`.
+- Vérifie que `place.point.x` est inférieur ou égal à `3.0f - 0.75f + CM`.
+- Vérifie que `combat.destinationsFor(CombatantId{9}, 30.0f).empty()` est vrai.
+- Vérifie que `combat.destinationsFor(absent, 30.0f).empty()` est vrai.
+
+### CombatStateTest.UnVolantSurvoleLesObstaclesDeSol
+
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1362`
+
+Un volant survole les obstacles de sol, pas les murs.
+
+**Étapes**
+
+1. Carte de 5 x 3 cases : la case (2,1) en eau profonde, la case (2,2) en falaise, la case (1,1) en boue, la ligne 0 muree.
+2. Chemins du meme combattant au sol, puis en vol, depuis le centre de (0,1).
+
+**Résultat attendu**
+
+- Vérifie que `marche->routeFor(HEROS, tile(3, 1), 9.0f).has_value()` est faux.
+- Vérifie que `marche->routeFor(HEROS, tile(3, 2), 9.0f).has_value()` est faux.
+- Vérifie que `marche->canStandAt(HEROS, tile(2, 1))` est faux.
+- Vérifie que `boueAPied.has_value()` est vrai.
+- Vérifie que `boueAPied->length` vaut `2.25f`, à `CM` près.
+- Vérifie que `rive.has_value()` est vrai.
+- Vérifie que `rive->length` vaut `4.5f`, à `CM` près.
+- Vérifie que `boueEnVol.has_value()` est vrai.
+- Vérifie que `boueEnVol->length` vaut `1.5f`, à `CM` près.
+- Vérifie que `vol->canStandAt(HEROS, tile(2, 1))` est vrai.
+- Vérifie que `vol->routeFor(HEROS, tile(2, 2), 9.0f).has_value()` est vrai.
+- Vérifie que `combat->routeFor(HEROS, tile(1, 0), -1.0f).has_value()` est faux.
+- Vérifie que `combat->canStandAt(HEROS, tile(1, 0))` est faux.
+
+### CombatStateTest.UneGrandeCreatureNePassePasParUnPassageEtroit
+
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1417`
+
+Une creature G (3 m de diametre) ne passe pas par un passage de 1,5 m.
+
+**Étapes**
+
+1. Salle de 6 x 6 cases coupee par un mur en colonne 3, percee d'une seule case en (3,2).
+2. Chemins et places de fin d'un combattant M, puis d'un G, avec 15 m.
+
+**Résultat attendu**
+
+- Vérifie que `combat.routeFor(heros, tile(5, 2), 15.0f).has_value()` est vrai.
+- Vérifie que `combat.routeFor(ours, tile(4, 1, core::CreatureSize::Large), 15.0f).has_value()` est faux.
+- Vérifie que `places.size()` est strictement supérieur à `1U`.
+- Vérifie que `place.point.x + core::creatureRadius(core::CreatureSize::Large)` est inférieur ou égal à `4.5f + CM`.
+- Vérifie que `combat.canStandAt(ours, place.point)` est vrai.
+
+### CombatStateTest.LesObstaclesSontCeuxDeLaCollision
+
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1452`
+
+Les obstacles de l'espace sont ceux de la couche collision.
+
+**Étapes**
+
+1. Un espace lu d'une collision portant un mur, de l'eau peu profonde, de l'eau profonde et une falaise.
+2. Demander un placement au centre de chaque case, au sol puis en vol, et hors de la carte.
+
+**Résultat attendu**
+
+- Vérifie que `place(marcheur, 0)` vaut `core::PlacementResult::Obstructed`.
+- Vérifie que `place(volant, 0)` vaut `core::PlacementResult::Obstructed`.
+- Vérifie que `place(marcheur, 1)` vaut `core::PlacementResult::Placed`.
+- Vérifie que `place(marcheur, 2)` vaut `core::PlacementResult::Obstructed`.
+- Vérifie que `place(volant, 2)` vaut `core::PlacementResult::Placed`.
+- Vérifie que `place(marcheur, 3)` vaut `core::PlacementResult::Obstructed`.
+- Vérifie que `place(volant, 3)` vaut `core::PlacementResult::Placed`.
+- Vérifie que `place(marcheur, 4)` vaut `core::PlacementResult::Placed`.
+- Vérifie que `place(marcheur, 5)` vaut `core::PlacementResult::Obstructed`.
+- Vérifie que `place(volant, -1)` vaut `core::PlacementResult::Obstructed`.
+
+### CombatStateTest.UnPlacementImpossibleEstRefuseAvecSaRaison
+
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1493`
+
+Un placement impossible est refuse avec sa raison, et la place d'un combattant sorti se reprend.
+
+**Étapes**
+
+1. Carte de 8 x 8 cases, mur en (1,1) : enroler hors de la carte, dans le mur, un G a cheval sur le bord.
+2. Poser le heros en (3,3), puis tenter un rat sur sa place, a 0,75 m de lui, et un G dont l'emprise le couvre ; poser le rat au contact.
+3. Pendant son tour, le heros tente d'aller sur le rat ; il sort ; un renfort entre a sa place.
+
+**Résultat attendu**
+
+- Vérifie que `combat.enlist(profil("Heros", CombatSide::Allies, 10), tile(8, 0)).placement` vaut `core::PlacementResult::Obstructed`.
+- Vérifie que `combat.enlist(profil("Heros", CombatSide::Allies, 10), tile(1, 1)).placement` vaut `core::PlacementResult::Obstructed`.
+- Vérifie que `combat.enlist(grand, tile(7, 7, core::CreatureSize::Large)).placement` vaut `core::PlacementResult::Obstructed`.
+- Vérifie que `combat.combatants().empty()` est vrai.
+- Vérifie que `heros` vaut `CombatantId{1}`.
+- Vérifie que `combat.enlist(rat, tile(3, 3)).placement` vaut `core::PlacementResult::Occupied`.
+- Vérifie que `combat.enlist(rat, Meters3{tile(3, 3).x + 0.75f, tile(3, 3).y, 0.0f}).placement` vaut `core::PlacementResult::Occupied`.
+- Vérifie que `combat.enlist(grand, tile(2, 2, core::CreatureSize::Large)).placement` vaut `core::PlacementResult::Occupied`.
+- Vérifie que `leRat` vaut `CombatantId{2}`.
+- Vérifie que `combat.occupantAt(tile(3, 3))` vaut `heros`.
+- Vérifie que `combat.occupantAt(tile(4, 3))` vaut `leRat`.
+- Vérifie que `combat.occupantAt(tile(5, 5)).has_value()` est faux.
+- Vérifie que `combat.start(des)` est vrai.
+- Vérifie que `combat.activeCombatant()` vaut `heros`.
+- Vérifie que `combat.move(tile(4, 3)).result` vaut `core::MoveResult::Unreachable`.
+- Vérifie que `proche(*combat.positionOf(heros), tile(3, 3))` est vrai.
+- Vérifie que `combat.withdraw(heros)` vaut `core::WithdrawResult::Withdrawn`.
+- Vérifie que `combat.occupantAt(tile(3, 3)).has_value()` est faux.
+- Vérifie que `renfort.placement` vaut `core::PlacementResult::Placed`.
+- Vérifie que `renfort.combatant` vaut `CombatantId{4}`.
+
+### CombatStateTest.UneGrandeCreatureOccupeToutSonEmprise
+
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1554`
+
+Une creature G couvre ses quatre cases et avance en recouvrant sa propre place.
+
+**Étapes**
+
+1. Poser une creature G sur les cases (1,1) a (2,2).
+2. A son tour, la deplacer d'une case vers la droite.
+
+**Résultat attendu**
+
+- Vérifie que `core::footprintSide(core::CreatureSize::Tiny)` vaut `1`.
+- Vérifie que `core::footprintSide(core::CreatureSize::Large)` vaut `2`.
+- Vérifie que `core::footprintSide(core::CreatureSize::Gargantuan)` vaut `4`.
+- Vérifie que `combat.occupantAt(centre)` vaut `ours`.
+- Vérifie que `combat.occupantAt(tile(3, 1)).has_value()` est faux.
+- Vérifie que `combat.start(des)` est vrai.
+- Vérifie que `combat.activeCombatant()` vaut `ours`.
+- Vérifie que `pas.result` vaut `core::MoveResult::Moved`.
+- Vérifie que `pas.path.length` vaut `1.5f`, à `CM` près.
+- Vérifie que `combat.occupantAt(tile(1, 1)).has_value()` est faux.
+- Vérifie que `combat.occupantAt(tile(3, 2))` vaut `ours`.
+
+### CombatStateTest.MemeEntreeMemeChemin
+
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1591`
+
+Le chemin est deterministe, et la place de fin annoncee porte le chemin que le deplacement suivra.
+
+**Étapes**
+
+1. Carte accidentee (mur en L, boue), heros au centre de (1,3).
+2. Monter cinquante fois le meme combat et demander le chemin vers (7,2) et les places de fin a 18 m.
+3. Pour chaque place de fin, redemander son chemin ; puis, le combat commence, aller a l'une d'elles.
+
+**Résultat attendu**
+
+- Vérifie que `chemin.has_value()` est vrai.
+- Vérifie que `places.size()` est strictement supérieur à `10U`.
+- Vérifie que `autre.has_value()` est vrai.
+- Vérifie que `autre->points` vaut `chemin->points`.
+- Vérifie que `autre->length` vaut `chemin->length`.
+- Vérifie que `autres.size()` vaut `places.size()`.
+- Vérifie que `autres[i].point` vaut `places[i].point`.
+- Vérifie que `redemande.has_value()` est vrai.
+- Vérifie que `redemande->points` vaut `places[i].route.points`.
+- Vérifie que `redemande->length` vaut `places[i].route.length`, à `1e-4f` près.
+- Vérifie que `places[i].route.length` est inférieur ou égal à `18.0f + CM`.
+- Vérifie que `reference->start(des)` est vrai.
+- Vérifie que `reference->activeCombatant()` vaut `HEROS`.
+- Vérifie que `duTour.size()` est strictement supérieur à `1U`.
+- Vérifie que `pas.result` vaut `core::MoveResult::Moved`.
+- Vérifie que `pas.path.points` vaut `visee.route.points`.
+- Vérifie que `pas.path.length` vaut `visee.route.length`, à `1e-4f` près.
+
+### CombatStateTest.SurDesCartesAleatoiresLeCheminAnnonceSAccorde
+
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_combat_state.cpp:1646`
+
+Sur douze cartes aleatoires a graine fixe, la place de fin et le chemin demande vers elle s'accordent.
+
+**Étapes**
+
+1. Tirer douze cartes de 12 x 9 cases (graine fixe) : murs, eau profonde, boue, un allie a traverser ; une carte sur trois en vol.
+2. Pour chaque place de fin a 21 m, comparer son chemin au chemin demande.
+
+**Résultat attendu**
+
+- Vérifie que `demande.has_value()` est vrai.
+- Vérifie que `demande->points` vaut `places[i].route.points`.
+- Vérifie que `demande->length` vaut `places[i].route.length`, à `1e-4f` près.
+- Vérifie que `demande->length` est inférieur ou égal à `21.0f + CM`.
+- Vérifie que `comparaisons` est strictement supérieur à `600`.
 
 ## test_damage.cpp
 
@@ -2672,7 +3032,7 @@ Des degats qui touchent plusieurs cibles sont lances une fois pour toutes, et un
 
 *Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_damage.cpp:358`
 
-Une structure de la grille traverse le pipeline avec ses resistances et quitte la grille detruite ; les affinites d'une creature se lisent de son bloc.
+Une structure traverse le pipeline avec ses resistances et se dit detruite a 0 PV, et l'espace la retire ; les affinites d'une creature se lisent de son bloc.
 
 **Étapes**
 
@@ -2682,12 +3042,16 @@ Une structure de la grille traverse le pipeline avec ses resistances et quitte l
 
 **Résultat attendu**
 
-- Vérifie que `grille.placeObject(ou, porte)` vaut `core::PlacementResult::Placed`.
-- Vérifie que `pipeline.applyToStructure(grille, ou, poison).hitPointsAfter` vaut `10`.
-- Vérifie que `pipeline.applyToStructure(grille, ou, fleches).hitPointsAfter` vaut `3`.
-- Vérifie que `grille.objectAt(ou)` diffère de `nullptr`.
-- Vérifie que `pipeline.applyToStructure(grille, ou, fin).overflow` vaut `0`.
-- Vérifie que `grille.objectAt(ou)` vaut `nullptr`.
+- Vérifie que `pipeline.applyToStructure(porte, poison).hitPointsAfter` vaut `10`.
+- Vérifie que `perce.hitPointsAfter` vaut `3`.
+- Vérifie que `perce.work.structure` vaut `std::optional<std::string>("porte")`.
+- Vérifie que `porte.destroyed()` est faux.
+- Vérifie que `pipeline.applyToStructure(porte, fin).overflow` vaut `0`.
+- Vérifie que `porte.destroyed()` est vrai.
+- Vérifie que `espace.isClear(derriere, core::Locomotion::Walk)` est faux.
+- Vérifie que `espace.removeBox(0)` est vrai.
+- Vérifie que `espace.isClear(derriere, core::Locomotion::Walk)` est vrai.
+- Vérifie que `espace.isClear(devant, core::Locomotion::Walk)` est vrai.
 - Vérifie que `traits.affinities.size()` vaut `3U`.
 - Vérifie que `traits.affinities[0].kind` vaut `DamageAffinityKind::Immunity`.
 - Vérifie que `traits.applies(DamageAffinityKind::Vulnerability, DamageType::Fire, 0)` est vrai.
@@ -2697,7 +3061,7 @@ Une structure de la grille traverse le pipeline avec ses resistances et quitte l
 
 ### DeathAndDyingTest.TroisEchecsTuent
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:148`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:145`
 
 Exigences : `EX-CBT-040`
 
@@ -2730,7 +3094,7 @@ Un allie tombe a 0 PV : il agonise ; deux echecs et un succes ne le tuent pas, l
 
 ### DeathAndDyingTest.UnVingtReleveUnUnCompteDouble
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:189`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:186`
 
 Exigences : `EX-CBT-040`, `EX-CBT-041`
 
@@ -2765,7 +3129,7 @@ Les d20 extremes du Manuel : 20 rend 1 PV, 1 compte deux echecs, meme quand la b
 
 ### DeathAndDyingTest.LesDegatsATerreEtLaMortInstantanee
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:233`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:230`
 
 Exigences : `EX-CBT-040`
 
@@ -2787,7 +3151,7 @@ Degats a 0 point de vie et mort instantanee, Manuel p. 199 : un coup a terre cou
 
 ### DeathAndDyingTest.UnMonstreMeurtEtLaMarqueProtege
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:271`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:268`
 
 Les monstres et la mort (Manuel p. 199) ; et la Marque Heroique des Arenes : sans mort, on tombe sans agoniser, meme sous des degats massifs.
 
@@ -2807,7 +3171,7 @@ Les monstres et la mort (Manuel p. 199) ; et la Marque Heroique des Arenes : san
 
 ### DeathAndDyingTest.LeJetSeFaitASaPlaceEtUnVingtRejoue
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:304`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:301`
 
 Exigences : `EX-CBT-040`
 
@@ -2830,7 +3194,7 @@ Exigences : `EX-CBT-040`
 
 ### DeathAndDyingTest.ReviveNeRameneQueLesMorts
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:340`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:337`
 
 Seul un mort revient : revive refuse un vivant, et le revenant se releve avec ses points de vie, compteur vide.
 
@@ -2853,7 +3217,7 @@ Seul un mort revient : revive refuse un vivant, et le revenant se releve avec se
 
 ### DeathAndDyingTest.UnAllieATerreSeReleveParSoinEtRejoue
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:367`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:364`
 
 Exigences : `EX-CBT-041`
 
@@ -2883,7 +3247,7 @@ Critere du LOT-137 : Bran tombe, inconscient et a terre ; la Priest le soigne au
 
 ### DeathAndDyingTest.LeJetContreLaMortSeJetteDansLArene
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:407`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:404`
 
 Exigences : `EX-CBT-040`
 
@@ -2906,7 +3270,7 @@ Dans une session, qui tient les des jette le d20 de Bran a sa place et l'ecrit :
 
 ### DeathAndDyingTest.EpargnerLesMourantsStabilise
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:434`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:431`
 
 La Priest de niveau 5 lance epargner les mourants sur Bran a terre : il est stabilise, et son tour passe sans jet.
 
@@ -2931,7 +3295,7 @@ La Priest de niveau 5 lance epargner les mourants sur Bran a terre : il est stab
 
 ### DeathAndDyingTest.RevigorerRameneUnMortDeMoinsDUneMinute
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:464`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:461`
 
 Bran meurt sous des degats massifs ; soin des blessures ne le ramene pas, revigorer si : 1 PV. Mort de nouveau, onze rounds plus tard, revigorer refuse.
 
@@ -2960,7 +3324,7 @@ Bran meurt sous des degats massifs ; soin des blessures ne le ramene pas, revigo
 
 ### DeathAndDyingTest.FrapperUnInconscientAuContactEstCritique
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:508`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:505`
 
 Exigences : `EX-CBT-040`
 
@@ -2987,7 +3351,7 @@ Manuel, annexe A : Bran, stabilise a terre, est attaque par le gobelin a son con
 
 ### DeathAndDyingTest.DesDegatsRompentLaConcentration
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:541`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:538`
 
 La Priest benie et concentree prend 100 degats : DD 50, la sauvegarde de Constitution echoue, la benediction prend fin.
 
@@ -3010,11 +3374,11 @@ La Priest benie et concentree prend 100 degats : DD 50, la sauvegarde de Constit
 
 ### DeathAndDyingTest.LIaAcheveOuEpargneSelonSonProfil
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:572`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_death_and_dying.cpp:569`
 
 Exigences : `EX-CBT-050`
 
-Critere du LOT-137 et du LOT-139 : un gobelin au contact de Bran, a terre. Aldric, debout, est a trois cases : un profil qui n'acheve pas va frapper Aldric ; un profil qui acheve frappe Bran. Aldric revenu au contact, meme le profil qui acheve frappe Aldric. Les profils livres disent qui acheve.
+Critere du LOT-137 et du LOT-139 : un gobelin au contact de Bran, a terre. Aldric, debout, est a trois cases (3 m entre les bords) : un profil qui n'acheve pas va frapper Aldric ; un profil qui acheve frappe Bran. Aldric revenu au contact, meme le profil qui acheve frappe Aldric. Les profils livres disent qui acheve.
 
 **Étapes**
 
@@ -3331,42 +3695,44 @@ Les bandits de l'Arena of Fate sont une rencontre difficile pour le groupe de de
 
 ## test_enemy_ai.cpp
 
-### FlankingTest.LaLigneDesCentresTranche
+### FlankingTest.LAngleAuCentreTranche
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:107`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:121`
 
-Deux allies prennent un ennemi en tenaille si la ligne entre leurs centres passe par deux cotes ou deux angles opposes de son emplacement, s'ils lui sont adjacents, debout, et le voient.
+Deux allies prennent un ennemi en tenaille si leurs centres forment au centre de la cible un angle d'au moins 135 degres, s'ils sont a une case de lui (ecart entre les bords d'au plus 1,5 m), debout, et le voient.
 
 **Étapes**
 
-1. Un ennemi en (5,5) ; tester la geometrie de cotes opposes, d'angles opposes, d'une position en L et de deux cases du meme cote.
-2. Un ennemi de taille G en (5,5)-(6,6).
-3. Dans un combat : l'allie a terre, puis un mur entre l'allie et l'ennemi.
+1. Un ennemi au centre de la case (5,5) ; tester, aux centres des cases voisines, des cotes opposes, des angles opposes, un cote et l'angle oppose, une position en L et deux cases du meme cote.
+2. Un ennemi de taille G sur (5,5)-(6,6).
+3. Dans un combat : l'allie a terre, une autre place de l'attaquant, puis un allie a une case de l'ennemi mais derriere un mur.
 
 **Résultat attendu**
 
-- Vérifie que `core::crossesOppositeSides({4, 5}, {6, 5}, moyen)` est vrai.
-- Vérifie que `core::crossesOppositeSides({5, 4}, {5, 6}, moyen)` est vrai.
-- Vérifie que `core::crossesOppositeSides({4, 4}, {6, 6}, moyen)` est vrai.
-- Vérifie que `core::crossesOppositeSides({6, 4}, {4, 6}, moyen)` est vrai.
-- Vérifie que `core::crossesOppositeSides({4, 5}, {6, 6}, moyen)` est faux.
-- Vérifie que `core::crossesOppositeSides({4, 4}, {6, 5}, moyen)` est faux.
-- Vérifie que `core::crossesOppositeSides({4, 4}, {4, 6}, moyen)` est faux.
-- Vérifie que `core::crossesOppositeSides({4, 5}, {5, 4}, moyen)` est faux.
-- Vérifie que `core::crossesOppositeSides({4, 5}, {7, 6}, grand)` est vrai.
-- Vérifie que `core::crossesOppositeSides({4, 4}, {7, 7}, grand)` est vrai.
-- Vérifie que `core::crossesOppositeSides({4, 5}, {5, 7}, grand)` est faux.
+- Vérifie que `core::flanksByAngle(tile(4, 5), tile(6, 5), moyen)` est vrai.
+- Vérifie que `core::flanksByAngle(tile(5, 4), tile(5, 6), moyen)` est vrai.
+- Vérifie que `core::flanksByAngle(tile(4, 4), tile(6, 6), moyen)` est vrai.
+- Vérifie que `core::flanksByAngle(tile(6, 4), tile(4, 6), moyen)` est vrai.
+- Vérifie que `core::flanksByAngle(tile(4, 5), tile(6, 6), moyen)` est vrai.
+- Vérifie que `core::flanksByAngle(tile(4, 4), tile(6, 5), moyen)` est vrai.
+- Vérifie que `core::flanksByAngle(tile(4, 4), tile(4, 6), moyen)` est faux.
+- Vérifie que `core::flanksByAngle(tile(4, 5), tile(5, 4), moyen)` est faux.
+- Vérifie que `core::flanksByAngle(tile(4, 5), tile(7, 6), grand)` est vrai.
+- Vérifie que `core::flanksByAngle(tile(4, 4), tile(7, 7), grand)` est vrai.
+- Vérifie que `core::flanksByAngle(tile(4, 5), tile(5, 7), grand)` est faux.
 - Vérifie que `core::isFlanked(session.combat(), CombatantId{1}, CombatantId{3})` est vrai.
 - Vérifie que `core::isFlanked(session.combat(), CombatantId{2}, CombatantId{3})` est vrai.
-- Vérifie que `core::isFlankedFrom(session.combat(), CombatantId{1}, {4, 2}, CombatantId{3})` est faux.
+- Vérifie que `core::isFlankedFrom(session.combat(), CombatantId{1}, tile(5, 2), CombatantId{3})` est faux.
 - Vérifie que `core::isFlanked(session.combat(), CombatantId{3}, CombatantId{1})` est faux.
 - Vérifie que `core::isFlanked(session.combat(), CombatantId{1}, CombatantId{3})` est faux.
-- Vérifie que `core::crossesOppositeSides({4, 4}, {6, 2}, {.anchor = {5, 3}, .side = 1})` est vrai.
+- Vérifie que `core::flanksByAngle(tile(4, 3), tile(7, 3), tile(5, 3))` est vrai.
+- Vérifie que `core::adjacentGap(ecart(murs, CombatantId{2}, CombatantId{3}))` est vrai.
+- Vérifie que `core::hasLineOfSight(murs.combat(), CombatantId{2}, CombatantId{3})` est faux.
 - Vérifie que `core::isFlanked(murs.combat(), CombatantId{1}, CombatantId{3})` est faux.
 
 ### FlankingTest.LaTenailleDonneLAvantageDansLArene
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:161`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:187`
 
 Dans une arene a prise en tenaille, une attaque au corps a corps contre un ennemi pris en tenaille est jetee avec avantage, et le journal le dit ; ailleurs, non.
 
@@ -3385,7 +3751,7 @@ Dans une arene a prise en tenaille, une attaque au corps a corps contre un ennem
 
 ### EnemyAiTest.LeJetRequisEtLEsperanceSuiventLeGuide
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:192`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:218`
 
 Le jet requis est la CA moins le bonus d'attaque ; la chance de toucher et l'esperance de degats en decoulent, en entiers.
 
@@ -3411,7 +3777,7 @@ Le jet requis est la CA moins le bonus d'attaque ; la chance de toucher et l'esp
 
 ### EnemyAiTest.LesProfilsSontDesDonnees
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:226`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:252`
 
 Les profils de comportement livres se chargent sans erreur, ne tolerent jamais trois menaces, et s'attribuent aux creatures par leurs regles.
 
@@ -3438,7 +3804,7 @@ Les profils de comportement livres se chargent sans erreur, ne tolerent jamais t
 
 ### EnemyAiTest.LIaNeLitQueLEtatEnsanglante
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:283`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:309`
 
 Exigences : `EX-CBT-050`
 
@@ -3463,13 +3829,13 @@ Les points de vie d'un adversaire restent secrets : deux cibles qui ne different
 
 ### EnemyAiTest.PasDeSuicideQuandUneCaseSureExiste
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:323`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:349`
 
-Aucun profil ne finit son tour a portee immediate de trois ennemis quand une case moins exposee etait atteignable.
+Aucun profil ne finit son tour a portee immediate de trois ennemis quand une place moins exposee etait atteignable.
 
 **Étapes**
 
-1. Trois heros inoffensifs en (6,2), (6,4) et (7,3), le dernier ensanglante ; la case (6,3) les touche tous, et c'est la seule d'ou le gobelin prend le heros ensanglante en tenaille avec son complice en (8,3) : la plus rentable, et la seule dangereuse. D'autres cases frappent au plus deux heros.
+1. Trois heros inoffensifs aux centres des cases (6,2), (6,4) et (7,3), le dernier ensanglante ; le centre de (6,3) les touche tous, et les places d'ou le gobelin prend le heros ensanglante en tenaille avec son complice en (8,3) -- les plus rentables -- sont a une case des trois. D'autres places frappent au plus deux heros.
 2. Pour chaque profil livre, jouer le tour du gobelin.
 
 **Résultat attendu**
@@ -3478,11 +3844,11 @@ Aucun profil ne finit son tour a portee immediate de trois ennemis quand une cas
 - Vérifie que `session.combat().activeCombatant()` vaut `CombatantId{4}`.
 - Vérifie que `core::playTurn(session, profils)` est vrai.
 - Vérifie que `aPortee` est inférieur ou égal à `2`.
-- Vérifie que `fin` diffère de `(GridPosition{6, 3})`.
+- Vérifie que `core::groundDistance(fin, tile(6, 3))` est strictement supérieur à `0.01f`.
 
 ### EnemyAiTest.UnTireurNeComptePasDansLAntiSuicide
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:369`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:397`
 
 Deux archers allies qui couvrent toute la salle n'empechent pas un prudent d'aller frapper le heros au contact.
 
@@ -3501,34 +3867,34 @@ Deux archers allies qui couvrent toute la salle n'empechent pas un prudent d'all
 
 ### EnemyAiTest.SansAttaquePossibleChaqueProfilAvance
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:401`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:430`
 
 Dans une salle aux dimensions de l'arene, un ennemi de chaque profil qui ne peut pas encore frapper se rapproche a chaque tour, jusqu'a attaquer.
 
 **Étapes**
 
-1. Salle 20x14, heros en (3,6) (+4, 1d8+2), ennemi de contact en (16,6) a treize cases, pour chacun des profils livres.
+1. Salle 20x14, heros en (3,6) (+4, 1d8+2), ennemi de contact en (16,6) : treize cases entre les centres, 18 m entre les bords. Pour chacun des profils livres.
 2. Le heros passe son tour ; jouer l'ennemi par l'IA, jusqu'a six tours.
 
 **Résultat attendu**
 
 - Vérifie que `session.start()` est vrai.
-- Vérifie que `distance` vaut `13`.
+- Vérifie que `distance` vaut `18.0f`, à `0.01f` près.
 - Vérifie que `session.endTurn()` est vrai.
 - Vérifie que `core::playTurn(session, profils)` est vrai.
-- Vérifie que `apres` est strictement inférieur à `distance`.
+- Vérifie que `apres` est strictement inférieur à `distance - 0.01f`.
 - Vérifie que `aAttaque()` est vrai.
-- Vérifie que `toursEnnemi` est inférieur ou égal à `3`.
+- Vérifie que `toursEnnemi` est inférieur ou égal à `4`.
 
 ### EnemyAiTest.LeRepliVaALaCaseSureLaPlusProche
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:458`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:494`
 
-Une archere prudente tire puis recule juste hors de portee du heros, vers la case la plus proche de lui.
+Une archere prudente tire puis recule juste hors de portee du heros, vers la place la plus proche de lui.
 
 **Étapes**
 
-1. Salle 20x8, heros de contact en (16,3), archere prudente en (10,3) a sept cases de portee : le heros atteint en un tour toute case de la colonne 9 et au-dela, et elle ne peut tirer que de la.
+1. Salle 20x8, heros de contact en (16,3) (6 cases : 9 m), archere prudente en (10,3) a 7 cases de portee (10,5 m entre les bords) : le heros atteint en un tour toute place a moins de 12 m de son centre, et elle tire de la ou elle est.
 2. Jouer le tour de l'archere.
 
 **Résultat attendu**
@@ -3538,61 +3904,64 @@ Une archere prudente tire puis recule juste hors de portee du heros, vers la cas
 - Vérifie que `core::playTurn(session, profils)` est vrai.
 - Vérifie que `std::ranges::any_of( journal, [](const std::string& l) { return l.starts_with("attaque Archere -> Heros"); })` est vrai.
 - Vérifie que `std::ranges::any_of( journal, [](const std::string& l) { return l.find(": recule en") != std::string::npos; })` est vrai.
-- Vérifie que `fin.column` vaut `8`.
-- Vérifie que `fin.row` vaut `1`.
+- Vérifie que `core::adjacentGap( core::edgeDistance(core::volumeOf(d.point, core::CreatureSize::Medium), elle))` est faux.
+- Vérifie que `auHeros` est strictement supérieur à `12.0f`.
+- Vérifie que `auHeros` est strictement inférieur à `13.5f`.
 
 ### EnemyAiTest.LArchereChercheLaVue
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:499`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:545`
 
-Une IA archere cachee de sa cible par un pilier se deplace jusqu'a une case qui la voit et tire ; elle n'essaie jamais un tir que la ligne de vue refuse.
+Une IA archere cachee de sa cible par un pan de mur se deplace jusqu'a une place qui la voit et tire ; elle n'essaie jamais un tir que la ligne de vue refuse.
 
 **Étapes**
 
-1. Une archere en (5,3), un heros en (7,3) derriere un pilier en (6,3).
+1. Une archere en (3,3), un heros en (8,3) derriere un pan de mur en (6,2)-(6,4) ; elle ne le voit pas.
 2. Jouer son tour par l'IA.
 
 **Résultat attendu**
 
 - Vérifie que `session.start()` est vrai.
 - Vérifie que `session.combat().activeCombatant()` vaut `CombatantId{2}`.
+- Vérifie que `core::hasLineOfSight(session.combat(), CombatantId{2}, CombatantId{1})` est faux.
 - Vérifie que `plan.action` vaut `core::TurnAction::Attack`.
 - Vérifie que `plan.moveTo.has_value()` est vrai.
-- Vérifie que `core::hasLineOfSight(session.combat().grid(), {.anchor = *plan.moveTo, .side = 1}, {.anchor = {7, 3}, .side = 1})` est vrai.
+- Vérifie que `core::hasLineOfSightFrom(session.combat(), CombatantId{2}, *plan.moveTo, CombatantId{1})` est vrai.
 - Vérifie que `core::playTurn(session, profils)` est vrai.
 - Vérifie que `std::ranges::any_of( journal, [](const std::string& l) { return l.starts_with("attaque Archere -> Heros"); })` est vrai.
 
 ### EnemyAiTest.SePrecipiterEtChoisirSesOpportunites
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:533`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:580`
 
 Une IA qui ne peut attaquer se precipite vers l'ennemi le plus proche ; une IA prudente laisse passer une attaque d'opportunite dont le jet requis depasse son seuil, une agressive la prend.
 
 **Étapes**
 
-1. Un gobelin agressif a quinze cases d'un heros ; jouer son tour.
-2. Un ogre au contact d'un heros a CA 20 (+4 : jet requis 16) ; le heros s'eloigne, l'ogre prudent puis agressif.
+1. Un gobelin agressif a seize cases d'un heros ; jouer son tour.
+2. Un ogre au contact d'un heros a CA 20 (+4 : jet requis 16) ; le heros s'eloigne au centre de (2,5), hors de l'allonge, l'ogre prudent puis agressif.
 
 **Résultat attendu**
 
 - Vérifie que `session.start()` est vrai.
 - Vérifie que `core::playTurn(session, profils)` est vrai.
 - Vérifie que `std::ranges::any_of(session.journal(), [](const std::string& l) { return l.starts_with("precipitation Gobelin"); })` est vrai.
-- Vérifie que `session.combat().grid().positionOf(CombatantId{2})->column` est strictement supérieur à `7`.
+- Vérifie que `core::groundDistance(*session.combat().positionOf(CombatantId{2}), tile(1, 1))` est strictement supérieur à `core::metersFromTiles(6.0f)`.
 - Vérifie que `session.start()` est vrai.
 - Vérifie que `session.combat().activeCombatant()` vaut `CombatantId{1}`.
-- Vérifie que `session.move({2, 5}).result` vaut `core::MoveResult::Moved`.
+- Vérifie que `session.move(tile(2, 5)).result` vaut `core::MoveResult::Moved`.
+- Vérifie que `core::adjacentGap(ecart(session, CombatantId{1}, CombatantId{2}))` est faux.
 - Vérifie que `prises` vaut `std::string(profil) == "aggressive" ? 1 : 0`.
 
 ### EnemyAiTest.UnCombatIaContreIaSeTermineToujoursEtSeRejoue
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:582`
+*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_enemy_ai.cpp:631`
 
 Sur des configurations generees -- salles, piliers, compositions, profils, tireurs, tenaille ou non --, un combat joue par l'IA des deux cotes atteint son issue ; a graine fixee, deux parties donnent le meme journal.
 
 **Étapes**
 
-1. Pour trente graines, generer une salle de 10 a 16 cases sur 8 a 10 avec des piliers, deux a quatre combattants par camp, chacun avec un profil livre, un tiers de tireurs, la tenaille une fois sur deux.
+1. Pour trente graines, generer une salle de 10 a 16 cases sur 8 a 10 avec des piliers, deux a quatre combattants par camp poses aux centres de leurs cases, chacun avec un profil livre, un tiers de tireurs, la tenaille une fois sur deux.
 2. Jouer par l'IA jusqu'a l'issue, avec une garde de 600 tours.
 3. Une graine sur trois, rejouer par `replay`.
 
@@ -3606,86 +3975,6 @@ Sur des configurations generees -- salles, piliers, compositions, profils, tireu
 - Vérifie que `jouerParLIa(session, profils)` vaut `tours`.
 - Vérifie que `session.journal()` vaut `journal`.
 - Vérifie que `longest` est strictement supérieur à `0`.
-
-## test_line_of_sight.cpp
-
-### LineOfSightTest.LaVueEstSymetriqueSurDesGrillesGenerees
-
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_line_of_sight.cpp:115`
-
-A voit B si et seulement si B voit A — vérifié exhaustivement sur des grilles générées, pour chaque paire de points de grille et chaque paire d'emprises, 1 × 1 et 2 × 2.
-
-**Étapes**
-
-1. Générer 20 grilles 5 × 5 à des densités de 10 à 55 % de murs, d'eau profonde, de portes et de herses.
-2. Pour chaque paire ordonnée de points de grille : comparer les deux sens du segment.
-3. Pour chaque paire ordonnée d'emprises 1 × 1, et d'emprises 2 × 2 contre 1 × 1 : comparer les deux sens de la ligne de vue.
-4. Pour chacune : l'abri total équivaut à l'absence de ligne de vue.
-
-**Résultat attendu**
-
-- Vérifie que `core::isSightClear(grille, a, b)` vaut `core::isSightClear(grille, b, a)`.
-- Vérifie que `ab` vaut `core::hasLineOfSight(grille, b, a)`.
-- Vérifie que `core::coverFrom(grille, a, b) == Cover::Total` vaut `!ab`.
-- Vérifie que `core::coverFrom(grille, b, a) == Cover::Total` vaut `!ab`.
-- Vérifie que `segments` est strictement supérieur à `25000U`.
-- Vérifie que `vues` est strictement supérieur à `5000U`.
-- Vérifie que `cachees` est strictement supérieur à `1000U`.
-
-### LineOfSightTest.CeQuiArreteLaVue
-
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_line_of_sight.cpp:181`
-
-Un mur caché, un gouffre non ; le coin commun de deux murs ne laisse pas passer le regard ; une porte fermée cache comme un mur.
-
-**Étapes**
-
-1. Deux combattants alignés, un mur d'une case entre eux.
-2. Les mêmes, séparés par une rivière d'eau profonde.
-3. Deux combattants en diagonale, deux murs sur les deux autres cases du carré ; puis un seul mur.
-4. Une porte fermée entre deux combattants.
-
-**Résultat attendu**
-
-- Vérifie que `core::hasLineOfSight(mur, une(0, 1), une(2, 1))` est faux.
-- Vérifie que `core::coverFrom(mur, une(0, 1), une(2, 1))` vaut `Cover::Total`.
-- Vérifie que `core::hasLineOfSight(mur, une(0, 0), une(2, 0))` est vrai.
-- Vérifie que `core::hasLineOfSight(riviere, une(0, 1), une(4, 1))` est vrai.
-- Vérifie que `core::coverFrom(riviere, une(0, 1), une(4, 1))` vaut `Cover::None`.
-- Vérifie que `core::hasLineOfSight(coin, une(0, 0), une(1, 1))` est faux.
-- Vérifie que `core::hasLineOfSight(demiCoin, une(0, 0), une(1, 1))` est vrai.
-- Vérifie que `core::hasLineOfSight(porte, une(1, 0), une(1, 2))` est faux.
-
-### LineOfSightTest.LesAbrisEtCeQuiLesDonne
-
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_line_of_sight.cpp:213`
-
-Un muret et une créature interposée abritent partiellement, une herse de façon importante ; un angle de mur donne l'abri selon les lignes qu'il coupe ; les abris ne s'additionnent pas.
-
-**Étapes**
-
-1. Un tireur, une cible à trois cases, rien entre eux.
-2. Un muret, puis une herse, sur la case devant la cible.
-3. Une créature sur cette case.
-4. La cible derrière un angle de mur.
-5. La herse et une créature ensemble.
-
-**Résultat attendu**
-
-- Vérifie que `core::coverFrom(libre, une(0, 1), une(3, 1))` vaut `Cover::None`.
-- Vérifie que `core::coverFrom(muret, une(0, 1), une(3, 1))` vaut `Cover::Half`.
-- Vérifie que `core::coverFrom(herse, une(0, 1), une(3, 1))` vaut `Cover::ThreeQuarters`.
-- Vérifie que `core::coverFrom(libre, une(0, 1), une(3, 1), garde)` vaut `Cover::Half`.
-- Vérifie que `core::coverFrom(herse, une(0, 1), une(3, 1), garde)` vaut `Cover::ThreeQuarters`.
-- Vérifie que `core::coverFrom(angle, une(0, 0), une(3, 1))` vaut `Cover::Half`.
-- Vérifie que `core::coverFromPoint(angle, coin, une(3, 1))` vaut `Cover::Half`.
-- Vérifie que `core::coverFromPoint(libre, coin, une(3, 1), voisin)` vaut `Cover::Half`.
-- Vérifie que `core::coverFromPoint(angle, coin, une(3, 1), voisin)` vaut `Cover::Half`.
-- Vérifie que `core::coverFrom(angle, une(0, 0), une(3, 1), voisin)` vaut `Cover::Half`.
-- Vérifie que `core::coverBonus(Cover::None)` vaut `0`.
-- Vérifie que `core::coverBonus(Cover::Half)` vaut `2`.
-- Vérifie que `core::coverBonus(Cover::ThreeQuarters)` vaut `5`.
-- Vérifie que `core::coverBonus(Cover::Total)` vaut `0`.
 
 ## test_map_encounter.cpp
 
@@ -3908,293 +4197,59 @@ Une rencontre sans zone est refusée.
 - Vérifie que `verdicts.front().issues.front().code` vaut `DeploymentIssueCode::NoCombatZone`.
 - Vérifie que `verdicts.front().partyPlaces.empty()` est vrai.
 
-## test_pathfinding.cpp
+## test_serie_de_l_arene.cpp
 
-### PathfindingTest.LeBudgetSeDeduitDeLaVitesse
+### SerieDeLArene.LaSerieMonteEnDifficulte
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:69`
+*Critique · Integration · Serie de l'arene · Equilibrage* — `Source/Test/Unit/Core/Combat/test_serie_de_l_arene.cpp:133`
 
-Le budget de deplacement vaut la vitesse divisee par 1,5, arrondie en dessous.
-
-**Étapes**
-
-1. Convertir 9 m, 7,5 m, 10 m, 0 m et -3 m.
-2. Lire le budget d'une fiche a 9 m.
-3. Lire le budget de marche et de vol d'une creature qui ne vole pas, puis d'une qui vole.
-
-**Résultat attendu**
-
-- Vérifie que `core::movementBudget(9.0F)` vaut `6`.
-- Vérifie que `core::movementBudget(7.5F)` vaut `5`.
-- Vérifie que `core::movementBudget(10.0F)` vaut `6`.
-- Vérifie que `core::movementBudget(13.5F - 4.5F)` vaut `6`.
-- Vérifie que `core::movementBudget(0.0F)` vaut `0`.
-- Vérifie que `core::movementBudget(-3.0F)` vaut `0`.
-- Vérifie que `core::movementBudget(fiche)` vaut `6`.
-- Vérifie que `core::movementBudget(loup, core::Locomotion::Walk)` vaut `8`.
-- Vérifie que `core::movementBudget(loup, core::Locomotion::Fly)` vaut `0`.
-- Vérifie que `core::movementBudget(chouette, core::Locomotion::Fly)` vaut `12`.
-
-### PathfindingTest.LesCasesAtteignablesCorrespondentExactementAuBudget
-
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:103`
-
-Les cases atteignables correspondent exactement au budget.
+Les six rencontres de la serie sont difficiles, les deux dernieres mortelles, et leur budget croit jusqu'au niveau 5.
 
 **Étapes**
 
-1. Grille ouverte 11x11, heros au centre.
-2. Calculer l'aire atteignable pour les budgets 0 a 5.
-3. Comparer chaque case a sa distance de Tchebychev.
+1. Charger les rencontres, le bestiaire et les regles de difficulte livres.
+2. Juger chaque rencontre de la serie pour quatre heros de son niveau.
 
 **Résultat attendu**
 
-- Vérifie que `aire.origin()` vaut `centre`.
-- Vérifie que `aire.destinations().size()` vaut `attendu`.
-- Vérifie que `aire.canEndAt(case_)` vaut `distance >= 1 && distance <= budget`.
-- Vérifie que `aire.costTo(case_)` vaut `distance`.
-- Vérifie que `aire.costTo(case_).has_value()` est faux.
+- Vérifie que `rencontre` diffère de `nullptr`.
+- Vérifie que `budget.unknownCreatures.empty()` est vrai.
+- Vérifie que `budget.category == "difficile" || budget.category == "mortelle"` est vrai.
+- Vérifie que `budget.adjustedExperience` est strictement supérieur à `precedent`.
+- Vérifie que `budget.category` vaut `"mortelle"`.
 
-### PathfindingTest.UnMurCouteLeDetour
+### SerieDeLArene.ChaqueRencontreSeGagneDansSaBande
 
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:140`
+*Critique · Integration · Serie de l'arene · Equilibrage* — `Source/Test/Unit/Core/Combat/test_serie_de_l_arene.cpp:172`
 
-Un mur entre deux cases voisines coute le detour.
+Chaque rencontre de la serie se gagne dans sa bande de victoires.
 
 **Étapes**
 
-1. Grille 7x5, mur vertical en colonne 3 des lignes 0 a 2.
-2. Heros en (2,1), cible en (4,1), a deux cases de l'autre cote du mur.
+1. Le sable ; le groupe de « Nouvelle partie » monte au niveau de chaque rencontre.
+2. Trente combats par rencontre en Release (un en Debug), les deux camps par l'IA.
 
 **Résultat attendu**
 
-- Vérifie que `grille.place(HEROS, {2, 1})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `courte.canEndAt({4, 1})` est faux.
-- Vérifie que `longue.canEndAt({4, 1})` est vrai.
-- Vérifie que `longue.costTo({4, 1})` vaut `6`.
-- Vérifie que `chemin.has_value()` est vrai.
-- Vérifie que `chemin->cost` vaut `6`.
-- Vérifie que `chemin->steps.size()` vaut `6U`.
-- Vérifie que `chemin->steps.back()` vaut `(core::GridPosition{4, 1})`.
+- Vérifie que `carte.ok()` est vrai.
+- Vérifie que `gagnes` est supérieur ou égal à `bas`.
+- Vérifie que `gagnes` est inférieur ou égal à `haut`.
 
-### PathfindingTest.UneDiagonaleNeCoupePasLeCoinDUnMur
+### SerieDeLArene.MesureCompleteParComposition
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:172`
+*Critique · Integration · Serie de l'arene · Equilibrage* — `Source/Test/Unit/Core/Combat/test_serie_de_l_arene.cpp:220`
 
-Une diagonale ne coupe pas le coin d'un mur.
+Sur la serie, l'ecart de victoires entre les quatre trios reste sous vingt points.
 
 **Étapes**
 
-1. Grille 3x3, mur en (1,0).
-2. Heros en (0,0), cible (1,1) en diagonale.
-3. Meme chose avec de l'eau profonde a la place du mur.
+1. Poser `JADG_SIMULATION_SEEDS` (cent) et `JADG_SIMULATION_OUT`.
+2. Jouer chaque rencontre par le groupe et par chaque trio.
 
 **Résultat attendu**
 
-- Vérifie que `grilleMur.place(HEROS, {0, 0})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `core::ReachableArea(grilleMur, {.combatant = HEROS}, 3).costTo({1, 1})` vaut `2`.
-- Vérifie que `grilleMare.place(HEROS, {0, 0})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `core::ReachableArea(grilleMare, {.combatant = HEROS}, 3).costTo({1, 1})` vaut `1`.
-
-### PathfindingTest.LeTerrainDifficileDoubleLeCoutEtReduitLaPortee
-
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:197`
-
-Le terrain difficile double le cout et reduit la portee.
-
-**Étapes**
-
-1. Grille ouverte 11x11, heros au centre, budget 4.
-2. Rendre difficile une case voisine, puis toute la grille.
-3. Recalculer l'aire avec un budget de 1 contre une case difficile.
-
-**Résultat attendu**
-
-- Vérifie que `uneCase.costTo(voisine)` vaut `2`.
-- Vérifie que `uneCase.costTo({7, 5})` vaut `2`.
-- Vérifie que `core::ReachableArea(grille, {.combatant = HEROS}, 1).canEndAt(voisine)` est faux.
-- Vérifie que `core::ReachableArea(grilleOuverte(11), {.combatant = HEROS}, 4).destinations().size()` vaut `80U`.
-- Vérifie que `boue.destinations().size()` vaut `24U`.
-- Vérifie que `boue.costTo({7, 7})` vaut `4`.
-- Vérifie que `boue.costTo({8, 5}).has_value()` est faux.
-
-### PathfindingTest.UnAllieSeTraverseUnEnnemiNon
-
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:234`
-
-Un allie se traverse, un ennemi non, et aucun ne sert de destination.
-
-**Étapes**
-
-1. Couloir 5x1 : heros en (0,0), allie en (1,0), ennemi en (3,0).
-2. Calculer l'aire sans droit de passage, puis en autorisant l'allie.
-
-**Résultat attendu**
-
-- Vérifie que `grille.place(HEROS, {0, 0})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.place(ALLIE, {1, 0})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.place(ENNEMI, {3, 0})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `bloque.destinations().empty()` est vrai.
-- Vérifie que `passage.destinations()` vaut `(std::vector<core::GridPosition>{{2, 0}})`.
-- Vérifie que `passage.costTo({1, 0})` vaut `2`.
-- Vérifie que `passage.costTo({2, 0})` vaut `3`.
-- Vérifie que `passage.canEndAt({1, 0})` est faux.
-- Vérifie que `passage.costTo({4, 0}).has_value()` est faux.
-- Vérifie que `core::findPath(grille, heros, {4, 0}).has_value()` est faux.
-- Vérifie que `core::findPath(grille, heros, {1, 0}).has_value()` est faux.
-
-### PathfindingTest.MemeEntreeMemeChemin
-
-*Bloquant · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:268`
-
-Meme entree, meme chemin, et le departage suit la regle du plus petit indice.
-
-**Étapes**
-
-1. Grille ouverte 3x3, heros en (0,0).
-2. Demander le chemin vers (2,0) et vers (0,2), chacun a deux chemins de cout 2.
-3. Repeter cent fois la requete sur une grille accidentee.
-
-**Résultat attendu**
-
-- Vérifie que `petite.place(HEROS, {0, 0})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `versLaDroite.has_value()` est vrai.
-- Vérifie que `versLaDroite->steps` vaut `(std::vector<core::GridPosition>{{1, 0}, {2, 0}})`.
-- Vérifie que `versLeBas.has_value()` est vrai.
-- Vérifie que `versLeBas->steps` vaut `(std::vector<core::GridPosition>{{0, 1}, {0, 2}})`.
-- Vérifie que `reference.has_value()` est vrai.
-- Vérifie que `chemin.has_value()` est vrai.
-- Vérifie que `chemin->steps` vaut `reference->steps`.
-- Vérifie que `chemin->cost` vaut `reference->cost`.
-
-### PathfindingTest.LeCheminSuitLaDroite
-
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:308`
-
-Sur une grille ouverte, le chemin retenu parmi ceux de meme cout est le plus proche de la droite depart-arrivee, et reste dans la boite qui les englobe.
-
-**Étapes**
-
-1. Grille ouverte 11x11, heros au centre (5,5).
-2. Demander le chemin vers (9,3), en haut a droite, par l'aire et par A*.
-3. Verifier toute destination de l'aire.
-
-**Résultat attendu**
-
-- Vérifie que `hautDroite.has_value()` est vrai.
-- Vérifie que `hautDroite->steps` vaut `(std::vector<core::GridPosition>{{6, 4}, {7, 4}, {8, 3}, {9, 3}})`.
-- Vérifie que `core::findPath(grille, {.combatant = HEROS}, {9, 3})->steps` vaut `hautDroite->steps`.
-- Vérifie que `chemin.has_value()` est vrai.
-- Vérifie que `pas.column` est supérieur ou égal à `colonneMin`.
-- Vérifie que `pas.column` est inférieur ou égal à `colonneMax`.
-- Vérifie que `pas.row` est supérieur ou égal à `ligneMin`.
-- Vérifie que `pas.row` est inférieur ou égal à `ligneMax`.
-
-### PathfindingTest.LAireEtAStarRendentLeMemeChemin
-
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:348`
-
-findPath et ReachableArea::pathTo rendent le meme chemin.
-
-**Étapes**
-
-1. Grille accidentee (mur en L, boue).
-2. Calculer l'aire pour un budget de 12.
-3. Pour chaque destination, comparer pathTo a findPath.
-
-**Résultat attendu**
-
-- Vérifie que `aire.destinations().empty()` est faux.
-- Vérifie que `parAire.has_value()` est vrai.
-- Vérifie que `parAStar.has_value()` est vrai.
-- Vérifie que `parAire->steps` vaut `parAStar->steps`.
-- Vérifie que `parAire->cost` vaut `parAStar->cost`.
-- Vérifie que `aire.costTo(destination)` vaut `parAire->cost`.
-- Vérifie que `tchebychev(pas, precedente)` vaut `1`.
-
-### PathfindingTest.UnCheminImpossibleEstRefuse
-
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:382`
-
-Un chemin impossible est refuse.
-
-**Étapes**
-
-1. Grille coupee en deux par un mur plein.
-2. Demander un chemin de l'autre cote, un chemin vers un mur, un chemin pour un combattant absent.
-
-**Résultat attendu**
-
-- Vérifie que `grille.place(HEROS, {0, 2})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `core::findPath(grille, {.combatant = HEROS}, {4, 2}).has_value()` est faux.
-- Vérifie que `core::findPath(grille, {.combatant = HEROS}, {2, 2}).has_value()` est faux.
-- Vérifie que `core::findPath(grille, {.combatant = ENNEMI}, {1, 2}).has_value()` est faux.
-- Vérifie que `aire.pathTo({0, 2}).has_value()` est faux.
-- Vérifie que `aire.pathTo({4, 2}).has_value()` est faux.
-- Vérifie que `aire.destinations().size()` vaut `9U`.
-- Vérifie que `core::ReachableArea(grille, {.combatant = ENNEMI}, 20).destinations().empty()` est vrai.
-
-### PathfindingTest.UnVolantSurvoleLesObstaclesDeSol
-
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:411`
-
-Un volant survole les obstacles de sol, pas les murs.
-
-**Étapes**
-
-1. Couloir 5x3 : colonne 2 en eau profonde, case (1,1) en boue, ligne 0 murée.
-2. Calculer l'aire du meme combattant au sol, puis en vol.
-
-**Résultat attendu**
-
-- Vérifie que `grille.place(HEROS, {0, 1})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `marche.canEndAt({3, 1})` est faux.
-- Vérifie que `marche.costTo({1, 1})` vaut `2`.
-- Vérifie que `vol.canEndAt({3, 1})` est vrai.
-- Vérifie que `vol.costTo({1, 1})` vaut `1`.
-- Vérifie que `vol.canEndAt({2, 1})` est vrai.
-- Vérifie que `vol.costTo({1, 0}).has_value()` est faux.
-
-### PathfindingTest.UneGrandeCreatureNePassePasParUnCouloirEtroit
-
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:446`
-
-Une creature 2x2 ne passe pas par un couloir d'une case.
-
-**Étapes**
-
-1. Salle 6x6 coupee par un mur en colonne 3, percee d'une seule case en (3,2).
-2. Calculer l'aire d'un combattant 1x1, puis d'un 2x2, au budget 10.
-
-**Résultat attendu**
-
-- Vérifie que `grille.place(HEROS, {0, 0})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.place(ENNEMI, {0, 3}, 2)` vaut `core::PlacementResult::Placed`.
-- Vérifie que `core::ReachableArea(grille, {.combatant = HEROS}, 10).canEndAt({5, 2})` est vrai.
-- Vérifie que `ours.destinations().empty()` est faux.
-- Vérifie que `place.column` est strictement inférieur à `3`.
-- Vérifie que `grille.canStand(place, 2, ENNEMI)` est vrai.
-
-### PathfindingTest.SurDesCartesAleatoiresAStarEtLAireSAccordent
-
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_pathfinding.cpp:479`
-
-Sur deux cents cartes aleatoires a graine fixe, A* et l'aire s'accordent.
-
-**Étapes**
-
-1. Tirer deux cents grilles 12x9 (graine fixe) : murs, eau profonde, boue, un allie a traverser.
-2. Pour chaque destination de l'aire au budget 14, comparer pathTo et findPath.
-
-**Résultat attendu**
-
-- Vérifie que `grille.place(HEROS, {1, 1})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `grille.place(ALLIE, {2, 1})` vaut `core::PlacementResult::Placed`.
-- Vérifie que `parAire.has_value()` est vrai.
-- Vérifie que `parAStar.has_value()` est vrai.
-- Vérifie que `parAire->steps` vaut `parAStar->steps`.
-- Vérifie que `parAire->cost` vaut `parAStar->cost`.
-- Vérifie que `comparaisons` est strictement supérieur à `2000`.
+- Vérifie que `carte.ok()` est vrai.
+- Vérifie que `meilleur - pire` est strictement inférieur à `20.0`.
 
 ## test_simulated_space.cpp
 
@@ -4326,17 +4381,23 @@ Les candidats sont dans le budget et en ordre fixe.
 
 **Résultat attendu**
 
-- Vérifie que `first` vaut `second`.
+- Vérifie que `first.size()` vaut `second.size()`.
+- Vérifie que `first[i].point` vaut `second[i].point`.
+- Vérifie que `first[i].route.points` vaut `second[i].route.points`.
 - Vérifie que `first.empty()` est faux.
-- Vérifie que `first.front()` vaut `query.mover.base`.
-- Vérifie que `core::groundDistance(point, query.mover.base)` est inférieur ou égal à `4.5f + 0.01f`.
-- Vérifie que `space.isClear(core::volumeOf(point, CreatureSize::Medium), core::Locomotion::Walk)` est vrai.
+- Vérifie que `first.front().point` vaut `query.mover.base`.
+- Vérifie que `first.front().route.points.empty()` est vrai.
+- Vérifie que `core::groundDistance(candidate.point, query.mover.base)` est inférieur ou égal à `4.5f + 0.01f`.
+- Vérifie que `candidate.route.length` est inférieur ou égal à `4.5f + 0.01f`.
+- Vérifie que `candidate.route.points.empty()` est faux.
+- Vérifie que `candidate.route.points.back()` vaut `candidate.point`.
+- Vérifie que `space.isClear(core::volumeOf(candidate.point, CreatureSize::Medium), core::Locomotion::Walk)` est vrai.
 - Vérifie que `far` est faux.
 - Vérifie que `near` est vrai.
 
 ### EspaceSimuleTest.UnMurArreteLaVueEtUneToileNon
 
-*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:220`
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:229`
 
 Un mur arrete la vue et une toile non.
 
@@ -4352,7 +4413,7 @@ Un mur arrete la vue et une toile non.
 
 ### EspaceSimuleTest.LAbriSeCompteParLignesCoupees
 
-*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:238`
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:247`
 
 L'abri se compte par lignes coupees.
 
@@ -4372,7 +4433,7 @@ L'abri se compte par lignes coupees.
 
 ### EspaceSimuleTest.UnCorpsInterposeAbriteAMoitie
 
-*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:270`
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:279`
 
 Un corps interpose abrite a moitie.
 
@@ -4387,7 +4448,7 @@ Un corps interpose abrite a moitie.
 
 ### EspaceSimuleTest.LAbriEstSymetriqueSansCorps
 
-*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:286`
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:295`
 
 La ligne de vue est symetrique.
 
@@ -4401,7 +4462,7 @@ La ligne de vue est symetrique.
 
 ### EspaceSimuleTest.UnPlateauDonneSaHauteurAuSol
 
-*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:302`
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:311`
 
 Un plateau donne sa hauteur au sol.
 
@@ -4419,7 +4480,7 @@ Un plateau donne sa hauteur au sol.
 
 ### EspaceSimuleTest.UneGrilleDeCollisionDevientDesBoites
 
-*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:322`
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:331`
 
 Une grille de collision devient des boites.
 
@@ -4437,7 +4498,7 @@ Une grille de collision devient des boites.
 
 ### EspaceSimuleTest.LeMemeCheminDeuxFois
 
-*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:349`
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_simulated_space.cpp:358`
 
 Le meme chemin deux fois.
 
@@ -4456,7 +4517,7 @@ Le meme chemin deux fois.
 
 ### TacticalTerrainTest.UneRencontreEnChampOuvertEstValide
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:61`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:63`
 
 Une rencontre en champ ouvert est un terrain tactique valide.
 
@@ -4473,13 +4534,21 @@ Une rencontre en champ ouvert est un terrain tactique valide.
 - Vérifie que `verdict.encounterId` vaut `"rats"`.
 - Vérifie que `verdict.placements.size()` vaut `2U`.
 - Vérifie que `verdict.requiredCells` vaut `(2 + core::TACTICAL_PARTY_SIZE) * 4`.
-- Vérifie que `verdict.area.size()` vaut `13U * 13U`.
-- Vérifie que `verdict.area.front()` vaut `(core::GridPosition{.column = 4, .row = 4})`.
-- Vérifie que `verdict.area.back()` vaut `(core::GridPosition{.column = 16, .row = 16})`.
+- Vérifie que `contient({.column = 10, .row = 10})` est vrai.
+- Vérifie que `contient({.column = 16, .row = 10})` est vrai.
+- Vérifie que `contient({.column = 4, .row = 10})` est vrai.
+- Vérifie que `contient({.column = 10, .row = 4})` est vrai.
+- Vérifie que `contient({.column = 14, .row = 14})` est vrai.
+- Vérifie que `contient({.column = 15, .row = 15})` est faux.
+- Vérifie que `contient({.column = 17, .row = 10})` est faux.
+- Vérifie que `verdict.area.front()` vaut `(core::GridPosition{.column = 10, .row = 4})`.
+- Vérifie que `verdict.area.back()` vaut `(core::GridPosition{.column = 10, .row = 16})`.
+- Vérifie que `core::groundDistance(core::tileCenter(cell), centre)` est inférieur ou égal à `9.0F + 0.01F`.
+- Vérifie que `std::ranges::is_sorted(verdict.area, [](core::GridPosition a, core::GridPosition b) { return a.row != b.row ? a.row < b.row : a.column < b.column; })` est vrai.
 
 ### TacticalTerrainTest.UnCombattantDansUnMurEstSignale
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:90`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:111`
 
 Un combattant pose dans un mur est signale.
 
@@ -4495,7 +4564,7 @@ Un combattant pose dans un mur est signale.
 
 ### TacticalTerrainTest.UnCombattantHorsDeLaCarteEstSignale
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:114`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:135`
 
 Un combattant hors de la carte est signale.
 
@@ -4511,7 +4580,7 @@ Un combattant hors de la carte est signale.
 
 ### TacticalTerrainTest.DeuxCombattantsSuperposesSontSignales
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:137`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:158`
 
 Deux combattants superposes sont signales.
 
@@ -4527,7 +4596,7 @@ Deux combattants superposes sont signales.
 
 ### TacticalTerrainTest.UnCouloirTropEtroitEstSignale
 
-*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:165`
+*Critique · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:186`
 
 Un couloir trop etroit est signale.
 
@@ -4546,7 +4615,7 @@ Un couloir trop etroit est signale.
 
 ### TacticalTerrainTest.UnDeclencheurDansUnMurNAAucuneZone
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:200`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:221`
 
 Un declencheur dans un mur n'a aucune zone.
 
@@ -4564,7 +4633,7 @@ Un declencheur dans un mur n'a aucune zone.
 
 ### TacticalTerrainTest.UneRencontreInconnueEstIgnoree
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:222`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:243`
 
 Une rencontre inconnue est ignoree.
 
@@ -4581,7 +4650,7 @@ Une rencontre inconnue est ignoree.
 
 ### TacticalTerrainTest.LesAutresEntitesSontIgnorees
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:244`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:265`
 
 Les entites qui ne sont pas des rencontres sont ignorees.
 
@@ -4596,7 +4665,7 @@ Les entites qui ne sont pas des rencontres sont ignorees.
 
 ### TacticalTerrainTest.LEmpriseDUneGrandeCreatureVientDuBestiaire
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:268`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:289`
 
 L'emprise d'une grande creature vient du bestiaire.
 
@@ -4614,7 +4683,7 @@ L'emprise d'une grande creature vient du bestiaire.
 
 ### TacticalTerrainTest.LAnalyseEstDeterministe
 
-*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:306`
+*Majeur · Unitaire · Combat* — `Source/Test/Unit/Core/Combat/test_tactical_terrain.cpp:327`
 
 L'analyse est deterministe.
 

@@ -8,17 +8,14 @@
 #include <optional>
 #include <utility>
 
-#include "Core/Combat/BattleGrid.h"
+#include "Core/Combat/CombatSpace.h"
 #include "Core/Combat/CombatTransition.h"
-#include "Core/Combat/Pathfinding.h"
+#include "Core/Combat/SimulatedSpace.h"
 #include "Core/Rpg/Bestiary.h"
 
 namespace core {
 
 namespace {
-
-// Le combattant fictif qui arpente la zone : seul sur sa grille, son identifiant importe peu.
-constexpr CombatantId ARPENTEUR{1};
 
 [[nodiscard]] CreatureSize tailleDe(const std::string& creatureId, const Bestiary* bestiary) {
     if (bestiary == nullptr) {
@@ -28,35 +25,53 @@ constexpr CombatantId ARPENTEUR{1};
     return creature == nullptr ? CreatureSize::Medium : creature->size;
 }
 
-// Le refus de la grille, traduit en problème d'auteur. `InvalidCombatant` n'en est pas un : il
-// ne survient pas pour un identifiant neuf et une taille du bestiaire.
-[[nodiscard]] std::optional<TacticalIssueCode> problemeDe(PlacementResult result) {
-    switch (result) {
-        case PlacementResult::OutOfBounds:
-            return TacticalIssueCode::CombatantOutOfBounds;
-        case PlacementResult::Obstructed:
-            return TacticalIssueCode::CombatantObstructed;
-        case PlacementResult::Occupied:
-            return TacticalIssueCode::CombatantsOverlap;
-        case PlacementResult::Placed:
-        case PlacementResult::InvalidCombatant:
-            return std::nullopt;
+// La pose d'un combattant, comme le montage la fait (`core::CombatState::placementAt`) : dans la
+// carte, sans toucher un mur, sans recouvrir un combattant déjà posé.
+[[nodiscard]] std::optional<TacticalIssueCode> problemeDe(const TileMap& collision,
+                                                          const SimulatedSpace& espace,
+                                                          const std::vector<Volume>& poses,
+                                                          GridPosition ancre, CreatureSize taille,
+                                                          Volume& volume) {
+    const int cote = footprintSide(taille);
+    if (ancre.column < 0 || ancre.row < 0 || ancre.column + cote > collision.width() ||
+        ancre.row + cote > collision.height()) {
+        return TacticalIssueCode::CombatantOutOfBounds;
+    }
+    volume = volumeOf(tileCenter(ancre, taille), taille);
+    if (!espace.isClear(volume, Locomotion::Walk)) {
+        return TacticalIssueCode::CombatantObstructed;
+    }
+    if (std::ranges::any_of(poses, [&](const Volume& autre) { return overlap(volume, autre); })) {
+        return TacticalIssueCode::CombatantsOverlap;
     }
     return std::nullopt;
 }
 
-// Les cases où un marcheur de taille M, parti du déclencheur, peut finir un tour de 30 pieds —
-// le déclencheur compris. Vide si le déclencheur lui-même ne se tient pas.
+// Les cases dont le centre est une place où un marcheur de taille M, parti du centre du
+// déclencheur, peut finir un tour de 9 m — le déclencheur compris. Vide si le déclencheur
+// lui-même ne se tient pas.
 [[nodiscard]] std::vector<GridPosition> zoneAtteignable(const TileMap& collision,
+                                                        const SimulatedSpace& espace,
                                                         GridPosition trigger) {
-    BattleGrid grille(collision);
-    if (grille.place(ARPENTEUR, trigger) != PlacementResult::Placed) {
+    const Volume arpenteur = volumeOf(tileCenter(trigger), CreatureSize::Medium);
+    if (!espace.isClear(arpenteur, Locomotion::Walk)) {
         return {};
     }
-    const ReachableArea aire(grille, Mover{.combatant = ARPENTEUR, .canPassThrough = {}},
-                             TACTICAL_AREA_RADIUS);
-    std::vector<GridPosition> zone = aire.destinations();
-    zone.push_back(trigger);
+    const RouteQuery requete{
+        .mover = arpenteur,
+        .destination = {},
+        .budget = metersFromTiles(static_cast<float>(TACTICAL_AREA_RADIUS)),
+    };
+    std::vector<GridPosition> zone;
+    for (const Destination& place : espace.candidates(requete)) {
+        const GridPosition caseDe = tileOf(place.point);
+        const Meters3 centre = tileCenter(caseDe);
+        if (caseDe.column < 0 || caseDe.row < 0 || caseDe.column >= collision.width() ||
+            caseDe.row >= collision.height() || groundDistance(centre, place.point) > 1e-3f) {
+            continue;
+        }
+        zone.push_back(caseDe);
+    }
     std::ranges::sort(zone, [](GridPosition a, GridPosition b) {
         return a.row != b.row ? a.row < b.row : a.column < b.column;
     });
@@ -70,6 +85,7 @@ std::vector<EncounterTerrain> analyzeEncounterTerrain(const TileMap& collision,
                                                       const EncounterCatalog& encounters,
                                                       const Bestiary* bestiary) {
     std::vector<EncounterTerrain> verdicts;
+    const SimulatedSpace espace = SimulatedSpace::fromTileMap(collision);
     for (std::size_t index = 0; index < entities.size(); ++index) {
         // Le nom de carte n'ouvre que la clé de drapeau, dont cette vérification n'a pas l'usage.
         const std::optional<EncounterTrigger> declencheur =
@@ -88,22 +104,23 @@ std::vector<EncounterTerrain> analyzeEncounterTerrain(const TileMap& collision,
         verdict.trigger = declencheur->position;
         verdict.placements = placeCombatants(*rencontre, declencheur->position);
 
-        // La même grille, la même pose que le montage : chaque combattant posé gêne les suivants,
+        // Le même espace, la même pose que le montage : chaque combattant posé gêne les suivants,
         // et c'est donc le second de deux combattants superposés qui est signalé.
-        BattleGrid grille(collision);
-        std::uint32_t suivant = 1;
+        std::vector<Volume> poses;
         for (const CombatantPlacement& placement : verdict.placements) {
-            const PlacementResult pose =
-                grille.place(CombatantId{suivant++}, placement.position,
-                             footprintSide(tailleDe(placement.creatureId, bestiary)));
-            if (const auto probleme = problemeDe(pose); probleme.has_value()) {
+            Volume volume;
+            const auto probleme = problemeDe(collision, espace, poses, placement.position,
+                                             tailleDe(placement.creatureId, bestiary), volume);
+            if (probleme.has_value()) {
                 verdict.issues.push_back({.code = *probleme,
                                           .creatureId = placement.creatureId,
                                           .cell = placement.position});
+            } else {
+                poses.push_back(volume);
             }
         }
 
-        verdict.area = zoneAtteignable(collision, verdict.trigger);
+        verdict.area = zoneAtteignable(collision, espace, verdict.trigger);
         verdict.requiredCells =
             (static_cast<int>(verdict.placements.size()) + TACTICAL_PARTY_SIZE) *
             TACTICAL_CELLS_PER_COMBATANT;

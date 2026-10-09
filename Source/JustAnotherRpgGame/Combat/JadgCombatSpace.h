@@ -42,7 +42,7 @@ public:
 	[[nodiscard]] bool isClear(const core::Volume& Volume, core::Locomotion Locomotion) const override;
 	[[nodiscard]] bool lineOfSight(core::Meters3 From, core::Meters3 To) const override;
 	[[nodiscard]] std::optional<core::Route> route(const core::RouteQuery& Query) const override;
-	[[nodiscard]] std::vector<core::Meters3> candidates(const core::RouteQuery& Query) const override;
+	[[nodiscard]] std::vector<core::Destination> candidates(const core::RouteQuery& Query) const override;
 
 private:
 	[[nodiscard]] bool OverlapsBlocking(core::Meters3 Point, const core::RouteQuery& Query) const;

@@ -5,14 +5,47 @@
 
 #include <algorithm>
 #include <array>
+#include <cmath>
 #include <cstdlib>
 
 #include "Core/Rpg/Ability.h"
 #include "Core/Rpg/Bestiary.h"
 #include "Core/Rpg/CharacterSheet.h"
 #include "Core/Rpg/RpgEnumNames.h"
+#include "Core/Rpg/Scale.h"
 
 namespace core {
+
+namespace {
+
+// Une vitesse qui tombe juste sur une case ne doit pas en perdre une par l'arrondi des flottants.
+constexpr float SPEED_EPSILON = 1.0e-3F;
+// Ce qu'on tolère de flottant sur une longueur de chemin.
+constexpr float LENGTH_EPSILON = 1.0e-3F;
+
+}  // namespace
+
+int movementBudget(float speedMeters) noexcept {
+    if (!(speedMeters > 0.0F)) {
+        return 0;
+    }
+    return static_cast<int>(std::floor(tilesFromMeters(speedMeters) + SPEED_EPSILON));
+}
+
+int movementBudget(const CharacterSheet& sheet) noexcept {
+    // Capacites comprises (LOT-131) : Scoundrel's Agility ajoute 10 ft, soit deux cases.
+    return movementBudget(sheet.effectiveSpeedMeters());
+}
+
+int movementBudget(const Creature& creature, Locomotion locomotion) noexcept {
+    switch (locomotion) {
+        case Locomotion::Walk:
+            return movementBudget(creature.speed.walk);
+        case Locomotion::Fly:
+            return movementBudget(creature.speed.fly.value_or(0.0F));
+    }
+    return 0;
+}
 
 // Tient la profondeur d'appel. En sortant de l'appel **extérieur** — celui qui ne vient d'aucun
 // abonné —, la machine règle ce que l'appel a changé.
@@ -112,15 +145,15 @@ CombatantProfile profileFor(const Creature& creature, CombatSide side) {
     };
 }
 
-CombatState::CombatState(BattleGrid grid) : _grid(std::move(grid)) {}
+CombatState::CombatState(std::shared_ptr<const CombatSpace> space) : _space(std::move(space)) {}
 
 // --- Montage ---------------------------------------------------------------------------------
 
-EnlistResult CombatState::enlist(CombatantProfile profile, std::optional<GridPosition> anchor) {
+EnlistResult CombatState::enlist(CombatantProfile profile, std::optional<Meters3> base) {
     if (_phase != CombatPhase::Setup) {
         return {.combatant = std::nullopt, .placement = PlacementResult::InvalidCombatant};
     }
-    return admit(std::move(profile), anchor);
+    return admit(std::move(profile), base);
 }
 
 bool CombatState::addInitiativeMarker(InitiativeMarker marker) {
@@ -181,6 +214,69 @@ std::vector<CombatantId> CombatState::combatants() const {
     return ids;
 }
 
+std::optional<Meters3> CombatState::positionOf(CombatantId combatant) const {
+    const Combatant* found = find(combatant);
+    return found == nullptr ? std::nullopt : found->position;
+}
+
+std::optional<Volume> CombatState::volumeOf(CombatantId combatant) const {
+    const Combatant* found = find(combatant);
+    if (found == nullptr || !found->position.has_value()) {
+        return std::nullopt;
+    }
+    return core::volumeOf(*found->position, found->profile.size);
+}
+
+std::optional<Volume> CombatState::volumeAt(CombatantId combatant, Meters3 base) const {
+    const Combatant* found = find(combatant);
+    if (found == nullptr) {
+        return std::nullopt;
+    }
+    base.z = _space->groundHeight(base.x, base.y);
+    return core::volumeOf(base, found->profile.size);
+}
+
+std::vector<Volume> CombatState::bodiesExcept(std::optional<CombatantId> a,
+                                              std::optional<CombatantId> b) const {
+    std::vector<Volume> bodies;
+    for (const Combatant& combatant : _combatants) {
+        if (combatant.id == a || combatant.id == b || !combatant.position.has_value()) {
+            continue;
+        }
+        bodies.push_back(core::volumeOf(*combatant.position, combatant.profile.size));
+    }
+    return bodies;
+}
+
+std::optional<CombatantId> CombatState::occupantAt(Meters3 point) const {
+    for (const Combatant& combatant : _combatants) {
+        if (combatant.position.has_value() &&
+            groundDistance(point, *combatant.position) <
+                creatureRadius(combatant.profile.size) - LENGTH_EPSILON) {
+            return combatant.id;
+        }
+    }
+    return std::nullopt;
+}
+
+PlacementResult CombatState::placementAt(const CombatantProfile& profile, Meters3 base,
+                                         std::optional<CombatantId> self) const {
+    base.z = _space->groundHeight(base.x, base.y);
+    const Volume volume = core::volumeOf(base, profile.size);
+    if (!_space->isClear(volume, profile.locomotion)) {
+        return PlacementResult::Obstructed;
+    }
+    for (const Combatant& other : _combatants) {
+        if (other.id == self || !other.position.has_value()) {
+            continue;
+        }
+        if (overlap(volume, core::volumeOf(*other.position, other.profile.size))) {
+            return PlacementResult::Occupied;
+        }
+    }
+    return PlacementResult::Placed;
+}
+
 // --- Le tour ---------------------------------------------------------------------------------
 
 ActionEconomy* CombatState::economy(CombatantId combatant) {
@@ -195,33 +291,108 @@ bool CombatState::spend(std::string_view resource, int amount) {
     return findMutable(*_active)->economy.spend(resource, amount);
 }
 
-std::optional<ReachableArea> CombatState::reachableArea() const {
-    if (_phase != CombatPhase::TurnActive || !_active.has_value() ||
-        !_grid.positionOf(*_active).has_value()) {
-        return std::nullopt;
-    }
-    return ReachableArea(_grid, moverFor(*_active),
-                         find(*_active)->economy.remaining(MOVEMENT_RESOURCE));
+float CombatState::movementLeftOf(const Combatant& combatant) const {
+    return metersFromTiles(static_cast<float>(combatant.economy.remaining(MOVEMENT_RESOURCE))) +
+           combatant.movementSlack;
 }
 
-MoveOutcome CombatState::move(GridPosition destination) {
+float CombatState::movementLeft() const {
+    if (_phase != CombatPhase::TurnActive || !_active.has_value()) {
+        return 0.0f;
+    }
+    return movementLeftOf(*find(*_active));
+}
+
+RouteQuery CombatState::queryFor(CombatantId mover, float budget, std::vector<Volume>& blocking,
+                                 std::vector<Volume>& passable) const {
+    const Combatant* self = find(mover);
+    for (const Combatant& other : _combatants) {
+        if (other.id == mover || !other.position.has_value()) {
+            continue;
+        }
+        const Volume volume = core::volumeOf(*other.position, other.profile.size);
+        (canPassThrough(mover, other.id) ? passable : blocking).push_back(volume);
+    }
+    return {.mover = core::volumeOf(*self->position, self->profile.size),
+            .destination = {},
+            .budget = budget,
+            .locomotion = self->profile.locomotion,
+            .blocking = blocking,
+            .passable = passable};
+}
+
+std::optional<Route> CombatState::routeFor(CombatantId combatant, Meters3 destination,
+                                           float budget) const {
+    const Combatant* found = find(combatant);
+    if (found == nullptr || !found->position.has_value()) {
+        return std::nullopt;
+    }
+    std::vector<Volume> blocking;
+    std::vector<Volume> passable;
+    RouteQuery query = queryFor(combatant, budget, blocking, passable);
+    query.destination = destination;
+    return _space->route(query);
+}
+
+std::optional<Route> CombatState::routeTo(Meters3 destination) const {
+    if (_phase != CombatPhase::TurnActive || !_active.has_value()) {
+        return std::nullopt;
+    }
+    return routeFor(*_active, destination, movementLeft());
+}
+
+std::vector<Destination> CombatState::destinationsFor(CombatantId combatant, float budget) const {
+    const Combatant* found = find(combatant);
+    if (found == nullptr || !found->position.has_value()) {
+        return {};
+    }
+    std::vector<Volume> blocking;
+    std::vector<Volume> passable;
+    return _space->candidates(queryFor(combatant, budget, blocking, passable));
+}
+
+std::vector<Destination> CombatState::destinations() const {
+    if (_phase != CombatPhase::TurnActive || !_active.has_value()) {
+        return {};
+    }
+    return destinationsFor(*_active, movementLeft());
+}
+
+bool CombatState::canStandAt(CombatantId combatant, Meters3 base) const {
+    const Combatant* found = find(combatant);
+    return found != nullptr &&
+           placementAt(found->profile, base, combatant) == PlacementResult::Placed;
+}
+
+MoveOutcome CombatState::move(Meters3 destination) {
     if (_phase != CombatPhase::TurnActive || !_active.has_value()) {
         return {.result = MoveResult::NoActiveTurn, .path = {}};
     }
     const CombatantId mover = *_active;
-    if (!_grid.positionOf(mover).has_value()) {
+    if (!find(mover)->position.has_value()) {
         return {.result = MoveResult::NotPlaced, .path = {}};
     }
-    std::optional<Path> path = reachableArea()->pathTo(destination);
+    std::optional<Route> path = routeTo(destination);
     if (!path.has_value()) {
         return {.result = MoveResult::Unreachable, .path = {}};
     }
     Operation operation(*this);
     Combatant* combatant = findMutable(mover);
-    // `pathTo` a vérifié que le chemin tient dans ce qui reste, et que l'emprise tient à
-    // l'arrivée : ni la dépense ni le déplacement ne peuvent être refusés ici.
-    static_cast<void>(combatant->economy.spend(MOVEMENT_RESOURCE, path->cost));
-    static_cast<void>(_grid.moveTo(mover, destination, combatant->profile.locomotion));
+    // Le chemin tient dans ce qui reste : on use d'abord la case entamée, puis on entame les
+    // suivantes, chacune payée entière (« par segments de 1,50 mètre »).
+    float length = std::max(0.0f, path->length);
+    if (length <= combatant->movementSlack + LENGTH_EPSILON) {
+        combatant->movementSlack = std::max(0.0f, combatant->movementSlack - length);
+    } else {
+        const float beyond = length - combatant->movementSlack;
+        const int tiles =
+            std::max(1, static_cast<int>(std::ceil(tilesFromMeters(beyond) - LENGTH_EPSILON)));
+        static_cast<void>(combatant->economy.spend(
+            MOVEMENT_RESOURCE, std::min(tiles, combatant->economy.remaining(MOVEMENT_RESOURCE))));
+        combatant->movementSlack =
+            std::max(0.0f, metersFromTiles(static_cast<float>(tiles)) - beyond);
+    }
+    combatant->position = path->points.back();
     return {.result = MoveResult::Moved, .path = std::move(*path)};
 }
 
@@ -268,13 +439,13 @@ bool CombatState::declareAttack(CombatantId attacker, CombatantId target) {
 
 // --- Entrées, sorties, points de vie ---------------------------------------------------------
 
-EnlistResult CombatState::join(CombatantProfile profile, GridPosition anchor,
+EnlistResult CombatState::join(CombatantProfile profile, Meters3 base,
                                DeterministicRandom& random) {
     if (!running()) {
         return {.combatant = std::nullopt, .placement = PlacementResult::InvalidCombatant};
     }
     Operation operation(*this);
-    EnlistResult result = admit(std::move(profile), anchor);
+    EnlistResult result = admit(std::move(profile), base);
     if (!result.combatant.has_value()) {
         return result;
     }
@@ -290,13 +461,12 @@ EnlistResult CombatState::join(CombatantProfile profile, GridPosition anchor,
     return result;
 }
 
-EnlistResult CombatState::joinAtInitiative(CombatantProfile profile, GridPosition anchor,
-                                           int initiative) {
+EnlistResult CombatState::joinAtInitiative(CombatantProfile profile, Meters3 base, int initiative) {
     if (!running()) {
         return {.combatant = std::nullopt, .placement = PlacementResult::InvalidCombatant};
     }
     Operation operation(*this);
-    EnlistResult result = admit(std::move(profile), anchor);
+    EnlistResult result = admit(std::move(profile), base);
     if (!result.combatant.has_value()) {
         return result;
     }
@@ -322,7 +492,7 @@ WithdrawResult CombatState::withdraw(CombatantId combatant) {
     }
     Operation operation(*this);
     leaving->status = CombatantStatus::Withdrawn;
-    static_cast<void>(_grid.remove(combatant));
+    leaving->position.reset();
     static_cast<void>(_order.remove(combatant));
     std::erase(_interjections, combatant);
     dispatch({.hook = CombatHook::CombatantLeft,
@@ -443,15 +613,6 @@ std::vector<HitPointReserve>* CombatState::reserves(CombatantId combatant) {
     return target == nullptr ? nullptr : &target->reserves;
 }
 
-Mover CombatState::moverFor(CombatantId combatant) const {
-    const Combatant* found = find(combatant);
-    return {.combatant = combatant,
-            .locomotion = found == nullptr ? Locomotion::Walk : found->profile.locomotion,
-            .canPassThrough = [this, combatant](CombatantId other) {
-                return canPassThrough(combatant, other);
-            }};
-}
-
 bool CombatState::setLocomotion(CombatantId combatant, Locomotion locomotion, int movement) {
     Combatant* found = findMutable(combatant);
     if (found == nullptr) {
@@ -476,14 +637,15 @@ bool CombatState::setLocomotion(CombatantId combatant, Locomotion locomotion, in
 
 // --- Mécanique interne -----------------------------------------------------------------------
 
-EnlistResult CombatState::admit(CombatantProfile profile, std::optional<GridPosition> anchor) {
+EnlistResult CombatState::admit(CombatantProfile profile, std::optional<Meters3> base) {
     const CombatantId id{static_cast<std::uint32_t>(_combatants.size() + 1)};
-    if (anchor.has_value()) {
-        const PlacementResult placed =
-            _grid.place(id, *anchor, footprintSide(profile.size), profile.locomotion);
+    std::optional<Meters3> position;
+    if (base.has_value()) {
+        const PlacementResult placed = placementAt(profile, *base);
         if (placed != PlacementResult::Placed) {
             return {.combatant = std::nullopt, .placement = placed};
         }
+        position = Meters3{base->x, base->y, _space->groundHeight(base->x, base->y)};
     }
     const CombatantStatus status =
         profile.currentHitPoints > 0 ? CombatantStatus::Standing : CombatantStatus::Down;
@@ -497,7 +659,9 @@ EnlistResult CombatState::admit(CombatantProfile profile, std::optional<GridPosi
                            .reserves = {},
                            .deathSaves = {},
                            .prone = status == CombatantStatus::Down,
-                           .diedAtRound = std::nullopt});
+                           .diedAtRound = std::nullopt,
+                           .position = position,
+                           .movementSlack = 0.0f});
     return {.combatant = id, .placement = PlacementResult::Placed};
 }
 
@@ -773,6 +937,7 @@ void CombatState::startTurn(CombatantId combatant) {
     // La réaction revient ici, au début du tour de son porteur — jamais à la fin du tour d'un
     // autre (`EX-CBT-011`).
     actor->economy.refresh();
+    actor->movementSlack = 0.0f;
     if (actor->prone) {
         // Manuel, « Se relever » : il en coûte la moitié de sa vitesse. Le moteur relève d'office
         // qui commence son tour à terre (`LOT-137`) : rester couché ne sert à rien ici.
@@ -822,7 +987,8 @@ EncounterMount mountEncounter(CombatState& combat, const EncounterRun& run,
     EncounterMount mount;
     combat.setEscapable(run.escapable);
     for (const PartyMember& member : party) {
-        const EnlistResult enlisted = combat.enlist(member.profile, member.position);
+        const EnlistResult enlisted =
+            combat.enlist(member.profile, tileCenter(member.position, member.profile.size));
         if (enlisted.combatant.has_value()) {
             mount.allies.push_back(*enlisted.combatant);
         } else {
@@ -839,8 +1005,8 @@ EncounterMount mountEncounter(CombatState& combat, const EncounterRun& run,
                                       .placement = std::nullopt});
             continue;
         }
-        const EnlistResult enlisted =
-            combat.enlist(profileFor(*creature, CombatSide::Enemies), placement.position);
+        const EnlistResult enlisted = combat.enlist(profileFor(*creature, CombatSide::Enemies),
+                                                    tileCenter(placement.position, creature->size));
         if (enlisted.combatant.has_value()) {
             mount.enemies.push_back(*enlisted.combatant);
         } else {
