@@ -6,6 +6,28 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **Le combat se joue dans le moteur** (LOT-1017, sous-lots 2 et 3, 9 octobre 2026, lot non
+  livré, à recetter). « Combattre » au maître d'arène ouvre la carte d'arène d'essai
+  (`essai/arene`, scène `essai-1017-arene`, qui remplace l'arène vide du LOT-1016) ; `AJadgCombat`
+  y monte la rencontre — zone de combat, points d'entrée du groupe et marqueur posés sur la carte
+  de Core, composition par `core::boutForEncounter` (le montage de l'écran de rencontre, désormais
+  dans `Core/Combat/Contestants.h`, que le banc de la série lit aussi) —, joue l'IA par
+  `core::playTurn` et le joueur au clic (cible, destination) et aux touches (`Attack` X,
+  `Capacity` W après un chiffre, `EndTurn` Espace), montre chaque pas et chaque geste en file
+  (`MoveToLocation` sur le chemin de Core, clips à l'instant d'impact, retour au repos après un
+  clip joué une fois), dessine un aperçu de travail (portée restante, chemin, attaques
+  d'opportunité, cibles) et écrit l'issue : les fiches gardent ce que le combat a laissé,
+  `core::endEncounter` pose `encounter/<rencontre>/won`, la carte quittée se rouvre, le groupe là
+  où il était. `FJadgCombatSpace` rend ses candidats par une **requête EQS construite en C++**,
+  sans limite de budget pour l'approche de l'IA (827 points, 748 places en 6 ms sur l'arène) ; la
+  place et la vue ne voient que le décor statique. Dix fiches d'apparence provisoires pour les
+  adversaires humanoïdes de la série (`retraitSi` : LOT-1024). **Les personnages se bloquent** :
+  capsules bloquantes et évitement RVO en exploration, transparentes en combat (dette du
+  LOT-1016). `build.ps1 -Unreal -ParcoursCombat` joue `arene-bandits` par clics et touches
+  depuis le parvis (graine 2 : victoire au round 7) ; `-Encounter` monte une rencontre pour les
+  captures de l'arène (97 à 98 images/s à midi et à 22 h). 667 tests de Core, 19 tests du moteur
+  (`Jadg.Combat.Candidats`, `Montage`, `Tour`, `Opportunite`, `Resolution`).
+
 - **Le combat en distance commence : l'espace de combat en mètres** (LOT-1017, D-50, 9 octobre
   2026, lot ouvert, non livré). `core::CombatSpace` dit les règles spatiales du Manuel sans
   grille : une créature est un cylindre à la taille de son emprise, l'allonge se mesure entre les

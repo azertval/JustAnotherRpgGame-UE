@@ -75,8 +75,8 @@
  * d'un vingtième, pour l'avantage), des dégâts moyens un nombre de demi-points, un poids un
  * pourcentage, une longueur de chemin un nombre de centimètres. Les places candidates viennent de
  * l'espace (`core::CombatSpace::candidates` : la simulation de Core en donne, le moteur les
- * demandera à EQS) dans un ordre fixe, les cibles par identifiant croissant, et une égalité garde
- * le premier candidat. Deux exécutions sur la simulation donnent le même tour.
+ * demande à l'EQS, `FJadgCombatSpace`) dans un ordre fixe, les cibles par identifiant croissant, et
+ * une égalité garde le premier candidat. Deux exécutions sur la simulation donnent le même tour.
  */
 
 #include <cstddef>

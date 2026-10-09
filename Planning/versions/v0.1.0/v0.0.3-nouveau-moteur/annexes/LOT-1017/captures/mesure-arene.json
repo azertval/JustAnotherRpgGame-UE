@@ -1,0 +1,11 @@
+{
+  "map": "arene",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 16.60,
+  "captures": ["arene-1200.png", "arene-melee-1200.png", "arene-2200.png", "arene-melee-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.4, "frames": 1118, "fps": 98.1, "frameMs": 10.20, "p99FrameMs": 14.66, "worstFrameMs": 33.50, "gameMs": 3.84, "renderMs": 3.04, "gpuMs": 9.52},
+    {"hour": "22:00", "seconds": 11.4, "frames": 1104, "fps": 96.9, "frameMs": 10.32, "p99FrameMs": 21.74, "worstFrameMs": 27.76, "gameMs": 3.77, "renderMs": 10.32, "gpuMs": 9.50}
+  ]
+}

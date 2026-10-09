@@ -24,7 +24,7 @@ La troisième, `essai/arene` (scène `essai-1017-arene`), est le **sable** où l
 combat mène (LOT-1017) : la carte de Core y porte ce que le combat lit — la zone de combat
 (`combatZone`, la carte entière), les quatre points d'entrée du groupe (`arenaEntry`, camp allié,
 rangs 0 à 3) et le marqueur de rencontre (`encounter`) autour duquel chaque rencontre de la série
-se dresse —, et quatre piliers de deux cases sur deux, qui coupent la vue et se contournent.
+se dresse —, et deux piliers de deux cases sur deux, qui coupent la vue et se contournent.
 L'exploration ne la joue pas : le groupe y entre par la rencontre, et en sort par son issue.
 
 Un PNJ nomme sa figurine par son dossier depuis `Assets/` : le jeu y lit son portrait quand les

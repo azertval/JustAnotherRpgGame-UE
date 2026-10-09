@@ -267,9 +267,10 @@ bool AJadgHud::DrawCombat(float Unit)
 			Y += Write(FString::Printf(TEXT("%s%d. %s"), bChosen ? TEXT("> ") : TEXT("   "), Index + 1, *Capacities[Index]), Left, Y,
 				bChosen ? Gold : Dim, Scale);
 		}
-		const FString Keys = FString::Printf(TEXT("[clic] cible ou destination   [%s] attaquer   [1-%d] capacité, [%s] la lancer   [%s] fin du tour"),
-			*UJadgControls::KeyLabel(TEXT("Attack")), FMath::Max(1, Capacities.Num()), *UJadgControls::KeyLabel(TEXT("Capacity")),
-			*UJadgControls::KeyLabel(TEXT("EndTurn")));
+		const FString CapacityKeys = Capacities.IsEmpty() ? FString()
+			: FString::Printf(TEXT("[1-%d] capacité, [%s] la lancer   "), Capacities.Num(), *UJadgControls::KeyLabel(TEXT("Capacity")));
+		const FString Keys = FString::Printf(TEXT("[clic] cible ou destination   [%s] attaquer   %s[%s] fin du tour"),
+			*UJadgControls::KeyLabel(TEXT("Attack")), *CapacityKeys, *UJadgControls::KeyLabel(TEXT("EndTurn")));
 		Y += Write(Keys, Left, Y, Dim, Scale * 0.9f);
 		if (!Combat->Refusal().IsEmpty())
 		{

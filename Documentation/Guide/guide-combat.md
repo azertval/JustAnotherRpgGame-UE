@@ -738,7 +738,7 @@ ligne de vue lui refuse. Ce que le Guide ne dit pas — les **poids** — est un
 
 Aucun flottant dans le score : une longueur de chemin y entre en **centimètres** entiers. Les
 places candidates viennent de l'espace (`core::CombatSpace::candidates` : la simulation de Core en
-donne, le moteur les demandera à EQS) dans un ordre fixe, les cibles par identifiant croissant, et
+donne, le moteur les demande à l'EQS, plus bas) dans un ordre fixe, les cibles par identifiant croissant, et
 une égalité garde le premier candidat : deux exécutions sur la simulation donnent le même tour.
 
 ### Les profils
@@ -958,6 +958,110 @@ l'écran de mort (`LOT-119`) sans quitter la rencontre, pour que la scène du co
 sous son voile ; c'est l'écran de mort qui quitte la rencontre et finit la partie
 (`hmi::WorldModel::endGame`).
 
+## Le combat joué dans le moteur (`AJadgCombat`, `LOT-1017`)
+
+Depuis le `LOT-1017`, la rencontre que la bascule de l'exploration engage se **joue** dans la carte
+d'arène du moteur (`Source/JustAnotherRpgGame/Combat/`). Tout ce qui est règle reste Core ; le
+moteur fournit l'espace, montre ce que Core a résolu, et prend les gestes du joueur.
+
+### L'espace du moteur et ses candidats (`FJadgCombatSpace`)
+
+`FJadgCombatSpace` implémente `core::CombatSpace` sur la carte du moteur : le chemin et son budget
+par le maillage de navigation (`FindPathSync`, sans objet du moteur par chemin), la vue et le sol
+par des rayons, la place libre par un balayage de capsule — contre le **décor statique seul**
+(`ECC_WorldStatic` en type d'objet) : une figurine n'arrête ni la vue ni la place, Core compte les
+corps à part. Les mètres de Core se rapportent au repère de la carte (`AJadgMapFrame`), décalé du
+coin de la zone de combat. La capsule de la place est d'un centimètre en retrait : une créature M au
+centre de la case voisine d'un mur y tient, comme dans la simulation.
+
+**Les candidats** (`candidates`) viennent de l'**Environment Query System**, par une requête
+**construite en C++** — aucun asset : une option, un générateur en grille
+(`UEnvQueryGenerator_SimpleGrid`) d'un pas d'une demi-case (0,75 m) autour du mobile, projetée sur
+le maillage de navigation. Sa demi-largeur est le budget ; un budget **sans limite** (l'approche de
+l'IA) prend tout le maillage de la carte. Chaque point est gardé s'il est une place libre, hors des
+volumes de la requête, et si le maillage y trouve un chemin dans le budget : ce chemin est celui que
+la `core::Destination` rend. Le gestionnaire d'EQS garde une copie de chaque requête par son nom :
+chaque requête a un nom unique, et un espace ne la réutilise qu'à demi-largeur égale. Sans système
+d'IA dans le monde, la même grille s'échantillonne en C++ (`FJadgCandidateStats::bFromEqs` le dit).
+
+Mesuré sur l'arène d'essai (30 × 21 m, deux piliers), poste de référence : une requête sans
+limite rend 827 points et 748 places en 6 ms ; une requête dans un budget de 9 m, environ 460
+points et 310 places en 2,4 ms ; un tour de l'IA, décisions comprises, 41 ms en moyenne, 120 ms au
+pire. Le moteur ne retire pas encore un volume du maillage le temps d'une requête : un ennemi ne se
+traverse pas à l'arrivée, mais un chemin peut le frôler.
+
+### Le montage
+
+`AJadgParty` crée le combat quand il entre dans l'arène avec une rencontre engagée. `Mount` lit la
+carte de Core que nomme le repère (`essai/arene`), y prend le déclencheur
+(`core::encounterTriggerOn` : le marqueur `encounter` de la rencontre, sinon le premier de la carte)
+et le déploiement du groupe (`core::partyDeploymentOn` : les points d'entrée `arenaEntry` alliés,
+par rang), prépare la rencontre (`core::prepareMapEncounter`), compose l'affrontement
+(`core::boutForEncounter`, `Core/Combat/Contestants.h` — létal, sans Marque, tenaille en jeu, la
+fuite si la rencontre la permet ; les héros sans comportement, les créatures avec le leur) et le
+lance sur `core::ArenaSession` avec l'espace du moteur. Les héros sont ceux de l'exploration, leurs
+fiches telles qu'elles sont (`core::heroContestantSource`) ; leurs figurines sont celles de la
+scène, retrouvées par leur fiche d'apparence. Les adversaires sont posés par le combat, chacun par
+sa **fiche d'apparence provisoire** (`Rpg/appearances/<créature>.json`, copiée d'un héros, corps
+Manny ou Quinn, son arme prise aux maîtres de `Weapons` ; `retraitSi` : le `LOT-1024`), ou le
+pantin.
+
+Le banc de la série de l'arène (`Source/Test/Support/ArenaSimulation.h`) monte par les mêmes
+fonctions : la règle est écrite une fois.
+
+### Les tours
+
+- **L'IA** : `core::playTurn` sur l'espace du moteur, d'un bloc ; ce qu'elle a résolu se montre
+  ensuite.
+- **Le joueur** : un clic sur un combattant le **choisit pour cible** ; un clic au sol est une
+  **destination** — la place candidate la plus proche du point, ou, si le budget n'y mène pas, la
+  plus avancée vers lui. `Attack` (X) attaque la cible avec la première attaque qui l'atteint ; un
+  chiffre choisit la capacité de ce rang, `Capacity` (W) la lance sur la cible (sur soi, pour un
+  sort personnel) ; `EndTurn` (Espace) finit le tour. Un geste refusé s'écrit au HUD. Se
+  précipiter, esquiver et se désengager ne sont pas encore des gestes du joueur.
+- Un combattant à terre ou mort voit son tour passer.
+
+### Ce que la figurine montre
+
+Les gestes s'enchaînent dans une file, comme dans l'écran de combat de l'ancien moteur : chaque pas
+(`setMoveObserver`) devient une marche, point après point du chemin de Core, par
+`AAIController::MoveToLocation`, et la figurine se pose à la fin sur la base que Core lui donne ;
+chaque attaque ou sort (`setActionObserver`, l'attaque d'opportunité par le crochet
+`AttackDeclared`) un clip joué une fois (`attack`, `cast`) ; à l'**instant d'impact** du clip
+(`ClipKeys`, la moitié du clip sans clé), la cible joue `hit`, ou tombe (`death`, pose tenue). Un
+combattant relevé quitte sa pose. Après un clip joué une fois, la figurine revient au repos
+(`AJadgWalker::PlayOnce`).
+
+### L'aperçu de travail
+
+Le temps du tour du joueur, des lignes de débogage : un cercle au sol du rayon des **mètres qui
+restent**, le **chemin** vers le point sous le pointeur (vert ; rouge et droit si aucun chemin du
+budget n'y mène), un cercle rouge sur chaque créature qu'il ferait **frapper en chemin**
+(`previewOpportunities`), un cercle jaune sur chaque **cible atteignable** d'ici, blanc sur la cible
+choisie. Le HUD minimal écrit les deux camps et leurs PV, qui joue, les mètres qui restent, la cible
+et ses circonstances (la hauteur, la tenaille, l'esquive), les capacités et leurs lancers, les
+touches, le refus du moment, le journal de Core, et l'issue. L'interface finale est le `LOT-1020`.
+
+### L'issue
+
+Quand la file a montré l'issue, le combat l'écrit : sur les fiches, ce que le combat a laissé
+(`EX-CBT-062` : à terre, 1 PV ; debout, ses PV, au moins 1 ; les lancers restants ; une défaite ne
+laisse rien) ; dans la partie, `core::endEncounter` par `UJadgExploration::ResolveEncounter` (une
+victoire pose `encounter/<rencontre>/won`) ; puis la carte quittée se rouvre, le groupe là où il
+était. Un membre mort garde sa fiche : l'enterrement (`EX-CBT-062`) n'est pas porté.
+
+### Vérifier
+
+| Quoi | Commande |
+|---|---|
+| `Jadg.Combat.*` : l'espace, les candidats, le montage, un tour, l'attaque d'opportunité, la résolution | `pwsh scripts/build.ps1 -Unreal -NoCapture` |
+| la rencontre `arene-bandits` jouée au clavier et à la souris depuis le parvis | `pwsh scripts/build.ps1 -Unreal -ParcoursCombat -Seed 2` |
+| l'arène en combat, captures à 12 h et 22 h et cadence | `pwsh scripts/build.ps1 -Unreal -Scene essai-1017-arene -Capture -Encounter arene-bandits` |
+
+Le **parcours du combat** (`AJadgCombatWalkthrough`) joue chaque tour d'un héros comme un joueur :
+le tour que l'IA jouerait avec le profil de sa classe (`AJadgCombat::PlanForActive`) se traduit en
+un clic au sol, un clic sur la cible, une touche — chaque clic vérifié avant d'être pressé.
+
 ## Voir aussi
 
 - `core::CombatSpace`, `core::SimulatedSpace`, `core::Volume`, `core::Route`, `core::RouteQuery`,
@@ -971,6 +1075,11 @@ sous son voile ; c'est l'écran de mort qui quitte la rencontre et finit la part
   `core::hasHighGround`, `core::Effect`, `core::shapeHits`, `core::combatantsInArea`,
   `core::flanksByAngle`, `core::isFlanked`, `core::previewAttack`, `core::previewMove`.
 - `core::Structure`, `core::DamagePipeline::applyToStructure`.
+- `core::heroContestantSource`, `core::heroContestant`, `core::creatureContestant`,
+  `core::boutForEncounter`, `core::encounterTriggerOn`, `core::partyDeploymentOn`,
+  `core::behaviorOfClass` — le montage d'une rencontre (`LOT-1017`).
+- `FJadgCombatSpace`, `AJadgCombat`, `AJadgCombatWalkthrough` — le combat joué dans le moteur.
+- [L'exploration dans le moteur](guide-exploration-moteur.md) — la bascule vers l'arène et le retour.
 - `core::prepareMapEncounter`, `core::MapEncounterSetup`, `hmi::EncounterModel`,
   `hmi::CombatModel`, `hmi::CombatCueTrack`, `hmi::FigureResolver`.
 - `core::planTurn`, `core::playTurn`, `core::expectedDamage`, `core::ArenaSession`,

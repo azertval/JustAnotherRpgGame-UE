@@ -88,8 +88,15 @@ navigation. Un suiveur ne coupe donc pas un angle que le meneur a contourné.
 - À l'arrivée sur une carte, la file se range dans le dos du meneur, à une case l'un de l'autre,
   tant que le maillage porte. Le maillage d'une carte se construit après son lancement : le groupe
   attend sur le point d'arrivée et se range dès qu'il porte.
-- Les personnages ne se bloquent pas entre eux (canal `Pawn` ignoré) : c'est la file qui les
-  espace, et un meneur qui fait demi-tour ne reste pas derrière ses suiveurs.
+- **Les personnages se bloquent** (`LOT-1017`, dette du `LOT-1016`) : la capsule de chacun bloque
+  celle des autres, membres du groupe et PNJ (canal `Pawn`), et l'évitement réciproque du
+  mouvement (RVO du `CharacterMovementComponent`, rayon de considération 2 m, poids 0,5) les
+  écarte l'un de l'autre au lieu de les pousser : un meneur qui fait demi-tour contourne ses
+  suiveurs. Une file posée sur un seul point (le maillage pas encore prêt à l'arrivée) ne se
+  bloque pas tant que ses membres se recouvrent — sinon ils repoussaient le meneur hors de la case
+  que Core lui donne (mesuré : 0,57 case au retour de l'arène) — ; elle se bloque dès qu'ils sont
+  écartés. En combat, Core tient l'espace : la capsule ne bloque plus les autres personnages et
+  l'évitement se coupe (`AJadgWalker::SetInCombat`).
 - **Passer la main** (`Tab`) : le meneur va en queue (`EX-EXP-014`), `core::Party` tourne avec lui,
   la caméra suit le nouveau meneur.
 
@@ -123,10 +130,22 @@ kits, le dialogue s'écrit sans portrait.
 
 Une rencontre s'engage par un dialogue (`startEncounter`, le maître d'arène) ou par une entité de
 la carte. `UJadgExploration::Encounter` la nomme ; tant qu'elle tient, la carte est gelée et
-l'heure ne passe pas. Le combat lui-même est le `LOT-1017` : d'ici là, `AJadgParty` ouvre
-l'**arène vide** (`EmptyArenaMap`, dans `Config/DefaultGame.ini`), le HUD y nomme la rencontre, et
-la touche d'interaction la quitte **sans issue** — ni victoire ni défaite, aucun drapeau — puis
-rouvre la carte quittée, le groupe là où il était.
+l'heure ne passe pas. `AJadgParty` ouvre la **carte d'arène** (`ArenaMap`, dans
+`Config/DefaultGame.ini` : `/Game/Maps/Levels/essai/arene`). Dans l'arène, le groupe ne joue pas
+la carte de Core de l'arène en exploration — la session garde la carte quittée, gelée — : il crée
+le **combat** (`AJadgCombat`, `LOT-1017`), qui monte la rencontre sur la carte de Core que nomme le
+repère de l'arène et se joue (le [guide du combat](guide-combat.md) le décrit). Le maillage de
+navigation de l'arène se construit après son lancement : le groupe remonte le combat à chaque
+trame jusqu'à ce qu'il tienne (trois trames sur le poste de référence, 600 au plus).
+
+À l'issue, `UJadgExploration::ResolveEncounter` l'écrit par `core::endEncounter` — une victoire
+pose `encounter/<rencontre>/won`, que les dialogues lisent —, les points de vie et les lancers
+restants passent sur les fiches (à terre : 1 PV ; debout : ses PV, au moins 1 ; une défaite ne
+laisse rien), et la carte quittée se rouvre, **le groupe là où il était** : la session d'exploration
+a gardé la case du meneur, gelée, et la file se range derrière lui.
+
+`-JadgRencontre=<id>` engage une rencontre au lancement de l'arène elle-même ; avec
+`-JadgCapture`, le combat se monte et reste figé sur son déploiement pour les captures.
 
 ## La caméra
 
@@ -157,11 +176,12 @@ en fait des actions d'Enhanced Input créées en C++, sans asset ni Blueprint.
 
 | Commande | Effet | Touches livrées |
 |---|---|---|
-| `Walk` | le meneur marche vers le point cliqué ; sur un PNJ, il va lui parler | clic gauche |
-| `Interact` | solliciter la cible ; en dialogue, « continuer » ; dans l'arène vide, revenir | F |
-| `NextLeader` | passer la main au suivant | Tab |
-| `Recenter` | ramener la caméra sur le meneur | Début |
-| `Choice1` … `Choice6` | donner la réponse de ce rang | 1 … 6 |
+| `Walk` | le meneur marche vers le point cliqué ; sur un PNJ, il va lui parler ; en combat, la cible ou la destination | clic gauche |
+| `Interact` | solliciter la cible ; en dialogue, « continuer » | F |
+| `NextLeader` | passer la main au suivant ; sans effet en combat | Tab |
+| `Recenter` | ramener la caméra sur le meneur ; en combat, sur le combattant actif | Début |
+| `Choice1` … `Choice6` | donner la réponse de ce rang ; en combat, choisir la capacité de ce rang | 1 … 6 |
+| `Attack`, `Capacity`, `EndTurn` | en combat : attaquer la cible, lancer la capacité choisie, finir le tour (`LOT-1017`) | X, W, Espace |
 | `Turn`, `Tilt` | tourner, incliner la caméra | A / E, R / V |
 | `Look` + `LookTurn`, `LookTilt` | tourner et incliner à la souris | C tenue, ou clic droit tenu |
 | `Zoom` | rapprocher, éloigner | molette |
@@ -185,16 +205,19 @@ qui déclare une heure fixe (`hour`) se montre à cette heure. `Jadg.Time 22:00`
 | les tests du moteur (`Jadg.Exploration.*`), sans fenêtre | `pwsh scripts/build.ps1 -Unreal -NoCapture` |
 | une carte d'essai et ses captures | `pwsh scripts/build.ps1 -Unreal -Scene essai-1016-etals -Capture` |
 | la quête des pommes jouée dans le jeu lancé | `pwsh scripts/build.ps1 -Unreal -Parcours` |
+| la rencontre `arene-bandits` jouée dans le jeu lancé | `pwsh scripts/build.ps1 -Unreal -ParcoursCombat -Seed 2` |
 
-Les cartes d'essai sont écrites par `scripts/maps/build_essai_maps.py` : deux cartes de Core, chacune
-avec sa description de scène tirée du même plan, et l'arène vide.
+Les cartes d'essai sont écrites par `scripts/maps/build_essai_maps.py` : trois cartes de Core, chacune
+avec sa description de scène tirée du même plan — les étals, le parvis, et l'arène du combat
+(`essai/arene`, scène `essai-1017-arene`).
 
 Le **parcours** joue par les entrées du joueur : il presse les touches que le fichier donne aux
 commandes, injectées dans le contrôleur (`APlayerController::InputKey`), qui passent donc par
 Enhanced Input comme celles d'un clavier ; un clic est le bouton gauche pressé, le pointeur posé sur
 sa cible (`AJadgPlayerController::PointAt`), après vérification qu'il la désigne. Il essaie d'abord
 chaque commande de caméra et la juge à son effet, puis joue la quête : le clic au sol, la touche
-d'interaction, les réponses au clavier, le clic sur le coffre, sur le maître d'arène, sur la mère.
+d'interaction, les réponses au clavier, le clic sur le coffre, sur le maître d'arène — à qui il
+répond « attendre » : le combat a son propre parcours —, sur la mère.
 Les trois marches vers un portail ou une zone restent des ordres donnés au groupe. Il capture
 chaque réplique et quitte en erreur dès qu'une commande n'a pas son effet.
 

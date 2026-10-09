@@ -229,9 +229,9 @@ struct RouteQuery {
  *        sol.
  *
  * Deux implémentations : `core::SimulatedSpace` (un plan, des boîtes, des plateaux ; les tests et
- * la simulation de la série) et celle du moteur (maillage de navigation, rayons, EQS ; `LOT-1017`,
- * sous-lot 3). Les règles — `core::CombatState`, l'attaque, les zones, l'IA — ne voient que cette
- * interface, et ne savent pas laquelle répond.
+ * la simulation de la série) et celle du moteur (maillage de navigation, rayons, EQS ;
+ * `FJadgCombatSpace`, `LOT-1017`). Les règles — `core::CombatState`, l'attaque, les zones, l'IA —
+ * ne voient que cette interface, et ne savent pas laquelle répond.
  *
  * Toutes les réponses sont **déterministes** pour un même espace et une même question : la
  * simulation le garantit par construction ; le moteur n'a pas à l'être pour que les tests tiennent,
