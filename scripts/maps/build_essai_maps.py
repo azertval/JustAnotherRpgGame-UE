@@ -27,7 +27,8 @@ la vue et se contournent.
 La quatrième, `essai/etages`, est la dette du LOT-1016 (D-51) : **deux étages l'un au-dessus de
 l'autre** dans une seule carte. Un plancher à 3 m couvre la moitié est de la salle ; une rampe y
 monte ; sous le plancher, un portail du rez mène au palier de l'étage ; à la verticale du portail,
-sur le plancher, un panneau et une lanterne de l'étage.
+sur le plancher, un panneau et une lanterne de l'étage. Autour de la salle, un **terrain** : un
+tertre, un chemin pavé sur une rampe de terre, une mare.
 
 Un PNJ nomme sa figurine par son dossier depuis `Assets/` : le jeu y lit son portrait quand les
 kits sont sur le poste. Son personnage, lui, est le pantin (`appearance`), en attendant sa fiche
@@ -134,6 +135,23 @@ ETAGES_PLAN = """
 #..............#
 ################
 """
+# Autour de la salle, un terrain (LOT-1018) : un tertre au nord-est, un chemin pavé qui monte de
+# l'ouest par une rampe de terre, une mare au sud. Ses hauteurs et ses couches se régénèrent
+# (`build_level.py`) ; sous la salle, il reste sous le dallage.
+ETAGES_TERRAIN = {
+    "area": [-24.0, -24.0, 48.0, 42.0],
+    "resolution": 1.0,
+    "base": -0.1,
+    "shapes": [
+        {"shape": "disc", "centre": [32.0, -12.0], "radius": 6.0, "height": 4.0, "falloff": 8.0},
+        {"shape": "ramp", "from": [-20.0, 9.75], "to": [-4.0, 9.75], "width": 6.0, "heights": [1.5, 0.0]},
+    ],
+    "layers": [{"name": "herbe", "colour": "#4f6b33"}, {"name": "terre", "colour": "#7a5f3e"},
+               {"name": "pave", "colour": "#8a8378"}],
+}
+ETAGES_ROUTES = [{"name": "chemin", "points": [[-20.0, 9.75], [-1.0, 9.75]], "width": 3.0, "layer": "pave"}]
+ETAGES_OUTLINES = [{"name": "mare", "points": [[4.0, 24.0], [16.0, 24.0], [18.0, 32.0], [6.0, 34.0]],
+                    "height": -1.2, "water": -0.3, "layer": "terre"}]
 STOREY = 3.0                 # la hauteur du plancher de l'étage, en mètres
 SLAB = 0.3                   # son épaisseur
 SLAB_CELLS = (8, 1, 14, 10)  # colonnes et lignes qu'il couvre, bornes comprises
@@ -389,13 +407,16 @@ def map_doc(identifier: str, spec: dict) -> dict:
         "nextEntityId": len(entities) + 1,
         "tiles": tiles,
         "entities": [core_entity(entity) for entity in entities],
+        **({"terrain": ETAGES_TERRAIN, "routes": ETAGES_ROUTES, "outlines": ETAGES_OUTLINES}
+           if identifier == "essai/etages" else {}),
         "objects": objects_of(identifier, spec, entities),
         "fills": [{"id": "sol", "meshes": [FLOOR_MESH], "cell": CELL, "areas": [[0.0, 0.0, width, height]]}],
         "party": {"appearances": list(HEROES), "walkSpeed": 3.0},
         "assetsRoot": "Source/Test/Fixtures/Meshes/Assets",
         "lighting": LIGHTING,
         "daylight": jadg_map.DAYLIGHT,
-        "ground": {"colour": "#8f7d62", "size": 4000.0, "height": -0.02},
+        # Le sol lointain, sous une carte sans terrain.
+        **({} if identifier == "essai/etages" else {"ground": {"colour": "#8f7d62", "size": 4000.0, "height": -0.02}}),
         "navigation": {"area": [0.0, 0.0, width, height], "height": 4.0 + (STOREY if "storeys" in spec else 0.0)},
         "shots": spec["shots"],
         "hours": ["12:00", "22:00"],

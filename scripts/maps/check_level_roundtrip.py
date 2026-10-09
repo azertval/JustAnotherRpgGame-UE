@@ -135,7 +135,10 @@ def main() -> None:
     check(rebuilt["digest"] == moved, f"reconstruit depuis le texte relu, l'empreinte du niveau retouché ({rebuilt['digest'][:16]})",
           failures)
 
-    unreal.EditorAssetLibrary.delete_asset(PACKAGE)
+    # Le niveau d'essai ne s'efface pas tant qu'il est ouvert : un niveau vide le remplace d'abord.
+    unreal.EditorLoadingAndSavingUtils.new_blank_map(False)
+    if not unreal.EditorAssetLibrary.delete_asset(PACKAGE):
+        log(f"{PACKAGE} : ne s'efface pas")
     if failures:
         build_level.fail(f"aller-retour : {len(failures)} échec(s)")
     log("aller-retour réussi")

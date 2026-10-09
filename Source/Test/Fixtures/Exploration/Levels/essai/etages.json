@@ -81,6 +81,26 @@
     {"id": "e4", "type": "sign", "x": 11, "y": 7, "storey": 1},
     {"id": "e5", "type": "light", "x": 12, "y": 9, "storey": 1, "height": 22, "always": false, "color": "#ffbe7a", "flicker": false, "intensity": 100, "radius": 4}
   ],
+  "terrain": {
+    "area": [-24.0, -24.0, 48.0, 42.0],
+    "resolution": 1.0,
+    "base": -0.1,
+    "shapes": [
+      {"centre": [32.0, -12.0], "falloff": 8.0, "height": 4.0, "radius": 6.0, "shape": "disc"},
+      {"from": [-20.0, 9.75], "heights": [1.5, 0.0], "shape": "ramp", "to": [-4.0, 9.75], "width": 6.0}
+    ],
+    "layers": [
+      {"name": "herbe", "colour": "#4f6b33"},
+      {"name": "terre", "colour": "#7a5f3e"},
+      {"name": "pave", "colour": "#8a8378"}
+    ]
+  },
+  "routes": [
+    {"name": "chemin", "layer": "pave", "points": [[-20.0, 9.75], [-1.0, 9.75]], "width": 3.0}
+  ],
+  "outlines": [
+    {"name": "mare", "height": -1.2, "layer": "terre", "points": [[4.0, 24.0], [16.0, 24.0], [18.0, 32.0], [6.0, 34.0]], "water": -0.3}
+  ],
   "objects": [
     {"id": "mur/0,0", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.75, 0.0], "folder": "murs"},
     {"id": "mur/1,0", "mesh": "Scene/ilot/wall.glb", "position": [2.25, 0.75, 0.0], "folder": "murs"},
@@ -165,11 +185,6 @@
     }
   },
   "daylight": "Common/Lighting/daylight.json",
-  "ground": {
-    "colour": "#8f7d62",
-    "size": 4000.0,
-    "height": -0.02
-  },
   "navigation": {
     "area": [0.0, 0.0, 24.0, 18.0],
     "height": 7.0

@@ -1,0 +1,11 @@
+{
+  "map": "arena-of-fate",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 17.05,
+  "captures": ["ensemble-1200.png", "ensemble-2200.png"],
+  "measures": [
+    {"hour": "12:00", "seconds": 11.4, "frames": 1241, "fps": 108.4, "frameMs": 9.22, "p99FrameMs": 11.05, "worstFrameMs": 32.17, "gameMs": 2.94, "renderMs": 1.99, "gpuMs": 8.57},
+    {"hour": "22:00", "seconds": 11.5, "frames": 1252, "fps": 109.3, "frameMs": 9.15, "p99FrameMs": 10.56, "worstFrameMs": 12.65, "gameMs": 2.77, "renderMs": 9.15, "gpuMs": 8.54}
+  ]
+}

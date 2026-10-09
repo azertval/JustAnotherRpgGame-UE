@@ -806,7 +806,7 @@ def place_prefabs(level: Level, frame: Frame, doc: dict, library: Library) -> in
                 member = {**member, "mesh": resolved[0]}
             member = {**member, "id": f"{item['id']}/{member['id']}"}
             actor = place_object(level, frame, doc, library, member, item["id"], (origin, item.get("yaw", 0.0), grown))
-            actor.tags = [t for t in actor.tags if not t.startswith(OBJECT_TAG)]
+            actor.tags = [t for t in actor.tags if not str(t).startswith(OBJECT_TAG)]
             actor.attach_to_actor(anchor, "", unreal.AttachmentRule.KEEP_WORLD, unreal.AttachmentRule.KEEP_WORLD,
                                   unreal.AttachmentRule.KEEP_WORLD, False)
             count += 1
@@ -1154,7 +1154,8 @@ def place_entities(level: Level, doc: dict, frame: Frame) -> None:
         extent = frame.map_point([(high[k] - low[k]) / 2 for k in range(3)])
         shape = box.get_component_by_class(unreal.BoxComponent)
         shape.set_box_extent(unreal.Vector(abs(extent.x), abs(extent.y), abs(extent.z)))
-        shape.set_can_ever_affect_navigation(False)
+        # Une boîte de déclenchement ne compte pas pour le maillage de navigation (défaut d'une forme).
+        shape.set_collision_enabled(unreal.CollisionEnabled.QUERY_ONLY)
         box.tags = [f"{VOLUME_TAG}{entity['id']}"]
 
 
@@ -1251,7 +1252,7 @@ def write_footprint(map_id: str, digest: str, actors: list[dict], measures: dict
     path = FOOTPRINTS / f"{map_id}.json"
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps({"map": map_id, "digest": digest, "actors": len(actors), **measures,
-                                "detail": actors}, indent=1, ensure_ascii=False), encoding="utf-8")
+                                "detail": actors}, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     return path
 
 

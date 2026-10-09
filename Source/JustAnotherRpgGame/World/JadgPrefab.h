@@ -26,10 +26,10 @@ public:
 	AJadgPrefab();
 
 	/// Le préfabriqué, par son chemin sous `Editor/Prefabs/`, sans extension.
-	UPROPERTY(VisibleAnywhere, Category = "Jadg")
+	UPROPERTY(EditAnywhere, Category = "Jadg")
 	FString PrefabId;
 
 	/// L'identifiant de cette pose dans la description de la carte (`prefabs[].id`).
-	UPROPERTY(VisibleAnywhere, Category = "Jadg")
+	UPROPERTY(EditAnywhere, Category = "Jadg")
 	FString InstanceId;
 };
