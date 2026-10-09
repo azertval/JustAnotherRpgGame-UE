@@ -1,0 +1,12 @@
+{
+  "map": "arenarea-palazzo-terracotta",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 16.02,
+  "post": "",
+  "gpuMemoryMiB": {"used": 3514.9, "texturesStreaming": 103.4, "texturesNonStreaming": 1763.4},
+  "meshTextures": {"count": 6, "residentMiB": 16.6, "allMipsMiB": 16.6},
+  "meshes": {"count": 3, "triangles": 2684226, "resourceMiB": 7.1, "largest": "/Game/Master/Scenery/arenarea-palazzo-terracotta/StaticMeshes/SM_Scenery_Arenarea_Palazzo_Terracotta.SM_Scenery_Arenarea_Palazzo_Terracotta", "largestTriangles": 2679696},
+  "captures": ["face-1200.png", "droite-1200.png", "dos-1200.png", "gauche-1200.png", "face-2200.png", "droite-2200.png", "dos-2200.png", "gauche-2200.png"],
+  "measures": []
+}

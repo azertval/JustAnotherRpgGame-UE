@@ -1,0 +1,648 @@
+{
+ "set": "maitres",
+ "pieces": 49,
+ "glbBytes": 1870632928,
+ "meshBytes": 1823089351,
+ "textures": 147,
+ "textureBytes": 419969066,
+ "largest": "Statues/statue-dorsi",
+ "detail": [
+  {
+   "id": "Statues/statue-bauron",
+   "asset": "/Game/Master/Statues/statue-bauron/StaticMeshes/SM_Statue_Bauron",
+   "triangles": 2221596,
+   "glbBytes": 74076968,
+   "meshBytes": 81568182,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_b3f0b3376092d59b",
+    "/Game/Scenery/Textures/T_N_020c5e5ed21b6027",
+    "/Game/Scenery/Textures/T_ORM_7abc5bfc211e5c61"
+   ],
+   "textureBytes": 9730627
+  },
+  {
+   "id": "Statues/effigy-zulvath",
+   "asset": "/Game/Master/Statues/effigy-zulvath/StaticMeshes/SM_Statue_Effigy_Zulvath",
+   "triangles": 1764976,
+   "glbBytes": 59571268,
+   "meshBytes": 64959372,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_2398cb448180397e",
+    "/Game/Scenery/Textures/T_N_3f5db9077e3a4923",
+    "/Game/Scenery/Textures/T_ORM_c5e8e1207e6da074"
+   ],
+   "textureBytes": 8373709
+  },
+  {
+   "id": "Statues/portal-guardian-lion",
+   "asset": "/Game/Master/Statues/portal-guardian-lion/StaticMeshes/SM_Statue_Portal_Guardian_Lion",
+   "triangles": 1088160,
+   "glbBytes": 40999540,
+   "meshBytes": 40154242,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_91ccee13c6ffed30",
+    "/Game/Scenery/Textures/T_N_b730b7f9e28db9fb",
+    "/Game/Scenery/Textures/T_ORM_8d2ad94d55fc5137"
+   ],
+   "textureBytes": 9587089
+  },
+  {
+   "id": "Statues/statue-duality",
+   "asset": "/Game/Master/Statues/statue-duality/StaticMeshes/SM_Statue_Duality",
+   "triangles": 2573340,
+   "glbBytes": 83581936,
+   "meshBytes": 97039739,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_836dd903feceebe1",
+    "/Game/Scenery/Textures/T_N_de2de05559957be5",
+    "/Game/Scenery/Textures/T_ORM_9b58d6a098f5dac2"
+   ],
+   "textureBytes": 9277325
+  },
+  {
+   "id": "Statues/statue-lumina",
+   "asset": "/Game/Master/Statues/statue-lumina/StaticMeshes/SM_Statue_Lumina",
+   "triangles": 1857128,
+   "glbBytes": 62209100,
+   "meshBytes": 66449747,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_3f92bffd2a5543c0",
+    "/Game/Scenery/Textures/T_N_9c4d2d0fc526f2da",
+    "/Game/Scenery/Textures/T_ORM_27341ed743cf3ea1"
+   ],
+   "textureBytes": 8553071
+  },
+  {
+   "id": "Statues/statue-bas",
+   "asset": "/Game/Master/Statues/statue-bas/StaticMeshes/SM_Statue_Bas",
+   "triangles": 1900974,
+   "glbBytes": 63562536,
+   "meshBytes": 70484098,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_461b4881c68546b4",
+    "/Game/Scenery/Textures/T_N_38398d0ba0872698",
+    "/Game/Scenery/Textures/T_ORM_cb76ab1aa5c46a64"
+   ],
+   "textureBytes": 8444494
+  },
+  {
+   "id": "Statues/statue-oigridh",
+   "asset": "/Game/Master/Statues/statue-oigridh/StaticMeshes/SM_Statue_Oigridh",
+   "triangles": 1602702,
+   "glbBytes": 55006340,
+   "meshBytes": 59723351,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_bff774c7135e07ba",
+    "/Game/Scenery/Textures/T_N_aea48a1ea7a1f5aa",
+    "/Game/Scenery/Textures/T_ORM_b094caec8f98146c"
+   ],
+   "textureBytes": 8518898
+  },
+  {
+   "id": "Statues/statue-glorious-one",
+   "asset": "/Game/Master/Statues/statue-glorious-one/StaticMeshes/SM_Statue_Glorious_One",
+   "triangles": 2536316,
+   "glbBytes": 82157304,
+   "meshBytes": 96933160,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_1ed68069798ee53b",
+    "/Game/Scenery/Textures/T_N_efdb7faf0872a596",
+    "/Game/Scenery/Textures/T_ORM_dfcf23eb42a1d925"
+   ],
+   "textureBytes": 8420022
+  },
+  {
+   "id": "Statues/statue-tamera",
+   "asset": "/Game/Master/Statues/statue-tamera/StaticMeshes/SM_Statue_Tamera",
+   "triangles": 1122786,
+   "glbBytes": 40502212,
+   "meshBytes": 41152426,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_62e1bca9c1836c07",
+    "/Game/Scenery/Textures/T_N_7fbf2884ca303b62",
+    "/Game/Scenery/Textures/T_ORM_371152f4d68e6c7b"
+   ],
+   "textureBytes": 7781178
+  },
+  {
+   "id": "Statues/statue-fruitful",
+   "asset": "/Game/Master/Statues/statue-fruitful/StaticMeshes/SM_Statue_Fruitful",
+   "triangles": 2708602,
+   "glbBytes": 88788492,
+   "meshBytes": 103206562,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_df6f8f1f4db636b4",
+    "/Game/Scenery/Textures/T_N_635c3f1bfb6131d9",
+    "/Game/Scenery/Textures/T_ORM_842672010b103cc7"
+   ],
+   "textureBytes": 9774189
+  },
+  {
+   "id": "Statues/statue-fumetsu",
+   "asset": "/Game/Master/Statues/statue-fumetsu/StaticMeshes/SM_Statue_Fumetsu",
+   "triangles": 1123536,
+   "glbBytes": 40673960,
+   "meshBytes": 39830176,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_f150414c7386f01e",
+    "/Game/Scenery/Textures/T_N_3004213068f7cbe8",
+    "/Game/Scenery/Textures/T_ORM_c1e74d892eaf9ee8"
+   ],
+   "textureBytes": 8011174
+  },
+  {
+   "id": "Statues/statue-nature-spirits",
+   "asset": "/Game/Master/Statues/statue-nature-spirits/StaticMeshes/SM_Statue_Nature_Spirits",
+   "triangles": 2005712,
+   "glbBytes": 66888592,
+   "meshBytes": 74876537,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_f58835c09a35ad55",
+    "/Game/Scenery/Textures/T_N_bb98cc8a72b73867",
+    "/Game/Scenery/Textures/T_ORM_76221fa36642284e"
+   ],
+   "textureBytes": 8770464
+  },
+  {
+   "id": "Statues/statue-aibidh",
+   "asset": "/Game/Master/Statues/statue-aibidh/StaticMeshes/SM_Statue_Aibidh",
+   "triangles": 2308174,
+   "glbBytes": 74477556,
+   "meshBytes": 88793135,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_432a427da7f0501c",
+    "/Game/Scenery/Textures/T_N_f884c3dd1448d135",
+    "/Game/Scenery/Textures/T_ORM_4fc1363b75f8109b"
+   ],
+   "textureBytes": 7263369
+  },
+  {
+   "id": "Statues/ossuary-insert",
+   "asset": "/Game/Master/Statues/ossuary-insert/StaticMeshes/SM_Statue_Ossuary_Insert",
+   "triangles": 2331844,
+   "glbBytes": 76466280,
+   "meshBytes": 87236565,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_5744e74c7733ca04",
+    "/Game/Scenery/Textures/T_N_99717ced4e5949b4",
+    "/Game/Scenery/Textures/T_ORM_f6bd2de906d89ea9"
+   ],
+   "textureBytes": 8470855
+  },
+  {
+   "id": "Statues/statue-ba-ka",
+   "asset": "/Game/Master/Statues/statue-ba-ka/StaticMeshes/SM_Statue_Ba_Ka",
+   "triangles": 1791162,
+   "glbBytes": 62064856,
+   "meshBytes": 65130419,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_91d5c87630c3d98e",
+    "/Game/Scenery/Textures/T_N_4ab48142ae163b83",
+    "/Game/Scenery/Textures/T_ORM_dc939218c2067a7d"
+   ],
+   "textureBytes": 9665029
+  },
+  {
+   "id": "Statues/funerary-statue",
+   "asset": "/Game/Master/Statues/funerary-statue/StaticMeshes/SM_Statue_Funerary_Statue",
+   "triangles": 562518,
+   "glbBytes": 25643216,
+   "meshBytes": 20044852,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_5d8416bb87661392",
+    "/Game/Scenery/Textures/T_N_b8c0cb0d67f6435e",
+    "/Game/Scenery/Textures/T_ORM_88cbfe8d853ec8e0"
+   ],
+   "textureBytes": 9077359
+  },
+  {
+   "id": "Statues/effigy-droggath",
+   "asset": "/Game/Master/Statues/effigy-droggath/StaticMeshes/SM_Statue_Effigy_Droggath",
+   "triangles": 2283728,
+   "glbBytes": 75803056,
+   "meshBytes": 86022605,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_dd2bd216d169c65f",
+    "/Game/Scenery/Textures/T_N_d8a3d014e5ce4bcb",
+    "/Game/Scenery/Textures/T_ORM_056d1a6c06d39082"
+   ],
+   "textureBytes": 9884902
+  },
+  {
+   "id": "Statues/statue-dorsi",
+   "asset": "/Game/Master/Statues/statue-dorsi/StaticMeshes/SM_Statue_Dorsi",
+   "triangles": 2900460,
+   "glbBytes": 93134652,
+   "meshBytes": 107680802,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_811d7f172931125b",
+    "/Game/Scenery/Textures/T_N_f8e2546d5321e17e",
+    "/Game/Scenery/Textures/T_ORM_4a465d08d1600707"
+   ],
+   "textureBytes": 9853702
+  },
+  {
+   "id": "Statues/neutral-athlete",
+   "asset": "/Game/Master/Statues/neutral-athlete/StaticMeshes/SM_Statue_Neutral_Athlete",
+   "triangles": 520138,
+   "glbBytes": 21268352,
+   "meshBytes": 17949964,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_0da6d5a404957dd2",
+    "/Game/Scenery/Textures/T_N_a05aeeb40655f0f0",
+    "/Game/Scenery/Textures/T_ORM_51973ff8c44f9d86"
+   ],
+   "textureBytes": 6085407
+  },
+  {
+   "id": "Statues/effigy-krynnethoth",
+   "asset": "/Game/Master/Statues/effigy-krynnethoth/StaticMeshes/SM_Statue_Effigy_Krynnethoth",
+   "triangles": 1666716,
+   "glbBytes": 57667960,
+   "meshBytes": 61514568,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_29fb91af3eb556ae",
+    "/Game/Scenery/Textures/T_N_ee993ffdf5634239",
+    "/Game/Scenery/Textures/T_ORM_380ae17794eb9f55"
+   ],
+   "textureBytes": 9024392
+  },
+  {
+   "id": "Statues/effigy-cthraxis",
+   "asset": "/Game/Master/Statues/effigy-cthraxis/StaticMeshes/SM_Statue_Effigy_Cthraxis",
+   "triangles": 2632186,
+   "glbBytes": 86800628,
+   "meshBytes": 97751826,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_98955cceb8aaaf67",
+    "/Game/Scenery/Textures/T_N_7bce13b3813d68cf",
+    "/Game/Scenery/Textures/T_ORM_1dad4a7ee8b0b47b"
+   ],
+   "textureBytes": 10174776
+  },
+  {
+   "id": "Statues/statue-breith",
+   "asset": "/Game/Master/Statues/statue-breith/StaticMeshes/SM_Statue_Breith",
+   "triangles": 1299612,
+   "glbBytes": 45771008,
+   "meshBytes": 46210329,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_f382f0d9c638a5c9",
+    "/Game/Scenery/Textures/T_N_fcf40f0878df0e40",
+    "/Game/Scenery/Textures/T_ORM_8593f8469f2e6fb5"
+   ],
+   "textureBytes": 7970004
+  },
+  {
+   "id": "Scenery/arenarea-palazzo-terracotta",
+   "asset": "/Game/Master/Scenery/arenarea-palazzo-terracotta/StaticMeshes/SM_Scenery_Arenarea_Palazzo_Terracotta",
+   "triangles": 2679696,
+   "glbBytes": 91910416,
+   "meshBytes": 99272458,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_2bda8a739eb129aa",
+    "/Game/Scenery/Textures/T_N_870bd7d00f34768b",
+    "/Game/Scenery/Textures/T_ORM_2980434d2dac0ebb"
+   ],
+   "textureBytes": 11613750
+  },
+  {
+   "id": "Weapons/gladiator-shield",
+   "asset": "/Game/Master/Weapons/gladiator-shield/StaticMeshes/SM_Weapon_Gladiator_Shield",
+   "triangles": 462470,
+   "glbBytes": 22912768,
+   "meshBytes": 14779832,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_35c09f691ac378b9",
+    "/Game/Scenery/Textures/T_N_11328cecdc935203",
+    "/Game/Scenery/Textures/T_ORM_2742de0203828dcf"
+   ],
+   "textureBytes": 9389805
+  },
+  {
+   "id": "Weapons/ironhand-longsword",
+   "asset": "/Game/Master/Weapons/ironhand-longsword/StaticMeshes/SM_Weapon_Ironhand_Longsword",
+   "triangles": 149474,
+   "glbBytes": 12751620,
+   "meshBytes": 4934873,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_f2578d0589638ef6",
+    "/Game/Scenery/Textures/T_N_75623a76d8010a20",
+    "/Game/Scenery/Textures/T_ORM_dceef1fe97fcbbcd"
+   ],
+   "textureBytes": 8320736
+  },
+  {
+   "id": "Weapons/longbow",
+   "asset": "/Game/Master/Weapons/longbow/StaticMeshes/SM_Weapon_Longbow",
+   "triangles": 213194,
+   "glbBytes": 14986504,
+   "meshBytes": 7059335,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_388aa401356ba313",
+    "/Game/Scenery/Textures/T_N_5fe9f64256143155",
+    "/Game/Scenery/Textures/T_ORM_74b0a8516075f288"
+   ],
+   "textureBytes": 8654809
+  },
+  {
+   "id": "Weapons/mage-staff",
+   "asset": "/Game/Master/Weapons/mage-staff/StaticMeshes/SM_Weapon_Mage_Staff",
+   "triangles": 169826,
+   "glbBytes": 12374216,
+   "meshBytes": 5744358,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_460a65afa82c24df",
+    "/Game/Scenery/Textures/T_N_eb989c9f468f9481",
+    "/Game/Scenery/Textures/T_ORM_e003165487699f6f"
+   ],
+   "textureBytes": 7345905
+  },
+  {
+   "id": "Weapons/captain-scimitar",
+   "asset": "/Game/Master/Weapons/captain-scimitar/StaticMeshes/SM_Weapon_Captain_Scimitar",
+   "triangles": 178094,
+   "glbBytes": 13752460,
+   "meshBytes": 5749580,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_8785a13672bbf20f",
+    "/Game/Scenery/Textures/T_N_2c804c7a82f71c21",
+    "/Game/Scenery/Textures/T_ORM_297128f71f39b856"
+   ],
+   "textureBytes": 8507031
+  },
+  {
+   "id": "Weapons/brawler-axe",
+   "asset": "/Game/Master/Weapons/brawler-axe/StaticMeshes/SM_Weapon_Brawler_Axe",
+   "triangles": 198538,
+   "glbBytes": 13826472,
+   "meshBytes": 6710936,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_cc0159e600ee049c",
+    "/Game/Scenery/Textures/T_N_d6d7eceb7fad7523",
+    "/Game/Scenery/Textures/T_ORM_0e41d59f139fc6f6"
+   ],
+   "textureBytes": 8043021
+  },
+  {
+   "id": "Weapons/thug-mace",
+   "asset": "/Game/Master/Weapons/thug-mace/StaticMeshes/SM_Weapon_Thug_Mace",
+   "triangles": 208600,
+   "glbBytes": 15156992,
+   "meshBytes": 7141610,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_920ce7bca1468fa3",
+    "/Game/Scenery/Textures/T_N_fca03fc8dfa85a0c",
+    "/Game/Scenery/Textures/T_ORM_818b8364b996d85d"
+   ],
+   "textureBytes": 9025388
+  },
+  {
+   "id": "Weapons/berserker-axe",
+   "asset": "/Game/Master/Weapons/berserker-axe/StaticMeshes/SM_Weapon_Berserker_Axe",
+   "triangles": 295224,
+   "glbBytes": 17832616,
+   "meshBytes": 10012796,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_e5856b16abc2e656",
+    "/Game/Scenery/Textures/T_N_c75d97955d61bb26",
+    "/Game/Scenery/Textures/T_ORM_27daa94787d71ff5"
+   ],
+   "textureBytes": 9245107
+  },
+  {
+   "id": "Weapons/dagger",
+   "asset": "/Game/Master/Weapons/dagger/StaticMeshes/SM_Weapon_Dagger",
+   "triangles": 91748,
+   "glbBytes": 11091840,
+   "meshBytes": 3059632,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_7f4e80eb10240c0c",
+    "/Game/Scenery/Textures/T_N_ada3d96b8460ed5f",
+    "/Game/Scenery/Textures/T_ORM_4125f728ab10c01b"
+   ],
+   "textureBytes": 8370824
+  },
+  {
+   "id": "Weapons/bolt",
+   "asset": "/Game/Master/Weapons/bolt/StaticMeshes/SM_Weapon_Bolt",
+   "triangles": 225636,
+   "glbBytes": 15364712,
+   "meshBytes": 7510221,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_6727c0f70870d410",
+    "/Game/Scenery/Textures/T_N_55fb407af04bacec",
+    "/Game/Scenery/Textures/T_ORM_41adee9bd9fd419c"
+   ],
+   "textureBytes": 8685926
+  },
+  {
+   "id": "Weapons/heavy-crossbow",
+   "asset": "/Game/Master/Weapons/heavy-crossbow/StaticMeshes/SM_Weapon_Heavy_Crossbow",
+   "triangles": 334722,
+   "glbBytes": 19095396,
+   "meshBytes": 10274039,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_88e0da9774cabd1d",
+    "/Game/Scenery/Textures/T_N_a9bc1e1ec3e58380",
+    "/Game/Scenery/Textures/T_ORM_c2cab7099c74ddbb"
+   ],
+   "textureBytes": 9226537
+  },
+  {
+   "id": "Weapons/arena-shield",
+   "asset": "/Game/Master/Weapons/arena-shield/StaticMeshes/SM_Weapon_Arena_Shield",
+   "triangles": 536182,
+   "glbBytes": 25123336,
+   "meshBytes": 17401705,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_624bc8d1158187fd",
+    "/Game/Scenery/Textures/T_N_2e54eb2531f01b3c",
+    "/Game/Scenery/Textures/T_ORM_ada123f1ff8f62de"
+   ],
+   "textureBytes": 9448378
+  },
+  {
+   "id": "Weapons/handaxe",
+   "asset": "/Game/Master/Weapons/handaxe/StaticMeshes/SM_Weapon_Handaxe",
+   "triangles": 313314,
+   "glbBytes": 18291060,
+   "meshBytes": 10625393,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_72147ce07d4ecce3",
+    "/Game/Scenery/Textures/T_N_6e7365e7193a0d50",
+    "/Game/Scenery/Textures/T_ORM_e9523edbf8d15963"
+   ],
+   "textureBytes": 9174183
+  },
+  {
+   "id": "Weapons/handaxe-variant",
+   "asset": "/Game/Master/Weapons/handaxe-variant/StaticMeshes/SM_Weapon_Handaxe_Variant",
+   "triangles": 319506,
+   "glbBytes": 18083732,
+   "meshBytes": 10955737,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_be688e07866ee1f3",
+    "/Game/Scenery/Textures/T_N_5e4f888a0d01820f",
+    "/Game/Scenery/Textures/T_ORM_28c18f7f8b820ef2"
+   ],
+   "textureBytes": 8766927
+  },
+  {
+   "id": "Weapons/arrow",
+   "asset": "/Game/Master/Weapons/arrow/StaticMeshes/SM_Weapon_Arrow",
+   "triangles": 57496,
+   "glbBytes": 9200100,
+   "meshBytes": 1992071,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_a147fa50b553cb73",
+    "/Game/Scenery/Textures/T_N_bcd4d5c8445acd5e",
+    "/Game/Scenery/Textures/T_ORM_33c52f4e86020f9d"
+   ],
+   "textureBytes": 7436666
+  },
+  {
+   "id": "Weapons/gladiator-spear",
+   "asset": "/Game/Master/Weapons/gladiator-spear/StaticMeshes/SM_Weapon_Gladiator_Spear",
+   "triangles": 107156,
+   "glbBytes": 10193788,
+   "meshBytes": 3710654,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_dd541b8d131c2766",
+    "/Game/Scenery/Textures/T_N_396dc78eb6be5d25",
+    "/Game/Scenery/Textures/T_ORM_7d899d3f48411c3d"
+   ],
+   "textureBytes": 7022690
+  },
+  {
+   "id": "Weapons/javelin",
+   "asset": "/Game/Master/Weapons/javelin/StaticMeshes/SM_Weapon_Javelin",
+   "triangles": 48858,
+   "glbBytes": 8514572,
+   "meshBytes": 1766312,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_d2e2d79d3f86c819",
+    "/Game/Scenery/Textures/T_N_a0d8e5923c3cf290",
+    "/Game/Scenery/Textures/T_ORM_4cb5c2c9f7872902"
+   ],
+   "textureBytes": 6968076
+  },
+  {
+   "id": "Weapons/quiver",
+   "asset": "/Game/Master/Weapons/quiver/StaticMeshes/SM_Weapon_Quiver",
+   "triangles": 619396,
+   "glbBytes": 24290028,
+   "meshBytes": 21200652,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_e2c2ba3cbb66b22a",
+    "/Game/Scenery/Textures/T_N_b4988936b9845b8d",
+    "/Game/Scenery/Textures/T_ORM_fc95718aa5728e31"
+   ],
+   "textureBytes": 6248309
+  },
+  {
+   "id": "Weapons/priest-warhammer",
+   "asset": "/Game/Master/Weapons/priest-warhammer/StaticMeshes/SM_Weapon_Priest_Warhammer",
+   "triangles": 560344,
+   "glbBytes": 26002484,
+   "meshBytes": 18215187,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_4b0cd9e18d1e50bd",
+    "/Game/Scenery/Textures/T_N_945b8ea010c4f854",
+    "/Game/Scenery/Textures/T_ORM_4c3265af9dcbc269"
+   ],
+   "textureBytes": 9736293
+  },
+  {
+   "id": "Weapons/skeleton-shortsword",
+   "asset": "/Game/Master/Weapons/skeleton-shortsword/StaticMeshes/SM_Weapon_Skeleton_Shortsword",
+   "triangles": 122466,
+   "glbBytes": 11771512,
+   "meshBytes": 4124118,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_3bde3750340b14b7",
+    "/Game/Scenery/Textures/T_N_1820aaf61b84a013",
+    "/Game/Scenery/Textures/T_ORM_ef4f03f951551d10"
+   ],
+   "textureBytes": 8185433
+  },
+  {
+   "id": "Weapons/scoundrel-rapier",
+   "asset": "/Game/Master/Weapons/scoundrel-rapier/StaticMeshes/SM_Weapon_Scoundrel_Rapier",
+   "triangles": 154870,
+   "glbBytes": 11699632,
+   "meshBytes": 5227878,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_eac8fb370cd07828",
+    "/Game/Scenery/Textures/T_N_a73d2bbf384416ef",
+    "/Game/Scenery/Textures/T_ORM_bb4f6d176a74cd4e"
+   ],
+   "textureBytes": 7077678
+  },
+  {
+   "id": "Weapons/ironhand-shield",
+   "asset": "/Game/Master/Weapons/ironhand-shield/StaticMeshes/SM_Weapon_Ironhand_Shield",
+   "triangles": 300216,
+   "glbBytes": 18027980,
+   "meshBytes": 9660527,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_b4141c92171a01fa",
+    "/Game/Scenery/Textures/T_N_81bf60656e5778b5",
+    "/Game/Scenery/Textures/T_ORM_db7014f573620de4"
+   ],
+   "textureBytes": 9172574
+  },
+  {
+   "id": "Weapons/skeleton-shortbow",
+   "asset": "/Game/Master/Weapons/skeleton-shortbow/StaticMeshes/SM_Weapon_Skeleton_Shortbow",
+   "triangles": 151944,
+   "glbBytes": 12588200,
+   "meshBytes": 4985350,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_3ba6eca51312deda",
+    "/Game/Scenery/Textures/T_N_1288743054fc6416",
+    "/Game/Scenery/Textures/T_ORM_8395368a223b46bb"
+   ],
+   "textureBytes": 8005115
+  },
+  {
+   "id": "Weapons/light-crossbow",
+   "asset": "/Game/Master/Weapons/light-crossbow/StaticMeshes/SM_Weapon_Light_Crossbow",
+   "triangles": 325730,
+   "glbBytes": 18096184,
+   "meshBytes": 10036944,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_e2f097c03e009959",
+    "/Game/Scenery/Textures/T_N_cfdbf91df4b44840",
+    "/Game/Scenery/Textures/T_ORM_88091ffbbd5d486c"
+   ],
+   "textureBytes": 8559339
+  },
+  {
+   "id": "Weapons/staff",
+   "asset": "/Game/Master/Weapons/staff/StaticMeshes/SM_Weapon_Staff",
+   "triangles": 66432,
+   "glbBytes": 8463992,
+   "meshBytes": 2390253,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_9ecf835792f92730",
+    "/Game/Scenery/Textures/T_N_34864d8c6437cfc1",
+    "/Game/Scenery/Textures/T_ORM_6fa13f4c1696301a"
+   ],
+   "textureBytes": 6427100
+  },
+  {
+   "id": "Weapons/bandit-scimitar",
+   "asset": "/Game/Master/Weapons/bandit-scimitar/StaticMeshes/SM_Weapon_Bandit_Scimitar",
+   "triangles": 119290,
+   "glbBytes": 12114504,
+   "meshBytes": 3834243,
+   "textures": [
+    "/Game/Scenery/Textures/T_C_fa38d767f5fd1f9c",
+    "/Game/Scenery/Textures/T_N_cfb37a0ff185982e",
+    "/Game/Scenery/Textures/T_ORM_d2c8d9c5360ead98"
+   ],
+   "textureBytes": 8599431
+  }
+ ]
+}
