@@ -13,15 +13,16 @@ class UInputMappingContext;
 struct FInputActionInstance;
 
 /**
- * @brief Les commandes du joueur en exploration : la caméra libre, la marche au clic,
- *        l'interaction, le meneur, les réponses d'un dialogue (LOT-1012, LOT-1016).
+ * @brief Les commandes du joueur : la caméra libre, la marche au clic, l'interaction, le meneur,
+ *        les réponses d'un dialogue (LOT-1012, LOT-1016) ; en combat, la cible, la destination,
+ *        l'attaque, la capacité, la fin du tour (LOT-1017).
  *
  * Les commandes et leurs touches sont dans `Config/DefaultGame.ini` (`UJadgControls`, qui en donne
  * la table). Au lancement, chaque commande devient une action d'Enhanced Input créée ici, dans un
  * contexte créé ici : ni asset d'action, ni table d'entrées, ni Blueprint.
  *
  * Le contrôleur ne décide de rien : il passe l'ordre au groupe (`AJadgParty`), à la caméra
- * (`AJadgCameraPawn`) ou à l'exploration (`UJadgExploration`).
+ * (`AJadgCameraPawn`), à l'exploration (`UJadgExploration`) ou au combat (`AJadgCombat`).
  */
 UCLASS()
 class AJadgPlayerController : public APlayerController

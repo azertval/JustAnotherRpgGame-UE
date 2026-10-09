@@ -354,24 +354,10 @@ void AJadgWalkthrough::Tick(float DeltaSeconds)
 		return;
 	}
 
-	if (!Exploration->Encounter().IsEmpty() && !Exploration->InDialogue())
+	if (!Exploration->Encounter().IsEmpty())
 	{
-		// La bascule vers le combat : l'arène vide s'ouvre ; on la capture, puis la touche ramène.
-		if (!Party->InArena() || GEncounterDone)
-		{
-			return;
-		}
-		if (!bArenaShot)
-		{
-			bArenaShot = true;
-			Shoot(FString::Printf(TEXT("l'arène vide, rencontre %s"), *Exploration->Encounter()));
-		}
-		else if (ShotWritten())
-		{
-			GEncounterDone = true;
-			Note(TEXT("touche : interagir (revenir de l'arène)"));
-			Press(UJadgControls::KeyOf(TEXT("Interact")));
-		}
+		// La quête des pommes ne combat pas : le combat a son parcours (LOT-1017).
+		Finish(1, FString::Printf(TEXT("une rencontre s'est engagée : %s"), *Exploration->Encounter()));
 		return;
 	}
 	if (!GControlsDone)
@@ -509,7 +495,8 @@ void AJadgWalkthrough::Answer()
 
 	// La réponse se donne au clavier : son rang, ou la touche d'interaction pour « continuer ».
 	const TArray<FJadgChoice> Offered = Exploration->Choices();
-	for (const TCHAR* Wanted : {TEXT("accepter"), TEXT("convaincre"), TEXT("sourire"), TEXT("combattre"), TEXT("continue")})
+	// Au maître d'arène, « attendre » : le combat a son parcours (`AJadgCombatWalkthrough`, LOT-1017).
+	for (const TCHAR* Wanted : {TEXT("accepter"), TEXT("convaincre"), TEXT("sourire"), TEXT("attendre"), TEXT("continue")})
 	{
 		const int32 Rank = Offered.IndexOfByPredicate([Wanted](const FJadgChoice& Choice) { return Choice.Id == Wanted; });
 		if (Rank == INDEX_NONE)
@@ -526,6 +513,10 @@ void AJadgWalkthrough::Answer()
 		}
 		Note(FString::Printf(TEXT("touche %s : %s"), *Key.GetDisplayName(false).ToString(), Wanted));
 		Press(Key);
+		if (FCString::Strcmp(Wanted, TEXT("attendre")) == 0)
+		{
+			GEncounterDone = true;
+		}
 		// La touche se lit à la trame suivante : la réplique aura changé d'ici là.
 		ResumeAt = Frames + 8;
 		return;

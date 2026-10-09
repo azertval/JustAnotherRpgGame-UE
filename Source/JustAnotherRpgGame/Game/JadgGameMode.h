@@ -18,7 +18,8 @@
  * Avec `-JadgCapture=<dossier>` sur la ligne de commande, il crée le directeur de capture
  * (`AJadgCaptureDirector`), qui prend les images, mesure la cadence et quitte. Avec
  * `-JadgParcours=<dossier>`, il crée le parcours (`AJadgWalkthrough`), qui joue la quête des pommes
- * sur les cartes essai.
+ * sur les cartes essai ; avec `-JadgParcoursCombat=<dossier>`, le parcours du combat
+ * (`AJadgCombatWalkthrough`, LOT-1017), qui joue la rencontre `arene-bandits` depuis le parvis.
  */
 UCLASS()
 class AJadgGameMode : public AGameModeBase

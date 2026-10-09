@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
 
 // Core avant le moteur : ses en-têtes ne doivent voir aucune macro d'Unreal.
+#include "Core/Combat/CombatTransition.h"
 #include "Core/Gameplay/Quest.h"
 #include "Core/Gameplay/WorldFlags.h"
 #include "Core/Levels/Level.h"
@@ -28,7 +29,7 @@
 #include <string>
 #include <vector>
 
-#include "Game/JadgExploration.h"
+#include "Game/JadgExplorationState.h"
 
 #include "Bridge/JadgPaths.h"
 #include "JustAnotherRpgGame.h"
@@ -48,87 +49,42 @@ namespace
 		return std::string(TCHAR_TO_UTF8(*Text));
 	}
 
-	/**
-	 * Celui qui parle au PNJ : le meneur, par sa fiche (`core::CharacterListener`), et ce que le PNJ
-	 * demande au jeu — une rencontre, la fin de la démo —, noté pour qui saura l'ouvrir.
-	 */
-	class FPartyListener final : public core::DialogueListener
-	{
-	public:
-		FPartyListener(const core::CharacterSheet& Sheet, core::Inventory& Inventory, const core::ExperienceTable& Experience,
-			const core::SkillCatalog& Skills, TArray<FString>& InAsked)
-			: Speaker(Sheet, Inventory, Experience, Skills), Asked(InAsked)
-		{
-		}
-
-		[[nodiscard]] bool speaks(std::string_view LanguageId) const override { return Speaker.speaks(LanguageId); }
-		[[nodiscard]] std::vector<core::Modifier> skillModifiers(std::string_view SkillId) const override
-		{
-			return Speaker.skillModifiers(SkillId);
-		}
-		void receiveItem(std::string_view ItemId, int Quantity) override { Speaker.receiveItem(ItemId, Quantity); }
-		void startEncounter(std::string_view EncounterId) override
-		{
-			Asked.Add(TEXT("encounter:") + FJadgPaths::ToFString(std::string(EncounterId)));
-		}
-		void endDemo(std::string_view Ending) override
-		{
-			Asked.Add(TEXT("ending:") + FJadgPaths::ToFString(std::string(Ending)));
-		}
-
-	private:
-		core::CharacterListener Speaker;
-		TArray<FString>& Asked;
-	};
 }
 
-struct UJadgExploration::FState
+/**
+ * Celui qui parle au PNJ : le meneur, par sa fiche (`core::CharacterListener`), et ce que le PNJ
+ * demande au jeu — une rencontre, la fin de la démo —, noté pour qui saura l'ouvrir.
+ */
+class FJadgPartyListener final : public core::DialogueListener
 {
-	/// Les dossiers de cartes, dans l'ordre où une carte s'y cherche.
-	std::vector<std::filesystem::path> LevelDirs;
-	std::unique_ptr<core::ExplorationSession> Session;
-
-	core::DialogueCatalog Dialogues;
-	core::DifficultyScale Difficulty;
-	core::CharacterOptions Options;
-	core::CharacterCreationRules Rules;
-	core::ExperienceTable Experience;
-	core::SkillCatalog Skills;
-
-	core::Party Party;
-	/// Les fiches et les sacs du groupe, par identifiant de fiche.
-	std::map<std::string, core::LoadedCharacterSheet> Sheets;
-
-	/// Le dialogue ouvert : la suite aléatoire et l'interlocuteur vivent autant que le runner.
-	std::unique_ptr<core::DeterministicRandom> Random;
-	std::unique_ptr<FPartyListener> Listener;
-	std::unique_ptr<core::DialogueRunner> Runner;
-	std::uint64_t NextSeed = 0;
-	std::uint64_t Conversations = 0;
-
-	core::LoadedCharacterSheet* Leader()
+public:
+	FJadgPartyListener(const core::CharacterSheet& Sheet, core::Inventory& Inventory, const core::ExperienceTable& Experience,
+		const core::SkillCatalog& Skills, TArray<FString>& InAsked)
+		: Speaker(Sheet, Inventory, Experience, Skills), Asked(InAsked)
 	{
-		const auto Found = Sheets.find(std::string(Party.leader()));
-		return Found != Sheets.end() ? &Found->second : nullptr;
 	}
 
-	const core::MapEntity* Find(const std::string& EntityId) const
+	[[nodiscard]] bool speaks(std::string_view LanguageId) const override { return Speaker.speaks(LanguageId); }
+	[[nodiscard]] std::vector<core::Modifier> skillModifiers(std::string_view SkillId) const override
 	{
-		const core::Level* Map = Session->map();
-		if (Map == nullptr)
-		{
-			return nullptr;
-		}
-		for (const core::MapEntity& Entity : Map->entities())
-		{
-			if (Entity.id == EntityId)
-			{
-				return &Entity;
-			}
-		}
-		return nullptr;
+		return Speaker.skillModifiers(SkillId);
 	}
+	void receiveItem(std::string_view ItemId, int Quantity) override { Speaker.receiveItem(ItemId, Quantity); }
+	void startEncounter(std::string_view EncounterId) override
+	{
+		Asked.Add(TEXT("encounter:") + FJadgPaths::ToFString(std::string(EncounterId)));
+	}
+	void endDemo(std::string_view Ending) override
+	{
+		Asked.Add(TEXT("ending:") + FJadgPaths::ToFString(std::string(Ending)));
+	}
+
+private:
+	core::CharacterListener Speaker;
+	TArray<FString>& Asked;
 };
+
+UJadgExploration::FState::~FState() = default;
 
 void UJadgExploration::Initialize(FSubsystemCollectionBase& Collection)
 {
@@ -439,17 +395,35 @@ void UJadgExploration::LeaveEncounter()
 {
 	if (!EncounterId.IsEmpty())
 	{
-		UE_LOG(LogJadg, Display, TEXT("[Exploration] rencontre « %s » quittée sans issue : le combat est le LOT-1017"), *EncounterId);
+		UE_LOG(LogJadg, Display, TEXT("[Exploration] rencontre « %s » quittée sans issue"), *EncounterId);
 		EncounterId.Reset();
 		State->Session->freeze(false);
 	}
+}
+
+void UJadgExploration::ResolveEncounter(EJadgOutcome Outcome)
+{
+	if (EncounterId.IsEmpty())
+	{
+		return;
+	}
+	core::EncounterRun Run;
+	Run.encounterId = ToUtf8(EncounterId);
+	const core::CombatOutcome Issue = Outcome == EJadgOutcome::Victory ? core::CombatOutcome::Victory
+		: Outcome == EJadgOutcome::Flight ? core::CombatOutcome::Flight : core::CombatOutcome::Defeat;
+	// Le groupe revient où il était : la session d'exploration a gardé sa case, gelée.
+	static_cast<void>(core::endEncounter(Run, Issue, State->Session->flags()));
+	UE_LOG(LogJadg, Display, TEXT("[Exploration] rencontre « %s » : %s"), *EncounterId,
+		Outcome == EJadgOutcome::Victory ? TEXT("victoire") : Outcome == EJadgOutcome::Flight ? TEXT("fuite") : TEXT("défaite"));
+	EncounterId.Reset();
+	State->Session->freeze(false);
 }
 
 FString UJadgExploration::Flag(const FString& Key) const
 {
 	const core::WorldFlags& Flags = State->Session->flags();
 	const std::string Name = ToUtf8(Key);
-	if (const std::optional<std::string> Value = Flags.value(Name))
+	if (const std::optional<std::string> Value = Flags.value(Name); Value.has_value() && !Value->empty())
 	{
 		return FJadgPaths::ToFString(*Value);
 	}
@@ -517,7 +491,7 @@ void UJadgExploration::OpenDialogue(const FString& DialogueId)
 	State->NextSeed = 0;
 	State->Random = std::make_unique<core::DeterministicRandom>(Seed);
 	State->Listener =
-		std::make_unique<FPartyListener>(Leader->sheet, Leader->inventory, State->Experience, State->Skills, Asked);
+		std::make_unique<FJadgPartyListener>(Leader->sheet, Leader->inventory, State->Experience, State->Skills, Asked);
 	State->Runner = std::make_unique<core::DialogueRunner>(
 		*Graph, State->Session->flags(), *State->Listener, State->Difficulty, *State->Random);
 	State->Session->freeze(true);

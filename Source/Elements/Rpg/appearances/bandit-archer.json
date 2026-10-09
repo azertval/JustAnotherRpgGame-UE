@@ -1,0 +1,58 @@
+{
+  "id": "bandit-archer",
+  "name": "Bandit arbalétrier",
+  "source": "original",
+  "status": {
+    "provisoire": true,
+    "raison": "LOT-1017 : fiche provisoire pour jouer la serie de l'arene dans le moteur, copiee de heros-scoundrel (corps quinn), l'arme de la creature prise aux maitres de Weapons ; ecrite par l'assistant, sans que l'auteur l'ait vue.",
+    "retraitSi": "LOT-1024 : le createur d'especes et d'humanoides livre la fiche de cette creature"
+  },
+  "creator": "humanoid",
+  "clips": {
+    "attack": {
+      "key": 0.4
+    },
+    "cast": {
+      "key": 0.5
+    }
+  },
+  "body": "quinn",
+  "head": "quinn",
+  "height": 1.7,
+  "colors": {
+    "skin": [
+      0.7,
+      0.55,
+      0.45
+    ],
+    "hair": [
+      0.08,
+      0.05,
+      0.03
+    ],
+    "eyes": [
+      0.25,
+      0.25,
+      0.2
+    ]
+  },
+  "pieces": {
+    "torso": "none",
+    "legs": "none",
+    "feet": "none",
+    "hair": "none"
+  },
+  "weapons": {
+    "main-hand": "Weapons/light-crossbow"
+  },
+  "metahuman": {
+    "bodyConstraints": {
+      "height": 170.0
+    },
+    "skin": {
+      "u": 0.35,
+      "v": 0.45,
+      "roughness": 0.75
+    }
+  }
+}

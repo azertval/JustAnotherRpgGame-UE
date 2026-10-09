@@ -4,6 +4,7 @@
 #include "UI/JadgHud.h"
 
 #include "CanvasItem.h"
+#include "Combat/JadgCombat.h"
 #include "Engine/Canvas.h"
 #include "Engine/Engine.h"
 #include "Engine/Font.h"
@@ -109,6 +110,11 @@ void AJadgHud::DrawHUD()
 	const float Scale = 1.5f * Unit;
 	const float Margin = 24.0f * Unit;
 
+	if (DrawCombat(Unit))
+	{
+		return;
+	}
+
 	// Le groupe, le meneur en tête.
 	float Y = Margin;
 	const TArray<FJadgMember> Members = Exploration->Members();
@@ -139,11 +145,9 @@ void AJadgHud::DrawHUD()
 		FString Key;
 		if (!Exploration->Encounter().IsEmpty())
 		{
-			// La bascule vers le combat : le combat lui-même est le LOT-1017.
+			// La bascule vers le combat, le temps que l'arène s'ouvre.
 			const FString Title = TEXT("Rencontre : ") + Exploration->Encounter();
-			const FString Back = InteractKey + TEXT("Revenir — le combat n'est pas encore joué");
 			Write(Title, (Width - Measure(Title, Scale * 1.3f)) / 2.0f, Height * 0.40f, Gold, Scale * 1.3f);
-			Write(Back, (Width - Measure(Back, Scale)) / 2.0f, Height * 0.46f, Ink, Scale);
 		}
 		else if (Exploration->Target(Cell, Key))
 		{
@@ -193,4 +197,96 @@ void AJadgHud::DrawHUD()
 		}
 		Y += WriteWrapped(Line, Left + Margin, Y, Inner - Margin, Ink, Scale);
 	}
+}
+
+bool AJadgHud::DrawCombat(float Unit)
+{
+	AJadgCombat* Combat = AJadgCombat::Find(GetWorld());
+	if (Combat == nullptr || !Combat->IsMounted())
+	{
+		return false;
+	}
+	const float Width = Canvas->SizeX;
+	const float Height = Canvas->SizeY;
+	const float Scale = 1.3f * Unit;
+	const float Margin = 24.0f * Unit;
+	const FLinearColor Foe(1.0f, 0.55f, 0.45f);
+	const int32 Active = Combat->ActiveId();
+
+	// Les deux camps, le combattant actif marqué.
+	float Y = Margin;
+	Y += Write(FString::Printf(TEXT("Round %d"), Combat->Round()), Margin, Y, Gold, Scale);
+	for (const FJadgFighter& Fighter : Combat->Fighters())
+	{
+		const FString State = Fighter.bDead ? TEXT("  mort") : !Fighter.bStanding ? TEXT("  à terre") : TEXT("");
+		const FString Line = FString::Printf(TEXT("%s%s   %d / %d%s"), Fighter.Id == Active ? TEXT("> ") : TEXT("   "), *Fighter.Name,
+			Fighter.HitPoints, Fighter.MaxHitPoints, *State);
+		Y += Write(Line, Margin, Y, Fighter.Id == Active ? Gold : Fighter.bAlly ? Ink : Foe, Scale);
+	}
+
+	// L'issue, au centre.
+	const FString Outcome = Combat->Outcome();
+	if (!Outcome.IsEmpty())
+	{
+		Write(Outcome, (Width - Measure(Outcome, Scale * 2.0f)) / 2.0f, Height * 0.38f, Gold, Scale * 2.0f);
+	}
+
+	// Le tour, en bas : un bandeau.
+	const float Top = Height * 0.74f;
+	FCanvasTileItem Back(FVector2D(0.0f, Top - Margin * 0.5f), FVector2D(Width, Height - Top + Margin * 0.5f), Panel);
+	Back.BlendMode = SE_BLEND_Translucent;
+	Canvas->DrawItem(Back);
+	const float Left = Margin;
+	const float Right = Width * 0.55f;
+	Y = Top;
+	FString Who;
+	for (const FJadgFighter& Fighter : Combat->Fighters())
+	{
+		if (Fighter.Id == Active)
+		{
+			Who = Fighter.Name;
+		}
+	}
+	if (Combat->IsPlayerTurn())
+	{
+		Y += Write(FString::Printf(TEXT("À vous : %s — %.1f m de déplacement"), *Who, Combat->MovementLeft()), Left, Y, Gold, Scale * 1.1f);
+		FString TargetLine = TEXT("Cible : aucune (clic sur un adversaire)");
+		for (const FJadgFighter& Fighter : Combat->Fighters())
+		{
+			if (Fighter.Id == Combat->TargetId())
+			{
+				TargetLine = FString::Printf(TEXT("Cible : %s, %d / %d — %s"), *Fighter.Name, Fighter.HitPoints, Fighter.MaxHitPoints,
+					*Combat->TargetCircumstances());
+			}
+		}
+		Y += Write(TargetLine, Left, Y, Ink, Scale);
+		const TArray<FString> Capacities = Combat->Capacities();
+		for (int32 Index = 0; Index < Capacities.Num(); ++Index)
+		{
+			const bool bChosen = Combat->CapacityRank() == Index + 1;
+			Y += Write(FString::Printf(TEXT("%s%d. %s"), bChosen ? TEXT("> ") : TEXT("   "), Index + 1, *Capacities[Index]), Left, Y,
+				bChosen ? Gold : Dim, Scale);
+		}
+		const FString CapacityKeys = Capacities.IsEmpty() ? FString()
+			: FString::Printf(TEXT("[1-%d] capacité, [%s] la lancer   "), Capacities.Num(), *UJadgControls::KeyLabel(TEXT("Capacity")));
+		const FString Keys = FString::Printf(TEXT("[clic] cible ou destination   [%s] attaquer   %s[%s] fin du tour"),
+			*UJadgControls::KeyLabel(TEXT("Attack")), *CapacityKeys, *UJadgControls::KeyLabel(TEXT("EndTurn")));
+		Y += Write(Keys, Left, Y, Dim, Scale * 0.9f);
+		if (!Combat->Refusal().IsEmpty())
+		{
+			Y += Write(Combat->Refusal(), Left, Y, Foe, Scale);
+		}
+	}
+	else if (Outcome.IsEmpty())
+	{
+		Y += Write(FString::Printf(TEXT("Tour de %s"), *Who), Left, Y, Ink, Scale * 1.1f);
+	}
+
+	// Le journal, à droite du bandeau.
+	float J = Top;
+	for (const FString& Line : Combat->Journal(8))
+	{
+		J += Write(Line, Right, J, Dim, Scale * 0.85f);
+	}
+	return true;
 }

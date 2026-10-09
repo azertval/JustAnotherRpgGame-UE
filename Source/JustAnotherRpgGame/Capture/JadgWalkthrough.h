@@ -43,9 +43,8 @@ class UJadgExploration;
  * | étals | quête acceptée | clic sur le coffre : le meneur y va et l'ouvre |
  * | étals | coffre ouvert | marche jusqu'au portail de l'est |
  * | parvis | quête acceptée | marche dans la zone du parvis : le garde parle ; plaider (jet de Persuasion) |
- * | parvis | enfant libéré | clic sur le maître d'arène ; « combattre » : l'arène vide s'ouvre |
- * | arène | rencontre engagée | capture ; touche d'interaction : retour au parvis |
- * | parvis | rencontre quittée | marche jusqu'au portail de l'ouest |
+ * | parvis | enfant libéré | clic sur le maître d'arène ; « attendre » — le combat a son parcours (`AJadgCombatWalkthrough`, LOT-1017) |
+ * | parvis | maître quitté | marche jusqu'au portail de l'ouest |
  * | étals | enfant libéré | clic sur la mère ; la quête est rendue |
  *
  * Les trois marches vers un portail ou une zone sont des ordres donnés au groupe
@@ -105,8 +104,6 @@ private:
 	int32 ResumeAt = 0;
 	float Before = 0.0f;
 	int32 Taps = 0;
-	/// Dans l'arène vide : la capture demandée, puis le retour.
-	bool bArenaShot = false;
 
 	void Press(const FKey& Key, int32 ForFrames = 2);
 	void Axis(const FKey& Key, float Delta);

@@ -76,6 +76,9 @@ def test_une_entite_ne_tient_pas_dans_un_mur():
         level, _ = written(identifier)
         walls = {(tile["x"], tile["y"]) for tile in level["tiles"] if tile["type"] == "wall"}
         for entity in level["entities"]:
+            if entity["type"] == "combatZone":
+                # Une zone de combat est un rectangle : sa case est son coin, l'enceinte comprise.
+                continue
             assert (entity["x"], entity["y"]) not in walls, f"{identifier} : {entity['id']} est dans un mur"
         entries = [tile for tile in level["tiles"] if tile["type"] == "entry"]
         assert len(entries) == 1 and (entries[0]["x"], entries[0]["y"]) not in walls
@@ -91,12 +94,17 @@ def test_une_figurine_se_nomme_par_son_dossier_et_ne_s_ecrit_que_pour_un_pnj():
                 assert entity["figure"].startswith("Regions/") and entity["figure"].count("/") >= 3
 
 
-def test_l_arene_vide_ne_joue_aucune_carte_de_core():
-    scene = json.loads(essai.scene_text(None, essai.ARENA))
-    assert "level" not in scene
-    assert scene["map"] == "/Game/Maps/Essai1016Arene"
-    assert sorted(character["party"] for character in scene["characters"]) == [0, 1, 2, 3]
-    assert all(item["folder"] == "murs" for item in scene["objects"])
+def test_l_arene_porte_ce_que_le_combat_lit():
+    level, scene = written("essai/arene")
+    assert scene["map"] == "/Game/Maps/Levels/essai/arene"
+    zones = [entity for entity in level["entities"] if entity["type"] == "combatZone"]
+    assert [(zone["x"], zone["y"], zone["width"], zone["height"]) for zone in zones] == [(0, 0, level["width"], level["height"])]
+    entries = sorted((entity["rank"], entity["side"]) for entity in level["entities"] if entity["type"] == "arenaEntry")
+    assert entries == [(0, "allies"), (1, "allies"), (2, "allies"), (3, "allies")]
+    markers = [entity for entity in level["entities"] if entity["type"] == "encounter"]
+    assert [marker["encounterId"] for marker in markers] == ["arene-bandits"]
+    # Aucun adversaire dans la scène : le combat les pose depuis la rencontre.
+    assert all("entity" not in character for character in scene["characters"])
 
 
 def test_un_plan_irregulier_est_refuse():

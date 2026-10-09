@@ -1,0 +1,59 @@
+{
+  "id": "gladiator",
+  "name": "Gladiateur",
+  "source": "original",
+  "status": {
+    "provisoire": true,
+    "raison": "LOT-1017 : fiche provisoire pour jouer la serie de l'arene dans le moteur, copiee de heros-brawler (corps manny), l'arme de la creature prise aux maitres de Weapons ; ecrite par l'assistant, sans que l'auteur l'ait vue.",
+    "retraitSi": "LOT-1024 : le createur d'especes et d'humanoides livre la fiche de cette creature"
+  },
+  "creator": "humanoid",
+  "clips": {
+    "attack": {
+      "key": 0.4
+    },
+    "cast": {
+      "key": 0.5
+    }
+  },
+  "body": "manny",
+  "head": "manny",
+  "height": 1.95,
+  "colors": {
+    "skin": [
+      0.35,
+      0.42,
+      0.28
+    ],
+    "hair": [
+      0.05,
+      0.04,
+      0.03
+    ],
+    "eyes": [
+      0.35,
+      0.2,
+      0.1
+    ]
+  },
+  "pieces": {
+    "torso": "none",
+    "legs": "none",
+    "feet": "none",
+    "hair": "none"
+  },
+  "weapons": {
+    "main-hand": "Weapons/gladiator-spear",
+    "off-hand": "Weapons/gladiator-shield"
+  },
+  "metahuman": {
+    "bodyConstraints": {
+      "height": 195.0
+    },
+    "skin": {
+      "u": 0.55,
+      "v": 0.6,
+      "roughness": 0.8
+    }
+  }
+}

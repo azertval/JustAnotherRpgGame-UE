@@ -35,11 +35,14 @@ struct FJadgBinding
  *
  * | Commande | Nature | Effet | Touches livrées |
  * |---|---|---|---|
- * | `Walk` | geste | le meneur marche vers le point cliqué ; sur un PNJ, il va lui parler | clic gauche |
- * | `Interact` | geste | le meneur sollicite ce qu'il a à portée ; en dialogue, « continuer » ; dans l'arène vide, revenir | F |
- * | `NextLeader` | geste | passe la main au suivant du groupe (`EX-EXP-014`) | Tab |
- * | `Recenter` | geste | ramène la caméra sur le meneur | Début |
- * | `Choice1` … `Choice6` | geste | donne la réponse de ce rang, en dialogue | 1 … 6 |
+ * | `Walk` | geste | le meneur marche vers le point cliqué ; sur un PNJ, il va lui parler ; en combat, un combattant devient la cible, un point du sol la destination | clic gauche |
+ * | `Interact` | geste | le meneur sollicite ce qu'il a à portée ; en dialogue, « continuer » | F |
+ * | `NextLeader` | geste | passe la main au suivant du groupe (`EX-EXP-014`) ; sans effet en combat | Tab |
+ * | `Recenter` | geste | ramène la caméra sur le meneur ; en combat, sur le combattant actif | Début |
+ * | `Choice1` … `Choice6` | geste | donne la réponse de ce rang, en dialogue ; en combat, choisit la capacité de ce rang | 1 … 6 |
+ * | `Attack` | geste | en combat, attaque la cible choisie (LOT-1017) | X |
+ * | `Capacity` | geste | en combat, lance la capacité choisie sur la cible | W |
+ * | `EndTurn` | geste | en combat, finit le tour | Espace |
  * | `Turn`, `Tilt` | axe, degrés par seconde | tourne, incline la caméra | A / E, R / V |
  * | `Look` | tenue | tant qu'elle est tenue, la souris tourne et incline la caméra | C, clic droit |
  * | `LookTurn`, `LookTilt` | axe, degrés par unité de souris | la souris, sous `Look` | souris |

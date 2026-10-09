@@ -1,6 +1,6 @@
 # Core · Combat
 
-Tests unitaires — **201 cas** (28 bloquants, 103 critiques, 70 majeurs). [Retour à la synthèse](README.md).
+Tests unitaires — **205 cas** (28 bloquants, 103 critiques, 72 majeurs, 2 mineurs). [Retour à la synthèse](README.md).
 
 ## Ce que cette page couvre
 
@@ -19,6 +19,7 @@ Tests unitaires — **201 cas** (28 bloquants, 103 critiques, 70 majeurs). [Reto
 | [`test_combat_preview.cpp`](#test-combat-previewcpp) | 3 | 1 | 2 | - | - |
 | [`test_combat_space.cpp`](#test-combat-spacecpp) | 13 | - | - | 13 | - |
 | [`test_combat_state.cpp`](#test-combat-statecpp) | 29 | 11 | 12 | 6 | - |
+| [`test_contestants.cpp`](#test-contestantscpp) | 4 | - | - | 2 | 2 |
 | [`test_damage.cpp`](#test-damagecpp) | 7 | 3 | 3 | 1 | - |
 | [`test_death_and_dying.cpp`](#test-death-and-dyingcpp) | 13 | - | 9 | 4 | - |
 | [`test_encounter.cpp`](#test-encountercpp) | 12 | - | 7 | 5 | - |
@@ -2863,6 +2864,92 @@ Sur douze cartes aleatoires a graine fixe, la place de fin et le chemin demande 
 - Vérifie que `demande->length` vaut `places[i].route.length`, à `1e-4f` près.
 - Vérifie que `demande->length` est inférieur ou égal à `21.0f + CM`.
 - Vérifie que `comparaisons` est strictement supérieur à `600`.
+
+## test_contestants.cpp
+
+### ContestantsTest.LArenaDitOuLaRencontreSeDresseEtOuLeGroupeEntre
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_contestants.cpp:38`
+
+L'arene d'essai dit ou la rencontre se dresse et ou le groupe entre.
+
+**Étapes**
+
+1. Lire la carte d'arene d'essai.
+2. Chercher le declencheur de arene-bandits, puis d'une rencontre que la carte ne nomme pas.
+3. Lire le deploiement du groupe.
+
+**Résultat attendu**
+
+- Vérifie que `charge.ok()` est vrai.
+- Vérifie que `core::encounterTriggerOn(carte, "arene-bandits")` vaut `marqueur`.
+- Vérifie que `core::encounterTriggerOn(carte, "arene-champion")` vaut `marqueur`.
+- Vérifie que `groupe.size()` vaut `4u`.
+- Vérifie que `groupe[static_cast<std::size_t>(rang)]` vaut `(core::GridPosition{3, 5 + rang})`.
+
+### ContestantsTest.LaCompositionSuitLesReglesDeLEcranDeRencontre
+
+*Majeur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_contestants.cpp:62`
+
+La composition d'une rencontre suit les regles de l'ecran de rencontre.
+
+**Étapes**
+
+1. Preparer arene-bandits sur l'arene d'essai, le groupe a ses points d'entree.
+2. Composer l'affrontement a la graine 7, puis le monter et le lancer.
+
+**Résultat attendu**
+
+- Vérifie que `charge.ok()` est vrai.
+- Vérifie que `rencontre` diffère de `nullptr`.
+- Vérifie que `prepare.ok()` est vrai.
+- Vérifie que `monte.bout.has_value()` est vrai.
+- Vérifie que `bout.lethal` est vrai.
+- Vérifie que `bout.heroicMark` est faux.
+- Vérifie que `bout.flanking` est vrai.
+- Vérifie que `bout.escapable` est faux.
+- Vérifie que `bout.seed` vaut `7u`.
+- Vérifie que `bout.contestants.size()` vaut `10u`.
+- Vérifie que `bout.contestants[i].behavior.empty()` vaut `i < 4`.
+- Vérifie que `mount.allies.size()` vaut `4u`.
+- Vérifie que `mount.enemies.size()` vaut `6u`.
+- Vérifie que `mount.refusals.empty()` est vrai.
+- Vérifie que `session.start()` est vrai.
+
+### ContestantsTest.UneCreatureInconnueEmpecheLaComposition
+
+*Mineur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_contestants.cpp:109`
+
+Une creature inconnue empeche la composition, et la raison est dite.
+
+**Étapes**
+
+1. Une mise en place dont un placement nomme une creature absente du bestiaire.
+
+**Résultat attendu**
+
+- Vérifie que `charge.ok()` est vrai.
+- Vérifie que `prepare.ok()` est vrai.
+- Vérifie que `monte.bout.has_value()` est faux.
+- Vérifie que `monte.issue.find("chimere-de-papier")` diffère de `std::string::npos`.
+
+### ContestantsTest.ChaqueClasseASonRole
+
+*Mineur · Unitaire · Combat en distance (LOT-1017)* — `Source/Test/Unit/Core/Combat/test_contestants.cpp:136`
+
+Chaque classe a son role quand ce n'est pas le joueur qui la joue.
+
+**Étapes**
+
+1. Lire le profil des quatre classes et d'une classe inconnue.
+
+**Résultat attendu**
+
+- `EXPECT_STREQ(core::behaviorOfClass("brawler"), "aggressive")`
+- `EXPECT_STREQ(core::behaviorOfClass("scoundrel"), "pack")`
+- `EXPECT_STREQ(core::behaviorOfClass("priest"), "support")`
+- `EXPECT_STREQ(core::behaviorOfClass("mage"), "archer")`
+- `EXPECT_STREQ(core::behaviorOfClass("barde"), "aggressive")`
 
 ## test_damage.cpp
 

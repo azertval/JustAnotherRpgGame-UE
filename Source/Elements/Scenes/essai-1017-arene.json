@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "name": "Essai1017Arene",
+  "comment": "Carte d'essai de l'exploration (LOT-1016) ou du combat (LOT-1017), écrite par scripts/maps/build_essai_maps.py, jamais à la main : la carte de Core « essai/arene » (Source/Test/Fixtures/Exploration/Levels) et cette scène viennent du même plan. Elle ne lit aucun kit d'assets. Même repère et mêmes champs que porte-1012.json.",
+  "map": "/Game/Maps/Levels/essai/arene",
+  "assetsRoot": "Source/Test/Fixtures/Meshes/Assets",
+  "level": {
+    "id": "essai/arene",
+    "root": "Source/Test/Fixtures/Exploration/Levels",
+    "origin": [
+      0.0,
+      0.0
+    ],
+    "cell": 1.5
+  },
+  "daylight": "Common/Lighting/daylight.json",
+  "frameReference": "Scene/socle/repere.glb",
+  "lighting": {
+    "comment": "Les réglages de la porte (porte-1012.json), repris tels quels.",
+    "lampCandelas": 60.0,
+    "fireCandelas": 30.0,
+    "sunScale": 1.8,
+    "ambientScale": 0.45,
+    "skyLuminance": 3.0,
+    "exposureBias": 0.0,
+    "fog": {
+      "density": 0.004,
+      "falloff": 0.05,
+      "volumetric": true
+    },
+    "post": {
+      "bloom_intensity": 0.6,
+      "vignette_intensity": 0.3
+    }
+  },
+  "ground": {
+    "colour": "#8f7d62",
+    "size": 4000.0,
+    "height": -0.02
+  },
+  "fills": [
+    {
+      "id": "sol",
+      "meshes": [
+        "Scene/ilot/floor.glb"
+      ],
+      "cell": 1.5,
+      "areas": [
+        [
+          0.0,
+          0.0,
+          30.0,
+          21.0
+        ]
+      ]
+    }
+  ],
+  "navigation": {
+    "area": [
+      0.0,
+      0.0,
+      30.0,
+      21.0
+    ],
+    "height": 4.0
+  },
+  "hours": [
+    "12:00",
+    "22:00"
+  ],
+  "objects": [
+    {"id": "mur/0,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/1,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [2.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/2,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [3.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/3,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [5.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/4,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [6.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/5,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [8.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/6,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [9.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/7,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [11.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/8,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [12.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/9,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/10,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/11,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/12,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [18.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/13,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [20.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/14,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [21.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/15,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/16,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [24.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/17,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [26.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/18,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [27.75, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,0", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 0.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,1", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 2.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,1", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 2.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,2", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 3.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,2", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 3.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,3", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 5.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/9,3", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 0.0, 5.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/10,3", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 0.0, 5.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,3", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 5.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,4", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 6.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/9,4", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 0.0, 6.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/10,4", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 0.0, 6.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,4", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 6.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,5", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 8.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,5", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 8.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,6", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 9.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,7", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 11.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,7", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 11.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,8", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 12.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,8", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 12.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,9", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 14.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/9,9", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 0.0, 14.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/10,9", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 0.0, 14.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,9", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 14.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,10", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 15.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/9,10", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 0.0, 15.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/10,10", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 0.0, 15.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,10", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 15.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,11", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 17.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,11", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 17.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,12", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 18.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,12", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 18.75], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/0,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/1,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [2.25, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/2,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [3.75, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/3,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [5.25, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/4,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [6.75, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/5,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [8.25, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/6,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [9.75, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/7,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [11.25, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/8,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [12.75, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/9,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/10,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/11,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/12,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [18.75, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/13,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [20.25, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/14,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [21.75, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/15,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/16,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [24.75, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/17,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [26.25, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/18,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [27.75, 0.0, 20.25], "yaw": 0.0, "scale": 1.0},
+    {"id": "mur/19,13", "folder": "murs", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.0, 20.25], "yaw": 0.0, "scale": 1.0}
+  ],
+  "characters": [
+    {"id": "groupe-1", "appearance": "heros-brawler", "walkSpeed": 3.0, "position": [5.25, 0.0, 8.25], "heading": 90.0, "party": 0},
+    {"id": "groupe-2", "appearance": "heros-mage", "walkSpeed": 3.0, "position": [5.25, 0.0, 8.25], "heading": 90.0, "party": 1},
+    {"id": "groupe-3", "appearance": "heros-priest", "walkSpeed": 3.0, "position": [5.25, 0.0, 8.25], "heading": 90.0, "party": 2},
+    {"id": "groupe-4", "appearance": "heros-scoundrel", "walkSpeed": 3.0, "position": [5.25, 0.0, 8.25], "heading": 90.0, "party": 3}
+  ],
+  "shots": [
+    {"id": "arene", "target": [15.0, 1.0, 10.5], "heading": 0.0, "pitch": 48.0, "distance": 30.0, "comment": "Le sable entier depuis le sud, au cadrage du joueur : le groupe à l'ouest, les bandits autour de leur marqueur à l'est, les piliers entre eux."},
+    {"id": "arene-melee", "target": [12.0, 1.0, 10.5], "heading": 20.0, "pitch": 38.0, "distance": 16.0, "comment": "Le centre du sable, plus près : les piliers et l'aperçu de travail (chemin, portée, cibles)."}
+  ]
+}

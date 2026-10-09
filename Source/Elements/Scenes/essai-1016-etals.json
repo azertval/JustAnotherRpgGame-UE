@@ -1,7 +1,7 @@
 {
   "version": 1,
   "name": "Essai1016Etals",
-  "comment": "Carte d'essai de l'exploration (LOT-1016), écrite par scripts/maps/build_essai_maps.py, jamais à la main : la carte de Core « essai/etals » (Source/Test/Fixtures/Exploration/Levels) et cette scène viennent du même plan. Elle ne lit aucun kit d'assets. Même repère et mêmes champs que porte-1012.json.",
+  "comment": "Carte d'essai de l'exploration (LOT-1016) ou du combat (LOT-1017), écrite par scripts/maps/build_essai_maps.py, jamais à la main : la carte de Core « essai/etals » (Source/Test/Fixtures/Exploration/Levels) et cette scène viennent du même plan. Elle ne lit aucun kit d'assets. Même repère et mêmes champs que porte-1012.json.",
   "map": "/Game/Maps/Levels/essai/etals",
   "assetsRoot": "Source/Test/Fixtures/Meshes/Assets",
   "level": {

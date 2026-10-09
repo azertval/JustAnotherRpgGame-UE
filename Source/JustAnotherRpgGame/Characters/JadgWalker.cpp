@@ -38,8 +38,8 @@ void AJadgWalker::BeginPlay()
 {
 	Super::BeginPlay();
 	GetCharacterMovement()->MaxWalkSpeed = WalkSpeed;
-	// Les personnages ne se bloquent pas entre eux ; un PNJ se désigne au clic.
-	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+	// Les personnages se bloquent entre eux (LOT-1017) et s'évitent : un PNJ se désigne au clic.
+	SetInCombat(false);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 	if (!EntityId.IsEmpty())
 	{
@@ -66,7 +66,64 @@ bool AJadgWalker::PlayOnce(FName Clip)
 	GetMesh()->PlayAnimation(Once, false);
 	GetMesh()->SetPlayRate(1.0f);
 	bWalking = false;
+	bHolding = false;
+	OnceUntil = GetWorld()->GetTimeSeconds() + FMath::Max(Once->GetPlayLength(), 0.05f);
 	return true;
+}
+
+bool AJadgWalker::PlayAndHold(FName Clip)
+{
+	if (!PlayOnce(Clip))
+	{
+		return false;
+	}
+	OnceUntil = 0.0;
+	bHolding = true;
+	return true;
+}
+
+void AJadgWalker::ReturnToRest()
+{
+	OnceUntil = 0.0;
+	bHolding = false;
+	bWalking = false;
+	Play(IdleClip);
+}
+
+float AJadgWalker::ClipSeconds(FName Clip) const
+{
+	const UAnimSequence* Found = Clips.FindRef(Clip);
+	return Found != nullptr ? Found->GetPlayLength() : 0.0f;
+}
+
+float AJadgWalker::ImpactSeconds(FName Clip) const
+{
+	if (const float* Key = ClipKeys.Find(Clip))
+	{
+		return *Key;
+	}
+	return ClipSeconds(Clip) / 2.0f;
+}
+
+void AJadgWalker::SetInCombat(bool bInCombat)
+{
+	UCharacterMovementComponent* Movement = GetCharacterMovement();
+	// Hors combat, la capsule bloque les autres personnages et l'évitement les écarte ; en combat,
+	// Core tient l'espace et la figurine suit le chemin payé.
+	SetBlocksCharacters(!bInCombat);
+	Movement->SetAvoidanceEnabled(!bInCombat);
+	Movement->AvoidanceConsiderationRadius = 200.0f;
+	Movement->AvoidanceWeight = 0.5f;
+	// En combat, chaque combattant se désigne au clic, comme un PNJ.
+	if (bInCombat || !EntityId.IsEmpty())
+	{
+		GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+	}
+}
+
+void AJadgWalker::SetBlocksCharacters(bool bBlocks)
+{
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Pawn, bBlocks ? ECR_Block : ECR_Ignore);
 }
 
 void AJadgWalker::Tick(float DeltaSeconds)
@@ -75,7 +132,18 @@ void AJadgWalker::Tick(float DeltaSeconds)
 
 	const float Speed = GetVelocity().Size2D();
 	const bool bNowWalking = Speed > 5.0f;
-	if (bNowWalking != bWalking)
+	if (OnceUntil > 0.0 && GetWorld()->GetTimeSeconds() >= OnceUntil)
+	{
+		// Le clip joué une fois est fini : retour au repos, ou à la marche.
+		OnceUntil = 0.0;
+		bWalking = bNowWalking;
+		Play(bWalking ? WalkClip : IdleClip);
+	}
+	if (bHolding || OnceUntil > 0.0)
+	{
+		// Un geste ou une pose tenue ne s'interrompt pas pour la marche.
+	}
+	else if (bNowWalking != bWalking)
 	{
 		bWalking = bNowWalking;
 		Play(bWalking ? WalkClip : IdleClip);
