@@ -251,7 +251,7 @@ void UJadgCharacterScreen::Build(FJadgUi& Ui, UCanvasPanel* Root)
 	for (int32 Index = 0; Index < Sheet.Abilities.Num() && Index < Around.Num(); ++Index)
 	{
 		const FJadgAbilityView& Ability = Sheet.Abilities[Index];
-		const FText Label = FText::FromString(Named(TEXT("rpg.ability.short."), Ability.Id).ToString() + TEXT(" ") + Signed(Ability.Modifier).ToString());
+		const FText Label = FText::FromString(Named(TEXT("sheet.ability."), Ability.Id).ToString() + TEXT(" ") + Signed(Ability.Modifier).ToString());
 		FJadgUi::Place(Left, Medallion(Ui, TEXT("medallion/ability"), 130.0f, FText::AsNumber(Ability.Score), Label), Around[Index],
 			FVector2D(140.0f, 170.0f));
 	}

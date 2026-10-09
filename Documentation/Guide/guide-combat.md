@@ -1038,9 +1038,11 @@ Le temps du tour du joueur, des lignes de débogage : un cercle au sol du rayon 
 restent**, le **chemin** vers le point sous le pointeur (vert ; rouge et droit si aucun chemin du
 budget n'y mène), un cercle rouge sur chaque créature qu'il ferait **frapper en chemin**
 (`previewOpportunities`), un cercle jaune sur chaque **cible atteignable** d'ici, blanc sur la cible
-choisie. Le HUD minimal écrit les deux camps et leurs PV, qui joue, les mètres qui restent, la cible
-et ses circonstances (la hauteur, la tenaille, l'esquive), les capacités et leurs lancers, les
-touches, le refus du moment, le journal de Core, et l'issue. L'interface finale est le `LOT-1020`.
+choisie. L'interface du combat (`UJadgCombatScreen`, `LOT-1020`) habille cet aperçu : le round et
+l'ordre d'initiative en haut, la cible et ses circonstances (la hauteur, la tenaille, l'esquive) à
+droite, le combattant actif, ses mètres, son attaque et ses capacités (une case cliquable chacune)
+et la fin du tour en bas, le refus du moment et l'issue au centre, le journal de Core derrière
+*Historique*.
 
 ### L'issue
 

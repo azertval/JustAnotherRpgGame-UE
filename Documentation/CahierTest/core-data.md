@@ -1,12 +1,12 @@
 # Core · Data
 
-Tests unitaires — **17 cas** (1 bloquant, 5 critiques, 9 majeurs, 2 mineurs). [Retour à la synthèse](README.md).
+Tests unitaires — **18 cas** (1 bloquant, 5 critiques, 10 majeurs, 2 mineurs). [Retour à la synthèse](README.md).
 
 ## Ce que cette page couvre
 
 | Fichier de test | Cas | Bloquant | Critique | Majeur | Mineur |
 |---|---|---|---|---|---|
-| [`test_game_options.cpp`](#test-game-optionscpp) | 5 | 1 | - | 4 | - |
+| [`test_game_options.cpp`](#test-game-optionscpp) | 6 | 1 | - | 5 | - |
 | [`test_json_document.cpp`](#test-json-documentcpp) | 12 | - | 5 | 5 | 2 |
 
 ## test_game_options.cpp
@@ -126,6 +126,25 @@ Sans fichier, les options sont la base ; un document illisible le dit.
 - Vérifie que `malforme.options` vaut `base`.
 - Vérifie que `recent.errors.size()` vaut `1U`.
 - Vérifie que `recent.options` vaut `base`.
+
+### GameOptionsTest.LaLangueSeLitEtLEcritureSeRelit
+
+*Majeur · Unitaire · Données · Options* — `Source/Test/Unit/Core/Data/test_game_options.cpp:196`
+
+Les options écrites par l'écran Options se relisent à l'identique.
+
+**Étapes**
+
+1. Lire `interface.language` à « en », puis à « English ».
+2. Écrire des options réglées (2560 × 1440, fenêtré, anglais) puis les relire sur la base par défaut.
+
+**Résultat attendu**
+
+- Vérifie que `core::readGameOptions(R"({"version": 1, "interface": {"language": "en"}})") .options.language` vaut `"en"`.
+- Vérifie que `refused.errors.size()` vaut `1U`.
+- Vérifie que `refused.options.language` vaut `"fr"`.
+- Vérifie que `read.ok()` est vrai.
+- Vérifie que `read.options` vaut `written`.
 
 ## test_json_document.cpp
 

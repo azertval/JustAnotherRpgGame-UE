@@ -1,0 +1,36 @@
+{
+  "comment": "Référence des captures du tour des écrans (LOT-1020 : scripts/build.ps1 -Unreal -Ecrans, AJadgScreensTour), sur les cartes d'essai des étals et de l'arène, écrite par -UpdateReference : une image de blocs par capture (scripts/checks/compare_captures.py). Seuils relevés le 9 octobre 2026 sous l'anticrénelage temporel (RTX 4060 Ti, 1920 × 1080, Unreal Engine 5.8.3), sur trois tours comparés à leur référence : une page qui couvre la scène s'écarte au pire de 2,11 niveaux sur 255, le menu posé sur la scène voilée de 4,07 ; le HUD de 0,91 à midi et de 7,09 à 22 h (les ombres et les lampes) ; le menu de débogage de 11,99 sur les blocs de sa cadence, qui change d'un lancement à l'autre ; le combat, figé au tour du joueur et le pointeur posé au même point, de 16,44 sur 0,42 % de ses blocs au pire tour (ses figurines jouent leur repos). La tolérance est à 12, au-dessus de tout bloc relevé hors combat ; la part admise (1 %, 36 blocs sur 3 600) est plus du double de celle du combat.",
+  "block": 24,
+  "tolerance": 12,
+  "outliers": 0.01,
+  "size": [
+    1920,
+    1080
+  ],
+  "captures": [
+    "carte-region.png",
+    "carte.png",
+    "combat-historique.png",
+    "combat.png",
+    "debogage.png",
+    "dialogue-voix.png",
+    "dialogue.png",
+    "equipement.png",
+    "fin-demo.png",
+    "groupe-meneur.png",
+    "groupe.png",
+    "hud-1200.png",
+    "hud-2200.png",
+    "hud-en.png",
+    "journal.png",
+    "menu-en.png",
+    "menu.png",
+    "mort.png",
+    "nouvelle-partie.png",
+    "options-graphismes.png",
+    "options.png",
+    "personnage-en.png",
+    "personnage.png",
+    "titre.png"
+  ]
+}

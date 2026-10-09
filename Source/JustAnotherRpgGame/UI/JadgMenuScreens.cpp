@@ -67,10 +67,17 @@ namespace
 void UJadgTitleScreen::Build(FJadgUi& Ui, UCanvasPanel* Root)
 {
 	Backdrop(Ui, Root, TEXT("background/menu-scene"));
+	// Le logo du kit porte le titre du jeu ; sans le kit, le titre s'écrit sur l'aplat.
 	UOverlay* Logo = Ui.Layers();
-	FJadgUi::Add(Logo, Ui.Image(TEXT("plate/logo"), NAME_None, FVector2D(640.0f, 400.0f)));
-	FJadgUi::Add(Logo, Ui.Text(Key(TEXT("menu.title")), TEXT("display"), TEXT("display"), TEXT("goldLight"), true, ETextJustify::Center), HAlign_Center,
-		VAlign_Center, FMargin(90.0f, 0.0f));
+	if (UJadgStyle::Get().TexturesFound() > 0)
+	{
+		FJadgUi::Add(Logo, Ui.Image(TEXT("plate/logo"), NAME_None, FVector2D(640.0f, 400.0f)));
+	}
+	else
+	{
+		FJadgUi::Add(Logo, Ui.Text(Key(TEXT("menu.title")), TEXT("display"), TEXT("display"), TEXT("goldLight"), true, ETextJustify::Center),
+			HAlign_Center, VAlign_Center, FMargin(90.0f, 0.0f));
+	}
 	FJadgUi::Place(Root, Ui.Sized(Logo, 640.0f, 400.0f), FVector2D(110.0f, 40.0f));
 	UVerticalBox* Entries = MenuColumn(Ui, {
 		MakeTuple(TEXT("menu.continue"), FString(TEXT("icon/menu/continue")), TFunction<void()>([this] { Close(); })),

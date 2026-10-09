@@ -280,8 +280,10 @@ void AJadgHud::Tick(float DeltaSeconds)
 	}
 
 	// Ce que le jeu demande : la fin qu'un dialogue a écrite, la mort du groupe.
+	// Sous un automate (le parcours de la quête), la fin ne s'ouvre pas : sa page mettrait le jeu en
+	// pause sous lui ; le tour des écrans l'ouvre lui-même.
 	const FString Ending = Exploration->TakeEnding();
-	if (!Ending.IsEmpty())
+	if (!Ending.IsEmpty() && !LaunchedByAutomaton())
 	{
 		Open(EJadgScreen::Ending, Ending);
 	}

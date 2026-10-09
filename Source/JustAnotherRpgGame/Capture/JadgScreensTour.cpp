@@ -213,7 +213,9 @@ void AJadgScreensTour::Finish(int32 Code)
 	FString Text;
 	const TSharedRef<TJsonWriter<>> Writer = TJsonWriterFactory<>::Create(&Text);
 	FJsonSerializer::Serialize(Report, Writer);
-	FFileHelper::SaveStringToFile(Text, *FPaths::Combine(OutputDir, TEXT("ecrans.json")), FFileHelper::EEncodingOptions::ForceUTF8WithoutBOM);
+	// Le tour du combat écrit son propre relevé : les deux tours partagent le dossier des captures.
+	const TCHAR* const Journal = FString(FCommandLine::Get()).Contains(TEXT("-JadgRencontre=")) ? TEXT("ecrans-combat.json") : TEXT("ecrans.json");
+	FFileHelper::SaveStringToFile(Text, *FPaths::Combine(OutputDir, Journal), FFileHelper::EEncodingOptions::ForceUTF8WithoutBOM);
 	UE_LOG(LogJadg, Display, TEXT("[Écrans] fin du tour, code %d"), Code);
 	FPlatformMisc::RequestExitWithStatus(false, static_cast<uint8>(Code));
 	Steps.Reset();
@@ -554,6 +556,8 @@ void AJadgScreensTour::TourCombat()
 	{
 		AJadgCombat::Find(GetWorld())->SetPaused(true);
 		Exploration->SetMinutes(12.0f * 60.0f);
+		// L'aperçu suit le pointeur : il est posé au même point à chaque lancement.
+		Player->PointAt(FVector2D(1200.0, 640.0));
 		return true;
 	});
 	Then(TEXT("combat : capture"), [this] { return Shot(TEXT("combat")); });

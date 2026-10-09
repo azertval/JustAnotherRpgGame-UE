@@ -6,6 +6,22 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **Les écrans et le HUD en UMG, construits par C++** (LOT-1020, 9 octobre 2026, lot ouvert, non
+  livré). `UJadgScreen` et son gestionnaire (`AJadgHud`, qui remplace le HUD de canevas du
+  LOT-1016) : HUD d'exploration, dialogue avec choix de qui parle (D-28) et jet affiché, interface
+  du combat de groupe sur l'aperçu du LOT-1017, menu du titre, menu du mercenaire, Options (langue,
+  affichage, rendu, son, enregistrées dans le fichier du poste), nouvelle partie et choix du meneur
+  (D-37), groupe à quatre, fiche du personnage, équipement, journal, carte (l'atlas illustré, ses
+  lieux cliquables, la recherche, les favoris), fin de la démonstration, défaite, débogage (F9).
+  Aucun Widget Blueprint : le style est un fichier texte (`Source/Elements/Assets/UI/style.json`,
+  `core::loadUiStyle`) ; les images du kit `UI` s'importent par `import_ui_unreal.py`, les polices
+  par le commandlet `JadgImportFonts` ; un aplat des jetons remplace une pièce absente. Les textes
+  sont des **tables de chaînes** du moteur chargées depuis `fr.lang` et `en.lang`
+  (`core::parseTextCatalog`, `FJadgTexts`) ; `jadg_en.ts` est retiré et `check_translations.py`
+  contrôle désormais les `.lang` et les clés du code. `build.ps1 -Unreal -Ecrans` fait le tour des
+  écrans au clavier et à la souris dans le jeu lancé et compare leurs captures à leur référence ;
+  tests `Jadg.Interface.*` ; le manuel du joueur est réécrit (`Documentation/Guide/Manuel/`).
+
 - **Les cartes sont des descriptions texte, construites en niveau par script** (LOT-1018, D-51,
   D-52, 9 octobre 2026, lot ouvert, non livré). Le format `jadg-map`, version 5 : une description
   par carte dit ce que Core joue (grille, couches de pièces, entités sur leurs cases et à leur

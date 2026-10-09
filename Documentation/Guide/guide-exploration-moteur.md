@@ -33,7 +33,7 @@ deux constructions : elle se teste hors du moteur
 | `AJadgCameraPawn` | `Player/JadgCameraPawn.h` | la caméra libre de D-49, à ressort |
 | `AJadgPlayerController`, `UJadgControls` | `Player/` | les commandes, lues dans un fichier texte |
 | `AJadgDayLight` | `World/JadgDayLight.h` | l'heure du monde appliquée au soleil, au ciel et aux lumières de nuit |
-| `AJadgHud` | `UI/JadgHud.h` | le HUD minimal : groupe, heure, annonce, invite, dialogue et portrait, rencontre |
+| `AJadgHud` | `UI/JadgHud.h` | le gestionnaire des écrans (LOT-1020) : le HUD d'exploration (lieu, heure, groupe, annonce, invite, rencontre), le dialogue, les pages ([manuel du joueur](Manuel/README.md)) |
 | `AJadgWalkthrough` | `Capture/JadgWalkthrough.h` | joue la quête des pommes sur les cartes d'essai, sans personne, par les touches et les clics du joueur |
 
 Aucun en-tête du moteur ne montre un type de Core : `UJadgExploration` parle en `FString` et en
