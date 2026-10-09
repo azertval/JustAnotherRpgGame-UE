@@ -1,10 +1,11 @@
 # Combat tactique
 
 Le combat est la moitié « au tour par tour » du jeu : le temps s'arrête, chacun joue à son rang,
-et l'espace se compte en cases. Tout ce qui le décide vit dans `Source/Core/Combat/` — dix-huit
-en-têtes de `Core` pur, sans Qt ni GPU (`EX-NFR-010`), que cette page parcourt dans l'ordre d'un
-combat : le montage d'une rencontre, la grille, l'initiative, le tour et son économie, le
-déplacement, l'attaque et les dégâts, la géométrie (portée, ligne de vue, abri, zones, tenaille),
+et l'espace se mesure en mètres. Tout ce qui le décide vit dans
+`Source/JustAnotherRpgGame/Core/Combat/` — vingt en-têtes de `Core` pur, sans moteur ni GPU
+(`EX-NFR-010`), que cette page parcourt dans l'ordre d'un combat : le montage d'une rencontre,
+l'espace, l'initiative, le tour et son économie, le déplacement, l'attaque et les dégâts, la
+géométrie (portée, ligne de vue, abri, zones, tenaille),
 la prévisualisation, l'IA, puis la session d'arène qui tient un combat — lequel se joue sur la
 carte d'exploration elle-même depuis le `LOT-118`. Ce que l'écran en montre est renvoyé à Rendu 2D et
 Écrans ; les règles du d20 lui-même, à [Règles d20](guide-regles.md).
@@ -20,12 +21,15 @@ action bonus, une réaction et un déplacement (`EX-CBT-011`) — et se termine 
 le décide (`EX-CBT-012`). Le combat prend fin quand l'un des deux **camps** n'a plus personne
 debout, ou que le camp du joueur a rompu le contact.
 
-L'espace est une **grille** de cases carrées de 1,5 m (`EX-REG-051`), dérivée de la couche de
-collision de la carte d'exploration : le combat se joue **au même endroit**, seul le temps change
-(`EX-CBT-001`). Une créature occupe une **emprise** carrée de une à quatre cases de côté selon sa
-taille ; un déplacement se paie en cases, sur un chemin qui contourne les murs (`EX-CBT-020`) ;
-une attaque suppose d'être à **portée** et, pour une attaque à distance, d'avoir une **ligne de
-vue** (`EX-CBT-021`, `EX-CBT-022`). C'est le programme d'`EX-VIS-004`, et la [spécification du
+L'espace se mesure **en mètres** (`LOT-1017`) : le combat se joue **au même endroit** que
+l'exploration, seul le temps change (`EX-CBT-001`), et ce que la carte oppose au pas et au regard
+est l'affaire d'un **espace de combat** (`core::CombatSpace`) que le moteur implémente et que les
+tests simulent. Une créature y est un **cylindre** posé au sol, dont le rayon et la hauteur se
+tirent de son emprise du Manuel ; les données, elles, restent écrites en **cases** de 1,5 m
+(`EX-REG-051`) et se convertissent par `core::metersFromTiles`. Un déplacement se paie en cases
+entamées, sur un chemin qui contourne les murs (`EX-CBT-020`) ; une attaque suppose d'être à
+**portée**, mesurée entre les bords des volumes, et d'avoir une **ligne de vue** (`EX-CBT-021`,
+`EX-CBT-022`). C'est le programme d'`EX-VIS-004`, et la [spécification du
 combat](../Specification/combat.md) en détaille chaque terme.
 
 ### Ce que le dossier contient
@@ -34,20 +38,19 @@ combat](../Specification/combat.md) en détaille chaque terme.
 |---|---|---|
 | `Encounter.h`, `CombatTransition.h` | la rencontre (qui, en quelle formation) et l'aller-retour exploration ↔ combat | `LOT-18` |
 | `TacticalTerrain.h` | le verdict de l'éditeur : la rencontre tient-elle sur le terrain ? | `LOT-11`, `LOT-EDITOR-07` |
-| `BattleGrid.h`, `Pathfinding.h` | la grille (obstacles, emprises, objets, zones) et le déplacement par budget | `LOT-19` |
-| `TurnOrder.h`, `ActionEconomy.h`, `CombatCounters.h`, `CombatState.h` | l'initiative, les ressources du tour, les mémoires à portée, la machine à états | `LOT-20` |
-| `Attack.h`, `Damage.h` | le jet d'attaque amendable et le pipeline de dégâts | `LOT-21` |
-| `LineOfSight.h`, `AreaOfEffect.h` | ligne de vue, abri, zones d'effet | `LOT-22` |
+| `CombatTypes.h`, `CombatSpace.h`, `SimulatedSpace.h` | les types partagés, l'espace de combat **en mètres** (volumes, allonge, zones, abri, tenaille, hauteur ; chemin et places candidates, l'interface que le moteur implémente) et sa simulation pour les tests | `LOT-1017` |
+| `TurnOrder.h`, `ActionEconomy.h`, `CombatCounters.h`, `CombatState.h` | l'initiative, les ressources du tour, les mémoires à portée, la machine à états, le déplacement | `LOT-20`, `LOT-1017` |
+| `Attack.h`, `Damage.h` | le jet d'attaque amendable, la portée, la vue et l'abri entre deux combattants, et le pipeline de dégâts | `LOT-21`, `LOT-1017` |
+| `AreaOfEffect.h` | les combattants qu'une zone d'effet prend | `LOT-22`, `LOT-1017` |
 | `EnemyAi.h`, `Flanking.h` | l'IA tactique et la prise en tenaille | `LOT-23` |
 | `CombatPreview.h` | ce que l'écran montre avant que le joueur ne s'engage | `LOT-24` |
 | `Arena.h` | la session d'arène, rejouable | `LOT-50` |
-| `CombatTypes.h`, `CombatSpace.h`, `SimulatedSpace.h` | les types partagés, l'espace de combat **en mètres** (volumes, allonge, zones, abri, tenaille, hauteur ; l'interface que le moteur implémente) et sa simulation pour les tests | `LOT-1017` |
 
 Chaque en-tête cite la page du Manuel des Joueurs ou du Guide du Maître qui fonde ses règles, et
 nomme ce qu'il **décide** au-delà du livre : cette page reprend ces décisions, sans recopier les
 fiches de lots qui les ont tranchées.
 
-## Le montage : de la rencontre à la grille
+## Le montage : de la rencontre à l'espace
 
 ### La rencontre : qui, et en quelle formation (`Encounter.h`)
 
@@ -110,60 +113,119 @@ ne se découvrirait qu'en jeu. `core::analyzeEncounterTerrain(collision, entité
 bestiaire)` le dit à l'auteur au moment où il pose : pour chaque entité `encounter` dont la
 rencontre est connue, un `core::EncounterTerrain` — les placements voulus, la zone atteignable
 autour du déclencheur, le nombre de cases exigé, et les problèmes (`core::TacticalIssue`, des
-codes `core::TacticalIssueCode` et jamais du texte, `EX-NFR-011`). Les combattants sont posés sur
-une `core::BattleGrid` par `place`, **dans l'ordre de la formation**, exactement comme le fera le
-montage : un avertissement de l'éditeur et un refus au montage ne peuvent pas diverger. Trois
-constantes sont des décisions nommées, réglables : `TACTICAL_PARTY_SIZE` (4, le groupe pour
-lequel le Guide calibre ses rencontres), `TACTICAL_AREA_RADIUS` (6 cases, ce qu'un combattant de
-taille M parcourt en un tour) et `TACTICAL_CELLS_PER_COMBATANT` (4 : se tenir, et manœuvrer).
-L'éditeur l'appelle dans son contrôle du contenu (`LOT-EDITOR-07`,
-Éditeur de niveaux).
+codes `core::TacticalIssueCode` et jamais du texte, `EX-NFR-011`). La carte est encore en cases
+(jusqu'à la description de carte du `LOT-1018`), et le verdict aussi ; il se **calcule** pourtant
+sur l'espace du combat : l'espace simulé de la grille de collision
+(`core::SimulatedSpace::fromTileMap`), où chaque combattant est posé au centre de son emprise
+(`core::tileCenter`), **dans l'ordre de la formation**, avec la règle du montage — tenir dans
+l'espace, ne recouvrir personne (`core::CombatState::placementAt`) : un avertissement de l'éditeur
+et un refus au montage ne peuvent pas diverger. La zone atteignable est l'ensemble des cases dont
+le **centre** est une place candidate de cet espace (`core::CombatSpace::candidates`) pour un
+marcheur de taille M parti du centre du déclencheur, dans un budget de
+`TACTICAL_AREA_RADIUS` cases converti en mètres ; le chemin se mesure en mètres, sans seconde
+implémentation. Trois constantes sont des décisions nommées, réglables : `TACTICAL_PARTY_SIZE` (4,
+le groupe pour lequel le Guide calibre ses rencontres), `TACTICAL_AREA_RADIUS` (6 cases, les 9 m
+qu'un combattant de taille M parcourt en un tour) et `TACTICAL_CELLS_PER_COMBATANT` (4 : se tenir,
+et manœuvrer). L'éditeur l'appelle dans son contrôle du contenu (`LOT-EDITOR-07`, Éditeur de
+niveaux). `core::analyzePartyDeployment` (`PartyDeployment.h`, `LOT-143`) juge de même, sur le
+même espace simulé, la rencontre et le groupe de quatre sur leur zone de combat, et rend ses
+places en cases de la carte.
 
-### La grille (`BattleGrid.h`)
+### L'espace (`CombatTypes.h`, `CombatSpace.h`, `SimulatedSpace.h`)
 
-`core::BattleGrid` répond à une seule question, « peut-on se tenir ici ? », et à rien d'autre :
-elle ne calcule aucun chemin, ne connaît aucun camp, n'a pas d'altitude.
+Le Manuel compte en mètres ; la grille du `LOT-19` n'était qu'une façon de les dessiner, et elle a
+imposé des demi-cases, un départage de chemins et un abri non additionné. Depuis le `LOT-1017`
+(D-50), une créature est un **cylindre**, une portée une distance entre deux bords, une zone une
+forme, et la carte est ce que l'espace en dit. La projection isométrique de l'ancien moteur est
+retirée avec la grille : la caméra est libre (D-49), et le moteur projette.
 
-- `core::CombatantId` est un type **fort**, pas un `int` : la grille ne sait rien de ce qu'est un
-  combattant, elle retient sa place ; c'est `core::CombatState` qui attribue les identifiants, et
-  un entier nu se serait confondu avec un indice de case à la première signature qui prend les
-  deux.
+**Les types partagés** (`CombatTypes.h`) ne déclarent rien qui porte le nom d'une macro du moteur :
+ils se consomment depuis le module du jeu.
+
+- `core::CombatantId` est un type **fort**, pas un `int` : l'espace ne sait rien de ce qu'est un
+  combattant, il ne retient que sa place ; c'est `core::CombatState` qui attribue les identifiants.
 - `core::footprintSide(taille)` traduit la table des tailles du Manuel : 1 case jusqu'à M, 2 × 2
   pour G, 3 × 3 pour TG, 4 × 4 pour Gig. Une très petite créature occupe une case entière là où le
-  livre en tolère quatre : c'est le critère du `LOT-19` — deux créatures ne partagent jamais une
-  case —, à rouvrir par une exception nommée si un contenu le réclame.
-- `core::Locomotion` (`Walk`, `Fly`) : **l'altitude est un attribut, jamais une géométrie**. La
-  grille n'a pas de hauteur ; un volant franchit les obstacles **au sol** (eau profonde, falaise)
-  et ignore le terrain difficile, mais pas la matière pleine — la grille de collision ne distingue
-  pas un muret d'un rempart —, et occupe sa case comme tout autre.
+  livre en tolère quatre : décision du `LOT-19`, gardée en distance.
+- `core::Locomotion` (`Walk`, `Fly`) : le vol est une **manière de traverser** le même espace. Un
+  volant franchit les obstacles au sol (eau profonde, falaise) et ignore le terrain difficile, mais
+  pas la matière pleine, et tient sa place comme tout autre ; il n'a pas d'altitude propre — sa base
+  se pose au sol de l'espace, comme celle d'un marcheur.
 - `core::Cover` : les trois abris du Manuel et l'absence d'abri, ordonnés du moins au plus
   protecteur, parce que « seul celui qui protège le plus est pris en compte » et que comparer deux
-  abris est ce que cette règle demande.
-- `core::GridObject` : une toile, une barricade, posée sur une case. Elle a des points de vie
-  (le corpus en donne), un `blocksMovement`, un abri déclaré (`cover`, jamais déduit de `kind`, que
-  la grille n'interprète pas) et des `damageTraits` — une porte de fer ne craint pas le poison.
-- `core::PlacementResult` : `Placed`, `OutOfBounds`, `Obstructed`, `Occupied`, `InvalidCombatant`.
+  abris est ce que cette règle demande ; `core::coverBonus` (0, +2, +5, et 0 pour le total, qui
+  n'est pas un bonus mais une cible qu'on ne vise pas) et `core::coverLabel` (« abri partiel »…).
+- `core::PlacementResult` : `Placed`, `OutOfBounds` (hors de l'espace, ou plus de point d'entrée),
+  `Obstructed` (le volume touche la carte), `Occupied` (il recouvre un **autre** combattant),
+  `InvalidCombatant`.
+- `core::AreaShape` : les cinq formes de zone du Manuel.
 
-Les constructeurs recopient la grille de collision de la carte — `core::Level::tileMap()`, ou une
-grille dérivée comme une zone de combat découpée — parce qu'une copie ne peut pas changer sous un
-tour en cours ; les obstacles n'ont **jamais** d'autre source (`EX-CBT-001`). Avec un `Level`, ils
-relèvent aussi les **zones** : les cases non vides d'une couche à propriétés libres
-(`EX-LVL-018`), et les entités `zone` (rectangle ou cases peintes, `core::zoneCells`). La grille
-n'interprète qu'une propriété, `difficultTerrain` — vraie seulement pour le booléen `true`, un `1`
-ou un `"oui"` étant une faute de saisie qu'il ne faut pas transformer en règle.
+**La géométrie** (`CombatSpace.h`) se passe de la carte, et se teste exactement, sans moteur.
 
-| Fonction | Rôle |
-|---|---|
-| `inBounds`, `width`, `height` | les bornes. |
-| `isObstructed(case, locomotion)` | matière pleine, objet bloquant, et — au sol seulement — eau profonde et falaise. Hors carte : plein, pour qu'un appelant qui oublie la borne se heurte à un mur plutôt que de lire hors du tableau. |
-| `isDifficult(case)`, `setDifficult` | le coût double d'entrée ; modifiable en combat (un séisme, un sort). |
-| `blocksSight(case)` | ce qui arrête la **vue** : matière pleine ou objet à abri total. L'eau et la falaise arrêtent la marche, pas le regard ; hors carte, faux. |
-| `objectCoverAt`, `objectAt`, `placeObject`, `damageObject` | les objets : posés sur une case ouverte et libre, détruits à 0 PV — la case redevient franchissable. |
-| `zonesAt(case)` | les propriétés de toutes les zones qui couvrent la case, dans l'ordre des couches puis des entités ; les autres règles de zone sont lues par qui en a l'usage (`LOT-50`, `LOT-81`). |
-| `place(id, ancre, côté, locomotion)` | pose une emprise. **Refuse plutôt que de corriger** : une case voulue qui tombe dans un mur est une information pour le montage, et la déplacer d'office cacherait une formation mal écrite. Un marcheur ne se pose pas sur l'eau profonde ; un volant, si. |
-| `moveTo(id, ancre)` | déplace une emprise déjà posée, sans vérifier ni chemin ni budget (l'appelant l'a fait par `ReachableArea`) ; une créature de 2 × 2 qui avance d'une case recouvre la moitié de son ancienne emprise et ne se gêne pas elle-même. |
-| `remove`, `occupantAt`, `positionOf`, `sideOf`, `combatants` | l'occupation, par identifiant croissant — les conteneurs sont ordonnés pour qu'un parcours donne le même ordre d'une partie à l'autre. |
-| `canStand(ancre, côté, soi, locomotion)`, `isClear` | l'emprise tient-elle : bornes, obstacles, et — pour `canStand` — aucun autre combattant que soi. |
+- `core::Meters3` : un point en mètres, `x` et `y` au sol, `z` la hauteur ; `groundDistance` ignore
+  la hauteur, `distance` la compte.
+- `core::Volume` : le centre de la base, un rayon, une hauteur. `core::volumeOf(base, taille)` les
+  tire de l'emprise — le rayon est la moitié de son côté, la hauteur son côté, parce que le Manuel
+  donne à une créature un espace **cubique** : 0,75 m et 1,50 m pour M, 1,50 m et 3 m pour G
+  (`creatureRadius`, `creatureHeight`). `core::centerOf(volume)` est le centre à mi-hauteur : d'où
+  l'on regarde, et ce que l'on vise.
+- `core::edgeDistance(a, b)` : l'écart entre les **bords** de deux volumes, en trois dimensions, 0
+  s'ils se touchent ; `core::inReach(a, b, allonge)` le compare à l'allonge (1,50 m par défaut,
+  `MELEE_REACH_METERS`) ; `core::overlap(a, b)` dit que deux volumes ne peuvent pas se tenir là tous
+  les deux.
+- `core::tileCenter(ancre, taille)` : le centre, au sol, de l'emprise dont la case haut-gauche est
+  `ancre` — là où une carte en tuiles pose une créature ; `core::tileOf(point)` rend la case qui
+  contient un point. Les cartes, leurs entités, les placements de rencontre et les points d'entrée
+  restent en cases jusqu'à la description de carte du `LOT-1018` ; le combat, lui, ne connaît que
+  des mètres, et ces deux fonctions sont la seule couture.
+
+**L'interface `core::CombatSpace`** porte ce qui dépend de la carte : `groundHeight(x, y)` (la
+hauteur du sol, où une base se pose), `isClear(volume, locomotion)` (le volume tient-il sans toucher
+mur, bord ou, au sol, eau profonde), `lineOfSight(de, à)` (rien de la carte n'arrête le segment),
+`route(requête)` (le meilleur chemin dans le budget, ou rien) et `candidates(requête)` (des places
+où **finir** un déplacement dans le budget, le départ en tête, chacune avec son chemin, dans un
+ordre fixe : ce que l'IA examine et ce que l'aperçu dessine). Une `core::RouteQuery` dit qui se
+déplace (`mover`, son volume à sa place), où, avec quel budget en mètres (négatif : sans limite),
+par quelle `locomotion`, et quels volumes il ne traverse pas (`blocking`) ou traverse comme du
+terrain difficile (`passable`). Un `core::Route` est la suite de ses points — départ exclu, arrivée
+incluse — et sa longueur ; une `core::Destination`, une place et son chemin. Deux implémentations
+répondent, et les règles ne savent pas laquelle : celle du moteur (`FJadgCombatSpace`, maillage de
+navigation et rayons), et `core::SimulatedSpace`. Les réponses sont déterministes pour un même
+espace et une même question : la simulation le garantit par construction, et le moteur n'a pas à
+l'être, puisque les tests de règles, la série de l'arène et la simulation à cent graines jouent sur
+la simulation (décision du `LOT-1017`).
+
+**L'espace simulé** (`SimulatedSpace.h`) est un plan borné de `width × height` mètres, au sol à 0,
+où l'on pose :
+
+- des **boîtes** alignées sur les axes (`core::Box` : un `core::GroundRect`, une hauteur, un
+  `blocksMovement`, un abri `cover`) — un mur, un tonneau, une herse, un muret. Une boîte dont
+  l'abri n'est pas `Cover::None` coupe les lignes de vue qui la traversent **à sa hauteur** : un
+  muret cache les bas, pas les hauts. `removeBox(indice)` retire une structure détruite ;
+- des **plateaux** (`addPlatform`) : une hauteur de sol sur un rectangle, montée par ses bords, sans
+  rampe — la pente est l'affaire du maillage de navigation du moteur ;
+- du **terrain difficile** (`addDifficult`, `isDifficult`) et de l'**eau profonde**
+  (`addDeepWater`), infranchissable au sol, survolée, et que le regard traverse.
+
+Le chemin est un **Dijkstra** sur un réseau régulier (`SIMULATION_STEP`, 0,5 m par défaut), à
+huit voisins et coût euclidien, les obstacles élargis du rayon du mobile ; un pas ne coupe pas de
+coin — son milieu doit tenir, et, en diagonale, ses deux côtés. La destination exacte termine le
+chemin si le dernier pas est dégagé ; à coût égal, le prédécesseur d'indice le plus petit l'emporte,
+et deux exécutions donnent le même chemin. Ce que la carte oppose à un rayon donné se calcule une
+fois et se garde ; seuls les combattants se relisent à chaque question. Le réseau est un détail de
+la simulation, pas une règle.
+
+`SimulatedSpace::fromTileMap(collision)` lit une grille de collision en tuiles : une boîte pleine de
+3 m par suite de cases solides d'une même ligne, de l'eau profonde pour l'eau profonde et la
+falaise, sur un réseau à la **demi-case** (`TILE_MAP_STEP`, 0,75 m) dont les centres et les coins
+des cases sont des nœuds — une créature M y passe une porte d'une case, et un chemin qui n'est ni
+droit ni à 45° y est un peu plus long que la ligne droite. `fromLevel(carte, collision)` y ajoute
+le terrain difficile que les zones de la carte déclarent : les cases non vides d'une couche à
+propriétés libres (`EX-LVL-018`) et les entités `zone` (rectangle ou cases peintes,
+`core::zoneCells`) dont la propriété `difficultTerrain` est le booléen `true` — un `1` ou un `"oui"`
+est une faute de saisie qu'il ne faut pas transformer en règle. Les obstacles n'ont **jamais**
+d'autre source que la carte (`EX-CBT-001`), et les cartes et les tests écrits sur la grille de
+collision se rejouent en mètres sans rien redessiner.
 
 ### Enrôler et poser : `core::CombatState::enlist` et `core::mountEncounter`
 
@@ -177,13 +239,19 @@ n'en porte pas. La **classe d'armure** y est recalculée depuis ses sources au m
 construction (`EX-CBT-030`) et jamais tenue à jour à la main : ce qui la change en combat — un
 abri, une posture — s'ajoute au jet, pas à ce nombre.
 
-`enlist(profil, ancre)` n'est permis qu'en phase `Setup` et attribue les identifiants **dans
-l'ordre des enrôlements**, à partir de 1 : c'est l'ordre de la **donnée**, dernier critère de
-départage de l'initiative. Un placement refusé n'enrôle personne et ne consomme aucun identifiant.
-`core::mountEncounter(combat, run, bestiaire, groupe)` enchaîne : `setEscapable` recopié de la
-rencontre, le groupe (`core::PartyMember`) puis les créatures, et rend un `core::EncounterMount` —
-alliés, ennemis, et chaque `core::MountRefusal` avec sa raison (`placement` vide pour une créature
-inconnue du bestiaire). Un combattant refusé n'est pas enrôlé : sans case, il ne combat pas.
+`core::CombatState` se construit sur l'espace de la rencontre (`std::shared_ptr<const
+CombatSpace>`), qu'il partage avec qui le construit et qu'il lit sans le changer.
+`enlist(profil, base)` n'est permis qu'en phase `Setup` ; la base, facultative, est le centre du
+pied du volume en mètres, posé au sol de l'espace (la hauteur donnée est ignorée). Il attribue les
+identifiants **dans l'ordre des enrôlements**, à partir de 1 : c'est l'ordre de la **donnée**,
+dernier critère de départage de l'initiative. Un placement refusé — le volume ne tient pas dans
+l'espace, ou recouvre celui d'un autre combattant (`placementAt`) — n'enrôle personne et ne
+consomme aucun identifiant. `core::mountEncounter(combat, run, bestiaire, groupe)` enchaîne :
+`setEscapable` recopié de la rencontre, le groupe (`core::PartyMember`) puis les créatures, et rend
+un `core::EncounterMount` — alliés, ennemis, et chaque `core::MountRefusal` avec sa raison
+(`placement` vide pour une créature inconnue du bestiaire). Les placements de la rencontre et les
+cases du groupe sont en cases de la carte : chacun se pose au centre de son emprise
+(`core::tileCenter`). Un combattant refusé n'est pas enrôlé : sans place, il ne combat pas.
 
 ## Le cycle d'un combat
 
@@ -223,8 +291,7 @@ plus, même si la Dextérité d'un combattant change ensuite — tout ce qui ser
 dont une combinaison sur deux n'aurait pas de sens : `Setup` (on enrôle), `Starting` (initiatives
 jetées, premier round pas commencé — la fenêtre d'avant le premier tour), `RoundStart`,
 `TurnActive` (un combattant joue et le combat **attend**), `TurnEnd`, `Ended`. Elle n'est ni
-copiable ni déplaçable : les `core::Mover` qu'elle construit et les abonnés la désignent par son
-adresse.
+copiable ni déplaçable : les abonnés la désignent par son adresse.
 
 **Les crochets.** `core::CombatHook` nomme treize points d'insertion — `BeforeFirstTurn`,
 `RoundStart`, `InitiativeCount`, `TurnStart`, `TurnEnd`, `AttackDeclared`, `DamageTaken`,
@@ -262,26 +329,27 @@ Les fonctions, dans l'ordre d'un combat :
 |---|---|
 | `enlist`, `addInitiativeMarker`, `setEscapable`, `subscribe` | le montage (ci-dessus). Deux abonnés d'un même crochet sont avertis dans l'ordre de l'abonnement ; un abonné qui s'abonne pendant une annonce ne l'est que pour la suivante. |
 | `start(random)` | jette l'initiative de chacun par identifiant croissant (à graine égale, les mêmes dés tombent sur les mêmes combattants), sauf des acteurs flottants ; annonce `BeforeFirstTurn`, puis ouvre le premier round. Faux hors `Setup`. |
-| `phase`, `round`, `activeCombatant`, `turnOrder`, `outcome`, `escapable`, `find`, `combatants`, `grid` | la lecture ; `round` vaut 0 avant le premier ; `grid()` mutable existe pour ce qui change la grille en combat (terrain difficile créé, objet détruit). |
+| `phase`, `round`, `activeCombatant`, `turnOrder`, `outcome`, `escapable`, `find`, `combatants`, `space` | la lecture ; `round` vaut 0 avant le premier ; `space()` est l'espace partagé, en lecture seule — ce qui change la carte en combat (une structure détruite) passe par qui tient l'espace (`core::SimulatedSpace::removeBox`). |
+| `positionOf`, `volumeOf`, `volumeAt(id, base)`, `bodiesExcept(a, b)`, `occupantAt(point)`, `placementAt(profil, base, soi)`, `canStandAt(id, base)` | la place d'un combattant dans l'espace : le centre de sa base, son volume à sa place ou supposé ailleurs (au sol de l'espace), les corps qui s'interposent entre deux combattants, celui dont le volume couvre un point, ce que dirait un placement — tenir dans l'espace sans recouvrir un autre que soi. Un corps à terre ou mort garde sa place. |
 | `counters()` | les `core::ScopedCounters` du combat : la portée `Turn` est vidée à chaque fin de tour, `Round` à chaque début de round, `Turn`, `Round` et `Encounter` à la fin ; `Day` jamais. |
 | `economy(id)` | l'économie d'un combattant, pour dépenser une réaction **hors** de son tour ou octroyer une ressource. |
 | `spend(ressource, n)` | dépense sur le combattant actif ; faux sans tour ou sans reste. |
-| `reachableArea()` | la `core::ReachableArea` du combattant actif sur **ce qui reste** de son déplacement ; vide sans tour ou s'il n'est pas placé. |
-| `move(destination)` | suit `pathTo`, paie le coût, déplace l'emprise ; `core::MoveOutcome` dit `Moved`, `NoActiveTurn`, `NotPlaced` ou `Unreachable`. Le déplacement se **fractionne** : trois cases, une attaque, trois cases. |
+| `movementLeft()`, `routeTo(destination)`, `destinations()` | les mètres que le combattant actif peut encore marcher, son chemin jusqu'à une place, et les places où il peut finir, dans **ce qui reste** de son déplacement (ci-dessous, « Le déplacement ») ; 0, rien ou vide sans tour. `routeFor(id, destination, budget)` et `destinationsFor(id, budget)` répondent pour n'importe quel combattant posé, à un budget donné en mètres (négatif : sans limite). |
+| `move(destination)` | suit `routeTo`, paie le chemin en cases entamées, déplace le volume ; `core::MoveOutcome` porte le résultat — `Moved`, `NoActiveTurn`, `NotPlaced` ou `Unreachable` — et le chemin suivi (`path`). Le déplacement se **fractionne** : trois cases, une attaque, trois cases. |
 | `endTurn()` | termine **explicitement** le tour ; annonce `TurnEnd`, vide `Turn`, puis la machine cherche la place suivante. |
 | `interject(id)` | un acteur **flottant** (*Law of Time*, `CombatantProfile::floating`) demande à jouer avant le prochain tour, une fois par round ; s'il ne choisit pas, il joue en fin de round — un acteur indécis ne perd pas son tour. |
 | `declareAttack(attaquant, cible)` | annonce `AttackDeclared` avant tout jet : la fenêtre où une posture répond à l'intention. Refusé si l'attaquant n'est pas debout ou si la cible est morte ou sortie — une cible à terre s'attaque : l'achever (`LOT-137`). |
-| `join(profil, ancre, random)`, `joinAtInitiative(profil, ancre, rang)` | un renfort, en cours de combat, au jet ou à une initiative imposée (« au rang 0 ») ; annonce `CombatantJoined`. |
-| `withdraw(id)` | la sortie : quitte la grille et l'ordre, sans retour ; `NotEscapable` pour un allié d'une rencontre dont on ne fuit pas. Un combattant qui sort pendant son tour voit son tour terminé, `TurnEnd` annoncé quand même — les actions légendaires ne distinguent pas un tour fini d'un tour interrompu. |
+| `join(profil, base, random)`, `joinAtInitiative(profil, base, rang)` | un renfort, en cours de combat, posé en `base` (en mètres), au jet ou à une initiative imposée (« au rang 0 ») ; annonce `CombatantJoined`. |
+| `withdraw(id)` | la sortie : quitte l'espace et l'ordre, sans retour ; `NotEscapable` pour un allié d'une rencontre dont on ne fuit pas. Un combattant qui sort pendant son tour voit son tour terminé, `TurnEnd` annoncé quand même — les actions légendaires ne distinguent pas un tour fini d'un tour interrompu. |
 | `applyDamage(id, n)`, `applyDamage(span)` | la **dernière** étape du pipeline (`LOT-21`) : borne à 0, met à terre, annonce `DamageTaken` puis `CombatantDowned`. La version à salve n'évalue l'issue **qu'une fois** : une boule de feu qui abat le dernier allié et le dernier ennemi est une défaite, pas une victoire ou une défaite selon l'ordre des cibles. |
 | `heal(id, n)` | rend des PV sans dépasser le maximum, relève un combattant à terre et remet son compteur de jets contre la mort à zéro (`EX-CBT-041`) ; les réserves ne se soignent pas, un mort ne récupère rien. |
 | `recordDeathSave(id, naturel, total)`, `stabilize(id)`, `revive(id, pv)`, `isDying(id)`, `setLethal(bool)` | l'agonie (`LOT-137`) : voir ci-dessous. |
 | `grantReserve(id, réserve)`, `reserves(id)` | une réserve qui ne se cumule pas remplace celle de même source si elle est plus grande, et est ignorée sinon. |
-| `moverFor(id)` | le `core::Mover` du combattant, droit de passage compris : on traverse un allié, et un ennemi seulement à **deux catégories de taille** d'écart (Manuel, « Se déplacer au milieu d'autres créatures »). |
+| `setLocomotion(id, locomotion, budget)` | change la manière de se déplacer et le budget par tour — le *vol* d'un sort (`LOT-133`), et sa fin ; ce qui a déjà été marché ce tour reste dépensé, un octroi en cours est gardé. |
 
 Un combattant à terre (`core::CombatantStatus::Down`) garde sa place et ses tours sont **passés** ;
-relevé, il rejoue à sa place. `Dead` est mort : il reste sur la grille — son corps —, et seul
-`revive` le ramène. `Withdrawn` a quitté la grille et l'ordre.
+relevé, il rejoue à sa place. `Dead` est mort : il reste à sa place dans l'espace — son corps —, et
+seul `revive` le ramène. `Withdrawn` a quitté l'espace et l'ordre.
 
 **L'agonie et la mort** (`LOT-137`, `EX-CBT-040`, `EX-CBT-041` ; Manuel des Joueurs, « Tomber à
 0 point de vie », PDF p. 199). Ce qui arrive à 0 PV est un champ du profil,
@@ -321,8 +389,7 @@ appel à `declare`.
   déjà déclarée garde sa place : l'ordre est celui de la première déclaration, stable d'une partie
   à l'autre.
 - `has`, `remaining` ; `spend(id, n)` : faux, et **rien n'est dépensé**, si la ressource est inconnue,
-  s'il n'en reste pas assez ou si `n` n'est pas positif — on ne paie pas une case de terrain
-  difficile à moitié.
+  s'il n'en reste pas assez ou si `n` n'est pas positif — on ne paie pas un pas à moitié.
 - `grant(id, n)` : un octroi au-delà de `perTurn`, valable jusqu'à la dépense ou au prochain début de
   tour du porteur ; une ressource inconnue est déclarée avec un `perTurn` nul, le temps de
   l'octroi. C'est ainsi que *se précipiter* double le déplacement du tour.
@@ -342,45 +409,42 @@ attaque sournoise portée par une réaction pendant le tour d'un ennemi en conso
 source) — la même créature reste sensible à un autre dragon — avec une **échéance** en secondes de
 jeu (`IMMUNITY_DAY_SECONDS`), que l'horloge du `LOT-70` fournira ; le registre ne lit aucune horloge.
 
-## Le déplacement (`Pathfinding.h`)
+## Le déplacement (`CombatState.h`, `CombatSpace.h`)
 
-Le Manuel, « Jouer sur un quadrillage », fixe trois faits : entrer dans une case coûte **1, même en
-diagonale** ; une case de terrain difficile coûte **2**, et il faut de quoi la payer ; on ne passe
-pas en diagonale par le **coin** d'un mur. La case d'une créature qu'on traverse coûte aussi double,
-en vol comme au sol — c'est la créature qui gêne, pas le sol. Un parcours en largeur à quatre
-voisins et coût uniforme ne sait exprimer aucun des trois ; le calcul est donc un **Dijkstra sur
-les huit voisins** (algorithme de plus court chemin à coûts positifs), et le coin d'un mur se juge
-comme en vol : seule la matière qui remplit l'espace l'interdit, longer une mare en diagonale est
-permis.
+Le Manuel dépense la vitesse « par segments de 1,50 mètre », compte double le terrain difficile, et
+laisse traverser l'espace d'une créature non hostile. Le jeu garde l'**unité** des données — un
+budget en cases — et **marche** en mètres sur l'espace : la distance est euclidienne, une diagonale
+n'est plus « une case », et le chemin contourne ce que la carte oppose (`EX-CBT-020`).
 
-- `core::movementBudget(mètres)` divise par 1,5 (`EX-REG-051`) et **tronque** : le livre dépense la
-  vitesse « par segments de 1,50 mètre », et un segment entamé n'en est pas un — arrondir au plus
-  proche ferait gagner une case à qui porte trop. Une tolérance d'un millième empêche l'inverse
-  (5,9999 après une soustraction de flottants). Les surcharges prennent une fiche
-  (`speedMeters`) ou une créature et sa locomotion (0 pour qui ne vole pas).
-- `core::Mover` : qui se déplace, comment, et à travers qui (`canPassThrough`). Le combattant doit
-  être **placé** : départ et emprise sont lus de la grille, jamais recopiés, pour qu'une requête ne
-  parte pas d'une case déjà quittée. Vide, `canPassThrough` ne laisse traverser personne — le parti
-  prudent.
-- `core::Path` : les cases franchies, départ exclu, arrivée incluse, et le coût.
-- `core::ReachableArea(grille, mover, budget)` explore à la construction et ne relit plus la grille.
-  `costTo(ancre)` est défini aussi pour une case qu'on **traverse** sans pouvoir s'y arrêter ;
-  `canEndAt(ancre)` dit qu'on peut y **finir** (dans le budget, place libre, jamais le départ) ;
-  `destinations()` les liste par indice croissant — ce que l'écran surligne (`EX-CBT-020`) ;
-  `pathTo(ancre)` rend le chemin, ou rien. Une case difficile à une case du bout du budget reste
-  hors de portée, pas « à moitié » atteinte.
-- `core::findPath(grille, mover, destination)` : le même calcul en A* (Dijkstra guidé par une
-  estimation, ici la distance de Tchebychev, cohérente puisque chaque pas coûte au moins 1), sans
-  limite de budget, pour qui planifie au-delà du tour — l'IA qui marche vers une cible lointaine.
+- `core::movementBudget(mètres)` (`CombatState.h`) divise par 1,5 (`EX-REG-051`) et **tronque** :
+  un segment entamé n'en est pas un — arrondir au plus proche ferait gagner une case à qui porte
+  trop. Une tolérance d'un millième empêche l'inverse (5,9999 après une soustraction de flottants).
+  Les surcharges prennent une fiche (sa vitesse effective, capacités comprises) ou une créature et
+  sa locomotion (0 pour qui ne vole pas). Le résultat est `CombatantProfile::movement`, que
+  l'économie du tour déclare en `MOVEMENT_RESOURCE`.
+- **Le budget en mètres** : `movementLeft()` vaut les cases restantes × 1,50 m, plus ce qui reste
+  de la dernière case **entamée** ce tour-ci (`Combatant::movementSlack`). `move` use d'abord ce
+  reste, puis paie le surplus en cases entamées — arrondies à l'unité supérieure, au moins une —,
+  et garde ce qui reste de la dernière pour le pas suivant du même tour : deux pas de 0,75 m coûtent
+  une case, pas deux. Le reste est remis à zéro au début du tour du combattant.
+- **Le terrain difficile** double le coût d'un pas qui y entre, au sol ; un volant l'ignore.
+- **Le droit de passage** (Manuel, « Se déplacer au milieu d'autres créatures », PDF p. 193) : on
+  traverse l'espace d'un **allié**, et celui d'un ennemi à **deux catégories de taille** d'écart ou
+  plus, comme du terrain difficile — c'est la créature qui gêne, pas le sol, en vol comme au sol — ;
+  un autre ennemi bloque, et l'on ne finit dans l'espace de personne. `CombatState` range chaque
+  autre combattant posé dans `RouteQuery::passable` ou `RouteQuery::blocking` avant de questionner
+  l'espace.
+- `routeFor(id, destination, budget)` rend le chemin (`core::Route`), ou rien hors budget ;
+  `routeTo(destination)` est le même pour le combattant actif, sur `movementLeft()`.
+  `destinationsFor(id, budget)` et `destinations()` rendent les places où finir — la sienne en
+  tête, chacune avec son chemin (`core::CombatSpace::candidates`) : ce que l'IA examine et ce que
+  l'aperçu dessine.
 
-**Le départage est une règle, pas un hasard.** Deux chemins de même coût existent presque toujours,
-et il fallait une règle qui tienne les deux algorithmes d'accord : parmi les prédécesseurs qui
-atteignent une case à son meilleur coût — l'exploration les retient **tous**, un bit par voisin —,
-la remontée retient **le plus proche de la droite qui joint le départ à l'arrivée**, et à égalité
-celui d'indice de case le plus petit. La règle se définit sur le graphe, pas sur l'ordre
-d'exploration ; le chemin ne monte donc pas pour redescendre, et c'est lui que la prévisualisation
-dessine. Pour que l'A* voie tous ces prédécesseurs, il ne s'arrête pas à la première sortie de la
-destination : un test sur deux cents cartes à graine fixe échoue si l'on rétablit l'arrêt précoce.
+Le chemin est celui que l'espace trace : le maillage de navigation dans le moteur, le réseau de la
+simulation dans les tests (voir « L'espace », plus haut). Sur une carte en tuiles, ce réseau est à
+la demi-case : un chemin ni droit ni à 45° y est un peu plus long que la ligne droite. Dans le
+moteur, les volumes qu'on ne traverse pas ne comptent encore qu'à l'arrivée, pas sur le trajet ;
+c'est un reste du `LOT-1017`, nommé dans sa fiche.
 
 ## L'attaque (`Attack.h`)
 
@@ -398,7 +462,7 @@ déterminer les modificateurs, résoudre — le d20 puis les dés de dégâts. U
   bas — une portée ne dépasse jamais ce que le texte promet) et le seuil critique.
 - `core::attacksFor(créature)` tire les attaques d'un bloc de bestiaire : chaque action à bonus
   d'attaque et dégâts. Une action **avec** allonge est au contact (en cases, arrondie, au moins 1 :
-  une nuée à 0 m frappe au contact, deux créatures ne partageant jamais une case) ; **sans**
+  une nuée à 0 m frappe au contact, deux volumes ne se recouvrant jamais) ; **sans**
   allonge, à distance, à la portée que le bloc structure depuis le `LOT-22` ; les deux, deux
   attaques. Une action dont les dégâts ne sont pas typés est **refusée et nommée**
   (`core::CreatureAttacks::refused`) : jamais un type par défaut (`EX-CBT-032`).
@@ -411,18 +475,30 @@ déterminer les modificateurs, résoudre — le d20 puis les dés de dégâts. U
 
 ### Cibler
 
-- `core::gridDistance(combat, a, b)` et `gridDistanceFrom(combat, a, ancreA, b)` : la distance en
-  cases **emprises comprises** — 1 pour deux emprises adjacentes, diagonale comprise. Un ogre de
-  2 × 2 touche à 1 tout ce qui borde son emprise, pas seulement son ancre.
-- `core::inReach(combat, attaquant, cible, profil)` : l'allonge au contact ; la portée maximale à
-  distance, ou le contact seul si la portée est inconnue.
-- `core::checkTarget(…)` rend un `core::TargetCheck` : `NotOnGrid`, `OutOfReach`, `TotalCover` (aucun
-  segment dégagé, `core::hasLineOfSight`), `Valid`. Au corps à corps aussi : frapper par le coin
-  commun de deux murs est aussi impossible que de s'y faufiler.
-- `core::attackCircumstances(…)` : ce que la **grille** sait dire des sources d'avantage et de
-  désavantage (`core::AttackCircumstances`, des chaînes nommées) — le tir au contact d'un ennemi
-  debout **qui vous voit**, et la longue portée. L'abri n'est pas une circonstance mais un changement
-  de CA.
+L'allonge et la portée se mesurent entre les **bords** des volumes, en trois dimensions : une
+créature de taille G touche ce qui borde son volume, et non ce qui borde son centre. Les données
+restent en cases : une allonge ou une portée de N cases est un écart d'au plus N × 1,50 m. Deux
+créatures M aux centres de deux cases voisines — diagonale comprise : 2,12 m entre les centres,
+0,62 m entre les bords — sont donc au contact ; mais en diagonale la distance n'est plus celle de
+la grille, et une cible à cinq cases en colonne et cinq en ligne n'est plus « à cinq cases ».
+
+- `core::gapBetween(combat, a, b)` et `gapFrom(combat, a, baseA, b)` : l'écart entre les bords, en
+  mètres (`core::edgeDistance`), 0 au contact ; vide si l'un des deux n'est pas posé. La seconde
+  suppose `a` posé en `baseA` : l'IA juge une place avant d'y aller.
+- `core::withinTiles(écart, n)` : l'écart tient dans `n` cases ; `core::adjacentGap(écart)` — « à
+  une case », au plus 1,50 m — est le voisinage que lisent le tir au contact, la tenaille et
+  l'attaque sournoise.
+- `core::profileReaches(profil, écart)` et `core::inReach(combat, attaquant, cible, profil)` :
+  l'allonge au contact ; la portée maximale à distance, ou une case si la portée est inconnue.
+- `core::checkTarget(…)` rend un `core::TargetCheck` : `NotPlaced` (l'attaquant est la cible, ou
+  l'un des deux n'est pas posé), `OutOfReach`, `TotalCover` (`core::hasLineOfSight` faux), `Valid`.
+  Au corps à corps aussi : frapper à travers un mur est aussi impossible que d'y passer.
+- `core::attackCircumstances(…)` : ce que l'**espace** sait dire des sources d'avantage et de
+  désavantage (`core::AttackCircumstances`, des chaînes nommées) — la **hauteur** (« hauteur » : la
+  base de l'attaquant au moins 1,50 m au-dessus de celle de la cible, `core::hasHighGround`, au
+  contact comme à distance, et rien d'autre : ni bonus de dégâts ni de portée, que le Manuel ne
+  donne pas), le tir à une case (`adjacentGap`) d'un ennemi debout **qui vous voit**, et la longue
+  portée, au-delà de la portée normale. L'abri n'est pas une circonstance mais un changement de CA.
 
 ### Un jet qui est un objet
 
@@ -448,8 +524,8 @@ une graine cherchée à la main.
 ### Résoudre dans le combat
 
 `core::resolveAttack(combat, attaquant, cible, profil, random, contexte)` : déclare
-(`CombatHook::AttackDeclared`), assemble les circonstances de la grille et celles du
-`core::AttackContext` (l'appelant sait ce que la grille ignore : une esquive, une tenaille), pose
+(`CombatHook::AttackDeclared`), assemble les circonstances de l'espace et celles du
+`core::AttackContext` (l'appelant sait ce que l'espace ignore : une esquive, une tenaille), pose
 l'abri de `core::coverBetween` **avant le premier greffon** `BeforeRoll`, jette, et si l'attaque
 touche, lance les dégâts (`core::rollDamage`) et les fait traverser le pipeline du contexte jusqu'à
 `applyDamage`. Elle ne dépense **aucune** ressource — l'action *attaquer* dépense l'action, une
@@ -503,114 +579,109 @@ d'insertion :
   la termine en **un** `applyDamage(span)` : l'issue ne dépend pas de l'ordre des cibles. Chaque
   `core::DamageReport` porte les PV avant et après et l'**excédent** au-delà de 0 — l'exemple du
   Manuel, le clerc à 6 PV sur 12 qui en subit 18, tombe avec un excédent de 12 : la mort instantanée
-  que le `LOT-72` en tirera. `applyToStructure(grille, case, dégâts)` fait de même pour un
-  `core::GridObject`, sans réserves, et le détruit par `damageObject`.
+  que le `LOT-72` en tirera. `applyToStructure(structure, dégâts)` fait de même pour une
+  `core::Structure` — une toile, une barricade, une porte : une nature libre (`kind`, que le combat
+  n'interprète pas), des points de vie parce que le corpus en donne, et des `damageTraits` (une
+  porte de fer ne craint pas le poison) —, sans réserves ; `DamageWork::structure` nomme sa nature.
+  Une structure n'est ni une créature ni un volume de l'espace des combattants : sa place et son
+  abri sont une boîte de l'espace (`core::Box`). À 0 PV elle est détruite (`destroyed()`), et c'est
+  à qui tient l'espace de la retirer — `core::SimulatedSpace::removeBox` dans la simulation.
 - `core::damageTypeLabel` et `core::damageStageName` : les noms du journal, dans la langue du
   Manuel, sans défaut silencieux.
 
-## Portée, ligne de vue et abri (`LineOfSight.h`)
+## Portée, ligne de vue et abri (`CombatSpace.h`, `Attack.h`)
 
 Le Manuel dit qu'un mur, un arbre, une créature abritent ; que l'abri partiel donne +2 à la CA,
 l'important +5, le total interdit de viser ; que les abris ne s'additionnent pas. Il ne dit pas
-**comment** mesurer ces fractions de corps sur un quadrillage. Le `LOT-22` prend la méthode du
-Guide du Maître : depuis un coin de l'emprise de l'attaquant, tracer des lignes vers les quatre
-coins d'une case de la cible, et compter celles qu'un obstacle coupe.
+**comment** mesurer ces fractions de corps. Le `LOT-22` avait pris la méthode du Guide du Maître —
+tracer des lignes d'un coin de l'attaquant vers les quatre coins d'une case de la cible, et compter
+celles qu'un obstacle coupe ; le `LOT-1017` la garde, sur des volumes : les lignes partent du
+**meilleur point** de l'attaquant vers **quatre points du bord** de la cible, étagés sur sa
+hauteur.
 
-![Un attaquant A, un pilier et une cible B en diagonale : depuis le coin (2, 2) de A, deux lignes passent au-dessus du pilier et deux rasent son bord — abri partiel, CA + 2](figures/combat-ligne-de-vue-abri.svg)
+- `CombatSpace::lineOfSight(de, à)` : rien de la carte n'arrête le segment. Dans la simulation,
+  toute boîte dont l'abri n'est pas `Cover::None` coupe un segment qui la traverse à sa hauteur ;
+  l'eau profonde et la falaise arrêtent la marche, pas le regard. Dans le moteur, ce sont ses
+  rayons.
+- `core::segmentCrosses(de, à, volume)` : le segment traverse-t-il un cylindre — ce qui part d'un
+  corps ou y arrive n'est pas coupé par lui.
+- `core::coverFrom(espace, attaquant, cible, corps)` : l'attaquant prend le point qui l'arrange
+  parmi cinq — le centre de son volume à mi-hauteur et quatre points de son bord ; de chacun,
+  quatre lignes vont vers quatre points du bord de la cible, à un, trois, cinq et sept huitièmes de
+  sa hauteur, en tournant autour d'elle — un muret cache les bas, pas les hauts. Les lignes que la
+  **carte** coupe se comptent : une ou deux, abri partiel ; trois, important ; quatre, total. Un
+  **corps** interposé (`corps`, ami ou ennemi) qui coupe une ligne restée dégagée donne un abri
+  partiel, et rien de plus : les abris ne s'additionnent pas, le plus protecteur compte.
+- `core::coverFromPoint(espace, origine, cible, corps)` : le même compte depuis un **point** —
+  l'origine d'une zone.
+- `core::hasLineOfSight(espace, a, b)` : les deux volumes se voient — l'abri, sans les corps, n'est
+  pas total. Les corps n'arrêtent pas la vue.
+- Entre deux combattants (`Attack.h`) : `core::hasLineOfSight(combat, a, b)`, faux si l'un des deux
+  n'est pas posé ; `hasLineOfSightFrom(combat, a, baseA, b)`, `a` supposé posé en `baseA` ; et
+  `core::coverBetween(combat, attaquant, cible)`, tous les autres combattants posés faisant corps
+  (`CombatState::bodiesExcept`) — un combattant à terre garde sa place et abrite encore. `Total` si
+  l'un des deux n'est pas posé : ce qui n'y est pas ne se vise pas.
 
-**La symétrie, par construction.** Le défaut classique est un tracé qui **avance** case par case
-depuis A et s'arrête au premier obstacle : parti de B, il ne passe pas par les mêmes cases, et le
-joueur le découvre en tirant sur un ennemi qui ne peut pas riposter. Ici rien n'avance : la
-question est « ce **segment** coupe-t-il cette case ? », en arithmétique **entière exacte** sur des
-points en demi-cases — chaque axe donne l'intervalle des paramètres où le segment est dans la boîte,
-et l'intersection se compare en fractions. Un segment n'a pas de sens de parcours ; A voit B si et
-seulement si B voit A, et un test le vérifie sur vingt grilles générées (plus de 25 000 segments).
+**La hauteur** entre dans la vue et l'abri par les volumes eux-mêmes — une base posée sur un
+plateau voit par-dessus un muret que la cible, en bas, a devant elle —, et dans le jet par
+l'avantage du Manuel (`core::hasHighGround`, ci-dessus). « Voir », c'est ici la ligne de vue : la
+lumière, les sens et les ténèbres n'ont pas encore de modèle.
 
-- `core::GridPoint` : un point en **demi-cases**, la case (c, r) allant de (2c, 2r) à (2c + 2,
-  2r + 2) — coins pairs (`core::cornerOf`), centre impair (`core::centerOf`). Tout point qu'une règle
-  nomme s'écrit en entiers, et aucun calcul de vue n'a besoin d'un flottant.
-- `core::Footprint` : une emprise, ancre et côté. `core::coverBonus` (0, +2, +5, 0 pour le total qui
-  n'est pas un bonus) et `core::coverLabel` (« abri partiel »…).
-- `core::isSightClear(grille, a, b)` : rien n'arrête la vue sur le segment, extrémités exceptées
-  (un tir part d'un coin de sa propre case, qui touche souvent un mur sans que le mur soit sur le
-  chemin). Ce qui arrête la vue (`blocksSight`) coupe un segment qui **touche** sa boîte, bord et
-  coin compris : raser la face d'un mur ne permet pas de voir au travers, et le coin commun de deux
-  murs en diagonale arrête le regard comme il arrête le pas — une règle d'extrémité, elle-même
-  symétrique, rattrape le segment qui **part** de ce coin.
-- `core::hasLineOfSight(grille, a, b)` : un segment dégagé relie un point de grille de l'une à un
-  point de l'autre — **tous** les points de l'emprise, pas seulement ses quatre coins, ce qui garde
-  la relation symétrique pour une grande créature dont une case intérieure regarde par une
-  meurtrière. La surcharge sur `CombatState` prend deux combattants.
-- `core::coverFrom(grille, attaquant, cible, corps)` compte **trois familles** séparément, puis les
-  compare, parce que les abris ne s'additionnent pas : ce qui arrête la vue abrite **selon les lignes
-  coupées** (1 ou 2 partiel, 3 important, 4 total) ; un objet à abri important (la herse) donne
-  `ThreeQuarters` dès qu'il coupe une ligne ; une créature interposée, amie ou ennemie, ou un objet
-  à abri partiel donnent `Half` de même — compter leurs lignes n'aurait pas de sens, une herse d'une
-  case n'en coupe jamais plus de deux. Un mur qui coupe deux lignes et un allié qui coupe les deux
-  autres font un abri partiel, pas un abri total. L'attaquant prend le point et la case qui
-  l'arrangent ; `Cover::Total` équivaut exactement à `!hasLineOfSight`.
-- `core::coverFromPoint(grille, origine, cible, corps)` : le même compte depuis un **point** —
-  l'origine d'une zone —, l'abri qui s'ajoutera à une sauvegarde de Dextérité contre une boule de
-  feu, avec les sorts.
-- `core::coverBetween(combat, attaquant, cible)` : entre deux combattants, tous les autres placés
-  faisant corps — un combattant à terre reste sur la grille et abrite encore. `Total` si l'un des
-  deux n'est pas sur la grille.
-
-L'eau profonde et la falaise n'arrêtent pas la vue ; un volant se voit et se vise sur la même
-grille. « Voir », c'est ici la ligne de vue : la lumière, les sens et les ténèbres n'ont pas encore
-de modèle.
-
-## Les zones d'effet (`AreaOfEffect.h`)
+## Les zones d'effet (`CombatSpace.h`, `AreaOfEffect.h`)
 
 Chapitre 10, « Zones d'effet » : chaque zone a un **point d'origine**, l'effet s'étend en lignes
 droites depuis ce point, et seul un abri total bloque ces lignes. Puis cinq formes
 (`core::AreaShape`) : le **cône**, dont la largeur en un point égale la distance à l'origine ; le
 **cube**, origine sur une face ; le **cylindre**, origine au centre de sa base ; la **ligne**,
-longueur et largeur ; la **sphère**, un rayon. Le Manuel ne dit pas quelles cases une forme
-couvre : une case est dans la zone si la forme en couvre **au moins la moitié** — la règle du Guide
-du Maître pour les zones circulaires, étendue aux autres formes plutôt que d'en inventer une par
-forme. La surface se calcule exactement : cône, cube et ligne sont des polygones découpés par la
-case (Sutherland-Hodgman), un disque s'intègre analytiquement ; une case couverte à 50 % pile est
-dedans.
+longueur et largeur ; la **sphère**, un rayon. Une forme est exacte, en mètres : une créature est
+**dans** la zone si son **volume la croise** — un bord suffit —, pas si son centre y est.
 
-![À gauche, la prise en tenaille : la ligne des centres de A et B traverse deux côtés opposés de T, celle de A et B' entre par la gauche et sort par le haut ; à droite, une sphère de rayon 2 sur une intersection couvre douze cases, le carré 4 × 4 sans ses coins](figures/combat-tenaille-zone.svg)
+- `core::Effect` : la forme, `origin` (le centre d'une sphère, le sommet d'un cône, le milieu d'une
+  face du cube, le début d'une ligne), `toward` — le point vers lequel s'étendent cône, cube et
+  ligne ; confondu avec l'origine, la zone est vide —, `size` (rayon, longueur ou arête) et `width`
+  (largeur d'une ligne, hauteur d'un cylindre), en **mètres** : une taille écrite en cases se
+  convertit par `core::metersFromTiles`.
+- `core::shapeHits(zone, volume)` : la sphère et le cylindre sont exacts en trois dimensions (le
+  point du volume le plus proche du centre de la sphère est à moins du rayon ; le disque du volume
+  rejoint celui du cylindre, et leurs hauteurs se recouvrent) ; le cône (un triangle dont le bout
+  est aussi large que long), la ligne et le cube (des rectangles) se posent dans le plan
+  horizontal et touchent ce qui est à moins de leur taille en hauteur de leur origine — décision
+  du `LOT-1017`, le jeu n'ayant qu'une terrasse. `core::volumesInEffect(zone, volumes)` rend les
+  indices des volumes pris.
+- `core::combatantsInArea(combat, zone)` (`AreaOfEffect.h`) : les combattants posés dont le volume
+  croise la zone **et** que l'origine ne tient pas sous abri total (`core::coverFromPoint`, sans les
+  corps) — un mur entre l'origine et eux les en protège, un corps ne les protège pas —, par
+  identifiant croissant, corps à terre compris.
 
-- `core::AreaOfEffect` : la forme, `origin` en demi-cases (un coin de case pour une boule de feu
-  lancée sur une intersection, le milieu d'une arête pour un souffle, un centre pour une aura),
-  `toward` — le point vers lequel s'étendent cône, cube et ligne ; confondu avec l'origine, la zone
-  est vide —, `size` (rayon, longueur ou arête) et `width` (ligne). « L'origine n'est pas incluse »
-  dans un cône tombe de la géométrie : parti du bord d'une créature, il ne couvre rien de sa case.
-- `core::areaTilesFromMeters(mètres)` : 6 m font 4 cases, arrondi **vers le bas** ; vide pour une
-  taille nulle.
-- `core::areaTemplate(zone, colonnes, lignes)` : le gabarit seul, sans obstacle, par ligne puis
-  colonne.
-- `core::affectedCells(grille, zone)` : le gabarit moins les cases qu'aucun segment dégagé
-  (`isSightClear`) ne relie de l'origine à l'un de leurs quatre coins — le même compte que l'abri
-  total — et moins les cases qui arrêtent elles-mêmes la vue : l'effet s'y heurte.
-- `core::combatantsInArea(combat, zone)` : les combattants dont une case au moins est atteinte, par
-  identifiant croissant.
-
-Sans hauteur (`core::Locomotion`), un cylindre est son disque ; les deux formes restent parce que le
-Manuel les distingue et qu'un sort les nomme. Les sorts qui emploient ces zones, et le déplacement
-de l'origine derrière un obstacle, arrivent avec les classes (`LOT-25`, `LOT-35`).
+La session centre la sphère d'un sort à sauvegarde sur le centre du volume de sa cible, de rayon
+`core::ArenaSpell::areaRadiusMeters` tel que le corpus l'écrit en mètres (`LOT-133`) : le moteur
+ne vise pas encore un point vide. Les autres formes, et le déplacement de l'origine derrière un
+obstacle quand l'incantateur vise un point qu'il ne voit pas, arrivent avec les sorts qui les
+emploient.
 
 ## La prise en tenaille (`Flanking.h`)
 
 Règle **optionnelle** du Guide du Maître (chapitre 8) : deux créatures adjacentes à un ennemi, sur
 des côtés ou des angles opposés de son emplacement, le prennent en tenaille et gagnent l'avantage
-au corps à corps ; en cas de doute, « tracez une ligne entre les centres ». Le moteur tranche
-**toujours** par la ligne des centres : c'est la seule des deux formulations qui se calcule sans
-interprétation. Les centres sont des points impairs, les bords des points pairs ; la ligne « passe
-par deux côtés opposés » si elle touche le bord gauche **et** le bord droit, ou le haut **et** le
-bas, coins compris — ce qui couvre les angles opposés. Tout reste entier.
+au corps à corps ; en cas de doute, « tracez une ligne entre les centres ». Sans grille, la ligne
+des centres devient un **angle** : les deux attaquants prennent la cible en tenaille si l'angle
+qu'ils forment **au centre de la cible**, dans le plan, atteint 135° (`FLANKING_ANGLE_DEGREES`).
+C'est la valeur exacte où la règle de la ligne des centres, jouée sur les huit cases adjacentes,
+bascule : deux cases adjacentes font 135° ou plus quand la ligne traverse deux côtés opposés, 90° au
+plus sinon — un test le vérifie (`LaTenailleParAngleRejoueLaLigneDesCentresDuGuide`). « Adjacent »
+devient « à une case » : l'écart entre les bords des volumes (`core::adjacentGap`).
 
-- `core::crossesOppositeSides(a, b, cible)` : la géométrie seule.
-- `core::isFlankedFrom(combat, attaquant, ancreSupposée, cible)` : chacun des deux debout, adjacent
-  (distance 1, emprises comprises) et voyant la cible ; une case de l'emprise de l'un et une de
-  l'autre alignées par leurs centres sur deux côtés opposés — une grande créature prend en tenaille
-  « tant que l'une de ses cases remplit les conditions ». L'ancre supposée sert l'IA, qui juge une
-  case avant d'y aller.
-- `core::isFlanked(combat, attaquant, cible)` : la même règle, l'attaquant à sa place.
+- `core::flanksByAngle(a, b, cible)` (`CombatSpace.h`) : la géométrie seule — ni l'allonge, ni la
+  vue, ni l'état des créatures.
+- `core::isFlankedFrom(combat, attaquant, baseSupposée, cible)` : l'attaquant et au moins un allié
+  debout, chacun à une case de la cible et la voyant (`core::hasLineOfSight`), leurs deux positions
+  formant l'angle au centre de la cible. La base supposée sert l'IA, qui juge une place avant d'y
+  aller.
+- `core::isFlanked(combat, attaquant, cible)` : la même règle, l'attaquant à sa place ; faux s'il
+  n'est pas posé.
+- `core::isAdjacentToAllyOf(combat, attaquant, cible)` : la moitié de la tenaille — un allié debout
+  de l'attaquant, autre que lui, à une case de la cible —, sans l'angle ni la vue : ce que *Sneak
+  Attack Simplified* demande (`LOT-135`).
 
 C'est la **composition** qui active la règle (`core::ArenaBout::flanking`, faux par défaut — une
 règle optionnelle s'active, elle ne se présume pas) ; la rencontre de carte la laisse fausse
@@ -630,8 +701,10 @@ savoir : ce qu'un greffon `BeforeRoll` changera, et les dés — les seconds son
   l'espérance de dégâts. `core::previewAttack(session, cible, indice)` la calcule pour le combattant
   actif ; `core::firstValidAttack(session, cible)` rend la première attaque qui peut viser — celle
   que le geste « attaquer » choisit quand le joueur n'en a pas désigné.
-- `core::MovePreview` et `core::previewMove(session, destination)` : le chemin de `pathTo` (celui que
-  `move` suivra), le déplacement restant, et **qui frapperait en chemin**
+- `core::MovePreview` et `core::previewMove(session, destination)` (une destination en mètres) : le
+  chemin de `routeTo` (celui que `move` suivra, vide si la place n'est pas une fin de déplacement
+  permise), le déplacement restant **en mètres** (`movementLeft` : `CombatState::movementLeft()`
+  moins la longueur du chemin), et **qui frapperait en chemin**
   (`core::ArenaSession::previewOpportunities`), choix du joueur et politique de l'IA compris.
 
 C'est ce que `hmi::CombatModel` expose au HUD (`pathCells` ; la prévisualisation en lignes lisibles
@@ -663,19 +736,21 @@ ligne de vue lui refuse. Ce que le Guide ne dit pas — les **poids** — est un
   moyens (en demi-points) + chance de critique × moyenne des dés seuls — « ajoutez-les aux dégâts
   moyens ». Les résistances n'y entrent pas : la table ne les connaît pas avant de les avoir vues.
 
-Aucun flottant : deux exécutions, deux compilateurs, deux modes de construction donnent le même
-tour ; les cases se parcourent par indice croissant, les cibles par identifiant croissant, une
-égalité garde le premier candidat.
+Aucun flottant dans le score : une longueur de chemin y entre en **centimètres** entiers. Les
+places candidates viennent de l'espace (`core::CombatSpace::candidates` : la simulation de Core en
+donne, le moteur les demandera à EQS) dans un ordre fixe, les cibles par identifiant croissant, et
+une égalité garde le premier candidat : deux exécutions sur la simulation donnent le même tour.
 
 ### Les profils
 
 `core::BehaviorProfile` : des poids en pour cent — `damageDealt`, `bloodiedTarget` (achever),
 `focusFire` (par allié au contact de la cible : la meute), `protectBloodiedAlly` (dégager un allié
 ensanglanté : le soutien), `threatTaken` et `threatWhenBloodied`, `opportunityTaken`,
-`approachPerTile` — et des règles : `toleratedThreats` (au plus 2), `opportunityMaximumRoll` (le
-jet requis au-delà duquel on laisse passer un fuyard : le prudent ne frappe pas ce qu'il ne
-toucherait qu'à 16), `dodgeWhenThreatened`, `retreatAfterAttack` — et `finishDowned` (`LOT-137`),
-le poids d'un ennemi **à terre** dans un combat où l'on meurt, en pour cent de l'espérance de dégâts
+`approachPerTile` (le prix d'une case de 1,50 m de chemin restant jusqu'à la cible, que le combat
+en distance compte en centimètres à ce taux par case) — et des règles : `toleratedThreats` (au plus
+2), `opportunityMaximumRoll` (le jet requis au-delà duquel on laisse passer un fuyard : le prudent
+ne frappe pas ce qu'il ne toucherait qu'à 16), `dodgeWhenThreatened`, `retreatAfterAttack` — et
+`finishDowned` (`LOT-137`), le poids d'un ennemi **à terre** dans un combat où l'on meurt, en pour cent de l'espérance de dégâts
 comme `damageDealt` : 0, on l'épargne et il n'est pas une cible ; l'agressif en met 75, la meute
 100, les trois autres 0. Un ennemi à terre n'est jamais une menace ; sa posture compte l'avantage
 de l'inconscience et d'« à terre » au contact. Cinq profils sont livrés :
@@ -692,37 +767,43 @@ agressif, prudent, soutien, archer, meute — la meute parce que dix créatures 
 
 ### Décider, puis jouer
 
-`core::planTurn(session, acteur, profil)` examine **toutes** les cases où finir le déplacement et la
-case de départ, et pour chacune : les **attaques** possibles (chaque cible debout à portée et en
-vue, chaque attaque — l'espérance contre la CA de la cible et son abri, dans la posture que la case
-donne : tenaille, longue portée, tir au contact, esquive de la cible) ; la **menace**, l'espérance
-des coups que les ennemis peuvent porter sur cette case au prochain round, en marchant jusqu'au
-contact ou à distance depuis leur portée plus leur vitesse — sans l'abri, dont le compte doublait
-le coût d'un tour pour une nuance de deux points ; les **attaques d'opportunité** que le chemin
-provoque, telles que l'arène les jouera. Sans attaque possible, elle compare **s'avancer** vers
-l'ennemi le plus proche (`findPath`), **se précipiter** au plus loin de ce chemin, **esquiver** si
-le profil le veut et qu'on la menace, **se désengager** si le chemin provoque une opportunité. Le
+`core::planTurn(session, acteur, profil)` examine **toutes** les places candidates où finir le
+déplacement (`CombatState::destinations`, au lieu des cases voisines du `LOT-23`) et la place de
+départ, et pour chacune : les **attaques** possibles (chaque cible debout à portée et en vue,
+chaque attaque — l'espérance contre la CA de la cible et son abri, dans la posture que la place
+donne : tenaille, hauteur, longue portée, tir au contact, esquive de la cible) ; la **menace**,
+l'espérance des coups que les ennemis peuvent porter sur cette place au prochain round — au
+contact depuis l'une des places que chacun atteint dans sa vitesse (`destinationsFor`), ou à
+distance si l'écart tient dans sa portée plus sa vitesse, en cases — sans l'abri, dont le compte
+doublait le coût d'un tour pour une nuance de deux points ; les **attaques d'opportunité** que le
+chemin provoque, point par point, telles que l'arène les jouera. Sans attaque possible, elle
+compare **s'avancer** — le plus court chemin, sans limite de budget, jusqu'à une place à une case
+d'un ennemi debout ; le chemin qui reste depuis une place se compte en centimètres, exact sur ce
+chemin et estimé ailleurs par l'écart au-delà du contact —, **se précipiter** jusqu'au point le plus
+loin de ce chemin où l'on peut finir, **esquiver** si le profil le veut et qu'on la menace, **se
+désengager** si le chemin provoque une opportunité. Les poids et les cinq profils sont ceux du
+`LOT-23`, inchangés. Le
 résultat est un `core::TurnPlan` : où aller, quoi faire (`core::TurnAction`), contre qui, le jet
 requis, les menaces immédiates, le score, et la ligne de journal qui dit la décision.
 
 Deux garde-fous sont des **clés** de comparaison, pas des poids, parce que les poids ne suffisent
-pas — une case qui prend en tenaille un ennemi ensanglanté rapporte plus que trois menaces faibles
-ne coûtent :
+pas — une place qui prend en tenaille un ennemi ensanglanté rapporte plus que trois menaces
+faibles ne coûtent :
 
-- **le suicide** : le nombre d'ennemis qui peuvent frapper la case de fin **au contact, sans
+- **le suicide** : le nombre d'ennemis qui peuvent frapper la place de fin **au contact, sans
   bouger**, au-delà de `toleratedThreats`, passe avant tout. Seules les attaques de contact
   comptent : un tireur couvre toute l'arène, et le compter interdirait d'approcher — il pèse dans la
   menace ;
 - **le blocage** : une IA qui peut attaquer attaque ; une IA qui ne le peut pas **progresse** —
-  laisse moins de chemin jusqu'à l'ennemi que sa case de départ —, et c'est une clé avant le score,
+  laisse moins de chemin jusqu'à l'ennemi que sa place de départ —, et c'est une clé avant le score,
   sans quoi la menace d'un round entier la tiendrait hors de portée à jamais (défaut vu au Colisée,
-  corrigé après livraison). Le dernier critère est le moins de déplacement : sans lui, le repli
-  après attaque filait au coin haut-gauche de la salle.
+  corrigé après livraison). Le dernier critère est le moins de déplacement, en centimètres : sans
+  lui, le repli après attaque filait au coin haut-gauche de la salle.
 
 `core::playTurn(session, catalogue)` joue le plan du combattant actif par les actions de la
 session, **les mêmes que celles du joueur** — `disengage`, `move`, `attack`, `dash` puis `move`,
 `dodge` —, écrit la décision au journal avant de la jouer, recule après avoir frappé si le profil
-le veut (vers une case strictement moins menacée, la moins loin à menace égale), et **termine le
+le veut (vers une place strictement moins menacée, la moins loin à menace égale), et **termine le
 tour**, qu'il ait servi ou non ; une attaque d'opportunité qui abat l'IA en chemin met fin au sien.
 `core::shouldTakeOpportunity(session, réacteur, fuyard, profil)` prend l'opportunité si la première
 attaque de contact a un jet requis au plus égal à `opportunityMaximumRoll` ;
@@ -769,13 +850,13 @@ où l'une d'elles devient jouable, sa composition sera une rencontre sur sa cart
 
 | Fonction | Rôle |
 |---|---|
-| `ArenaSession(carte)` | garde la carte pour chaque rejeu ; la grille est `BattleGrid(carte)`. |
-| `mount(bout)` | une session neuve à la graine de la composition ; enrôle chaque concurrent à sa case ou au **prochain point d'entrée libre** de son camp ; un septième allié sur six entrées est refusé `OutOfBounds` — la carte n'a plus de place, et le dire vaut mieux que le poser dans un mur. Le rituel de Marque déclare `heroicAction` à chacun. Rend un `core::ArenaMount`. |
+| `ArenaSession(carte, espace)` | garde la carte pour chaque rejeu ; l'espace est celui que donne l'appelant (le moteur), ou, sans espace, la simulation de Core lue de la carte (`core::SimulatedSpace::fromLevel` sur sa grille de collision). |
+| `mount(bout)` | une session neuve à la graine de la composition ; enrôle chaque concurrent au centre de sa case demandée ou du **prochain point d'entrée libre** de son camp (`core::tileCenter`) ; un septième allié sur six entrées est refusé `OutOfBounds` — la carte n'a plus de place, et le dire vaut mieux que le poser dans un mur. Le rituel de Marque déclare `heroicAction` à chacun. Rend un `core::ArenaMount`. |
 | `start()` | jette l'initiative et l'écrit au journal. `replay()` remonte la même composition à la même graine, journal vidé : **une seule** suite aléatoire (`core::DeterministicRandom`) sert l'initiative, les attaques et les dégâts, et deux exécutions donnent le même journal — comparer deux versions d'une mécanique, c'est comparer deux journaux (`EX-NFR-002`). |
 | `combat()`, `level()`, `bout()`, `attacks(id)`, `journal()`, `outcome()` | la lecture : la machine, la carte, la composition, les attaques d'un enrôlé, le journal, l'issue. |
 | `attack(cible, indice)` | l'action *attaquer* : vérifie la cible (ni soi, ni un allié, ni un mort — une cible à terre se vise, `LOT-137`), `checkTarget`, l'action restante, dépense l'action, résout par `resolveAttack`. `core::ArenaAttack` porte le `core::ArenaActionResult` (`Done`, `NoActiveTurn`, `NoAction`, `OutOfReach`, `TotalCover`, `InvalidTarget`, `NoAttack`) et l'issue. |
 | `dodge()`, `disengage()`, `dash()` | les actions du Manuel : esquiver (désavantage aux attaques contre soi jusqu'au début de son prochain tour, si la cible **voit** l'attaquant), se désengager (plus d'attaque d'opportunité jusqu'à la fin du tour), se précipiter (un `grant` de déplacement égal à sa vitesse). Se précipiter manquait au joueur : l'IA en avait besoin pour traverser une grande salle, et `EX-CBT-050` interdit une action réservée aux monstres. |
-| `move(destination)` | le déplacement, avec les **attaques d'opportunité** : quand le chemin sort de l'allonge d'une créature hostile debout, qui a sa réaction et **voit** le fuyard depuis la case qu'il quitte (`provokes`, un seul prédicat partagé avec la prévisualisation), elle frappe de sa première attaque de contact et dépense sa réaction. Le déplacement s'arrête à la dernière case où l'on peut se tenir avant la sortie — jamais sur un allié qu'on traverse —, les attaques se jouent par identifiant croissant, et le déplacement reprend si le combattant tient debout. |
+| `move(destination)` | le déplacement vers une place en mètres, avec les **attaques d'opportunité** : le chemin se lit point par point, et quand un pas fait passer l'écart entre les bords du fuyard et d'une créature hostile debout, qui a sa réaction et **voit** le fuyard depuis le point qu'il quitte, de l'allonge de sa première attaque de contact à au-delà (`provokes`, un seul prédicat partagé avec la prévisualisation), elle frappe « juste avant que la créature ne sorte de sa zone d'allonge » et dépense sa réaction. Le déplacement s'arrête au dernier point du chemin où l'on peut se tenir avant la sortie — jamais sur un allié qu'on traverse —, les attaques se jouent par identifiant croissant, et le déplacement reprend si le combattant tient debout. Chaque pas s'écrit au journal, « pas Nom 5.25,6.75 (3.00 m) » — le point d'arrivée et la longueur —, et l'observateur des pas (`setMoveObserver`, `core::MoveObserver`) reçoit son chemin (`core::Route`). |
 | `setOpportunityPolicy`, `setTakesOpportunities(id, bool)`, `takesOpportunities` | qui décide d'une opportunité : la politique (l'IA), et le choix du joueur de **laisser passer**, fait **avant** que l'ennemi ne bouge, comme on tient une réaction prête — suspendre le tour d'une IA pour poser la question ferait d'un tour une suite de fenêtres. Le choix survit au rejeu. |
 | `previewOpportunities(destination)`, `circumstancesAgainst(…)`, `isDodging`, `behaviorOf` | ce que la prévisualisation et l'IA lisent ; `note(ligne)` ajoute une décision au journal. |
 | `endTurn()`, `withdraw()` | la fin du tour, et la sortie du combattant actif. |
@@ -804,28 +885,6 @@ dix rounds avec 1 PV (`revives`) ; le soin ne vise pas un mort. La ligne d'une a
 après la déclaration et avant les dés, et se remplit une fois l'attaque résolue : la chute, l'issue
 et la Marque qu'elle déclenche s'écrivent après elle, dans l'ordre où c'est arrivé.
 
-### L'espace de combat en mètres (`CombatSpace.h`, `SimulatedSpace.h`)
-
-Depuis le `LOT-1017` (D-50), les règles spatiales se disent **en mètres**, sans grille à l'écran :
-une créature est un cylindre posé au sol (`core::Volume` — rayon et hauteur tirés de son emprise
-du Manuel, 0,75 m et 1,50 m pour une créature M), l'allonge se mesure entre les bords
-(`core::inReach`, 1,50 m), une zone est une forme (`core::Effect`, `core::shapeHits` : sphère et
-cylindre exacts en trois dimensions ; cône, ligne et cube dans le plan), la tenaille est un angle
-au centre de la cible (`core::flanksByAngle`, 135° : la valeur où la ligne des centres du Guide
-bascule sur les huit cases adjacentes), et l'avantage de hauteur demande une case d'écart
-(`core::hasHighGround`). Les données du corpus restent écrites en cases : `core::metersFromTiles`.
-
-Ce qui dépend de la carte passe par l'interface `core::CombatSpace` — hauteur du sol, place libre,
-ligne de vue, chemin dans un budget, positions candidates — que le moteur implémente par son
-maillage de navigation et ses rayons, et que `core::SimulatedSpace` implémente sans moteur : un
-plan borné, des boîtes, des plateaux, du terrain difficile, de l'eau profonde ; le chemin est un
-Dijkstra sur un réseau de 0,5 m, déterministe, et `fromTileMap` lit une grille de collision de
-l'ancien format. L'abri (`core::coverFrom`) garde la méthode du Guide : des lignes vers quatre
-points du bord de la cible, étagés sur sa hauteur ; une ou deux coupées, abri partiel ; trois,
-important ; quatre, total ; un corps interposé, partiel.
-
-La projection isométrique (`IsoProjection.h`) est retirée : la caméra est libre (D-49) et le
-moteur projette.
 ### À l'écran
 
 Ce que l'écran fait de la session est l'affaire d'autres pages ; en voici seulement les prises.
@@ -848,8 +907,8 @@ ci-dessous.
 
 ## Le combat sur la carte (`MapEncounter.h`, `LOT-118`)
 
-Une rencontre engagée pendant l'exploration se joue **sur place** : la carte se fige, la grille
-paraît, le combat se joue, l'exploration reprend. Trois questions, trois réponses :
+Une rencontre engagée pendant l'exploration se joue **sur place** : la carte se fige, le combat
+s'y monte et s'y joue, l'exploration reprend. Trois questions, trois réponses :
 
 ### Où ? (`core::prepareMapEncounter`)
 
@@ -857,10 +916,11 @@ Sur la **zone de combat** de la carte qui contient le déclencheur — le PNJ do
 engage le combat (`startEncounter`), l'entité `encounter` — ; à défaut, celle qui contient le
 héros ; à défaut, refus : un combat se joue sur une zone que l'éditeur a posée et contrôlée,
 jamais sur une fenêtre inventée autour du héros. La carte est découpée à cette zone
-(`core::cropLevelToZone`) : c'est la grille tactique, dont les cases sont celles de la zone
-(`core::mapToZone`, `core::zoneToMap`). Le héros garde sa case si elle est dans la zone et libre ;
-chaque combattant garde celle que sa formation lui donne (`core::placeCombatants`) si elle est
-libre, sinon la case libre la plus proche — et une place déplacée se **note** au journal.
+(`core::cropLevelToZone`) : c'est le terrain de la session, encore en cases jusqu'au `LOT-1018`
+— celles de la zone (`core::mapToZone`, `core::zoneToMap`) —, dont la session tire son espace
+(`core::SimulatedSpace::fromLevel`, ou celui du moteur). Le héros garde sa case si elle est dans
+la zone et libre ; chaque combattant garde celle que sa formation lui donne
+(`core::placeCombatants`) si elle est libre, sinon la case libre la plus proche — et une place déplacée se **note** au journal.
 
 ### Qui ? (`hmi::EncounterModel`, `hmi::CombatContestants`)
 
@@ -876,7 +936,7 @@ l'origine de la zone (`zoneColumn`, `zoneRow`).
 ### Comment cela se voit ? (`hmi::CombatCueTrack`)
 
 La session est instantanée : un tour de l'IA — approche, attaque, repli — se joue en un appel,
-et dessiner la grille telle quelle montre des combattants qui **se téléportent**. La file des
+et dessiner le combat tel quel montre des combattants qui **se téléportent**. La file des
 mouvements (`Source/HMI/Game/CombatCues.h`) reçoit les faits au moment où ils se produisent —
 un pas et son chemin (`core::ArenaSession::setMoveObserver`), une attaque déclarée, un coup
 encaissé, une chute (`core::CombatHook`) — et les **rejoue** à la vitesse du monde : la marche à
@@ -900,26 +960,27 @@ sous son voile ; c'est l'écran de mort qui quitte la rencontre et finit la part
 
 ## Voir aussi
 
-- `core::BattleGrid`, `core::CombatantId`, `core::Locomotion`, `core::Cover`, `core::GridObject`,
-  `core::ReachableArea`, `core::findPath`, `core::Mover`, `core::movementBudget`.
+- `core::CombatSpace`, `core::SimulatedSpace`, `core::Volume`, `core::Route`, `core::RouteQuery`,
+  `core::tileCenter`, `core::CombatantId`, `core::Locomotion`, `core::Cover`, `core::movementBudget`
+  — l'espace en mètres (`LOT-1017`).
 - `core::TurnOrder`, `core::actsBefore`, `core::CombatState`, `core::CombatHook`,
   `core::ActionEconomy`, `core::ScopedCounters`, `core::mountEncounter`.
 - `core::AttackProfile`, `core::AttackRoll`, `core::rollAttack`, `core::resolveAttack`,
   `core::DamagePipeline`, `core::rollDamage`.
-- `core::isSightClear`, `core::hasLineOfSight`, `core::coverFrom`, `core::areaTemplate`,
-  `core::affectedCells`, `core::isFlanked`, `core::previewAttack`, `core::previewMove`.
+- `core::gapBetween`, `core::hasLineOfSight`, `core::coverFrom`, `core::coverBetween`,
+  `core::hasHighGround`, `core::Effect`, `core::shapeHits`, `core::combatantsInArea`,
+  `core::flanksByAngle`, `core::isFlanked`, `core::previewAttack`, `core::previewMove`.
+- `core::Structure`, `core::DamagePipeline::applyToStructure`.
 - `core::prepareMapEncounter`, `core::MapEncounterSetup`, `hmi::EncounterModel`,
   `hmi::CombatModel`, `hmi::CombatCueTrack`, `hmi::FigureResolver`.
 - `core::planTurn`, `core::playTurn`, `core::expectedDamage`, `core::ArenaSession`,
   `core::CombatZone`.
-- `core::Volume`, `core::inReach`, `core::shapeHits`, `core::flanksByAngle`, `core::hasHighGround`,
-  `core::CombatSpace`, `core::SimulatedSpace`, `core::coverFrom` — l'espace en mètres (`LOT-1017`).
 - `hmi::CombatModel`, `hmi::EncounterModel` — la présentation du combat sur la carte.
 - [Règles d20 et personnages](guide-regles.md) — le jet, la fiche, l'inventaire que les profils
   d'attaque lisent.
 - [Monde et exploration](guide-monde.md) — la session d'exploration qui rencontre un déclencheur,
   et la zone de combat d'une carte.
-- [Niveaux](guide-niveaux.md) — la grille de collision dont la grille de combat est la copie.
+- [Niveaux](guide-niveaux.md) — la grille de collision dont l'espace simulé du combat se lit.
 - Rendu 2D, Écrans — ce que `CombatHud.qml` et
   `hmi::EncounterModel` font de la session.
 - Éditeur de niveaux — le contrôle du contenu qui appelle

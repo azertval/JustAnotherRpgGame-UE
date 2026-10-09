@@ -9,8 +9,8 @@
 
 **RPG 2D en vue isométrique**, à monde de cartes connectées. Le joueur dirige un personnage qui
 explore en **temps réel** (déplacement libre 8 directions, interaction avec les PNJ, les coffres
-et les portails) et affronte les rencontres en **combat tactique au tour par tour** sur la grille
-de la carte, régi par un système **d20**.
+et les portails) et affronte les rencontres en **combat tactique au tour par tour** sur la carte
+elle-même, régi par un système **d20**.
 
 - **Genre** : action-RPG d'exploration + combat tactique.
 - **Perspective** : 2D **isométrique**, décor en tuiles multi-couches (sol / décor / collision).
@@ -84,8 +84,8 @@ joueur, et son échelle est celle de la fenêtre. La frontière entre les deux e
 
 1. Le joueur explore une carte : déplacement libre, interaction avec le décor et les PNJ.
 2. Il progresse dans le monde par des portails entre cartes, guidé par les dialogues et les quêtes.
-3. Une rencontre se déclenche (contact, zone, dialogue) : le monde se fige, la grille tactique se
-   monte sur la carte courante.
+3. Une rencontre se déclenche (contact, zone, dialogue) : le monde se fige, le combat se monte sur
+   la carte courante.
 4. Le combat se joue au tour par tour, dans l'ordre d'initiative, chaque action résolue au d20.
 5. Victoire : retour à l'exploration, l'ennemi retiré de la carte durablement, butin et expérience
    acquis. Défaite : reprise à la dernière sauvegarde.

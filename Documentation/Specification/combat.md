@@ -6,14 +6,21 @@
 > une défaite y ouvre l'écran de mort (`LOT-119`). Reste l'agonie et la mort (`LOT-137`). Dépend de
 > [`regles-d20.md`](regles-d20.md) (le jet, les conditions) et de
 > [`exploration.md`](exploration.md) (la couche de collision, l'orientation).
+>
+> **Le combat en distance** (`LOT-1017`, en cours) retire la grille de combat : les positions, les
+> portées, les chemins et les zones se mesurent en mètres sur un espace de combat que le moteur
+> implémente, sans grille à l'écran ; une case de 1,5 m reste l'unité des données. Les exigences
+> `EX-CBT-001`, `EX-CBT-020`, `EX-CBT-021` et `EX-CBT-061` nomment encore la grille, et les deux
+> maquettes de cette page la dessinent : leur réécriture attend la décision de l'auteur.
 
 Ce document concrétise [`EX-VIS-004`](vision.md#EX-VIS-004) — « résoudre un combat tactique complet au
 tour par tour » — dont il détaille chaque terme : l'initiative, la portée, le jet d'attaque et la
 fin de rencontre.
 
-Le combat est la moitié « au tour par tour » du jeu. Il se déroule **sur la carte d'exploration**,
-sur une grille dérivée de la couche de collision — décision de cadrage actée avant le `LOT-01` : pas
-d'écran de combat séparé, pas de transition vers une arène abstraite. Ce qui change à la bascule,
+Le combat est la moitié « au tour par tour » du jeu. Il se déroule **sur la carte d'exploration**
+— décision de cadrage actée avant le `LOT-01` : pas d'écran de combat séparé, pas de transition vers
+une arène abstraite. Il s'y jouait sur une grille dérivée de la couche de collision, et se mesure en
+mètres depuis le `LOT-1017`. Ce qui change à la bascule,
 c'est le **temps**, pas le lieu.
 
 ## 1. Bascule
@@ -48,13 +55,17 @@ c'est le **temps**, pas le lieu.
 ## 3. L'espace
 
 Trois exigences se partagent une seule question : **où peut-on aller, et qui peut-on atteindre ?**
-Elles se lisent mieux ensemble, sur la grille qu'elles décrivent — une case de 1,5 m, dérivée de la
-couche de collision, et jamais une seconde carte posée à côté de la première.
+Elles se lisent mieux ensemble, sur l'espace qu'elles décrivent — tiré de la carte elle-même, et
+jamais une seconde carte posée à côté de la première. Écrites pour la grille de cases de 1,5 m du
+`LOT-19`, elles se jouent depuis le `LOT-1017` en mètres : la distance d'un chemin et l'allonge se
+mesurent sur l'espace, entre les bords des volumes, et la case de 1,5 m n'est plus que l'unité des
+portées et des vitesses écrites dans les données.
 
 ![Maquette de la grille tactique : les cases atteignables calculées par un parcours qui contourne le mur, le terrain difficile compté double, la ligne de vue tracée en demi-cases et coupée par le mur, et le muret qui laisse voir tout en donnant un abri partiel](maquettes/combat-grille-portee.svg)
 
 Ce que la maquette montre et qu'une phrase peine à dire : le joueur **voit** le coût avant de
-s'engager. Les cases atteignables sont peintes, le chemin suit le détour imposé par le mur, et le
+s'engager. Elle dessine la grille du `LOT-19` — les cases atteignables peintes, la ligne de vue en
+demi-cases — ; le principe survit à la grille : le chemin suit le détour imposé par le mur, et le
 curseur annonce le jet à atteindre. Une portée annoncée après le geste ne serait pas de la
 tactique, seulement une sanction.
 
@@ -116,10 +127,12 @@ pour l'adversaire.
 
 ![Maquette de la prise en tenaille et des zones d'effet : à gauche, deux alliés dont la ligne traverse la case de la cible par deux côtés opposés donnent l'avantage, alors que deux côtés adjacents ne le donnent pas ; à droite, un cône et une sphère dont on ne retient que les cases couvertes à moitié et que l'origine atteint en ligne droite](maquettes/combat-tenaille-zone.svg)
 
-Le point commun des deux moitiés de cette maquette est qu'elles sont **décidables sans jugement** :
-un test de côtés opposés, un seuil de demi-case, une ligne droite jusqu'à l'origine. C'est la
-condition pour qu'une règle de placement soit à la fois enseignable au joueur, exécutable par l'IA
-et rejouable par un test.
+Le point commun des deux moitiés de cette maquette est qu'elles sont **décidables sans jugement**.
+Elle les dessine sur la grille — un test de côtés opposés, un seuil de demi-case ; en mètres
+(`LOT-1017`), la tenaille devient un angle d'au moins 135° au centre de la cible, et une créature
+est prise par une zone si son volume croise la forme ; la ligne droite jusqu'à l'origine reste.
+C'est la condition pour qu'une règle de placement soit à la fois enseignable au joueur, exécutable
+par l'IA et rejouable par un test.
 
 - **EX-CBT-050** — L'intelligence artificielle choisit **dans les mêmes actions
   que le joueur**, avec les **mêmes informations** : pas d'action réservée aux monstres, pas de

@@ -74,8 +74,8 @@ Fichier : [`ExplorationSession.h`](../../Source/JustAnotherRpgGame/Core/World/Ex
 
 La position du héros est **continue, en cases** : `{1.5, 2.5}` est le centre de la case `(1, 2)`.
 `core::cellOf` rend la case qui contient un point (partie entière), `core::cellCenter` le centre
-d'une case (`+ 0,5`). Le nom diffère volontairement de `core::centerOf`, qui compte en demi-cases
-pour la ligne de vue du combat : deux repères, deux noms. La collision se lit sur la **grille
+d'une case (`+ 0,5`). Le nom diffère volontairement de `core::centerOf`, qui rend en mètres le
+centre d'un volume du combat (`LOT-1017`) : deux repères, deux noms. La collision se lit sur la **grille
 racine** de la carte (`core::Level::tileMap`), la seule qui porte le masque (`EX-LVL-016`,
 `EX-EXP-002`) : repeindre le sol ne change rien à ce qui bloque.
 
@@ -193,8 +193,9 @@ est donc un parcours en largeur des cases non solides reliées **en quatre voisi
 donnés ; `reaches(cell)` répond, `count()` compte. Un départ hors carte ou sur une case solide
 n'atteint rien, pas même sa case. Un `static_assert` lie la règle au gabarit : si
 `HERO_HALF_SIZE_CELLS` dépassait 0,5, un couloir d'une case ne se passerait plus et ce parcours
-mentirait. Ce n'est **pas** l'aire atteignable du combat (`core::ReachableArea`, `LOT-19`), qui
-coupe les diagonales libres et compte double le terrain difficile : deux questions, deux règles.
+mentirait. Ce n'est **pas** le déplacement du combat (`core::CombatState::destinations`,
+`LOT-1017`), qui marche en mètres sur l'espace de combat et compte double le terrain difficile :
+deux questions, deux règles.
 
 ## Le groupe : `core::Party` et `core::FollowTrail`
 
@@ -433,7 +434,7 @@ Un portail orphelin est relevé au **chargement**, pas à la traversée (`EX-NFR
 | `MissingArrivalPoint` | un portail ne nomme aucun point d'arrivée | — |
 | `UnknownArrivalPoint` | la carte cible n'offre pas ce point | le point |
 | `DuplicateArrivalPoint` | deux points d'une même carte portent le même nom | le nom |
-| `CombatZoneDegenerate`, `CombatZoneOutOfBounds`, `CombatZoneBlocked` | une zone de combat n'est pas une grille tactique | la zone |
+| `CombatZoneDegenerate`, `CombatZoneOutOfBounds`, `CombatZoneBlocked` | une zone de combat n'est pas un terrain de combat | la zone |
 
 `core::validateWorldGraph(graph)` relève, sur un `core::WorldGraph`, les cartes illisibles puis
 chaque portail dont le statut n'est pas `Resolved` (cartes par identifiant, portails dans l'ordre
@@ -585,7 +586,7 @@ Fichier : [`EntityKinds.h`](../../Source/JustAnotherRpgGame/Core/World/EntityKin
 connaît aucune sémantique de type d'entité (`EX-LVL-017`) ; ce fichier **rassemble** les familles
 que le jeu lit déjà, pour que l'éditeur sache les poser et les contrôler. Il ne les invente pas :
 les types et propriétés sont ceux de `knownInteractableKinds`, `dialogueTriggerFor`,
-`encounterTriggerFor`, `arenaEntryPoints` et `BattleGrid`. Une seule exception, le **trajet**
+`encounterTriggerFor`, `arenaEntryPoints` et `SimulatedSpace::fromLevel`. Une seule exception, le **trajet**
 (`route`), que l'éditeur demande avant que le jeu ne le lise
 (`LOT-171`).
 
@@ -598,7 +599,7 @@ les types et propriétés sont ceux de `knownInteractableKinds`, `dialogueTrigge
 | `spawnPoint` | point | `name` (requis) | `arrivalPointAt` |
 | `combatZone` | rectangle | `name`, `width`, `height` (≥ 1) | `combatZonesOf` |
 | `cityBlock` | rectangle | `name`, `width`, `height` (≥ 1) | `cityBlocksOf` |
-| `zone` | aire | `name`, `difficultTerrain`, `width`, `height` ; les déclencheurs `triggerDialogue`, `triggerFlag` + `triggerValue`, `triggerMap` + `triggerArrival`, `triggerOnce` | `BattleGrid`, `ExplorationSession` |
+| `zone` | aire | `name`, `difficultTerrain`, `width`, `height` ; les déclencheurs `triggerDialogue`, `triggerFlag` + `triggerValue`, `triggerMap` + `triggerArrival`, `triggerOnce` | `SimulatedSpace::fromLevel`, `ExplorationSession` |
 | `prop` | rectangle | `piece` (requis), `blocks` (vrai par défaut), `width`, `height` (≥ 1) | `ExplorationSession`, `WorldSceneComposer` |
 | `route` | ligne brisée | `name` (requis), `loop` | personne encore |
 | `arenaEntry` | point | `side` (`allies`/`enemies`), `rank` | `arenaEntryPoints` |
@@ -995,8 +996,8 @@ propose, pour `presenceValue`, les valeurs que la quête déclare (source `FlagV
 
 ### Les zones déclencheuses {#les-zones-declencheuses}
 
-Une zone de règles (`zone`, l'aire que `BattleGrid` lit pour le terrain difficile) peut aussi
-**agir** quand le héros y entre, par trois déclencheurs facultatifs de `EntityKinds.h` :
+Une zone de règles (`zone`, l'aire que `SimulatedSpace::fromLevel` lit pour le terrain difficile)
+peut aussi **agir** quand le héros y entre, par trois déclencheurs facultatifs de `EntityKinds.h` :
 `triggerDialogue` (un dialogue s'ouvre), `triggerFlag` (un drapeau se pose, avec `triggerValue` si
 une quête le déclare — requise alors, puisque `core::WorldFlags::set` refuse un drapeau déclaré
 sans valeur) et `triggerMap` + `triggerArrival` (un **transfert** vers une autre carte, ou
@@ -1048,7 +1049,7 @@ l'ouverture et à chaque `questAdvanced` de `hmi::WorldModel`. Au clavier :
 Fichier : [`CombatZone.h`](../../Source/JustAnotherRpgGame/Core/World/CombatZone.h) (`LOT-09`, `EX-LVL-018`).
 L'Arena of Fate est un lieu : on marche dans le hall, les couloirs, les vestiaires et les tribunes, et
 l'on ne s'y bat pas — le livre ne fait combattre que sur le sable. Prendre la carte entière pour
-grille tactique donnerait un affrontement de mille cases dont la plupart seraient des gradins. La
+terrain de combat donnerait un affrontement de mille cases dont la plupart seraient des gradins. La
 zone est donc **déclarée sur la carte** : une entité `combatZone`, sa case au coin haut-gauche,
 `name`, `width`, `height` en propriétés.
 
@@ -1076,7 +1077,7 @@ zone est donc **déclarée sur la carte** : une entité `combatZone`, sa case au
   par le chargeur, sinon la carte réduite porterait deux fois sa collision. Les entités de la zone
   sont **translatées** avec elle — les points d'entrée des deux camps gardent leur place relative
   —, celles du dehors écartées, les cases forcées suivent. L'entrée de la carte réduite est celle
-  de la carte si elle est dans la zone, son coin sinon : une grille de combat ne s'en sert pas,
+  de la carte si elle est dans la zone, son coin sinon : le combat ne s'en sert pas,
   mais un champ menteur finirait par être lu.
 
 **La bascule elle-même** (`LOT-18`, `EX-CBT-001`) est un aller-retour dont la carte ne sait rien :
@@ -1086,7 +1087,7 @@ zone, et à la fin dégèle : le héros est à la case où il était, l'état de
 drapeaux posés — est conservé parce que la carte n'a jamais été détruite. Un ennemi vaincu est un
 fait de partie sous une clé fabriquée (`core::encounterTriggerFor` la calcule ; vide pour une zone
 qui se redéclenche), et seule une **victoire** l'acquiert : poser le drapeau à toute sortie ferait
-de la fuite un moyen de nettoyer une carte. La grille, l'initiative et les tours sont dans
+de la fuite un moyen de nettoyer une carte. L'espace, l'initiative et les tours sont dans
 [Combat tactique](guide-combat.md).
 
 ## Voir aussi

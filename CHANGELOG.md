@@ -18,10 +18,20 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
   eau ; Dijkstra déterministe sur un réseau de 0,5 m ; lecture d'une grille de collision) pour les
   tests et la simulation, `FJadgCombatSpace` dans le moteur (maillage de navigation, rayons,
   balayages). Les types partagés quittent `BattleGrid.h` pour `CombatTypes.h`. `IsoProjection`
-  est retirée (D-49). 28 tests de Core, un test du moteur (`Jadg.Combat.Espace`). **La grille
-  reste en place** : `CombatState` et ses consommateurs ne sont pas encore passés en mètres, et
-  les sous-lots de l'IA et du combat dans le moteur ne sont pas ouverts ; la fiche du lot dit
-  l'ordre.
+  est retirée (D-49). 28 tests de Core, un test du moteur (`Jadg.Combat.Espace`). **Puis la
+  grille est retirée** : `BattleGrid`, `Pathfinding` et `LineOfSight` disparaissent, et
+  `CombatState` (positions en mètres, un `CombatSpace` partagé, chemins et places dans un budget
+  en mètres, vitesse toujours comptée en cases et payée en cases entamées), l'attaque (allonge et
+  portée entre les bords, abri et vue sur l'espace, avantage de hauteur), les structures
+  (`core::Structure`), les zones, la tenaille, le terrain tactique, le déploiement, l'aperçu,
+  l'IA (mêmes poids, places candidates de l'espace, approche en centimètres ; profils JSON
+  inchangés) et l'arène jouent sur l'espace. `SimulatedSpace` lit une carte à la demi-case, avec
+  l'eau, la falaise et le terrain difficile de ses zones (`fromLevel`) ; `candidates` rend chaque
+  place avec son chemin. La série de l'arène et la simulation à cent graines entrent dans les
+  tests de Core, sans Qt : **écart entre trios 19,2 points** (15,8 en `0.0.2`, critère 20).
+  663 tests de Core avant comme après (23 tests de la grille retirés, leurs règles portées),
+  14 tests du moteur. Restent les zones et le marqueur de rencontre en volumes (LOT-1018), l'IA
+  sur EQS et le combat dans le moteur (sous-lots 2 et 3) ; la fiche du lot le dit.
 
 - **Les personnages entrent dans le moteur par un créateur** (LOT-1015, 8 octobre 2026). Un
   personnage est une **fiche d'apparence** (`Source/Elements/Rpg/appearances/<id>.json`, schéma

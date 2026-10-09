@@ -46,7 +46,7 @@ du groupe, meneur en tête et marqué ; le portrait principal est celui du meneu
 
 En combat s'ajoute exactement ce que le tour rend décidable : l'ordre stable (`EX-CBT-010`), les
 quatre ressources consommables une fois (`EX-CBT-011`), la fin de tour explicite (`EX-CBT-012`), et
-les aides de grille (`EX-CBT-020`, `EX-CBT-021`). La cible montre ce que le joueur **sait** d'elle —
+les aides au déplacement et à la visée (`EX-CBT-020`, `EX-CBT-021`). La cible montre ce que le joueur **sait** d'elle —
 « ensanglanté », pas un nombre de points de vie que rien ne lui a appris.
 
 - **EX-IHM-108** — En combat de **groupe** (`EX-CBT-061`), l'interface montre : l'ordre

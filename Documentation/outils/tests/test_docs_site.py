@@ -30,7 +30,7 @@ FICHE = ('+++\nid = "LOT-19"\ntitre = "Grille"\nversion = "0.0.0"\nfiliere = "re
 TAGFILE = '''<?xml version="1.0"?>
 <tagfile>
   <compound kind="class">
-    <name>core::BattleGrid</name>
+    <name>core::CombatState</name>
     <filename>classcore_1_1_battle_grid.html</filename>
     <member kind="function">
       <name>place</name>
@@ -55,7 +55,7 @@ def depot(tmp_path):
         '# Guide\n\nLe comment.\n\n- [Combat](guide-combat.md)\n- [Boucle](guide-boucle.md)\n', encoding='utf-8')
     (docs / 'Guide' / 'guide-boucle.md').write_text('# Boucle\n\n## Pas fixe {#pas-fixe}\n\nTexte.\n', encoding='utf-8')
     (docs / 'Guide' / 'guide-combat.md').write_text(
-        '# Combat\n\nVoir `EX-CBT-001`, `LOT-19`, `core::BattleGrid` et `core::BattleGrid::place()`, '
+        '# Combat\n\nVoir `EX-CBT-001`, `LOT-19`, `core::CombatState` et `core::CombatState::place()`, '
         'puis [le pas fixe](guide-boucle.md#pas-fixe) et [la fiche](../../Planning/versions/v0.0.0/lots/LOT-19-grille.md).\n\n'
         '![La grille de combat](captures/grille.png)\n\n> **Attention** — Un encadré.\n', encoding='utf-8')
     (docs / 'Guide' / 'captures' / 'grille.png').write_bytes(b'png')

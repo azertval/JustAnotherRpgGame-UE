@@ -21,7 +21,7 @@ les montre sur une carte réelle de la démo.
 
 Ce que la maquette rend visible : un portail **nomme** sa destination — une carte et un point
 d'arrivée — au lieu de pointer des coordonnées, ce qui permet de redimensionner la carte cible sans
-casser l'arrivée ; et la bascule en combat ne **déplace** personne, elle découpe une grille là où
+casser l'arrivée ; et la bascule en combat ne **déplace** personne, elle découpe une zone là où
 le joueur se trouve déjà.
 
 ## 1. Déplacement
@@ -70,7 +70,7 @@ le joueur se trouve déjà.
 ## 2. Repères d'échelle
 
 Une case vaut **1,5 m** (5 ft), l'unité tactique du système d20, que la grille de combat du `LOT-19`
-reprend telle quelle. La marche va à **2 cases par seconde**, soit 3 m/s
+a reprise telle quelle et que le combat en distance (`LOT-1017`) garde comme unité de ses données. La marche va à **2 cases par seconde**, soit 3 m/s
 (`core::ExplorationSession::WALK_SPEED_CELLS_PER_SECOND`) : une marche vive, pas la vitesse réelle
 d'un marcheur — l'exploration doit rester agréable au clavier, pas simuler une randonnée. Elle
 allait à 4 cases par seconde avant le `LOT-112` ; c'est la figurine peinte qui a tranché.
