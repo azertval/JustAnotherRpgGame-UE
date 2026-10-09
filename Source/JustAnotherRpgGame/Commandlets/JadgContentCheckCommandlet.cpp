@@ -6,6 +6,8 @@
 #include "Core/Rpg/CharacterOptions.h"
 #include "Core/Rpg/CharacterSheet.h"
 #include "Core/Rpg/Party.h"
+#include "Core/World/WorldGraph.h"
+#include "Core/World/WorldTravel.h"
 
 #include <filesystem>
 #include <string>
@@ -15,6 +17,39 @@
 #include "Bridge/JadgLog.h"
 #include "Bridge/JadgPaths.h"
 #include "JustAnotherRpgGame.h"
+#include "Misc/Paths.h"
+
+namespace
+{
+	/// Ce que dit un défaut du graphe du monde, en clair.
+	const TCHAR* IssueText(core::WorldIssueCode Code)
+	{
+		switch (Code)
+		{
+		case core::WorldIssueCode::UnreadableMap:
+			return TEXT("carte illisible");
+		case core::WorldIssueCode::MissingTargetMap:
+			return TEXT("portail sans carte visée");
+		case core::WorldIssueCode::UnknownTargetMap:
+			return TEXT("portail vers une carte inconnue");
+		case core::WorldIssueCode::UnreadableTargetMap:
+			return TEXT("portail vers une carte illisible");
+		case core::WorldIssueCode::MissingArrivalPoint:
+			return TEXT("portail sans point d'arrivée");
+		case core::WorldIssueCode::UnknownArrivalPoint:
+			return TEXT("portail vers un point d'arrivée inconnu");
+		case core::WorldIssueCode::DuplicateArrivalPoint:
+			return TEXT("point d'arrivée en double");
+		case core::WorldIssueCode::CombatZoneDegenerate:
+			return TEXT("zone de combat dégénérée");
+		case core::WorldIssueCode::CombatZoneOutOfBounds:
+			return TEXT("zone de combat hors de la carte");
+		case core::WorldIssueCode::CombatZoneBlocked:
+			return TEXT("zone de combat sans case libre");
+		}
+		return TEXT("défaut");
+	}
+}
 
 UJadgContentCheckCommandlet::UJadgContentCheckCommandlet()
 {
@@ -82,6 +117,31 @@ int32 UJadgContentCheckCommandlet::Main(const FString& Params)
 			*FJadgPaths::ToFString(Sheet.classId), Sheet.level, Sheet.abilities[0], Sheet.abilities[1],
 			Sheet.abilities[2], Sheet.abilities[3], Sheet.abilities[4], Sheet.abilities[5],
 			Sheet.currentHitPoints, Sheet.maximumHitPoints, Sheet.armorClass, Sheet.speedMeters);
+	}
+
+	// Les cartes (format v5, LOT-1018) : celles du jeu et celles des essais, lues par le lecteur de
+	// Core, puis le graphe de leurs portails — carte et point d'arrivée visés, zones de combat. Le
+	// contrôle du texte (arrivées citées, zones nommées, cases inatteignables) est celui de
+	// `scripts/maps/jadg_map.py --check` ; celui du maillage de navigation, de `build_level.py`.
+	const std::filesystem::path TrialLevels =
+		FJadgPaths::ToPath(FPaths::ConvertRelativePathToFull(FPaths::Combine(FPaths::ProjectDir(), TEXT("Source/Test/Fixtures/Exploration/Levels"))));
+	int32 MapCount = 0;
+	for (const std::filesystem::path& Root : {FJadgPaths::ToPath(FJadgPaths::ElementsDir()) / "Levels", TrialLevels})
+	{
+		const core::WorldGraph Graph = core::loadWorldGraph(Root);
+		MapCount += static_cast<int32>(Graph.maps.size());
+		for (const core::WorldIssue& Issue : core::validateWorldGraph(Graph))
+		{
+			UE_LOG(LogJadg, Error, TEXT("carte %s (%d ; %d) : %s %s"), *FJadgPaths::ToFString(Issue.mapId), Issue.position.column,
+				Issue.position.row, IssueText(Issue.code), *FJadgPaths::ToFString(Issue.value));
+			++ErrorCount;
+		}
+	}
+	UE_LOG(LogJadg, Display, TEXT("%d carte(s) lue(s) par Core"), MapCount);
+	if (MapCount == 0)
+	{
+		UE_LOG(LogJadg, Error, TEXT("aucune carte lue"));
+		++ErrorCount;
 	}
 
 	if (ErrorCount > 0)

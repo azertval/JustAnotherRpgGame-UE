@@ -52,9 +52,22 @@ namespace
 struct AJadgParty::FState
 {
 	core::FollowTrail Trail;
-	/// Le point de la trace vers lequel chaque suiveur a été envoyé, par rang.
+	/// Le point de la trace vers lequel chaque suiveur a été envoyé, par rang, et sa hauteur.
 	TArray<FVector2D> Ordered;
+	TArray<double> OrderedHeight;
 };
+
+namespace
+{
+	/// Un suiveur reçoit un nouvel ordre quand la hauteur de son point a bougé d'autant, en
+	/// centimètres : il monte l'escalier derrière le meneur (D-51).
+	constexpr double ReorderHeight = 40.0;
+
+	/// La hauteur où l'on cherche le maillage de navigation sous un point d'une carte à étages, en
+	/// centimètres de part et d'autre : moins que la moitié d'un étage, pour ne pas trouver le rez
+	/// sous un point de l'étage (D-51).
+	constexpr double StoreySearch = 120.0;
+}
 
 AJadgParty::AJadgParty()
 {
@@ -93,7 +106,10 @@ bool AJadgParty::OnNavigation(const FVector& Point, FVector& OutGround) const
 {
 	UNavigationSystemV1* Navigation = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
 	FNavLocation Found;
-	if (Navigation != nullptr && Navigation->ProjectPointToNavigation(Point, Found, FVector(200.0, 200.0, 400.0)))
+	// Sur une carte à étages, on cherche près de la hauteur du point, pas sous lui jusqu'au rez.
+	const bool bStoreys = Frame != nullptr && Frame->StoreyHeights.Num() > 1;
+	const FVector Extent(200.0, 200.0, bStoreys ? StoreySearch : 400.0);
+	if (Navigation != nullptr && Navigation->ProjectPointToNavigation(Point, Found, Extent))
 	{
 		OutGround = Found.Location;
 		return true;
@@ -199,6 +215,7 @@ void AJadgParty::GatherEntities()
 	for (const FJadgEntity& Entity : Exploration->Entities())
 	{
 		EntityCells.Add(Entity.Id, Entity.Cell);
+		EntityStoreys.Add(Entity.Id, Entity.Storey);
 	}
 	for (TActorIterator<AActor> It(GetWorld()); It; ++It)
 	{
@@ -228,10 +245,11 @@ void AJadgParty::GatherEntities()
 		}
 		EntityIds.Add(Id);
 		EntityActors.Add(*It);
-		// Un personnage se tient sur la case de son entité : c'est Core qui dit où.
+		// Un personnage se tient sur la case de son entité, à son étage : c'est Core qui dit où.
 		if (AJadgWalker* Walker = Cast<AJadgWalker>(*It))
 		{
-			const FVector Centre = Frame->ToWorld(FVector2D(Cell->X + 0.5, Cell->Y + 0.5));
+			FVector Centre = Frame->ToWorld(FVector2D(Cell->X + 0.5, Cell->Y + 0.5));
+			Centre.Z = Frame->StoreyZ(EntityStoreys.FindRef(Id)) + 50.0;
 			FVector Ground = Centre;
 			OnNavigation(Centre, Ground);
 			Walker->StandOn(Ground, Walker->GetActorRotation().Yaw);
@@ -249,7 +267,8 @@ void AJadgParty::GatherEntities()
 	{
 		for (const FJadgLamp& Lamp : Lamps)
 		{
-			const FVector Foot = Frame->ToWorld(Lamp.Cell);
+			FVector Foot = Frame->ToWorld(Lamp.Cell);
+			Foot.Z = Frame->StoreyZ(Lamp.Storey);
 			DayLight->AddLamp(Foot + FVector(0.0, 0.0, Lamp.HeightMetres * 100.0), Lamp.Colour, Lamp.RadiusMetres * 100.0f,
 				Lamp.Intensity, Lamp.bAlways);
 		}
@@ -268,7 +287,9 @@ void AJadgParty::PlaceParty(const FVector2D& LeaderCell)
 	{
 		return;
 	}
-	FVector Ground = WorldOf(LeaderCell, Frame != nullptr ? Frame->GetActorLocation().Z : Head->Feet().Z);
+	// Le meneur se pose à l'étage que Core lui donne (D-51) : le rez sur une carte d'un seul niveau.
+	FVector Ground = WorldOf(LeaderCell, Frame != nullptr ? Frame->StoreyZ(Exploration != nullptr ? Exploration->HeroStorey() : 0) + 50.0
+		: Head->Feet().Z);
 	// Sans maillage de navigation sous le meneur, la file ne peut pas encore se ranger : tout le
 	// groupe attend sur son point, et `Tick` y revient.
 	bLinedUp = OnNavigation(Ground, Ground);
@@ -308,14 +329,18 @@ void AJadgParty::SetStacked(bool bStacked)
 void AJadgParty::ResetTrail()
 {
 	std::vector<core::TrailPoint> Points;
+	std::vector<float> Heights;
 	State->Ordered.Reset();
+	State->OrderedHeight.Reset();
 	for (const TObjectPtr<AJadgWalker>& Member : Members)
 	{
 		const FVector2D Cell = CellOf(Member->Feet());
 		Points.emplace_back(static_cast<float>(Cell.X), static_cast<float>(Cell.Y));
+		Heights.push_back(static_cast<float>(Member->Feet().Z));
 		State->Ordered.Add(Cell);
+		State->OrderedHeight.Add(Member->Feet().Z);
 	}
-	State->Trail.reset(Points);
+	State->Trail.reset(Points, Heights);
 	State->Trail.keep((static_cast<float>(Members.Num()) + 1.0f) * core::FollowTrail::SPACING_CELLS);
 }
 
@@ -383,6 +408,11 @@ void AJadgParty::Tick(float DeltaSeconds)
 	}
 
 	const bool bOnCoreMap = Frame != nullptr && Head != nullptr;
+	if (bOnCoreMap)
+	{
+		// L'étage des pieds du meneur : Core ne sollicite que ce qui est à cet étage (D-51).
+		Exploration->SetStorey(Frame->StoreyAt(Head->Feet().Z));
+	}
 	const TArray<FJadgEvent> Events = Exploration->Step(bOnCoreMap ? &Cell : nullptr, bInteract, DeltaSeconds);
 	for (const FJadgEvent& Event : Events)
 	{
@@ -402,7 +432,8 @@ void AJadgParty::Tick(float DeltaSeconds)
 		bPending = false;
 	}
 
-	State->Trail.record(core::TrailPoint{static_cast<float>(Cell.X), static_cast<float>(Cell.Y)});
+	// La trace porte la hauteur de chaque pas : un suiveur monte l'escalier derrière le meneur.
+	State->Trail.record(core::TrailPoint{static_cast<float>(Cell.X), static_cast<float>(Cell.Y)}, static_cast<float>(Head->Feet().Z));
 	FollowLeader();
 	if (bStackedNow)
 	{
@@ -431,15 +462,20 @@ void AJadgParty::FollowLeader()
 	for (int32 Rank = 1; Rank < Members.Num(); ++Rank)
 	{
 		AJadgWalker* Member = Members[Rank];
-		const core::TrailPoint Point = State->Trail.pointBehind(static_cast<float>(Rank) * core::FollowTrail::SPACING_CELLS);
+		const float Behind = static_cast<float>(Rank) * core::FollowTrail::SPACING_CELLS;
+		const core::TrailPoint Point = State->Trail.pointBehind(Behind);
 		const FVector2D Wanted(Point.x, Point.y);
-		if (FVector2D::Distance(Wanted, State->Ordered[Rank]) < ReorderCells)
+		const double Height = State->Trail.heightBehind(Behind);
+		if (FVector2D::Distance(Wanted, State->Ordered[Rank]) < ReorderCells
+			&& FMath::Abs(Height - State->OrderedHeight[Rank]) < ReorderHeight)
 		{
 			continue;
 		}
 		State->Ordered[Rank] = Wanted;
+		State->OrderedHeight[Rank] = Height;
 		const FVector Feet = Member->Feet();
-		FVector Goal = WorldOf(Wanted, Feet.Z);
+		// Le point de la trace à sa hauteur : à l'étage, le suiveur ne cherche pas sa place au rez.
+		FVector Goal = WorldOf(Wanted, Height + 50.0);
 		if (FVector::Dist2D(Goal, Feet) > CloseEnough && OnNavigation(Goal, Goal))
 		{
 			Member->WalkTo(Goal, 10.0f);
@@ -490,7 +526,7 @@ void AJadgParty::OrderInteract(const AActor* Target)
 	}
 	const FIntPoint Cell = EntityCells[EntityIds[Index]];
 	const FVector Feet = Head->Feet();
-	const FVector There = WorldOf(FVector2D(Cell.X + 0.5, Cell.Y + 0.5), Feet.Z);
+	const FVector There = WorldOf(FVector2D(Cell.X + 0.5, Cell.Y + 0.5), Frame->StoreyZ(EntityStoreys.FindRef(EntityIds[Index])) + 50.0);
 	FVector Toward = Feet - There;
 	Toward.Z = 0.0;
 	FVector Ground;

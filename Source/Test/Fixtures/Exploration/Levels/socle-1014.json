@@ -1,0 +1,47 @@
+{
+  "format": "jadg-map",
+  "version": 5,
+  "name": "Socle1014",
+  "comment": "La carte du socle (LOT-1014) : une carte presque vide, pour les tests du moteur. Un sol uni, le ciel, la table du jour et un bloc de pierre des données d'essai, qui sert de repère. Elle ne lit aucun kit d'assets (assetsRoot) : elle se construit sur un poste qui n'a que le dépôt, par scripts/maps/build_level.py, et ses captures se comparent à tolérance à celles de Source/Test/Fixtures/Captures/socle-1014/ (scripts/checks/compare_captures.py). Sa grille de Core n'a que l'entrée : rien ne s'y joue (LOT-1018).",
+  "width": 8,
+  "height": 8,
+  "origin": [-6.0, -6.0],
+  "nextEntityId": 1,
+  "tiles": [
+    {"x": 0, "y": 7, "type": "entry"}
+  ],
+  "entities": [],
+  "objects": [
+    {"id": "repere", "mesh": "Scene/socle/repere.glb", "position": [0.0, 0.0, 0.0], "yaw": 0.0, "scale": 1.0}
+  ],
+  "assetsRoot": "Source/Test/Fixtures/Meshes/Assets",
+  "lighting": {
+    "comment": "Les réglages de la porte (porte-1012.json), repris tels quels : la capture du socle vérifie le même chemin de rendu.",
+    "lampCandelas": 60.0,
+    "fireCandelas": 30.0,
+    "sunScale": 1.8,
+    "ambientScale": 0.45,
+    "skyLuminance": 3.0,
+    "exposureBias": 0.0,
+    "fog": {
+      "density": 0.004,
+      "falloff": 0.05,
+      "volumetric": true
+    },
+    "post": {
+      "bloom_intensity": 0.6,
+      "vignette_intensity": 0.3
+    }
+  },
+  "daylight": "Common/Lighting/daylight.json",
+  "ground": {
+    "comment": "Le sol de la porte.",
+    "colour": "#8f7d62",
+    "size": 4000.0,
+    "height": -0.02
+  },
+  "shots": [
+    {"id": "socle", "target": [0.5, -0.4, 1.2], "heading": 30.0, "pitch": 12.0, "distance": 12.0, "comment": "Le bloc au premier plan, de trois quarts, le sol jusqu'à l'horizon et le ciel : ce que la table du jour change se voit sur les trois."}
+  ],
+  "hours": ["12:00", "22:00"]
+}

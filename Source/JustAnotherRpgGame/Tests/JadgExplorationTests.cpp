@@ -667,4 +667,120 @@ bool FJadgExplorationStoreyTest::RunTest(const FString& Parameters)
 	return true;
 }
 
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FJadgExplorationTwoStoreysTest, "Jadg.Exploration.DeuxEtages", ExplorationFlags)
+
+/// Deux étages l'un au-dessus de l'autre dans une seule carte (D-51, LOT-1018) : la carte d'essai
+/// `essai/etages`, son plancher à 3 m et sa rampe, rebâtis ici en cubes. Le meneur monte à l'étage,
+/// la file le suit en hauteur ; à la verticale du portail du rez, rien ne se franchit, et le panneau
+/// de l'étage se désigne ; redescendu sous le plancher, le portail du rez le mène au palier de
+/// l'étage, où le groupe se pose.
+bool FJadgExplorationTwoStoreysTest::RunTest(const FString& Parameters)
+{
+	AddExpectedError(TEXT("Unable to find RecastNavMesh instance"), EAutomationExpectedErrorFlags::Contains, 0);
+	FGame Game;
+	UWorld* World = Game.World;
+
+	// Les cotes de `scripts/maps/build_essai_maps.py` : le plancher couvre les colonnes 8 à 14 et
+	// les lignes 1 à 10, son dessus à 3 m ; la rampe monte de X = 6 m à X = 12 m sur les lignes 1 et 2.
+	constexpr double Storey = 300.0;
+	constexpr double RampStart = 600.0;
+	constexpr double RampEnd = 1200.0;
+	const double Slope = FMath::RadiansToDegrees(FMath::Atan2(Storey, RampEnd - RampStart));
+	const double Length = FMath::Sqrt(FMath::Square(RampEnd - RampStart) + FMath::Square(Storey));
+	const FVector Normal = FRotator(Slope, 0.0, 0.0).RotateVector(FVector::UpVector);
+	const AStaticMeshActor* Floor = Block(World, FVector(1200.0, 900.0, -50.0), FRotator::ZeroRotator, FVector(24.0, 18.0, 1.0));
+	const AStaticMeshActor* Slab = Block(World, FVector(1725.0, 900.0, Storey - 15.0), FRotator::ZeroRotator, FVector(10.5, 15.0, 0.3));
+	const AStaticMeshActor* Ramp = Block(World, FVector((RampStart + RampEnd) / 2.0, 300.0, Storey / 2.0) - Normal * 15.0,
+		FRotator(Slope, 0.0, 0.0), FVector(Length / 100.0, 3.0, 0.3));
+	if (!TestNotNull(TEXT("le sol"), Floor) || !TestNotNull(TEXT("le plancher"), Slab) || !TestNotNull(TEXT("la rampe"), Ramp))
+	{
+		return false;
+	}
+	UJadgSceneBuild::SpawnBoxVolume(World, ANavMeshBoundsVolume::StaticClass(), FVector(1200.0, 900.0, 200.0), FVector(2400.0, 1800.0, 800.0));
+
+	World->SpawnActor<AJadgDayLight>();
+	AJadgMapFrame* Frame = World->SpawnActor<AJadgMapFrame>();
+	Frame->LevelId = TEXT("essai/etages");
+	Frame->LevelsRoot = TrialLevels;
+	Frame->StoreyHeights = {0.0f, static_cast<float>(Storey)};
+	for (int32 Rank = 0; Rank < 4; ++Rank)
+	{
+		AJadgWalker* Walker = World->SpawnActor<AJadgWalker>(FVector(375.0, 975.0, 100.0), FRotator::ZeroRotator);
+		Walker->PartyRank = Rank;
+	}
+	Game.Play();
+	if (FNavigationSystem::GetCurrent<UNavigationSystemV1>(World) == nullptr)
+	{
+		FNavigationSystem::AddNavigationSystemToWorld(*World, FNavigationSystemRunMode::GameMode);
+	}
+	UNavigationSystemV1* Navigation = FNavigationSystem::GetCurrent<UNavigationSystemV1>(World);
+	if (!TestNotNull(TEXT("le système de navigation du monde"), Navigation))
+	{
+		return false;
+	}
+	Navigation->Build();
+	FNavLocation Up;
+	FNavLocation Down;
+	if (!TestTrue(TEXT("le plancher porte un maillage de navigation"),
+			Navigation->ProjectPointToNavigation(FVector(1725.0, 1125.0, Storey), Up, FVector(50.0, 50.0, 50.0)))
+		|| !TestTrue(TEXT("le rez, sous le plancher, aussi"),
+			Navigation->ProjectPointToNavigation(FVector(1725.0, 1125.0, 0.0), Down, FVector(50.0, 50.0, 50.0))))
+	{
+		return false;
+	}
+	Game.Tick(2);
+	AJadgParty* Party = AJadgParty::Find(World);
+	UJadgExploration& Exploration = *Game.Exploration;
+	if (!TestNotNull(TEXT("le groupe"), Party) || !TestEqual(TEXT("quatre membres"), Party->GetMembers().Num(), 4))
+	{
+		return false;
+	}
+	TestEqual(TEXT("on part du rez"), Exploration.HeroStorey(), 0);
+	const TArray<TObjectPtr<AJadgWalker>>& Members = Party->GetMembers();
+
+	// À l'étage, par la rampe, puis un pas vers l'est : le panneau de l'étage (11, 7) est devant.
+	Party->OrderWalk(FVector(1425.0, 1125.0, Storey));
+	Game.Tick(30 * 12);
+	Party->OrderWalk(FVector(1575.0, 1125.0, Storey));
+	Game.Tick(30 * 3);
+	const AJadgWalker* Head = Members[0];
+	TestTrue(*FString::Printf(TEXT("le meneur est à l'étage (%.0f cm)"), Head->Feet().Z), FMath::Abs(Head->Feet().Z - Storey) < 20.0);
+	TestEqual(TEXT("Core le sait à l'étage"), Exploration.HeroStorey(), 1);
+	FIntPoint Aimed;
+	FString Prompt;
+	TestTrue(TEXT("le panneau de l'étage se désigne"), Exploration.Target(Aimed, Prompt) && Aimed == FIntPoint(11, 7));
+	for (int32 Rank = 1; Rank < Members.Num(); ++Rank)
+	{
+		const FVector Feet = Members[Rank]->Feet();
+		TestTrue(*FString::Printf(TEXT("le suiveur %d a suivi à l'étage (%.0f cm, en %.1f ; %.1f)"), Rank, Feet.Z,
+			Party->CellOf(Feet).X, Party->CellOf(Feet).Y), Feet.Z > Storey - 60.0);
+	}
+
+	// À la verticale du portail du rez : rien ne se franchit.
+	Party->OrderWalk(FVector(1725.0, 1125.0, Storey));
+	Game.Tick(30 * 2);
+	TestTrue(*FString::Printf(TEXT("le meneur est au-dessus du portail (%.2f ; %.2f)"), Party->CellOf(Head->Feet()).X, Party->CellOf(Head->Feet()).Y),
+		FVector2D::Distance(Party->CellOf(Head->Feet()), FVector2D(11.5, 7.5)) < 0.4);
+	TestTrue(TEXT("le portail du rez ne l'a pas mené au palier"), FMath::Abs(Head->Feet().Z - Storey) < 20.0
+		&& FVector2D::Distance(Party->CellOf(Head->Feet()), FVector2D(9.5, 2.5)) > 2.0);
+
+	// Redescendu sous le plancher, le portail du rez le mène au palier de l'étage (9, 2).
+	Party->OrderWalk(FVector(1725.0, 1125.0, 0.0));
+	Game.Tick(30 * 20);
+	TestEqual(TEXT("on est resté sur la carte"), Exploration.MapId(), FString(TEXT("essai/etages")));
+	TestEqual(TEXT("le portail pose à l'étage du palier"), Exploration.HeroStorey(), 1);
+	TestTrue(*FString::Printf(TEXT("le meneur est au palier (%.2f ; %.2f, %.0f cm)"), Party->CellOf(Head->Feet()).X, Party->CellOf(Head->Feet()).Y,
+		Head->Feet().Z), FVector2D::Distance(Party->CellOf(Head->Feet()), FVector2D(9.5, 2.5)) < 0.6 && FMath::Abs(Head->Feet().Z - Storey) < 20.0);
+	Game.Tick(30 * 2);
+	// La file se range dans son dos : sur le plancher, ou sur la rampe qui y mène quand le palier
+	// est trop près du bord ; jamais au rez, sous lui.
+	for (int32 Rank = 1; Rank < Members.Num(); ++Rank)
+	{
+		const FVector Feet = Members[Rank]->Feet();
+		TestTrue(*FString::Printf(TEXT("le suiveur %d s'est posé en haut avec lui (%.0f cm, en %.1f ; %.1f)"), Rank, Feet.Z,
+			Party->CellOf(Feet).X, Party->CellOf(Feet).Y), Feet.Z > Storey / 2.0);
+	}
+	return true;
+}
+
 #endif // WITH_DEV_AUTOMATION_TESTS

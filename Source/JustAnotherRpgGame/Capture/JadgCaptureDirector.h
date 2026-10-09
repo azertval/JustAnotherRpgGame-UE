@@ -18,7 +18,7 @@ class AJadgShot;
  *
  * Le mode de jeu crée cet acteur quand la ligne de commande porte `-JadgCapture=<dossier>` :
  *
- *     UnrealEditor-Cmd.exe <projet>.uproject /Game/Maps/Porte1012 -game -RenderOffscreen
+ *     UnrealEditor-Cmd.exe <projet>.uproject /Game/Maps/Levels/porte-1012 -game -RenderOffscreen
  *         -ResX=1920 -ResY=1080 -ForceRes -JadgCapture=<dossier> -JadgHours=12:00,22:00
  *         -JadgMeasure=10
  *

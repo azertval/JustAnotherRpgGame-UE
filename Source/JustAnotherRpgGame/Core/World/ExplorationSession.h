@@ -77,6 +77,15 @@ struct ExplorationIntent {
      * un portail se franchit en y **arrivant**.
      */
     std::optional<CellPoint> carried{};
+    /**
+     * @brief L'**étage** où le moteur a mené le héros (format v5, D-51, `LOT-1018`) : le rang d'un
+     *        étage de `Level::storeys()`, que le moteur lit à la hauteur de ses pieds.
+     *
+     * Sur une carte à deux étages superposés, une même case est au rez et à l'étage : seul ce qui
+     * est à l'étage du héros se sollicite, se franchit ou se déclenche. Absent : l'étage ne change
+     * pas.
+     */
+    std::optional<int> storey{};
 };
 
 /// @brief Ce qu'un pas d'exploration a produit et que l'appelant doit jouer.
@@ -166,6 +175,12 @@ public:
     /// @return La case du héros.
     [[nodiscard]] GridPosition heroCell() const noexcept {
         return cellOf(_hero);
+    }
+
+    /// @return L'étage où se tient le héros (format v5, D-51) : 0, le rez, sur une carte d'un seul
+    ///         niveau.
+    [[nodiscard]] int heroStorey() const noexcept {
+        return _storey;
     }
 
     /// @return L'orientation du héros : la dernière direction non nulle qu'il a prise.
@@ -324,6 +339,10 @@ private:
     /// Case du héros au pas précédent : un portail se franchit **en y arrivant**, pas à chaque pas
     /// où l'on reste dessus — sans quoi un portail qui ramène sur place bouclerait.
     GridPosition _lastCell{};
+    /// L'étage du héros (D-51) : ce qui n'est pas à cet étage ne se sollicite pas.
+    int _storey = 0;
+    /// L'étage du héros au pas précédent : changer d'étage, c'est arriver sur une autre case.
+    int _lastStorey = 0;
     bool _frozen = false;
     WorldClock _clock;
 };

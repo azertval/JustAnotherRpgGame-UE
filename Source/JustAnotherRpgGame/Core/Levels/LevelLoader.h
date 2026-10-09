@@ -61,11 +61,31 @@ enum class LevelValidationError {
  *   (`"cells"`) ; une carte peut être la **variante** d'une autre (`"base"`, `"scene"`) ; la
  *   hauteur est réservée (`"floor"` par couche, `"elevation"` par case et par entité).
  *
+ * - Version 5 (`LOT-1018`, D-51, D-52) : le format **`jadg-map`**, la description d'une carte du
+ *   moteur — elle se déclare (`"format": "jadg-map"`). Core y lit ce qu'il lisait en v4 (la grille
+ *   de collision, les couches, les entités) et y ajoute les **étages** praticables
+ *   (`"storeys"`, `core::Storey`), l'**étage** de chaque entité (`"storey"`) et son **volume** en
+ *   mètres (`"volume"`, `core::MapVolume`), ramené au repère de la grille par l'**origine** de la
+ *   carte (`"origin"`). Les réserves de la v4 tombent (`"elevation"`, `"floor"` : refusés), et une
+ *   v5 n'est jamais une variante. Le reste — terrain, objets, préfabriqués, lumières, ciel,
+ *   navigation, groupe, cadrages, notes — est la construction du niveau
+ *   (`scripts/maps/build_level.py`) : Core le passe. Une v5 s'écrit par `scripts/maps/jadg_map.py`
+ * ; `core::LevelWriter` écrit la v4 (`LEVEL_WRITER_VERSION`).
+ *
  * Toute clé non reconnue dans une couche ou une entité est rangée dans ses propriétés libres
  * (`core::PropertyMap`) et **réémise** à l'écriture : un fichier produit par une version
  * ultérieure de l'éditeur traverse une version antérieure sans rien perdre.
  */
-inline constexpr int LEVEL_FORMAT_VERSION = 4;
+inline constexpr int LEVEL_FORMAT_VERSION = 5;
+
+/**
+ * @brief La version que `core::LevelWriter` écrit : la v4, celle de la grille seule.
+ *
+ * Une carte v5 porte des sections que Core ne lit pas (le terrain, les objets) : elle s'écrit par
+ * l'outil qui les connaît, `scripts/maps/jadg_map.py`. L'écrivain de Core sert les tests et le
+ * brouillon de l'ancien éditeur (`core::LevelDraft`).
+ */
+inline constexpr int LEVEL_WRITER_VERSION = 4;
 
 /**
  * @brief Plus grand côté de carte accepté au chargement, en cases.

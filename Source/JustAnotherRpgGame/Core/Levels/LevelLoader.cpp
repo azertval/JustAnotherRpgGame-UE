@@ -7,6 +7,7 @@
 #include <fstream>
 #include <set>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <utility>
 #include <vector>
@@ -28,6 +29,14 @@ namespace {
 
 // Premiere version ou la grille racine ne porte plus d'assignation de texture (LOT-EDITOR-12).
 constexpr int PIECES_ON_LAYERS_VERSION = 4;
+
+// Premiere version a etre une description de carte du moteur (LOT-1018) : etages, volumes, et les
+// sections que la construction lit et que Core ignore.
+constexpr int SCENE_FORMAT_VERSION = 5;
+
+// Ce qu'une carte v5 declare en tete : le format, pour qu'un JSON quelconque ne passe pas pour une
+// carte.
+constexpr const char* SCENE_FORMAT_NAME = "jadg-map";
 
 // Nom de la couche de decor creee pour recevoir les assignations d'une carte v3 qui n'en a pas.
 constexpr const char* MIGRATED_RELIEF_LAYER_NAME = "relief";
@@ -95,6 +104,102 @@ void collectProperties(const nlohmann::json& object, const std::set<std::string>
     return known;
 }
 
+// Les cles racine d'une carte v5 que Core lit (format, origine, etages) ou que seule la
+// construction du niveau lit (`scripts/maps/build_level.py`) : le terrain, les objets, les
+// prefabriques, les lumieres, le ciel, la navigation, le groupe, les cadrages, les notes. Core les
+// passe sans les ranger : ce ne sont pas des proprietes de carte, et l'ecriture d'une v5 est celle
+// de `scripts/maps/jadg_map.py`, qui les garde.
+[[nodiscard]] const std::set<std::string>& sceneRootKeys() {
+    static const std::set<std::string> known{
+        "format",     "origin",  "storeys", "place",    "comment",  "terrain",    "objects",
+        "fills",      "prefabs", "routes",  "outlines", "lighting", "daylight",   "ground",
+        "navigation", "party",   "shots",   "hours",    "notes",    "assetsRoot", "characters"};
+    return known;
+}
+
+// Les cles racine connues pour la version @p version.
+[[nodiscard]] std::set<std::string> rootKeysFor(int version) {
+    std::set<std::string> known = knownRootKeys();
+    if (version >= SCENE_FORMAT_VERSION) {
+        known.insert(sceneRootKeys().begin(), sceneRootKeys().end());
+    }
+    return known;
+}
+
+// Un nombre JSON, entier ou reel.
+[[nodiscard]] float numberOf(const nlohmann::json& value, const std::string& where) {
+    if (!value.is_number()) {
+        throw std::invalid_argument(where + " : nombre attendu");
+    }
+    return value.get<float>();
+}
+
+// L'origine d'une carte v5 : ou tombe le coin de la case (0, 0), en metres, dans le repere de la
+// carte. Absente : a l'origine.
+struct SceneOrigin {
+    float x = 0.0F;
+    float y = 0.0F;
+};
+
+[[nodiscard]] SceneOrigin parseOrigin(const nlohmann::json& root) {
+    if (!root.contains("origin")) {
+        return {};
+    }
+    const nlohmann::json& origin = root.at("origin");
+    if (!origin.is_array() || origin.size() != 2) {
+        throw std::invalid_argument("'origin' : deux nombres attendus (x, y en metres)");
+    }
+    return SceneOrigin{.x = numberOf(origin[0], "origin"), .y = numberOf(origin[1], "origin")};
+}
+
+// Les etages d'une carte v5 (D-51) : au moins le rez, a la hauteur 0, puis des hauteurs
+// strictement croissantes.
+[[nodiscard]] std::vector<Storey> parseStoreys(const nlohmann::json& root) {
+    std::vector<Storey> storeys;
+    if (!root.contains("storeys")) {
+        return storeys;
+    }
+    if (!root.at("storeys").is_array()) {
+        throw std::invalid_argument("'storeys' doit etre une liste");
+    }
+    for (const nlohmann::json& storey : root.at("storeys")) {
+        Storey parsed{.name = storey.value("name", std::string{}),
+                      .z = numberOf(storey.at("z"), "storeys.z")};
+        if (storeys.empty() ? parsed.z != 0.0F : parsed.z <= storeys.back().z) {
+            throw std::invalid_argument(
+                "'storeys' : le rez a la hauteur 0, puis des hauteurs croissantes");
+        }
+        storeys.push_back(std::move(parsed));
+    }
+    return storeys;
+}
+
+// Le volume d'une entite v5, ramene du repere de la carte a celui de la grille.
+[[nodiscard]] MapVolume parseVolume(const nlohmann::json& volume, SceneOrigin origin) {
+    const nlohmann::json& low = volume.at("min");
+    const nlohmann::json& high = volume.at("max");
+    if (!low.is_array() || !high.is_array() || low.size() != 3 || high.size() != 3) {
+        throw std::invalid_argument("'volume' : min et max, trois nombres chacun");
+    }
+    MapVolume parsed{.minX = numberOf(low[0], "volume") - origin.x,
+                     .minY = numberOf(low[1], "volume") - origin.y,
+                     .minZ = numberOf(low[2], "volume"),
+                     .maxX = numberOf(high[0], "volume") - origin.x,
+                     .maxY = numberOf(high[1], "volume") - origin.y,
+                     .maxZ = numberOf(high[2], "volume")};
+    if (parsed.maxX <= parsed.minX || parsed.maxY <= parsed.minY || parsed.maxZ <= parsed.minZ) {
+        throw std::invalid_argument("'volume' : chaque cote de max depasse celui de min");
+    }
+    return parsed;
+}
+
+// Ce qu'une entite v5 ajoute a la v4 : son etage et son volume.
+struct SceneContext {
+    int version = 0;
+    SceneOrigin origin{};
+    std::size_t storeyCount = 0;
+};
+
 // Une case {x, y} d'une liste de cases ("forced", "cells"), bornee a la carte.
 [[nodiscard]] std::optional<LevelLoadResult> parseCell(const nlohmann::json& cell,
                                                        const TileMap& map, const std::string& where,
@@ -110,7 +215,7 @@ void collectProperties(const nlohmann::json& object, const std::set<std::string>
 
 // Une case d'une couche : son type, sa piece et sa hauteur (format v4).
 [[nodiscard]] std::optional<LevelLoadResult> parseLayerTile(const nlohmann::json& tile,
-                                                            TileLayer& layer) {
+                                                            TileLayer& layer, int version) {
     const int x = tile.at("x").get<int>();
     const int y = tile.at("y").get<int>();
     if (!layer.tiles.inBounds(x, y)) {
@@ -128,6 +233,13 @@ void collectProperties(const nlohmann::json& object, const std::set<std::string>
         layer.setPiece(x, y, tile.at("piece").get<std::string>());
     }
     if (tile.contains("elevation")) {
+        // La hauteur reservee de la v4 tombe avec elle (D-51) : une v5 pose ses objets en metres.
+        if (version >= SCENE_FORMAT_VERSION) {
+            return failure(
+                "'elevation' dans une carte v5 : la hauteur reservee de la v4 tombe "
+                "avec elle (D-51) ; une piece se pose en metres ('z' de la couche)",
+                LevelValidationError::ParseError);
+        }
         layer.setElevation(x, y, tile.at("elevation").get<int>());
     }
     return std::nullopt;
@@ -138,7 +250,7 @@ void collectProperties(const nlohmann::json& object, const std::set<std::string>
 // la carte : une couche decalee d'une case rendrait la collision incoherente avec l'affichage,
 // d'ou le refus plutot qu'un redimensionnement silencieux.
 [[nodiscard]] std::optional<LevelLoadResult> parseLayers(const nlohmann::json& root, int width,
-                                                         int height,
+                                                         int height, int version,
                                                          std::vector<TileLayer>& layers) {
     if (!root.contains("layers")) {
         return std::nullopt;
@@ -148,6 +260,12 @@ void collectProperties(const nlohmann::json& object, const std::set<std::string>
     }
     static const std::set<std::string> known{"name", "kind", "tiles", "floor"};
     for (const nlohmann::json& layerJson : root.at("layers")) {
+        if (version >= SCENE_FORMAT_VERSION && layerJson.contains("floor")) {
+            return failure(
+                "'floor' dans une couche d'une carte v5 : l'etage de decor de la v4 tombe "
+                "avec elle (D-51) ; la couche se pose a sa hauteur ('z', en metres)",
+                LevelValidationError::ParseError);
+        }
         TileLayer layer{.name = layerJson.value("name", std::string{}),
                         .kind = parseLayerKind(layerJson),
                         .tiles = TileMap(width, height),
@@ -159,7 +277,7 @@ void collectProperties(const nlohmann::json& object, const std::set<std::string>
                                LevelValidationError::ParseError);
             }
             for (const nlohmann::json& tile : layerJson.at("tiles")) {
-                if (std::optional<LevelLoadResult> error = parseLayerTile(tile, layer)) {
+                if (std::optional<LevelLoadResult> error = parseLayerTile(tile, layer, version)) {
                     return error;
                 }
             }
@@ -185,6 +303,7 @@ void collectProperties(const nlohmann::json& object, const std::set<std::string>
 // (decision D8) : deux entites du meme id rendraient ambigue toute reference `carte#id`.
 [[nodiscard]] std::optional<LevelLoadResult> parseEntities(const nlohmann::json& root,
                                                            const TileMap& map,
+                                                           const SceneContext& scene,
                                                            std::vector<MapEntity>& entities) {
     if (!root.contains("entities")) {
         return std::nullopt;
@@ -192,7 +311,8 @@ void collectProperties(const nlohmann::json& object, const std::set<std::string>
     if (!root.at("entities").is_array()) {
         return failure("Le champ 'entities' doit etre une liste", LevelValidationError::ParseError);
     }
-    static const std::set<std::string> known{"id", "type", "x", "y", "elevation", "cells"};
+    static const std::set<std::string> known{"id",        "type",  "x",      "y",
+                                             "elevation", "cells", "storey", "volume"};
     std::set<std::string> ids;
     for (const nlohmann::json& entityJson : root.at("entities")) {
         MapEntity entity{.type = entityJson.value("type", std::string{}),
@@ -206,6 +326,23 @@ void collectProperties(const nlohmann::json& object, const std::set<std::string>
             return failure(
                 "Entite hors bornes en " + cellText(entity.position.column, entity.position.row),
                 LevelValidationError::OutOfBounds);
+        }
+        if (scene.version >= SCENE_FORMAT_VERSION) {
+            if (entityJson.contains("elevation")) {
+                return failure("'elevation' sur l'entite '" + entity.id +
+                                   "' d'une carte v5 : son etage se dit par 'storey' (D-51)",
+                               LevelValidationError::ParseError);
+            }
+            entity.storey = entityJson.value("storey", 0);
+            const std::size_t storeys = std::max<std::size_t>(1, scene.storeyCount);
+            if (entity.storey < 0 || static_cast<std::size_t>(entity.storey) >= storeys) {
+                return failure("L'entite '" + entity.id + "' est a l'etage " +
+                                   std::to_string(entity.storey) + ", que la carte n'a pas",
+                               LevelValidationError::OutOfBounds);
+            }
+            if (entityJson.contains("volume")) {
+                entity.volume = parseVolume(entityJson.at("volume"), scene.origin);
+            }
         }
         if (!entity.id.empty() && !ids.insert(entity.id).second) {
             return failure("Deux entites portent l'identifiant '" + entity.id + "'",
@@ -397,10 +534,16 @@ void adoptLegacyTextures(std::vector<std::pair<GridPosition, std::string>>& text
 [[nodiscard]] LevelLoadResult loadVariant(const nlohmann::json& root, int version,
                                           const LevelLoader::BaseResolver& resolveBase) {
     const std::string baseId = root.at("base").get<std::string>();
-    if (version < LEVEL_FORMAT_VERSION) {
+    if (version < PIECES_ON_LAYERS_VERSION) {
         return failure("Variante ('base') dans une carte de version " + std::to_string(version) +
                            " : les variantes datent de la version 4",
                        LevelValidationError::ParseError);
+    }
+    if (version >= SCENE_FORMAT_VERSION) {
+        return failure(
+            "Variante ('base') dans une carte v5 : une description de carte du moteur "
+            "porte ses propres objets, elle ne reprend pas ceux d'une autre",
+            LevelValidationError::ParseError);
     }
     for (const char* cellField : {"width", "height", "tiles", "layers", "forced"}) {
         if (root.contains(cellField)) {
@@ -423,12 +566,12 @@ void adoptLegacyTextures(std::vector<std::pair<GridPosition, std::string>>& text
                        LevelValidationError::MissingBase);
     }
     std::vector<MapEntity> entities;
-    if (std::optional<LevelLoadResult> error =
-            parseEntities(root, base.level->tileMap(), entities)) {
+    if (std::optional<LevelLoadResult> error = parseEntities(
+            root, base.level->tileMap(), SceneContext{.version = version}, entities)) {
         return std::move(*error);
     }
     PropertyMap variantProperties;
-    collectProperties(root, knownRootKeys(), variantProperties);
+    collectProperties(root, rootKeysFor(version), variantProperties);
     return LevelLoadResult{
         .level = applyVariant(*base.level, LevelData{.name = root.value("name", std::string{}),
                                                      .tileMap = TileMap(1, 1),
@@ -478,12 +621,29 @@ void adoptLegacyTextures(std::vector<std::pair<GridPosition, std::string>>& text
     // l'exploration et la grille de combat tactique. Une seule source de verite.
     std::vector<TileLayer> declaredLayers;
     if (std::optional<LevelLoadResult> layersError =
-            parseLayers(root, width, height, declaredLayers)) {
+            parseLayers(root, width, height, version, declaredLayers)) {
         return std::move(*layersError);
+    }
+    SceneContext scene{.version = version};
+    std::vector<Storey> storeys;
+    if (version >= SCENE_FORMAT_VERSION) {
+        try {
+            scene.origin = parseOrigin(root);
+            storeys = parseStoreys(root);
+        } catch (const std::invalid_argument& error) {
+            return failure(error.what(), LevelValidationError::ParseError);
+        }
+        scene.storeyCount = storeys.size();
     }
     adoptLegacyTextures(legacyTextures, width, height, declaredLayers);
     std::vector<MapEntity> entities;
-    if (std::optional<LevelLoadResult> entitiesError = parseEntities(root, map, entities)) {
+    std::optional<LevelLoadResult> entitiesError;
+    try {
+        entitiesError = parseEntities(root, map, scene, entities);
+    } catch (const std::invalid_argument& error) {
+        return failure(error.what(), LevelValidationError::ParseError);
+    }
+    if (entitiesError) {
         return std::move(*entitiesError);
     }
     std::vector<GridPosition> forced;
@@ -509,7 +669,7 @@ void adoptLegacyTextures(std::vector<std::pair<GridPosition, std::string>>& text
     // Toute cle racine inconnue est une propriete de la carte (LOT-EDITOR-09) : la region et
     // l'ambiance en sont, et une cle ecrite par un editeur plus recent traverse celui-ci.
     PropertyMap properties;
-    collectProperties(root, knownRootKeys(), properties);
+    collectProperties(root, rootKeysFor(version), properties);
 
     return LevelLoadResult{.level = Level(LevelData{.name = std::move(name),
                                                     .tileMap = std::move(map),
@@ -518,7 +678,8 @@ void adoptLegacyTextures(std::vector<std::pair<GridPosition, std::string>>& text
                                                     .entry = entry,
                                                     .forcedCollision = std::move(forced),
                                                     .nextEntityId = parseNextEntityId(root),
-                                                    .properties = std::move(properties)}),
+                                                    .properties = std::move(properties),
+                                                    .storeys = std::move(storeys)}),
                            .error = {}};
 }
 
@@ -538,6 +699,12 @@ LevelLoadResult LevelLoader::loadFromString(std::string_view json,
         int version = 0;
         if (std::optional<LevelLoadResult> versionError = parseVersion(root, version)) {
             return std::move(*versionError);
+        }
+        if (version >= SCENE_FORMAT_VERSION &&
+            root.value("format", std::string{}) != SCENE_FORMAT_NAME) {
+            return failure(std::string{"Carte v5 sans \"format\": \""} + SCENE_FORMAT_NAME +
+                               "\" : une description de carte se declare",
+                           LevelValidationError::ParseError);
         }
         if (root.contains("base")) {
             return loadVariant(root, version, resolveBase);

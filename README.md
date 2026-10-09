@@ -73,13 +73,15 @@ Le second enchaîne cinq temps et sort en 1 à la première erreur :
 3. les tests d'automatisation du moteur (`Automation RunTests Jadg`, sans processeur graphique) :
    une carte vide s'ouvre sous l'instance et le mode de jeu, les quatre fiches du groupe préformé
    ont les valeurs de leur page, les options du jeu atteignent le moteur ;
-4. la carte de la scène du socle, reconstruite par script depuis
-   `Source/Elements/Scenes/socle-1014.json` — elle ne lit aucun kit d'assets ;
-5. ses captures à midi et à 22 h, prises hors écran, puis comparées à tolérance et par blocs à
+4. les cartes contrôlées (`scripts/maps/jadg_map.py --check`), et l'aller-retour d'une carte entre
+   son texte et l'éditeur (`scripts/maps/check_level_roundtrip.py`) ;
+5. le niveau du socle, reconstruit par script (`scripts/maps/build_level.py`) depuis sa description
+   `Source/Test/Fixtures/Exploration/Levels/socle-1014.json` — il ne lit aucun kit d'assets ;
+6. ses captures à midi et à 22 h, prises hors écran, puis comparées à tolérance et par blocs à
    leur référence (`Source/Test/Fixtures/Captures/socle-1014/`).
 
-`-NoCapture` saute les temps 4 et 5 sur un poste sans processeur graphique ; `-Scene porte-1012
--Capture` construit et capture la scène de la porte à la place ; `-UpdateReference` réécrit la
+`-NoCapture` saute les temps 5 et 6 sur un poste sans processeur graphique ; `-Map porte-1012
+-Capture` construit et capture le niveau de la porte à la place ; `-UpdateReference` réécrit la
 référence d'une image qui a changé exprès. Le moteur doit être la version que `ci.yml` épingle
 (`UNREAL_ENGINE_VERSION`).
 

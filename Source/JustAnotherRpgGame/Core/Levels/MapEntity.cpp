@@ -4,9 +4,12 @@
 #include "Core/Levels/MapEntity.h"
 
 #include <algorithm>
+#include <cmath>
 #include <cstdint>
 #include <string>
 #include <variant>
+
+#include "Core/Rpg/Scale.h"
 
 namespace core {
 
@@ -58,6 +61,33 @@ std::vector<GridPosition> zoneCells(const MapEntity& entity) {
         }
     }
     return cells;
+}
+
+VolumeCells volumeCells(const MapVolume& volume) noexcept {
+    // Les cases dont le centre tombe dans l'emprise : de la premiere colonne dont le centre est a
+    // droite du bord ouest a la derniere dont le centre est a gauche du bord est.
+    const auto first = [](float low) {
+        return static_cast<int>(std::ceil((low / METERS_PER_TILE) - 0.5F));
+    };
+    const auto last = [](float high) {
+        return static_cast<int>(std::floor((high / METERS_PER_TILE) - 0.5F));
+    };
+    int column0 = first(volume.minX);
+    int column1 = last(volume.maxX);
+    int row0 = first(volume.minY);
+    int row1 = last(volume.maxY);
+    // Un volume plus etroit qu'une case garde la case de son centre.
+    if (column1 < column0) {
+        column0 = column1 =
+            static_cast<int>(std::floor(((volume.minX + volume.maxX) / 2.0F) / METERS_PER_TILE));
+    }
+    if (row1 < row0) {
+        row0 = row1 =
+            static_cast<int>(std::floor(((volume.minY + volume.maxY) / 2.0F) / METERS_PER_TILE));
+    }
+    return VolumeCells{.origin = GridPosition{.column = column0, .row = row0},
+                       .columns = column1 - column0 + 1,
+                       .rows = row1 - row0 + 1};
 }
 
 }  // namespace core

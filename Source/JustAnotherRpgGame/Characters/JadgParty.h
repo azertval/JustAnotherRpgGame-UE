@@ -113,6 +113,8 @@ private:
 
 	TArray<FString> EntityIds;
 	TMap<FString, FIntPoint> EntityCells;
+	/// L'étage de chaque entité montrée (D-51).
+	TMap<FString, int32> EntityStoreys;
 
 	struct FState;
 	/// La trace de Core : hors de l'en-tête, qui ne doit pas montrer Core après le moteur.

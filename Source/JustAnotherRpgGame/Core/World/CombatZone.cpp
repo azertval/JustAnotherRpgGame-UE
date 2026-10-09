@@ -61,6 +61,15 @@ bool CombatZone::contains(GridPosition cell) const noexcept {
 }
 
 CombatZone combatZoneOf(const MapEntity& entity) {
+    // Une zone v5 est un volume (LOT-1018) : la grille tactique est faite des cases dont le centre
+    // tombe dans son emprise au sol.
+    if (entity.volume.has_value()) {
+        const VolumeCells cases = volumeCells(*entity.volume);
+        return CombatZone{.name = texteDe(entity, COMBAT_ZONE_NAME_PROPERTY),
+                          .origin = cases.origin,
+                          .columns = cases.columns,
+                          .rows = cases.rows};
+    }
     return CombatZone{.name = texteDe(entity, COMBAT_ZONE_NAME_PROPERTY),
                       .origin = entity.position,
                       .columns = entierDe(entity, COMBAT_ZONE_WIDTH_PROPERTY),

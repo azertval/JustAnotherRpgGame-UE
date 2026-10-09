@@ -77,7 +77,7 @@ bool FJadgSocleEmptyMapTest::RunTest(const FString& Parameters)
 		return false;
 	}
 
-	// Le mode de jeu que les cartes du dépôt désignent (`build_scene_unreal.py`).
+	// Le mode de jeu que les cartes du dépôt désignent (`build_level.py`).
 	World->GetWorldSettings()->DefaultGameMode = AJadgGameMode::StaticClass();
 	const FURL Url;
 	World->SetGameMode(Url);

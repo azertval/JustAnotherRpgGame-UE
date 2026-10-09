@@ -14,11 +14,15 @@
            compte ses erreurs ;
         3. les tests d'automatisation du moteur (Jadg.*) tournent sans processeur graphique, et
            leur rapport est relu : aucun échec, aucun test non lancé, au moins un test passé ;
-        4. la carte d'une scène est reconstruite par script depuis sa description ;
-        5. le jeu est lancé hors écran sur cette carte, ses captures sont prises, puis comparées
-           à tolérance à leur référence si la scène en a une (Source/Test/Fixtures/Captures/).
-      Sans -Scene, la scène est celle du socle (socle-1014) : elle ne lit aucun kit d'assets, ses
-      captures ont une référence, et les temps 4 et 5 se font d'office. -NoCapture les saute, sur
+        4. les cartes sont contrôlées (scripts/maps/jadg_map.py --check), puis l'aller-retour
+           entre le texte et l'éditeur est rejoué sur la carte à deux étages
+           (scripts/maps/check_level_roundtrip.py, LOT-1018) ;
+        5. le niveau d'une carte est construit par script depuis sa description v5
+           (scripts/maps/build_level.py), son maillage de navigation contrôlé ;
+        6. le jeu est lancé hors écran sur ce niveau, ses captures sont prises, puis comparées
+           à tolérance à leur référence si la carte en a une (Source/Test/Fixtures/Captures/).
+      Sans -Map, la carte est celle du socle (socle-1014) : elle ne lit aucun kit d'assets, ses
+      captures ont une référence, et les temps 5 et 6 se font d'office. -NoCapture les saute, sur
       un poste sans processeur graphique.
       Le moteur est trouvé par l'association du .uproject (registre HKCU\Software\Epic Games\
       Unreal Engine\Builds), ou par -EnginePath ; sa version doit être celle que ci.yml épingle
@@ -28,23 +32,25 @@
     Construire le projet Unreal, contrôler le contenu, lancer les tests d'automatisation, puis
     construire la scène du socle et comparer ses captures à leur référence.
 
-.PARAMETER Scene
-    Avec -Unreal : construire la carte de cette description de scène
-    (Source/Elements/Scenes/<Scene>.json) par scripts/maps/build_scene_unreal.py, sans fenêtre
-    (LOT-1012), à la place de celle du socle. Ses captures ne se prennent qu'avec -Capture.
+.PARAMETER Map
+    Avec -Unreal : construire le niveau de cette carte, par son identifiant (porte-1012,
+    essai/etages, central-empire/capital/martpart…), depuis sa description v5 par
+    scripts/maps/build_level.py, sans fenêtre (LOT-1018), à la place de celle du socle. Ses
+    captures ne se prennent qu'avec -Capture. -Scene en est l'ancien nom.
 
 .PARAMETER Capture
-    Avec -Scene : lancer ensuite le jeu hors écran sur cette carte, prendre les captures aux
+    Avec -Map : lancer ensuite le jeu hors écran sur cette carte, prendre les captures aux
     cadrages et aux heures de la description, mesurer la cadence, et vérifier que chaque image est
-    écrite. Sorties dans Saved/Captures/<Scene>/. Demande un processeur graphique.
+    écrite. Sorties dans Saved/Captures/<carte>/ (« / » devient « - »). Demande un processeur
+    graphique.
 
 .PARAMETER NoCapture
-    Avec -Unreal, sans -Scene : ne pas construire la scène du socle ni prendre ses captures.
+    Avec -Unreal, sans -Map : ne pas construire la carte du socle ni prendre ses captures.
 
 .PARAMETER Parcours
-    Avec -Unreal, à la place de -Scene : construire les cartes d'essai de l'exploration
-    (essai-1016-etals, essai-1016-parvis, LOT-1016) et l'arène du combat (essai-1017-arene,
-    LOT-1017), puis lancer le jeu hors écran sur la première et y jouer la quête « Des pommes pour
+    Avec -Unreal, à la place de -Map : construire les cartes d'essai de l'exploration
+    (essai/etals, essai/parvis, LOT-1016) et l'arène du combat (essai/arene, LOT-1017), puis
+    lancer le jeu hors écran sur la première et y jouer la quête « Des pommes pour
     l'arène » sans personne, par les touches et les clics du joueur, injectés dans son contrôleur :
     l'essai de chaque commande de caméra, la mère, le coffre, le portail, le garde (jet de
     Persuasion, graine -Seed), le maître d'arène (« attendre » : le combat a son parcours), le
@@ -52,7 +58,7 @@
     Demande un processeur graphique.
 
 .PARAMETER ParcoursCombat
-    Avec -Unreal, à la place de -Scene : construire le parvis et l'arène d'essai, puis lancer le
+    Avec -Unreal, à la place de -Map : construire le parvis et l'arène d'essai, puis lancer le
     jeu hors écran sur le parvis et y jouer, par les touches et les clics du joueur, le début de la
     série de l'arène (LOT-1017) : le maître d'arène, « combattre », la rencontre arene-bandits dans
     l'arène jusqu'à son issue — chaque tour d'un héros traduit en clics et en touches, ceux des
@@ -64,12 +70,12 @@
     test Jadg.Exploration.QueteDesPommes). Avec -ParcoursCombat : la graine du combat.
 
 .PARAMETER Encounter
-    Avec -Scene et -Capture, sur la carte d'arène : la rencontre engagée au lancement, montée et
+    Avec -Map et -Capture, sur la carte d'arène : la rencontre engagée au lancement, montée et
     figée sur son déploiement pendant les captures et la mesure (LOT-1017).
 
 .PARAMETER UpdateReference
     Avec des captures : réécrire leur référence (les images de blocs de
-    Source/Test/Fixtures/Captures/<Scene>/) au lieu de les y comparer. Pour une image qui a changé
+    Source/Test/Fixtures/Captures/<carte>/) au lieu de les y comparer. Pour une image qui a changé
     exprès ; les vignettes se relisent dans la PR.
 
 .PARAMETER MeasureSeconds
@@ -94,12 +100,13 @@
 
 .EXAMPLE
     pwsh scripts/build.ps1 -Unreal
-    Construit l'éditeur du projet, vérifie le contenu, lance les tests du moteur, reconstruit la
-    carte du socle et compare ses captures à leur référence, sans fenêtre.
+    Construit l'éditeur du projet, vérifie le contenu, lance les tests du moteur, contrôle les
+    cartes et rejoue leur aller-retour, reconstruit la carte du socle et compare ses captures à
+    leur référence, sans fenêtre.
 
 .EXAMPLE
-    pwsh scripts/build.ps1 -Unreal -Scene porte-1012 -Capture
-    Construit, vérifie, reconstruit la carte de la porte, puis en prend les captures et la mesure.
+    pwsh scripts/build.ps1 -Unreal -Map porte-1012 -Capture
+    Construit, vérifie, reconstruit le niveau de la porte, puis en prend les captures et la mesure.
 
 .EXAMPLE
     pwsh scripts/build.ps1 -Unreal -Parcours
@@ -109,7 +116,8 @@
 [CmdletBinding()]
 param(
     [switch]$Unreal,
-    [string]$Scene,
+    [Alias('Scene')]
+    [string]$Map,
     [switch]$Capture,
     [switch]$NoCapture,
     [switch]$Parcours,
@@ -135,14 +143,30 @@ function Fail([string]$message) {
     exit 1
 }
 
-# La scène que -Unreal construit et capture d'office : elle ne lit aucun kit d'assets (LOT-1014).
-$SocleScene = 'socle-1014'
+# La carte que -Unreal construit et capture d'office : elle ne lit aucun kit d'assets (LOT-1014).
+$SocleMap = 'socle-1014'
 
 function Get-Python {
     # L'environnement du dépôt (uv sync) s'il existe : ses versions sont celles de uv.lock.
     $venv = Join-Path $root '.venv\Scripts\python.exe'
     if (Test-Path $venv) { return $venv }
     return 'python'
+}
+
+function Get-MapInfo([string]$mapId) {
+    # Ce que la description d'une carte dit au build : son fichier, son niveau, ses cadrages, ses heures.
+    $info = & (Get-Python) (Join-Path $root 'scripts\maps\jadg_map.py') --info $mapId
+    if ($LASTEXITCODE -ne 0) { Fail "Carte « $mapId » introuvable (scripts/maps/jadg_map.py --info)." }
+    return ($info | Out-String | ConvertFrom-Json)
+}
+
+function Invoke-LevelBuild([string]$editorCmd, [string]$mapId) {
+    # Le niveau d'une carte, construit par script depuis sa description (LOT-1018), son maillage de
+    # navigation contrôlé. Chemin absolu : le moteur résout un chemin relatif depuis ses binaires.
+    $builder = (Join-Path $root 'scripts\maps\build_level.py') -replace '\\', '/'
+    Write-Host "== Carte « $mapId » : construction du niveau par script (sans fenêtre) ==" -ForegroundColor Cyan
+    & $editorCmd "$uproject" -run=pythonscript "-script=$builder" "-JadgMap=$mapId" -JadgCheck -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
+    if ($LASTEXITCODE -ne 0) { Fail "La construction du niveau de $mapId a échoué (code $LASTEXITCODE)." }
 }
 
 function Get-PinnedEngineVersion {
@@ -203,10 +227,11 @@ if ($Unreal) {
     }
     Write-Host "Unreal Engine $found.$($installed.PatchVersion) : $EnginePath" -ForegroundColor DarkGray
 
-    if (($Parcours -or $ParcoursCombat) -and $Scene) { Fail '-Parcours et -ParcoursCombat construisent leurs cartes : ils ne se combinent pas avec -Scene.' }
+    if (($Parcours -or $ParcoursCombat) -and $Map) { Fail '-Parcours et -ParcoursCombat construisent leurs cartes : ils ne se combinent pas avec -Map.' }
     if ($Parcours -and $ParcoursCombat) { Fail '-Parcours et -ParcoursCombat se lancent l''un après l''autre.' }
-    if (-not $Scene -and -not $NoCapture -and -not $Parcours -and -not $ParcoursCombat) {
-        $Scene = $SocleScene
+    $roundTrip = -not $Map -and -not $Parcours -and -not $ParcoursCombat
+    if (-not $Map -and -not $NoCapture -and -not $Parcours -and -not $ParcoursCombat) {
+        $Map = $SocleMap
         $Capture = $true
     }
 
@@ -247,18 +272,24 @@ if ($Unreal) {
     }
     Write-Host "Tests d'automatisation : $passed passé(s), dont $($results.succeededWithWarnings) avec avertissement." -ForegroundColor Green
 
-    if ($Parcours) {
-        # Les cartes d'essai de l'exploration sont écrites par script, carte de Core et scène du même plan.
-        & (Get-Python) (Join-Path $root 'scripts\maps\build_essai_maps.py') --check
-        if ($LASTEXITCODE -ne 0) { Fail "Les cartes d'essai de l'exploration sont périmées : python scripts/maps/build_essai_maps.py" }
-        $builder = (Join-Path $root 'scripts\maps\build_scene_unreal.py') -replace '\\', '/'
-        foreach ($trial in @('essai-1016-etals', 'essai-1016-parvis', 'essai-1017-arene')) {
-            Write-Host "== Scène « $trial » : construction de la carte par script (sans fenêtre) ==" -ForegroundColor Cyan
-            & $editorCmd "$uproject" -run=pythonscript "-script=$builder" "-JadgScene=$trial" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
-            if ($LASTEXITCODE -ne 0) { Fail "La construction de la scène $trial a échoué (code $LASTEXITCODE)." }
-        }
+    Write-Host '== Les cartes : contrôle des descriptions (jadg_map.py --check) ==' -ForegroundColor Cyan
+    & (Get-Python) (Join-Path $root 'scripts\maps\jadg_map.py') --check
+    if ($LASTEXITCODE -ne 0) { Fail 'Une carte ne passe pas son contrôle : python scripts/maps/jadg_map.py --check' }
+    & (Get-Python) (Join-Path $root 'scripts\maps\build_essai_maps.py') --check
+    if ($LASTEXITCODE -ne 0) { Fail "Les cartes d'essai sont périmées : python scripts/maps/build_essai_maps.py" }
 
-        $start = (Get-Content (Join-Path $root 'Source\Elements\Scenes\essai-1016-etals.json') -Raw -Encoding UTF8 | ConvertFrom-Json).map
+    if ($roundTrip) {
+        Write-Host "== Les cartes : l'aller-retour entre le texte et l'éditeur (essai/etages) ==" -ForegroundColor Cyan
+        $roundTripScript = (Join-Path $root 'scripts\maps\check_level_roundtrip.py') -replace '\\', '/'
+        & $editorCmd "$uproject" -run=pythonscript "-script=$roundTripScript" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
+        if ($LASTEXITCODE -ne 0) { Fail "L'aller-retour d'une carte entre le texte et l'éditeur a échoué (code $LASTEXITCODE)." }
+    }
+
+    if ($Parcours) {
+        # Les cartes d'essai de l'exploration : une description v5 par carte, écrite par script.
+        foreach ($trial in @('essai/etals', 'essai/parvis', 'essai/arene')) { Invoke-LevelBuild $editorCmd $trial }
+
+        $start = (Get-MapInfo 'essai/etals').package
         $output = Join-Path $root 'Saved\Captures\parcours-1016'
         $journal = Join-Path $output 'parcours.json'
         if (Test-Path $journal) { Remove-Item $journal }
@@ -274,17 +305,10 @@ if ($Unreal) {
     }
 
     if ($ParcoursCombat) {
-        # Le parvis et l'arène d'essai sont écrits par script, carte de Core et scène du même plan.
-        & (Get-Python) (Join-Path $root 'scripts\maps\build_essai_maps.py') --check
-        if ($LASTEXITCODE -ne 0) { Fail "Les cartes d'essai sont périmées : python scripts/maps/build_essai_maps.py" }
-        $builder = (Join-Path $root 'scripts\maps\build_scene_unreal.py') -replace '\\', '/'
-        foreach ($trial in @('essai-1016-parvis', 'essai-1017-arene')) {
-            Write-Host "== Scène « $trial » : construction de la carte par script (sans fenêtre) ==" -ForegroundColor Cyan
-            & $editorCmd "$uproject" -run=pythonscript "-script=$builder" "-JadgScene=$trial" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
-            if ($LASTEXITCODE -ne 0) { Fail "La construction de la scène $trial a échoué (code $LASTEXITCODE)." }
-        }
+        # Le parvis et l'arène d'essai : une description v5 par carte, écrite par script.
+        foreach ($trial in @('essai/parvis', 'essai/arene')) { Invoke-LevelBuild $editorCmd $trial }
 
-        $start = (Get-Content (Join-Path $root 'Source\Elements\Scenes\essai-1016-parvis.json') -Raw -Encoding UTF8 | ConvertFrom-Json).map
+        $start = (Get-MapInfo 'essai/parvis').package
         $output = Join-Path $root 'Saved\Captures\parcours-1017'
         $journal = Join-Path $output 'parcours.json'
         if (Test-Path $journal) { Remove-Item $journal }
@@ -298,47 +322,35 @@ if ($Unreal) {
         exit 0
     }
 
-    if ($Scene) {
-        $description = Join-Path $root "Source\Elements\Scenes\$Scene.json"
-        if (-not (Test-Path $description)) { Fail "Description de scène absente : $description" }
-
-        if ($Scene -eq 'porte-1012') {
-            # Le groupe du Colisée est une sortie de script : la carte ne se construit pas sur un fichier périmé.
+    if ($Map) {
+        $mapData = Get-MapInfo $Map
+        if ($Map -eq 'porte-1012') {
+            # La porte et son Colisée sont des sorties de script : le niveau ne se construit pas sur un fichier périmé.
             & (Get-Python) (Join-Path $root 'scripts\maps\build_gate_scene.py') --check
-            if ($LASTEXITCODE -ne 0) { Fail 'Le groupe du Colisée (colisee.json) est périmé : python scripts/maps/build_gate_scene.py' }
+            if ($LASTEXITCODE -ne 0) { Fail 'La porte ou le Colisée sont périmés : python scripts/maps/build_gate_scene.py' }
         }
-        if ($Scene -like 'essai-101*') {
-            # Les cartes d'essai de l'exploration sont écrites par script, carte de Core et scène du même plan.
-            & (Get-Python) (Join-Path $root 'scripts\maps\build_essai_maps.py') --check
-            if ($LASTEXITCODE -ne 0) { Fail "Les cartes d'essai de l'exploration sont périmées : python scripts/maps/build_essai_maps.py" }
-        }
-        if ($Scene -eq $SocleScene) {
-            # Le repère du socle est une donnée d'essai écrite par script : pas de carte sur un fichier périmé.
+        if ($Map -eq $SocleMap) {
+            # Le repère du socle est une donnée d'essai écrite par script : pas de niveau sur un fichier périmé.
             & (Get-Python) (Join-Path $root 'scripts\assetsGeneration\build_mesh_fixture.py') --check
             if ($LASTEXITCODE -ne 0) { Fail "Les données d'essai en maillages sont périmées : python scripts/assetsGeneration/build_mesh_fixture.py" }
         }
-
-        Write-Host "== Scène « $Scene » : construction de la carte par script (sans fenêtre) ==" -ForegroundColor Cyan
-        # Chemin absolu : le moteur résout un chemin relatif depuis son propre dossier de binaires.
-        $builder = (Join-Path $root 'scripts\maps\build_scene_unreal.py') -replace '\\', '/'
-        & $editorCmd "$uproject" -run=pythonscript "-script=$builder" "-JadgScene=$Scene" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
-        if ($LASTEXITCODE -ne 0) { Fail "La construction de la scène a échoué (code $LASTEXITCODE)." }
+        Invoke-LevelBuild $editorCmd $Map
 
         if ($Capture) {
-            $sceneData = Get-Content $description -Raw -Encoding UTF8 | ConvertFrom-Json
-            $output = Join-Path $root "Saved\Captures\$Scene"
+            $name = $Map -replace '/', '-'
+            $output = Join-Path $root "Saved\Captures\$name"
             $measureFile = Join-Path $output 'mesure.json'
             if (Test-Path $measureFile) { Remove-Item $measureFile }
 
-            Write-Host "== Scène « $Scene » : captures et mesure de cadence (rendu hors écran, 1920 × 1080) ==" -ForegroundColor Cyan
+            Write-Host "== Carte « $Map » : captures et mesure de cadence (rendu hors écran, 1920 × 1080) ==" -ForegroundColor Cyan
             # Une rencontre engagée au lancement de l'arène : le combat monté, figé sur son déploiement.
             $engaged = if ($Encounter) { "-JadgRencontre=$Encounter" } else { '-JadgSansRencontre' }
-            & $editorCmd "$uproject" $sceneData.map -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
-                "-JadgCapture=$output" "-JadgHours=$($sceneData.hours -join ',')" "-JadgMeasure=$MeasureSeconds" $engaged "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
+            & $editorCmd "$uproject" $mapData.package -game -RenderOffscreen -ResX=1920 -ResY=1080 -ForceRes -unattended -nosplash -NoSound `
+                "-JadgCapture=$output" "-JadgHours=$($mapData.hours -join ',')" "-JadgMeasure=$MeasureSeconds" $engaged "-JadgSeed=$Seed" -stdout -FullStdOutLogOutput
             if ($LASTEXITCODE -ne 0) { Fail "La capture a échoué (code $LASTEXITCODE)." }
             if (-not (Test-Path $measureFile)) { Fail "La capture n'a pas écrit $measureFile." }
-            foreach ($shot in $sceneData.shots) {
-                foreach ($hour in $sceneData.hours) {
+            foreach ($shot in $mapData.shots) {
+                foreach ($hour in $mapData.hours) {
                     $image = Join-Path $output "$($shot.id)-$($hour -replace ':', '').png"
                     if (-not (Test-Path $image)) { Fail "Capture absente : $image" }
                 }
@@ -346,19 +358,19 @@ if ($Unreal) {
             Write-Host "Captures et mesure : $output" -ForegroundColor Green
             Get-Content $measureFile
 
-            # Une scène qui a une référence s'y compare, à tolérance et par blocs ; -UpdateReference la réécrit.
-            $reference = Join-Path $root "Source\Test\Fixtures\Captures\$Scene"
+            # Une carte qui a une référence s'y compare, à tolérance et par blocs ; -UpdateReference la réécrit.
+            $reference = Join-Path $root "Source\Test\Fixtures\Captures\$name"
             $compare = Join-Path $root 'scripts\checks\compare_captures.py'
             if ($UpdateReference) {
-                Write-Host "== Scène « $Scene » : la référence des captures est réécrite ==" -ForegroundColor Yellow
+                Write-Host "== Carte « $Map » : la référence des captures est réécrite ==" -ForegroundColor Yellow
                 & (Get-Python) $compare --reference $reference --captures $output --update
                 if ($LASTEXITCODE -ne 0) { Fail "La référence des captures n'a pas pu être écrite (code $LASTEXITCODE)." }
             } elseif (Test-Path (Join-Path $reference 'reference.json')) {
-                Write-Host "== Scène « $Scene » : captures comparées à leur référence ==" -ForegroundColor Cyan
+                Write-Host "== Carte « $Map » : captures comparées à leur référence ==" -ForegroundColor Cyan
                 & (Get-Python) $compare --reference $reference --captures $output
                 if ($LASTEXITCODE -ne 0) { Fail "Une capture s'écarte de sa référence : $reference" }
-            } elseif ($Scene -eq $SocleScene) {
-                Fail "La scène du socle n'a pas de référence de captures : $reference (-UpdateReference pour l'écrire)."
+            } elseif ($Map -eq $SocleMap) {
+                Fail "La carte du socle n'a pas de référence de captures : $reference (-UpdateReference pour l'écrire)."
             }
         }
     }

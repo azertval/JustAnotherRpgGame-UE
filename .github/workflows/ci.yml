@@ -221,6 +221,21 @@ jobs:
         if: ${{ !cancelled() }}
         run: python3 scripts/checks/check_orphans.py --sans-kits
 
+      # LOT-1018 : le contrôle de contenu des cartes (format v5) — schéma, portails appariés,
+      # arrivées citées, zones nommées, cases inatteignables, forme canonique. Sans moteur ; le
+      # maillage de navigation se contrôle à la construction du niveau (`build_level.py`).
+      - name: Cartes au format v5 controlees (jadg_map --check)
+        id: cartes
+        if: ${{ !cancelled() }}
+        run: python3 scripts/maps/jadg_map.py --check
+
+      # LOT-1018 : le mode Quêtes — un drapeau qu'une carte lit sans qu'aucune quête, aucun dialogue
+      # ne le déclare ne s'ouvre jamais.
+      - name: Drapeaux des cartes declares (quest_mode --check)
+        id: drapeaux
+        if: ${{ !cancelled() }}
+        run: python3 scripts/maps/quest_mode.py --check
+
       # `test_le_depot_est_conforme` lit les images des kits, absentes du runner (voir l'en-tête).
       - name: Tests des scripts (pytest)
         id: pytest
@@ -248,6 +263,8 @@ jobs:
             Documentation=${{ steps.docs.outcome }}
             Cahier de test=${{ steps.cahier.outcome }}
             Scripts et sorties du moteur=${{ steps.orphans.outcome }}
+            Cartes (format v5)=${{ steps.cartes.outcome }}
+            Drapeaux des cartes=${{ steps.drapeaux.outcome }}
             Tests des scripts (pytest)=${{ steps.pytest.outcome }}
         run: |
           {

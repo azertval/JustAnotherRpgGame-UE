@@ -71,7 +71,7 @@ def test_chaque_maillage_est_au_standard(name):
 
 def test_le_repere_du_socle_se_lit_sur_ses_trois_axes():
     """Le bloc du socle (LOT-1014) : aucune borne n'en vaut une autre, au signe près, à moins de
-    2 cm — l'écart sous lequel `build_scene_unreal.Frame` confond deux axes."""
+    2 cm — l'écart sous lequel `build_level.Frame` confond deux axes."""
     document, _ = _document(M.files()[f'Assets/Scene/{M.MARKER_PLACE}/repere.glb'])
     position = document['accessors'][0]
     spans = [(position['min'][axis], position['max'][axis]) for axis in range(3)]

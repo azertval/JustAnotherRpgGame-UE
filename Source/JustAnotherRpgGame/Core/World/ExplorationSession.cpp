@@ -37,6 +37,7 @@ bool ExplorationSession::start(std::string_view mapId, std::string_view arrival)
     if (_travel.enter(mapId, arrival) != TravelResult::Moved) {
         return false;
     }
+    _storey = _lastStorey = _travel.storey();
     rebuildInteractables();
     _hero = cellCenter(_travel.position());
     _lastCell = _travel.position();
@@ -113,7 +114,8 @@ void ExplorationSession::rebuildInteractables() {
     // jeu n'a pas d'ECS, mais elle ne peut pas avoir sa PROPRE idee de ce qui est interactif.
     _seenRevision = _flags.revision();
     for (const MapEntity& objet : carte->entities()) {
-        if (!isEntityPresent(objet, _flags)) {
+        // Ce qui est a un autre etage que le heros ne se sollicite ni ne l'arrete (D-51).
+        if (!isEntityPresent(objet, _flags) || objet.storey != _storey) {
             continue;
         }
         if (objet.type == PROP_ENTITY_TYPE) {
@@ -196,19 +198,20 @@ void ExplorationSession::carry(CellPoint point) {
 
 void ExplorationSession::crossPortal(std::vector<ExplorationEvent>& events) {
     const GridPosition ici = heroCell();
-    if (ici == _lastCell) {
+    if (ici == _lastCell && _storey == _lastStorey) {
         return;
     }
     _lastCell = ici;
+    _lastStorey = _storey;
     const Level* carte = map();
     if (carte == nullptr) {
         return;
     }
-    const std::optional<PortalTarget> portail = portalAt(*carte, ici);
+    const std::optional<PortalTarget> portail = portalAt(*carte, ici, _storey);
     if (!portail.has_value()) {
         return;
     }
-    switch (_travel.cross(ici, _flags)) {
+    switch (_travel.cross(ici, _flags, _storey)) {
         case TravelResult::Moved:
             arrived(events);
             break;
@@ -232,6 +235,7 @@ void ExplorationSession::crossPortal(std::vector<ExplorationEvent>& events) {
 }
 
 void ExplorationSession::arrived(std::vector<ExplorationEvent>& events) {
+    _storey = _lastStorey = _travel.storey();
     rebuildInteractables();
     _hero = cellCenter(_travel.position());
     _lastCell = _travel.position();
@@ -267,14 +271,14 @@ namespace {
     return text != nullptr ? *text : std::string{};
 }
 
-// Les rangs des zones a declencheur, presentes, qui couvrent @p cell.
+// Les rangs des zones a declencheur, presentes, qui couvrent @p cell a l'etage @p storey.
 [[nodiscard]] std::vector<std::size_t> triggerZonesAt(const Level& map, GridPosition cell,
-                                                      const WorldFlags& flags) {
+                                                      const WorldFlags& flags, int storey) {
     std::vector<std::size_t> zones;
     const std::vector<MapEntity>& entities = map.entities();
     for (std::size_t index = 0; index < entities.size(); ++index) {
         const MapEntity& entity = entities[index];
-        if (!hasTrigger(entity) || !isEntityPresent(entity, flags)) {
+        if (!hasTrigger(entity) || !isEntityPresent(entity, flags) || entity.storey != storey) {
             continue;
         }
         const std::vector<GridPosition> cells = zoneCells(entity);
@@ -289,8 +293,8 @@ namespace {
 
 void ExplorationSession::resetZones() {
     const Level* carte = map();
-    _insideZones =
-        carte != nullptr ? triggerZonesAt(*carte, heroCell(), _flags) : std::vector<std::size_t>{};
+    _insideZones = carte != nullptr ? triggerZonesAt(*carte, heroCell(), _flags, _storey)
+                                    : std::vector<std::size_t>{};
 }
 
 void ExplorationSession::enterZones(std::vector<ExplorationEvent>& events) {
@@ -298,7 +302,7 @@ void ExplorationSession::enterZones(std::vector<ExplorationEvent>& events) {
     if (carte == nullptr) {
         return;
     }
-    const std::vector<std::size_t> ici = triggerZonesAt(*carte, heroCell(), _flags);
+    const std::vector<std::size_t> ici = triggerZonesAt(*carte, heroCell(), _flags, _storey);
     std::vector<std::size_t> entrees;
     std::ranges::set_difference(ici, _insideZones, std::back_inserter(entrees));
     _insideZones = ici;
@@ -388,7 +392,8 @@ void ExplorationSession::resolveInteraction(std::vector<ExplorationEvent>& event
     const GridPosition ou = _interactables[cible.index].position;
     for (const MapEntity& objet : carte->entities()) {
         // Une entite absente peut partager la case d'une presente : l'enfant rendu a sa mere.
-        if (objet.position != ou || objet.type != issue.type || !isEntityPresent(objet, _flags)) {
+        if (objet.position != ou || objet.type != issue.type || objet.storey != _storey ||
+            !isEntityPresent(objet, _flags)) {
             continue;
         }
         if (const std::optional<DialogueTrigger> parole = dialogueTriggerFor(objet);
@@ -452,6 +457,11 @@ std::vector<ExplorationEvent> ExplorationSession::update(const ExplorationIntent
     // L'heure du monde passe avec la marche (LOT-1007) : gelee comme elle pendant un dialogue ou
     // un combat.
     _clock.advance(seconds);
+    if (intent.storey.has_value() && *intent.storey != _storey) {
+        // Un autre etage : ce qui s'y sollicite n'est plus ce qui se sollicitait.
+        _storey = *intent.storey;
+        rebuildInteractables();
+    }
     if (intent.carried.has_value()) {
         carry(*intent.carried);
     } else {

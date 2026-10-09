@@ -15,7 +15,7 @@
  * Les portails, les points d'arrivée, les PNJ et les lumières d'une carte sont des données de
  * Core, posées sur des **cases** de 1,5 m. Cet acteur dit où tombe la case (0, 0) dans la carte
  * du moteur et ce que deviennent ses axes ; il est posé par le script qui construit la scène
- * (`scripts/maps/build_scene_unreal.py`, champ `level` de la description), qui mesure le repère
+ * (`scripts/maps/build_level.py`, depuis l'origine de la description v5), qui mesure le repère
  * au lieu de le supposer. Une carte du moteur sans cet acteur ne joue aucune carte de Core : la
  * porte du LOT-1012.
  *
@@ -48,6 +48,20 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Jadg")
 	FVector South = FVector(0.0, 1.0, 0.0);
+
+	/**
+	 * La hauteur du sol de chaque étage praticable au-dessus de l'acteur, en centimètres, le rez en
+	 * tête (format de carte v5, D-51, LOT-1018) ; vide pour une carte d'un seul niveau. Posée par
+	 * `scripts/maps/build_level.py` depuis les étages de la description (`storeys`).
+	 */
+	UPROPERTY(EditAnywhere, Category = "Jadg")
+	TArray<float> StoreyHeights;
+
+	/// L'étage d'un point du monde : le plus haut dont le sol est sous lui, à un demi-mètre près.
+	int32 StoreyAt(double WorldZ) const;
+
+	/// La hauteur, dans le monde, du sol de l'étage @p Storey ; celle de l'acteur hors des étages.
+	double StoreyZ(int32 Storey) const;
 
 	/// Le point du monde d'une position continue en cases ; le coin de la case (0, 0) est l'acteur.
 	FVector ToWorld(const FVector2D& Cell) const;

@@ -16,7 +16,7 @@ postes produisent les mêmes octets ; `--check` vérifie que les fichiers sont �
 | `Assets/Scene/ilot/floor.glb` | une dalle d'une case, à plat : 2 triangles |
 | `Assets/Scene/ilot/wall.glb` | un bloc de mur d'une case, haut d'un étage (2,366 m) : 10 triangles |
 | `Assets/Scene/ilot/roof.glb` | un toit à quatre pans sur trois cases de côté : 4 triangles |
-| `Assets/Scene/socle/repere.glb` | le **repère** de la scène du socle (`LOT-1014`) : un bloc de 2 × 3 × 1,25 m, dissymétrique sur ses trois axes, sur lequel `build_scene_unreal.py` mesure le changement de repère sans kit d'assets : 10 triangles |
+| `Assets/Scene/socle/repere.glb` | le **repère** de la scène du socle (`LOT-1014`) : un bloc de 2 × 3 × 1,25 m, dissymétrique sur ses trois axes, sur lequel `build_level.py` mesure le changement de repère sans kit d'assets : 10 triangles |
 | `Assets/Scene/ilot/paving.png` | la dalle de sol **en image**, pour qu'une même carte mêle les deux formes |
 | `Assets/Scene/ilot/manifest.json` | le lieu : trois clés citent un maillage (`"mesh"`), une une image (`"file"`) |
 | `Assets/Npc/temoin/` | la figurine témoin, 1,80 m, d'une teinte que rien d'autre ne porte |

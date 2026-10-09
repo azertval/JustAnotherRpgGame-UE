@@ -1,12 +1,13 @@
 # Core · Levels
 
-Tests unitaires — **122 cas** (1 bloquant, 24 critiques, 80 majeurs, 17 mineurs). [Retour à la synthèse](README.md).
+Tests unitaires — **132 cas** (1 bloquant, 26 critiques, 88 majeurs, 17 mineurs). [Retour à la synthèse](README.md).
 
 ## Ce que cette page couvre
 
 | Fichier de test | Cas | Bloquant | Critique | Majeur | Mineur |
 |---|---|---|---|---|---|
 | [`test_format_v4.cpp`](#test-format-v4cpp) | 19 | - | 8 | 7 | 4 |
+| [`test_format_v5.cpp`](#test-format-v5cpp) | 10 | - | 2 | 8 | - |
 | [`test_layer_pieces.cpp`](#test-layer-piecescpp) | 9 | - | 3 | 6 | - |
 | [`test_level.cpp`](#test-levelcpp) | 6 | - | - | 6 | - |
 | [`test_level_draft.cpp`](#test-level-draftcpp) | 25 | - | 1 | 21 | 3 |
@@ -32,7 +33,7 @@ Chaque exigence citée par un cas de cette page, avec les cas qui la citent ; la
 | `EX-EDIT-084` | [`LevelDraftPiecesTest.ChangerDePlancheTraduitLesPiecesEtRededuitLaCollision`](#leveldraftpiecestestchangerdeplanchetraduitlespiecesetrededuitlacollision) |
 | `EX-LVL-003` | [`TerrainRpgTest.AllerRetourSurChaqueTypeDeTerrain`](#terrainrpgtestallerretoursurchaquetypedeterrain) |
 | `EX-LVL-004` | [`CouchesDeCarteTest.TuileHorsBornesDansUneCoucheRefusee`](#couchesdecartetesttuilehorsbornesdansunecoucherefusee) |
-| `EX-LVL-005` | [`LevelLoaderTest.NiveauSansVersionSeChargeSansErreur`](#levelloadertestniveausansversionsechargesanserreur), [`LevelLoaderTest.VersionSuperieureALaVersionGereeEchoueProprement`](#levelloadertestversionsuperieurealaversiongereeechoueproprement), [`CouchesDeCarteTest.CarteDUneVersionFutureRefuseeAvecUnMessageExplicite`](#couchesdecartetestcarteduneversionfuturerefuseeavecunmessageexplicite) |
+| `EX-LVL-005` | [`FormatV5Test.UneV4SeLitSansEtageNiVolume`](#formatv5testunev4selitsansetagenivolume), [`LevelLoaderTest.NiveauSansVersionSeChargeSansErreur`](#levelloadertestniveausansversionsechargesanserreur), [`LevelLoaderTest.VersionSuperieureALaVersionGereeEchoueProprement`](#levelloadertestversionsuperieurealaversiongereeechoueproprement), [`CouchesDeCarteTest.CarteDUneVersionFutureRefuseeAvecUnMessageExplicite`](#couchesdecartetestcarteduneversionfuturerefuseeavecunmessageexplicite) |
 | `EX-LVL-016` | [`CouchesDeCarteTest.CarteVersion2PromueEnCoucheLegacyUnique`](#couchesdecartetestcarteversion2promueencouchelegacyunique), [`CouchesDeCarteTest.CarteVersion2ReecriteSansTableauDeCouches`](#couchesdecartetestcarteversion2reecritesanstableaudecouches), [`CouchesDeCarteTest.AllerRetourSurTroisCouchesEtDeuxEntites`](#couchesdecartetestallerretoursurtroiscouchesetdeuxentites), [`CouchesDeCarteTest.LaCoucheDeCollisionEstLaGrilleDuGameplay`](#couchesdecartetestlacouchedecollisionestlagrilledugameplay), [`CouchesDeCarteTest.BrouillonDEditionPreserveCouchesEtEntites`](#couchesdecartetestbrouillondeditionpreservecouchesetentites), [`CouchesDeCarteTest.TuilePeinteAtteintLaCoucheDeCollision`](#couchesdecartetesttuilepeinteatteintlacouchedecollision), [`CouchesDeCarteTest.RedimensionnementEmporteCouchesEtEntites`](#couchesdecartetestredimensionnementemportecouchesetentites), [`CouchesDeCarteTest.CoucheDeCollisionDeclareeRefusee`](#couchesdecartetestcouchedecollisiondeclareerefusee) |
 | `EX-LVL-017` | [`CouchesDeCarteTest.AllerRetourSurTroisCouchesEtDeuxEntites`](#couchesdecartetestallerretoursurtroiscouchesetdeuxentites), [`CouchesDeCarteTest.EntiteHorsBornesRefusee`](#couchesdecartetestentitehorsbornesrefusee), [`CouchesDeCarteTest.RedimensionnementEmporteCouchesEtEntites`](#couchesdecartetestredimensionnementemportecouchesetentites) |
 | `EX-LVL-018` | [`CouchesDeCarteTest.ChampsInconnusDUneCouchePreservesALaReecriture`](#couchesdecartetestchampsinconnusdunecouchepreservesalareecriture), [`CouchesDeCarteTest.ChampsInconnusDUneEntitePreservesALaReecriture`](#couchesdecartetestchampsinconnusduneentitepreservesalareecriture) |
@@ -363,6 +364,199 @@ L'entrée s'accorde avec une case vide.
 
 - Vérifie que `core::collisionAgrees(ecrite, deduite, 0, 0)` est vrai.
 - Vérifie que `core::collisionAgrees(ecrite, deduite, 1, 0)` est faux.
+
+## test_format_v5.cpp
+
+### FormatV5Test.UneCarteV5SeLitEtagesEtVolumesCompris
+
+*Critique · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:99`
+
+Une carte v5 se lit, étages et volumes compris.
+
+**Étapes**
+
+1. Charger `format-v5.json` (deux étages, origine en (3 ; -1,5) m).
+
+**Résultat attendu**
+
+- Vérifie que `level.storeys().size()` vaut `2U`.
+- Vérifie que `level.storeys()[0]` vaut `(core::Storey{.name = "rez", .z = 0.0F})`.
+- Vérifie que `level.storeys()[1]` vaut `(core::Storey{.name = "etage", .z = 3.0F})`.
+- Vérifie que `level.entry()` vaut `(GridPosition{0, 0})`.
+- Vérifie que `entite(level, "e1").storey` vaut `0`.
+- Vérifie que `entite(level, "e2").storey` vaut `1`.
+- Vérifie que `entite(level, "e4").volume.has_value()` est vrai.
+- Vérifie que `volume.minX` vaut `0.0F` (comparaison flottante).
+- Vérifie que `volume.minY` vaut `0.0F` (comparaison flottante).
+- Vérifie que `volume.minZ` vaut `-0.5F` (comparaison flottante).
+- Vérifie que `volume.maxX` vaut `6.0F` (comparaison flottante).
+- Vérifie que `volume.maxY` vaut `6.0F` (comparaison flottante).
+- Vérifie que `volume.maxZ` vaut `3.0F` (comparaison flottante).
+- Vérifie que `entite(level, "e1").volume.has_value()` est faux.
+
+### FormatV5Test.CorePasseLesSectionsDeConstruction
+
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:130`
+
+Core passe les sections de construction d'une v5.
+
+**Étapes**
+
+1. Charger `format-v5.json`.
+
+**Résultat attendu**
+
+- Vérifie que `level.properties().contains(cle)` est faux.
+- Vérifie que `layer.properties.contains("z")` est vrai.
+- Vérifie que `std::get<double>(layer.properties.at("z"))` vaut `3.0` (comparaison flottante).
+- Vérifie que `toit` est vrai.
+- Vérifie que `std::get<std::string>(pnj.properties.at("appearance"))` vaut `"pantin"`.
+- Vérifie que `std::get<double>(pnj.properties.at("heading"))` vaut `90.0` (comparaison flottante).
+
+### FormatV5Test.UneV5FautiveEstRefuseeAvecSaRaison
+
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:160`
+
+Une v5 fautive est refusée avec sa raison.
+
+**Étapes**
+
+1. Charger sept cartes v5 fautives.
+
+**Résultat attendu**
+
+- Vérifie que `loaded.ok()` est faux.
+- Vérifie que `loaded.errorCode` vaut `un.code`.
+- Vérifie que `loaded.error.find(un.mot)` diffère de `std::string::npos`.
+
+### FormatV5Test.UnVolumeSeRameneAuxCasesDeSonEmprise
+
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:203`
+
+Un volume se ramène aux cases de son emprise.
+
+**Étapes**
+
+1. Ramener un volume de 0 à 6 m sur 0 à 4,5 m, puis un volume de 0,5 m de côté.
+
+**Résultat attendu**
+
+- Vérifie que `large.origin` vaut `(GridPosition{0, 0})`.
+- Vérifie que `large.columns` vaut `4`.
+- Vérifie que `large.rows` vaut `3`.
+- Vérifie que `etroit.origin` vaut `(GridPosition{2, 1})`.
+- Vérifie que `etroit.columns` vaut `1`.
+- Vérifie que `etroit.rows` vaut `1`.
+
+### FormatV5Test.UneZoneDeCombatV5SeLitDeSonVolume
+
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:226`
+
+Une zone de combat v5 se lit de son volume.
+
+**Étapes**
+
+1. Charger `format-v5.json`.
+2. Lire ses zones de combat.
+
+**Résultat attendu**
+
+- Vérifie que `zones.size()` vaut `1U`.
+- Vérifie que `zones[0].name` vaut `"cour"`.
+- Vérifie que `zones[0].origin` vaut `(GridPosition{0, 0})`.
+- Vérifie que `zones[0].columns` vaut `4`.
+- Vérifie que `zones[0].rows` vaut `4`.
+
+### FormatV5Test.UnPortailDuRezNeSeFranchitPasDepuisLEtage
+
+*Critique · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:246`
+
+Un portail du rez ne se franchit pas depuis l'étage.
+
+**Étapes**
+
+1. Ouvrir `format-v5.json` à l'entrée.
+2. Mener le héros sur la case du portail, à l'étage 1.
+3. Le redescendre au rez sur la même case.
+
+**Résultat attendu**
+
+- Vérifie que `session.start("v5", "")` est vrai.
+- Vérifie que `session.heroStorey()` vaut `0`.
+- Vérifie que `aEntre(mene(session, 2.5F, 1.5F, 1), "ailleurs")` est faux.
+- Vérifie que `session.heroStorey()` vaut `1`.
+- Vérifie que `aEntre(mene(session, 2.5F, 1.5F, 0), "ailleurs")` est vrai.
+
+### FormatV5Test.UnPanneauDeLEtageNeSeDesigneQueDeLEtage
+
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:266`
+
+Un panneau de l'étage ne se désigne que de l'étage.
+
+**Étapes**
+
+1. Mener le héros face au panneau, au rez.
+2. Le mener au même point, à l'étage 1.
+
+**Résultat attendu**
+
+- Vérifie que `session.start("v5", "")` est vrai.
+- Vérifie que `session.interactionTarget().has_value()` est faux.
+- Vérifie que `cible.has_value()` est vrai.
+- Vérifie que `cible->type` vaut `"sign"`.
+
+### FormatV5Test.OnArriveALEtageDeSonPointDArrivee
+
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:288`
+
+On arrive à l'étage de son point d'arrivée.
+
+**Étapes**
+
+1. Entrer dans `format-v5.json` par le point d'arrivée « palier ».
+
+**Résultat attendu**
+
+- Vérifie que `session.start("v5", "palier")` est vrai.
+- Vérifie que `session.heroCell()` vaut `(GridPosition{3, 1})`.
+- Vérifie que `session.heroStorey()` vaut `1`.
+
+### FormatV5Test.LaTraceDuGroupeSuitEnHauteur
+
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:305`
+
+La trace du groupe suit en hauteur.
+
+**Étapes**
+
+1. Tracer quatre pas d'une case, de 0 à 300 de hauteur.
+2. Lire la hauteur à une case et demie derrière le meneur.
+
+**Résultat attendu**
+
+- Vérifie que `trail.heightBehind(1.5F)` vaut `150.0F` (comparaison flottante).
+- Vérifie que `trail.heightBehind(0.0F)` vaut `300.0F` (comparaison flottante).
+- Vérifie que `trail.heightBehind(10.0F)` vaut `0.0F` (comparaison flottante).
+- Vérifie que `plat.heightBehind(0.5F)` vaut `0.0F` (comparaison flottante).
+
+### FormatV5Test.UneV4SeLitSansEtageNiVolume
+
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:330`
+
+Exigences : `EX-LVL-005`
+
+Une v4 se lit sans étage ni volume.
+
+**Étapes**
+
+1. Charger `format-v4.json`.
+
+**Résultat attendu**
+
+- Vérifie que `loaded.ok()` est vrai.
+- Vérifie que `loaded.level->storeys().empty()` est vrai.
+- Vérifie que `entity.storey` vaut `0`.
+- Vérifie que `entity.volume.has_value()` est faux.
 
 ## test_layer_pieces.cpp
 

@@ -19,6 +19,27 @@
 namespace core {
 
 /**
+ * @brief Un **volume** de la carte, en mètres (format v5, `LOT-1018`) : une boîte alignée sur les
+ *        axes, dans le repère de la grille — x vers les colonnes croissantes (l'est), y vers les
+ *        lignes croissantes (le sud), z vers le haut, le coin de la case (0, 0) à l'origine.
+ *
+ * Une zone de combat, un marqueur de rencontre, une zone de déploiement se décrivent ainsi dans une
+ * carte du moteur, où le combat se joue en distance (`LOT-1017`) : la case n'en est plus que
+ * l'ancrage. Le chargeur ramène le volume écrit dans le repère de la carte (`origin`) à celui de
+ * la grille.
+ */
+struct MapVolume {
+    float minX = 0.0F;
+    float minY = 0.0F;
+    float minZ = 0.0F;
+    float maxX = 0.0F;
+    float maxY = 0.0F;
+    float maxZ = 0.0F;
+
+    [[nodiscard]] bool operator==(const MapVolume&) const = default;
+};
+
+/**
  * @brief Une entité de carte — ce qui n'est **pas** une tuile.
  *
  * La grille ne porte qu'un `core::TileType` par case, sans métadonnée : un PNJ a un nom et un
@@ -52,6 +73,13 @@ struct MapEntity {
     /// Forme **peinte** d'une zone (décision D13) : les cases qu'elle couvre. Vide pour une entité
     /// ponctuelle ou une zone rectangle (propriétés `width` et `height`).
     std::vector<GridPosition> cells{};
+    /// L'**étage** praticable de l'entité (format v5, D-51, `LOT-1018`) : le rang d'un étage de
+    /// `Level::storeys()`, 0 pour le rez. Un portail, une zone, un coffre de l'étage 1 ne se
+    /// sollicitent que d'un héros à l'étage 1, même s'il passe à la verticale de leur case.
+    int storey = 0;
+    /// Le **volume** de l'entité (format v5) : une zone de combat, un marqueur de rencontre. Absent
+    /// pour une entité ponctuelle et pour toute entité d'une carte v4.
+    std::optional<MapVolume> volume{};
 
     /// Deux entités sont égales si tout l'est, identifiant compris : ce que compare un tampon
     /// relu (`LOT-EDITOR-08`) ou un test qui vérifie qu'une carte n'a pas bougé.
@@ -86,5 +114,18 @@ inline constexpr std::string_view ZONE_HEIGHT_PROPERTY = "height";
  *        rectangle (`width` × `height`, 1 × 1 par défaut) depuis sa case.
  */
 [[nodiscard]] std::vector<GridPosition> zoneCells(const MapEntity& entity);
+
+/**
+ * @brief Les cases dont le **centre** tombe dans l'emprise au sol de @p volume (1,5 m par case,
+ *        `core::METERS_PER_TILE`) : ce que la grille de Core retient d'un volume. Au moins la case
+ *        qui contient le centre du volume, même pour un volume plus étroit qu'une case.
+ * @return Le coin haut-gauche de ces cases, leur nombre de colonnes et de lignes.
+ */
+struct VolumeCells {
+    GridPosition origin{};
+    int columns = 0;
+    int rows = 0;
+};
+[[nodiscard]] VolumeCells volumeCells(const MapVolume& volume) noexcept;
 
 }  // namespace core

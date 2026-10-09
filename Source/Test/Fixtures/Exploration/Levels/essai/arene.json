@@ -1,8 +1,11 @@
 {
-  "version": 4,
-  "name": "essai/arene",
+  "format": "jadg-map",
+  "version": 5,
+  "name": "Essai1017Arene",
+  "comment": "Carte d'essai de l'exploration (LOT-1016), du combat (LOT-1017) ou des étages (LOT-1018), écrite par scripts/maps/build_essai_maps.py, jamais à la main : la grille que Core joue et ce que build_level.py construit viennent du même plan « essai/arene ». Elle ne lit aucun kit d'assets.",
   "width": 20,
   "height": 14,
+  "origin": [0.0, 0.0],
   "nextEntityId": 7,
   "tiles": [
     {"x": 0, "y": 0, "type": "wall"},
@@ -38,6 +41,7 @@
     {"x": 10, "y": 4, "type": "wall"},
     {"x": 19, "y": 4, "type": "wall"},
     {"x": 0, "y": 5, "type": "wall"},
+    {"x": 3, "y": 5, "type": "entry"},
     {"x": 19, "y": 5, "type": "wall"},
     {"x": 0, "y": 6, "type": "wall"},
     {"x": 19, "y": 6, "type": "wall"},
@@ -76,58 +80,129 @@
     {"x": 16, "y": 13, "type": "wall"},
     {"x": 17, "y": 13, "type": "wall"},
     {"x": 18, "y": 13, "type": "wall"},
-    {"x": 19, "y": 13, "type": "wall"},
-    {"x": 3, "y": 5, "type": "entry"}
+    {"x": 19, "y": 13, "type": "wall"}
   ],
   "entities": [
-    {
-      "id": "e1",
-      "type": "arenaEntry",
-      "x": 3,
-      "y": 5,
-      "rank": 0,
-      "side": "allies"
+    {"id": "e1", "type": "arenaEntry", "x": 3, "y": 5, "rank": 0, "side": "allies"},
+    {"id": "e2", "type": "arenaEntry", "x": 3, "y": 6, "rank": 1, "side": "allies"},
+    {"id": "e3", "type": "arenaEntry", "x": 3, "y": 7, "rank": 2, "side": "allies"},
+    {"id": "e4", "type": "encounter", "x": 15, "y": 7, "volume": {"min": [22.5, 10.5, 0.0], "max": [24.0, 12.0, 2.0]}, "encounterId": "arene-bandits", "respawns": true},
+    {"id": "e5", "type": "arenaEntry", "x": 3, "y": 8, "rank": 3, "side": "allies"},
+    {"id": "e6", "type": "combatZone", "x": 0, "y": 0, "name": "sable", "volume": {"min": [0.0, 0.0, -0.5], "max": [30.0, 21.0, 4.0]}}
+  ],
+  "objects": [
+    {"id": "mur/0,0", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/1,0", "mesh": "Scene/ilot/wall.glb", "position": [2.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/2,0", "mesh": "Scene/ilot/wall.glb", "position": [3.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/3,0", "mesh": "Scene/ilot/wall.glb", "position": [5.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/4,0", "mesh": "Scene/ilot/wall.glb", "position": [6.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/5,0", "mesh": "Scene/ilot/wall.glb", "position": [8.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/6,0", "mesh": "Scene/ilot/wall.glb", "position": [9.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/7,0", "mesh": "Scene/ilot/wall.glb", "position": [11.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/8,0", "mesh": "Scene/ilot/wall.glb", "position": [12.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/9,0", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/10,0", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/11,0", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/12,0", "mesh": "Scene/ilot/wall.glb", "position": [18.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/13,0", "mesh": "Scene/ilot/wall.glb", "position": [20.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/14,0", "mesh": "Scene/ilot/wall.glb", "position": [21.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/15,0", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/16,0", "mesh": "Scene/ilot/wall.glb", "position": [24.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/17,0", "mesh": "Scene/ilot/wall.glb", "position": [26.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/18,0", "mesh": "Scene/ilot/wall.glb", "position": [27.75, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/19,0", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 0.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,1", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 2.25, 0.0], "folder": "murs"},
+    {"id": "mur/19,1", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 2.25, 0.0], "folder": "murs"},
+    {"id": "mur/0,2", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 3.75, 0.0], "folder": "murs"},
+    {"id": "mur/19,2", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 3.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,3", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 5.25, 0.0], "folder": "murs"},
+    {"id": "mur/9,3", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 5.25, 0.0], "folder": "murs"},
+    {"id": "mur/10,3", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 5.25, 0.0], "folder": "murs"},
+    {"id": "mur/19,3", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 5.25, 0.0], "folder": "murs"},
+    {"id": "mur/0,4", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 6.75, 0.0], "folder": "murs"},
+    {"id": "mur/9,4", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 6.75, 0.0], "folder": "murs"},
+    {"id": "mur/10,4", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 6.75, 0.0], "folder": "murs"},
+    {"id": "mur/19,4", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 6.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,5", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 8.25, 0.0], "folder": "murs"},
+    {"id": "mur/19,5", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 8.25, 0.0], "folder": "murs"},
+    {"id": "mur/0,6", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 9.75, 0.0], "folder": "murs"},
+    {"id": "mur/19,6", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 9.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,7", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 11.25, 0.0], "folder": "murs"},
+    {"id": "mur/19,7", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 11.25, 0.0], "folder": "murs"},
+    {"id": "mur/0,8", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 12.75, 0.0], "folder": "murs"},
+    {"id": "mur/19,8", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 12.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,9", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 14.25, 0.0], "folder": "murs"},
+    {"id": "mur/9,9", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 14.25, 0.0], "folder": "murs"},
+    {"id": "mur/10,9", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 14.25, 0.0], "folder": "murs"},
+    {"id": "mur/19,9", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 14.25, 0.0], "folder": "murs"},
+    {"id": "mur/0,10", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 15.75, 0.0], "folder": "murs"},
+    {"id": "mur/9,10", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 15.75, 0.0], "folder": "murs"},
+    {"id": "mur/10,10", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 15.75, 0.0], "folder": "murs"},
+    {"id": "mur/19,10", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 15.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,11", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/19,11", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 17.25, 0.0], "folder": "murs"},
+    {"id": "mur/0,12", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 18.75, 0.0], "folder": "murs"},
+    {"id": "mur/19,12", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 18.75, 0.0], "folder": "murs"},
+    {"id": "mur/0,13", "mesh": "Scene/ilot/wall.glb", "position": [0.75, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/1,13", "mesh": "Scene/ilot/wall.glb", "position": [2.25, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/2,13", "mesh": "Scene/ilot/wall.glb", "position": [3.75, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/3,13", "mesh": "Scene/ilot/wall.glb", "position": [5.25, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/4,13", "mesh": "Scene/ilot/wall.glb", "position": [6.75, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/5,13", "mesh": "Scene/ilot/wall.glb", "position": [8.25, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/6,13", "mesh": "Scene/ilot/wall.glb", "position": [9.75, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/7,13", "mesh": "Scene/ilot/wall.glb", "position": [11.25, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/8,13", "mesh": "Scene/ilot/wall.glb", "position": [12.75, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/9,13", "mesh": "Scene/ilot/wall.glb", "position": [14.25, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/10,13", "mesh": "Scene/ilot/wall.glb", "position": [15.75, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/11,13", "mesh": "Scene/ilot/wall.glb", "position": [17.25, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/12,13", "mesh": "Scene/ilot/wall.glb", "position": [18.75, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/13,13", "mesh": "Scene/ilot/wall.glb", "position": [20.25, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/14,13", "mesh": "Scene/ilot/wall.glb", "position": [21.75, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/15,13", "mesh": "Scene/ilot/wall.glb", "position": [23.25, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/16,13", "mesh": "Scene/ilot/wall.glb", "position": [24.75, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/17,13", "mesh": "Scene/ilot/wall.glb", "position": [26.25, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/18,13", "mesh": "Scene/ilot/wall.glb", "position": [27.75, 20.25, 0.0], "folder": "murs"},
+    {"id": "mur/19,13", "mesh": "Scene/ilot/wall.glb", "position": [29.25, 20.25, 0.0], "folder": "murs"}
+  ],
+  "fills": [
+    {"id": "sol", "areas": [[0.0, 0.0, 30.0, 21.0]], "cell": 1.5, "meshes": ["Scene/ilot/floor.glb"]}
+  ],
+  "party": {
+    "appearances": ["heros-brawler", "heros-mage", "heros-priest", "heros-scoundrel"],
+    "walkSpeed": 3.0
+  },
+  "assetsRoot": "Source/Test/Fixtures/Meshes/Assets",
+  "lighting": {
+    "comment": "Les réglages de la porte (LOT-1012), repris tels quels.",
+    "lampCandelas": 60.0,
+    "fireCandelas": 30.0,
+    "sunScale": 1.8,
+    "ambientScale": 0.45,
+    "skyLuminance": 3.0,
+    "exposureBias": 0.0,
+    "fog": {
+      "density": 0.004,
+      "falloff": 0.05,
+      "volumetric": true
     },
-    {
-      "id": "e2",
-      "type": "arenaEntry",
-      "x": 3,
-      "y": 6,
-      "rank": 1,
-      "side": "allies"
-    },
-    {
-      "id": "e3",
-      "type": "arenaEntry",
-      "x": 3,
-      "y": 7,
-      "rank": 2,
-      "side": "allies"
-    },
-    {
-      "id": "e4",
-      "type": "encounter",
-      "x": 15,
-      "y": 7,
-      "encounterId": "arene-bandits",
-      "respawns": true
-    },
-    {
-      "id": "e5",
-      "type": "arenaEntry",
-      "x": 3,
-      "y": 8,
-      "rank": 3,
-      "side": "allies"
-    },
-    {
-      "id": "e6",
-      "type": "combatZone",
-      "x": 0,
-      "y": 0,
-      "height": 14,
-      "name": "sable",
-      "width": 20
+    "post": {
+      "bloom_intensity": 0.6,
+      "vignette_intensity": 0.3
     }
-  ]
+  },
+  "daylight": "Common/Lighting/daylight.json",
+  "ground": {
+    "colour": "#8f7d62",
+    "size": 4000.0,
+    "height": -0.02
+  },
+  "navigation": {
+    "area": [0.0, 0.0, 30.0, 21.0],
+    "height": 4.0
+  },
+  "shots": [
+    {"id": "arene", "target": [15.0, 10.5, 1.0], "heading": 0.0, "pitch": 48.0, "distance": 30.0, "comment": "Le sable entier depuis le sud, au cadrage du joueur : le groupe à l'ouest, les bandits autour de leur marqueur à l'est, les piliers entre eux."},
+    {"id": "arene-melee", "target": [12.0, 10.5, 1.0], "heading": 20.0, "pitch": 38.0, "distance": 16.0, "comment": "Le centre du sable, plus près : les piliers et l'aperçu de travail (chemin, portée, cibles)."}
+  ],
+  "hours": ["12:00", "22:00"]
 }
