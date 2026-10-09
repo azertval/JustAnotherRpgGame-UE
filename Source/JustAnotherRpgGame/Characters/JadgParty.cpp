@@ -49,8 +49,10 @@ namespace
 	constexpr int32 MountTries = 600;
 
 	/// Un portail hors du maillage se franchit quand le meneur s'arrête à moins de cette distance de
-	/// son centre, en cases : il touche sa case (une case et demie, la portée de Core).
-	constexpr double PortalContactCells = 1.5;
+	/// son centre, en cases : il touche sa case. Deux cases : le portail du parvis de l'Arena of Fate
+	/// est sur la deuxième marche d'un escalier que le maillage ne gravit pas (mesuré : le meneur
+	/// s'arrête au pied, à 1,8 case du centre du portail).
+	constexpr double PortalContactCells = 2.0;
 }
 
 struct AJadgParty::FState

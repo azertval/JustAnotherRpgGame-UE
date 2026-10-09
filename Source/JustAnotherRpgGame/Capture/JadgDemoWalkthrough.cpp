@@ -13,6 +13,7 @@
 #include "Misc/CommandLine.h"
 #include "Misc/FileHelper.h"
 #include "Misc/Paths.h"
+#include "NavigationSystem.h"
 #include "ShaderCompiler.h"
 #include "UObject/Package.h"
 #include "UnrealClient.h"
@@ -23,8 +24,9 @@ namespace
 	const TCHAR* const Arenarea = TEXT("central-empire/capital/arenarea");
 	const TCHAR* const ArenaOfFate = TEXT("central-empire/capital/arenarea/arena-of-fate");
 
-	/// Une étape : sur quelle carte, vers quelle case (son centre) de quel étage, et la carte qu'elle
-	/// ouvre (un portail) ou rien (un escalier : l'étape finit quand le meneur est arrivé).
+	/// Une étape : sur quelle carte, vers quel portail (le centre de sa case, à son étage), et ce qu'il
+	/// ouvre : une autre carte, ou un autre étage de la même (`Arrives`, l'étage où le groupe arrive) ;
+	/// `Arrives` à -1 : un lieu de passage, atteint à moins de `ArrivedCells`.
 	struct FLeg
 	{
 		const TCHAR* Map;
@@ -32,18 +34,22 @@ namespace
 		double Row;
 		int32 Storey;
 		const TCHAR* Opens;
+		int32 Arrives;
 		const TCHAR* What;
 	};
 
-	// Les cases des portails et des points d'arrivée sont celles des descriptions de carte : Martpart
-	// (e4), Arenarea (e4, e2), l'Arena of Fate (le sable, le pied de l'escalier des catacombes, e23).
+	// Les cases des portails sont celles des descriptions de carte : Martpart (e4), Arenarea (e4,
+	// e2), l'Arena of Fate (e20, e2, e25, e33, e23 — les portails de la v4 entre ses niveaux).
 	const FLeg Legs[] = {
-		{Martpart, 8.5, 0.5, 0, Arenarea, TEXT("Martpart : le portail de Stravian Avenue, vers Arenarea")},
-		{Arenarea, 65.5, 33.5, 0, ArenaOfFate, TEXT("Arenarea : l'escalier de l'arène, vers l'Arena of Fate")},
-		{ArenaOfFate, 9.5, 12.5, 0, nullptr, TEXT("l'Arena of Fate : du vestibule au sable, par l'escalier de la porte du triomphe")},
-		{ArenaOfFate, 22.5, 8.5, 2, nullptr, TEXT("l'Arena of Fate : du sable aux catacombes, par la prison et son puits")},
-		{ArenaOfFate, 16.5, 21.5, 1, Arenarea, TEXT("l'Arena of Fate : des catacombes à l'escalier du parvis, vers Arenarea")},
-		{Arenarea, 116.5, 86.5, 0, Martpart, TEXT("Arenarea : le portail de Herofate Avenue, retour à Martpart")},
+		{Martpart, 30.5, 34.5, 0, nullptr, -1, TEXT("Martpart : de Market Gate à la place des étals, auprès de la mère")},
+		{Martpart, 8.5, 0.5, 0, Arenarea, 0, TEXT("Martpart : le portail de Stravian Avenue, vers Arenarea")},
+		{Arenarea, 65.5, 33.5, 0, ArenaOfFate, 1, TEXT("Arenarea : l'escalier de l'arène, vers le vestibule des vestiaires")},
+		{ArenaOfFate, 4.5, 12.5, 1, nullptr, 0, TEXT("l'Arena of Fate : des vestiaires au sable, par la porte du triomphe")},
+		{ArenaOfFate, 4.5, 12.5, 0, nullptr, 1, TEXT("l'Arena of Fate : du sable aux vestiaires, par la porte du triomphe")},
+		{ArenaOfFate, 22.5, 4.5, 1, nullptr, 2, TEXT("l'Arena of Fate : de la prison aux catacombes, par leur descente")},
+		{ArenaOfFate, 22.5, 6.5, 2, nullptr, 1, TEXT("l'Arena of Fate : des catacombes à la prison")},
+		{ArenaOfFate, 16.5, 21.5, 1, Arenarea, 0, TEXT("l'Arena of Fate : du vestibule à Arenarea, par l'escalier du parvis")},
+		{Arenarea, 116.5, 86.5, 0, Martpart, 0, TEXT("Arenarea : le portail de Herofate Avenue, retour à Martpart")},
 	};
 	constexpr int32 LegCount = UE_ARRAY_COUNT(Legs);
 
@@ -53,10 +59,10 @@ namespace
 	constexpr double LegSeconds = 240.0;
 	/// Un meneur arrêté avant son but reçoit l'ordre de nouveau, autant de fois au plus.
 	constexpr int32 MaxOrders = 6;
+	/// Un lieu de passage est atteint à moins de cette distance de sa case, en cases.
+	constexpr double ArrivedCells = 2.0;
 	/// Trames laissées à un ordre avant de juger que le meneur s'est arrêté.
 	constexpr int32 OrderFrames = 60;
-	/// Le meneur est arrivé à moins de cette distance de la case visée, en cases.
-	constexpr double ArrivedCells = 1.5;
 
 	/// Ce qui survit au changement de carte : le parcours est un seul processus.
 	TArray<FString> GSteps;
@@ -86,6 +92,9 @@ void AJadgDemoWalkthrough::BeginPlay()
 	if (GLegSince == 0.0)
 	{
 		GLegSince = FPlatformTime::Seconds();
+		// `-JadgDemoEtape=<rang>` reprend la démo à une étape, lancée sur sa carte.
+		FParse::Value(FCommandLine::Get(), TEXT("JadgDemoEtape="), GLeg);
+		GLeg = FMath::Clamp(GLeg, 0, LegCount - 1);
 	}
 	Note(FString::Printf(TEXT("carte du moteur %s"), *GetWorld()->GetOutermost()->GetName()));
 }
@@ -111,8 +120,12 @@ void AJadgDemoWalkthrough::Shoot(const FString& What)
 bool AJadgDemoWalkthrough::LegDone(const AJadgParty& Party) const
 {
 	const FLeg& Leg = Legs[GLeg];
-	return Exploration->HeroStorey() == Leg.Storey
-		&& FVector2D::Distance(Exploration->HeroCell(), FVector2D(Leg.Column, Leg.Row)) < ArrivedCells;
+	if (Leg.Arrives < 0)
+	{
+		return FVector2D::Distance(Exploration->HeroCell(), FVector2D(Leg.Column, Leg.Row)) < ArrivedCells;
+	}
+	// Un portail de la même carte : l'étape est faite quand le groupe est à l'étage où il mène.
+	return Exploration->HeroStorey() == Leg.Arrives;
 }
 
 void AJadgDemoWalkthrough::Order(AJadgParty& Party)
@@ -139,7 +152,17 @@ void AJadgDemoWalkthrough::Tick(float DeltaSeconds)
 	}
 	GLastWorld = World;
 	GLastFrame = Now;
-	const bool bCompiling = GShaderCompilingManager != nullptr && GShaderCompilingManager->IsCompiling();
+	// Le maillage de navigation d'une grande carte se construit après son ouverture (Martpart :
+	// une marche donnée avant s'arrête où il s'arrête encore).
+	UNavigationSystemV1* Navigation = FNavigationSystem::GetCurrent<UNavigationSystemV1>(GetWorld());
+	const bool bCompiling = (GShaderCompilingManager != nullptr && GShaderCompilingManager->IsCompiling())
+		|| (Navigation != nullptr && Navigation->IsNavigationBuildInProgress());
+	if (!bDone && Frames % 600 == 0)
+	{
+		// Le pouls du parcours : une carte qui s'ouvre lentement se voit ici, pas dans le silence.
+		UE_LOG(LogJadg, Display, TEXT("[Démo] trame %d, %.1f ms, shaders ou maillage de navigation en construction : %s"), Frames,
+			DeltaSeconds * 1000.0f, bCompiling ? TEXT("oui") : TEXT("non"));
+	}
 	if (bDone || ++Frames < OpeningFrames || bCompiling)
 	{
 		return;
@@ -199,7 +222,7 @@ void AJadgDemoWalkthrough::Tick(float DeltaSeconds)
 	{
 		Party->Leader()->StopWalking();
 		Note(FString::Printf(TEXT("fait en %.0f s : %s"), FPlatformTime::Seconds() - GLegSince, Leg.What));
-		Shoot(FString::Printf(TEXT("le meneur à l'étage %d de l'Arena of Fate"), Leg.Storey));
+		Shoot(Leg.Arrives < 0 ? FString(Leg.What) : FString::Printf(TEXT("le meneur à l'étage %d de l'Arena of Fate"), Leg.Arrives));
 		return;
 	}
 	if (FPlatformTime::Seconds() - GLegSince > LegSeconds)
