@@ -79,7 +79,7 @@
     <text x="318" y="421" font-size="12" font-weight="600">Monde — unité = 1 case, float</text>
     <text x="318" y="437" font-size="10">origine haut-gauche, Y vers le bas</text>
     <text x="318" y="451" font-size="10">grille (c, r) → monde :</text>
-    <text x="318" y="465" font-size="10" font-family="Consolas, monospace">core::IsoProjection::gridToWorld</text>
+    <text x="318" y="465" font-size="10" font-family="Consolas, monospace">projection isométrique (retirée, LOT-1017)</text>
     <text x="318" y="479" font-size="10" font-family="Consolas, monospace">worldToGrid · tileBounds · depth</text>
     <text x="318" y="493" font-size="10">losange L × 0,62 L en unités monde</text>
     <text x="318" y="507" font-size="10">(ARENA_DIAMOND_RATIO)</text>
