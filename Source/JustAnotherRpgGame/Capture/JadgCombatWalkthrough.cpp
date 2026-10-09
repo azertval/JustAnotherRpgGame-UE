@@ -61,6 +61,11 @@ namespace
 		return GEngine->GameViewport != nullptr ? GEngine->GameViewport->Viewport : nullptr;
 	}
 
+	/// Un clic que le décor cache : le point visé amené dessus, trois fois au plus, la caméra tournée
+	/// d'un tiers de tour à chaque fois.
+	constexpr int32 MaxRecenters = 3;
+	constexpr float RecenterTurn = 120.0f;
+
 	FString Quote(const FString& Text)
 	{
 		return TEXT("\"") + Text.Replace(TEXT("\\"), TEXT("\\\\")).Replace(TEXT("\""), TEXT("\\\"")) + TEXT("\"");
@@ -138,8 +143,17 @@ bool AJadgCombatWalkthrough::ClickPoint(const FVector& World, const TCHAR* What)
 {
 	FVector2D Screen;
 	FHitResult Hit;
+	AJadgCameraPawn* View = Cast<AJadgCameraPawn>(Player->GetPawn());
 	if (!Player->ProjectWorldLocationToScreen(World, Screen))
 	{
+		// Hors de la vue (la caméra a été amenée ailleurs au tour d'avant) : le joueur l'y ramène.
+		if (Recenters < MaxRecenters && View != nullptr)
+		{
+			View->SetView(World, View->GetViewYaw(), View->GetViewPitch(), View->GetViewDistance());
+			++Recenters;
+			Note(FString::Printf(TEXT("%s est hors de la vue : le point visé est amené sur elle (%d)"), What, Recenters));
+			return false;
+		}
 		Finish(1, FString::Printf(TEXT("%s n'est pas devant la caméra"), What));
 		return false;
 	}
@@ -176,22 +190,22 @@ bool AJadgCombatWalkthrough::ClickPoint(const FVector& World, const TCHAR* What)
 			}
 		}
 	}
-	AJadgCameraPawn* View = Cast<AJadgCameraPawn>(Player->GetPawn());
-	if (!bFound && !bRecentered && View != nullptr)
+	if (!bFound && Recenters < MaxRecenters && View != nullptr)
 	{
 		// Le décor cache le point (une bannière, une tribune de l'Arena of Fate, LOT-1022) : le joueur
-		// amène le point visé sur lui, de plus haut, et clique à la trame suivante.
-		bRecentered = true;
-		View->SetView(World, View->GetViewYaw(), FMath::Max(View->GetViewPitch(), 60.0f), View->GetViewDistance());
-		Note(FString::Printf(TEXT("le décor cache %s : le point visé est amené sur elle"), What));
+		// amène le point visé sur lui, de plus haut, en tournant autour, et clique à la trame suivante.
+		View->SetView(World, View->GetViewYaw() + (Recenters > 0 ? RecenterTurn : 0.0f), FMath::Max(View->GetViewPitch(), 70.0f), View->GetViewDistance());
+		++Recenters;
+		Note(FString::Printf(TEXT("le décor cache %s : le point visé est amené sur elle (%d)"), What, Recenters));
 		return false;
 	}
 	if (!bFound)
 	{
-		Finish(1, FString::Printf(TEXT("le pointeur en (%.0f ; %.0f) ne désigne pas %s"), Screen.X, Screen.Y, What));
+		Finish(1, FString::Printf(TEXT("le pointeur en (%.0f ; %.0f) ne désigne pas %s (il désigne %s)"), Screen.X, Screen.Y, What,
+			Hit.GetActor() != nullptr ? *Hit.GetActor()->GetActorNameOrLabel() : TEXT("rien")));
 		return false;
 	}
-	bRecentered = false;
+	Recenters = 0;
 	Note(FString::Printf(TEXT("clic au sol en (%.0f ; %.0f) : %s"), Screen.X, Screen.Y, What));
 	Press(UJadgControls::KeyOf(TEXT("Walk")));
 	return true;
@@ -208,28 +222,60 @@ bool AJadgCombatWalkthrough::ClickActor(const AActor* Target, const TCHAR* What)
 	const FVector Origin = Target->GetActorLocation();
 	FVector2D Screen;
 	FHitResult Hit;
+	AJadgCameraPawn* View = Cast<AJadgCameraPawn>(Player->GetPawn());
 	if (!Player->ProjectWorldLocationToScreen(Origin, Screen))
 	{
+		if (Recenters < MaxRecenters && View != nullptr)
+		{
+			View->SetView(Origin, View->GetViewYaw(), View->GetViewPitch(), View->GetViewDistance());
+			++Recenters;
+			Note(FString::Printf(TEXT("%s est hors de la vue : le point visé est amené sur elle (%d)"), What, Recenters));
+			return false;
+		}
 		Finish(1, FString::Printf(TEXT("%s n'est pas devant la caméra"), What));
 		return false;
 	}
-	Player->PointAt(Screen);
-	AJadgCameraPawn* View = Cast<AJadgCameraPawn>(Player->GetPawn());
-	const bool bHit = Player->PointerHit(Hit) && Hit.GetActor() == Target;
-	if (!bHit && !bRecentered && View != nullptr)
+	// La figurine, ou ce qu'elle porte (son arme) ; un bord de la figurine si son centre est caché
+	// (LOT-1022 : sur le sable, une statue ou un combattant passe devant).
+	const auto OnTarget = [&](const FVector2D& At)
 	{
-		// Le décor cache la figurine : le joueur amène le point visé sur elle, de plus haut (LOT-1022).
-		bRecentered = true;
-		View->SetView(Origin, View->GetViewYaw(), FMath::Max(View->GetViewPitch(), 60.0f), View->GetViewDistance());
-		Note(FString::Printf(TEXT("le décor cache %s : le point visé est amené sur elle"), What));
+		Player->PointAt(At);
+		if (!Player->PointerHit(Hit) || Hit.GetActor() == nullptr)
+		{
+			return false;
+		}
+		return Hit.GetActor() == Target || Hit.GetActor()->GetAttachParentActor() == Target;
+	};
+	bool bHit = OnTarget(Screen);
+	for (int32 Ring = 1; Ring <= 4 && !bHit; ++Ring)
+	{
+		for (int32 Step = 0; Step < 8 && !bHit; ++Step)
+		{
+			const double Angle = Step * UE_DOUBLE_PI / 4.0;
+			const FVector2D Shifted = Screen + FVector2D(FMath::Cos(Angle), FMath::Sin(Angle)) * (Ring * 6.0);
+			if (OnTarget(Shifted))
+			{
+				Screen = Shifted;
+				bHit = true;
+			}
+		}
+	}
+	if (!bHit && Recenters < MaxRecenters && View != nullptr)
+	{
+		// Le décor cache la figurine : le joueur amène le point visé sur elle, de plus haut, en tournant
+		// autour (LOT-1022).
+		View->SetView(Origin, View->GetViewYaw() + (Recenters > 0 ? RecenterTurn : 0.0f), FMath::Max(View->GetViewPitch(), 70.0f), View->GetViewDistance());
+		++Recenters;
+		Note(FString::Printf(TEXT("le décor cache %s : le point visé est amené sur elle (%d)"), What, Recenters));
 		return false;
 	}
 	if (!bHit)
 	{
-		Finish(1, FString::Printf(TEXT("le pointeur en (%.0f ; %.0f) ne désigne pas %s"), Screen.X, Screen.Y, What));
+		Finish(1, FString::Printf(TEXT("le pointeur en (%.0f ; %.0f) ne désigne pas %s (il désigne %s)"), Screen.X, Screen.Y, What,
+			Hit.GetActor() != nullptr ? *Hit.GetActor()->GetActorNameOrLabel() : TEXT("rien")));
 		return false;
 	}
-	bRecentered = false;
+	Recenters = 0;
 	Note(FString::Printf(TEXT("clic en (%.0f ; %.0f) sur %s"), Screen.X, Screen.Y, What));
 	Press(UJadgControls::KeyOf(TEXT("Walk")));
 	return true;
@@ -457,7 +503,7 @@ void AJadgCombatWalkthrough::PlayHeroTurn(AJadgCombat& Combat)
 	case 1:
 		if (GMoveTo.IsSet())
 		{
-			if (!ClickPoint(GMoveTo.GetValue(), TEXT("la destination du tour")) && bRecentered && !bDone)
+			if (!ClickPoint(GMoveTo.GetValue(), TEXT("la destination du tour")) && Recenters > 0 && !bDone)
 			{
 				// La caméra a bougé : le même clic, quand la vue est posée.
 				--TurnStep;
@@ -475,7 +521,7 @@ void AJadgCombatWalkthrough::PlayHeroTurn(AJadgCombat& Combat)
 				Combat.Select(GTarget);
 				break;
 			}
-			if (!ClickActor(Victim, TEXT("la cible")) && bRecentered && !bDone)
+			if (!ClickActor(Victim, TEXT("la cible")) && Recenters > 0 && !bDone)
 			{
 				// La caméra a bougé : le même clic, quand la vue est posée.
 				--TurnStep;
