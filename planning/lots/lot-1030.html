@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOT-1030 — Le générateur : validation en jeu et passage en production — Planification</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Planification</a>
+  <nav><a href="../index.html">Trajectoire</a><a href="index.html" class="active">Lots</a><a href="../versions/index.html">Versions</a><a href="../vision/index.html">Vision</a><a href="../referentiels/index.html">Référentiels</a><a href="../standards/index.html">Standards</a></nav>
+  <div class="links"><a href="../../">Documentation</a><a class="active" href="../index.html">Planification</a><a href="../../qualite/">Qualité</a></div>
+</header>
+<div class="shell">
+
+<main>
+<p class="crumb"><a href="index.html">Lots</a> › <a href="../versions/v0-0-3.html">0.0.3 — Le nouveau moteur</a></p><h1><span class="vid">LOT-1030</span> Le générateur : validation en jeu et passage en production</h1><p class="lede">Le créateur, les personnages et les créatures passent une recette commune de qualité, performances et reconstruction avant le peuplement en volume.</p><dl class="facts"><div><dt>État</dt><dd><span class="badge etat-en-attente">en attente</span></dd></div><div><dt>Filière</dt><dd><span class="filiere f-pnj">PNJ</span></dd></div><div><dt>Taille</dt><dd>M</dd></div><div><dt>Ordre calculé</dt><dd>7</dd></div><div><dt>Prérequis</dt><dd><a class="ref" href="lot-1025.html">LOT-1025</a> <a class="ref" href="lot-1029.html">LOT-1029</a></dd></div><div><dt>Débloque</dt><dd><a class="ref" href="lot-314.html">LOT-314</a> <a class="ref" href="lot-1023.html">LOT-1023</a></dd></div><div><dt>Reprend</dt><dd>—</dd></div></dl><section><h2>Livrables</h2><ul class=""><li>Le dossier de recette du générateur : matrice espèces/paramètres/vêtements, captures, tests empaquetés et écarts résolus.</li><li>Les mesures groupe proche, rue et arène à densité croissante, avec niveaux de détail, animations, cheveux et tissus réellement retenus.</li><li>La stratégie PNJ fixes / personnages équipables : préassemblage ou génération à la demande, cache et partage de ressources, avec mesures de stockage et chargement.</li><li>Le standard final de production, le guide d'ajout d'une base et d'un vêtement, les limites connues, versions des outils et contrôles de migration.</li></ul></section><section><h2>Critères d'acceptation</h2><ul class="checks"><li>Les seuils fixés au LOT-1024 sont respectés dans le paquet final avec personnages habillés ; huit mannequins ne servent pas de preuve de capacité.</li><li>Les changements de LOD, générations successives, équipement, sauvegarde/reprise et traversée de scène n'altèrent pas l'identité et ne créent pas de dérive mémoire.</li><li>La chaîne est reconstruite depuis les sources conservées ; toute dépendance externe de fabrication est déclarée et absente des opérations de création en jeu.</li><li>La démo active présente ses héros, PNJ et rencontre des fauves ; les lots de peuplement disposent d'un contrat publié et d'une densité validée par scène.</li></ul></section><section class="prose"><h2 id="pourquoi">Pourquoi</h2>
+<p>Les performances d'un seul personnage dans l'éditeur ne préjugent ni du créateur en jeu, ni d'une foule dans la capitale. Ce lot clôt le chantier avant la recette de version LOT-1023.</p>
+<h2 id="périmètre">Périmètre</h2>
+<p>Dedans : validation et durcissement de la chaîne, mesures et contrat de production. Dehors : production de toute la population, remplissage des gradins, nouveaux systèmes d'IA ou recours imposé à Mass. Une population de test est isolée et reproductible.</p>
+<h2 id="conception">Conception</h2>
+<p>Rejouer le protocole du LOT-1024 avec les vrais assets, puis mesurer la scène active autour de l'arène. Publier matériel, résolution, qualité, nombre visible/animé, distances caméra, temps CPU/GPU, mémoire permanente et transitoire, chargement, changements d'équipement et taille des ressources. Séparer le coût des personnages de celui du décor ; conserver les objectifs globaux du projet et expliquer toute limite.</p>
+<p>Préassembler les PNJ à tenue fixe lorsque le gain est démontré ; conserver une génération au changement pour les personnages équipables. Ne pas cuire toutes les combinaisons : mesurer stockage, cache et réutilisation. Le partage de sources ne signifie pas automatiquement partage intégral des meshes et textures générés.</p>
+<p>La recette comprend les cas difficiles, les extrêmes combinés et les changements rapides, les créatures, les corps enfants et les morts-vivants. Livrer captures midi/22 h à la caméra du joueur. Les tests Core portent sur contrats et migration ; les contrôles Unreal et le paquet final portent sur rendu, animation et reconstruction.</p>
+<p>Mettre à jour standard, guide, scripts de vérification et références de planning. Retirer uniquement les prototypes et dépendances remplacés dont les références ont été vérifiées. Le LOT-314 réutilise le créateur d'apparence pour son parcours de règles.</p>
+<h2 id="risques-et-questions-ouvertes">Risques et questions ouvertes</h2>
+<p>Si une cible n'est pas tenue, corriger le lot concerné ou faire approuver un changement explicite de portée ; ne pas déclarer livré en reportant silencieusement le défaut à la foule future. Les outils expérimentaux ou interfaces privées retenus disposent d'un test de compatibilité à chaque changement de version moteur.</p></section><p class="source">Source : <code>Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1030-validation-generateur-et-populations.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Planning/</code> le 2026-10-20 · <code>d0bf2f8e2</code>. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

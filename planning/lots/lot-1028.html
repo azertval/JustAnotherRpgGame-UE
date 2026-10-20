@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOT-1028 — Le générateur : créateur complet en jeu — Planification</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Planification</a>
+  <nav><a href="../index.html">Trajectoire</a><a href="index.html" class="active">Lots</a><a href="../versions/index.html">Versions</a><a href="../vision/index.html">Vision</a><a href="../referentiels/index.html">Référentiels</a><a href="../standards/index.html">Standards</a></nav>
+  <div class="links"><a href="../../">Documentation</a><a class="active" href="../index.html">Planification</a><a href="../../qualite/">Qualité</a></div>
+</header>
+<div class="shell">
+
+<main>
+<p class="crumb"><a href="index.html">Lots</a> › <a href="../versions/v0-0-3.html">0.0.3 — Le nouveau moteur</a></p><h1><span class="vid">LOT-1028</span> Le générateur : créateur complet en jeu</h1><p class="lede">Le joueur règle visage et corps, choisit sa tenue, puis retrouve exactement son apparence ; l'outil de production utilise le même générateur.</p><dl class="facts"><div><dt>État</dt><dd><span class="badge etat-en-attente">en attente</span></dd></div><div><dt>Filière</dt><dd><span class="filiere f-interface">Interface</span></dd></div><div><dt>Taille</dt><dd>L</dd></div><div><dt>Ordre calculé</dt><dd>4</dd></div><div><dt>Prérequis</dt><dd><a class="ref" href="lot-1026.html">LOT-1026</a> <a class="ref" href="lot-1027.html">LOT-1027</a> <a class="ref" href="lot-1020.html">LOT-1020</a></dd></div><div><dt>Débloque</dt><dd><a class="ref" href="lot-1029.html">LOT-1029</a></dd></div><div><dt>Reprend</dt><dd>—</dd></div></dl><section><h2>Livrables</h2><ul class=""><li>L'interface UMG à logique C++ : choix d'espèce/base, curseurs visage et corps, cheveux, couleurs, vêtements, aperçu et réinitialisation.</li><li>La gestion des mises à jour asynchrones et des erreurs, la recette sauvegardée et les contrôles de migration.</li><li>Un mode de production partageant les paramètres et la validation : presets, verrouillage de choix, génération déterministe par graine et export de fiches.</li><li>Les tests de sauvegarde/rechargement, changement rapide de paramètres, changement de famille et reconstruction dans un jeu empaqueté.</li></ul></section><section><h2>Critères d'acceptation</h2><ul class="checks"><li>Le créateur livré en jeu possède de vrais réglages d'identité faciale et corporelle, distincts des expressions ; les vêtements suivent ces réglages dans les plages publiées.</li><li>Une réponse asynchrone obsolète n'écrase jamais le dernier choix ; la confirmation attend une apparence cohérente et les latences respectent les seuils du LOT-1024.</li><li>Après fermeture et relancement, les paramètres, équipements et couleurs sont identiques ; les données anciennes migrent ou produisent une erreur explicite.</li><li>Le mode de production et le mode joueur reconstruisent la même recette ; aucune dépendance à un outil de création externe n'est nécessaire à l'exécution.</li></ul></section><section class="prose"><h2 id="pourquoi">Pourquoi</h2>
+<p>Un générateur d'assets ne suffit pas au créateur complet demandé. Ce lot livre le parcours visuel en jeu et évite deux implémentations divergentes pour le joueur et les PNJ.</p>
+<h2 id="périmètre">Périmètre</h2>
+<p>Dedans : création d'apparence complète dans les familles et plages validées, presets, aperçu, persistance et mode de production. Dehors : choix de classe, historique, règles de caractéristiques et validation de personnage au sens des livres, qui restent au LOT-314. Celui-ci intégrera cet écran au parcours de règles sans réécrire le générateur.</p>
+<h2 id="conception">Conception</h2>
+<p>Afficher les contraintes propres à l'espèce sans promettre des transformations arbitraires entre anatomies. Distinguer identité persistante et expressions d'aperçu. Proposer annuler, réinitialiser, rotation/zoom et un éclairage de contrôle ; localiser les libellés FR/EN. Reprendre la charte du jeu et ses commandes, sans logique Blueprint.</p>
+<p>Regrouper les événements de curseurs, versionner les requêtes et ignorer les réponses dépassées. Préserver une apparence affichable pendant la reconstruction, gérer l'échec et libérer les ressources des générations annulées. Tester les changements rapides de famille et d'équipement, pas seulement le déplacement lent d'un curseur.</p>
+<p>La génération de variantes accepte une graine, des paramètres verrouillés et des plages validées ; elle ne distribue pas les métiers par espèce de manière déterministe. Les portraits et jetons peints restent une filière distincte (D-30) : préciser leur sélection dans l'interface sans les remplacer implicitement par une capture du visage.</p>
+<h2 id="risques-et-questions-ouvertes">Risques et questions ouvertes</h2>
+<p>L'identité doit rester cohérente aux changements de LOD et après reprise de sauvegarde. Le temps acceptable d'actualisation se fixe au LOT-1024 et se contrôle ici sur le vrai écran, avec les pièces du LOT-1027 ; aucune promesse de calcul instantané n'est admise.</p></section><p class="source">Source : <code>Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1028-createur-complet-en-jeu.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Planning/</code> le 2026-10-20 · <code>d0bf2f8e2</code>. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>

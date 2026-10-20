@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LOT-1026 — Le générateur : bases anatomiques et recettes versionnées — Planification</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../index.html"><span>Just Another RPG Game</span> Planification</a>
+  <nav><a href="../index.html">Trajectoire</a><a href="index.html" class="active">Lots</a><a href="../versions/index.html">Versions</a><a href="../vision/index.html">Vision</a><a href="../referentiels/index.html">Référentiels</a><a href="../standards/index.html">Standards</a></nav>
+  <div class="links"><a href="../../">Documentation</a><a class="active" href="../index.html">Planification</a><a href="../../qualite/">Qualité</a></div>
+</header>
+<div class="shell">
+
+<main>
+<p class="crumb"><a href="index.html">Lots</a> › <a href="../versions/v0-0-3.html">0.0.3 — Le nouveau moteur</a></p><h1><span class="vid">LOT-1026</span> Le générateur : bases anatomiques et recettes versionnées</h1><p class="lede">Les familles de corps, leurs formes d'identité et leurs rigs se reconstruisent depuis des recettes indépendantes de l'interface et du fournisseur.</p><dl class="facts"><div><dt>État</dt><dd><span class="badge etat-en-attente">en attente</span></dd></div><div><dt>Filière</dt><dd><span class="filiere f-pnj">PNJ</span></dd></div><div><dt>Taille</dt><dd>L</dd></div><div><dt>Ordre calculé</dt><dd>2</dd></div><div><dt>Prérequis</dt><dd><a class="ref" href="lot-1024.html">LOT-1024</a></dd></div><div><dt>Débloque</dt><dd><a class="ref" href="lot-1025.html">LOT-1025</a> <a class="ref" href="lot-1027.html">LOT-1027</a> <a class="ref" href="lot-1028.html">LOT-1028</a></dd></div><div><dt>Reprend</dt><dd>—</dd></div></dl><section><h2>Livrables</h2><ul class=""><li>Le contrat d'apparence versionné, son schéma JSON, son lecteur Core et l'adaptateur de la chaîne retenue ; migration des anciennes fiches.</li><li>La matrice des 22 entrées d'espèces actuelles : famille, base, rig, paramètres, plages admises, source et restrictions ; décision explicite sur les espèces du corpus absentes du catalogue.</li><li>Les bases et morphs réutilisables, un exemple par entrée couverte, les rigs et profils de retargeting, collisions et emplacements d'équipement.</li><li>Les scripts d'import/construction, manifestes de sources, contrôles de reconstruction et mise à jour du standard.</li></ul></section><section><h2>Critères d'acceptation</h2><ul class="checks"><li>Chaque entrée du catalogue couvert reconstruit son exemple et ses paramètres d'identité ; une valeur hors plage, une combinaison interdite ou une version inconnue produit une erreur explicite.</li><li>Les Taii'maku conservent six doigts et les Gloomfolk leur anatomie de scorpion avec locomotion ; les corps petits, trapus, enfant et drakéide passent leurs contrôles propres.</li><li>Modifier l'identité préserve les expressions, les yeux et dents, les articulations, les prises et les contacts au sol dans le paquet final.</li><li>La migration préserve les identifiants et références de gameplay ; les sources permettent de reconstruire les assets dans un répertoire de sortie vierge.</li></ul></section><section class="prose"><h2 id="pourquoi">Pourquoi</h2>
+<p>Les vêtements et les sauvegardes dépendent des bases. Ce lot stabilise ce contrat après la preuve du LOT-1024, sans imposer MetaHuman, Mutable ni le mannequin à une anatomie incompatible.</p>
+<h2 id="périmètre">Périmètre</h2>
+<p>Dedans : bases, morphs d'identité, rigs, adaptation du squelette aux proportions, physique, recette et migration. Dehors : garde-robe complète (LOT-1027), interface finale (LOT-1028), PNJ de la démo (LOT-1029) et fauves (LOT-1025).</p>
+<h2 id="conception">Conception</h2>
+<p>La recette contient des identifiants sémantiques : famille, espèce, base, paramètres d'identité, pièces équipées et matériaux ; l'adaptateur traduit ces valeurs pour le backend retenu. Les règles restent dans Core sans dépendance Unreal. La fiche d'apparence ne se substitue pas à la fiche de règles, et un PNJ d'ambiance peut n'avoir qu'une apparence.</p>
+<p>Ne pas confondre les 22 entrées actuelles et 22 anatomies distinctes : certaines sont des variantes partageant une base. Inventorier humain, elfes et variantes, demi-elfe, demi-orc, nains et variantes, halfelins et variantes, gnome, tieffelin, drakéide, cirrus, gloomfolk et taii'maku. Documenter le cas Soulborn et tout autre écart au corpus, sans ajout silencieux. Une matrice ne vaut livraison que lorsque ses lignes ont un exemple fonctionnel.</p>
+<p>Partager les conventions d'action et d'équipement, pas obligatoirement les squelettes. Les mains à six doigts, cornes, queues, museaux et bas de corps de scorpion ont leurs compatibilités explicites. Les ailes des anciens cirrus ne deviennent pas un attribut de tous. Un changement de proportions doit mettre à jour les articulations et volumes nécessaires ; un morph de surface seul n'est pas toujours suffisant.</p>
+<p>Le contrat décrit aussi les plages combinables, LOD et raccords de tête/corps. Les sources de fabrication sont conservées ; aucun pipeline de migration ne promet de convertir automatiquement les UV, morphs ou vêtements d'une topologie à une autre. Captures de contrôle à midi et à 22 h au cadrage du joueur, avec planche des espèces.</p>
+<h2 id="risques-et-questions-ouvertes">Risques et questions ouvertes</h2>
+<p>Une famille dont le coût dépasse le lot est redécoupée avant réalisation, sans fausse clôture de sa couverture. La préparation des bases doit rester rejouable à partir de sources conservées. Le LOT-1024 fixe les voies admises ; ce lot en livre le catalogue et contrôle leurs limites.</p></section><p class="source">Source : <code>Planning/versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1026-bases-anatomiques-et-recettes.md</code></p>
+</main>
+</div>
+<footer>Engendré depuis <code>Planning/</code> le 2026-10-20 · <code>d0bf2f8e2</code>. Rien ici ne s'édite : la source est le dossier.</footer>
+<script src="../assets/site.js"></script>
+</body>
+</html>
