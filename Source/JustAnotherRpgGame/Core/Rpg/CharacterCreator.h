@@ -25,7 +25,7 @@ namespace core {
 
 struct CharacterCreator {
     std::string id;
-    /// L'objet personnalisable, en chemin de contenu (`/Game/Characters/Creator/CO_Humanoid`).
+    /// L'objet personnalisable, en chemin de contenu (`/Game/Jeu/Personnages/Creator/CO_Humanoid`).
     std::string asset;
     /// Le nom du composant squelettique de l'objet personnalisable (`Body`).
     std::string component;
@@ -39,7 +39,7 @@ struct CharacterCreator {
     std::map<std::string, std::string> clips;
     /// `main-hand`, `off-hand` -> nom du socket (os) qui porte l'arme.
     std::map<std::string, std::string> sockets;
-    /// Le dossier de contenu des armes au maître (`/Game/Master/Weapons`).
+    /// Le dossier de contenu des armes au maître (`/Game/Bibliotheque/ModelesMaitres/Weapons`).
     std::string weapons;
 };
 

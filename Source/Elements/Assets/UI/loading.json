@@ -1,0 +1,20 @@
+{
+  "_doc": "Les écrans de chargement (prepare_loading_screens.py) : pour chaque carte de Core, le nom du lieu (clé de texte) et ses illustrations, montrées tour à tour d'un chargement à l'autre ; « default » pour une carte qui n'en a pas.",
+  "maps": {
+    "Capitale": {
+      "place": "loading.place.capitale",
+      "images": [
+        "UI/Loading/arena-of-fate-jour.png",
+        "UI/Loading/arena-of-fate-facade.png",
+        "UI/Loading/arena-of-fate-vestiaires.png",
+        "UI/Loading/arena-of-fate-nuit.png"
+      ]
+    }
+  },
+  "default": {
+    "place": "loading.place.default",
+    "images": [
+      "UI/Loading/arena-of-fate-jour.png"
+    ]
+  }
+}

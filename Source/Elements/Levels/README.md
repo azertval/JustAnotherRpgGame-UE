@@ -12,8 +12,8 @@ Les cartes suivent **le même découpage que les assets** — `<région>/<ville>
 sous-zone sous son dossier de zone : `central-empire/capital/arenarea.json` et `martpart.json`,
 **migrées de la v4 telles quelles** (`jadg_map.py --migrate`), et `arenarea/arena-of-fate.json`,
 l'Arena of Fate en **une carte à trois étages** — le sable, les vestiaires et la prison, les
-catacombes — (`LOT-1022`, D-51), les trois cartes de la démo ;
-`porte-1012.json`, la carte de la porte (`LOT-1012`), écrite par `scripts/maps/build_gate_scene.py`.
+catacombes — (`LOT-1022`, D-51), les trois cartes de la démo.
+Le jeu et l’éditeur démarrent dans le quartier jouable de Martpart.
 Une carte a pour identifiant son **chemin relatif** : un portail vise
 `central-empire/capital/martpart`, et son niveau du moteur est `/Game/Maps/Levels/<identifiant>`.
 

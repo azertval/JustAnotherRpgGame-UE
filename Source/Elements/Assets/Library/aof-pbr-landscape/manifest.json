@@ -1,0 +1,436 @@
+{
+  "materials": {
+    "grass": {
+      "source": "Poly Haven",
+      "asset": "grass_ground",
+      "url": "https://polyhaven.com/a/grass_ground",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        2.509999990463257,
+        2.509999990463257
+      ],
+      "files": {
+        "baseColor": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grass_ground/grass_ground_diff_4k.png",
+          "md5": "e1f6319a67008511c6fff35367682a88",
+          "size": 92110422,
+          "file": "grass/grass_ground_diff_4k.png",
+          "sha256": "baa1141d9b9d0f72a5a6ab73b5f59164e18c4f6cc362c7febdc05c1f20bb67e3"
+        },
+        "normal": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grass_ground/grass_ground_nor_dx_4k.png",
+          "md5": "d80bfe1c133285e18412b18d3a98cdb9",
+          "size": 98025463,
+          "file": "grass/grass_ground_nor_dx_4k.png",
+          "sha256": "2fcfdd6e355203742d848a5d699ae14bbc914aac6306252eccd07a3145fd840f"
+        },
+        "roughness": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grass_ground/grass_ground_rough_4k.png",
+          "md5": "218afc3da11e8f44d627304273097c0a",
+          "size": 27661781,
+          "file": "grass/grass_ground_rough_4k.png",
+          "sha256": "c010e937d37e4a66e5e4b4089d1949c4303ddcd7e0f816e01ae0a44b8616661f"
+        },
+        "height": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grass_ground/grass_ground_disp_4k.png",
+          "md5": "c31c11b0801d24f6380257cc81e9088a",
+          "size": 28608106,
+          "file": "grass/grass_ground_disp_4k.png",
+          "sha256": "45388dd604e4a99146f258aaaa06278906172fc21787fe6cc3921faef90393a0"
+        },
+        "ao": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grass_ground/grass_ground_ao_4k.png",
+          "md5": "1acd1fbd64de084e1ef7cea9f0d4d70a",
+          "size": 31791319,
+          "file": "grass/grass_ground_ao_4k.png",
+          "sha256": "049181e2b2ea397c94a6aecd703893ff97173e61442d55b81aeb395094184281"
+        },
+        "orm": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grass_ground/grass_ground_arm_4k.png",
+          "md5": "35093c17c9e11ad7df0de04fbe7b56b3",
+          "size": 69983259,
+          "file": "grass/grass_ground_arm_4k.png",
+          "sha256": "b00bedb6f05d4dd57a9ca4e281f3c235bcee77ab573dcf1d04a103f375ac7c83"
+        }
+      }
+    },
+    "forest": {
+      "source": "Poly Haven",
+      "asset": "forest_floor",
+      "url": "https://polyhaven.com/a/forest_floor",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        2.1399996280670166,
+        2.1399996280670166
+      ],
+      "files": {
+        "baseColor": {
+          "size": 97681938,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/forest_floor/forest_floor_diff_4k.png",
+          "md5": "29d061f05146dbd42e609d0830a4ba5e",
+          "file": "forest/forest_floor_diff_4k.png",
+          "sha256": "96d0cdb27300e7bf021e8d558bfe7e82060cd5bef60095917a21b88405180dfc"
+        },
+        "normal": {
+          "size": 92591639,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/forest_floor/forest_floor_nor_dx_4k.png",
+          "md5": "cd9be3c90fa02436963339cce043a2b4",
+          "file": "forest/forest_floor_nor_dx_4k.png",
+          "sha256": "849764a4427d96799c68807c3239272834c6330d15618582dcd7e73a9e53e5ef"
+        },
+        "roughness": {
+          "size": 41347303,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/forest_floor/forest_floor_rough_4k.png",
+          "md5": "7f3658eaad1fd7bf6b29b46fc6e9c09b",
+          "file": "forest/forest_floor_rough_4k.png",
+          "sha256": "8847f9914b532e72a1d9b8126c2108b30837bb8b7091310623c20130d42320cb"
+        },
+        "height": {
+          "size": 36483297,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/forest_floor/forest_floor_disp_4k.png",
+          "md5": "807e1b33240bd13220f12373ff316975",
+          "file": "forest/forest_floor_disp_4k.png",
+          "sha256": "36d997d4202c6051993269a94a69a2ec174767cb6f1d8e575fdfe8d21e18cf3c"
+        },
+        "ao": {
+          "size": 40157377,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/forest_floor/forest_floor_ao_4k.png",
+          "md5": "e894e041ac57a3a1080b0be553506b72",
+          "file": "forest/forest_floor_ao_4k.png",
+          "sha256": "a94d94856459ab831953158a034b34a9be1f944f82ea14ea13a324582d1f02d5"
+        },
+        "orm": {
+          "size": 71516280,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/forest_floor/forest_floor_arm_4k.png",
+          "md5": "edd20c22e8f0302253f1e5c43d05a75d",
+          "file": "forest/forest_floor_arm_4k.png",
+          "sha256": "9c08632bb01e56113414a3c17ea0a2488b55e8613ffe5e78cf36e6004589569b"
+        }
+      }
+    },
+    "rock": {
+      "source": "Poly Haven",
+      "asset": "rock_face",
+      "url": "https://polyhaven.com/a/rock_face",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        2.380000114440918,
+        2.380000114440918
+      ],
+      "files": {
+        "baseColor": {
+          "size": 86162897,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rock_face/rock_face_diff_4k.png",
+          "md5": "1772c775fc8230af2c151060176f30fa",
+          "file": "rock/rock_face_diff_4k.png",
+          "sha256": "2a16bcca46d1e76f436997120b252a3edb0dc46128090cf58c0d3abb82f1c245"
+        },
+        "normal": {
+          "size": 88452076,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rock_face/rock_face_nor_dx_4k.png",
+          "md5": "8c221ac8cff8300c044e2c7d7ca093e5",
+          "file": "rock/rock_face_nor_dx_4k.png",
+          "sha256": "b040d3eac91653f76126f08f5716af6e2ec816c2eb78929227759b6cd611d071"
+        },
+        "roughness": {
+          "size": 25540407,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rock_face/rock_face_rough_4k.png",
+          "md5": "1f16b0ddadc658f2d33a5c8f3c5565cd",
+          "file": "rock/rock_face_rough_4k.png",
+          "sha256": "62c09c7d53789b7815c668ec34d74739ab31b1df3becac72135a78c43282cf42"
+        },
+        "height": {
+          "size": 22894519,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rock_face/rock_face_disp_4k.png",
+          "md5": "8a850beb28692c49e64e56ede4dfdea7",
+          "file": "rock/rock_face_disp_4k.png",
+          "sha256": "6f1b83b97237e34accad628e685114613cb4f3c88193b1ff399711c784b79aef"
+        },
+        "ao": {
+          "size": 26302855,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rock_face/rock_face_ao_4k.png",
+          "md5": "e633252109d7202187b1b641c2c02398",
+          "file": "rock/rock_face_ao_4k.png",
+          "sha256": "5da7d217107f28e758d5f7346701a11320ac957e2e101312e1cbd6199db57ac2"
+        },
+        "orm": {
+          "size": 58876298,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rock_face/rock_face_arm_4k.png",
+          "md5": "487ee10ba085c01e80db8a65fe88b5d7",
+          "file": "rock/rock_face_arm_4k.png",
+          "sha256": "f1d4d804b6aa63863bbd32346f9a6605957417c10225f7cb0bf8fc8b13b3cf37"
+        }
+      }
+    },
+    "sand": {
+      "source": "Poly Haven",
+      "asset": "gravelly_sand",
+      "url": "https://polyhaven.com/a/gravelly_sand",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        2.4800000190734863,
+        2.4800000190734863
+      ],
+      "files": {
+        "baseColor": {
+          "size": 93642547,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/gravelly_sand/gravelly_sand_diff_4k.png",
+          "md5": "f029a26f181843b2fea07c1f8162ce91",
+          "file": "sand/gravelly_sand_diff_4k.png",
+          "sha256": "e69f2dab8b81b329749cbc04777cb26b10f74670bf1ea3a2c6ed37b5ddc94f14"
+        },
+        "normal": {
+          "size": 97094750,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/gravelly_sand/gravelly_sand_nor_dx_4k.png",
+          "md5": "dbd00ce44cf1a25ab89d4616f5fdfe27",
+          "file": "sand/gravelly_sand_nor_dx_4k.png",
+          "sha256": "ccf7c4ab566ce7b2179aa494e48a24adc73a6c320d4b39ab53d9e21cf8b87ab9"
+        },
+        "roughness": {
+          "size": 28200987,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/gravelly_sand/gravelly_sand_rough_4k.png",
+          "md5": "f6c9940e3b53d888bd5e12548a7fba0c",
+          "file": "sand/gravelly_sand_rough_4k.png",
+          "sha256": "7b7d293e62b450ddb192c90a6e6d3665d80e8943fdd6890fdba7cde15abfcfd6"
+        },
+        "height": {
+          "size": 24905233,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/gravelly_sand/gravelly_sand_disp_4k.png",
+          "md5": "b8ca8177e5f1279e19db5c115adad318",
+          "file": "sand/gravelly_sand_disp_4k.png",
+          "sha256": "431879ac2b4fe29d9eea4db85398debd7063d6f305eebc24cec8fcaac1a36653"
+        },
+        "ao": {
+          "size": 30627707,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/gravelly_sand/gravelly_sand_ao_4k.png",
+          "md5": "3ef8e87b7f52ff06ae777be093f98b0f",
+          "file": "sand/gravelly_sand_ao_4k.png",
+          "sha256": "4e8e03db4544d697736bf09093774c885c1506bea34f903cd836acacfb2e19f9"
+        },
+        "orm": {
+          "size": 69177428,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/gravelly_sand/gravelly_sand_arm_4k.png",
+          "md5": "d7c5c386bf143ea47fe14c673e3822cd",
+          "file": "sand/gravelly_sand_arm_4k.png",
+          "sha256": "38e05fc9eed04f59d47b37c13246d50eea5dbf6688b12ddf8bbc0e9e975bf514"
+        }
+      }
+    },
+    "soil": {
+      "source": "Poly Haven",
+      "asset": "brown_mud_dry",
+      "url": "https://polyhaven.com/a/brown_mud_dry",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        1.299996018409729,
+        1.299996018409729
+      ],
+      "files": {
+        "baseColor": {
+          "size": 36177150,
+          "md5": "eddbb6fc13fcb9498f1d6d3c9344aab2",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud_dry/brown_mud_dry_diff_4k.png",
+          "file": "soil/brown_mud_dry_diff_4k.png",
+          "sha256": "c9dc2fc469713e33e3a789fd31b1a4223a59545cf83ab80468e9fd4cbc271db3"
+        },
+        "normal": {
+          "size": 31910726,
+          "md5": "98c603e0dae0a47d644fcd0c521e247c",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud_dry/brown_mud_dry_nor_dx_4k.png",
+          "file": "soil/brown_mud_dry_nor_dx_4k.png",
+          "sha256": "11d89a6115686b500f1836e1875fccf18fb4acd2abadf770d7099655af5a5ea5"
+        },
+        "roughness": {
+          "size": 31347994,
+          "md5": "6760fd074886911df525bc71ac7d4011",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud_dry/brown_mud_dry_rough_4k.png",
+          "file": "soil/brown_mud_dry_rough_4k.png",
+          "sha256": "3e19e0405bf1539bf486653b3f84b00d1f7af90358d9d168be2128160d321ff7"
+        },
+        "height": {
+          "size": 32386159,
+          "md5": "b5da5c5dc6c35b71f69fc65f5c4ad993",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud_dry/brown_mud_dry_disp_4k.png",
+          "file": "soil/brown_mud_dry_disp_4k.png",
+          "sha256": "94b851be516956abbe05d4eb5f22afcea252b3e479fef62291fc1e16b9749ea1"
+        },
+        "ao": {
+          "size": 13496474,
+          "md5": "2f509f73aa0bda2a2d9bf91e46e72aa1",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud_dry/brown_mud_dry_ao_4k.png",
+          "file": "soil/brown_mud_dry_ao_4k.png",
+          "sha256": "3ac7161343b336757c9ae90da9ba64991c6b768ef999c06627167a571ddca16f"
+        },
+        "orm": {
+          "size": 25640422,
+          "md5": "63b3745e2dd32ead9a0ed7315177e693",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud_dry/brown_mud_dry_arm_4k.png",
+          "file": "soil/brown_mud_dry_arm_4k.png",
+          "sha256": "fdbb3cef02a91a633da7da58fa869531d92613acc84a6e5721d25058845ed1cf"
+        }
+      }
+    },
+    "wet_soil": {
+      "source": "Poly Haven",
+      "asset": "brown_mud",
+      "url": "https://polyhaven.com/a/brown_mud",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        1.299996018409729,
+        1.299996018409729
+      ],
+      "files": {
+        "baseColor": {
+          "size": 29072834,
+          "md5": "1ac2c8641a60aefac2c69f1f7fc94fdd",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud/brown_mud_diff_4k.png",
+          "file": "wet_soil/brown_mud_diff_4k.png",
+          "sha256": "b6201c36a3508cd3c45bf2fc3b3a4609e025760135f0f17bc34ea90e8115bf32"
+        },
+        "normal": {
+          "size": 30192195,
+          "md5": "95bc5445251d9b08ba4143936a1c7247",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud/brown_mud_nor_dx_4k.png",
+          "file": "wet_soil/brown_mud_nor_dx_4k.png",
+          "sha256": "2f03bfe18d957e1e75ec5090d85ce2d2b2bcc6dd9bf317c56523285d202f74d8"
+        },
+        "roughness": {
+          "size": 9425935,
+          "md5": "d371d2ec4d42158aaa1ce89dd1ece29b",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud/brown_mud_rough_4k.png",
+          "file": "wet_soil/brown_mud_rough_4k.png",
+          "sha256": "1506b07e680d824c0a8c437f2fe13b1ea84432471e6f39f0fca751ad0431795c"
+        },
+        "height": {
+          "size": 5549654,
+          "md5": "cc3521bd376550c4e3c87d1725dbcc18",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud/brown_mud_disp_4k.png",
+          "file": "wet_soil/brown_mud_disp_4k.png",
+          "sha256": "774f81b44910c96585ba49cf1f407e1eb8edf538da68860bac9a94ece2dca8f2"
+        },
+        "ao": {
+          "size": 11646999,
+          "md5": "8b9993aae26648ec25c8fff91ae48176",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud/brown_mud_ao_4k.png",
+          "file": "wet_soil/brown_mud_ao_4k.png",
+          "sha256": "6ce894c0db8c52a64012bb8368cdc9c76717bdbafbf8f9bf238628dc5cd032b4"
+        },
+        "orm": {
+          "size": 23837832,
+          "md5": "024594603a6f7c48b054593751d6fb15",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_mud/brown_mud_arm_4k.png",
+          "file": "wet_soil/brown_mud_arm_4k.png",
+          "sha256": "35b33dc1423373de890fd2b8baef58b48bb012bd43868ecdf66c8735a1cea1cc"
+        }
+      }
+    },
+    "paving": {
+      "source": "Poly Haven",
+      "asset": "cobblestone_floor_02",
+      "url": "https://polyhaven.com/a/cobblestone_floor_02",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        2.0,
+        2.0
+      ],
+      "files": {
+        "baseColor": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/cobblestone_floor_02/cobblestone_floor_02_diff_4k.png",
+          "size": 89198760,
+          "md5": "7a2e170c9b6aad12e0cd262f94133151",
+          "file": "paving/cobblestone_floor_02_diff_4k.png",
+          "sha256": "317965e8802495a97a7cc120368017182c8323edaa3b7c4450ffe9782d8e0c1d"
+        },
+        "normal": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/cobblestone_floor_02/cobblestone_floor_02_nor_dx_4k.png",
+          "size": 76795273,
+          "md5": "1800e1b0fb2d39e8f47b20ae54deb1bc",
+          "file": "paving/cobblestone_floor_02_nor_dx_4k.png",
+          "sha256": "e1c2044c9b0142d0be983ede92eeb1db24a531f34c6ee138422c18908628a7d7"
+        },
+        "roughness": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/cobblestone_floor_02/cobblestone_floor_02_rough_4k.png",
+          "size": 39286299,
+          "md5": "bff9972d318348aef594abd4ddefe752",
+          "file": "paving/cobblestone_floor_02_rough_4k.png",
+          "sha256": "7d9ac98349fffcd5f09a4df824e9578653c41082ed74f3f32ddaa9154d36f227"
+        },
+        "height": {
+          "size": 24052896,
+          "md5": "ea0600c5f180166e5c1f2cd5c81fadc5",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/cobblestone_floor_02/cobblestone_floor_02_disp_4k.png",
+          "file": "paving/cobblestone_floor_02_disp_4k.png",
+          "sha256": "404921afe52157011e4f206586580fb22554dc3249fa491600c08adc09396c5b"
+        },
+        "ao": {
+          "size": 33682980,
+          "md5": "4fe97a6fc53112960d8195acdf6735a4",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/cobblestone_floor_02/cobblestone_floor_02_ao_4k.png",
+          "file": "paving/cobblestone_floor_02_ao_4k.png",
+          "sha256": "dff6be4e97cfcbf26d5041000c8cead0bad92f641d82a78dd1a96110743e1a38"
+        },
+        "orm": {
+          "size": 68515982,
+          "md5": "039b85c68a29473015d72ae3f6731ae5",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/cobblestone_floor_02/cobblestone_floor_02_arm_4k.png",
+          "file": "paving/cobblestone_floor_02_arm_4k.png",
+          "sha256": "76161bb6ef05427cf0821fec6bbfd19b6391987b1a55ec1ca60db6dbc36ab448"
+        }
+      }
+    },
+    "paving_worn": {
+      "source": "Poly Haven",
+      "asset": "mossy_cobblestone",
+      "url": "https://polyhaven.com/a/mossy_cobblestone",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        2.0,
+        2.0
+      ],
+      "files": {
+        "baseColor": {
+          "size": 96618279,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/mossy_cobblestone/mossy_cobblestone_diff_4k.png",
+          "md5": "e155466b8767f1b57825c13ab1d3b0ae",
+          "file": "paving_worn/mossy_cobblestone_diff_4k.png",
+          "sha256": "c1271354742243fb24d5e1dc307e5476779a44ef689e072072ccec9d1294fbff"
+        },
+        "normal": {
+          "size": 88875477,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/mossy_cobblestone/mossy_cobblestone_nor_dx_4k.png",
+          "md5": "d99062881c10902e322b48ba7acf0780",
+          "file": "paving_worn/mossy_cobblestone_nor_dx_4k.png",
+          "sha256": "27a32e5187864395d8e6eb2b56ed170b99ca46c031003733b47b84dfe42e8818"
+        },
+        "roughness": {
+          "size": 36393134,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/mossy_cobblestone/mossy_cobblestone_rough_4k.png",
+          "md5": "3277b6d325a9f3d8c2891f8300b31731",
+          "file": "paving_worn/mossy_cobblestone_rough_4k.png",
+          "sha256": "74df910534e6bd25b64f4eec768bbf0d68052d8160365006ccd2592e6bbc5b97"
+        },
+        "height": {
+          "size": 19978840,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/mossy_cobblestone/mossy_cobblestone_disp_4k.png",
+          "md5": "f7ea450397df568f12af98ab38d88549",
+          "file": "paving_worn/mossy_cobblestone_disp_4k.png",
+          "sha256": "656396cdefeffc46dfd5e6fb6354cefcbbf0ae2ced3ad023707168cbf7407bc9"
+        },
+        "ao": {
+          "size": 26455949,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/mossy_cobblestone/mossy_cobblestone_ao_4k.png",
+          "md5": "7de802c4f3f53987ec587ffb7661d819",
+          "file": "paving_worn/mossy_cobblestone_ao_4k.png",
+          "sha256": "55a699b852bf400e2c621f0257d607f7ab3c64215bb5c8cf178cbe7cbe23aaa9"
+        },
+        "orm": {
+          "size": 62628769,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/mossy_cobblestone/mossy_cobblestone_arm_4k.png",
+          "md5": "75e7577352c2c3dd64b3294f69bd5a4e",
+          "file": "paving_worn/mossy_cobblestone_arm_4k.png",
+          "sha256": "111b68d4249cfd9f7d1338bb7075de3cd7240beead7188737dc60b51b299d61c"
+        }
+      }
+    }
+  }
+}

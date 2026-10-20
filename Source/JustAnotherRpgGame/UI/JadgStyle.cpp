@@ -22,8 +22,8 @@
 
 namespace
 {
-	const TCHAR* const KitRoot = TEXT("/Game/UI/Kit/");
-	const TCHAR* const FontRoot = TEXT("/Game/UI/Fonts/");
+	const TCHAR* const KitRoot = TEXT("/Game/Jeu/UI/Kit/");
+	const TCHAR* const FontRoot = TEXT("/Game/Jeu/UI/Fonts/");
 
 	/// L'objet d'un paquet du projet, s'il existe : aucun avertissement de chargement s'il manque.
 	template <typename T>

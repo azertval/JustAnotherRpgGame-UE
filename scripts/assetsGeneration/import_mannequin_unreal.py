@@ -5,7 +5,7 @@ Le moteur livre, dans `Templates/TemplateResources/High/Characters/Content/Manne
 mannequin (Manny, Quinn, leur squelette `SK_Mannequin`), ses matières, ses textures, son asset
 de physique et un jeu d'animations. C'est la première source de corps et de clips de la version
 (D-63 : « le contenu livré avec le moteur reste la première source »). Les assets y sont rangés
-sous `/Game/Characters/Mannequins/…` : copiés au même chemin relatif sous `Content/`, leurs
+sous `/Game/Jeu/Personnages/Mannequins/…` : copiés au même chemin relatif sous `Content/`, leurs
 références entre eux restent valides, sans import ni geste dans l'éditeur.
 
 Ce qui vient, et rien d'autre :

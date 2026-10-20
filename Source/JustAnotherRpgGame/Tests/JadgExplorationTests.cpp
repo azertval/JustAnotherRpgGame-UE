@@ -42,7 +42,7 @@ namespace
 	const TCHAR* const TrialLevels = TEXT("Source/Test/Fixtures/Exploration/Levels");
 	const TCHAR* const Martpart = TEXT("central-empire/capital/martpart");
 	const TCHAR* const Arenarea = TEXT("central-empire/capital/arenarea");
-	/// L'Arena of Fate, une carte à trois étages (LOT-1022) : le sable, les vestiaires (1), les catacombes (2).
+	/// L'Arena of Fate : le sable, les vestiaires (1), les catacombes (2), puis ses galeries.
 	const TCHAR* const ArenaOfFate = TEXT("central-empire/capital/arenarea/arena-of-fate");
 
 	/// Une partie neuve sous l'instance du jeu, comme au lancement, et son monde vide.
@@ -97,6 +97,19 @@ namespace
 	FVector2D Centre(int32 Column, int32 Row)
 	{
 		return FVector2D(Column + 0.5, Row + 0.5);
+	}
+
+	/// Les quartiers changent de dimensions, leurs identifiants de quête restent.
+	FVector2D EntityCentre(const UJadgExploration& Exploration, const FString& Id)
+	{
+		for (const FJadgEntity& Entity : Exploration.Entities())
+		{
+			if (Entity.Id == Id)
+			{
+				return Centre(Entity.Cell.X, Entity.Cell.Y);
+			}
+		}
+		return FVector2D(-1000.0, -1000.0);
 	}
 
 	bool Has(const TArray<FJadgEvent>& Events, EJadgEventKind Kind, const FString& Value)
@@ -185,16 +198,16 @@ namespace
 	{
 		bool bOk = Test.TestTrue(TEXT("Martpart se lit"), Exploration.EnterMap(Martpart, FString()));
 		bOk &= Test.TestEqual(TEXT("la quête n'est pas connue"), Exploration.Flag(TEXT("quete.pommes")), FString(TEXT("inconnue")));
-		bOk &= Test.TestTrue(TEXT("la mère interpelle"), TalkFrom(Exploration, Centre(28, 36), FVector2D(1.0, 0.0), TEXT("mere")));
+		bOk &= Test.TestTrue(TEXT("la mère interpelle"), TalkFrom(Exploration, EntityCentre(Exploration, TEXT("e1")) - FVector2D(1.0, 0.0), FVector2D(1.0, 0.0), TEXT("mere")));
 		bOk &= Test.TestTrue(TEXT("accepter se dit"), Converse(Exploration, {TEXT("accepter")}));
 		bOk &= Test.TestTrue(TEXT("la quête s'ouvre"),
 			Has(Exploration.Step(nullptr, false, 1.0f / 30.0f), EJadgEventKind::QuestAdvanced, TEXT("pommes/acceptee")));
 		bOk &= Test.TestTrue(TEXT("Stravian Avenue mène à Arenarea"),
-			WalkUntil(Exploration, Centre(8, 1), FVector2D(0.0, -1.0), EJadgEventKind::MapEntered, Arenarea));
+			WalkUntil(Exploration, EntityCentre(Exploration, TEXT("e4")) + FVector2D(1.0, 0.0), FVector2D(-1.0, 0.0), EJadgEventKind::MapEntered, Arenarea));
 		// La graine du jet se fixe avant que le garde ne parle.
 		Exploration.SetSeed(Seed);
 		bOk &= Test.TestTrue(TEXT("le parvis déclenche le garde"),
-			WalkUntil(Exploration, Centre(59, 37), FVector2D(1.0, 0.0), EJadgEventKind::Dialogue, TEXT("garde")));
+			WalkUntil(Exploration, EntityCentre(Exploration, TEXT("e7")) - FVector2D(8.0, 0.0), FVector2D(1.0, 0.0), EJadgEventKind::Dialogue, TEXT("garde"), 10));
 		return bOk && Exploration.InDialogue();
 	}
 }
@@ -323,9 +336,9 @@ bool FJadgExplorationAppleQuestTest::RunTest(const FString& Parameters)
 			TestFalse(TEXT("le garde a quitté le parvis"), Exploration.IsPresent(TEXT("e5")));
 			TestFalse(TEXT("l'enfant aussi"), Exploration.IsPresent(TEXT("e6")));
 			TestTrue(TEXT("Herofate Avenue ramène à Martpart"),
-				WalkUntil(Exploration, Centre(116, 85), FVector2D(0.0, 1.0), EJadgEventKind::MapEntered, Martpart));
+				WalkUntil(Exploration, EntityCentre(Exploration, TEXT("e2")) - FVector2D(0.0, 1.0), FVector2D(0.0, 1.0), EJadgEventKind::MapEntered, Martpart));
 			TestTrue(TEXT("l'enfant est auprès de sa mère"), Exploration.IsPresent(TEXT("e2")));
-			TestTrue(TEXT("la mère attend"), TalkFrom(Exploration, Centre(28, 36), FVector2D(1.0, 0.0), TEXT("mere")));
+			TestTrue(TEXT("la mère attend"), TalkFrom(Exploration, EntityCentre(Exploration, TEXT("e1")) - FVector2D(1.0, 0.0), FVector2D(1.0, 0.0), TEXT("mere")));
 			TestTrue(TEXT("les retrouvailles"), Converse(Exploration, {TEXT("sourire")}));
 			TestTrue(TEXT("la démo se clôt par la parole"), Exploration.Requests().Contains(TEXT("ending:parole")));
 			TestTrue(TEXT("la quête est rendue"),
@@ -341,9 +354,22 @@ bool FJadgExplorationAppleQuestTest::RunTest(const FString& Parameters)
 			TestTrue(TEXT("endosser le crime"), Converse(Exploration, {TEXT("endosser")}));
 			TestEqual(TEXT("condamné"), Exploration.Flag(TEXT("quete.pommes")), FString(TEXT("condamne")));
 			TestTrue(TEXT("l'escalier de l'arène mène à l'Arena of Fate"),
-				WalkUntil(Exploration, Centre(65, 34), FVector2D(0.0, -1.0), EJadgEventKind::MapEntered, ArenaOfFate));
-			TestEqual(TEXT("on arrive au vestibule"), Exploration.HeroCell(), Centre(16, 19));
-			TestEqual(TEXT("le vestibule est à l'étage des vestiaires"), Exploration.HeroStorey(), 1);
+				WalkUntil(Exploration, EntityCentre(Exploration, TEXT("e4")) + FVector2D(0.0, 1.0), FVector2D(0.0, -1.0), EJadgEventKind::MapEntered, ArenaOfFate));
+			// The authored entrance moved with the physical arena. Assert arrival at
+			// that specific vestibule, retaining its identity and narrative storey.
+			const TArray<FJadgEntity> ArenaEntities = Exploration.Entities();
+			const FJadgEntity* Vestibule = ArenaEntities.FindByPredicate([](const FJadgEntity& Entity)
+			{
+				return Entity.Id == TEXT("e21");
+			});
+			if (TestNotNull(TEXT("le point d'arrivée du vestibule est livré"), Vestibule))
+			{
+				TestEqual(TEXT("le vestibule est un point d'arrivée"), Vestibule->Type, FString(TEXT("spawnPoint")));
+				TestTrue(TEXT("le vestibule est accessible sous la condamnation"), Vestibule->bPresent);
+				TestEqual(TEXT("on arrive au vestibule livré"), Exploration.HeroCell(), Centre(Vestibule->Cell.X, Vestibule->Cell.Y));
+				TestEqual(TEXT("le vestibule livré est à l'étage des vestiaires"), Vestibule->Storey, 1);
+				TestEqual(TEXT("l'arrivée conserve l'étage du vestibule"), Exploration.HeroStorey(), Vestibule->Storey);
+			}
 		}
 	}
 	TestTrue(TEXT("une graine au moins réussit le jet de Persuasion"), bSpoken);
@@ -782,6 +808,115 @@ bool FJadgExplorationTwoStoreysTest::RunTest(const FString& Parameters)
 		TestTrue(*FString::Printf(TEXT("le suiveur %d s'est posé en haut avec lui (%.0f cm, en %.1f ; %.1f)"), Rank, Feet.Z,
 			Party->CellOf(Feet).X, Party->CellOf(Feet).Y), Feet.Z > Storey / 2.0);
 	}
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FJadgExplorationTerrainFrameTest, "Jadg.Exploration.TerrainSpatial", ExplorationFlags)
+
+/// Un rez haut de quinze mètres reste le rez ; seul le volume du pub est un étage.
+bool FJadgExplorationTerrainFrameTest::RunTest(const FString& Parameters)
+{
+	FGame Game;
+	AJadgMapFrame* Frame = Game.World->SpawnActor<AJadgMapFrame>();
+	Frame->SetActorLocation(FVector(100.0, 200.0, 20.0));
+	Frame->StoreyHeights = {0.0f, 400.0f, -600.0f};
+	TestEqual(TEXT("l'arène sans terrain conserve ses sous-sols"), Frame->StoreyAt(FVector(0, 0, -580)), 2);
+	TestEqual(TEXT("l'arène sans terrain conserve ses galeries"), Frame->StoreyAt(FVector(0, 0, 420)), 1);
+	Frame->TerrainOrigin = FVector(100.0, 200.0, 0.0);
+	Frame->TerrainSpacing = FVector2D(150.0, 100.0);
+	Frame->TerrainWidth = 2;
+	Frame->TerrainHeight = 2;
+	Frame->TerrainHeights = {1000.0f, 1200.0f, 1400.0f, 1800.0f};
+	double Height = -1.0;
+	TestTrue(TEXT("la grille peut être échantillonnée"), Frame->TerrainZAt(FVector(175, 250, 0), Height));
+	TestEqual(TEXT("hauteur bilinéaire du centre, en Z monde"), Height, 1350.0);
+	TestTrue(TEXT("le dernier sommet est inclus"), Frame->TerrainZAt(FVector(250, 300, 0), Height));
+	TestEqual(TEXT("hauteur du dernier sommet"), Height, 1800.0);
+	TestFalse(TEXT("hors de la grille, aucun sol inventé"), Frame->TerrainZAt(FVector(99, 250, 0), Height));
+	TestEqual(TEXT("une colline reste au rez malgré sa hauteur"), Frame->StoreyAt(FVector(175, 250, 1350)), 0);
+	FJadgStoreyRegion Pub;
+	Pub.Storey = 1;
+	Pub.Minimum = FVector(500, 500, 400);
+	Pub.Maximum = FVector(900, 900, 850);
+	Frame->StoreyRegions = {Pub};
+	TestEqual(TEXT("on reste au rez sous le plancher du pub"), Frame->StoreyAt(FVector(600, 600, 0)), 0);
+	TestEqual(TEXT("le haut de l'escalier appartient au pub"), Frame->StoreyAt(FVector(600, 600, 355)), 1);
+	TestEqual(TEXT("le plancher du pub est un étage"), Frame->StoreyAt(FVector(600, 600, 400)), 1);
+	TestEqual(TEXT("une colline à côté du pub ne devient pas son étage"), Frame->StoreyAt(FVector(450, 600, 400)), 0);
+	TestEqual(TEXT("au-dessus du volume du pub, aucun étage fantôme"), Frame->StoreyAt(FVector(600, 600, 1500)), 0);
+	TestEqual(TEXT("le sol demandé du pub vient de sa surface locale"), Frame->GroundZAt(FVector(600, 600, 0), 1), 400.0);
+	TestEqual(TEXT("le sol demandé du rez vient du terrain"), Frame->GroundZAt(FVector(175, 250, 0), 0), 1350.0);
+	Frame->East = FVector(0, 1, 0);
+	Frame->South = FVector(-1, 0, 0);
+	TestTrue(TEXT("la grille suit le repère mesuré"), Frame->TerrainZAt(FVector(50, 275, 0), Height));
+	TestEqual(TEXT("la rotation conserve la hauteur"), Height, 1350.0);
+	Frame->TerrainHeights.Pop();
+	TestFalse(TEXT("une grille incomplète est rejetée"), Frame->TerrainZAt(FVector(50, 275, 0), Height));
+	TestEqual(TEXT("une grille incomplète garde le sol de repli"), Frame->GroundZAt(FVector(50, 275, 0), 0), 20.0);
+	return true;
+}
+
+IMPLEMENT_SIMPLE_AUTOMATION_TEST(FJadgExplorationTerrainArrivalTest, "Jadg.Exploration.ArriveeSurTerrain", ExplorationFlags)
+
+/// Le groupe arrive à dix mètres et peut approcher son PNJ ; le pub à quatre mètres est local.
+bool FJadgExplorationTerrainArrivalTest::RunTest(const FString& Parameters)
+{
+	AddExpectedError(TEXT("Unable to find RecastNavMesh instance"), EAutomationExpectedErrorFlags::Contains, 0);
+	FGame Game;
+	UWorld* World = Game.World;
+	const AStaticMeshActor* Floor = Block(World, FVector(1200, 900, 950), FRotator::ZeroRotator, FVector(24, 18, 1));
+	if (!TestNotNull(TEXT("le sol haut de dix mètres"), Floor))
+	{
+		return false;
+	}
+	UJadgSceneBuild::SpawnBoxVolume(World, ANavMeshBoundsVolume::StaticClass(), FVector(1200, 900, 1000), FVector(2400, 1800, 800));
+	World->SpawnActor<AJadgDayLight>();
+	AJadgMapFrame* Frame = World->SpawnActor<AJadgMapFrame>();
+	Frame->LevelId = TEXT("essai/etals");
+	Frame->LevelsRoot = TrialLevels;
+	Frame->StoreyHeights = {0.0f, 400.0f};
+	Frame->TerrainSpacing = FVector2D(2400, 1800);
+	Frame->TerrainWidth = 2;
+	Frame->TerrainHeight = 2;
+	Frame->TerrainHeights = {1000, 1000, 1000, 1000};
+	FJadgStoreyRegion Pub;
+	Pub.Storey = 1;
+	Pub.Minimum = FVector(2100, 1500, 400);
+	Pub.Maximum = FVector(2400, 1800, 900);
+	Frame->StoreyRegions = {Pub};
+	for (int32 Rank = 0; Rank < 4; ++Rank)
+	{
+		AJadgWalker* Walker = World->SpawnActor<AJadgWalker>(FVector(525, 1275, 1100), FRotator::ZeroRotator);
+		Walker->PartyRank = Rank;
+	}
+	AJadgWalker* Mother = World->SpawnActor<AJadgWalker>(FVector(525, 375, 1100), FRotator::ZeroRotator);
+	Mother->EntityId = TEXT("e1");
+	Game.Play();
+	if (FNavigationSystem::GetCurrent<UNavigationSystemV1>(World) == nullptr)
+	{
+		FNavigationSystem::AddNavigationSystemToWorld(*World, FNavigationSystemRunMode::GameMode);
+	}
+	UNavigationSystemV1* Navigation = FNavigationSystem::GetCurrent<UNavigationSystemV1>(World);
+	if (!TestNotNull(TEXT("le système de navigation"), Navigation))
+	{
+		return false;
+	}
+	Navigation->Build();
+	Game.Tick(15);
+	AJadgParty* Party = AJadgParty::Find(World);
+	if (!TestNotNull(TEXT("le groupe"), Party) || !TestNotNull(TEXT("le meneur"), Party->Leader()))
+	{
+		return false;
+	}
+	TestTrue(TEXT("l'arrivée est au terrain, pas au Z global du rez"), FMath::Abs(Party->Leader()->Feet().Z - 1000) < 20);
+	TestEqual(TEXT("la colline appartient au rez de Core"), Game.Exploration->HeroStorey(), 0);
+	TestTrue(*FString::Printf(TEXT("le PNJ se pose sur le même terrain (%.1f cm)"), Mother->Feet().Z), FMath::Abs(Mother->Feet().Z - 1000) < 20);
+	TestEqual(TEXT("le point d'arrivée demandé utilise la hauteur locale"), Party->PointOn(Centre(3, 8), 0).Z, 1050.0);
+	Party->OrderInteract(Mother);
+	Game.Tick(30 * 8);
+	TestTrue(TEXT("le PNJ sur terrain est atteint pour parler"), Game.Exploration->InDialogue());
+	TestTrue(TEXT("l'approche ne descend pas sous le terrain"), FMath::Abs(Party->Leader()->Feet().Z - 1000) < 20);
+	TestEqual(TEXT("la conversation reste au rez"), Game.Exploration->HeroStorey(), 0);
 	return true;
 }
 

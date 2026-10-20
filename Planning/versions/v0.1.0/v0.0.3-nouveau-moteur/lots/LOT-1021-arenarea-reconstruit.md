@@ -3,7 +3,7 @@ id = "LOT-1021"
 titre = "Arenarea reconstruit au standard D-54"
 version = "0.0.3"
 filiere = "cartes"
-statut = "a-faire"
+statut = "abandonne"
 taille = "XL"
 resume = "Arenarea est le premier lieu produit pour de bon sur le nouveau moteur, quartier par quartier depuis sa carte peinte, jusqu'à donner la même impression qu'elle à midi et à 22 h : c'est ici que le coût d'un lieu se mesure."
 prerequis = ["LOT-1019"]
@@ -25,6 +25,14 @@ sources = [
   "Tanares Sourcebook, p. 91-92, 96-99 (géographie et lieux, jamais comme image d'entrée) ; la carte peinte d'Arenarea de l'atlas (Maps@2)",
 ]
 +++
+
+## Abandonné le 20 octobre 2026
+
+Sans avoir été ouvert, sur décision de l'auteur : le lot redit le périmètre de la `0.0.4` —
+Arenarea reconstruit quartier par quartier est le [LOT-147](../../v0.0.4-lieux-de-la-demo/lots/LOT-147-zone-arenarea-reprise.md)
+et les lots de son lieu. La `0.0.3` se livre avec la capitale et son Arena of Fate (`LOT-1022`) ;
+la reconstruction d'Arenarea reprend à la `0.0.4`, sur le nouveau moteur. La fiche reste pour
+l'histoire ; son numéro n'est pas repris.
 
 ## Pourquoi
 

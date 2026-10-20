@@ -1,0 +1,17 @@
+{
+  "id": "district-citizen-manny",
+  "name": "Habitant de la Capitale",
+  "source": "unreal-mannequin",
+  "status": {
+    "provisoire": true,
+    "raison": "Population ambiante animée : corps et clips du créateur humanoid existant. La garde-robe civile et les têtes MetaHuman ne sont pas encore disponibles sur le poste.",
+    "retraitSi": "Remplacement par la production finale des habitants des LOT-114 et LOT-115."
+  },
+  "creator": "humanoid",
+  "body": "manny",
+  "head": "manny",
+  "height": 1.8,
+  "colors": {},
+  "pieces": {},
+  "weapons": {}
+}

@@ -327,38 +327,106 @@ TEST(FormatV5Test, UnPanneauDeLEtageNeSeDesigneQueDeLEtage) {
 }
 
 /**
- * @brief L'Arena of Fate livrée est une carte à trois étages (LOT-1022) : on y entre d'Arenarea au
- *        vestibule des vestiaires (niveau −1), et un portail de la v4 entre deux niveaux mène
- *        désormais à un autre étage de la même carte.
- * \castest{<b>L'Arena of Fate est une carte à trois étages.</b><br/>
+ * @brief L'Arena of Fate livrée compte sept niveaux (reprise du LOT-106, 10 octobre 2026) :
+ *        sable, deux sous-sols et quatre niveaux hauts. Les liaisons intérieures sont physiques,
+ *        sans anciens portails vers soi-même ; arrivées et combat gardent leur contrat.
+ * \castest{<b>L'Arena of Fate est une carte à sept niveaux avec ses accès et son combat.</b><br/>
  * \tcat Unitaire · Format v5<br/>
  * \tcrit Majeur<br/>
- * \tetapes 1. Charger l'Arena of Fate du contenu livré.<br/>2. Y entrer par « from-arenarea ».<br/>
- * 3. Mener le héros, à l'étage 1, sur le portail de la porte du triomphe (4, 12).<br/>
- * \tattendu Trois étages, le sable à 0 m et deux sous-sols en dessous ; le héros arrive au
- * vestibule (16, 19), à l'étage 1 ; le portail le pose au sable (6, 12), à l'étage 0, sur la même
- * carte.
+ * \tetapes 1. Charger l'Arena of Fate du contenu livré.<br/>2. Contrôler les sept noms/hauteurs,
+ * les arrivées sur les trois niveaux bas et le portail extérieur.<br/>3. Contrôler la zone sable,
+ * ses six rencontres et les quatre entrées alliées.<br/>
+ * \tattendu Sept niveaux aux hauteurs 0, -6, -12, 12, 24, 36 et 46,8 m ; entrée d'Arenarea au
+ * vestibule (68, 70), niveau 1 ; un seul portail vers Arenarea ; rencontres et entrées restent
+ * dans la zone de combat du sable, niveau 0. La navigation physique se vérifie dans Unreal.
  * }
  */
-TEST(FormatV5Test, LArenaOfFateEstUneCarteATroisEtages) {
+TEST(FormatV5Test, LArenaOfFateEstUneCarteASeptNiveauxAvecSesAccesEtSonCombat) {
     const core::WorldTravel::MapLoader charge =
         core::WorldTravel::directoriesLoader({ELEMENTS / "Levels"});
     const core::LevelLoadResult loaded = charge(ARENA_OF_FATE);
     ASSERT_TRUE(loaded.ok()) << loaded.error;
-    const std::vector<core::Storey>& etages = loaded.level->storeys();
-    ASSERT_EQ(etages.size(), 3U);
-    EXPECT_EQ(etages[0].z, 0.0F);
-    EXPECT_LT(etages[1].z, 0.0F);
-    EXPECT_LT(etages[2].z, etages[1].z);
+    const core::Level& level = *loaded.level;
+    const std::vector<core::Storey> attendus{
+        {.name = "sable", .z = 0.0F},          {.name = "vestiaires-et-prison", .z = -6.0F},
+        {.name = "catacombes", .z = -12.0F},   {.name = "tribunes", .z = 12.0F},
+        {.name = "galerie-haute", .z = 24.0F}, {.name = "attique", .z = 36.0F},
+        {.name = "terrasse", .z = 46.8F},
+    };
+    EXPECT_EQ(level.storeys(), attendus);
+    EXPECT_EQ(level.entry(), (GridPosition{44, 56}));
 
-    core::ExplorationSession session{charge};
-    ASSERT_TRUE(session.start(std::string{ARENA_OF_FATE}, "from-arenarea"));
-    EXPECT_EQ(session.heroCell(), (GridPosition{16, 19}));
-    EXPECT_EQ(session.heroStorey(), 1);
-    static_cast<void>(mene(session, 5.5F, 12.5F, 1));
-    EXPECT_TRUE(aEntre(mene(session, 4.5F, 12.5F, 1), ARENA_OF_FATE));
-    EXPECT_EQ(session.heroCell(), (GridPosition{6, 12}));
-    EXPECT_EQ(session.heroStorey(), 0);
+    struct Arrivee {
+        const char* nom;
+        GridPosition caseAttendue;
+        int etage;
+    };
+    for (const Arrivee& arrivee :
+         std::vector<Arrivee>{{"from-arenarea", {68, 70}, 1},
+                              {"from-undercroft", {41, 56}, 0},
+                              {"catacombs-from-undercroft", {94, 51}, 2}}) {
+        SCOPED_TRACE(arrivee.nom);
+        EXPECT_EQ(core::arrivalStoreyAt(level, arrivee.nom), arrivee.etage);
+        core::ExplorationSession session{charge};
+        ASSERT_TRUE(session.start(std::string{ARENA_OF_FATE}, arrivee.nom));
+        EXPECT_EQ(session.heroCell(), arrivee.caseAttendue);
+        EXPECT_EQ(session.heroStorey(), arrivee.etage);
+    }
+
+    const core::MapEntity& portail = entite(level, "e23");
+    EXPECT_EQ(portail.type, "portal");
+    EXPECT_EQ(portail.storey, 1);
+    EXPECT_EQ(std::get<std::string>(portail.properties.at("targetMap")),
+              "central-empire/capital/arenarea");
+    EXPECT_EQ(std::get<std::string>(portail.properties.at("arrival")), "from-arena-of-fate");
+    std::size_t portails = 0;
+    std::size_t rencontres = 0;
+    std::size_t entrees = 0;
+    for (const core::MapEntity& entity : level.entities()) {
+        portails += entity.type == "portal" ? 1U : 0U;
+        rencontres += entity.type == "encounter" ? 1U : 0U;
+        entrees += entity.type == "arenaEntry" ? 1U : 0U;
+    }
+    EXPECT_EQ(portails, 1U);
+    EXPECT_EQ(rencontres, 6U);
+    EXPECT_EQ(entrees, 4U);
+
+    const std::vector<core::CombatZone> zones = core::combatZonesOf(level);
+    ASSERT_EQ(zones.size(), 1U);
+    EXPECT_EQ(zones[0],
+              (core::CombatZone{.name = "sable", .origin = {46, 44}, .columns = 44, .rows = 24}));
+    const core::MapEntity& sable = entite(level, "e4");
+    EXPECT_EQ(sable.storey, 0);
+    ASSERT_TRUE(sable.volume.has_value());
+    const core::MapVolume& volume = *sable.volume;
+    const std::map<std::string, std::string> marqueurs{
+        {"e6", "arene-bandits"}, {"e7", "arene-gladiateurs"}, {"e8", "arene-morts"},
+        {"e9", "arene-veteran"}, {"e10", "arene-capitaine"},  {"e11", "arene-champion"},
+    };
+    for (const auto& [id, rencontre] : marqueurs) {
+        SCOPED_TRACE(id);
+        const core::MapEntity& marqueur = entite(level, id);
+        EXPECT_EQ(marqueur.type, "encounter");
+        EXPECT_EQ(marqueur.storey, 0);
+        EXPECT_EQ(std::get<std::string>(marqueur.properties.at("encounterId")), rencontre);
+        EXPECT_FALSE(std::get<bool>(marqueur.properties.at("respawns")));
+        EXPECT_TRUE(zones[0].contains(marqueur.position));
+        ASSERT_TRUE(marqueur.volume.has_value());
+        EXPECT_GE(marqueur.volume->minX, volume.minX);
+        EXPECT_GE(marqueur.volume->minY, volume.minY);
+        EXPECT_GE(marqueur.volume->minZ, volume.minZ);
+        EXPECT_LE(marqueur.volume->maxX, volume.maxX);
+        EXPECT_LE(marqueur.volume->maxY, volume.maxY);
+        EXPECT_LE(marqueur.volume->maxZ, volume.maxZ);
+    }
+    for (int rang = 0; rang < 4; ++rang) {
+        const core::MapEntity& arrivee = entite(level, "e" + std::to_string(28 + rang));
+        EXPECT_EQ(arrivee.type, "arenaEntry");
+        EXPECT_EQ(arrivee.storey, 0);
+        EXPECT_EQ(std::get<std::int64_t>(arrivee.properties.at("rank")), rang);
+        EXPECT_EQ(std::get<std::string>(arrivee.properties.at("side")), "allies");
+        EXPECT_TRUE(zones[0].contains(arrivee.position));
+    }
 }
 
 /**

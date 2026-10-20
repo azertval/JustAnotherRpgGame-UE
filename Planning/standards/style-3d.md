@@ -30,6 +30,14 @@ aucune valeur de sa version précédente (la vue isométrique de la `0.0.2.5`) s
 
 La hauteur d'un étage de décor reste **ouverte** : 3 m par étage dans les cartes migrées, provisoire
 ([LOT-1018](../versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1018-cartes-composees.md), question 1).
+Pour **Arenarea et Martpart**, l'auteur a validé le **11 octobre 2026** des étages
+ordinaires de **3 à 4 m**, deux à trois niveaux majoritaires et quelques bâtiments
+de quatre niveaux ; les salles publiques sont plus hautes selon leur usage.
+Il valide un relief urbain de **10 à 15 m** à Arenarea et **5 à 10 m** à Martpart,
+les terrasses et les pentes marchandes, en préservant le parvis de l'Arena.
+L'étage accessible du Cloaked Brewer Pub est conservé ; quelques terrasses,
+galeries et escaliers extérieurs complètent les parcours. Cette décision locale
+est consignée dans `annexes/districts/relief-approval-20261011.json` de la `0.0.4`.
 Le Colisée de la porte a les dimensions de celui de Rome (189 × 156 m, 48 m ; décision de l'auteur
 du 8 octobre 2026).
 
@@ -195,6 +203,35 @@ les jetons, peints ([D-30](../vision/decisions.md), [personnages 3D](personnages
 les effets de `Common/Fx/`.
 
 ## 8. Ce qui est tranché, ce qui reste ouvert
+
+**Portée Arena of Fate — refonte décidée le 9 octobre 2026 ([D-65](../vision/decisions.md)).**
+La référence sourcebook, la composition et la narration sont conservées ; le style reste à
+éprouver entre réalisme stylisé, rendu peint remanié et réalisme poussé. La refonte se construit
+avec Blender en modules simples assemblés en formes complexes ; l'organisation et les connexions
+intérieures restent libres dans l'emprise extérieure de 189 × 156 × 48 m, en préservant les
+fonctions et les flux. Tout le décor, gradins et loges compris, doit être praticable dans un
+parcours physique continu, avec murs et plafonds complets pour l'occultation caméra. L'essai
+témoin Unreal arcade-gradins-salle voûtée-escalier dans les trois styles, au cadrage joueur, à
+midi et à 22 h, a été présenté. L'auteur juge les trois traitements trop proches, leurs textures
+pauvres et le résultat plat. Il ouvre une piste **dessin fantasy cohérente avec les portraits**
+si le réalisme est trop difficile à tenir. Le témoin est repris dans cette direction : volumes
+sculptés, matières distinctes, grands plans colorés et lumière lisible. Cette piste reste une
+proposition ; elle ne vaut pas adoption d'un nouveau standard ni validation de la carte complète.
+À la revue suivante, l'auteur demande un **style dessin encore plus marqué** : l'itération
+suivante porte sur le traitement des valeurs, des pigments et des contours, à géométrie constante.
+Après l'avoir comparée, il retient finalement **le style peint précédent**, avec des textures
+beaucoup plus détaillées et variées pour réduire l'aspect lisse. Cette consigne locale remplace,
+pour cette reprise, la recherche de surfaces pauvres en microdétails : les détails doivent
+décrire les matières à plusieurs échelles, en gardant palette et éclairage. La passe dessin
+accentuée est retirée ; les formes et les liaisons praticables sont conservées.
+L'auteur **valide ensuite ce témoin peint enrichi** et autorise la construction complète.
+Le travail de qualité porte désormais sur les props, les détails construits et l'habillage
+selon l'usage des lieux, en conservant les matières validées.
+Le **10 octobre 2026**, l’auteur valide la nouvelle portion impériale sculptée et peinte,
+inspirée de *No Rest for the Wicked*, après revue Unreal à midi et à 22 h. Il autorise
+son extension aux sept niveaux et au parvis immédiat, en conservant le gameplay existant.
+La preuve de cette validation est `wicked-approval-20261010.json` dans les annexes du LOT-106 ;
+la carte complète reste à examiner sur ses propres captures et mesures.
 
 Les questions que le standard renvoyait au LOT-151 et à un lot de rendu sont posées ici sur captures
 du moteur, à midi et à 22 h, aux cadrages de la porte

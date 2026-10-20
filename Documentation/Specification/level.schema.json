@@ -26,6 +26,33 @@
       }
     },
     "storeyLevels": { "type": "boolean", "description": "Vrai : le niveau construit se découpe en un niveau de chargement par étage, toujours chargé (D-51, LOT-1022) ; ses objets, ses couches et ses lumières y vont, le reste dans le niveau de la carte." },
+    "groundHeightfield": {
+      "description": "Altitudes du terrain urbain en mètres, lignes Y puis colonnes X ; même grille pour géométrie, placement et déplacements. Interpolation bilinéaire. Indépendante des étages de bâtiment.",
+      "type": "object",
+      "required": ["origin", "spacing", "width", "height", "heights"],
+      "properties": {
+        "origin": { "$ref": "#/$defs/point2" },
+        "spacing": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number", "exclusiveMinimum": 0 } },
+        "width": { "type": "integer", "minimum": 2 },
+        "height": { "type": "integer", "minimum": 2 },
+        "heights": { "type": "array", "minItems": 4, "items": { "type": "number" } }
+      },
+      "additionalProperties": false
+    },
+    "storeyRegions": {
+      "description": "Emprises locales des étages et des plateformes marchables (storey 0 pour un tablier ou une cour). minimum.z est le sol et maximum.z le plafond, en mètres absolus de carte.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["storey", "minimum", "maximum"],
+        "properties": {
+          "storey": { "type": "integer", "minimum": 0 },
+          "minimum": { "$ref": "#/$defs/point3" },
+          "maximum": { "$ref": "#/$defs/point3" }
+        },
+        "additionalProperties": false
+      }
+    },
     "nextEntityId": { "type": "integer", "minimum": 1 },
     "tiles": {
       "description": "La grille de collision du rez, entrée comprise : ce que Core joue. Absence = vide.",

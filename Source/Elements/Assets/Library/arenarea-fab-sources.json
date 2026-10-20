@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "district": "Q07 Arenarea",
+  "generator": "scripts/maps/inspect_arenarea_fab.py",
+  "items": [
+    {
+      "name": "Lawn Grass",
+      "megascansId": "tkynejer",
+      "role": "surface",
+      "origin": "Fab assets supplied locally by the project owner, 2026-10-15",
+      "licence": null,
+      "licenceStatus": "Acquisition terms not present in local Unreal metadata; no licence invented or redistribution performed",
+      "sources": [
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Lawn_Grass_tkynejer/Raw/tkynejer_tier_0/Materials/MI_tkynejer",
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Lawn_Grass_tkynejer/Raw/tkynejer_tier_0/Textures/T_tkynejer_8K_B",
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Lawn_Grass_tkynejer/Raw/tkynejer_tier_0/Textures/T_tkynejer_8K_N",
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Lawn_Grass_tkynejer/Raw/tkynejer_tier_0/Textures/T_tkynejer_8K_ORM"
+      ],
+      "sourceEdits": false
+    },
+    {
+      "name": "Uncut Grass",
+      "megascansId": "oilpt20",
+      "role": "surface",
+      "origin": "Fab assets supplied locally by the project owner, 2026-10-15",
+      "licence": null,
+      "licenceStatus": "Acquisition terms not present in local Unreal metadata; no licence invented or redistribution performed",
+      "sources": [
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Uncut_Grass_oilpt20/Raw/oilpt20_tier_0/Materials/MI_oilpt20",
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Uncut_Grass_oilpt20/Raw/oilpt20_tier_0/Textures/T_oilpt20_8K_B",
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Uncut_Grass_oilpt20/Raw/oilpt20_tier_0/Textures/T_oilpt20_8K_N",
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Uncut_Grass_oilpt20/Raw/oilpt20_tier_0/Textures/T_oilpt20_8K_ORM"
+      ],
+      "sourceEdits": false
+    },
+    {
+      "name": "Wild Grass",
+      "megascansId": "sfknaeoa",
+      "role": "surface",
+      "origin": "Fab assets supplied locally by the project owner, 2026-10-15",
+      "licence": null,
+      "licenceStatus": "Acquisition terms not present in local Unreal metadata; no licence invented or redistribution performed",
+      "sources": [
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Wild_Grass_sfknaeoa/Raw/sfknaeoa_tier_0/Materials/MI_sfknaeoa",
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Wild_Grass_sfknaeoa/Raw/sfknaeoa_tier_0/Textures/T_sfknaeoa_8K_B",
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Wild_Grass_sfknaeoa/Raw/sfknaeoa_tier_0/Textures/T_sfknaeoa_8K_N",
+        "/Game/Bibliotheque/Scans/Megascans/Surfaces/Wild_Grass_sfknaeoa/Raw/sfknaeoa_tier_0/Textures/T_sfknaeoa_8K_ORM"
+      ],
+      "sourceEdits": false
+    },
+    {
+      "name": "Ribbon Grass",
+      "megascansId": "tbdpec3r",
+      "role": "foliage",
+      "origin": "Fab assets supplied locally by the project owner, 2026-10-15",
+      "licence": null,
+      "licenceStatus": "Acquisition terms not present in local Unreal metadata; no licence invented or redistribution performed",
+      "sources": [
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/FoliageTypes/FT_tbdpec3r_VarA",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/FoliageTypes/FT_tbdpec3r_VarB",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/FoliageTypes/FT_tbdpec3r_VarC",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/FoliageTypes/FT_tbdpec3r_VarD",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/FoliageTypes/FT_tbdpec3r_VarE",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/FoliageTypes/FT_tbdpec3r_VarF",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/tbdpec3r_tier_0/Materials/MI_tbdpec3r",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/tbdpec3r_tier_0/StaticMeshes/SM_tbdpec3r_VarA",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/tbdpec3r_tier_0/StaticMeshes/SM_tbdpec3r_VarB",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/tbdpec3r_tier_0/StaticMeshes/SM_tbdpec3r_VarC",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/tbdpec3r_tier_0/StaticMeshes/SM_tbdpec3r_VarD",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/tbdpec3r_tier_0/StaticMeshes/SM_tbdpec3r_VarE",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/tbdpec3r_tier_0/StaticMeshes/SM_tbdpec3r_VarF",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/tbdpec3r_tier_0/Textures/T_tbdpec3r_4K_B",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/tbdpec3r_tier_0/Textures/T_tbdpec3r_4K_N",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Ribbon_Grass_tbdpec3r/Raw/tbdpec3r_tier_0/Textures/T_tbdpec3r_4K_ORT"
+      ],
+      "sourceEdits": false
+    },
+    {
+      "name": "Wheat Grass",
+      "megascansId": "tdcrdbur",
+      "role": "foliage",
+      "origin": "Fab assets supplied locally by the project owner, 2026-10-15",
+      "licence": null,
+      "licenceStatus": "Acquisition terms not present in local Unreal metadata; no licence invented or redistribution performed",
+      "sources": [
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/FoliageTypes/FT_tdcrdbur_VarA",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/FoliageTypes/FT_tdcrdbur_VarB",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/FoliageTypes/FT_tdcrdbur_VarC",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/FoliageTypes/FT_tdcrdbur_VarD",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/FoliageTypes/FT_tdcrdbur_VarE",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/FoliageTypes/FT_tdcrdbur_VarF",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/tdcrdbur_tier_0/Materials/MI_tdcrdbur",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/tdcrdbur_tier_0/StaticMeshes/SM_tdcrdbur_VarA",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/tdcrdbur_tier_0/StaticMeshes/SM_tdcrdbur_VarB",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/tdcrdbur_tier_0/StaticMeshes/SM_tdcrdbur_VarC",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/tdcrdbur_tier_0/StaticMeshes/SM_tdcrdbur_VarD",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/tdcrdbur_tier_0/StaticMeshes/SM_tdcrdbur_VarE",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/tdcrdbur_tier_0/StaticMeshes/SM_tdcrdbur_VarF",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/tdcrdbur_tier_0/Textures/T_tdcrdbur_4K_B",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/tdcrdbur_tier_0/Textures/T_tdcrdbur_4K_N",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wheat_Grass_tdcrdbur/Raw/tdcrdbur_tier_0/Textures/T_tdcrdbur_4K_ORT"
+      ],
+      "sourceEdits": false
+    },
+    {
+      "name": "Wild Grass",
+      "megascansId": "vczndjqja",
+      "role": "foliage",
+      "origin": "Fab assets supplied locally by the project owner, 2026-10-15",
+      "licence": null,
+      "licenceStatus": "Acquisition terms not present in local Unreal metadata; no licence invented or redistribution performed",
+      "sources": [
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/FoliageTypes/FT_vczndjqja_VarA",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/FoliageTypes/FT_vczndjqja_VarB",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/FoliageTypes/FT_vczndjqja_VarC",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/FoliageTypes/FT_vczndjqja_VarD",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/FoliageTypes/FT_vczndjqja_VarE",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/FoliageTypes/FT_vczndjqja_VarF",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/FoliageTypes/FT_vczndjqja_VarG",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/FoliageTypes/FT_vczndjqja_VarH",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/Materials/MI_vczndjqja",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/StaticMeshes/SM_vczndjqja_VarA",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/StaticMeshes/SM_vczndjqja_VarB",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/StaticMeshes/SM_vczndjqja_VarC",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/StaticMeshes/SM_vczndjqja_VarD",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/StaticMeshes/SM_vczndjqja_VarE",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/StaticMeshes/SM_vczndjqja_VarF",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/StaticMeshes/SM_vczndjqja_VarG",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/StaticMeshes/SM_vczndjqja_VarH",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/Textures/T_vczndjqja_4K_B",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/Textures/T_vczndjqja_4K_N",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vczndjqja/Raw/vczndjqja_tier_0/Textures/T_vczndjqja_4K_ORT"
+      ],
+      "sourceEdits": false
+    },
+    {
+      "name": "Wild Grass",
+      "megascansId": "vlkhcbxia",
+      "role": "foliage",
+      "origin": "Fab assets supplied locally by the project owner, 2026-10-15",
+      "licence": null,
+      "licenceStatus": "Acquisition terms not present in local Unreal metadata; no licence invented or redistribution performed",
+      "sources": [
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/FoliageTypes/FT_vlkhcbxia_VarA",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/FoliageTypes/FT_vlkhcbxia_VarB",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/FoliageTypes/FT_vlkhcbxia_VarC",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/FoliageTypes/FT_vlkhcbxia_VarD",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/FoliageTypes/FT_vlkhcbxia_VarE",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/FoliageTypes/FT_vlkhcbxia_VarF",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/FoliageTypes/FT_vlkhcbxia_VarG",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/FoliageTypes/FT_vlkhcbxia_VarH",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/Materials/MI_vlkhcbxia",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/StaticMeshes/SM_vlkhcbxia_VarA",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/StaticMeshes/SM_vlkhcbxia_VarB",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/StaticMeshes/SM_vlkhcbxia_VarC",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/StaticMeshes/SM_vlkhcbxia_VarD",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/StaticMeshes/SM_vlkhcbxia_VarE",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/StaticMeshes/SM_vlkhcbxia_VarF",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/StaticMeshes/SM_vlkhcbxia_VarG",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/StaticMeshes/SM_vlkhcbxia_VarH",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/Textures/T_vlkhcbxia_8K_B",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/Textures/T_vlkhcbxia_8K_N",
+        "/Game/Bibliotheque/Scans/Megascans/Plants/Wild_Grass_vlkhcbxia/Raw/vlkhcbxia_tier_0/Textures/T_vlkhcbxia_8K_ORT"
+      ],
+      "sourceEdits": false
+    }
+  ]
+}

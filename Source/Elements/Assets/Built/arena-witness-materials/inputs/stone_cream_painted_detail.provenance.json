@@ -1,0 +1,17 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-09",
+  "input": "stone_cream_painted_detail.png",
+  "purpose": "Keep the previous painterly fantasy style and enrich limestone detail; user rejected the stronger drawing pass.",
+  "source": "Edit of the original generated stone_cream_painted.png. No sourcebook image was supplied.",
+  "generatedOutput": "exec-19c439de-1235-455a-ab1d-fc3578851c1c.png",
+  "prompts": [
+    "Edit this original limestone GAME BASE-COLOR TEXTURE, preserving the warm cream/ochre and muted cool-grey palette and its mature hand-painted fantasy style. The user wants the SAME painterly style with MUCH RICHER MATERIAL DETAIL and more natural variation, less smooth. Keep a single flat continuous limestone surface, no masonry blocks or grout, square edge-to-edge tileable material. Replace the repetitive large diagonal wave-like bands with a more varied hierarchy: irregular cloudy mineral patches spanning 15–40 cm, interrupted sediment seams and pale calcite inclusions 2–10 cm, abundant small fossil flecks and irregular pinprick mineral pores, broken short stone-dressing chisel marks and sparse fine worn scratches. The implied swatch covers 2 metres. A maintained, worked ancient limestone, not damaged ruins. Rich close-up detail with a restrained hand-painted finish, no uniform noise or digital triangle brush stamps. Some areas should be denser and other areas quieter; variation must be material-specific and nonrepetitive. Low-to-medium contrast warm mineral pigmentation, no black holes, no deep cracks, no cliff strata, no dominant diagonal stripes. DIFFUSE ALBEDO ONLY: absolutely neutral flat illumination with no directional shading, cast shadows, ambient occlusion, highlights or reflections. Relief and roughness are generated independently in Unreal. Keep the original overall average colour and saturation. Perfectly matching opposite edges for seamless tiling. No text, labels, border, grid, frames, objects, perspective or vignette. Aim for a square 2048x2048 PNG."
+  ],
+  "limitations": [
+    "Output is an original albedo image; exact source pixels are preserved.",
+    "Tile seam continuity is requested but not mathematically guaranteed.",
+    "Physical height/normal and ORM are authored independently, not derived from albedo.",
+    "Unreal performs its native power-of-two texture build for mipmaps."
+  ]
+}

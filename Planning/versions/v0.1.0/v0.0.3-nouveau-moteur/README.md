@@ -72,13 +72,13 @@ une chaîne de décor qui produit des boîtes.
 | 4 | [LOT-1024](lots/LOT-1024-createur-especes-et-humanoides.md) — le créateur : les 22 espèces et les humanoïdes de la démo | pnj | L | LOT-1015 |
 | 5 | [LOT-1025](lots/LOT-1025-creatures-lion-et-loup.md) — les créatures : lion et loup | pnj | M | LOT-1015 |
 | 6 | [LOT-1016](lots/LOT-1016-camera-et-exploration.md) — caméra, marche, groupe, portails, jour et nuit — **livré** | moteur | L | LOT-1014 |
-| 7 | [LOT-1017](lots/LOT-1017-combat-en-distance.md) — le combat en distance | regles | XL | LOT-1015, LOT-1016 |
-| 8 | [LOT-1018](lots/LOT-1018-cartes-composees.md) — le format de carte et sa chaîne | editeur | L | LOT-1016 |
-| 9 | [LOT-1019](lots/LOT-1019-chaine-de-decor.md) — la chaîne de décor au niveau du moteur ; le standard 3D réécrit | standard | L | LOT-1018 |
-| 10 | [LOT-1020](lots/LOT-1020-interface-umg.md) — les écrans et le HUD en UMG | interface | L | LOT-1016 |
-| 11 | [LOT-1021](lots/LOT-1021-arenarea-reconstruit.md) — Arenarea reconstruit au standard D-54 | cartes | XL | LOT-1019 |
-| 12 | [LOT-1022](lots/LOT-1022-portage-arena-of-fate-et-martpart.md) — l'Arena of Fate et Martpart portés | cartes | M | LOT-1019 |
-| 13 | [LOT-1023](lots/LOT-1023-recette-et-version-0-0-3.md) — recette, retrait de l'ancien moteur, version | version | M | LOT-1017, LOT-1020, LOT-1021, LOT-1022, LOT-1024, LOT-1025 |
+| 7 | [LOT-1017](lots/LOT-1017-combat-en-distance.md) — le combat en distance — **livré** | regles | XL | LOT-1015, LOT-1016 |
+| 8 | [LOT-1018](lots/LOT-1018-cartes-composees.md) — le format de carte et sa chaîne — **livré** | editeur | L | LOT-1016 |
+| 9 | [LOT-1019](lots/LOT-1019-chaine-de-decor.md) — la chaîne de décor au niveau du moteur ; le standard 3D réécrit — **livré** | standard | L | LOT-1018 |
+| 10 | [LOT-1020](lots/LOT-1020-interface-umg.md) — les écrans et le HUD en UMG — **livré** | interface | L | LOT-1016 |
+| 11 | [LOT-1021](lots/LOT-1021-arenarea-reconstruit.md) — Arenarea reconstruit au standard D-54 — **abandonné**, redite du LOT-147 de la `0.0.4` | cartes | XL | LOT-1019 |
+| 12 | [LOT-1022](lots/LOT-1022-portage-arena-of-fate.md) — l'Arena of Fate portée, dans la capitale — **livré** (Martpart revient au LOT-110 de la `0.0.4`) | cartes | M | LOT-1019 |
+| 13 | [LOT-1023](lots/LOT-1023-recette-et-version-0-0-3.md) — recette, retrait de l'ancien moteur, version | version | M | LOT-1017, LOT-1020, LOT-1022, LOT-1024, LOT-1025 |
 
 Après le socle, deux filières avancent en parallèle : les personnages (LOT-1015) et l'exploration
 (LOT-1016, livrée le 8 octobre 2026). Le LOT-1015 pose le créateur de personnage et le prouve sur
@@ -86,8 +86,10 @@ les quatre héros (D-63) ; les 22 espèces et les humanoïdes de la démo (LOT-1
 loup (LOT-1025) en dépendent et peuvent avancer pendant le combat. Le combat (LOT-1017) attend le
 LOT-1015 et le LOT-1016 ; d'ici les LOT-1024 et LOT-1025, il se joue avec des fiches provisoires
 sur le corps des héros. Les cartes (LOT-1018), le décor (LOT-1019) et l'interface (LOT-1020)
-peuvent avancer pendant le combat. Arenarea (LOT-1021) et le portage (LOT-1022) attendent la chaîne
-de décor. La recette (LOT-1023) attend tout le reste.
+peuvent avancer pendant le combat. Le portage de l'Arena of Fate (LOT-1022) attend la chaîne de
+décor. Le 20 octobre 2026, l'auteur livre les LOT-1017 à LOT-1020 et la part Arena of Fate du
+LOT-1022 avec la version ; il abandonne le LOT-1021 et rend la part Martpart du LOT-1022, redites
+du périmètre de la `0.0.4` (LOT-106, LOT-110, LOT-147, LOT-157). La recette (LOT-1023) attend tout le reste.
 
 La `0.0.2.5` a porté 30 000 lignes en cinq jours ; cette version en pèse trois à cinq fois plus.
 Six à dix semaines sont l'ordre de grandeur, à mesurer au bilan, pas une promesse.
@@ -98,8 +100,8 @@ Six à dix semaines sont l'ordre de grandeur, à mesurer au bilan, pas une prome
   son statut : ses maillages sont portés par le LOT-1022, et sa validation artistique se fait sur le
   nouveau moteur.
 - [LOT-147](../v0.0.4-lieux-de-la-demo/lots/LOT-147-zone-arenarea-reprise.md) : la reconstruction
-  d'Arenarea est faite par le LOT-1021 ; ce qui lui reste — les PNJ, l'image de l'onglet, la
-  relecture des postes — se réécrit à la recette.
+  d'Arenarea lui revient (le LOT-1021, qui la redisait, est abandonné le 20 octobre 2026) ; elle
+  se fait sur le nouveau moteur, avec la chaîne de décor du LOT-1019.
 - [LOT-151](../v0.0.4-lieux-de-la-demo/lots/LOT-151-kit-commun-intra-muros.md) et
   [LOT-107](../v0.0.4-lieux-de-la-demo/lots/LOT-107-carte-arena-of-fate.md) attendent désormais le
   LOT-1023 ; les autres lots de la `0.0.4` en dépendent par eux.

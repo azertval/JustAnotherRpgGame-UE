@@ -1,0 +1,1315 @@
+{
+  "version": 1,
+  "generator": "scripts/assetsGeneration/build_aof_001_048.py",
+  "scope": "48 base types, pilot variants only",
+  "radiusMetres": 12.0,
+  "sectorDegrees": 15,
+  "closureCount": 24,
+  "meshes": [
+    {
+      "id": "SM_AOF_001",
+      "file": "SM_AOF_001.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.75,
+          0.0
+        ],
+        [
+          1.5,
+          0.75,
+          0.6
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 1,
+      "label": "Fondation droite",
+      "sha256": "09b7b65f6014174726f3b9fe56da421857b69c4c77dd978768a5270f28dcb735",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_002",
+      "file": "SM_AOF_002.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 668,
+      "boundsBlender": [
+        [
+          0.0,
+          -1.4999,
+          0.0
+        ],
+        [
+          3.492,
+          0.4069,
+          0.6
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 2,
+      "label": "Fondation courbe",
+      "sha256": "fe3bd3bf4baf886db8c95c84ddc9107ce573df7306f773516374dc42234bc5ab",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_003",
+      "file": "SM_AOF_003.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -1.5,
+          -1.5,
+          0.0
+        ],
+        [
+          1.5,
+          1.5,
+          0.2
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 3,
+      "label": "Dalle carrée",
+      "sha256": "8b3fe30a20f0c5df5924f909b335180cacd9d58aa62de66e433514ca8d8f6170",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_004",
+      "file": "SM_AOF_004.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 668,
+      "boundsBlender": [
+        [
+          0.0,
+          -2.9999,
+          0.0
+        ],
+        [
+          3.8802,
+          0.4069,
+          0.2
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 4,
+      "label": "Dalle radiale",
+      "sha256": "db9beb05ca1f3f667ab0b4bd07348122fea8b11d899fd0be8fdb42e65a302fb3",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_005",
+      "file": "SM_AOF_005.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 140,
+      "boundsBlender": [
+        [
+          0.0,
+          -2.9939,
+          0.0
+        ],
+        [
+          2.9939,
+          0.0,
+          0.2
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 5,
+      "label": "Dalle triangulaire",
+      "sha256": "dd7d4a74ecf845ff2d9fb1e9abcca1e22d2c3a7e2c127fb6c543254b4f59b07d",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_006",
+      "file": "SM_AOF_006.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 668,
+      "boundsBlender": [
+        [
+          0.0,
+          -0.2499,
+          0.0
+        ],
+        [
+          3.1685,
+          0.4069,
+          0.3
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 6,
+      "label": "Bordure de piste",
+      "sha256": "0a073ccf7ce65bf71fa3e1a964901284ccfbb9d44194eea2b6a63fe1a8b9ffec",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_007",
+      "file": "SM_AOF_007.glb",
+      "materials": [
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 8948,
+      "boundsBlender": [
+        [
+          -1.487,
+          -0.2942,
+          0.013
+        ],
+        [
+          1.487,
+          0.2942,
+          2.987
+        ]
+      ],
+      "assembledSimpleParts": 16,
+      "catalogueId": 7,
+      "label": "Mur droit",
+      "sha256": "3aa198902b8a95af2c91e486cfcd9b63a7d8f7461e0357d4da6a2ff1ba5c0ea5",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_008",
+      "file": "SM_AOF_008.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 668,
+      "boundsBlender": [
+        [
+          0.0,
+          -0.4999,
+          0.0
+        ],
+        [
+          3.2332,
+          0.4069,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 8,
+      "label": "Mur courbe",
+      "sha256": "27ced615efe12f032d1c4f6c85266e1ed0aa7f22577595a06b6e1daadbefb1ed",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_009",
+      "file": "SM_AOF_009.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 376,
+      "boundsBlender": [
+        [
+          -1.5,
+          -2.75,
+          0.0
+        ],
+        [
+          1.5,
+          0.25,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 9,
+      "label": "Angle intérieur",
+      "sha256": "2ebce1d1c9a65d38c9bb22a565692e88ad0b7476ff3c156c6bb1d44c5b30ab08",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_010",
+      "file": "SM_AOF_010.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 376,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.25,
+          0.0
+        ],
+        [
+          1.5,
+          2.75,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 10,
+      "label": "Angle extérieur",
+      "sha256": "a848b22a27b9e25abe6526cf7f199e71c591b0e9c8486169299d94ccc7f72e4e",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_011",
+      "file": "SM_AOF_011.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -0.75,
+          -0.25,
+          0.0
+        ],
+        [
+          0.75,
+          0.25,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 11,
+      "label": "Mur de fermeture",
+      "sha256": "c0ec473441fc731ff4283cfb1dfc63c94a5353d913e3d7d3eb9644e20e9cd64e",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_012",
+      "file": "SM_AOF_012.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 564,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.25,
+          0.0
+        ],
+        [
+          1.5,
+          0.25,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 12,
+      "label": "Mur à ouverture",
+      "sha256": "b5a191d9546338fe123864c7dd0b5687267b785de704010a6c9bc3339faaee91",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_013",
+      "file": "SM_AOF_013.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -0.3,
+          -0.3,
+          0.0
+        ],
+        [
+          0.3,
+          0.3,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 13,
+      "label": "Pilier carré",
+      "sha256": "f2ef4173510434042d885cee9dd6613c5adecbab59f088170fcea36f0cc32ed1",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_014",
+      "file": "SM_AOF_014.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.25,
+          0.0
+        ],
+        [
+          1.5,
+          0.25,
+          0.4
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 14,
+      "label": "Poutre droite",
+      "sha256": "fa8734b7f08b1c9f1fd28987361d674494d6ec2b2d7ab65f70a5000148d5b2fe",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_015",
+      "file": "SM_AOF_015.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 668,
+      "boundsBlender": [
+        [
+          0.0,
+          -0.4999,
+          0.0
+        ],
+        [
+          3.2332,
+          0.4069,
+          0.4
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 15,
+      "label": "Poutre courbe",
+      "sha256": "fcd9c8029cd0037960b24ecf61c50ecfc3d830a8d99d481da5560f50937eb51c",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_016",
+      "file": "SM_AOF_016.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -0.5986,
+          -0.35,
+          0.0
+        ],
+        [
+          0.5986,
+          0.35,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 16,
+      "label": "Contrefort",
+      "sha256": "36ac3fc915c8495cdf9ef23aa4f84734d98a6ce400a84f76906069053fcb43cf",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_017",
+      "file": "SM_AOF_017.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 380,
+      "boundsBlender": [
+        [
+          0.0,
+          -0.25,
+          0.0
+        ],
+        [
+          2.55,
+          0.25,
+          1.5
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 17,
+      "label": "Support de gradins",
+      "sha256": "408488e1692b853bc6cb15cf24c5e8b0d580aa47449ee2978b8047a5595f3aba",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_018",
+      "file": "SM_AOF_018.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 236,
+      "boundsBlender": [
+        [
+          -0.4,
+          -0.3,
+          0.0
+        ],
+        [
+          0.4,
+          0.3,
+          0.8
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 18,
+      "label": "Console",
+      "sha256": "e59457ad81659de7074965abfffb9f6de18568d09c01ee7e83a4cb535b2866ff",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_019",
+      "file": "SM_AOF_019.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 3760,
+      "boundsBlender": [
+        [
+          -1.7991,
+          -0.25,
+          0.0
+        ],
+        [
+          1.7991,
+          0.25,
+          1.7991
+        ]
+      ],
+      "assembledSimpleParts": 20,
+      "catalogueId": 19,
+      "label": "Arc plein cintre",
+      "sha256": "b5330a2f85658131239d967b57ee1631d5785499fb4a006ce09b6eee2f1cb6ac",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_020",
+      "file": "SM_AOF_020.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1880,
+      "boundsBlender": [
+        [
+          0.0,
+          -0.25,
+          0.0
+        ],
+        [
+          1.7991,
+          0.25,
+          1.7991
+        ]
+      ],
+      "assembledSimpleParts": 10,
+      "catalogueId": 20,
+      "label": "Demi-arc",
+      "sha256": "dea296ce682b0bce469a822c057f0b0f93410e017996489ca6303af3672d5581",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_021",
+      "file": "SM_AOF_021.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -0.1973,
+          -0.25,
+          0.0
+        ],
+        [
+          0.1973,
+          0.25,
+          0.35
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 21,
+      "label": "Clé de voûte",
+      "sha256": "0aa05c878ac99bc6681f257ee09397e5271dca10109ced4e879a056937de2f61",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_022",
+      "file": "SM_AOF_022.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 1980,
+      "boundsBlender": [
+        [
+          -0.2936,
+          -0.2936,
+          0.0
+        ],
+        [
+          0.2936,
+          0.2936,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 22,
+      "label": "Fût de colonne",
+      "sha256": "69cf515ac42eca20f0db831b25a202229bc87a0f23e4b9d648066b32e43c2ef7",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_023",
+      "file": "SM_AOF_023.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 2744,
+      "boundsBlender": [
+        [
+          -0.4,
+          -0.4,
+          0.0
+        ],
+        [
+          0.4,
+          0.4,
+          0.4
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 23,
+      "label": "Base de colonne",
+      "sha256": "54944430c0d8d22c48021bfaabdb54ae4fbac1d096780d7da5938a04b06d234f",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_024",
+      "file": "SM_AOF_024.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 1848,
+      "boundsBlender": [
+        [
+          -0.425,
+          -0.425,
+          0.0
+        ],
+        [
+          0.425,
+          0.425,
+          0.42
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 24,
+      "label": "Chapiteau",
+      "sha256": "a1a3689761efb33bcc326508e83fc3c0d31695ea9a2e8317b36796ed09b2a8ad",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_025",
+      "file": "SM_AOF_025.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 564,
+      "boundsBlender": [
+        [
+          -1.5,
+          -2.55,
+          0.0
+        ],
+        [
+          1.5,
+          0.0,
+          1.5
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 25,
+      "label": "Gradins droits",
+      "sha256": "17b93ba1177ae8d1820d393c026db914dfbfd4b16f72c275bc3027a2fd3ef098",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_026",
+      "file": "SM_AOF_026.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 2004,
+      "boundsBlender": [
+        [
+          0.0,
+          -2.5499,
+          0.0
+        ],
+        [
+          3.7637,
+          0.4069,
+          1.5
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 26,
+      "label": "Gradins courbes",
+      "sha256": "b1646acf23cb22847f15176d29915f484f6faab31e02b337f9eeba2124fafedb",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_027",
+      "file": "SM_AOF_027.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1504,
+      "boundsBlender": [
+        [
+          -1.5,
+          -2.4,
+          0.0
+        ],
+        [
+          1.5,
+          0.0,
+          1.5
+        ]
+      ],
+      "assembledSimpleParts": 8,
+      "catalogueId": 27,
+      "label": "Escalier droit",
+      "sha256": "704d334aa6d22a9235d6ab4a4f33109ab875e66e5ef20cf58b86fa678a62377f",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_028",
+      "file": "SM_AOF_028.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 5344,
+      "boundsBlender": [
+        [
+          0.0,
+          -2.3999,
+          0.0
+        ],
+        [
+          3.7249,
+          0.4069,
+          1.5
+        ]
+      ],
+      "assembledSimpleParts": 8,
+      "catalogueId": 28,
+      "label": "Escalier radial",
+      "sha256": "eda7d059b288ac31ebcd7391ef832eb117404cbd6a06448e876e23514f31d515",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_029",
+      "file": "SM_AOF_029.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.75,
+          0.0
+        ],
+        [
+          1.5,
+          0.75,
+          0.2
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 29,
+      "label": "Palier droit",
+      "sha256": "9648b02465c8b15ab29b7ea77f8810930ac817c8ed5546cde3d2eb66e055fba8",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_030",
+      "file": "SM_AOF_030.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 668,
+      "boundsBlender": [
+        [
+          0.0,
+          -1.4999,
+          0.0
+        ],
+        [
+          3.492,
+          0.4069,
+          0.2
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 30,
+      "label": "Palier courbe",
+      "sha256": "4ad3af1c984abc356d1038012a200b01845fba87173a3d5bc0fef395bc96d547",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_031",
+      "file": "SM_AOF_031.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 3760,
+      "boundsBlender": [
+        [
+          -1.7991,
+          -1.5,
+          0.0
+        ],
+        [
+          1.7991,
+          1.5,
+          1.7991
+        ]
+      ],
+      "assembledSimpleParts": 20,
+      "catalogueId": 31,
+      "label": "Voûte droite",
+      "sha256": "8358cb82ab9a0e86edb3f32e517e973ce94a259b1912ea81748863372a365812",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_032",
+      "file": "SM_AOF_032.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 3776,
+      "boundsBlender": [
+        [
+          0.0,
+          -3.2496,
+          0.0
+        ],
+        [
+          3.9453,
+          0.6485,
+          1.75
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 32,
+      "label": "Voûte courbe",
+      "sha256": "98d787a795fcd6bcb91d8de44c393c2a5d85066b3a3695aa279bd4d49044e657",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_033",
+      "file": "SM_AOF_033.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 2496,
+      "boundsBlender": [
+        [
+          -1.5,
+          -1.5,
+          0.0
+        ],
+        [
+          1.5,
+          1.5,
+          1.75
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 33,
+      "label": "Croisée de voûtes",
+      "sha256": "3d91fa9a67819b14cb424d057233011cc8e5288be53565eec08ac662a735baa5",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_034",
+      "file": "SM_AOF_034.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 4136,
+      "boundsBlender": [
+        [
+          -2.0,
+          -1.5,
+          0.0
+        ],
+        [
+          2.0,
+          1.5,
+          4.7991
+        ]
+      ],
+      "assembledSimpleParts": 22,
+      "catalogueId": 34,
+      "label": "Entrée de gradins",
+      "sha256": "972acb2aa4110df80663a3c05f464a9ce6d08610972a4751fca2c61ccad8672a",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_035",
+      "file": "SM_AOF_035.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -1.5,
+          -1.5,
+          0.0
+        ],
+        [
+          1.5,
+          1.5,
+          1.4961
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 35,
+      "label": "Rampe droite",
+      "sha256": "ceb5cf5ce5e1197b9353c0171fa38ad7bd31ca5040b054beb7206772625245e2",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_036",
+      "file": "SM_AOF_036.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1180,
+      "boundsBlender": [
+        [
+          0.0,
+          -3.0,
+          0.0
+        ],
+        [
+          3.8792,
+          0.4058,
+          1.4965
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 36,
+      "label": "Rampe courbe",
+      "sha256": "b9e18757eecdc95773fd967a494c9cc6708725cfd35b57ef7e74c75beafad8cc",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_037",
+      "file": "SM_AOF_037.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 376,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.2,
+          0.0
+        ],
+        [
+          1.5,
+          0.2,
+          1.22
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 37,
+      "label": "Parapet droit",
+      "sha256": "153739999572e1d276221a4ea981680b85a387f643822d8d3e119e8ed37eae58",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_038",
+      "file": "SM_AOF_038.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1336,
+      "boundsBlender": [
+        [
+          0.0,
+          -0.3499,
+          0.0
+        ],
+        [
+          3.1943,
+          0.4552,
+          1.22
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 38,
+      "label": "Parapet courbe",
+      "sha256": "cd8a935a941815cbaf4b885725ed87a3bc5a24c71e941c718569f83e55db815f",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_039",
+      "file": "SM_AOF_039.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 752,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.425,
+          0.0
+        ],
+        [
+          1.5,
+          0.425,
+          0.49
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 39,
+      "label": "Corniche droite",
+      "sha256": "30503fb0b13d79eaf0b99377d493213aee2951ca6f8a529158650f400f293ddc",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_040",
+      "file": "SM_AOF_040.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 2672,
+      "boundsBlender": [
+        [
+          0.0,
+          -0.8499,
+          0.0
+        ],
+        [
+          3.3238,
+          0.4069,
+          0.49
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 40,
+      "label": "Corniche courbe",
+      "sha256": "3aab7849470a936d1a24677ca74f2d24c241f73523b59da2c669fe0c5e26aac2",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_041",
+      "file": "SM_AOF_041.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 376,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.4,
+          0.0
+        ],
+        [
+          1.5,
+          0.4,
+          0.24
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 41,
+      "label": "Couronnement droit",
+      "sha256": "a75e12551e2768b621abe0693cb01589f8615b03b209e8712acb5ae2f24a1f0d",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_042",
+      "file": "SM_AOF_042.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1336,
+      "boundsBlender": [
+        [
+          0.0,
+          -0.7999,
+          0.0
+        ],
+        [
+          3.3108,
+          0.4069,
+          0.24
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 42,
+      "label": "Couronnement courbe",
+      "sha256": "172c99339e5d2cda7604f1f45663dd250899bc1219582d52088b15e8df8fe10f",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_043",
+      "file": "SM_AOF_043.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 376,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.4,
+          0.0
+        ],
+        [
+          1.5,
+          0.4,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 43,
+      "label": "Podium droit",
+      "sha256": "c5a5e043d7cbd8fa2b7d7154d469d2a62ae66af704148a571188774724a54f91",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_044",
+      "file": "SM_AOF_044.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1336,
+      "boundsBlender": [
+        [
+          0.0,
+          -0.6999,
+          0.0
+        ],
+        [
+          3.2849,
+          0.5035,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 44,
+      "label": "Podium courbe",
+      "sha256": "615e9255b882ff5d2dc962512f4741f25a3bba2e0c79e8701a125845df24e605",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_045",
+      "file": "SM_AOF_045.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 4136,
+      "boundsBlender": [
+        [
+          -1.8,
+          -0.25,
+          0.0
+        ],
+        [
+          1.8,
+          0.25,
+          4.7991
+        ]
+      ],
+      "assembledSimpleParts": 22,
+      "catalogueId": 45,
+      "label": "Cadre de porte",
+      "sha256": "7e71e016266779526fd6c001cd4c5b9dbaf8258add40922cf3896c705d489019",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_046",
+      "file": "SM_AOF_046.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 3824,
+      "boundsBlender": [
+        [
+          -1.48,
+          -0.12,
+          0.0
+        ],
+        [
+          1.468,
+          0.26,
+          4.479
+        ]
+      ],
+      "assembledSimpleParts": 20,
+      "catalogueId": 46,
+      "label": "Porte double",
+      "sha256": "f57552d56c37110de3f6c6d67394a78b9835d2789bb718fb1c47946b283a8a15",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_047",
+      "file": "SM_AOF_047.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 3008,
+      "boundsBlender": [
+        [
+          -1.45,
+          -0.07,
+          0.0
+        ],
+        [
+          1.45,
+          0.07,
+          4.48
+        ]
+      ],
+      "assembledSimpleParts": 16,
+      "catalogueId": 47,
+      "label": "Herse",
+      "sha256": "240bba848b46d0b12ff70c97afc10969c86070b6aaa5c1bbbf676357ac688fae",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    },
+    {
+      "id": "SM_AOF_048",
+      "file": "SM_AOF_048.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 2508,
+      "boundsBlender": [
+        [
+          -0.925,
+          -0.925,
+          0.0
+        ],
+        [
+          0.925,
+          0.925,
+          0.265
+        ]
+      ],
+      "assembledSimpleParts": 13,
+      "catalogueId": 48,
+      "label": "Trappe de piste",
+      "sha256": "2882a40313569581a279d5e56b5e44b8e7866625262be3e658945dfdc77e81b4",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "{8EB2BDF7-462A-EE4A-4806-DD954C1CBB9D}",
+	"EngineAssociation": "5.8",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -28,6 +28,37 @@
 		},
 		{
 			"Name": "MetaHumanCharacter",
+			"Enabled": true
+		},
+		{
+			"Name": "MetaHumanCoreML",
+			"Enabled": true,
+			"SupportedTargetPlatforms": [
+				"Mac",
+				"IOS",
+				"TVOS",
+				"VisionOS"
+			]
+		},
+		{
+			"Name": "MetaHumanCalibrationProcessing",
+			"Enabled": true,
+			"SupportedTargetPlatforms": [
+				"Win64",
+				"Linux",
+				"Mac"
+			]
+		},
+		{
+			"Name": "MeshPartition",
+			"Enabled": true
+		},
+		{
+			"Name": "MeshTerrainMode",
+			"Enabled": true
+		},
+		{
+			"Name": "PCG",
 			"Enabled": true
 		}
 	]

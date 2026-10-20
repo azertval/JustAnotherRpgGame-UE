@@ -25,6 +25,7 @@
 #include "Player/JadgCameraPawn.h"
 #include "UObject/Package.h"
 #include "World/JadgDayLight.h"
+#include "UI/JadgLoadingScreen.h"
 #include "World/JadgMapFrame.h"
 
 namespace
@@ -256,9 +257,11 @@ void AJadgParty::GatherEntities()
 		// Un personnage se tient sur la case de son entité, à son étage : c'est Core qui dit où.
 		if (AJadgWalker* Walker = Cast<AJadgWalker>(*It))
 		{
-			FVector Centre = Frame->ToWorld(FVector2D(Cell->X + 0.5, Cell->Y + 0.5));
-			Centre.Z = Frame->StoreyZ(EntityStoreys.FindRef(Id)) + 50.0;
+			FVector Centre = PointOn(FVector2D(Cell->X + 0.5, Cell->Y + 0.5), EntityStoreys.FindRef(Id));
 			FVector Ground = Centre;
+			// La navigation peut encore se construire au lancement. Le PNJ immobile
+			// se pose déjà au sol local, sans garder les 50 cm de marge de projection.
+			Ground.Z = Frame->GroundZAt(Centre, EntityStoreys.FindRef(Id));
 			OnNavigation(Centre, Ground);
 			Walker->StandOn(Ground, Walker->GetActorRotation().Yaw);
 		}
@@ -276,7 +279,7 @@ void AJadgParty::GatherEntities()
 		for (const FJadgLamp& Lamp : Lamps)
 		{
 			FVector Foot = Frame->ToWorld(Lamp.Cell);
-			Foot.Z = Frame->StoreyZ(Lamp.Storey);
+			Foot.Z = Frame->GroundZAt(Foot, Lamp.Storey);
 			DayLight->AddLamp(Foot + FVector(0.0, 0.0, Lamp.HeightMetres * 100.0), Lamp.Colour, Lamp.RadiusMetres * 100.0f,
 				Lamp.Intensity, Lamp.bAlways);
 		}
@@ -296,8 +299,8 @@ void AJadgParty::PlaceParty(const FVector2D& LeaderCell)
 		return;
 	}
 	// Le meneur se pose à l'étage que Core lui donne (D-51) : le rez sur une carte d'un seul niveau.
-	FVector Ground = WorldOf(LeaderCell, Frame != nullptr ? Frame->StoreyZ(Exploration != nullptr ? Exploration->HeroStorey() : 0) + 50.0
-		: Head->Feet().Z);
+	FVector Ground = Frame != nullptr ? PointOn(LeaderCell, Exploration != nullptr ? Exploration->HeroStorey() : 0)
+		: WorldOf(LeaderCell, Head->Feet().Z);
 	// Sans maillage de navigation sous le meneur, la file ne peut pas encore se ranger : tout le
 	// groupe attend sur son point, et `Tick` y revient.
 	bLinedUp = OnNavigation(Ground, Ground);
@@ -419,7 +422,7 @@ void AJadgParty::Tick(float DeltaSeconds)
 	if (bOnCoreMap)
 	{
 		// L'étage des pieds du meneur : Core ne sollicite que ce qui est à cet étage (D-51).
-		Exploration->SetStorey(Frame->StoreyAt(Head->Feet().Z));
+		Exploration->SetStorey(Frame->StoreyAt(Head->Feet()));
 	}
 	if (bPortalAimed && bOnCoreMap && !Head->IsWalking())
 	{
@@ -520,7 +523,7 @@ void AJadgParty::OrderWalk(const FVector& Destination)
 		{
 			const FVector2D Aimed = CellOf(Destination);
 			const FIntPoint Target(FMath::FloorToInt32(Aimed.X), FMath::FloorToInt32(Aimed.Y));
-			const int32 Storey = Frame->StoreyAt(Destination.Z);
+			const int32 Storey = Frame->StoreyAt(Ground);
 			for (const FJadgEntity& Entity : Exploration->Entities())
 			{
 				if (Entity.Type == TEXT("portal") && Entity.bPresent && Entity.Cell == Target && Entity.Storey == Storey)
@@ -543,6 +546,10 @@ AActor* AJadgParty::EntityActor(const FString& EntityId) const
 FVector AJadgParty::PointOf(const FVector2D& Cell) const
 {
 	const AJadgWalker* Head = Leader();
+	if (Frame != nullptr && Head != nullptr && (!Frame->TerrainHeights.IsEmpty() || !Frame->StoreyRegions.IsEmpty()))
+	{
+		return PointOn(Cell, Frame->StoreyAt(Head->Feet()));
+	}
 	return WorldOf(Cell, Head != nullptr ? Head->Feet().Z : 0.0);
 }
 
@@ -561,11 +568,14 @@ void AJadgParty::OrderInteract(const AActor* Target)
 	}
 	const FIntPoint Cell = EntityCells[EntityIds[Index]];
 	const FVector Feet = Head->Feet();
-	const FVector There = WorldOf(FVector2D(Cell.X + 0.5, Cell.Y + 0.5), Frame->StoreyZ(EntityStoreys.FindRef(EntityIds[Index])) + 50.0);
+	const int32 Storey = EntityStoreys.FindRef(EntityIds[Index]);
+	const FVector There = PointOn(FVector2D(Cell.X + 0.5, Cell.Y + 0.5), Storey);
 	FVector Toward = Feet - There;
 	Toward.Z = 0.0;
 	FVector Ground;
-	if (OnNavigation(There + Toward.GetSafeNormal() * ApproachCells * Frame->CellSize, Ground))
+	FVector Approach = There + Toward.GetSafeNormal() * ApproachCells * Frame->CellSize;
+	Approach.Z = Frame->GroundZAt(Approach, Storey) + 50.0;
+	if (OnNavigation(Approach, Ground))
 	{
 		Head->WalkTo(Ground, 10.0f);
 	}
@@ -623,6 +633,7 @@ void AJadgParty::Travel(const FString& MapId)
 void AJadgParty::Open(const FString& Package)
 {
 	UE_LOG(LogJadg, Display, TEXT("[Groupe] carte du moteur : %s"), *Package);
+	FJadgLoadingScreen::SetNextMap(FPackageName::GetShortName(Package));
 	bTravelling = true;
 	UGameplayStatics::OpenLevel(this, FName(*Package));
 }
@@ -640,7 +651,9 @@ bool AJadgParty::InArena() const
 
 FVector AJadgParty::PointOn(const FVector2D& Cell, int32 Storey) const
 {
-	return WorldOf(Cell, Frame != nullptr ? Frame->StoreyZ(Storey) + 50.0 : 0.0);
+	FVector Point = WorldOf(Cell, 0.0);
+	Point.Z = Frame != nullptr ? Frame->GroundZAt(Point, Storey) + 50.0 : 0.0;
+	return Point;
 }
 
 void AJadgParty::ReturnFromArena()

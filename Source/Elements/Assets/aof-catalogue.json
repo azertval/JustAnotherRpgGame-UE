@@ -1,0 +1,1314 @@
+[
+  {
+    "code": "A",
+    "title": "Fondations & sols",
+    "priority": "P0",
+    "mats": "M01 M02 M08",
+    "items": [
+      {
+        "id": 1,
+        "name": "Fondation droite",
+        "use": "Porter les travées",
+        "variants": "Longueurs 1/2/4 m"
+      },
+      {
+        "id": 2,
+        "name": "Fondation courbe",
+        "use": "Suivre les anneaux",
+        "variants": "Courbure par secteur"
+      },
+      {
+        "id": 3,
+        "name": "Dalle carrée",
+        "use": "Composer les sols",
+        "variants": "1/2/4 m ; épaisseurs"
+      },
+      {
+        "id": 4,
+        "name": "Dalle radiale",
+        "use": "Fermer les couronnes",
+        "variants": "Largeur et courbure"
+      },
+      {
+        "id": 5,
+        "name": "Dalle triangulaire",
+        "use": "Combler les raccords",
+        "variants": "Angles et miroirs"
+      },
+      {
+        "id": 6,
+        "name": "Bordure de piste",
+        "use": "Délimiter le sable",
+        "variants": "Droite ; courbe ; terminaison"
+      }
+    ]
+  },
+  {
+    "code": "B",
+    "title": "Murs & raccords",
+    "priority": "P0",
+    "mats": "M01 M02 M06",
+    "items": [
+      {
+        "id": 7,
+        "name": "Mur droit",
+        "use": "Fermer les volumes",
+        "variants": "Longueur ; hauteur ; épaisseur"
+      },
+      {
+        "id": 8,
+        "name": "Mur courbe",
+        "use": "Fermer les anneaux",
+        "variants": "Courbure ; concave/convexe"
+      },
+      {
+        "id": 9,
+        "name": "Angle intérieur",
+        "use": "Joindre deux murs",
+        "variants": "90° et angle de secteur"
+      },
+      {
+        "id": 10,
+        "name": "Angle extérieur",
+        "use": "Fermer un retour",
+        "variants": "90° et angle de secteur"
+      },
+      {
+        "id": 11,
+        "name": "Mur de fermeture",
+        "use": "Compléter une travée",
+        "variants": "Demi-module ; about"
+      },
+      {
+        "id": 12,
+        "name": "Mur à ouverture",
+        "use": "Traverser une cloison",
+        "variants": "Largeur et hauteur libres"
+      }
+    ]
+  },
+  {
+    "code": "C",
+    "title": "Structure porteuse",
+    "priority": "P0",
+    "mats": "M01 M02",
+    "items": [
+      {
+        "id": 13,
+        "name": "Pilier carré",
+        "use": "Porter les travées",
+        "variants": "Section ; hauteur ; tête"
+      },
+      {
+        "id": 14,
+        "name": "Poutre droite",
+        "use": "Relier les appuis",
+        "variants": "Portée ; section"
+      },
+      {
+        "id": 15,
+        "name": "Poutre courbe",
+        "use": "Relier les appuis annulaires",
+        "variants": "Portée et courbure"
+      },
+      {
+        "id": 16,
+        "name": "Contrefort",
+        "use": "Exprimer les reprises de charge",
+        "variants": "Hauteur ; saillie"
+      },
+      {
+        "id": 17,
+        "name": "Support de gradins",
+        "use": "Porter les rangs",
+        "variants": "Pente ; nombre de rangs"
+      },
+      {
+        "id": 18,
+        "name": "Console",
+        "use": "Porter une saillie",
+        "variants": "Simple ; double ; angle"
+      }
+    ]
+  },
+  {
+    "code": "D",
+    "title": "Arcades & colonnes",
+    "priority": "P0",
+    "mats": "M01 M03",
+    "items": [
+      {
+        "id": 19,
+        "name": "Arc plein cintre",
+        "use": "Encadrer les passages",
+        "variants": "Portée ; épaisseur"
+      },
+      {
+        "id": 20,
+        "name": "Demi-arc",
+        "use": "Former une arcade à assembler",
+        "variants": "Gauche/droite ; portée"
+      },
+      {
+        "id": 21,
+        "name": "Clé de voûte",
+        "use": "Fermer le sommet de l'arc",
+        "variants": "Sobre ; décorée"
+      },
+      {
+        "id": 22,
+        "name": "Fût de colonne",
+        "use": "Composer une colonne",
+        "variants": "Hauteur ; diamètre ; plein"
+      },
+      {
+        "id": 23,
+        "name": "Base de colonne",
+        "use": "Raccorder fût et sol",
+        "variants": "Diamètre ; profil"
+      },
+      {
+        "id": 24,
+        "name": "Chapiteau",
+        "use": "Raccorder fût et entablement",
+        "variants": "Sobre ; sculpté"
+      }
+    ]
+  },
+  {
+    "code": "E",
+    "title": "Gradins & escaliers",
+    "priority": "P0",
+    "mats": "M01 M03 M08",
+    "items": [
+      {
+        "id": 25,
+        "name": "Gradins droits",
+        "use": "Créer les rangs rectilignes",
+        "variants": "1/3/6 rangs"
+      },
+      {
+        "id": 26,
+        "name": "Gradins courbes",
+        "use": "Créer les couronnes",
+        "variants": "1/3/6 rangs ; courbure"
+      },
+      {
+        "id": 27,
+        "name": "Escalier droit",
+        "use": "Relier les niveaux",
+        "variants": "Volées ; largeur"
+      },
+      {
+        "id": 28,
+        "name": "Escalier radial",
+        "use": "Traverser les rangs",
+        "variants": "Marche radiale ; joues"
+      },
+      {
+        "id": 29,
+        "name": "Palier droit",
+        "use": "Distribuer les circulations",
+        "variants": "Largeur ; longueur"
+      },
+      {
+        "id": 30,
+        "name": "Palier courbe",
+        "use": "Distribuer un anneau",
+        "variants": "Profondeur ; courbure"
+      }
+    ]
+  },
+  {
+    "code": "F",
+    "title": "Couloirs & passages",
+    "priority": "P0",
+    "mats": "M01 M02 M06",
+    "items": [
+      {
+        "id": 31,
+        "name": "Voûte droite",
+        "use": "Couvrir une galerie",
+        "variants": "Portée ; longueur"
+      },
+      {
+        "id": 32,
+        "name": "Voûte courbe",
+        "use": "Couvrir une galerie annulaire",
+        "variants": "Portée ; courbure"
+      },
+      {
+        "id": 33,
+        "name": "Croisée de voûtes",
+        "use": "Croiser les circulations",
+        "variants": "Croix ; dérivation"
+      },
+      {
+        "id": 34,
+        "name": "Entrée de gradins",
+        "use": "Créer un vomitoire",
+        "variants": "Largeur ; pente ; hauteur"
+      },
+      {
+        "id": 35,
+        "name": "Rampe droite",
+        "use": "Relier deux sols",
+        "variants": "Pente ; largeur ; longueur"
+      },
+      {
+        "id": 36,
+        "name": "Rampe courbe",
+        "use": "Relier deux anneaux",
+        "variants": "Pente ; courbure"
+      }
+    ]
+  },
+  {
+    "code": "G",
+    "title": "Bordures & couronnement",
+    "priority": "P0",
+    "mats": "M01 M03",
+    "items": [
+      {
+        "id": 37,
+        "name": "Parapet droit",
+        "use": "Border les coursives",
+        "variants": "Hauteur ; longueur"
+      },
+      {
+        "id": 38,
+        "name": "Parapet courbe",
+        "use": "Border les couronnes",
+        "variants": "Hauteur ; courbure"
+      },
+      {
+        "id": 39,
+        "name": "Corniche droite",
+        "use": "Séparer les étages",
+        "variants": "Profil ; longueur"
+      },
+      {
+        "id": 40,
+        "name": "Corniche courbe",
+        "use": "Suivre les façades",
+        "variants": "Profil ; courbure"
+      },
+      {
+        "id": 41,
+        "name": "Couronnement droit",
+        "use": "Protéger le sommet du mur",
+        "variants": "Largeur ; about"
+      },
+      {
+        "id": 42,
+        "name": "Couronnement courbe",
+        "use": "Terminer un mur annulaire",
+        "variants": "Largeur ; courbure"
+      }
+    ]
+  },
+  {
+    "code": "H",
+    "title": "Arène & fermetures",
+    "priority": "P0",
+    "mats": "M01 M10 M12",
+    "items": [
+      {
+        "id": 43,
+        "name": "Podium droit",
+        "use": "Séparer piste et public",
+        "variants": "Hauteur cible 3 m ; accès"
+      },
+      {
+        "id": 44,
+        "name": "Podium courbe",
+        "use": "Ceinturer la piste",
+        "variants": "Hauteur cible 3 m ; courbure"
+      },
+      {
+        "id": 45,
+        "name": "Cadre de porte",
+        "use": "Recevoir les ouvrants",
+        "variants": "Arc ; rectangulaire"
+      },
+      {
+        "id": 46,
+        "name": "Porte double",
+        "use": "Fermer un grand passage",
+        "variants": "Deux pivots ; ouverte/fermée"
+      },
+      {
+        "id": 47,
+        "name": "Herse",
+        "use": "Fermer un accès vertical",
+        "variants": "Guides ; course ; verrou"
+      },
+      {
+        "id": 48,
+        "name": "Trappe de piste",
+        "use": "Ouvrir un accès au sol",
+        "variants": "Cadre ; ouvrant ; charnière"
+      }
+    ]
+  },
+  {
+    "code": "I",
+    "title": "Façades & détails architecturaux",
+    "priority": "P1",
+    "mats": "M01 M03 M04 M07",
+    "items": [
+      {
+        "id": 49,
+        "name": "Pilastre",
+        "use": "Rythmer les murs",
+        "variants": "Engagé ; angle"
+      },
+      {
+        "id": 50,
+        "name": "Base de pilastre",
+        "use": "Terminer un pilastre au sol",
+        "variants": "Droite ; angle"
+      },
+      {
+        "id": 51,
+        "name": "Chapiteau de pilastre",
+        "use": "Terminer un pilastre en tête",
+        "variants": "Profil assorti"
+      },
+      {
+        "id": 52,
+        "name": "Entablement",
+        "use": "Composer l'ordre de façade",
+        "variants": "Droit ; courbe ; about"
+      },
+      {
+        "id": 53,
+        "name": "Frise sculptée",
+        "use": "Identifier les niveaux nobles",
+        "variants": "Motifs alternés"
+      },
+      {
+        "id": 54,
+        "name": "Médaillon",
+        "use": "Porter un emblème",
+        "variants": "Support neutre ; variantes"
+      },
+      {
+        "id": 55,
+        "name": "Niche murale",
+        "use": "Recevoir une statue",
+        "variants": "Fond plat ; cul-de-four"
+      },
+      {
+        "id": 56,
+        "name": "Fronton",
+        "use": "Souligner une entrée",
+        "variants": "Triangulaire ; cintré"
+      },
+      {
+        "id": 57,
+        "name": "Balustrade",
+        "use": "Border les loges",
+        "variants": "Droit ; courbe ; angle"
+      },
+      {
+        "id": 58,
+        "name": "Balustre",
+        "use": "Réparer ou varier un garde-corps",
+        "variants": "Fût ; terminal"
+      },
+      {
+        "id": 59,
+        "name": "Socle de statue",
+        "use": "Porter les sculptures",
+        "variants": "Bas ; haut ; mural"
+      },
+      {
+        "id": 60,
+        "name": "Statue de façade",
+        "use": "Donner l'échelle monumentale",
+        "variants": "Silhouette provisoire ; sujet à définir"
+      }
+    ]
+  },
+  {
+    "code": "J",
+    "title": "Gradins, loges & accueil",
+    "priority": "P1",
+    "mats": "M01 M03 M10 M19 M20",
+    "items": [
+      {
+        "id": 61,
+        "name": "Siège individuel",
+        "use": "Ponctuer les rangs réservés",
+        "variants": "Dossier ; sans dossier"
+      },
+      {
+        "id": 62,
+        "name": "Banc de loge",
+        "use": "Asseoir les délégations",
+        "variants": "Longueurs ; embout"
+      },
+      {
+        "id": 63,
+        "name": "Accoudoir de rang",
+        "use": "Séparer les places",
+        "variants": "Gauche/droite"
+      },
+      {
+        "id": 64,
+        "name": "Joue de gradin",
+        "use": "Fermer les côtés des rangs",
+        "variants": "Pentes ; miroir"
+      },
+      {
+        "id": 65,
+        "name": "Nez de marche",
+        "use": "Finir une marche",
+        "variants": "Droit ; radial"
+      },
+      {
+        "id": 66,
+        "name": "Garde-corps d'escalier",
+        "use": "Border les volées",
+        "variants": "Pente ; terminal"
+      },
+      {
+        "id": 67,
+        "name": "Main courante",
+        "use": "Guider la circulation",
+        "variants": "Droite ; courbe ; raccord"
+      },
+      {
+        "id": 68,
+        "name": "Façade de loge",
+        "use": "Délimiter une des 13 loges",
+        "variants": "Travée ouverte ; entrée"
+      },
+      {
+        "id": 69,
+        "name": "Cloison de loge",
+        "use": "Séparer les délégations",
+        "variants": "Pleine ; ajourée"
+      },
+      {
+        "id": 70,
+        "name": "Portique de loge",
+        "use": "Marquer l'accès réservé",
+        "variants": "Largeur ; ordre"
+      },
+      {
+        "id": 71,
+        "name": "Auvent de loge",
+        "use": "Couvrir une tribune",
+        "variants": "Structure ; toile séparée"
+      },
+      {
+        "id": 72,
+        "name": "Pupitre d'accueil",
+        "use": "Contrôler l'entrée",
+        "variants": "Simple ; tablette"
+      }
+    ]
+  },
+  {
+    "code": "K",
+    "title": "Stations divines & identité",
+    "priority": "P1",
+    "mats": "M03 M04 M13 M14 M20",
+    "items": [
+      {
+        "id": 73,
+        "name": "Socle de station",
+        "use": "Support des 14 stations publiques",
+        "variants": "Gabarit commun ; variantes"
+      },
+      {
+        "id": 74,
+        "name": "Autel",
+        "use": "Organiser le centre d'une station",
+        "variants": "Simple ; monumental"
+      },
+      {
+        "id": 75,
+        "name": "Stèle divine",
+        "use": "Porter un symbole identifié",
+        "variants": "14 contenus à documenter"
+      },
+      {
+        "id": 76,
+        "name": "Statue divine",
+        "use": "Représenter une divinité",
+        "variants": "14 sujets à documenter"
+      },
+      {
+        "id": 77,
+        "name": "Niche de station",
+        "use": "Encadrer la représentation",
+        "variants": "Droite ; courbe"
+      },
+      {
+        "id": 78,
+        "name": "Table d'offrandes",
+        "use": "Recevoir les offrandes",
+        "variants": "Pierre ; bois"
+      },
+      {
+        "id": 79,
+        "name": "Brasero votif",
+        "use": "Éclairer une station",
+        "variants": "Vasque ; support séparés"
+      },
+      {
+        "id": 80,
+        "name": "Porte-bannière",
+        "use": "Porter l'emblème",
+        "variants": "Mural ; sur pied"
+      },
+      {
+        "id": 81,
+        "name": "Bannière divine",
+        "use": "Identifier les stations",
+        "variants": "14 motifs ; toile séparée"
+      },
+      {
+        "id": 82,
+        "name": "Blason de délégation",
+        "use": "Identifier chaque loge",
+        "variants": "13 motifs à documenter"
+      },
+      {
+        "id": 83,
+        "name": "Plaque de secteur",
+        "use": "Orienter le public",
+        "variants": "Numéro ; pictogramme"
+      },
+      {
+        "id": 84,
+        "name": "Inscription monumentale",
+        "use": "Nommer les accès",
+        "variants": "Alphabet et texte à valider"
+      }
+    ]
+  },
+  {
+    "code": "L",
+    "title": "Couverture & gréement",
+    "priority": "P2",
+    "mats": "M10 M12 M17 M18",
+    "items": [
+      {
+        "id": 85,
+        "name": "Embase de mât",
+        "use": "Ancrer le velum",
+        "variants": "Au sol ; sur couronnement"
+      },
+      {
+        "id": 86,
+        "name": "Mât de velum",
+        "use": "Porter la couverture",
+        "variants": "Tronçons ; tête"
+      },
+      {
+        "id": 87,
+        "name": "Tête de mât",
+        "use": "Recevoir les cordages",
+        "variants": "Anneaux ; traverse"
+      },
+      {
+        "id": 88,
+        "name": "Console de mât",
+        "use": "Tenir le mât en façade",
+        "variants": "Déport ; fixations"
+      },
+      {
+        "id": 89,
+        "name": "Panneau de velum",
+        "use": "Ombrager les gradins",
+        "variants": "Tendu ; replié ; radial"
+      },
+      {
+        "id": 90,
+        "name": "Bordure de toile",
+        "use": "Finir les panneaux",
+        "variants": "Œillets ; ourlet"
+      },
+      {
+        "id": 91,
+        "name": "Corde tendue",
+        "use": "Relier deux ancrages",
+        "variants": "Longueur ; flèche"
+      },
+      {
+        "id": 92,
+        "name": "Corde lovée",
+        "use": "Équiper les postes",
+        "variants": "Petit ; grand rouleau"
+      },
+      {
+        "id": 93,
+        "name": "Poulie",
+        "use": "Dévier un cordage",
+        "variants": "Simple ; double"
+      },
+      {
+        "id": 94,
+        "name": "Treuil de velum",
+        "use": "Tendre les toiles",
+        "variants": "Tambour ; manivelle"
+      },
+      {
+        "id": 95,
+        "name": "Anneau d'ancrage",
+        "use": "Fixer les câbles",
+        "variants": "Mural ; sol"
+      },
+      {
+        "id": 96,
+        "name": "Taquet de corde",
+        "use": "Bloquer un cordage",
+        "variants": "Mural ; sur mât"
+      }
+    ]
+  },
+  {
+    "code": "M",
+    "title": "Sous-sols & catacombes",
+    "priority": "P1",
+    "mats": "M02 M05 M06 M08",
+    "items": [
+      {
+        "id": 97,
+        "name": "Mur de sous-sol",
+        "use": "Fermer les niveaux techniques",
+        "variants": "Plein ; passage"
+      },
+      {
+        "id": 98,
+        "name": "Pilier de sous-sol",
+        "use": "Porter les planchers",
+        "variants": "Carré ; cruciforme"
+      },
+      {
+        "id": 99,
+        "name": "Plancher technique",
+        "use": "Séparer les deux sous-sols",
+        "variants": "Plein ; trémie"
+      },
+      {
+        "id": 100,
+        "name": "Bouche de trémie",
+        "use": "Border une ouverture verticale",
+        "variants": "Carrée ; rectangulaire"
+      },
+      {
+        "id": 101,
+        "name": "Escalier de service",
+        "use": "Desservir les niveaux",
+        "variants": "Volée ; palier ; retour"
+      },
+      {
+        "id": 102,
+        "name": "Échelle fixe",
+        "use": "Accéder à une réserve technique",
+        "variants": "Longueur ; ancrages"
+      },
+      {
+        "id": 103,
+        "name": "Porte gardée",
+        "use": "Contrôler prison vers catacombes",
+        "variants": "Battant ; verrou"
+      },
+      {
+        "id": 104,
+        "name": "Tunnel de catacombe",
+        "use": "Composer un passage souterrain",
+        "variants": "Droit ; coude"
+      },
+      {
+        "id": 105,
+        "name": "Jonction de tunnel",
+        "use": "Distribuer les catacombes",
+        "variants": "T ; croix"
+      },
+      {
+        "id": 106,
+        "name": "Cul-de-sac voûté",
+        "use": "Terminer un tunnel",
+        "variants": "Plein ; niche"
+      },
+      {
+        "id": 107,
+        "name": "Niche funéraire",
+        "use": "Composer un mur funéraire",
+        "variants": "Simple ; empilée"
+      },
+      {
+        "id": 108,
+        "name": "Dalle funéraire",
+        "use": "Fermer une niche",
+        "variants": "Pleine ; inscription à définir"
+      }
+    ]
+  },
+  {
+    "code": "N",
+    "title": "Vestiaires, prison & services",
+    "priority": "P1",
+    "mats": "M02 M10 M12 M19",
+    "items": [
+      {
+        "id": 109,
+        "name": "Banc de vestiaire",
+        "use": "Équiper les combattants",
+        "variants": "Simple ; avec coffre"
+      },
+      {
+        "id": 110,
+        "name": "Casier de vestiaire",
+        "use": "Ranger les équipements",
+        "variants": "Ouvert ; fermé"
+      },
+      {
+        "id": 111,
+        "name": "Patère murale",
+        "use": "Suspendre les affaires",
+        "variants": "Simple ; rangée"
+      },
+      {
+        "id": 112,
+        "name": "Râtelier",
+        "use": "Ranger armes ou accessoires",
+        "variants": "Vide ; supports variables"
+      },
+      {
+        "id": 113,
+        "name": "Table de préparation",
+        "use": "Préparer le matériel",
+        "variants": "Plateau ; tiroir"
+      },
+      {
+        "id": 114,
+        "name": "Coffre de service",
+        "use": "Stocker les réserves",
+        "variants": "Ouvert ; fermé"
+      },
+      {
+        "id": 115,
+        "name": "Barreaux de cellule",
+        "use": "Fermer les cellules",
+        "variants": "Panneau ; angle"
+      },
+      {
+        "id": 116,
+        "name": "Porte de cellule",
+        "use": "Contrôler une cellule",
+        "variants": "Pivot ; serrure"
+      },
+      {
+        "id": 117,
+        "name": "Lit de cellule",
+        "use": "Meubler la prison",
+        "variants": "Paillasse ; structure"
+      },
+      {
+        "id": 118,
+        "name": "Guichet de garde",
+        "use": "Surveiller le passage",
+        "variants": "Grille ; volet"
+      },
+      {
+        "id": 119,
+        "name": "Abreuvoir de service",
+        "use": "Alimenter une zone technique",
+        "variants": "Cuve ; bec"
+      },
+      {
+        "id": 120,
+        "name": "Cloison de service",
+        "use": "Séparer vestiaires et prison",
+        "variants": "Pleine ; porte ; retour"
+      }
+    ]
+  },
+  {
+    "code": "O",
+    "title": "Machinerie de piste",
+    "priority": "P2",
+    "mats": "M10 M12 M17",
+    "items": [
+      {
+        "id": 121,
+        "name": "Plateforme élévatrice",
+        "use": "Amener un décor au sol de piste",
+        "variants": "Plateau ; rebords"
+      },
+      {
+        "id": 122,
+        "name": "Châssis élévateur",
+        "use": "Guider la plateforme",
+        "variants": "Montants ; traverses"
+      },
+      {
+        "id": 123,
+        "name": "Rail de guidage",
+        "use": "Maintenir une translation",
+        "variants": "Droit ; butée"
+      },
+      {
+        "id": 124,
+        "name": "Treuil de levage",
+        "use": "Lever la plateforme",
+        "variants": "Tambour ; axe"
+      },
+      {
+        "id": 125,
+        "name": "Cabestan",
+        "use": "Actionner une machinerie",
+        "variants": "Bras ; tête"
+      },
+      {
+        "id": 126,
+        "name": "Contrepoids",
+        "use": "Équilibrer un mécanisme",
+        "variants": "Bloc ; suspension"
+      },
+      {
+        "id": 127,
+        "name": "Poulie de levage",
+        "use": "Renvoyer les câbles",
+        "variants": "Simple ; moufle"
+      },
+      {
+        "id": 128,
+        "name": "Chaîne",
+        "use": "Relier les mécanismes",
+        "variants": "Segment ; boucle"
+      },
+      {
+        "id": 129,
+        "name": "Verrou de trappe",
+        "use": "Immobiliser l'ouvrant",
+        "variants": "Pêne ; gâche"
+      },
+      {
+        "id": 130,
+        "name": "Barrière de piste",
+        "use": "Canaliser les entrées",
+        "variants": "Panneau ; pied"
+      },
+      {
+        "id": 131,
+        "name": "Portillon de piste",
+        "use": "Ouvrir un accès de service",
+        "variants": "Pivot ; verrou"
+      },
+      {
+        "id": 132,
+        "name": "Chariot de décor",
+        "use": "Déplacer le matériel",
+        "variants": "Roues ; plateau"
+      }
+    ]
+  },
+  {
+    "code": "P",
+    "title": "Drainage & équipements techniques",
+    "priority": "P1",
+    "mats": "M02 M05 M12 M23",
+    "items": [
+      {
+        "id": 133,
+        "name": "Caniveau droit",
+        "use": "Collecter l'eau",
+        "variants": "Ouvert ; couvert"
+      },
+      {
+        "id": 134,
+        "name": "Caniveau courbe",
+        "use": "Suivre la piste",
+        "variants": "Courbure ; pente"
+      },
+      {
+        "id": 135,
+        "name": "Angle de caniveau",
+        "use": "Changer de direction",
+        "variants": "90° ; angle libre"
+      },
+      {
+        "id": 136,
+        "name": "Grille de drainage",
+        "use": "Couvrir les rigoles",
+        "variants": "Carrée ; longue"
+      },
+      {
+        "id": 137,
+        "name": "Regard",
+        "use": "Accéder au réseau",
+        "variants": "Cadre ; couvercle"
+      },
+      {
+        "id": 138,
+        "name": "Avaloir",
+        "use": "Collecter un point bas",
+        "variants": "Sol ; mural"
+      },
+      {
+        "id": 139,
+        "name": "Conduite",
+        "use": "Relier les ouvrages",
+        "variants": "Tronçon ; diamètre"
+      },
+      {
+        "id": 140,
+        "name": "Coude de conduite",
+        "use": "Changer de direction",
+        "variants": "45° ; 90°"
+      },
+      {
+        "id": 141,
+        "name": "Jonction de conduite",
+        "use": "Raccorder les branches",
+        "variants": "T ; Y"
+      },
+      {
+        "id": 142,
+        "name": "Citerne modulaire",
+        "use": "Stocker l'eau de service",
+        "variants": "Fond ; parois ; couverture"
+      },
+      {
+        "id": 143,
+        "name": "Bouche de ventilation",
+        "use": "Aérer les sous-sols",
+        "variants": "Grille ; encadrement"
+      },
+      {
+        "id": 144,
+        "name": "Gargouille d'évacuation",
+        "use": "Rejeter l'eau du couronnement",
+        "variants": "Bec simple ; sculpté"
+      }
+    ]
+  },
+  {
+    "code": "Q",
+    "title": "Parvis & abords immédiats",
+    "priority": "P1",
+    "mats": "M01 M08 M09 M12",
+    "items": [
+      {
+        "id": 145,
+        "name": "Pavé unitaire",
+        "use": "Finir les petites interfaces",
+        "variants": "Carré ; rectangulaire"
+      },
+      {
+        "id": 146,
+        "name": "Dallage de parvis",
+        "use": "Composer les grandes surfaces",
+        "variants": "Motif ; raccord"
+      },
+      {
+        "id": 147,
+        "name": "Bordure de parvis",
+        "use": "Limiter une plateforme",
+        "variants": "Droite ; courbe ; angle"
+      },
+      {
+        "id": 148,
+        "name": "Marche de parvis",
+        "use": "Relier les niveaux extérieurs",
+        "variants": "Droite ; courbe"
+      },
+      {
+        "id": 149,
+        "name": "Rampe de parvis",
+        "use": "Relier les plateformes",
+        "variants": "Pente ; retour"
+      },
+      {
+        "id": 150,
+        "name": "Mur de soutènement",
+        "use": "Retenir les terrassements",
+        "variants": "Hauteur ; about"
+      },
+      {
+        "id": 151,
+        "name": "Chaperon de soutènement",
+        "use": "Terminer le mur",
+        "variants": "Droit ; angle"
+      },
+      {
+        "id": 152,
+        "name": "Borne de circulation",
+        "use": "Canaliser les abords",
+        "variants": "Basse ; haute"
+      },
+      {
+        "id": 153,
+        "name": "Barrière de file",
+        "use": "Organiser les entrées",
+        "variants": "Panneau ; angle"
+      },
+      {
+        "id": 154,
+        "name": "Poteau de signalétique",
+        "use": "Orienter vers les secteurs",
+        "variants": "Une/deux faces"
+      },
+      {
+        "id": 155,
+        "name": "Banc extérieur",
+        "use": "Meubler les esplanades",
+        "variants": "Droit ; courbe"
+      },
+      {
+        "id": 156,
+        "name": "Socle de luminaire",
+        "use": "Porter un éclairage",
+        "variants": "Bas ; haut"
+      }
+    ]
+  },
+  {
+    "code": "R",
+    "title": "Éclairage & mobilier",
+    "priority": "P2",
+    "mats": "M10 M12 M13 M16 M22",
+    "items": [
+      {
+        "id": 157,
+        "name": "Torche murale",
+        "use": "Éclairer une galerie",
+        "variants": "Support ; combustible"
+      },
+      {
+        "id": 158,
+        "name": "Brasero sur pied",
+        "use": "Éclairer les espaces ouverts",
+        "variants": "Vasque ; grille"
+      },
+      {
+        "id": 159,
+        "name": "Lanterne suspendue",
+        "use": "Éclairer les services",
+        "variants": "Crochet ; vitrage"
+      },
+      {
+        "id": 160,
+        "name": "Support de lanterne",
+        "use": "Ancrer une suspension",
+        "variants": "Mural ; plafond"
+      },
+      {
+        "id": 161,
+        "name": "Vasque d'eau",
+        "use": "Meubler une station ou loge",
+        "variants": "Ronde ; rectangulaire"
+      },
+      {
+        "id": 162,
+        "name": "Jarre",
+        "use": "Stocker les consommables",
+        "variants": "Petite ; grande ; couvercle"
+      },
+      {
+        "id": 163,
+        "name": "Tonneau",
+        "use": "Stocker les réserves",
+        "variants": "Debout ; couché"
+      },
+      {
+        "id": 164,
+        "name": "Caisse",
+        "use": "Transporter le matériel",
+        "variants": "Ouverte ; fermée"
+      },
+      {
+        "id": 165,
+        "name": "Sac",
+        "use": "Remplir les réserves",
+        "variants": "Vide ; plein"
+      },
+      {
+        "id": 166,
+        "name": "Panier",
+        "use": "Transporter les petits objets",
+        "variants": "Anse ; sans anse"
+      },
+      {
+        "id": 167,
+        "name": "Table de loge",
+        "use": "Équiper les délégations",
+        "variants": "Ronde ; rectangulaire"
+      },
+      {
+        "id": 168,
+        "name": "Tabouret",
+        "use": "Équiper les services",
+        "variants": "Bas ; haut"
+      }
+    ]
+  },
+  {
+    "code": "S",
+    "title": "Raccords & variantes de finition",
+    "priority": "P0",
+    "mats": "M01 M02 M03 M10",
+    "items": [
+      {
+        "id": 169,
+        "name": "About de corniche",
+        "use": "Fermer un profil apparent",
+        "variants": "Gauche ; droite"
+      },
+      {
+        "id": 170,
+        "name": "Angle de corniche",
+        "use": "Tourner un profil",
+        "variants": "Intérieur ; extérieur"
+      },
+      {
+        "id": 171,
+        "name": "Raccord de rayon",
+        "use": "Joindre deux courbures",
+        "variants": "Transition paramétrée"
+      },
+      {
+        "id": 172,
+        "name": "Cale de fermeture",
+        "use": "Combler la dernière travée",
+        "variants": "Largeur variable"
+      },
+      {
+        "id": 173,
+        "name": "Joue de voûte",
+        "use": "Fermer une tranche de toiture",
+        "variants": "Profil ; épaisseur"
+      },
+      {
+        "id": 174,
+        "name": "Lunette de voûte",
+        "use": "Percer une voûte latéralement",
+        "variants": "Portée ; position"
+      },
+      {
+        "id": 175,
+        "name": "Seuil de porte",
+        "use": "Raccorder deux sols",
+        "variants": "Plat ; ressaut"
+      },
+      {
+        "id": 176,
+        "name": "Embrasure",
+        "use": "Habiller une baie épaisse",
+        "variants": "Gauche ; droite ; linteau"
+      },
+      {
+        "id": 177,
+        "name": "Linteau droit",
+        "use": "Franchir une baie rectangulaire",
+        "variants": "Portée ; section"
+      },
+      {
+        "id": 178,
+        "name": "Plinthe",
+        "use": "Finir le pied de mur",
+        "variants": "Droite ; courbe ; angle"
+      },
+      {
+        "id": 179,
+        "name": "Joint de séparation",
+        "use": "Marquer une interface",
+        "variants": "Bande ; terminaison"
+      },
+      {
+        "id": 180,
+        "name": "Cache de raccord",
+        "use": "Masquer une interface technique",
+        "variants": "Réversible ; discret"
+      }
+    ]
+  },
+  {
+    "code": "T",
+    "title": "Usure, détails & variantes optionnelles",
+    "priority": "P2",
+    "mats": "M01 M02 M12 M21 M24",
+    "items": [
+      {
+        "id": 181,
+        "name": "Bloc ébréché",
+        "use": "Varier les silhouettes proches",
+        "variants": "Coin ; bord"
+      },
+      {
+        "id": 182,
+        "name": "Corniche brisée",
+        "use": "Créer une rupture locale",
+        "variants": "Gauche ; droite"
+      },
+      {
+        "id": 183,
+        "name": "Gradin endommagé",
+        "use": "Créer une variante de rang",
+        "variants": "Éclat ; réparation"
+      },
+      {
+        "id": 184,
+        "name": "Dalle fracturée",
+        "use": "Varier un sol secondaire",
+        "variants": "Fissure en volume limitée"
+      },
+      {
+        "id": 185,
+        "name": "Gravats de pierre",
+        "use": "Habiller une zone dégradée",
+        "variants": "Petit ; moyen amas"
+      },
+      {
+        "id": 186,
+        "name": "Planche isolée",
+        "use": "Habiller un stockage",
+        "variants": "Longueur ; casse"
+      },
+      {
+        "id": 187,
+        "name": "Ferrure de porte",
+        "use": "Détailler les ouvrants",
+        "variants": "Penture ; renfort"
+      },
+      {
+        "id": 188,
+        "name": "Poignée de porte",
+        "use": "Rendre l'accès lisible",
+        "variants": "Anneau ; barre"
+      },
+      {
+        "id": 189,
+        "name": "Serrure",
+        "use": "Détailler une fermeture",
+        "variants": "Boîtier ; gâche"
+      },
+      {
+        "id": 190,
+        "name": "Rivet",
+        "use": "Ponctuer les assemblages",
+        "variants": "Tête ; taille"
+      },
+      {
+        "id": 191,
+        "name": "Pièce de réparation",
+        "use": "Exprimer une maintenance",
+        "variants": "Bois ; pierre ; métal"
+      },
+      {
+        "id": 192,
+        "name": "Débris de toile",
+        "use": "Varier le gréement optionnel",
+        "variants": "Bande ; panneau déchiré"
+      }
+    ]
+  }
+]

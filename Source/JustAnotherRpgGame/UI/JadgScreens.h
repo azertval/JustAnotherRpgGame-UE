@@ -291,7 +291,7 @@ class UJadgMapScreen : public UJadgScreen
 	GENERATED_BODY()
 
 public:
-	/// La carte montrée : son identifiant dans `world-maps.json` ; vide, celle du monde.
+	/// L'illustration montrée : son parent dans `map-interactions.json` ; vide, celle du monde.
 	FString MapId;
 	/// Le lieu choisi ; vide aucun.
 	FString PlaceId;

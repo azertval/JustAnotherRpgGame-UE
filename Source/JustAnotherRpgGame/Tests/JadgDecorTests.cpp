@@ -26,13 +26,13 @@ namespace
 {
 	constexpr EAutomationTestFlags DecorFlags = EAutomationTestFlags_ApplicationContextMask | EAutomationTestFlags::EngineFilter;
 
-	const TCHAR* ParentMaterials[] = {TEXT("/Game/Scenery/Common/M_Scenery"), TEXT("/Game/Scenery/Common/M_SceneryMasked")};
-	const TCHAR* TexturesRoot = TEXT("/Game/Scenery/Textures/");
+	const TCHAR* ParentMaterials[] = {TEXT("/Game/Bibliotheque/Commun/Common/M_Scenery"), TEXT("/Game/Bibliotheque/Commun/Common/M_SceneryMasked")};
+	const TCHAR* TexturesRoot = TEXT("/Game/Bibliotheque/Commun/Textures/");
 
 	/// Les pièces que la chaîne doit avoir installées : un maître Meshy (la façade témoin), une
 	/// pièce du kit de l'Arena of Fate posée en instances, une pièce construite par script.
 	const TCHAR* Pieces[] = {
-		TEXT("/Game/Master/Scenery/arenarea-palazzo-terracotta/StaticMeshes/SM_Scenery_Arenarea_Palazzo_Terracotta"),
+		TEXT("/Game/Bibliotheque/ModelesMaitres/Scenery/arenarea-palazzo-terracotta/StaticMeshes/SM_Scenery_Arenarea_Palazzo_Terracotta"),
 		TEXT("/Game/Kit/Regions/central-empire/capital/arenarea/arena-of-fate/af-sand-a/StaticMeshes/SM_af-sand-a"),
 		TEXT("/Game/Kit/Built/colisee/col-sand/StaticMeshes/SM_col-sand"),
 	};

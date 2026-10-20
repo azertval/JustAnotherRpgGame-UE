@@ -1,0 +1,560 @@
+{
+  "date": "2026-10-10T14:08:04.258681+00:00",
+  "status": "implemented-and-technically-verified; full-scene-artistic-review-pending",
+  "scope": "Propagation of the witness approved on 2026-10-10 to the seven levels and south threshold. Existing gameplay preserved. Crowd and city extension excluded. No final artistic approval claimed.",
+  "approvedWitness": {
+    "path": "Planning/versions/v0.1.0/v0.0.4-lieux-de-la-demo/annexes/LOT-106/wicked-approval-20261010.json",
+    "sha256": "b516435144b58357fa8ae0bf3bed78d78d40f3bf3062088875d7055262466fac"
+  },
+  "sources": [
+    {
+      "path": "Source/Elements/Assets/Built/arena-fate-modern/manifest.json",
+      "sha256": "a70eb4b2cd7385bbe835628648829cb76a35fbd779202c2dd08fe332380a68fc"
+    },
+    {
+      "path": "Source/Elements/Assets/Built/arena-fate-props/manifest.json",
+      "sha256": "273ed2535728bb14d7d12c62b05a0d24e2c7f5d76b5d6f1bb9e06173ca4cfefb"
+    },
+    {
+      "path": "Source/Elements/Assets/Built/arena-fate-atmosphere/manifest.json",
+      "sha256": "70c91d37bfe8b3561e97708f1d299e60bc7a6f4c7ced375881480a6c1e2efde5"
+    },
+    {
+      "path": "Source/Elements/Levels/central-empire/capital/arenarea/arena-of-fate.json",
+      "sha256": "84e788e10abf16b5c692f089d2e42aafe10731e89b4fc27ee310c69f720f4fb9"
+    },
+    {
+      "path": "Source/Elements/Assets/Regions/central-empire/capital/arenarea/arena-of-fate/Scene/af-effigy-chains-cthraxis.glb",
+      "sha256": "280d4425f322b309ce5d2ff6d6d5d666e49a3234d7c886cb82789b8585d1dbc1"
+    },
+    {
+      "path": "Source/Elements/Assets/Regions/central-empire/capital/arenarea/arena-of-fate/Scene/af-effigy-chains-droggath.glb",
+      "sha256": "b87cd8afe099cdc33f7f2f5c68412a1a22a48c254ffa80a94dc3ff3c9fb2e4f2"
+    },
+    {
+      "path": "Source/Elements/Assets/Regions/central-empire/capital/arenarea/arena-of-fate/Scene/af-effigy-chains-krynnethoth.glb",
+      "sha256": "616a1407f95837bcefc6feb0afdd2287b3e6ec6c4753ac2b48e44d13dcd6275c"
+    },
+    {
+      "path": "Source/Elements/Assets/Regions/central-empire/capital/arenarea/arena-of-fate/Scene/af-effigy-chains-zulvath.glb",
+      "sha256": "199c81724e267ab8c4ceec1d3832284dc4bc0428faa10e934435e5caabda69e8"
+    }
+  ],
+  "construction": {
+    "objects": 1826,
+    "storeys": 7,
+    "routePoints": 66,
+    "visitTargets": 235,
+    "unreachableRouteIndices": [],
+    "unreachableTargetIndices": [],
+    "missingNavigationAtFloor": [],
+    "walkableCollision": [
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-00.glb",
+        "fallbackTriangles": 262092,
+        "naniteTriangles": 262092
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-01.glb",
+        "fallbackTriangles": 262093,
+        "naniteTriangles": 262093
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-02.glb",
+        "fallbackTriangles": 262106,
+        "naniteTriangles": 262106
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-03.glb",
+        "fallbackTriangles": 262088,
+        "naniteTriangles": 262088
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-04.glb",
+        "fallbackTriangles": 262088,
+        "naniteTriangles": 262088
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-05.glb",
+        "fallbackTriangles": 262104,
+        "naniteTriangles": 262104
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-06.glb",
+        "fallbackTriangles": 262094,
+        "naniteTriangles": 262094
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-07.glb",
+        "fallbackTriangles": 262092,
+        "naniteTriangles": 262092
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-08.glb",
+        "fallbackTriangles": 262092,
+        "naniteTriangles": 262092
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-09.glb",
+        "fallbackTriangles": 262093,
+        "naniteTriangles": 262093
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-10.glb",
+        "fallbackTriangles": 262106,
+        "naniteTriangles": 262106
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-11.glb",
+        "fallbackTriangles": 262088,
+        "naniteTriangles": 262088
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-12.glb",
+        "fallbackTriangles": 262088,
+        "naniteTriangles": 262088
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-13.glb",
+        "fallbackTriangles": 262104,
+        "naniteTriangles": 262104
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-14.glb",
+        "fallbackTriangles": 262094,
+        "naniteTriangles": 262094
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-aisle-15.glb",
+        "fallbackTriangles": 262092,
+        "naniteTriangles": 262092
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-cat-cross.glb",
+        "fallbackTriangles": 125020,
+        "naniteTriangles": 125020
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-cat-landing.glb",
+        "fallbackTriangles": 2820,
+        "naniteTriangles": 2820
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-descent.glb",
+        "fallbackTriangles": 3932,
+        "naniteTriangles": 3932
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-gate-path.glb",
+        "fallbackTriangles": 34404,
+        "naniteTriangles": 34404
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-gate-sides.glb",
+        "fallbackTriangles": 66552,
+        "naniteTriangles": 66552
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-middle-course.glb",
+        "fallbackTriangles": 36096,
+        "naniteTriangles": 36096
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-ring-gallery.glb",
+        "fallbackTriangles": 1224256,
+        "naniteTriangles": 1224256,
+        "collisionSource": "Built/arena-fate-modern/afm-ring-gallery-collision.glb",
+        "collisionAsset": "/Game/ArenaFateModern/Kit/Built/arena-fate-modern/afm-ring-gallery-collision/StaticMeshes/SM_afm-ring-gallery-collision.SM_afm-ring-gallery-collision",
+        "collisionTriangles": 1416,
+        "collisionNanite": false,
+        "collisionTraceFlag": "CTF_USE_COMPLEX_AS_SIMPLE",
+        "navigationGeometry": "architectural-proxy-body-setup"
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-ring-ground.glb",
+        "fallbackTriangles": 1624320,
+        "naniteTriangles": 1624320,
+        "collisionSource": "Built/arena-fate-modern/afm-ring-ground-collision.glb",
+        "collisionAsset": "/Game/ArenaFateModern/Kit/Built/arena-fate-modern/afm-ring-ground-collision/StaticMeshes/SM_afm-ring-ground-collision.SM_afm-ring-ground-collision",
+        "collisionTriangles": 1536,
+        "collisionNanite": false,
+        "collisionTraceFlag": "CTF_USE_COMPLEX_AS_SIMPLE",
+        "navigationGeometry": "architectural-proxy-body-setup"
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-ring-upper.glb",
+        "fallbackTriangles": 2018368,
+        "naniteTriangles": 2018368,
+        "collisionSource": "Built/arena-fate-modern/afm-ring-upper-collision.glb",
+        "collisionAsset": "/Game/ArenaFateModern/Kit/Built/arena-fate-modern/afm-ring-upper-collision/StaticMeshes/SM_afm-ring-upper-collision.SM_afm-ring-upper-collision",
+        "collisionTriangles": 1416,
+        "collisionNanite": false,
+        "collisionTraceFlag": "CTF_USE_COMPLEX_AS_SIMPLE",
+        "navigationGeometry": "architectural-proxy-body-setup"
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-room-floor-crypt.glb",
+        "fallbackTriangles": 297348,
+        "naniteTriangles": 297348
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-room-floor-service.glb",
+        "fallbackTriangles": 188288,
+        "naniteTriangles": 188288
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-room-floor.glb",
+        "fallbackTriangles": 36284,
+        "naniteTriangles": 36284
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-sand.glb",
+        "fallbackTriangles": 768,
+        "naniteTriangles": 768
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-01.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-02.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-03.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-05.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-06.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-07.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-09.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-10.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-11.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-13.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-14.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-seats-15.glb",
+        "fallbackTriangles": 120320,
+        "naniteTriangles": 120320
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-statue-course.glb",
+        "fallbackTriangles": 33088,
+        "naniteTriangles": 33088
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-tower-108.glb",
+        "fallbackTriangles": 145840,
+        "naniteTriangles": 145840
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-tower-12.glb",
+        "fallbackTriangles": 146614,
+        "naniteTriangles": 146614
+      },
+      {
+        "source": "Built/arena-fate-modern/afm-under-cross.glb",
+        "fallbackTriangles": 168448,
+        "naniteTriangles": 168448
+      },
+      {
+        "source": "Regions/central-empire/capital/arenarea/arena-of-fate/Scene/af-effigy-chains-cthraxis.glb",
+        "fallbackTriangles": 7416,
+        "naniteTriangles": 7416
+      },
+      {
+        "source": "Regions/central-empire/capital/arenarea/arena-of-fate/Scene/af-effigy-chains-droggath.glb",
+        "fallbackTriangles": 7944,
+        "naniteTriangles": 7944
+      },
+      {
+        "source": "Regions/central-empire/capital/arenarea/arena-of-fate/Scene/af-effigy-chains-krynnethoth.glb",
+        "fallbackTriangles": 6456,
+        "naniteTriangles": 6456
+      },
+      {
+        "source": "Regions/central-empire/capital/arenarea/arena-of-fate/Scene/af-effigy-chains-zulvath.glb",
+        "fallbackTriangles": 9480,
+        "naniteTriangles": 9480
+      }
+    ],
+    "proof": {
+      "path": "Saved/Jadg/arena-fate-modern/build.json",
+      "sha256": "c374aceaa413b4ac827159aec81b9aa22fb4df58e71bc99941063c397fa4e236"
+    }
+  },
+  "gameplayPreservation": {
+    "exact": true,
+    "fields": [
+      "entities",
+      "party",
+      "tiles",
+      "width",
+      "height",
+      "origin",
+      "storeys",
+      "place",
+      "nextEntityId"
+    ],
+    "unchangedFiles": [
+      "Config/DefaultEngine.ini",
+      "Config/DefaultGame.ini",
+      "scripts/maps/arena_fate_modern_gameplay.py"
+    ],
+    "comparison": "Before propagation snapshot from 2026-10-10"
+  },
+  "physicalWalk": {
+    "completed": true,
+    "reason": "round trip completed",
+    "return": true,
+    "pointsPlanned": 132,
+    "pointsReached": 132,
+    "seconds": 617.7752204984426,
+    "cutEvents": 3558,
+    "occluderComponents": 1594,
+    "fineNavigationBuilds": 1,
+    "xyToleranceCm": 35,
+    "zToleranceCm": 10,
+    "proof": {
+      "path": "Saved/Jadg/arena-fate-modern/walk.json",
+      "sha256": "34f4095d5a3a925329605a33e6a6b67360fed73c8eab74dba58b6aba0bfeec87"
+    }
+  },
+  "performance": {
+    "map": "arena-of-fate",
+    "resolution": [
+      1920,
+      1080
+    ],
+    "gpu": "NVIDIA GeForce RTX 4060 Ti",
+    "openSeconds": 31.15,
+    "post": "",
+    "storeys": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "storeyCount": 7,
+    "gpuMemoryMiB": {
+      "used": 4291.2,
+      "texturesStreaming": 208.0,
+      "texturesNonStreaming": 1808.2
+    },
+    "meshTextures": {
+      "count": 97,
+      "residentMiB": 43.7,
+      "allMipsMiB": 413.0
+    },
+    "meshes": {
+      "count": 189,
+      "triangles": 58405036,
+      "resourceMiB": 2005.1,
+      "largest": "/Game/Master/Statues/statue-dorsi/StaticMeshes/SM_Statue_Dorsi.SM_Statue_Dorsi",
+      "largestTriangles": 2900460
+    },
+    "captures": [
+      "ensemble-1200.png",
+      "sable-1200.png",
+      "gradins-1200.png",
+      "loge-1200.png",
+      "vestiaire-1200.png",
+      "prison-1200.png",
+      "catacombes-1200.png",
+      "escalier-1200.png",
+      "facade-1200.png",
+      "terrasse-1200.png",
+      "parvis-1200.png",
+      "galerie-haute-1200.png",
+      "fumetsu-1200.png",
+      "ensemble-2200.png",
+      "sable-2200.png",
+      "gradins-2200.png",
+      "loge-2200.png",
+      "vestiaire-2200.png",
+      "prison-2200.png",
+      "catacombes-2200.png",
+      "escalier-2200.png",
+      "facade-2200.png",
+      "terrasse-2200.png",
+      "parvis-2200.png",
+      "galerie-haute-2200.png",
+      "fumetsu-2200.png"
+    ],
+    "measures": [
+      {
+        "hour": "12:00",
+        "seconds": 11.2,
+        "frames": 968,
+        "fps": 86.3,
+        "frameMs": 11.59,
+        "p99FrameMs": 17.79,
+        "worstFrameMs": 30.29,
+        "gameMs": 5.36,
+        "renderMs": 11.59,
+        "gpuMs": 9.92
+      },
+      {
+        "hour": "22:00",
+        "seconds": 11.3,
+        "frames": 930,
+        "fps": 82.5,
+        "frameMs": 12.12,
+        "p99FrameMs": 20.23,
+        "worstFrameMs": 33.48,
+        "gameMs": 5.61,
+        "renderMs": 12.1,
+        "gpuMs": 10.15
+      }
+    ]
+  },
+  "captures": [
+    {
+      "path": "Saved/Captures/arena-fate-modern/ensemble-1200.png",
+      "sha256": "1b5aa770faf8034ee31275dbdc44ad990740866b8a40e1ffbb992c4ee9dc0829"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/ensemble-2200.png",
+      "sha256": "260bd0f995c3dfa0604dc73c64d701f4f1a23cc68f2e0f61a19d7e1af81b6a5b"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/sable-1200.png",
+      "sha256": "86be5611dcb5c2414206cdd2879782068f110be2a05047aa2b193e01d3e7c5a5"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/sable-2200.png",
+      "sha256": "3fa701bc04bd406f1ec287ec274ea7c777fd40fdc6dcb4f410d4f85dcdb1d1a5"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/gradins-1200.png",
+      "sha256": "b189e70d14a00350d4e5668479a589b2d6861075055d9a17d57827ee52acdfd9"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/gradins-2200.png",
+      "sha256": "1a8bbc03a0c5335a4de338dd25192cdbfdc67808f7f859f898cc382e72cc57c2"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/loge-1200.png",
+      "sha256": "9cc4b0142d2958dabe2681d16a283c3552139af1c78cc2ace1fe05aff0eaa2b4"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/loge-2200.png",
+      "sha256": "d4967d7a263d72afc49f03e2996d9f92a4b27cbc4889e77b956a4dcb4e2c9a84"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/vestiaire-1200.png",
+      "sha256": "3dc68f5fc73bb53d8290ad5644bb3f4ab26466c619adc578a958117d7b9d0991"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/vestiaire-2200.png",
+      "sha256": "0f4eaad7e5f2d917686144c25e6fb055e29d2cd9e724f27da0e3296bdad9ce05"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/prison-1200.png",
+      "sha256": "1a2bd6fc014b6fc7c863a04f79226a439c5390d2bde8aaad49799831ab1a2cf5"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/prison-2200.png",
+      "sha256": "2fa1ed5662345ed1c6c978f823325f876ec1a4dca70fe154e13d2d5bcf67928d"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/catacombes-1200.png",
+      "sha256": "ce00a2cd37fef42d7f2f494bccb1e2000599913b4bcae015182f134ccf10ee3b"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/catacombes-2200.png",
+      "sha256": "ac32925ea3a2eed000e623458d382e61aca6b755f7d6a05eff25d0eb90789070"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/escalier-1200.png",
+      "sha256": "a76c93f944c5d872000c92f3975d2b7aa3548e61d850a77d3efcd62a1148071f"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/escalier-2200.png",
+      "sha256": "caf68c1bf9ee857db1f1611034a70d18028033296f17ddd72deab836d7902517"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/facade-1200.png",
+      "sha256": "d11e7731b3742af9c2c5e827ca07754055c0031af01831bd677f404903150496"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/facade-2200.png",
+      "sha256": "0a3771e02f45a3025952d38b3600830c034a221d8b90ae0243ceb4b04575724e"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/terrasse-1200.png",
+      "sha256": "1bc0081f4acd063845453be3a99f195d6e4d6bbb4292b72de1e3ae6d140ec4f9"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/terrasse-2200.png",
+      "sha256": "62183d79d1e0b06a045097f33b559a24a13a49151195c429997ecfa3d0fe802b"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/parvis-1200.png",
+      "sha256": "48445e9105184f358fad5db78909216d4e716235eb38aa723f594a408c1ab5b6"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/parvis-2200.png",
+      "sha256": "7da649760d9bb9fbd814881cf75eb6686d45a699a0e1e35a842b13670365d3bd"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/galerie-haute-1200.png",
+      "sha256": "b3dbe1e1510417cbfcf326285ad11aed96a39a9a397f763e1aa540c03d70190e"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/galerie-haute-2200.png",
+      "sha256": "7afbb190ee76ea9161dec2ab557e37a0694d79f563a899e1436ce4d99bbb7861"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/fumetsu-1200.png",
+      "sha256": "bda8dfa926812bee10aabb94805add0b525dd62ba14c75e2bdd82f1946a0b616"
+    },
+    {
+      "path": "Saved/Captures/arena-fate-modern/fumetsu-2200.png",
+      "sha256": "7a102691cff66c7245ee68977aaf717437c0997d206216e9b1aab4a26ade173a"
+    }
+  ],
+  "limits": [
+    "Performance measured in short rotating-camera samples on the reference machine, without crowd; not a full-game benchmark.",
+    "Sound actors are installed; captured runs use NoSound and do not constitute an audio audition.",
+    "235 visit targets are navigation queries; the physical group walk covers the 66-point route in both directions."
+  ]
+}

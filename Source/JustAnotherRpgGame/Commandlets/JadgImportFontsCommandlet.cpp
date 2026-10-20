@@ -46,7 +46,7 @@ int32 UJadgImportFontsCommandlet::Main(const FString& Params)
 			UE_LOG(LogJadg, Error, TEXT("[Polices] %s : %s ne se lit pas"), *FJadgPaths::ToFString(Role), *Source);
 			return 1;
 		}
-		const FString PackageName = TEXT("/Game/UI/Fonts/") + FPaths::GetBaseFilename(Source);
+		const FString PackageName = TEXT("/Game/Jeu/UI/Fonts/") + FPaths::GetBaseFilename(Source);
 		const FString Name = FPackageName::GetShortName(PackageName);
 		UPackage* Package = CreatePackage(*PackageName);
 		Package->FullyLoad();

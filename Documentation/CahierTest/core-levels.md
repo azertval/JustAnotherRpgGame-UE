@@ -541,35 +541,59 @@ Un panneau de l'étage ne se désigne que de l'étage.
 - Vérifie que `cible.has_value()` est vrai.
 - Vérifie que `cible->type` vaut `"sign"`.
 
-### FormatV5Test.LArenaOfFateEstUneCarteATroisEtages
+### FormatV5Test.LArenaOfFateEstUneCarteASeptNiveauxAvecSesAccesEtSonCombat
 
 *Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:333`
 
-L'Arena of Fate est une carte à trois étages.
+L'Arena of Fate est une carte à sept niveaux avec ses accès et son combat.
 
 **Étapes**
 
 1. Charger l'Arena of Fate du contenu livré.
-2. Y entrer par « from-arenarea ».
-3. Mener le héros, à l'étage 1, sur le portail de la porte du triomphe (4, 12).
+2. Contrôler les sept noms/hauteurs, les arrivées sur les trois niveaux bas et le portail extérieur.
+3. Contrôler la zone sable, ses six rencontres et les quatre entrées alliées.
 
 **Résultat attendu**
 
 - Vérifie que `loaded.ok()` est vrai.
-- Vérifie que `etages.size()` vaut `3U`.
-- Vérifie que `etages[0].z` vaut `0.0F`.
-- Vérifie que `etages[1].z` est strictement inférieur à `0.0F`.
-- Vérifie que `etages[2].z` est strictement inférieur à `etages[1].z`.
-- Vérifie que `session.start(std::string{ARENA_OF_FATE}, "from-arenarea")` est vrai.
-- Vérifie que `session.heroCell()` vaut `(GridPosition{16, 19})`.
-- Vérifie que `session.heroStorey()` vaut `1`.
-- Vérifie que `aEntre(mene(session, 4.5F, 12.5F, 1), ARENA_OF_FATE)` est vrai.
-- Vérifie que `session.heroCell()` vaut `(GridPosition{6, 12})`.
-- Vérifie que `session.heroStorey()` vaut `0`.
+- Vérifie que `level.storeys()` vaut `attendus`.
+- Vérifie que `level.entry()` vaut `(GridPosition{44, 56})`.
+- Vérifie que `core::arrivalStoreyAt(level, arrivee.nom)` vaut `arrivee.etage`.
+- Vérifie que `session.start(std::string{ARENA_OF_FATE}, arrivee.nom)` est vrai.
+- Vérifie que `session.heroCell()` vaut `arrivee.caseAttendue`.
+- Vérifie que `session.heroStorey()` vaut `arrivee.etage`.
+- Vérifie que `portail.type` vaut `"portal"`.
+- Vérifie que `portail.storey` vaut `1`.
+- Vérifie que `std::get<std::string>(portail.properties.at("targetMap"))` vaut `"central-empire/capital/arenarea"`.
+- Vérifie que `std::get<std::string>(portail.properties.at("arrival"))` vaut `"from-arena-of-fate"`.
+- Vérifie que `portails` vaut `1U`.
+- Vérifie que `rencontres` vaut `6U`.
+- Vérifie que `entrees` vaut `4U`.
+- Vérifie que `zones.size()` vaut `1U`.
+- Vérifie que `zones[0]` vaut `(core::CombatZone{.name = "sable", .origin = {46, 44}, .columns = 44, .rows = 24})`.
+- Vérifie que `sable.storey` vaut `0`.
+- Vérifie que `sable.volume.has_value()` est vrai.
+- Vérifie que `marqueur.type` vaut `"encounter"`.
+- Vérifie que `marqueur.storey` vaut `0`.
+- Vérifie que `std::get<std::string>(marqueur.properties.at("encounterId"))` vaut `rencontre`.
+- Vérifie que `std::get<bool>(marqueur.properties.at("respawns"))` est faux.
+- Vérifie que `zones[0].contains(marqueur.position)` est vrai.
+- Vérifie que `marqueur.volume.has_value()` est vrai.
+- Vérifie que `marqueur.volume->minX` est supérieur ou égal à `volume.minX`.
+- Vérifie que `marqueur.volume->minY` est supérieur ou égal à `volume.minY`.
+- Vérifie que `marqueur.volume->minZ` est supérieur ou égal à `volume.minZ`.
+- Vérifie que `marqueur.volume->maxX` est inférieur ou égal à `volume.maxX`.
+- Vérifie que `marqueur.volume->maxY` est inférieur ou égal à `volume.maxY`.
+- Vérifie que `marqueur.volume->maxZ` est inférieur ou égal à `volume.maxZ`.
+- Vérifie que `arrivee.type` vaut `"arenaEntry"`.
+- Vérifie que `arrivee.storey` vaut `0`.
+- Vérifie que `std::get<std::int64_t>(arrivee.properties.at("rank"))` vaut `rang`.
+- Vérifie que `std::get<std::string>(arrivee.properties.at("side"))` vaut `"allies"`.
+- Vérifie que `zones[0].contains(arrivee.position)` est vrai.
 
 ### FormatV5Test.OnArriveALEtageDeSonPointDArrivee
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:366`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:437`
 
 On arrive à l'étage de son point d'arrivée.
 
@@ -585,7 +609,7 @@ On arrive à l'étage de son point d'arrivée.
 
 ### FormatV5Test.LaTraceDuGroupeSuitEnHauteur
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:383`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:454`
 
 La trace du groupe suit en hauteur.
 
@@ -603,7 +627,7 @@ La trace du groupe suit en hauteur.
 
 ### FormatV5Test.UneV4SeLitSansEtageNiVolume
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:409`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:480`
 
 Exigences : `EX-LVL-005`, `EX-LVL-039`
 

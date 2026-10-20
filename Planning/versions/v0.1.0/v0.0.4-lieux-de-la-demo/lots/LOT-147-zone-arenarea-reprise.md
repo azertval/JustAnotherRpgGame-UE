@@ -112,3 +112,10 @@ C'est une **v0** : le lot reste à faire. Les images du `LOT-108` sont encore da
 retrait ([D-32](../../../../vision/decisions.md)) appartient à la livraison finale, quand la
 relecture poste par poste aura dit ce qui se garde. La validation artistique, le contrôle à 2160p,
 la mesure à 60 images par seconde et l'image de l'onglet « Carte » restent dus.
+
+## La reconstruction revient ici — 20 octobre 2026
+
+Le `LOT-1021` de la `0.0.3` (Arenarea reconstruit au standard D-54) redisait ce lot : l'auteur
+l'abandonne le 20 octobre 2026, et la reconstruction d'Arenarea revient ici, sur le nouveau moteur,
+avec la chaîne de décor du `LOT-1019` (livrée). La commande des six façades de la porte, qui
+restait au `LOT-1019`, la suit.

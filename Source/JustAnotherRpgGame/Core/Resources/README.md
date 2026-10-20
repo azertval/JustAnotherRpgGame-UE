@@ -1,25 +1,10 @@
 # Core/Resources/
 
-**Clés d'assets d'entité** et **marqueurs** de substitution, sans dépendance au rendu (`LOT-39`).
+Les descriptions des pièces et des lieux, sans dépendance au moteur :
 
-- `AssetKey` — comment une donnée désigne son illustration : familles d'assets et contrat de
-  dimensions (`AssetFamilyDefinition`, `AssetFamilyTable`, `loadAssetFamilies`), clé d'asset
-  (`EX-CNT-040`, `EX-CNT-041`).
-- `AssetMarker` — le marqueur qui tient lieu d'illustration tant qu'aucune n'existe : pixels RVBA
-  peints depuis la clé (`assetMarker`, `stableAssetHash`), sans Qt ni GPU (`EX-ARCH-001`).
+- `ScenePieceManifest` résout les pièces déclarées dans les manifestes d’un lieu.
+- `ScenePlace` valide les identifiants de lieu et leurs chemins dans les données.
 
-- `SkeletonPose`, `SkeletonFile` — le squelette d'un modèle animé (`LOT-1005`) : la pose de ses os à
-  un instant d'un clip (`poseSkeleton`), et ce que déclarent `skeleton.json` (os, durée, boucle et
-  image clé des clips) et `character.json` (le modèle d'un personnage et son squelette).
-
-Il n'y a pas de `ResourceManager` unique dans `Core` (`EX-ARCH-080` dans sa formulation
-d'origine) : un gestionnaire de textures obligerait `Core` à connaître le GPU (`EX-NFR-010`,
-`EX-ARCH-010`). La gestion des ressources vit du côté qui les possède :
-
-- **Textures** → `HMI/Graphics` : décodage et upload (`hmi::TextureLoader`) ; les pixels d'un
-  marqueur d'entité (`hmi::EntityMarkers`) deviennent une texture par la bibliothèque du rendu
-  qui les dessine (`hmi::WorldSceneRenderer::textures()`).
-- **Cartes** → `Core/Levels` : `core::LevelLoader`/`core::LevelWriter`, avec validation
-  (`EX-LVL-004`).
-
-Réf. specs : `EX-ARCH-080` (amendée en conséquence).
+Les maillages, animations et textures sont importés par les scripts Unreal du dépôt.
+La lecture et l’écriture des cartes restent dans `Core/Levels`.
+Les familles d’illustrations sont contrôlées par `scripts/checks/check_asset_keys.py`.

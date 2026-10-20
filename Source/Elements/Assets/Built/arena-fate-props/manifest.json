@@ -1,0 +1,2085 @@
+{
+  "format": "jadg-arena-fate-props",
+  "version": 1,
+  "generator": "scripts/assetsGeneration/build_arena_fate_props.py",
+  "helperDependency": "scripts/assetsGeneration/build_arena_witness.py",
+  "coordinates": "metres; manifest X east, Y south, Z up; GLB X east, Y up, Z south",
+  "dimensionsAxisOrder": [
+    "width X",
+    "depth Y",
+    "height Z"
+  ],
+  "uvMetersPerRepeat": 2.0,
+  "materials": [
+    "stone_cream",
+    "marble_white",
+    "bronze",
+    "dark_metal",
+    "burgundy",
+    "sand",
+    "wood",
+    "mortar"
+  ],
+  "materialSource": "../arena-witness-materials/manifest.json",
+  "materialOverrides": {
+    "afp-service-amphora-pair": {
+      "burgundy": "pottery"
+    },
+    "afp-folded-linen": {
+      "mortar": "linen"
+    },
+    "afp-training-staves": {
+      "mortar": "linen"
+    },
+    "afp-wash-fountain": {
+      "stone_cream": "chamber_stone",
+      "mortar": "wash_water"
+    }
+  },
+  "sculptedWitness": "arena-wicked-witness, approved 2026-10-10",
+  "meshes": [
+    {
+      "id": "afp-weapon-rack",
+      "file": "afp-weapon-rack.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "wood"
+      ],
+      "triangles": 38668,
+      "assembledSimpleParts": 37,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.99,
+          -0.31,
+          0.0
+        ],
+        [
+          0.99,
+          0.31,
+          2.1325
+        ]
+      ],
+      "dimensions": [
+        1.98,
+        0.62,
+        2.1325
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "vestiaires",
+        "armurerie"
+      ],
+      "description": "Râtelier avec quatre épées et une lance, fers losangés, fixations bronze.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "292c97c61cb0cbae8eb7a7dded4dffa7e75f2aa195447156df3ddefb18ed37d4"
+    },
+    {
+      "id": "afp-shield-pair",
+      "file": "afp-shield-pair.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "wood"
+      ],
+      "triangles": 19520,
+      "assembledSimpleParts": 33,
+      "removedCollapsedBevelTriangles": 4,
+      "bounds": [
+        [
+          -0.755,
+          -0.37,
+          0.0005
+        ],
+        [
+          0.805,
+          0.1817,
+          0.8046
+        ]
+      ],
+      "dimensions": [
+        1.56,
+        0.5517,
+        0.8041
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "vestiaires",
+        "armurerie",
+        "entraînement"
+      ],
+      "description": "Deux boucliers sans emblème, bosses, bordures et poignées arrière.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0005
+      },
+      "sha256": "79b45608e06da3099fcea8646d97e71d06d5f5f449f63348b7c7a3f9f8c5145a"
+    },
+    {
+      "id": "afp-bench",
+      "file": "afp-bench.glb",
+      "materials": [
+        "bronze",
+        "wood"
+      ],
+      "triangles": 12146,
+      "assembledSimpleParts": 19,
+      "removedCollapsedBevelTriangles": 2,
+      "bounds": [
+        [
+          -0.975,
+          -0.315,
+          0.0
+        ],
+        [
+          0.975,
+          0.2986,
+          0.87
+        ]
+      ],
+      "dimensions": [
+        1.95,
+        0.6136,
+        0.87
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "galerie",
+        "vestiaires",
+        "public"
+      ],
+      "description": "Banc à trois lames, pieds tournés, dossier et rivets.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "fdb5aed48765f16daec4e3745ca331e4b9caae87c0ba06b2d9872712c25e5a15"
+    },
+    {
+      "id": "afp-chest",
+      "file": "afp-chest.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "wood"
+      ],
+      "triangles": 23474,
+      "assembledSimpleParts": 29,
+      "removedCollapsedBevelTriangles": 6,
+      "bounds": [
+        [
+          -0.58,
+          -0.3555,
+          0.0
+        ],
+        [
+          0.58,
+          0.3918,
+          0.797
+        ]
+      ],
+      "dimensions": [
+        1.16,
+        0.7473,
+        0.797
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "vestiaires",
+        "loges",
+        "stockage"
+      ],
+      "description": "Coffre cerclé avec couvercle cintré, serrures et poignées.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "8eeb7716d8177be2e1474fbb4b56d12856830f4cceb5aca7ad675e9f81a9ba66"
+    },
+    {
+      "id": "afp-amphora-pair",
+      "file": "afp-amphora-pair.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 43524,
+      "assembledSimpleParts": 32,
+      "removedCollapsedBevelTriangles": 4,
+      "bounds": [
+        [
+          -0.69,
+          -0.33,
+          0.0
+        ],
+        [
+          0.551,
+          0.351,
+          1.067
+        ]
+      ],
+      "dimensions": [
+        1.241,
+        0.681,
+        1.067
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "galerie",
+        "loges",
+        "stockage"
+      ],
+      "description": "Deux amphores creuses, anses épaisses et bandes géométriques sobres.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "867514133249bdcc3eb8c61aa462cebf0d8ee22f715a4e4090ac0bd891bb7ce4"
+    },
+    {
+      "id": "afp-barrel",
+      "file": "afp-barrel.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "wood"
+      ],
+      "triangles": 36446,
+      "assembledSimpleParts": 61,
+      "removedCollapsedBevelTriangles": 510,
+      "bounds": [
+        [
+          -0.398,
+          -0.4001,
+          0.0
+        ],
+        [
+          0.405,
+          0.4001,
+          0.974
+        ]
+      ],
+      "dimensions": [
+        0.803,
+        0.8002,
+        0.974
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "stockage",
+        "entretien"
+      ],
+      "description": "Tonneau en dix-huit douelles galbées, quatre cercles rivetés.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "f238a19de853ec9b33c8eeb1d1ea0505deff8d19ddf0a7cd34c512768da56586"
+    },
+    {
+      "id": "afp-crate-stack",
+      "file": "afp-crate-stack.glb",
+      "materials": [
+        "dark_metal",
+        "wood"
+      ],
+      "triangles": 22584,
+      "assembledSimpleParts": 114,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.835,
+          -0.402,
+          0.0
+        ],
+        [
+          0.795,
+          0.44,
+          1.27
+        ]
+      ],
+      "dimensions": [
+        1.63,
+        0.842,
+        1.27
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "stockage",
+        "entretien"
+      ],
+      "description": "Trois caisses fermées, planches séparées et renforts obliques.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "7a7a54aa852737463e10801517c663dbaca71860c35f72398e6b091cf8606342"
+    },
+    {
+      "id": "afp-rope-coil",
+      "file": "afp-rope-coil.glb",
+      "materials": [
+        "bronze",
+        "wood"
+      ],
+      "triangles": 149552,
+      "assembledSimpleParts": 20,
+      "removedCollapsedBevelTriangles": 12,
+      "bounds": [
+        [
+          -0.3128,
+          -0.3128,
+          0.0001
+        ],
+        [
+          0.9427,
+          0.3128,
+          0.1638
+        ]
+      ],
+      "dimensions": [
+        1.2555,
+        0.6256,
+        0.1637
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "entretien",
+        "stockage"
+      ],
+      "description": "Cordage continu en neuf tours et extrémité ferrée.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0001
+      },
+      "sha256": "13d4a3708ac0081244023831341b4dbea9c858699025e6362a13a9a21d49840c"
+    },
+    {
+      "id": "afp-maintenance-cart",
+      "file": "afp-maintenance-cart.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "wood"
+      ],
+      "triangles": 85558,
+      "assembledSimpleParts": 151,
+      "removedCollapsedBevelTriangles": 414,
+      "bounds": [
+        [
+          -0.62,
+          -0.755,
+          0.0
+        ],
+        [
+          0.72,
+          1.434,
+          1.6206
+        ]
+      ],
+      "dimensions": [
+        1.34,
+        2.189,
+        1.6206
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "entretien",
+        "services"
+      ],
+      "description": "Chariot à quatre roues à rayons, ridelles, tonneau et balai.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "97cc7624bbaf3841a95de1bf3c2bd2e66ca046aa3afc383917243c837105be92"
+    },
+    {
+      "id": "afp-brazier",
+      "file": "afp-brazier.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 22832,
+      "assembledSimpleParts": 21,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.4148,
+          -0.4148,
+          0.0
+        ],
+        [
+          0.4148,
+          0.4148,
+          1.2748
+        ]
+      ],
+      "dimensions": [
+        0.8296,
+        0.8296,
+        1.2748
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "galerie",
+        "arène",
+        "sous-sol"
+      ],
+      "description": "Brasero à vasque intérieure, nervures bronze et bûches; feu géré par moteur.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "e5d13759e613228c26bf831cbde0a46edef234b37ee56db678853ad4c70c3102",
+      "light": {
+        "color": "#ffc47d",
+        "radius": 4.0,
+        "position": [
+          0,
+          0,
+          1.28
+        ],
+        "flicker": true,
+        "always": false
+      }
+    },
+    {
+      "id": "afp-wall-lamp",
+      "file": "afp-wall-lamp.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 19886,
+      "assembledSimpleParts": 13,
+      "removedCollapsedBevelTriangles": 262,
+      "bounds": [
+        [
+          -0.19,
+          -0.1588,
+          0.0
+        ],
+        [
+          0.19,
+          0.53,
+          1.16
+        ]
+      ],
+      "dimensions": [
+        0.38,
+        0.6888,
+        1.16
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "galerie",
+        "loges",
+        "sous-sol"
+      ],
+      "description": "Applique ajourée, support courbe, coupe et capot; lumière gérée par moteur.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "ac6840d61fe4838b97f01e7a387f17145f03cf2d9859b14276b7eafa9d9906f4",
+      "light": {
+        "color": "#ffc47d",
+        "radius": 3.0,
+        "position": [
+          0,
+          0.34,
+          0.85
+        ],
+        "flicker": false,
+        "always": false
+      }
+    },
+    {
+      "id": "afp-loge-chair",
+      "file": "afp-loge-chair.glb",
+      "materials": [
+        "bronze",
+        "burgundy",
+        "wood"
+      ],
+      "triangles": 40350,
+      "assembledSimpleParts": 26,
+      "removedCollapsedBevelTriangles": 10,
+      "bounds": [
+        [
+          -0.3737,
+          -0.3637,
+          0.0
+        ],
+        [
+          0.3737,
+          0.315,
+          1.325
+        ]
+      ],
+      "dimensions": [
+        0.7474,
+        0.6787,
+        1.325
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "loges",
+        "administration"
+      ],
+      "description": "Fauteuil bourgogne capitonné, bois tourné et bronze.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "b474af45f51434f615a7f4455baff77fc19e1d09be0e4b13c0ae9fbe7e4ba181"
+    },
+    {
+      "id": "afp-loge-table",
+      "file": "afp-loge-table.glb",
+      "materials": [
+        "bronze",
+        "burgundy",
+        "marble_white",
+        "wood"
+      ],
+      "triangles": 22652,
+      "assembledSimpleParts": 20,
+      "removedCollapsedBevelTriangles": 52,
+      "bounds": [
+        [
+          -0.7455,
+          -0.43,
+          0.0
+        ],
+        [
+          0.7455,
+          0.43,
+          1.125
+        ]
+      ],
+      "dimensions": [
+        1.491,
+        0.86,
+        1.125
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "loges",
+        "administration"
+      ],
+      "description": "Table avec chemin bourgogne, deux coupes, vaisselle et carafe creuse.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "ba6b0322accf1ea4667310d2c6ba5177fa1ce04e041eda4823686a5c16da0120"
+    },
+    {
+      "id": "afp-lectern",
+      "file": "afp-lectern.glb",
+      "materials": [
+        "bronze",
+        "burgundy",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 10408,
+      "assembledSimpleParts": 7,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.325,
+          -0.288,
+          0.0
+        ],
+        [
+          0.325,
+          0.288,
+          1.139
+        ]
+      ],
+      "dimensions": [
+        0.65,
+        0.576,
+        1.139
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "administration",
+        "galerie"
+      ],
+      "description": "Pupitre autonome, pied mouluré et registre sans texte ni emblème.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "e3a8f70faa1d4b3afceb39d2a5ec854a612e127e4aa98a99d74d059a12c0f528"
+    },
+    {
+      "id": "afp-pallet",
+      "file": "afp-pallet.glb",
+      "materials": [
+        "burgundy",
+        "wood"
+      ],
+      "triangles": 9412,
+      "assembledSimpleParts": 31,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.92,
+          -0.36,
+          0.0
+        ],
+        [
+          0.92,
+          0.36,
+          0.45
+        ]
+      ],
+      "dimensions": [
+        1.84,
+        0.72,
+        0.45
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "prison",
+        "services"
+      ],
+      "description": "Paillasse sur châssis de bois, coussin et couverture bourgogne.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "1920a3acfc1711633e84380e4e6957d9f15d1aadd5c811fc262fd452fdd72375"
+    },
+    {
+      "id": "afp-chain-set",
+      "file": "afp-chain-set.glb",
+      "materials": [
+        "dark_metal"
+      ],
+      "triangles": 368828,
+      "assembledSimpleParts": 61,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.4598,
+          -0.085,
+          0.0002
+        ],
+        [
+          0.4598,
+          0.5778,
+          0.2278
+        ]
+      ],
+      "dimensions": [
+        0.9196,
+        0.6628,
+        0.2276
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "prison",
+        "stockage"
+      ],
+      "description": "Deux chaînes à maillons ouverts, anneaux et menottes neutres au sol.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0002
+      },
+      "sha256": "bd34427132ede6a107053bdb93cbb9b3a325fa3070c3547f454b57c0dc5cf18f"
+    },
+    {
+      "id": "afp-neutral-sarcophagus",
+      "file": "afp-neutral-sarcophagus.glb",
+      "materials": [
+        "bronze",
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 26456,
+      "assembledSimpleParts": 14,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -1.14,
+          -0.49,
+          0.0
+        ],
+        [
+          1.14,
+          0.49,
+          1.08
+        ]
+      ],
+      "dimensions": [
+        2.28,
+        0.98,
+        1.08
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "catacombes"
+      ],
+      "description": "Sarcophage neutre, moulures, panneaux marbre et anneaux bronze.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "f08ab611838ce6aed2aab8bee104ba43b8de2435493e0a8d678f3b7903dfa355"
+    },
+    {
+      "id": "afp-practice-stand",
+      "file": "afp-practice-stand.glb",
+      "materials": [
+        "wood"
+      ],
+      "triangles": 225004,
+      "assembledSimpleParts": 41,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.475,
+          -0.475,
+          0.0
+        ],
+        [
+          0.475,
+          0.475,
+          1.52
+        ]
+      ],
+      "dimensions": [
+        0.95,
+        0.95,
+        1.52
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "entraînement",
+        "vestiaires"
+      ],
+      "description": "Poteau d'entraînement habillé de cordage, sans personnage.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "b36e5086775956405c88ebf719c9c091d78fa460df3c7afcde2ed18a2117140c"
+    },
+    {
+      "id": "afp-training-staves",
+      "file": "afp-training-staves.glb",
+      "materials": [
+        "mortar",
+        "wood"
+      ],
+      "triangles": 1896,
+      "assembledSimpleParts": 6,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.2925,
+          -0.0423,
+          0.0008
+        ],
+        [
+          0.3685,
+          0.1423,
+          1.9899
+        ]
+      ],
+      "dimensions": [
+        0.661,
+        0.1846,
+        1.9891
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "vestiaires",
+        "entraînement"
+      ],
+      "description": "Trois bâtons d'entraînement à bouts émoussés, poignées de linge ; groupe de rangement.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0008
+      },
+      "sha256": "f8ebc720d86b3b2300f9f64516251e1e808a4e02b821220e44bb282047c85d76"
+    },
+    {
+      "id": "afp-folded-linen",
+      "file": "afp-folded-linen.glb",
+      "materials": [
+        "mortar"
+      ],
+      "triangles": 2872,
+      "assembledSimpleParts": 8,
+      "removedCollapsedBevelTriangles": 168,
+      "bounds": [
+        [
+          -0.305,
+          -0.19,
+          0.0
+        ],
+        [
+          0.326,
+          0.1906,
+          0.264
+        ]
+      ],
+      "dimensions": [
+        0.631,
+        0.3806,
+        0.264
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "vestiaires",
+        "services"
+      ],
+      "description": "Quatre linges pliés avec ourlets en vrai volume, à poser sur un banc existant.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "be1318a5d44c381d3fc3d7c2e220a1cd2fd98b71464cc8d3af9e829efc88e443"
+    },
+    {
+      "id": "afp-service-amphora-pair",
+      "file": "afp-service-amphora-pair.glb",
+      "materials": [
+        "burgundy"
+      ],
+      "triangles": 43524,
+      "assembledSimpleParts": 32,
+      "removedCollapsedBevelTriangles": 4,
+      "bounds": [
+        [
+          -0.69,
+          -0.33,
+          0.0
+        ],
+        [
+          0.551,
+          0.351,
+          1.067
+        ]
+      ],
+      "dimensions": [
+        1.241,
+        0.681,
+        1.067
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "vestiaires",
+        "catacombes",
+        "stockage"
+      ],
+      "description": "Amphores utilitaires en terre cuite ; emprise exacte de la paire existante.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "e689af90a7802770ef32d1cff7f3251070526d5e0b256b6c594f6156426edab7"
+    },
+    {
+      "id": "afp-loge-chair-sculpted",
+      "file": "afp-loge-chair-sculpted.glb",
+      "materials": [
+        "bronze",
+        "burgundy",
+        "wood"
+      ],
+      "triangles": 31048,
+      "assembledSimpleParts": 61,
+      "removedCollapsedBevelTriangles": 4,
+      "bounds": [
+        [
+          -0.3552,
+          -0.3101,
+          0.0
+        ],
+        [
+          0.3552,
+          0.289,
+          1.3156
+        ]
+      ],
+      "dimensions": [
+        0.7104,
+        0.5991,
+        1.3156
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "loges"
+      ],
+      "description": "Fauteuil sculpté au gabarit existant, bois, velours à vrais plis et garnitures.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "222bc94f116f2c375b89aa9101cfb486c3bf1c1f10d21f90cb5e12b95da9cd66"
+    },
+    {
+      "id": "afp-loge-table-sculpted",
+      "file": "afp-loge-table-sculpted.glb",
+      "materials": [
+        "bronze",
+        "burgundy",
+        "marble_white",
+        "wood"
+      ],
+      "triangles": 27312,
+      "assembledSimpleParts": 25,
+      "removedCollapsedBevelTriangles": 52,
+      "bounds": [
+        [
+          -0.7455,
+          -0.43,
+          0.0
+        ],
+        [
+          0.7455,
+          0.43,
+          1.125
+        ]
+      ],
+      "dimensions": [
+        1.491,
+        0.86,
+        1.125
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "loges"
+      ],
+      "description": "Table existante enrichie de pieds tournés et d'une jupe gravée, coupes conservées.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "33d57969645fbf03fcf9638be90c2ec993d46660eda49ff9b30fb0d2d03e7a56"
+    },
+    {
+      "id": "afp-loge-lantern",
+      "file": "afp-loge-lantern.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 6880,
+      "assembledSimpleParts": 8,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.2304,
+          -0.2304,
+          0.0
+        ],
+        [
+          0.2304,
+          0.2304,
+          2.23
+        ]
+      ],
+      "dimensions": [
+        0.4608,
+        0.4608,
+        2.23
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "loges"
+      ],
+      "description": "Lanternon à socle de pierre, coupe et cage ; foyer défini dans sa fiche.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "6641c960877dfd40724e05616799ca0ac29efc2ac60a5687378f47876ca951d8",
+      "light": {
+        "color": "#ffc47d",
+        "radius": 4.0,
+        "position": [
+          0,
+          0,
+          1.7
+        ],
+        "flicker": false,
+        "always": true,
+        "candelas": 40,
+        "flamePosition": [
+          0,
+          0,
+          1.4
+        ],
+        "flameScale": 0.52
+      }
+    },
+    {
+      "id": "afp-velum-winch",
+      "file": "afp-velum-winch.glb",
+      "materials": [
+        "dark_metal",
+        "wood"
+      ],
+      "triangles": 58896,
+      "assembledSimpleParts": 23,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.49,
+          -0.325,
+          0.0
+        ],
+        [
+          0.527,
+          0.38,
+          0.827
+        ]
+      ],
+      "dimensions": [
+        1.017,
+        0.705,
+        0.827
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "terrasse",
+        "entretien"
+      ],
+      "description": "Treuil bas de velum, tambour cordé, manivelle et platines ; aucune haute perche.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "77998caa5fc1da55ba34a017c051d3bf7696b4abdf545d49aad5ba9e23881272"
+    },
+    {
+      "id": "afp-velum-anchor",
+      "file": "afp-velum-anchor.glb",
+      "materials": [
+        "dark_metal",
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 7464,
+      "assembledSimpleParts": 6,
+      "removedCollapsedBevelTriangles": 4,
+      "bounds": [
+        [
+          -0.31,
+          -0.285,
+          0.0
+        ],
+        [
+          0.31,
+          0.285,
+          0.7528
+        ]
+      ],
+      "dimensions": [
+        0.62,
+        0.57,
+        0.7528
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "terrasse"
+      ],
+      "description": "Ancrage bas de velum, socle mouluré et anneau fermé ; sommet sous un mètre.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "cce739c207729bf04b953408843a3db0e847987a05390e220ea5ad20495e936d"
+    },
+    {
+      "id": "afp-prison-cell-front",
+      "file": "afp-prison-cell-front.glb",
+      "materials": [
+        "dark_metal"
+      ],
+      "triangles": 27886,
+      "assembledSimpleParts": 59,
+      "removedCollapsedBevelTriangles": 14,
+      "bounds": [
+        [
+          -1.5,
+          -0.0425,
+          0.0
+        ],
+        [
+          1.5,
+          0.06,
+          2.6
+        ]
+      ],
+      "dimensions": [
+        3.0,
+        0.1025,
+        2.6
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "prison"
+      ],
+      "description": "Grille forgée de trois mètres, rivets, colliers et ouverture sans seuil de 1,10m.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0,
+        "doorOpeningX": [
+          -0.55,
+          0.55
+        ],
+        "doorClearHeight": 2.5,
+        "hingeLocalPosition": [
+          -0.55,
+          0,
+          0
+        ]
+      },
+      "sha256": "f99c9f3f818b2d5c6b8c6bffc44b4d2f51c99f8a95078895b097ae03859e91a6"
+    },
+    {
+      "id": "afp-prison-cell-return",
+      "file": "afp-prison-cell-return.glb",
+      "materials": [
+        "dark_metal"
+      ],
+      "triangles": 25024,
+      "assembledSimpleParts": 62,
+      "removedCollapsedBevelTriangles": 8,
+      "bounds": [
+        [
+          -1.2,
+          -0.0425,
+          0.0
+        ],
+        [
+          1.2,
+          0.06,
+          2.6
+        ]
+      ],
+      "dimensions": [
+        2.4,
+        0.1025,
+        2.6
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "prison"
+      ],
+      "description": "Retour de cellule droit de 2,40m, cadre et barreaux forgés, raccords alignés.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0,
+        "nominalEndpoints": [
+          [
+            -1.2,
+            0,
+            0
+          ],
+          [
+            1.2,
+            0,
+            0
+          ]
+        ]
+      },
+      "sha256": "0ba08753b764ab399db6c385551e844a09bdf2e00727d52b00e6ce851d084780"
+    },
+    {
+      "id": "afp-prison-cell-door-open",
+      "file": "afp-prison-cell-door-open.glb",
+      "materials": [
+        "dark_metal"
+      ],
+      "triangles": 16584,
+      "assembledSimpleParts": 37,
+      "removedCollapsedBevelTriangles": 8,
+      "bounds": [
+        [
+          -0.3363,
+          -0.0143,
+          0.0
+        ],
+        [
+          0.0402,
+          1.0147,
+          2.42
+        ]
+      ],
+      "dimensions": [
+        0.3765,
+        1.029,
+        2.42
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "prison"
+      ],
+      "description": "Battant de 1,04m sur 2,42m, ouvert à 105 degrés vers +Y, origine à la charnière gauche.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0,
+        "originRole": "left hinge",
+        "leafWidth": 1.04,
+        "leafHeight": 2.42,
+        "openAngleDegrees": 105,
+        "opensToward": "+Y exterior"
+      },
+      "sha256": "74c2defad859b2e8bf70a168fe97e52b440f2ea1acffec15c2324a8a683e7fc9"
+    },
+    {
+      "id": "afp-wash-fountain",
+      "file": "afp-wash-fountain.glb",
+      "materials": [
+        "dark_metal",
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 6640,
+      "assembledSimpleParts": 10,
+      "removedCollapsedBevelTriangles": 128,
+      "bounds": [
+        [
+          -0.67,
+          -0.0,
+          0.0
+        ],
+        [
+          0.67,
+          0.5774,
+          1.2
+        ]
+      ],
+      "dimensions": [
+        1.34,
+        0.5774,
+        1.2
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "vestiaires"
+      ],
+      "description": "Fontaine de service neutre, bassin creux, dosseret sans masque, bec de fer et eau sombre.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0,
+        "wallDatumY": 0,
+        "projectsToward": "+Y",
+        "noHeraldicMask": true,
+        "decorativeOnly": true
+      },
+      "sha256": "ff505165a918c500d19b8d4486b1fca542935f201b59546414c0ae6181eb38c1"
+    },
+    {
+      "id": "afp-nameplate-breith",
+      "file": "afp-nameplate-breith.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 6268,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Breith",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "d98ecdf75ddb71cfd4d9b5d1f658098a8d6ae2ec26ea012a0d0943a3878d123a"
+    },
+    {
+      "id": "afp-nameplate-bauron",
+      "file": "afp-nameplate-bauron.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 7214,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Bauron",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "7b60965eeab74049f96433be18394b68c3f961321fafe4f87531af3814121840"
+    },
+    {
+      "id": "afp-nameplate-bas",
+      "file": "afp-nameplate-bas.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 4618,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Bás",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "4eff61fda1ab56953ba6d78d835b946f1bada8f83b3cf73412ccda485cd7e32c"
+    },
+    {
+      "id": "afp-nameplate-dorsi",
+      "file": "afp-nameplate-dorsi.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 4980,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Dorsi",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "8506e4f69a863966bfb26ad889c99534b37614b6fdbe3d8d5114ff136c0adb36"
+    },
+    {
+      "id": "afp-nameplate-ba-ka",
+      "file": "afp-nameplate-ba-ka.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 6340,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Ba-Ka",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "d9fd86706888994c9fe8ee1f38e364032503457d75c20bd434b451f398b38ee5"
+    },
+    {
+      "id": "afp-nameplate-fruitful",
+      "file": "afp-nameplate-fruitful.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 6804,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Fruitful",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "214d73463e40e559babd9086ebbe60f8f2fa8fde0ae2e056e29fb72e4dd2547a"
+    },
+    {
+      "id": "afp-nameplate-aibidh",
+      "file": "afp-nameplate-aibidh.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 5916,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Aibidh",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "a79c19507fc54168633ec1a3e3bc2e830553022be222d6bcf2e348d7aa79fac7"
+    },
+    {
+      "id": "afp-nameplate-fumetsu",
+      "file": "afp-nameplate-fumetsu.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 17846,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Fumetsu Tenshinkin",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "4596cedd0b322fc8e04f683b4cc7347bd99bf9b97b3a3262ccfba0f53948f9f9"
+    },
+    {
+      "id": "afp-nameplate-nature-spirits",
+      "file": "afp-nameplate-nature-spirits.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 20040,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Les Esprits de la Nature",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "c8887fc245293cfaff3682e70f46b9be0029ed1c8fc52a0d979dacf73bb35ede"
+    },
+    {
+      "id": "afp-nameplate-glorious-one",
+      "file": "afp-nameplate-glorious-one.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 10562,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Glorious One",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "b61a481fd932bdfae4aa36f58f9a74b16a6f830114601d660c866145f1ae2a87"
+    },
+    {
+      "id": "afp-nameplate-tamera",
+      "file": "afp-nameplate-tamera.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 7816,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Tamera",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "36f3a019ecf063e429f3be126135e9a3ebd4586eff15eb815b327b3c78e8857a"
+    },
+    {
+      "id": "afp-nameplate-lumina",
+      "file": "afp-nameplate-lumina.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 7460,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Lumina",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "fd2d40b7988b57b1d63dbf9de780e6379becec7f472e24016d7bf9591aa645e9"
+    },
+    {
+      "id": "afp-nameplate-duality",
+      "file": "afp-nameplate-duality.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 17020,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Tamera & Bauron",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "8102f4c3abd75e466f8a62b664c7b9bbcb6a9b8234101ee9b6c41915be12c180"
+    },
+    {
+      "id": "afp-nameplate-oigridh",
+      "file": "afp-nameplate-oigridh.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 8632,
+      "assembledSimpleParts": 1,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -0.69,
+          0.0,
+          0.0
+        ],
+        [
+          0.69,
+          0.135,
+          0.68
+        ]
+      ],
+      "dimensions": [
+        1.38,
+        0.135,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Plaque de pierre, nom canonique réellement gravé : Òigridh",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "0204ac59cd61313ae69083b675ba1d89cb052da53bb734ad5245cb8d59dd068f"
+    },
+    {
+      "id": "afp-fumetsu-plinth-collar",
+      "file": "afp-fumetsu-plinth-collar.glb",
+      "materials": [
+        "marble_white"
+      ],
+      "triangles": 1504,
+      "assembledSimpleParts": 8,
+      "removedCollapsedBevelTriangles": 0,
+      "bounds": [
+        [
+          -1.06,
+          -1.06,
+          0.0
+        ],
+        [
+          1.06,
+          1.06,
+          0.18
+        ]
+      ],
+      "dimensions": [
+        2.12,
+        2.12,
+        0.18
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "suggestedZones": [
+        "coursive"
+      ],
+      "description": "Double assise sobre distinguant le socle de Fumetsu, sans emblème inventé.",
+      "placementHints": {
+        "keepOutOfWalkingRoute": true,
+        "front": "+Y south",
+        "groundOffset": -0.0
+      },
+      "sha256": "c5ee82fa2327150b2d31f86d71546901a02bb26e16018c2c6bb91956cf0c3a74"
+    }
+  ],
+  "previews": [
+    "kit-overview.png"
+  ],
+  "qaReport": "generation-report.json",
+  "notes": [
+    "Approved painted material kit reused; no texture edits.",
+    "All faces finished; props do not replace traversable architecture.",
+    "No invented heraldry, religious symbol or imperial symbol; no characters.",
+    "One logical mesh per GLB; material factors are fallback only, UE parent binds validated painted maps.",
+    "Lamps expose source metadata; no emissive flame or baked lighting."
+  ]
+}

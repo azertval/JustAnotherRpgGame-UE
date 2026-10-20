@@ -8,6 +8,22 @@
 
 #include "JadgMapFrame.generated.h"
 
+/** Une surface d'étage locale : limites dans le monde, sol à Minimum.Z, plafond à Maximum.Z. */
+USTRUCT(BlueprintType)
+struct FJadgStoreyRegion
+{
+	GENERATED_BODY()
+
+	UPROPERTY(EditAnywhere, Category = "Jadg")
+	int32 Storey = 0;
+
+	UPROPERTY(EditAnywhere, Category = "Jadg")
+	FVector Minimum = FVector::ZeroVector;
+
+	UPROPERTY(EditAnywhere, Category = "Jadg")
+	FVector Maximum = FVector::ZeroVector;
+};
+
 /**
  * @brief Ce qui relie une carte du moteur à une carte de Core : laquelle, et où est sa grille
  *        (LOT-1016).
@@ -66,8 +82,36 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Jadg")
 	TArray<FString> StoreyLevels;
 
+	/// Grille du terrain : coin dans le monde, pas en centimètres selon East/South, dimensions en sommets.
+	UPROPERTY(EditAnywhere, Category = "Jadg|Terrain")
+	FVector TerrainOrigin = FVector::ZeroVector;
+
+	UPROPERTY(EditAnywhere, Category = "Jadg|Terrain")
+	FVector2D TerrainSpacing = FVector2D(100.0, 100.0);
+
+	UPROPERTY(EditAnywhere, Category = "Jadg|Terrain")
+	int32 TerrainWidth = 0;
+
+	UPROPERTY(EditAnywhere, Category = "Jadg|Terrain")
+	int32 TerrainHeight = 0;
+
+	/// Z monde en centimètres, lignes South puis colonnes East ; interpolation bilinéaire.
+	UPROPERTY(EditAnywhere, Category = "Jadg|Terrain")
+	TArray<float> TerrainHeights;
+
+	/// Sur terrain, les étages sont locaux (pub, terrasse), jamais des tranches Z du quartier entier.
+	UPROPERTY(EditAnywhere, Category = "Jadg|Terrain")
+	TArray<FJadgStoreyRegion> StoreyRegions;
+
 	/// L'étage d'un point du monde : le plus haut dont le sol est sous lui, à un demi-mètre près.
 	int32 StoreyAt(double WorldZ) const;
+	int32 StoreyAt(const FVector& World) const;
+
+	/// Sol local de l'étage demandé, terrain interpolé au rez ; conserve les cartes sans relief.
+	double GroundZAt(const FVector& World, int32 Storey) const;
+
+	/// Faux hors de la grille ou si ses données ne sont pas valides.
+	bool TerrainZAt(const FVector& World, double& Height) const;
 
 	/**
 	 * Montre ou cache le niveau de chargement d'un étage (`StoreyLevels`) : caché, il quitte le monde

@@ -88,7 +88,7 @@ les tests retrouvent la même forme d'arborescence quel que soit l'endroit d'où
 | `Maps/world-maps.json` | les positions relevées sur les cartes peintes : ancre d'une région, cadre, lieux, quartiers | relevé par Ctrl+clic dans l'écran « Carte » (`LOT-94`) |
 | `Localization/` | `fr.lang`, `en.lang` (les textes du jeu, par clé), `rpg.glossary.csv` | à la main, `sourcebook glossaire` |
 | `Editor/Templates/` | quatre modèles de carte vide (`arena`, `blockout`, `interior`, `street`) | `LOT-EDITOR-08` |
-| `Editor/Prefabs/<niveau>/<nom>.json` | les préfabriqués (format `jadg-prefab`, `LOT-1018`), rangés par niveau de l'arbre des lieux (`central-empire/capital/`, `central-empire/capital/arenarea/`…) : des objets autour d'une origine, qu'une carte pose d'un bloc | à la main, `build_gate_scene.py` (le Colisée) |
+| `Editor/Prefabs/<niveau>/<nom>.json` | les préfabriqués (format `jadg-prefab`, `LOT-1018`), rangés par niveau de l'arbre des lieux (`central-empire/capital/`, `central-empire/capital/arenarea/`…) : des objets autour d'une origine, qu'une carte pose d'un bloc | description texte du préfabriqué |
 | `Credits/credits.json` | l'écran des crédits | à la main |
 
 Deux conventions traversent tous les catalogues. Les **identifiants** sont en anglais, en
@@ -507,6 +507,7 @@ l'arborescence depuis le `LOT-102` : un fichier qu'aucun manifeste ne cite fait 
 | `Assets/Maps/manifest.json` | les cartes peintes par l'auteur : fichier, niveau (monde, région, ville), provenance `author`, taille 1920 × 1080, empreinte SHA-256 | `check_map_assets.py` |
 | `Maps/world-maps.json` | sur ces cartes, en fractions de la largeur et de la hauteur : l'ancre et le cadre de chaque région, ses lieux, ses quartiers | `check_map_assets.py`, `hmi::WorldMapModel` |
 | `Assets/UI/illustrations.json` | les illustrations d'interface **produites** : clé du cahier, prompt, date, empreinte | `check_ui_assets.py` |
+| `Assets/UI/loading.json` | l'écran de chargement de chaque carte de Core : nom du lieu (clé de texte), illustrations découpées dans la planche de référence du lieu (`Assets/UI/Loading/`, hors Git, refaites par `scripts/assetsGeneration/prepare_loading_screens.py`) | `UI/JadgLoadingScreen` |
 | `scripts/sourcebook/corpus.toml` | les documents du corpus (voir plus bas) | `check_corpus_manifest.py` |
 
 Le `Assets/README.md` dit où un asset **va** : au niveau le plus bas qui couvre tous ses usages —
@@ -879,7 +880,6 @@ portent, leurs textures partagées.
 
 | Script | Ce qu'il produit |
 |---|---|
-| [`build_colosseum.py`](../../scripts/assetsGeneration/build_colosseum.py) | le Colisée en **pièces modulaires** à l'échelle de celui de Rome (189 × 156 m, 48 m, 80 travées) : une travée de chaque ordre, l'attique, la porte axiale et son tunnel, un quart des gradins, la loge impériale, le sable, le socle d'une statue ; textures au mètre, rugosité et métal en facteurs (plus de carte dérivée) ; écrit `Source/Elements/Assets/Built/colisee/` et son manifeste. [`build_gate_scene.py`](../../scripts/maps/build_gate_scene.py) les pose en anneau (le préfabriqué `colisee`), avec les dieux et les lions au maître, les bannières et les feux |
 
 ### La carte
 

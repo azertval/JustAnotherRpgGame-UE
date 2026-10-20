@@ -1,0 +1,99 @@
+{
+  "_doc": "Description texte de la geographie naturelle de la capitale, lue par scripts/maps/prepare_capitale_reference.py (demande de l'auteur du 17 octobre 2026 : suivre le Guide de Creation). Les planches 02 a 06 du guide partagent un cadrage de 1492 x 1054 pixels, vu de dessus ; la planche 01 (5000 x 3532) a le meme cadrage. Toutes les positions 'px' sont des pixels de ce cadrage commun (origine en haut a gauche, x vers l'est, y vers le sud). Les altitudes 'm' sont celles du catalogue topographique (pages 9-12), retenues pour le relief du 16 octobre 2026 : le guide ne donne aucune altitude, elles fixent l'equidistance des courbes de la planche 06 et leur niveau.",
+  "guide": "Documentation/SourceBook/references-capitale/output/Guide de Creation.pdf",
+  "planches": {"carte": 1, "paysage": 2, "relief": 3, "routes": 4, "eau": 5, "topographie": 6},
+  "cadrage": {
+    "_doc": "La planche est posee a plat sur le Landscape (4 032 m de cote) : sa largeur en occupe toute la largeur. Au nord, 784 m de collines prolongent la planche (les reliefs peripheriques de la planche 03 et l'horizon de la planche 02) ; au sud, 400 m de plaine et de bois.",
+    "metres_par_px": 2.7024,
+    "origine_m": [-2016.0, -1232.0]
+  },
+  "eau": {"_doc": "L'eau des planches 04 et 06 : bleu au-dessus du rouge.", "bleu_sur_rouge": 30},
+  "courbes": {
+    "_doc": "Les courbes de niveau de la planche 06 : traits plus sombres que leur fond (assombrissement), traces de moins de longueur_min_px retires, interruptions raccordees dans l'axe de la courbe (portee raccord_px, cone cone_deg). Les bandes entre courbes recoivent un niveau par moindres carres : une boucle fermee monte vers son interieur ; une courbe ouverte prend le sens que donnent les reperes d'altitude. Les reliefs de moins de nettoyage_px (bandes mal orientees) sont retires, ceux de moins de pointes_px ecretes a pointes_crans ; le bandeau superieur (bandeau_px), ou la planche ecrase les collines lointaines, est lisse.",
+    "assombrissement": 14,
+    "longueur_min_px": 25,
+    "squelette_min_px": 15,
+    "raccord_px": 28,
+    "cone_deg": 40,
+    "nettoyage_px": 9,
+    "pointes_px": 15,
+    "pointes_crans": 0.4,
+    "bandeau_px": 70,
+    "lissage_px": 2.2,
+    "correction_px": 150
+  },
+  "river": {
+    "_doc": "Axe de la Rubicund River, de son embouchure dans la baie vers l'amont (bord est). Fixe la pente du plan d'eau.",
+    "centre_px": [[700, 185], [800, 205], [900, 238], [1000, 280], [1090, 322], [1170, 372], [1235, 420], [1300, 450], [1400, 462], [1492, 462]],
+    "level_m": [0.0, 2.4],
+    "depth_m": 5.5,
+    "bed_m": 16.0
+  },
+  "creek": {
+    "_doc": "Axe de South Creek, de son estuaire dans le chenal occidental vers l'amont (bord sud), le long de Sloghood.",
+    "centre_px": [[150, 650], [125, 700], [140, 760], [168, 830], [182, 900], [192, 975], [195, 1054]],
+    "level_m": [0.0, 8.0],
+    "depth_m": 1.6,
+    "bed_m": 5.0
+  },
+  "bay": {"_doc": "Tourmaline Bay, la Petite Anse (le Natural Pool de la planche 01, ouvert sur la baie sous le pont de la Water Gate) et le chenal occidental, au niveau de la mer.", "depth_m": 24.0, "shelf_m": 2.2, "shelf_bed_m": 14.0, "bed_m": 170.0},
+  "rive_m": {"_doc": "Hauteur de la berge au bord de l'eau, puis la pente lue sur les courbes.", "berge": 0.6, "largeur": 8.0},
+  "anchors": [
+    {"id": "arenarea", "px": [828, 347], "m": 20, "beach": 0.1},
+    {"id": "arene-quai", "px": [790, 205], "m": 12, "beach": 0.0},
+    {"id": "docks", "px": [537, 290], "m": 8, "beach": 0.15},
+    {"id": "palacedomain", "px": [552, 522], "m": 68, "beach": 0.0},
+    {"id": "palais-terrasse", "px": [545, 490], "m": 74, "beach": 0.0},
+    {"id": "downtown", "px": [828, 582], "m": 42, "beach": 0.2},
+    {"id": "martpart", "px": [1112, 522], "m": 23, "beach": 0.2},
+    {"id": "uptown", "px": [507, 821], "m": 58, "beach": 0.3},
+    {"id": "artisansquare", "px": [739, 753], "m": 52, "beach": 0.3},
+    {"id": "scholarnest", "px": [940, 828], "m": 44, "beach": 0.3},
+    {"id": "dweomer", "px": [1179, 746], "m": 37, "beach": 0.2},
+    {"id": "neckoffoods", "px": [1194, 1015], "m": 35, "beach": 0.6},
+    {"id": "bloomburgs", "px": [530, 1003], "m": 48, "beach": 0.5},
+    {"id": "sloghood", "px": [269, 791], "m": 38, "beach": 0.5},
+    {"id": "oldtown", "px": [1052, 179], "m": 24, "beach": 0.1},
+    {"id": "tour-lune", "px": [1037, 142], "m": 46, "beach": 0.0},
+    {"id": "rive-rocheuse", "px": [1400, 440], "m": 30, "beach": 0.0},
+    {"id": "ile-tigre", "px": [205, 140], "m": 35, "beach": 0.1},
+    {"id": "fort-cotier", "px": [45, 388], "m": 20, "beach": 0.0}
+  ],
+  "marges": {
+    "_doc": "Au-dela de la planche : au nord, les collines montent de nord_m sur toute la marge, avec des croupes ; au sud, le dernier rang de la planche se prolonge.",
+    "nord_m": 70.0
+  },
+  "zones": {
+    "_doc": "Contours en pixels de la planche 01. remparts : l'enceinte (les rues y sont pavees, de la Water Gate a la Witchgate par l'Arena Gate, la Market Gate, la Baudon Gate et la Tamera Gate) ; jardins : le domaine du palais et Tyreen's Verdant ; champs : les cultures de Neckoffoods.",
+    "remparts": [[620, 325], [660, 297], [700, 265], [725, 215], [752, 195], [790, 185], [830, 193], [870, 213], [905, 238], [960, 250], [992, 288], [1030, 323], [1065, 350], [1060, 400], [1055, 460], [1100, 490], [1172, 505], [1270, 547], [1310, 600], [1363, 693], [1390, 800], [1410, 905], [1300, 935], [1186, 962], [1104, 965], [1017, 925], [950, 936], [822, 928], [710, 932], [630, 944], [440, 965], [340, 965], [335, 920], [335, 865], [390, 850], [385, 780], [380, 710], [335, 645], [300, 600], [300, 540], [315, 520], [325, 490], [380, 380], [420, 345], [580, 330]],
+    "jardins": [
+      [[400, 390], [480, 365], [560, 380], [592, 440], [582, 520], [522, 562], [440, 560], [398, 500]],
+      [[592, 572], [690, 568], [700, 625], [600, 632]]
+    ],
+    "champs": [[1150, 960], [1492, 930], [1492, 1054], [1130, 1054]]
+  },
+  "parcels": {"_doc": "Champs de Neckoffoods : trame de parcelles, angle de la route du grain.", "angle_deg": -12, "size_m": [70, 32], "ploughed": 0.45},
+  "couvert": {
+    "_doc": "Le couvert de la planche 02, lu par sa couleur adoucie (rayon flou_px) : foret sous lum_foret, terre seche ou rocheuse quand le rouge passe le vert de sec, le reste en prairie.",
+    "flou_px": 5,
+    "lum_foret": 100,
+    "sec": 6
+  },
+  "routes": {
+    "_doc": "Le reseau de la planche 04, vectorise : l'axe de chaque voie est lu au pixel pres, sa classe a sa largeur dessinee (seuils_px) ; la largeur au sol est celle de la classe (largeurs_m), le dessin de la planche donnant 16 a 32 m de voie a cette echelle. Pavage dans l'enceinte, terre battue au-dehors. Le terrain est adouci sous la voie (nivellement_m) pour qu'elle ne penche pas en travers.",
+    "lum_max": 200,
+    "saturation_max": 0.3,
+    "seuils_px": [7.0, 10.0],
+    "largeurs_m": {"ruelle": 4.5, "rue": 7.0, "avenue": 12.0},
+    "bord_m": 1.2,
+    "nivellement_m": 10.0
+  },
+  "arene": {
+    "_doc": "L'emprise de l'Arena of Fate (fiche L07-01, demande de l'auteur du 17 octobre 2026) : le centre du sable relu sur la planche 01, sur la pointe entre la baie et l'embouchure, dans l'anneau de Gauntlet St. L'ovale du monument (189 x 156 m, style-3d.md) a son grand axe d'est en ouest, comme le dessin. Le terrain y est mis de niveau a la mediane du relief de l'emprise (le site penche de 8 m vers la baie), entoure d'un parvis pave de parvis_m, puis rejoint la pente sur raccord_m. Le dessin, en perspective, donne a l'arene pres de 310 m : seule sa position est lue, jamais sa taille.",
+    "centre_px": [807.2, 253.6],
+    "demi_axes_m": [94.5, 78.0],
+    "cap_deg": 0.0,
+    "parvis_m": 20.0,
+    "raccord_m": 45.0
+  }
+}

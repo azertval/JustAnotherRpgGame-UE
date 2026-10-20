@@ -166,6 +166,60 @@ TEST(SerieDeLArene, LaSerieMonteEnDifficulte) {
 }
 
 /**
+ * @brief La démo de la capitale (demande de l'auteur du 19 octobre 2026) joue la série sur le
+ *        sable de l'arène posée dans la capitale : chaque rencontre s'y monte comme le moteur la
+ *        monte (`AJadgCombat::Mount` : le marqueur de la rencontre, les points d'entrée du groupe,
+ *        la zone qui les contient), sur la même grille tactique que la carte de l'arène.
+ * \castest{<b>La carte de la capitale monte chaque rencontre de la serie comme la carte de
+ * l'arene.</b><br/>
+ * \tcat Integration · Serie de l'arene · Demo de la capitale<br/>
+ * \tcrit Critique<br/>
+ * \tetapes 1. Charger la carte de l'arene et celle de la capitale (scripts/maps/capitale_demo.py).
+ * <br/>2. Pour chaque rencontre, preparer le combat sur l'une et l'autre a partir de leur marqueur
+ * et de leurs points d'entree.
+ * \tattendu Les deux montages reussissent, avec une zone de meme taille, le declencheur et le
+ * groupe aux memes cases de la grille tactique.
+ * }
+ */
+TEST(SerieDeLArene, LaCapitaleMonteLaSerieCommeLArene) {
+    const test_support::ArenaContent arene(ELEMENTS);
+    const auto charger = core::WorldTravel::directoriesLoader({ELEMENTS / "Levels"});
+    const core::LevelLoadResult sable = charger(test_support::SABLE);
+    const core::LevelLoadResult capitale = charger("Capitale");
+    ASSERT_TRUE(sable.ok()) << sable.error;
+    ASSERT_TRUE(capitale.ok()) << capitale.error;
+    const auto monter = [](const core::Level& carte, std::string_view id,
+                           const core::Encounter& rencontre) -> core::MapEncounterResult {
+        const std::optional<core::GridPosition> declencheur =
+            core::encounterTriggerOn(carte, rencontre.id);
+        const std::vector<core::GridPosition> entree = core::partyDeploymentOn(carte);
+        if (!declencheur.has_value() || entree.empty()) {
+            return {.setup = std::nullopt, .issue = "ni marqueur de rencontre ni point d'entree"};
+        }
+        return core::prepareMapEncounter(carte, id, rencontre, *declencheur, entree,
+                                         core::ExplorationSnapshot{}, "");
+    };
+    for (const Etape& etape : SERIE) {
+        const core::Encounter* rencontre = arene.encounters.find(etape.rencontre);
+        ASSERT_NE(rencontre, nullptr) << etape.rencontre;
+        const core::MapEncounterResult attendu =
+            monter(*sable.level, test_support::SABLE, *rencontre);
+        const core::MapEncounterResult obtenu = monter(*capitale.level, "Capitale", *rencontre);
+        ASSERT_TRUE(attendu.ok()) << etape.rencontre << " : " << attendu.issue;
+        ASSERT_TRUE(obtenu.ok()) << etape.rencontre << " : " << obtenu.issue;
+        EXPECT_EQ(obtenu.setup->zone.columns, attendu.setup->zone.columns) << etape.rencontre;
+        EXPECT_EQ(obtenu.setup->zone.rows, attendu.setup->zone.rows) << etape.rencontre;
+        EXPECT_EQ(obtenu.setup->heroCell, attendu.setup->heroCell) << etape.rencontre;
+        EXPECT_EQ(obtenu.setup->partyCells, attendu.setup->partyCells) << etape.rencontre;
+        EXPECT_EQ(core::mapToZone(obtenu.setup->zone,
+                                  *core::encounterTriggerOn(*capitale.level, rencontre->id)),
+                  core::mapToZone(attendu.setup->zone,
+                                  *core::encounterTriggerOn(*sable.level, rencontre->id)))
+            << etape.rencontre;
+    }
+}
+
+/**
  * @brief Le test de garde de l'équilibrage : chaque rencontre de la série, jouée par le groupe
  *        entier à son niveau, se termine ; en Release, sur trente graines, le groupe en gagne
  *        dans la bande que la mesure complète a fixée.

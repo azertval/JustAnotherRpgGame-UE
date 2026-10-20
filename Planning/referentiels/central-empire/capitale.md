@@ -192,5 +192,9 @@ Les catacombes **feront l'objet d'un donjon cultiste** à part entière (voir la
 `LOT-157`) : le Culte de l'Aile d'Ombre, qui n'a ni statue ni loge au-dessus, tient ce qui est en
 dessous. Dans la démo `0.0.1`, l'escalier existe et **reste fermé**.
 
+**Précision de l'auteur du 19 octobre 2026 : on entre dans les catacombes par un mur à
+interrupteur caché.** Au repos, le mur ferme le passage : la vérification d'accès de la
+capitale (`verify_capitale_arena_access.py`) compte les catacombes à part, comme fermées.
+
 
 **Catacombes — décision de l'auteur du 2 octobre 2026 : aucun symbole impérial**, y compris à l'escalier d'entrée. L'emblème du Culte, ailes violettes bordées d'or sur noir (SB p. 44), reste réservé à ce niveau.

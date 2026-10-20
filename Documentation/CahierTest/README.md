@@ -1,6 +1,6 @@
 # Cahier de test
 
-**699 cas de test**, un par test automatisé du dépôt. Le cahier est **engendré** depuis les blocs `\castest{…}` écrits au-dessus de chaque test par `scripts/docs/generate_cahier_test.py` : il ne s'édite pas — on corrige le commentaire du test, puis on relance le script. La CI refuse un cahier périmé, et refuse un test sans bloc. Seule la [recette manuelle](recette-manuelle.md) s'écrit à la main.
+**676 cas de test**, un par test automatisé du dépôt. Le cahier est **engendré** depuis les blocs `\castest{…}` écrits au-dessus de chaque test par `scripts/docs/generate_cahier_test.py` : il ne s'édite pas — on corrige le commentaire du test, puis on relance le script. La CI refuse un cahier périmé, et refuse un test sans bloc. Seule la [recette manuelle](recette-manuelle.md) s'écrit à la main.
 
 ## Lire une fiche
 
@@ -25,12 +25,12 @@ Chaque cas porte l'**identifiant GoogleTest** (`Suite.Nom`, retrouvable tel quel
 | [Core · Gameplay](core-gameplay.md) | Tests unitaires | 21 | — | 12 | 8 | 1 |
 | [Core · Levels](core-levels.md) | Tests unitaires | 134 | 1 | 26 | 90 | 17 |
 | [Core · Math](core-math.md) | Tests unitaires | 26 | 4 | — | 18 | 4 |
-| [Core · Resources](core-resources.md) | Tests unitaires | 34 | 13 | 6 | 14 | 1 |
+| [Core · Resources](core-resources.md) | Tests unitaires | 11 | 5 | — | 6 | — |
 | [Core · Rpg](core-rpg.md) | Tests unitaires | 113 | 3 | 62 | 46 | 2 |
 | [Core · Time](core-time.md) | Tests unitaires | 7 | — | 1 | 6 | — |
 | [Core · Ui](core-ui.md) | Tests unitaires | 7 | 5 | — | 2 | — |
 | [Core · World](core-world.md) | Tests unitaires | 76 | 7 | 34 | 32 | 3 |
-| **Total** | | **699** | **62** | **254** | **348** | **35** |
+| **Total** | | **676** | **54** | **248** | **340** | **34** |
 
 ## Ce que le cahier couvre
 

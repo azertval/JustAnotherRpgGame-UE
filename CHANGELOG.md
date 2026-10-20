@@ -6,6 +6,306 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **La démo de la capitale démarre ; vestiaires et prison aménagés** (20 octobre 2026, retour de
+  l'auteur : « la démo ne démarre pas et les vestiaires / prison sont trop simples », à juger par
+  lui). *Démarrage* : dans le jeu lancé, `AJadgWitnessReview` reconstruisait le maillage de
+  navigation de l'arène d'un bloc (30 s sans image), puis à nouveau à chaque cellule World
+  Partition chargée ; dans un monde de jeu sans rapport de marche, le profil fin s'applique une
+  fois et Recast construit en arrière-plan, les tuiles proches d'abord (les éditeurs et les
+  contrôles gardent la construction bloquante). La coupe de caméra ne trace plus les deux mille
+  pièces de l'arène à chaque image : seulement celles dont la boîte croise le rayon de la caméra.
+  *Vestiaires et prison* : `scripts/assetsGeneration/arena_undercroft.py` dessine leur
+  aménagement fixe (`afm-vestiaire-nord`, `afm-vestiaire-sud`, `afm-prison`) : dans chaque
+  vestiaire, la paroi de loculi à deux rangs et portes de bois et son banc de marbre à coussins,
+  l'armurerie du mur ouest (lances au râtelier, scuta, boucliers ronds, glaives), deux tables de
+  massage et leurs étagères de fioles, la fosse d'entraînement sablée et son palus, les manteaux
+  aux chevilles, deux lampes de bronze pendues, une mosaïque devant la porte ; dans la prison,
+  quatre cellules à cloisons de pierre et grilles de fer, paille, fers et seaux (celle de l'enfant
+  fermée, cadenas), l'enclos grillagé des condamnés avec son banc et ses anneaux, le tableau de
+  clés du garde, le pilori, le poteau de flagellation, une grille d'écoulement et des chaînes
+  pendues aux voûtes. Les meubles du catalogue et des accessoires s'y rangent (linges dans les
+  niches, amphores, coffres, mannequins, bancs, braseros, poste du garde, râtelier, abreuvoir) ;
+  les anciens meubles épars de ces deux salles sont retirés. On parle à l'enfant à travers la
+  grille ; le contrôle d'accès le vérifie devant elle.
+- **Optimisation de la capitale par les outils du moteur, sans rien simplifier ; écran de
+  chargement** (20 octobre 2026, demandes de l'auteur). *Mesure* : profil CSV du moteur
+  (`csvprofile`) sur un tour de caméra dans l'arène. Le régime établi tenait 61 images/s (fil de
+  rendu 16 ms, processeur graphique 13 ms) ; les à-coups venaient de la navigation — même en
+  arrière-plan, Recast intégrait ses tuiles sur le fil du jeu : 32,6 s cumulées, jusqu'à 272 ms
+  d'une image. *Navigation construite avec la carte* : `capitale_demo.py` enregistre le maillage
+  de l'arène au profil fin, Static et partitionné, et l'étape `navigation` de
+  `rebuild_capitale_relief.ps1` le découpe par `WorldPartitionNavigationDataBuilder` en morceaux
+  chargés avec les cellules ; `AJadgWitnessReview` ne reconstruit plus un maillage Static. Après :
+  13 ms de navigation sur tout le profil, 12 images de plus de 100 ms (167 avant, toutes au
+  démarrage), 57 images/s sur le tour de caméra, 99e centile à 28 ms (82 à 111 avant).
+  *Chargement des cellules* : `s.AdaptiveAddToWorld` et des lots d'enregistrement plus petits
+  étalent l'arrivée d'une cellule sur plusieurs images. *Lumières* : les feux et lampes de l'arène
+  s'effacent au-delà de 60 m (fondu de 15 m) ; leurs flammes restent. *Coupe de caméra* : seule la
+  cellule chargée est relue, plus tout le monde. *Écran de chargement* (`UI/JadgLoadingScreen`) :
+  l'illustration de référence du lieu — les quatre vues de la planche validée de l'arène,
+  découpées par `scripts/assetsGeneration/prepare_loading_screens.py` dans
+  `Source/Elements/Assets/UI/Loading/`, tour à tour —, le nom du lieu, ce qui se prépare et un
+  indicateur qui tourne ; pendant le chargement de la carte par le lecteur de films du moteur,
+  puis par-dessus le jeu jusqu'à ce que le monde soit prêt (cellules chargées, navigation prête,
+  trente images de suite sous 50 ms ; trois minutes au plus), aussi dans l'éditeur.
+  *Agent de navigation au gabarit du personnage* : la marche du parcours de la démo dans le jeu
+  lancé (`-JadgWitnessWalk`, points `WALK` de `capitale_demo.py`) a montré que le maillage, bâti
+  pour l'agent par défaut du moteur (1,44 m, rayon 35 cm), menait le groupe (capsule de 1,96 m,
+  rayon 21 cm) sous le pignon de voûte au pied de l'escalier sud, où il restait coincé, et sous
+  les pointes de la herse levée des portes du sable (1,94 m). `Config/DefaultEngine.ini` déclare
+  l'agent du jeu (`SupportedAgents` : 1,90 m, rayon 25 cm, marche de 45 cm) — la hauteur
+  arrondie aux cellules de 5 cm de Recast, le rayon assez fin pour garder le passage sous l'arc
+  des vomitoires — et la herse est levée de 12 cm (`arena_cavea.podium_gate`, pointes à 2,06 m).
+  Le contrôle d'accès passe partout à ce gabarit, et le groupe fait le parcours entier dans le
+  jeu : du parvis à la mère, au garde de la prison, au maître d'arène sur le sable (123 s).
+  *Lumière du sous-sol* : la pose de l'arène dans la capitale n'installait pas l'atmosphère des
+  accessoires (`arena_fate_atmosphere.install`) — appliques, lanternes et braseros sans flamme ni
+  lumière, vestiaires, prison et couloirs noirs ; elle l'installe, aux profils intérieurs de la
+  description (vestiaires 240 cd, prison 200), comme la carte du LOT-1022. *Textures* : la réserve
+  de streaming des textures passe à 2 500 Mo (`r.Streaming.PoolSize`) — l'arène la dépassait de
+  420 Mo au démarrage, d'où des textures floues ; les captures tournaient déjà à 4 000 Mo. Avec
+  ces lumières, le tour de caméra tient 58 images/s (processeur graphique 13,4 ms), et deux images
+  seulement passent 40 ms une fois le monde prêt. Captures, mesures avant et après, parcours de la
+  démo et écran de chargement : `Planning/versions/v0.1.0/v0.0.4-lieux-de-la-demo/annexes/LOT-106/capitale-20261020/`.
+  *Vérification* : `-JadgApresChargement=<fichier.png>` enregistre ce que le joueur voit quand
+  l'écran de chargement s'efface ; le lancement sans titre (`-JadgSansTitre`) garde l'écran, que
+  seuls les captures, parcours et marches de contrôle retirent.
+- **La démo réintroduite autour de l'Arena of Fate, dans la capitale ; les détails du Colisée**
+  (19 octobre 2026, demande de l'auteur, à juger par lui : « le colisée est suffisamment
+  imposant », aucune autre zone). *Démo* : `scripts/maps/capitale_demo.py` écrit la carte de Core
+  `Source/Elements/Levels/Capitale.json` — la grille de l'arène prolongée jusqu'au parvis sud,
+  ses sept étages, la zone de combat, les six rencontres de la série et les points d'entrée du
+  groupe recopiés d'`arena-of-fate.json` — et, à l'étape `demo` de `rebuild_capitale_relief.ps1`,
+  la pose dans la carte : la mère à son étal devant la porte monumentale du sud (le groupe arrive
+  face à elle), le garde devant les cellules de la prison (-6 m) et l'enfant dans la seconde
+  cellule jusqu'à sa libération (il attend ensuite auprès de sa mère), le maître d'arène à la porte
+  du triomphe, au bord du sable, qui lance la série. La quête des pommes et ses dialogues sont
+  inchangés. Le repère de la carte de Core passe au coin de cette grille, au sol de l'arène ; le
+  groupe, les personnages, le départ, un volume de navigation autour de l'arène et le contrôleur du
+  profil fin de navigation et de la coupe de caméra (`AJadgWitnessReview`) sont toujours chargés.
+  La capitale est sa propre carte d'arène (`ArenaMap`, `Config/DefaultGame.ini`) : le combat se
+  joue sur le sable posé dans la capitale, rouverte pour lui. La carte d'essai
+  `Source/Test/Fixtures/Exploration/Levels/Capitale.json`, qui ne portait que le relief, est
+  remplacée. Le test `SerieDeLArene.LaCapitaleMonteLaSerieCommeLArene` monte chaque rencontre sur
+  la capitale comme sur l'arène ; `verify_capitale_arena_access.py` vérifie que l'arrivée du
+  groupe et chaque personnage sont atteints depuis le parvis. *Colisée* : un porte-bannière du
+  catalogue (SM_AOF_080) de chaque côté de chaque loge, sur le premier rang de la media cavea, la
+  bannière de la délégation pendue à sa traverse et tournée vers le sable (26) ; dans les
+  vestiaires, patères et bancs au mur du fond, table de préparation, tabourets, panier et jarres au
+  mur ouest ; dans la prison, un lit et un sac dans les cellules, le poste du garde (table,
+  tabouret, caisse) et un râtelier ; l'étal de la mère sur le parvis. La pose de l'arène marque
+  enfin ses pièces de coupe (`JadgWitnessOccluder`) et lie chaque objet au sol qui le porte, comme
+  la carte du LOT-1022 : la caméra voit le groupe sous le sable et sous les voûtes.
+- **La capitale sans végétation ; l'Arena of Fate reprise sur le Colisée** (19 octobre 2026,
+  demande de l'auteur, à juger par lui). *Végétation* : `scripts/maps/retire_capitale_vegetation.py`
+  (étape `sans-vegetation` de `rebuild_capitale_relief.ps1`, à la place de `vegetation`) retire le
+  volume PCG des forêts, ses 256 acteurs de partition, le graphe et le type d'herbe ;
+  `M_TerrainNaturel` perd sa sortie d'herbe, et `UJadgSceneBuild::RefreshLandscapeGrass` relit le
+  cache des 80 tuiles du Landscape, qui citaient encore l'ancien type. `build_capitale_vegetation.py`
+  et `vegetation.json` sont supprimés, la partition `Vegetation` n'est plus configurée, le contrôle
+  exige zéro acteur végétal, les cadrages `foret-*` disparaissent. Sans la forêt, la capture de la
+  capitale repasse en une minute (elle restait bloquée). *Arène* : la carte posait le témoin du
+  LOT-1022, loin de la planche validée (`arena-of-fate-planche-v1.png`) : sable au niveau des
+  statues, quatre brèches dans les gradins, gradins arrêtés à 12 m sous 36 m d'arcades ouvertes,
+  tours d'escalier visibles, ni velum ni braseros. La nouvelle coupe (`scripts/assetsGeneration/arena_cavea.py`)
+  suit le Colisée : podium de 3 m plaqué de marbre et couronné d'une balustrade, coursive des
+  quatorze dieux avec un brasero votif entre deux statues, portes du triomphe et des morts à herse
+  levée sur le grand axe, passages couverts sous le podium et les gradins ; cavea continue en
+  trois maeniana (ima 3 → 12 m, media 12 → 24 m, summa jusqu'à 28,6 m), baltei percés de
+  57 vomitoires, escaliers rayonnants arrêtés aux baltei, loges des treize délégations encastrées
+  dans la media cavea (impériale au-dessus de la porte de l'est), haut mur à arcade aveugle,
+  portique couvert sous la terrasse, velum sur douze secteurs et tentures bourgogne. Aucune tour
+  d'escalier visible : les gradins se desservent à la romaine. Chaque vomitoire des deux baltei est
+  un passage réel de 2,4 m creusé sous les gradins jusqu'aux déambulatoires de 12 et 24 m (portes
+  au pied du haut mur), et quatre cages d'escalier sur les diagonales, creusées dans la masse et
+  ouvertes seulement sur les déambulatoires (escalier en U du sol à 12 m, volée de 12 à 24 m,
+  paliers de départ, garde-corps), relient le parvis aux deux praecinctiones ; les loges, tournées
+  face au balteus (normale de l'ovale), se gagnent par l'arrière de leur encoche. `scripts/maps/verify_capitale_arena_access.py` (étape `controle`)
+  le vérifie sur le maillage de navigation, au profil fin de l'arène (tuiles de 3 m, douze couches) ;
+  les catacombes, ouvertes par un mur à interrupteur caché, y comptent comme fermées. Pour que la
+  marche suive les marches, la pose de la capitale reprend `preserve_walkable_collision` (repli
+  Nanite complet : le repli simplifié effaçait les marches) et mesure le repère des .glb sur la
+  pièce témoin des accessoires. Les déambulatoires partent du dos de la cavea (84,6 m). Les garnitures viennent du catalogue unitaire de l'arène (`aof-catalogue.json`) :
+  braseros votifs et sur pied, mâts de velum (embase, tronçons, tête), torches des passages,
+  bornes, bancs et socles du parvis, posés depuis `/Game/Bibliotheque/ArenaFate` avec les
+  finitions peintes de l'arène (les instances `MI_AOF_stone_cream` et `MI_AOF_wood` de
+  `M_AOF_Surface` ne compilent pas : « Requires valid texture » sur l'occlusion, à reprendre).
+  42 feux (flamme et lumière). L'arène a sa partition de streaming `Arene` (cellules de 1 008 m,
+  chargée à 4,5 km, sans HLOD) : la cuisson du HLOD fusionné de sa cellule faisait planter le
+  processeur graphique. Sable plus pâle, pierre plus ivoire. La pose dans la capitale
+  efface désormais les paquets externes des acteurs qu'elle retire : la pose précédente laissait
+  1 826 anciens acteurs revenir au chargement. Le pool de streaming Nanite passe à 1 Go : à
+  512 Mo, les colonnes de la façade tombaient sur des clusters grossiers (2 Go fait planter ce
+  poste). Les pièces dont la géométrie ne change pas gardent leur fichier validé : le Blender 5.2
+  du poste les réexporte différemment.
+
+- **La capitale construite sur le Guide de Création : relief des courbes, réseau routier, streaming**
+  (17 octobre 2026, demande de l'auteur, à juger par lui). La référence n'est plus la vue v04 mais
+  le guide (`references-capitale/output/Guide de Creation.pdf`), lu planche par planche dans le PDF
+  (`scripts/maps/guide_capitale.py`). La planche 06 (courbes de niveau) donne le relief
+  (`scripts/maps/relief_guide.py`) : les courbes sont réduites à leur squelette, leurs interruptions
+  raccordées dans leur axe, les bandes entre courbes reçoivent un cran par moindres carrés (une
+  boucle fermée monte, une courbe ouverte suit les repères), la surface la plus douce passe entre
+  elles ; le guide ne chiffre rien, l'équidistance (≈ 7,3 m) et le niveau viennent des 19 repères
+  du catalogue, qui tombent à quelques mètres près. Butte du palais, buttes du sud, collines du
+  nord, îles et rives suivent le dessin ; la planche est posée à plat, 2,70 m par pixel, sur les
+  4,032 km du Landscape, prolongée de 784 m de collines au nord et de 400 m au sud. Le Natural Pool
+  de l'ancienne vue est la Petite Anse du guide, ouverte sur la baie. La planche 04 donne le
+  réseau routier, vectorisé (axe au pixel près, classe à la largeur dessinée) et peint : pavé dans
+  l'enceinte relevée sur la planche 01, terre battue au-dehors (Oldtown, Sloghood, Boomburbs,
+  Neckoffoods, routes de campagne) ; le terrain est nivelé sous la voie. La planche 02 donne le
+  couvert (bois, prairie, terre sèche). `M_TerrainNaturel` passe à neuf couches (`Foret`,
+  `Chemin` ajoutées) et le déplacement Nanite (tessellation) s'étend à toutes, lu sur leur carte de
+  hauteur (roche 30 cm, sous-bois 8 cm, terre battue 7 cm, pavés 5 cm, herbes 2 à 4 cm). Le
+  streaming World Partition est actif (`scripts/maps/configure_capitale_streaming.py`) : cellules de
+  504 m chargées à 1,6 km, HLOD instanciés à 3,2 km et fusionnés à 6,4 km, sur les mêmes cellules, l'eau
+  toujours chargée (sa matière ne s'aplatit pas en HLOD), construits par
+  `WorldPartitionHLODsBuilder` ; deux étapes de plus dans `rebuild_capitale_relief.ps1`. Les
+  contrôles `controle-guide.png` (rivage, voies et enceinte sur la planche 06) et
+  `controle-courbes.png` remplacent `controle-rivage.png`. Le déplacement Nanite d'un Landscape
+  passe par l'échelle Z de l'acteur (100) : l'échelle de la matière en est divisée (sans cela,
+  5 cm de pavés soulevaient la chaussée de plusieurs mètres et déchiraient le maillage). Mesures :
+  équidistance 7,29 m, relief de −16 à +134 m, 64 mandataires Nanite vérifiés par lancer de
+  rayons, 128 HLOD, 9 cadrages capturés à 12 h et 22 h. Le HLOD du Landscape se prend à la LOD 2
+  (mailles de 8 m, texture de 512 par mandataire de 504 m) : à la LOD la plus grossière, réglage
+  d'origine (« Lowest Detail LOD » de la documentation d'Epic), un seul quad couvrait un composant
+  de 126 m et le constructeur y ajoutait une jupe Nanite d'une maille de profondeur (63 m), qui
+  débordait sous le bord de la carte et faisait paraître manquante la rangée de cellules chargées
+  au sud de la vue d'ensemble ; la jupe descend à 4 m et la vue est complète. Restent ouverts :
+  quelques points de ciel isolés aux vues rapprochées, dus au rendu
+  Nanite du Landscape (absents avec `r.Nanite 0`, présents même sans déplacement) ; les largeurs
+  des voies (choix de classe, à valider) ; le tracé de l'enceinte (relevé à la main sur la
+  planche 01) ; les ouvrages (ponts, quais, remparts) ; le RVT, toujours non affecté.
+
+- **Les rivages et le relief de la capitale lus sur la vue d'ensemble v04** (17 octobre 2026, à
+  juger par l'auteur). Le rivage n'est plus un jeu de polygones tracés à main levée : l'eau est lue
+  par sa couleur sur `capitale-vue-ensemble-v04.png`, complétée par les axes tracés de la rivière et
+  du ruisseau (les ponts et les arbres les coupent), nettoyée des toits bleus, des coques et des
+  pontons, puis projetée au sol par une caméra perspective à 60° ajustée sur le cadre validé le
+  16 octobre. Baie, île du tigre, fort côtier, quais du palais et du port, front de l'arène,
+  embouchure, rivière et ses deux ponts, bassin intérieur et ruisseau de Sloghood suivent le dessin
+  à quelques mètres près ; au-delà du bord de l'image, une rive libre ferme la baie au nord-ouest
+  sous les collines boisées. Les altitudes du catalogue (pages 9-12) sont reprises, placées sur les
+  quartiers de l'image ; chaque rive a son profil (quai, greve, berge basse, roche), les fonds leur
+  plateau et leur cuvette, la rivière et le ruisseau leur pente d'eau. Tout est décrit en texte dans
+  `Source/Elements/Terrain/capital/relief-reference/geographie.json` ; `controle-rivage.png` montre
+  la vue redressée au sol et le rivage obtenu. La nouvelle matière `M_TerrainNaturel`
+  (`scripts/maps/build_capitale_terrain_material.py`) : fondu de distance à trame tournée (la
+  trame anti-répétition à trois lectures faisait un damier sur les herbes 8K ; elle est retirée), macro-variations de couleur et de normale (SenseiTerrain), roche automatique des pentes
+  et des rives rocheuses en triplanaire, mélange par hauteur, berges humides et fonds teintés lus
+  dans `T_Capitale_Rivage`, déplacement Nanite de la roche, de la terre et du sable, sortie vers
+  `RVT_TerrainNaturel`. Chaque Landscape porte deux couches d'édition, `Relief_Reference` (générée)
+  et `Retouches` (à la main) — `UJadgSceneBuild::NameLandscapeEditLayers`. Toute la chaîne se rejoue
+  par `scripts/maps/rebuild_capitale_relief.ps1`. Restent ouverts : le RVT n'est pas encore affecté
+  aux Landscape (l'éditeur 5.8 plante au chargement de la carte partitionnée avec rendu quand il
+  l'est), l'horizon au-delà des 4 km du cadre, et les ouvrages (quais, ponts, remparts).
+
+- **Code et niveaux obsolètes retirés** (15 octobre 2026) : suppression du lecteur
+  glTF, du système d’animation et des marqueurs graphiques maison, des anciennes scènes de comparaison de
+  l’arène et de la porte isolée avec son Colisée. Les primitives utilisées par
+  les générateurs actuels sont regroupées dans `arena_geometry.py` et
+  `arena_sculpted_geometry.py`. Les niveaux doublons de la capitale et le candidat
+  Martpart refusé sont supprimés ; le démarrage ouvre désormais Martpart. Le contrôle
+  des orphelins exige un chemin exact pour chaque niveau, y compris ses étages.
+
+- **Nettoyage du projet** (15 octobre 2026) : retrait des exemples de packs et des
+  essais de tutoriel sans dépendant dans le registre Unreal, du support CRT de
+  l'ancien moteur et des fixtures de son atelier de personnages, dont le test
+  n'existe plus. Le guide de journalisation décrit désormais le pont Unreal et
+  retire les options et rapports de plantage propres à l'ancien moteur.
+
+- **Le paysage de la capitale impériale, première passe** (12 octobre 2026, à juger par
+  l'auteur). Un terrain de 3 × 2 km, 1512 × 1008 quads de 2 m, calculé depuis un relevé en texte
+  du plan d'ensemble (`scripts/maps/capital_landscape_layout.py`) : Tourmaline Bay et ses îles, la
+  Rubicund River, South Creek, le Natural Pool, l'enceinte, les faubourgs, les bois, les cultures
+  de Neckoffoods, les grandes voies. La ville a son relief, de −15 m à +235 m : une colline par
+  quartier (Downtown, Dweomer, Scholarnest, Uptown, le palais sur son promontoire), les avenues au
+  creux de vallons, des mamelons et des creux semés, les pentes de la ville close en terrasses
+  inégales, une chaîne à crêtes derrière la baie et Oldtown. Le `Landscape` est Nanite. Sa matière
+  est `M_SenseiTerrain` (pack SenseiTerrain), écrite pour le Mesh Terrain et **portée au
+  `Landscape` par script** — matière et fonctions copiées, canaux devenus couches de paysage,
+  coordonnées du Mesh Terrain devenues celles du monde (`UJadgSceneBuild::PortMeshTerrainGraph`) :
+  cinq matières empilées, roche d'elle-même sur les pentes et en triplanaire, tuilage rompu de près
+  et de loin, fondu au loin, variations, déplacement. Les packs se posent depuis leurs archives par
+  `scripts/assetsGeneration/install_terrain_packs.py`. L'eau est une matière à une couche,
+  hauts-fonds turquoise. `scripts/maps/review_capital_landscape.ps1` régénère le tout et prend neuf
+  cadrages à midi et à 22 h ; mesure courte en 1080p sur RTX 4060 Ti : 86 et 89 images/s. Restent
+  ouverts : le passage au Mesh Terrain lui-même (World Partition), les surfaces de pavé et de
+  labour, l'herbe et les arbres semés, les ouvrages (ponts, quais, remparts) et le raccord
+  d'échelle avec les quartiers écrits.
+
+- **Construction complète d'Arenarea et Martpart** (D-66, 10 octobre 2026,
+  revue artistique des quartiers complets à faire). Les deux quartiers gardent
+  leurs identités de quête, dialogues, conditions et destinations, avec des rues,
+  monuments, commerces, jardins et quais recomposés depuis leurs références.
+  Les bâtiments et accessoires sont assemblés dans Blender à partir de pièces
+  simples ; leurs matières reprennent le témoin peint de l'Arena of Fate.
+  Arenarea associe aux maîtres visibles des volumes de collision architecturaux
+  séparés : la navigation garde les ouvertures et les marches sans recopier les
+  feuilles et détails sculptés pour chaque instance. Les maîtres Nanite restent
+  entiers. La mémoire de construction et la couverture physique sont mesurées.
+  Sols et escaliers restent physiques, les murs et couvertures qui gênent la vue
+  peuvent se couper. Eau animée, feuillages et étoffes au vent, feux, fumées,
+  ambiances locales et douze passants par quartier complètent les scènes.
+  Ces passants utilisent le créateur Mutable et les clips du moteur ; les corps
+  Manny/Quinn restent provisoires tant que la garde-robe civile n'est pas disponible.
+  `scripts/maps/review_capital_districts.ps1` régénère les deux cartes, vérifie
+  les accès et les parcours aller-retour, contrôle la population, puis capture
+  les vues à midi et à 22 h. Le constructeur standard appelle la même chaîne.
+  Les sources et cartes précédentes sont conservées sous `Saved/Jadg/districts/`.
+  Revue technique : 2 509 éléments à Arenarea, 1 018 à Martpart ; 256/256 et
+  38/38 étapes physiques aller-retour réussies, douze passants actifs par carte,
+  62 captures finales inspectées. Mesures courtes en 1080p sur RTX 4060 Ti :
+  Arenarea 82,7 images/s à midi et à 22 h ; Martpart 80,1 et 79,8 images/s.
+  Compilation, contrôles de contenu, 702 tests Core (2 ignorés), 48 tests Python
+  ciblés et 27 tests Unreal réussis (un avec avertissements) ; les huit tests
+  d'exploration de cette suite sont repassés sur les cartes finales. La galerie
+  conserve les réserves de finition ; ces contrôles ne valent pas approbation
+  artistique de l'auteur ni validation par écoute des ambiances sonores.
+  La boucle réelle entre Martpart, Arenarea et l'Arena of Fate réussit les quatre
+  transferts et six étapes avec cache prêt, après un premier essai limité par la
+  préparation de ce cache. Réserve visuelle distincte conservée sur le vestibule
+  de l'Arena of Fate préexistante : éclairage insuffisant et sable supérieur
+  partiellement visible dans le cadrage d'arrivée, sans blocage de circulation.
+
+- **Décor complet de l'Arena of Fate reconstruit dans Unreal 5.8.3** (LOT-106,
+  9 octobre 2026, revue artistique de la carte complète à faire). L'emprise monumentale de
+  189 × 156 m reçoit sept niveaux physiques, reliés par de vrais escaliers, depuis les
+  catacombes jusqu'à la terrasse. La scène comprend 719 pièces d'architecture, 243 accessoires
+  et 37 sculptures et bannières réemployées. Les matières peintes enrichies du témoin sont
+  conservées ; les loges sont meublées, les accès bordés et les flancs des gradins habillés
+  de pierre taillée. Feux, appliques, crépitements et vent complètent le décor ; la foule est
+  reportée selon le choix de l'auteur. Les six portails intérieurs disparaissent, les fonctions
+  narratives et les six rencontres restent présentes. La construction contrôle 235 positions
+  de visite et 66 points de parcours à la hauteur des sols. Les collisions des surfaces
+  praticables gardent la géométrie entière. Le contrôleur de navigation et de coupe des
+  occultants est sauvegardé dans le niveau principal ; la commande standard de reconstruction
+  utilise aussi le constructeur dédié. Le remappage est idempotent et préserve les modifications
+  narratives de la carte courante.
+  Le parcours physique final atteint ses 132 arrêts aller-retour avec les quatre membres du
+  groupe, sans téléportation. Les accessoires suivent la coupe de leur plancher tout en gardant
+  leurs collisions et leurs ombres ; les lumières des salles souterraines sont mieux réparties.
+  Les tours reçoivent des rampes intérieures et des retours de palier. Les 18 captures finales
+  donnent 95,1 images/s à midi et 96,9 à 22 h en 1080p sur le poste de référence, sans foule.
+
+- **Témoin visuel D-65 de l'Arena of Fate en fantasy peinte, matières enrichies** (LOT-106, 9 octobre 2026,
+  témoin **validé par l'auteur**). La géométrie modulaire est produite par
+  `build_arena_witness.py`, les textures par `build_arena_witness_textures.py`, puis les scènes
+  Unreal par `build_arena_witness_scene.py`. La commande
+  `scripts/maps/review_arena_witness.ps1 -Generate -Compile -Walk` orchestre la revue. L'auteur
+  juge les premiers essais trop proches et trop plats ; la reprise prend les portraits comme
+  repères : pierres modelées, joints sur mortier reculé, dalles taillées, colonnes cannelées,
+  couleurs par bloc et touches de bronze. Les marches sont des volumes continus. Une peinture
+  minérale originale fournit la couleur du calcaire ; les normales et l'ORM restent indépendants.
+  Le ciel de réflexion gradué remplace le cube blanc du témoin. Le style peint est retenu par
+  l'auteur ; les matières gagnent des détails à plusieurs échelles, du relief de surface et des
+  variations de rugosité. Une graine stable par pierre décale les textures ensemble et varie les
+  teintes sans changer les formes. La passe dessin accentuée est retirée après comparaison.
+  La lumière réelle et la géométrie sont conservées. La galerie locale
+  `Saved/Captures/arena-witness/index.html` compare l'avant et la reprise aux mêmes cadrages,
+  à midi et à 22 h. L'auteur autorise la construction complète en conservant ce style, avec
+  davantage de mobilier et d'accessoires. La foule sera ajoutée après le décor.
+
 - **L'Arena of Fate et Martpart portés** (LOT-1022, 9 octobre 2026, lot ouvert, non livré).
   L'Arena of Fate est **une carte à trois étages** (D-51) — le sable, les vestiaires et la prison
   (niveau −1), les catacombes (niveau −2) —, ses trois cartes fusionnées sous le même identifiant,

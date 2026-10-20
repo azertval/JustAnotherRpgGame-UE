@@ -1,0 +1,477 @@
+{
+  "version": 3,
+  "resolution": "4K",
+  "normalConvention": "DirectX; green channel must NOT be flipped",
+  "materials": {
+    "stone_cream": {
+      "asset": "Travertine009",
+      "source": "ambientCG",
+      "url": "https://ambientcg.com/a/Travertine009",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        1,
+        1
+      ],
+      "scaleNote": "1 m working repeat; source physical size not assumed.",
+      "files": {
+        "ao": {
+          "file": "Travertine009/Travertine009_4K-PNG_AmbientOcclusion.png",
+          "sha256": "7c9eae216015d0cb282a0e6cb5efc45559aa175205fc5cebca2a3cac61f17416",
+          "url": "https://ambientcg.com/get?file=Travertine009_4K-PNG.zip"
+        },
+        "baseColor": {
+          "file": "Travertine009/Travertine009_4K-PNG_Color.png",
+          "sha256": "b0f7c9711dfc9fe0b0422668284698269599caf8038490200a2eb83ee32a6c01",
+          "url": "https://ambientcg.com/get?file=Travertine009_4K-PNG.zip"
+        },
+        "height": {
+          "file": "Travertine009/Travertine009_4K-PNG_Displacement.png",
+          "sha256": "2b0b651c1f86be43e6b02057f17bd8468c758da4171335700dc1178875393c3c",
+          "url": "https://ambientcg.com/get?file=Travertine009_4K-PNG.zip"
+        },
+        "normal": {
+          "file": "Travertine009/Travertine009_4K-PNG_NormalDX.png",
+          "sha256": "3171184c628bcb566d8b4fbf4546b10fadce60e7ec97c7a16d4ccfd968b16f4c",
+          "url": "https://ambientcg.com/get?file=Travertine009_4K-PNG.zip"
+        },
+        "roughness": {
+          "file": "Travertine009/Travertine009_4K-PNG_Roughness.png",
+          "sha256": "58d81142763281413a877dc50d8a380df09ef5eccbdb7c817ce8f39b905c3510",
+          "url": "https://ambientcg.com/get?file=Travertine009_4K-PNG.zip"
+        }
+      }
+    },
+    "marble_white": {
+      "asset": "Marble012",
+      "source": "ambientCG",
+      "url": "https://ambientcg.com/a/Marble012",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        1,
+        1
+      ],
+      "scaleNote": "1 m working repeat; source physical size not assumed.",
+      "files": {
+        "baseColor": {
+          "file": "Marble012/Marble012_4K-PNG_Color.png",
+          "sha256": "7f1063cad1e9f02adb668372d7e7d8661672c3ddf625472ed7810faee1985bda",
+          "url": "https://ambientcg.com/get?file=Marble012_4K-PNG.zip"
+        },
+        "height": {
+          "file": "Marble012/Marble012_4K-PNG_Displacement.png",
+          "sha256": "81a8d9ec91d52f7685535781ddf60e690027d34f6bf44c6953d598c0c22cef16",
+          "url": "https://ambientcg.com/get?file=Marble012_4K-PNG.zip"
+        },
+        "normal": {
+          "file": "Marble012/Marble012_4K-PNG_NormalDX.png",
+          "sha256": "3347a368a5510fbf36a43697ff7007d1dd5666d1b02433227d0df291a9093dd9",
+          "url": "https://ambientcg.com/get?file=Marble012_4K-PNG.zip"
+        },
+        "roughness": {
+          "file": "Marble012/Marble012_4K-PNG_Roughness.png",
+          "sha256": "0d29e2579e43e3889dcb27520c16c34999fa11e5815532bb05804edf9f26df32",
+          "url": "https://ambientcg.com/get?file=Marble012_4K-PNG.zip"
+        }
+      }
+    },
+    "wood": {
+      "asset": "rough_wood",
+      "source": "Poly Haven",
+      "url": "https://polyhaven.com/a/rough_wood",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "tileMetres": [
+        0.5,
+        0.5
+      ],
+      "files": {
+        "baseColor": {
+          "size": 29482325,
+          "md5": "a122cbda15d438b914a2e6eec7e162ae",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rough_wood/rough_wood_diff_4k.png",
+          "file": "wood/rough_wood_diff_4k.png",
+          "sha256": "b0b9543d7cc6538f437b6235f612e6a83519e47f1a5c038e8e3224e97a2ba66a"
+        },
+        "normal": {
+          "size": 21485602,
+          "md5": "0f58def35a504078ac880fd533968040",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rough_wood/rough_wood_nor_dx_4k.png",
+          "file": "wood/rough_wood_nor_dx_4k.png",
+          "sha256": "cf6cd3b7c042c95921bb55e5ad8430a22bcd1f2cdb03c6cea2f15ce6314a73a0"
+        },
+        "orm": {
+          "size": 22901934,
+          "md5": "9dcb680a100a91401224ff73bb76c542",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rough_wood/rough_wood_arm_4k.png",
+          "file": "wood/rough_wood_arm_4k.png",
+          "sha256": "433e795c364e71e2de8d156ed3dcd920b1fadd21aa936876ca5d8709a523e796"
+        },
+        "height": {
+          "size": 30754622,
+          "md5": "524f46c63f121f39450c1ba6404b525c",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rough_wood/rough_wood_disp_4k.png",
+          "file": "wood/rough_wood_disp_4k.png",
+          "sha256": "1089a8cfb0e363035d2b55c33df799497170ca14b8355be86cf6181fa4c19375"
+        },
+        "roughness": {
+          "size": 29353658,
+          "md5": "d7bef8d9330a05e7f3a1117cf4891344",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rough_wood/rough_wood_rough_4k.png",
+          "file": "wood/rough_wood_rough_4k.png",
+          "sha256": "9d7b81d57ffbfa4050e14405205b4c69f3b55b61284bf8e333a8df56c0f61d25"
+        },
+        "ao": {
+          "size": 11535274,
+          "md5": "45417f3e99763c5082a7180471d99835",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rough_wood/rough_wood_ao_4k.png",
+          "file": "wood/rough_wood_ao_4k.png",
+          "sha256": "e681fb335de657baf6f4b22e28cddf7edf2d0a0734a848f64acba6c7ff4591fc"
+        }
+      }
+    },
+    "dark_metal": {
+      "asset": "Metal054B",
+      "source": "ambientCG",
+      "url": "https://ambientcg.com/a/Metal054B",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        1,
+        1
+      ],
+      "scaleNote": "1 m working repeat; source physical size not assumed.",
+      "files": {
+        "baseColor": {
+          "file": "Metal054B/Metal054B_4K-PNG_Color.png",
+          "sha256": "706e21e728795793f17f4528b41c53807b53ba82e5a827fc299a51f3fa525f2e",
+          "url": "https://ambientcg.com/get?file=Metal054B_4K-PNG.zip"
+        },
+        "height": {
+          "file": "Metal054B/Metal054B_4K-PNG_Displacement.png",
+          "sha256": "569d9c61da780072be97f7d083b20c1399c9d775bba7999aaafd792bb981bca1",
+          "url": "https://ambientcg.com/get?file=Metal054B_4K-PNG.zip"
+        },
+        "metallic": {
+          "file": "Metal054B/Metal054B_4K-PNG_Metalness.png",
+          "sha256": "da57b786b5c9c54b59f8e029aa09699517991f4b4465ab2b1c73ffc11586d161",
+          "url": "https://ambientcg.com/get?file=Metal054B_4K-PNG.zip"
+        },
+        "normal": {
+          "file": "Metal054B/Metal054B_4K-PNG_NormalDX.png",
+          "sha256": "68ba74910e4c385b923c12232346a7afe0064bae330c2fb256e3f36e920abdee",
+          "url": "https://ambientcg.com/get?file=Metal054B_4K-PNG.zip"
+        },
+        "roughness": {
+          "file": "Metal054B/Metal054B_4K-PNG_Roughness.png",
+          "sha256": "0f24141e0dde2c5474d76edda79328037e68a17b53ed69090b4a7e55922ffc4b",
+          "url": "https://ambientcg.com/get?file=Metal054B_4K-PNG.zip"
+        }
+      }
+    },
+    "mortar": {
+      "asset": "grey_plaster_03",
+      "source": "Poly Haven",
+      "url": "https://polyhaven.com/a/grey_plaster_03",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "tileMetres": [
+        1.0,
+        1.0
+      ],
+      "files": {
+        "baseColor": {
+          "size": 102330879,
+          "md5": "1c47ea0ecd8f5f7196ae490d8291a072",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grey_plaster_03/grey_plaster_03_diff_4k.png",
+          "file": "mortar/grey_plaster_03_diff_4k.png",
+          "sha256": "4bd7aa05363edd7d8518288f601b413f220fc04476ace2ddf3fab3e2966f73c8"
+        },
+        "normal": {
+          "size": 96549557,
+          "md5": "4d89c2beeaed0eb348ec49ebbf78a0dd",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grey_plaster_03/grey_plaster_03_nor_dx_4k.png",
+          "file": "mortar/grey_plaster_03_nor_dx_4k.png",
+          "sha256": "6da011e61ec42e138e2432ec450026641ab14b5264b3516ba87fce9a4c5733cb"
+        },
+        "orm": {
+          "size": 74601315,
+          "md5": "ad094ec5cbbf9c30013514a94b12a18e",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grey_plaster_03/grey_plaster_03_arm_4k.png",
+          "file": "mortar/grey_plaster_03_arm_4k.png",
+          "sha256": "4314de92d6f4214197fa1d247bb0e4007374fee3154fa9dd690e081d253132f2"
+        },
+        "height": {
+          "size": 27580190,
+          "md5": "704416189b93be888b860a83fa6eb264",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grey_plaster_03/grey_plaster_03_disp_4k.png",
+          "file": "mortar/grey_plaster_03_disp_4k.png",
+          "sha256": "a8439dd264e3c342b82fdfe2cb94b52baf9f1dbdfdcecde90494b36404fc4b9c"
+        },
+        "roughness": {
+          "size": 37099699,
+          "md5": "dc251404351c3a97e897d7c3f58e2296",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grey_plaster_03/grey_plaster_03_rough_4k.png",
+          "file": "mortar/grey_plaster_03_rough_4k.png",
+          "sha256": "ba76327b918199af707a88732964a511c9eb12326dd56ea2dd81fcae3f7538f2"
+        },
+        "ao": {
+          "size": 36262526,
+          "md5": "d36c1fd4b8065e0eec15a70ca4c94689",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/grey_plaster_03/grey_plaster_03_ao_4k.png",
+          "file": "mortar/grey_plaster_03_ao_4k.png",
+          "sha256": "8ea7c90c4df25dfd66efde30bc114c488781a8af7ccb8831dca5038746c7fd72"
+        }
+      }
+    },
+    "metal_clean": {
+      "asset": "Metal054A",
+      "source": "ambientCG",
+      "url": "https://ambientcg.com/a/Metal054A",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        1,
+        1
+      ],
+      "scaleNote": "1 m working repeat; source physical size not assumed.",
+      "files": {
+        "baseColor": {
+          "file": "Metal054A/Metal054A_4K-PNG_Color.png",
+          "sha256": "d99d3b9931d5ed9986adcde7731ad9861bf9d27c6f153699f28ee4752ebacd42",
+          "url": "https://ambientcg.com/get?file=Metal054A_4K-PNG.zip"
+        },
+        "height": {
+          "file": "Metal054A/Metal054A_4K-PNG_Displacement.png",
+          "sha256": "08ed856640128357ffbfed83428349687a345e467f2bdc521be471a7ddd7bc2f",
+          "url": "https://ambientcg.com/get?file=Metal054A_4K-PNG.zip"
+        },
+        "metallic": {
+          "file": "Metal054A/Metal054A_4K-PNG_Metalness.png",
+          "sha256": "ffa91db9cb790e60cf05f57ba95bcbb3b7a188fa17d234838c9109b23c11a0ce",
+          "url": "https://ambientcg.com/get?file=Metal054A_4K-PNG.zip"
+        },
+        "normal": {
+          "file": "Metal054A/Metal054A_4K-PNG_NormalDX.png",
+          "sha256": "2131abc72c588274c9ec02bb8a0096018009a945ff0398f371a5ae79546a7e67",
+          "url": "https://ambientcg.com/get?file=Metal054A_4K-PNG.zip"
+        },
+        "roughness": {
+          "file": "Metal054A/Metal054A_4K-PNG_Roughness.png",
+          "sha256": "d9c7d200e763e19d0bdd6750583557d75a3f683998e2532767e11a0d27396d5c",
+          "url": "https://ambientcg.com/get?file=Metal054A_4K-PNG.zip"
+        }
+      }
+    },
+    "dust": {
+      "asset": "coast_sand_01",
+      "source": "Poly Haven",
+      "url": "https://polyhaven.com/a/coast_sand_01",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "tileMetres": [
+        15.0,
+        15.0
+      ],
+      "files": {
+        "baseColor": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/coast_sand_01/coast_sand_01_diff_4k.png",
+          "size": 24754419,
+          "md5": "9c93e008a0194e7c7900e33bbd92374d",
+          "file": "dust/coast_sand_01_diff_4k.png",
+          "sha256": "b3569f6ba0a1e3274dd637701cad6cc460513601094e83e706add0b18a34ea3d"
+        },
+        "normal": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/coast_sand_01/coast_sand_01_nor_dx_4k.png",
+          "size": 34813990,
+          "md5": "387fc44522590f6e9a45ec907c48bdd3",
+          "file": "dust/coast_sand_01_nor_dx_4k.png",
+          "sha256": "0b825ef3667d4da6169915edd194dab7c06c43d9ba552cfdd8b4e324702cb52c"
+        },
+        "orm": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/coast_sand_01/coast_sand_01_arm_4k.png",
+          "size": 18621001,
+          "md5": "d301c0faeb4eb1d98ffc726432db1dcb",
+          "file": "dust/coast_sand_01_arm_4k.png",
+          "sha256": "64ffd55fd727e4fc337d7e50a8a9519435585985f16da43d4f559dc0ab552482"
+        },
+        "height": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/coast_sand_01/coast_sand_01_disp_4k.png",
+          "size": 32659358,
+          "md5": "177e1071e73e01f5800514970a2bc0fc",
+          "file": "dust/coast_sand_01_disp_4k.png",
+          "sha256": "e1e32512dcc3ed1094e055744b7b024b5333211bca809d0bf54523832d056ddf"
+        },
+        "roughness": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/coast_sand_01/coast_sand_01_rough_4k.png",
+          "size": 4946713,
+          "md5": "589526f474b4b935e36d612c2bf4d437",
+          "file": "dust/coast_sand_01_rough_4k.png",
+          "sha256": "7dc42aec6b437199f9588804a4be60647225b499dbfb8b56a824bd7279db794a"
+        },
+        "ao": {
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/coast_sand_01/coast_sand_01_ao_4k.png",
+          "size": 15475882,
+          "md5": "596b913f786448f08db5464873ee6405",
+          "file": "dust/coast_sand_01_ao_4k.png",
+          "sha256": "ba3b73c2cd2f660ee7f49cde4610f05f41d900f8773c503a93ec5f6b9df6d1d3"
+        }
+      }
+    },
+    "stone_worn": {
+      "asset": "old_sandstone_02",
+      "source": "Poly Haven",
+      "url": "https://polyhaven.com/a/old_sandstone_02",
+      "license": "CC0-1.0",
+      "authors": {
+        "Dimitrios Savva": "All"
+      },
+      "tileMetres": [
+        1.5299999713897705,
+        1.5299999713897705
+      ],
+      "files": {
+        "baseColor": {
+          "size": 88190883,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/old_sandstone_02/old_sandstone_02_diff_4k.png",
+          "md5": "55102fab67b154a60df5b50894b697fa",
+          "file": "stone_worn/old_sandstone_02_diff_4k.png",
+          "sha256": "4f63ab081f34b3afabd7d4f2ae87343f86c41bb5c4c5d90f37c17d025d464c16"
+        },
+        "normal": {
+          "size": 88334179,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/old_sandstone_02/old_sandstone_02_nor_dx_4k.png",
+          "md5": "0dba5e91e66db1ebd21cde45f57fdc45",
+          "file": "stone_worn/old_sandstone_02_nor_dx_4k.png",
+          "sha256": "e79389993aee48a1e666a5ccf690d547254b9c25f551328f72ae686bcdf0050e"
+        },
+        "orm": {
+          "size": 62972163,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/old_sandstone_02/old_sandstone_02_arm_4k.png",
+          "md5": "f556aa87d900ce4f6705e6ab7e650172",
+          "file": "stone_worn/old_sandstone_02_arm_4k.png",
+          "sha256": "4756e7268b944b1a93bee032427fd032720efd7a9558b1a5c2d4d675adc539f1"
+        },
+        "height": {
+          "size": 17994521,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/old_sandstone_02/old_sandstone_02_disp_4k.png",
+          "md5": "6a45e1e6f4c81bd12b4eeca04b6a3697",
+          "file": "stone_worn/old_sandstone_02_disp_4k.png",
+          "sha256": "31da3c993e0190c8f908d3aa701b7c2aa733582427380879cfd4eba9c716bb27"
+        },
+        "roughness": {
+          "size": 39005155,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/old_sandstone_02/old_sandstone_02_rough_4k.png",
+          "md5": "8a78a61cbbece14ead47273e8a86adf8",
+          "file": "stone_worn/old_sandstone_02_rough_4k.png",
+          "sha256": "737f6e3b946e07c9ce69ae004476363dbcf7e110cec750314889c902d15aa9c3"
+        },
+        "ao": {
+          "size": 24989023,
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/old_sandstone_02/old_sandstone_02_ao_4k.png",
+          "md5": "c8fc55a1a5217466a33d7d745c1b7f83",
+          "file": "stone_worn/old_sandstone_02_ao_4k.png",
+          "sha256": "aa1600ad867188f21bcd54cb0a419103c849feac0613d0624eca2e3d726c22a7"
+        }
+      }
+    },
+    "bronze": {
+      "asset": "Metal013",
+      "source": "ambientCG",
+      "url": "https://ambientcg.com/a/Metal013",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        1,
+        1
+      ],
+      "scaleNote": "Source provides no physical dimension; 1 m working scale, adjustable.",
+      "files": {
+        "baseColor": {
+          "file": "bronze/Metal013_4K-PNG_Color.png",
+          "sha256": "8a7bbb107b0ec01171da891445b1772b12bd21c388ef00fff664dc4f1516ca1a",
+          "url": "https://ambientcg.com/get?file=Metal013_4K-PNG.zip"
+        },
+        "height": {
+          "file": "bronze/Metal013_4K-PNG_Displacement.png",
+          "sha256": "b21fd5142c5c253563e90744d3d9c80365c235141064c2193961e57f3da09fb3",
+          "url": "https://ambientcg.com/get?file=Metal013_4K-PNG.zip"
+        },
+        "metallic": {
+          "file": "bronze/Metal013_4K-PNG_Metalness.png",
+          "sha256": "62d08af967fbba1c99dfb863283f98cf7fb5fcfd601cdc1c8bcea15a176c062a",
+          "url": "https://ambientcg.com/get?file=Metal013_4K-PNG.zip"
+        },
+        "normal": {
+          "file": "bronze/Metal013_4K-PNG_NormalDX.png",
+          "sha256": "5a1dbbba5d65b7bf64bd4f799f2327bfe0338e0a89e54415ccfb2ffe0a8e7da8",
+          "url": "https://ambientcg.com/get?file=Metal013_4K-PNG.zip"
+        },
+        "roughness": {
+          "file": "bronze/Metal013_4K-PNG_Roughness.png",
+          "sha256": "cb983e04720faa0b3a46f0175c3efc388ee996973b565a38e18be9c384dc4316",
+          "url": "https://ambientcg.com/get?file=Metal013_4K-PNG.zip"
+        }
+      }
+    },
+    "stone_cracked": {
+      "asset": "sandstone_cracks",
+      "source": "Poly Haven",
+      "url": "https://polyhaven.com/a/sandstone_cracks",
+      "license": "CC0-1.0",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "tileMetres": [
+        2.0,
+        2.0
+      ],
+      "files": {
+        "baseColor": {
+          "size": 33862152,
+          "md5": "65a6ffc8f5846b544b1eb4e97e00a0b1",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/sandstone_cracks/sandstone_cracks_diff_4k.png",
+          "file": "stone_cream/sandstone_cracks_diff_4k.png",
+          "sha256": "42848bfa140fa7321ddcfdc32c75b61b9f6d2e830e4405aa9eaeba97484cf2e2"
+        },
+        "normal": {
+          "size": 30012365,
+          "md5": "44c08e21f553f1b4feec56bf4ab8916e",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/sandstone_cracks/sandstone_cracks_nor_dx_4k.png",
+          "file": "stone_cream/sandstone_cracks_nor_dx_4k.png",
+          "sha256": "646ced1c76799f3c3af87c494e3d6ad5de0ad329d29eeee32aa33d6e8b333b44"
+        },
+        "orm": {
+          "size": 26998035,
+          "md5": "906009bd3432acfcf7efb26ba962f657",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/sandstone_cracks/sandstone_cracks_arm_4k.png",
+          "file": "stone_cream/sandstone_cracks_arm_4k.png",
+          "sha256": "36671c88b8ec19a75d215df705859d09f95cf5c05673ec41739565ba68376f00"
+        },
+        "height": {
+          "size": 28531702,
+          "md5": "6ca02e1a129d9c0b88a0543ab6493cbf",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/sandstone_cracks/sandstone_cracks_disp_4k.png",
+          "file": "stone_cream/sandstone_cracks_disp_4k.png",
+          "sha256": "69ae3f5e56f866ee9b54e6dc8e4b09b05adfdc2150ba23ac6c4f30f5cc144876"
+        },
+        "roughness": {
+          "size": 30787414,
+          "md5": "89733b77be70c7872b051875eac48cf4",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/sandstone_cracks/sandstone_cracks_rough_4k.png",
+          "file": "stone_cream/sandstone_cracks_rough_4k.png",
+          "sha256": "99ec205cc337dffc8befc1941ee456250ed1db8ce9c87d80622834fd45465118"
+        },
+        "ao": {
+          "size": 12879136,
+          "md5": "fe099e923eabe398d4ceb16f4d17d1f4",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/sandstone_cracks/sandstone_cracks_ao_4k.png",
+          "file": "stone_cream/sandstone_cracks_ao_4k.png",
+          "sha256": "33329af8011537e967c1f509791798ec201e98d04d069952dac0516b5f79d70b"
+        }
+      }
+    }
+  }
+}

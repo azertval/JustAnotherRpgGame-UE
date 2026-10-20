@@ -145,7 +145,6 @@ def read_entities(world: unreal.World, doc: dict, frame: build_level.Frame) -> l
     changes = []
     markers = tagged(world, build_level.MARKER_TAG)
     volumes = tagged(world, build_level.VOLUME_TAG)
-    storeys = doc.get("storeys") or [{"z": 0.0}]
     for entity in doc.get("entities", ()):
         before = copy.deepcopy(entity)
         marker = markers.get(entity["id"])
@@ -154,7 +153,7 @@ def read_entities(world: unreal.World, doc: dict, frame: build_level.Frame) -> l
             column, row = jadg_map.cell_of(point[0], point[1], doc.get("origin"))
             if 0 <= column < doc["width"] and 0 <= row < doc["height"]:
                 entity["x"], entity["y"] = column, row
-            storey = min(range(len(storeys)), key=lambda s: abs(storeys[s]["z"] - point[2]))
+            storey = build_level.district_surface.storey_at(doc, point)
             if storey or "storey" in entity:
                 entity["storey"] = storey
         box = volumes.get(entity["id"])

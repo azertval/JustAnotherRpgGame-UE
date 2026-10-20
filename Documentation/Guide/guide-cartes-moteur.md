@@ -22,7 +22,7 @@ coin de la case (0, 0) tombe en `origin`, une case fait 1,5 m. Un `yaw` tourne l
 un `pitch` lève l'est, un `roll` lève le sud.
 
 Le texte s'écrit sous une **forme canonique** — une case, un objet, une entité par ligne — par
-`scripts/maps/jadg_map.py` : c'est lui qu'écrivent `build_essai_maps.py`, `build_gate_scene.py` et
+`scripts/maps/jadg_map.py` : c'est lui qu'écrivent `build_essai_maps.py`, `build_capital_districts.py` et
 `read_level.py`. `python scripts/maps/jadg_map.py --canonical` remet une carte écrite à la main dans
 cette forme.
 
@@ -147,8 +147,7 @@ cadence. L'Arena of Fate est la première (voir le [guide des données](guide-do
 
 Un **préfabriqué** est un fichier de `Source/Elements/Editor/Prefabs/<niveau>/<nom>.json`
 (format `jadg-prefab`) : des objets autour d'une origine, par maillage ou par pièce du kit de son
-lieu. Le Colisée de la porte en est un (`central-empire/capital/arenarea/colisee`, écrit par
-`build_gate_scene.py`). Une carte le pose (`prefabs`) ; dans l'éditeur, il se déplace d'un bloc, et
+lieu. Une carte le pose (`prefabs`) ; dans l'éditeur, il se déplace d'un bloc, et
 seule sa place se relit.
 
 Le **mode Quêtes** montre une carte à une étape de quête :
@@ -170,6 +169,38 @@ réécrit une v4 en v5 à sa place : la grille, les couches, les entités et leu
 changent pas ; l'étage de décor d'une couche devient sa hauteur (3 m par étage, provisoire) ; les
 notes de l'éditeur entrent dans la description ; le groupe, le ciel, la navigation et un cadrage
 s'ajoutent. Les quatre cartes de la démo ont été migrées ainsi.
+
+## Le paysage de la capitale
+
+La vue d'ensemble de la capitale impériale est un terrain à part, de 3 × 2 km : il ne se décrit
+pas par contours dans une carte, il se **calcule** depuis un relevé du plan d'ensemble.
+
+- `scripts/maps/capital_landscape_layout.py` — le relevé, en texte : rives de Tourmaline Bay, de la
+  Rubicund River et de South Creek, enceinte, mur du palais, faubourgs, bois, buttes, terre-pleins,
+  voies, collines et vallons des quartiers, et la table des matières (couches, paramètres de la
+  matière du pack, eau, cadrages).
+  Repère des quartiers (x = droite du plan, y = bas du plan), 1,26 m par unité du plan, origine au
+  centre de l'Arena of Fate, son seuil à zéro.
+- `scripts/maps/capital_landscape.py` — hors du moteur (numpy) : la hauteur et le poids des cinq
+  couches à chaque sommet. Deux calculs du même relevé donnent les mêmes octets
+  (`scripts/tests/test_capital_landscape.py`).
+- `scripts/assetsGeneration/install_terrain_packs.py` — pose dans `Content/` ce que le paysage
+  emploie des packs achetés, depuis leurs archives reconnues par leur empreinte : la matière
+  `M_SenseiTerrain` et ses fonctions, le sable, l'herbe et la roche d'exemple de BlendMaster.
+- `scripts/maps/build_capital_landscape_scene.py` — `--prepare` écrit les images sous
+  `Saved/Jadg/capital-landscape/` (dont `apercu.png`, à relire) et la carte
+  `capital-landscape/ensemble` ; lancé dans l'éditeur, il pose le niveau : un `Landscape` Nanite,
+  l'eau à une couche, le ciel, les cadrages, et la matière du terrain. `M_SenseiTerrain` est écrite
+  pour le Mesh Terrain (ses nœuds de canal et de coordonnées vivent dans un module d'éditeur, que
+  le jeu lancé n'a pas) : le script en fait une **copie portée** au `Landscape`, matière et
+  fonctions (`UJadgSceneBuild::PortMeshTerrainGraph`, `RetargetFunctionCalls`), où chaque canal
+  devient une couche de paysage du même nom. Le terrain porte une instance de cette copie, ses cinq
+  matières empilées : herbe, roche (d'elle-même sur les pentes, en triplanaire), sous-bois, terre,
+  sable.
+- `scripts/maps/review_capital_landscape.ps1` — les trois temps à la suite, puis les captures à
+  midi et à 22 h sous `Saved/Captures/capital-landscape/`.
+
+Changer une rive, une butte ou une teinte, c'est changer le relevé et relancer la revue.
 
 ## Voir aussi
 

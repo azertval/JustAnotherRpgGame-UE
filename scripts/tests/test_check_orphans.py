@@ -183,8 +183,8 @@ def test_l_histoire_n_appelle_rien(tmp_path):
 
 def projet(tmp_path):
     """Un dépôt dont trois scripts produisent des sorties du moteur."""
-    ecrire(tmp_path / 'scripts/maps/build_scene.py', 'KIT_ROOT = "/Game/Kit"\nCUBE = "/Game/Scenes/Common/T_White"\n')
-    ecrire(tmp_path / 'scripts/assets/build_manifest.py', 'FAMILIES = {"npc": "/Game/Master/Npc"}\n')
+    ecrire(tmp_path / 'scripts/maps/build_scene.py', 'KIT_ROOT = "/Game/Kit"\nCUBE = "/Game/Jeu/Commun/Common/T_White"\n')
+    ecrire(tmp_path / 'scripts/assets/build_manifest.py', 'FAMILIES = {"npc": "/Game/Bibliotheque/ModelesMaitres/Npc"}\n')
     ecrire(tmp_path / 'scripts/tests/test_build_scene.py', 'assert "/Game/Essai/SM_Test"\n')
     ecrire(tmp_path / 'scripts/maps/build_level.py', 'PORTE = "/Game/Maps/Porte"\n')
     content = tmp_path / 'Content'
@@ -198,7 +198,7 @@ def projet(tmp_path):
 def test_une_sortie_du_moteur_citee_par_son_script_n_est_pas_orpheline(tmp_path):
     content = projet(tmp_path)
     cited = O.content_citations(tmp_path)
-    assert cited == {'/Game/Kit', '/Game/Scenes/Common/T_White', '/Game/Master/Npc', '/Game/Maps/Porte'}
+    assert cited == {'/Game/Kit', '/Game/Jeu/Commun/Common/T_White', '/Game/Bibliotheque/ModelesMaitres/Npc', '/Game/Maps/Porte'}
     assert O.check_content(content, cited) == []
 
 
@@ -237,6 +237,23 @@ def test_une_piece_de_decor_est_citee_par_sa_fiche(tmp_path):
 
 def test_sans_dossier_content_il_n_y_a_rien_a_verifier(tmp_path):
     assert O.check_content(tmp_path / 'Content', set()) == []
+
+
+def test_un_dossier_generique_ne_justifie_pas_un_ancien_niveau(tmp_path):
+    ecrire(tmp_path / 'scripts/maps/build_level.py', 'ROOT = "/Game/Maps/Levels"\n')
+    ecrire(tmp_path / 'Content/Maps/Levels/ancien-essai.umap')
+    (error,) = O.check_content(tmp_path / 'Content', O.content_citations(tmp_path))
+    assert error.startswith('Content/Maps/Levels/ancien-essai.umap :')
+
+
+def test_les_descriptions_citent_le_niveau_et_seulement_leurs_etages(tmp_path):
+    ecrire(tmp_path / 'Source/Elements/Levels/ville/arene.json', json.dumps({
+        'format': 'jadg-map', 'storeyLevels': True, 'storeys': [{'name': 'sable'}, {'name': 'tribunes'}]}))
+    content = tmp_path / 'Content'
+    for name in ('arene', 'arene-etage-sable', 'arene-etage-tribunes', 'arene-etage-ancien'):
+        ecrire(content / f'Maps/Levels/ville/{name}.umap')
+    (error,) = O.check_content(content, O.content_citations(tmp_path))
+    assert error.startswith('Content/Maps/Levels/ville/arene-etage-ancien.umap :')
 
 
 def test_le_depot_n_a_pas_de_script_orphelin():

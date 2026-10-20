@@ -36,7 +36,6 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "scripts" / "maps"))
-import build_gate_scene  # noqa: E402
 import jadg_map  # noqa: E402
 
 ASSETS = ROOT / "Source" / "Elements" / "Assets"
@@ -103,9 +102,9 @@ def control_map(piece: dict, assets: Path = ASSETS) -> dict:
         "tiles": [{"x": 0, "y": GRID - 1, "type": "entry"}],
         "entities": [],
         "objects": [item],
-        "lighting": build_gate_scene.LIGHTING,
+        "lighting": jadg_map.LIGHTING,
         "daylight": jadg_map.DAYLIGHT,
-        "ground": {"comment": "Le sol de la porte.", "colour": build_gate_scene.GROUND["colour"], "size": 4000.0, "height": -0.02},
+        "ground": {"comment": "Le sol du contrôle de pièce.", "colour": "#8f7d62", "size": 4000.0, "height": -0.02},
         "shots": [{"id": side, "target": [0.0, 0.0, round(tall * 0.45, 2)], "heading": heading, "pitch": 8.0,
                    "distance": distance} for side, heading in SIDES],
         "hours": ["12:00", "22:00"],

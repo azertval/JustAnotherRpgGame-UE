@@ -1,7 +1,5 @@
 {
   "version": 1,
   "comment": "Les pièces venues par passation (LOT-1014) dont le lecteur n'est pas encore écrit dans le nouveau moteur. Chacune nomme le lot qui l'attend ; check_orphans.py les tient pour citées jusque-là, et refuse une entrée dont le lot est livré. Chemins relatifs à ce dossier.",
-  "awaiting": [
-    {"file": "Regions/central-empire/capital/arenarea/Scene/appearance.json", "lot": "LOT-1018", "reason": "l'apparence du lieu (variantes de sol) que lisait le rendu de l'ancien moteur ; le format de carte du LOT-1018 dit s'il la reprend ou la supprime"}
-  ]
+  "awaiting": []
 }

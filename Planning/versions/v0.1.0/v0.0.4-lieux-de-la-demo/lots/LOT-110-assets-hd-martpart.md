@@ -70,3 +70,12 @@ sous `martpart@4` (38 fichiers, 93 Mio).
 C'est une **v0** : le lot reste à faire. `appearance.json` n'est pas écrit, les pièces communes de
 travail (pavages, eau, végétal) attendent leur réconciliation avec le `LOT-151`, et la validation
 artistique de l'auteur, de jour comme de nuit, n'est pas acquise.
+
+## Le portage de Martpart revient ici — 20 octobre 2026
+
+Le `LOT-1022` de la `0.0.3` portait l'Arena of Fate et Martpart ; l'auteur le sépare le
+20 octobre 2026 : l'arène est livrée avec la `0.0.3`, Martpart — redite de ce lot — revient ici.
+Le travail du 9 octobre (sa description au format v5, 10 217 pièces posées, ses portails vers
+Arenarea) est écrit dans la [fiche du LOT-1022](../../v0.0.3-nouveau-moteur/lots/LOT-1022-portage-arena-of-fate.md) ;
+sa carte du moteur est archivée par la base de construction de la capitale du 16 octobre 2026.
+Où Martpart se pose dans la capitale est une décision de l'auteur.

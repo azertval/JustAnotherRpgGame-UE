@@ -46,6 +46,79 @@ int32 AJadgMapFrame::StoreyAt(double WorldZ) const
 	return Storey != INDEX_NONE ? Storey : (StoreyHeights.IsEmpty() ? 0 : Lowest);
 }
 
+bool AJadgMapFrame::TerrainZAt(const FVector& World, double& Height) const
+{
+	if (TerrainWidth < 2 || TerrainHeight < 2 || TerrainSpacing.X <= 0.0 || TerrainSpacing.Y <= 0.0
+		|| static_cast<int64>(TerrainWidth) * TerrainHeight != TerrainHeights.Num())
+	{
+		return false;
+	}
+	const FVector Offset = World - TerrainOrigin;
+	const double X = FVector::DotProduct(Offset, East) / TerrainSpacing.X;
+	const double Y = FVector::DotProduct(Offset, South) / TerrainSpacing.Y;
+	if (!FMath::IsFinite(X) || !FMath::IsFinite(Y) || X < 0.0 || Y < 0.0 || X > TerrainWidth - 1 || Y > TerrainHeight - 1)
+	{
+		return false;
+	}
+	const int32 Column = FMath::Min(FMath::FloorToInt32(X), TerrainWidth - 2);
+	const int32 Row = FMath::Min(FMath::FloorToInt32(Y), TerrainHeight - 2);
+	const double U = X - Column;
+	const double V = Y - Row;
+	const int32 Index = Row * TerrainWidth + Column;
+	const double A = TerrainHeights[Index];
+	const double B = TerrainHeights[Index + 1];
+	const double C = TerrainHeights[Index + TerrainWidth];
+	const double D = TerrainHeights[Index + TerrainWidth + 1];
+	const double Sample = FMath::Lerp(FMath::Lerp(A, B, U), FMath::Lerp(C, D, U), V);
+	if (!FMath::IsFinite(Sample))
+	{
+		return false;
+	}
+	Height = Sample;
+	return true;
+}
+
+double AJadgMapFrame::GroundZAt(const FVector& World, int32 Storey) const
+{
+	for (const FJadgStoreyRegion& Region : StoreyRegions)
+	{
+		if (Region.Storey == Storey && World.X >= Region.Minimum.X && World.X <= Region.Maximum.X
+			&& World.Y >= Region.Minimum.Y && World.Y <= Region.Maximum.Y)
+		{
+			return Region.Minimum.Z;
+		}
+	}
+	double Height = StoreyZ(Storey);
+	if (Storey == 0)
+	{
+		TerrainZAt(World, Height);
+	}
+	return Height;
+}
+
+int32 AJadgMapFrame::StoreyAt(const FVector& World) const
+{
+	if (StoreyRegions.IsEmpty() && TerrainHeights.IsEmpty())
+	{
+		return StoreyAt(World.Z);
+	}
+	constexpr double Tolerance = 50.0;
+	int32 Storey = 0;
+	double Floor = -TNumericLimits<double>::Max();
+	for (const FJadgStoreyRegion& Region : StoreyRegions)
+	{
+		if (World.X >= Region.Minimum.X && World.X <= Region.Maximum.X
+			&& World.Y >= Region.Minimum.Y && World.Y <= Region.Maximum.Y
+			&& World.Z >= Region.Minimum.Z - Tolerance && World.Z <= Region.Maximum.Z + Tolerance
+			&& Region.Minimum.Z > Floor)
+		{
+			Storey = Region.Storey;
+			Floor = Region.Minimum.Z;
+		}
+	}
+	return Storey;
+}
+
 bool AJadgMapFrame::ShowStorey(int32 Storey, bool bVisible) const
 {
 	UWorld* World = GetWorld();
@@ -73,5 +146,10 @@ double AJadgMapFrame::StoreyZ(int32 Storey) const
 
 FString AJadgMapFrame::MapPackage(const FString& InLevelId)
 {
+	// The terrain source ID remains stable; its editor world has a canonical location.
+	if (InLevelId == TEXT("capital-landscape/paysage-capitale") || InLevelId == TEXT("Capitale"))
+	{
+		return TEXT("/Game/Capitale/Cartes/Capitale");
+	}
 	return TEXT("/Game/Maps/Levels/") + InLevelId;
 }

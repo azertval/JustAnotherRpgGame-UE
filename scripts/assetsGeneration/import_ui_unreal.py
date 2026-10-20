@@ -15,9 +15,9 @@ Ce qu'il importe :
 
 | Source | Liste | Asset |
 |---|---|---|
-| les images du kit `Source/Elements/Assets/UI/` | `illustrations.json` (fichier, empreinte SHA-256) | `/Game/UI/Kit/<fichier sans extension>`, texture d'interface sans mipmaps |
+| les images du kit `Source/Elements/Assets/UI/` | `illustrations.json` (fichier, empreinte SHA-256) | `/Game/Jeu/UI/Kit/<fichier sans extension>`, texture d'interface sans mipmaps |
 
-Les polices des écrans (`style.json`, section `fonts`) deviennent `/Game/UI/Fonts/<fichier>` par le
+Les polices des écrans (`style.json`, section `fonts`) deviennent `/Game/Jeu/UI/Fonts/<fichier>` par le
 commandlet `JadgImportFonts`, que `build.ps1` lance juste après ce script : l'importeur de polices
 du moteur demande une fenêtre et s'arrête sans elle (relevé du 9 octobre 2026).
 
@@ -40,8 +40,8 @@ import unreal
 PROJECT_DIR = Path(unreal.Paths.project_dir()).resolve()
 UI_DIR = PROJECT_DIR / "Source" / "Elements" / "Assets" / "UI"
 MANIFEST = UI_DIR / "illustrations.json"
-KIT_ROOT = "/Game/UI/Kit"
-# Les polices : `/Game/UI/Fonts`, écrites par le commandlet JadgImportFonts (voir plus haut).
+KIT_ROOT = "/Game/Jeu/UI/Kit"
+# Les polices : `/Game/Jeu/UI/Fonts`, écrites par le commandlet JadgImportFonts (voir plus haut).
 TAG = "JadgSha256"
 
 

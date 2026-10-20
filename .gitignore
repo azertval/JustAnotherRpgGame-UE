@@ -51,6 +51,16 @@ compile_commands.json
 /Source/Elements/Assets/Master/**/*.glb
 # Les pièces construites par script (build_colosseum.py) : régénérées, le manifeste seul est suivi.
 /Source/Elements/Assets/Built/**/*.glb
+# D-65 : textures originales régénérées par build_arena_witness_textures.py.
+/Source/Elements/Assets/Built/arena-witness-materials/**/*.png
+# D-65 : arène complète, accessoires et ambiance régénérables ; manifestes JSON suivis.
+/Source/Elements/Assets/Built/arena-fate-modern/**/*.png
+/Source/Elements/Assets/Built/arena-fate-modern/generation-report.json
+/Source/Elements/Assets/Built/arena-fate-props/**/*.png
+/Source/Elements/Assets/Built/arena-fate-props/generation-report.json
+/Source/Elements/Assets/Built/arena-fate-atmosphere/**/*.png
+/Source/Elements/Assets/Built/arena-fate-atmosphere/**/*.wav
+/Source/Elements/Assets/Built/arena-fate-atmosphere/generation-report.json
 # Les pièces des bibliothèques du moteur (LOT-1019, D-55) : le manifeste est suivi, les .glb non.
 /Source/Elements/Assets/Library/**/*.glb
 

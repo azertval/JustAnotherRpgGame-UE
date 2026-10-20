@@ -4,6 +4,7 @@
 #include "Game/JadgGameMode.h"
 
 #include "Capture/JadgCaptureDirector.h"
+#include "Capture/JadgLandscapeStreamingProbe.h"
 #include "Capture/JadgCombatWalkthrough.h"
 #include "Capture/JadgDemoWalkthrough.h"
 #include "Capture/JadgScreensTour.h"
@@ -30,7 +31,11 @@ void AJadgGameMode::StartPlay()
 	GetWorld()->SpawnActor<AJadgParty>();
 
 	FString CaptureDir;
-	if (FParse::Value(FCommandLine::Get(), TEXT("JadgCapture="), CaptureDir))
+	if (FParse::Value(FCommandLine::Get(), TEXT("JadgLandscapeStreaming="), CaptureDir))
+	{
+		GetWorld()->SpawnActor<AJadgLandscapeStreamingProbe>();
+	}
+	else if (FParse::Value(FCommandLine::Get(), TEXT("JadgCapture="), CaptureDir))
 	{
 		GetWorld()->SpawnActor<AJadgCaptureDirector>();
 	}

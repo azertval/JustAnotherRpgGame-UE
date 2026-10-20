@@ -24,8 +24,8 @@ class UTexture2D;
  *
  * | Ce qu'il donne | D'où |
  * |---|---|
- * | une image du kit | `/Game/UI/Kit/<pièce>[/<état>]`, importée par `scripts/assetsGeneration/import_ui_unreal.py` |
- * | une police | `/Game/UI/Fonts/<fichier>`, la face importée par le même script, mise en police composite ici |
+ * | une image du kit | `/Game/Jeu/UI/Kit/<pièce>[/<état>]`, importée par `scripts/assetsGeneration/import_ui_unreal.py` |
+ * | une police | `/Game/Jeu/UI/Fonts/<fichier>`, la face importée par le même script, mise en police composite ici |
  *
  * Une pièce absente — le kit n'est pas sur le poste, ou pas importé — retombe sur un aplat des
  * couleurs du fichier cerclé d'or (`EX-IHM-075`) ; une police absente, sur celle du moteur

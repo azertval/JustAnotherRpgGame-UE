@@ -1,0 +1,15 @@
+{
+  "map": "Capitale",
+  "resolution": [1920, 1080],
+  "gpu": "NVIDIA GeForce RTX 4060 Ti",
+  "openSeconds": 37.31,
+  "post": "",
+  "gpuMemoryMiB": {"used": 5938.6, "texturesStreaming": 1266.1, "texturesNonStreaming": 1939.6},
+  "meshTextures": {"count": 1588, "residentMiB": 923.4, "allMipsMiB": 2005.2},
+  "meshes": {"count": 382, "triangles": 61500567, "resourceMiB": 1624.5, "largest": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-dorsi/StaticMeshes/SM_Statue_Dorsi.SM_Statue_Dorsi", "largestTriangles": 2900460},
+  "captures": ["arene-interieur-1200.png"],
+  "measureShot": "arene-interieur",
+  "measures": [
+    {"hour": "12:00", "seconds": 14.1, "frames": 733, "fps": 51.9, "frameMs": 19.25, "p99FrameMs": 82.02, "worstFrameMs": 120.71, "gameMs": 9.86, "renderMs": 16.92, "gpuMs": 13.19}
+  ]
+}

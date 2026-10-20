@@ -1,0 +1,731 @@
+{
+  "generator": "scripts/assetsGeneration/build_arena_witness_textures.py",
+  "version": 5,
+  "size": 2048,
+  "styleSizes": {
+    "painted": 2048,
+    "stylized": 1024,
+    "realistic": 1024
+  },
+  "tileMetres": 2.0,
+  "styleRevisions": {
+    "painted": 5,
+    "stylized": 2,
+    "realistic": 2
+  },
+  "provenance": "Original procedural physical height/ORM and pigments; painted stone baseColor may use the exact original AI-painted PNG cited in inputs. No sourcebook image.",
+  "styles": {
+    "painted": {
+      "stone_cream": {
+        "baseColor": {
+          "file": "painted/stone_cream_baseColor.png",
+          "sha256": "3415e1fb1715e379f9d1a75dc024d20f343f292be28b16dd3fd56f6bf66ef638",
+          "size": [
+            1254,
+            1254
+          ],
+          "provenance": "Original AI-generated mineral painting, exact PNG bytes; no sourcebook image; no edit or resampling.",
+          "periodicity": "not validated; inspect repetition in the engine",
+          "normalRelation": "none: independent physical height and ORM remain unchanged",
+          "nativeProcessing": {
+            "powerOfTwo": "STRETCH_TO_POWER_OF_TWO",
+            "maxTextureSize": 2048,
+            "mips": "TMGS_FROM_TEXTURE_GROUP",
+            "streaming": true
+          }
+        },
+        "normal": {
+          "file": "painted/stone_cream_normal.png",
+          "sha256": "8f2ed6e4dcc0d42b6e21b0bf990dde9c28421157752706215e41a29c9632f655"
+        },
+        "orm": {
+          "file": "painted/stone_cream_orm.png",
+          "sha256": "95bb4e8d74a00b62ca38d09eb596b2a6b27aee14c9036644a0c0799603e64c61"
+        }
+      },
+      "marble_white": {
+        "baseColor": {
+          "file": "painted/marble_white_baseColor.png",
+          "sha256": "4417952dbf7a56e15e9aaf7b95b38e98a7bc4449163fad473c192393ac6d20dd"
+        },
+        "normal": {
+          "file": "painted/marble_white_normal.png",
+          "sha256": "f4540698e44709e12c9773f4d3a974944d64670fb41d74b51d87cb6ec7638a4f"
+        },
+        "orm": {
+          "file": "painted/marble_white_orm.png",
+          "sha256": "d9207fc24bd29cf25b1b9654fbfce9118a49a9818cb6669108f9af42844e109a"
+        }
+      },
+      "bronze": {
+        "baseColor": {
+          "file": "painted/bronze_baseColor.png",
+          "sha256": "d080f8a9736a42d2733626b524926454bfb9a3e9fb1d523f8e485669510d6740"
+        },
+        "normal": {
+          "file": "painted/bronze_normal.png",
+          "sha256": "e172f623facbbf275edcb712d30d64df4ea312053838f0ef18ec3d44b2e939d6"
+        },
+        "orm": {
+          "file": "painted/bronze_orm.png",
+          "sha256": "df4b0edc2e0194cd396230b0f077a319863618d5c1da9102388d9df3a39c091f"
+        }
+      },
+      "dark_metal": {
+        "baseColor": {
+          "file": "painted/dark_metal_baseColor.png",
+          "sha256": "7e6b13f208417a48eb9da816b976255445ef5f29b137dc66bd147d541460d2de"
+        },
+        "normal": {
+          "file": "painted/dark_metal_normal.png",
+          "sha256": "6b03b58ad99e3e05be2fb91c6e5af944ddf7c1a3a5d5973a43d897bfb6657f60"
+        },
+        "orm": {
+          "file": "painted/dark_metal_orm.png",
+          "sha256": "e3fd18b8df30ab36368c4771c3362c9c937781c49013ce3bcb98d6c069833631"
+        }
+      },
+      "burgundy": {
+        "baseColor": {
+          "file": "painted/burgundy_baseColor.png",
+          "sha256": "252598357e8ba1206c9cd5c749397bff0b6a1d3cc182ba85cd233145e13dfc95"
+        },
+        "normal": {
+          "file": "painted/burgundy_normal.png",
+          "sha256": "4813e3befc1054d9002937c49992e8908e83b73ff8ac31996da3f93a7d3b2724"
+        },
+        "orm": {
+          "file": "painted/burgundy_orm.png",
+          "sha256": "37cfe0d1706361ea09181355214c383ea7d4d543691d4a5ffa91d8a40d3ffb6a"
+        }
+      },
+      "sand": {
+        "baseColor": {
+          "file": "painted/sand_baseColor.png",
+          "sha256": "e5ad5308a058e599d3f2a6d821d82020395234b00388993467d4935a5be2d478"
+        },
+        "normal": {
+          "file": "painted/sand_normal.png",
+          "sha256": "d813ce206f51e850a1ef8637625a9dd80fe642b7035fd2902484086423807808"
+        },
+        "orm": {
+          "file": "painted/sand_orm.png",
+          "sha256": "d8e233fa782b69a592a7964a1d89524c66f3562c9782be6f0f6465c3d397ba29"
+        }
+      },
+      "wood": {
+        "baseColor": {
+          "file": "painted/wood_baseColor.png",
+          "sha256": "d9d8b975cb2ff0ac9052cb29547f32af1189de4dd9985c587998f51bfad65157"
+        },
+        "normal": {
+          "file": "painted/wood_normal.png",
+          "sha256": "1efdc3d477437946693c944b3c6717845579783838e9870c6412720349ee5135"
+        },
+        "orm": {
+          "file": "painted/wood_orm.png",
+          "sha256": "ab266e1459d4a3bae46348d0f391bcb0590b5b02438b428f1f5ed351c15d7030"
+        }
+      },
+      "mortar": {
+        "baseColor": {
+          "file": "painted/mortar_baseColor.png",
+          "sha256": "b6292ddfdf32302241423590ac3d3e978742582b2f59613b298346cdbf2f7671"
+        },
+        "normal": {
+          "file": "painted/mortar_normal.png",
+          "sha256": "7bcf92654354f72dae36677ca88237db1ddece8e93e4867ce6e1ed7412c01364"
+        },
+        "orm": {
+          "file": "painted/mortar_orm.png",
+          "sha256": "f552e205121deaa71a79519126103168d0291ad72778435ae6964d1a520b14dc"
+        }
+      }
+    },
+    "stylized": {
+      "stone_cream": {
+        "baseColor": {
+          "file": "stylized/stone_cream_baseColor.png",
+          "sha256": "32b98affb0a42e329a8a8b3e8290f367b1c4e4ed9e2840185c04cd216132739a"
+        },
+        "normal": {
+          "file": "stylized/stone_cream_normal.png",
+          "sha256": "00e065c0426ba8eed60ba410d7318e19e33f8addaac36aa7dc3c7d33a6a5e193"
+        },
+        "orm": {
+          "file": "stylized/stone_cream_orm.png",
+          "sha256": "0212d16d5eefe72263fc7395e6bdb94e5faa461544be3fcbce4fbeb76a3dbe03"
+        }
+      },
+      "marble_white": {
+        "baseColor": {
+          "file": "stylized/marble_white_baseColor.png",
+          "sha256": "443e23e228fe37695e215d2d4ef13b89d5f8990470c63dd9fd2b39a5a3204791"
+        },
+        "normal": {
+          "file": "stylized/marble_white_normal.png",
+          "sha256": "18ba7a9a5a2c0493a909bb879311cb1832958121d49b869f95ee79e05d335491"
+        },
+        "orm": {
+          "file": "stylized/marble_white_orm.png",
+          "sha256": "4231b79c07a046dc604a0a5e2a6b0626c83f184902eb4afe873eb2290d263609"
+        }
+      },
+      "bronze": {
+        "baseColor": {
+          "file": "stylized/bronze_baseColor.png",
+          "sha256": "3736bc8814421fb83c2235fb8b8df7bbca0047cc2450cca02e8934b4131179fc"
+        },
+        "normal": {
+          "file": "stylized/bronze_normal.png",
+          "sha256": "fc9688fba37d3f0da7e265974b715ec1bf36113f2f59bf57b33438098dc25e71"
+        },
+        "orm": {
+          "file": "stylized/bronze_orm.png",
+          "sha256": "033865f15cc1aa78ff017f13ea7e1ba8d9c4d16efa36f41f4e0bd7b8499821d8"
+        }
+      },
+      "dark_metal": {
+        "baseColor": {
+          "file": "stylized/dark_metal_baseColor.png",
+          "sha256": "4e4b3a172fe96236d8365cff50084c054eaca1d854283bd05a7ae8b00373c96c"
+        },
+        "normal": {
+          "file": "stylized/dark_metal_normal.png",
+          "sha256": "a456e073833712eccc92c0a6bde684faf8f16485be18b4fe35777e9aa4ba1663"
+        },
+        "orm": {
+          "file": "stylized/dark_metal_orm.png",
+          "sha256": "355ec0a6ce8a85e0516542222b93f5381783276e24d7c25b9f9313a52738d48f"
+        }
+      },
+      "burgundy": {
+        "baseColor": {
+          "file": "stylized/burgundy_baseColor.png",
+          "sha256": "12f748a30639a4e0abf9e96a74346705df17599fc2d7c5d40161b9c93007259b"
+        },
+        "normal": {
+          "file": "stylized/burgundy_normal.png",
+          "sha256": "d9f002f66aba0c0f807e6a3e41dd6e30182c7de32201d9e0598cc0e28d5f6299"
+        },
+        "orm": {
+          "file": "stylized/burgundy_orm.png",
+          "sha256": "b9239ce2ac19cee15fac0342c9e9a870d47e2fc96749cabc5ec04d344cde23c5"
+        }
+      },
+      "sand": {
+        "baseColor": {
+          "file": "stylized/sand_baseColor.png",
+          "sha256": "5e83bd79c2606355a4d7f056b105f9770964e8703d1399b84e94d7d0b48e2dee"
+        },
+        "normal": {
+          "file": "stylized/sand_normal.png",
+          "sha256": "57f4ca016d0251856c5ef5ede275943441eb51216bb06b136dbdf1683333641a"
+        },
+        "orm": {
+          "file": "stylized/sand_orm.png",
+          "sha256": "c85ab68a40c9500c997dc68965c397405f01dbabb0018ead58b78eb69ebf62cb"
+        }
+      },
+      "wood": {
+        "baseColor": {
+          "file": "stylized/wood_baseColor.png",
+          "sha256": "c71c531ada0eda8984256c91cb3d86e1256eccd6b426f35e5aab9dd2ffe5d140"
+        },
+        "normal": {
+          "file": "stylized/wood_normal.png",
+          "sha256": "d74658b286405ee968bded2d4a7d5127924f5ac27cda699d355603a605bae679"
+        },
+        "orm": {
+          "file": "stylized/wood_orm.png",
+          "sha256": "16f37dbfb33ef14c9aea8d5488c1472a2de4b8211af1138021d6f2a82f0e4cf5"
+        }
+      },
+      "mortar": {
+        "baseColor": {
+          "file": "stylized/mortar_baseColor.png",
+          "sha256": "857cff32ea6665f154510d6e3a85063aaef657cc03ff85cb20a68790e9e77484"
+        },
+        "normal": {
+          "file": "stylized/mortar_normal.png",
+          "sha256": "a073461700b6705afa8bed4a8ffd3f032525a4804554c69a18b64b792b9cabb7"
+        },
+        "orm": {
+          "file": "stylized/mortar_orm.png",
+          "sha256": "42161018f7cb0a384d70bc8e76a5a329df871595cbcdd71324b5c5ac1c4ead0e"
+        }
+      }
+    },
+    "realistic": {
+      "stone_cream": {
+        "baseColor": {
+          "file": "realistic/stone_cream_baseColor.png",
+          "sha256": "c9c0fedc81e4e36f1cff76f7e558741ea3b8eaf60312460646e551094943d317"
+        },
+        "normal": {
+          "file": "realistic/stone_cream_normal.png",
+          "sha256": "60539386ecafce5b8f00ad40f0295109ef6d0a4ea82d42937c30d2b3a360e2ac"
+        },
+        "orm": {
+          "file": "realistic/stone_cream_orm.png",
+          "sha256": "aa47e730cb3dd6a82667253a1b1db2524f2224231f74f6aaaacc5797de7f3a6a"
+        }
+      },
+      "marble_white": {
+        "baseColor": {
+          "file": "realistic/marble_white_baseColor.png",
+          "sha256": "b4480b5c62a57d66b1af80c72a768630e9145523a00cafd5739658503f45645c"
+        },
+        "normal": {
+          "file": "realistic/marble_white_normal.png",
+          "sha256": "740edf3e502b6f7af1af8fca4439b341c5fc14642ce0eead54e23b6159ad8ed0"
+        },
+        "orm": {
+          "file": "realistic/marble_white_orm.png",
+          "sha256": "71b8dda4bf2ada550811f88f9afb940333253bb77d4927e076f92bb0e5d32d67"
+        }
+      },
+      "bronze": {
+        "baseColor": {
+          "file": "realistic/bronze_baseColor.png",
+          "sha256": "7f2650d11375920ec9663ee1e1d37cbe28f2cf3d2ee120985b5b647ebf939d06"
+        },
+        "normal": {
+          "file": "realistic/bronze_normal.png",
+          "sha256": "567ce2a9dc0986caf0534e3dc4695a9db8ea84b30f21eb7b1e297c0b9767c11e"
+        },
+        "orm": {
+          "file": "realistic/bronze_orm.png",
+          "sha256": "d263657a8a4669d32348900362f34a49722695e54f0a055c6f24489ab013e12f"
+        }
+      },
+      "dark_metal": {
+        "baseColor": {
+          "file": "realistic/dark_metal_baseColor.png",
+          "sha256": "ccb7ac74570f81d41765e5437a871cbeeaf10f70e7f5aff0f90b1866f762d597"
+        },
+        "normal": {
+          "file": "realistic/dark_metal_normal.png",
+          "sha256": "7f574e776e6b02134c4e2b8f9f09f435213e9a2a0b3c275d7cdb7ece0bd35820"
+        },
+        "orm": {
+          "file": "realistic/dark_metal_orm.png",
+          "sha256": "f915e6bd2120f7dd0790cad8d16d2ef5d7f0232c89897388b76cf18e38ea3096"
+        }
+      },
+      "burgundy": {
+        "baseColor": {
+          "file": "realistic/burgundy_baseColor.png",
+          "sha256": "bfbb745cdfd51fc6336b4c12153ef600dc67acc354f5b0c86cda2dc48fb88448"
+        },
+        "normal": {
+          "file": "realistic/burgundy_normal.png",
+          "sha256": "01329ee973a9f425523ec1fdda4864c88fb5d4196bee328200a49494323dcb81"
+        },
+        "orm": {
+          "file": "realistic/burgundy_orm.png",
+          "sha256": "1be3f4cdb8bd43469613144ccb04e21840f2b7435455bb5cfa395fe666d9e865"
+        }
+      },
+      "sand": {
+        "baseColor": {
+          "file": "realistic/sand_baseColor.png",
+          "sha256": "0a53fa13128add50c1d59f2a006004de48a2f884c3237362e567ea47a8ea32c5"
+        },
+        "normal": {
+          "file": "realistic/sand_normal.png",
+          "sha256": "2ae97e762df8b8b896a8f4b5ae6648d8d0719a1af3d1feb73356b19039ac30fe"
+        },
+        "orm": {
+          "file": "realistic/sand_orm.png",
+          "sha256": "c14cddc44504e082cde1e988a2c017b6ba341548a45727d5df98eba0c79721cb"
+        }
+      },
+      "wood": {
+        "baseColor": {
+          "file": "realistic/wood_baseColor.png",
+          "sha256": "fa5ba3809918f8cf37c6d6726c31e4cfd91e18481cb62d715430093b5d18d38a"
+        },
+        "normal": {
+          "file": "realistic/wood_normal.png",
+          "sha256": "6a083234b54d854bdc288eee591a6eb84a0ec6bee58410e5d5bc074770836c35"
+        },
+        "orm": {
+          "file": "realistic/wood_orm.png",
+          "sha256": "8b130d960041c108b11a23facca9a4f9c4a98dbd5127eb500b7d9ce4a8556d73"
+        }
+      },
+      "mortar": {
+        "baseColor": {
+          "file": "realistic/mortar_baseColor.png",
+          "sha256": "b7ad1f1812c268fa2bb13d2310e31cf5c526f1104b5f1e36a68f7e5665a07168"
+        },
+        "normal": {
+          "file": "realistic/mortar_normal.png",
+          "sha256": "f4f0f09c6ee72b1d878e1b1a80fbf770c332154979af6b98b455e89e87cc18b9"
+        },
+        "orm": {
+          "file": "realistic/mortar_orm.png",
+          "sha256": "bd5faae31432b7fb600ea7fd1328c445835ffb2b66eb84027cb6b61724723e3e"
+        }
+      }
+    }
+  },
+  "measurements": {
+    "painted": {
+      "stone_cream": {
+        "size": [
+          2048,
+          2048
+        ],
+        "heightMinMm": -2.89797,
+        "heightMaxMm": 0.41097,
+        "heightPeakToPeakMm": 3.30894,
+        "heightRmsMm": 0.20478,
+        "normalZRange": [
+          0.687142,
+          1.0
+        ],
+        "normalQuantizedLengthMaxError": 0.005907,
+        "roughnessRange": [
+          0.6473,
+          0.96791
+        ],
+        "metalRange": [
+          0.0,
+          0.0
+        ],
+        "aoRange": [
+          0.74639,
+          1.0
+        ],
+        "heightSource": "Independent authored periodic physical features, never baseColor pixels"
+      },
+      "marble_white": {
+        "size": [
+          2048,
+          2048
+        ],
+        "heightMinMm": -0.21984,
+        "heightMaxMm": 0.13829,
+        "heightPeakToPeakMm": 0.35813,
+        "heightRmsMm": 0.0524,
+        "normalZRange": [
+          0.996262,
+          1.0
+        ],
+        "normalQuantizedLengthMaxError": 0.004067,
+        "roughnessRange": [
+          0.1889,
+          0.45189
+        ],
+        "metalRange": [
+          0.0,
+          0.0
+        ],
+        "aoRange": [
+          1.0,
+          1.0
+        ],
+        "heightSource": "Independent authored periodic physical features, never baseColor pixels"
+      },
+      "bronze": {
+        "size": [
+          2048,
+          2048
+        ],
+        "heightMinMm": -0.48255,
+        "heightMaxMm": 0.34605,
+        "heightPeakToPeakMm": 0.82859,
+        "heightRmsMm": 0.09451,
+        "normalZRange": [
+          0.978437,
+          1.0
+        ],
+        "normalQuantizedLengthMaxError": 0.004435,
+        "roughnessRange": [
+          0.22911,
+          0.7215
+        ],
+        "metalRange": [
+          0.40398,
+          0.98
+        ],
+        "aoRange": [
+          1.0,
+          1.0
+        ],
+        "heightSource": "Independent authored periodic physical features, never baseColor pixels"
+      },
+      "dark_metal": {
+        "size": [
+          2048,
+          2048
+        ],
+        "heightMinMm": -0.42097,
+        "heightMaxMm": 0.29426,
+        "heightPeakToPeakMm": 0.71524,
+        "heightRmsMm": 0.12213,
+        "normalZRange": [
+          0.986556,
+          1.0
+        ],
+        "normalQuantizedLengthMaxError": 0.004373,
+        "roughnessRange": [
+          0.37356,
+          0.64068
+        ],
+        "metalRange": [
+          0.94,
+          0.94
+        ],
+        "aoRange": [
+          1.0,
+          1.0
+        ],
+        "heightSource": "Independent authored periodic physical features, never baseColor pixels"
+      },
+      "burgundy": {
+        "size": [
+          2048,
+          2048
+        ],
+        "heightMinMm": -0.07847,
+        "heightMaxMm": 0.21243,
+        "heightPeakToPeakMm": 0.29089,
+        "heightRmsMm": 0.13414,
+        "normalZRange": [
+          0.996253,
+          1.0
+        ],
+        "normalQuantizedLengthMaxError": 0.003945,
+        "roughnessRange": [
+          0.78696,
+          0.94604
+        ],
+        "metalRange": [
+          0.0,
+          0.0
+        ],
+        "aoRange": [
+          0.9,
+          1.0
+        ],
+        "heightSource": "Independent authored periodic physical features, never baseColor pixels"
+      },
+      "sand": {
+        "size": [
+          2048,
+          2048
+        ],
+        "heightMinMm": -0.57468,
+        "heightMaxMm": 2.27035,
+        "heightPeakToPeakMm": 2.84503,
+        "heightRmsMm": 0.29236,
+        "normalZRange": [
+          0.858651,
+          1.0
+        ],
+        "normalQuantizedLengthMaxError": 0.005292,
+        "roughnessRange": [
+          0.91462,
+          0.99133
+        ],
+        "metalRange": [
+          0.0,
+          0.0
+        ],
+        "aoRange": [
+          0.94027,
+          1.0
+        ],
+        "heightSource": "Independent authored periodic physical features, never baseColor pixels"
+      },
+      "wood": {
+        "size": [
+          2048,
+          2048
+        ],
+        "heightMinMm": -1.00956,
+        "heightMaxMm": 0.14168,
+        "heightPeakToPeakMm": 1.15125,
+        "heightRmsMm": 0.13348,
+        "normalZRange": [
+          0.981555,
+          1.0
+        ],
+        "normalQuantizedLengthMaxError": 0.004423,
+        "roughnessRange": [
+          0.51819,
+          0.76296
+        ],
+        "metalRange": [
+          0.0,
+          0.0
+        ],
+        "aoRange": [
+          0.86366,
+          1.0
+        ],
+        "heightSource": "Independent authored periodic physical features, never baseColor pixels"
+      },
+      "mortar": {
+        "size": [
+          2048,
+          2048
+        ],
+        "heightMinMm": -0.31613,
+        "heightMaxMm": 0.57668,
+        "heightPeakToPeakMm": 0.89281,
+        "heightRmsMm": 0.14315,
+        "normalZRange": [
+          0.988477,
+          1.0
+        ],
+        "normalQuantizedLengthMaxError": 0.004362,
+        "roughnessRange": [
+          0.93196,
+          0.96816
+        ],
+        "metalRange": [
+          0.0,
+          0.0
+        ],
+        "aoRange": [
+          1.0,
+          1.0
+        ],
+        "heightSource": "Independent authored periodic physical features, never baseColor pixels"
+      }
+    },
+    "stylized": {},
+    "realistic": {}
+  },
+  "periodicity": {
+    "stone_cream": {
+      "status": "verified",
+      "edgeValueMaxErrors": {
+        "baseColor": 0.0,
+        "height": 4.040008345224111e-17,
+        "roughness": 5.773159728050814e-15,
+        "metal": 0.0,
+        "ao": 1.5543122344752192e-15
+      },
+      "heightDerivativeMaxError": 6.06736882957648e-14,
+      "scope": "Procedural colour/physical maps only; original AI colour input is excluded"
+    },
+    "marble_white": {
+      "status": "verified",
+      "edgeValueMaxErrors": {
+        "baseColor": 0.0,
+        "height": 8.131516293641283e-19,
+        "roughness": 8.881784197001252e-16,
+        "metal": 0.0,
+        "ao": 0.0
+      },
+      "heightDerivativeMaxError": 1.1136924715771102e-15,
+      "scope": "Procedural colour/physical maps only; original AI colour input is excluded"
+    },
+    "bronze": {
+      "status": "verified",
+      "edgeValueMaxErrors": {
+        "baseColor": 2.4424906541753444e-15,
+        "height": 2.7985968577282083e-18,
+        "roughness": 2.3314683517128287e-15,
+        "metal": 3.9968028886505635e-15,
+        "ao": 0.0
+      },
+      "heightDerivativeMaxError": 3.354955202539145e-15,
+      "scope": "Procedural colour/physical maps only; original AI colour input is excluded"
+    },
+    "dark_metal": {
+      "status": "verified",
+      "edgeValueMaxErrors": {
+        "baseColor": 0.0,
+        "height": 8.348356728138384e-18,
+        "roughness": 2.220446049250313e-15,
+        "metal": 0.0,
+        "ao": 0.0
+      },
+      "heightDerivativeMaxError": 9.742207041085749e-15,
+      "scope": "Procedural colour/physical maps only; original AI colour input is excluded"
+    },
+    "burgundy": {
+      "status": "verified",
+      "edgeValueMaxErrors": {
+        "baseColor": 0.0,
+        "height": 2.4123498337802474e-18,
+        "roughness": 7.771561172376096e-16,
+        "metal": 0.0,
+        "ao": 0.0
+      },
+      "heightDerivativeMaxError": 8.326672684688674e-16,
+      "scope": "Procedural colour/physical maps only; original AI colour input is excluded"
+    },
+    "sand": {
+      "status": "verified",
+      "edgeValueMaxErrors": {
+        "baseColor": 0.0,
+        "height": 2.72405795836983e-18,
+        "roughness": 2.220446049250313e-16,
+        "metal": 0.0,
+        "ao": 0.0
+      },
+      "heightDerivativeMaxError": 2.8727020762175925e-15,
+      "scope": "Procedural colour/physical maps only; original AI colour input is excluded"
+    },
+    "wood": {
+      "status": "verified",
+      "edgeValueMaxErrors": {
+        "baseColor": 0.0,
+        "height": 1.3115458155285586e-17,
+        "roughness": 2.220446049250313e-15,
+        "metal": 0.0,
+        "ao": 1.6653345369377348e-15
+      },
+      "heightDerivativeMaxError": 2.0011770018868447e-14,
+      "scope": "Procedural colour/physical maps only; original AI colour input is excluded"
+    },
+    "mortar": {
+      "status": "verified",
+      "edgeValueMaxErrors": {
+        "baseColor": 0.0,
+        "height": 7.643625316022806e-18,
+        "roughness": 1.1102230246251565e-16,
+        "metal": 0.0,
+        "ao": 0.0
+      },
+      "heightDerivativeMaxError": 6.418476861114186e-15,
+      "scope": "Procedural colour/physical maps only; original AI colour input is excluded"
+    }
+  },
+  "inputs": [
+    {
+      "file": "inputs/stone_cream_painted_detail.png",
+      "sha256": "3415e1fb1715e379f9d1a75dc024d20f343f292be28b16dd3fd56f6bf66ef638",
+      "size": [
+        1254,
+        1254
+      ],
+      "usage": "painted/stone_cream/baseColor only",
+      "periodicity": "not validated"
+    },
+    {
+      "file": "inputs/stone_cream_painted_detail.provenance.json",
+      "usage": "original generation provenance"
+    },
+    {
+      "file": "inputs/stone_cream_painted.png",
+      "sha256": "afb8eb65e74b21af39249ae5e892ae14b61d1114794f65464b2ce93535a82050",
+      "size": [
+        1254,
+        1254
+      ],
+      "usage": "previous source preserved"
+    },
+    {
+      "file": "inputs/stone_cream_painted.provenance.json",
+      "usage": "previous generation provenance preserved"
+    }
+  ]
+}

@@ -1,0 +1,383 @@
+{
+  "generator": "scripts/assetsGeneration/build_capital_terrain_modules.py",
+  "status": "prototype de terrain, non validé artistiquement",
+  "pieces": [
+    {
+      "id": "paves-0",
+      "file": "paves-0.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 37564,
+      "boundsBlender": [
+        [
+          -3.0,
+          -3.0,
+          0.0
+        ],
+        [
+          3.0,
+          3.0,
+          0.27
+        ]
+      ],
+      "assembledSimpleParts": 65,
+      "surfaceFamily": "paving",
+      "designEnvelopeMetres": [
+        6,
+        6,
+        0.27
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "paves-1",
+      "file": "paves-1.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 37564,
+      "boundsBlender": [
+        [
+          -3.0,
+          -3.0,
+          0.0
+        ],
+        [
+          3.0,
+          3.0,
+          0.27
+        ]
+      ],
+      "assembledSimpleParts": 65,
+      "surfaceFamily": "paving",
+      "designEnvelopeMetres": [
+        6,
+        6,
+        0.27
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "paves-2",
+      "file": "paves-2.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 37564,
+      "boundsBlender": [
+        [
+          -3.0,
+          -3.0,
+          0.0
+        ],
+        [
+          3.0,
+          3.0,
+          0.27
+        ]
+      ],
+      "assembledSimpleParts": 65,
+      "surfaceFamily": "paving",
+      "designEnvelopeMetres": [
+        6,
+        6,
+        0.27
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "roche-0",
+      "file": "roche-0.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 16128,
+      "boundsBlender": [
+        [
+          -1.7226,
+          -1.698,
+          0.0
+        ],
+        [
+          1.7226,
+          1.5343,
+          2.415
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "surfaceFamily": "rock",
+      "designEnvelopeMetres": [
+        3.6,
+        3.6,
+        2.4
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "roche-1",
+      "file": "roche-1.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 16128,
+      "boundsBlender": [
+        [
+          -1.6137,
+          -1.7029,
+          0.0
+        ],
+        [
+          1.7809,
+          1.64,
+          2.415
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "surfaceFamily": "rock",
+      "designEnvelopeMetres": [
+        3.6,
+        3.6,
+        2.4
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "roche-2",
+      "file": "roche-2.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 16128,
+      "boundsBlender": [
+        [
+          -1.5952,
+          -1.6537,
+          0.0
+        ],
+        [
+          1.7866,
+          1.6996,
+          2.415
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "surfaceFamily": "rock",
+      "designEnvelopeMetres": [
+        3.6,
+        3.6,
+        2.4
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "bordure",
+      "file": "bordure.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 2336,
+      "boundsBlender": [
+        [
+          -1.4975,
+          -0.225,
+          0.0
+        ],
+        [
+          1.4975,
+          0.225,
+          0.3
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "surfaceFamily": "stone",
+      "designEnvelopeMetres": [
+        3,
+        0.45,
+        0.3
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "bordure-angle",
+      "file": "bordure-angle.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 2920,
+      "boundsBlender": [
+        [
+          -0.3725,
+          -1.8725,
+          0.0
+        ],
+        [
+          1.8725,
+          0.3725,
+          0.3
+        ]
+      ],
+      "assembledSimpleParts": 5,
+      "surfaceFamily": "stone",
+      "designEnvelopeMetres": [
+        2.25,
+        2.25,
+        0.3
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "soutenement",
+      "file": "soutenement.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 14392,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.75,
+          0.0
+        ],
+        [
+          1.5,
+          0.75,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 26,
+      "surfaceFamily": "stone",
+      "designEnvelopeMetres": [
+        3,
+        1.5,
+        3
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "rampe",
+      "file": "rampe.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -3.0,
+          -3.0,
+          0.0
+        ],
+        [
+          3.0,
+          3.0,
+          1.7964
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "surfaceFamily": "stone",
+      "designEnvelopeMetres": [
+        6,
+        6,
+        1.8
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "escalier",
+      "file": "escalier.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1880,
+      "boundsBlender": [
+        [
+          -1.5,
+          -2.25,
+          0.0
+        ],
+        [
+          1.5,
+          2.25,
+          1.5
+        ]
+      ],
+      "assembledSimpleParts": 10,
+      "surfaceFamily": "stone",
+      "designEnvelopeMetres": [
+        3,
+        4.5,
+        1.5
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "berge",
+      "file": "berge.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 17534,
+      "boundsBlender": [
+        [
+          -3.0,
+          -6.0,
+          0.0
+        ],
+        [
+          3.0,
+          6.0,
+          1.1
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "surfaceFamily": "sand",
+      "designEnvelopeMetres": [
+        6,
+        12,
+        1.1
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    },
+    {
+      "id": "sillons",
+      "file": "sillons.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 17534,
+      "boundsBlender": [
+        [
+          -3.0,
+          -6.0,
+          0.0
+        ],
+        [
+          3.0,
+          6.0,
+          0.26
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "surfaceFamily": "soil",
+      "designEnvelopeMetres": [
+        6,
+        12,
+        0.26
+      ],
+      "pivot": "ground",
+      "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_terrain_modules.py"
+    }
+  ]
+}

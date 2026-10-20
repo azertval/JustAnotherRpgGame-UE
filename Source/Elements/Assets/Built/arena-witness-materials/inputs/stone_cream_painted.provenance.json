@@ -1,0 +1,19 @@
+{
+  "tool": "built-in image_gen",
+  "purpose": "Original limestone albedo for the Arena of Fate fantasy-illustration witness; not an approval of the scene.",
+  "date": "2026-10-09",
+  "input": "stone_cream_painted.png",
+  "source": "Generated from text, then edited from that original generation. No sourcebook image was supplied.",
+  "generatedOutput": "exec-2a73df39-142d-4b53-9678-115e5f93e226.png",
+  "originalGeneration": "exec-5e7572ae-03d4-4687-9ff9-89fe81889e8d.png",
+  "prompts": [
+    "Use case: stylized-concept. Asset type: ORIGINAL tileable base-color game material, square 2048 x 2048, to wrap around individually sculpted limestone blocks in a fantasy colosseum in Unreal. A flat orthographic swatch of cream ochre limestone, a single continuous mineral surface with NO masonry block grid and NO grout lines. Mature hand-painted fantasy RPG illustration quality: layered confident broken dry-brush marks and broad mineral planes, warm grey beige ivory and subtle muted cool mauve mineral variation. Rich worked-stone surface with irregular pale mineral inclusions, sparse gentle natural strata and restrained small chisel scratches. Texture hierarchy: broad 30 cm mineral color clouds, 3–8 cm broken painterly striations, subtle fine bristle texture. Refined crafted maintained stone, NOT ruined, NOT cracked boulders. Colors midtone ochre-grey rather than white. All detail should describe local pigment/material color only. Absolutely flat diffuse neutral illumination: NO directional highlights, NO cast shadows, NO baked ambient occlusion, NO vignette, NO gradients representing illumination, NO perspective, NO metallic shine, NO objects, text, border, labels or swatch layout. Edge-to-edge single material, perfectly seamless matching opposite edges for repetition. Avoid cheap smooth vector triangles or translucent straight tape strokes; use varied convincing organic painterly brushwork, not a photographic surface. The relief will be handled separately by true 3D geometry, this image is only albedo. Do not draw stones, joints, architecture or a scene.",
+    "Edit this original limestone albedo into a clearly HAND-PAINTED FANTASY RPG GAME TEXTURE. Preserve a single continuous limestone surface, edge-to-edge square seamless composition and warm cream-ochre / cool muted grey-lavender palette. Dramatically SIMPLIFY the small gritty photo detail: remove at least 85% of tiny speckles and rock chips. Interpret broad mineral shapes using intentional chunky gouache/oil brushwork, expressive organic bristle edges and 4–5 clear grouped pigment values. Broad broken patches of cream and smoky mineral ochre, restrained pale hand-drawn mineral striations, only a few fine strokes. The result should look lovingly painted by an experienced fantasy environment artist, not a photograph, not smooth vector triangles, not random tape strips. Unlit diffuse albedo only; no shadows, no baked lighting, no vignette, no perspective or shine. No stone block grid, mortar joints, borders, text or objects. Avoid scars, cracks, holes or a ruined surface. Maintain seamless matching opposite edges. Aim for a square 2048 by 2048 material texture, base color only."
+  ],
+  "limitations": [
+    "Actual output is RGB 1254 by 1254, not the requested 2048 by 2048.",
+    "Seamlessness is requested but not mathematically guaranteed.",
+    "Albedo only. Normals and ORM come from independent procedural physical fields; the main relief is in the mesh.",
+    "The imported engine texture may be resized by Unreal's native power-of-two build for mipmaps; source pixels are preserved."
+  ]
+}

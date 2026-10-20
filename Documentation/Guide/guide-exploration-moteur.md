@@ -47,8 +47,7 @@ moteur et la carte de Core sont **une seule description** (format v5,
 [Les cartes dans le moteur](guide-cartes-moteur.md)) : `build_level.py` en construit le niveau,
 `/Game/Maps/Levels/<id>` (`AJadgMapFrame::MapPackage`) — le chemin qu'un portail ouvre —, et y pose
 un `AJadgMapFrame` au coin de la case (0, 0), avec les axes **mesurés** à l'import et la hauteur de
-chaque étage. Toute carte du moteur joue sa carte de Core : la porte du `LOT-1012` aussi, dont la
-grille est tirée de la géométrie construite (`build_gate_scene.py`).
+chaque étage. Les quartiers jouables et leurs niveaux Unreal partagent cette description.
 
 Ce que la carte de Core fait paraître :
 
