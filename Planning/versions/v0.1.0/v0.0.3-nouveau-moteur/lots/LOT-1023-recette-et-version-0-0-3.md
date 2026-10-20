@@ -6,7 +6,7 @@ filiere = "version"
 statut = "a-faire"
 taille = "M"
 resume = "La démo se rejoue de bout en bout sur le nouveau moteur, l'ancien dépôt est gelé, le bilan est écrit, les fiches de la 0.0.4 sont réécrites, le tag v0.0.3 est posé dans le nouveau dépôt."
-prerequis = ["LOT-1017", "LOT-1020", "LOT-1022", "LOT-1024", "LOT-1025"]
+prerequis = ["LOT-1017", "LOT-1020", "LOT-1022", "LOT-1030"]
 livrables = [
   "La quête « Des pommes pour l'arène » par ses trois issues et la série de l'arène, jouées par l'auteur sur le nouveau moteur, de jour et de nuit ; les suites d'intégration et système vertes sur `main`.",
   "Le **gel de l'ancien dépôt** (D-58) : un dernier commit qui marque la fin du moteur maison, le README de tête qui renvoie au nouveau dépôt et au tag `v0.0.2.5`, l'archivage GitHub ; le balayage du nouveau dépôt — rien de `Qt`, `QRhi`, `QML`, `LevelEditor`, format v4 n'y est entré, et ce que la passation avait laissé passer par erreur est retiré dans la PR de la recette (D-32).",
@@ -14,6 +14,7 @@ livrables = [
   "`bilan.md` : ce qui a coûté plus que prévu, le coût d'Arenarea, ce que la `0.0.4` doit en retenir ; `README.md`, `AGENTS.md`, le guide du développeur et les spécifications de rendu mis à jour.",
   "Les fiches de la `0.0.4` réécrites pour le nouveau moteur (comme D-35 l'a fait pour la 3D) : LOT-106, 107, 110, 111, 113, 114, 115, 147, 151, 157 ; les fiches de l'éditeur de la `0.2.0` (LOT-158, 159, 166, 167, 168, 169) relues.",
   "L'installeur et les notes de version ; le tag `v0.0.3`.",
+  "Le dossier de validation du générateur (LOT-1030), couvrant curseurs visage/corps en jeu, garde-robe, recettes, héros/PNJ et fauves ; les prototypes remplacés sont retirés après contrôle des références.",
 ]
 criteres = [
   "Plus une ligne de Qt, de QML ni de QRhi dans le nouveau dépôt ; sa CI est verte ; l'ancien dépôt est archivé et privé.",
@@ -21,6 +22,7 @@ criteres = [
   "Les trois cartes tiennent 60 images par seconde à 1080p sur le poste de référence, de jour comme de nuit, et s'ouvrent en moins de 10 secondes.",
   "L'auteur a joué la démo par ses trois issues sur le nouveau moteur et l'écrit dans la fiche.",
   "Le tag `v0.0.3` est posé ; l'archive se lance sur un poste vierge (test de fumée de `release.yml`).",
+  "Le générateur est validé dans le paquet final (LOT-1030) ; ni la preuve sur mannequins ni un créateur limité à l'éditeur ne permettent de clôturer ce périmètre.",
 ]
 +++
 
@@ -57,6 +59,8 @@ Dehors, nommément :
 - **Un lot de la version non livré** (Arenarea partiel, interface redécoupée) : la recette se fait
   sur ce qui est livré, la dette s'écrit avec le lot qui la retire, et le tag se pose quand même si
   la démo se joue ; sinon la version attend.
+  Pour le générateur repris le 20 octobre (D-68), le LOT-1030 reste un préalable : un changement
+  de portée doit être explicite et le planning révisé, pas une dérogation implicite à ses critères.
 - **La dette du LOT-1016** (clos le 8 octobre 2026), que la recette retire : **la main sur la
   souris** — jouer dans une fenêtre, juger la sensation des commandes et les distances de la caméra
   (4 m à 120 m, reprises de la porte sans être réglées) — et **la cadence de la porte**, 88 images

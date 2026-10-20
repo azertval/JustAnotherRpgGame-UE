@@ -7,8 +7,18 @@ statut = "a-faire"
 taille = "L"
 resume = "Les familles de corps, leurs formes d'identité et leurs rigs se reconstruisent depuis des recettes indépendantes de l'interface et du fournisseur."
 prerequis = ["LOT-1024"]
-livrables = ["Le contrat d'apparence versionné, son schéma JSON, son lecteur Core et l'adaptateur de la chaîne retenue ; migration des anciennes fiches.", "La matrice des 22 entrées d'espèces actuelles : famille, base, rig, paramètres, plages admises, source et restrictions ; décision explicite sur les espèces du corpus absentes du catalogue.", "Les bases et morphs réutilisables, un exemple par entrée couverte, les rigs et profils de retargeting, collisions et emplacements d'équipement.", "Les scripts d'import/construction, manifestes de sources, contrôles de reconstruction et mise à jour du standard."]
-criteres = ["Chaque entrée du catalogue couvert reconstruit son exemple et ses paramètres d'identité ; une valeur hors plage, une combinaison interdite ou une version inconnue produit une erreur explicite.", "Les Taii'maku conservent six doigts et les Gloomfolk leur anatomie de scorpion avec locomotion ; les corps petits, trapus, enfant et drakéide passent leurs contrôles propres.", "Modifier l'identité préserve les expressions, les yeux et dents, les articulations, les prises et les contacts au sol dans le paquet final.", "La migration préserve les identifiants et références de gameplay ; les sources permettent de reconstruire les assets dans un répertoire de sortie vierge."]
+livrables = [
+  "Le contrat d'apparence versionné, son schéma JSON, son lecteur Core et l'adaptateur de la chaîne retenue ; migration des anciennes fiches.",
+  "La matrice des 22 entrées d'espèces actuelles : famille, base, rig, paramètres, plages admises, source et restrictions ; décision explicite sur les espèces du corpus absentes du catalogue.",
+  "Les bases et morphs réutilisables, un exemple par entrée couverte, les rigs et profils de retargeting, collisions et emplacements d'équipement.",
+  "Les scripts d'import/construction, manifestes de sources, contrôles de reconstruction et mise à jour du standard.",
+]
+criteres = [
+  "Chaque entrée du catalogue couvert reconstruit son exemple et ses paramètres d'identité ; une valeur hors plage, une combinaison interdite ou une version inconnue produit une erreur explicite.",
+  "Les Taii'maku conservent six doigts et les Gloomfolk leur anatomie de scorpion avec locomotion ; les corps petits, trapus, enfant et drakéide passent leurs contrôles propres.",
+  "Modifier l'identité préserve les expressions, les yeux et dents, les articulations, les prises et les contacts au sol dans le paquet final.",
+  "La migration préserve les identifiants et références de gameplay ; les sources permettent de reconstruire les assets dans un répertoire de sortie vierge.",
+]
 +++
 
 ## Pourquoi

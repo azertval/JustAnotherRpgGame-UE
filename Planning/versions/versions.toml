@@ -113,10 +113,11 @@ objectifs = [
   "Un **rendu au niveau de l'atlas** : Lumen, Nanite, ombres virtuelles, anticrénelage temporel ; un lieu se juge sur captures du moteur à midi et à 22 h contre sa carte peinte (décision D-54).",
   "Le **combat en distance** (décision D-50) : mètres du *Manuel*, maillage de navigation, ligne de vue par rayon, zones en volumes, hauteur comptée ; les règles, les classes et les capacités de la `0.0.2` ne changent pas.",
   "Une **carte composée** (décision D-51) : terrain, objets à transformation libre, étages praticables, construite par script depuis une description en texte (décision D-52).",
-  "Les **vingt personnages** et les maillages de l'Arena of Fate importés au maître (décision D-53) ; la chaîne Meshy et l'atelier Blender gardés.",
+  "Un **générateur de personnages complet en jeu** : réglages visage/corps, familles anatomiques, garde-robe et recettes communes joueur/PNJ ; choix de chaîne sur prototype empaqueté avant production (D-68, LOT-1024 à LOT-1030). Les maillages de l'Arena of Fate restent importés au maître.",
   "Un **dépôt sans moteur mort** : Qt, QRhi, QML, le LevelEditor et le format de carte v4 sont supprimés dans la PR de la recette (décision D-32).",
 ]
 criteres_de_sortie = [
+  "Le générateur passe le LOT-1030 : personnalisation visage/corps en jeu, sauvegarde, vêtements, anatomies, héros/PNJ de la démo et lion/loup ; performances mesurées avec les assets finaux.",
   "La porte (LOT-1012) a été vue et acceptée par l'auteur avant tout autre lot : parvis d'Arenarea rendu à midi et à 22 h, 60 images par seconde à 1080p, carte construite par script.",
   "La quête « Des pommes pour l'arène » et la série de l'arène se rejouent de bout en bout sur le nouveau moteur, en distance, de jour comme de nuit, au clavier et à la souris.",
   "Arenarea est reconstruit au standard D-54 et validé par l'auteur sur le rendu du moteur ; l'Arena of Fate et Martpart sont portés.",

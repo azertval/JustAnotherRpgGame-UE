@@ -61,6 +61,16 @@ LOT-1018, l'interface au LOT-1020.
 - [L'exploration dans le moteur](guide-exploration-moteur.md) — la caméra libre, la marche du groupe sur le maillage de navigation, les commandes, les portails entre cartes, l'heure du monde (LOT-1016).
 - [Les cartes dans le moteur](guide-cartes-moteur.md) — le format de carte v5, la construction du niveau par script, la relecture de l'éditeur et l'aller-retour, les deux étages d'une carte, le contrôle de contenu, les préfabriqués, le mode Quêtes (LOT-1018).
 
+### Historique des essais de terrain
+
+Ces pages décrivent les essais antérieurs à la carte active `/Game/Capitale/Cartes/Capitale`.
+Leurs cartes sont archivées ; elles ne constituent pas les instructions de reconstruction
+de la capitale actuelle.
+
+- [Essais de terrain de la capitale](guide-essais-terrains-capitale.md) — prototypes de sols urbains, de rives et de terres rocheuses.
+- [Arenarea — premier quartier du Landscape](guide-landscape-arenarea.md) — premier terrain du quartier et réservations de ses lieux.
+- [Paysage de la capitale — production par quartier](guide-paysage-capitale.md) — ancienne chaîne d'assemblage des paysages par quartier.
+
 ### Construire, vérifier, documenter
 
 - Construire, tester, la CI : `README.md` et `CONTRIBUTING.md`, à la racine du dépôt.

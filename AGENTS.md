@@ -49,17 +49,25 @@ Avant de produire ou retoucher un lot d'assets, lire `Planning/standards/style-3
 des pièces au maître, toutes faces finies. `Planning/standards/personnages-3d.md` a été réécrit au
 `LOT-1015` sur les mesures du moteur (D-63, D-64) : c'est lui qui vaut pour un personnage.
 
-Un personnage est une **fiche texte** (JSON) qui donne les valeurs des paramètres d'un **objet
-personnalisable Mutable** ; le créateur assemble corps, tête, pièces, garde-robe et matières (D-63).
-Les corps et têtes humains et proches de l'humain viennent de **MetaHuman** ; ce que MetaHuman
-n'atteint pas, et les pièces propres au monde (cornes, défenses, queues, oreilles, armures
-signatures, armes), viennent de **Meshy**, ou de **Fab** pour les corps de base, la garde-robe et
-les animations. Tout est sur le squelette standard d'Unreal, les animations viennent des
-bibliothèques du moteur reciblées par l'IK Retargeter, les armes s'accrochent par socket. Le
-créateur se régénère par script depuis sa description texte ; aucun asset construit à la main dans
-l'éditeur ne reste, et aucune retouche à la main d'un maillage ni d'une texture : la pièce se
-recommande. La chaîne maison (squelettes MPFB et `quadruped`, clips posés par cibles, retouche dans
-Blender) ne se porte pas : elle se supprime (D-64). Portraits et jetons restent peints (D-30).
+**Révision du générateur, 20 octobre 2026 (D-68).** L'auteur demande un créateur complet
+**en jeu**, avec réglages du visage et du corps, et considère toute la chaîne actuelle comme
+provisoire. Les LOT-1024 et LOT-1025 sont repris ; les LOT-1026 à LOT-1030 séparent bases,
+garde-robe, interface, production et validation. Le LOT-1024 prouve la chaîne dans un jeu
+empaqueté avant la production en volume. Mutable est le premier candidat d'assemblage,
+comparé au modulaire natif ; MetaHuman est un fournisseur possible, pas obligatoire.
+Character Creator et les bases riggées sont évalués sur l'export des déformations d'identité,
+pas seulement des expressions. Aucun outil n'est déclaré retenu sur sa seule documentation.
+
+La fiche d'apparence reste textuelle, versionnée et séparée des règles ; son adaptateur traduit
+les paramètres vers la chaîne retenue. Les familles anatomiques peuvent avoir des rigs
+différents : pas de squelette humanoïde imposé au Gloomfolk, ni de main à cinq doigts
+substituée aux six doigts taii'maku. Ne pas présumer qu'Unreal fournit les rigs et clips animaux.
+Les sources de bases, morphs et vêtements ainsi que les imports doivent être conservés et
+reproductibles ; le LOT-1024 tranche la préparation initiale nécessaire. La cible est
+l'absence de retouche par PNJ après validation de sa famille et de sa garde-robe.
+La présente révision n'autorise ni achat ni restauration de l'ancienne chaîne maison.
+Portraits et jetons restent peints (D-30). Voir le standard personnages pour les constats
+historiques du LOT-1015 et les nouveaux critères de livraison.
 
 Le standard n'écrit que des valeurs mesurées ou des décisions datées de l'auteur. Ne pas combler une
 question ouverte par une valeur devinée : la poser à l'auteur, ou la laisser au lot que le standard

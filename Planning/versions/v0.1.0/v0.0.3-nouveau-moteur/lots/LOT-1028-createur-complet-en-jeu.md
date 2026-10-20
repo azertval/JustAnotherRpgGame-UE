@@ -7,8 +7,18 @@ statut = "a-faire"
 taille = "L"
 resume = "Le joueur règle visage et corps, choisit sa tenue, puis retrouve exactement son apparence ; l'outil de production utilise le même générateur."
 prerequis = ["LOT-1026", "LOT-1027", "LOT-1020"]
-livrables = ["L'interface UMG à logique C++ : choix d'espèce/base, curseurs visage et corps, cheveux, couleurs, vêtements, aperçu et réinitialisation.", "La gestion des mises à jour asynchrones et des erreurs, la recette sauvegardée et les contrôles de migration.", "Un mode de production partageant les paramètres et la validation : presets, verrouillage de choix, génération déterministe par graine et export de fiches.", "Les tests de sauvegarde/rechargement, changement rapide de paramètres, changement de famille et reconstruction dans un jeu empaqueté."]
-criteres = ["Le créateur livré en jeu possède de vrais réglages d'identité faciale et corporelle, distincts des expressions ; les vêtements suivent ces réglages dans les plages publiées.", "Une réponse asynchrone obsolète n'écrase jamais le dernier choix ; la confirmation attend une apparence cohérente et les latences respectent les seuils du LOT-1024.", "Après fermeture et relancement, les paramètres, équipements et couleurs sont identiques ; les données anciennes migrent ou produisent une erreur explicite.", "Le mode de production et le mode joueur reconstruisent la même recette ; aucune dépendance à un outil de création externe n'est nécessaire à l'exécution."]
+livrables = [
+  "L'interface UMG à logique C++ : choix d'espèce/base, curseurs visage et corps, cheveux, couleurs, vêtements, aperçu et réinitialisation.",
+  "La gestion des mises à jour asynchrones et des erreurs, la recette sauvegardée et les contrôles de migration.",
+  "Un mode de production partageant les paramètres et la validation : presets, verrouillage de choix, génération déterministe par graine et export de fiches.",
+  "Les tests de sauvegarde/rechargement, changement rapide de paramètres, changement de famille et reconstruction dans un jeu empaqueté.",
+]
+criteres = [
+  "Le créateur livré en jeu possède de vrais réglages d'identité faciale et corporelle, distincts des expressions ; les vêtements suivent ces réglages dans les plages publiées.",
+  "Une réponse asynchrone obsolète n'écrase jamais le dernier choix ; la confirmation attend une apparence cohérente et les latences respectent les seuils du LOT-1024.",
+  "Après fermeture et relancement, les paramètres, équipements et couleurs sont identiques ; les données anciennes migrent ou produisent une erreur explicite.",
+  "Le mode de production et le mode joueur reconstruisent la même recette ; aucune dépendance à un outil de création externe n'est nécessaire à l'exécution.",
+]
 +++
 
 ## Pourquoi

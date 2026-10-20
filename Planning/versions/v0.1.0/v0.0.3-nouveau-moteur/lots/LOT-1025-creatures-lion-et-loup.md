@@ -7,8 +7,18 @@ statut = "a-faire"
 taille = "L"
 resume = "Le lion et les deux loups de la rencontre utilisent des rigs et animations validés, intégrés au contrat d'apparence sans dépendre d'une anatomie humaine."
 prerequis = ["LOT-1026", "LOT-1017"]
-livrables = ["La voie de production documentée des familles animales : source des modèles, rigs, animations, profils de retargeting, physique et import reproductible.", "Un lion et un loup réutilisable, leurs matériaux, LOD et animations de repos, déplacement, attaque, réaction et mort.", "Les recettes d'apparence, collisions/navigation, effets et instants d'impact raccordés aux règles de combat et à la rencontre colisee-fauves.", "Les captures de contrôle à midi et à 22 h et les mesures dans un paquet final avec le lion et deux instances de loup."]
-criteres = ["La rencontre colisee-fauves affiche un lion et deux loups distincts en instance, partageant les ressources appropriées, sans mannequin ni rig humain forcé.", "Locomotion, attaque, réaction et mort correspondent au modèle ; contacts au sol, virages, collision/navigation et portée de combat sont contrôlés.", "Les dégâts se déclenchent une seule fois à l'événement d'impact défini ; la mort reste lisible et les acteurs quittent correctement la participation au combat.", "Le chargement, la reconstruction depuis les sources et la sauvegarde/reprise fonctionnent dans le paquet final ; CPU/GPU et mémoire sont consignés."]
+livrables = [
+  "La voie de production documentée des familles animales : source des modèles, rigs, animations, profils de retargeting, physique et import reproductible.",
+  "Un lion et un loup réutilisable, leurs matériaux, LOD et animations de repos, déplacement, attaque, réaction et mort.",
+  "Les recettes d'apparence, collisions/navigation, effets et instants d'impact raccordés aux règles de combat et à la rencontre colisee-fauves.",
+  "Les captures de contrôle à midi et à 22 h et les mesures dans un paquet final avec le lion et deux instances de loup.",
+]
+criteres = [
+  "La rencontre colisee-fauves affiche un lion et deux loups distincts en instance, partageant les ressources appropriées, sans mannequin ni rig humain forcé.",
+  "Locomotion, attaque, réaction et mort correspondent au modèle ; contacts au sol, virages, collision/navigation et portée de combat sont contrôlés.",
+  "Les dégâts se déclenchent une seule fois à l'événement d'impact défini ; la mort reste lisible et les acteurs quittent correctement la participation au combat.",
+  "Le chargement, la reconstruction depuis les sources et la sauvegarde/reprise fonctionnent dans le paquet final ; CPU/GPU et mémoire sont consignés.",
+]
 +++
 
 ## Pourquoi

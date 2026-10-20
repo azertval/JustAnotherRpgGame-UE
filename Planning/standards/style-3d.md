@@ -250,7 +250,7 @@ captures règle le post-traitement sans reconstruire la carte (`-JadgPost`, `AJa
 | L'**échelle** d'une pièce Meshy | **ouvert** : Meshy n'en livre pas ; la façade témoin est à 12 m, provisoire | la cote que la commande donnera |
 | La **hauteur d'un étage** de décor | **ouvert** : 3 m, provisoire | LOT-1018, question 1 |
 | Le **coût Meshy** d'une pièce | **ouvert** : 30 crédits au barème des personnages, à confirmer par l'auteur | le retour de la commande des façades |
-| Le squelette `quadruped`, ses clips | ouvert | le lion et le loup (LOT-1025) |
+| Les rigs et clips des familles animales, de provenance vérifiée | ouverts ; aucun squelette quadrupède fourni par Unreal n'est présumé | le lion et le loup (LOT-1025, repris le 20 octobre 2026) |
 | La silhouette `flying` : un squelette par morphologie | ouvert | le premier lot qui en produit une |
 
 ## 9. Ce que le standard interdit

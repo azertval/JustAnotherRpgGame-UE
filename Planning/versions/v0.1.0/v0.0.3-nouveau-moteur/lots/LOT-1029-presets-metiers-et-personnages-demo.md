@@ -7,8 +7,18 @@ statut = "a-faire"
 taille = "L"
 resume = "Les héros, habitants et adversaires de la démo deviennent des recettes du nouveau générateur, avec des presets professionnels réutilisables."
 prerequis = ["LOT-1028", "LOT-1017"]
-livrables = ["Les presets de production séparant anatomie, culture, métier, milieu social, affiliation et variations individuelles, avec provenance et graine.", "La migration des quatre héros, de la mère, de l'enfant, du garde Ironhand, du maître d'arène et des adversaires effectivement référencés.", "Les recettes de bandit, archer, capitaine, berserker, brute, gladiateur, combattant, vétéran, squelette et zombie, complétées par l'inventaire des rencontres actives.", "Le raccord des apparences à la démo actuelle autour de l'arène et la suppression contrôlée des remplacements provisoires devenus inutiles."]
-criteres = ["Tous les identifiants de personnage référencés par la quête et les rencontres actives résolvent une apparence validée, sans mannequin de remplacement.", "Le garde, la mère, l'enfant, le maître d'arène et les adversaires se reconnaissent au cadrage joueur ; leurs portraits peints restent cohérents.", "Un preset produit plusieurs variantes reproductibles sans copier corps et textures à chaque PNJ ; un PNJ nommé conserve sa recette explicite.", "Les captures repos/marche/attaque, à midi et à 22 h, et le relevé des références migrées sont livrés."]
+livrables = [
+  "Les presets de production séparant anatomie, culture, métier, milieu social, affiliation et variations individuelles, avec provenance et graine.",
+  "La migration des quatre héros, de la mère, de l'enfant, du garde Ironhand, du maître d'arène et des adversaires effectivement référencés.",
+  "Les recettes de bandit, archer, capitaine, berserker, brute, gladiateur, combattant, vétéran, squelette et zombie, complétées par l'inventaire des rencontres actives.",
+  "Le raccord des apparences à la démo actuelle autour de l'arène et la suppression contrôlée des remplacements provisoires devenus inutiles.",
+]
+criteres = [
+  "Tous les identifiants de personnage référencés par la quête et les rencontres actives résolvent une apparence validée, sans mannequin de remplacement.",
+  "Le garde, la mère, l'enfant, le maître d'arène et les adversaires se reconnaissent au cadrage joueur ; leurs portraits peints restent cohérents.",
+  "Un preset produit plusieurs variantes reproductibles sans copier corps et textures à chaque PNJ ; un PNJ nommé conserve sa recette explicite.",
+  "Les captures repos/marche/attaque, à midi et à 22 h, et le relevé des références migrées sont livrés.",
+]
 +++
 
 ## Pourquoi

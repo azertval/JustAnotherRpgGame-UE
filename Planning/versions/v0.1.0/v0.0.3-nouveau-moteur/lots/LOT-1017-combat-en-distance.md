@@ -30,6 +30,11 @@ sources = [
 
 ## Pourquoi
 
+> Répartition du 20 octobre 2026 : les remplacements d'apparence annoncés ci-dessous
+> au LOT-1024 sont produits au LOT-1029 après la preuve technique du LOT-1024 et les bases
+> et vêtements des LOT-1026/1027. Les fauves restent au LOT-1025 ; le LOT-1030 vérifie
+> l'ensemble dans la démo active. Les mesures de combat historiques ne sont pas réécrites.
+
 Le *Manuel* compte en mètres. La grille n'était qu'une façon de les dessiner, et elle a imposé des
 demi-cases, un départage de chemins et un abri non additionné (LOT-19, LOT-22). Un combat en
 distance rapproche le jeu de la règle écrite et de ce que l'auteur attend : « non pas en case mais

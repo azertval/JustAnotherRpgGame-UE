@@ -7,8 +7,20 @@ statut = "a-faire"
 taille = "L"
 resume = "Un créateur témoin empaqueté prouve les curseurs visage et corps, les vêtements et les anatomies difficiles avant de choisir la chaîne de production."
 prerequis = ["LOT-1015", "LOT-1016"]
-livrables = ["Une matrice des exigences, des familles anatomiques et des options de fabrication et d'assemblage, avec sources, versions et limites vérifiées.", "Un prototype isolé, reproductible et empaqueté : identité du visage, proportions corporelles, deux vêtements, expression, locomotion et sauvegarde.", "Un comparatif Mutable / assemblage natif sur les mêmes assets exportés ; MetaHuman / Character Creator / base riggée évalués séparément pour la fabrication.", "Des preuves anatomiques : corps trapu, main à six doigts et ébauche articulée de Gloomfolk ; stratégie explicite enfant et tête drakéide.", "Un relevé des temps de préparation, corrections, latences, mémoire et rendu, et une décision motivée de chaîne retenue ou de rejet."]
-criteres = ["Dans le paquet final, nez et mâchoire, corpulence et proportions changent ; les extrêmes combinés restent compatibles avec vêtements, expressions, yeux, dents, rig et physique.", "Après sauvegarde, fermeture et relancement, l'identité et la tenue sont reconstruites sans éditeur ni service de création externe.", "Le matériel, les scènes, la résolution et les seuils de qualité, latence, CPU/GPU et mémoire sont fixés avant les essais ; les résultats sont consignés, sans extrapolation depuis les mannequins.", "Chaque anatomie témoin dispose d'une voie démontrée ; aucun réglage seulement disponible dans un outil de fabrication n'est présenté comme une capacité du jeu.", "La décision technique et le jugement artistique sont consignés ; en cas d'échec, les lots de production restent bloqués et le lot n'est pas déclaré livré."]
+livrables = [
+  "Une matrice des exigences, des familles anatomiques et des options de fabrication et d'assemblage, avec sources, versions et limites vérifiées.",
+  "Un prototype isolé, reproductible et empaqueté : identité du visage, proportions corporelles, deux vêtements, expression, locomotion et sauvegarde.",
+  "Un comparatif Mutable / assemblage natif sur les mêmes assets exportés ; MetaHuman / Character Creator / base riggée évalués séparément pour la fabrication.",
+  "Des preuves anatomiques : corps trapu, main à six doigts et ébauche articulée de Gloomfolk ; stratégie explicite enfant et tête drakéide.",
+  "Un relevé des temps de préparation, corrections, latences, mémoire et rendu, et une décision motivée de chaîne retenue ou de rejet.",
+]
+criteres = [
+  "Dans le paquet final, nez et mâchoire, corpulence et proportions changent ; les extrêmes combinés restent compatibles avec vêtements, expressions, yeux, dents, rig et physique.",
+  "Après sauvegarde, fermeture et relancement, l'identité et la tenue sont reconstruites sans éditeur ni service de création externe.",
+  "Le matériel, les scènes, la résolution et les seuils de qualité, latence, CPU/GPU et mémoire sont fixés avant les essais ; les résultats sont consignés, sans extrapolation depuis les mannequins.",
+  "Chaque anatomie témoin dispose d'une voie démontrée ; aucun réglage seulement disponible dans un outil de fabrication n'est présenté comme une capacité du jeu.",
+  "La décision technique et le jugement artistique sont consignés ; en cas d'échec, les lots de production restent bloqués et le lot n'est pas déclaré livré.",
+]
 +++
 
 ## Pourquoi

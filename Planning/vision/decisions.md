@@ -136,6 +136,37 @@ l'admet désormais pour les corps de base, la garde-robe et les animations des p
 L'architecture reste produite pour le lieu. Le `LOT-1015` est réécrit, et deux lots s'ajoutent :
 le `LOT-1024` (les espèces et les humanoïdes de la démo) et le `LOT-1025` (le lion et le loup).
 
+### D-68 — Reprise du générateur de personnages — 20 octobre 2026
+
+L'auteur précise que l'implémentation actuelle est temporaire et peut être remplacée,
+confirme un **créateur complet en jeu avec réglage du visage et du corps**, puis demande
+la reprise totale des LOT-1024 et LOT-1025 et le découpage du générateur.
+
+Cette décision de planification remplace, pour ce chantier, les obligations de D-63/D-64
+sur le fournisseur MetaHuman et le squelette universel. Elle ne déclare aucun comparatif
+réussi et n'autorise pas la restauration de l'ancien moteur.
+
+- LOT-1024 : preuve empaquetée et choix de chaîne avant production. Mutable est le premier
+  candidat de l'analyse, confronté au modulaire natif sur les mêmes assets ; MetaHuman,
+  Character Creator et bases riggées sont des sources possibles, à éprouver.
+- LOT-1026 : bases par famille anatomique, morphs d'identité, rigs et recettes versionnées.
+- LOT-1027 : garde-robe adaptée aux corps, matériaux, compatibilités et accessoires.
+- LOT-1028 : créateur visuel complet en jeu et mode de production sur la même chaîne.
+- LOT-1029 : héros et PNJ de la démo, presets professionnels et migration.
+- LOT-1025 : lion/loup, rigs et animations vérifiés, sans obligation de Mutable.
+- LOT-1030 : validation qualité, densité et performances avant la recette LOT-1023.
+
+Les formats texte, Core indépendant du moteur, imports reproductibles et logique C++ sont
+conservés. Les rigs peuvent différer selon l'anatomie ; le bas de corps scorpion et les mains
+à six doigts ne sont pas simplifiés pour satisfaire le mannequin. La préparation spécialisée
+initiale et ses sources sont évaluées au LOT-1024 ; la cible est l'absence de correction par
+PNJ dans une famille validée. Les anciens chiffres du LOT-1015 restent des mesures de
+prototype, pas des garanties de production. Portraits et jetons restent peints (D-30).
+
+Le LOT-314 intègre ce créateur au parcours de règles en 0.3.0 ; il ne duplique pas le travail
+d'apparence. Les choix finaux de logiciels, achats et seuils mesurés ne sont pas déduits de
+la présente révision.
+
 ## À trancher par l'auteur
 
 | # | Question | Proposition | Se tranche au |

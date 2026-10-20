@@ -7,8 +7,18 @@ statut = "a-faire"
 taille = "L"
 resume = "Une garde-robe réutilisable suit les réglages corporels et distingue métiers, cultures et affiliations sans retouche par personnage."
 prerequis = ["LOT-1026"]
-livrables = ["Un catalogue texte des vêtements et accessoires : emplacements, familles compatibles, superpositions, masques du corps et exclusions.", "Un kit initial de coupes réutilisables couvrant civil, artisan et combattant : tunique, bas, robe ou manteau, tablier, chaussures, gants et protection rigide.", "Les déformations de vêtements correspondant aux paramètres corporels, les matériaux paramétrés et les variantes culturelles/professionnelles nécessaires à la démo.", "Le protocole et les mesures d'ajout d'un nouveau vêtement, avec sources, tailles préparées, corrections initiales et contrôle animé."]
-criteres = ["Les vêtements suivent les extrêmes combinés autorisés ; aucune intersection ou déformation refusée dans les poses et animations de contrôle.", "Les incompatibilités anatomiques et superpositions sont traitées explicitement ; aucun gant humain à cinq doigts ni pantalon bipède n'est imposé aux anatomies incompatibles.", "Couleur, matière, motif et usure changent sans dupliquer les géométries ; modifier une coupe utilise la pièce appropriée.", "Après préparation d'une pièce pour une famille, plusieurs personnages distincts l'utilisent sans correction manuelle individuelle ; le temps d'intégration est consigné."]
+livrables = [
+  "Un catalogue texte des vêtements et accessoires : emplacements, familles compatibles, superpositions, masques du corps et exclusions.",
+  "Un kit initial de coupes réutilisables couvrant civil, artisan et combattant : tunique, bas, robe ou manteau, tablier, chaussures, gants et protection rigide.",
+  "Les déformations de vêtements correspondant aux paramètres corporels, les matériaux paramétrés et les variantes culturelles/professionnelles nécessaires à la démo.",
+  "Le protocole et les mesures d'ajout d'un nouveau vêtement, avec sources, tailles préparées, corrections initiales et contrôle animé.",
+]
+criteres = [
+  "Les vêtements suivent les extrêmes combinés autorisés ; aucune intersection ou déformation refusée dans les poses et animations de contrôle.",
+  "Les incompatibilités anatomiques et superpositions sont traitées explicitement ; aucun gant humain à cinq doigts ni pantalon bipède n'est imposé aux anatomies incompatibles.",
+  "Couleur, matière, motif et usure changent sans dupliquer les géométries ; modifier une coupe utilise la pièce appropriée.",
+  "Après préparation d'une pièce pour une famille, plusieurs personnages distincts l'utilisent sans correction manuelle individuelle ; le temps d'intégration est consigné.",
+]
 +++
 
 ## Pourquoi

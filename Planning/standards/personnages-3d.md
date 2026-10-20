@@ -1,5 +1,39 @@
 # Les personnages 3D
 
+## Cadre applicable depuis le 20 octobre 2026
+
+La [révision D-68](../vision/decisions.md) remplace les obligations de fournisseur MetaHuman,
+d'assembleur Mutable et de squelette universel. Le besoin confirmé est un **créateur complet
+en jeu**, avec réglages du visage et du corps. Les sections numérotées ci-dessous conservent
+les mesures et le contrat provisoire du LOT-1015 ; elles ne prouvent pas la chaîne finale.
+
+- **LOT-1024** : comparaison de fabrication et d'assemblage, prototype empaqueté, décision
+  sur mesures avant production ; Mutable premier candidat, modulaire natif en comparaison,
+  MetaHuman ou Character Creator comme sources possibles. Collections reste une option à
+  vérifier, pas l'équivalent présumé de MetaHuman Creator dans le jeu.
+- **LOT-1026** : familles anatomiques, bases, morphs d'identité, rigs, recettes versionnées
+  et migration. L'identité reste distincte des expressions ; les rigs peuvent différer.
+- **LOT-1027** : vêtements adaptés aux plages corporelles, matériaux, masques et compatibilités.
+- **LOT-1028** : interface de création en jeu et mode de production sur le même générateur.
+- **LOT-1029** : héros et PNJ de la démo, presets métiers et migration des remplacements.
+- **LOT-1025** : lion/loup avec rigs et animations de provenance vérifiée.
+- **LOT-1030** : validation empaquetée, densité et coûts, puis publication du standard final.
+
+Les Gloomfolk exigent un bas de corps de scorpion ; les Taii'maku six doigts. Le contrat
+commun porte sur les actions et les équipements, pas sur un nombre d'os unique.
+La préparation initiale des sources doit être démontrée et chiffrée au LOT-1024 ; la cible
+est l'absence de correction individuelle lors de l'assemblage de chaque PNJ.
+Les sources et exports sont conservés, les sorties Unreal régénérables ; les règles restent
+dans Core et la logique d'interface en C++. Un JSON ne convertit pas automatiquement les
+UV, morphs ou vêtements lors d'un changement de base.
+
+Les seuils sont fixés avant les essais selon le matériel et les scènes cibles. Le jeu
+empaqueté doit prouver les curseurs, les vêtements aux extrêmes combinés, les animations,
+la sauvegarde et la reconstruction. Les mesures de huit mannequins ne valent pas capacité
+de foule. Les portraits et jetons peints restent inchangés (D-30).
+
+## État historique mesuré au LOT-1015
+
 > **Réécrit au [LOT-1015](../versions/v0.1.0/v0.0.3-nouveau-moteur/lots/LOT-1015-personnages-et-createur.md),
 > 8 octobre 2026**, sur les décisions [D-63](../vision/decisions.md) et [D-64](../vision/decisions.md)
 > et sur ce que le lot a mesuré dans Unreal Engine 5.8.3. La page précédente décrivait la chaîne de
@@ -64,7 +98,7 @@ Mesuré le 8 octobre 2026, Unreal 5.8.3, plugin Mutable (bêta) :
 - Ce que le créateur **ne fait pas encore** : les têtes (`head` est lu, pas joué), les couleurs
   (lues, pas jouées : la matière du mannequin n'a pas de paramètre de peau), les pièces de
   garde-robe (aucune dans le contenu du moteur). Ce sont des paramètres de plus dans la
-  description, à ajouter au LOT-1024 avec les corps de race.
+  description ; leur remplacement est éprouvé au LOT-1024, puis livré aux LOT-1026 et LOT-1027.
 
 ## 4. MetaHuman
 
@@ -106,7 +140,7 @@ est celle de l'acteur (`WalkSpeed`, 3 m/s), le clip suit.
   l'échelle `height / referenceHeight` (1,80 m pour le mannequin), capsule comprise, debout au
   même point du sol. Les fiches des quatre héros portent 1,95 m (Grom), 1,80 m (Faelar), 1,45 m
   (Helga), 1,70 m (Nessa) — des valeurs de départ, **à juger par l'auteur à la recette** ; une
-  taille par espèce vient au LOT-1024.
+  taille et des plages de proportions par famille viennent au LOT-1026 après preuve au LOT-1024.
 - **Les armes** : la pièce de `Master/Weapons` nommée par la fiche (`main-hand`, `off-hand`),
   accrochée à l'os `hand_r` ou `hand_l` du mannequin (`sockets` de `humanoid.json`), sans
   collision. L'orientation d'un maître Meshy dans la main n'est pas réglée : **à juger par
@@ -131,9 +165,12 @@ portrait se peint avant toute pièce de référence : c'est lui qui fixe le visa
 
 | Question | Se tranche au |
 |---|---|
-| Les corps et têtes des 22 espèces : ce que MetaHuman atteint, ce qui demande Meshy ou Fab | LOT-1024 |
-| Les couleurs et la garde-robe comme paramètres du créateur | LOT-1024 |
-| Le contenu optionnel de MetaHuman sur le poste | l'auteur, par le lanceur Epic |
-| Les quadrupèdes : Mutable ou un maillage désigné par la fiche | LOT-1025 |
-| Le poids en mémoire graphique de huit personnages à l'écran | LOT-1024 (huit humanoïdes) |
-| La compilation du créateur dans un jeu empaqueté | LOT-1023 |
+| Choix de fabricant, assembleur et préparation initiale ; prototype avec curseurs en jeu | LOT-1024 |
+| Les bases, rigs et morphs des 22 entrées actuelles ; écart Soulborn/corpus | LOT-1026 |
+| Les couleurs, matériaux, garde-robe et adaptation aux corps | LOT-1027 |
+| L'interface complète visage/corps et sa sauvegarde | LOT-1028 |
+| Les héros et PNJ, les presets professionnels | LOT-1029 |
+| Le contenu optionnel de MetaHuman si cette voie est retenue | vérification au LOT-1024 |
+| Les quadrupèdes : rigs/clips sourcés, maillage direct ou générateur | LOT-1025 |
+| Les coûts du groupe proche et des densités de rue/arène | seuils LOT-1024, recette LOT-1030 |
+| La génération et la cuisson dans un jeu empaqueté | preuve LOT-1024, livraison LOT-1028, recette LOT-1030 |
