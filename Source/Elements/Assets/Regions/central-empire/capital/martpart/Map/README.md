@@ -1,14 +1,12 @@
-# L'image de la zone pour l'onglet « Carte »
+# Ancienne carte rendue de Martpart
 
-`martpart.jpg` : la carte de Martpart **rendue** par l'éditeur, telle que le jeu la dessine
-(`LOT-121`), en attendant une carte peinte par l'auteur, qui viendra avec la carte définitive de la
-zone.
+`martpart.jpg` et sa grille dans la section historique de `Maps/world-maps.json` proviennent
+du moteur précédent (LOT-121). Leur projection ne correspond plus au quartier Unreal complet.
 
-```
-LevelEditor --render central-empire/capital/martpart --canvas 1920x1080 --layers floors,relief --output Source/Elements/Assets/Regions/central-empire/capital/martpart/Map/martpart.jpg
-```
+L'onglet Carte Unreal affiche l'illustration `Maps/capital/images/martpart.png`. Ses bannières
+de lieux sont décrites en coordonnées graphiques dans `Maps/map-interactions.json`. Il n'affiche
+actuellement aucun marqueur du héros ou des portails et n'utilise pas la grille de ce JPEG.
 
-La commande écrit aussi la **grille** de l'image (`grid {"origin": …, "column": …, "row": …}`) :
-elle se recopie dans `Maps/world-maps.json`, à côté du chemin de l'image, et c'est par elle que
-l'onglet pose le héros et les repères sur la carte. Toute retouche de la carte de niveau se
-re-rend, et l'image repart dans le kit de la zone (`scripts/release/publish_asset_kit.py`).
+Les nouvelles emprises jouables ne changent pas les coordonnées graphiques de l'atlas. Une future
+carte de navigation devra être produite depuis la scène finale, avec sa propre projection, selon
+`Planning/standards/cartographie.md`.

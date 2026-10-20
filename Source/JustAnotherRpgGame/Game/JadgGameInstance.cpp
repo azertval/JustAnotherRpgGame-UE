@@ -8,6 +8,7 @@
 
 #include "Bridge/JadgOptions.h"
 #include "Bridge/JadgPaths.h"
+#include "UI/JadgLoadingScreen.h"
 #include "UI/JadgTexts.h"
 
 void UJadgGameInstance::Init()
@@ -19,4 +20,6 @@ void UJadgGameInstance::Init()
 	FJadgOptions::Read(Options);
 	FJadgOptions::Apply(Options);
 	FJadgTexts::SetLanguage(FJadgPaths::ToFString(Options.language));
+	// L'écran de chargement, sur le lecteur de films du moteur, dès le premier chargement de carte.
+	FJadgLoadingScreen::Install();
 }

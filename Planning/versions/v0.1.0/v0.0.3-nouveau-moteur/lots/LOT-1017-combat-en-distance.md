@@ -3,7 +3,7 @@ id = "LOT-1017"
 titre = "Le combat en distance"
 version = "0.0.3"
 filiere = "regles"
-statut = "en-cours"
+statut = "livre"
 taille = "XL"
 resume = "Le combat se joue en mètres, à la manière de Baldur's Gate 3 : déplacement libre sur le maillage de navigation, ligne de vue par rayon, zones en volumes, hauteur comptée ; les règles, les classes et l'IA de la 0.0.2 ne changent pas."
 prerequis = ["LOT-1015", "LOT-1016"]
@@ -29,6 +29,11 @@ sources = [
 +++
 
 ## Pourquoi
+
+> Répartition du 20 octobre 2026 : les remplacements d'apparence annoncés ci-dessous
+> au LOT-1024 sont produits au LOT-1029 après la preuve technique du LOT-1024 et les bases
+> et vêtements des LOT-1026/1027. Les fauves restent au LOT-1025 ; le LOT-1030 vérifie
+> l'ensemble dans la démo active. Les mesures de combat historiques ne sont pas réécrites.
 
 Le *Manuel* compte en mètres. La grille n'était qu'une façon de les dessiner, et elle a imposé des
 demi-cases, un départage de chemins et un abri non additionné (LOT-19, LOT-22). Un combat en
@@ -475,3 +480,22 @@ l'auteur à la recette.**
    À garder jusqu'au `LOT-1024`, ou l'arme du héros copié ?
 10. **Un héros mort** garde sa fiche et sa figurine dans le moteur : l'enterrer dès maintenant
     (`EX-CBT-062`, le groupe se réduit), ou avec l'écran de mort du `LOT-1020` ?
+
+## Livraison — 20 octobre 2026
+
+Le lot est **livré** avec la version, sur décision de l'auteur (20 octobre 2026). Ce qui est livré
+est écrit plus haut : `Core/Combat` sans grille, les règles spatiales du *Manuel* en mètres, l'IA
+des profils sur les candidats de l'EQS, le combat joué dans le moteur au clavier et à la souris.
+Depuis le 9 octobre, le combat se monte sur le sable de l'Arena of Fate posée dans la capitale :
+la capitale est sa propre carte d'arène (`ArenaMap`), `arene-bandits` s'y monte à la première
+tentative (4 alliés, 6 adversaires), sur la navigation construite avec la carte ; le test
+`SerieDeLArene.LaCapitaleMonteLaSerieCommeLArene` monte les six rencontres de la série sur la carte
+de la capitale comme sur celle de l'arène. 682 tests de Core, `Jadg.Combat.*` verts.
+
+Ce qui restait au lot (plus haut) passe à la **recette** (`LOT-1023`), où l'auteur joue la série :
+les zones de combat en volumes, le `levelUp` et le `rest` du dialogue du maître joués par le
+moteur, les gestes du joueur (se précipiter, esquiver, se désengager, viser un point),
+l'enterrement d'un mort (`EX-CBT-062`), la réécriture des exigences en grille et le jugement du
+combat dans une fenêtre. Les questions pour l'auteur restent ouvertes, à la recette ; la
+question 7 (le combat sur une autre carte) a sa réponse pour l'arène : la capitale est sa propre
+carte d'arène, le sable s'y joue sur place.

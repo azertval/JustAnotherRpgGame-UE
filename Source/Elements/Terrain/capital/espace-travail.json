@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-17",
+  "mainMap": "/Game/Capitale/Cartes/Capitale",
+  "galleries": [
+    "/Game/Atelier/Cartes/GalerieAssets",
+    "/Game/Atelier/Cartes/GalerieMateriaux",
+    "/Game/Atelier/Cartes/PhysiqueTissus"
+  ],
+  "roots": {
+    "Capitale": "Construction et terrain",
+    "Atelier": "Galeries de validation",
+    "Bibliotheque": "Modeles et materiaux reutilisables",
+    "Jeu": "Dependances personnages et interface"
+  },
+  "backup": "D:\\Codex\\2026-10-16\\prep\\outputs\\nettoyage-capitale\\sauvegarde-avant-nettoyage",
+  "terrainRevision": "scripts/maps/build_capitale_terrain_material.py",
+  "note": "Les anciens parcours de gameplay dependent de cartes archivees. Cette base est destinee a la construction.",
+  "waterRevision": "scripts/maps/revise_capitale_water.py",
+  "waterMaterial": "/Game/Capitale/Ressources/Eau/MI_Eau_Capitale",
+  "terrainMaterial": "/Game/Capitale/Ressources/ReliefReference/MI_TerrainNaturel",
+  "runtimeVirtualTexture": "/Game/Capitale/Ressources/ReliefReference/RVT_TerrainNaturel",
+  "editLayers": [
+    "Relief_Reference",
+    "Retouches"
+  ],
+  "workspaceViews": "scripts/maps/configure_capitale_workspace.py",
+  "nanite": "Enabled for existing terrain and 212 library static meshes; water and simulated cloth retain their dedicated rendering paths.",
+  "geography": "Source/Elements/Terrain/capital/relief-reference/geographie.json",
+  "terrainGenerator": "scripts/maps/prepare_capitale_reference.py",
+  "terrainBuilder": "scripts/maps/build_reference_relief.py",
+  "terrainFinalizer": "scripts/maps/finalize_reference_relief.py",
+  "waterGeometry": "scripts/maps/prepare_capitale_reference_water.py",
+  "rebuild": "scripts/maps/rebuild_capitale_relief.ps1",
+  "geographyReference": "Guide de Creation.pdf : planches 06 (relief, rivage), 04 (voies), 02 (couvert), 01 (enceinte)",
+  "heightReference": "catalogue-topographie-capitale-complet.pdf, pages 9-12",
+  "naturalOnly": true,
+  "roads": true,
+  "buildingSites": false,
+  "vegetation": false,
+  "reliefBackup": "Saved/Sauvegardes/capitale-avant-guide-20261017",
+  "paintLayers": [
+    "Pelouse",
+    "Prairie",
+    "HerbeSauvage",
+    "Foret",
+    "Terre",
+    "Chemin",
+    "Sable",
+    "Roche",
+    "Pavage"
+  ],
+  "streaming": "scripts/maps/configure_capitale_streaming.py"
+}

@@ -1,0 +1,306 @@
+{
+  "reference": "Guide de Creation.pdf",
+  "geography": "geographie.json",
+  "plates": {
+    "carte": 1,
+    "paysage": 2,
+    "relief": 3,
+    "routes": 4,
+    "eau": 5,
+    "topographie": 6
+  },
+  "extent_m": [
+    -2016,
+    -2016,
+    2016,
+    2016
+  ],
+  "sea_level_m": 0,
+  "tiles": [
+    {
+      "id": "relief-0-0",
+      "origin": [
+        -2016.0,
+        -2016.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-1-0",
+      "origin": [
+        -1008.0,
+        -2016.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-2-0",
+      "origin": [
+        0.0,
+        -2016.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-3-0",
+      "origin": [
+        1008.0,
+        -2016.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-0-1",
+      "origin": [
+        -2016.0,
+        -1008.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-1-1",
+      "origin": [
+        -1008.0,
+        -1008.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-2-1",
+      "origin": [
+        0.0,
+        -1008.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-3-1",
+      "origin": [
+        1008.0,
+        -1008.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-0-2",
+      "origin": [
+        -2016.0,
+        0.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-1-2",
+      "origin": [
+        -1008.0,
+        0.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-2-2",
+      "origin": [
+        0.0,
+        0.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-3-2",
+      "origin": [
+        1008.0,
+        0.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-0-3",
+      "origin": [
+        -2016.0,
+        1008.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-1-3",
+      "origin": [
+        -1008.0,
+        1008.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-2-3",
+      "origin": [
+        0.0,
+        1008.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    },
+    {
+      "id": "relief-3-3",
+      "origin": [
+        1008.0,
+        1008.0
+      ],
+      "quads": 504,
+      "spacing": 2
+    }
+  ],
+  "layers": [
+    "Pelouse",
+    "Prairie",
+    "HerbeSauvage",
+    "Foret",
+    "Terre",
+    "Chemin",
+    "Sable",
+    "Roche",
+    "Pavage"
+  ],
+  "roads": {
+    "axis_pixels": 65736,
+    "paved_fraction": 0.0552,
+    "dirt_fraction": 0.0282,
+    "widths_m": {
+      "ruelle": 4.5,
+      "rue": 7.0,
+      "avenue": 12.0
+    }
+  },
+  "building_sites": 0,
+  "vegetation": 0,
+  "coverage": {
+    "Pelouse": 0.0914,
+    "Prairie": 0.2721,
+    "HerbeSauvage": 0.2155,
+    "Foret": 0.1824,
+    "Terre": 0.1342,
+    "Chemin": 0.0282,
+    "Sable": 0.0051,
+    "Roche": 0.016,
+    "Pavage": 0.0552
+  },
+  "arena": {
+    "centre_m": [
+      165.38,
+      -546.67
+    ],
+    "cap_deg": 0.0,
+    "demi_axes_m": [
+      94.5,
+      78.0
+    ],
+    "sol_m": 18.39,
+    "parvis_ecart_m": 0.208
+  },
+  "contours": {
+    "bands": 2749,
+    "edges": 5167,
+    "enclosed": 738,
+    "summits": 80,
+    "levels": 67.96350397149796,
+    "iterations": 137,
+    "links": 880,
+    "equidistance_m": 7.294,
+    "anchors": {
+      "arenarea": [
+        20,
+        18.7
+      ],
+      "arene-quai": [
+        12,
+        12.0
+      ],
+      "docks": [
+        8,
+        5.2
+      ],
+      "palacedomain": [
+        68,
+        70.5
+      ],
+      "palais-terrasse": [
+        74,
+        78.2
+      ],
+      "downtown": [
+        42,
+        36.8
+      ],
+      "martpart": [
+        23,
+        30.8
+      ],
+      "uptown": [
+        58,
+        53.5
+      ],
+      "artisansquare": [
+        52,
+        50.3
+      ],
+      "scholarnest": [
+        44,
+        43.0
+      ],
+      "dweomer": [
+        37,
+        37.5
+      ],
+      "neckoffoods": [
+        35,
+        35.7
+      ],
+      "bloomburgs": [
+        48,
+        46.6
+      ],
+      "sloghood": [
+        38,
+        40.4
+      ],
+      "oldtown": [
+        24,
+        28.8
+      ],
+      "tour-lune": [
+        46,
+        41.3
+      ],
+      "rive-rocheuse": [
+        30,
+        10.8
+      ],
+      "ile-tigre": [
+        35,
+        34.5
+      ],
+      "fort-cotier": [
+        20,
+        24.7
+      ]
+    }
+  },
+  "height_range_m": [
+    -16.35839080810547,
+    134.29945373535156
+  ],
+  "water_fraction": 0.09972005430292685,
+  "interpretation": "Relief lu sur les courbes de la planche 06 (crans par moindres carres, equidistance et niveau donnes par les reperes du catalogue) ; rivage de la planche 06 ; voies de la planche 04, pavees dans l'enceinte de la planche 01, en terre au-dehors."
+}

@@ -1,0 +1,77 @@
+{
+  "format": "jadg-map",
+  "version": 5,
+  "name": "CapitalLandscape",
+  "comment": "Le paysage de la capitale impÃ©riale, vue d'ensemble. GÃ©nÃ©rÃ© par scripts/maps/build_capital_landscape_scene.py ; Ã  juger par l'auteur.",
+  "width": 20,
+  "height": 20,
+  "origin": [-15.0, 89.58],
+  "storeys": [
+    {"name": "seuil", "z": 0.0}
+  ],
+  "nextEntityId": 1,
+  "tiles": [
+    {"x": 10, "y": 10, "type": "entry"}
+  ],
+  "entities": [],
+  "party": {
+    "appearances": ["heros-brawler"],
+    "walkSpeed": 3.0,
+    "heading": 0.0
+  },
+  "lighting": {
+    "comment": "Les rÃ©glages des quartiers ; une brume lÃ©gÃ¨re pour trois kilomÃ¨tres de vue.",
+    "sunScale": 1.65,
+    "ambientScale": 0.34,
+    "skyLuminance": 1.8,
+    "exposureBias": 0.0,
+    "fog": {
+      "density": 0.0006,
+      "falloff": 0.08,
+      "volumetric": false
+    },
+    "post": {
+      "bloom_intensity": 0.25,
+      "vignette_intensity": 0.12,
+      "motion_blur_amount": 0.0,
+      "film_grain_intensity": 0.0
+    }
+  },
+  "daylight": "Common/Lighting/daylight.json",
+  "ground": {
+    "colour": "#0b0f08",
+    "size": 40000.0,
+    "height": -15.5
+  },
+  "navigation": {
+    "area": [-1238.58, -273.42, 1092.42, 1389.78],
+    "height": 140.0,
+    "floor": -20.0
+  },
+  "shots": [
+    {"id": "ensemble", "target": [-104.6, 457.4, 18.8], "heading": 0, "pitch": 50, "distance": 2000},
+    {"id": "baie", "target": [-583.4, -46.6, -2.5], "heading": 300, "pitch": 24, "distance": 700},
+    {"id": "riviere", "target": [311.2, -34.0, -2.5], "heading": 60, "pitch": 26, "distance": 520},
+    {"id": "palais", "target": [-539.3, 381.8, 22.0], "heading": 270, "pitch": 28, "distance": 620},
+    {"id": "cultures", "target": [714.4, 1314.2, 18.1], "heading": 20, "pitch": 24, "distance": 420},
+    {"id": "ruisseau", "target": [-1062.2, 982.8, -2.5], "heading": 330, "pitch": 26, "distance": 380},
+    {"id": "panorama", "target": [-104.6, 533.0, 22.0], "heading": 335, "pitch": 18, "distance": 1500},
+    {"id": "collines", "target": [134.8, 570.8, 26.0], "heading": 300, "pitch": 14, "distance": 520},
+    {"id": "seuil-arene", "target": [0.0, 104.6, 0.0], "heading": 0, "pitch": 20, "distance": 60},
+    {"id": "proche-arching", "target": [231.8, 2.5, 7.6], "heading": 35, "pitch": 35, "distance": 60},
+    {"id": "proche-market", "target": [632.5, 399.4, 11.6], "heading": 35, "pitch": 40, "distance": 50},
+    {"id": "proche-palais", "target": [-538.0, 448.6, 63.5], "heading": 0, "pitch": 32, "distance": 95},
+    {"id": "proche-terrasses", "target": [-611.1, 480.1, 46.1], "heading": 300, "pitch": 40, "distance": 100},
+    {"id": "proche-universite", "target": [115.9, 1034.5, 51.0], "heading": 0, "pitch": 42, "distance": 55},
+    {"id": "proche-dweomer", "target": [459.9, 903.4, 44.8], "heading": 25, "pitch": 35, "distance": 90},
+    {"id": "market-gate-old-bridge", "target": [689.2, 335.2, 8.0], "heading": 25, "pitch": 28, "distance": 410},
+    {"id": "scholarnest-dweomer", "target": [349.0, 936.2, 23.7], "heading": 330, "pitch": 26, "distance": 680},
+    {"id": "sloghood-uptown", "target": [-709.4, 974.0, 24.2], "heading": 315, "pitch": 28, "distance": 520},
+    {"id": "bloomburgs-rempart", "target": [-356.6, 1244.9, 14.8], "heading": 10, "pitch": 22, "distance": 390},
+    {"id": "joueur-water-gate", "target": [-293.6, 97.0, 2.0], "heading": 45, "pitch": 35, "distance": 45},
+    {"id": "joueur-market-gate", "target": [619.9, 425.9, 6.0], "heading": 45, "pitch": 40, "distance": 38},
+    {"id": "joueur-universite", "target": [115.9, 1006.7, 29.0], "heading": 180, "pitch": 35, "distance": 55},
+    {"id": "proche-oldtown", "target": [613.6, -40.3, 24.6], "heading": 0, "pitch": 38, "distance": 65}
+  ],
+  "hours": ["12:00", "22:00"]
+}

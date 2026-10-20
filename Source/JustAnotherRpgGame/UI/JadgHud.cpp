@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Combat/JadgCombat.h"
 #include "Engine/GameInstance.h"
+#include "Engine/GameViewportClient.h"
 #include "Engine/World.h"
 #include "Game/JadgExploration.h"
 #include "Game/JadgGameInstance.h"
@@ -13,7 +14,18 @@
 #include "JustAnotherRpgGame.h"
 #include "Kismet/GameplayStatics.h"
 #include "Misc/CommandLine.h"
+#include "AssetCompilingManager.h"
+#include "Misc/App.h"
+#include "Misc/Paths.h"
+#include "UnrealClient.h"
+#include "ShaderCompiler.h"
+#include "Misc/PackageName.h"
 #include "Misc/Parse.h"
+#include "NavigationSystem.h"
+#include "UObject/Package.h"
+#include "UI/JadgLoadingScreen.h"
+#include "UI/JadgTexts.h"
+#include "WorldPartition/WorldPartitionSubsystem.h"
 #include "UI/JadgScreens.h"
 
 namespace
@@ -38,6 +50,23 @@ namespace
 		}
 		return FParse::Param(Line, TEXT("JadgSansTitre"));
 	}
+
+	/// Vrai si une capture, un parcours ou une marche de contrôle mène le jeu : l'écran de
+	/// chargement ne se pose pas sur leurs images (le seul lancement sans titre le garde).
+	bool CapturedOrWalked()
+	{
+		const TCHAR* Line = FCommandLine::Get();
+		FString Ignored;
+		for (const TCHAR* Flag : {TEXT("JadgCapture="), TEXT("JadgParcours="), TEXT("JadgParcoursCombat="), TEXT("JadgParcoursDemo="),
+				 TEXT("JadgEcrans="), TEXT("JadgWitnessWalk=")})
+		{
+			if (FParse::Value(Line, Flag, Ignored))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 AJadgHud::AJadgHud()
@@ -57,6 +86,10 @@ void AJadgHud::BeginPlay()
 {
 	Super::BeginPlay();
 	Ground = Create(EJadgScreen::Hud, FString(), GroundLayer);
+	if (!CapturedOrWalked() && !GIsAutomationTesting)
+	{
+		ShowLoading();
+	}
 
 	UJadgGameInstance* Instance = Cast<UJadgGameInstance>(GetGameInstance());
 	if (Instance != nullptr && !Instance->bTitleShown && !LaunchedByAutomaton() && !GIsAutomationTesting)
@@ -68,6 +101,7 @@ void AJadgHud::BeginPlay()
 
 void AJadgHud::EndPlay(const EEndPlayReason::Type Reason)
 {
+	HideLoading();
 	for (UJadgScreen* Screen : Stack)
 	{
 		Remove(Screen);
@@ -248,12 +282,86 @@ void AJadgHud::StartNewGame(const FString& LeaderId)
 	Exploration->SetLeader(LeaderId);
 	CloseAll();
 	// La carte du moteur se rouvre : la partie neuve y entre par l'entrée de la carte.
+	FJadgLoadingScreen::SetNextMap(UGameplayStatics::GetCurrentLevelName(this, true));
 	UGameplayStatics::OpenLevel(this, FName(*UGameplayStatics::GetCurrentLevelName(this, false)));
+}
+
+void AJadgHud::ShowLoading()
+{
+	UGameViewportClient* Viewport = GetWorld() != nullptr ? GetWorld()->GetGameViewport() : nullptr;
+	if (Viewport == nullptr || Loading.IsValid())
+	{
+		return;
+	}
+	const FString MapId = FPackageName::GetShortName(UWorld::RemovePIEPrefix(GetWorld()->GetOutermost()->GetName()));
+	LoadingStatus = FJadgTexts::Get(TEXT("loading.status.streaming"));
+	LoadingSince = FPlatformTime::Seconds();
+	SteadyFrames = 0;
+	TWeakObjectPtr<AJadgHud> Self(this);
+	Loading = FJadgLoadingScreen::Make(MapId, TAttribute<FText>::CreateLambda([Self]
+	{
+		return Self.IsValid() ? Self->LoadingStatus : FText::GetEmpty();
+	}));
+	// Au-dessus de toutes les pages (AddToViewport place un écran à sa couche + 10).
+	Viewport->AddViewportWidgetContent(Loading.ToSharedRef(), 10000);
+}
+
+void AJadgHud::UpdateLoading()
+{
+	// Prêt quand les cellules autour du joueur sont là, la navigation aussi, et que trente images
+	// de suite passent sous 50 ms (shaders, maillages et personnages en place). Trois minutes au
+	// plus : un monde qui ne finit pas de charger ne garde pas le joueur derrière l'écran.
+	UWorld* World = GetWorld();
+	UWorldPartitionSubsystem* Partition = World->GetSubsystem<UWorldPartitionSubsystem>();
+	const bool bStreamed = Partition == nullptr || Partition->IsAllStreamingCompleted();
+	UNavigationSystemV1* Navigation = FNavigationSystem::GetCurrent<UNavigationSystemV1>(World);
+	const bool bPaths = Navigation == nullptr || !Navigation->IsNavigationBuildInProgress();
+	// Lancé depuis l'éditeur, le moteur prépare encore textures et shaders après le chargement :
+	// le monde paraîtrait en matières provisoires. Un jeu empaqueté n'a rien à préparer.
+	bool bPrepared = true;
+#if WITH_EDITOR
+	bPrepared = FAssetCompilingManager::Get().GetNumRemainingAssets() == 0
+		&& (GShaderCompilingManager == nullptr || !GShaderCompilingManager->IsCompiling());
+#endif
+	SteadyFrames = bStreamed && bPaths && bPrepared && FApp::GetDeltaTime() < 0.05 ? SteadyFrames + 1 : 0;
+	LoadingStatus = FJadgTexts::Get(!bStreamed ? TEXT("loading.status.streaming")
+		: !bPaths ? TEXT("loading.status.navigation") : !bPrepared ? TEXT("loading.status.shaders") : TEXT("loading.status.settling"));
+	const double Elapsed = FPlatformTime::Seconds() - LoadingSince;
+	if ((SteadyFrames >= 30 && Elapsed > 1.0) || Elapsed > 180.0)
+	{
+		UE_LOG(LogJadg, Display, TEXT("[Chargement] %s prêt en %.1f s%s"), *World->GetMapName(), Elapsed,
+			Elapsed > 180.0 ? TEXT(" (délai dépassé)") : TEXT(""));
+		HideLoading();
+		FJadgLoadingScreen::Advance();
+		// -JadgApresChargement=<fichier.png> : ce que le joueur voit quand l'écran s'efface.
+		FString Shot;
+		if (FParse::Value(FCommandLine::Get(), TEXT("JadgApresChargement="), Shot))
+		{
+			FScreenshotRequest::RequestScreenshot(FPaths::ConvertRelativePathToFull(Shot), true, false);
+		}
+	}
+}
+
+void AJadgHud::HideLoading()
+{
+	if (!Loading.IsValid())
+	{
+		return;
+	}
+	if (UGameViewportClient* Viewport = GetWorld() != nullptr ? GetWorld()->GetGameViewport() : nullptr)
+	{
+		Viewport->RemoveViewportWidgetContent(Loading.ToSharedRef());
+	}
+	Loading.Reset();
 }
 
 void AJadgHud::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+	if (Loading.IsValid())
+	{
+		UpdateLoading();
+	}
 	UJadgExploration* Exploration = GetGameInstance() != nullptr ? GetGameInstance()->GetSubsystem<UJadgExploration>() : nullptr;
 	if (Exploration == nullptr)
 	{

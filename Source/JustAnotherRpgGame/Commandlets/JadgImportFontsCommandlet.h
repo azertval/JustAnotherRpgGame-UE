@@ -14,7 +14,7 @@
  *     UnrealEditor-Cmd.exe <projet>.uproject -run=JadgImportFonts -unattended -nosplash -nullrhi
  *
  * Chaque police que nomme `Source/Elements/Assets/UI/style.json` (section `fonts`) devient
- * `/Game/UI/Fonts/<fichier sans extension>`, une `UFontFace` dont les octets sont ceux du fichier
+ * `/Game/Jeu/UI/Fonts/<fichier sans extension>`, une `UFontFace` dont les octets sont ceux du fichier
  * (`InitializeFromBulkData`). L'importeur du moteur (`FontFileImportFactory`) demande une fenêtre et
  * s'arrête sans elle : ce commandlet fait la même chose sans. Une face dont les octets sont déjà
  * ceux du fichier n'est pas réécrite. Code 1 si une police manque ou ne s'enregistre pas.

@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-10",
+  "status": "approved-by-user",
+  "scope": "Sculpted painterly imperial witness reviewed in Unreal at noon and 22 h. Authorizes propagation to the whole Arena, preserving existing gameplay. Full arena remains subject to final visual review.",
+  "userStatement": "Je valide",
+  "witness": "/Game/Maps/Levels/arena-wicked-witness/painted",
+  "captures": [
+    {
+      "path": "Saved/Captures/arena-wicked-witness/gradins-1200.png",
+      "sha256": "73e816f326b9a65e7fd287755a7d1493a522c6de0e7d02e721c430dcbb7c5572"
+    },
+    {
+      "path": "Saved/Captures/arena-wicked-witness/gradins-2200.png",
+      "sha256": "4c6bb77608f1b5ff8f9015eaff5bebe489127bf8648f3304e43a882e66148916"
+    },
+    {
+      "path": "Saved/Captures/arena-wicked-witness/interior-1200.png",
+      "sha256": "0c2d532c764950f7ea41a86fbf7a974c740a601ccf06eeea833de1bb91f22890"
+    },
+    {
+      "path": "Saved/Captures/arena-wicked-witness/interior-2200.png",
+      "sha256": "67438ae7000bb0cddcfb00f3e0c2cbd170f25dd5f013a990e8f31c3422060353"
+    },
+    {
+      "path": "Saved/Captures/arena-wicked-witness/loge-1200.png",
+      "sha256": "ecd87966adafb48bbde9c07b170f274576a8d9da4bc44de7c7a87ad9d562541b"
+    },
+    {
+      "path": "Saved/Captures/arena-wicked-witness/loge-2200.png",
+      "sha256": "66e2416764bf8dc5ae76f3229164d0c42d011eea67d05772c5bfbb3b0232f948"
+    },
+    {
+      "path": "Saved/Captures/arena-wicked-witness/overview-1200.png",
+      "sha256": "0a2988f1008dd93839fc7601379f4111e96263dd2c90af2913a8be43953a1256"
+    },
+    {
+      "path": "Saved/Captures/arena-wicked-witness/overview-2200.png",
+      "sha256": "3bf734c4c694f6f45dd7c4711422f87ad6601ae65e9905f1a9e4075f223f3a30"
+    },
+    {
+      "path": "Saved/Captures/arena-wicked-witness/stairs-1200.png",
+      "sha256": "a7070443c180241703ca44237723ad8db03ac32056c131e0ae5ada49cf8d2025"
+    },
+    {
+      "path": "Saved/Captures/arena-wicked-witness/stairs-2200.png",
+      "sha256": "4b163ca99401d1464d3770396a5b11a0b057d5647d4044d5048e9c386695f824"
+    }
+  ]
+}

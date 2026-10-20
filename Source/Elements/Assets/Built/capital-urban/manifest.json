@@ -1,0 +1,1520 @@
+{
+  "generator": "scripts/assetsGeneration/build_capital_urban_assets.py",
+  "version": 1,
+  "coordinates": "metres, image right/down, Z up",
+  "uvMetres": 2,
+  "meshes": [
+    {
+      "id": "cu-curtain",
+      "file": "cu-curtain.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 5196,
+      "boundsBlender": [
+        [
+          -6.05,
+          -1.5,
+          -2.0
+        ],
+        [
+          6.05,
+          1.5,
+          9.2509
+        ]
+      ],
+      "assembledSimpleParts": 15,
+      "sha256": "c46fcbacb45bf7950fc57afd99b8db237f1c01f66ec4ba8890b19b763cbff84c"
+    },
+    {
+      "id": "cu-retaining",
+      "file": "cu-retaining.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 1128,
+      "boundsBlender": [
+        [
+          -4.1,
+          -0.75,
+          -0.5
+        ],
+        [
+          4.1,
+          0.65,
+          3.25
+        ]
+      ],
+      "assembledSimpleParts": 6,
+      "sha256": "4aa05141c1bae6607b5684821957b2664064f9171b2af72fa92ef01f39189105"
+    },
+    {
+      "id": "cu-bridge",
+      "file": "cu-bridge.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 8648,
+      "boundsBlender": [
+        [
+          -6.75,
+          -5.0,
+          -9.0
+        ],
+        [
+          6.0,
+          5.0,
+          1.28
+        ]
+      ],
+      "assembledSimpleParts": 46,
+      "sha256": "56dc1e6f77b4eb85c95d99735caf507cd5e5c8a7d00ada06021644cbffe7a458"
+    },
+    {
+      "id": "cu-aqueduct",
+      "file": "cu-aqueduct.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 9212,
+      "boundsBlender": [
+        [
+          -6.75,
+          -5.0,
+          -9.0
+        ],
+        [
+          6.0,
+          5.0,
+          1.28
+        ]
+      ],
+      "assembledSimpleParts": 49,
+      "sha256": "017eb67d1f03cd7bd3d6e3997d5366f82787f68551244011e144a76b66b3ce58"
+    },
+    {
+      "id": "cu-pier",
+      "file": "cu-pier.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 8696,
+      "boundsBlender": [
+        [
+          -3.5,
+          -6.24,
+          -6.0
+        ],
+        [
+          3.5,
+          6.24,
+          0.6
+        ]
+      ],
+      "assembledSimpleParts": 34,
+      "sha256": "7b06d86b3802362f961898734a54362ce2138bfc9bc12e53eec424cee5eacae3"
+    },
+    {
+      "id": "cu-cathedral",
+      "file": "cu-cathedral.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "marble_white",
+        "roof_blue",
+        "stone_cream"
+      ],
+      "triangles": 224472,
+      "boundsBlender": [
+        [
+          -23.0,
+          -36.78,
+          -0.5
+        ],
+        [
+          23.0,
+          34.0,
+          56.0
+        ]
+      ],
+      "assembledSimpleParts": 638,
+      "sha256": "08fbfb8aa61fc3704a7d823abef80ca91b9914fdcf177a027963c60c7dd1461f"
+    },
+    {
+      "id": "cu-palace",
+      "file": "cu-palace.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "marble_white",
+        "roof_blue",
+        "roof_green",
+        "stone_cream"
+      ],
+      "triangles": 757484,
+      "boundsBlender": [
+        [
+          -23.16,
+          -57.5,
+          -2.0
+        ],
+        [
+          23.16,
+          55.25,
+          56.0
+        ]
+      ],
+      "assembledSimpleParts": 865,
+      "sha256": "3462b89010a296e81a2818610855c0c9ba74535498276f44945dfb0df8323498"
+    },
+    {
+      "id": "cu-arcane-tower",
+      "file": "cu-arcane-tower.glb",
+      "materials": [
+        "marble_white",
+        "roof_green",
+        "stone_cream"
+      ],
+      "triangles": 13476,
+      "boundsBlender": [
+        [
+          -9.198,
+          -9.198,
+          0.0
+        ],
+        [
+          9.198,
+          9.198,
+          62.0
+        ]
+      ],
+      "assembledSimpleParts": 23,
+      "sha256": "2a0e9a8c7d513e28be271f2494cb16533eb55e7850926c292062ac4a480e9401"
+    },
+    {
+      "id": "cu-fortress",
+      "file": "cu-fortress.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "marble_white",
+        "roof_terracotta",
+        "stone_cream"
+      ],
+      "triangles": 111208,
+      "boundsBlender": [
+        [
+          -29.45,
+          -27.45,
+          -0.5
+        ],
+        [
+          29.45,
+          27.45,
+          16.9
+        ]
+      ],
+      "assembledSimpleParts": 266,
+      "sha256": "901083ad719946e2ff470eb1420c620194eca5c5b2a3b6326e14dac3e1b3deb5"
+    },
+    {
+      "id": "cu-civic-hall",
+      "file": "cu-civic-hall.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "marble_white",
+        "roof_terracotta",
+        "stone_cream"
+      ],
+      "triangles": 163988,
+      "boundsBlender": [
+        [
+          -16.5,
+          -24.28,
+          -0.5
+        ],
+        [
+          16.5,
+          21.5,
+          17.2
+        ]
+      ],
+      "assembledSimpleParts": 319,
+      "sha256": "264b5a0bdf15f11c70b98b28e578848516eca6ef2fce3001e1e5ea3dd107fd7a"
+    },
+    {
+      "id": "cu-university",
+      "file": "cu-university.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "marble_white",
+        "roof_blue",
+        "stone_cream"
+      ],
+      "triangles": 889324,
+      "boundsBlender": [
+        [
+          -39.16,
+          -56.5,
+          -0.2
+        ],
+        [
+          39.16,
+          40.66,
+          21.2
+        ]
+      ],
+      "assembledSimpleParts": 1041,
+      "sha256": "ccb7bab782e684f3a031629dccd71d0a829744ecd2ad43b8875fbbe0fb71a0d2"
+    },
+    {
+      "id": "cu-museum",
+      "file": "cu-museum.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "marble_white",
+        "roof_blue",
+        "stone_cream"
+      ],
+      "triangles": 289232,
+      "boundsBlender": [
+        [
+          -16.5,
+          -28.0,
+          -0.5
+        ],
+        [
+          16.5,
+          22.5,
+          19.2
+        ]
+      ],
+      "assembledSimpleParts": 460,
+      "sha256": "27b506777da2c32b533fc61a7f3585949ede3dcae5f2bd4dd34da21bb9d08897"
+    },
+    {
+      "id": "cu-forum",
+      "file": "cu-forum.glb",
+      "materials": [
+        "bronze",
+        "marble_white",
+        "roof_blue",
+        "stone_cream"
+      ],
+      "triangles": 110580,
+      "boundsBlender": [
+        [
+          -18.0,
+          -20.0,
+          -0.5
+        ],
+        [
+          18.0,
+          18.0,
+          21.0
+        ]
+      ],
+      "assembledSimpleParts": 75,
+      "sha256": "4e6ada563d9c513dcab8726aef2c9c6cafecf53f087dfd207471e7984e885152"
+    },
+    {
+      "id": "cu-manor-court",
+      "file": "cu-manor-court.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "marble_white",
+        "roof_terracotta",
+        "stone_cream"
+      ],
+      "triangles": 251880,
+      "boundsBlender": [
+        [
+          -27.16,
+          -31.0,
+          -0.5
+        ],
+        [
+          27.16,
+          16.5,
+          16.2
+        ]
+      ],
+      "assembledSimpleParts": 418,
+      "sha256": "ef71192ddd3e8dbd76a36024dd588865c7028748309336f4af364d7a9a706b76"
+    },
+    {
+      "id": "cu-footing",
+      "file": "cu-footing.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -0.5,
+          -0.5,
+          0.0
+        ],
+        [
+          0.5,
+          0.5,
+          1.0
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "sha256": "dde6942ec30c5d6c4e19508963c3f907975110f568353ad3a942a103ad419fd0"
+    },
+    {
+      "id": "cu-watchtower",
+      "file": "cu-watchtower.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 5312,
+      "boundsBlender": [
+        [
+          -3.45,
+          -3.45,
+          0.0
+        ],
+        [
+          3.45,
+          3.45,
+          18.9
+        ]
+      ],
+      "assembledSimpleParts": 16,
+      "sha256": "e3a375ce78bdf3b18bcfa11ccf38f8b9a6713a4521b0200cdbba46ab976a5adb"
+    },
+    {
+      "id": "cu-grave",
+      "file": "cu-grave.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 820,
+      "boundsBlender": [
+        [
+          -0.55,
+          -1.0,
+          -0.2
+        ],
+        [
+          0.55,
+          1.173,
+          1.4
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "sha256": "4d6706c1ee5426d0105832d13044d735d57fce01b2233436d32c76eacad8b3e7"
+    },
+    {
+      "id": "cu-moon-tower",
+      "file": "cu-moon-tower.glb",
+      "materials": [
+        "marble_white",
+        "roof_blue",
+        "stone_cream"
+      ],
+      "triangles": 3500,
+      "boundsBlender": [
+        [
+          -4.3924,
+          -4.3924,
+          0.0
+        ],
+        [
+          4.3924,
+          4.3924,
+          22.0
+        ]
+      ],
+      "assembledSimpleParts": 5,
+      "sha256": "f7b3eb364179ac8ad8d7f61d792ee17956f296a945148fdab77f420a4b8b5a8c"
+    },
+    {
+      "id": "cu-paving-0",
+      "file": "cu-paving-0.glb",
+      "materials": [
+        "marble_white",
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 36288,
+      "boundsBlender": [
+        [
+          -4.0,
+          -4.0,
+          -0.24
+        ],
+        [
+          4.0,
+          4.0,
+          0.0
+        ]
+      ],
+      "assembledSimpleParts": 96,
+      "sha256": "ab908ab90ac4aa839d20b890e4ac9cdf859d7583ee20188cedeb9947ea7425cb"
+    },
+    {
+      "id": "cu-paving-1",
+      "file": "cu-paving-1.glb",
+      "materials": [
+        "marble_white",
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 28688,
+      "boundsBlender": [
+        [
+          -4.0,
+          -4.0,
+          -0.24
+        ],
+        [
+          4.0,
+          4.0,
+          0.0
+        ]
+      ],
+      "assembledSimpleParts": 76,
+      "sha256": "89ada70c44040b23a45f02a17df3293c7439cec780ef2f75c87d3d14101c5fb7"
+    },
+    {
+      "id": "cu-paving-2",
+      "file": "cu-paving-2.glb",
+      "materials": [
+        "marble_white",
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 45788,
+      "boundsBlender": [
+        [
+          -4.0,
+          -4.0,
+          -0.24
+        ],
+        [
+          4.0,
+          4.0,
+          0.0
+        ]
+      ],
+      "assembledSimpleParts": 121,
+      "sha256": "c4ad294cd2bc51d5724fc080150e7bb062c1c4aca209ff6a03a17a8327029be3"
+    },
+    {
+      "id": "cu-monument-foundations",
+      "file": "cu-monument-foundations.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 13224,
+      "boundsBlender": [
+        [
+          -1008.5984,
+          -1409.0699,
+          -3.0428
+        ],
+        [
+          1278.2518,
+          266.0637,
+          68.8459
+        ]
+      ],
+      "assembledSimpleParts": 1014,
+      "sha256": "66c493484ee773c7beba8a4e1fbfc0eb20914a0965b97556868671b2dbdd5853"
+    },
+    {
+      "id": "cu-road-retaining",
+      "file": "cu-road-retaining.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 91176,
+      "boundsBlender": [
+        [
+          -1213.4503,
+          -1270.3074,
+          -3.5637
+        ],
+        [
+          1035.97,
+          238.3256,
+          70.0821
+        ]
+      ],
+      "assembledSimpleParts": 7598,
+      "sha256": "d8efe22cfc7aaffa2975d733f67213cb5e479b9a43dd1bbe40e221007fa3a399"
+    },
+    {
+      "id": "cu-water-bay",
+      "file": "cu-water-bay.glb",
+      "materials": [
+        "marble_white"
+      ],
+      "triangles": 20090,
+      "boundsBlender": [
+        [
+          -7616.5801,
+          -7414.98,
+          -2.5
+        ],
+        [
+          7407.4199,
+          6601.02,
+          -2.5
+        ]
+      ],
+      "assembledSimpleParts": 10045,
+      "sha256": "e3a389dc1b2a9a3008e95b7bb0267f7fdd47a5e255585d0eafb30e85839de13e"
+    },
+    {
+      "id": "cu-water-river",
+      "file": "cu-water-river.glb",
+      "materials": [
+        "marble_white"
+      ],
+      "triangles": 24192,
+      "boundsBlender": [
+        [
+          -128.58,
+          -1414.98,
+          -2.5
+        ],
+        [
+          1407.42,
+          601.02,
+          -2.5
+        ]
+      ],
+      "assembledSimpleParts": 12096,
+      "sha256": "07da19551cf9f4bff3b32dbe87a0955e41ea7d21381b4e38a59767d2b78fcf43"
+    },
+    {
+      "id": "cu-water-creek",
+      "file": "cu-water-creek.glb",
+      "materials": [
+        "marble_white"
+      ],
+      "triangles": 3200,
+      "boundsBlender": [
+        [
+          -1616.58,
+          -1414.98,
+          -2.5
+        ],
+        [
+          -976.58,
+          -774.98,
+          -2.5
+        ]
+      ],
+      "assembledSimpleParts": 1600,
+      "sha256": "609f07a3fedf45ba6479e24607aae193cc2c518cc472f37c09f5712446ba08d5"
+    },
+    {
+      "id": "cu-water-pool",
+      "file": "cu-water-pool.glb",
+      "materials": [
+        "marble_white"
+      ],
+      "triangles": 154,
+      "boundsBlender": [
+        [
+          -304.58,
+          -182.98,
+          -2.5
+        ],
+        [
+          -128.58,
+          -70.98,
+          -2.5
+        ]
+      ],
+      "assembledSimpleParts": 77,
+      "sha256": "fc9fd0f876a154c1c948ff65428a58bfb44b480aeb1bd1cd610be1105e1a03cc"
+    },
+    {
+      "id": "cu-terrace-gardens",
+      "file": "cu-terrace-gardens.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 38728,
+      "boundsBlender": [
+        [
+          -653.94,
+          -553.515,
+          35.4
+        ],
+        [
+          -551.8725,
+          -422.985,
+          62.04
+        ]
+      ],
+      "assembledSimpleParts": 206,
+      "sha256": "a5b6dff1784ab97eae9bb64a878d1a5ab1c58bb3e8c42a0d2ac10b0e0ea502e2"
+    },
+    {
+      "id": "cu-stonebreaker-forge",
+      "file": "cu-stonebreaker-forge.glb",
+      "materials": [
+        "bronze",
+        "burgundy",
+        "dark_metal",
+        "marble_white",
+        "mortar",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 16864,
+      "boundsBlender": [
+        [
+          -7.76,
+          -20.0,
+          -12.0
+        ],
+        [
+          7.76,
+          8.6,
+          11.65
+        ]
+      ],
+      "assembledSimpleParts": 68,
+      "sha256": "8616dc58833bd0cb46686b1dfdd4f137e51218b21e728a2d7b92c09aee6a5432"
+    },
+    {
+      "id": "cu-bridge-open",
+      "file": "cu-bridge-open.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 7896,
+      "boundsBlender": [
+        [
+          -6.75,
+          -5.0,
+          -9.0
+        ],
+        [
+          6.0,
+          5.0,
+          0.0991
+        ]
+      ],
+      "assembledSimpleParts": 42,
+      "sha256": "7bb98f961a53048442d5e242eb9cad675303b27733c610b9be0fc6cea540a4fe"
+    },
+    {
+      "id": "cu-bridge-entry",
+      "file": "cu-bridge-entry.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 8648,
+      "boundsBlender": [
+        [
+          -6.75,
+          -5.0,
+          -9.0
+        ],
+        [
+          6.0,
+          5.0,
+          1.28
+        ]
+      ],
+      "assembledSimpleParts": 46,
+      "sha256": "deaa32b39754ebd862baf75a3946b4570889a24be2a7de92a1d57b1709c271bb"
+    },
+    {
+      "id": "cu-bridge-exit",
+      "file": "cu-bridge-exit.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 8648,
+      "boundsBlender": [
+        [
+          -6.75,
+          -5.0,
+          -9.0
+        ],
+        [
+          6.0,
+          5.0,
+          1.28
+        ]
+      ],
+      "assembledSimpleParts": 46,
+      "sha256": "7cc731e1f3e3487bfbfe712d708f27cdf3bb7e3e77eed859814aa50788f751ab"
+    },
+    {
+      "id": "cu-horizon",
+      "file": "cu-horizon.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 836640,
+      "boundsBlender": [
+        [
+          -3216.5801,
+          -3014.98,
+          -15.62
+        ],
+        [
+          3007.4199,
+          2201.02,
+          229.005
+        ]
+      ],
+      "assembledSimpleParts": 418320,
+      "sha256": "f448f4296c18472f20e3f276e3ecdf474a634de531652a9683061a96859c51eb"
+    },
+    {
+      "id": "cu-road-herofate-avenue",
+      "file": "cu-road-herofate-avenue.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 81780,
+      "boundsBlender": [
+        [
+          -317.9507,
+          -192.219,
+          1.3424
+        ],
+        [
+          247.4455,
+          16.8976,
+          12.3942
+        ]
+      ],
+      "assembledSimpleParts": 705,
+      "sha256": "4540d4f24be7895b58a38c4047a417fe5a2ccc87321246963e327e8ac4a89652"
+    },
+    {
+      "id": "cu-road-shield-avenue",
+      "file": "cu-road-shield-avenue.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 121800,
+      "boundsBlender": [
+        [
+          -130.3848,
+          -1078.7457,
+          8.6162
+        ],
+        [
+          323.2883,
+          -166.4292,
+          42.7053
+        ]
+      ],
+      "assembledSimpleParts": 1050,
+      "sha256": "505cf7a60ad140f60da3b1f5e25224fb05c4ffec0d8c06cf11936047fd94ef01"
+    },
+    {
+      "id": "cu-road-knights-avenue",
+      "file": "cu-road-knights-avenue.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 87600,
+      "boundsBlender": [
+        [
+          -719.6772,
+          -778.38,
+          5.2324
+        ],
+        [
+          122.22,
+          -678.513,
+          22.9028
+        ]
+      ],
+      "assembledSimpleParts": 876,
+      "sha256": "9b034f1f5dbbf65da095eac5d5bd027c42409725208f3c1424887b0cb157889c"
+    },
+    {
+      "id": "cu-road-knights-avenue-uptown",
+      "file": "cu-road-knights-avenue-uptown.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 45200,
+      "boundsBlender": [
+        [
+          -705.4435,
+          -1017.2949,
+          11.3797
+        ],
+        [
+          -364.4439,
+          -730.8964,
+          38.0452
+        ]
+      ],
+      "assembledSimpleParts": 452,
+      "sha256": "14179c7cea63101a7a636a71bbfdae13e4f81b4900ed01f12293ee8d1916d7eb"
+    },
+    {
+      "id": "cu-road-oath-avenue",
+      "file": "cu-road-oath-avenue.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 22260,
+      "boundsBlender": [
+        [
+          -682.8583,
+          -1234.137,
+          12.4352
+        ],
+        [
+          -616.18,
+          -992.4153,
+          23.5844
+        ]
+      ],
+      "assembledSimpleParts": 265,
+      "sha256": "8a4677033a276c98293bf2280fd82cfcc8c6e8e8312f7f89e90e3b4477bbec70"
+    },
+    {
+      "id": "cu-road-stravian-avenue",
+      "file": "cu-road-stravian-avenue.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 75900,
+      "boundsBlender": [
+        [
+          292.6595,
+          -1075.4678,
+          11.1813
+        ],
+        [
+          625.4681,
+          -423.5955,
+          34.832
+        ]
+      ],
+      "assembledSimpleParts": 759,
+      "sha256": "47bf9cdaae103a30524d9d0e17ebcb7ad52d0bc9c73ae15054d15f656a43e44e"
+    },
+    {
+      "id": "cu-road-imperial-avenue",
+      "file": "cu-road-imperial-avenue.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 38200,
+      "boundsBlender": [
+        [
+          -657.1375,
+          -163.4616,
+          1.9595
+        ],
+        [
+          -290.3354,
+          -74.3329,
+          30.1043
+        ]
+      ],
+      "assembledSimpleParts": 382,
+      "sha256": "f91a6707cbb24ce218e0d2aad8a1a869f9b87d99333408b4507b784dbbf2056b"
+    },
+    {
+      "id": "cu-road-autumn-avenue",
+      "file": "cu-road-autumn-avenue.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 51528,
+      "boundsBlender": [
+        [
+          -723.3069,
+          -774.7147,
+          16.0247
+        ],
+        [
+          -352.1898,
+          -279.9922,
+          47.0566
+        ]
+      ],
+      "assembledSimpleParts": 678,
+      "sha256": "70e3b34b426a58f11931862ed3a2a15da1e57c76db63ab1cfb0eb25f19497fda"
+    },
+    {
+      "id": "cu-road-saint-malrok",
+      "file": "cu-road-saint-malrok.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 25384,
+      "boundsBlender": [
+        [
+          96.5231,
+          -775.837,
+          21.6451
+        ],
+        [
+          402.3008,
+          -667.1075,
+          40.8394
+        ]
+      ],
+      "assembledSimpleParts": 334,
+      "sha256": "4706d70ec6c5f08ab3d0186a42264b4228a0dd33b6cad3769bdae16d73ff09b0"
+    },
+    {
+      "id": "cu-road-dweomer-view",
+      "file": "cu-road-dweomer-view.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 37164,
+      "boundsBlender": [
+        [
+          398.9722,
+          -789.4576,
+          15.9336
+        ],
+        [
+          655.8892,
+          -475.7542,
+          48.0894
+        ]
+      ],
+      "assembledSimpleParts": 489,
+      "sha256": "6b02d331b6aa2aa9dc026b414738ff815d37dcbdbd347e931031261d603f86b3"
+    },
+    {
+      "id": "cu-road-grain-road",
+      "file": "cu-road-grain-road.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 274924,
+      "boundsBlender": [
+        [
+          -851.1541,
+          -1292.4916,
+          6.4672
+        ],
+        [
+          1033.42,
+          -472.888,
+          60.9657
+        ]
+      ],
+      "assembledSimpleParts": 4043,
+      "sha256": "664b5568a340750a6bd81c8eb76e5cdeb4aa06de0d2257ef0fba81d1d5848dc2"
+    },
+    {
+      "id": "cu-road-hudlodge-route",
+      "file": "cu-road-hudlodge-route.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 26160,
+      "boundsBlender": [
+        [
+          -1213.4207,
+          -1153.88,
+          -2.564
+        ],
+        [
+          -797.58,
+          -979.3,
+          13.6047
+        ]
+      ],
+      "assembledSimpleParts": 436,
+      "sha256": "bdf9112a671a0f17071d43b47c2d830714c2178a70df38b868a7debe7d7f9f2c"
+    },
+    {
+      "id": "cu-road-old-path",
+      "file": "cu-road-old-path.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 22516,
+      "boundsBlender": [
+        [
+          -79.8043,
+          86.547,
+          5.98
+        ],
+        [
+          330.8371,
+          200.7899,
+          28.4807
+        ]
+      ],
+      "assembledSimpleParts": 433,
+      "sha256": "022cb8aaf958c1bfaf163964638e67665c711b37b2528e8f1ca413cecb557fcd"
+    },
+    {
+      "id": "cu-road-arching-path",
+      "file": "cu-road-arching-path.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 9840,
+      "boundsBlender": [
+        [
+          326.7793,
+          88.416,
+          5.98
+        ],
+        [
+          402.5505,
+          237.1852,
+          22.276
+        ]
+      ],
+      "assembledSimpleParts": 164,
+      "sha256": "23b2a3e5a34df9287bda231eb912a56643bfdf9bddae91e41c5fad50d30aa85b"
+    },
+    {
+      "id": "cu-road-smithheim-way",
+      "file": "cu-road-smithheim-way.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 25896,
+      "boundsBlender": [
+        [
+          335.558,
+          -82.1214,
+          5.98
+        ],
+        [
+          784.9384,
+          112.4935,
+          29.564
+        ]
+      ],
+      "assembledSimpleParts": 498,
+      "sha256": "5f1248fe9e4dec94083434d22558f1d53d54beb83edf5f87113fba1972eac83b"
+    },
+    {
+      "id": "cu-road-fortway",
+      "file": "cu-road-fortway.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 12844,
+      "boundsBlender": [
+        [
+          780.9507,
+          -80.5338,
+          28.9067
+        ],
+        [
+          967.7617,
+          61.9033,
+          57.4639
+        ]
+      ],
+      "assembledSimpleParts": 247,
+      "sha256": "d0908ee35b2364b518837c3b150e094e6e77e63688bf3d12a0d5381d97d93aeb"
+    },
+    {
+      "id": "cu-road-old-bridge-road",
+      "file": "cu-road-old-bridge-road.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 19856,
+      "boundsBlender": [
+        [
+          616.8972,
+          -428.4997,
+          -2.5705
+        ],
+        [
+          812.6835,
+          -166.2251,
+          12.1
+        ]
+      ],
+      "assembledSimpleParts": 292,
+      "sha256": "06b4bed17ac07be8b8637ecdb2a7ba720023cb6796843f2f511c0b35b5abf412"
+    },
+    {
+      "id": "cu-road-northwoods-track",
+      "file": "cu-road-northwoods-track.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 21252,
+      "boundsBlender": [
+        [
+          1015.6273,
+          -1124.8572,
+          47.6522
+        ],
+        [
+          1483.3909,
+          -1021.9077,
+          67.8748
+        ]
+      ],
+      "assembledSimpleParts": 483,
+      "sha256": "6ed5b45be0f36281877a4172cda733508bc8e4b57c1a5f1993b0ee9ee00163a5"
+    },
+    {
+      "id": "cu-road-sloghood-gate-lane",
+      "file": "cu-road-sloghood-gate-lane.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 14340,
+      "boundsBlender": [
+        [
+          -888.2198,
+          -1152.8895,
+          10.9724
+        ],
+        [
+          -701.7802,
+          -1008.5303,
+          23.9984
+        ]
+      ],
+      "assembledSimpleParts": 239,
+      "sha256": "5dcde547c5596f6509a8535dd9153740689b942e4fb772819af1a32379432425"
+    },
+    {
+      "id": "cu-road-arenarea-terrace-lane",
+      "file": "cu-road-arenarea-terrace-lane.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 31980,
+      "boundsBlender": [
+        [
+          -126.0947,
+          -364.3369,
+          8.5284
+        ],
+        [
+          408.3425,
+          -181.2292,
+          42.5604
+        ]
+      ],
+      "assembledSimpleParts": 615,
+      "sha256": "a7e5681df3e9ec904b92df820cc876e56b8d7cfc04416d748e481b2a83f1fa2b"
+    },
+    {
+      "id": "cu-road-martpart-market-lane",
+      "file": "cu-road-martpart-market-lane.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 25680,
+      "boundsBlender": [
+        [
+          409.3161,
+          -673.8024,
+          11.317
+        ],
+        [
+          627.1911,
+          -425.6306,
+          25.1071
+        ]
+      ],
+      "assembledSimpleParts": 428,
+      "sha256": "09ada502eaaa39af449260a299479a5f82127d0156c1765db321f55cb879d6b9"
+    },
+    {
+      "id": "cu-road-scholarnest-civic-lane",
+      "file": "cu-road-scholarnest-civic-lane.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 25220,
+      "boundsBlender": [
+        [
+          114.947,
+          -1134.4617,
+          18.8877
+        ],
+        [
+          326.2392,
+          -833.6059,
+          52.0632
+        ]
+      ],
+      "assembledSimpleParts": 485,
+      "sha256": "482d1d5318e3bfeb47df9ba0e3f187bf7143064859f3600f8a3d5a51a618e2de"
+    },
+    {
+      "id": "cu-road-dweomer-garden-lane",
+      "file": "cu-road-dweomer-garden-lane.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 37856,
+      "boundsBlender": [
+        [
+          396.4968,
+          -964.3316,
+          33.7082
+        ],
+        [
+          767.7617,
+          -707.1602,
+          62.826
+        ]
+      ],
+      "assembledSimpleParts": 728,
+      "sha256": "fa70372cfe634cfcbbae2716734192d41024846d95303144887d52d63d2c6f18"
+    },
+    {
+      "id": "cu-road-uptown-garden-lane",
+      "file": "cu-road-uptown-garden-lane.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 28652,
+      "boundsBlender": [
+        [
+          -661.4062,
+          -1090.3712,
+          23.2257
+        ],
+        [
+          -378.8696,
+          -846.3159,
+          40.6374
+        ]
+      ],
+      "assembledSimpleParts": 551,
+      "sha256": "6b2425f8765991bfb67bdc194bb55f95320f19f94b2d2c09fa7eb18da024fb6b"
+    },
+    {
+      "id": "cu-road-artisan-delivery-lane",
+      "file": "cu-road-artisan-delivery-lane.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 40980,
+      "boundsBlender": [
+        [
+          -252.9493,
+          -1090.5455,
+          9.3166
+        ],
+        [
+          3.4962,
+          -683.7174,
+          40.9487
+        ]
+      ],
+      "assembledSimpleParts": 683,
+      "sha256": "1b494d20b1508656b472e85f5da47f41aff4b8ce2adbb3c49d49e9ed9c2de147"
+    },
+    {
+      "id": "cu-road-oldtown-upper-lane",
+      "file": "cu-road-oldtown-upper-lane.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 28952,
+      "boundsBlender": [
+        [
+          77.1915,
+          7.2455,
+          12.5678
+        ],
+        [
+          653.3619,
+          240.64,
+          42.7091
+        ]
+      ],
+      "assembledSimpleParts": 658,
+      "sha256": "285d4c2656e470e2f0d2d9ca58e6b978c9138395244b2bd1277a75098e79b628"
+    },
+    {
+      "id": "cu-road-water-gate-dry",
+      "file": "cu-road-water-gate-dry.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 24696,
+      "boundsBlender": [
+        [
+          -451.9489,
+          -188.474,
+          0.98
+        ],
+        [
+          -269.6237,
+          -75.2358,
+          7.0263
+        ]
+      ],
+      "assembledSimpleParts": 294,
+      "sha256": "e126a2e9e9d11eb31176805fd0963b090b10d7d1e199763cdc2a881103be012e"
+    },
+    {
+      "id": "cu-road-wildlife-gate",
+      "file": "cu-road-wildlife-gate.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 44436,
+      "boundsBlender": [
+        [
+          394.851,
+          -1276.38,
+          16.3784
+        ],
+        [
+          530.42,
+          -770.3493,
+          47.1536
+        ]
+      ],
+      "assembledSimpleParts": 529,
+      "sha256": "4f913662da4248cbdecd71345df123162a38c24f85c0da63a95e7d9762c867da"
+    },
+    {
+      "id": "cu-road-arena-gate-link",
+      "file": "cu-road-arena-gate-link.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 12516,
+      "boundsBlender": [
+        [
+          193.8732,
+          -47.1697,
+          -2.6733
+        ],
+        [
+          341.1924,
+          111.1114,
+          12.3846
+        ]
+      ],
+      "assembledSimpleParts": 149,
+      "sha256": "ee097c8b4b79e11ea2d3170f13db52e905b6d5c9e4b855580dbef7cc2160681c"
+    },
+    {
+      "id": "cu-road-palace-approach",
+      "file": "cu-road-palace-approach.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 21356,
+      "boundsBlender": [
+        [
+          -540.9512,
+          -468.0681,
+          33.0111
+        ],
+        [
+          -374.8824,
+          -279.9377,
+          63.325
+        ]
+      ],
+      "assembledSimpleParts": 281,
+      "sha256": "a6604c2ebd02a0d85f0323773cd00cd522f38387dbda135c41f291429773f041"
+    },
+    {
+      "id": "cu-road-oldtown-spine",
+      "file": "cu-road-oldtown-spine.glb",
+      "materials": [
+        "sand"
+      ],
+      "triangles": 63300,
+      "boundsBlender": [
+        [
+          -79.6591,
+          -201.2963,
+          4.98
+        ],
+        [
+          811.6288,
+          213.9089,
+          38.0876
+        ]
+      ],
+      "assembledSimpleParts": 1055,
+      "sha256": "69f9225af2b69ef1837bc459122c2b2638b39695b84a8ebbe179a04ad2401cb0"
+    },
+    {
+      "id": "cu-road-cathedral-approach",
+      "file": "cu-road-cathedral-approach.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 16968,
+      "boundsBlender": [
+        [
+          95.84,
+          -689.0388,
+          31.8922
+        ],
+        [
+          219.8308,
+          -593.5469,
+          52.7503
+        ]
+      ],
+      "assembledSimpleParts": 202,
+      "sha256": "7ab04dd9c808eb87a8b8ce0afb9fbcbb8dde3f6b58b7e026b374b4ca57663eda"
+    },
+    {
+      "id": "cu-road-university-approach",
+      "file": "cu-road-university-approach.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 37088,
+      "boundsBlender": [
+        [
+          29.5432,
+          -1127.6533,
+          19.3924
+        ],
+        [
+          195.2794,
+          -769.68,
+          56.3758
+        ]
+      ],
+      "assembledSimpleParts": 488,
+      "sha256": "23fd98eb9777bdbc742e6b6fa96f33d60ed3c6734859eb5ce78119ca2e2f264e"
+    }
+  ],
+  "status": "proposed architecture; visual and traversal review required"
+}

@@ -1,0 +1,6294 @@
+{
+  "version": "1.0-proposition",
+  "date": "2026-10-15",
+  "units": "metres",
+  "datum": "Z=0 : niveau moyen proposé de Tourmaline Bay ; aucune altitude absolue canonique",
+  "orientation": "Nord géographique en haut ; Est +E, Nord +N. Carte source : N à droite ; rotation de lecture 90 degrés antihoraire.",
+  "source_plane_scale_m_per_unit": 6.75,
+  "source_plane_origin_uv": [
+    1000,
+    680
+  ],
+  "coordinate_transform": "E=(v-680)*6.75 ; N=(u-1000)*6.75. Recomposition métrique, pas géoréférencement.",
+  "engine_transform": "UE_X=100*E ; UE_Y=-100*N ; UE_Z=100*Z (cm), nord vers -Y ; yaw moteur=-azimut géographique depuis Est.",
+  "population_target": 680000,
+  "soldiers_included": 34000,
+  "districts": [
+    {
+      "id": "Q01",
+      "name": "Sloghood",
+      "polygon_uv": [
+        [
+          390,
+          830
+        ],
+        [
+          470,
+          900
+        ],
+        [
+          450,
+          1080
+        ],
+        [
+          420,
+          1230
+        ],
+        [
+          350,
+          1270
+        ],
+        [
+          270,
+          1180
+        ],
+        [
+          240,
+          1070
+        ],
+        [
+          270,
+          950
+        ],
+        [
+          330,
+          865
+        ]
+      ],
+      "polygon_m": [
+        [
+          1012.5,
+          -4117.5
+        ],
+        [
+          1485.0,
+          -3577.5
+        ],
+        [
+          2700.0,
+          -3712.5
+        ],
+        [
+          3712.5,
+          -3915.0
+        ],
+        [
+          3982.5,
+          -4387.5
+        ],
+        [
+          3375.0,
+          -4927.5
+        ],
+        [
+          2632.5,
+          -5130.0
+        ],
+        [
+          1822.5,
+          -4927.5
+        ],
+        [
+          1248.75,
+          -4522.5
+        ]
+      ],
+      "center_uv": [
+        350,
+        1050
+      ],
+      "center_m": [
+        2497.5,
+        -4387.5
+      ],
+      "area_km2": 3.1393,
+      "z_min": 18,
+      "z_max": 56,
+      "road_widths_m": [
+        4.5,
+        7.5,
+        12
+      ],
+      "typical_building_m": [
+        9,
+        15,
+        16.5
+      ],
+      "landform": "Croupe habitée au-dessus de South Creek ; petites terrasses domestiques, jamais une falaise continue.",
+      "terraces": "Habitat +32 à +56 ; gradins +36/+44/+52 ; approche basse de Hudlodge Route à +18.",
+      "drainage": "Des venelles descendent vers le ruisseau ; collecteurs en pied, seuils à +0,30 m du trottoir.",
+      "population": 110000,
+      "soldiers": 14300,
+      "core_population": 110000,
+      "program": "110 000 résidents, dont 14 300 militaires déjà inclus ; habitat courant de 3 à 4 niveaux ; casernes distribuées.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 3.2,
+      "residential_footprint_m2": 1375000.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            1230.0,
+            -4387.5
+          ],
+          "z_m": 32
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            2576.25,
+            -4387.5
+          ],
+          "z_m": 44
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            3922.5,
+            -4387.5
+          ],
+          "z_m": 56
+        }
+      ]
+    },
+    {
+      "id": "Q02",
+      "name": "Uptown",
+      "polygon_uv": [
+        [
+          470,
+          900
+        ],
+        [
+          700,
+          900
+        ],
+        [
+          735,
+          970
+        ],
+        [
+          750,
+          1100
+        ],
+        [
+          875,
+          1170
+        ],
+        [
+          830,
+          1280
+        ],
+        [
+          580,
+          1290
+        ],
+        [
+          500,
+          1260
+        ],
+        [
+          420,
+          1230
+        ],
+        [
+          450,
+          1080
+        ]
+      ],
+      "polygon_m": [
+        [
+          1485.0,
+          -3577.5
+        ],
+        [
+          1485.0,
+          -2025.0
+        ],
+        [
+          1957.5,
+          -1788.75
+        ],
+        [
+          2835.0,
+          -1687.5
+        ],
+        [
+          3307.5,
+          -843.75
+        ],
+        [
+          4050.0,
+          -1147.5
+        ],
+        [
+          4117.5,
+          -2835.0
+        ],
+        [
+          3915.0,
+          -3375.0
+        ],
+        [
+          3712.5,
+          -3915.0
+        ],
+        [
+          2700.0,
+          -3712.5
+        ]
+      ],
+      "center_uv": [
+        600,
+        1100
+      ],
+      "center_m": [
+        2835.0,
+        -2700.0
+      ],
+      "area_km2": 5.7591,
+      "z_min": 46,
+      "z_max": 68,
+      "road_widths_m": [
+        6,
+        12,
+        18
+      ],
+      "typical_building_m": [
+        18,
+        24,
+        15
+      ],
+      "landform": "Versant doux aménagé en jardins, manoirs et rues sinueuses.",
+      "terraces": "Paliers de jardins espacés de 3 à 4,5 m ; rues de desserte à 2-4 %.",
+      "drainage": "Talweg de rue vers le sud-ouest ; éviter les cuvettes closes derrière les murs de jardin.",
+      "population": 55000,
+      "soldiers": 1500,
+      "core_population": 55000,
+      "program": "55 000 résidents ; propriétés nobles, artisans, commerçants et logements de service, sans addition des métiers aux familles.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 2,
+      "residential_footprint_m2": 1100000.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            1545.0,
+            -2700.0
+          ],
+          "z_m": 56
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            2798.55,
+            -2700.0
+          ],
+          "z_m": 62
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            4052.1,
+            -2700.0
+          ],
+          "z_m": 48
+        }
+      ]
+    },
+    {
+      "id": "Q03",
+      "name": "Artisansquare",
+      "polygon_uv": [
+        [
+          700,
+          900
+        ],
+        [
+          850,
+          850
+        ],
+        [
+          1040,
+          880
+        ],
+        [
+          1120,
+          940
+        ],
+        [
+          1130,
+          1010
+        ],
+        [
+          1170,
+          1110
+        ],
+        [
+          1110,
+          1170
+        ],
+        [
+          1000,
+          1280
+        ],
+        [
+          900,
+          1320
+        ],
+        [
+          830,
+          1280
+        ],
+        [
+          875,
+          1170
+        ],
+        [
+          750,
+          1100
+        ],
+        [
+          735,
+          970
+        ]
+      ],
+      "polygon_m": [
+        [
+          1485.0,
+          -2025.0
+        ],
+        [
+          1147.5,
+          -1012.5
+        ],
+        [
+          1350.0,
+          270.0
+        ],
+        [
+          1755.0,
+          810.0
+        ],
+        [
+          2227.5,
+          877.5
+        ],
+        [
+          2902.5,
+          1147.5
+        ],
+        [
+          3307.5,
+          742.5
+        ],
+        [
+          4050.0,
+          0.0
+        ],
+        [
+          4320.0,
+          -675.0
+        ],
+        [
+          4050.0,
+          -1147.5
+        ],
+        [
+          3307.5,
+          -843.75
+        ],
+        [
+          2835.0,
+          -1687.5
+        ],
+        [
+          1957.5,
+          -1788.75
+        ]
+      ],
+      "center_uv": [
+        950,
+        1070
+      ],
+      "center_m": [
+        2632.5,
+        -337.5
+      ],
+      "area_km2": 6.315,
+      "z_min": 42,
+      "z_max": 62,
+      "road_widths_m": [
+        4.5,
+        9,
+        15
+      ],
+      "typical_building_m": [
+        12,
+        18,
+        13.5
+      ],
+      "landform": "Plateau artisanal découpé par des cours et des rues de travail.",
+      "terraces": "Sols d’ateliers horizontaux ; décalages de 1,5 à 3 m entre îlots ; jardins en poches.",
+      "drainage": "Cours en pente à 1,5 % vers leurs caniveaux ; pas de rejet industriel libre dans les rues.",
+      "population": 60000,
+      "soldiers": 1500,
+      "core_population": 60000,
+      "program": "60 000 résidents ; distinguer maisons des guildes, ateliers partagés et habitat au-dessus des boutiques.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 2.2,
+      "residential_footprint_m2": 1090909.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            1314.08,
+            -337.5
+          ],
+          "z_m": 58
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            2719.54,
+            -337.5
+          ],
+          "z_m": 52
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            4125.0,
+            -337.5
+          ],
+          "z_m": 44
+        }
+      ]
+    },
+    {
+      "id": "Q04",
+      "name": "Scholarnest",
+      "polygon_uv": [
+        [
+          1120,
+          940
+        ],
+        [
+          1240,
+          930
+        ],
+        [
+          1285,
+          1000
+        ],
+        [
+          1360,
+          1130
+        ],
+        [
+          1300,
+          1240
+        ],
+        [
+          1190,
+          1250
+        ],
+        [
+          1110,
+          1170
+        ],
+        [
+          1170,
+          1110
+        ],
+        [
+          1130,
+          1010
+        ]
+      ],
+      "polygon_m": [
+        [
+          1755.0,
+          810.0
+        ],
+        [
+          1687.5,
+          1620.0
+        ],
+        [
+          2160.0,
+          1923.75
+        ],
+        [
+          3037.5,
+          2430.0
+        ],
+        [
+          3780.0,
+          2025.0
+        ],
+        [
+          3847.5,
+          1282.5
+        ],
+        [
+          3307.5,
+          742.5
+        ],
+        [
+          2902.5,
+          1147.5
+        ],
+        [
+          2227.5,
+          877.5
+        ]
+      ],
+      "center_uv": [
+        1220,
+        1100
+      ],
+      "center_m": [
+        2835.0,
+        1485.0
+      ],
+      "area_km2": 2.4194,
+      "z_min": 26,
+      "z_max": 58,
+      "road_widths_m": [
+        6,
+        12,
+        18
+      ],
+      "typical_building_m": [
+        18,
+        24,
+        18
+      ],
+      "landform": "Éperon académique, esplanades blanches et liaisons en pente douce.",
+      "terraces": "Parvis à +44, +48 et +54 m ; raccord bas à Martpart +26 ; escaliers doublés de rampes.",
+      "drainage": "Les grandes places s’égouttent à 1-1,5 % ; collecteur aval du côté oriental.",
+      "population": 40000,
+      "soldiers": 1000,
+      "core_population": 40000,
+      "program": "40 000 résidents ; logements étudiants et résidences ordinaires complètent les grands bâtiments institutionnels.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 2.8,
+      "residential_footprint_m2": 571429.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            1758.75,
+            1485.0
+          ],
+          "z_m": 26
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            2763.92,
+            1485.0
+          ],
+          "z_m": 48
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            3769.09,
+            1485.0
+          ],
+          "z_m": 54
+        }
+      ]
+    },
+    {
+      "id": "Q05",
+      "name": "Dweomer",
+      "polygon_uv": [
+        [
+          1340,
+          830
+        ],
+        [
+          1570,
+          800
+        ],
+        [
+          1650,
+          700
+        ],
+        [
+          1700,
+          800
+        ],
+        [
+          1750,
+          950
+        ],
+        [
+          1780,
+          1140
+        ],
+        [
+          1500,
+          1240
+        ],
+        [
+          1400,
+          1210
+        ],
+        [
+          1360,
+          1130
+        ],
+        [
+          1285,
+          1000
+        ],
+        [
+          1240,
+          930
+        ]
+      ],
+      "polygon_m": [
+        [
+          1012.5,
+          2295.0
+        ],
+        [
+          810.0,
+          3847.5
+        ],
+        [
+          135.0,
+          4387.5
+        ],
+        [
+          810.0,
+          4725.0
+        ],
+        [
+          1822.5,
+          5062.5
+        ],
+        [
+          3105.0,
+          5265.0
+        ],
+        [
+          3780.0,
+          3375.0
+        ],
+        [
+          3577.5,
+          2700.0
+        ],
+        [
+          3037.5,
+          2430.0
+        ],
+        [
+          2160.0,
+          1923.75
+        ],
+        [
+          1687.5,
+          1620.0
+        ]
+      ],
+      "center_uv": [
+        1510,
+        1000
+      ],
+      "center_m": [
+        2160.0,
+        3442.5
+      ],
+      "area_km2": 8.0987,
+      "z_min": 26,
+      "z_max": 48,
+      "road_widths_m": [
+        6,
+        12,
+        18
+      ],
+      "typical_building_m": [
+        21,
+        30,
+        18
+      ],
+      "landform": "Croupe arcanique modérément vallonnée, grands jardins et plateformes distinctes.",
+      "terraces": "Socles rocheux bas de 1,5 à 4,5 m ; aucun quartier flottant déduit des cristaux.",
+      "drainage": "Les bassins restent indépendants ; ruissellement gravitaire vers le nord et la lisière agricole.",
+      "population": 15000,
+      "soldiers": 1500,
+      "core_population": 15000,
+      "program": "15 000 résidents ; grandes réserves de jardins et de domaines autour des trois repères principaux.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 2,
+      "residential_footprint_m2": 300000.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            922.83,
+            3442.5
+          ],
+          "z_m": 26
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            2309.36,
+            3442.5
+          ],
+          "z_m": 40
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            3695.89,
+            3442.5
+          ],
+          "z_m": 34
+        }
+      ]
+    },
+    {
+      "id": "Q06",
+      "name": "Martpart",
+      "polygon_uv": [
+        [
+          1370,
+          440
+        ],
+        [
+          1430,
+          480
+        ],
+        [
+          1520,
+          535
+        ],
+        [
+          1560,
+          585
+        ],
+        [
+          1570,
+          640
+        ],
+        [
+          1650,
+          700
+        ],
+        [
+          1570,
+          800
+        ],
+        [
+          1340,
+          830
+        ],
+        [
+          1240,
+          930
+        ],
+        [
+          1120,
+          940
+        ],
+        [
+          1130,
+          840
+        ],
+        [
+          1240,
+          780
+        ],
+        [
+          1290,
+          660
+        ],
+        [
+          1320,
+          570
+        ]
+      ],
+      "polygon_m": [
+        [
+          -1620.0,
+          2497.5
+        ],
+        [
+          -1350.0,
+          2902.5
+        ],
+        [
+          -978.75,
+          3510.0
+        ],
+        [
+          -641.25,
+          3780.0
+        ],
+        [
+          -270.0,
+          3847.5
+        ],
+        [
+          135.0,
+          4387.5
+        ],
+        [
+          810.0,
+          3847.5
+        ],
+        [
+          1012.5,
+          2295.0
+        ],
+        [
+          1687.5,
+          1620.0
+        ],
+        [
+          1755.0,
+          810.0
+        ],
+        [
+          1080.0,
+          877.5
+        ],
+        [
+          675.0,
+          1620.0
+        ],
+        [
+          -135.0,
+          1957.5
+        ],
+        [
+          -742.5,
+          2160.0
+        ]
+      ],
+      "center_uv": [
+        1400,
+        700
+      ],
+      "center_m": [
+        135.0,
+        2700.0
+      ],
+      "area_km2": 5.2192,
+      "z_min": 18,
+      "z_max": 26,
+      "road_widths_m": [
+        4.5,
+        9,
+        18
+      ],
+      "typical_building_m": [
+        12,
+        18,
+        13.5
+      ],
+      "landform": "Terrasse marchande basse à faible dénivelé, au contact de la Rubicund.",
+      "terraces": "Trois plateaux à +18, +22 et +26 m ; raccords longs, pas d’escalier sur l’axe de livraison.",
+      "drainage": "Pentes marchandes de 1-3 % ; rigoles continues aux changements de terrasse.",
+      "population": 67000,
+      "soldiers": 2000,
+      "core_population": 67000,
+      "program": "67 000 résidents ; étages de 3-4 m, 2-3 niveaux majoritaires, quelques 4 ; relief urbain de 8 m.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 2.8,
+      "residential_footprint_m2": 957143.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            -1425.0,
+            2700.0
+          ],
+          "z_m": 18
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            -262.66,
+            2700.0
+          ],
+          "z_m": 22
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            899.67,
+            2700.0
+          ],
+          "z_m": 26
+        }
+      ]
+    },
+    {
+      "id": "Q07",
+      "name": "Arenarea",
+      "polygon_uv": [
+        [
+          780,
+          420
+        ],
+        [
+          850,
+          370
+        ],
+        [
+          900,
+          320
+        ],
+        [
+          930,
+          250
+        ],
+        [
+          1020,
+          245
+        ],
+        [
+          1100,
+          280
+        ],
+        [
+          1200,
+          325
+        ],
+        [
+          1260,
+          370
+        ],
+        [
+          1340,
+          380
+        ],
+        [
+          1370,
+          440
+        ],
+        [
+          1320,
+          570
+        ],
+        [
+          1290,
+          660
+        ],
+        [
+          1160,
+          600
+        ],
+        [
+          1040,
+          560
+        ],
+        [
+          900,
+          500
+        ]
+      ],
+      "polygon_m": [
+        [
+          -1755.0,
+          -1485.0
+        ],
+        [
+          -2092.5,
+          -1012.5
+        ],
+        [
+          -2430.0,
+          -675.0
+        ],
+        [
+          -2902.5,
+          -472.5
+        ],
+        [
+          -2936.25,
+          135.0
+        ],
+        [
+          -2700.0,
+          675.0
+        ],
+        [
+          -2396.25,
+          1350.0
+        ],
+        [
+          -2092.5,
+          1755.0
+        ],
+        [
+          -2025.0,
+          2295.0
+        ],
+        [
+          -1620.0,
+          2497.5
+        ],
+        [
+          -742.5,
+          2160.0
+        ],
+        [
+          -135.0,
+          1957.5
+        ],
+        [
+          -540.0,
+          1080.0
+        ],
+        [
+          -810.0,
+          270.0
+        ],
+        [
+          -1215.0,
+          -675.0
+        ]
+      ],
+      "center_uv": [
+        1100,
+        440
+      ],
+      "center_m": [
+        -1620.0,
+        675.0
+      ],
+      "area_km2": 6.127,
+      "z_min": 14,
+      "z_max": 28,
+      "road_widths_m": [
+        6,
+        15,
+        24
+      ],
+      "typical_building_m": [
+        21,
+        30,
+        15
+      ],
+      "landform": "Terrasse patricienne entre baie, rivière et centre civique ; relief total de 14 m.",
+      "terraces": "Parvis de l’Arena à +20 m ; jardins à +17, +23 et +26 m ; gradins paysagers de 1,5-3 m.",
+      "drainage": "Évacuer vers la baie par collecteurs séparés du Natural Pool ; les accès de foule restent secs.",
+      "population": 45000,
+      "soldiers": 2000,
+      "core_population": 45000,
+      "program": "45 000 résidents ; étages de 3-4 m, 2-3 niveaux majoritaires ; relief urbain de 14 m, anse basse traitée à part.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 2,
+      "residential_footprint_m2": 900000.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            -2640.0,
+            675.0
+          ],
+          "z_m": 20
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            -1687.5,
+            675.0
+          ],
+          "z_m": 23
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            -735.0,
+            675.0
+          ],
+          "z_m": 28
+        }
+      ]
+    },
+    {
+      "id": "Q08",
+      "name": "Oldtown",
+      "polygon_uv": [
+        [
+          950,
+          170
+        ],
+        [
+          1100,
+          140
+        ],
+        [
+          1270,
+          125
+        ],
+        [
+          1370,
+          180
+        ],
+        [
+          1490,
+          240
+        ],
+        [
+          1590,
+          340
+        ],
+        [
+          1630,
+          440
+        ],
+        [
+          1590,
+          500
+        ],
+        [
+          1520,
+          450
+        ],
+        [
+          1410,
+          380
+        ],
+        [
+          1320,
+          340
+        ],
+        [
+          1210,
+          270
+        ],
+        [
+          1070,
+          220
+        ],
+        [
+          950,
+          205
+        ]
+      ],
+      "polygon_m": [
+        [
+          -3442.5,
+          -337.5
+        ],
+        [
+          -3645.0,
+          675.0
+        ],
+        [
+          -3746.25,
+          1822.5
+        ],
+        [
+          -3375.0,
+          2497.5
+        ],
+        [
+          -2970.0,
+          3307.5
+        ],
+        [
+          -2295.0,
+          3982.5
+        ],
+        [
+          -1620.0,
+          4252.5
+        ],
+        [
+          -1215.0,
+          3982.5
+        ],
+        [
+          -1552.5,
+          3510.0
+        ],
+        [
+          -2025.0,
+          2767.5
+        ],
+        [
+          -2295.0,
+          2160.0
+        ],
+        [
+          -2767.5,
+          1417.5
+        ],
+        [
+          -3105.0,
+          472.5
+        ],
+        [
+          -3206.25,
+          -337.5
+        ]
+      ],
+      "center_uv": [
+        1340,
+        280
+      ],
+      "center_m": [
+        -2700.0,
+        2295.0
+      ],
+      "area_km2": 4.2202,
+      "z_min": 10,
+      "z_max": 38,
+      "road_widths_m": [
+        4.5,
+        7.5,
+        12
+      ],
+      "typical_building_m": [
+        9,
+        15,
+        12
+      ],
+      "landform": "Rive historique étroite, adossée aux collines occidentales.",
+      "terraces": "Terrasse industrielle à +12 m ; habitat à +18/+24 m ; cimetière à +32 m.",
+      "drainage": "Écoulement vers la Rubicund, chemins en travers du versant ; cimetière au-dessus des zones humides.",
+      "population": 45000,
+      "soldiers": 1500,
+      "core_population": 45000,
+      "program": "45 000 résidents ; industries en rive et habitat ancien en retrait ; desserte hors murs.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 2.2,
+      "residential_footprint_m2": 818182.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            -3426.38,
+            2295.0
+          ],
+          "z_m": 38
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            -2860.69,
+            2295.0
+          ],
+          "z_m": 24
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            -2295.0,
+            2295.0
+          ],
+          "z_m": 10
+        }
+      ]
+    },
+    {
+      "id": "Q09",
+      "name": "Neckoffoods",
+      "polygon_uv": [
+        [
+          1780,
+          1140
+        ],
+        [
+          1830,
+          1200
+        ],
+        [
+          1850,
+          1330
+        ],
+        [
+          1380,
+          1330
+        ],
+        [
+          1300,
+          1310
+        ],
+        [
+          1190,
+          1330
+        ],
+        [
+          1000,
+          1330
+        ],
+        [
+          1000,
+          1280
+        ],
+        [
+          1110,
+          1170
+        ],
+        [
+          1190,
+          1250
+        ],
+        [
+          1300,
+          1240
+        ],
+        [
+          1360,
+          1130
+        ],
+        [
+          1400,
+          1210
+        ],
+        [
+          1500,
+          1240
+        ]
+      ],
+      "polygon_m": [
+        [
+          3105.0,
+          5265.0
+        ],
+        [
+          3510.0,
+          5602.5
+        ],
+        [
+          4387.5,
+          5737.5
+        ],
+        [
+          4387.5,
+          2565.0
+        ],
+        [
+          4252.5,
+          2025.0
+        ],
+        [
+          4387.5,
+          1282.5
+        ],
+        [
+          4387.5,
+          0.0
+        ],
+        [
+          4050.0,
+          0.0
+        ],
+        [
+          3307.5,
+          742.5
+        ],
+        [
+          3847.5,
+          1282.5
+        ],
+        [
+          3780.0,
+          2025.0
+        ],
+        [
+          3037.5,
+          2430.0
+        ],
+        [
+          3577.5,
+          2700.0
+        ],
+        [
+          3780.0,
+          3375.0
+        ]
+      ],
+      "center_uv": [
+        1610,
+        1270
+      ],
+      "center_m": [
+        3982.5,
+        4117.5
+      ],
+      "area_km2": 4.6793,
+      "z_min": 24,
+      "z_max": 46,
+      "road_widths_m": [
+        4.5,
+        9,
+        15
+      ],
+      "typical_building_m": [
+        12,
+        21,
+        10.5
+      ],
+      "landform": "Glacis agricole oriental ; champs en pente faible, fermes groupées près du mur.",
+      "terraces": "Parcelles longues de 150-450 m ; banquettes de 1-2 m ; priorité au maintien des terres profondes.",
+      "drainage": "Fossés à 0,5-1 % ; noues en bord de champs ; séparer chemins agricoles et traversées de foule.",
+      "population": 100000,
+      "soldiers": 3000,
+      "core_population": 20000,
+      "program": "100 000 résidents M : 20 000 dans cette frange, 80 000 dans la couronne rurale P ; aucun double compte.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 1.8,
+      "residential_footprint_m2": 444444.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            3574.82,
+            4117.5
+          ],
+          "z_m": 40
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            3951.16,
+            4117.5
+          ],
+          "z_m": 34
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            4327.5,
+            4117.5
+          ],
+          "z_m": 26
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "name": "Bloomburgs / Boomburbs",
+      "polygon_uv": [
+        [
+          350,
+          1270
+        ],
+        [
+          420,
+          1230
+        ],
+        [
+          500,
+          1260
+        ],
+        [
+          580,
+          1290
+        ],
+        [
+          830,
+          1280
+        ],
+        [
+          900,
+          1320
+        ],
+        [
+          1000,
+          1280
+        ],
+        [
+          1000,
+          1330
+        ],
+        [
+          980,
+          1450
+        ],
+        [
+          420,
+          1450
+        ],
+        [
+          320,
+          1390
+        ]
+      ],
+      "polygon_m": [
+        [
+          3982.5,
+          -4387.5
+        ],
+        [
+          3712.5,
+          -3915.0
+        ],
+        [
+          3915.0,
+          -3375.0
+        ],
+        [
+          4117.5,
+          -2835.0
+        ],
+        [
+          4050.0,
+          -1147.5
+        ],
+        [
+          4320.0,
+          -675.0
+        ],
+        [
+          4050.0,
+          0.0
+        ],
+        [
+          4387.5,
+          0.0
+        ],
+        [
+          5197.5,
+          -135.0
+        ],
+        [
+          5197.5,
+          -3915.0
+        ],
+        [
+          4792.5,
+          -4590.0
+        ]
+      ],
+      "center_uv": [
+        680,
+        1370
+      ],
+      "center_m": [
+        4657.5,
+        -2160.0
+      ],
+      "area_km2": 5.0369,
+      "z_min": 38,
+      "z_max": 60,
+      "road_widths_m": [
+        3,
+        6,
+        12
+      ],
+      "typical_building_m": [
+        9,
+        12,
+        12
+      ],
+      "landform": "Faubourg dense sur des replats irréguliers ; le tissu continue au-delà du cadrage du livre.",
+      "terraces": "Microterrasses de 0,6-1,5 m ; trois grandes poches à +42, +48 et +54 m.",
+      "drainage": "Casser les descentes rectilignes ; conserver des passages pour les noues et la maintenance.",
+      "population": 127000,
+      "soldiers": 5500,
+      "core_population": 127000,
+      "program": "127 000 résidents ; 2-3 niveaux, moyenne résidentielle 2,5 ; trois sous-secteurs et voies de service maintenus.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 2.5,
+      "residential_footprint_m2": 2032000.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            4150.5,
+            -2160.0
+          ],
+          "z_m": 52
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            4644.0,
+            -2160.0
+          ],
+          "z_m": 48
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            5137.5,
+            -2160.0
+          ],
+          "z_m": 42
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "name": "Downtown",
+      "polygon_uv": [
+        [
+          760,
+          480
+        ],
+        [
+          900,
+          500
+        ],
+        [
+          1040,
+          560
+        ],
+        [
+          1160,
+          600
+        ],
+        [
+          1290,
+          660
+        ],
+        [
+          1240,
+          780
+        ],
+        [
+          1130,
+          840
+        ],
+        [
+          1120,
+          940
+        ],
+        [
+          1040,
+          880
+        ],
+        [
+          850,
+          850
+        ],
+        [
+          830,
+          620
+        ]
+      ],
+      "polygon_m": [
+        [
+          -1350.0,
+          -1620.0
+        ],
+        [
+          -1215.0,
+          -675.0
+        ],
+        [
+          -810.0,
+          270.0
+        ],
+        [
+          -540.0,
+          1080.0
+        ],
+        [
+          -135.0,
+          1957.5
+        ],
+        [
+          675.0,
+          1620.0
+        ],
+        [
+          1080.0,
+          877.5
+        ],
+        [
+          1755.0,
+          810.0
+        ],
+        [
+          1350.0,
+          270.0
+        ],
+        [
+          1147.5,
+          -1012.5
+        ],
+        [
+          -405.0,
+          -1147.5
+        ]
+      ],
+      "center_uv": [
+        1030,
+        720
+      ],
+      "center_m": [
+        270.0,
+        202.5
+      ],
+      "area_km2": 5.9254,
+      "z_min": 26,
+      "z_max": 50,
+      "road_widths_m": [
+        6,
+        15,
+        24
+      ],
+      "typical_building_m": [
+        21,
+        30,
+        16.5
+      ],
+      "landform": "Charnière civique sur un dos de terrain, entre quartier du palais et vallée marchande.",
+      "terraces": "Cathédrale à +38 m ; mairie à +40 m ; hospitalité à +42 m ; terrasses de 3 m.",
+      "drainage": "Partager les ruissellements de part et d’autre de la ligne haute ; fontaines en circuit séparé.",
+      "population": 10000,
+      "soldiers": 0,
+      "core_population": 10000,
+      "program": "10 000 résidents ; propriétés nobles et grands espaces civiques ; quartiers ouverts vers leurs voisins.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 2,
+      "residential_footprint_m2": 200000.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            -778.93,
+            202.5
+          ],
+          "z_m": 48
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            250.21,
+            202.5
+          ],
+          "z_m": 40
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            1279.34,
+            202.5
+          ],
+          "z_m": 28
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "name": "Palacedomain",
+      "polygon_uv": [
+        [
+          400,
+          600
+        ],
+        [
+          445,
+          470
+        ],
+        [
+          660,
+          440
+        ],
+        [
+          760,
+          480
+        ],
+        [
+          830,
+          620
+        ],
+        [
+          850,
+          850
+        ],
+        [
+          700,
+          900
+        ],
+        [
+          470,
+          900
+        ],
+        [
+          390,
+          830
+        ],
+        [
+          365,
+          720
+        ]
+      ],
+      "polygon_m": [
+        [
+          -540.0,
+          -4050.0
+        ],
+        [
+          -1417.5,
+          -3746.25
+        ],
+        [
+          -1620.0,
+          -2295.0
+        ],
+        [
+          -1350.0,
+          -1620.0
+        ],
+        [
+          -405.0,
+          -1147.5
+        ],
+        [
+          1147.5,
+          -1012.5
+        ],
+        [
+          1485.0,
+          -2025.0
+        ],
+        [
+          1485.0,
+          -3577.5
+        ],
+        [
+          1012.5,
+          -4117.5
+        ],
+        [
+          270.0,
+          -4286.25
+        ]
+      ],
+      "center_uv": [
+        600,
+        680
+      ],
+      "center_m": [
+        0.0,
+        -2700.0
+      ],
+      "area_km2": 8.3209,
+      "z_min": 44,
+      "z_max": 78,
+      "road_widths_m": [
+        6,
+        18,
+        27
+      ],
+      "typical_building_m": [
+        24,
+        36,
+        18
+      ],
+      "landform": "Promontoire palatial, pente littorale boisée modérée et terrasses de maçonnerie.",
+      "terraces": "Palais à +68 m ; jardins +58/+62/+66 ; bord oriental +48 ; aucune grande falaise continue.",
+      "drainage": "Drainage derrière chaque soutènement ; exutoires discrets vers le littoral, hors parvis publics.",
+      "population": 6000,
+      "soldiers": 200,
+      "core_population": 6000,
+      "program": "6 000 résidents, dont 200 militaires ; jardins et institutions ; le quartier général n’est pas une caserne de 34 000 personnes.",
+      "population_status": "M : population proposée préexistante conservée",
+      "residential_levels": 2.5,
+      "residential_footprint_m2": 96000.0,
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            -1503.49,
+            -2700.0
+          ],
+          "z_m": 44
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            -39.24,
+            -2700.0
+          ],
+          "z_m": 68
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            1425.0,
+            -2700.0
+          ],
+          "z_m": 48
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "name": "Docks District",
+      "polygon_uv": [
+        [
+          500,
+          360
+        ],
+        [
+          650,
+          330
+        ],
+        [
+          770,
+          345
+        ],
+        [
+          800,
+          380
+        ],
+        [
+          780,
+          420
+        ],
+        [
+          650,
+          430
+        ],
+        [
+          510,
+          440
+        ],
+        [
+          470,
+          415
+        ]
+      ],
+      "polygon_m": [
+        [
+          -2160.0,
+          -3375.0
+        ],
+        [
+          -2362.5,
+          -2362.5
+        ],
+        [
+          -2261.25,
+          -1552.5
+        ],
+        [
+          -2025.0,
+          -1350.0
+        ],
+        [
+          -1755.0,
+          -1485.0
+        ],
+        [
+          -1687.5,
+          -2362.5
+        ],
+        [
+          -1620.0,
+          -3307.5
+        ],
+        [
+          -1788.75,
+          -3577.5
+        ]
+      ],
+      "center_uv": [
+        650,
+        385
+      ],
+      "center_m": [
+        -1991.25,
+        -2362.5
+      ],
+      "area_km2": 1.2074,
+      "z_min": 3,
+      "z_max": 8,
+      "road_widths_m": [
+        6,
+        12,
+        18
+      ],
+      "typical_building_m": [
+        18,
+        36,
+        12
+      ],
+      "landform": "Littoral portuaire bas, quais continus et raccord terrestre à Water Gate.",
+      "terraces": "Quais +3,5 m ; cours +4,5 m ; accès arrière +6 m ; seuil de Water Gate +8 m.",
+      "drainage": "Sols à 1,5 % ; eau moyenne à 0 ; cote de contrôle de projet +2 m, sans prétention hydrologique.",
+      "population": 0,
+      "soldiers": 0,
+      "core_population": 0,
+      "program": "Secteur de travail et d’arrivée ; aucun profil résident autonome ajouté aux 680 000 habitants.",
+      "population_status": "Non ventilée : aucun habitant additionnel",
+      "terrain_transect": [
+        {
+          "label": "A",
+          "xy_m": [
+            -2302.5,
+            -2362.5
+          ],
+          "z_m": 3.5
+        },
+        {
+          "label": "B",
+          "xy_m": [
+            -2025.0,
+            -2362.5
+          ],
+          "z_m": 4.5
+        },
+        {
+          "label": "C",
+          "xy_m": [
+            -1747.5,
+            -2362.5
+          ],
+          "z_m": 6
+        }
+      ]
+    }
+  ],
+  "sites": [
+    {
+      "id": "L01-01",
+      "name": "The Redeemers Assembly",
+      "district": "Q01",
+      "uv": [
+        355,
+        1160
+      ],
+      "xy_m": [
+        3240.0,
+        -4353.75
+      ],
+      "parcel_m": [
+        66,
+        78
+      ],
+      "footprint_m": [
+        36,
+        48
+      ],
+      "height_m": 12,
+      "ground_z_m": 46,
+      "top_z_m": 58,
+      "levels": "R+1",
+      "note": "Parvis 24 x 36 m ; terrasse à +46 ; rampe 3 x 60 m pour 3 m de montée.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L01-02",
+      "name": "The Moonlit Herbarium",
+      "district": "Q01",
+      "uv": [
+        390,
+        940
+      ],
+      "xy_m": [
+        1755.0,
+        -4117.5
+      ],
+      "parcel_m": [
+        45,
+        60
+      ],
+      "footprint_m": [
+        18,
+        30
+      ],
+      "height_m": 10.5,
+      "ground_z_m": 50,
+      "top_z_m": 60.5,
+      "levels": "R+1",
+      "note": "Jardin de 24 x 30 m ; serre de 12 x 18 m ; seuil +0,30 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L01-03",
+      "name": "The Iron Hammer Smithy",
+      "district": "Q01",
+      "uv": [
+        315,
+        1060
+      ],
+      "xy_m": [
+        2565.0,
+        -4623.75
+      ],
+      "parcel_m": [
+        54,
+        66
+      ],
+      "footprint_m": [
+        24,
+        36
+      ],
+      "height_m": 10.5,
+      "ground_z_m": 40,
+      "top_z_m": 50.5,
+      "levels": "R+1 partiel",
+      "note": "Cour de 24 x 30 m ; sol atelier +40 ; rue +39,7 ; accès charroi 6 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L02-01",
+      "name": "Baleroth Library of the Capital",
+      "district": "Q02",
+      "uv": [
+        705,
+        1090
+      ],
+      "xy_m": [
+        2767.5,
+        -1991.25
+      ],
+      "parcel_m": [
+        120,
+        150
+      ],
+      "footprint_m": [
+        72,
+        96
+      ],
+      "height_m": 24,
+      "ground_z_m": 60,
+      "top_z_m": 84,
+      "levels": "R+2",
+      "note": "Parvis 36 x 60 m ; cour 24 x 36 m ; trois niveaux de 6 m et toiture 6 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L02-02",
+      "name": "Tsvetown",
+      "district": "Q02",
+      "uv": [
+        640,
+        980
+      ],
+      "xy_m": [
+        2025.0,
+        -2430.0
+      ],
+      "parcel_m": [
+        360,
+        450
+      ],
+      "footprint_m": [
+        18,
+        24
+      ],
+      "height_m": 15,
+      "ground_z_m": 58,
+      "top_z_m": 73,
+      "levels": "R+2 type",
+      "note": "Enclave de 0,162 km² ; maisons 18 x 24 m ; ruelles 6 m ; deux places 45 x 60 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L02-03",
+      "name": "Knights of the Tanarean Order",
+      "district": "Q02",
+      "uv": [
+        570,
+        1130
+      ],
+      "xy_m": [
+        3037.5,
+        -2902.5
+      ],
+      "parcel_m": [
+        120,
+        150
+      ],
+      "footprint_m": [
+        60,
+        84
+      ],
+      "height_m": 21,
+      "ground_z_m": 56,
+      "top_z_m": 77,
+      "levels": "R+2",
+      "note": "Cour d’exercice 45 x 60 m ; entrée de service 6 m ; plateformes à +56/+59.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L02-04",
+      "name": "Aethereal Canvas Art Gallery",
+      "district": "Q02",
+      "uv": [
+        690,
+        1205
+      ],
+      "xy_m": [
+        3543.75,
+        -2092.5
+      ],
+      "parcel_m": [
+        90,
+        120
+      ],
+      "footprint_m": [
+        42,
+        66
+      ],
+      "height_m": 18,
+      "ground_z_m": 54,
+      "top_z_m": 72,
+      "levels": "R+1",
+      "note": "Jardin de sculpture 30 x 45 m ; entrée à +54 ; rue à +53,7.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L03-01",
+      "name": "The Vault - Hajal’s Bank of the Capital",
+      "district": "Q03",
+      "uv": [
+        960,
+        920
+      ],
+      "xy_m": [
+        1620.0,
+        -270.0
+      ],
+      "parcel_m": [
+        120,
+        150
+      ],
+      "footprint_m": [
+        66,
+        90
+      ],
+      "height_m": 24,
+      "ground_z_m": 58,
+      "top_z_m": 82,
+      "levels": "R+2 + sous-sol",
+      "note": "Parvis 30 x 60 m ; plancher coffre à +52 ; accès technique indépendant.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L03-02",
+      "name": "Maisons des guildes artisanales",
+      "district": "Q03",
+      "uv": [
+        920,
+        1100
+      ],
+      "xy_m": [
+        2835.0,
+        -540.0
+      ],
+      "parcel_m": [
+        600,
+        750
+      ],
+      "footprint_m": [
+        36,
+        48
+      ],
+      "height_m": 18,
+      "ground_z_m": 52,
+      "top_z_m": 70,
+      "levels": "R+2 type",
+      "note": "Secteur de cinq maisons de guilde ; chaque parcelle 72 x 90 m ; cours 24 x 30 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L03-03",
+      "name": "Orphanage of the Sacred Seed",
+      "district": "Q03",
+      "uv": [
+        1010,
+        1020
+      ],
+      "xy_m": [
+        2295.0,
+        67.5
+      ],
+      "parcel_m": [
+        120,
+        150
+      ],
+      "footprint_m": [
+        48,
+        72
+      ],
+      "height_m": 16.5,
+      "ground_z_m": 54,
+      "top_z_m": 70.5,
+      "levels": "R+2",
+      "note": "Cour 36 x 45 m ; jardin 45 x 60 m ; accès de plain-pied depuis plateau +54.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L04-01",
+      "name": "Imperial University of Light",
+      "district": "Q04",
+      "uv": [
+        1145,
+        1010
+      ],
+      "xy_m": [
+        2227.5,
+        978.75
+      ],
+      "parcel_m": [
+        330,
+        420
+      ],
+      "footprint_m": [
+        150,
+        210
+      ],
+      "height_m": 30,
+      "ground_z_m": 50,
+      "top_z_m": 80,
+      "levels": "R+3",
+      "note": "Campus : enveloppe composite ; cours 60 x 90 m ; pelouses et logements séparés.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L04-02",
+      "name": "Imperial Museum",
+      "district": "Q04",
+      "uv": [
+        1135,
+        960
+      ],
+      "xy_m": [
+        1890.0,
+        911.25
+      ],
+      "parcel_m": [
+        150,
+        210
+      ],
+      "footprint_m": [
+        90,
+        132
+      ],
+      "height_m": 24,
+      "ground_z_m": 54,
+      "top_z_m": 78,
+      "levels": "R+2",
+      "note": "Parvis 45 x 75 m ; terrasse de sculpture +54 ; rampe de liaison 5 %.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L04-03",
+      "name": "Imperial Department of Truth",
+      "district": "Q04",
+      "uv": [
+        1245,
+        985
+      ],
+      "xy_m": [
+        2058.75,
+        1653.75
+      ],
+      "parcel_m": [
+        150,
+        180
+      ],
+      "footprint_m": [
+        78,
+        108
+      ],
+      "height_m": 24,
+      "ground_z_m": 48,
+      "top_z_m": 72,
+      "levels": "R+3",
+      "note": "Cour fermée 30 x 45 m ; entrée publique et livraison à des façades distinctes.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L04-04",
+      "name": "Public Discussion Hall",
+      "district": "Q04",
+      "uv": [
+        1220,
+        1125
+      ],
+      "xy_m": [
+        3003.75,
+        1485.0
+      ],
+      "parcel_m": [
+        108,
+        150
+      ],
+      "footprint_m": [
+        60,
+        90
+      ],
+      "height_m": 21,
+      "ground_z_m": 46,
+      "top_z_m": 67,
+      "levels": "R+1",
+      "note": "Salle publique hauteur libre 9 m ; parvis 30 x 60 m ; deux sorties opposées.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L04-05",
+      "name": "« Burlesque » Theater of Horrors",
+      "district": "Q04",
+      "uv": [
+        1185,
+        1200
+      ],
+      "xy_m": [
+        3510.0,
+        1248.75
+      ],
+      "parcel_m": [
+        105,
+        135
+      ],
+      "footprint_m": [
+        54,
+        78
+      ],
+      "height_m": 24,
+      "ground_z_m": 44,
+      "top_z_m": 68,
+      "levels": "R+2 technique",
+      "note": "Fosse à +40 ; scène +44 ; toiture haute +68 ; petit parvis 24 x 45 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L05-01",
+      "name": "Torygg Addin-Zaiba’s Magic Tower",
+      "district": "Q05",
+      "uv": [
+        1400,
+        960
+      ],
+      "xy_m": [
+        1890.0,
+        2700.0
+      ],
+      "parcel_m": [
+        210,
+        270
+      ],
+      "footprint_m": [
+        66,
+        66
+      ],
+      "height_m": 81,
+      "ground_z_m": 40,
+      "top_z_m": 121,
+      "levels": "Tour : 12 niveaux",
+      "note": "Tour centrale sur plateau de 90 x 90 m ; jardins périphériques ; sommet +121 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L05-02",
+      "name": "Imperial Wizards Headquarters",
+      "district": "Q05",
+      "uv": [
+        1690,
+        1000
+      ],
+      "xy_m": [
+        2160.0,
+        4657.5
+      ],
+      "parcel_m": [
+        210,
+        270
+      ],
+      "footprint_m": [
+        108,
+        150
+      ],
+      "height_m": 33,
+      "ground_z_m": 34,
+      "top_z_m": 67,
+      "levels": "R+3",
+      "note": "Cour 60 x 75 m ; socles périphériques +34/+37 ; jardin sans lévitation du terrain.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L05-03",
+      "name": "Omathyr Manor",
+      "district": "Q05",
+      "uv": [
+        1520,
+        970
+      ],
+      "xy_m": [
+        1957.5,
+        3510.0
+      ],
+      "parcel_m": [
+        180,
+        240
+      ],
+      "footprint_m": [
+        84,
+        120
+      ],
+      "height_m": 24,
+      "ground_z_m": 42,
+      "top_z_m": 66,
+      "levels": "R+2",
+      "note": "Jardin 90 x 120 m ; plateformes +39/+42 ; murs de terrasse 3 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L06-01",
+      "name": "Municipal Market",
+      "district": "Q06",
+      "uv": [
+        1415,
+        650
+      ],
+      "xy_m": [
+        -202.5,
+        2801.25
+      ],
+      "parcel_m": [
+        210,
+        270
+      ],
+      "footprint_m": [
+        120,
+        180
+      ],
+      "height_m": 21,
+      "ground_z_m": 22,
+      "top_z_m": 43,
+      "levels": "R+1 partiel",
+      "note": "Halle couverte ; parvis 60 x 90 m ; boucle livraison 9 m ; quatre rues traversantes.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L06-02",
+      "name": "Illu Die Arena",
+      "district": "Q06",
+      "uv": [
+        1365,
+        775
+      ],
+      "xy_m": [
+        641.25,
+        2463.75
+      ],
+      "parcel_m": [
+        210,
+        240
+      ],
+      "footprint_m": [
+        144,
+        126
+      ],
+      "height_m": 30,
+      "ground_z_m": 22,
+      "top_z_m": 52,
+      "levels": "Gradins + galeries",
+      "note": "Piste 66 x 42 m à +20 ; anneau extérieur libre 18 m ; hauteur totale projet.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L06-03",
+      "name": "The Shaft Loop",
+      "district": "Q06",
+      "uv": [
+        1290,
+        740
+      ],
+      "xy_m": [
+        405.0,
+        1957.5
+      ],
+      "parcel_m": [
+        105,
+        150
+      ],
+      "footprint_m": [
+        60,
+        90
+      ],
+      "height_m": 15,
+      "ground_z_m": 24,
+      "top_z_m": 39,
+      "levels": "R+2",
+      "note": "Îlot marchand courbe ; cour 24 x 36 m ; passage 4,5 m ; aucun puits supposé.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L07-01",
+      "name": "Arena of Fate",
+      "district": "Q07",
+      "uv": [
+        1020,
+        315
+      ],
+      "xy_m": [
+        -2463.75,
+        135.0
+      ],
+      "parcel_m": [
+        450,
+        540
+      ],
+      "footprint_m": [
+        300,
+        246
+      ],
+      "height_m": 66,
+      "ground_z_m": 20,
+      "top_z_m": 86,
+      "levels": "3 couronnes + 2 sous-sols",
+      "note": "Cote révisée ; parvis 120 x 150 m ; anneau piéton 24 m ; mâts +72 m au-dessus du sol.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L07-02",
+      "name": "Golden Chalice Casino",
+      "district": "Q07",
+      "uv": [
+        1030,
+        470
+      ],
+      "xy_m": [
+        -1417.5,
+        202.5
+      ],
+      "parcel_m": [
+        150,
+        210
+      ],
+      "footprint_m": [
+        84,
+        120
+      ],
+      "height_m": 27,
+      "ground_z_m": 23,
+      "top_z_m": 50,
+      "levels": "R+3",
+      "note": "Parvis 36 x 60 m ; jardin +23/+26 ; seuil monumental sur plateau horizontal.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L07-03",
+      "name": "Hippodrome",
+      "district": "Q07",
+      "uv": [
+        1210,
+        500
+      ],
+      "xy_m": [
+        -1215.0,
+        1417.5
+      ],
+      "parcel_m": [
+        240,
+        420
+      ],
+      "footprint_m": [
+        180,
+        330
+      ],
+      "height_m": 21,
+      "ground_z_m": 23,
+      "top_z_m": 44,
+      "levels": "Gradins bas",
+      "note": "Piste ovale 96 x 240 m ; enceinte allongée ; bande de service 12 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L07-04",
+      "name": "Dusk of Justice Betting House",
+      "district": "Q07",
+      "uv": [
+        1020,
+        361
+      ],
+      "xy_m": [
+        -2153.25,
+        135.0
+      ],
+      "parcel_m": [
+        90,
+        120
+      ],
+      "footprint_m": [
+        42,
+        60
+      ],
+      "height_m": 15,
+      "ground_z_m": 20,
+      "top_z_m": 35,
+      "levels": "R+2",
+      "note": "Parvis 24 x 36 m ; corps à environ 140 m de la coque de l’Arena ; continuité avec Gauntlet St.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L07-05",
+      "name": "Inlet’s Bazaar Block",
+      "district": "Q07",
+      "uv": [
+        840,
+        450
+      ],
+      "xy_m": [
+        -1552.5,
+        -1080.0
+      ],
+      "parcel_m": [
+        210,
+        300
+      ],
+      "footprint_m": [
+        18,
+        30
+      ],
+      "height_m": 15,
+      "ground_z_m": 24,
+      "top_z_m": 39,
+      "levels": "R+2 type",
+      "note": "Ensemble de 20 échoppes ; parcelles 30 x 45 m ; passages 6 m ; place 45 x 60 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L07-06",
+      "name": "Natural Pool",
+      "district": "Q07",
+      "uv": [
+        860,
+        420
+      ],
+      "xy_m": [
+        -1755.0,
+        -945.0
+      ],
+      "parcel_m": [
+        135,
+        210
+      ],
+      "footprint_m": [
+        60,
+        120
+      ],
+      "height_m": 0,
+      "ground_z_m": 0.2,
+      "top_z_m": 0.2,
+      "levels": "Anse basse",
+      "note": "Eau +0,2 ; fond -3 ; berge +3,5 ; chenal ouvert vers la baie ; raccord au quartier par versant.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "water"
+    },
+    {
+      "id": "L08-01",
+      "name": "Cemetery of Sacred Remembrance et Moon Tower",
+      "district": "Q08",
+      "uv": [
+        1290,
+        180
+      ],
+      "xy_m": [
+        -3375.0,
+        1957.5
+      ],
+      "parcel_m": [
+        450,
+        600
+      ],
+      "footprint_m": [
+        36,
+        36
+      ],
+      "height_m": 72,
+      "ground_z_m": 32,
+      "top_z_m": 104,
+      "levels": "Cimetière + tour",
+      "note": "Cimetière 450 x 600 m ; Moon Tower 36 x 36 m ; cour 60 x 75 m ; sommet +104.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L08-02",
+      "name": "Sturdylog Lumbermill",
+      "district": "Q08",
+      "uv": [
+        1090,
+        180
+      ],
+      "xy_m": [
+        -3375.0,
+        607.5
+      ],
+      "parcel_m": [
+        150,
+        210
+      ],
+      "footprint_m": [
+        54,
+        90
+      ],
+      "height_m": 15,
+      "ground_z_m": 14,
+      "top_z_m": 29,
+      "levels": "R+1",
+      "note": "Stockage bois 60 x 90 m ; terrasse de travail +14 ; desserte 9 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L08-03",
+      "name": "Stonebreaker Forge",
+      "district": "Q08",
+      "uv": [
+        1470,
+        300
+      ],
+      "xy_m": [
+        -2565.0,
+        3172.5
+      ],
+      "parcel_m": [
+        150,
+        180
+      ],
+      "footprint_m": [
+        60,
+        96
+      ],
+      "height_m": 18,
+      "ground_z_m": 20,
+      "top_z_m": 38,
+      "levels": "R+1 partiel",
+      "note": "Aire chaude 45 x 60 m ; séparation 15 m des logements ; accès logistique 9 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L08-04",
+      "name": "O’Myre Slaughterhouse",
+      "district": "Q08",
+      "uv": [
+        1550,
+        390
+      ],
+      "xy_m": [
+        -1957.5,
+        3712.5
+      ],
+      "parcel_m": [
+        150,
+        210
+      ],
+      "footprint_m": [
+        72,
+        108
+      ],
+      "height_m": 15,
+      "ground_z_m": 16,
+      "top_z_m": 31,
+      "levels": "R+1 partiel",
+      "note": "Cour 45 x 75 m ; réseaux confinés proposés ; aucun rejet direct dans la rivière.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L09-01",
+      "name": "Braves Arena",
+      "district": "Q09",
+      "uv": [
+        1310,
+        1280
+      ],
+      "xy_m": [
+        4050.0,
+        2092.5
+      ],
+      "parcel_m": [
+        180,
+        210
+      ],
+      "footprint_m": [
+        105,
+        84
+      ],
+      "height_m": 15,
+      "ground_z_m": 34,
+      "top_z_m": 49,
+      "levels": "Gradins bas",
+      "note": "Piste 54 x 36 m ; anneau 12 m ; terrain naturel +33,5 à +35.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L09-02",
+      "name": "Farmer’s Market",
+      "district": "Q09",
+      "uv": [
+        1240,
+        1300
+      ],
+      "xy_m": [
+        4185.0,
+        1620.0
+      ],
+      "parcel_m": [
+        150,
+        210
+      ],
+      "footprint_m": [
+        60,
+        105
+      ],
+      "height_m": 12,
+      "ground_z_m": 36,
+      "top_z_m": 48,
+      "levels": "Halle R",
+      "note": "Aire de vente 90 x 120 m ; livraison par voie 9 m ; sol 1,5 %.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L09-03",
+      "name": "The Crops et fermes",
+      "district": "Q09",
+      "uv": [
+        1700,
+        1275
+      ],
+      "xy_m": [
+        4016.25,
+        4725.0
+      ],
+      "parcel_m": [
+        900,
+        1050
+      ],
+      "footprint_m": [
+        18,
+        36
+      ],
+      "height_m": 12,
+      "ground_z_m": 30,
+      "top_z_m": 42,
+      "levels": "Ferme type R+1",
+      "note": "Secteur agricole de 0,945 km² ; granges 18 x 36 ; maisons 12 x 18 ; chemins 4,5 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L10-01",
+      "name": "The Boom Market",
+      "district": "Q10",
+      "uv": [
+        680,
+        1370
+      ],
+      "xy_m": [
+        4657.5,
+        -2160.0
+      ],
+      "parcel_m": [
+        150,
+        240
+      ],
+      "footprint_m": [
+        12,
+        24
+      ],
+      "height_m": 12,
+      "ground_z_m": 48,
+      "top_z_m": 60,
+      "levels": "Échoppes R+1",
+      "note": "Place 75 x 120 m ; toitures légères ; rues principales 9-12 m, venelles 3 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L10-02",
+      "name": "Zafara’s Tears Temple",
+      "district": "Q10",
+      "uv": [
+        590,
+        1390
+      ],
+      "xy_m": [
+        4792.5,
+        -2767.5
+      ],
+      "parcel_m": [
+        90,
+        120
+      ],
+      "footprint_m": [
+        36,
+        60
+      ],
+      "height_m": 18,
+      "ground_z_m": 50,
+      "top_z_m": 68,
+      "levels": "R+1",
+      "note": "Parvis 24 x 45 m ; plateau +50 ; passage accessible latéral 3 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L11-01",
+      "name": "Sacred Celestianist Cathedral of the Eight",
+      "district": "Q11",
+      "uv": [
+        1145,
+        740
+      ],
+      "xy_m": [
+        405.0,
+        978.75
+      ],
+      "parcel_m": [
+        240,
+        330
+      ],
+      "footprint_m": [
+        96,
+        180
+      ],
+      "height_m": 78,
+      "ground_z_m": 38,
+      "top_z_m": 116,
+      "levels": "Nef + tours",
+      "note": "Nef 36 m de haut ; flèches 78 ; parvis 90 x 120 ; transept inclus dans 96 x 180.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L11-02",
+      "name": "Municipal Palace",
+      "district": "Q11",
+      "uv": [
+        1050,
+        665
+      ],
+      "xy_m": [
+        -101.25,
+        337.5
+      ],
+      "parcel_m": [
+        210,
+        270
+      ],
+      "footprint_m": [
+        108,
+        156
+      ],
+      "height_m": 30,
+      "ground_z_m": 40,
+      "top_z_m": 70,
+      "levels": "R+3",
+      "note": "Cour 60 x 75 m ; parvis 60 x 90 m ; accès aux niveaux bas par aile latérale.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L11-03",
+      "name": "Pious Sara Sonata’s Hospital and Sanatorium",
+      "district": "Q11",
+      "uv": [
+        960,
+        700
+      ],
+      "xy_m": [
+        135.0,
+        -270.0
+      ],
+      "parcel_m": [
+        240,
+        330
+      ],
+      "footprint_m": [
+        120,
+        180
+      ],
+      "height_m": 24,
+      "ground_z_m": 42,
+      "top_z_m": 66,
+      "levels": "R+3",
+      "note": "Cours de soin 45 x 60 m ; jardins en terrasses +39/+42 ; service 9 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L11-04",
+      "name": "Imperial Coat of Arms and Heraldry",
+      "district": "Q11",
+      "uv": [
+        1100,
+        850
+      ],
+      "xy_m": [
+        1147.5,
+        675.0
+      ],
+      "parcel_m": [
+        120,
+        150
+      ],
+      "footprint_m": [
+        60,
+        84
+      ],
+      "height_m": 21,
+      "ground_z_m": 44,
+      "top_z_m": 65,
+      "levels": "R+2",
+      "note": "Cour 24 x 36 m ; archives basses à +40 ; seuil public +44.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L12-01",
+      "name": "Imperial Palace",
+      "district": "Q12",
+      "uv": [
+        610,
+        610
+      ],
+      "xy_m": [
+        -472.5,
+        -2632.5
+      ],
+      "parcel_m": [
+        510,
+        660
+      ],
+      "footprint_m": [
+        240,
+        330
+      ],
+      "height_m": 72,
+      "ground_z_m": 68,
+      "top_z_m": 140,
+      "levels": "Corps R+4 + dôme",
+      "note": "Enveloppe composite, non rectangle plein ; dôme 72 m ; galerie axiale 24 x 180 m incluse.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L12-02",
+      "name": "Imperial Botanical Gardens",
+      "district": "Q12",
+      "uv": [
+        560,
+        640
+      ],
+      "xy_m": [
+        -270.0,
+        -2970.0
+      ],
+      "parcel_m": [
+        1050,
+        1350
+      ],
+      "footprint_m": [
+        18,
+        45
+      ],
+      "height_m": 12,
+      "ground_z_m": 62,
+      "top_z_m": 74,
+      "levels": "Jardins ; pavillon type",
+      "note": "Secteur paysager contenant le palais ; terrasses +58/+62/+66 ; ne pas additionner les deux réserves.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L12-03",
+      "name": "Ironhand Headquarters",
+      "district": "Q12",
+      "uv": [
+        770,
+        840
+      ],
+      "xy_m": [
+        1080.0,
+        -1552.5
+      ],
+      "parcel_m": [
+        300,
+        390
+      ],
+      "footprint_m": [
+        150,
+        240
+      ],
+      "height_m": 30,
+      "ground_z_m": 58,
+      "top_z_m": 88,
+      "levels": "R+3",
+      "note": "Quartier général, pas logement des 34 000 soldats ; place d’exercice 120 x 150 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L12-04",
+      "name": "Duke Wicar’s War School",
+      "district": "Q12",
+      "uv": [
+        605,
+        850
+      ],
+      "xy_m": [
+        1147.5,
+        -2666.25
+      ],
+      "parcel_m": [
+        240,
+        330
+      ],
+      "footprint_m": [
+        120,
+        180
+      ],
+      "height_m": 27,
+      "ground_z_m": 60,
+      "top_z_m": 87,
+      "levels": "R+3",
+      "note": "Cour d’exercice 90 x 120 m ; service 12 m ; gradin de terrain de 3 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L12-05",
+      "name": "Celestianist Temple of the Children of Tamera",
+      "district": "Q12",
+      "uv": [
+        490,
+        805
+      ],
+      "xy_m": [
+        843.75,
+        -3442.5
+      ],
+      "parcel_m": [
+        180,
+        240
+      ],
+      "footprint_m": [
+        84,
+        120
+      ],
+      "height_m": 30,
+      "ground_z_m": 58,
+      "top_z_m": 88,
+      "levels": "Temple + R+2",
+      "note": "Temple et orphelinat ; jardin 60 x 90 m ; entrée sur plateforme +58.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L12-06",
+      "name": "Central Complex of Capital Portals",
+      "district": "Q12",
+      "uv": [
+        440,
+        780
+      ],
+      "xy_m": [
+        675.0,
+        -3780.0
+      ],
+      "parcel_m": [
+        180,
+        210
+      ],
+      "footprint_m": [
+        96,
+        120
+      ],
+      "height_m": 24,
+      "ground_z_m": 56,
+      "top_z_m": 80,
+      "levels": "R+1 technique",
+      "note": "Cour 60 x 75 m ; accès 12 m ; réserve sans déduire la capacité des portails.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L13-01",
+      "name": "Quais du Docks District et Warehouses Office",
+      "district": "Q13",
+      "uv": [
+        650,
+        380
+      ],
+      "xy_m": [
+        -2025.0,
+        -2362.5
+      ],
+      "parcel_m": [
+        450,
+        1350
+      ],
+      "footprint_m": [
+        30,
+        60
+      ],
+      "height_m": 15,
+      "ground_z_m": 4.5,
+      "top_z_m": 19.5,
+      "levels": "Entrepôt type R+2",
+      "note": "Front portuaire 1 350 m ; bureau 30 x 60 ; entrepôts 24 x 60 ; pontons 12 x 120.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X01",
+      "name": "Water Gate",
+      "district": null,
+      "uv": [
+        780,
+        410
+      ],
+      "xy_m": [
+        -1822.5,
+        -1485.0
+      ],
+      "parcel_m": [
+        60,
+        90
+      ],
+      "footprint_m": [
+        30,
+        48
+      ],
+      "height_m": 21,
+      "ground_z_m": 8,
+      "top_z_m": 29,
+      "levels": "Porte + R+2",
+      "note": "Passage 12 x 9 m (largeur x libre) ; raccord sec vers docks +4,5 sur 120 m ; pas d’écluse.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X02",
+      "name": "Arena Gate",
+      "district": null,
+      "uv": [
+        1210,
+        340
+      ],
+      "xy_m": [
+        -2295.0,
+        1417.5
+      ],
+      "parcel_m": [
+        60,
+        90
+      ],
+      "footprint_m": [
+        30,
+        48
+      ],
+      "height_m": 24,
+      "ground_z_m": 20,
+      "top_z_m": 44,
+      "levels": "Porte + R+2",
+      "note": "Passage 12 x 10,5 m ; tablier Arching Bridge à +20 ; Herofate Ave 24 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X03",
+      "name": "Market Gate",
+      "district": null,
+      "uv": [
+        1510,
+        655
+      ],
+      "xy_m": [
+        -168.75,
+        3442.5
+      ],
+      "parcel_m": [
+        60,
+        90
+      ],
+      "footprint_m": [
+        30,
+        48
+      ],
+      "height_m": 21,
+      "ground_z_m": 24,
+      "top_z_m": 45,
+      "levels": "Porte + R+2",
+      "note": "Passage 12 x 9 m ; environ 1 km de rue extérieure avant Old Bridge ; porte distincte du pont.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X04",
+      "name": "Wildlife Gate",
+      "district": null,
+      "uv": [
+        1400,
+        1210
+      ],
+      "xy_m": [
+        3577.5,
+        2700.0
+      ],
+      "parcel_m": [
+        60,
+        90
+      ],
+      "footprint_m": [
+        30,
+        48
+      ],
+      "height_m": 21,
+      "ground_z_m": 40,
+      "top_z_m": 61,
+      "levels": "Porte + R+2",
+      "note": "Passage 12 x 9 m ; Grain Road 15 m ; rampe vers champs +34 sur 150 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X05",
+      "name": "Bauron Gate",
+      "district": null,
+      "uv": [
+        550,
+        1280
+      ],
+      "xy_m": [
+        4050.0,
+        -3037.5
+      ],
+      "parcel_m": [
+        54,
+        78
+      ],
+      "footprint_m": [
+        30,
+        42
+      ],
+      "height_m": 21,
+      "ground_z_m": 52,
+      "top_z_m": 73,
+      "levels": "Porte + R+2",
+      "note": "Passage 9 x 9 m ; Oath Ave 18 m ; attente sur une poche de 30 x 45 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X06",
+      "name": "Tamera Gate",
+      "district": null,
+      "uv": [
+        425,
+        1160
+      ],
+      "xy_m": [
+        3240.0,
+        -3881.25
+      ],
+      "parcel_m": [
+        54,
+        78
+      ],
+      "footprint_m": [
+        30,
+        42
+      ],
+      "height_m": 21,
+      "ground_z_m": 48,
+      "top_z_m": 69,
+      "levels": "Porte + R+2",
+      "note": "Passage 9 x 9 m ; Oath Ave 18 m ; raccord au faubourg à 3 % maximum.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X07",
+      "name": "Arching Bridge",
+      "district": null,
+      "uv": [
+        1230,
+        310
+      ],
+      "xy_m": [
+        -2497.5,
+        1552.5
+      ],
+      "parcel_m": [
+        420,
+        30
+      ],
+      "footprint_m": [
+        330,
+        18
+      ],
+      "height_m": null,
+      "ground_z_m": 20,
+      "top_z_m": 21.2,
+      "levels": "Pont routier",
+      "note": "Tablier 330 x 18 m ; eau +0,4 ; intrados central +12 ; deux culées, 5 travées proposées.",
+      "azimuth_deg": 140,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "linear_structure",
+      "reference_level": "tablier ou canal, pas un sol de bâtiment"
+    },
+    {
+      "id": "X08",
+      "name": "Old Bridge",
+      "district": null,
+      "uv": [
+        1584,
+        526
+      ],
+      "xy_m": [
+        -1039.5,
+        3942.0
+      ],
+      "parcel_m": [
+        330,
+        30
+      ],
+      "footprint_m": [
+        270,
+        15
+      ],
+      "height_m": null,
+      "ground_z_m": 18,
+      "top_z_m": 19.2,
+      "levels": "Pont routier",
+      "note": "Tablier 270 x 15 m ; eau +1,2 ; intrados +10 ; 5 travées proposées ; approches séparées.",
+      "azimuth_deg": 150,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "linear_structure",
+      "reference_level": "tablier ou canal, pas un sol de bâtiment"
+    },
+    {
+      "id": "X09",
+      "name": "Aqueduct",
+      "district": null,
+      "uv": [
+        1775,
+        625
+      ],
+      "xy_m": [
+        -371.25,
+        5231.25
+      ],
+      "parcel_m": [
+        390,
+        24
+      ],
+      "footprint_m": [
+        330,
+        9
+      ],
+      "height_m": null,
+      "ground_z_m": 36,
+      "top_z_m": 37.2,
+      "levels": "Aqueduc",
+      "note": "Canal 3 m de large ; fond +36,5 vers +35,5 sur 500 m ; captage proposé hors cadre au NE.",
+      "azimuth_deg": 150,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "linear_structure",
+      "reference_level": "tablier ou canal, pas un sol de bâtiment"
+    },
+    {
+      "id": "X10",
+      "name": "Eastern Bridge",
+      "district": null,
+      "uv": [
+        207,
+        1070
+      ],
+      "xy_m": [
+        2632.5,
+        -5352.75
+      ],
+      "parcel_m": [
+        90,
+        18
+      ],
+      "footprint_m": [
+        54,
+        9
+      ],
+      "height_m": null,
+      "ground_z_m": 18,
+      "top_z_m": 19.2,
+      "levels": "Pont routier",
+      "note": "Tablier 54 x 9 m ; South Creek environ +4 ; intrados +12 ; approches reliées à Hudlodge Route.",
+      "azimuth_deg": 90,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "linear_structure",
+      "reference_level": "tablier ou canal, pas un sol de bâtiment"
+    },
+    {
+      "id": "X11",
+      "name": "Imperial Thermal Springs",
+      "district": null,
+      "uv": [
+        710,
+        455
+      ],
+      "xy_m": [
+        -1518.75,
+        -1957.5
+      ],
+      "parcel_m": [
+        150,
+        210
+      ],
+      "footprint_m": [
+        78,
+        120
+      ],
+      "height_m": 12,
+      "ground_z_m": 26,
+      "top_z_m": 38,
+      "levels": "Bains R+1 partiel",
+      "note": "Bassins à +24,5 ; sol +26 ; toiture basse ; liaison d’environ 560 m depuis Water Gate.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X12",
+      "name": "Sanctuary of Defiance",
+      "district": null,
+      "uv": null,
+      "xy_m": null,
+      "parcel_m": [
+        180,
+        240
+      ],
+      "footprint_m": [
+        90,
+        150
+      ],
+      "height_m": 9,
+      "ground_z_m": null,
+      "top_z_m": null,
+      "levels": "Souterrain : repère local",
+      "note": "Salle 30 x 45 m, tunnels 6 x 6 m ; profondeur et entrée non localisées ; pas de lien aux autres réseaux.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X13",
+      "name": "Caverns of Baleroth’s Descent",
+      "district": null,
+      "uv": [
+        610,
+        610
+      ],
+      "xy_m": [
+        -472.5,
+        -2632.5
+      ],
+      "parcel_m": [
+        300,
+        390
+      ],
+      "footprint_m": [
+        180,
+        240
+      ],
+      "height_m": 42,
+      "ground_z_m": 8,
+      "top_z_m": 50,
+      "levels": "Cavernes sous le palais",
+      "note": "Enveloppe +8 à +50 (H42) ; salles de 18 m max ; sols +8/+20/+32 ; roche restante 18 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X14",
+      "name": "Watcher’s Eye",
+      "district": null,
+      "uv": [
+        120,
+        370
+      ],
+      "xy_m": [
+        -2092.5,
+        -5940.0
+      ],
+      "parcel_m": [
+        150,
+        210
+      ],
+      "footprint_m": [
+        30,
+        30
+      ],
+      "height_m": 42,
+      "ground_z_m": 18,
+      "top_z_m": 60,
+      "levels": "Tour : 6 niveaux",
+      "note": "Promontoire +12 à +24 ; jetée coudée à +3,5 ; accès terrestre à 5 % proposé.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X15",
+      "name": "Cyan Fortress",
+      "district": null,
+      "uv": [
+        70,
+        500
+      ],
+      "xy_m": [
+        -1215.0,
+        -6277.5
+      ],
+      "parcel_m": [
+        270,
+        390
+      ],
+      "footprint_m": [
+        120,
+        210
+      ],
+      "height_m": 30,
+      "ground_z_m": 20,
+      "top_z_m": 50,
+      "levels": "Forteresse R+3",
+      "note": "Rive basse boisée ; quatre tours ; sol cour +20 ; murs 18 ; tours 30 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X16",
+      "name": "Imperium Tigris Lair",
+      "district": null,
+      "uv": [
+        630,
+        75
+      ],
+      "xy_m": [
+        -4083.75,
+        -2497.5
+      ],
+      "parcel_m": [
+        330,
+        510
+      ],
+      "footprint_m": [
+        150,
+        300
+      ],
+      "height_m": 36,
+      "ground_z_m": 84,
+      "top_z_m": 120,
+      "levels": "Domaine R+3",
+      "note": "Plateforme +84 ; collines arrière +120 à +180 ; accès 6 %, deux lacets.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X17",
+      "name": "The Ruined Palace",
+      "district": null,
+      "uv": [
+        1410,
+        70
+      ],
+      "xy_m": [
+        -4117.5,
+        2767.5
+      ],
+      "parcel_m": [
+        240,
+        330
+      ],
+      "footprint_m": [
+        90,
+        150
+      ],
+      "height_m": 24,
+      "ground_z_m": 126,
+      "top_z_m": 150,
+      "levels": "Ruines : restes R+3",
+      "note": "Plateau +126 ; vestiges jusqu’à +150 ; approche 4,5 m et paliers tous les 120 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X18",
+      "name": "West Mines",
+      "district": null,
+      "uv": [
+        1580,
+        130
+      ],
+      "xy_m": [
+        -3712.5,
+        3915.0
+      ],
+      "parcel_m": [
+        210,
+        330
+      ],
+      "footprint_m": [
+        9,
+        12
+      ],
+      "height_m": 6,
+      "ground_z_m": 108,
+      "top_z_m": 114,
+      "levels": "Mine : galerie type",
+      "note": "Entrée +108 ; galerie 4,5 x 4,5 m ; réserve souterraine 300 x 450 m ; profondeur non canonique.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X19",
+      "name": "Stone Fortress",
+      "district": null,
+      "uv": [
+        1750,
+        255
+      ],
+      "xy_m": [
+        -2868.75,
+        5062.5
+      ],
+      "parcel_m": [
+        240,
+        300
+      ],
+      "footprint_m": [
+        120,
+        150
+      ],
+      "height_m": 27,
+      "ground_z_m": 72,
+      "top_z_m": 99,
+      "levels": "Forteresse R+3",
+      "note": "Cour +72 ; glacis de 30 m ; Fortway 9 m ; rampe 6 % vers Oldtown.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "X20",
+      "name": "Praharebaagh, the Sentinel Tiger",
+      "district": null,
+      "uv": [
+        250,
+        200
+      ],
+      "xy_m": [
+        -3240.0,
+        -5062.5
+      ],
+      "parcel_m": [
+        240,
+        330
+      ],
+      "footprint_m": [
+        54,
+        84
+      ],
+      "height_m": 60,
+      "ground_z_m": 24,
+      "top_z_m": 84,
+      "levels": "Statue assise",
+      "note": "Plateforme 90 x 120 m ; statue 60 m ; tête +84 ; continuité boisée conservée vers Yorehof.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    }
+  ],
+  "water": {
+    "bay_outline_uv": [
+      [
+        0,
+        100
+      ],
+      [
+        170,
+        105
+      ],
+      [
+        200,
+        120
+      ],
+      [
+        165,
+        165
+      ],
+      [
+        180,
+        265
+      ],
+      [
+        235,
+        330
+      ],
+      [
+        310,
+        320
+      ],
+      [
+        365,
+        270
+      ],
+      [
+        380,
+        180
+      ],
+      [
+        520,
+        125
+      ],
+      [
+        650,
+        120
+      ],
+      [
+        790,
+        140
+      ],
+      [
+        910,
+        210
+      ],
+      [
+        880,
+        260
+      ],
+      [
+        850,
+        330
+      ],
+      [
+        780,
+        345
+      ],
+      [
+        650,
+        330
+      ],
+      [
+        500,
+        360
+      ],
+      [
+        460,
+        390
+      ],
+      [
+        430,
+        390
+      ],
+      [
+        400,
+        430
+      ],
+      [
+        430,
+        460
+      ],
+      [
+        400,
+        540
+      ],
+      [
+        360,
+        650
+      ],
+      [
+        330,
+        780
+      ],
+      [
+        300,
+        845
+      ],
+      [
+        255,
+        890
+      ],
+      [
+        230,
+        840
+      ],
+      [
+        235,
+        800
+      ],
+      [
+        270,
+        775
+      ],
+      [
+        255,
+        740
+      ],
+      [
+        200,
+        745
+      ],
+      [
+        170,
+        805
+      ],
+      [
+        145,
+        865
+      ],
+      [
+        80,
+        890
+      ],
+      [
+        0,
+        850
+      ],
+      [
+        0,
+        660
+      ],
+      [
+        110,
+        680
+      ],
+      [
+        180,
+        630
+      ],
+      [
+        220,
+        525
+      ],
+      [
+        205,
+        460
+      ],
+      [
+        160,
+        410
+      ],
+      [
+        160,
+        365
+      ],
+      [
+        100,
+        350
+      ],
+      [
+        0,
+        385
+      ]
+    ],
+    "river_center_uv": [
+      [
+        1875,
+        680
+      ],
+      [
+        1800,
+        635
+      ],
+      [
+        1720,
+        600
+      ],
+      [
+        1620,
+        545
+      ],
+      [
+        1535,
+        500
+      ],
+      [
+        1460,
+        450
+      ],
+      [
+        1375,
+        395
+      ],
+      [
+        1230,
+        310
+      ],
+      [
+        1180,
+        285
+      ],
+      [
+        1090,
+        250
+      ],
+      [
+        990,
+        230
+      ],
+      [
+        900,
+        230
+      ]
+    ],
+    "river_width_m": [
+      180,
+      195,
+      210,
+      225,
+      240,
+      255,
+      270,
+      285,
+      300,
+      330,
+      360,
+      390
+    ],
+    "river_water_z_m": [
+      2.4,
+      2.0,
+      1.6,
+      1.2,
+      1.0,
+      0.8,
+      0.6,
+      0.4,
+      0.3,
+      0.2,
+      0.1,
+      0
+    ],
+    "creek_center_uv": [
+      [
+        210,
+        1450
+      ],
+      [
+        225,
+        1320
+      ],
+      [
+        230,
+        1200
+      ],
+      [
+        210,
+        1120
+      ],
+      [
+        205,
+        1040
+      ],
+      [
+        175,
+        970
+      ],
+      [
+        160,
+        890
+      ]
+    ],
+    "creek_width_m": 30,
+    "creek_water_z_m": [
+      8,
+      7,
+      6,
+      5,
+      4,
+      2,
+      0
+    ],
+    "pool_connection_uv": [
+      [
+        860,
+        420
+      ],
+      [
+        835,
+        390
+      ],
+      [
+        800,
+        380
+      ],
+      [
+        780,
+        360
+      ]
+    ],
+    "pool_connection_water_z_m": [
+      0.2,
+      0.15,
+      0.05,
+      0
+    ]
+  },
+  "roads": [
+    {
+      "id": "R01",
+      "name": "Herofate Ave / Arena Gate",
+      "width": 24,
+      "nodes": [
+        [
+          780,
+          410,
+          8
+        ],
+        [
+          920,
+          450,
+          23
+        ],
+        [
+          1030,
+          435,
+          23
+        ],
+        [
+          1130,
+          400,
+          22
+        ],
+        [
+          1210,
+          340,
+          20
+        ]
+      ],
+      "kind": "principal"
+    },
+    {
+      "id": "R02",
+      "name": "Stravian Av / Market Gate / Old Bridge",
+      "width": 18,
+      "nodes": [
+        [
+          1230,
+          1100,
+          46
+        ],
+        [
+          1320,
+          840,
+          26
+        ],
+        [
+          1415,
+          650,
+          22
+        ],
+        [
+          1510,
+          655,
+          24
+        ],
+        [
+          1570,
+          600,
+          21
+        ],
+        [
+          1574,
+          543.32,
+          18
+        ],
+        [
+          1584,
+          526,
+          18
+        ]
+      ],
+      "kind": "principal"
+    },
+    {
+      "id": "R03",
+      "name": "Knight’s Ave / Shield Ave",
+      "width": 18,
+      "nodes": [
+        [
+          500,
+          1100,
+          54
+        ],
+        [
+          650,
+          1040,
+          58
+        ],
+        [
+          820,
+          900,
+          58
+        ],
+        [
+          1010,
+          890,
+          46
+        ],
+        [
+          1130,
+          840,
+          26
+        ],
+        [
+          1200,
+          570,
+          26
+        ]
+      ],
+      "kind": "principal"
+    },
+    {
+      "id": "R04",
+      "name": "Imperial Ave",
+      "width": 27,
+      "nodes": [
+        [
+          850,
+          850,
+          48
+        ],
+        [
+          740,
+          790,
+          58
+        ],
+        [
+          680,
+          720,
+          64
+        ],
+        [
+          610,
+          660,
+          68
+        ]
+      ],
+      "kind": "principal"
+    },
+    {
+      "id": "R05",
+      "name": "Oath Ave / Tamera / Bauron",
+      "width": 18,
+      "nodes": [
+        [
+          425,
+          1160,
+          48
+        ],
+        [
+          500,
+          1160,
+          52
+        ],
+        [
+          580,
+          1190,
+          54
+        ],
+        [
+          550,
+          1280,
+          52
+        ]
+      ],
+      "kind": "principal"
+    },
+    {
+      "id": "R06",
+      "name": "Grain Road",
+      "width": 15,
+      "nodes": [
+        [
+          350,
+          1270,
+          46
+        ],
+        [
+          550,
+          1310,
+          48
+        ],
+        [
+          850,
+          1330,
+          50
+        ],
+        [
+          1100,
+          1290,
+          42
+        ],
+        [
+          1400,
+          1240,
+          38
+        ],
+        [
+          1600,
+          1210,
+          32
+        ],
+        [
+          1810,
+          1140,
+          28
+        ]
+      ],
+      "kind": "ceinture"
+    },
+    {
+      "id": "R07",
+      "name": "Old Path / Arching Path / Fortway",
+      "width": 12,
+      "nodes": [
+        [
+          1000,
+          185,
+          16
+        ],
+        [
+          1150,
+          200,
+          20
+        ],
+        [
+          1270,
+          275,
+          20
+        ],
+        [
+          1390,
+          300,
+          24
+        ],
+        [
+          1490,
+          340,
+          22
+        ],
+        [
+          1580,
+          450,
+          18
+        ],
+        [
+          1750,
+          255,
+          72
+        ]
+      ],
+      "kind": "principal"
+    },
+    {
+      "id": "R08",
+      "name": "Dweomer View / Wildlife Gate",
+      "width": 18,
+      "nodes": [
+        [
+          1240,
+          930,
+          26
+        ],
+        [
+          1400,
+          910,
+          42
+        ],
+        [
+          1510,
+          980,
+          40
+        ],
+        [
+          1530,
+          1110,
+          36
+        ],
+        [
+          1400,
+          1210,
+          40
+        ]
+      ],
+      "kind": "principal"
+    },
+    {
+      "id": "R09",
+      "name": "Arching Bridge / approches",
+      "width": 18,
+      "nodes": [
+        [
+          1210,
+          340,
+          20
+        ],
+        [
+          1214.29,
+          328.73,
+          20
+        ],
+        [
+          1245.71,
+          291.27,
+          20
+        ],
+        [
+          1270,
+          275,
+          20
+        ]
+      ],
+      "kind": "franchissement"
+    },
+    {
+      "id": "R10",
+      "name": "Old Bridge / raccord Oldtown",
+      "width": 15,
+      "nodes": [
+        [
+          1574,
+          543.32,
+          18
+        ],
+        [
+          1594,
+          508.68,
+          18
+        ],
+        [
+          1590,
+          485,
+          18
+        ],
+        [
+          1580,
+          450,
+          18
+        ]
+      ],
+      "kind": "franchissement"
+    },
+    {
+      "id": "R11",
+      "name": "Hudlodge Route / Eastern Bridge",
+      "width": 9,
+      "nodes": [
+        [
+          170,
+          1070,
+          18
+        ],
+        [
+          203,
+          1070,
+          18
+        ],
+        [
+          211,
+          1070,
+          18
+        ],
+        [
+          245,
+          1070,
+          18
+        ],
+        [
+          315,
+          1060,
+          40
+        ]
+      ],
+      "kind": "franchissement"
+    }
+  ],
+  "wall_uv": [
+    [
+      470,
+      900
+    ],
+    [
+      450,
+      980
+    ],
+    [
+      470,
+      1070
+    ],
+    [
+      450,
+      1080
+    ],
+    [
+      425,
+      1160
+    ],
+    [
+      420,
+      1230
+    ],
+    [
+      500,
+      1260
+    ],
+    [
+      550,
+      1280
+    ],
+    [
+      580,
+      1290
+    ],
+    [
+      830,
+      1280
+    ],
+    [
+      900,
+      1320
+    ],
+    [
+      1000,
+      1280
+    ],
+    [
+      1110,
+      1170
+    ],
+    [
+      1190,
+      1250
+    ],
+    [
+      1300,
+      1240
+    ],
+    [
+      1360,
+      1130
+    ],
+    [
+      1400,
+      1210
+    ],
+    [
+      1500,
+      1240
+    ],
+    [
+      1780,
+      1140
+    ],
+    [
+      1750,
+      950
+    ],
+    [
+      1700,
+      800
+    ],
+    [
+      1650,
+      700
+    ],
+    [
+      1570,
+      640
+    ],
+    [
+      1510,
+      655
+    ],
+    [
+      1430,
+      480
+    ],
+    [
+      1370,
+      440
+    ],
+    [
+      1340,
+      380
+    ],
+    [
+      1260,
+      370
+    ],
+    [
+      1210,
+      340
+    ],
+    [
+      1200,
+      325
+    ],
+    [
+      1100,
+      280
+    ],
+    [
+      1020,
+      245
+    ],
+    [
+      930,
+      250
+    ],
+    [
+      900,
+      320
+    ],
+    [
+      850,
+      370
+    ],
+    [
+      780,
+      410
+    ],
+    [
+      650,
+      430
+    ],
+    [
+      510,
+      440
+    ],
+    [
+      445,
+      470
+    ],
+    [
+      400,
+      600
+    ],
+    [
+      365,
+      720
+    ],
+    [
+      390,
+      830
+    ],
+    [
+      470,
+      900
+    ]
+  ],
+  "terrain_controls": [
+    {
+      "name": "Baie",
+      "uv": [
+        650,
+        200
+      ],
+      "xy_m": [
+        -3240.0,
+        -2362.5
+      ],
+      "z_m": 0
+    },
+    {
+      "name": "Docks",
+      "uv": [
+        650,
+        380
+      ],
+      "xy_m": [
+        -2025.0,
+        -2362.5
+      ],
+      "z_m": 4.5
+    },
+    {
+      "name": "Arena",
+      "uv": [
+        1020,
+        315
+      ],
+      "xy_m": [
+        -2463.75,
+        135.0
+      ],
+      "z_m": 20
+    },
+    {
+      "name": "Arenarea haute",
+      "uv": [
+        1100,
+        535
+      ],
+      "xy_m": [
+        -978.75,
+        675.0
+      ],
+      "z_m": 28
+    },
+    {
+      "name": "Martpart bas",
+      "uv": [
+        1530,
+        600
+      ],
+      "xy_m": [
+        -540.0,
+        3577.5
+      ],
+      "z_m": 18
+    },
+    {
+      "name": "Martpart haut",
+      "uv": [
+        1280,
+        800
+      ],
+      "xy_m": [
+        810.0,
+        1890.0
+      ],
+      "z_m": 26
+    },
+    {
+      "name": "Downtown",
+      "uv": [
+        1050,
+        740
+      ],
+      "xy_m": [
+        405.0,
+        337.5
+      ],
+      "z_m": 38
+    },
+    {
+      "name": "Palais",
+      "uv": [
+        610,
+        610
+      ],
+      "xy_m": [
+        -472.5,
+        -2632.5
+      ],
+      "z_m": 68
+    },
+    {
+      "name": "Crête palatiale",
+      "uv": [
+        540,
+        500
+      ],
+      "xy_m": [
+        -1215.0,
+        -3105.0
+      ],
+      "z_m": 78
+    },
+    {
+      "name": "Artisansquare",
+      "uv": [
+        950,
+        1070
+      ],
+      "xy_m": [
+        2632.5,
+        -337.5
+      ],
+      "z_m": 52
+    },
+    {
+      "name": "Uptown",
+      "uv": [
+        620,
+        1070
+      ],
+      "xy_m": [
+        2632.5,
+        -2565.0
+      ],
+      "z_m": 58
+    },
+    {
+      "name": "Sloghood",
+      "uv": [
+        350,
+        1050
+      ],
+      "xy_m": [
+        2497.5,
+        -4387.5
+      ],
+      "z_m": 42
+    },
+    {
+      "name": "Scholarnest",
+      "uv": [
+        1220,
+        1100
+      ],
+      "xy_m": [
+        2835.0,
+        1485.0
+      ],
+      "z_m": 46
+    },
+    {
+      "name": "Dweomer",
+      "uv": [
+        1510,
+        1000
+      ],
+      "xy_m": [
+        2160.0,
+        3442.5
+      ],
+      "z_m": 38
+    },
+    {
+      "name": "Neckoffoods",
+      "uv": [
+        1610,
+        1270
+      ],
+      "xy_m": [
+        3982.5,
+        4117.5
+      ],
+      "z_m": 30
+    },
+    {
+      "name": "Bloomburgs",
+      "uv": [
+        680,
+        1370
+      ],
+      "xy_m": [
+        4657.5,
+        -2160.0
+      ],
+      "z_m": 48
+    },
+    {
+      "name": "Oldtown",
+      "uv": [
+        1350,
+        280
+      ],
+      "xy_m": [
+        -2700.0,
+        2362.5
+      ],
+      "z_m": 24
+    },
+    {
+      "name": "Cimetière",
+      "uv": [
+        1290,
+        180
+      ],
+      "xy_m": [
+        -3375.0,
+        1957.5
+      ],
+      "z_m": 32
+    },
+    {
+      "name": "Collines occidentales",
+      "uv": [
+        1300,
+        30
+      ],
+      "xy_m": [
+        -4387.5,
+        2025.0
+      ],
+      "z_m": 180
+    },
+    {
+      "name": "Crête ouest",
+      "uv": [
+        1600,
+        0
+      ],
+      "xy_m": [
+        -4590.0,
+        4050.0
+      ],
+      "z_m": 240
+    },
+    {
+      "name": "Tigris",
+      "uv": [
+        630,
+        75
+      ],
+      "xy_m": [
+        -4083.75,
+        -2497.5
+      ],
+      "z_m": 84
+    },
+    {
+      "name": "Sentinelle",
+      "uv": [
+        250,
+        200
+      ],
+      "xy_m": [
+        -3240.0,
+        -5062.5
+      ],
+      "z_m": 24
+    },
+    {
+      "name": "Cyan",
+      "uv": [
+        70,
+        500
+      ],
+      "xy_m": [
+        -1215.0,
+        -6277.5
+      ],
+      "z_m": 20
+    }
+  ],
+  "demography": {
+    "status": "reconciliation prioritaire Documentation/Metiers",
+    "source_model": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+    "source_demography": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\demographie.md",
+    "total_population": 680000,
+    "total_military_included": 34000,
+    "total_core_population_proposed": 600000,
+    "rural_population_outside_frame_proposed": 80000,
+    "total_core_land_km2": 66.467628,
+    "habitable_m2_per_resident_proposed": 30,
+    "habitable_gross_ratio_proposed": 0.75,
+    "total_habitable_m2": 20400000,
+    "total_residential_gross_m2": 27200000,
+    "rows": [
+      {
+        "id": "Q01",
+        "profile_id": "empire--sloghood",
+        "name": "Sloghood",
+        "population": 110000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 14300,
+        "core_population_proposed": 110000,
+        "rural_population_outside_frame_proposed": 0,
+        "visible_core_area_km2": 3.139236,
+        "density_core_hab_km2": 35040.0,
+        "active_count": 66476.96,
+        "employed_percent_residents": 57.154726,
+        "employed_count": 62870.198599999996,
+        "top_occupational_bases": [
+          {
+            "base_id": "combat",
+            "percent_residents": 14.190772342713569,
+            "workers_expected": 15609.849576984925
+          },
+          {
+            "base_id": "services",
+            "percent_residents": 9.996926607228735,
+            "workers_expected": 10996.619267951608
+          },
+          {
+            "base_id": "commerce",
+            "percent_residents": 2.8227046286908073,
+            "workers_expected": 3104.975091559888
+          },
+          {
+            "base_id": "administration",
+            "percent_residents": 2.737267146863468,
+            "workers_expected": 3010.993861549815
+          },
+          {
+            "base_id": "maconnerie",
+            "percent_residents": 2.688761406041079,
+            "workers_expected": 2957.637546645187
+          },
+          {
+            "base_id": "transport",
+            "percent_residents": 2.6763421664623954,
+            "workers_expected": 2943.976383108635
+          },
+          {
+            "base_id": "barberie",
+            "percent_residents": 2.499231651807184,
+            "workers_expected": 2749.154816987903
+          },
+          {
+            "base_id": "bois",
+            "percent_residents": 1.387059455497382,
+            "workers_expected": 1525.7654010471203
+          }
+        ],
+        "habitable_all_residents_m2": 3300000,
+        "gross_residential_all_m2": 4400000,
+        "gross_residential_core_m2": 4400000,
+        "residential_levels_equivalent_core": 3.2,
+        "residential_footprint_core_m2": 1375000.0,
+        "residential_coverage_core_percent": 43.8,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--sloghood.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--sloghood]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      },
+      {
+        "id": "Q02",
+        "profile_id": "empire--uptown",
+        "name": "Uptown",
+        "population": 55000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 1500,
+        "core_population_proposed": 55000,
+        "rural_population_outside_frame_proposed": 0,
+        "visible_core_area_km2": 5.7591,
+        "density_core_hab_km2": 9550.0,
+        "active_count": 31691.0,
+        "employed_percent_residents": 54.63419999999999,
+        "employed_count": 30048.809999999994,
+        "top_occupational_bases": [
+          {
+            "base_id": "services",
+            "percent_residents": 5.322422688821048,
+            "workers_expected": 2927.3324788515765
+          },
+          {
+            "base_id": "commerce",
+            "percent_residents": 5.274306166785459,
+            "workers_expected": 2900.8683917320027
+          },
+          {
+            "base_id": "administration",
+            "percent_residents": 4.022308017443811,
+            "workers_expected": 2212.2694095940956
+          },
+          {
+            "base_id": "combat",
+            "percent_residents": 3.8471407729556875,
+            "workers_expected": 2115.927425125628
+          },
+          {
+            "base_id": "transport",
+            "percent_residents": 3.1255147655024946,
+            "workers_expected": 1719.0331210263719
+          },
+          {
+            "base_id": "maconnerie",
+            "percent_residents": 3.0871481983596913,
+            "workers_expected": 1697.9315090978303
+          },
+          {
+            "base_id": "spectacle",
+            "percent_residents": 2.031140632411067,
+            "workers_expected": 1117.1273478260869
+          },
+          {
+            "base_id": "agriculture",
+            "percent_residents": 1.7973586273095954,
+            "workers_expected": 988.5472450202775
+          }
+        ],
+        "habitable_all_residents_m2": 1650000,
+        "gross_residential_all_m2": 2200000,
+        "gross_residential_core_m2": 2200000,
+        "residential_levels_equivalent_core": 2,
+        "residential_footprint_core_m2": 1100000.0,
+        "residential_coverage_core_percent": 19.1,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--uptown.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--uptown]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      },
+      {
+        "id": "Q03",
+        "profile_id": "empire--artisansquare",
+        "name": "Artisansquare",
+        "population": 60000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 1500,
+        "core_population_proposed": 60000,
+        "rural_population_outside_frame_proposed": 0,
+        "visible_core_area_km2": 6.314922,
+        "density_core_hab_km2": 9501.0,
+        "active_count": 36203.76,
+        "employed_percent_residents": 57.064436,
+        "employed_count": 34238.6616,
+        "top_occupational_bases": [
+          {
+            "base_id": "bois",
+            "percent_residents": 6.10560248488746,
+            "workers_expected": 3663.361490932476
+          },
+          {
+            "base_id": "forge",
+            "percent_residents": 5.1662790256740045,
+            "workers_expected": 3099.767415404403
+          },
+          {
+            "base_id": "maconnerie",
+            "percent_residents": 3.9451585286965125,
+            "workers_expected": 2367.0951172179075
+          },
+          {
+            "base_id": "commerce",
+            "percent_residents": 3.8101028586206898,
+            "workers_expected": 2286.061715172414
+          },
+          {
+            "base_id": "transport",
+            "percent_residents": 3.6125419696551724,
+            "workers_expected": 2167.5251817931035
+          },
+          {
+            "base_id": "combat",
+            "percent_residents": 3.3829019292462306,
+            "workers_expected": 2029.7411575477383
+          },
+          {
+            "base_id": "textile",
+            "percent_residents": 2.8179703776403664,
+            "workers_expected": 1690.7822265842199
+          },
+          {
+            "base_id": "bijouterie",
+            "percent_residents": 2.254376302112293,
+            "workers_expected": 1352.625781267376
+          }
+        ],
+        "habitable_all_residents_m2": 1800000,
+        "gross_residential_all_m2": 2400000,
+        "gross_residential_core_m2": 2400000,
+        "residential_levels_equivalent_core": 2.2,
+        "residential_footprint_core_m2": 1090909.0,
+        "residential_coverage_core_percent": 17.28,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--artisansquare.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--artisansquare]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      },
+      {
+        "id": "Q04",
+        "profile_id": "empire--scholarnest",
+        "name": "Scholarnest",
+        "population": 40000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 1000,
+        "core_population_proposed": 40000,
+        "rural_population_outside_frame_proposed": 0,
+        "visible_core_area_km2": 2.419389,
+        "density_core_hab_km2": 16533.0,
+        "active_count": 15980.0,
+        "employed_percent_residents": 38.75149999999999,
+        "employed_count": 15500.599999999999,
+        "top_occupational_bases": [
+          {
+            "base_id": "services",
+            "percent_residents": 5.049215888573638,
+            "workers_expected": 2019.6863554294553
+          },
+          {
+            "base_id": "combat",
+            "percent_residents": 3.0865820603015073,
+            "workers_expected": 1234.632824120603
+          },
+          {
+            "base_id": "commerce",
+            "percent_residents": 2.4537923398328685,
+            "workers_expected": 981.5169359331474
+          },
+          {
+            "base_id": "transport",
+            "percent_residents": 2.326558662952645,
+            "workers_expected": 930.623465181058
+          },
+          {
+            "base_id": "administration",
+            "percent_residents": 2.2066130434782605,
+            "workers_expected": 882.6452173913042
+          },
+          {
+            "base_id": "maconnerie",
+            "percent_residents": 2.0603349496576717,
+            "workers_expected": 824.1339798630687
+          },
+          {
+            "base_id": "savoir",
+            "percent_residents": 1.3478445074198149,
+            "workers_expected": 539.137802967926
+          },
+          {
+            "base_id": "barberie",
+            "percent_residents": 1.2623039721434097,
+            "workers_expected": 504.9215888573639
+          }
+        ],
+        "habitable_all_residents_m2": 1200000,
+        "gross_residential_all_m2": 1600000,
+        "gross_residential_core_m2": 1600000,
+        "residential_levels_equivalent_core": 2.8,
+        "residential_footprint_core_m2": 571429.0,
+        "residential_coverage_core_percent": 23.62,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--scholarnest.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--scholarnest]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      },
+      {
+        "id": "Q05",
+        "profile_id": "empire--dweomer",
+        "name": "Dweomer",
+        "population": 15000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 1500,
+        "core_population_proposed": 15000,
+        "rural_population_outside_frame_proposed": 0,
+        "visible_core_area_km2": 8.098704,
+        "density_core_hab_km2": 1852.0,
+        "active_count": 8739.900000000001,
+        "employed_percent_residents": 55.20506,
+        "employed_count": 8280.759,
+        "top_occupational_bases": [
+          {
+            "base_id": "combat",
+            "percent_residents": 11.501653643741403,
+            "workers_expected": 1725.2480465612105
+          },
+          {
+            "base_id": "administration",
+            "percent_residents": 4.9443034375,
+            "workers_expected": 741.6455156250001
+          },
+          {
+            "base_id": "services",
+            "percent_residents": 4.663921588857365,
+            "workers_expected": 699.5882383286048
+          },
+          {
+            "base_id": "arcane",
+            "percent_residents": 4.64411204333013,
+            "workers_expected": 696.6168064995196
+          },
+          {
+            "base_id": "maconnerie",
+            "percent_residents": 2.2021764227144587,
+            "workers_expected": 330.3264634071688
+          },
+          {
+            "base_id": "controle-arcane",
+            "percent_residents": 2.002204858321871,
+            "workers_expected": 300.33072874828065
+          },
+          {
+            "base_id": "commerce",
+            "percent_residents": 1.922493060581583,
+            "workers_expected": 288.37395908723744
+          },
+          {
+            "base_id": "transport",
+            "percent_residents": 1.822808235218094,
+            "workers_expected": 273.4212352827141
+          }
+        ],
+        "habitable_all_residents_m2": 450000,
+        "gross_residential_all_m2": 600000,
+        "gross_residential_core_m2": 600000,
+        "residential_levels_equivalent_core": 2,
+        "residential_footprint_core_m2": 300000.0,
+        "residential_coverage_core_percent": 3.7,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--dweomer.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--dweomer]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      },
+      {
+        "id": "Q06",
+        "profile_id": "empire--martpart",
+        "name": "Martpart",
+        "population": 67000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 2000,
+        "core_population_proposed": 67000,
+        "rural_population_outside_frame_proposed": 0,
+        "visible_core_area_km2": 5.219154,
+        "density_core_hab_km2": 12837.0,
+        "active_count": 40490.511999999995,
+        "employed_percent_residents": 57.154726,
+        "employed_count": 38293.66642,
+        "top_occupational_bases": [
+          {
+            "base_id": "commerce",
+            "percent_residents": 7.993861508302618,
+            "workers_expected": 5355.887210562754
+          },
+          {
+            "base_id": "services",
+            "percent_residents": 5.096139962407335,
+            "workers_expected": 3414.4137748129147
+          },
+          {
+            "base_id": "combat",
+            "percent_residents": 4.153759902721568,
+            "workers_expected": 2783.0191348234507
+          },
+          {
+            "base_id": "transport",
+            "percent_residents": 3.7896824928249444,
+            "workers_expected": 2539.087270192713
+          },
+          {
+            "base_id": "maconnerie",
+            "percent_residents": 3.078703665637018,
+            "workers_expected": 2062.731455976802
+          },
+          {
+            "base_id": "accueil",
+            "percent_residents": 3.0576839774444005,
+            "workers_expected": 2048.648264887748
+          },
+          {
+            "base_id": "administration",
+            "percent_residents": 2.938353782970755,
+            "workers_expected": 1968.6970345904058
+          },
+          {
+            "base_id": "agriculture",
+            "percent_residents": 1.8757089920252665,
+            "workers_expected": 1256.7250246569286
+          }
+        ],
+        "habitable_all_residents_m2": 2010000,
+        "gross_residential_all_m2": 2680000,
+        "gross_residential_core_m2": 2680000,
+        "residential_levels_equivalent_core": 2.8,
+        "residential_footprint_core_m2": 957143.0,
+        "residential_coverage_core_percent": 18.34,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--martpart.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--martpart]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      },
+      {
+        "id": "Q07",
+        "profile_id": "empire--arenarea",
+        "name": "Arenarea",
+        "population": 45000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 2000,
+        "core_population_proposed": 45000,
+        "rural_population_outside_frame_proposed": 0,
+        "visible_core_area_km2": 6.127002,
+        "density_core_hab_km2": 7345.0,
+        "active_count": 25638.299999999996,
+        "employed_percent_residents": 54.06333999999999,
+        "employed_count": 24328.502999999993,
+        "top_occupational_bases": [
+          {
+            "base_id": "combat",
+            "percent_residents": 8.814990596729434,
+            "workers_expected": 3966.745768528245
+          },
+          {
+            "base_id": "services",
+            "percent_residents": 4.644185076461273,
+            "workers_expected": 2089.883284407573
+          },
+          {
+            "base_id": "administration",
+            "percent_residents": 3.766253518072289,
+            "workers_expected": 1694.81408313253
+          },
+          {
+            "base_id": "commerce",
+            "percent_residents": 3.5471859014877705,
+            "workers_expected": 1596.2336556694968
+          },
+          {
+            "base_id": "transport",
+            "percent_residents": 3.3632577436328495,
+            "workers_expected": 1513.4659846347824
+          },
+          {
+            "base_id": "accueil",
+            "percent_residents": 2.7865110458767637,
+            "workers_expected": 1253.9299706445436
+          },
+          {
+            "base_id": "guidage",
+            "percent_residents": 2.397196990709142,
+            "workers_expected": 1078.7386458191138
+          },
+          {
+            "base_id": "maconnerie",
+            "percent_residents": 2.2157644539669747,
+            "workers_expected": 997.0940042851387
+          }
+        ],
+        "habitable_all_residents_m2": 1350000,
+        "gross_residential_all_m2": 1800000,
+        "gross_residential_core_m2": 1800000,
+        "residential_levels_equivalent_core": 2,
+        "residential_footprint_core_m2": 900000.0,
+        "residential_coverage_core_percent": 14.69,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--arenarea.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--arenarea]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      },
+      {
+        "id": "Q08",
+        "profile_id": "empire--oldtown",
+        "name": "Oldtown",
+        "population": 45000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 1500,
+        "core_population_proposed": 45000,
+        "rural_population_outside_frame_proposed": 0,
+        "visible_core_area_km2": 4.220262,
+        "density_core_hab_km2": 10663.0,
+        "active_count": 20227.500000000004,
+        "employed_percent_residents": 42.70775,
+        "employed_count": 19218.4875,
+        "top_occupational_bases": [
+          {
+            "base_id": "combat",
+            "percent_residents": 4.182818235622557,
+            "workers_expected": 1882.2682060301508
+          },
+          {
+            "base_id": "forge",
+            "percent_residents": 3.59623996705107,
+            "workers_expected": 1618.3079851729815
+          },
+          {
+            "base_id": "maconnerie",
+            "percent_residents": 2.7462196112026356,
+            "workers_expected": 1235.798825041186
+          },
+          {
+            "base_id": "commerce",
+            "percent_residents": 2.6651763927576595,
+            "workers_expected": 1199.3293767409468
+          },
+          {
+            "base_id": "transport",
+            "percent_residents": 2.5269820612813363,
+            "workers_expected": 1137.1419275766013
+          },
+          {
+            "base_id": "services",
+            "percent_residents": 2.462440066708359,
+            "workers_expected": 1108.0980300187614
+          },
+          {
+            "base_id": "foresterie",
+            "percent_residents": 1.9042539042821152,
+            "workers_expected": 856.9142569269518
+          },
+          {
+            "base_id": "administration",
+            "percent_residents": 1.525577029520295,
+            "workers_expected": 686.5096632841328
+          }
+        ],
+        "habitable_all_residents_m2": 1350000,
+        "gross_residential_all_m2": 1800000,
+        "gross_residential_core_m2": 1800000,
+        "residential_levels_equivalent_core": 2.2,
+        "residential_footprint_core_m2": 818182.0,
+        "residential_coverage_core_percent": 19.39,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--oldtown.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--oldtown]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      },
+      {
+        "id": "Q09",
+        "profile_id": "empire--neckoffoods",
+        "name": "Neckoffoods",
+        "population": 100000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 3000,
+        "core_population_proposed": 20000,
+        "rural_population_outside_frame_proposed": 80000,
+        "visible_core_area_km2": 4.679289,
+        "density_core_hab_km2": 4274.0,
+        "active_count": 67539.6,
+        "employed_percent_residents": 65.27928,
+        "employed_count": 65279.28,
+        "top_occupational_bases": [
+          {
+            "base_id": "agriculture",
+            "percent_residents": 35.221320095377685,
+            "workers_expected": 35221.32009537768
+          },
+          {
+            "base_id": "elevage",
+            "percent_residents": 5.4188941738444205,
+            "workers_expected": 5418.894173844421
+          },
+          {
+            "base_id": "combat",
+            "percent_residents": 3.167955847236181,
+            "workers_expected": 3167.9558472361805
+          },
+          {
+            "base_id": "peche",
+            "percent_residents": 2.8025676000000006,
+            "workers_expected": 2802.5676000000008
+          },
+          {
+            "base_id": "horticulture",
+            "percent_residents": 2.6547684067643744,
+            "workers_expected": 2654.768406764374
+          },
+          {
+            "base_id": "collecte",
+            "percent_residents": 1.9582515436302146,
+            "workers_expected": 1958.2515436302147
+          },
+          {
+            "base_id": "maconnerie",
+            "percent_residents": 1.390561128956907,
+            "workers_expected": 1390.5611289569072
+          },
+          {
+            "base_id": "commerce",
+            "percent_residents": 1.1709892479108635,
+            "workers_expected": 1170.9892479108635
+          }
+        ],
+        "habitable_all_residents_m2": 3000000,
+        "gross_residential_all_m2": 4000000,
+        "gross_residential_core_m2": 800000,
+        "residential_levels_equivalent_core": 1.8,
+        "residential_footprint_core_m2": 444444.0,
+        "residential_coverage_core_percent": 9.5,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--neckoffoods.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--neckoffoods]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      },
+      {
+        "id": "Q10",
+        "profile_id": "empire--bloomburgs",
+        "name": "Bloomburgs",
+        "population": 127000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 5500,
+        "core_population_proposed": 127000,
+        "rural_population_outside_frame_proposed": 0,
+        "visible_core_area_km2": 5.036904,
+        "density_core_hab_km2": 25214.0,
+        "active_count": 76162.662,
+        "employed_percent_residents": 55.120371000000006,
+        "employed_count": 70002.87117,
+        "top_occupational_bases": [
+          {
+            "base_id": "crime",
+            "percent_residents": 6.602656104015748,
+            "workers_expected": 8385.373252099998
+          },
+          {
+            "base_id": "combat",
+            "percent_residents": 5.152531338453686,
+            "workers_expected": 6543.714799836182
+          },
+          {
+            "base_id": "commerce",
+            "percent_residents": 4.583802394902726,
+            "workers_expected": 5821.429041526462
+          },
+          {
+            "base_id": "transport",
+            "percent_residents": 4.3461237522040665,
+            "workers_expected": 5519.577165299165
+          },
+          {
+            "base_id": "maconnerie",
+            "percent_residents": 4.329905647938453,
+            "workers_expected": 5498.980172881836
+          },
+          {
+            "base_id": "services",
+            "percent_residents": 3.144059572158845,
+            "workers_expected": 3992.955656641733
+          },
+          {
+            "base_id": "bois",
+            "percent_residents": 2.2336814850476148,
+            "workers_expected": 2836.7754860104706
+          },
+          {
+            "base_id": "forge",
+            "percent_residents": 1.890038179655674,
+            "workers_expected": 2400.348488162706
+          }
+        ],
+        "habitable_all_residents_m2": 3810000,
+        "gross_residential_all_m2": 5080000,
+        "gross_residential_core_m2": 5080000,
+        "residential_levels_equivalent_core": 2.5,
+        "residential_footprint_core_m2": 2032000.0,
+        "residential_coverage_core_percent": 40.34,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--bloomburgs.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--bloomburgs]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      },
+      {
+        "id": "Q11",
+        "profile_id": "empire--downtown",
+        "name": "Downtown",
+        "population": 10000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 0,
+        "core_population_proposed": 10000,
+        "rural_population_outside_frame_proposed": 0,
+        "visible_core_area_km2": 5.925393,
+        "density_core_hab_km2": 1688.0,
+        "active_count": 3250.0,
+        "employed_percent_residents": 32.175,
+        "employed_count": 3217.5,
+        "top_occupational_bases": [
+          {
+            "base_id": "administration",
+            "percent_residents": 19.588396946564885,
+            "workers_expected": 1958.8396946564885
+          },
+          {
+            "base_id": "sante",
+            "percent_residents": 3.8609999999999998,
+            "workers_expected": 386.1
+          },
+          {
+            "base_id": "religion",
+            "percent_residents": 2.1764885496183206,
+            "workers_expected": 217.6488549618321
+          },
+          {
+            "base_id": "savoir",
+            "percent_residents": 1.4542651555076893,
+            "workers_expected": 145.42651555076893
+          },
+          {
+            "base_id": "ecriture",
+            "percent_residents": 1.3805861631297995,
+            "workers_expected": 138.05861631297995
+          },
+          {
+            "base_id": "securite",
+            "percent_residents": 1.287,
+            "workers_expected": 128.7
+          },
+          {
+            "base_id": "finance",
+            "percent_residents": 1.2869999999999997,
+            "workers_expected": 128.69999999999996
+          },
+          {
+            "base_id": "spectacle",
+            "percent_residents": 0.32175,
+            "workers_expected": 32.175
+          }
+        ],
+        "habitable_all_residents_m2": 300000,
+        "gross_residential_all_m2": 400000,
+        "gross_residential_core_m2": 400000,
+        "residential_levels_equivalent_core": 2,
+        "residential_footprint_core_m2": 200000.0,
+        "residential_coverage_core_percent": 3.38,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--downtown.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--downtown]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      },
+      {
+        "id": "Q12",
+        "profile_id": "empire--palacedomain",
+        "name": "Palacedomain",
+        "population": 6000,
+        "population_status": "P preexistante du projet, conservee exactement",
+        "military_included": 200,
+        "core_population_proposed": 6000,
+        "rural_population_outside_frame_proposed": 0,
+        "visible_core_area_km2": 8.320887,
+        "density_core_hab_km2": 721.0,
+        "active_count": 2025.0,
+        "employed_percent_residents": 33.412499999999994,
+        "employed_count": 2004.7499999999998,
+        "top_occupational_bases": [
+          {
+            "base_id": "administration",
+            "percent_residents": 15.275313479623822,
+            "workers_expected": 916.5188087774294
+          },
+          {
+            "base_id": "combat",
+            "percent_residents": 4.532362563044476,
+            "workers_expected": 271.94175378266857
+          },
+          {
+            "base_id": "services",
+            "percent_residents": 3.967210111742077,
+            "workers_expected": 238.03260670452462
+          },
+          {
+            "base_id": "religion",
+            "percent_residents": 1.9397223466188982,
+            "workers_expected": 116.3833407971339
+          },
+          {
+            "base_id": "securite",
+            "percent_residents": 0.9991910247592848,
+            "workers_expected": 59.95146148555708
+          },
+          {
+            "base_id": "barberie",
+            "percent_residents": 0.9918025279355192,
+            "workers_expected": 59.50815167613115
+          },
+          {
+            "base_id": "ecriture",
+            "percent_residents": 0.6941696855846168,
+            "workers_expected": 41.65018113507701
+          },
+          {
+            "base_id": "savoir",
+            "percent_residents": 0.5773512061723416,
+            "workers_expected": 34.641072370340495
+          }
+        ],
+        "habitable_all_residents_m2": 180000,
+        "gross_residential_all_m2": 240000,
+        "gross_residential_core_m2": 240000,
+        "residential_levels_equivalent_core": 2.5,
+        "residential_footprint_core_m2": 96000.0,
+        "residential_coverage_core_percent": 1.15,
+        "sources": [
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Localites\\empire--palacedomain.md",
+            "line": 5,
+            "claim": "Population retenue"
+          },
+          {
+            "path": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-modele.json",
+            "json_pointer": "/profiles[id=empire--palacedomain]",
+            "claim": "Garnison incluse, actifs, professions residentes et lieux de travail"
+          }
+        ]
+      }
+    ],
+    "docks": {
+      "id": "Q13",
+      "name": "Docks District",
+      "population_additional": 0,
+      "status": "Secteur fonctionnel sans profil demographique autonome ; ne pas ajouter une treizieme population.",
+      "core_area_km2": 1.207386,
+      "residence_rule": "Toute residence aux docks doit etre rattachee et soustraite au quota de son profil administratif parmi les douze."
+    },
+    "neckoffoods_projection": {
+      "status": "P nouvelle projection geographique des budgets regionaux V3, non additive",
+      "source": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\Documentation\\Metiers\\Donnees\\metiers-tanares-alimentation-v3.json",
+      "source_regional_pointer": "/regions/empire",
+      "source_profile_pointer": "/profiles/empire--neckoffoods",
+      "existing_primary_food_workers": 46709.46000000001,
+      "crop_workers": 35966.28420000001,
+      "regional_crop_workers": 627843.0800879288,
+      "crop_share": 0.05728546724599237,
+      "rotation_ha_allocated": 103113.84104278627,
+      "cropped_ha_per_year_allocated": 70625.91852245636,
+      "pasture_workers": 5138.0406,
+      "regional_pasture_workers": 89637.60555249057,
+      "pasture_ha_allocated": 66767.6191422973,
+      "rotation_plus_pasture_km2": 1698.8146018508357,
+      "planning_window_km": [
+        50,
+        50
+      ],
+      "planning_window_area_km2": 2500,
+      "other_land_budget_km2": 801.1853981491643,
+      "near_core_population": 20000,
+      "rural_population": 80000,
+      "residential_gross_rural_m2": 3200000,
+      "rural_residential_levels_equivalent": 1.5,
+      "rural_residential_footprint_m2": 2133333.3333333335,
+      "development_rule": "Fenetre50x50km de planification P, incluant la frange visibleQ09 ; pas un champ uniforme ni une surface supplementaire aux hectares regionaux.",
+      "exact_geographic_area_in_source": false,
+      "production_addition_to_v3": 0
+    },
+    "accounting_rules": [
+      "Les professions sont celles des residents ; le lieu de travail peut etre un autre quartier.",
+      "Les visiteurs ne sont pas des residents supplementaires.",
+      "Un travailleur ne vaut ni un foyer ni un batiment.",
+      "Les parents agreges et leurs enfants ne se cumulent pas.",
+      "La garnison34000 est deja incluse par conventionP existante.",
+      "Nourriture et terres allouees aNeckoffoods sont des fractions du budgetEmpire."
+    ]
+  },
+  "transitions": [
+    {
+      "id": "TP01",
+      "name": "Terrasse des thermes",
+      "xy_m": [
+        -1518.75,
+        -1957.5
+      ],
+      "size_m": [
+        330,
+        450
+      ],
+      "z_m": 26,
+      "connections": [
+        {
+          "to": "X01",
+          "horizontal_m": 560,
+          "delta_z_m": -18
+        },
+        {
+          "to": "Q12",
+          "horizontal_m": 450,
+          "delta_z_m": 18
+        }
+      ]
+    },
+    {
+      "id": "TP02",
+      "name": "Berge basse du Natural Pool",
+      "z_m": 3.5,
+      "upper_district_z_m": 14,
+      "ramp_length_m": 270,
+      "width_m": 6
+    }
+  ],
+  "non_additive_reserves": [
+    "L12-02 inclut L12-01",
+    "Q09 2500 km2 de planification inclut la frange de 4.6793 km2",
+    "Les parcelles de sites sont incluses dans leurs secteurs ; les gabarits techniques ne sont pas des surfaces additionnelles de quartier."
+  ],
+  "measurement_policy": {
+    "geometry_status": "P : proposition métrique, non canonique et non intégrée au moteur",
+    "population_status": "M : propositions préexistantes du dossier Metiers, conservées",
+    "terrain_priority": [
+      "plateformes de sites et eaux",
+      "points cotés et nœuds routiers",
+      "terrasses et raccords",
+      "interpolation du terrain"
+    ],
+    "building_height": "H au-dessus du sol nominal, toiture incluse, sauf mâts séparés ; seuil courant +0,30 m",
+    "dimensions": "E x N pour azimut nul ; longueur x largeur dans le repère de l’ouvrage tourné",
+    "azimuth": "degrés depuis Est vers Nord, pour le premier axe de footprint_m",
+    "unknown_values": "null signifie non localisé ou non applicable, jamais zéro",
+    "terrain_exceptions": [
+      "L07-06 : bassin littoral à +0,2 m en contrebas du quartier urbain Q07",
+      "X13 : niveaux souterrains sous Palacedomain",
+      "X12 : Sanctuary of Defiance sans coordonnées canoniques ; repère local à établir"
+    ]
+  },
+  "arena_program": {
+    "site": "L07-01",
+    "outer_ellipse_m": [
+      300,
+      246
+    ],
+    "height_m": 66,
+    "mast_height_m": 72,
+    "ground_z_m": 20,
+    "track_z_m": 17,
+    "track_ellipse_m": [
+      120,
+      78
+    ],
+    "podium_m": 3,
+    "first_row_ellipse_m": [
+      128,
+      86
+    ],
+    "rows": 72,
+    "tiers": 3,
+    "row_tread_m": 0.85,
+    "row_rise_m": 0.5,
+    "intermediate_landings_m": [
+      3,
+      3
+    ],
+    "seat_width_m": 0.55,
+    "interruption_ratio": 0.16,
+    "target_total": 60000,
+    "delegation_boxes": 13,
+    "seats_per_box": 40,
+    "public_target": 59480,
+    "divine_stations_public": 14,
+    "ungods_catacombs_only": 4,
+    "underground_z_m": [
+      11,
+      3
+    ],
+    "access_rule": "catacombes via prison uniquement",
+    "main_parvis_m": [
+      120,
+      150
+    ],
+    "pedestrian_ring_width_m": 24,
+    "proposed_public_exits": 24,
+    "proposed_exit_width_m": 4.5,
+    "capacity_status": "cible géométrique P ; plans détaillés et flux à valider dans les volumes de jeu"
+  },
+  "logistics_reservations": [
+    {
+      "id": "P-F01",
+      "name": "Terminal nord-est",
+      "parcel_m": [
+        900,
+        450
+      ],
+      "ground_z_m": 30,
+      "max_grade_percent": 1,
+      "placement": "hors murs, lisière nord-est de Neckoffoods ; coordonnées fines non fixées"
+    },
+    {
+      "id": "P-F02",
+      "name": "Faisceau ferroviaire et raccord",
+      "parcel_m": [
+        1200,
+        180
+      ],
+      "corridor_width_m": 45,
+      "max_grade_percent": 1,
+      "placement": "périphérie orientale ; scénario M préexistant, tracé fin non fixé"
+    },
+    {
+      "id": "P-F03",
+      "name": "Greniers métropolitains",
+      "group_count": 4,
+      "group_parcel_m": [
+        300,
+        360
+      ],
+      "warehouses_per_group": 12,
+      "warehouse_m": [
+        24,
+        60,
+        15
+      ],
+      "placement": [
+        "port",
+        "Market Gate",
+        "terminal",
+        "Farmer’s Market"
+      ]
+    },
+    {
+      "id": "P-F04",
+      "name": "Marché de gros",
+      "parcel_m": [
+        450,
+        600
+      ],
+      "hall_m": [
+        60,
+        120,
+        18
+      ],
+      "placement": "extérieur côté agricole"
+    },
+    {
+      "id": "P-F05",
+      "name": "Dépôts eau et services",
+      "count": 4,
+      "parcel_m": [
+        150,
+        210
+      ],
+      "ground_z_m": null,
+      "placement": "par bassin de desserte ; coordonnées fines non fixées"
+    }
+  ]
+}

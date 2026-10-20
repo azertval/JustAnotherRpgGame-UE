@@ -15,6 +15,11 @@ sans lumière indirecte ni post-traitement, rien pour une carte dense (un appel 
 maillage, pas de niveau de détail, chargement synchrone), la caméra fixe et le combat sur grille,
 une chaîne de décor qui produit des boîtes.
 
+**Périmètre personnages révisé le 20 octobre 2026 :** [D-68](../../../vision/decisions.md)
+remplace les anciennes obligations MetaHuman/Mutable et de squelette unique. Les mentions
+de D-63/D-64 dans l'historique de migration ci-dessous décrivent le prototype, pas le choix
+de production à éprouver au LOT-1024. Le nouveau découpage figure dans l'ordre des lots.
+
 ## Ce qui ne bouge pas
 
 - `Source/Core` : règles d20, classes, capacités, quêtes, dialogues, monde. Il n'inclut pas une
@@ -65,32 +70,60 @@ une chaîne de décor qui produit des boîtes.
 
 | # | Lot | Filière | Taille | Attend |
 |---|---|---|---|---|
-| 1 | [LOT-1012](lots/LOT-1012-porte-le-parvis-d-arenarea.md) — la porte : le parvis d'Arenarea dans Unreal | moteur | L | — |
-| — | [LOT-1013](lots/LOT-1013-porte-de-repli-godot.md) — la porte de repli sur Godot — **abandonné** ([D-57](../../../vision/decisions.md)) | moteur | M | — |
-| 2 | [LOT-1014](lots/LOT-1014-socle-core-donnees-build.md) — le socle : le nouveau dépôt, Core en module, données, build, tests, CI | moteur | L | LOT-1012 |
-| 3 | [LOT-1015](lots/LOT-1015-personnages-et-createur.md) — les personnages dans le moteur : squelette, animations, créateur Mutable, les quatre héros | pnj | L | LOT-1014 |
-| 4 | [LOT-1024](lots/LOT-1024-createur-especes-et-humanoides.md) — le créateur : les 22 espèces et les humanoïdes de la démo | pnj | L | LOT-1015 |
-| 5 | [LOT-1025](lots/LOT-1025-creatures-lion-et-loup.md) — les créatures : lion et loup | pnj | M | LOT-1015 |
-| 6 | [LOT-1016](lots/LOT-1016-camera-et-exploration.md) — caméra, marche, groupe, portails, jour et nuit — **livré** | moteur | L | LOT-1014 |
-| 7 | [LOT-1017](lots/LOT-1017-combat-en-distance.md) — le combat en distance | regles | XL | LOT-1015, LOT-1016 |
-| 8 | [LOT-1018](lots/LOT-1018-cartes-composees.md) — le format de carte et sa chaîne | editeur | L | LOT-1016 |
-| 9 | [LOT-1019](lots/LOT-1019-chaine-de-decor.md) — la chaîne de décor au niveau du moteur ; le standard 3D réécrit | standard | L | LOT-1018 |
-| 10 | [LOT-1020](lots/LOT-1020-interface-umg.md) — les écrans et le HUD en UMG | interface | L | LOT-1016 |
-| 11 | [LOT-1021](lots/LOT-1021-arenarea-reconstruit.md) — Arenarea reconstruit au standard D-54 | cartes | XL | LOT-1019 |
-| 12 | [LOT-1022](lots/LOT-1022-portage-arena-of-fate-et-martpart.md) — l'Arena of Fate et Martpart portés | cartes | M | LOT-1019 |
-| 13 | [LOT-1023](lots/LOT-1023-recette-et-version-0-0-3.md) — recette, retrait de l'ancien moteur, version | version | M | LOT-1017, LOT-1020, LOT-1021, LOT-1022, LOT-1024, LOT-1025 |
+| 1 | [LOT-1012](lots/LOT-1012-porte-le-parvis-d-arenarea.md) — La porte : le parvis d'Arenarea dans Unreal — **livré** | moteur | L | — |
+| — | [LOT-1013](lots/LOT-1013-porte-de-repli-godot.md) — La porte de repli : le même parvis dans Godot — **abandonné** | moteur | M | LOT-1012 |
+| 2 | [LOT-1014](lots/LOT-1014-socle-core-donnees-build.md) — Le socle : Core en module, données, build, tests, CI — **livré** | moteur | L | LOT-1012 |
+| 3 | [LOT-1015](lots/LOT-1015-personnages-et-createur.md) — Les personnages dans le moteur : squelette, animations, créateur Mutable, les quatre héros — **livré** | pnj | L | LOT-1014 |
+| 4 | [LOT-1016](lots/LOT-1016-camera-et-exploration.md) — Caméra, marche, groupe, portails, jour et nuit — **livré** | moteur | L | LOT-1014 |
+| 5 | [LOT-1017](lots/LOT-1017-combat-en-distance.md) — Le combat en distance — **livré** | regles | XL | LOT-1015, LOT-1016 |
+| 6 | [LOT-1018](lots/LOT-1018-cartes-composees.md) — Le format de carte et sa chaîne : des cartes composées — **livré** | editeur | L | LOT-1016 |
+| 7 | [LOT-1019](lots/LOT-1019-chaine-de-decor.md) — La chaîne de décor au niveau du moteur, et le standard 3D réécrit — **livré** | standard | L | LOT-1018 |
+| 8 | [LOT-1020](lots/LOT-1020-interface-umg.md) — Les écrans et le HUD en UMG — **livré** | interface | L | LOT-1016 |
+| 9 | [LOT-1024](lots/LOT-1024-createur-especes-et-humanoides.md) — Le générateur : choix de chaîne et prototype jouable | pnj | L | LOT-1015, LOT-1016 |
+| 10 | [LOT-1026](lots/LOT-1026-bases-anatomiques-et-recettes.md) — Le générateur : bases anatomiques et recettes versionnées | pnj | L | LOT-1024 |
+| 11 | [LOT-1027](lots/LOT-1027-garde-robe-et-adaptation.md) — Le générateur : garde-robe et adaptation aux corps | assets | L | LOT-1026 |
+| 12 | [LOT-1028](lots/LOT-1028-createur-complet-en-jeu.md) — Le générateur : créateur complet en jeu | interface | L | LOT-1026, LOT-1027, LOT-1020 |
+| 13 | [LOT-1029](lots/LOT-1029-presets-metiers-et-personnages-demo.md) — Le générateur : presets métiers et personnages de la démo | pnj | L | LOT-1028, LOT-1017 |
+| 14 | [LOT-1025](lots/LOT-1025-creatures-lion-et-loup.md) — Les créatures : familles animales, lion et loup | pnj | L | LOT-1026, LOT-1017 |
+| 15 | [LOT-1030](lots/LOT-1030-validation-generateur-et-populations.md) — Le générateur : validation en jeu et passage en production | pnj | M | LOT-1025, LOT-1029 |
+| — | [LOT-1021](lots/LOT-1021-arenarea-reconstruit.md) — Arenarea reconstruit au standard D-54 — **abandonné** | cartes | XL | LOT-1019 |
+| 16 | [LOT-1022](lots/LOT-1022-portage-arena-of-fate.md) — L'Arena of Fate portée — **livré** | cartes | M | LOT-1019 |
+| 17 | [LOT-1023](lots/LOT-1023-recette-et-version-0-0-3.md) — Recette, retrait de l'ancien moteur et version 0.0.3 | version | M | LOT-1017, LOT-1020, LOT-1022, LOT-1030 |
 
-Après le socle, deux filières avancent en parallèle : les personnages (LOT-1015) et l'exploration
-(LOT-1016, livrée le 8 octobre 2026). Le LOT-1015 pose le créateur de personnage et le prouve sur
-les quatre héros (D-63) ; les 22 espèces et les humanoïdes de la démo (LOT-1024) et le lion et le
-loup (LOT-1025) en dépendent et peuvent avancer pendant le combat. Le combat (LOT-1017) attend le
-LOT-1015 et le LOT-1016 ; d'ici les LOT-1024 et LOT-1025, il se joue avec des fiches provisoires
-sur le corps des héros. Les cartes (LOT-1018), le décor (LOT-1019) et l'interface (LOT-1020)
-peuvent avancer pendant le combat. Arenarea (LOT-1021) et le portage (LOT-1022) attendent la chaîne
-de décor. La recette (LOT-1023) attend tout le reste.
+Le LOT-1015 reste un prototype historique : il ne démontre pas une chaîne MetaHuman
+habillée ni les curseurs d'identité dans le jeu. **Reprise du 20 octobre 2026 (D-68)** :
+le LOT-1024 choisit la chaîne sur un créateur témoin empaqueté avant toute production.
+L'existant est remplaçable ; Mutable est le premier candidat, MetaHuman une source possible.
+
+Le chemin du générateur devient :
+
+```text
+LOT-1024 : comparaison et preuve en jeu
+  -> LOT-1026 : bases anatomiques, rigs, morphs et recettes
+       -> LOT-1027 : garde-robe
+            -> LOT-1028 : créateur complet en jeu et outil de production
+                 -> LOT-1029 : héros, PNJ de la démo et presets métiers
+       -> LOT-1025 : familles animales, lion et loup
+  -> LOT-1030 : validation commune (attend LOT-1029 et LOT-1025)
+       -> LOT-1023 : recette de version
+```
+
+Les prérequis complets sont ceux du tableau et des fiches : l'interface s'appuie aussi sur
+LOT-1020, la production et les animaux sur LOT-1017. Les bases anatomiques peuvent partager
+des conventions sans imposer un squelette universel. Le LOT-314 réutilise l'apparence livrée
+pour le parcours de règles en 0.3.0. Les lots de peuplement consomment la chaîne validée ;
+ils ne sont pas remplacés par un remplissage automatique de la capitale dans ces lots.
+
+Le 20 octobre 2026, l'auteur livre les LOT-1017 à LOT-1020 et la part Arena of Fate du
+LOT-1022 avec la version ; il abandonne le LOT-1021 et rend la part Martpart du LOT-1022,
+redites du périmètre de la `0.0.4` (LOT-106, LOT-110, LOT-147, LOT-157).
+Cette révision du générateur conserve ces changements. La recette attend le LOT-1030 ;
+les essais utilisent la démo active autour de l'arène, sans restaurer les cartes archivées.
 
 La `0.0.2.5` a porté 30 000 lignes en cinq jours ; cette version en pèse trois à cinq fois plus.
-Six à dix semaines sont l'ordre de grandeur, à mesurer au bilan, pas une promesse.
+Six à dix semaines étaient l'ordre de grandeur initial, pas une promesse. Le découpage du
+générateur du 20 octobre impose une nouvelle estimation après le prototype LOT-1024 ; aucune
+durée de production de garde-robe n'est déduite des seuls essais sur mannequins.
 
 ## Ce que la version fait aux lots ouverts
 
@@ -98,8 +131,8 @@ Six à dix semaines sont l'ordre de grandeur, à mesurer au bilan, pas une prome
   son statut : ses maillages sont portés par le LOT-1022, et sa validation artistique se fait sur le
   nouveau moteur.
 - [LOT-147](../v0.0.4-lieux-de-la-demo/lots/LOT-147-zone-arenarea-reprise.md) : la reconstruction
-  d'Arenarea est faite par le LOT-1021 ; ce qui lui reste — les PNJ, l'image de l'onglet, la
-  relecture des postes — se réécrit à la recette.
+  d'Arenarea lui revient (le LOT-1021, qui la redisait, est abandonné le 20 octobre 2026) ; elle
+  se fait sur le nouveau moteur, avec la chaîne de décor du LOT-1019.
 - [LOT-151](../v0.0.4-lieux-de-la-demo/lots/LOT-151-kit-commun-intra-muros.md) et
   [LOT-107](../v0.0.4-lieux-de-la-demo/lots/LOT-107-carte-arena-of-fate.md) attendent désormais le
   LOT-1023 ; les autres lots de la `0.0.4` en dépendent par eux.

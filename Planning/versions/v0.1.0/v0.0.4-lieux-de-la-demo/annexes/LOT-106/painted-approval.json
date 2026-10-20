@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-09",
+  "status": "approved-by-user",
+  "scope": "Painterly witness with enriched materials; authorizes full Arena reconstruction with additional props. Not final arena approval.",
+  "userStatement": "je valide le mockup, il faudra rajouter des props dans la version final pour rendre l’arene de bien meilleurs qualité, continue de travailler en mode orchestrateur",
+  "captures": [
+    {
+      "path": "Saved/Captures/arena-witness-approved/painted/close-1200.png",
+      "sha256": "4cafabfb7c2ab130897776d1c6c14b34d6fbec83850588300d7aad3a4c540f63"
+    },
+    {
+      "path": "Saved/Captures/arena-witness-approved/painted/close-2200.png",
+      "sha256": "5e9c7ba0534e7001cf22c2d48d2e704adae1a8e7f7991572a4c3471b60dac48b"
+    },
+    {
+      "path": "Saved/Captures/arena-witness-approved/painted/interior-1200.png",
+      "sha256": "1663a4ca13fdc8b6fdd8be9eb00c355bc010921baa61ea8c034aa6008c6eb697"
+    },
+    {
+      "path": "Saved/Captures/arena-witness-approved/painted/interior-2200.png",
+      "sha256": "475477148781c952b4fdadc3605992e5074ea4d9ad32834683852356a0bc80fa"
+    },
+    {
+      "path": "Saved/Captures/arena-witness-approved/painted/overview-1200.png",
+      "sha256": "3c37a05c9c95e4af54b557a300ac9ea575373348c0aa0453f8ef0f01e7cad329"
+    },
+    {
+      "path": "Saved/Captures/arena-witness-approved/painted/overview-2200.png",
+      "sha256": "5cfb628ca1c3706c00343d4909bb41c88c3677876f61e92b00147e8f23a56c8e"
+    },
+    {
+      "path": "Saved/Captures/arena-witness-approved/painted/player-1200.png",
+      "sha256": "172f657c822d468b2bc5e6856be3f9efd5cc7fca1cdf20303eb063540a5c4c6d"
+    },
+    {
+      "path": "Saved/Captures/arena-witness-approved/painted/player-2200.png",
+      "sha256": "ff24880c8231d50c1d521d06dd9ab8228849918f7362b9e4056b9d6809510569"
+    },
+    {
+      "path": "Saved/Captures/arena-witness-approved/painted/stairs-1200.png",
+      "sha256": "e970bcac155a3bb6c80b525dec415a6e2d75b8c73030330731106253261ccd77"
+    },
+    {
+      "path": "Saved/Captures/arena-witness-approved/painted/stairs-2200.png",
+      "sha256": "6e0ab1a7b6408cd191ebf25803b06fbef9018a550ba0ff088da40cc650cced64"
+    }
+  ]
+}

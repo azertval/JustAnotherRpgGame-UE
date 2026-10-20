@@ -40,6 +40,8 @@ dans une description du créateur de personnage (`Source/Elements/Assets/Charact
 dans la fiche d'une pièce de décor (le champ `asset` des manifestes des maîtres et des pièces de
 bibliothèque, que `import_scenery_unreal.py` installe, LOT-1019). Un asset que rien ne cite ne se
 régénère pas : c'est une erreur, comme tout autre fichier trouvé sous `Content/`.
+Pour un niveau `.umap`, le chemin exact est exigé : citer seulement son dossier ne suffit pas.
+Les descriptions de carte citent leur niveau et les sous-niveaux de leurs étages.
 
 Les images des kits ne sont pas suivies par Git : le contrôle lit le **disque**, après
 `scripts/fetch_assets.py`, comme `check_hd_assets.py`. `Content/` se lit sur le disque aussi : là
@@ -307,6 +309,24 @@ def content_citations(root: Path) -> set[str]:
                 continue  # dit par `check_assets`
             # Le dossier d'une pièce (`…/<pièce>/StaticMeshes/SM_…` → `…/<pièce>`) : son maillage.
             cited.update(piece["asset"].rsplit("/", 2)[0] for piece in pieces if str(piece.get("asset", "")).startswith("/Game/"))
+    # A generic /Game/Maps/Levels prefix must not make every abandoned level valid.
+    # The current descriptions name the persistent maps and their streamed storeys.
+    for tree in ("Source/Elements/Levels", "Source/Test/Fixtures/Exploration/Levels"):
+        base = root / tree
+        for path in walk(base):
+            if path.suffix != ".json":
+                continue
+            try:
+                doc = json.loads(read(path))
+            except json.JSONDecodeError:
+                continue  # the JSON/map checks report malformed descriptions
+            if not isinstance(doc, dict) or doc.get("format") != "jadg-map":
+                continue
+            package = "/Game/Maps/Levels/" + path.relative_to(base).with_suffix("").as_posix()
+            cited.add(package)
+            if doc.get("storeyLevels"):
+                cited.update(f"{package}-etage-{storey['name']}" for storey in doc.get("storeys", [])
+                             if isinstance(storey, dict) and isinstance(storey.get("name"), str))
     return cited
 
 
@@ -319,7 +339,10 @@ def check_content(content: Path, cited: set[str]) -> list[str]:
             errors.append(f"Content/{relative} : ni .uasset ni .umap, rien à faire sous Content/")
             continue
         package = "/Game/" + relative[: -len(path.suffix)]
-        # Cité lui-même, ou par un dossier qui le contient (`/Game/Kit`, `/Game/Master/Statues`).
+        if path.suffix == ".umap" and package not in cited:
+            errors.append(f"Content/{relative} : aucun script ni description de carte ne nomme ce niveau exact")
+            continue
+        # Cité lui-même, ou par un dossier qui le contient (`/Game/Kit`, `/Game/Bibliotheque/ModelesMaitres/Statues`).
         if not any(package == prefix or package.startswith(prefix + "/") for prefix in cited):
             errors.append(f"Content/{relative} : aucun script du dépôt ne le produit "
                           "(aucun ne cite son chemin /Game/… ni un dossier qui le contient)")

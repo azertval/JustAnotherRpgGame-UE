@@ -33,6 +33,7 @@
 #include "UnrealClient.h"
 #include "World/JadgDayLight.h"
 #include "World/JadgMapFrame.h"
+#include "WorldPartition/WorldPartitionSubsystem.h"
 
 namespace
 {
@@ -42,7 +43,7 @@ namespace
 	constexpr int32 MeasureWarmupFrames = 60;
 
 	// La passe du contour sombre, écrite par `build_level.py` (LOT-1019) ; l'étiquette des lampes.
-	const TCHAR* ContourMaterial = TEXT("/Game/Scenes/Common/M_Contour.M_Contour");
+	const TCHAR* ContourMaterial = TEXT("/Game/Jeu/Commun/Common/M_Contour.M_Contour");
 	const FName LampTag(TEXT("JadgLamp"));
 
 	bool ShadersCompiling()
@@ -112,6 +113,15 @@ void AJadgCaptureDirector::BeginPlay()
 	}
 	// L'ordre des acteurs d'une carte n'est pas celui de la description : leur rang l'est.
 	Shots.Sort([](const AJadgShot& A, const AJadgShot& B) { return A.Order < B.Order; });
+
+	// A representative view can be captured and measured on the same saved map.
+	FString ShotList;
+	if (FParse::Value(CommandLine, TEXT("JadgShots="), ShotList, false))
+	{
+		TArray<FString> Names;
+		ShotList.ParseIntoArray(Names, TEXT(","));
+		Shots.RemoveAll([&Names](const TObjectPtr<AJadgShot>& Shot) { return !Names.Contains(Shot->ShotId); });
+	}
 
 	// Les étages d'une carte découpée en niveaux de chargement (LOT-1022) : `-JadgEtages` n'en
 	// garde que certains, et seulement les cadrages qui les regardent.
@@ -237,7 +247,7 @@ void AJadgCaptureDirector::ShowStoreys(int32 LookedAt)
 	// Un personnage d'un étage caché est caché avec lui ; son sol parti, il ne tombe pas.
 	for (TActorIterator<AJadgWalker> It(GetWorld()); It; ++It)
 	{
-		const int32 Storey = MapFrame->StoreyAt(It->Feet().Z);
+		const int32 Storey = MapFrame->StoreyAt(It->Feet());
 		const bool bShow = !Visible.IsValidIndex(Storey) || Visible[Storey];
 		It->SetActorHiddenInGame(!bShow);
 		if (UCharacterMovementComponent* Movement = It->GetCharacterMovement())
@@ -276,7 +286,8 @@ void AJadgCaptureDirector::Tick(float DeltaSeconds)
 		break;
 
 	case EPhase::Settling:
-		if (FramesInStep >= SettleFrames && !ShadersCompiling() && !AssetsCompiling())
+		if (FramesInStep >= SettleFrames && !ShadersCompiling() && !AssetsCompiling()
+			&& GetWorld()->GetSubsystem<UWorldPartitionSubsystem>()->IsAllStreamingCompleted())
 		{
 			FScreenshotRequest::RequestScreenshot(PendingFile, false, false);
 			Phase = EPhase::Writing;
@@ -494,7 +505,7 @@ void AJadgCaptureDirector::WriteReport() const
 	{
 		Json += FString::Printf(TEXT("%s\"%s\""), Index > 0 ? TEXT(", ") : TEXT(""), *Written[Index]);
 	}
-	Json += TEXT("],\n  \"measures\": [");
+	Json += FString::Printf(TEXT("],\n  \"measureShot\": \"%s\",\n  \"measures\": ["), Shots.IsEmpty() ? TEXT("") : *Shots[0]->ShotId);
 	for (int32 Index = 0; Index < Measures.Num(); ++Index)
 	{
 		const FMeasure& Measure = Measures[Index];

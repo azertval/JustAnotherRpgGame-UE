@@ -1,0 +1,189 @@
+[
+  {
+    "id": "ensemble",
+    "target": [
+      0,
+      0,
+      40
+    ],
+    "yaw": -90,
+    "pitch": -60,
+    "distance": 5200
+  },
+  {
+    "id": "baie",
+    "target": [
+      -800,
+      -700,
+      5
+    ],
+    "yaw": -60,
+    "pitch": -30,
+    "distance": 1500
+  },
+  {
+    "id": "arene-embouchure",
+    "target": [
+      122,
+      -567,
+      15
+    ],
+    "yaw": -110,
+    "pitch": -28,
+    "distance": 700
+  },
+  {
+    "id": "palais",
+    "target": [
+      -543,
+      92,
+      75
+    ],
+    "yaw": -45,
+    "pitch": -25,
+    "distance": 900
+  },
+  {
+    "id": "riviere",
+    "target": [
+      1092,
+      -300,
+      3
+    ],
+    "yaw": -150,
+    "pitch": -26,
+    "distance": 450
+  },
+  {
+    "id": "rue-pavee",
+    "target": [
+      226,
+      324,
+      38
+    ],
+    "yaw": -60,
+    "pitch": -12,
+    "distance": 18
+  },
+  {
+    "id": "chemin-sloghood",
+    "target": [
+      -1290,
+      916,
+      42
+    ],
+    "yaw": -30,
+    "pitch": -12,
+    "distance": 20
+  },
+  {
+    "id": "berge",
+    "target": [
+      -565,
+      -435,
+      6
+    ],
+    "yaw": -20,
+    "pitch": -24,
+    "distance": 160
+  },
+  {
+    "id": "ruisseau",
+    "target": [
+      -1557,
+      1011,
+      4
+    ],
+    "yaw": -70,
+    "pitch": -30,
+    "distance": 120
+  },
+  {
+    "id": "arene-parvis",
+    "target": [
+      165,
+      -466,
+      21
+    ],
+    "yaw": -90,
+    "pitch": -4,
+    "distance": 70
+  },
+  {
+    "id": "arene-interieur",
+    "target": [
+      165,
+      -547,
+      19
+    ],
+    "yaw": 0,
+    "pitch": -18,
+    "distance": 75
+  },
+  {
+    "id": "arene-baie",
+    "target": [
+      165,
+      -547,
+      35
+    ],
+    "yaw": -150,
+    "pitch": -18,
+    "distance": 420
+  },
+  {
+    "id": "arene-sable",
+    "target": [
+      198,
+      -547,
+      23
+    ],
+    "yaw": 0,
+    "pitch": 4,
+    "distance": 40
+  },
+  {
+    "id": "arene-escalier",
+    "target": [
+      205.97,
+      -485.17,
+      33.39
+    ],
+    "yaw": -177.3,
+    "pitch": 7.0,
+    "distance": 10.72
+  },
+  {
+    "id": "arene-loges",
+    "target": [
+      228.8,
+      -526.6,
+      32.0
+    ],
+    "yaw": 17.6,
+    "pitch": 10,
+    "distance": 32
+  },
+  {
+    "id": "arene-prison",
+    "target": [
+      181.1,
+      -532.4,
+      13.4
+    ],
+    "yaw": 200,
+    "pitch": -55,
+    "distance": 14
+  },
+  {
+    "id": "arene-entree",
+    "target": [
+      170.6,
+      -460.4,
+      19.4
+    ],
+    "yaw": -80,
+    "pitch": -12,
+    "distance": 12
+  }
+]

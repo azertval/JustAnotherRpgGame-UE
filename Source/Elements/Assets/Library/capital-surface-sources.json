@@ -1,0 +1,174 @@
+{
+  "date": "2026-10-13",
+  "origin": "Locally supplied UE5Landscape project; pack originals remain unchanged",
+  "surfaces": [
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\MossyGrass\\T_MossyGrass_01_BC.uasset",
+      "sha256": "72d1648b46a8a28581b95b9426f18199a6a850d7704465690c80e3a99ca2d7b1",
+      "destination": "Content/Surfaces/MossyGrass/T_MossyGrass_01_BC.uasset",
+      "installedAtAudit": true,
+      "required": true,
+      "adopted": true
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\MossyGrass\\T_MossyGrass_01_N.uasset",
+      "sha256": "dc3ba7e9ca60103cfd268a0cf4b5b3440054c0614bf78122d939dfc591c22d75",
+      "destination": "Content/Surfaces/MossyGrass/T_MossyGrass_01_N.uasset",
+      "installedAtAudit": true,
+      "required": true,
+      "adopted": true
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\MossyGrass\\T_MossyGrass_01_Roughness.uasset",
+      "sha256": "a14612ebde39624fa5d86ef526cafd6a88c1b50e0e9fd57cf87636c1ce7eeb2c",
+      "destination": "Content/Surfaces/MossyGrass/T_MossyGrass_01_Roughness.uasset",
+      "installedAtAudit": true,
+      "required": true,
+      "adopted": true
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\ForestGround\\T_ForestGround_A.uasset",
+      "sha256": "ee2f6d1cbea4e7ff264241dfdf9872f2f45fa9a29b3d77effbc995dced043b4e",
+      "destination": "Content/Surfaces/ForestGround/T_ForestGround_A.uasset",
+      "installedAtAudit": true,
+      "required": true,
+      "adopted": true
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\ForestGround\\T_ForestGround_N.uasset",
+      "sha256": "c56489700e9a4dd50e7e8749ad9797990c7713a612abf80cc09aa2cf2ee1a52c",
+      "destination": "Content/Surfaces/ForestGround/T_ForestGround_N.uasset",
+      "installedAtAudit": true,
+      "required": true,
+      "adopted": true
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\ForestGround\\T_ForestGround_R.uasset",
+      "sha256": "d509f1ab29717277a82e85d9804f31067068cf7bd90d91ccaf502501a9c868f2",
+      "destination": "Content/Surfaces/ForestGround/T_ForestGround_R.uasset",
+      "installedAtAudit": true,
+      "required": true,
+      "adopted": true
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\MossyRockyGround\\T_MossyRockyGround_01_BC.uasset",
+      "sha256": "b102222ea5b5a57283c8a639b4a28fc10e94ae286054050ae31a393c13c137ce",
+      "destination": "Content/Surfaces/MossyRockyGround/T_MossyRockyGround_01_BC.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\MossyRockyGround\\T_MossyRockyGround_01_Displacement_PNG.uasset",
+      "sha256": "ac52b42bb3136ecb5362cf39e6965b3caf16d4aa93986f9e8dabce4d74055a9b",
+      "destination": "Content/Surfaces/MossyRockyGround/T_MossyRockyGround_01_Displacement_PNG.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\MossyRockyGround\\T_MossyRockyGround_01_N.uasset",
+      "sha256": "f09183f4d191f476065ba265c87a6815b96e6f7844f647e2b20a7e3161a14ed3",
+      "destination": "Content/Surfaces/MossyRockyGround/T_MossyRockyGround_01_N.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\MossyRockyGround\\T_MossyRockyGround_01_Roughness.uasset",
+      "sha256": "07b12d7bc74584f97b09ed9b2f7f99b17fb8de1017114d7c5aba35f8493aae03",
+      "destination": "Content/Surfaces/MossyRockyGround/T_MossyRockyGround_01_Roughness.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\BeachCliff\\T_BeachCliff_01_BC.uasset",
+      "sha256": "6b6f22edd034a5f0e1324ec93092dd89f87f4a1fa35b930b75b1dfde382ff406",
+      "destination": "Content/Surfaces/BeachCliff/T_BeachCliff_01_BC.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\BeachCliff\\T_BeachCliff_01_Displacement.uasset",
+      "sha256": "e8feffa95c992216310c36648c0dfa6d5eed72e068453eee40e2c226966fec97",
+      "destination": "Content/Surfaces/BeachCliff/T_BeachCliff_01_Displacement.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\BeachCliff\\T_BeachCliff_01_N.uasset",
+      "sha256": "549cfe5540944d3a0b99ae480fb1adf53fea4a7a51cb62a1a189db9af3883823",
+      "destination": "Content/Surfaces/BeachCliff/T_BeachCliff_01_N.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\BeachCliff\\T_BeachCliff_01_Roughness.uasset",
+      "sha256": "c2ca44d19ee2ef40868c43cf98553da6d052ea53f6615b21668f5991d372783a",
+      "destination": "Content/Surfaces/BeachCliff/T_BeachCliff_01_Roughness.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\MossyCreekStones\\T_MossyCreekStones_A.uasset",
+      "sha256": "d0be53c84d748672d717ea809591c3df9a30c5b34a8820eb83e692f8130f7d37",
+      "destination": "Content/Surfaces/MossyCreekStones/T_MossyCreekStones_A.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\MossyCreekStones\\T_MossyCreekStones_N.uasset",
+      "sha256": "1c51b0808232d40cc8349ed89f4f13f43c34a84e7db0ec41dabfe7e5a72ceaf4",
+      "destination": "Content/Surfaces/MossyCreekStones/T_MossyCreekStones_N.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\MossyCreekStones\\T_MossyCreekStones_R.uasset",
+      "sha256": "42cfadc03b5c32c8b55bd4c3202683b3b13a64cb1900850dcbc7ac4896801e80",
+      "destination": "Content/Surfaces/MossyCreekStones/T_MossyCreekStones_R.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\Mossy_Rocky_Ground_vcrkeax\\T_Mossy_Rocky_Ground_vcrkeax_4K_D.uasset",
+      "sha256": "4575c60bcc9bbd822864bb2c14dee19a901a5d79f6a5a07d5daee80691d7c378",
+      "destination": "Content/Surfaces/Mossy_Rocky_Ground_vcrkeax/T_Mossy_Rocky_Ground_vcrkeax_4K_D.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\Mossy_Rocky_Ground_vcrkeax\\T_Mossy_Rocky_Ground_vcrkeax_4K_N.uasset",
+      "sha256": "8d42f6c2c88d394d80240757dcd028389410a87a8ca431bf486e8f0692c620f0",
+      "destination": "Content/Surfaces/Mossy_Rocky_Ground_vcrkeax/T_Mossy_Rocky_Ground_vcrkeax_4K_N.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\Mossy_Rocky_Ground_vcrkeax\\T_Mossy_Rocky_Ground_vcrkeax_Roughness.uasset",
+      "sha256": "17d55f274bdb05632386928664acef66b85bc870a7a43939c1bc5a6cc6aaf726",
+      "destination": "Content/Surfaces/Mossy_Rocky_Ground_vcrkeax/T_Mossy_Rocky_Ground_vcrkeax_Roughness.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    },
+    {
+      "source": "E:\\JustAnotherRpgGame_UR\\UE5 Landscape UE5.4 and newer 2026\\UE5Landscape\\Content\\Megascans\\Surfaces\\Mossy_Rocky_Ground_vcrkeax\\T_MossyRockyGround_vcrkeax_4K_DISPDISPLACE.uasset",
+      "sha256": "279975fa44065877d3a3158048f60b825b9dbf2074ab40d559e3156f4d7ada97",
+      "destination": "Content/Surfaces/Mossy_Rocky_Ground_vcrkeax/T_MossyRockyGround_vcrkeax_4K_DISPDISPLACE.uasset",
+      "installedAtAudit": true,
+      "required": false,
+      "adopted": false
+    }
+  ]
+}

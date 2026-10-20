@@ -3,7 +3,7 @@ id = "LOT-1019"
 titre = "La chaîne de décor au niveau du moteur, et le standard 3D réécrit"
 version = "0.0.3"
 filiere = "standard"
-statut = "a-faire"
+statut = "livre"
 taille = "L"
 resume = "Chaque famille de pièces d'un lieu se produit au maître, avec sa matière complète, et s'installe dans le moteur par script ; le standard 3D dit sur mesures ce qu'une pièce doit être."
 prerequis = ["LOT-1018"]
@@ -348,3 +348,17 @@ crédits pour les six, reprises non comprises.
    annexes du lot pour qu'elle se relise dans la PR ?
 8. **Le Colisée** : son relief dérivé est retiré ; reste-t-il construit par script jusqu'au
    LOT-1021, ou se commande-t-il en pièces modulaires à Meshy ?
+
+## Livraison — 20 octobre 2026
+
+Le lot est **livré** avec la version, sur décision de l'auteur (20 octobre 2026) : la chaîne de
+décor au maître (`import_scenery_unreal.py`, une pièce entre depuis sa fiche avec sa matière
+complète), le standard 3D réécrit sur les mesures du moteur, le gabarit de commande révisé (plus
+haut). Depuis, l'Arena of Fate posée dans la capitale tire ses garnitures du catalogue unitaire de
+l'arène (`aof-catalogue.json`, `/Game/Bibliotheque/ArenaFate`) par leur asset du projet, et ses
+pièces générées (`arena_cavea.py`, `arena_undercroft.py`) se réimportent par leur empreinte.
+
+Ce qui restait au lot : la commande des six façades d'Arenarea et leur remplacement dans la porte
+suivent Arenarea à la `0.0.4` (`LOT-147`) ; les jugements de l'auteur (famille témoin, contour,
+occlusion, halo, ombres des lampes) et une pièce de bibliothèque prise sur Fab, à la recette
+(`LOT-1023`). Les questions pour l'auteur restent ouvertes, à la recette.

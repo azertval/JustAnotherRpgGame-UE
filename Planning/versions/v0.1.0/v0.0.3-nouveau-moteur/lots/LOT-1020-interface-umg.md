@@ -3,7 +3,7 @@ id = "LOT-1020"
 titre = "Les écrans et le HUD en UMG"
 version = "0.0.3"
 filiere = "interface"
-statut = "en-cours"
+statut = "livre"
 taille = "L"
 resume = "Tous les écrans du jeu à la charte v2 — HUD, Personnage, Équipement, Journal, Groupe, Carte, Options, menus, dialogues, combat, écrans de fin — existent sur le nouveau moteur, construits en C++, avec les mêmes images et les mêmes textes."
 prerequis = ["LOT-1016"]
@@ -261,3 +261,18 @@ jugement de l'auteur, que le lot ne prononce pas.
    crédits) : à un lot suivant, ou à celui-ci ?
 4. **La pause sous une page** : le jeu s'arrête dès qu'une page s'ouvre ; l'ancien jeu arrêtait
    seulement le héros. Garder la pause ?
+
+## Livraison — 20 octobre 2026
+
+Le lot est **livré** avec la version, sur décision de l'auteur (20 octobre 2026) : les écrans et le
+HUD en UMG construits par C++, la charte v2, la localisation (plus haut). S'y ajoute l'**écran de
+chargement** (`UI/JadgLoadingScreen`, demande de l'auteur du 20 octobre) : l'illustration de
+référence du lieu — les quatre vues de la planche validée de l'Arena of Fate, découpées par
+`scripts/assetsGeneration/prepare_loading_screens.py`, déclarées dans
+`Source/Elements/Assets/UI/loading.json` —, le nom du lieu, ce qui se prépare et un indicateur qui
+tourne ; pendant le chargement de la carte (lecteur de films du moteur), puis par-dessus le jeu
+jusqu'à ce que le monde soit prêt. Textes `loading.*` en français et en anglais.
+
+Ce qui restait au lot (le jugement des comparaisons côte à côte, les écarts que l'auteur voudrait
+reprendre, le cahier de test des écrans) passe à la recette (`LOT-1023`). Les questions pour
+l'auteur restent ouvertes, à la recette.

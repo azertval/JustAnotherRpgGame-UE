@@ -212,7 +212,7 @@ trois cartes ([bilan](../../v0.0.2.5-passage-3d/bilan.md)).
 
 ## Le portage au nouveau moteur (LOT-1022, 9 octobre 2026)
 
-L'Arena of Fate est désormais **une seule carte à trois étages** ([LOT-1022](../../v0.0.3-nouveau-moteur/lots/LOT-1022-portage-arena-of-fate-et-martpart.md), D-51) : le
+L'Arena of Fate est désormais **une seule carte à trois étages** ([LOT-1022](../../v0.0.3-nouveau-moteur/lots/LOT-1022-portage-arena-of-fate.md), D-51) : le
 sable, les vestiaires et la prison (niveau −1, à −5,5 m), les catacombes (niveau −2, à −12,1 m),
 leurs pièces et leurs entités telles que les trois cartes de la v4 les posaient, un niveau de
 chargement par étage. Les escaliers sont aux mêmes cases ; ils relient les étages par les portails

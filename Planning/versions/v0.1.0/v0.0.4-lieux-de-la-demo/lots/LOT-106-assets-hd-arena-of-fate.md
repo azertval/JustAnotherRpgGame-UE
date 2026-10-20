@@ -26,6 +26,213 @@ sources = [
 ]
 +++
 
+## Refonte complète de l'Arena of Fate — décision du 9 octobre 2026
+
+La référence au *Tanares Sourcebook*, la composition et la narration de l'arène sont conservées.
+Après comparaison, l'auteur retient **le style fantasy peint précédent**, avec des textures
+beaucoup plus détaillées, plus variées et un ensemble moins lisse.
+L'extérieur conserve l'emprise monumentale de **189 × 156 × 48 m** ; l'organisation intérieure,
+les connexions et les hauteurs sont libres si les fonctions et les flux du lieu restent lisibles.
+Tout le décor devra être praticable, y compris les gradins et les loges, dans un parcours physique
+continu. Les murs et plafonds seront complets et s'effaceront lorsqu'ils masquent le personnage.
+La scène complète devra comprendre la foule, les bannières, les feux et l'ambiance.
+
+**Témoin validé par l'auteur le 9 octobre 2026.** La construction complète est autorisée.
+L'auteur précise que l'amélioration doit maintenant venir des props et de l'habillage de la
+version finale. Les textures peintes enrichies constituent la base validée. Les accessoires
+doivent exprimer la préparation des gladiateurs, la détention, l'entretien, les cérémonies et
+les réceptions des délégations, tout en laissant les circulations praticables.
+L'auteur précise ensuite **« Décor d'abord, foule ensuite »** : la foule est différée à
+l'arrivée des personnages de la nouvelle chaîne. Elle ne conditionne pas cette passe de décor.
+
+### Propagation du témoin enrichi — 10 octobre 2026
+
+L’auteur valide les vues du témoin de jour et de nuit et autorise sa propagation. La carte
+complète comporte 1826 éléments, dont 1468 pièces d’architecture et 317 accessoires.
+Les sculptures et les emblèmes du projet sont réemployés. L’emprise reste de 189 × 156 m,
+avec un sommet à 48,03 m. Les sept niveaux vont des catacombes à −12 m à la terrasse à 46,8 m.
+Les gradins, loges, galeries et le seuil sud reprennent les reliefs et matières du témoin.
+Les vestiaires conservent leur neutralité ; grilles de cellules, fontaines, liens des
+effigies et inscriptions des socles complètent les éléments narratifs de la référence.
+
+Le gameplay existant, les rencontres, le groupe, les étages et leurs données restent
+strictement identiques à la carte précédant cette propagation. La foule reste différée,
+et la ville d’Arenarea n’entre pas dans ce périmètre.
+
+Nanite conserve les maillages visuels au maître. Les trois sols annulaires utilisent
+des collisions architecturales fermées, de mêmes contours à 192 cordes, mêmes hauteurs
+et mêmes trémies ; leur géométrie visuelle détaillée reste intacte. Les autres sols et
+escaliers gardent une collision fidèle à leur géométrie. Les nervures suivent leurs voûtes,
+les appliques suivent leurs murs, et les accessoires suivent leur support de sol lors
+de la coupe, avec conservation des collisions et de l’éclairage.
+
+Les 235 positions de contrôle et les 66 points du parcours sont reliés. Le groupe a
+parcouru ce trajet dans les deux sens : **132/132 arrêts**, sans portail ni téléportation,
+avec les tolérances de 35 cm horizontalement et 10 cm en hauteur.
+Les 26 captures à midi et à 22 h proviennent du moteur sans retouche.
+Les mesures courtes en 1920 × 1080 sur RTX 4060 Ti donnent **86.3 images/s à midi
+et 82.5 à 22 h**, sans foule. Elles décrivent la scène de mesure et ne garantissent
+pas la cadence à chaque position ni en combat. Les sons installés ne sont pas audités
+par les exécutions sans son.
+
+Les empreintes des sources, des captures et des rapports actuels sont conservées dans
+[le relevé de validation technique](../annexes/LOT-106/modern-decor-validation.json).
+La revue se reproduit avec `scripts/maps/review_arena_fate_modern.ps1 -Walk` ; `-Generate`
+refait aussi les sources Blender. Les rapports sont dans `Saved/Jadg/arena-fate-modern/`
+et les captures dans `Saved/Captures/arena-fate-modern/`. La validation artistique finale
+de l’arène complète reste distincte de l’approbation du témoin.
+
+### Style peint conservé — matières enrichies du 9 octobre
+
+L'auteur préfère le style peint précédent et demande davantage de détails et de variations.
+La passe dessin accentuée est retirée, avec ses deux matériaux Unreal. La palette, les
+cadrages, l'éclairage et les formes de la proposition peinte sont conservés.
+
+Les huit matières sont enrichies : pores et traces de taille du calcaire, veines et variations
+de poli du marbre, patine et rayures du bronze, métal martelé, tissage du tissu, fibres et nœuds
+du bois, grains du sable et du mortier. Les normales et cartes ORM peintes passent en 2048².
+Elles proviennent de champs physiques indépendants de la couleur ; le relief crête à crête
+mesuré atteint 3,31 mm pour le calcaire, 1,15 mm pour le bois et 0,83 mm pour le bronze.
+
+L'outil intégré de génération d'images enrichit la peinture originale du calcaire. Le résultat
+est conservé intact en 1254² dans
+`Source/Elements/Assets/Built/arena-witness-materials/inputs/stone_cream_painted_detail.png`,
+avec sa consigne complète dans `stone_cream_painted_detail.provenance.json`. Aucune image du
+sourcebook n'est envoyée. Unreal prépare ses mipmaps ; la répétabilité exacte de cette image
+générée reste une limite distincte des champs procéduraux, dont la périodicité est contrôlée.
+
+Chaque bloc de calcaire ou de marbre porte une graine constante, y compris sur ses biseaux.
+Le matériau s'en sert pour décaler ensemble couleur, relief et ORM ; les teintes varient aussi
+entre blocs. Cet attribut n'affecte pas l'opacité. La comparaison des 16 GLB confirme les mêmes
+1 191 484 triangles, positions à 10 µm près, UV et couleurs RGB. La réexportation change quelques
+normales de moins de 0,0057 degré, sans modifier les surfaces praticables
+(`Saved/Jadg/arena-witness/detail-alpha-comparison.json`).
+
+Le moteur construit les matériaux sans erreur de shader et retrouve tous les points de
+navigation. Le parcours physique **50/50** déjà réalisé reste applicable aux sols et escaliers
+inchangés. Les 72 PNG des trois familles historiques et leurs empreintes sont vérifiés ; les
+mesures des huit matières peintes sont consignées dans
+`Saved/Jadg/arena-witness/texture-detail-validation.json`.
+
+Les dix captures finales sont dans `Saved/Captures/arena-witness/painted/`. La galerie
+`Saved/Captures/arena-witness/index.html` compare les matières enrichies au style peint conservé
+dans `arena-witness-before-drawn/painted/`, aux mêmes heures et cadrages. La revue visuelle
+confirme les détails du calcaire en gros plan et la variation entre blocs au cadrage du joueur,
+de jour comme de nuit. Les relevés courts donnent **92,8 images/s à midi et 95,7 à 22 h** en
+1920 × 1080 sur RTX 4060 Ti. Ces mesures portent uniquement sur le témoin sans foule.
+Le style peint est retenu par l'auteur ; le témoin présente maintenant la qualité de matière
+demandée pour revue, avant la reconstruction complète de l'arène.
+
+### Dessin plus marqué — essai écarté du 9 octobre
+
+L'auteur demande un **« style dessin encore plus marqué »**. La géométrie, les collisions,
+les points de passage et les cinq cadrages restent identiques. Les matériaux mélangent un
+pigment uni à leurs textures : calcaire à 28 % de texture, marbre à 25 %, tissu à 70 % ; les
+normales de surface sont atténuées et la pierre devient plus mate. Les PNG sources sont conservés.
+
+L'ancien `arena_witness_illustration.py` construisait une passe propre au témoin : luminance
+regroupée par paliers, ombres légèrement refroidies, lumières réchauffées et contours
+brun-charbon fondés sur la profondeur. Elle passe après la profondeur de champ et avant
+l'anticrénelage temporel d'Unreal. Le second réglage adoucit les transitions et réduit le
+crénelage visible au premier essai. La lumière réelle, le cycle jour/nuit et les autres effets
+de sélection sont conservés.
+
+Les dix captures de cet essai sont archivées dans
+`Saved/Jadg/arena-witness/drawn-rejected/captures/`. La galerie comparait
+la fantasy peinte précédente (`arena-witness-before-drawn/painted/`) à cette proposition.
+Les relevés courts en 1920 × 1080 sur RTX 4060 Ti donnent **100,5 images/s à midi et 103,3 à
+22 h**, sur cet extrait sans foule ; ils ne préjugent pas de la scène complète. Le parcours
+**50/50** de l'étape précédente reste applicable : aucun sol, escalier ni collision n'a changé.
+Le moteur a construit les matériaux et produit les captures sans erreur de shader ; Ruff et
+le contrôle des assets/scripts orphelins passent. Le rendu reste soumis à la validation
+artistique de l'auteur avant la reconstruction complète. **Essai ensuite écarté par l'auteur**,
+qui préfère le style peint précédent ; ses sources et captures sont archivées dans
+`Saved/Jadg/arena-witness/drawn-rejected/`, et la passe est retirée de la scène.
+
+### Reprise fantasy illustrée après le premier retour
+
+L'auteur juge les trois traitements du premier témoin difficiles à distinguer, les textures
+pauvres et l'ensemble plat. Il ouvre une direction dessin fantasy comme les portraits.
+La proposition suivante reprend ensemble la géométrie, les matières et l'éclairage : 286 pierres
+modelées, 534 dalles taillées, 72 tambours cannelés, des filets de bronze, des joints sur mortier
+reculé et une variation colorée par bloc. Les trois volées (deux d'accès, une dans les gradins)
+deviennent des volumes fermés continus, sans les anciens nez de marche superposés.
+Les points de passage et les cinq cadrages restent inchangés.
+
+La couleur du calcaire est une peinture minérale originale produite avec l'outil intégré de
+génération d'images. Son PNG source est conservé intact dans
+`Source/Elements/Assets/Built/arena-witness-materials/inputs/stone_cream_painted.png`, avec les
+consignes et limites dans `stone_cream_painted.provenance.json`. Aucune image du sourcebook
+n'a été fournie au générateur. Les cartes de normales et d'ORM proviennent de champs physiques
+indépendants. Unreal effectue le traitement vers une puissance de deux pour les mipmaps ; la
+périodicité de l'image générée n'est pas mathématiquement garantie.
+
+Le témoin reçoit un ciel de réflexion gradué, un soleil plus défini et des lampes plus locales.
+La galerie compare **l'avant et la proposition globale**, et non deux seules matières. Le
+premier essai est conservé dans `Saved/Captures/arena-witness-before-fantasy/`. Les dix nouvelles
+captures sont conservées dans `Saved/Captures/arena-witness-before-drawn/painted/`, à midi et à 22 h, avec
+les cinq cadrages identiques. Les grandes faces de mortier aux ouvertures sont corrigées ; les
+diagonales des anciens nez de marche ne sont plus visibles dans cette passe.
+
+Le nouveau parcours physique est validé : **50 points sur 50**, aller-retour en 135,0 secondes,
+dans `Saved/Jadg/arena-witness/walk-painted.json`. La dernière correction recule seulement le
+support des cinq murs ; la comparaison des triangles et attributs des sols et escaliers, à
+10 µm près et indépendamment de l'ordre d'export, confirme leur invariance
+(`Saved/Jadg/arena-witness/mortar-canonical-comparison.json`).
+
+La capture finale mesure **96,8 images/s à midi et 101,4 à 22 h**, en 1920 × 1080 sur RTX 4060 Ti
+(`Saved/Captures/arena-witness-before-drawn/painted/mesure.json`). Ces relevés courts portent sur ce seul extrait
+sans foule. Le rendu conserve une base 3D éclairée par Unreal et des matières peintes ; il ne
+prétend pas reproduire exactement le dessin des portraits. La direction artistique reste à
+valider avant toute reconstruction complète.
+
+### Premier témoin présenté — mesures antérieures à la reprise
+
+La première étape est un témoin Unreal réunissant une arcade, des gradins, une salle voûtée et un
+escalier. Il a été présenté : `scripts/assetsGeneration/build_arena_witness.py` génère la
+géométrie modulaire avec Blender, `build_arena_witness_textures.py` les textures, et
+`scripts/maps/build_arena_witness_scene.py` les trois scènes. La commande
+`scripts/maps/review_arena_witness.ps1 -Generate -Compile -Walk` orchestre la génération et la revue. Les trois traitements partagent la même
+géométrie et le même éclairage ; seul le traitement visuel varie. Ce témoin est un extrait de
+l'arène, pas le remplacement de la carte complète. Les rendus au cadrage du joueur, à midi et à
+22 h sont conservés dans `Saved/Captures/arena-witness-before-fantasy/index.html` ; la validation artistique par
+l'auteur est **en attente** avant la reconstruction complète.
+
+**État de la production du témoin.** La compilation de la cible éditeur sous Unreal Engine 5.8.3
+a réussi ; `JadgContentCheck` valide quatre fiches. Le rapport
+`Saved/Automation/Jadg/index.json` consigne 27 tests réussis, sans avertissement ni échec ;
+`check_orphans.py` passe. La galerie locale est produite par
+`scripts/maps/render_arena_witness_review.py`. Ces contrôles ne valent pas validation artistique.
+
+La marche complète du personnage sur la géométrie commune est validée : 50 points sur 50,
+aller-retour physique sans portail, dont les deux côtés des sept rangées, la loge, la salle et
+l'escalier à deux volées (`Saved/Jadg/arena-witness/walk-stylized.json`). Le contrôle de hauteur
+est de 10 cm. La navigation propre au témoin emploie des cellules de 5 × 2 cm et conserve
+l'erreur verticale dans ses contours ; les arrêts se font sur les paliers et les rangées.
+Les 30 captures des trois traitements sont produites (cinq cadrages à deux heures). Les mesures
+sur RTX 4060 Ti en 1920 × 1080, consignées dans chaque `mesure.json`, concernent uniquement
+ce témoin sans foule :
+
+| Traitement | Midi | 22 h |
+|---|---:|---:|
+| Réalisme stylisé | 101,6 images/s | 101,3 images/s |
+| Peint remanié | 99,3 images/s | 99,3 images/s |
+| Réalisme poussé | 102,8 images/s | 96,8 images/s |
+
+Ces relevés courts ne préjugent pas de la cadence de l'arène complète. Le traitement peint porte
+sur les matières ; il n'ajoute pas de shader de rendu non photoréaliste. Le témoin emploie une
+coupe franche de visibilité : la
+collision et la physique restent actives, comme les ombres et l'éclairage indirect des éléments
+masqués. La transition fondue reste à affiner pour la carte complète. Ce témoin n'ajoute ni foule
+ni effets visuels nouveaux.
+
+**Réserve de revue visuelle.** De fines diagonales restent visibles sur certaines marches dans
+la vue éloignée, alors que le cadrage rapproché est net. Les normales horizontales des marches
+sont correctes dans le GLB. Un essai temporaire à `r.Nanite.MaxPixelsPerEdge=0.25`
+(`Saved/Captures/arena-witness/nanite-detail-probe/`) ne les a pas supprimées ; leur cause reste
+à établir. Aucun réglage de cet essai n'est conservé. La galerie permet le choix des matières,
+sans valider cette finition géométrique ni la carte complète.
+
 ## Reprise V2 du Colisée — décision du 3 octobre 2026
 
 La première proposition 3D est refusée par l’auteur : textures trop simples, statues
@@ -237,7 +444,7 @@ trois cartes ([bilan](../../v0.0.2.5-passage-3d/bilan.md)).
 
 ## Le portage au nouveau moteur (LOT-1022, 9 octobre 2026)
 
-L'Arena of Fate est désormais **une seule carte à trois étages** ([LOT-1022](../../v0.0.3-nouveau-moteur/lots/LOT-1022-portage-arena-of-fate-et-martpart.md), D-51) : le
+L'Arena of Fate est désormais **une seule carte à trois étages** ([LOT-1022](../../v0.0.3-nouveau-moteur/lots/LOT-1022-portage-arena-of-fate.md), D-51) : le
 sable, les vestiaires et la prison (niveau −1, à −5,5 m), les catacombes (niveau −2, à −12,1 m),
 leurs pièces et leurs entités telles que les trois cartes de la v4 les posaient, un niveau de
 chargement par étage. Les escaliers sont aux mêmes cases ; ils relient les étages par les portails

@@ -83,6 +83,16 @@ private:
 
 	bool bDeathShown = false;
 
+	/// L'écran de chargement, par-dessus le jeu tant que le monde n'est pas prêt (FJadgLoadingScreen).
+	TSharedPtr<SWidget> Loading;
+	FText LoadingStatus;
+	double LoadingSince = 0.0;
+	int32 SteadyFrames = 0;
+
+	void ShowLoading();
+	void UpdateLoading();
+	void HideLoading();
+
 	UJadgScreen* Create(EJadgScreen Kind, const FString& Argument, int32 Layer);
 	void Remove(UJadgScreen* Screen);
 	void ApplyInputMode();

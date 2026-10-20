@@ -1,0 +1,28 @@
+{
+  "map": "/Game/Capitale/Cartes/Capitale",
+  "originCm": [
+    -504000,
+    -604800
+  ],
+  "extentCm": [
+    1108800,
+    1310400
+  ],
+  "dimensions": [
+    2773,
+    3277
+  ],
+  "channels": {
+    "R": "earthen road shoulders",
+    "G": "damp river and bay banks",
+    "B": "free construction reservations"
+  },
+  "terrainHeightsChanged": false,
+  "roadAxesChanged": false,
+  "generatedFoliage": false,
+  "generatedStructures": false,
+  "references": [
+    "https://www.youtube.com/watch?v=5ju7wyvZGBI&t=80s",
+    "https://www.youtube.com/watch?v=WUtl1K9Pn7k&t=2270s"
+  ]
+}

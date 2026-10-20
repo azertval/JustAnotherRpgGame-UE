@@ -1,0 +1,269 @@
+{
+  "generator": "E:\\JustAnotherRpgGame_UR\\JustAnotherRpgGame\\scripts\\assetsGeneration\\build_capital_landscape_water.py",
+  "meshes": [
+    {
+      "id": "eau-t04_00",
+      "file": "eau-t04_00.glb",
+      "triangles": 24250,
+      "sha256": "31c02a74fee86b411da2988e35e99cfe013145640dc2edf28dabb607df1f1878"
+    },
+    {
+      "id": "eau-t05_00",
+      "file": "eau-t05_00.glb",
+      "triangles": 3906,
+      "sha256": "acb6c065deeca44e2f0176ca20efe298e2c41ec98c3689f8074cab9667fa3ef4"
+    },
+    {
+      "id": "eau-t03_01",
+      "file": "eau-t03_01.glb",
+      "triangles": 1590,
+      "sha256": "c21aa6e17bbcd61253fdd7102eea7092442de7531919e4afceee06d9a9b005cb"
+    },
+    {
+      "id": "eau-t04_01",
+      "file": "eau-t04_01.glb",
+      "triangles": 30132,
+      "sha256": "3fae395a7f768ac96280ca53c30707446cd3c14dbf2db612ca22d2a090182fdc"
+    },
+    {
+      "id": "eau-t03_02",
+      "file": "eau-t03_02.glb",
+      "triangles": 34036,
+      "sha256": "2725fa1c60ae74908b961899a50fe76248556c6fa9a83c72d46d4874ffc43fbb"
+    },
+    {
+      "id": "eau-t04_02",
+      "file": "eau-t04_02.glb",
+      "triangles": 2644,
+      "sha256": "4d2e5862c232a5ccb3cb96682fd1362176d7b7ff32394e5f009a56ae84b57978"
+    },
+    {
+      "id": "eau-t02_03",
+      "file": "eau-t02_03.glb",
+      "triangles": 14516,
+      "sha256": "814174488b284ba69b0bb73304eb6781378a4eb1a85e2c0f767f2064d9ed96f8"
+    },
+    {
+      "id": "eau-t03_03",
+      "file": "eau-t03_03.glb",
+      "triangles": 26148,
+      "sha256": "79bdda32c19ec36e6b34eb424356ab9dd11a97cc4b083052c59e3d20b68bd33c"
+    },
+    {
+      "id": "eau-t02_04",
+      "file": "eau-t02_04.glb",
+      "triangles": 42050,
+      "sha256": "54b094a664d35729492805f7b54ff0f9ba16cc51e665369592c4d7c4ae2b3bf1"
+    },
+    {
+      "id": "eau-t01_05",
+      "file": "eau-t01_05.glb",
+      "triangles": 9440,
+      "sha256": "fd5d57140a9fb4fffc303dbe68c244cee701f3bada0b813e602c339f99704bc9"
+    },
+    {
+      "id": "eau-t02_05",
+      "file": "eau-t02_05.glb",
+      "triangles": 35124,
+      "sha256": "b11a2f6118f74d53a9c9d22de9db84ec7f5a371fbb6d316ba4c6386e21e7ff89"
+    },
+    {
+      "id": "eau-t01_06",
+      "file": "eau-t01_06.glb",
+      "triangles": 29068,
+      "sha256": "6da4e25a872f8e8df94e2c6d94449929aa6eae8963effa4e0598f0868346c53e"
+    },
+    {
+      "id": "eau-t02_06",
+      "file": "eau-t02_06.glb",
+      "triangles": 28448,
+      "sha256": "70a212dbe3afa180898d22abd2bc1ac0202ab1cb164b2d42eace41ad62b4ff47"
+    },
+    {
+      "id": "eau-t03_06",
+      "file": "eau-t03_06.glb",
+      "triangles": 1040,
+      "sha256": "302d22cc3163e6e1e729f30100eaed4e9019020183e98d7b13cb9f19085c2dcb"
+    },
+    {
+      "id": "eau-t01_07",
+      "file": "eau-t01_07.glb",
+      "triangles": 75672,
+      "sha256": "af389a15b7a83a02e579821d2209851d60246e5cf7daf546c0f5357ed1d09b3f"
+    },
+    {
+      "id": "eau-t02_07",
+      "file": "eau-t02_07.glb",
+      "triangles": 92458,
+      "sha256": "6de4837b66d6da13dc6cf925c6f191fca132cfef219ae6b88e396ebf1a765b86"
+    },
+    {
+      "id": "eau-t03_07",
+      "file": "eau-t03_07.glb",
+      "triangles": 1466,
+      "sha256": "b24de9c1bb07b6d725460a883f75719605a113ea3e00a53e77425034daf2dc7b"
+    },
+    {
+      "id": "eau-t01_08",
+      "file": "eau-t01_08.glb",
+      "triangles": 93396,
+      "sha256": "6b2aeef06c784435a65653e555124490b6f7dbff82b108a67934de41b06d0302"
+    },
+    {
+      "id": "eau-t02_08",
+      "file": "eau-t02_08.glb",
+      "triangles": 89996,
+      "sha256": "54bc2b89593ce2bcc7edcdabda57e36262660b18fc4a85841679e93d5797027f"
+    },
+    {
+      "id": "eau-t01_09",
+      "file": "eau-t01_09.glb",
+      "triangles": 76042,
+      "sha256": "fc8938985bef2c475c104a060904cfc9f74b3acb4a4896df9ad5196a8dcd420d"
+    },
+    {
+      "id": "eau-t02_09",
+      "file": "eau-t02_09.glb",
+      "triangles": 117612,
+      "sha256": "df4d458ad5966a800e0838f9950f101b1ef7cbcdc526840ae0f18b0f66285296"
+    },
+    {
+      "id": "eau-t03_09",
+      "file": "eau-t03_09.glb",
+      "triangles": 14206,
+      "sha256": "38dbc87e0f8d9114dd6e2521b056b5b6713cfcf146a284e990467b597326472e"
+    },
+    {
+      "id": "eau-t04_09",
+      "file": "eau-t04_09.glb",
+      "triangles": 12,
+      "sha256": "8de1c4ec6909d5206252991086045074e929ed7f4ba3c42830e081628fc4e53f"
+    },
+    {
+      "id": "eau-t01_10",
+      "file": "eau-t01_10.glb",
+      "triangles": 8732,
+      "sha256": "9fcf25a975238a7ba835307d82f013478d205b662e03d519c948a699a0b3fd00"
+    },
+    {
+      "id": "eau-t02_10",
+      "file": "eau-t02_10.glb",
+      "triangles": 77342,
+      "sha256": "7367ce280ed00e5c0e5f1418ee59c9641117873c818b121d803a51c98d80e32d"
+    },
+    {
+      "id": "eau-t03_10",
+      "file": "eau-t03_10.glb",
+      "triangles": 126980,
+      "sha256": "4a8efd82a92c3820be25531304a14632729a303a793c73d2155e4e50f5ed3a6b"
+    },
+    {
+      "id": "eau-t04_10",
+      "file": "eau-t04_10.glb",
+      "triangles": 105206,
+      "sha256": "193319b4b64331a6bf95271c0394f714c9e270e9e03baffba72806f2722fd337"
+    },
+    {
+      "id": "eau-t05_10",
+      "file": "eau-t05_10.glb",
+      "triangles": 66670,
+      "sha256": "a693b3bc31a078a2dc65addd55ab170675791705990f2c8568f136821a0d2b05"
+    },
+    {
+      "id": "eau-t06_10",
+      "file": "eau-t06_10.glb",
+      "triangles": 10910,
+      "sha256": "fe010f65d0f977a43ca1036851570c48f2a3c7bfa41905f7953bd37806491643"
+    },
+    {
+      "id": "eau-t01_11",
+      "file": "eau-t01_11.glb",
+      "triangles": 52902,
+      "sha256": "e2eb5ad424423f4b800be2d2026734780fdc7fbdf728c857a9efbc2e1ab99353"
+    },
+    {
+      "id": "eau-t02_11",
+      "file": "eau-t02_11.glb",
+      "triangles": 88934,
+      "sha256": "06c3c2506889d53044e6c7d27df683eda4b632e795442d438748a53545397fd6"
+    },
+    {
+      "id": "eau-t03_11",
+      "file": "eau-t03_11.glb",
+      "triangles": 51994,
+      "sha256": "c42b928cbe79b84866bb2bb5a5c314c6d272d307ee56ed79b5b098250044f334"
+    },
+    {
+      "id": "eau-t04_11",
+      "file": "eau-t04_11.glb",
+      "triangles": 62088,
+      "sha256": "7431be2abcfd44ec54a7bed1827c516f4787b79ff3aa8ac7aac9363cec941240"
+    },
+    {
+      "id": "eau-t05_11",
+      "file": "eau-t05_11.glb",
+      "triangles": 95130,
+      "sha256": "fda9e1e7e30ab604b2b57e6e0d7ede46c784e897ed36ab4907049b72994a6023"
+    },
+    {
+      "id": "eau-t06_11",
+      "file": "eau-t06_11.glb",
+      "triangles": 19190,
+      "sha256": "fbf8456980cb5ed4618b46b30f93b3a8285ed9871fa99a74631bc99d55455c61"
+    },
+    {
+      "id": "eau-t07_11",
+      "file": "eau-t07_11.glb",
+      "triangles": 4538,
+      "sha256": "25aa302433f1741983c2df0a8f1a497b7f66c6adb67866b98a2b05ae1da6ae55"
+    },
+    {
+      "id": "eau-t08_11",
+      "file": "eau-t08_11.glb",
+      "triangles": 4424,
+      "sha256": "96a0ec58455a1f5a9a237fcfdbe27e9d1698dd4d8626945fbcfe4591ced03db3"
+    },
+    {
+      "id": "eau-t09_11",
+      "file": "eau-t09_11.glb",
+      "triangles": 4358,
+      "sha256": "512694937159ce49f1ffd2cfa31872325204f51e7a96d1a812afba8be8125dcb"
+    },
+    {
+      "id": "eau-t10_11",
+      "file": "eau-t10_11.glb",
+      "triangles": 4340,
+      "sha256": "9f22343b57b40c5414c28a4d80ec6a273f71070c8cc48b18400a024e2db5661c"
+    },
+    {
+      "id": "eau-t01_12",
+      "file": "eau-t01_12.glb",
+      "triangles": 110136,
+      "sha256": "f73ed5a46a601154d3e55d89be2801a480b0c8e117e459dc5a4fe31006113e50"
+    },
+    {
+      "id": "eau-t02_12",
+      "file": "eau-t02_12.glb",
+      "triangles": 109084,
+      "sha256": "fd8c4f08149e53d4587c42d5962d528c31b174845e1bac98cfee26cc0107bd73"
+    },
+    {
+      "id": "eau-t04_12",
+      "file": "eau-t04_12.glb",
+      "triangles": 5564,
+      "sha256": "a869383e0966fadba7596404f9285ad2693ca8c7da312361ec9ec5db10974423"
+    },
+    {
+      "id": "eau-t05_12",
+      "file": "eau-t05_12.glb",
+      "triangles": 127008,
+      "sha256": "2e6960900ff4a1d9352ac121001ef11b8ed67538558229375fab428edc2cbd5f"
+    },
+    {
+      "id": "eau-t06_12",
+      "file": "eau-t06_12.glb",
+      "triangles": 43490,
+      "sha256": "0d4d91320cbc06613679e4f6c93e10caf243b476a66e5457e817825003a9dd65"
+    }
+  ]
+}

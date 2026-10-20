@@ -1,0 +1,273 @@
+{
+  "version": 2,
+  "tileMetres": 2,
+  "size": 2048,
+  "normalConvention": "OpenGL; flip green on Unreal import",
+  "provenance": "Original periodic procedural material fields, common physical features drive height, colour, roughness and metal masks. No normal derived from albedo.",
+  "materials": {
+    "stone_cream": {
+      "files": {
+        "baseColor": {
+          "file": "stone_cream_baseColor.png",
+          "sha256": "18d257700aa67a7064096800d9f855ddfc265c421a051036f5c3a9fba2db2057"
+        },
+        "normal": {
+          "file": "stone_cream_normal.png",
+          "sha256": "e72cb34370fa22da254ad2ee201e4f02cb20af6df173b2425e31089bf76e55ae"
+        },
+        "roughness": {
+          "file": "stone_cream_roughness.png",
+          "sha256": "267a8eb00ff4bf37897fc136124598fc1f36df6073cb4be95fd113ed25f372ff"
+        },
+        "metallic": {
+          "file": "stone_cream_metallic.png",
+          "sha256": "47409785b30cc38f1ec62f219ce1c46f885427442416c0768dc470497ef784cb"
+        },
+        "ao": {
+          "file": "stone_cream_ao.png",
+          "sha256": "e41c05f550b84721c689e384b9df47a7ad9c514af9e09b35c63c1820587c2346"
+        },
+        "orm": {
+          "file": "stone_cream_orm.png",
+          "sha256": "4c820899f54ced4ff5fdfc5a7f79d1b2373537a916afbeab7729eb7cb8e54e19"
+        },
+        "height": {
+          "file": "stone_cream_height.png",
+          "sha256": "21c57051d7c9af4e7d6539ea629a546953f47800414a4032b281fe4d0c6c13fb"
+        }
+      },
+      "heightRangeMm": [
+        -10.333374680614892,
+        2.2672181497329333
+      ],
+      "normalAngleP50P95": [
+        6.411274530521295,
+        25.65306601450536
+      ],
+      "metallicRange": [
+        0.0,
+        0.0
+      ]
+    },
+    "marble_white": {
+      "files": {
+        "baseColor": {
+          "file": "marble_white_baseColor.png",
+          "sha256": "183d87f264463302aff1811f36db68e2d9b18d0e9f9709993a8921413a2d27a5"
+        },
+        "normal": {
+          "file": "marble_white_normal.png",
+          "sha256": "b8a07099d0ef587f089a6b6e0d177057f6850c0309ea070360003feb159c3b52"
+        },
+        "roughness": {
+          "file": "marble_white_roughness.png",
+          "sha256": "f5ffc6b57233b2bd61d7a4b4a6b664212a70623e8a30da9febb195108f170e6c"
+        },
+        "metallic": {
+          "file": "marble_white_metallic.png",
+          "sha256": "47409785b30cc38f1ec62f219ce1c46f885427442416c0768dc470497ef784cb"
+        },
+        "ao": {
+          "file": "marble_white_ao.png",
+          "sha256": "7368a2762f0210ba889788e2c23314e77fc184beecf5c6b5ffbe8279ed4f308a"
+        },
+        "orm": {
+          "file": "marble_white_orm.png",
+          "sha256": "631f22199ef41dfb774572a994f1d37936830e7d7cff82c9bcfe812393276041"
+        },
+        "height": {
+          "file": "marble_white_height.png",
+          "sha256": "e0db3db31a902e5afdda073277016a11a06c36f79c2286ffa04d57edf8acced5"
+        }
+      },
+      "heightRangeMm": [
+        -0.7276809208840256,
+        0.2608107681243624
+      ],
+      "normalAngleP50P95": [
+        1.8009113934379362,
+        3.786969015769219
+      ],
+      "metallicRange": [
+        0.0,
+        0.0
+      ]
+    },
+    "dark_metal": {
+      "files": {
+        "baseColor": {
+          "file": "dark_metal_baseColor.png",
+          "sha256": "eebd231a5983b603fd4a67358c06ecfb557411d4bd3ae428218fffbf03fd7937"
+        },
+        "normal": {
+          "file": "dark_metal_normal.png",
+          "sha256": "c269454ea15a675ba7ffb959dcdc94abd3aafb8fca54193879d5e6709bc7e767"
+        },
+        "roughness": {
+          "file": "dark_metal_roughness.png",
+          "sha256": "e9137996ac67feb8b72df3546092b9c2adcd80f8798c524524786a15265a34f6"
+        },
+        "metallic": {
+          "file": "dark_metal_metallic.png",
+          "sha256": "45346603b5e11de98172030ada0c967eaa5ff062cda8f110a7c608eda74fd7fe"
+        },
+        "ao": {
+          "file": "dark_metal_ao.png",
+          "sha256": "1e41b94033bc4ca7a26e7c4f4e8b58d81b62b33d4885cd68ea5b09aa72099d95"
+        },
+        "orm": {
+          "file": "dark_metal_orm.png",
+          "sha256": "08cba51195d11db98aa706c9582a49617c78c219cd8399d8eaf85b4b45a9dfcf"
+        },
+        "height": {
+          "file": "dark_metal_height.png",
+          "sha256": "d21ed9a90eb071e75c5fe9e4951bc8e77c4798100465262d6a3c0ab86636441b"
+        }
+      },
+      "heightRangeMm": [
+        -1.7346428217303134,
+        0.40084410302195406
+      ],
+      "normalAngleP50P95": [
+        2.3791164937624,
+        7.095869878020162
+      ],
+      "metallicRange": [
+        0.0,
+        1.0
+      ]
+    },
+    "wood": {
+      "files": {
+        "baseColor": {
+          "file": "wood_baseColor.png",
+          "sha256": "99fdb4bbc5bd4ff426ee9472dedc9178a44aecfbd664435ab25bf9a89971b0b8"
+        },
+        "normal": {
+          "file": "wood_normal.png",
+          "sha256": "393b4fa7d1ca92e54482e4da909ba8e9fec94cfd17b49bea9fbd0eedb7b407e9"
+        },
+        "roughness": {
+          "file": "wood_roughness.png",
+          "sha256": "9524d07ce63ead1840430120a1b975837279e8775eba66afc89537c4f5247ac2"
+        },
+        "metallic": {
+          "file": "wood_metallic.png",
+          "sha256": "47409785b30cc38f1ec62f219ce1c46f885427442416c0768dc470497ef784cb"
+        },
+        "ao": {
+          "file": "wood_ao.png",
+          "sha256": "a4c45d22d0dbed4b2f834afb68a445fd14b229ab546f5f5b50e372a598f41224"
+        },
+        "orm": {
+          "file": "wood_orm.png",
+          "sha256": "9a99cae2e7fb0eefc46b5aff1f57c8b4ce2e93d158b3572c4c08900146db6cce"
+        },
+        "height": {
+          "file": "wood_height.png",
+          "sha256": "9393aaf740b4d1dad3861ebb8d4914d57346ddded48c5f4a8e18b29369bb926e"
+        }
+      },
+      "heightRangeMm": [
+        -3.550461047629028,
+        1.0331945191074627
+      ],
+      "normalAngleP50P95": [
+        4.43182321042603,
+        12.656520273396133
+      ],
+      "metallicRange": [
+        0.0,
+        0.0
+      ]
+    },
+    "mortar": {
+      "files": {
+        "baseColor": {
+          "file": "mortar_baseColor.png",
+          "sha256": "9dae89ca9c93d5ba040e55ddd57c74da7a290a1559759edc0529ece0b7ab161f"
+        },
+        "normal": {
+          "file": "mortar_normal.png",
+          "sha256": "af5bc8313a41d216071fdeedc82319c00f18209def6aea40d3f288fc937ed6f1"
+        },
+        "roughness": {
+          "file": "mortar_roughness.png",
+          "sha256": "1680afb9abf3f114b054040a43cfb497cd90f756aa2b2c4046ebf45b25f16156"
+        },
+        "metallic": {
+          "file": "mortar_metallic.png",
+          "sha256": "47409785b30cc38f1ec62f219ce1c46f885427442416c0768dc470497ef784cb"
+        },
+        "ao": {
+          "file": "mortar_ao.png",
+          "sha256": "35fcfa80a991bf5881a38bb1adfe8bd897b59923b6286ae891ea2ce9f0a1ec6d"
+        },
+        "orm": {
+          "file": "mortar_orm.png",
+          "sha256": "772f4b3b34c26afe6ff217b79b56f4baf40fe90fbf72932e2d5e4a8f1a265f5f"
+        },
+        "height": {
+          "file": "mortar_height.png",
+          "sha256": "741e9e9dfd726cb4b7a1c62eab4ad154ba265bbf823428a580ec9438331143a8"
+        }
+      },
+      "heightRangeMm": [
+        -8.673506152192447,
+        2.2293534954677567
+      ],
+      "normalAngleP50P95": [
+        6.604601217890162,
+        25.818242549581957
+      ],
+      "metallicRange": [
+        0.0,
+        0.0
+      ]
+    },
+    "bronze": {
+      "files": {
+        "baseColor": {
+          "file": "bronze_baseColor.png",
+          "sha256": "3672b9677c3a68777c164a4551a3c041ad1186fe8126eeb2e355b365a2653869"
+        },
+        "normal": {
+          "file": "bronze_normal.png",
+          "sha256": "0c74af61c5578a0951244e59d92f058775435ff37da5e4237ebc13c27e8a7882"
+        },
+        "roughness": {
+          "file": "bronze_roughness.png",
+          "sha256": "58698839a10051020e923b77eb111fa05ab86d3ac86b3831d72ab4b58aaf4568"
+        },
+        "metallic": {
+          "file": "bronze_metallic.png",
+          "sha256": "186a99d51d6d110b0c5f23a9fceee86463d3d09fff2e10d3967896bac2ee8516"
+        },
+        "ao": {
+          "file": "bronze_ao.png",
+          "sha256": "4bb551b9071e3aaa7d89eadd63574fc1b0bbe93c362e6f9cd0162f219a191c74"
+        },
+        "orm": {
+          "file": "bronze_orm.png",
+          "sha256": "a53bc61eab9c1c14cdd11c948de39c3768a6c15d1888979a37a8adb713eb4e37"
+        },
+        "height": {
+          "file": "bronze_height.png",
+          "sha256": "11d06dde3394a1bf09ff80102273ff8cb7a1512eb8d58660631bacb3593cb922"
+        }
+      },
+      "heightRangeMm": [
+        -1.661778445639402,
+        0.4055163794001126
+      ],
+      "normalAngleP50P95": [
+        2.3331712773162434,
+        7.01787193702239
+      ],
+      "metallicRange": [
+        0.0,
+        1.0
+      ]
+    }
+  }
+}

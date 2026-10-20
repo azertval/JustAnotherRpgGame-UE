@@ -1,0 +1,106 @@
+{
+  "format": "jadg-arena-fate-atmosphere",
+  "version": 1,
+  "generator": "scripts/assetsGeneration/build_arena_fate_atmosphere.py",
+  "installer": "scripts/maps/arena_fate_atmosphere.py",
+  "coordinates": "metres; manifest X east Y south Z up; GLB X east Y up Z south",
+  "meshes": [
+    {
+      "id": "afa-flame",
+      "file": "afa-flame.glb",
+      "materials": [
+        "flame_emissive"
+      ],
+      "triangles": 3354,
+      "sha256": "b551d7efa8793161090be1e7b7168ad1f0fda8d03bff207f76673b5d9f39144f",
+      "dimensions": [
+        0.3490538363685912,
+        0.1939909757842384,
+        0.68
+      ],
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "closedTongues": 3,
+      "vertexAlpha": "normalised height; zero motion at root",
+      "collision": "none"
+    }
+  ],
+  "audio": [
+    {
+      "id": "exterior-breeze",
+      "file": "exterior-breeze.wav",
+      "sha256": "a3038091d5224c02c4bdf60b3efc44e8561062c9297adb51c36e5d1190c61842",
+      "sampleRate": 48000,
+      "channels": 1,
+      "bits": 16,
+      "seconds": 24.0,
+      "loop": true,
+      "peakDbFS": -12.54,
+      "rmsDbFS": -27.134,
+      "loopBoundaryStepPcm": 0,
+      "boundarySamples": [
+        0,
+        0
+      ],
+      "maxAdjacentStepPcm": 1201,
+      "provenance": "Original deterministic noise/filter/event synthesis; no external samples or voices",
+      "seed": 8673
+    },
+    {
+      "id": "local-crackle",
+      "file": "local-crackle.wav",
+      "sha256": "816f83b7f2165e9e4ba56f64b1584ad9dd142192a64ad93ed0bfd069052200e6",
+      "sampleRate": 48000,
+      "channels": 1,
+      "bits": 16,
+      "seconds": 16.0,
+      "loop": true,
+      "peakDbFS": -3.737,
+      "rmsDbFS": -26.023,
+      "loopBoundaryStepPcm": 0,
+      "boundarySamples": [
+        0,
+        0
+      ],
+      "maxAdjacentStepPcm": 38072,
+      "provenance": "Original deterministic noise/filter/event synthesis; no external samples or voices",
+      "seed": 9151
+    }
+  ],
+  "qaReport": "generation-report.json",
+  "previews": [
+    "flame-geometry.png"
+  ],
+  "placements": {
+    "afp-brazier": {
+      "flameScale": 0.82,
+      "audio": "local-crackle",
+      "volume": 0.32,
+      "audioRadiusMetres": 5
+    },
+    "afp-wall-lamp": {
+      "flameScale": 0.16,
+      "audio": null
+    }
+  },
+  "globalAudio": {
+    "id": "exterior-breeze",
+    "position": [
+      0,
+      0,
+      8
+    ],
+    "volume": 0.14,
+    "audioRadiusMetres": 125,
+    "occlusion": true
+  },
+  "notes": [
+    "Three closed tongues; emissive/WPO shader animates tips only.",
+    "Fire remains a separate non-colliding mesh; point lights stay owned by scene builder.",
+    "One exterior loop in persistent map; only braziers add attenuated crackles.",
+    "No crowd recording, voice, external sample or sourcebook imagery."
+  ]
+}

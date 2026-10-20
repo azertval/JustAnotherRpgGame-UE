@@ -28,11 +28,11 @@ d'un kit (`<kit>/Scene/manifest.json`). Pour chaque pièce :
   2. le `.glb` passe par Interchange (glTF) vers le dossier de contenu de la pièce ; le maillage
      est renommé comme la fiche le nomme, Nanite activé, la collision prise sur le maillage ;
   3. **la matière** : chaque image du `.glb` devient une texture du projet, une fois par contenu
-     (`/Game/Scenery/Textures/T_<rôle>_<empreinte>` : deux pièces qui portent la même image la
+     (`/Game/Bibliotheque/Commun/Textures/T_<rôle>_<empreinte>` : deux pièces qui portent la même image la
      partagent), compressée par le moteur — **BC7** pour la couleur de base (sRGB) et
      l'occlusion-rugosité-métal (linéaire), **BC5** pour le relief (vert retourné : glTF est en
      repère OpenGL) ; chaque matière du `.glb` devient une instance de `M_Scenery` (ou de
-     `M_SceneryMasked` pour un alpha), partagée de même (`/Game/Scenery/Materials/MI_<empreinte>`),
+     `M_SceneryMasked` pour un alpha), partagée de même (`/Game/Bibliotheque/Commun/Materials/MI_<empreinte>`),
      avec ses facteurs glTF ; ce qu'Interchange avait produit (`Materials/`, `Textures/` de la
      pièce) est retiré.
 
@@ -69,7 +69,7 @@ CONTENT_DIR = PROJECT_DIR / "Content"
 STAGING = PROJECT_DIR / "Intermediate" / "Jadg" / "scenery"
 REPORTS = PROJECT_DIR / "Saved" / "Jadg" / "scenery"
 
-SCENERY = "/Game/Scenery"
+SCENERY = "/Game/Bibliotheque/Commun"  # rangement du 16 octobre 2026 (Content/Bibliotheque)
 TEXTURES = f"{SCENERY}/Textures"
 MATERIALS = f"{SCENERY}/Materials"
 PARENT = f"{SCENERY}/Common/M_Scenery"
@@ -78,7 +78,7 @@ WHITE = f"{SCENERY}/Common/T_White"
 WHITE_LINEAR = f"{SCENERY}/Common/T_WhiteLinear"
 FLAT_NORMAL = f"{SCENERY}/Common/T_FlatNormal"
 # Le numéro de la chaîne : changé, toute matière et toute instance se refont.
-CHAIN_VERSION = 1
+CHAIN_VERSION = 2
 ROLE_TAGS = {"baseColor": "C", "normal": "N", "orm": "ORM"}
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -121,7 +121,39 @@ def assets() -> unreal.EditorAssetLibrary:
 
 # --- L'import du maillage ---------------------------------------------------------------------
 
-def import_glb(glb: Path, family_folder: str, piece_folder: str, asset_path: str) -> unreal.StaticMesh:
+_COLLISION_IMPORT_OPTIONS = None
+
+
+def collision_import_options():
+    """Preserve the GLTF stack; override only invisible proxy render builds."""
+    global _COLLISION_IMPORT_OPTIONS
+    if _COLLISION_IMPORT_OPTIONS is None:
+        # Python commandlets can import GLTF before the plugin's pipeline
+        # assets have entered AssetRegistry. DuplicateAsset requires that
+        # registry entry; scan only the installed Interchange pipeline folder.
+        registry = unreal.AssetRegistryHelpers.get_asset_registry()
+        registry.scan_paths_synchronous(["/Interchange/Pipelines"], True, True)
+        path = f"{SCENERY}/Common/P_CollisionGLTF"
+        pipeline = assets().load_asset(path) if assets().does_asset_exist(path) else assets().duplicate_asset(
+            "/Interchange/Pipelines/DefaultGLTFAssetsPipeline.DefaultGLTFAssetsPipeline", path)
+        if pipeline is None:
+            fail("Collision proxy GLTF pipeline could not be duplicated")
+        mesh_pipeline = pipeline.get_editor_property("mesh_pipeline")
+        mesh_pipeline.set_editor_property("build_nanite", False)
+        mesh_pipeline.set_editor_property("distance_field_resolution_scale", 0.0)
+        if not assets().save_loaded_asset(pipeline, only_if_is_dirty=False):
+            fail("Collision proxy GLTF pipeline could not be saved")
+        options = unreal.InterchangePipelineStackOverride()
+        options.set_editor_property("override_pipelines", [
+            unreal.SoftObjectPath(pipeline.get_path_name()),
+            unreal.SoftObjectPath("/Interchange/Pipelines/DefaultGLTFPipeline.DefaultGLTFPipeline"),
+        ])
+        _COLLISION_IMPORT_OPTIONS = options
+    return _COLLISION_IMPORT_OPTIONS
+
+
+def import_glb(glb: Path, family_folder: str, piece_folder: str, asset_path: str,
+               collision_proxy: bool = False) -> unreal.StaticMesh:
     """Passe le .glb par Interchange dans `family_folder` ; Interchange crée `piece_folder`
     (le nom du fichier) et ses sous-dossiers StaticMeshes/, Materials/, Textures/."""
     task = unreal.AssetImportTask()
@@ -133,6 +165,8 @@ def import_glb(glb: Path, family_folder: str, piece_folder: str, asset_path: str
     task.replace_existing_settings = True
     task.save = False
     task.set_editor_property("async_", False)
+    if collision_proxy:
+        task.options = collision_import_options()
     unreal.AssetToolsHelpers.get_asset_tools().import_asset_tasks([task])
 
     meshes = []
@@ -152,7 +186,7 @@ def import_glb(glb: Path, family_folder: str, piece_folder: str, asset_path: str
     return mesh
 
 
-def finish(mesh: unreal.StaticMesh) -> bool:
+def finish(mesh: unreal.StaticMesh, collision_proxy: bool = False) -> bool:
     """Nanite et la collision prise sur le maillage lui-même ; vrai si l'asset a changé.
 
     Interchange construit Nanite à l'import (`bBuildNanite`) ; on l'active par la propriété si un
@@ -160,7 +194,15 @@ def finish(mesh: unreal.StaticMesh) -> bool:
     commandlet). La marche et le clic se font sur le maillage : pas de collision à dessiner."""
     changed = False
     settings = mesh.get_editor_property("nanite_settings")
-    if not settings.enabled:
+    if collision_proxy:
+        if settings.enabled:
+            settings.enabled = False
+            mesh.set_editor_property("nanite_settings", settings)
+            changed = True
+        if not mesh.get_editor_property("allow_cpu_access"):
+            mesh.set_editor_property("allow_cpu_access", True)
+            changed = True
+    elif not settings.enabled:
         settings.enabled = True
         mesh.set_editor_property("nanite_settings", settings)
         if not mesh.get_editor_property("nanite_settings").enabled:
@@ -269,7 +311,20 @@ def parent_material(masked: bool) -> unreal.Material:
     library.connect_material_property(colour, "", unreal.MaterialProperty.MP_BASE_COLOR)
 
     normal = texture("Normal", flat, unreal.MaterialSamplerType.SAMPLERTYPE_NORMAL, 500)
-    library.connect_material_property(normal, "RGB", unreal.MaterialProperty.MP_NORMAL)
+    # glTF normalTexture.scale acts on tangent XY, then the vector is normalized.
+    # Keep Z and the DirectX conversion performed at texture import unchanged.
+    xy = node(unreal.MaterialExpressionComponentMask, -650, 500)
+    xy.set_editor_property("r", True)
+    xy.set_editor_property("g", True)
+    xy.set_editor_property("b", False)
+    library.connect_material_expressions(normal, "RGB", xy, "")
+    strength = multiply(xy, "", scalar("NormalStrength", 1.0, 640), "", 500)
+    append = node(unreal.MaterialExpressionAppendVector, -200, 500)
+    library.connect_material_expressions(strength, "", append, "A")
+    library.connect_material_expressions(normal, "B", append, "B")
+    normalized = node(unreal.MaterialExpressionNormalize, 0, 500)
+    library.connect_material_expressions(append, "", normalized, "VectorInput")
+    library.connect_material_property(normalized, "", unreal.MaterialProperty.MP_NORMAL)
 
     orm = texture("ORM", white_linear, unreal.MaterialSamplerType.SAMPLERTYPE_LINEAR_COLOR, 800)
     one = node(unreal.MaterialExpressionConstant, -600, 750)
@@ -319,7 +374,7 @@ def instance_for(slot: dict) -> unreal.MaterialInstanceConstant:
         "chain": CHAIN_VERSION,
         "alpha": slot["alpha"],
         "textures": {role: texture.get_path_name() for role, texture in sorted(textures.items())},
-        "factors": [slot["baseColorFactor"], slot["metallicFactor"], slot["roughnessFactor"], slot["occlusionStrength"]],
+        "factors": [slot["baseColorFactor"], slot["metallicFactor"], slot["roughnessFactor"], slot["occlusionStrength"], slot["normalScale"]],
     }
     name = "MI_" + hashlib.sha256(json.dumps(key, sort_keys=True).encode("utf-8")).hexdigest()[:16]
     path = f"{MATERIALS}/{name}"
@@ -337,6 +392,7 @@ def instance_for(slot: dict) -> unreal.MaterialInstanceConstant:
     library.set_material_instance_scalar_parameter_value(instance, "MetallicFactor", slot["metallicFactor"])
     library.set_material_instance_scalar_parameter_value(instance, "RoughnessFactor", slot["roughnessFactor"])
     library.set_material_instance_scalar_parameter_value(instance, "OcclusionStrength", slot["occlusionStrength"])
+    library.set_material_instance_scalar_parameter_value(instance, "NormalStrength", slot["normalScale"])
     library.update_material_instance(instance)
     assets().save_asset(path, only_if_is_dirty=False)
     return instance
@@ -370,15 +426,19 @@ def dress(mesh: unreal.StaticMesh, glb: Path) -> bool:
     except sheets.SceneryError as error:
         fail(f"{glb.name} : {error}")
     matched = match_slots(mesh, slots, glb.name)
+    # Array elements read from an asset can retain its owner and notify it when
+    # edited. Detached copies preserve slot names, UV data and overlay material;
+    # only their interfaces change before one mesh-level editor notification.
+    static_materials = [slot.copy() for slot in mesh.get_editor_property("static_materials")]
     changed = False
     for index, slot in enumerate(matched):
-        if slot["normalScale"] != 1.0:
-            log(f"{glb.name} : force du relief {slot['normalScale']} ignorée (1 appliqué)")
         instance = instance_for(slot)
-        current = mesh.get_material(index)
+        current = static_materials[index].get_editor_property("material_interface")
         if current is None or current.get_path_name() != instance.get_path_name():
-            mesh.set_material(index, instance)
+            static_materials[index].set_editor_property("material_interface", instance)
             changed = True
+    if changed:
+        mesh.set_editor_property("static_materials", static_materials)
     piece_folder = mesh.get_path_name().split(".")[0].rsplit("/", 2)[0]
     for leftover in ("Materials", "Textures"):
         folder = f"{piece_folder}/{leftover}"
@@ -389,7 +449,8 @@ def dress(mesh: unreal.StaticMesh, glb: Path) -> bool:
     return changed
 
 
-def install(glb: Path, asset_path: str, force: bool = False, reimport: bool = False) -> tuple[unreal.StaticMesh, bool]:
+def install(glb: Path, asset_path: str, force: bool = False, reimport: bool = False,
+            collision_proxy: bool = False) -> tuple[unreal.StaticMesh, bool]:
     """La pièce dans le projet : importée si elle manque (ou si `reimport`), finie, habillée.
     Rend le maillage, et vrai s'il a été importé."""
     piece_folder = asset_path.rsplit("/", 2)[0]
@@ -397,11 +458,12 @@ def install(glb: Path, asset_path: str, force: bool = False, reimport: bool = Fa
     if force or reimport or not assets().does_asset_exist(asset_path):
         if assets().does_directory_exist(piece_folder):
             assets().delete_directory(piece_folder)
-        mesh = import_glb(glb, piece_folder.rsplit("/", 1)[0], piece_folder, asset_path)
+        mesh = import_glb(glb, piece_folder.rsplit("/", 1)[0], piece_folder, asset_path,
+                          collision_proxy=collision_proxy)
         imported = True
     else:
         mesh = assets().load_asset(asset_path)
-    changed = finish(mesh)
+    changed = finish(mesh, collision_proxy=collision_proxy)
     changed = dress(mesh, glb) or changed
     if changed or imported:
         assets().save_asset(asset_path, only_if_is_dirty=False)

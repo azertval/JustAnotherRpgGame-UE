@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-11",
+  "status": "construction-authorized-by-user",
+  "userStatement": "je valide les cinq propositions",
+  "approvedProposals": {
+    "arenarea": "Urban terraces, stepped gardens, retaining walls and a lower waterfront promenade; continuous main avenues and secondary stairs; 10 to 15 metres between low and high areas; preserve Arena of Fate forecourt and entrance elevations.",
+    "martpart": "General slope towards the river, stable platforms for Municipal Market and Illu Die, courtyards and lanes at different heights; cart-accessible main routes; 5 to 10 metres elevation difference.",
+    "buildings": "Predominantly two or three levels, a few four-level buildings; ordinary storeys 3 to 4 metres high, public rooms taller according to use.",
+    "verticalExploration": "Preserve the accessible upper floor of Cloaked Brewer Pub and add selected useful terraces, galleries and exterior stairs; complete important interiors according to their functions.",
+    "shaftLoop": "Reproduce the illustrated annular built and planted ensemble with its central structure. No additional underground function was requested."
+  },
+  "retainedDecisions": "Sculpted painterly Arena of Fate style, noble gardened Arenarea, dense cosmopolitan Martpart, small scripted Blender pieces assembled into complex modules, separate maps, original quest and transition contracts, 60 fps at 1080p with Lumen and Nanite.",
+  "sequence": "Terrain and physically connected routes first; architecture and detailed finishes afterwards. Construction is authorized; final artistic acceptance requires the author's review of actual engine captures."
+}

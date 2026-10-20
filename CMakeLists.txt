@@ -97,7 +97,6 @@ target_compile_definitions(CoreTests PRIVATE
     JADG_TEST_FIXTURES_DIR="${_fixtures}"
     JADG_TEST_DATA_DIR="${_fixtures}/GameData"
     JADG_MESH_FIXTURE_DIR="${_fixtures}/Meshes"
-    JADG_CHARACTER_FIXTURE_DIR="${_fixtures}/Characters"
     JADG_ELEMENTS_DIR="${_elements}"
     JADG_LEVELS_DIR="${_elements}/Levels"
     JADG_RPG_SCHEMA_DIR="${_elements}/Rpg/schema"

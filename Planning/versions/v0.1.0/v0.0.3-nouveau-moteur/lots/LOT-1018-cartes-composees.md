@@ -3,7 +3,7 @@ id = "LOT-1018"
 titre = "Le format de carte et sa chaîne : des cartes composées"
 version = "0.0.3"
 filiere = "editeur"
-statut = "en-cours"
+statut = "livre"
 taille = "L"
 resume = "Une carte se décrit en texte — terrain, objets à transformation libre, zones, entités, portails — et se construit en niveau par script ; l'éditeur du moteur la retouche, et ce qu'il retouche revient dans le texte."
 prerequis = ["LOT-1016"]
@@ -248,3 +248,21 @@ recette** : les pièces de l'Arena of Fate y sont grises, sans leur texture.
 4. **L'escalier** : une rampe suffit-elle à l'essai, ou faut-il un maillage d'escalier ?
 5. **Les textures des pièces de kit** : l'Arena of Fate sort grise de la chaîne ; est-ce attendu
    jusqu'au LOT-1019 (la chaîne de décor), ou une matière à reprendre ici ?
+
+## Livraison — 20 octobre 2026
+
+Le lot est **livré** avec la version, sur décision de l'auteur (20 octobre 2026) : le format
+`jadg-map` v5, sa construction par script, l'aller-retour avec l'éditeur, le contrôle des cartes
+et le mode Quêtes en script (plus haut). La carte active de la version est la capitale
+(`/Game/Capitale/Cartes/Capitale`, base de construction du 16 octobre 2026) ; sa carte de Core,
+`Source/Elements/Levels/Capitale.json`, est écrite par `scripts/maps/capitale_demo.py` au format
+v5 — la grille de l'arène, ses sept étages, ses rencontres, ses personnages.
+
+L'apparence de l'ancien rendu (`Regions/central-empire/capital/arenarea/Scene/appearance.json`,
+variantes de sol en losange), que le lot devait reprendre ou supprimer, n'est lue par rien : le
+format v5 ne la reprend pas, elle est supprimée avec son entrée d'`awaiting.json` (D-32).
+
+Ce qui restait au lot : le parcours de Martpart à Arenarea par leurs portails et les pièces que
+les kits n'ont pas suivent leurs lieux à la `0.0.4` — Martpart au `LOT-110`, Arenarea au
+`LOT-147` (leurs cartes du moteur sont archivées par la base du 16 octobre) ; le panneau du mode Quêtes dans l'éditeur passe à la
+recette (`LOT-1023`). Les questions pour l'auteur restent ouvertes, à la recette.

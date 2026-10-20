@@ -1,0 +1,115 @@
+{
+  "materials": {
+    "linen": {
+      "source": "Poly Haven",
+      "asset": "rough_linen",
+      "url": "https://polyhaven.com/a/rough_linen",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        0.2707081392676629,
+        0.27129998803138733
+      ],
+      "files": {
+        "baseColor": {
+          "file": "linen/rough_linen_diff_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rough_linen/rough_linen_diff_4k.png",
+          "sha256": "47891667b6155404caa026c07d94ad663d6855db82a53d0c2808fb3ce2ad584d"
+        },
+        "normal": {
+          "file": "linen/rough_linen_nor_dx_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rough_linen/rough_linen_nor_dx_4k.png",
+          "sha256": "91f8442e22e1907ba54e508b5dbb5c9490ba618984d8fbc6ee91b4671b2414af"
+        },
+        "roughness": {
+          "file": "linen/rough_linen_rough_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rough_linen/rough_linen_rough_4k.png",
+          "sha256": "93722b447198431fe173e59180d9fec3d80fc57055eee882fe3fb7ff69f4f89c"
+        },
+        "height": {
+          "file": "linen/rough_linen_disp_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rough_linen/rough_linen_disp_4k.png",
+          "sha256": "51a085e1994300c0b18199f5049d48c37d163be9dba2b4b3888c85ca5e890360"
+        },
+        "ao": {
+          "file": "linen/rough_linen_ao_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/rough_linen/rough_linen_ao_4k.png",
+          "sha256": "e142cb64bc76c3200d1f3dce465201221f642691a4d21b8dbfa45efe7672f23b"
+        }
+      }
+    },
+    "sacking": {
+      "source": "Poly Haven",
+      "asset": "hessian_230",
+      "url": "https://polyhaven.com/a/hessian_230",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        0.2687538661074732,
+        0.2671999931335449
+      ],
+      "files": {
+        "baseColor": {
+          "file": "sacking/hessian_230_diff_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/hessian_230/hessian_230_diff_4k.png",
+          "sha256": "733a61f61d960d701bc8d6dae2ae9f62e8b32ea34fc49e3d27979047cf398cb4"
+        },
+        "normal": {
+          "file": "sacking/hessian_230_nor_dx_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/hessian_230/hessian_230_nor_dx_4k.png",
+          "sha256": "0451c59c6232db862d2515873f75f22d06d364dc26cd22a3fd83c87f1af2b9fd"
+        },
+        "roughness": {
+          "file": "sacking/hessian_230_rough_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/hessian_230/hessian_230_rough_4k.png",
+          "sha256": "11373bc96ab307631e3c2c0be1028cfae9f1a7d79a120f85d428683d78a36f28"
+        },
+        "height": {
+          "file": "sacking/hessian_230_disp_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/hessian_230/hessian_230_disp_4k.png",
+          "sha256": "009bb2ee28279e5de6048e4fd1f75e575aa48355c0901c794957723b7b85f23d"
+        },
+        "ao": {
+          "file": "sacking/hessian_230_ao_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/hessian_230/hessian_230_ao_4k.png",
+          "sha256": "ba5d770d2dede78ba48bedeb39f6d175d54493fd4a315de825ae0206e9a4e782"
+        }
+      }
+    },
+    "leather": {
+      "source": "Poly Haven",
+      "asset": "brown_leather",
+      "url": "https://polyhaven.com/a/brown_leather",
+      "license": "CC0-1.0",
+      "tileMetres": [
+        0.4000000059604645,
+        0.40000003576278687
+      ],
+      "files": {
+        "baseColor": {
+          "file": "leather/brown_leather_albedo_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_leather/brown_leather_albedo_4k.png",
+          "sha256": "cf8be36b8b3ee38100e7494e70cd4a00969c5247aa7287a38d5f0cc59d0b1fe9"
+        },
+        "normal": {
+          "file": "leather/brown_leather_nor_dx_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_leather/brown_leather_nor_dx_4k.png",
+          "sha256": "d0435c4c8339ae020fc5a00dbd698fa4d124c474de19fcce75f897991c6e90da"
+        },
+        "roughness": {
+          "file": "leather/brown_leather_rough_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_leather/brown_leather_rough_4k.png",
+          "sha256": "57f17ee722cc6f25ec1c255c6d1f71299f63eaf172959547b6bba243bbbd26cb"
+        },
+        "height": {
+          "file": "leather/brown_leather_disp_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_leather/brown_leather_disp_4k.png",
+          "sha256": "0bc4379e25495cdc95c1fd9bcff047ad7e41a93952da9d5cf3310afdc44d4f6a"
+        },
+        "ao": {
+          "file": "leather/brown_leather_ao_4k.png",
+          "url": "https://dl.polyhaven.org/file/ph-assets/Textures/png/4k/brown_leather/brown_leather_ao_4k.png",
+          "sha256": "69ffc31c0a0d128c0d113894ec119979ff56948dfdfdfa956572031d9ff593a3"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,3884 @@
+{
+  "version": 1,
+  "uvRepeatMetres": 2,
+  "meshes": [
+    {
+      "id": "SM_AOF_046",
+      "file": "SM_AOF_046.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 3824,
+      "boundsBlender": [
+        [
+          -1.48,
+          -0.12,
+          0.0
+        ],
+        [
+          1.468,
+          0.26,
+          4.479
+        ]
+      ],
+      "assembledSimpleParts": 20,
+      "catalogueId": 46,
+      "label": "Porte double",
+      "sha256": "f57552d56c37110de3f6c6d67394a78b9835d2789bb718fb1c47946b283a8a15",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review",
+      "skeletalFile": "SK_AOF_046.glb",
+      "bones": 3,
+      "physics": "hinge",
+      "anchorRoot": true,
+      "sourceBlend": "AOF_046_rig_source.blend"
+    },
+    {
+      "id": "SM_AOF_047",
+      "file": "SM_AOF_047.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 3008,
+      "boundsBlender": [
+        [
+          -1.45,
+          -0.07,
+          0.0
+        ],
+        [
+          1.45,
+          0.07,
+          4.48
+        ]
+      ],
+      "assembledSimpleParts": 16,
+      "catalogueId": 47,
+      "label": "Herse",
+      "sha256": "240bba848b46d0b12ff70c97afc10969c86070b6aaa5c1bbbf676357ac688fae",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review",
+      "skeletalFile": "SK_AOF_047.glb",
+      "bones": 2,
+      "physics": "slider",
+      "anchorRoot": true,
+      "sourceBlend": "AOF_047_rig_source.blend"
+    },
+    {
+      "id": "SM_AOF_048",
+      "file": "SM_AOF_048.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 2508,
+      "boundsBlender": [
+        [
+          -0.925,
+          -0.925,
+          0.0
+        ],
+        [
+          0.925,
+          0.925,
+          0.265
+        ]
+      ],
+      "assembledSimpleParts": 13,
+      "catalogueId": 48,
+      "label": "Trappe de piste",
+      "sha256": "2882a40313569581a279d5e56b5e44b8e7866625262be3e658945dfdc77e81b4",
+      "units": "metres",
+      "uvRepeatMetres": 2,
+      "status": "pilot-awaiting-user-review",
+      "skeletalFile": "SK_AOF_048.glb",
+      "bones": 2,
+      "physics": "hinge",
+      "anchorRoot": true,
+      "sourceBlend": "AOF_048_rig_source.blend"
+    },
+    {
+      "id": "SM_AOF_049",
+      "file": "SM_AOF_049.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1316,
+      "boundsBlender": [
+        [
+          -0.495,
+          -0.35,
+          0.0
+        ],
+        [
+          0.495,
+          0.35,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 7,
+      "catalogueId": 49,
+      "label": "Pilastre",
+      "physics": "static",
+      "sha256": "d9dba94b4aab828211cc8ae9cb6d77f46bc8c7a1925c92b190aa6695e1a9a09b"
+    },
+    {
+      "id": "SM_AOF_050",
+      "file": "SM_AOF_050.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 564,
+      "boundsBlender": [
+        [
+          -0.52,
+          -0.375,
+          0.0
+        ],
+        [
+          0.52,
+          0.375,
+          0.34
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 50,
+      "label": "Base de pilastre",
+      "physics": "static",
+      "sha256": "1737eb0fd16a9cff213495c66fe4d621d3911c2e4ce44e1f7b38344f33a815ea"
+    },
+    {
+      "id": "SM_AOF_051",
+      "file": "SM_AOF_051.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1720,
+      "boundsBlender": [
+        [
+          -0.425,
+          -0.3933,
+          0.0
+        ],
+        [
+          0.425,
+          0.3933,
+          0.4
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 51,
+      "label": "Chapiteau de pilastre",
+      "physics": "static",
+      "sha256": "350e25308f3999f003c3b698a38cb344befb746448a7fe3c312e1bfbbcc6232d"
+    },
+    {
+      "id": "SM_AOF_052",
+      "file": "SM_AOF_052.glb",
+      "materials": [
+        "bronze",
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 3384,
+      "boundsBlender": [
+        [
+          -1.62,
+          -0.6525,
+          0.0
+        ],
+        [
+          1.62,
+          0.55,
+          1.23
+        ]
+      ],
+      "assembledSimpleParts": 18,
+      "catalogueId": 52,
+      "label": "Entablement",
+      "physics": "static",
+      "sha256": "69f37b23e9ad908a6c0fca88ae6b63de4ccea7b228f05bfdb4a1134bdc422716"
+    },
+    {
+      "id": "SM_AOF_053",
+      "file": "SM_AOF_053.glb",
+      "materials": [
+        "bronze",
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 2068,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.2525,
+          0.0
+        ],
+        [
+          1.5,
+          0.1,
+          0.62
+        ]
+      ],
+      "assembledSimpleParts": 11,
+      "catalogueId": 53,
+      "label": "Frise sculptée",
+      "physics": "static",
+      "sha256": "5432fdcb626fb4b7b08459cd747a51fa575e7ee608f1006abbbab57f92a56ab8"
+    },
+    {
+      "id": "SM_AOF_054",
+      "file": "SM_AOF_054.glb",
+      "materials": [
+        "bronze",
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 6908,
+      "boundsBlender": [
+        [
+          -0.5598,
+          -0.0598,
+          -0.0098
+        ],
+        [
+          0.5598,
+          0.0598,
+          1.1098
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 54,
+      "label": "Médaillon",
+      "physics": "static",
+      "sha256": "ab2907f1e70feb378dd23ee9029b2c0b0141496909a226cf724de3e02ba38cd4"
+    },
+    {
+      "id": "SM_AOF_055",
+      "file": "SM_AOF_055.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 6580,
+      "boundsBlender": [
+        [
+          -1.0194,
+          -0.35,
+          0.0
+        ],
+        [
+          1.0194,
+          0.375,
+          3.3188
+        ]
+      ],
+      "assembledSimpleParts": 35,
+      "catalogueId": 55,
+      "label": "Niche murale",
+      "physics": "static",
+      "sha256": "2dff4d0abb140152fa1ad683d21278ac85d25bf339b03098d4b98e6fbdb023b8"
+    },
+    {
+      "id": "SM_AOF_056",
+      "file": "SM_AOF_056.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 644,
+      "boundsBlender": [
+        [
+          -1.7838,
+          -0.25,
+          -0.066
+        ],
+        [
+          1.7838,
+          0.38,
+          1.016
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 56,
+      "label": "Fronton",
+      "physics": "static",
+      "sha256": "b4527f742538d46f4b4cfffa55baee088ee690be8ce5d1c760cb329bed4cc0ac"
+    },
+    {
+      "id": "SM_AOF_057",
+      "file": "SM_AOF_057.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 7240,
+      "boundsBlender": [
+        [
+          -1.75,
+          -0.25,
+          0.0
+        ],
+        [
+          1.75,
+          0.25,
+          1.23
+        ]
+      ],
+      "assembledSimpleParts": 14,
+      "catalogueId": 57,
+      "label": "Balustrade",
+      "physics": "static",
+      "sha256": "d970669aceb52bf9a858286099777015be2a19b1ef57ab5fc51e901a843e06d1"
+    },
+    {
+      "id": "SM_AOF_058",
+      "file": "SM_AOF_058.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 2300,
+      "boundsBlender": [
+        [
+          -0.15,
+          -0.15,
+          0.0
+        ],
+        [
+          0.15,
+          0.15,
+          0.8
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 58,
+      "label": "Balustre",
+      "physics": "static",
+      "sha256": "86c6efeec1b5ba31945a12f1c9065afb40853b6bbdad4491f2470a8c912ca821"
+    },
+    {
+      "id": "SM_AOF_059",
+      "file": "SM_AOF_059.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1316,
+      "boundsBlender": [
+        [
+          -0.82,
+          -0.8,
+          0.0
+        ],
+        [
+          0.82,
+          0.8,
+          1.68
+        ]
+      ],
+      "assembledSimpleParts": 7,
+      "catalogueId": 59,
+      "label": "Socle de statue",
+      "physics": "static",
+      "sha256": "e39a5bfc9f326f1774da9fe7b13bd32f458fc39e17850f94a4baa8e1bfd243d0"
+    },
+    {
+      "id": "REF_AOF_060",
+      "catalogueId": 60,
+      "label": "Statue de façade",
+      "physics": "static",
+      "referenceAssets": [
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-bauron/StaticMeshes/SM_Statue_Bauron"
+      ],
+      "note": "Existing approved master statues, no invented deity."
+    },
+    {
+      "id": "SM_AOF_061",
+      "file": "SM_AOF_061.glb",
+      "materials": [
+        "bronze",
+        "burgundy",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 31020,
+      "boundsBlender": [
+        [
+          -0.3552,
+          -0.289,
+          0.0
+        ],
+        [
+          0.3552,
+          0.3101,
+          1.3156
+        ]
+      ],
+      "assembledSimpleParts": 61,
+      "catalogueId": 61,
+      "label": "Siège individuel",
+      "physics": "rigid",
+      "sha256": "fa94ce351f71ba57cb734ddfee4f7d3a4b4d727551b7fd5536eb892617b5b444"
+    },
+    {
+      "id": "SM_AOF_062",
+      "file": "SM_AOF_062.glb",
+      "materials": [
+        "bronze",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 12021,
+      "boundsBlender": [
+        [
+          -0.975,
+          -0.315,
+          0.0
+        ],
+        [
+          0.975,
+          0.2996,
+          0.87
+        ]
+      ],
+      "assembledSimpleParts": 19,
+      "catalogueId": 62,
+      "label": "Banc de loge",
+      "physics": "rigid",
+      "sha256": "bcea26eebfba94838e9711274ea848eb6f9ce6c416d104bd0b533a30aff04d38"
+    },
+    {
+      "id": "SM_AOF_063",
+      "file": "SM_AOF_063.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 1336,
+      "boundsBlender": [
+        [
+          -0.09,
+          -0.3,
+          0.0
+        ],
+        [
+          0.09,
+          0.3,
+          0.53
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 63,
+      "label": "Accoudoir de rang",
+      "physics": "rigid",
+      "sha256": "8ee57cb9f534802b36285040f85e1868136c1ffcf527332d3ecdd7eb2bc2a6c5"
+    },
+    {
+      "id": "SM_AOF_064",
+      "file": "SM_AOF_064.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 380,
+      "boundsBlender": [
+        [
+          0.0,
+          -0.12,
+          0.0
+        ],
+        [
+          2.55,
+          0.12,
+          1.5
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 64,
+      "label": "Joue de gradin",
+      "physics": "static",
+      "sha256": "af36d4c110ecb3598023b5529763cab5f16a66b6e7c67570c5f30432ab5b5f23"
+    },
+    {
+      "id": "SM_AOF_065",
+      "file": "SM_AOF_065.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 440,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.205,
+          0.0
+        ],
+        [
+          1.5,
+          0.16,
+          0.1
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 65,
+      "label": "Nez de marche",
+      "physics": "static",
+      "sha256": "3936d30971ea7dc62c76d096e557827da334fd13b27a957ad813006c2b9d7fed"
+    },
+    {
+      "id": "SM_AOF_066",
+      "file": "SM_AOF_066.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 1008,
+      "boundsBlender": [
+        [
+          -1.3227,
+          -0.06,
+          0.0
+        ],
+        [
+          1.3227,
+          0.06,
+          2.4495
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 66,
+      "label": "Garde-corps d'escalier",
+      "physics": "static",
+      "sha256": "8ae44cc83b93e64ea0197d1bb001d10607ba9d42dc9b4b2c2dae7983f66dd20d"
+    },
+    {
+      "id": "SM_AOF_067",
+      "file": "SM_AOF_067.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 1008,
+      "boundsBlender": [
+        [
+          -1.3,
+          -0.06,
+          0.0
+        ],
+        [
+          1.3,
+          0.06,
+          1.16
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 67,
+      "label": "Main courante",
+      "physics": "static",
+      "sha256": "05c7ff2d5170499240b5ec4af46b3b239cd1f6dfcc441afdffcad261ad8a83bd"
+    },
+    {
+      "id": "SM_AOF_068",
+      "file": "SM_AOF_068.glb",
+      "materials": [
+        "bronze",
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 53896,
+      "boundsBlender": [
+        [
+          -2.05,
+          -0.45,
+          0.0
+        ],
+        [
+          2.05,
+          0.45,
+          3.3
+        ]
+      ],
+      "assembledSimpleParts": 39,
+      "catalogueId": 68,
+      "label": "Façade de loge",
+      "physics": "static",
+      "sha256": "3f3cdc4302d50ff3977c82def872abfe417ce3fdc5fa418850a1ab358133aa05"
+    },
+    {
+      "id": "SM_AOF_069",
+      "file": "SM_AOF_069.glb",
+      "materials": [
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 16782,
+      "boundsBlender": [
+        [
+          -1.4876,
+          -0.1693,
+          0.013
+        ],
+        [
+          1.487,
+          0.1693,
+          2.7892
+        ]
+      ],
+      "assembledSimpleParts": 29,
+      "catalogueId": 69,
+      "label": "Cloison de loge",
+      "physics": "static",
+      "sha256": "798df76c50a7642b2c7c345b78ef6a8d25e7c30de5de09a295617c1530e7bec2"
+    },
+    {
+      "id": "SM_AOF_070",
+      "file": "SM_AOF_070.glb",
+      "materials": [
+        "bronze",
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 47006,
+      "boundsBlender": [
+        [
+          -1.92,
+          -0.5,
+          0.0
+        ],
+        [
+          1.92,
+          0.5,
+          3.84
+        ]
+      ],
+      "assembledSimpleParts": 27,
+      "catalogueId": 70,
+      "label": "Portique de loge",
+      "physics": "static",
+      "sha256": "277babd742ba23710451daa42a176850de15beb6ef3ab281c39c63d1960b8188"
+    },
+    {
+      "id": "SK_AOF_071",
+      "file": "SK_AOF_071.glb",
+      "catalogueId": 71,
+      "label": "Auvent de loge",
+      "physics": "cloth",
+      "pins": 4,
+      "vertices": 2009,
+      "blenderDrapeFrames": 35,
+      "materials": [
+        "burgundy"
+      ],
+      "sourceBlend": "AOF_071_cloth_source.blend",
+      "maxDistanceCm": 400,
+      "sha256": "a5998f660dc64d291b4a48deda907c2424517c5395c81ef609f6baa5bf87d714"
+    },
+    {
+      "id": "SM_AOF_072",
+      "file": "SM_AOF_072.glb",
+      "materials": [
+        "bronze",
+        "burgundy",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 10408,
+      "boundsBlender": [
+        [
+          -0.325,
+          -0.288,
+          0.0
+        ],
+        [
+          0.325,
+          0.288,
+          1.139
+        ]
+      ],
+      "assembledSimpleParts": 7,
+      "catalogueId": 72,
+      "label": "Pupitre d'accueil",
+      "physics": "rigid",
+      "sha256": "2f3502266449c88595a009995913e5df68c0c47c371a58dbef3fd716b56765a3"
+    },
+    {
+      "id": "SM_AOF_073",
+      "file": "SM_AOF_073.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1316,
+      "boundsBlender": [
+        [
+          -0.82,
+          -0.8,
+          0.0
+        ],
+        [
+          0.82,
+          0.8,
+          1.08
+        ]
+      ],
+      "assembledSimpleParts": 7,
+      "catalogueId": 73,
+      "label": "Socle de station",
+      "physics": "static",
+      "sha256": "2a8f306528415a3024b1ca810d2639db5e2e735349b0be21d7e2bb99ffdf0815"
+    },
+    {
+      "id": "SM_AOF_074",
+      "file": "SM_AOF_074.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1316,
+      "boundsBlender": [
+        [
+          -1.02,
+          -0.7,
+          0.0
+        ],
+        [
+          1.02,
+          0.7,
+          1.48
+        ]
+      ],
+      "assembledSimpleParts": 7,
+      "catalogueId": 74,
+      "label": "Autel",
+      "physics": "static",
+      "sha256": "95c0dd4d11c0329d426179563c0b13a09fed64b581f9ca5d8f914b004370e048"
+    },
+    {
+      "id": "SM_AOF_075",
+      "file": "SM_AOF_075.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 800,
+      "boundsBlender": [
+        [
+          -0.57,
+          -0.425,
+          0.0
+        ],
+        [
+          0.57,
+          0.425,
+          1.9951
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 75,
+      "label": "Stèle divine",
+      "physics": "static",
+      "sha256": "6dff25638c6bedb88e47794028aeaca6a8408cca0878cb57c4fd1fc81c11a0e6"
+    },
+    {
+      "id": "REF_AOF_076",
+      "catalogueId": 76,
+      "label": "Statue divine",
+      "physics": "static",
+      "referenceAssets": [
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-bauron/StaticMeshes/SM_Statue_Bauron",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/effigy-zulvath/StaticMeshes/SM_Statue_Effigy_Zulvath",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/portal-guardian-lion/StaticMeshes/SM_Statue_Portal_Guardian_Lion",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-duality/StaticMeshes/SM_Statue_Duality",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-lumina/StaticMeshes/SM_Statue_Lumina",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-bas/StaticMeshes/SM_Statue_Bas",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-oigridh/StaticMeshes/SM_Statue_Oigridh",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-glorious-one/StaticMeshes/SM_Statue_Glorious_One",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-tamera/StaticMeshes/SM_Statue_Tamera",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-fruitful/StaticMeshes/SM_Statue_Fruitful",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-fumetsu/StaticMeshes/SM_Statue_Fumetsu",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-nature-spirits/StaticMeshes/SM_Statue_Nature_Spirits",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/statue-aibidh/StaticMeshes/SM_Statue_Aibidh",
+        "/Game/Bibliotheque/ModelesMaitres/Statues/ossuary-insert/StaticMeshes/SM_Statue_Ossuary_Insert"
+      ],
+      "note": "Existing approved master statues, no invented deity."
+    },
+    {
+      "id": "SM_AOF_077",
+      "file": "SM_AOF_077.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 6580,
+      "boundsBlender": [
+        [
+          -1.0194,
+          -0.35,
+          0.0
+        ],
+        [
+          1.0194,
+          0.375,
+          4.0188
+        ]
+      ],
+      "assembledSimpleParts": 35,
+      "catalogueId": 77,
+      "label": "Niche de station",
+      "physics": "static",
+      "sha256": "9414aac11d23863c6b4427a1eb07ab99234746fc86e474bef1150cc7bff2c2a7"
+    },
+    {
+      "id": "SM_AOF_078",
+      "file": "SM_AOF_078.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 2256,
+      "boundsBlender": [
+        [
+          -0.796,
+          -0.45,
+          0.0
+        ],
+        [
+          0.796,
+          0.45,
+          0.8
+        ]
+      ],
+      "assembledSimpleParts": 12,
+      "catalogueId": 78,
+      "label": "Table d'offrandes",
+      "physics": "rigid",
+      "sha256": "034155dc34083c0ca40b76f729505828ec3f35f9996d2cda27f1b0d70b6dcfd1"
+    },
+    {
+      "id": "SM_AOF_079",
+      "file": "SM_AOF_079.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 22832,
+      "boundsBlender": [
+        [
+          -0.4148,
+          -0.4148,
+          0.0
+        ],
+        [
+          0.4148,
+          0.4148,
+          1.2748
+        ]
+      ],
+      "assembledSimpleParts": 21,
+      "catalogueId": 79,
+      "label": "Brasero votif",
+      "physics": "rigid",
+      "sha256": "3d42982ba9f66aa24ff5921a6382e31be451e406932cca2c13150c27d2c944c5"
+    },
+    {
+      "id": "SM_AOF_080",
+      "file": "SM_AOF_080.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 1652,
+      "boundsBlender": [
+        [
+          -0.85,
+          -0.3,
+          0.0
+        ],
+        [
+          0.85,
+          0.3,
+          3.2
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 80,
+      "label": "Porte-bannière",
+      "physics": "static",
+      "sha256": "f17ae0026b8ff47d62926bac60be67094ff8001dad8627ee2a184674149f90c0"
+    },
+    {
+      "id": "SK_AOF_081",
+      "file": "SK_AOF_081.glb",
+      "catalogueId": 81,
+      "label": "Bannière divine",
+      "physics": "cloth",
+      "pins": 49,
+      "vertices": 3185,
+      "blenderDrapeFrames": 35,
+      "materials": [
+        "burgundy"
+      ],
+      "sourceBlend": "AOF_081_cloth_source.blend",
+      "maxDistanceCm": 400,
+      "sha256": "c675603823e426aba9b2c8dba9e957767d90165c99683e2fee9bfceb785be538"
+    },
+    {
+      "id": "SM_AOF_082",
+      "file": "SM_AOF_082.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 9314,
+      "boundsBlender": [
+        [
+          -0.395,
+          -0.094,
+          -0.0023
+        ],
+        [
+          0.395,
+          0.1817,
+          0.7814
+        ]
+      ],
+      "assembledSimpleParts": 16,
+      "catalogueId": 82,
+      "label": "Blason de délégation",
+      "physics": "static",
+      "sha256": "7f0e3d83b75b5cb1b70f2046805b4ca70c1c0935a356c7867a12b8817cf4f58d"
+    },
+    {
+      "id": "SM_AOF_083",
+      "file": "SM_AOF_083.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 752,
+      "boundsBlender": [
+        [
+          -0.82,
+          -0.175,
+          0.0
+        ],
+        [
+          0.82,
+          0.175,
+          0.94
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 83,
+      "label": "Plaque de secteur",
+      "physics": "static",
+      "sha256": "ba65a944d2d56cf151fd3244248f882f63e9eac37457e9ecc2cf462d1e1a413b"
+    },
+    {
+      "id": "SM_AOF_084",
+      "file": "SM_AOF_084.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 752,
+      "boundsBlender": [
+        [
+          -1.92,
+          -0.175,
+          0.0
+        ],
+        [
+          1.92,
+          0.175,
+          0.94
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 84,
+      "label": "Inscription monumentale",
+      "physics": "static",
+      "sha256": "742eb114e73cbdf87fcb97859403c98bd09f7364f8e30a5c8bb5f3f9ed8d5358"
+    },
+    {
+      "id": "SM_AOF_085",
+      "file": "SM_AOF_085.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 2096,
+      "boundsBlender": [
+        [
+          -0.57,
+          -0.55,
+          0.0
+        ],
+        [
+          0.57,
+          0.55,
+          0.65
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 85,
+      "label": "Embase de mât",
+      "physics": "static",
+      "sha256": "712ef2e7b020ccd0f3ba178e42867791adea766b61a816e0bfef1e004c325114"
+    },
+    {
+      "id": "SM_AOF_086",
+      "file": "SM_AOF_086.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 19580,
+      "boundsBlender": [
+        [
+          -0.2178,
+          -0.2178,
+          0.0
+        ],
+        [
+          0.2178,
+          0.2178,
+          5.0
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 86,
+      "label": "Mât de velum",
+      "physics": "static",
+      "sha256": "17f98815d972b58f61dc91161a9c54ed7b9ce1cfcd047dc5bbdf718787b75395"
+    },
+    {
+      "id": "SM_AOF_087",
+      "file": "SM_AOF_087.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 12540,
+      "boundsBlender": [
+        [
+          -0.6448,
+          -0.075,
+          0.1552
+        ],
+        [
+          0.6448,
+          0.075,
+          0.4448
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 87,
+      "label": "Tête de mât",
+      "physics": "static",
+      "sha256": "23e30454470b3890c3da5fe8bb5e8d9f6318cd06fea79e6716d3f7192bf48786"
+    },
+    {
+      "id": "SM_AOF_088",
+      "file": "SM_AOF_088.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 6584,
+      "boundsBlender": [
+        [
+          -0.1848,
+          -0.8848,
+          -0.0343
+        ],
+        [
+          0.1848,
+          0.05,
+          1.0
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 88,
+      "label": "Console de mât",
+      "physics": "static",
+      "sha256": "b17a5410374479583999c949e59b438120a8055362e1c2de4c43c2043dc7bf63"
+    },
+    {
+      "id": "SK_AOF_089",
+      "file": "SK_AOF_089.glb",
+      "catalogueId": 89,
+      "label": "Panneau de velum",
+      "physics": "cloth",
+      "pins": 4,
+      "vertices": 2009,
+      "blenderDrapeFrames": 35,
+      "materials": [
+        "burgundy"
+      ],
+      "sourceBlend": "AOF_089_cloth_source.blend",
+      "maxDistanceCm": 400,
+      "sha256": "67e4e3a45ad5d7d9a2fa6c5372d04493cebd2e469ea20f6c974d5349ec903b6f"
+    },
+    {
+      "id": "SK_AOF_090",
+      "file": "SK_AOF_090.glb",
+      "catalogueId": 90,
+      "label": "Bordure de toile",
+      "physics": "cloth",
+      "pins": 49,
+      "vertices": 2009,
+      "blenderDrapeFrames": 35,
+      "materials": [
+        "burgundy"
+      ],
+      "sourceBlend": "AOF_090_cloth_source.blend",
+      "maxDistanceCm": 400,
+      "sha256": "465bbb838c97326105a553d04e72a85e598efc8a13e03f0bb0acb8d72409a4f5"
+    },
+    {
+      "id": "SM_AOF_091",
+      "file": "SM_AOF_091.glb",
+      "materials": [
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 184884,
+      "boundsBlender": [
+        [
+          -0.0306,
+          -0.0307,
+          -0.007
+        ],
+        [
+          0.0306,
+          0.0306,
+          3.207
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 91,
+      "label": "Corde tendue",
+      "physics": "chain",
+      "skeletalFile": "SK_AOF_091.glb",
+      "bones": 21,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_091_rig_source.blend",
+      "sha256": "7ffbe350d82f1426a0d5c4adc9448c2e2f1e543141825fb2bd039999c301ff13"
+    },
+    {
+      "id": "SM_AOF_092",
+      "file": "SM_AOF_092.glb",
+      "materials": [
+        "bronze",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 149039,
+      "boundsBlender": [
+        [
+          -0.3129,
+          -0.3129,
+          -0.0039
+        ],
+        [
+          0.9428,
+          0.3129,
+          0.1599
+        ]
+      ],
+      "assembledSimpleParts": 20,
+      "catalogueId": 92,
+      "label": "Corde lovée",
+      "physics": "rigid",
+      "sha256": "e4ff5a031b580761e1654c5fce1071b429eb3e72ee48ae96a058bf3285f25840"
+    },
+    {
+      "id": "SM_AOF_093",
+      "file": "SM_AOF_093.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 15188,
+      "boundsBlender": [
+        [
+          -0.42,
+          -0.19,
+          0.3
+        ],
+        [
+          0.42,
+          0.19,
+          1.1
+        ]
+      ],
+      "assembledSimpleParts": 13,
+      "catalogueId": 93,
+      "label": "Poulie",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_093.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_093_rig_source.blend",
+      "sha256": "181ddc91f25a5be2d175e8d160fa2b373838834ce4ff62a2524b0525982419fc"
+    },
+    {
+      "id": "SM_AOF_094",
+      "file": "SM_AOF_094.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 58896,
+      "boundsBlender": [
+        [
+          -0.49,
+          -0.38,
+          0.0
+        ],
+        [
+          0.527,
+          0.325,
+          0.827
+        ]
+      ],
+      "assembledSimpleParts": 23,
+      "catalogueId": 94,
+      "label": "Treuil de velum",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_094.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_094_rig_source.blend",
+      "sha256": "f648c3b3996e76fca32847dcd2fdc999b67e9382026fea9a6a4466f44eb2437d"
+    },
+    {
+      "id": "SM_AOF_095",
+      "file": "SM_AOF_095.glb",
+      "materials": [
+        "dark_metal",
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 7372,
+      "boundsBlender": [
+        [
+          -0.31,
+          -0.285,
+          0.0
+        ],
+        [
+          0.31,
+          0.285,
+          0.7528
+        ]
+      ],
+      "assembledSimpleParts": 6,
+      "catalogueId": 95,
+      "label": "Anneau d'ancrage",
+      "physics": "static",
+      "sha256": "8f14d4692fabc6999f36a11c9a60fa7a29cd1d002f6ce3169792d00711951b35"
+    },
+    {
+      "id": "SM_AOF_096",
+      "file": "SM_AOF_096.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 692,
+      "boundsBlender": [
+        [
+          -0.18,
+          -0.06,
+          0.0
+        ],
+        [
+          0.18,
+          0.06,
+          0.235
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 96,
+      "label": "Taquet de corde",
+      "physics": "static",
+      "sha256": "225c0013d28722858a164e21482677c881f3ef07722375fe640fe7f2ddb1322a"
+    },
+    {
+      "id": "SM_AOF_097",
+      "file": "SM_AOF_097.glb",
+      "materials": [
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 19286,
+      "boundsBlender": [
+        [
+          -1.487,
+          -0.3697,
+          0.013
+        ],
+        [
+          1.4892,
+          0.3697,
+          2.987
+        ]
+      ],
+      "assembledSimpleParts": 33,
+      "catalogueId": 97,
+      "label": "Mur de sous-sol",
+      "physics": "static",
+      "sha256": "1540759b5225d6496f5df00b0f18af789e91222e191bfbdba06462a32167e581"
+    },
+    {
+      "id": "SM_AOF_098",
+      "file": "SM_AOF_098.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 752,
+      "boundsBlender": [
+        [
+          -0.57,
+          -0.55,
+          0.0
+        ],
+        [
+          0.57,
+          0.55,
+          3.04
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 98,
+      "label": "Pilier de sous-sol",
+      "physics": "static",
+      "sha256": "aa66f2ed059e628cefe5da0fceac8846ebc194010b5a9b73090f8d07aff5556b"
+    },
+    {
+      "id": "SM_AOF_099",
+      "file": "SM_AOF_099.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 2256,
+      "boundsBlender": [
+        [
+          -1.5,
+          -1.5,
+          0.0
+        ],
+        [
+          1.5,
+          1.5,
+          0.3
+        ]
+      ],
+      "assembledSimpleParts": 12,
+      "catalogueId": 99,
+      "label": "Plancher technique",
+      "physics": "static",
+      "sha256": "a579d04192206b81b2b0e14615d601cd0228fe8233ff01c33e9c72744844d79a"
+    },
+    {
+      "id": "SM_AOF_100",
+      "file": "SM_AOF_100.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 752,
+      "boundsBlender": [
+        [
+          -1.0,
+          -0.9,
+          0.0
+        ],
+        [
+          1.0,
+          0.9,
+          0.3
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 100,
+      "label": "Bouche de trémie",
+      "physics": "static",
+      "sha256": "9b304ea784193e212155f9b63cc66e0d953672052e24a68422c04a0ad12897fa"
+    },
+    {
+      "id": "SM_AOF_101",
+      "file": "SM_AOF_101.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 860,
+      "boundsBlender": [
+        [
+          -1.2,
+          -2.4,
+          0.0
+        ],
+        [
+          1.2,
+          0.0,
+          1.5
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 101,
+      "label": "Escalier de service",
+      "physics": "static",
+      "sha256": "293cae394ecdd53f8ad62a6dae0aba137c610413f1aa4ff4378b34726e75fb63"
+    },
+    {
+      "id": "SM_AOF_102",
+      "file": "SM_AOF_102.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 3276,
+      "boundsBlender": [
+        [
+          -0.335,
+          -0.035,
+          0.0
+        ],
+        [
+          0.335,
+          0.035,
+          3.2
+        ]
+      ],
+      "assembledSimpleParts": 13,
+      "catalogueId": 102,
+      "label": "Échelle fixe",
+      "physics": "static",
+      "sha256": "507e5bee6e556e58d606ea01cd1bc16d3f7631d2adbb40293f633f88f1b1e91d"
+    },
+    {
+      "id": "SM_AOF_103",
+      "file": "SM_AOF_103.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 8964,
+      "boundsBlender": [
+        [
+          -0.775,
+          -0.1,
+          0.0
+        ],
+        [
+          0.775,
+          0.1228,
+          2.75
+        ]
+      ],
+      "assembledSimpleParts": 16,
+      "catalogueId": 103,
+      "label": "Porte gardée",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_103.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_103_rig_source.blend",
+      "sha256": "e40656fb2f891a8b7d6ba32b273e4e9a255202d4f53815d20ab221caeb967744"
+    },
+    {
+      "id": "SM_AOF_104",
+      "file": "SM_AOF_104.glb",
+      "materials": [
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 56862,
+      "boundsBlender": [
+        [
+          -1.495,
+          -1.7691,
+          0.013
+        ],
+        [
+          1.495,
+          1.7667,
+          4.1394
+        ]
+      ],
+      "assembledSimpleParts": 200,
+      "catalogueId": 104,
+      "label": "Tunnel de catacombe",
+      "physics": "static",
+      "sha256": "0ebaeef416e39c63181aa7dffe759c93b9de8729fb8d892c7e686bc912212f15"
+    },
+    {
+      "id": "SM_AOF_105",
+      "file": "SM_AOF_105.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 24064,
+      "boundsBlender": [
+        [
+          -1.725,
+          -3.0294,
+          0.0
+        ],
+        [
+          1.725,
+          3.0294,
+          3.9282
+        ]
+      ],
+      "assembledSimpleParts": 128,
+      "catalogueId": 105,
+      "label": "Jonction de tunnel",
+      "physics": "static",
+      "sha256": "0c05860d057be2c1ed3bc7f4f497a0b2daadb7b5de4e004362cb6ea78a8bb54d"
+    },
+    {
+      "id": "SM_AOF_106",
+      "file": "SM_AOF_106.glb",
+      "materials": [
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 57050,
+      "boundsBlender": [
+        [
+          -1.5,
+          -1.7691,
+          0.0
+        ],
+        [
+          1.495,
+          1.7667,
+          4.1394
+        ]
+      ],
+      "assembledSimpleParts": 201,
+      "catalogueId": 106,
+      "label": "Cul-de-sac voûté",
+      "physics": "static",
+      "sha256": "62ab75dd58d71348640cf2443e735ef34fc0f7522204ed5a00e718c57d828a23"
+    },
+    {
+      "id": "SM_AOF_107",
+      "file": "SM_AOF_107.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 6580,
+      "boundsBlender": [
+        [
+          -0.7694,
+          -0.35,
+          0.0
+        ],
+        [
+          0.7694,
+          0.375,
+          1.4691
+        ]
+      ],
+      "assembledSimpleParts": 35,
+      "catalogueId": 107,
+      "label": "Niche funéraire",
+      "physics": "static",
+      "sha256": "b9e20d29226c188aceec76235666eb7ea92166d6caa5f9129fa3a40091869798"
+    },
+    {
+      "id": "SM_AOF_108",
+      "file": "SM_AOF_108.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -0.55,
+          -0.075,
+          0.0
+        ],
+        [
+          0.55,
+          0.075,
+          0.85
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 108,
+      "label": "Dalle funéraire",
+      "physics": "static",
+      "sha256": "58b93d43aa8823b531c2d5083d97fdd8d0caa9101b93d808f19f1f49a3588831"
+    },
+    {
+      "id": "SM_AOF_109",
+      "file": "SM_AOF_109.glb",
+      "materials": [
+        "bronze",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 12021,
+      "boundsBlender": [
+        [
+          -0.975,
+          -0.315,
+          0.0
+        ],
+        [
+          0.975,
+          0.2996,
+          0.87
+        ]
+      ],
+      "assembledSimpleParts": 19,
+      "catalogueId": 109,
+      "label": "Banc de vestiaire",
+      "physics": "rigid",
+      "sha256": "5db52c7d79ec2fc7d0a5615f594f4cc1423117924a7c31ef2bd0a2cccdb0910d"
+    },
+    {
+      "id": "SM_AOF_110",
+      "file": "SM_AOF_110.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 1504,
+      "boundsBlender": [
+        [
+          -0.53,
+          -0.315,
+          0.0
+        ],
+        [
+          0.53,
+          0.275,
+          1.9
+        ]
+      ],
+      "assembledSimpleParts": 8,
+      "catalogueId": 110,
+      "label": "Casier de vestiaire",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_110.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_110_rig_source.blend",
+      "sha256": "41616a4657db2e0d23fd2d27b2f334ade4603c26d173c845297b5979a4e6aeb3"
+    },
+    {
+      "id": "SM_AOF_111",
+      "file": "SM_AOF_111.glb",
+      "materials": [
+        "bronze",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 5228,
+      "boundsBlender": [
+        [
+          -0.6,
+          -0.2476,
+          0.2325
+        ],
+        [
+          0.6,
+          0.04,
+          0.42
+        ]
+      ],
+      "assembledSimpleParts": 5,
+      "catalogueId": 111,
+      "label": "Patère murale",
+      "physics": "static",
+      "sha256": "d4d3905a4f9d1533d0cba25853740d3da1428721a179f365eb7ae79fff5f95e4"
+    },
+    {
+      "id": "SM_AOF_112",
+      "file": "SM_AOF_112.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 38572,
+      "boundsBlender": [
+        [
+          -0.99,
+          -0.31,
+          0.0
+        ],
+        [
+          0.99,
+          0.31,
+          2.1377
+        ]
+      ],
+      "assembledSimpleParts": 37,
+      "catalogueId": 112,
+      "label": "Râtelier",
+      "physics": "rigid",
+      "sha256": "9132338e1221ff422d69abcb71fc90ba5cb608a9174ca881ab9980b7f4647392"
+    },
+    {
+      "id": "SM_AOF_113",
+      "file": "SM_AOF_113.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 2256,
+      "boundsBlender": [
+        [
+          -0.796,
+          -0.45,
+          0.0
+        ],
+        [
+          0.796,
+          0.45,
+          0.8
+        ]
+      ],
+      "assembledSimpleParts": 12,
+      "catalogueId": 113,
+      "label": "Table de préparation",
+      "physics": "rigid",
+      "sha256": "c35de50214a108ff068afd35483088a0b5ca7c5a5b470085242f6e7356785a84"
+    },
+    {
+      "id": "SM_AOF_114",
+      "file": "SM_AOF_114.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 23472,
+      "boundsBlender": [
+        [
+          -0.58,
+          -0.3555,
+          0.0
+        ],
+        [
+          0.58,
+          0.3918,
+          0.797
+        ]
+      ],
+      "assembledSimpleParts": 29,
+      "catalogueId": 114,
+      "label": "Coffre de service",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_114.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_114_rig_source.blend",
+      "sha256": "ced32220e181d16c5a790a22f8385b256459deb394d06e0f54c36108e63d97be"
+    },
+    {
+      "id": "SM_AOF_115",
+      "file": "SM_AOF_115.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 24936,
+      "boundsBlender": [
+        [
+          -1.2,
+          -0.06,
+          0.0
+        ],
+        [
+          1.2,
+          0.0425,
+          2.6
+        ]
+      ],
+      "assembledSimpleParts": 62,
+      "catalogueId": 115,
+      "label": "Barreaux de cellule",
+      "physics": "static",
+      "sha256": "70c9f3068cd90a9fffe8aeda6f136d98d6edbf2ddf4102ad087542ae3c2e89c4"
+    },
+    {
+      "id": "SM_AOF_116",
+      "file": "SM_AOF_116.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 8964,
+      "boundsBlender": [
+        [
+          -0.775,
+          -0.1,
+          0.0
+        ],
+        [
+          0.775,
+          0.1228,
+          2.75
+        ]
+      ],
+      "assembledSimpleParts": 16,
+      "catalogueId": 116,
+      "label": "Porte de cellule",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_116.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_116_rig_source.blend",
+      "sha256": "db8a9ae52ee3e11b441fe2769da449e6758a5a5a9498f6a3fb25b6ae38bcedbb"
+    },
+    {
+      "id": "SM_AOF_117",
+      "file": "SM_AOF_117.glb",
+      "materials": [
+        "bronze",
+        "burgundy",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 67425,
+      "boundsBlender": [
+        [
+          -0.975,
+          -0.315,
+          -0.0653
+        ],
+        [
+          0.975,
+          0.2996,
+          0.87
+        ]
+      ],
+      "assembledSimpleParts": 116,
+      "catalogueId": 117,
+      "label": "Lit de cellule",
+      "physics": "rigid",
+      "sha256": "2eb34a8f88d483b7ad26ec28cae40dd702cdd4c199452b87e7029a2dec29199e"
+    },
+    {
+      "id": "SM_AOF_118",
+      "file": "SM_AOF_118.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 752,
+      "boundsBlender": [
+        [
+          -0.675,
+          -0.1,
+          0.0
+        ],
+        [
+          0.675,
+          0.1,
+          1.25
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 118,
+      "label": "Guichet de garde",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_118.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_118_rig_source.blend",
+      "sha256": "da2e0ce6a450a4d19ac8eadb67623925193f268d35e69a22894d5f062d3c5e3b"
+    },
+    {
+      "id": "SM_AOF_119",
+      "file": "SM_AOF_119.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 940,
+      "boundsBlender": [
+        [
+          -0.81,
+          -0.41,
+          0.0
+        ],
+        [
+          0.81,
+          0.41,
+          0.75
+        ]
+      ],
+      "assembledSimpleParts": 5,
+      "catalogueId": 119,
+      "label": "Abreuvoir de service",
+      "physics": "rigid",
+      "sha256": "300fb46df4ddedc77cbf71c7c5d039b81302f66f6fe26147b3491ea1c1f01d07"
+    },
+    {
+      "id": "SM_AOF_120",
+      "file": "SM_AOF_120.glb",
+      "materials": [
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 16782,
+      "boundsBlender": [
+        [
+          -1.4876,
+          -0.1693,
+          0.013
+        ],
+        [
+          1.487,
+          0.1693,
+          2.7892
+        ]
+      ],
+      "assembledSimpleParts": 29,
+      "catalogueId": 120,
+      "label": "Cloison de service",
+      "physics": "static",
+      "sha256": "969dcee0c68af1585ba9905ab4dce88d367cfc17a2107827674979985c45cd25"
+    },
+    {
+      "id": "SM_AOF_121",
+      "file": "SM_AOF_121.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 2256,
+      "boundsBlender": [
+        [
+          -1.246,
+          -1.25,
+          0.0
+        ],
+        [
+          1.246,
+          1.25,
+          0.35
+        ]
+      ],
+      "assembledSimpleParts": 12,
+      "catalogueId": 121,
+      "label": "Plateforme élévatrice",
+      "physics": "slider",
+      "skeletalFile": "SK_AOF_121.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_121_rig_source.blend",
+      "sha256": "04e741200f62d63fbf5f5890fa79cacc19091a40227fca760872843027bc058b"
+    },
+    {
+      "id": "SM_AOF_122",
+      "file": "SM_AOF_122.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 1128,
+      "boundsBlender": [
+        [
+          -1.4,
+          -1.39,
+          0.0
+        ],
+        [
+          1.4,
+          1.39,
+          4.0
+        ]
+      ],
+      "assembledSimpleParts": 6,
+      "catalogueId": 122,
+      "label": "Châssis élévateur",
+      "physics": "static",
+      "sha256": "580e555e2e84ff4c2acd89350a54f4f85e0470414f177e5de0df7113b0d6a93c"
+    },
+    {
+      "id": "SM_AOF_123",
+      "file": "SM_AOF_123.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 564,
+      "boundsBlender": [
+        [
+          -0.15,
+          -0.1,
+          0.0
+        ],
+        [
+          0.15,
+          0.1,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 123,
+      "label": "Rail de guidage",
+      "physics": "static",
+      "sha256": "3149f36677a43733f64757aab1682719e3dfba26c1a43280637dc5f29aef3bb6"
+    },
+    {
+      "id": "SM_AOF_124",
+      "file": "SM_AOF_124.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 58896,
+      "boundsBlender": [
+        [
+          -0.49,
+          -0.38,
+          0.0
+        ],
+        [
+          0.527,
+          0.325,
+          0.827
+        ]
+      ],
+      "assembledSimpleParts": 23,
+      "catalogueId": 124,
+      "label": "Treuil de levage",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_124.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_124_rig_source.blend",
+      "sha256": "14d7e734c5fc3eeb717fdef216a4310830f40283bfc15cb2176849791575494d"
+    },
+    {
+      "id": "SM_AOF_125",
+      "file": "SM_AOF_125.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 3564,
+      "boundsBlender": [
+        [
+          -1.4,
+          -1.4,
+          0.0
+        ],
+        [
+          1.4,
+          1.4,
+          1.0
+        ]
+      ],
+      "assembledSimpleParts": 5,
+      "catalogueId": 125,
+      "label": "Cabestan",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_125.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_125_rig_source.blend",
+      "sha256": "48d26f9a492521b06510c0a69614bdaa4786c9ff461e68e5d6ccfa35da624966"
+    },
+    {
+      "id": "SM_AOF_126",
+      "file": "SM_AOF_126.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 6332,
+      "boundsBlender": [
+        [
+          -0.3,
+          -0.25,
+          0.0
+        ],
+        [
+          0.3,
+          0.25,
+          1.1548
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 126,
+      "label": "Contrepoids",
+      "physics": "chain",
+      "skeletalFile": "SK_AOF_126.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_126_rig_source.blend",
+      "sha256": "2b4cc8847f992d0226f7d54f7076084455d0a3dd3f93f599146fa50d6f572a55"
+    },
+    {
+      "id": "SM_AOF_127",
+      "file": "SM_AOF_127.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 15188,
+      "boundsBlender": [
+        [
+          -0.42,
+          -0.19,
+          0.3
+        ],
+        [
+          0.42,
+          0.19,
+          1.1
+        ]
+      ],
+      "assembledSimpleParts": 13,
+      "catalogueId": 127,
+      "label": "Poulie de levage",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_127.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_127_rig_source.blend",
+      "sha256": "ef5c673f9601104a55eb9a1eb04a174cd478f2230979198bc322e3342d4718c9"
+    },
+    {
+      "id": "SM_AOF_128",
+      "file": "SM_AOF_128.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 147456,
+      "boundsBlender": [
+        [
+          -0.0928,
+          -0.1278,
+          0.1022
+        ],
+        [
+          0.0928,
+          0.1278,
+          3.4278
+        ]
+      ],
+      "assembledSimpleParts": 24,
+      "catalogueId": 128,
+      "label": "Chaîne",
+      "physics": "chain",
+      "skeletalFile": "SK_AOF_128.glb",
+      "bones": 25,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_128_rig_source.blend",
+      "sha256": "3deac1b0186cfc7dbbe563577eba80df84c63020e14c7de950f3a74ccb57bc02"
+    },
+    {
+      "id": "SM_AOF_129",
+      "file": "SM_AOF_129.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 440,
+      "boundsBlender": [
+        [
+          -0.2,
+          -0.095,
+          0.0
+        ],
+        [
+          0.2,
+          0.04,
+          0.2
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 129,
+      "label": "Verrou de trappe",
+      "physics": "slider",
+      "skeletalFile": "SK_AOF_129.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_129_rig_source.blend",
+      "sha256": "3697dae88e8da8f63ffd9bed7e6a115083553d9c612345c3b9f7203a3ee5ae60"
+    },
+    {
+      "id": "SM_AOF_130",
+      "file": "SM_AOF_130.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 1128,
+      "boundsBlender": [
+        [
+          -1.1,
+          -0.3,
+          0.0
+        ],
+        [
+          1.1,
+          0.3,
+          1.1
+        ]
+      ],
+      "assembledSimpleParts": 6,
+      "catalogueId": 130,
+      "label": "Barrière de piste",
+      "physics": "rigid",
+      "sha256": "c019469ebe2810824f292ae8b5dd3ebd8a7ac2baffe408e735487479fc2dc06b"
+    },
+    {
+      "id": "SM_AOF_131",
+      "file": "SM_AOF_131.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 8964,
+      "boundsBlender": [
+        [
+          -0.775,
+          -0.1,
+          0.0
+        ],
+        [
+          0.775,
+          0.1228,
+          2.75
+        ]
+      ],
+      "assembledSimpleParts": 16,
+      "catalogueId": 131,
+      "label": "Portillon de piste",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_131.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_131_rig_source.blend",
+      "sha256": "c5797ba627843925fbe7511942d533e3959d27728f26643eb8b69a3b57b91c08"
+    },
+    {
+      "id": "SM_AOF_132",
+      "file": "SM_AOF_132.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 84705,
+      "boundsBlender": [
+        [
+          -0.62,
+          -1.434,
+          0.0
+        ],
+        [
+          0.72,
+          0.755,
+          1.622
+        ]
+      ],
+      "assembledSimpleParts": 151,
+      "catalogueId": 132,
+      "label": "Chariot de décor",
+      "physics": "wheel",
+      "skeletalFile": "SK_AOF_132.glb",
+      "bones": 5,
+      "anchorRoot": false,
+      "sourceBlend": "AOF_132_rig_source.blend",
+      "sha256": "dcc86f85b8f52114bff920049cdf08523917ce9de2ac3bd321457fa6995ec5ec"
+    },
+    {
+      "id": "SM_AOF_133",
+      "file": "SM_AOF_133.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 564,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.36,
+          0.0
+        ],
+        [
+          1.5,
+          0.36,
+          0.36
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 133,
+      "label": "Caniveau droit",
+      "physics": "static",
+      "sha256": "0fccabb19809d91a230524a15e373cb5c374580666aa53c5b4dae2e231012a76"
+    },
+    {
+      "id": "SM_AOF_134",
+      "file": "SM_AOF_134.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 11280,
+      "boundsBlender": [
+        [
+          0.0,
+          -2.3395,
+          0.0
+        ],
+        [
+          2.3395,
+          0.0,
+          0.36
+        ]
+      ],
+      "assembledSimpleParts": 60,
+      "catalogueId": 134,
+      "label": "Caniveau courbe",
+      "physics": "static",
+      "sha256": "50966f2fa7f34a06edacd593fc17c6df5f6d58664889350ec64e3beadc7cc8ab"
+    },
+    {
+      "id": "SM_AOF_135",
+      "file": "SM_AOF_135.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 11280,
+      "boundsBlender": [
+        [
+          0.0,
+          -2.3395,
+          0.0
+        ],
+        [
+          2.3395,
+          0.0,
+          0.36
+        ]
+      ],
+      "assembledSimpleParts": 60,
+      "catalogueId": 135,
+      "label": "Angle de caniveau",
+      "physics": "static",
+      "sha256": "2e0f1382c89340ccf247b7b411fe41776610a2b5d5c2b29c52fc1802374ef852"
+    },
+    {
+      "id": "SM_AOF_136",
+      "file": "SM_AOF_136.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 2256,
+      "boundsBlender": [
+        [
+          -0.5,
+          -0.3,
+          0.0
+        ],
+        [
+          0.5,
+          0.3,
+          0.04
+        ]
+      ],
+      "assembledSimpleParts": 12,
+      "catalogueId": 136,
+      "label": "Grille de drainage",
+      "physics": "rigid",
+      "sha256": "88eaa4934401b80ddbab5d074ecae6c9e9c6635f41e53418b7bd417f50e8442c"
+    },
+    {
+      "id": "SM_AOF_137",
+      "file": "SM_AOF_137.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 7084,
+      "boundsBlender": [
+        [
+          -0.6,
+          -0.575,
+          0.0
+        ],
+        [
+          0.6,
+          0.575,
+          0.3248
+        ]
+      ],
+      "assembledSimpleParts": 6,
+      "catalogueId": 137,
+      "label": "Regard",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_137.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_137_rig_source.blend",
+      "sha256": "d40f583e17e6d9dd605f7e02873ac835bfa2722690a3dcd8d834b5a2656a6bd2"
+    },
+    {
+      "id": "SM_AOF_138",
+      "file": "SM_AOF_138.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 940,
+      "boundsBlender": [
+        [
+          -0.41,
+          -0.41,
+          0.0
+        ],
+        [
+          0.41,
+          0.41,
+          0.4
+        ]
+      ],
+      "assembledSimpleParts": 5,
+      "catalogueId": 138,
+      "label": "Avaloir",
+      "physics": "static",
+      "sha256": "200a9612524e37d5c855f4b3cc96ab59e9b830bd86f5d81954ccea1e25406186"
+    },
+    {
+      "id": "SM_AOF_139",
+      "file": "SM_AOF_139.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 1024,
+      "boundsBlender": [
+        [
+          -0.18,
+          -0.18,
+          0.0
+        ],
+        [
+          0.18,
+          0.18,
+          2.0
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 139,
+      "label": "Conduite",
+      "physics": "static",
+      "sha256": "7c9c328248377ab60dbd66eb66c34f881fe4ad7f485dd8a01d08d11322818326"
+    },
+    {
+      "id": "SM_AOF_140",
+      "file": "SM_AOF_140.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 3456,
+      "boundsBlender": [
+        [
+          -0.0069,
+          -0.18,
+          -0.1797
+        ],
+        [
+          0.8797,
+          0.18,
+          0.7069
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 140,
+      "label": "Coude de conduite",
+      "physics": "static",
+      "sha256": "503a17b956d8d859b65ff0b1cbae2001e77bdfcc8a42bc3130086291f341e0bb"
+    },
+    {
+      "id": "SM_AOF_141",
+      "file": "SM_AOF_141.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 2048,
+      "boundsBlender": [
+        [
+          -0.7,
+          -0.18,
+          0.0
+        ],
+        [
+          0.7,
+          0.18,
+          0.88
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 141,
+      "label": "Jonction de conduite",
+      "physics": "static",
+      "sha256": "3ae790d9428893b2dd9651f5d1e2a89a634fe4eec75ee0b8a541a172b247f4e1"
+    },
+    {
+      "id": "SM_AOF_142",
+      "file": "SM_AOF_142.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 940,
+      "boundsBlender": [
+        [
+          -1.56,
+          -1.56,
+          0.0
+        ],
+        [
+          1.56,
+          1.56,
+          2.15
+        ]
+      ],
+      "assembledSimpleParts": 5,
+      "catalogueId": 142,
+      "label": "Citerne modulaire",
+      "physics": "static",
+      "sha256": "87033c2c95780231f58862a8893e3ee6524d44dd59f1a69edb38611be9d2bbc6"
+    },
+    {
+      "id": "SM_AOF_143",
+      "file": "SM_AOF_143.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 2256,
+      "boundsBlender": [
+        [
+          -0.5,
+          -0.3,
+          0.0
+        ],
+        [
+          0.5,
+          0.3,
+          0.04
+        ]
+      ],
+      "assembledSimpleParts": 12,
+      "catalogueId": 143,
+      "label": "Bouche de ventilation",
+      "physics": "static",
+      "sha256": "6476964b16a2522915518b82e8edb8315cb410876611f47a214e66704a348d44"
+    },
+    {
+      "id": "SM_AOF_144",
+      "file": "SM_AOF_144.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 752,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.4,
+          0.0
+        ],
+        [
+          1.5,
+          0.4,
+          0.55
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 144,
+      "label": "Gargouille d'évacuation",
+      "physics": "static",
+      "sha256": "e1f177444df1a72fcc4b59f4bdc0e1beec6f79ddd5e3adfe998ea16e9b8064f4"
+    },
+    {
+      "id": "SM_AOF_145",
+      "file": "SM_AOF_145.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 504,
+      "boundsBlender": [
+        [
+          -0.15,
+          -0.15,
+          0.0
+        ],
+        [
+          0.15,
+          0.15,
+          0.1
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 145,
+      "label": "Pavé unitaire",
+      "physics": "static",
+      "sha256": "3a666c370bba28ca01602cf0ee9aca4d51980ab4e9f44c252669c498ec718f80"
+    },
+    {
+      "id": "SM_AOF_146",
+      "file": "SM_AOF_146.glb",
+      "materials": [
+        "marble_white",
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 6268,
+      "boundsBlender": [
+        [
+          -1.5,
+          -1.5,
+          -0.24
+        ],
+        [
+          1.5,
+          1.5,
+          0.0
+        ]
+      ],
+      "assembledSimpleParts": 17,
+      "catalogueId": 146,
+      "label": "Dallage de parvis",
+      "physics": "static",
+      "sha256": "3ccfdd2941d9a916887c1e834537193bb2edf92865a51377ed0dedb5c9de43b2"
+    },
+    {
+      "id": "SM_AOF_147",
+      "file": "SM_AOF_147.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 376,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.2,
+          0.0
+        ],
+        [
+          1.5,
+          0.2,
+          0.33
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 147,
+      "label": "Bordure de parvis",
+      "physics": "static",
+      "sha256": "034a72d83668cb4d3563cf2fd52440d695b827c2fcf2fe8e444effa8ece6df54"
+    },
+    {
+      "id": "SM_AOF_148",
+      "file": "SM_AOF_148.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 860,
+      "boundsBlender": [
+        [
+          -1.2,
+          -2.4,
+          0.0
+        ],
+        [
+          1.2,
+          0.0,
+          1.5
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 148,
+      "label": "Marche de parvis",
+      "physics": "static",
+      "sha256": "760fe4dd536e2a3ecf044a31d58941bd4c5e3c430a0d5327260a527140b4b0d4"
+    },
+    {
+      "id": "SM_AOF_149",
+      "file": "SM_AOF_149.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -1.5,
+          -1.5,
+          0.0
+        ],
+        [
+          1.5,
+          1.5,
+          0.6975
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 149,
+      "label": "Rampe de parvis",
+      "physics": "static",
+      "sha256": "9b18cf83fc9b2fb5eecc1cab968da6de8e07c058d60c36ad117558f6d15a2c2e"
+    },
+    {
+      "id": "SM_AOF_150",
+      "file": "SM_AOF_150.glb",
+      "materials": [
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 19286,
+      "boundsBlender": [
+        [
+          -1.487,
+          -0.3697,
+          0.013
+        ],
+        [
+          1.4892,
+          0.3697,
+          2.987
+        ]
+      ],
+      "assembledSimpleParts": 33,
+      "catalogueId": 150,
+      "label": "Mur de soutènement",
+      "physics": "static",
+      "sha256": "4a877209b2128b03466d52f5faf32cce9f69910c2eada93cb8f7247ff30a2851"
+    },
+    {
+      "id": "SM_AOF_151",
+      "file": "SM_AOF_151.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 376,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.2,
+          0.0
+        ],
+        [
+          1.5,
+          0.2,
+          0.33
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 151,
+      "label": "Chaperon de soutènement",
+      "physics": "static",
+      "sha256": "da02bf2621d2a6114d32be35c4cd4220cfb82cc279c9c8644aadc230297c8586"
+    },
+    {
+      "id": "SM_AOF_152",
+      "file": "SM_AOF_152.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 2172,
+      "boundsBlender": [
+        [
+          -0.2,
+          -0.2,
+          0.0
+        ],
+        [
+          0.2,
+          0.2,
+          0.98
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 152,
+      "label": "Borne de circulation",
+      "physics": "rigid",
+      "sha256": "18af4a6a6abf5f3abcd8056c3f8028168ec43810f292248da77c8f73b3309438"
+    },
+    {
+      "id": "SM_AOF_153",
+      "file": "SM_AOF_153.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 1128,
+      "boundsBlender": [
+        [
+          -1.1,
+          -0.3,
+          0.0
+        ],
+        [
+          1.1,
+          0.3,
+          1.1
+        ]
+      ],
+      "assembledSimpleParts": 6,
+      "catalogueId": 153,
+      "label": "Barrière de file",
+      "physics": "rigid",
+      "sha256": "63690aefe0bc826d7d9e76d56ad5d4a663c7718a2b60e53f0a4d949a2d4ad610"
+    },
+    {
+      "id": "SM_AOF_154",
+      "file": "SM_AOF_154.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 440,
+      "boundsBlender": [
+        [
+          -0.15,
+          -0.06,
+          0.0
+        ],
+        [
+          0.75,
+          0.06,
+          2.4
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 154,
+      "label": "Poteau de signalétique",
+      "physics": "rigid",
+      "sha256": "937d241e4911161adb59a2534cafe3d25b5d5650d3f430960e42e5a0363e7c12"
+    },
+    {
+      "id": "SM_AOF_155",
+      "file": "SM_AOF_155.glb",
+      "materials": [
+        "bronze",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 12021,
+      "boundsBlender": [
+        [
+          -0.975,
+          -0.315,
+          0.0
+        ],
+        [
+          0.975,
+          0.2996,
+          0.87
+        ]
+      ],
+      "assembledSimpleParts": 19,
+      "catalogueId": 155,
+      "label": "Banc extérieur",
+      "physics": "rigid",
+      "sha256": "25a7a50cff46e61a2852d43ea03068e848d3033ffaed52260772f910f93b7aa7"
+    },
+    {
+      "id": "SM_AOF_156",
+      "file": "SM_AOF_156.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1316,
+      "boundsBlender": [
+        [
+          -0.82,
+          -0.8,
+          0.0
+        ],
+        [
+          0.82,
+          0.8,
+          1.08
+        ]
+      ],
+      "assembledSimpleParts": 7,
+      "catalogueId": 156,
+      "label": "Socle de luminaire",
+      "physics": "static",
+      "sha256": "04c7ae8ad1c711a2fce80c242e3c621db85d891328d5ac6b898aaf74e01d9e1b"
+    },
+    {
+      "id": "SM_AOF_157",
+      "file": "SM_AOF_157.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 19907,
+      "boundsBlender": [
+        [
+          -0.19,
+          -0.53,
+          0.0
+        ],
+        [
+          0.19,
+          0.1588,
+          1.16
+        ]
+      ],
+      "assembledSimpleParts": 13,
+      "catalogueId": 157,
+      "label": "Torche murale",
+      "physics": "rigid",
+      "sha256": "563417416631dfbe5e475840e9835b0a6b94719bc7677a7b71fa59a5a0f477ee"
+    },
+    {
+      "id": "SM_AOF_158",
+      "file": "SM_AOF_158.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 22832,
+      "boundsBlender": [
+        [
+          -0.4148,
+          -0.4148,
+          0.0
+        ],
+        [
+          0.4148,
+          0.4148,
+          1.2748
+        ]
+      ],
+      "assembledSimpleParts": 21,
+      "catalogueId": 158,
+      "label": "Brasero sur pied",
+      "physics": "rigid",
+      "sha256": "07b1873c11ff3d6bc47e75ea4893d5bb4d2099a1ee90d1ae5f452ab97dc2d32a"
+    },
+    {
+      "id": "SM_AOF_159",
+      "file": "SM_AOF_159.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 12974,
+      "boundsBlender": [
+        [
+          -0.2304,
+          -0.2304,
+          0.0
+        ],
+        [
+          0.2304,
+          0.2304,
+          2.23
+        ]
+      ],
+      "assembledSimpleParts": 9,
+      "catalogueId": 159,
+      "label": "Lanterne suspendue",
+      "physics": "chain",
+      "skeletalFile": "SK_AOF_159.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_159_rig_source.blend",
+      "sha256": "781aad9b02559fa318edb1bbae25457b14a893c2804e4323f7f29946301b6fc2"
+    },
+    {
+      "id": "SM_AOF_160",
+      "file": "SM_AOF_160.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 1376,
+      "boundsBlender": [
+        [
+          -0.08,
+          -0.6846,
+          -0.0243
+        ],
+        [
+          0.08,
+          0.03,
+          0.5
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 160,
+      "label": "Support de lanterne",
+      "physics": "static",
+      "sha256": "ecd80ee065bde415bbb5a7cb3405c015b2b01693af7596cf96cd0650f3c58fa8"
+    },
+    {
+      "id": "SM_AOF_161",
+      "file": "SM_AOF_161.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 940,
+      "boundsBlender": [
+        [
+          -0.81,
+          -0.41,
+          0.0
+        ],
+        [
+          0.81,
+          0.41,
+          0.75
+        ]
+      ],
+      "assembledSimpleParts": 5,
+      "catalogueId": 161,
+      "label": "Vasque d'eau",
+      "physics": "rigid",
+      "sha256": "9da5f1a3d883b1d46a35c7346c564f73953daa113aba5b4bdab86cf2574fc0b2"
+    },
+    {
+      "id": "SM_AOF_162",
+      "file": "SM_AOF_162.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 21188,
+      "boundsBlender": [
+        [
+          -0.3,
+          -0.3,
+          0.0
+        ],
+        [
+          0.3,
+          0.3,
+          0.97
+        ]
+      ],
+      "assembledSimpleParts": 16,
+      "catalogueId": 162,
+      "label": "Jarre",
+      "physics": "rigid",
+      "sha256": "9cb6664c6ba9d7d24df224eac2f579eb41a022e6c0d05c602145b2d6299f294f"
+    },
+    {
+      "id": "SM_AOF_163",
+      "file": "SM_AOF_163.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 35228,
+      "boundsBlender": [
+        [
+          -0.398,
+          -0.4001,
+          0.02
+        ],
+        [
+          0.405,
+          0.4001,
+          0.994
+        ]
+      ],
+      "assembledSimpleParts": 61,
+      "catalogueId": 163,
+      "label": "Tonneau",
+      "physics": "rigid",
+      "sha256": "e69282ca2c6bb373320e44b339940bcb650e5398f344deb1102f1b72be768831"
+    },
+    {
+      "id": "SM_AOF_164",
+      "file": "SM_AOF_164.glb",
+      "materials": [
+        "dark_metal",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 7528,
+      "boundsBlender": [
+        [
+          -0.435,
+          -0.402,
+          0.0
+        ],
+        [
+          0.435,
+          0.402,
+          0.75
+        ]
+      ],
+      "assembledSimpleParts": 38,
+      "catalogueId": 164,
+      "label": "Caisse",
+      "physics": "rigid",
+      "sha256": "ea2126a26c0561a1c7ece5053f390e377a33dc637ec97ab5da9cc0fa0aa7a573"
+    },
+    {
+      "id": "SM_AOF_165",
+      "file": "SM_AOF_165.glb",
+      "materials": [
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 9212,
+      "boundsBlender": [
+        [
+          -0.4185,
+          -0.4185,
+          0.0
+        ],
+        [
+          0.4185,
+          0.4185,
+          0.8
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 165,
+      "label": "Sac",
+      "physics": "rigid",
+      "sha256": "ffaacacc44954ebd5eb59fe8d1e9d8b19c8981540bdde2d91ae008caa3ec8d53"
+    },
+    {
+      "id": "SM_AOF_166",
+      "file": "SM_AOF_166.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 83900,
+      "boundsBlender": [
+        [
+          -0.3248,
+          -0.2378,
+          0.0
+        ],
+        [
+          0.3248,
+          0.2378,
+          0.8048
+        ]
+      ],
+      "assembledSimpleParts": 34,
+      "catalogueId": 166,
+      "label": "Panier",
+      "physics": "rigid",
+      "sha256": "dc0e7f4602b7822a78e02f5a509d62f1d74d448ce248a35d44e2e492dd344746"
+    },
+    {
+      "id": "SM_AOF_167",
+      "file": "SM_AOF_167.glb",
+      "materials": [
+        "bronze",
+        "burgundy",
+        "marble_white",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 27244,
+      "boundsBlender": [
+        [
+          -0.7455,
+          -0.43,
+          0.0
+        ],
+        [
+          0.7455,
+          0.43,
+          1.125
+        ]
+      ],
+      "assembledSimpleParts": 25,
+      "catalogueId": 167,
+      "label": "Table de loge",
+      "physics": "rigid",
+      "sha256": "17fcf77c75fcd347ff9fa47429e3e2800757811ac1c2f27d000e1010f7098206"
+    },
+    {
+      "id": "SM_AOF_168",
+      "file": "SM_AOF_168.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 2256,
+      "boundsBlender": [
+        [
+          -0.23,
+          -0.225,
+          0.0
+        ],
+        [
+          0.23,
+          0.225,
+          0.55
+        ]
+      ],
+      "assembledSimpleParts": 12,
+      "catalogueId": 168,
+      "label": "Tabouret",
+      "physics": "rigid",
+      "sha256": "93d83b3332ce097fb86e03c5931d88f5d569ee5df2ff26b3823de21366cef246"
+    },
+    {
+      "id": "SM_AOF_169",
+      "file": "SM_AOF_169.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 564,
+      "boundsBlender": [
+        [
+          -0.32,
+          -0.5,
+          0.0
+        ],
+        [
+          0.32,
+          0.5,
+          0.34
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 169,
+      "label": "About de corniche",
+      "physics": "static",
+      "sha256": "b2c53c24c62c2aa203d0d94ffccc4623f7d1303b9eb1eafcef6558bcb1862bff"
+    },
+    {
+      "id": "SM_AOF_170",
+      "file": "SM_AOF_170.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 1128,
+      "boundsBlender": [
+        [
+          -0.87,
+          -1.22,
+          0.0
+        ],
+        [
+          0.87,
+          0.52,
+          0.34
+        ]
+      ],
+      "assembledSimpleParts": 6,
+      "catalogueId": 170,
+      "label": "Angle de corniche",
+      "physics": "static",
+      "sha256": "8209bd167916e49ac0d375a0e3f08a0a22adf216df27ae2f78a9e47da9477245"
+    },
+    {
+      "id": "SM_AOF_171",
+      "file": "SM_AOF_171.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 3760,
+      "boundsBlender": [
+        [
+          0.0,
+          -3.0654,
+          0.0
+        ],
+        [
+          4.0352,
+          -0.0043,
+          0.3
+        ]
+      ],
+      "assembledSimpleParts": 20,
+      "catalogueId": 171,
+      "label": "Raccord de rayon",
+      "physics": "static",
+      "sha256": "ff40a50a4e2ffb434e940b9f3a1a5963fc5ba20303087f04ddae6691e35b9b89"
+    },
+    {
+      "id": "SM_AOF_172",
+      "file": "SM_AOF_172.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -0.0998,
+          -0.3,
+          0.0
+        ],
+        [
+          0.0998,
+          0.3,
+          3.0
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 172,
+      "label": "Cale de fermeture",
+      "physics": "static",
+      "sha256": "431c229aa875fb30e76ca0f59f1ac715805a773cf2294458ff429f51d72d8909"
+    },
+    {
+      "id": "SM_AOF_173",
+      "file": "SM_AOF_173.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 5828,
+      "boundsBlender": [
+        [
+          -1.7994,
+          -0.15,
+          0.0027
+        ],
+        [
+          1.7994,
+          0.15,
+          1.7979
+        ]
+      ],
+      "assembledSimpleParts": 31,
+      "catalogueId": 173,
+      "label": "Joue de voûte",
+      "physics": "static",
+      "sha256": "72a68eed86017744833ee3c87876f11287ebbd7fb491d11bbd0ae345dbd3f608"
+    },
+    {
+      "id": "SM_AOF_174",
+      "file": "SM_AOF_174.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 5828,
+      "boundsBlender": [
+        [
+          -1.7994,
+          -0.15,
+          0.0027
+        ],
+        [
+          1.7994,
+          0.15,
+          1.7979
+        ]
+      ],
+      "assembledSimpleParts": 31,
+      "catalogueId": 174,
+      "label": "Lunette de voûte",
+      "physics": "static",
+      "sha256": "948654a8942c045ad5120abc328fde531f0f1366c4a964f9c1eb3847204bf68f"
+    },
+    {
+      "id": "SM_AOF_175",
+      "file": "SM_AOF_175.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 376,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.2,
+          0.0
+        ],
+        [
+          1.5,
+          0.2,
+          0.33
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 175,
+      "label": "Seuil de porte",
+      "physics": "static",
+      "sha256": "3541bb4c60744e926bbcbce8e1adbca0f55d579a9dcc251404e871068382eb7c"
+    },
+    {
+      "id": "SM_AOF_176",
+      "file": "SM_AOF_176.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 564,
+      "boundsBlender": [
+        [
+          -0.875,
+          -0.1,
+          0.0
+        ],
+        [
+          0.875,
+          0.1,
+          2.95
+        ]
+      ],
+      "assembledSimpleParts": 3,
+      "catalogueId": 176,
+      "label": "Embrasure",
+      "physics": "static",
+      "sha256": "99261f4c50cd249c82c020ddffb20b00cd63dc6b95b2017abf73ec019f52eeca"
+    },
+    {
+      "id": "SM_AOF_177",
+      "file": "SM_AOF_177.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.275,
+          0.0
+        ],
+        [
+          1.5,
+          0.275,
+          0.45
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 177,
+      "label": "Linteau droit",
+      "physics": "static",
+      "sha256": "0edf2276fb50f59c23d830374a247134633245e661a43046614127a14c77d739"
+    },
+    {
+      "id": "SM_AOF_178",
+      "file": "SM_AOF_178.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 376,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.2,
+          0.0
+        ],
+        [
+          1.5,
+          0.2,
+          0.33
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 178,
+      "label": "Plinthe",
+      "physics": "static",
+      "sha256": "8a29aa397acc8381c8193565b502fa06a57fca49a4a3aafef147c4812da72737"
+    },
+    {
+      "id": "SM_AOF_179",
+      "file": "SM_AOF_179.glb",
+      "materials": [
+        "mortar",
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -1.5,
+          -0.02,
+          0.0
+        ],
+        [
+          1.5,
+          0.02,
+          0.05
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 179,
+      "label": "Joint de séparation",
+      "physics": "static",
+      "sha256": "393fa7300e108ea89d020b7e57105d4f714e81d6ec3f603300c815aa910ccfb1"
+    },
+    {
+      "id": "SM_AOF_180",
+      "file": "SM_AOF_180.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -0.3,
+          -0.15,
+          0.0
+        ],
+        [
+          0.3,
+          0.15,
+          0.08
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 180,
+      "label": "Cache de raccord",
+      "physics": "static",
+      "sha256": "f6d2356a64806efa4c7b4fa1fba950c677626aa7943ffa992849f3b9dfe4f52f"
+    },
+    {
+      "id": "SM_AOF_181",
+      "file": "SM_AOF_181.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 284,
+      "boundsBlender": [
+        [
+          -0.65,
+          -0.4,
+          0.0
+        ],
+        [
+          0.65,
+          0.4,
+          0.45
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 181,
+      "label": "Bloc ébréché",
+      "physics": "rigid",
+      "sha256": "fb7333859712cf15f8d449835745d16adf1beab0b54a6918d729a314b19d52e0"
+    },
+    {
+      "id": "SM_AOF_182",
+      "file": "SM_AOF_182.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 704,
+      "boundsBlender": [
+        [
+          -0.77,
+          -0.5,
+          0.0
+        ],
+        [
+          0.8445,
+          0.5,
+          0.34
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 182,
+      "label": "Corniche brisée",
+      "physics": "rigid",
+      "sha256": "eb24646a908e5c25c1000948db1142f90d07e72c6acde59c044b9902d5e7426e"
+    },
+    {
+      "id": "SM_AOF_183",
+      "file": "SM_AOF_183.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 284,
+      "boundsBlender": [
+        [
+          -0.65,
+          -0.4,
+          0.0
+        ],
+        [
+          0.65,
+          0.4,
+          0.45
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 183,
+      "label": "Gradin endommagé",
+      "physics": "rigid",
+      "sha256": "a1ee95c0d5a26c0b9633ee9199e8e23d9ddc357b33354c1bcc9c530b1d44542d"
+    },
+    {
+      "id": "SM_AOF_184",
+      "file": "SM_AOF_184.glb",
+      "materials": [
+        "marble_white",
+        "stone_cream"
+      ],
+      "triangles": 408,
+      "boundsBlender": [
+        [
+          -1.0,
+          -1.0,
+          -0.18
+        ],
+        [
+          1.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 184,
+      "label": "Dalle fracturée",
+      "physics": "rigid",
+      "sha256": "de058f5fa183eafe82e2d05c6eac46fb0cedbcb0e19770b8185db64fd06455ed"
+    },
+    {
+      "id": "SM_AOF_185",
+      "file": "SM_AOF_185.glb",
+      "materials": [
+        "stone_cream"
+      ],
+      "triangles": 7008,
+      "boundsBlender": [
+        [
+          -0.2317,
+          -0.722,
+          0.0
+        ],
+        [
+          1.0595,
+          0.2239,
+          0.1508
+        ]
+      ],
+      "assembledSimpleParts": 12,
+      "catalogueId": 185,
+      "label": "Gravats de pierre",
+      "physics": "rigid",
+      "sha256": "51490fe7f73ed78332898fb6b7df3df2fe40bd7f4688a8f954c94d50b450b539"
+    },
+    {
+      "id": "SM_AOF_186",
+      "file": "SM_AOF_186.glb",
+      "materials": [
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 188,
+      "boundsBlender": [
+        [
+          -1.1,
+          -0.11,
+          0.0
+        ],
+        [
+          1.1,
+          0.11,
+          0.055
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 186,
+      "label": "Planche isolée",
+      "physics": "rigid",
+      "sha256": "52b77295b3e618e7ec1c9f1ffcc56d60a35db507dbcf8f72d50034a844e33d16"
+    },
+    {
+      "id": "SM_AOF_187",
+      "file": "SM_AOF_187.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 1928,
+      "boundsBlender": [
+        [
+          -0.325,
+          -0.06,
+          0.0
+        ],
+        [
+          0.325,
+          0.04,
+          0.04
+        ]
+      ],
+      "assembledSimpleParts": 6,
+      "catalogueId": 187,
+      "label": "Ferrure de porte",
+      "physics": "rigid",
+      "sha256": "15b65d2adff91d761e75afcb4ec32247fa674193419fd2fd03e456a1e32119df"
+    },
+    {
+      "id": "SM_AOF_188",
+      "file": "SM_AOF_188.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 6332,
+      "boundsBlender": [
+        [
+          -0.1178,
+          -0.0178,
+          -0.0078
+        ],
+        [
+          0.1178,
+          0.05,
+          0.3078
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 188,
+      "label": "Poignée de porte",
+      "physics": "hinge",
+      "skeletalFile": "SK_AOF_188.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_188_rig_source.blend",
+      "sha256": "86f08cca00270c440bef749d9bdde5b2606a0a9f1b283ecc5538aab9ea77feb6"
+    },
+    {
+      "id": "SM_AOF_189",
+      "file": "SM_AOF_189.glb",
+      "materials": [
+        "bronze",
+        "dark_metal",
+        "stone_cream"
+      ],
+      "triangles": 440,
+      "boundsBlender": [
+        [
+          -0.2,
+          -0.095,
+          0.0
+        ],
+        [
+          0.2,
+          0.04,
+          0.2
+        ]
+      ],
+      "assembledSimpleParts": 2,
+      "catalogueId": 189,
+      "label": "Serrure",
+      "physics": "slider",
+      "skeletalFile": "SK_AOF_189.glb",
+      "bones": 2,
+      "anchorRoot": true,
+      "sourceBlend": "AOF_189_rig_source.blend",
+      "sha256": "b145a108d566e4dc9991094a2364ca773fb51d540acb72e85e1bedb6b6757a4f"
+    },
+    {
+      "id": "SM_AOF_190",
+      "file": "SM_AOF_190.glb",
+      "materials": [
+        "bronze",
+        "stone_cream"
+      ],
+      "triangles": 2428,
+      "boundsBlender": [
+        [
+          -0.035,
+          -0.035,
+          0.0
+        ],
+        [
+          0.035,
+          0.035,
+          0.068
+        ]
+      ],
+      "assembledSimpleParts": 1,
+      "catalogueId": 190,
+      "label": "Rivet",
+      "physics": "rigid",
+      "sha256": "aa5b2db56751c0eff41457c5b654684e7c91ddad8b848e14e073aa0c29fdaab1"
+    },
+    {
+      "id": "SM_AOF_191",
+      "file": "SM_AOF_191.glb",
+      "materials": [
+        "bronze",
+        "stone_cream",
+        "wood"
+      ],
+      "triangles": 1232,
+      "boundsBlender": [
+        [
+          -0.4,
+          -0.11,
+          0.0
+        ],
+        [
+          0.4,
+          0.1,
+          0.0452
+        ]
+      ],
+      "assembledSimpleParts": 4,
+      "catalogueId": 191,
+      "label": "Pièce de réparation",
+      "physics": "rigid",
+      "sha256": "54dc75d99198c930b56a660862e7de876947467eb689833276bdfb64f4a4b4ed"
+    },
+    {
+      "id": "SK_AOF_192",
+      "file": "SK_AOF_192.glb",
+      "catalogueId": 192,
+      "label": "Débris de toile",
+      "physics": "cloth",
+      "pins": 49,
+      "vertices": 3185,
+      "blenderDrapeFrames": 35,
+      "materials": [
+        "burgundy"
+      ],
+      "sourceBlend": "AOF_192_cloth_source.blend",
+      "maxDistanceCm": 400,
+      "sha256": "78485f13769ce9f4203625a26ab5d37b977fc142610ab977b27294e1f3a03fc8"
+    }
+  ],
+  "generator": "scripts/assetsGeneration/build_aof_extension.py"
+}

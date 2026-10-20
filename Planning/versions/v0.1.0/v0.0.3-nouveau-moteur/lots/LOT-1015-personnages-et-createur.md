@@ -32,6 +32,11 @@ criteres = [
 
 ## Pourquoi
 
+> Lecture du 20 octobre 2026 : ce lot conserve ses mesures historiques de prototype.
+> La chaîne de production est réévaluée au LOT-1024 (D-68), les bases et vêtements aux
+> LOT-1026/1027, les personnages de la démo au LOT-1029 et les mesures finales au LOT-1030.
+> Les mentions ci-dessous de livraison future au LOT-1024 sont remplacées par ce découpage.
+
 Le jeu final propose beaucoup de personnages différents : 22 espèces jouables
 (`Source/Elements/Rpg/species/`), des PNJ par lieu, des adversaires par rencontre. Un maillage par
 personnage (D-38) multiplie les commandes Meshy, les liaisons et les contrôles à chaque visage.

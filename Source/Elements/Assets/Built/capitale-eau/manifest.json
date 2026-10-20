@@ -1,0 +1,227 @@
+{
+  "waterLevelChanged": false,
+  "terrainChanged": false,
+  "shoreExtensionMetres": 12,
+  "meshes": [
+    {
+      "id": "eau-t04_00",
+      "triangles": 26824,
+      "sha256": "eb7526c1f1470bf99ff66b5704199eecb1fc94e53314d24d20e0c3a30a915eaa"
+    },
+    {
+      "id": "eau-t05_00",
+      "triangles": 4438,
+      "sha256": "c2c95552cbc5ed5144454bea8bf298859ff6f2c3f2213984056398f4704687a9"
+    },
+    {
+      "id": "eau-t03_01",
+      "triangles": 1942,
+      "sha256": "43f81859d5ee5daae0ef862f0ca1c7844def9de15249e73c5107eaf6b3688412"
+    },
+    {
+      "id": "eau-t04_01",
+      "triangles": 32858,
+      "sha256": "6c6a288d9287fffb1bc49ef22e0c8c7c74ce32fa0e71493f20fa4fe75c19d1b6"
+    },
+    {
+      "id": "eau-t03_02",
+      "triangles": 36824,
+      "sha256": "ceca6cb76e9d9a0f36758436b9d7bf30f28e282da43aac106f60edab14cd9cc1"
+    },
+    {
+      "id": "eau-t04_02",
+      "triangles": 3098,
+      "sha256": "9dc316baf8e0a464304a99311b41be583d2e76c2a67747767c2c3880e147790f"
+    },
+    {
+      "id": "eau-t02_03",
+      "triangles": 15640,
+      "sha256": "af33c284bea21370d262d8725d9b402153caa77cd2b03fbc2dbb7f9a284da939"
+    },
+    {
+      "id": "eau-t03_03",
+      "triangles": 28280,
+      "sha256": "47238061ecbb7b11b19e4a7ffeda2753c37d2131a0d9ed7f2a85aeb34acd1cc9"
+    },
+    {
+      "id": "eau-t02_04",
+      "triangles": 45110,
+      "sha256": "84b80f88b6d50fc8535f81efc7db777d065d3e0068cef44f1bf9c15940b97795"
+    },
+    {
+      "id": "eau-t01_05",
+      "triangles": 10396,
+      "sha256": "b54edcb88b183a7321bbb20fb53ee1624fe075f721487537a64a8b371caee013"
+    },
+    {
+      "id": "eau-t02_05",
+      "triangles": 36738,
+      "sha256": "cc4b8c0a21f422f3bf3921581b4a37d439997e94c9b91861c2d1e16d0686abcb"
+    },
+    {
+      "id": "eau-t01_06",
+      "triangles": 30286,
+      "sha256": "f579b92fb40934d126dc67e95907c4c280cede702099a6f51d21c0282080d8eb"
+    },
+    {
+      "id": "eau-t02_06",
+      "triangles": 30026,
+      "sha256": "072a6e4702092aabe21c13cf6019a93771057c6aef8563c08ff83c25777a8466"
+    },
+    {
+      "id": "eau-t03_06",
+      "triangles": 1516,
+      "sha256": "05231b418e9651ca58a1ad430b476183346a5cfbf2031e2729f7726fb3747dfd"
+    },
+    {
+      "id": "eau-t01_07",
+      "triangles": 77000,
+      "sha256": "4bfb389555fab0013983f308bc3de48aa8d43477815f9d048ad07b266b5513dc"
+    },
+    {
+      "id": "eau-t02_07",
+      "triangles": 94428,
+      "sha256": "e9e358d96ea3bbdd3c93b8a8e241cf3d2239062c874ad4b520069c9c3dcc4118"
+    },
+    {
+      "id": "eau-t03_07",
+      "triangles": 2472,
+      "sha256": "e482fa97804b5b73ee90fa9991c0ee925051f5b875b47b4496d570e074a52a9a"
+    },
+    {
+      "id": "eau-t01_08",
+      "triangles": 94476,
+      "sha256": "88c132bc1739072b3d84d49dfa49dfa3793f32878d6dac904f6b30d75e6e56f5"
+    },
+    {
+      "id": "eau-t02_08",
+      "triangles": 91176,
+      "sha256": "cca534dee8bdcc73e0178f531f8b6fc98522194ede92f9e20a0103f012fa61e2"
+    },
+    {
+      "id": "eau-t01_09",
+      "triangles": 77366,
+      "sha256": "68bfbf3151e52f1eeeb04408a8752b903008e05d091b2fa43639771499529ebc"
+    },
+    {
+      "id": "eau-t02_09",
+      "triangles": 118350,
+      "sha256": "46f1476dd02e31cbe1c17300954b4c30dcc1ff91a32862f4fdce656bdff28b61"
+    },
+    {
+      "id": "eau-t03_09",
+      "triangles": 16048,
+      "sha256": "f081987333b82ee9eaee395cc0b6dabedfd943677e4bd8b635a14b26dc447761"
+    },
+    {
+      "id": "eau-t04_09",
+      "triangles": 64,
+      "sha256": "24cda2c9deaf0b9189bb664a92e075ca607b1915d196b389ca8f4c0b8816ca7f"
+    },
+    {
+      "id": "eau-t01_10",
+      "triangles": 9372,
+      "sha256": "23d3b243eaa0083228466b6254d974d474ad4052165ad94d05e3eb3c73a3a92e"
+    },
+    {
+      "id": "eau-t02_10",
+      "triangles": 78768,
+      "sha256": "66d40bc222f67c3523e65aa3e6df69f7d0a528d8ecebe122e85f060bc8855e0c"
+    },
+    {
+      "id": "eau-t03_10",
+      "triangles": 127008,
+      "sha256": "4b5768a99db2b9cd58ef89699ba28425a6f0372653ca67c90bd105cca547cc78"
+    },
+    {
+      "id": "eau-t04_10",
+      "triangles": 106504,
+      "sha256": "021dc1085830ad0007cdd4cc1d8c05cb1e3b1325a4f67fa3dc275af0903d4e9c"
+    },
+    {
+      "id": "eau-t05_10",
+      "triangles": 68492,
+      "sha256": "f797fb33fa51ce0a5d032fdf1837c2d2107b4074b3c087e4fd696752cb1b365f"
+    },
+    {
+      "id": "eau-t06_10",
+      "triangles": 11710,
+      "sha256": "7966783eeb7a340c0d8117caa17cbc97410c1b90e39d1f0213814966ba0ef530"
+    },
+    {
+      "id": "eau-t01_11",
+      "triangles": 54734,
+      "sha256": "f4005e9438b0efa257444bda433a40b9449df4df6a1be2a15a80528aa5fc1b92"
+    },
+    {
+      "id": "eau-t02_11",
+      "triangles": 90692,
+      "sha256": "fd850ac220db2ee79af552376d83b141d7695968a11ed7e7a93aa6d16d9a69de"
+    },
+    {
+      "id": "eau-t03_11",
+      "triangles": 53422,
+      "sha256": "0b752d3da6711a53c5e37c8a56d22f460a7a13c8b9e587774a680299cc147046"
+    },
+    {
+      "id": "eau-t04_11",
+      "triangles": 63848,
+      "sha256": "f4ce716ee0a653e87934340854f3876c0ab6063c808d64aa83b3453144163a4a"
+    },
+    {
+      "id": "eau-t05_11",
+      "triangles": 96802,
+      "sha256": "6051f0f07775157d1b2952478205c574e37dc1842acee21cc6d81416413c16cc"
+    },
+    {
+      "id": "eau-t06_11",
+      "triangles": 22046,
+      "sha256": "078bc75d6fdbba728df16368cc2428c2789cbd284b6a7aaf77a0221526c2442f"
+    },
+    {
+      "id": "eau-t07_11",
+      "triangles": 7002,
+      "sha256": "96f46f42ed9c1b9fa0c83215e745a267c70266d3d63c3586c9f5651e195f6ed5"
+    },
+    {
+      "id": "eau-t08_11",
+      "triangles": 6724,
+      "sha256": "405781357bebbea0baf7be28b7e0c2b92d0e425ffcd15f4f47f80b3d163c1fff"
+    },
+    {
+      "id": "eau-t09_11",
+      "triangles": 6564,
+      "sha256": "752eddf5a18328ccbf73c2dd539fec023e926814a07b351b9e47026cde4b66ca"
+    },
+    {
+      "id": "eau-t10_11",
+      "triangles": 6564,
+      "sha256": "c47611187e90f374f6affd65ea3a88fd36313a91d63029bda0b1642c6a4a2b22"
+    },
+    {
+      "id": "eau-t01_12",
+      "triangles": 111156,
+      "sha256": "fba5246ce5e1c3f6a53474c7f554a5b292a48cfaa54b210fb5f28b95f2416a48"
+    },
+    {
+      "id": "eau-t02_12",
+      "triangles": 110236,
+      "sha256": "5004ddf1aba7619368087f53c17f8c59439542def67c6532b1672e4312e0949f"
+    },
+    {
+      "id": "eau-t04_12",
+      "triangles": 6652,
+      "sha256": "c6369454024bb99ca116ef7634b6454241c2056740d05b6f5dc10ec80d6d532e"
+    },
+    {
+      "id": "eau-t05_12",
+      "triangles": 127008,
+      "sha256": "7b33b36acfa0fec8d8b27a6726dd44478d456a74d9c1067dacb6b68987693425"
+    },
+    {
+      "id": "eau-t06_12",
+      "triangles": 44706,
+      "sha256": "8ae876b2dc8c59089405dec8f0ba1659f66ef0d5ebd44d709e8660a12c224ab8"
+    }
+  ]
+}

@@ -33,7 +33,7 @@
     construire la scène du socle et comparer ses captures à leur référence.
 
 .PARAMETER Map
-    Avec -Unreal : construire le niveau de cette carte, par son identifiant (porte-1012,
+    Avec -Unreal : construire le niveau de cette carte, par son identifiant (central-empire/capital/martpart,
     essai/etages, central-empire/capital/martpart…), depuis sa description v5 par
     scripts/maps/build_level.py, sans fenêtre (LOT-1018), à la place de celle du socle. Ses
     captures ne se prennent qu'avec -Capture. -Scene en est l'ancien nom.
@@ -69,8 +69,10 @@
 .PARAMETER ParcoursDemo
     Avec -Unreal, à la place de -Map : construire Martpart, Arenarea et l'Arena of Fate, puis lancer
     le jeu hors écran sur Martpart et y marcher la démo de carte en carte par les ordres du joueur
-    (LOT-1022) : Martpart, Arenarea, l'Arena of Fate — le vestibule des vestiaires, le sable, les
-    catacombes —, Arenarea, retour à Martpart. Code 0 de retour à Martpart. Sorties dans
+    (LOT-1022) : Martpart, Arenarea, un passage dans le vestibule des vestiaires de l'Arena of
+    Fate, Arenarea, retour à Martpart. Les quatre transitions passent par les portails du jeu ;
+    code 0 après vérification des cartes et de leurs points d'arrivée. Le parcours physique des
+    sept niveaux de l'arène est contrôlé séparément par JadgArenaWalk. Sorties dans
     Saved/Captures/parcours-demo-1022/.
 
 .PARAMETER Ecrans
@@ -130,7 +132,7 @@
     leur référence, sans fenêtre.
 
 .EXAMPLE
-    pwsh scripts/build.ps1 -Unreal -Map porte-1012 -Capture
+    pwsh scripts/build.ps1 -Unreal -Map central-empire/capital/martpart -Capture
     Construit, vérifie, reconstruit le niveau de la porte, puis en prend les captures et la mesure.
 
 .EXAMPLE
@@ -317,7 +319,8 @@ if ($Unreal) {
     Write-Host "== Tests d'automatisation du moteur : Jadg (sans fenêtre) ==" -ForegroundColor Cyan
     $report = Join-Path $root 'Saved\Automation\Jadg'
     if (Test-Path $report) { Remove-Item -Recurse -Force $report }
-    & $editorCmd "$uproject" '-ExecCmds=Automation RunTests Jadg; Quit' "-ReportExportPath=$report" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
+    # Tests create their own worlds; do not load the playable district on editor startup.
+    & $editorCmd "$uproject" '/Engine/Maps/Entry' '-ExecCmds=Automation RunTests Jadg; Quit' "-ReportExportPath=$report" -unattended -nosplash -nullrhi -NoSound -stdout -FullStdOutLogOutput
     $automationExit = $LASTEXITCODE
     $index = Join-Path $report 'index.json'
     if (-not (Test-Path $index)) { Fail "Les tests d'automatisation n'ont pas écrit leur rapport (code $automationExit) : $index" }
@@ -443,11 +446,6 @@ if ($Unreal) {
 
     if ($Map) {
         $mapData = Get-MapInfo $Map
-        if ($Map -eq 'porte-1012') {
-            # La porte et son Colisée sont des sorties de script : le niveau ne se construit pas sur un fichier périmé.
-            & (Get-Python) (Join-Path $root 'scripts\maps\build_gate_scene.py') --check
-            if ($LASTEXITCODE -ne 0) { Fail 'La porte ou le Colisée sont périmés : python scripts/maps/build_gate_scene.py' }
-        }
         if ($Map -like 'controle/*') {
             # La carte de contrôle d'une pièce de décor est une sortie de script (LOT-1019).
             & (Get-Python) (Join-Path $root 'scripts\maps\build_piece_check.py') --check

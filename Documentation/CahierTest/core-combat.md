@@ -1,6 +1,6 @@
 # Core · Combat
 
-Tests unitaires — **205 cas** (28 bloquants, 103 critiques, 72 majeurs, 2 mineurs). [Retour à la synthèse](README.md).
+Tests unitaires — **206 cas** (28 bloquants, 104 critiques, 72 majeurs, 2 mineurs). [Retour à la synthèse](README.md).
 
 ## Ce que cette page couvre
 
@@ -27,7 +27,7 @@ Tests unitaires — **205 cas** (28 bloquants, 103 critiques, 72 majeurs, 2 mine
 | [`test_enemy_ai.cpp`](#test-enemy-aicpp) | 12 | 5 | 7 | - | - |
 | [`test_map_encounter.cpp`](#test-map-encountercpp) | 4 | - | 3 | 1 | - |
 | [`test_party_deployment.cpp`](#test-party-deploymentcpp) | 6 | - | 4 | 2 | - |
-| [`test_serie_de_l_arene.cpp`](#test-serie-de-l-arenecpp) | 3 | - | 3 | - | - |
+| [`test_serie_de_l_arene.cpp`](#test-serie-de-l-arenecpp) | 4 | - | 4 | - | - |
 | [`test_simulated_space.cpp`](#test-simulated-spacecpp) | 15 | - | - | 15 | - |
 | [`test_tactical_terrain.cpp`](#test-tactical-terraincpp) | 10 | - | 4 | 6 | - |
 | [`test_turn_order.cpp`](#test-turn-ordercpp) | 3 | 1 | 1 | 1 | - |
@@ -4305,9 +4305,33 @@ Les six rencontres de la serie sont difficiles, les deux dernieres mortelles, et
 - Vérifie que `budget.adjustedExperience` est strictement supérieur à `precedent`.
 - Vérifie que `budget.category` vaut `"mortelle"`.
 
+### SerieDeLArene.LaCapitaleMonteLaSerieCommeLArene
+
+*Critique · Integration · Serie de l'arene · Demo de la capitale* — `Source/Test/Unit/Core/Combat/test_serie_de_l_arene.cpp:173`
+
+La carte de la capitale monte chaque rencontre de la serie comme la carte de l'arene.
+
+**Étapes**
+
+1. Charger la carte de l'arene et celle de la capitale (scripts/maps/capitale_demo.py).
+2. Pour chaque rencontre, preparer le combat sur l'une et l'autre a partir de leur marqueur et de leurs points d'entree.
+
+**Résultat attendu**
+
+- Vérifie que `sable.ok()` est vrai.
+- Vérifie que `capitale.ok()` est vrai.
+- Vérifie que `rencontre` diffère de `nullptr`.
+- Vérifie que `attendu.ok()` est vrai.
+- Vérifie que `obtenu.ok()` est vrai.
+- Vérifie que `obtenu.setup->zone.columns` vaut `attendu.setup->zone.columns`.
+- Vérifie que `obtenu.setup->zone.rows` vaut `attendu.setup->zone.rows`.
+- Vérifie que `obtenu.setup->heroCell` vaut `attendu.setup->heroCell`.
+- Vérifie que `obtenu.setup->partyCells` vaut `attendu.setup->partyCells`.
+- Vérifie que `core::mapToZone(obtenu.setup->zone, *core::encounterTriggerOn(*capitale.level, rencontre->id))` vaut `core::mapToZone(attendu.setup->zone, *core::encounterTriggerOn(*sable.level, rencontre->id))`.
+
 ### SerieDeLArene.ChaqueRencontreSeGagneDansSaBande
 
-*Critique · Integration · Serie de l'arene · Equilibrage* — `Source/Test/Unit/Core/Combat/test_serie_de_l_arene.cpp:172`
+*Critique · Integration · Serie de l'arene · Equilibrage* — `Source/Test/Unit/Core/Combat/test_serie_de_l_arene.cpp:226`
 
 Chaque rencontre de la serie se gagne dans sa bande de victoires.
 
@@ -4324,7 +4348,7 @@ Chaque rencontre de la serie se gagne dans sa bande de victoires.
 
 ### SerieDeLArene.MesureCompleteParComposition
 
-*Critique · Integration · Serie de l'arene · Equilibrage* — `Source/Test/Unit/Core/Combat/test_serie_de_l_arene.cpp:220`
+*Critique · Integration · Serie de l'arene · Equilibrage* — `Source/Test/Unit/Core/Combat/test_serie_de_l_arene.cpp:274`
 
 Sur la serie, l'ecart de victoires entre les quatre trios reste sous vingt points.
 

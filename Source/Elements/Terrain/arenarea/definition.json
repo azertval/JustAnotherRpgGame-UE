@@ -1,0 +1,1125 @@
+{
+  "version": 1,
+  "source": "D:\\Codex\\2026-10-15\\topographie-capitale\\output\\capitale-topographie-donnees.json",
+  "sourceSha256": "15929d03454379ff5c3129b69b9f6128734e9a19154f140c8b300211f92605da",
+  "district": {
+    "id": "Q07",
+    "name": "Arenarea",
+    "polygon_uv": [
+      [
+        780,
+        420
+      ],
+      [
+        850,
+        370
+      ],
+      [
+        900,
+        320
+      ],
+      [
+        930,
+        250
+      ],
+      [
+        1020,
+        245
+      ],
+      [
+        1100,
+        280
+      ],
+      [
+        1200,
+        325
+      ],
+      [
+        1260,
+        370
+      ],
+      [
+        1340,
+        380
+      ],
+      [
+        1370,
+        440
+      ],
+      [
+        1320,
+        570
+      ],
+      [
+        1290,
+        660
+      ],
+      [
+        1160,
+        600
+      ],
+      [
+        1040,
+        560
+      ],
+      [
+        900,
+        500
+      ]
+    ],
+    "polygon_m": [
+      [
+        -1755.0,
+        -1485.0
+      ],
+      [
+        -2092.5,
+        -1012.5
+      ],
+      [
+        -2430.0,
+        -675.0
+      ],
+      [
+        -2902.5,
+        -472.5
+      ],
+      [
+        -2936.25,
+        135.0
+      ],
+      [
+        -2700.0,
+        675.0
+      ],
+      [
+        -2396.25,
+        1350.0
+      ],
+      [
+        -2092.5,
+        1755.0
+      ],
+      [
+        -2025.0,
+        2295.0
+      ],
+      [
+        -1620.0,
+        2497.5
+      ],
+      [
+        -742.5,
+        2160.0
+      ],
+      [
+        -135.0,
+        1957.5
+      ],
+      [
+        -540.0,
+        1080.0
+      ],
+      [
+        -810.0,
+        270.0
+      ],
+      [
+        -1215.0,
+        -675.0
+      ]
+    ],
+    "center_uv": [
+      1100,
+      440
+    ],
+    "center_m": [
+      -1620.0,
+      675.0
+    ],
+    "area_km2": 6.127,
+    "z_min": 14,
+    "z_max": 28,
+    "road_widths_m": [
+      6,
+      15,
+      24
+    ],
+    "typical_building_m": [
+      21,
+      30,
+      15
+    ],
+    "landform": "Terrasse patricienne entre baie, rivière et centre civique ; relief total de 14 m.",
+    "terraces": "Parvis de l’Arena à +20 m ; jardins à +17, +23 et +26 m ; gradins paysagers de 1,5-3 m.",
+    "drainage": "Évacuer vers la baie par collecteurs séparés du Natural Pool ; les accès de foule restent secs.",
+    "population": 45000,
+    "soldiers": 2000,
+    "core_population": 45000,
+    "program": "45 000 résidents ; étages de 3-4 m, 2-3 niveaux majoritaires ; relief urbain de 14 m, anse basse traitée à part.",
+    "population_status": "M : population proposée préexistante conservée",
+    "residential_levels": 2,
+    "residential_footprint_m2": 900000.0,
+    "terrain_transect": [
+      {
+        "label": "A",
+        "xy_m": [
+          -2640.0,
+          675.0
+        ],
+        "z_m": 20
+      },
+      {
+        "label": "B",
+        "xy_m": [
+          -1687.5,
+          675.0
+        ],
+        "z_m": 23
+      },
+      {
+        "label": "C",
+        "xy_m": [
+          -735.0,
+          675.0
+        ],
+        "z_m": 28
+      }
+    ]
+  },
+  "sites": [
+    {
+      "id": "L07-01",
+      "name": "Arena of Fate",
+      "district": "Q07",
+      "uv": [
+        1020,
+        315
+      ],
+      "xy_m": [
+        -2463.75,
+        135.0
+      ],
+      "parcel_m": [
+        450,
+        540
+      ],
+      "footprint_m": [
+        300,
+        246
+      ],
+      "height_m": 66,
+      "ground_z_m": 20,
+      "top_z_m": 86,
+      "levels": "3 couronnes + 2 sous-sols",
+      "note": "Cote révisée ; parvis 120 x 150 m ; anneau piéton 24 m ; mâts +72 m au-dessus du sol.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L07-02",
+      "name": "Golden Chalice Casino",
+      "district": "Q07",
+      "uv": [
+        1030,
+        470
+      ],
+      "xy_m": [
+        -1417.5,
+        202.5
+      ],
+      "parcel_m": [
+        150,
+        210
+      ],
+      "footprint_m": [
+        84,
+        120
+      ],
+      "height_m": 27,
+      "ground_z_m": 23,
+      "top_z_m": 50,
+      "levels": "R+3",
+      "note": "Parvis 36 x 60 m ; jardin +23/+26 ; seuil monumental sur plateau horizontal.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L07-03",
+      "name": "Hippodrome",
+      "district": "Q07",
+      "uv": [
+        1210,
+        500
+      ],
+      "xy_m": [
+        -1215.0,
+        1417.5
+      ],
+      "parcel_m": [
+        240,
+        420
+      ],
+      "footprint_m": [
+        180,
+        330
+      ],
+      "height_m": 21,
+      "ground_z_m": 23,
+      "top_z_m": 44,
+      "levels": "Gradins bas",
+      "note": "Piste ovale 96 x 240 m ; enceinte allongée ; bande de service 12 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L07-04",
+      "name": "Dusk of Justice Betting House",
+      "district": "Q07",
+      "uv": [
+        1020,
+        361
+      ],
+      "xy_m": [
+        -2153.25,
+        135.0
+      ],
+      "parcel_m": [
+        90,
+        120
+      ],
+      "footprint_m": [
+        42,
+        60
+      ],
+      "height_m": 15,
+      "ground_z_m": 20,
+      "top_z_m": 35,
+      "levels": "R+2",
+      "note": "Parvis 24 x 36 m ; corps à environ 140 m de la coque de l’Arena ; continuité avec Gauntlet St.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L07-05",
+      "name": "Inlet’s Bazaar Block",
+      "district": "Q07",
+      "uv": [
+        840,
+        450
+      ],
+      "xy_m": [
+        -1552.5,
+        -1080.0
+      ],
+      "parcel_m": [
+        210,
+        300
+      ],
+      "footprint_m": [
+        18,
+        30
+      ],
+      "height_m": 15,
+      "ground_z_m": 24,
+      "top_z_m": 39,
+      "levels": "R+2 type",
+      "note": "Ensemble de 20 échoppes ; parcelles 30 x 45 m ; passages 6 m ; place 45 x 60 m.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "volume_or_site_type"
+    },
+    {
+      "id": "L07-06",
+      "name": "Natural Pool",
+      "district": "Q07",
+      "uv": [
+        860,
+        420
+      ],
+      "xy_m": [
+        -1755.0,
+        -945.0
+      ],
+      "parcel_m": [
+        135,
+        210
+      ],
+      "footprint_m": [
+        60,
+        120
+      ],
+      "height_m": 0,
+      "ground_z_m": 0.2,
+      "top_z_m": 0.2,
+      "levels": "Anse basse",
+      "note": "Eau +0,2 ; fond -3 ; berge +3,5 ; chenal ouvert vers la baie ; raccord au quartier par versant.",
+      "azimuth_deg": 0,
+      "status": "PROPOSITION DE CONCEPTION - 15/10/2026",
+      "geometry_type": "water"
+    }
+  ],
+  "water": {
+    "bay_outline_uv": [
+      [
+        0,
+        100
+      ],
+      [
+        170,
+        105
+      ],
+      [
+        200,
+        120
+      ],
+      [
+        165,
+        165
+      ],
+      [
+        180,
+        265
+      ],
+      [
+        235,
+        330
+      ],
+      [
+        310,
+        320
+      ],
+      [
+        365,
+        270
+      ],
+      [
+        380,
+        180
+      ],
+      [
+        520,
+        125
+      ],
+      [
+        650,
+        120
+      ],
+      [
+        790,
+        140
+      ],
+      [
+        910,
+        210
+      ],
+      [
+        880,
+        260
+      ],
+      [
+        850,
+        330
+      ],
+      [
+        780,
+        345
+      ],
+      [
+        650,
+        330
+      ],
+      [
+        500,
+        360
+      ],
+      [
+        460,
+        390
+      ],
+      [
+        430,
+        390
+      ],
+      [
+        400,
+        430
+      ],
+      [
+        430,
+        460
+      ],
+      [
+        400,
+        540
+      ],
+      [
+        360,
+        650
+      ],
+      [
+        330,
+        780
+      ],
+      [
+        300,
+        845
+      ],
+      [
+        255,
+        890
+      ],
+      [
+        230,
+        840
+      ],
+      [
+        235,
+        800
+      ],
+      [
+        270,
+        775
+      ],
+      [
+        255,
+        740
+      ],
+      [
+        200,
+        745
+      ],
+      [
+        170,
+        805
+      ],
+      [
+        145,
+        865
+      ],
+      [
+        80,
+        890
+      ],
+      [
+        0,
+        850
+      ],
+      [
+        0,
+        660
+      ],
+      [
+        110,
+        680
+      ],
+      [
+        180,
+        630
+      ],
+      [
+        220,
+        525
+      ],
+      [
+        205,
+        460
+      ],
+      [
+        160,
+        410
+      ],
+      [
+        160,
+        365
+      ],
+      [
+        100,
+        350
+      ],
+      [
+        0,
+        385
+      ]
+    ],
+    "river_center_uv": [
+      [
+        1875,
+        680
+      ],
+      [
+        1800,
+        635
+      ],
+      [
+        1720,
+        600
+      ],
+      [
+        1620,
+        545
+      ],
+      [
+        1535,
+        500
+      ],
+      [
+        1460,
+        450
+      ],
+      [
+        1375,
+        395
+      ],
+      [
+        1230,
+        310
+      ],
+      [
+        1180,
+        285
+      ],
+      [
+        1090,
+        250
+      ],
+      [
+        990,
+        230
+      ],
+      [
+        900,
+        230
+      ]
+    ],
+    "river_width_m": [
+      180,
+      195,
+      210,
+      225,
+      240,
+      255,
+      270,
+      285,
+      300,
+      330,
+      360,
+      390
+    ],
+    "river_water_z_m": [
+      2.4,
+      2.0,
+      1.6,
+      1.2,
+      1.0,
+      0.8,
+      0.6,
+      0.4,
+      0.3,
+      0.2,
+      0.1,
+      0
+    ],
+    "creek_center_uv": [
+      [
+        210,
+        1450
+      ],
+      [
+        225,
+        1320
+      ],
+      [
+        230,
+        1200
+      ],
+      [
+        210,
+        1120
+      ],
+      [
+        205,
+        1040
+      ],
+      [
+        175,
+        970
+      ],
+      [
+        160,
+        890
+      ]
+    ],
+    "creek_width_m": 30,
+    "creek_water_z_m": [
+      8,
+      7,
+      6,
+      5,
+      4,
+      2,
+      0
+    ],
+    "pool_connection_uv": [
+      [
+        860,
+        420
+      ],
+      [
+        835,
+        390
+      ],
+      [
+        800,
+        380
+      ],
+      [
+        780,
+        360
+      ]
+    ],
+    "pool_connection_water_z_m": [
+      0.2,
+      0.15,
+      0.05,
+      0
+    ]
+  },
+  "roads": [
+    {
+      "id": "R01",
+      "name": "Herofate Ave / Arena Gate",
+      "width": 24,
+      "nodes": [
+        [
+          780,
+          410,
+          8
+        ],
+        [
+          920,
+          450,
+          23
+        ],
+        [
+          1030,
+          435,
+          23
+        ],
+        [
+          1130,
+          400,
+          22
+        ],
+        [
+          1210,
+          340,
+          20
+        ]
+      ],
+      "kind": "principal"
+    },
+    {
+      "id": "R07",
+      "name": "Old Path / Arching Path / Fortway",
+      "width": 12,
+      "nodes": [
+        [
+          1000,
+          185,
+          16
+        ],
+        [
+          1150,
+          200,
+          20
+        ],
+        [
+          1270,
+          275,
+          20
+        ],
+        [
+          1390,
+          300,
+          24
+        ],
+        [
+          1490,
+          340,
+          22
+        ],
+        [
+          1580,
+          450,
+          18
+        ],
+        [
+          1750,
+          255,
+          72
+        ]
+      ],
+      "kind": "principal"
+    },
+    {
+      "id": "R09",
+      "name": "Arching Bridge / approches",
+      "width": 18,
+      "nodes": [
+        [
+          1210,
+          340,
+          20
+        ],
+        [
+          1214.29,
+          328.73,
+          20
+        ],
+        [
+          1245.71,
+          291.27,
+          20
+        ],
+        [
+          1270,
+          275,
+          20
+        ]
+      ],
+      "kind": "franchissement"
+    }
+  ],
+  "terrain_controls": [
+    {
+      "name": "Baie",
+      "uv": [
+        650,
+        200
+      ],
+      "xy_m": [
+        -3240.0,
+        -2362.5
+      ],
+      "z_m": 0
+    },
+    {
+      "name": "Docks",
+      "uv": [
+        650,
+        380
+      ],
+      "xy_m": [
+        -2025.0,
+        -2362.5
+      ],
+      "z_m": 4.5
+    },
+    {
+      "name": "Arena",
+      "uv": [
+        1020,
+        315
+      ],
+      "xy_m": [
+        -2463.75,
+        135.0
+      ],
+      "z_m": 20
+    },
+    {
+      "name": "Arenarea haute",
+      "uv": [
+        1100,
+        535
+      ],
+      "xy_m": [
+        -978.75,
+        675.0
+      ],
+      "z_m": 28
+    },
+    {
+      "name": "Martpart bas",
+      "uv": [
+        1530,
+        600
+      ],
+      "xy_m": [
+        -540.0,
+        3577.5
+      ],
+      "z_m": 18
+    },
+    {
+      "name": "Martpart haut",
+      "uv": [
+        1280,
+        800
+      ],
+      "xy_m": [
+        810.0,
+        1890.0
+      ],
+      "z_m": 26
+    },
+    {
+      "name": "Downtown",
+      "uv": [
+        1050,
+        740
+      ],
+      "xy_m": [
+        405.0,
+        337.5
+      ],
+      "z_m": 38
+    },
+    {
+      "name": "Palais",
+      "uv": [
+        610,
+        610
+      ],
+      "xy_m": [
+        -472.5,
+        -2632.5
+      ],
+      "z_m": 68
+    },
+    {
+      "name": "Crête palatiale",
+      "uv": [
+        540,
+        500
+      ],
+      "xy_m": [
+        -1215.0,
+        -3105.0
+      ],
+      "z_m": 78
+    },
+    {
+      "name": "Artisansquare",
+      "uv": [
+        950,
+        1070
+      ],
+      "xy_m": [
+        2632.5,
+        -337.5
+      ],
+      "z_m": 52
+    },
+    {
+      "name": "Uptown",
+      "uv": [
+        620,
+        1070
+      ],
+      "xy_m": [
+        2632.5,
+        -2565.0
+      ],
+      "z_m": 58
+    },
+    {
+      "name": "Sloghood",
+      "uv": [
+        350,
+        1050
+      ],
+      "xy_m": [
+        2497.5,
+        -4387.5
+      ],
+      "z_m": 42
+    },
+    {
+      "name": "Scholarnest",
+      "uv": [
+        1220,
+        1100
+      ],
+      "xy_m": [
+        2835.0,
+        1485.0
+      ],
+      "z_m": 46
+    },
+    {
+      "name": "Dweomer",
+      "uv": [
+        1510,
+        1000
+      ],
+      "xy_m": [
+        2160.0,
+        3442.5
+      ],
+      "z_m": 38
+    },
+    {
+      "name": "Neckoffoods",
+      "uv": [
+        1610,
+        1270
+      ],
+      "xy_m": [
+        3982.5,
+        4117.5
+      ],
+      "z_m": 30
+    },
+    {
+      "name": "Bloomburgs",
+      "uv": [
+        680,
+        1370
+      ],
+      "xy_m": [
+        4657.5,
+        -2160.0
+      ],
+      "z_m": 48
+    },
+    {
+      "name": "Oldtown",
+      "uv": [
+        1350,
+        280
+      ],
+      "xy_m": [
+        -2700.0,
+        2362.5
+      ],
+      "z_m": 24
+    },
+    {
+      "name": "Cimetière",
+      "uv": [
+        1290,
+        180
+      ],
+      "xy_m": [
+        -3375.0,
+        1957.5
+      ],
+      "z_m": 32
+    },
+    {
+      "name": "Collines occidentales",
+      "uv": [
+        1300,
+        30
+      ],
+      "xy_m": [
+        -4387.5,
+        2025.0
+      ],
+      "z_m": 180
+    },
+    {
+      "name": "Crête ouest",
+      "uv": [
+        1600,
+        0
+      ],
+      "xy_m": [
+        -4590.0,
+        4050.0
+      ],
+      "z_m": 240
+    },
+    {
+      "name": "Tigris",
+      "uv": [
+        630,
+        75
+      ],
+      "xy_m": [
+        -4083.75,
+        -2497.5
+      ],
+      "z_m": 84
+    },
+    {
+      "name": "Sentinelle",
+      "uv": [
+        250,
+        200
+      ],
+      "xy_m": [
+        -3240.0,
+        -5062.5
+      ],
+      "z_m": 24
+    },
+    {
+      "name": "Cyan",
+      "uv": [
+        70,
+        500
+      ],
+      "xy_m": [
+        -1215.0,
+        -6277.5
+      ],
+      "z_m": 20
+    }
+  ],
+  "orientation": "UE_X=100*E ; UE_Y=-100*N ; UE_Z=100*Z (cm), nord vers -Y ; yaw moteur=-azimut géographique depuis Est.",
+  "origin_m": [
+    -3024,
+    -2646
+  ],
+  "quads": [
+    1512,
+    2142
+  ],
+  "spacing_m": 2,
+  "seed": 20261015,
+  "arena_existing_m": [
+    189,
+    156,
+    48
+  ],
+  "arena_note": "L atlas propose 300 x 246 x 66 m ; le Landscape reserve la parcelle mais ne redimensionne pas le monument existant de 189 x 156 x 48 m.",
+  "gardens": [
+    {
+      "id": "jardin-bas",
+      "bounds": [
+        -2090,
+        -170,
+        -1990,
+        -50
+      ],
+      "z": 17
+    },
+    {
+      "id": "jardin-arena",
+      "bounds": [
+        -2190,
+        -500,
+        -2070,
+        -380
+      ],
+      "z": 23
+    },
+    {
+      "id": "jardin-casino",
+      "bounds": [
+        -1300,
+        -500,
+        -1190,
+        -360
+      ],
+      "z": 26
+    }
+  ]
+}

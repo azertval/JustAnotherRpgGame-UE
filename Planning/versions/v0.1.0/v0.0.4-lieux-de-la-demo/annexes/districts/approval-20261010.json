@@ -1,0 +1,16 @@
+{
+  "date": "2026-10-10",
+  "status": "construction-authorized-by-user",
+  "userStatement": "Je valide les 7 propositions, tu peux commencer directement faire les quartiers compelt",
+  "scope": {
+    "districts": ["Arenarea", "Martpart"],
+    "style": "Sculpted and painted Arena of Fate treatment; noble and gardened Arenarea; dense cosmopolitan Martpart.",
+    "extent": "Complete districts and named landmarks, existing quests and transitions preserved.",
+    "scale": "District extents and building proportions may change; preserve landmark neighbourhoods and primary reference routes.",
+    "access": "Streets, squares, gardens, quays and important interiors accessible; ordinary houses mainly exterior; roofs and walls where a route is provided.",
+    "transitions": "Three separate maps with coherent streets and existing arrival contracts.",
+    "ambience": "Water, vegetation, cloth wind, fire, smoke, local sound and moderate animated ambient population.",
+    "production": "Small simple Blender parts assembled into reusable complex modules, reproducible sources.",
+    "review": "Latest instruction authorizes direct complete construction; intermediate engine reviews do not require another approval. Final artistic acceptance remains the author's."
+  }
+}

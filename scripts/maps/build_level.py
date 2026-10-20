@@ -79,21 +79,22 @@ sys.path.insert(0, str(PROJECT_DIR / "scripts" / "assetsGeneration"))
 sys.path.insert(0, str(PROJECT_DIR / "scripts" / "maps"))
 import import_scenery_unreal as scenery  # noqa: E402
 import jadg_map  # noqa: E402
+import district_surface  # noqa: E402
 
 KIT_ROOT = "/Game/Kit"
 FIXTURE_ROOT = "/Game/Fixtures"
 LEVEL_MAPS = jadg_map.MAP_PACKAGES
-AMBIENT_CUBE = "/Game/Scenes/Common/T_AmbientWhite"
-CHARACTER_MATERIAL = "/Game/Scenes/Common/M_Character"
-GROUND_MATERIAL = "/Game/Scenes/Common/M_Ground"
-OUTLINE_MATERIAL = "/Game/Scenes/Common/M_Outline"
+AMBIENT_CUBE = "/Game/Jeu/Commun/Common/T_AmbientWhite"
+CHARACTER_MATERIAL = "/Game/Jeu/Commun/Common/M_Character"
+GROUND_MATERIAL = "/Game/Jeu/Commun/Common/M_Ground"
+OUTLINE_MATERIAL = "/Game/Jeu/Commun/Common/M_Outline"
 # Le contour sombre (LOT-1019, standard 3D §8) : une passe de post-traitement, jugée avec et sans.
 # Le bronze foncé est celui du contour du standard 2D (archives) ; l'écart de profondeur relatif
 # entre deux pixels voisins au-delà duquel un bord se trace, et sa force, sont des réglages d'essai
 # à juger sur captures (`-JadgPost=contour`), pas des valeurs du standard.
-CONTOUR_MATERIAL = "/Game/Scenes/Common/M_Contour"
+CONTOUR_MATERIAL = "/Game/Jeu/Commun/Common/M_Contour"
 CONTOUR = {"colour": (0.36, 0.29, 0.165), "pixels": 1.0, "threshold": 0.02, "gain": 25.0, "strength": 0.85}
-WATER_MATERIAL = "/Game/Scenes/Common/M_Water"
+WATER_MATERIAL = "/Game/Jeu/Commun/Common/M_Water"
 OUTLINE_COLOUR = (1.0, 0.78, 0.36)  # l'or du HUD (`JadgHud.cpp`)
 OUTLINE_PIXELS = 3.0
 GAME_CLASSES = "/Script/JustAnotherRpgGame"
@@ -296,7 +297,7 @@ def kit_folder(mesh: str, root: str = KIT_ROOT) -> str:
 class Library:
     """Les assets de la carte : importés une fois, relus ensuite.
 
-    Une pièce **construite par script** (`Built/…`, `build_colosseum.py`) change quand son script
+    Une pièce **construite par script** (`Built/…`) change quand son script
     change : l'empreinte du `.glb` importé est notée (`Intermediate/Jadg/imports.json`), et une
     pièce dont l'empreinte diffère est réimportée ; de même une donnée d'essai (`assetsRoot`,
     `build_mesh_fixture.py`). Un maître ne change jamais (son manifeste le vérifie) ; une pièce de
@@ -322,13 +323,15 @@ class Library:
         glb = self.assets / mesh
         return f"{kit_folder(mesh, self.content_root)}/{glb.stem}/StaticMeshes/SM_{glb.stem}"
 
-    def static_mesh(self, mesh: str) -> unreal.StaticMesh:
+    def static_mesh(self, mesh: str, collision_proxy: bool = False) -> unreal.StaticMesh:
+        if collision_proxy and not mesh.startswith("Built/"):
+            fail(f"{mesh} : collision proxy mode is restricted to generated pieces")
         if mesh in self.static:
             return self.static[mesh]
         glb = self.assets / mesh
         if not glb.exists():
             fail(f"{mesh} : fichier absent (kits : python scripts/fetch_assets.py ; "
-                 f"Colisée : python scripts/assetsGeneration/build_colosseum.py)")
+                 f"pièce construite : relancer son générateur dans scripts/assetsGeneration/)")
         scripted = mesh.startswith("Built/") or self.assets != ASSETS
         piece = None if self.assets != ASSETS else self.master.get(mesh)
         stale = False
@@ -340,17 +343,31 @@ class Library:
             fail(f"{mesh} : absent du manifeste du maître")
         elif scripted:
             digest = scenery.sha256_of(glb)
+            # Several libraries coexist (district, fixtures, atmosphere). Read
+            # the latest cache before deciding to replace a shared mesh.
+            if self.imports_file.exists():
+                self.imports.update(json.loads(self.imports_file.read_text(encoding="utf-8")))
             stale = self.imports.get(asset_path) != digest
             self.imports[asset_path] = digest
         # La chaîne de décor (LOT-1019) : import au maître si la pièce manque ou a changé, Nanite,
         # collision sur le maillage, matière complète aux textures partagées.
         started = time.perf_counter()
-        asset, imported = scenery.install(glb, asset_path, reimport=stale)
+        if collision_proxy:
+            asset, imported = scenery.install(glb, asset_path, reimport=stale, collision_proxy=True)
+        else:
+            asset, imported = scenery.install(glb, asset_path, reimport=stale)
         if imported:
             log(f"import de {mesh} -> {asset_path}" + (" (pièce régénérée)" if stale else ""))
             self.imported += 1
             self.import_seconds += time.perf_counter() - started
             self.imports_file.parent.mkdir(parents=True, exist_ok=True)
+            # An import may invoke another library. Preserve its newer entries
+            # instead of overwriting the complete cache with this old snapshot.
+            latest = (json.loads(self.imports_file.read_text(encoding="utf-8"))
+                      if self.imports_file.exists() else {})
+            if scripted:
+                latest[asset_path] = digest
+            self.imports = latest
             self.imports_file.write_text(json.dumps(self.imports, indent=1), encoding="utf-8")
         self.static[mesh] = asset
         return asset
@@ -1220,6 +1237,7 @@ def place_characters(level: Level, doc: dict, frame: Frame, library: Library) ->
     entry = jadg_map.entry_of(doc)
     if party is not None and entry is not None:
         foot = jadg_map.cell_centre(*entry, doc.get("origin"))
+        foot[2] = district_surface.ground_height(doc, foot[0], foot[1])
         for rank, appearance in enumerate(party["appearances"]):
             actor = place_walker(level, frame, walker, f"groupe-{rank + 1}", appearance, foot, party.get("heading", 90.0),
                                  party.get("walkSpeed", 3.0))
@@ -1235,7 +1253,7 @@ def place_characters(level: Level, doc: dict, frame: Frame, library: Library) ->
         if entity["type"] != "npc" or "appearance" not in entity:
             continue
         foot = jadg_map.cell_centre(entity["x"], entity["y"], doc.get("origin"))
-        foot[2] = storey_z(doc, entity.get("storey", 0))
+        foot[2] = district_surface.ground_height(doc, foot[0], foot[1], entity.get("storey", 0))
         actor = place_walker(level, frame, walker, f"pnj-{entity['id']}", entity["appearance"], foot,
                              entity.get("heading", 0.0), entity.get("walkSpeed", 3.0))
         actor.set_editor_property("party_rank", -1)
@@ -1249,7 +1267,7 @@ def place_entities(level: Level, doc: dict, frame: Frame) -> None:
     une boîte par volume (zone de combat, marqueur de rencontre)."""
     for entity in doc.get("entities", ()):
         foot = jadg_map.cell_centre(entity["x"], entity["y"], doc.get("origin"))
-        foot[2] = storey_z(doc, entity.get("storey", 0))
+        foot[2] = district_surface.ground_height(doc, foot[0], foot[1], entity.get("storey", 0))
         marker = level.spawn(unreal.TargetPoint, frame.map_point(foot), unreal.Rotator(0, 0, 0),
                              f"entite_{entity['id']}_{entity['type']}", "entites")
         marker.tags = [f"{MARKER_TAG}{entity['id']}"]
@@ -1282,6 +1300,28 @@ def place_frame(level: Level, doc: dict, frame: Frame, map_id: str, path: Path,
         actor.set_editor_property("storey_heights", [s["z"] * 100.0 for s in doc["storeys"]])
     if storey_packages:
         actor.set_editor_property("storey_levels", storey_packages)
+    surface_errors = district_surface.validate_surface(doc)
+    if surface_errors:
+        fail("; ".join(surface_errors))
+    field = doc.get("groundHeightfield")
+    if field:
+        actor.set_editor_property("terrain_origin", frame.map_point([*field["origin"], 0.0]))
+        actor.set_editor_property("terrain_spacing", unreal.Vector2D(*[v * 100.0 for v in field["spacing"]]))
+        actor.set_editor_property("terrain_width", field["width"])
+        actor.set_editor_property("terrain_height", field["height"])
+        actor.set_editor_property("terrain_heights", [frame.map_point([0.0, 0.0, z]).z for z in field["heights"]])
+    regions = []
+    for region in doc.get("storeyRegions", []):
+        first, second = frame.map_point(region["minimum"]), frame.map_point(region["maximum"])
+        minimum = unreal.Vector(min(first.x, second.x), min(first.y, second.y), min(first.z, second.z))
+        maximum = unreal.Vector(max(first.x, second.x), max(first.y, second.y), max(first.z, second.z))
+        local_region = unreal.JadgStoreyRegion()
+        local_region.set_editor_property("storey", region["storey"])
+        local_region.set_editor_property("minimum", minimum)
+        local_region.set_editor_property("maximum", maximum)
+        regions.append(local_region)
+    if regions:
+        actor.set_editor_property("storey_regions", regions)
 
 
 def place_shots(level: Level, doc: dict, frame: Frame) -> None:
@@ -1337,6 +1377,25 @@ def actor_print(actor: unreal.Actor) -> dict:
         except Exception:  # noqa: BLE001 - une propriété que la classe n'a pas
             continue
         entry[name] = list(value) if isinstance(value, unreal.Array) else (round(value, 3) if isinstance(value, float) else value)
+    if entry["class"] == "JadgMapFrame":
+        heights = list(actor.get_editor_property("terrain_heights"))
+        if heights:
+            spacing = actor.get_editor_property("terrain_spacing")
+            origin = actor.get_editor_property("terrain_origin")
+            entry["groundHeightfield"] = {
+                "origin": rounded([origin.x, origin.y, origin.z], .1),
+                "spacing": rounded([spacing.x, spacing.y], .1),
+                "width": actor.get_editor_property("terrain_width"),
+                "height": actor.get_editor_property("terrain_height"),
+                "heightSha256": hashlib.sha256(json.dumps(heights).encode()).hexdigest(),
+            }
+        regions = actor.get_editor_property("storey_regions")
+        if regions:
+            entry["storeyRegions"] = [
+                {"storey": region.storey,
+                 "minimum": rounded([region.minimum.x, region.minimum.y, region.minimum.z], .1),
+                 "maximum": rounded([region.maximum.x, region.maximum.y, region.maximum.z], .1)}
+                for region in regions]
     light = actor.get_component_by_class(unreal.PointLightComponent)
     if light is not None:
         entry["light"] = [round(light.intensity, 3), round(light.attenuation_radius, 1), light.cast_shadows]
@@ -1383,7 +1442,7 @@ def check_navigation(world: unreal.World, doc: dict, frame: Frame, map_id: str) 
 
     def point(column: int, row: int, storey: int):
         foot = jadg_map.cell_centre(column, row, origin)
-        foot[2] = storey_z(doc, storey) + 0.5
+        foot[2] = district_surface.ground_height(doc, foot[0], foot[1], storey) + 0.5
         return frame.map_point(foot)
 
     targets = [e for e in doc.get("entities", ()) if e["type"] not in jadg_map.AREAS]
@@ -1464,6 +1523,19 @@ def place_decor(level: Level, frame: Frame, doc: dict, map_id: str, library: Lib
             "prefabbed": prefabbed}
 
 
+def _uses_modern_arena(map_id: str, doc: dict) -> bool:
+    return (map_id == "central-empire/capital/arenarea/arena-of-fate"
+            and any(str(item.get("mesh", "")).startswith("Built/arena-fate-modern/")
+                    for item in doc.get("objects", ())))
+
+
+def _uses_complete_district(map_id: str, doc: dict) -> bool:
+    name = map_id.rsplit("/", 1)[-1]
+    return (map_id in ("central-empire/capital/arenarea", "central-empire/capital/martpart")
+            and any(str(item.get("mesh", "")).startswith(f"Built/{name}-district/")
+                    for item in doc.get("objects", ())))
+
+
 def build(map_id: str, doc: dict, path: Path, package: str | None = None, check: bool = False) -> dict:
     """Construit le niveau de `doc` sous `package` (défaut : celui de la carte) ; rend les mesures.
 
@@ -1471,6 +1543,12 @@ def build(map_id: str, doc: dict, path: Path, package: str | None = None, check:
     (D-51, LOT-1022), construit et sauvé d'abord, puis ajouté au niveau de la carte, toujours
     chargé : le décor d'un étage (couches, objets, lumières) y va ; le ciel, la navigation, les
     personnages, les repères, le cadre et les cadrages restent dans le niveau de la carte."""
+    if _uses_modern_arena(map_id, doc) and (package is None or package == jadg_map.package(map_id)):
+        fail("Arena moderne : construire par build_arena_fate_modern_scene.py "
+             "(ou build_level.py -JadgMap), pour conserver matières, navigation, coupe et ambiance")
+    if _uses_complete_district(map_id, doc) and (package is None or package == jadg_map.package(map_id)):
+        fail("Quartier complet : construire par build_capital_districts.py "
+             "(ou build_level.py -JadgMap), pour conserver matières, foule, navigation et ambiance")
     started = time.perf_counter()
     package = package or jadg_map.package(map_id)
     errors = jadg_map.validate(doc)
@@ -1575,7 +1653,18 @@ def main() -> None:
     path = jadg_map.find(map_id)
     if path is None:
         fail(f"carte « {map_id} » introuvable sous {', '.join(str(r) for r in jadg_map.LEVEL_ROOTS)}")
-    build(map_id, jadg_map.read(path), path, check=scenery.command_line_option("JadgCheck") is not None)
+    doc = jadg_map.read(path)
+    if _uses_complete_district(map_id, doc):
+        import build_capital_districts
+
+        build_capital_districts.build_editor(map_id.rsplit("/", 1)[-1])
+        return
+    if _uses_modern_arena(map_id, doc):
+        import build_arena_fate_modern_scene
+
+        build_arena_fate_modern_scene.build_editor()
+        return
+    build(map_id, doc, path, check=scenery.command_line_option("JadgCheck") is not None)
 
 
 if __name__ == "__main__":

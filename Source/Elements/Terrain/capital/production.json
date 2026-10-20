@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "scope": "Base de construction de Capitale : terrain, rues et emprises. Aucune structure ni vegetation placee.",
+  "atlas": "atlas.json",
+  "atlasSha256": "15929d03454379ff5c3129b69b9f6128734e9a19154f140c8b300211f92605da",
+  "north": "UE -Y",
+  "origin_m": [
+    -5040,
+    -6048
+  ],
+  "tiles_xy": [
+    11,
+    13
+  ],
+  "tile_size_m": 1008,
+  "spacing_m": 4,
+  "seed": 20261015,
+  "arena_m": [
+    189,
+    156,
+    48
+  ],
+  "order": [
+    "Q07",
+    "Q06",
+    "Q08",
+    "Q13",
+    "Q11",
+    "Q12",
+    "Q02",
+    "Q03",
+    "Q04",
+    "Q05",
+    "Q01",
+    "Q10",
+    "Q09",
+    "Q14"
+  ],
+  "districts": {
+    "Q01": {
+      "slug": "sloghood",
+      "terrace_step_m": 4,
+      "garden_fraction": 0.12,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q02": {
+      "slug": "uptown",
+      "terrace_step_m": 3,
+      "garden_fraction": 0.55,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q03": {
+      "slug": "artisansquare",
+      "terrace_step_m": 1.5,
+      "garden_fraction": 0.18,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q04": {
+      "slug": "scholarnest",
+      "terrace_step_m": 3,
+      "garden_fraction": 0.4,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q05": {
+      "slug": "dweomer",
+      "terrace_step_m": 3,
+      "garden_fraction": 0.58,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q06": {
+      "slug": "martpart",
+      "terrace_step_m": 4,
+      "garden_fraction": 0.12,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q07": {
+      "slug": "arenarea",
+      "terrace_step_m": 3,
+      "garden_fraction": 0.48,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q08": {
+      "slug": "oldtown",
+      "terrace_step_m": 3,
+      "garden_fraction": 0.22,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q09": {
+      "slug": "neckoffoods",
+      "terrace_step_m": 1.5,
+      "garden_fraction": 0.02,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q10": {
+      "slug": "bloomburgs",
+      "terrace_step_m": 1.5,
+      "garden_fraction": 0.17,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q11": {
+      "slug": "downtown",
+      "terrace_step_m": 3,
+      "garden_fraction": 0.3,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q12": {
+      "slug": "palacedomain",
+      "terrace_step_m": 4,
+      "garden_fraction": 0.66,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q13": {
+      "slug": "docks",
+      "terrace_step_m": 1.5,
+      "garden_fraction": 0.02,
+      "tree_density": 0,
+      "grass_density": 0
+    },
+    "Q14": {
+      "slug": "abords",
+      "terrace_step_m": 0,
+      "garden_fraction": 0,
+      "tree_density": 0,
+      "grass_density": 0
+    }
+  },
+  "design_notes": [
+    "Les tuiles sont des fichiers techniques; les limites de quartier restent celles des polygones de l'atlas.",
+    "Le relief commun est echantillonne a 4 m; le chantier Arenarea a 2 m reste disponible separement et fournit la hauteur du Q07.",
+    "Les altitudes de l'atlas sont des propositions de conception, pas des altitudes canoniques du livre.",
+    "Les ponts et l'aqueduc restent absents: les rivieres ne sont pas bouchees par des remblais.",
+    "Le domaine agricole de 2500 km2 et les 80000 habitants hors cadre sont des reserves de monde, non une extension de cette carte.",
+    "Les cavernes et le sanctuaire non localise ne sont pas convertis en plateformes de surface.",
+    "Decision utilisateur 2026-10-16 : aucun feuillage place ni genere ; les textures de sol herbeux restent disponibles. Carte active /Game/Capitale/Cartes/Capitale."
+  ]
+}

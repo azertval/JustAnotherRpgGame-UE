@@ -51,13 +51,13 @@ DEFAULT_DEST = ROOT / "Source" / "Elements" / "Assets" / "Master"
 
 # Famille du dossier Meshy -> dossier du kit, dossier de contenu Unreal, préfixe d'asset.
 FAMILIES = {
-    "gods statues": ("Statues", "/Game/Master/Statues", "SM_Statue_"),
-    "weapon": ("Weapons", "/Game/Master/Weapons", "SM_Weapon_"),
+    "gods statues": ("Statues", "/Game/Bibliotheque/ModelesMaitres/Statues", "SM_Statue_"),
+    "weapon": ("Weapons", "/Game/Bibliotheque/ModelesMaitres/Weapons", "SM_Weapon_"),
 }
 # Famille de la référence -> dossier du kit, dossier de contenu, préfixe. Un retour rangé dans le
 # mauvais dossier Meshy (un immeuble sous NPC) suit sa référence, pas son dossier.
 KIT_FAMILIES = {kit: (kit, content, prefix) for kit, content, prefix in FAMILIES.values()}
-KIT_FAMILIES["Scenery"] = ("Scenery", "/Game/Master/Scenery", "SM_Scenery_")
+KIT_FAMILIES["Scenery"] = ("Scenery", "/Game/Bibliotheque/ModelesMaitres/Scenery", "SM_Scenery_")
 
 MESHY_NAME = re.compile(r"^Meshy_AI_(?P<name>.+?)_(?P<id>\d{10})_texture(?: \(\d+\))?\.glb$", re.IGNORECASE)
 

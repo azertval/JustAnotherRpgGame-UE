@@ -1,0 +1,25 @@
+{
+  "status": "verified",
+  "meshes": 108,
+  "objects": 1190,
+  "buildings": 127,
+  "landmarks": 25,
+  "triangles": 10953082,
+  "bytes": 838133004,
+  "checks": [
+    "GLB header/length and one mesh per file",
+    "POSITION NORMAL UV0 COLOR_0 per primitive",
+    "SHA256 per mesh",
+    "unique object IDs and all mesh references",
+    "independent roof IDs",
+    "2.8 m shop doorways",
+    "complete authored architectural collision coverage",
+    "continuous 1.5m heightfield and two-to-four storey homes"
+  ],
+  "requiresEngineValidation": [
+    "render noon and 22h",
+    "navigation including bridge and arena stairs",
+    "camera wall/roof occultation",
+    "frame time"
+  ]
+}

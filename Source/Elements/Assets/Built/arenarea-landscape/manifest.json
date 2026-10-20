@@ -1,0 +1,11 @@
+{
+  "generator": "scripts/assetsGeneration/build_arenarea_water.py",
+  "meshes": [
+    {
+      "id": "arenarea-eaux",
+      "file": "arenarea-eaux.glb",
+      "triangles": 192348,
+      "sha256": "089c4cdd515ca29557244c4d68e5be819f77f9cde37216a3c87bc71f2a79e36a"
+    }
+  ]
+}

@@ -55,16 +55,21 @@ public class JustAnotherRpgGame : ModuleRules
 			// Mutable : le créateur de personnage, un objet personnalisable que l'acteur instancie (LOT-1015).
 			"CustomizableObject" });
 
-		PrivateDependencyModuleNames.AddRange(new string[] { });
+		// MoviePlayer : l'écran de chargement pendant le chargement d'une carte (UI/JadgLoadingScreen).
+		PrivateDependencyModuleNames.AddRange(new string[] { "MoviePlayer" });
 
 		// La brosse d'un volume ne se dessine que par l'éditeur (Scene/JadgSceneBuild).
 		if (Target.bBuildEditor)
 		{
 			PrivateDependencyModuleNames.Add("UnrealEd");
+            PrivateDependencyModuleNames.Add("AssetTools");
 			// Le graphe du créateur se construit par réflexion sur les nœuds du plugin (JadgCreatorGraph).
 			PrivateDependencyModuleNames.Add("CustomizableObjectEditor");
 			// Le terrain d'une carte se crée depuis ses hauteurs et ses couches (Scene/JadgSceneBuild, LOT-1018).
 			PrivateDependencyModuleNames.Add("Landscape");
+			// Plantation d'éditeur avec une base Landscape explicite (JadgFoliageBuild).
+			PrivateDependencyModuleNames.Add("Foliage");
+			PrivateDependencyModuleNames.AddRange(new string[] { "ClothingSystemEditor", "ClothingSystemEditorInterface", "ClothingSystemRuntimeCommon", "ClothingSystemRuntimeInterface", "ChaosCloth", "PhysicsCore", "AssetRegistry" });
 		}
 	}
 }

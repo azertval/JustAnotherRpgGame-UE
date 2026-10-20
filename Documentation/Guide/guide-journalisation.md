@@ -1,9 +1,9 @@
 # Journalisation et assertions
 
-Cette page explique à quoi sert un système de journalisation (« logging ») dans un jeu, et comment
-celui de ce moteur est construit. Tout vit dans `Source/Core/Diagnostics`, plus un petit en-tête de
-macros par module (`Source/Core/CoreLog.h`, `Source/HMI/HmiLog.h`, `Source/HMI/Graphics/
-GraphicsLog.h`, …).
+Le diagnostic des règles vit dans `Source/JustAnotherRpgGame/Core/Diagnostics`, avec
+un en-tête de macros par catégorie (`Core/CoreLog.h`, `Core/Ecs/EcsLog.h`,
+`Core/Levels/LevelsLog.h`). Dans le jeu, `Bridge/JadgLog.cpp` relaie ces messages
+vers le journal d’Unreal, dans la catégorie `LogJadg`.
 
 ## Pourquoi journaliser dans un jeu vidéo
 
@@ -70,11 +70,8 @@ Un **sink** (« puits », au sens d'un point de destination) implémente l'inter
 - `core::FileLogSink` : écrit chaque ligne dans un fichier sur disque (dossier parent créé au
   besoin) ;
 - `core::MemoryLogSink` : ne fait **aucune** entrée-sortie — il **mémorise** les messages reçus dans
-  un vecteur, consultable via `entries()`. Deux usages distincts en pratique : dans les **tests**
-  automatisés, vérifier qu'un message précis a bien été journalisé sans dépendre d'un fichier ou
-  d'une console réels ; en exécution normale, alimenter un **bouton d'enregistrement des logs** de
-  l'interface (un joueur qui rencontre un problème peut exporter la session sans avoir eu besoin
-  d'ouvrir une console au préalable).
+  un vecteur, consultable via `entries()`, notamment pour vérifier les messages dans les
+  tests automatisés sans dépendre d'un fichier ou d'une console.
 
 Comme le `Logger` **possède** ses sinks (`std::unique_ptr`, RAII), ajouter un nouveau type de
 destination revient à écrire une nouvelle classe implémentant `ILogSink`, sans toucher au `Logger`
@@ -100,25 +97,18 @@ générique, `JADG_LOG(catégorie, niveau, message)`, et ses quatre raccourcis
 
 ### Chaque module a sa propre catégorie
 
-Plutôt que de répéter une chaîne littérale `"HMI"` ou `"Core"` à chaque site d'appel (source
-d'erreurs de frappe et de récriture répétitive), chaque module définit son propre petit en-tête de
-raccourcis — le **modèle** à dupliquer pour un nouveau module est `HMI/HmiLog.h` :
+Chaque catégorie possède ses raccourcis : `Core/CoreLog.h` pour `Core`,
+`Core/Ecs/EcsLog.h` pour `Ecs`, `Core/Levels/LevelsLog.h` pour `Levels`.
 
 ```cpp
-// HMI/HmiLog.h
-#define HMI_LOG_TRACE(message)   JADG_LOG_TRACE("HMI", message)
-#define HMI_LOG_INFO(message)    JADG_LOG_INFO("HMI", message)
-#define HMI_LOG_WARNING(message) JADG_LOG_WARNING("HMI", message)
-#define HMI_LOG_ERROR(message)   JADG_LOG_ERROR("HMI", message)
+#include "Core/CoreLog.h"
+
+CORE_LOG_INFO("Niveau charge");
+CORE_LOG_ERROR(std::string("Fichier introuvable : ") + chemin);
 ```
 
-`Core/CoreLog.h` (catégorie `"Core"`), `Core/Ecs/EcsLog.h` (`"Ecs"`), `Core/Levels/LevelsLog.h`
-(`"Levels"`), `HMI/Graphics/GraphicsLog.h` (`"Graphics"`) et `HMI/Audio/AudioLog.h` (`"Audio"`)
-suivent exactement le même modèle. La **catégorie** apparaît ensuite dans chaque ligne journalisée
-(voir le format ci-dessous), ce qui permet, en lisant un journal, de savoir immédiatement quel sous-système a
-émis un message donné — utile dès qu'un jeu grandit au-delà de quelques fichiers, et pour filtrer un
-journal verbeux en ne gardant que la catégorie qui intéresse un diagnostic précis (par exemple
-`grep "\[Levels\]"` pour ne voir que les chargements de cartes).
+La catégorie apparaît dans chaque ligne formatée par Core. Le pont vers Unreal
+conserve le message et traduit sa gravité dans `LogJadg`.
 
 ### Une règle de performance à respecter
 
@@ -150,53 +140,20 @@ Deux détails valent d'être notés :
   cas particulier du principe déjà rencontré en [Boucle de jeu et pas de temps fixe](guide-boucle.md) (isoler ce qui dépend du temps
   réel derrière un paramètre injecté, pas une lecture directe de l'horloge système).
 
-## Configurer le niveau minimal au lancement
+## Configurer le niveau minimal
 
-Le niveau minimal du `Logger` n'est pas figé dans le code : `core::parseLogLevel(text)`
-(`Core/Diagnostics/LogLevelParse.h`) convertit une chaîne (« trace », « info », « warning »/« warn »,
-« error », insensible à la casse) en `LogLevel`, ce qui permet de le régler **au lancement** sans
-recompiler. Dans ce moteur (`app::installLogging`, `Source/App/Common/Bootstrap.cpp`, partagé par le jeu et
-l'éditeur), deux sources sont acceptées, avec priorité à la
-seconde si les deux sont présentes :
+`core::defaultLogger().setMinimumLevel(core::LogLevel::Info)` règle le seuil de Core.
+`core::parseLogLevel(text)` convertit un nom de niveau en `std::optional<LogLevel>` ;
+une valeur inconnue donne `std::nullopt`.
 
-1. la variable d'environnement `JADG_LOG_LEVEL` ;
-2. l'argument de ligne de commande `--log-level=<niveau>`.
+`core::ScopedLogLevel(logger, plancher)` relève temporairement ce seuil, puis le
+restaure à la fin de sa portée. Il ne rend jamais plus permissif un seuil déjà
+plus strict. Le `Logger` coordonne les portées qui se chevauchent.
 
-Une valeur non reconnue par `parseLogLevel` (renvoyant `std::nullopt`) est **ignorée** plutôt que de
-faire échouer le démarrage — journaliser un `Warning` à ce sujet est préférable à interrompre le
-jeu pour une simple faute de frappe dans un paramètre de diagnostic.
-
-Le seuil peut aussi se **relever le temps d'une portée** : `core::ScopedLogLevel(logger, plancher)`
-([`ScopedLogLevel.h`](../../Source/JustAnotherRpgGame/Core/Diagnostics/ScopedLogLevel.h)) relève le niveau minimal à
-au moins `plancher` pour la durée de vie de l'objet, et restaure le niveau précédent à sa
-destruction (RAII). Il n'**assouplit** jamais un niveau déjà plus strict : qui a demandé
-`--log-level=error` reste à `error` à l'intérieur d'une portée qui ne demande que `warning`. Son
-usage prévu est de faire taire les traces de cycle de vie — chargement d'une carte, ouverture d'un
-catalogue — pendant un traitement répété sans joueur, dont le volume de journal n'a rien à voir
-avec une partie réelle et ralentit le traitement pour rien. La comptabilité vit dans le `Logger`
-(`beginLevelElevation`, `endLevelElevation`), pas dans chaque objet de portée : deux portées qui se
-chevauchent, chacune sur son fil, restaureraient sinon le niveau que la première avait relevé, et
-le journal resterait muet pour le reste de la session.
-
-### Bootstrap réel : sinks différents en développement et en Release
-
-`app::installLogging` illustre bien pourquoi séparer `Logger` (filtrage) et sinks (destination) est
-utile en pratique : en build de **développement** (`core::DEVELOPER_BUILD`, dérivé de `NDEBUG`), un
-`ConsoleLogSink` **et** un `MemoryLogSink` sont enregistrés (le second alimentant le bouton
-d'enregistrement de session évoqué plus haut) ; dans **les deux** configurations, un
-`FileLogSink` écrit un fichier horodaté par lancement (`Logs/run_<date>_<heure>.log`, à côté de
-l'exécutable) — un crash n'écrase jamais les preuves du lancement précédent. L'exécutable Release
-n'a pas de console (sous-système Windows pur) et il serait inutile d'y faire grandir un tampon
-mémoire. Le code qui journalise, lui, reste **identique** dans les deux configurations :
-`HMI_LOG_INFO("Demarrage...")` s'exécute pareil des deux côtés — c'est le nombre de sinks
-enregistrés, décidé une fois au démarrage, qui change ce qu'il en advient.
-
-Le `MemoryLogSink` (`Core`) collecte ces entrées en mémoire en build développement ; les écrire sur
-disque relève de la couche présentation. L'écran **Options** du jeu expose un bouton **«
-Enregistrer les journaux »** : `hmi::OptionsModel::saveLogs` sérialise `MemoryLogSink::entries()`,
-niveau en tête de chaque ligne, dans un fichier horodaté (`Logs/session_<date>_<heure>.log`), sans
-toucher à ce que `Core` a déjà collecté. En Release, aucun sink mémoire n'est enregistré : le bouton
-signale simplement des journaux indisponibles.
+Dans le jeu, `FJadgCoreLogBridge::Install()` ajoute le sink Unreal. Les niveaux
+`Error`, `Warning`, `Info` et `Trace` deviennent respectivement `Error`, `Warning`,
+`Log` et `Verbose` dans `LogJadg`. `Uninstall()` retire les sinks au démontage.
+Les journaux du moteur sont dans `Saved/Logs/`.
 
 ## Assertions : `JADG_ASSERT`, un outil différent
 
@@ -227,89 +184,8 @@ En résumé : **journaliser** un événement (« la carte du Colisée a été ch
 humain qui lira le journal plus tard ; **asserter** une condition (« cette entité doit être vivante
 ici ») protège contre un bug du code, et n'a de sens qu'en développement.
 
-## Quand le journal s'arrête net : le rapport de plantage
-
-Un journal documente ce qui est arrivé **jusqu'au** plantage. Il ne dit jamais *où* le programme
-est mort : la dernière ligne écrite est celle d'avant, et elle est le plus souvent anodine. C'est ce
-manque que comble le **minidump** (`Source/HMI/Platform/CrashDump.h`) : il garde la pile de chaque
-thread et le contexte de l'exception, et, ouvert dans Visual Studio avec les symboles de la **même
-version**, montre la ligne fautive.
-
-Rien n'est envoyé nulle part. Le fichier reste dans `Crashes/`, à côté de l'exécutable, comme
-`Logs/`.
-
-### `hmi::installCrashDumpWriter`
-
-À appeler **une fois, au plus tôt dans `main`**, et — c'est le détail qui compte — **après**
-l'installation du journal : le chemin du dump est consigné dans le journal avant la sortie, ce qui
-est la seule façon pour l'utilisateur de savoir qu'un fichier l'attend.
-
-Elle couvre plus que l'exception structurée non attrapée (violation d'accès, division par zéro).
-Trois autres fins anormales, qui ne sont **pas** des exceptions structurées, sont converties en une
-exception maison (`kFatalErrorExceptionCode`, « JADG ») que le même filtre sait écrire :
-
-| Fin anormale | Cas typique |
-|---|---|
-| `std::terminate` | une exception C++ non attrapée |
-| appel d'une fonction **virtuelle pure** | un objet utilisé pendant sa construction ou sa destruction |
-| **paramètre invalide** passé à la CRT | un indice hors bornes sur une fonction de la bibliothèque C |
-
-Le processus se termine ensuite **sans** la boîte de dialogue du rapport d'erreurs Windows — qui,
-sur une machine de CI, n'attend qu'un clic qui ne viendra jamais.
-
-### `hmi::writeMiniDump` : quatre tentatives, de la plus riche à la plus pauvre
-
-Écrire un dump est une opération qui peut **échouer dans un processus déjà mourant**. La fonction
-tente donc quatre écritures, de la plus complète à la plus réduite :
-
-1. le dump **riche**, avec la mémoire référencée par les piles ;
-2. et 3. des dumps réduits, qui gardent piles et contexte mais abandonnent l'état étendu du
-   processeur ;
-4. le **seul thread du plantage**.
-
-La dernière tentative mérite son explication, parce qu'elle vient d'une panne réellement
-diagnostiquée en CI. Une pile illisible — un thread quelconque, sans rapport avec le plantage —
-fait échouer **tout** le dump : l'API ne saute pas le thread fautif, elle abandonne. Se replier sur
-le seul thread du plantage contourne exactement ce cas. Et cette dernière tentative est en outre
-**réessayée**, parce que l'échec observé s'est révélé être un aléa et non un refus stable.
-
-`GetLastError()` ne rend que la raison de la **dernière** tentative, ce qui rend une panne de ce
-genre indéchiffrable. D'où `hmi::lastMiniDumpAttemptErrors`, qui rend le relevé **tentative par
-tentative** ; c'est un outil de diagnostic pur, que le test de minidump affiche quand il échoue. La
-règle qui en découle, apprise à ses dépens : devant un test de minidump rouge, **lire le relevé**,
-jamais relancer le job.
-
-### `hmi::routeCrtReportsToStderr`
-
-En Debug, une assertion de la bibliothèque standard (`_STL_VERIFY`, `assert`) ouvre une boîte
-modale « Microsoft Visual C++ Runtime Library » et **attend un clic**. Un programme sans fenêtre —
-`LevelEditor --check`, `UnitTests.exe`, un job de CI — s'arrête alors pour toujours, sans un mot
-dans son journal : le symptôme est un *timeout*, et rien n'indique la cause.
-
-Routées vers `stderr`, les mêmes assertions nomment leur **fichier et leur ligne**, puis la CRT
-poursuit sa route habituelle, que `installCrashDumpWriter` sait conclure par un minidump. La
-fonction est appelée par `installCrashDumpWriter` ; les exécutables de test, qui n'ont pas de
-bootstrap d'application, l'appellent eux-mêmes (`Source/Test/Support/CrtReports.cpp`).
-
-### Le nom du fichier, et pourquoi la version y figure
-
-`hmi::crashDumpFileName` compose `<application>_<version>_<AAAAMMJJ_HHMMSS>.dmp`. La version n'est
-pas décorative : un minidump ne se lit qu'avec les symboles **du binaire exact** qui l'a produit, et
-c'est elle qui permet de retrouver la bonne archive `<nom>-symbols.zip` sans ouvrir le fichier. Tout
-caractère hors `[A-Za-z0-9.-]` devient `_`, pour qu'une version comme `0.1.0+dev` reste un nom de
-fichier sûr.
-
-### Prouver que la chaîne marche : `--crash-test`
-
-Un dispositif de plantage qui n'a jamais planté n'est pas un dispositif : c'est une intention.
-`hmi::triggerCrashForTest` déclenche volontairement une violation d'accès, et l'option
-`--crash-test` du jeu l'expose. Le test de fumée de la release la lance sur l'**archive livrée** —
-pas sur un build local — pour prouver que c'est bien le zip téléchargé qui écrit son dump.
-
 ## Voir aussi
 - `core::Logger`, `core::LogLevel`, `core::ILogSink`, `core::ConsoleLogSink`, `core::MemoryLogSink`.
-- `hmi::installCrashDumpWriter`, `hmi::writeMiniDump`, `hmi::crashDumpFileName`,
-  `hmi::routeCrtReportsToStderr`.
 - `core::formatLogLine`, `core::parseLogLevel`, `core::defaultLogger`, `core::ScopedLogLevel`.
 - `JADG_ASSERT`, `core::setAssertionHandler`, `core::handleAssertionFailure`.
 - [Boucle de jeu et pas de temps fixe](guide-boucle.md) — la règle « jamais de log dans le chemin exécuté à chaque pas fixe ».

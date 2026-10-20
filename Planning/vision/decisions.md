@@ -72,6 +72,41 @@ lot qui les a prises.
 | D-62 | 8 oct. 2026 | **Les kits d'assets se publient sur le nouveau dépôt à la `0.0.3`** (LOT-1023). D'ici là ils ne s'installent que sur un poste qui les a déjà | décision de l'auteur — « les kits seront publiés dans le nouveau repo au moment de la 0.0.3 » |
 | D-63 | 8 oct. 2026 | **Un créateur de personnage remplace le maillage par personnage** : D-38 est **révisée**. Un personnage est une **fiche texte** (JSON) qui donne les valeurs des paramètres d'un **objet personnalisable Mutable** (plugin du moteur) ; celui-ci assemble corps, tête, pièces, garde-robe et matières. Les corps et les têtes humains et proches de l'humain viennent de **MetaHuman Creator** (dans l'éditeur depuis la 5.6, piloté en Python en 5.8, licence comprise dans celle d'Unreal) ; les races que MetaHuman n'atteint pas (le drakéide ; les petites tailles, les nains et le demi-orc sont à mesurer) reçoivent un corps ou une tête produits par Meshy ou pris sur Fab ; les pièces propres au monde (cornes, défenses, queues, oreilles, armures signatures, armes) viennent de Meshy. Tout est sur le **squelette standard d'Unreal** ; les **animations viennent des bibliothèques du moteur** (MetaHuman, Fab), reciblées par l'IK Retargeter. **Les armes s'accrochent par socket** : la question que D-42 laissait ouverte est tranchée, l'arme est un modèle à part accroché à une main, et les armes au maître de `Source/Elements/Assets/Master/Weapons` servent. **D-55 est étendue** : Fab est admis pour les corps de base, la garde-robe et les animations des personnages. Les **portraits et les jetons restent peints** (D-30 maintenue). Deux points se mesurent au `LOT-1015` : la régénération du graphe Mutable, asset d'éditeur, par un commandlet depuis une description texte (D-52), et les douze influences d'os par sommet que MetaHuman exige sous Mutable (réglage `BoneInfluences` du plugin). Mutable cuit les maillages : le mélange de visages de MetaHuman ne se fait pas à l'exécution, sans effet pour des PNJ décrits en fiche | décision de l'auteur — « il ne faut pas recréer mon moteur dans Unreal mais réinterpréter mon ancien moteur dans Unreal Engine et tirer au maximum parti des fonctions du moteur ; des fonctionnalités seront à supprimer ou refactorisées » ; « au vu de la quantité de personnages différents proposés par le jeu final il faudrait éviter d'avoir un modèle unique par personnage mais plutôt un créateur de personnage permettant de modifier facilement un modèle de base pour avoir des personnages uniques (comme dans des MMORPG type AION ou Black Desert) » ; il demande « la solution la plus long-termiste, il vaut mieux passer du temps maintenant tant qu'il y a peu de données ». Le montage est documenté par Epic (« Using Mutable and MetaHumans in Unreal Engine ») ; les portraits et jetons peints, décision de l'auteur le même jour |
 | D-64 | 8 oct. 2026 | **La chaîne maison des personnages est supprimée, pas portée** : le squelette `humanoid` (MPFB, 53 os) et le `quadruped` (29 os), les clips posés par cibles, la retouche dans Blender (D-44 tombe pour les personnages), les contrôles et les planches maison. `scripts/assetsGeneration/rig_character.py`, `rig_quadruped.py`, `retouch_character.py`, `reduce_model.py`, `render_character_review.py`, `scripts/checks/check_character_model.py`, leurs tests sous `scripts/tests/` et les maîtres de `Source/Elements/Assets/Master/Npc` (un personnage est une fiche, ils ne servent plus) partent dans la PR du `LOT-1015` (D-32, D-59). Les §1, §2, §4 à §9 et §11 du [standard des personnages](../standards/personnages-3d.md) sont périmés et se réécrivent au `LOT-1015` | consigne de l'auteur, avec D-63 — « réinterpréter, pas recréer » : le moteur fait nativement l'import squelettique, le reciblage, les bibliothèques d'animations et les sockets |
+| D-65 | 9 oct. 2026 | **Refonte complète de l'Arena of Fate** : la référence au *Tanares Sourcebook*, sa composition et sa narration sont conservées. Le style reste à éprouver entre **réalisme stylisé**, **rendu peint remanié** et **réalisme poussé**. L'extérieur garde son emprise monumentale de **189 × 156 × 48 m** ; connexions et hauteurs intérieures peuvent être réorganisées librement si les fonctions et flux du lieu restent lisibles. Tout le décor est praticable, gradins et loges compris, dans un parcours physique continu ; murs et plafonds complets assurent l'occultation de la caméra. La foule, les bannières, les feux et l'ambiance font partie de la scène. Avant la reconstruction complète, un témoin Unreal composé d'une arcade, de gradins, d'une salle voûtée et d'un escalier sera présenté dans les trois styles, au cadrage joueur, à midi et à 22 h, pour validation de l'auteur | décision de l'auteur — confirmation des propositions 1 à 8, avec la correction que tout décor doit être visitable |
+| D-66 | 10 oct. 2026 | **Arenarea et Martpart sont construits en quartiers complets**, dans le style sculpté et peint de l’Arena of Fate, selon leurs cartes et le livre de référence. Arenarea garde son caractère monumental et jardiné ; Martpart son tissu commercial dense. Emprises et proportions peuvent évoluer en conservant les relations entre lieux, les quêtes et les transitions. Les rues, places, jardins, quais et intérieurs importants sont visitables ; les maisons ordinaires sont principalement traitées en extérieur. Les trois cartes restent séparées. L’ambiance comprend eau, végétation, vent, feu, fumée, sons locaux et population animée modérée. L’auteur autorise Blender, avec assemblage de petites pièces simples en formes complexes, et demande de passer directement à la réalisation complète | l’auteur valide les sept propositions et précise : « tu peux commencer directement faire les quartiers compelt ». Les contrôles intermédiaires continuent sans nouvelle étape d’approbation ; la validation artistique du résultat final reste à l’auteur |
+
+| D-67 | 11 oct. 2026 | **Relief et achèvement d'Arenarea et Martpart** : terrasses urbaines et jardins étagés à Arenarea (10–15 m de dénivelé, seuils de l'Arena conservés), pente marchande vers la rivière à Martpart (5–10 m, voies principales praticables aux charrettes). Bâti majoritairement de deux à trois niveaux, quelques quatre, étages ordinaires de 3–4 m. Étage du Cloaked Brewer conservé et quelques terrasses/galeries/escaliers extérieurs accessibles. Shaft Loop reprend l'ensemble annulaire bâti et jardiné de la carte. Terrain et parcours avant détails, style de l'Arena et petites pièces Blender assemblées | « je valide les cinq propositions » ; `annexes/districts/relief-approval-20261011.json` dans la version 0.0.4 |
+
+### Retour sur le premier témoin de D-65 — 9 octobre 2026
+
+L'auteur juge les trois traitements difficiles à distinguer : textures « pauvres », tout semble
+« plat ». Il ouvre la possibilité d'un **dessin fantasy comme les portraits** si le style réaliste
+est trop difficile à tenir. Le témoin est repris en fantasy illustrée, avec la géométrie, les
+matières et la lumière examinées ensemble dans une comparaison avant/après. La référence aux
+portraits guide cette proposition ; aucun style final n'est encore validé, et la reconstruction
+complète reste suspendue à la revue du témoin.
+
+Après cette reprise, l'auteur demande explicitement un **« style dessin encore plus marqué »**.
+L'essai suivant conserve la géométrie et pousse le traitement de l'image : grands plans de
+pigment, textures atténuées, valeurs lumineuses regroupées et contours sélectifs. Cette demande
+fixe la direction de l'itération ; elle ne valide pas encore son rendu ni la carte complète.
+
+Après comparaison, l'auteur **préfère le style peint précédent** et demande de le garder,
+avec des textures « beaucoup de détails », davantage de variation et un ensemble moins lisse.
+La passe dessin à contours et valeurs regroupées est donc retirée. La reprise conserve la
+palette, l'éclairage et les formes du témoin peint ; elle enrichit les matières et leurs
+variations. Le choix de style est désormais le peint précédent, et non la variante dessinée.
+
+**Validation du témoin — 9 octobre 2026.** L'auteur valide explicitement le mockup peint
+enrichi et autorise la poursuite de la construction complète en orchestration. Il considère
+que les textures seules ont atteint leur limite : la version finale doit gagner en qualité
+par les props, le mobilier, les usages et la composition du décor. La validation du témoin
+lève le préalable de D-65 ; elle ne constitue pas une validation anticipée de l'arène finale.
+
+**Ordre de livraison précisé par l'auteur.** « Décor d'abord, foule ensuite » : l'architecture,
+les parcours, le mobilier, les bannières et les feux se terminent avant l'ajout de la foule.
+Les anciennes silhouettes planes ne sont pas reprises ; les futurs personnages du projet
+alimenteront cette étape distincte.
 
 ### Révision de D-31 — 1er octobre 2026
 
@@ -100,6 +135,37 @@ que D-64 supprime. D-55 admettait Fab pour la nature, les sols, les roches et le
 l'admet désormais pour les corps de base, la garde-robe et les animations des personnages.
 L'architecture reste produite pour le lieu. Le `LOT-1015` est réécrit, et deux lots s'ajoutent :
 le `LOT-1024` (les espèces et les humanoïdes de la démo) et le `LOT-1025` (le lion et le loup).
+
+### D-68 — Reprise du générateur de personnages — 20 octobre 2026
+
+L'auteur précise que l'implémentation actuelle est temporaire et peut être remplacée,
+confirme un **créateur complet en jeu avec réglage du visage et du corps**, puis demande
+la reprise totale des LOT-1024 et LOT-1025 et le découpage du générateur.
+
+Cette décision de planification remplace, pour ce chantier, les obligations de D-63/D-64
+sur le fournisseur MetaHuman et le squelette universel. Elle ne déclare aucun comparatif
+réussi et n'autorise pas la restauration de l'ancien moteur.
+
+- LOT-1024 : preuve empaquetée et choix de chaîne avant production. Mutable est le premier
+  candidat de l'analyse, confronté au modulaire natif sur les mêmes assets ; MetaHuman,
+  Character Creator et bases riggées sont des sources possibles, à éprouver.
+- LOT-1026 : bases par famille anatomique, morphs d'identité, rigs et recettes versionnées.
+- LOT-1027 : garde-robe adaptée aux corps, matériaux, compatibilités et accessoires.
+- LOT-1028 : créateur visuel complet en jeu et mode de production sur la même chaîne.
+- LOT-1029 : héros et PNJ de la démo, presets professionnels et migration.
+- LOT-1025 : lion/loup, rigs et animations vérifiés, sans obligation de Mutable.
+- LOT-1030 : validation qualité, densité et performances avant la recette LOT-1023.
+
+Les formats texte, Core indépendant du moteur, imports reproductibles et logique C++ sont
+conservés. Les rigs peuvent différer selon l'anatomie ; le bas de corps scorpion et les mains
+à six doigts ne sont pas simplifiés pour satisfaire le mannequin. La préparation spécialisée
+initiale et ses sources sont évaluées au LOT-1024 ; la cible est l'absence de correction par
+PNJ dans une famille validée. Les anciens chiffres du LOT-1015 restent des mesures de
+prototype, pas des garanties de production. Portraits et jetons restent peints (D-30).
+
+Le LOT-314 intègre ce créateur au parcours de règles en 0.3.0 ; il ne duplique pas le travail
+d'apparence. Les choix finaux de logiciels, achats et seuils mesurés ne sont pas déduits de
+la présente révision.
 
 ## À trancher par l'auteur
 

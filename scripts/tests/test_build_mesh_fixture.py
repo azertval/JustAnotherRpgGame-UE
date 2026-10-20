@@ -1,12 +1,12 @@
 # SPDX-FileCopyrightText: 2026 Valentin Eloy
 # SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
 
-"""Les données d'essai en maillages (LOT-1003) : à jour, au standard, et à la mesure du moteur.
+"""Les donnÃ©es d'essai en maillages (LOT-1003) : Ã  jour, au standard, et Ã  la mesure du moteur.
 
 Les `.glb` de `Source/Test/Fixtures/Meshes` sont suivis par Git et lus par les tests du moteur ; ce
-qui peut dériver en silence, c'est le script qui les écrit. Ces tests tiennent trois choses : les
+qui peut dÃ©river en silence, c'est le script qui les Ã©crit. Ces tests tiennent trois choses : les
 fichiers suivis sont bien ceux que le script produit, chaque maillage a la forme que le standard 3D
-fixe, et la hauteur du mur est celle d'un étage sous la caméra du jeu.
+fixe, et la hauteur du mur est celle d'un Ã©tage sous la camÃ©ra du jeu.
 """
 import json
 import math
@@ -30,7 +30,7 @@ def _document(glb: bytes) -> tuple[dict, bytes]:
 
 
 def test_les_donnees_suivies_sont_celles_du_script(root):
-    """Rien ne se retouche à la main : un fichier suivi qui diffère du script est une erreur."""
+    """Rien ne se retouche Ã  la main : un fichier suivi qui diffÃ¨re du script est une erreur."""
     for relative, content in M.files().items():
         path = root / 'Source' / 'Test' / 'Fixtures' / 'Meshes' / relative
         assert path.is_file(), relative
@@ -43,7 +43,7 @@ def test_le_script_est_deterministe():
 
 @pytest.mark.parametrize('name', ['floor', 'wall', 'roof'])
 def test_chaque_maillage_est_au_standard(name):
-    """Un maillage, une primitive, une matière, trois attributs, sa texture incorporée."""
+    """Un maillage, une primitive, une matiÃ¨re, trois attributs, sa texture incorporÃ©e."""
     document, binary = _document(M.files()[f'Assets/Scene/{M.PLACE}/{name}.glb'])
     assert len(document['meshes']) == 1
     (primitive,) = document['meshes'][0]['primitives']
@@ -61,7 +61,7 @@ def test_chaque_maillage_est_au_standard(name):
     assert position['min'][1] == 0.0
     assert position['min'][0] == pytest.approx(-position['max'][0])
     assert position['min'][2] == pytest.approx(-position['max'][2])
-    # Des triangles indexés, tous dans les sommets.
+    # Des triangles indexÃ©s, tous dans les sommets.
     indices = document['accessors'][primitive['indices']]
     assert indices['count'] % 3 == 0
     index_view = document['bufferViews'][indices['bufferView']]
@@ -70,8 +70,8 @@ def test_chaque_maillage_est_au_standard(name):
 
 
 def test_le_repere_du_socle_se_lit_sur_ses_trois_axes():
-    """Le bloc du socle (LOT-1014) : aucune borne n'en vaut une autre, au signe près, à moins de
-    2 cm — l'écart sous lequel `build_level.Frame` confond deux axes."""
+    """Le bloc du socle (LOT-1014) : aucune borne n'en vaut une autre, au signe prÃ¨s, Ã  moins de
+    2 cm â€” l'Ã©cart sous lequel `build_level.Frame` confond deux axes."""
     document, _ = _document(M.files()[f'Assets/Scene/{M.MARKER_PLACE}/repere.glb'])
     position = document['accessors'][0]
     spans = [(position['min'][axis], position['max'][axis]) for axis in range(3)]
@@ -83,10 +83,10 @@ def test_le_repere_du_socle_se_lit_sur_ses_trois_axes():
 
 
 def test_le_mur_fait_la_hauteur_d_un_etage_sous_la_camera_du_jeu():
-    """224 px d'art au losange de 256, soit 2,37 m : la valeur du standard (`style-3d.md`, §1)."""
+    """224 px d'art au losange de 256, soit 2,37 m : la valeur du standard (`style-3d.md`, Â§1)."""
     assert M.STOREY_ART / M.ART_TILE[0] == pytest.approx(224 / 256)
     assert M.STOREY_METRES == pytest.approx(2.37, abs=0.005)
-    # Vue par la caméra, cette hauteur redonne la part de case que le manifeste déclare.
+    # Vue par la camÃ©ra, cette hauteur redonne la part de case que le manifeste dÃ©clare.
     per_metre = M.ART_TILE[0] / (M.TILE_METRES * math.sqrt(2.0))
     cosine = math.sqrt(1.0 - M.DIAMOND_RATIO ** 2)
     assert M.STOREY_METRES * per_metre * cosine == pytest.approx(M.STOREY_ART)
@@ -102,14 +102,3 @@ def test_le_manifeste_cite_trois_maillages_et_une_image():
     assert [entry['file'] for entry in entries if 'file' in entry] == ['paving.png']
     assert manifest['storey'] == M.STOREY_ART
     assert manifest['tile'] == list(M.ART_TILE)
-
-
-def test_la_carte_pose_la_cour_l_ilot_et_son_toit():
-    level = json.loads(M.level())
-    ground, relief, roof = level['layers']
-    assert len(ground['tiles']) == M.MAP_COLUMNS * M.MAP_ROWS
-    assert sum(1 for tile in ground['tiles'] if tile['piece'] == 'floor') == 25
-    assert len(relief['tiles']) == 8 and all(tile['piece'] == 'wall' for tile in relief['tiles'])
-    assert roof['floor'] == 1 and [tile['piece'] for tile in roof['tiles']] == ['roof']
-    # La collision de la racine est celle des murs, plus l'entrée.
-    assert sum(1 for tile in level['tiles'] if tile['type'] == 'wall') == 8

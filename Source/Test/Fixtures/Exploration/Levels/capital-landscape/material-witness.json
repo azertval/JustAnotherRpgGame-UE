@@ -1,0 +1,39 @@
+{
+  "format": "jadg-map",
+  "version": 5,
+  "name": "CapitalMaterialWitness",
+  "width": 20,
+  "height": 20,
+  "origin": [-15, -15],
+  "storeys": [
+    {"name": "sol", "z": 0}
+  ],
+  "nextEntityId": 1,
+  "tiles": [
+    {"x": 10, "y": 10, "type": "entry"}
+  ],
+  "entities": [],
+  "party": {
+    "appearances": ["heros-brawler"],
+    "walkSpeed": 3.0,
+    "heading": 0
+  },
+  "lighting": {
+    "sunScale": 1.65,
+    "ambientScale": 0.34,
+    "skyLuminance": 1.8,
+    "exposureBias": 0
+  },
+  "daylight": "Common/Lighting/daylight.json",
+  "ground": {
+    "colour": "#c2b99c",
+    "size": 200,
+    "height": -1.0
+  },
+  "shots": [
+    {"id": "atelier", "target": [18, 5, 1], "heading": 330, "pitch": 36, "distance": 60},
+    {"id": "rasant", "target": [10, 0, 1], "heading": 290, "pitch": 8, "distance": 20},
+    {"id": "deplacement", "target": [16, 24, 0.2], "heading": 0, "pitch": 10, "distance": 13}
+  ],
+  "hours": ["12:00", "22:00"]
+}

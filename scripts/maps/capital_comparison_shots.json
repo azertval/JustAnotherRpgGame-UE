@@ -1,0 +1,178 @@
+[
+  {
+    "id": "ensemble",
+    "target": [
+      -104.6,
+      457.4,
+      18.8
+    ],
+    "heading": 0,
+    "pitch": 50,
+    "distance": 2000
+  },
+  {
+    "id": "baie",
+    "target": [
+      -583.4,
+      -46.6,
+      -2.5
+    ],
+    "heading": 300,
+    "pitch": 24,
+    "distance": 700
+  },
+  {
+    "id": "riviere",
+    "target": [
+      311.2,
+      -34.0,
+      -2.5
+    ],
+    "heading": 60,
+    "pitch": 26,
+    "distance": 520
+  },
+  {
+    "id": "palais",
+    "target": [
+      -539.3,
+      381.8,
+      22.0
+    ],
+    "heading": 270,
+    "pitch": 28,
+    "distance": 620
+  },
+  {
+    "id": "cultures",
+    "target": [
+      714.4,
+      1314.2,
+      18.1
+    ],
+    "heading": 20,
+    "pitch": 24,
+    "distance": 420
+  },
+  {
+    "id": "ruisseau",
+    "target": [
+      -1062.2,
+      982.8,
+      -2.5
+    ],
+    "heading": 330,
+    "pitch": 26,
+    "distance": 380
+  },
+  {
+    "id": "panorama",
+    "target": [
+      -104.6,
+      533.0,
+      22.0
+    ],
+    "heading": 335,
+    "pitch": 18,
+    "distance": 1500
+  },
+  {
+    "id": "collines",
+    "target": [
+      134.8,
+      570.8,
+      26.0
+    ],
+    "heading": 300,
+    "pitch": 14,
+    "distance": 520
+  },
+  {
+    "id": "seuil-arene",
+    "target": [
+      0.0,
+      104.6,
+      0.0
+    ],
+    "heading": 0,
+    "pitch": 20,
+    "distance": 60
+  },
+  {
+    "id": "market-gate-old-bridge",
+    "target": [
+      689.2,
+      335.2,
+      8.0
+    ],
+    "heading": 25,
+    "pitch": 28,
+    "distance": 410
+  },
+  {
+    "id": "scholarnest-dweomer",
+    "target": [
+      349.0,
+      936.2,
+      23.7
+    ],
+    "heading": 330,
+    "pitch": 26,
+    "distance": 680
+  },
+  {
+    "id": "sloghood-uptown",
+    "target": [
+      -709.4,
+      974.0,
+      24.2
+    ],
+    "heading": 315,
+    "pitch": 28,
+    "distance": 520
+  },
+  {
+    "id": "bloomburgs-rempart",
+    "target": [
+      -356.6,
+      1244.9,
+      14.8
+    ],
+    "heading": 10,
+    "pitch": 22,
+    "distance": 390
+  },
+  {
+    "id": "joueur-water-gate",
+    "target": [
+      -293.6,
+      97.0,
+      2.0
+    ],
+    "heading": 45,
+    "pitch": 35,
+    "distance": 45
+  },
+  {
+    "id": "joueur-market-gate",
+    "target": [
+      619.9,
+      425.9,
+      6.0
+    ],
+    "heading": 45,
+    "pitch": 40,
+    "distance": 38
+  },
+  {
+    "id": "joueur-universite",
+    "target": [
+      115.9,
+      1006.7,
+      29.0
+    ],
+    "heading": 180,
+    "pitch": 35,
+    "distance": 55
+  }
+]

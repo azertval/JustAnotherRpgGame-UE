@@ -9,7 +9,7 @@ objets en mètres, les préfabriqués, les lumières, le ciel, la navigation, le
 cadrages). Spécification : `Documentation/Specification/niveaux.md` ; schéma :
 `Documentation/Specification/level.schema.json`.
 
-Ce module est la seule écriture d'une v5 : `build_essai_maps.py`, `build_gate_scene.py` et
+Ce module est la seule écriture d'une v5 : `build_essai_maps.py`, `build_capital_districts.py` et
 `read_level.py` écrivent par lui, sous sa forme canonique (`dumps`) — relire puis réécrire une
 carte intacte rend le même fichier, octet pour octet. Core lit la v5 (`core::LevelLoader`) ;
 `build_level.py`, dans l'éditeur du moteur, la construit.
@@ -53,6 +53,8 @@ import sys
 from collections import deque
 from pathlib import Path
 
+import district_surface
+
 ROOT = Path(__file__).resolve().parents[2]
 FORMAT = "jadg-map"
 VERSION = 5
@@ -67,7 +69,7 @@ MAP_PACKAGES = "/Game/Maps/Levels"
 
 # L'ordre des clés racine d'une carte écrite ; une clé inconnue suit, dans l'ordre alphabétique.
 ROOT_ORDER = ("format", "version", "name", "comment", "place", "width", "height", "origin", "storeys", "storeyLevels",
-              "nextEntityId", "tiles", "forced", "layers", "entities", "terrain", "routes", "outlines",
+              "groundHeightfield", "storeyRegions", "nextEntityId", "tiles", "forced", "layers", "entities", "terrain", "routes", "outlines",
               "objects", "fills", "prefabs", "characters", "party", "assetsRoot", "lighting", "daylight", "ground",
               "navigation", "shots", "hours", "notes")
 # L'ordre des clés de tête d'un élément de liste ; les autres suivent par ordre alphabétique.
@@ -429,6 +431,7 @@ def validate(doc: dict) -> list[str]:
     errors = schema_errors(doc)
     if errors:
         return errors
+    errors.extend(district_surface.validate_surface(doc))
     width, height = doc["width"], doc["height"]
     storeys = doc.get("storeys") or [{"name": "rez", "z": 0.0}]
     entries = [t for t in doc["tiles"] if t["type"] == "entry"]

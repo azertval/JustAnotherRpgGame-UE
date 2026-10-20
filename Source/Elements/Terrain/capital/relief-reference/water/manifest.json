@@ -1,0 +1,42 @@
+[
+  {
+    "id": "eau-reference-0-0",
+    "triangles": 640,
+    "sha256": "20f37a248303c4708b4b5c83a5f4c6559ad759adb84cdcb5b46df8b361f98e31"
+  },
+  {
+    "id": "eau-reference-0-1",
+    "triangles": 70228,
+    "sha256": "8f18f72060ca29045424fa8785ea6342d7ee00a8fb42ffeba7b5f55b1338e988"
+  },
+  {
+    "id": "eau-reference-1-1",
+    "triangles": 59330,
+    "sha256": "54ba02a4034b75ec8c314aa7b4aba3d54710972196f348975685dad4cba3bad2"
+  },
+  {
+    "id": "eau-reference-2-1",
+    "triangles": 11622,
+    "sha256": "5e8c24cbfe19dcf0b0152855c62e9d259b94b55690c98366977ed1db3da05cee"
+  },
+  {
+    "id": "eau-reference-3-1",
+    "triangles": 9164,
+    "sha256": "3cc1438de484fc76fbe5ace6c6f3ff8980baf3f8ecb829b331a88b6e8378dc8d"
+  },
+  {
+    "id": "eau-reference-0-2",
+    "triangles": 45094,
+    "sha256": "ab92939155ea26221aaa3bdb7882fe2e5393a8eeffe40056c99f9a5148f3027f"
+  },
+  {
+    "id": "eau-reference-3-2",
+    "triangles": 4096,
+    "sha256": "56c813f332508dd00eeae4c78e854dfb0d73ebde5af5c1a50204e6bd3f299f04"
+  },
+  {
+    "id": "eau-reference-0-3",
+    "triangles": 12304,
+    "sha256": "e55876364c967a035c38044f68b5548a5d99b935306dd0102d942b052795dcbf"
+  }
+]

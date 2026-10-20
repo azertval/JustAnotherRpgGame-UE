@@ -19,7 +19,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-bauron/StaticMeshes/SM_Statue_Bauron",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-bauron/StaticMeshes/SM_Statue_Bauron",
       "sheet": {
         "material": {
           "slots": [
@@ -74,7 +74,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/effigy-zulvath/StaticMeshes/SM_Statue_Effigy_Zulvath",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/effigy-zulvath/StaticMeshes/SM_Statue_Effigy_Zulvath",
       "sheet": {
         "material": {
           "slots": [
@@ -129,7 +129,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/portal-guardian-lion/StaticMeshes/SM_Statue_Portal_Guardian_Lion",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/portal-guardian-lion/StaticMeshes/SM_Statue_Portal_Guardian_Lion",
       "sheet": {
         "material": {
           "slots": [
@@ -184,7 +184,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-duality/StaticMeshes/SM_Statue_Duality",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-duality/StaticMeshes/SM_Statue_Duality",
       "sheet": {
         "material": {
           "slots": [
@@ -239,7 +239,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-lumina/StaticMeshes/SM_Statue_Lumina",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-lumina/StaticMeshes/SM_Statue_Lumina",
       "sheet": {
         "material": {
           "slots": [
@@ -294,7 +294,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-bas/StaticMeshes/SM_Statue_Bas",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-bas/StaticMeshes/SM_Statue_Bas",
       "sheet": {
         "material": {
           "slots": [
@@ -349,7 +349,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-oigridh/StaticMeshes/SM_Statue_Oigridh",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-oigridh/StaticMeshes/SM_Statue_Oigridh",
       "sheet": {
         "material": {
           "slots": [
@@ -404,7 +404,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-glorious-one/StaticMeshes/SM_Statue_Glorious_One",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-glorious-one/StaticMeshes/SM_Statue_Glorious_One",
       "sheet": {
         "material": {
           "slots": [
@@ -459,7 +459,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-tamera/StaticMeshes/SM_Statue_Tamera",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-tamera/StaticMeshes/SM_Statue_Tamera",
       "sheet": {
         "material": {
           "slots": [
@@ -514,7 +514,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-fruitful/StaticMeshes/SM_Statue_Fruitful",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-fruitful/StaticMeshes/SM_Statue_Fruitful",
       "sheet": {
         "material": {
           "slots": [
@@ -569,7 +569,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-fumetsu/StaticMeshes/SM_Statue_Fumetsu",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-fumetsu/StaticMeshes/SM_Statue_Fumetsu",
       "sheet": {
         "material": {
           "slots": [
@@ -624,7 +624,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-nature-spirits/StaticMeshes/SM_Statue_Nature_Spirits",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-nature-spirits/StaticMeshes/SM_Statue_Nature_Spirits",
       "sheet": {
         "material": {
           "slots": [
@@ -679,7 +679,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-aibidh/StaticMeshes/SM_Statue_Aibidh",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-aibidh/StaticMeshes/SM_Statue_Aibidh",
       "sheet": {
         "material": {
           "slots": [
@@ -734,7 +734,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/ossuary-insert/StaticMeshes/SM_Statue_Ossuary_Insert",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/ossuary-insert/StaticMeshes/SM_Statue_Ossuary_Insert",
       "sheet": {
         "material": {
           "slots": [
@@ -789,7 +789,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-ba-ka/StaticMeshes/SM_Statue_Ba_Ka",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-ba-ka/StaticMeshes/SM_Statue_Ba_Ka",
       "sheet": {
         "material": {
           "slots": [
@@ -844,7 +844,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/funerary-statue/StaticMeshes/SM_Statue_Funerary_Statue",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/funerary-statue/StaticMeshes/SM_Statue_Funerary_Statue",
       "sheet": {
         "material": {
           "slots": [
@@ -899,7 +899,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/effigy-droggath/StaticMeshes/SM_Statue_Effigy_Droggath",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/effigy-droggath/StaticMeshes/SM_Statue_Effigy_Droggath",
       "sheet": {
         "material": {
           "slots": [
@@ -954,7 +954,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-dorsi/StaticMeshes/SM_Statue_Dorsi",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-dorsi/StaticMeshes/SM_Statue_Dorsi",
       "sheet": {
         "material": {
           "slots": [
@@ -1009,7 +1009,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/neutral-athlete/StaticMeshes/SM_Statue_Neutral_Athlete",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/neutral-athlete/StaticMeshes/SM_Statue_Neutral_Athlete",
       "sheet": {
         "material": {
           "slots": [
@@ -1064,7 +1064,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/effigy-krynnethoth/StaticMeshes/SM_Statue_Effigy_Krynnethoth",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/effigy-krynnethoth/StaticMeshes/SM_Statue_Effigy_Krynnethoth",
       "sheet": {
         "material": {
           "slots": [
@@ -1119,7 +1119,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/effigy-cthraxis/StaticMeshes/SM_Statue_Effigy_Cthraxis",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/effigy-cthraxis/StaticMeshes/SM_Statue_Effigy_Cthraxis",
       "sheet": {
         "material": {
           "slots": [
@@ -1174,7 +1174,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Statues/statue-breith/StaticMeshes/SM_Statue_Breith",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Statues/statue-breith/StaticMeshes/SM_Statue_Breith",
       "sheet": {
         "material": {
           "slots": [
@@ -1229,7 +1229,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Scenery/arenarea-palazzo-terracotta/StaticMeshes/SM_Scenery_Arenarea_Palazzo_Terracotta",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Scenery/arenarea-palazzo-terracotta/StaticMeshes/SM_Scenery_Arenarea_Palazzo_Terracotta",
       "sheet": {
         "family": "02",
         "class": "tall",
@@ -1289,7 +1289,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/gladiator-shield/StaticMeshes/SM_Weapon_Gladiator_Shield",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/gladiator-shield/StaticMeshes/SM_Weapon_Gladiator_Shield",
       "sheet": {
         "material": {
           "slots": [
@@ -1344,7 +1344,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/ironhand-longsword/StaticMeshes/SM_Weapon_Ironhand_Longsword",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/ironhand-longsword/StaticMeshes/SM_Weapon_Ironhand_Longsword",
       "sheet": {
         "material": {
           "slots": [
@@ -1399,7 +1399,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/longbow/StaticMeshes/SM_Weapon_Longbow",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/longbow/StaticMeshes/SM_Weapon_Longbow",
       "sheet": {
         "material": {
           "slots": [
@@ -1454,7 +1454,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/mage-staff/StaticMeshes/SM_Weapon_Mage_Staff",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/mage-staff/StaticMeshes/SM_Weapon_Mage_Staff",
       "sheet": {
         "material": {
           "slots": [
@@ -1509,7 +1509,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/captain-scimitar/StaticMeshes/SM_Weapon_Captain_Scimitar",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/captain-scimitar/StaticMeshes/SM_Weapon_Captain_Scimitar",
       "sheet": {
         "material": {
           "slots": [
@@ -1564,7 +1564,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/brawler-axe/StaticMeshes/SM_Weapon_Brawler_Axe",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/brawler-axe/StaticMeshes/SM_Weapon_Brawler_Axe",
       "sheet": {
         "material": {
           "slots": [
@@ -1619,7 +1619,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/thug-mace/StaticMeshes/SM_Weapon_Thug_Mace",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/thug-mace/StaticMeshes/SM_Weapon_Thug_Mace",
       "sheet": {
         "material": {
           "slots": [
@@ -1674,7 +1674,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/berserker-axe/StaticMeshes/SM_Weapon_Berserker_Axe",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/berserker-axe/StaticMeshes/SM_Weapon_Berserker_Axe",
       "sheet": {
         "material": {
           "slots": [
@@ -1729,7 +1729,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/dagger/StaticMeshes/SM_Weapon_Dagger",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/dagger/StaticMeshes/SM_Weapon_Dagger",
       "sheet": {
         "material": {
           "slots": [
@@ -1784,7 +1784,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/bolt/StaticMeshes/SM_Weapon_Bolt",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/bolt/StaticMeshes/SM_Weapon_Bolt",
       "sheet": {
         "material": {
           "slots": [
@@ -1839,7 +1839,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/heavy-crossbow/StaticMeshes/SM_Weapon_Heavy_Crossbow",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/heavy-crossbow/StaticMeshes/SM_Weapon_Heavy_Crossbow",
       "sheet": {
         "material": {
           "slots": [
@@ -1894,7 +1894,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/arena-shield/StaticMeshes/SM_Weapon_Arena_Shield",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/arena-shield/StaticMeshes/SM_Weapon_Arena_Shield",
       "sheet": {
         "material": {
           "slots": [
@@ -1949,7 +1949,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/handaxe/StaticMeshes/SM_Weapon_Handaxe",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/handaxe/StaticMeshes/SM_Weapon_Handaxe",
       "sheet": {
         "material": {
           "slots": [
@@ -2004,7 +2004,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/handaxe-variant/StaticMeshes/SM_Weapon_Handaxe_Variant",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/handaxe-variant/StaticMeshes/SM_Weapon_Handaxe_Variant",
       "sheet": {
         "material": {
           "slots": [
@@ -2059,7 +2059,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/arrow/StaticMeshes/SM_Weapon_Arrow",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/arrow/StaticMeshes/SM_Weapon_Arrow",
       "sheet": {
         "material": {
           "slots": [
@@ -2114,7 +2114,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/gladiator-spear/StaticMeshes/SM_Weapon_Gladiator_Spear",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/gladiator-spear/StaticMeshes/SM_Weapon_Gladiator_Spear",
       "sheet": {
         "material": {
           "slots": [
@@ -2169,7 +2169,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/javelin/StaticMeshes/SM_Weapon_Javelin",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/javelin/StaticMeshes/SM_Weapon_Javelin",
       "sheet": {
         "material": {
           "slots": [
@@ -2224,7 +2224,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/quiver/StaticMeshes/SM_Weapon_Quiver",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/quiver/StaticMeshes/SM_Weapon_Quiver",
       "sheet": {
         "material": {
           "slots": [
@@ -2279,7 +2279,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/priest-warhammer/StaticMeshes/SM_Weapon_Priest_Warhammer",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/priest-warhammer/StaticMeshes/SM_Weapon_Priest_Warhammer",
       "sheet": {
         "material": {
           "slots": [
@@ -2334,7 +2334,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/skeleton-shortsword/StaticMeshes/SM_Weapon_Skeleton_Shortsword",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/skeleton-shortsword/StaticMeshes/SM_Weapon_Skeleton_Shortsword",
       "sheet": {
         "material": {
           "slots": [
@@ -2389,7 +2389,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/scoundrel-rapier/StaticMeshes/SM_Weapon_Scoundrel_Rapier",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/scoundrel-rapier/StaticMeshes/SM_Weapon_Scoundrel_Rapier",
       "sheet": {
         "material": {
           "slots": [
@@ -2444,7 +2444,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/ironhand-shield/StaticMeshes/SM_Weapon_Ironhand_Shield",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/ironhand-shield/StaticMeshes/SM_Weapon_Ironhand_Shield",
       "sheet": {
         "material": {
           "slots": [
@@ -2499,7 +2499,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/skeleton-shortbow/StaticMeshes/SM_Weapon_Skeleton_Shortbow",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/skeleton-shortbow/StaticMeshes/SM_Weapon_Skeleton_Shortbow",
       "sheet": {
         "material": {
           "slots": [
@@ -2554,7 +2554,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/light-crossbow/StaticMeshes/SM_Weapon_Light_Crossbow",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/light-crossbow/StaticMeshes/SM_Weapon_Light_Crossbow",
       "sheet": {
         "material": {
           "slots": [
@@ -2609,7 +2609,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/staff/StaticMeshes/SM_Weapon_Staff",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/staff/StaticMeshes/SM_Weapon_Staff",
       "sheet": {
         "material": {
           "slots": [
@@ -2664,7 +2664,7 @@
       "materials": 1,
       "skins": 0,
       "animations": 0,
-      "asset": "/Game/Master/Weapons/bandit-scimitar/StaticMeshes/SM_Weapon_Bandit_Scimitar",
+      "asset": "/Game/Bibliotheque/ModelesMaitres/Weapons/bandit-scimitar/StaticMeshes/SM_Weapon_Bandit_Scimitar",
       "sheet": {
         "material": {
           "slots": [

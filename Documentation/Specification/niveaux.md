@@ -425,6 +425,16 @@ ajoute ce que le moteur construit. Le texte est la **source**, le niveau du mote
 ```
 
 ## 3. Conception (lignes directrices)
+
+Les quartiers en relief portent `groundHeightfield` : origine XY, pas XY,
+dimensions en sommets et altitudes en mètres, rangées par ligne Y puis colonne X.
+`scripts/maps/district_surface.py` fournit l'interpolation bilinéaire commune au
+placement, aux arrivées et aux contrôles ; `AJadgMapFrame` reçoit la même grille
+en centimètres. La hauteur d'une rue ne change jamais son étage de gameplay.
+`storeyRegions` donne les emprises XYZ locales des étages : `minimum.z` est le sol,
+`maximum.z` le plafond. Une région de rang zéro peut aussi fixer le sol d'un pont
+ou d'une cour. Les cartes sans ces champs conservent leurs hauteurs d'étage.
+
 - Chaque carte doit être **franchissable** : aucune zone jouable ne doit être inatteignable.
 - Aucune situation sans issue : un portail mène toujours quelque part, et l'on peut revenir.
 - Toute carte doit être un **terrain tactique valide** (`EX-EDIT-054`) : le combat se joue dessus.

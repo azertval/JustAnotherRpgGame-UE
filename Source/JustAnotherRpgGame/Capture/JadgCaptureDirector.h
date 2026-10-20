@@ -28,6 +28,7 @@ class AJadgShot;
  * et chaque cadrage il règle l'heure, pose la vue, laisse `-JadgSettle` trames à l'éclairage pour
  * se stabiliser (Lumen accumule dans le temps), puis écrit `<cadrage>-<HHMM>.png`.
  *
+ * `-JadgShots=<id,id>` limite les captures aux cadrages nommés, sans changer la carte.
  * Avec `-JadgMeasure=<secondes>` il fait ensuite tourner la caméra autour du premier cadrage, à
  * chaque heure, et relève chaque trame : durée, temps du fil de jeu, du fil de rendu et du
  * processeur graphique. `mesure.json` en donne la moyenne, la pire trame et le 1 % le plus lent,
@@ -39,7 +40,7 @@ class AJadgShot;
  *
  * `-JadgPost=<a,b…>` règle le post-traitement avant la première capture, pour comparer un rendu
  * avec et sans (LOT-1019, questions du standard 3D §8) : `contour` ajoute la passe du contour
- * sombre (`/Game/Scenes/Common/M_Contour`, écrite par `build_level.py`), `sans-contour` la
+ * sombre (`/Game/Jeu/Commun/Common/M_Contour`, écrite par `build_level.py`), `sans-contour` la
  * retire ; `sans-ao` coupe l'occlusion ambiante d'écran de Lumen ; `sans-halo` le halo
  * (`bloom`) ; `sans-ombres-lampes` les ombres portées des lampes (`JadgLamp`). Les options
  * appliquées sont écrites dans `mesure.json`.
