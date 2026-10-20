@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Régénère le paysage de la capitale impériale et prend ses captures, à midi et à 22 h.
 .DESCRIPTION

@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
 Construit Arenarea, un quartier à la fois, en phases indépendantes et vérifiables.
 #>

@@ -1,6 +1,6 @@
 # Cahier de test
 
-**676 cas de test**, un par test automatisé du dépôt. Le cahier est **engendré** depuis les blocs `\castest{…}` écrits au-dessus de chaque test par `scripts/docs/generate_cahier_test.py` : il ne s'édite pas — on corrige le commentaire du test, puis on relance le script. La CI refuse un cahier périmé, et refuse un test sans bloc. Seule la [recette manuelle](recette-manuelle.md) s'écrit à la main.
+**677 cas de test**, un par test automatisé du dépôt. Le cahier est **engendré** depuis les blocs `\castest{…}` écrits au-dessus de chaque test par `scripts/docs/generate_cahier_test.py` : il ne s'édite pas — on corrige le commentaire du test, puis on relance le script. La CI refuse un cahier périmé, et refuse un test sans bloc. Seule la [recette manuelle](recette-manuelle.md) s'écrit à la main.
 
 ## Lire une fiche
 
@@ -18,7 +18,7 @@ Chaque cas porte l'**identifiant GoogleTest** (`Suite.Nom`, retrouvable tel quel
 | Domaine | Type | Cas | Bloquant | Critique | Majeur | Mineur |
 |---|---|---|---|---|---|---|
 | [Core](core.md) | Tests unitaires | 1 | — | — | 1 | — |
-| [Core · Combat](core-combat.md) | Tests unitaires | 205 | 28 | 103 | 72 | 2 |
+| [Core · Combat](core-combat.md) | Tests unitaires | 206 | 28 | 104 | 72 | 2 |
 | [Core · Data](core-data.md) | Tests unitaires | 18 | 1 | 5 | 10 | 2 |
 | [Core · Diagnostics](core-diagnostics.md) | Tests unitaires | 22 | — | — | 19 | 3 |
 | [Core · Ecs](core-ecs.md) | Tests unitaires | 35 | — | 5 | 30 | — |
@@ -30,7 +30,7 @@ Chaque cas porte l'**identifiant GoogleTest** (`Suite.Nom`, retrouvable tel quel
 | [Core · Time](core-time.md) | Tests unitaires | 7 | — | 1 | 6 | — |
 | [Core · Ui](core-ui.md) | Tests unitaires | 7 | 5 | — | 2 | — |
 | [Core · World](core-world.md) | Tests unitaires | 76 | 7 | 34 | 32 | 3 |
-| **Total** | | **676** | **54** | **248** | **340** | **34** |
+| **Total** | | **677** | **54** | **249** | **340** | **34** |
 
 ## Ce que le cahier couvre
 

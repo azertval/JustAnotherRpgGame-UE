@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Régénère et vérifie Arenarea et Martpart, avec captures Unreal à midi et 22 h.
 .DESCRIPTION

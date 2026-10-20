@@ -635,6 +635,53 @@ se commet pas.
 > des marqueurs : c'est un kit absent, pas un bug de rendu. `python scripts/fetch_assets.py --check`
 > dit lequel.
 
+## Reconstruire les ressources de l'arène et les ateliers Unreal
+
+La carte active est `/Game/Capitale/Cartes/Capitale`. Sa reconstruction passe par
+`scripts/maps/rebuild_capitale_relief.ps1`. Les outils ci-dessous produisent les ressources
+intermédiaires et les ateliers : les conserver avec leurs sources permet de réparer un import
+ou de reconstruire une bibliothèque sans reconstruire la ville. Ils ne sont pas à lancer
+en bloc. Fermer l'éditeur avant un commandlet et conserver les ressources existantes avant
+une régénération. Les chemins historiques mentionnés ci-dessous ne sont pas ceux de la carte active.
+
+### Catalogue, matières et physique
+
+| Besoin | Outil et entrée |
+|---|---|
+| Régénérer les sources géométriques du catalogue | Dans Blender, `scripts/assetsGeneration/build_aof_001_048.py` produit les pièces 001–048 ; `scripts/assetsGeneration/build_aof_extension.py` produit les 049–192, les sources articulées et les tissus. Les manifestes se trouvent sous `Source/Elements/Assets/Built/`. |
+| Régénérer les textures procédurales du pilote | `scripts/assetsGeneration/build_aof_surface_v2.py` produit les six matières de `aof-pilot-surfaces-v2`. Ce jeu de sources est distinct des cartes CC0 de la bibliothèque finale. |
+| Réinstaller les parents de matériaux fournis | `scripts/assetsGeneration/install_aof_sensei.ps1 -SourceProject <projet-source>` copie la bibliothèque fournie et refuse les collisions différentes ; il ne télécharge ni n'achète de contenu. |
+| Réparer les matières du pilote | Dans Unreal, `scripts/maps/aof_sensei_materials.py` lie les textures du pilote aux parents Sensei installés. |
+| Reconstruire les matières de production | Dans Unreal, `scripts/maps/build_aof_master_v3.py` lit le manifeste `Library/aof-pbr-v3` et produit les instances à partir des parents installés. |
+| Réimporter les pièces 049–192 | Dans Unreal, `scripts/maps/import_aof_extension.py` lit le manifeste exporté par Blender ; vérifier ses destinations avant import, puis les déplacer uniquement avec les outils Unreal si nécessaire. |
+| Réparer la liaison physique des tissus | Dans Unreal, `scripts/maps/repair_aof_cloth.py` reconstruit et sauvegarde les tissus des pièces 071, 081, 089, 090 et 192 de la bibliothèque. |
+| Régénérer le témoin de mélange des matières | Dans Blender, `scripts/assetsGeneration/build_aof_material_witness.py` produit le maillage de contrôle à couleurs de sommets. |
+| Reconstruire les ateliers actifs | Dans Unreal, `scripts/maps/build_aof_complete_gallery.py` reconstruit les galeries ; `scripts/maps/build_aof_extension_maps.py` construit `PhysiqueTissus` depuis le rapport d'import des pièces. |
+
+Les générateurs Blender s'exécutent avec `blender --background --python <script>` ; les
+scripts Unreal avec le commandlet Python du projet. Ils exigent leurs sources locales
+(maillages, textures, parents de matériaux) : la présence du script seule ne suffit pas.
+
+### Diagnostic des ressources issues des anciens ateliers
+
+Pour reproduire un défaut dans un **projet de diagnostic séparé**, les outils suivants
+reconstituent les témoins dont proviennent certaines ressources conservées. Ne pas les
+exécuter sur le projet actif : ils recréent des cartes archivées ou ciblent d'anciens chemins.
+Avant cette reproduction, adapter les racines absolues encore présentes dans les scripts
+au projet de diagnostic et y copier les entrées attendues.
+
+- `scripts/maps/build_aof_pilot_scene.py` importe le pilote et construit ses trois témoins ;
+  `scripts/maps/build_aof_material_lab_v3.py` construit le laboratoire de matières depuis
+  le rapport de `build_aof_master_v3.py`.
+- `scripts/maps/tune_cloth_wind.py` applique les réglages de vent aux anciens témoins de tissus.
+  Pour l'atelier actuel, utiliser le générateur de `PhysiqueTissus`.
+- `scripts/assetsGeneration/prepare_capitale_water_meshes.py` relit les champs du précédent
+  paysage par quartiers ; `scripts/maps/import_capitale_water_meshes.py` importe ses surfaces.
+  La capitale actuelle utilise les surfaces du relief de référence.
+- `scripts/maps/revise_capitale_water.py` reconstruit le matériau Single Layer Water des
+  anciennes surfaces ; `scripts/maps/revise_capital_pbr.py` réapplique les cartes de
+  `Library/aof-pbr-landscape` aux ressources de l'ancien paysage.
+
 ## La galerie des assets
 
 Tout asset graphique livré doit paraître dans la **galerie des assets**, l'écran de débug

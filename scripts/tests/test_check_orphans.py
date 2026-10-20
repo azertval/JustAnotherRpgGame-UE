@@ -189,8 +189,8 @@ def projet(tmp_path):
     ecrire(tmp_path / 'scripts/maps/build_level.py', 'PORTE = "/Game/Maps/Porte"\n')
     content = tmp_path / 'Content'
     ecrire(content / 'Kit/Regions/arena/af-pyre/StaticMeshes/SM_af-pyre.uasset')
-    ecrire(content / 'Master/Npc/guard/StaticMeshes/SM_Npc_Guard.uasset')
-    ecrire(content / 'Scenes/Common/T_White.uasset')
+    ecrire(content / 'Bibliotheque/ModelesMaitres/Npc/guard/StaticMeshes/SM_Npc_Guard.uasset')
+    ecrire(content / 'Jeu/Commun/Common/T_White.uasset')
     ecrire(content / 'Maps/Porte.umap')
     return content
 
@@ -206,12 +206,12 @@ def test_un_uasset_qu_aucun_script_ne_produit_est_une_erreur(tmp_path):
     content = projet(tmp_path)
     ecrire(content / 'Developers/auteur/BP_Essai.uasset')
     ecrire(content / 'Maps/Porte_Essai.umap')       # un nom plus long n'est pas la carte citée
-    ecrire(content / 'Scenes/Common/T_Whiter.uasset')
+    ecrire(content / 'Jeu/Commun/Common/T_Whiter.uasset')
     ecrire(content / 'Essai/SM_Test.uasset')        # un test n'est pas un script qui produit
     errors = O.check_content(content, O.content_citations(tmp_path))
     assert sorted(e.split(' : ')[0] for e in errors) == [
         'Content/Developers/auteur/BP_Essai.uasset', 'Content/Essai/SM_Test.uasset',
-        'Content/Maps/Porte_Essai.umap', 'Content/Scenes/Common/T_Whiter.uasset']
+        'Content/Jeu/Commun/Common/T_Whiter.uasset', 'Content/Maps/Porte_Essai.umap']
 
 
 def test_un_fichier_qui_n_est_pas_une_sortie_du_moteur_n_a_rien_a_faire_sous_content(tmp_path):

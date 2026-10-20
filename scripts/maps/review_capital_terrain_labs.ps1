@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
 Regénère les trois essais de terrain, puis leurs captures à midi et à 22 h.
 #>

@@ -45,6 +45,11 @@ param(
 $ErrorActionPreference = 'Stop'
 # « -Etapes a,b » arrive en une seule chaîne quand le script est lancé par -File.
 $Etapes = $Etapes -split ',' | Where-Object { $_ }
+$retraitBackup = $null
+if ($Etapes -contains 'retrait') {
+    if (-not $Sauvegarde) { throw 'retrait : -Sauvegarde est exigé (copie vérifiée de la carte remplacée).' }
+    $retraitBackup = (Resolve-Path $Sauvegarde).Path -replace '\\', '/'
+}
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
 $uproject = Join-Path $root 'JustAnotherRpgGame.uproject'
 $editor = Join-Path $EnginePath 'Engine\Binaries\Win64\UnrealEditor-Cmd.exe'
@@ -107,9 +112,7 @@ Step 'partition' {
     Editor 'partition' @('-run=WorldPartitionConvertCommandlet', '/Game/Capitale/Cartes/Capitale_Reconstruction', '-SkipStableGUIDValidation') $null
 }
 Step 'retrait' {
-    if (-not $Sauvegarde) { throw 'retrait : -Sauvegarde est exigé (copie vérifiée de la carte remplacée).' }
-    $backup = (Resolve-Path $Sauvegarde).Path -replace '\\', '/'
-    Editor 'retrait' @('-run=pythonscript', (Script 'retire_previous_capitale.py'), "-JadgBackup=$backup") 'PREVIOUS_CAPITALE_RETIRED_BACKUP_VERIFIED'
+    Editor 'retrait' @('-run=pythonscript', (Script 'retire_previous_capitale.py'), "-JadgBackup=$retraitBackup") 'PREVIOUS_CAPITALE_RETIRED_BACKUP_VERIFIED'
 }
 Step 'renommage' {
     # Un éditeur arrêté à sa fermeture n'a pas réécrit le cache du registre d'assets : le renommeur y

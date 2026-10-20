@@ -11,7 +11,8 @@
  *
  * C'est le montage que faisait l'écran de rencontre de l'ancien moteur, sans fenêtre (le
  * `LOT-1017` le reprend sans rien de Qt, D-58) : la zone de combat qui contient
- * le déclencheur, le groupe en file devant le maître d'arène, un combat létal dont on ne
+ * le déclencheur, le groupe aux points d'entrée de la carte (en file devant le maître sur les
+ * anciennes cartes sans marqueurs), un combat létal dont on ne
  * s'échappe pas, la prise en tenaille en jeu. Chaque héros est joué par l'IA, sorts et soins
  * compris (`core::playTurn`), avec le profil de son rôle (`profileOfClass`).
  */
@@ -177,11 +178,16 @@ struct ArenaContent {
         ADD_FAILURE() << "rencontre inconnue : " << encounterId;
         return std::nullopt;
     }
-    // Le meneur devant le maitre, ses suiveurs dans son dos, vers l'est.
-    std::vector<core::GridPosition> cases;
-    for (std::size_t rang = 0; rang < party.size(); ++rang) {
-        cases.push_back({.column = DEVANT_LE_MAITRE.column + static_cast<int>(rang),
-                         .row = DEVANT_LE_MAITRE.row});
+    // Les points d'entree du jeu suivent le deplacement de l'arene dans la capitale.
+    // Les anciennes cartes sans marqueurs gardent le montage historique.
+    std::vector<core::GridPosition> cases = core::partyDeploymentOn(map);
+    if (cases.empty()) {
+        for (std::size_t rang = 0; rang < party.size(); ++rang) {
+            cases.push_back({.column = DEVANT_LE_MAITRE.column + static_cast<int>(rang),
+                             .row = DEVANT_LE_MAITRE.row});
+        }
+    } else if (cases.size() > party.size()) {
+        cases.resize(party.size());
     }
     const core::MapEncounterResult prepared =
         core::prepareMapEncounter(map, SABLE, *rencontre, triggerOf(map, encounterId), cases,

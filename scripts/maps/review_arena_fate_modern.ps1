@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Régénère, parcourt et capture l'arène complète peinte, sans fenêtre.
 .DESCRIPTION

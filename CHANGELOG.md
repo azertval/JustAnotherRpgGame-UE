@@ -6,6 +6,18 @@ le projet suit le [versionnage sémantique](https://semver.org/lang/fr/).
 
 ## [Non publié]
 
+- **Révision de la chaîne de personnages** (20 octobre 2026, D-68) : les LOT-1024 et
+  LOT-1025 sont repris, avec les LOT-1026 à LOT-1030 pour séparer bases anatomiques,
+  garde-robe, créateur complet en jeu, presets et validation. Le choix des outils dépend
+  d'un prototype empaqueté avec réglages du visage et du corps. Les standards et dépendances
+  du planning suivent cette décision.
+- **Corrections des contrôles de la PR** : sommaire des guides complété, cahier de tests
+  régénéré, provenance des deux fiches de citoyens conforme au schéma, encodage des scripts
+  PowerShell et lecture du paramètre de sauvegarde corrigés. Les tests d'orphelins suivent
+  les nouveaux chemins de contenu ; le guide documente les outils de reconstruction des
+  ressources et leurs limites. Le simulateur de l'arène lit les entrées du groupe dans la
+  carte au lieu de conserver les coordonnées de l'ancienne arène.
+
 - **La démo de la capitale démarre ; vestiaires et prison aménagés** (20 octobre 2026, retour de
   l'auteur : « la démo ne démarre pas et les vestiaires / prison sont trop simples », à juger par
   lui). *Démarrage* : dans le jeu lancé, `AJadgWitnessReview` reconstruisait le maillage de

@@ -1,7 +1,7 @@
 {
   "id": "district-citizen-quinn",
   "name": "Habitante de la Capitale",
-  "source": "unreal-mannequin",
+  "source": "original",
   "status": {
     "provisoire": true,
     "raison": "Population ambiante animée : corps et clips du créateur humanoid existant. La garde-robe civile et les têtes MetaHuman ne sont pas encore disponibles sur le poste.",

@@ -593,7 +593,7 @@ L'Arena of Fate est une carte à sept niveaux avec ses accès et son combat.
 
 ### FormatV5Test.OnArriveALEtageDeSonPointDArrivee
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:437`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:434`
 
 On arrive à l'étage de son point d'arrivée.
 
@@ -609,7 +609,7 @@ On arrive à l'étage de son point d'arrivée.
 
 ### FormatV5Test.LaTraceDuGroupeSuitEnHauteur
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:454`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:451`
 
 La trace du groupe suit en hauteur.
 
@@ -627,7 +627,7 @@ La trace du groupe suit en hauteur.
 
 ### FormatV5Test.UneV4SeLitSansEtageNiVolume
 
-*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:480`
+*Majeur · Unitaire · Format v5* — `Source/Test/Unit/Core/Levels/test_format_v5.cpp:477`
 
 Exigences : `EX-LVL-005`, `EX-LVL-039`
 
