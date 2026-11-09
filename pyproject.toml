@@ -24,9 +24,9 @@ dev = [
     # Contrats des catalogues RPG (check_rpg_data).
     "jsonschema==4.26.0",
     # Tests des scripts eux-mêmes (scripts/tests).
-    "pytest==9.1.1",
+    "pytest==9.2.0",
     # Normalisation et contrôles des candidats de la fabrique (sans génération en CI).
-    "pillow==12.3.0",
+    "pillow==13.0.0",
     "numpy==2.5.4",
 ]
 
